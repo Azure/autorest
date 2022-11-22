@@ -72,8 +72,8 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
 
   if (property.serializedName !== property.language.default.name) {
     decorators.push({
-      name: "friendlyName",
-      arguments: [property.language.default.name],
+      name: "projectedName",
+      arguments: ["json", property.serializedName],
     });
   }
 

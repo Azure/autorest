@@ -284,8 +284,8 @@ model ApplicationListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
@@ -346,8 +346,8 @@ model PoolListUsageMetricsResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
@@ -384,8 +384,8 @@ model AccountListSupportedImagesResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -479,8 +479,8 @@ model PoolNodeCountsListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
@@ -809,8 +809,8 @@ model CertificateListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -825,8 +825,8 @@ model NodeFileListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Information about a file or directory on a Compute Node.")
@@ -1307,8 +1307,8 @@ default.
 @doc("A private container registry.")
 model ContainerRegistry {
   @doc("The user name to log into the registry server.")
-  @friendlyName("userName")
-  username?: string;
+  @projectedName("json", "username")
+  userName?: string;
 
   @doc("The password to log into the registry server.")
   password?: string;
@@ -1523,8 +1523,8 @@ model UserIdentity {
 The userName and autoUser properties are mutually exclusive; you must specify
 one but not both.
 """)
-  @friendlyName("userName")
-  username?: string;
+  @projectedName("json", "username")
+  userName?: string;
 
   @doc("""
 The userName and autoUser properties are mutually exclusive; you must specify
@@ -2833,8 +2833,8 @@ model BatchJobScheduleListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("An Azure Batch Job.")
@@ -3135,8 +3135,8 @@ model BatchJobListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -3151,8 +3151,8 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
@@ -3703,8 +3703,8 @@ model BatchPoolListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The set of changes to be made to a Pool.")
@@ -4310,8 +4310,8 @@ model BatchTaskListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
@@ -4741,8 +4741,8 @@ model InboundEndpoint {
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
-  @friendlyName("publicFqdn")
-  publicFQDN: string;
+  @projectedName("json", "publicFQDN")
+  publicFqdn: string;
 
   @doc("The public port number of the endpoint.")
   frontendPort: int32;
@@ -4864,8 +4864,8 @@ model ComputeNodeListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The configuration for virtual machine extension instance view.")
@@ -4919,6 +4919,6 @@ model NodeVMExtensionList {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  @friendlyName("odataNextLink")
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }

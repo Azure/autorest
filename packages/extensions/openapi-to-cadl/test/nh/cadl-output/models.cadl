@@ -171,78 +171,78 @@ model NotificationHubEntryModel {
 model NotificationHubContentModel {
   type?: NotificationHubContentModelType;
 
-  @friendlyName("notificationHubDescription")
-  NotificationHubDescription?: NotificationHubDescriptionModel;
+  @projectedName("json", "NotificationHubDescription")
+  notificationHubDescription?: NotificationHubDescriptionModel;
 }
 
 model NotificationHubDescriptionModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: NotificationHubDescriptionModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: NotificationHubDescriptionModelXmlnsI;
 
-  @friendlyName("registrationTtl")
-  RegistrationTtl?: string;
+  @projectedName("json", "RegistrationTtl")
+  registrationTtl?: string;
 
-  @friendlyName("location")
-  Location?: string;
+  @projectedName("json", "Location")
+  location?: string;
 
-  @friendlyName("apnsCredential")
-  ApnsCredential?: PropertyBagModelItem[];
+  @projectedName("json", "ApnsCredential")
+  apnsCredential?: PropertyBagModelItem[];
 
-  @friendlyName("gcmCredential")
-  GcmCredential?: PropertyBagModelItem[];
+  @projectedName("json", "GcmCredential")
+  gcmCredential?: PropertyBagModelItem[];
 
-  @friendlyName("wnsCredential")
-  WnsCredential?: PropertyBagModelItem[];
+  @projectedName("json", "WnsCredential")
+  wnsCredential?: PropertyBagModelItem[];
 
-  @friendlyName("authorizationRules")
-  AuthorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
+  @projectedName("json", "AuthorizationRules")
+  authorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
 }
 
 model PropertyBagModelItem {
-  @friendlyName("name")
-  Name?: string;
+  @projectedName("json", "Name")
+  name?: string;
 
-  @friendlyName("value")
-  Value?: string;
+  @projectedName("json", "Value")
+  value?: string;
 }
 
 model NotificationHubDescriptionModelAuthorizationRulesItem {
-  @friendlyName("iType")
-  "i:type"?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
+  @projectedName("json", "i:type")
+  iType?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
 
-  @friendlyName("claimType")
-  ClaimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
+  @projectedName("json", "ClaimType")
+  claimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
 
-  @friendlyName("claimValue")
-  ClaimValue?: string;
+  @projectedName("json", "ClaimValue")
+  claimValue?: string;
 
-  @friendlyName("rights")
-  Rights?: string[];
+  @projectedName("json", "Rights")
+  rights?: string[];
 
-  @friendlyName("createdTime")
-  CreatedTime?: string;
+  @projectedName("json", "CreatedTime")
+  createdTime?: string;
 
-  @friendlyName("modifiedTime")
-  ModifiedTime?: string;
+  @projectedName("json", "ModifiedTime")
+  modifiedTime?: string;
 
-  @friendlyName("keyName")
-  KeyName?: string;
+  @projectedName("json", "KeyName")
+  keyName?: string;
 
-  @friendlyName("primaryKey")
-  PrimaryKey?: string;
+  @projectedName("json", "PrimaryKey")
+  primaryKey?: string;
 
-  @friendlyName("secondaryKey")
-  SecondaryKey?: string;
+  @projectedName("json", "SecondaryKey")
+  secondaryKey?: string;
 }
 
 model RegistrationEntryModel {
   content?: NotificationHubContentModel;
 
-  @friendlyName("xmlnsM")
-  "xmlns:m"?: RegistrationEntryModelXmlnsM;
+  @projectedName("json", "xmlns:m")
+  xmlnsM?: RegistrationEntryModelXmlnsM;
 
-  @friendlyName("mEtag")
-  "m:etag"?: string;
+  @projectedName("json", "m:etag")
+  mEtag?: string;
 }
 
 @resource("{hubName}/installations/{installationId}")
@@ -326,147 +326,147 @@ model InstallationPatchModelItem {
 model RegistrationContentModel {
   type?: RegistrationContentModelType;
 
-  @friendlyName("appleRegistrationDescription")
-  AppleRegistrationDescription?: AppleRegistrationContentModel;
+  @projectedName("json", "AppleRegistrationDescription")
+  appleRegistrationDescription?: AppleRegistrationContentModel;
 
-  @friendlyName("appleTemplateRegistrationDescription")
-  AppleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
+  @projectedName("json", "AppleTemplateRegistrationDescription")
+  appleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
 
-  @friendlyName("baiduRegistrationDescription")
-  BaiduRegistrationDescription?: BaiduRegistrationContentModel;
+  @projectedName("json", "BaiduRegistrationDescription")
+  baiduRegistrationDescription?: BaiduRegistrationContentModel;
 
-  @friendlyName("baiduTemplateRegistrationDescription")
-  BaiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
+  @projectedName("json", "BaiduTemplateRegistrationDescription")
+  baiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
 
-  @friendlyName("gcmRegistrationDescription")
-  GcmRegistrationDescription?: GcmRegistrationContentModel;
+  @projectedName("json", "GcmRegistrationDescription")
+  gcmRegistrationDescription?: GcmRegistrationContentModel;
 
-  @friendlyName("gcmTemplateRegistrationDescription")
-  GcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
+  @projectedName("json", "GcmTemplateRegistrationDescription")
+  gcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
 
-  @friendlyName("windowsRegistrationDescription")
-  WindowsRegistrationDescription?: WindowsRegistrationContentModel;
+  @projectedName("json", "WindowsRegistrationDescription")
+  windowsRegistrationDescription?: WindowsRegistrationContentModel;
 
-  @friendlyName("windowsTemplateRegistrationDescription")
-  WindowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
+  @projectedName("json", "WindowsTemplateRegistrationDescription")
+  windowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
 }
 
 model AppleRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: AppleRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: AppleRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("deviceToken")
-  DeviceToken: string;
+  @projectedName("json", "DeviceToken")
+  deviceToken: string;
 }
 
 model AppleTemplateRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: AppleTemplateRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: AppleTemplateRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("deviceToken")
-  DeviceToken: string;
+  @projectedName("json", "DeviceToken")
+  deviceToken: string;
 
-  @friendlyName("bodyTemplate")
-  BodyTemplate: string;
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 
-  @friendlyName("expiry")
-  Expiry?: string;
+  @projectedName("json", "Expiry")
+  expiry?: string;
 }
 
 model BaiduRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: BaiduRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: BaiduRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("baiduUserId")
-  BaiduUserId: string;
+  @projectedName("json", "BaiduUserId")
+  baiduUserId: string;
 
-  @friendlyName("baiduChannelId")
-  BaiduChannelId: string;
+  @projectedName("json", "BaiduChannelId")
+  baiduChannelId: string;
 }
 
 model BaiduTemplateRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: BaiduTemplateRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: BaiduTemplateRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("baiduUserId")
-  BaiduUserId: string;
+  @projectedName("json", "BaiduUserId")
+  baiduUserId: string;
 
-  @friendlyName("baiduChannelId")
-  BaiduChannelId: string;
+  @projectedName("json", "BaiduChannelId")
+  baiduChannelId: string;
 
-  @friendlyName("bodyTemplate")
-  BodyTemplate: string;
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 }
 
 model GcmRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: GcmRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: GcmRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("gcmRegistrationId")
-  GcmRegistrationId?: string;
+  @projectedName("json", "GcmRegistrationId")
+  gcmRegistrationId?: string;
 }
 
 model GcmTemplateRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: GcmTemplateRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: GcmTemplateRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("gcmRegistrationId")
-  GcmRegistrationId: string;
+  @projectedName("json", "GcmRegistrationId")
+  gcmRegistrationId: string;
 
-  @friendlyName("bodyTemplate")
-  BodyTemplate: string;
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 }
 
 model WindowsRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: WindowsRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: WindowsRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("channelUri")
-  ChannelUri: string;
+  @projectedName("json", "ChannelUri")
+  channelUri: string;
 }
 
 model WindowsTemplateRegistrationContentModel {
-  @friendlyName("xmlnsI")
-  "xmlns:i"?: WindowsTemplateRegistrationContentModelXmlnsI;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: WindowsTemplateRegistrationContentModelXmlnsI;
 
-  @friendlyName("tags")
-  Tags?: string;
+  @projectedName("json", "Tags")
+  tags?: string;
 
-  @friendlyName("channelUri")
-  ChannelUri: string;
+  @projectedName("json", "ChannelUri")
+  channelUri: string;
 
-  @friendlyName("bodyTemplate")
-  BodyTemplate: string;
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 
-  @friendlyName("wnsHeaders")
-  WnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
+  @projectedName("json", "WnsHeaders")
+  wnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
 }
 
 model WindowsTemplateRegistrationContentModelWnsHeadersItem {
-  @friendlyName("header")
-  Header?: string;
+  @projectedName("json", "Header")
+  header?: string;
 
-  @friendlyName("value")
-  Value?: string;
+  @projectedName("json", "Value")
+  value?: string;
 }
