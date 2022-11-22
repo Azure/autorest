@@ -91,18 +91,22 @@ question.
   userId?: string;
 
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
+  @friendlyName("confidenceThreshold")
   confidenceScoreThreshold?: float32;
 
   @doc("Context object with previous QnA's information.")
+  @friendlyName("answerContext")
   context?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
+  @friendlyName("rankerKind")
   rankerType?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
+  @friendlyName("shortAnswerOptions")
   answerSpanRequest?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -115,6 +119,7 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
+  @friendlyName("previousQuestion")
   previousUserQuery?: string;
 }
 
@@ -159,9 +164,11 @@ model ShortAnswerOptions {
 Minimum threshold score required to include an answer span, value ranges from 0
 to 1.
 """)
+  @friendlyName("confidenceThreshold")
   confidenceScoreThreshold?: float32;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
+  @friendlyName("top")
   topAnswersWithSpan?: int32;
 }
 
@@ -180,9 +187,11 @@ model KnowledgeBaseAnswer {
   answer?: string;
 
   @doc("Answer confidence score, value ranges from 0 to 1.")
+  @friendlyName("confidence")
   confidenceScore?: float32;
 
   @doc("ID of the QnA result.")
+  @friendlyName("qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -198,6 +207,7 @@ answers.
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
+  @friendlyName("shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -232,6 +242,7 @@ model AnswerSpan {
   text?: string;
 
   @doc("Predicted score of answer span, value ranges from 0 to 1.")
+  @friendlyName("confidence")
   confidenceScore?: float32;
 
   @doc("The answer span offset from the start of answer.")
@@ -300,6 +311,7 @@ model AnswersFromTextOptions {
   question: string;
 
   @doc("Text records to be searched for given question.")
+  @friendlyName("textDocuments")
   records: TextDocument[];
 
   @doc("""
@@ -338,12 +350,14 @@ model TextAnswer {
   answer?: string;
 
   @doc("answer confidence score, value ranges from 0 to 1.")
+  @friendlyName("confidence")
   confidenceScore?: float32;
 
   @doc("record ID.")
   id?: string;
 
   @doc("Answer span object with respect to user's question.")
+  @friendlyName("shortAnswer")
   answerSpan?: AnswerSpan;
 
   @doc("The sentence offset from the start of the document.")

@@ -1942,6 +1942,7 @@ Specifies the Read-Write IOPS for the managed disk. Should be used only when
 StorageAccountType is UltraSSD_LRS. If not specified, a default value would be
 assigned based on diskSizeGB.
 """)
+  @friendlyName("diskIopsReadWrite")
   diskIOPSReadWrite?: int32;
 
   @doc("""
@@ -4079,6 +4080,7 @@ UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be
 updated only via updates to the VirtualMachine Scale Set.
 """)
   @visibility("read")
+  @friendlyName("diskIopsReadWrite")
   diskIOPSReadWrite?: int32;
 
   @doc("""
@@ -4957,6 +4959,7 @@ model VirtualMachineCaptureResult {
 
   @doc("the schema of the captured virtual machine")
   @visibility("read")
+  @friendlyName("schema")
   $schema?: string;
 
   @doc("the version of the content")
@@ -6490,6 +6493,7 @@ model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 @doc("Describes the properties of a Run Command metadata.")
 model RunCommandDocumentBase {
   @doc("The VM run command schema.")
+  @friendlyName("schema")
   $schema: string;
 
   @doc("The VM run command id.")

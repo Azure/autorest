@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "NotificationHubsClient",
+  version: "2020-06-01",
 })
-@serviceVersion("2020-06-01")
 @server(
   "{namespaceBaseUrl}",
   "The Notification Hubs client performs operations to register and query devices, and send notifications",

@@ -170,39 +170,78 @@ model NotificationHubEntryModel {
 
 model NotificationHubContentModel {
   type?: NotificationHubContentModelType;
+
+  @friendlyName("notificationHubDescription")
   NotificationHubDescription?: NotificationHubDescriptionModel;
 }
 
 model NotificationHubDescriptionModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: NotificationHubDescriptionModelXmlnsI;
+
+  @friendlyName("registrationTtl")
   RegistrationTtl?: string;
+
+  @friendlyName("location")
   Location?: string;
+
+  @friendlyName("apnsCredential")
   ApnsCredential?: PropertyBagModelItem[];
+
+  @friendlyName("gcmCredential")
   GcmCredential?: PropertyBagModelItem[];
+
+  @friendlyName("wnsCredential")
   WnsCredential?: PropertyBagModelItem[];
+
+  @friendlyName("authorizationRules")
   AuthorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
 }
 
 model PropertyBagModelItem {
+  @friendlyName("name")
   Name?: string;
+
+  @friendlyName("value")
   Value?: string;
 }
 
 model NotificationHubDescriptionModelAuthorizationRulesItem {
+  @friendlyName("iType")
   "i:type"?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
+
+  @friendlyName("claimType")
   ClaimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
+
+  @friendlyName("claimValue")
   ClaimValue?: string;
+
+  @friendlyName("rights")
   Rights?: string[];
+
+  @friendlyName("createdTime")
   CreatedTime?: string;
+
+  @friendlyName("modifiedTime")
   ModifiedTime?: string;
+
+  @friendlyName("keyName")
   KeyName?: string;
+
+  @friendlyName("primaryKey")
   PrimaryKey?: string;
+
+  @friendlyName("secondaryKey")
   SecondaryKey?: string;
 }
 
 model RegistrationEntryModel {
   content?: NotificationHubContentModel;
+
+  @friendlyName("xmlnsM")
   "xmlns:m"?: RegistrationEntryModelXmlnsM;
+
+  @friendlyName("mEtag")
   "m:etag"?: string;
 }
 
@@ -286,73 +325,148 @@ model InstallationPatchModelItem {
 
 model RegistrationContentModel {
   type?: RegistrationContentModelType;
+
+  @friendlyName("appleRegistrationDescription")
   AppleRegistrationDescription?: AppleRegistrationContentModel;
+
+  @friendlyName("appleTemplateRegistrationDescription")
   AppleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
+
+  @friendlyName("baiduRegistrationDescription")
   BaiduRegistrationDescription?: BaiduRegistrationContentModel;
+
+  @friendlyName("baiduTemplateRegistrationDescription")
   BaiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
+
+  @friendlyName("gcmRegistrationDescription")
   GcmRegistrationDescription?: GcmRegistrationContentModel;
+
+  @friendlyName("gcmTemplateRegistrationDescription")
   GcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
+
+  @friendlyName("windowsRegistrationDescription")
   WindowsRegistrationDescription?: WindowsRegistrationContentModel;
+
+  @friendlyName("windowsTemplateRegistrationDescription")
   WindowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
 }
 
 model AppleRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: AppleRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("deviceToken")
   DeviceToken: string;
 }
 
 model AppleTemplateRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: AppleTemplateRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("deviceToken")
   DeviceToken: string;
+
+  @friendlyName("bodyTemplate")
   BodyTemplate: string;
+
+  @friendlyName("expiry")
   Expiry?: string;
 }
 
 model BaiduRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: BaiduRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("baiduUserId")
   BaiduUserId: string;
+
+  @friendlyName("baiduChannelId")
   BaiduChannelId: string;
 }
 
 model BaiduTemplateRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: BaiduTemplateRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("baiduUserId")
   BaiduUserId: string;
+
+  @friendlyName("baiduChannelId")
   BaiduChannelId: string;
+
+  @friendlyName("bodyTemplate")
   BodyTemplate: string;
 }
 
 model GcmRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: GcmRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("gcmRegistrationId")
   GcmRegistrationId?: string;
 }
 
 model GcmTemplateRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: GcmTemplateRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("gcmRegistrationId")
   GcmRegistrationId: string;
+
+  @friendlyName("bodyTemplate")
   BodyTemplate: string;
 }
 
 model WindowsRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: WindowsRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("channelUri")
   ChannelUri: string;
 }
 
 model WindowsTemplateRegistrationContentModel {
+  @friendlyName("xmlnsI")
   "xmlns:i"?: WindowsTemplateRegistrationContentModelXmlnsI;
+
+  @friendlyName("tags")
   Tags?: string;
+
+  @friendlyName("channelUri")
   ChannelUri: string;
+
+  @friendlyName("bodyTemplate")
   BodyTemplate: string;
+
+  @friendlyName("wnsHeaders")
   WnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
 }
 
 model WindowsTemplateRegistrationContentModelWnsHeadersItem {
+  @friendlyName("header")
   Header?: string;
+
+  @friendlyName("value")
   Value?: string;
 }

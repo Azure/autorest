@@ -17,6 +17,7 @@ from the beginning of a new document. Maximum allowed size of string list is
   prompt?: PostContentSchemaPrompt;
 
   @doc("The maximum number of tokens to generate. Has minimum of 0.")
+  @friendlyName("maxTokens")
   max_tokens?: int32;
 
   @doc("""
@@ -40,6 +41,7 @@ both.
 Minimum of 0 and maximum of 1 allowed.
 
 """)
+  @friendlyName("topP")
   top_p?: float32;
 
   @doc("""
@@ -54,6 +56,7 @@ like -100 or 100 should result in a ban or exclusive selection of the relevant
 token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
+  @friendlyName("logitBias")
   logit_bias?: object;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
@@ -87,12 +90,15 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
 
   @doc("A sequence which indicates the end of the current document.")
   stop?: PostContentSchemaStop;
+
+  @friendlyName("completionConfig")
   completion_config?: string;
 
   @doc("""
 can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
 enabled, 2=full cache
 """)
+  @friendlyName("cacheLevel")
   cache_level?: int32;
 
   @doc("""
@@ -100,18 +106,21 @@ How much to penalize new tokens based on their existing frequency in the text
 so far. Decreases the model's likelihood to repeat the same line verbatim. Has
 minimum of -2 and maximum of 2.
 """)
+  @friendlyName("presencePenalty")
   presence_penalty?: float32;
 
   @doc("""
 How much to penalize new tokens based on whether they appear in the text so
 far. Increases the model's likelihood to talk about new topics.
 """)
+  @friendlyName("frequencyPenalty")
   frequency_penalty?: float32;
 
   @doc("""
 How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
+  @friendlyName("bestOf")
   best_of?: int32;
 }
 
@@ -141,13 +150,21 @@ model Post200ApplicationJsonPropertiesItemsItem {
   text?: string;
   index?: int32;
   logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
+
+  @friendlyName("finishReason")
   finish_reason?: string;
 }
 
 model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
   tokens?: string[];
+
+  @friendlyName("tokenLogprobs")
   token_logprobs?: float32[];
+
+  @friendlyName("topLogprobs")
   top_logprobs?: Record<float32>[];
+
+  @friendlyName("textOffset")
   text_offset?: int32[];
 }
 
@@ -176,6 +193,7 @@ lists
   user?: string;
 
   @doc("input type of embedding search to use")
+  @friendlyName("inputType")
   input_type?: string;
 
   @doc("ID of the model to use")

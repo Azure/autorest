@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "Azure Schema Registry",
+  version: "2021-10",
 })
-@serviceVersion("2021-10")
 @server(
   "https://{endpoint}",
   "Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.",

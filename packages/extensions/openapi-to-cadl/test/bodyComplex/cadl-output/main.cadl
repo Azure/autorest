@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "AutoRest Complex Test Service",
+  version: "2016-02-29",
 })
-@serviceVersion("2016-02-29")
 @server(
   "{$host}",
   "Test Infrastructure for AutoRest",

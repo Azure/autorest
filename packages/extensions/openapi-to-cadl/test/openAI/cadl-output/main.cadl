@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "OpenAI",
+  version: "2022-03-01-preview",
 })
-@serviceVersion("2022-03-01-preview")
 @server(
   "https://{endpoint}/openai",
   "Azure OpenAI APIs for completions and search"

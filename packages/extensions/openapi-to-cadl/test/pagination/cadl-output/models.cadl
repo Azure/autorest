@@ -49,12 +49,14 @@ model OdataProductResult {
   values?: Product[];
 
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
 @pagedResult
 model ProductResultValueWithXMSClientName {
   @items
+  @friendlyName("indexes")
   values?: Product[];
 
   @nextLink

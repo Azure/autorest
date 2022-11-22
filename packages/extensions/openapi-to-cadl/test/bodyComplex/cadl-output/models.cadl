@@ -67,11 +67,16 @@ model FloatWrapper {
 
 model DoubleWrapper {
   field1?: float32;
+
+  @friendlyName("field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose")
   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose?: float32;
 }
 
 model BooleanWrapper {
+  @friendlyName("fieldTrue")
   field_true?: boolean;
+
+  @friendlyName("fieldFalse")
   field_false?: boolean;
 }
 
@@ -185,6 +190,7 @@ model MyBaseHelperType {
 }
 
 model SmartSalmon extends Salmon {
+  @friendlyName("collegeDegree")
   college_degree?: string;
   fishtype: "smart_salmon";
 }

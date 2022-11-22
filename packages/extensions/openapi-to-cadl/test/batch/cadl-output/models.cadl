@@ -284,6 +284,7 @@ model ApplicationListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -345,6 +346,7 @@ model PoolListUsageMetricsResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -382,6 +384,7 @@ model AccountListSupportedImagesResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -476,6 +479,7 @@ model PoolNodeCountsListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -805,6 +809,7 @@ model CertificateListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -820,6 +825,7 @@ model NodeFileListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -1301,6 +1307,7 @@ default.
 @doc("A private container registry.")
 model ContainerRegistry {
   @doc("The user name to log into the registry server.")
+  @friendlyName("userName")
   username?: string;
 
   @doc("The password to log into the registry server.")
@@ -1516,6 +1523,7 @@ model UserIdentity {
 The userName and autoUser properties are mutually exclusive; you must specify
 one but not both.
 """)
+  @friendlyName("userName")
   username?: string;
 
   @doc("""
@@ -2825,6 +2833,7 @@ model BatchJobScheduleListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -3126,6 +3135,7 @@ model BatchJobListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -3141,6 +3151,7 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -3692,6 +3703,7 @@ model BatchPoolListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -4298,6 +4310,7 @@ model BatchTaskListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -4728,6 +4741,7 @@ model InboundEndpoint {
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
+  @friendlyName("publicFqdn")
   publicFQDN: string;
 
   @doc("The public port number of the endpoint.")
@@ -4850,6 +4864,7 @@ model ComputeNodeListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
 
@@ -4904,5 +4919,6 @@ model NodeVMExtensionList {
 
   @doc("The URL to get the next set of results.")
   @nextLink
+  @friendlyName("odataNextLink")
   "odata.nextLink"?: string;
 }
