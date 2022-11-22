@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "Add @autorest/openapi-to-cadl plugin",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/configuration"
+}
