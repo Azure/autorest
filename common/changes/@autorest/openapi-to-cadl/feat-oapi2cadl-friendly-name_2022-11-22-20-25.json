@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/openapi-to-cadl",
-      "comment": "Add @friendlyName on model properties",
+      "comment": "Add @projectedName on model properties",
       "type": "minor"
     }
   ],
