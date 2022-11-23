@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "Microsoft Azure Compute Management",
+  version: "2022-08-01",
 })
-@serviceVersion("2022-08-01")
 @server(
   "{$host}",
   "Compute Client",

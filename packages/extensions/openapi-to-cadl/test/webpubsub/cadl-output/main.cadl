@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "AzureMessagingWebPubSubServiceClient",
+  version: "2022-11-01",
 })
-@serviceVersion("2022-11-01")
 @server(
   "{Endpoint}",
   "// FIXME: (miissing-service-description) Add service description",

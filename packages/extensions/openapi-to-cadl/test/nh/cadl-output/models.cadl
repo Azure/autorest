@@ -170,40 +170,79 @@ model NotificationHubEntryModel {
 
 model NotificationHubContentModel {
   type?: NotificationHubContentModelType;
-  NotificationHubDescription?: NotificationHubDescriptionModel;
+
+  @projectedName("json", "NotificationHubDescription")
+  notificationHubDescription?: NotificationHubDescriptionModel;
 }
 
 model NotificationHubDescriptionModel {
-  "xmlns:i"?: NotificationHubDescriptionModelXmlnsI;
-  RegistrationTtl?: string;
-  Location?: string;
-  ApnsCredential?: PropertyBagModelItem[];
-  GcmCredential?: PropertyBagModelItem[];
-  WnsCredential?: PropertyBagModelItem[];
-  AuthorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: NotificationHubDescriptionModelXmlnsI;
+
+  @projectedName("json", "RegistrationTtl")
+  registrationTtl?: string;
+
+  @projectedName("json", "Location")
+  location?: string;
+
+  @projectedName("json", "ApnsCredential")
+  apnsCredential?: PropertyBagModelItem[];
+
+  @projectedName("json", "GcmCredential")
+  gcmCredential?: PropertyBagModelItem[];
+
+  @projectedName("json", "WnsCredential")
+  wnsCredential?: PropertyBagModelItem[];
+
+  @projectedName("json", "AuthorizationRules")
+  authorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
 }
 
 model PropertyBagModelItem {
-  Name?: string;
-  Value?: string;
+  @projectedName("json", "Name")
+  name?: string;
+
+  @projectedName("json", "Value")
+  value?: string;
 }
 
 model NotificationHubDescriptionModelAuthorizationRulesItem {
-  "i:type"?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
-  ClaimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
-  ClaimValue?: string;
-  Rights?: string[];
-  CreatedTime?: string;
-  ModifiedTime?: string;
-  KeyName?: string;
-  PrimaryKey?: string;
-  SecondaryKey?: string;
+  @projectedName("json", "i:type")
+  iType?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
+
+  @projectedName("json", "ClaimType")
+  claimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
+
+  @projectedName("json", "ClaimValue")
+  claimValue?: string;
+
+  @projectedName("json", "Rights")
+  rights?: string[];
+
+  @projectedName("json", "CreatedTime")
+  createdTime?: string;
+
+  @projectedName("json", "ModifiedTime")
+  modifiedTime?: string;
+
+  @projectedName("json", "KeyName")
+  keyName?: string;
+
+  @projectedName("json", "PrimaryKey")
+  primaryKey?: string;
+
+  @projectedName("json", "SecondaryKey")
+  secondaryKey?: string;
 }
 
 model RegistrationEntryModel {
   content?: NotificationHubContentModel;
-  "xmlns:m"?: RegistrationEntryModelXmlnsM;
-  "m:etag"?: string;
+
+  @projectedName("json", "xmlns:m")
+  xmlnsM?: RegistrationEntryModelXmlnsM;
+
+  @projectedName("json", "m:etag")
+  mEtag?: string;
 }
 
 @resource("{hubName}/installations/{installationId}")
@@ -286,73 +325,148 @@ model InstallationPatchModelItem {
 
 model RegistrationContentModel {
   type?: RegistrationContentModelType;
-  AppleRegistrationDescription?: AppleRegistrationContentModel;
-  AppleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
-  BaiduRegistrationDescription?: BaiduRegistrationContentModel;
-  BaiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
-  GcmRegistrationDescription?: GcmRegistrationContentModel;
-  GcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
-  WindowsRegistrationDescription?: WindowsRegistrationContentModel;
-  WindowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
+
+  @projectedName("json", "AppleRegistrationDescription")
+  appleRegistrationDescription?: AppleRegistrationContentModel;
+
+  @projectedName("json", "AppleTemplateRegistrationDescription")
+  appleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
+
+  @projectedName("json", "BaiduRegistrationDescription")
+  baiduRegistrationDescription?: BaiduRegistrationContentModel;
+
+  @projectedName("json", "BaiduTemplateRegistrationDescription")
+  baiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
+
+  @projectedName("json", "GcmRegistrationDescription")
+  gcmRegistrationDescription?: GcmRegistrationContentModel;
+
+  @projectedName("json", "GcmTemplateRegistrationDescription")
+  gcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
+
+  @projectedName("json", "WindowsRegistrationDescription")
+  windowsRegistrationDescription?: WindowsRegistrationContentModel;
+
+  @projectedName("json", "WindowsTemplateRegistrationDescription")
+  windowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
 }
 
 model AppleRegistrationContentModel {
-  "xmlns:i"?: AppleRegistrationContentModelXmlnsI;
-  Tags?: string;
-  DeviceToken: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: AppleRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "DeviceToken")
+  deviceToken: string;
 }
 
 model AppleTemplateRegistrationContentModel {
-  "xmlns:i"?: AppleTemplateRegistrationContentModelXmlnsI;
-  Tags?: string;
-  DeviceToken: string;
-  BodyTemplate: string;
-  Expiry?: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: AppleTemplateRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "DeviceToken")
+  deviceToken: string;
+
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
+
+  @projectedName("json", "Expiry")
+  expiry?: string;
 }
 
 model BaiduRegistrationContentModel {
-  "xmlns:i"?: BaiduRegistrationContentModelXmlnsI;
-  Tags?: string;
-  BaiduUserId: string;
-  BaiduChannelId: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: BaiduRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "BaiduUserId")
+  baiduUserId: string;
+
+  @projectedName("json", "BaiduChannelId")
+  baiduChannelId: string;
 }
 
 model BaiduTemplateRegistrationContentModel {
-  "xmlns:i"?: BaiduTemplateRegistrationContentModelXmlnsI;
-  Tags?: string;
-  BaiduUserId: string;
-  BaiduChannelId: string;
-  BodyTemplate: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: BaiduTemplateRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "BaiduUserId")
+  baiduUserId: string;
+
+  @projectedName("json", "BaiduChannelId")
+  baiduChannelId: string;
+
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 }
 
 model GcmRegistrationContentModel {
-  "xmlns:i"?: GcmRegistrationContentModelXmlnsI;
-  Tags?: string;
-  GcmRegistrationId?: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: GcmRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "GcmRegistrationId")
+  gcmRegistrationId?: string;
 }
 
 model GcmTemplateRegistrationContentModel {
-  "xmlns:i"?: GcmTemplateRegistrationContentModelXmlnsI;
-  Tags?: string;
-  GcmRegistrationId: string;
-  BodyTemplate: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: GcmTemplateRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "GcmRegistrationId")
+  gcmRegistrationId: string;
+
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
 }
 
 model WindowsRegistrationContentModel {
-  "xmlns:i"?: WindowsRegistrationContentModelXmlnsI;
-  Tags?: string;
-  ChannelUri: string;
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: WindowsRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "ChannelUri")
+  channelUri: string;
 }
 
 model WindowsTemplateRegistrationContentModel {
-  "xmlns:i"?: WindowsTemplateRegistrationContentModelXmlnsI;
-  Tags?: string;
-  ChannelUri: string;
-  BodyTemplate: string;
-  WnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
+  @projectedName("json", "xmlns:i")
+  xmlnsI?: WindowsTemplateRegistrationContentModelXmlnsI;
+
+  @projectedName("json", "Tags")
+  tags?: string;
+
+  @projectedName("json", "ChannelUri")
+  channelUri: string;
+
+  @projectedName("json", "BodyTemplate")
+  bodyTemplate: string;
+
+  @projectedName("json", "WnsHeaders")
+  wnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
 }
 
 model WindowsTemplateRegistrationContentModelWnsHeadersItem {
-  Header?: string;
-  Value?: string;
+  @projectedName("json", "Header")
+  header?: string;
+
+  @projectedName("json", "Value")
+  value?: string;
 }

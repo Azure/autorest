@@ -6,9 +6,10 @@ export function generateServiceInformation(program: CadlProgram) {
   const { serviceInformation } = program;
   const definitions: string[] = [];
 
-  definitions.push(`@service({title: "${serviceInformation.name}"})`);
-
-  serviceInformation.version && definitions.push(`@serviceVersion("${serviceInformation.version}")`);
+  definitions.push(`@service({
+    title: "${serviceInformation.name}"
+    ${serviceInformation.version ? `, version: "${serviceInformation.version}"` : ""}
+  })`);
 
   if (serviceInformation.endpoint) {
     definitions.push(`@server("${serviceInformation.endpoint}", ${JSON.stringify(serviceInformation.doc) ?? ""}`);

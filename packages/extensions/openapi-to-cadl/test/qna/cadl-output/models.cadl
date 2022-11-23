@@ -91,19 +91,23 @@ question.
   userId?: string;
 
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
-  confidenceScoreThreshold?: float32;
+  @projectedName("json", "confidenceScoreThreshold")
+  confidenceThreshold?: float32;
 
   @doc("Context object with previous QnA's information.")
-  context?: KnowledgeBaseAnswerContext;
+  @projectedName("json", "context")
+  answerContext?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
-  rankerType?: RankerKind;
+  @projectedName("json", "rankerType")
+  rankerKind?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
-  answerSpanRequest?: ShortAnswerOptions;
+  @projectedName("json", "answerSpanRequest")
+  shortAnswerOptions?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
   includeUnstructuredSources?: boolean;
@@ -115,7 +119,8 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  previousUserQuery?: string;
+  @projectedName("json", "previousUserQuery")
+  previousQuestion?: string;
 }
 
 @doc("filters over knowledge base.")
@@ -159,10 +164,12 @@ model ShortAnswerOptions {
 Minimum threshold score required to include an answer span, value ranges from 0
 to 1.
 """)
-  confidenceScoreThreshold?: float32;
+  @projectedName("json", "confidenceScoreThreshold")
+  confidenceThreshold?: float32;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
-  topAnswersWithSpan?: int32;
+  @projectedName("json", "topAnswersWithSpan")
+  top?: int32;
 }
 
 @doc("Represents List of Question Answers.")
@@ -180,10 +187,12 @@ model KnowledgeBaseAnswer {
   answer?: string;
 
   @doc("Answer confidence score, value ranges from 0 to 1.")
-  confidenceScore?: float32;
+  @projectedName("json", "confidenceScore")
+  confidence?: float32;
 
   @doc("ID of the QnA result.")
-  id?: int32;
+  @projectedName("json", "id")
+  qnaId?: int32;
 
   @doc("Source of QnA result.")
   source?: string;
@@ -198,7 +207,8 @@ answers.
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  answerSpan?: AnswerSpan;
+  @projectedName("json", "answerSpan")
+  shortAnswer?: AnswerSpan;
 }
 
 @doc("Dialog associated with Answer.")
@@ -232,7 +242,8 @@ model AnswerSpan {
   text?: string;
 
   @doc("Predicted score of answer span, value ranges from 0 to 1.")
-  confidenceScore?: float32;
+  @projectedName("json", "confidenceScore")
+  confidence?: float32;
 
   @doc("The answer span offset from the start of answer.")
   offset?: int32;
@@ -300,7 +311,8 @@ model AnswersFromTextOptions {
   question: string;
 
   @doc("Text records to be searched for given question.")
-  records: TextDocument[];
+  @projectedName("json", "records")
+  textDocuments: TextDocument[];
 
   @doc("""
 Language of the text records. This is BCP-47 representation of a language. For
@@ -338,13 +350,15 @@ model TextAnswer {
   answer?: string;
 
   @doc("answer confidence score, value ranges from 0 to 1.")
-  confidenceScore?: float32;
+  @projectedName("json", "confidenceScore")
+  confidence?: float32;
 
   @doc("record ID.")
   id?: string;
 
   @doc("Answer span object with respect to user's question.")
-  answerSpan?: AnswerSpan;
+  @projectedName("json", "answerSpan")
+  shortAnswer?: AnswerSpan;
 
   @doc("The sentence offset from the start of the document.")
   offset?: int32;

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "comment": "Add @projectedName on model properties",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-cadl"
+}

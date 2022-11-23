@@ -17,7 +17,8 @@ from the beginning of a new document. Maximum allowed size of string list is
   prompt?: PostContentSchemaPrompt;
 
   @doc("The maximum number of tokens to generate. Has minimum of 0.")
-  max_tokens?: int32;
+  @projectedName("json", "max_tokens")
+  maxTokens?: int32;
 
   @doc("""
 What sampling temperature to use. Higher values means the model will take more
@@ -40,7 +41,8 @@ both.
 Minimum of 0 and maximum of 1 allowed.
 
 """)
-  top_p?: float32;
+  @projectedName("json", "top_p")
+  topP?: float32;
 
   @doc("""
 Defaults to null. Modify the likelihood of specified tokens appearing in the
@@ -54,7 +56,8 @@ like -100 or 100 should result in a ban or exclusive selection of the relevant
 token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
-  logit_bias?: object;
+  @projectedName("json", "logit_bias")
+  logitBias?: object;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -87,32 +90,38 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
 
   @doc("A sequence which indicates the end of the current document.")
   stop?: PostContentSchemaStop;
-  completion_config?: string;
+
+  @projectedName("json", "completion_config")
+  completionConfig?: string;
 
   @doc("""
 can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
 enabled, 2=full cache
 """)
-  cache_level?: int32;
+  @projectedName("json", "cache_level")
+  cacheLevel?: int32;
 
   @doc("""
 How much to penalize new tokens based on their existing frequency in the text
 so far. Decreases the model's likelihood to repeat the same line verbatim. Has
 minimum of -2 and maximum of 2.
 """)
-  presence_penalty?: float32;
+  @projectedName("json", "presence_penalty")
+  presencePenalty?: float32;
 
   @doc("""
 How much to penalize new tokens based on whether they appear in the text so
 far. Increases the model's likelihood to talk about new topics.
 """)
-  frequency_penalty?: float32;
+  @projectedName("json", "frequency_penalty")
+  frequencyPenalty?: float32;
 
   @doc("""
 How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
-  best_of?: int32;
+  @projectedName("json", "best_of")
+  bestOf?: int32;
 }
 
 @doc("""
@@ -141,14 +150,22 @@ model Post200ApplicationJsonPropertiesItemsItem {
   text?: string;
   index?: int32;
   logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
-  finish_reason?: string;
+
+  @projectedName("json", "finish_reason")
+  finishReason?: string;
 }
 
 model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
   tokens?: string[];
-  token_logprobs?: float32[];
-  top_logprobs?: Record<float32>[];
-  text_offset?: int32[];
+
+  @projectedName("json", "token_logprobs")
+  tokenLogprobs?: float32[];
+
+  @projectedName("json", "top_logprobs")
+  topLogprobs?: Record<float32>[];
+
+  @projectedName("json", "text_offset")
+  textOffset?: int32[];
 }
 
 @error
@@ -176,7 +193,8 @@ lists
   user?: string;
 
   @doc("input type of embedding search to use")
-  input_type?: string;
+  @projectedName("json", "input_type")
+  inputType?: string;
 
   @doc("ID of the model to use")
   "model"?: string;

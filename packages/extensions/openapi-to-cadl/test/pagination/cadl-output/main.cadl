@@ -5,8 +5,8 @@ using Cadl.Rest;
 using Cadl.Http;
 @service({
   title: "AutoRest Paging Test Service",
+  version: "1.0.0",
 })
-@serviceVersion("1.0.0")
 @server(
   "{$host}",
   "Long-running Operation for AutoRest",
