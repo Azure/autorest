@@ -2,6 +2,18 @@
   "name": "@azure-tools/jsonschema",
   "entries": [
     {
+      "version": "1.2.2",
+      "tag": "@azure-tools/jsonschema_v1.2.2",
+      "date": "Wed, 23 Nov 2022 16:35:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "tag": "@azure-tools/jsonschema_v1.2.1",
       "date": "Tue, 19 Jul 2022 15:09:55 GMT",

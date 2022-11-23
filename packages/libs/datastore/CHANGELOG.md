@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Nov 2022 16:35:48 GMT and should not be manually modified.
+
+## 4.7.1
+Wed, 23 Nov 2022 16:35:48 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 4.7.0
 Tue, 19 Jul 2022 15:09:55 GMT

@@ -2,6 +2,29 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.5.5",
+      "tag": "@autorest/common_v1.5.5",
+      "date": "Wed, 23 Nov 2022 16:35:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.7.0` to `~4.7.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/yaml\" from `~1.1.0` to `~1.1.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.2` to `~1.2.3`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.4",
       "tag": "@autorest/common_v1.5.4",
       "date": "Fri, 19 Aug 2022 16:52:58 GMT",

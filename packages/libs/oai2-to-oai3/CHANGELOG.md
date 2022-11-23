@@ -1,6 +1,17 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Nov 2022 16:35:48 GMT and should not be manually modified.
+
+## 4.7.0
+Wed, 23 Nov 2022 16:35:48 GMT
+
+### Minor changes
+
+- Convert final-state-schema ref to oai3 ref in oai3 converter
+
+### Patches
+
+- Update dependencies
 
 ## 4.6.2
 Tue, 19 Jul 2022 15:09:55 GMT

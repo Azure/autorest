@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 19 Oct 2022 16:18:27 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Nov 2022 16:35:47 GMT and should not be manually modified.
+
+## 3.9.4
+Wed, 23 Nov 2022 16:35:47 GMT
+
+### Patches
+
+- Fix: ignore $ref in `x-` pointing to `x-` paths
+- Update dependencies
 
 ## 3.9.3
 Wed, 19 Oct 2022 16:18:27 GMT

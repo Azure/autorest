@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/codegen
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Nov 2022 16:35:48 GMT and should not be manually modified.
+
+## 2.9.2
+Wed, 23 Nov 2022 16:35:48 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 2.9.1
 Tue, 15 Mar 2022 16:00:38 GMT
