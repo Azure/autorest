@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "Add `normalizePath` helper",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/datastore"
+}
