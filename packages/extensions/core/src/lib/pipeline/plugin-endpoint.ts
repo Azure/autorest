@@ -13,6 +13,7 @@ import {
   IdentityPathMappings,
   LazyPromise,
   Mapping,
+  normalizePath,
   PathPosition,
 } from "@azure-tools/datastore";
 import { ensureIsFolderUri } from "@azure-tools/uri";
@@ -437,8 +438,8 @@ export class AutoRestExtension extends EventEmitter {
           // wire through `sink` in order to retrieve default artifact type
           const artifactMessage = <ArtifactMessage>message;
           const artifact = artifactMessage.Details;
-
-          await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type, artifact.sourceMap);
+          const filename = normalizePath(artifact.uri);
+          await writeFileToSinkAndNotify(filename, artifact.content, artifact.type, artifact.sourceMap);
         }
 
         onMessage(message);
