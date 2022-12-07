@@ -5,13 +5,13 @@ Autorest extension to scaffold a new CADL definition from an existing OpenApi do
 To run it
 
 ```bash
-autorest --openapi-to-cadl --input-file=<path-to-swagger> -namespace=<namespace> --title="<ProjectName>" --clear-output-folder=false
+autorest --openapi-to-cadl --input-file=<path-to-swagger> -namespace=<namespace> --title="<ProjectName>" --use=@autorest/openapi-to-cadl@next
 ```
 
 or with a README config file
 
 ```bash
-autorest --openapi-to-cadl --require=<path-to-readme-config>.md
+autorest --openapi-to-cadl --require=<path-to-readme-config>.md --use=@autorest/openapi-to-cadl@next
 ```
 
 This plugin will generate the following files
