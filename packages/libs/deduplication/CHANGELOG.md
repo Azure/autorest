@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/deduplication
 
-This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+
+## 3.1.6
+Wed, 07 Dec 2022 22:24:34 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 3.1.5
 Tue, 19 Jul 2022 15:09:55 GMT

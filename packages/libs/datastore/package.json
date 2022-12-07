@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/datastore",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "description": "Virtualized Filesystem with parsing and sourcemaps (AutoRest)",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
@@ -53,11 +53,11 @@
     "typescript": "~4.9.3"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.9.1",
-    "@azure-tools/json": "~1.2.2",
+    "@azure-tools/codegen": "~2.9.2",
+    "@azure-tools/json": "~1.2.3",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
-    "@azure-tools/yaml": "~1.1.0",
+    "@azure-tools/yaml": "~1.1.1",
     "@azure/logger": "^1.0.2",
     "lodash": "~4.17.20",
     "jsonpath-plus": "~6.0.1",
