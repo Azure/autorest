@@ -10,3 +10,7 @@ export function mergePipeStates(result: PipeState, ...pipeStates: Array<PipeStat
   }
   return result;
 }
+
+export function normalizePath(path: string): string {
+  return path.replace(/\\/g, "/");
+}

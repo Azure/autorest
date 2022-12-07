@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: Emitted artifact from csharp on windows use `\\` which result in transform not running",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
