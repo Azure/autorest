@@ -79,7 +79,7 @@ languages:
       - --use:@autorest/modelerfour@4.23.0
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-rc.1
+      - --use:@autorest/typescript@6.0.0-rc.4
 
     newArgs:
       - --v3
@@ -87,4 +87,4 @@ languages:
       - --use:../packages/extensions/modelerfour
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-rc.1
+      - --use:@autorest/typescript@6.0.0-rc.4
