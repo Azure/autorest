@@ -27,7 +27,6 @@ export interface XMSEnum {
 
 const removeKnownParameters = [
   "x-ms-metadata",
-  "x-ms-enum",
   "x-ms-code-generation-settings",
   "x-ms-client-name",
   "x-ms-parameter-location",
