@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Keep `x-ms-enum` in extensions",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
