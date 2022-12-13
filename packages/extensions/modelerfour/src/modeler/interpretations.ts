@@ -10,15 +10,8 @@ import {
 import { Session } from "@autorest/extension-base";
 import { getPascalIdentifier } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
-import {
-  StringFormat,
-  JsonType,
-  ParameterLocation,
-  includeXDashKeys,
-  includeXDashProperties,
-  omitXDashProperties,
-} from "@azure-tools/openapi";
-import { keyBy } from "lodash";
+import { StringFormat, JsonType, ParameterLocation, includeXDashProperties } from "@azure-tools/openapi";
+
 export interface XMSEnum {
   modelAsString?: boolean;
   values: [{ value: any; description?: string; name?: string }];
