@@ -2,6 +2,23 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.19.3",
+      "tag": "@autorest/codemodel_v4.19.3",
+      "date": "Wed, 07 Dec 2022 22:24:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.9.1` to `~2.9.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.19.2",
       "tag": "@autorest/codemodel_v4.19.2",
       "date": "Fri, 12 Aug 2022 19:53:22 GMT",

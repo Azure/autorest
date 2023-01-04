@@ -1,0 +1,30 @@
+{
+  "name": "@autorest/openapi-to-cadl",
+  "entries": [
+    {
+      "version": "0.2.0",
+      "tag": "@autorest/openapi-to-cadl_v0.2.0",
+      "date": "Wed, 07 Dec 2022 22:24:34 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add @projectedName on model properties"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Introducing the OpenAPI to CADL plugin"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.5.0` to `~3.5.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.19.2` to `~4.19.3`"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -2,6 +2,43 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.26.0",
+      "tag": "@autorest/modelerfour_v4.26.0",
+      "date": "Wed, 07 Dec 2022 22:24:34 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Support final-state-schema lro option"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.19.2` to `~4.19.3`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.5.0` to `~3.5.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.5.2` to `~0.5.3`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.9.1` to `~2.9.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.7.0` to `~4.7.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.4.0` to `~3.4.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.25.0",
       "tag": "@autorest/modelerfour_v4.25.0",
       "date": "Thu, 03 Nov 2022 18:44:18 GMT",
