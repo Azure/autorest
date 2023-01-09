@@ -1,6 +1,17 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 03 Nov 2022 18:44:18 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+
+## 4.26.0
+Wed, 07 Dec 2022 22:24:34 GMT
+
+### Minor changes
+
+- Support final-state-schema lro option
+
+### Patches
+
+- Update dependencies
 
 ## 4.25.0
 Thu, 03 Nov 2022 18:44:18 GMT

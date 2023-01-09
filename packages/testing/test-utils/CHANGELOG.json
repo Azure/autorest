@@ -2,6 +2,26 @@
   "name": "@autorest/test-utils",
   "entries": [
     {
+      "version": "0.5.3",
+      "tag": "@autorest/test-utils_v0.5.3",
+      "date": "Wed, 07 Dec 2022 22:24:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.5.4` to `~1.5.5`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.7.0` to `~4.7.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.5.2",
       "tag": "@autorest/test-utils_v0.5.2",
       "date": "Tue, 19 Jul 2022 15:09:55 GMT",

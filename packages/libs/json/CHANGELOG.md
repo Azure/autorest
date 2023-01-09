@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/json
 
-This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+
+## 1.2.3
+Wed, 07 Dec 2022 22:24:34 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 1.2.2
 Mon, 21 Mar 2022 15:38:03 GMT

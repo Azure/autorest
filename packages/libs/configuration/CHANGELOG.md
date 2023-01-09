@@ -1,6 +1,18 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Wed, 27 Jul 2022 17:44:10 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+
+## 1.11.0
+Wed, 07 Dec 2022 22:24:34 GMT
+
+### Minor changes
+
+- Add @autorest/openapi-to-cadl plugin
+- Remove `--model-validator` flag to load oav as oav autorest plugin is not supported anymore
+
+### Patches
+
+- Update dependencies
 
 ## 1.10.1
 Wed, 27 Jul 2022 17:44:10 GMT

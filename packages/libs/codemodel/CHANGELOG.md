@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Fri, 12 Aug 2022 19:53:22 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+
+## 4.19.3
+Wed, 07 Dec 2022 22:24:34 GMT
+
+### Patches
+
+- Update dependencies
 
 ## 4.19.2
 Fri, 12 Aug 2022 19:53:22 GMT
