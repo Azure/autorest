@@ -31,7 +31,6 @@ export async function processRequest(host: AutorestExtensionHost) {
   await emitCadlConfig(getFilePath(session, "cadl-project.yaml"));
 }
 
-
 function getOutuptDirectory(session: Session<CodeModel>) {
   return session.configuration["src-path"] ?? "";
 }
