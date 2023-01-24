@@ -1,4 +1,4 @@
-import { writeFile } from "fs/promises";
+import { getSession } from "../autorest-session";
 import { generateOperationGroup } from "../generate/generate-operations";
 import { CadlProgram } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
@@ -7,7 +7,8 @@ import { getNamespace } from "../utils/namespace";
 
 export async function emitRoutes(filePath: string, program: CadlProgram): Promise<void> {
   const content = generateRoutes(program);
-  await writeFile(filePath, formatCadlFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
 }
 
 function generateRoutes(program: CadlProgram) {

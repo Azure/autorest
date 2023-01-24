@@ -1,4 +1,5 @@
 import { writeFile } from "fs/promises";
+import { getSession } from "../autorest-session";
 import { generateEnums } from "../generate/generate-enums";
 import { generateObject } from "../generate/generate-object";
 import { CadlEnum, CadlProgram } from "../interfaces";
@@ -9,7 +10,8 @@ import { getNamespace } from "../utils/namespace";
 export async function emitModels(filePath: string, program: CadlProgram): Promise<void> {
   const content = generateModels(program);
 
-  await writeFile(filePath, formatCadlFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
 }
 
 function generateModels(program: CadlProgram) {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
@@ -25,7 +24,6 @@ export async function processRequest(host: AutorestExtensionHost) {
   markErrorModels(codeModel);
   markResources(codeModel);
   const cadlProgramDetails = getModel(codeModel);
-  createOutputFolder(getFilePath(session, ""));
   await emitModels(getFilePath(session, "models.cadl"), cadlProgramDetails);
   await emitRoutes(getFilePath(session, "routes.cadl"), cadlProgramDetails);
   await emitMain(getFilePath(session, "main.cadl"), cadlProgramDetails);
@@ -33,16 +31,9 @@ export async function processRequest(host: AutorestExtensionHost) {
   await emitCadlConfig(getFilePath(session, "cadl-project.yaml"));
 }
 
-function createOutputFolder(dir: string) {
-  if (!existsSync(dir)) {
-    mkdirSync(dir, { recursive: true });
-  }
-}
 
 function getOutuptDirectory(session: Session<CodeModel>) {
-  const outputFolder = session.configuration["output-folder"] ?? ".";
-  const srcPath = session.configuration["src-path"] ?? "";
-  return join(outputFolder, srcPath);
+  return session.configuration["src-path"] ?? "";
 }
 
 function getFilePath(session: Session<CodeModel>, fileName: string) {
