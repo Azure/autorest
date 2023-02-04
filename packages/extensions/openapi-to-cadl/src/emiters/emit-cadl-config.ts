@@ -1,4 +1,5 @@
 import { writeFileSync } from "fs";
+import { getSession } from "../autorest-session";
 import { formatFile } from "../utils/format";
 
 export async function emitCadlConfig(filePath: string): Promise<void> {
@@ -19,5 +20,6 @@ export async function emitCadlConfig(filePath: string): Promise<void> {
     # "@azure-tools/cadl-typescript": true
 `;
 
-  writeFileSync(filePath, formatFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
 }

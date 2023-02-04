@@ -1,11 +1,12 @@
-import { writeFile } from "fs/promises";
+import { getSession } from "../autorest-session";
 import { generateServiceInformation } from "../generate/generate-service-information";
 import { CadlProgram } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
 
 export async function emitMain(filePath: string, program: CadlProgram): Promise<void> {
   const content = getServiceInformation(program);
-  await writeFile(filePath, formatCadlFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
 }
 
 function getServiceInformation(program: CadlProgram) {

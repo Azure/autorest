@@ -1,4 +1,4 @@
-import { writeFile } from "fs/promises";
+import { getSession } from "../autorest-session";
 import { CadlProgram } from "../interfaces";
 import { formatFile } from "../utils/format";
 
@@ -6,7 +6,8 @@ export async function emitPackage(filePath: string, program: CadlProgram): Promi
   const name = program.serviceInformation.name.toLowerCase().replace(/ /g, "-");
   const description = program.serviceInformation.doc;
   const content = JSON.stringify(getPackage(name, description as string));
-  await writeFile(filePath, formatFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
 }
 
 const getPackage = (name: string, description: string) => ({

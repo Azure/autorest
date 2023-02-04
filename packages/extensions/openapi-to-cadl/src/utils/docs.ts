@@ -10,6 +10,7 @@ export function generateDocs({ doc }: WithDocs): string {
   }
 
   let docString = Array.isArray(doc) ? doc.join("\n") : doc;
+  docString = docString.replace(/\r\n/g, "\n");
   docString = docString.replace(/\\/g, "\\\\");
   docString = docString.replace(/"/g, '\\"');
   docString = lineWrap(docString);
@@ -28,7 +29,7 @@ export function generateSummary({ summary }: WithSummary): string {
 function lineWrap(doc: string) {
   const maxLength = 80;
 
-  if (doc.length <= maxLength) {
+  if (doc.length <= maxLength && !doc.includes("\n")) {
     return `"${doc}"`;
   }
 
