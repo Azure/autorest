@@ -6,6 +6,7 @@ import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {
+  isAnySchema,
   isArraySchema,
   isChoiceSchema,
   isConstantSchema,
@@ -178,10 +179,14 @@ export function getCadlType(schema: Schema, codeModel: CodeModel): string {
     return `Record<${getCadlType(schema.elementType, codeModel)}>`;
   }
 
+  if (isAnySchema(schema)) {
+    return `unknown`;
+  }
+
   const cadlType = cadlTypes.get(schemaType);
 
   if (!cadlType) {
-    throw new Error(`Unknown type ${schema.type}`);
+    throw new Error(`Unknown type ${(schema as any).type}`);
   }
 
   return cadlType;
