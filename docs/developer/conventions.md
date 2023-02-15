@@ -8,7 +8,7 @@ See [Issue 3695](https://github.com/Azure/autorest/issues/3695) for context.
 If a generator needs to differentiate between `output-folder` where the generated content will be written and a project folder where the user might have their own data that shouln't be deleted, then `project-folder` configuration should be used.
 
 - `project-folder`: Root of their sdk project
-- `output-folder`: Folder where the generated SDK will be. Most likely under `$(project-fodler)`
+- `output-folder`: Folder where the generated SDK will be. Most likely under `$(project-folder)`
 
 Example:
 
