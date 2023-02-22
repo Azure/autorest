@@ -88,7 +88,7 @@ export function transformBaseUrl(codeModel: CodeModel) {
       const { requests } = codeModel.operationGroups[0].operations[0];
       urlParameters = getEndpointParameter(codeModel);
       isCustom = true;
-      endpoint = requests![0].protocol.http!.uri;
+      endpoint = requests?.[0].protocol.http?.uri;
     }
   } else {
     endpoint = $host.clientDefaultValue;
