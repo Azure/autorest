@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "comment": "Improvements on Enum translation",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-cadl"
+}
