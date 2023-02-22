@@ -10,7 +10,7 @@ export interface CadlOptions {
   guessResourceKey: boolean;
 }
 
-export interface CadlChoiceValue {
+export interface CadlChoiceValue extends WithDoc {
   name: string;
   value: string | number | boolean;
 }
@@ -85,6 +85,7 @@ export interface CadlEnum extends CadlDataType {
   kind: "enum";
   members: CadlChoiceValue[];
   isExtensible: boolean;
+  decorators?: CadlDecorator[];
 }
 
 export interface WithFixMe {

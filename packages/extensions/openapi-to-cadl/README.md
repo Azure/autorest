@@ -29,7 +29,7 @@ use-extension:
 
 modelerfour:
   # this runs a pre-namer step to clean up names
-  prenamer: true
+  prenamer: false
 
 openapi-to-cadl-scope/emitter:
   input-artifact: openapi-to-cadl-files

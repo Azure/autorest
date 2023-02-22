@@ -16,15 +16,13 @@ Unique identifier representing a specific product for a given latitude &
 longitude. For example, uberX in San Francisco will have a different product_id
 than uberX in Los Angeles.
 """)
-  @projectedName("json", "product_id")
-  productId?: string;
+  product_id?: string;
 
   @doc("Description of product.")
   description?: string;
 
   @doc("Display name of product.")
-  @projectedName("json", "display_name")
-  displayName?: string;
+  display_name?: string;
 
   @doc("Capacity of product. For example, 4 people.")
   capacity?: string;

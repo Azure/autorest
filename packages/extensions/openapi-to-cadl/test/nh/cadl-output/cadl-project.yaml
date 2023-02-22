@@ -1,5 +1,5 @@
 emitters:
-  # "@azure-tools/cadl-autorest": true
+  "@azure-tools/cadl-autorest": true
   # Uncomment this line and add "@azure-tools/cadl-python" to your package.json to generate Python code
   # "@azure-tools/cadl-python":
   #   "basic-setup-py": true

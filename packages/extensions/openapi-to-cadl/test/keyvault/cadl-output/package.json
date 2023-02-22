@@ -1,7 +1,7 @@
 {
-  "name": "@cadl-api-spec/azure-schema-registry",
+  "name": "@cadl-api-spec/azure-keyvault-service",
   "author": "Microsoft Corporation",
-  "description": "Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.",
+  "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
   "license": "MIT",
   "dependencies": {
     "@cadl-lang/compiler": "^0.40.0",

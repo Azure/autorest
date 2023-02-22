@@ -1,13 +1,15 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
 
 using Cadl.Rest;
 
 namespace AutoRestUrlTestService;
 
+@Azure.Core.fixed
 enum UriColor {
-  RedColor: "red color",
-  GreenColor: "green color",
-  BlueColor: "blue color",
+  "red color",
+  "green color",
+  "blue color",
 }
 
 @error

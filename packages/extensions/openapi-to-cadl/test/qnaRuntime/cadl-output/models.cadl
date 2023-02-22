@@ -4,15 +4,12 @@ using Cadl.Rest;
 
 namespace QnAMakerRuntimeClient;
 
-enum StrictFiltersCompoundOperationTypeKnownValues {
+enum StrictFiltersCompoundOperationType {
   "AND",
   "OR",
 }
 
-@knownValues(StrictFiltersCompoundOperationTypeKnownValues)
-model StrictFiltersCompoundOperationType is string;
-
-enum ErrorCodeTypeKnownValues {
+enum ErrorCodeType {
   "BadArgument",
   "Forbidden",
   "NotFound",
@@ -28,9 +25,6 @@ enum ErrorCodeTypeKnownValues {
   "ValidationFailure",
   "ExtractionFailure",
 }
-
-@knownValues(ErrorCodeTypeKnownValues)
-model ErrorCodeType is string;
 
 @doc("POST body schema to query the knowledgebase.")
 model QueryDTO {
@@ -60,7 +54,7 @@ target=\"blank\">Analytics and Telemetry</a>.
   scoreThreshold?: float32;
 
   @doc("Context object with previous QnA's information.")
-  context?: QueryDTOContext;
+  context?: QueryDTO_context;
 
   @doc("Optional field. Set to 'QuestionOnly' for using a question only Ranker.")
   rankerType?: string;
@@ -73,7 +67,7 @@ target=\"blank\">Analytics and Telemetry</a>.
 }
 
 @doc("Context object with previous QnA's information.")
-model QueryDTOContext {
+model QueryDTO_context {
   ...QueryContextDTO;
 }
 
@@ -122,11 +116,11 @@ model QnASearchResult {
   metadata?: MetadataDTO[];
 
   @doc("Context object of the QnA")
-  context?: QnASearchResultContext;
+  context?: QnASearchResult_context;
 }
 
 @doc("Context object of the QnA")
-model QnASearchResultContext {
+model QnASearchResult_context {
   ...ContextDTO;
 }
 
@@ -157,19 +151,19 @@ ignored.
   qnaId?: int32;
 
   @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
-  qna?: PromptDTOQna;
+  qna?: PromptDTO_qna;
 
   @doc("Text displayed to represent a follow up question prompt")
   displayText?: string;
 }
 
 @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
-model PromptDTOQna {
-  ...QnAdto;
+model PromptDTO_qna {
+  ...QnADTO;
 }
 
 @doc("Q-A object.")
-model QnAdto {
+model QnADTO {
   @doc("Unique id for the Q-A.")
   id?: int32;
 
@@ -189,11 +183,11 @@ https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
   metadata?: MetadataDTO[];
 
   @doc("Context of a QnA")
-  context?: QnAdtoContext;
+  context?: QnADTO_context;
 }
 
 @doc("Context of a QnA")
-model QnAdtoContext {
+model QnADTO_context {
   ...ContextDTO;
 }
 
@@ -204,11 +198,11 @@ https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-
 @error
 model ErrorResponse {
   @doc("The error object.")
-  error?: ErrorResponseError;
+  error?: ErrorResponse_error;
 }
 
 @doc("The error object.")
-model ErrorResponseError {
+model ErrorResponse_error {
   ...Error;
 }
 

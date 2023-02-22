@@ -4,35 +4,26 @@ using Cadl.Rest;
 
 namespace AutoRestComplexTestService;
 
-enum CMYKColorsKnownValues {
-  Cyan: "cyan",
+enum CMYKColors {
+  "cyan",
   "Magenta",
-  Yellow: "YELLOW",
-  BlacK: "blacK",
+  "YELLOW",
+  "blacK",
 }
 
-@knownValues(CMYKColorsKnownValues)
-model CMYKColors is string;
-
-enum MyKindKnownValues {
+enum MyKind {
   "Kind1",
 }
 
-@knownValues(MyKindKnownValues)
-model MyKind is string;
-
-enum GoblinSharkColorKnownValues {
-  Pink: "pink",
-  Gray: "gray",
-  Brown: "brown",
-  UpperRed: "RED",
-  LowerRed: "red",
+enum GoblinSharkColor {
+  "pink",
+  "gray",
+  "brown",
+  @doc("Uppercase RED") upperRed: "RED",
+  @doc("Lowercase RED") lowerRed: "red",
 }
 
-@knownValues(GoblinSharkColorKnownValues)
-model GoblinSharkColor is string;
-
-model Basic {
+model basic {
   @doc("Basic Id")
   id?: int32;
 
@@ -50,94 +41,86 @@ model Error {
   message?: string;
 }
 
-model IntWrapper {
+model int_wrapper {
   field1?: int32;
   field2?: int32;
 }
 
-model LongWrapper {
+model long_wrapper {
   field1?: int32;
   field2?: int32;
 }
 
-model FloatWrapper {
+model float_wrapper {
   field1?: float32;
   field2?: float32;
 }
 
-model DoubleWrapper {
+model double_wrapper {
   field1?: float32;
-
-  @projectedName(
-    "json",
-    "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
-  )
-  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float32;
+  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose?: float32;
 }
 
-model BooleanWrapper {
-  @projectedName("json", "field_true")
-  fieldTrue?: boolean;
-
-  @projectedName("json", "field_false")
-  fieldFalse?: boolean;
+model boolean_wrapper {
+  field_true?: boolean;
+  field_false?: boolean;
 }
 
-model StringWrapper {
+model string_wrapper {
   field?: string;
   empty?: string;
   null?: string;
 }
 
-model DateWrapper {
+model date_wrapper {
   field?: plainDate;
   leap?: plainDate;
 }
 
-model DatetimeWrapper {
+model datetime_wrapper {
   field?: zonedDateTime;
   now?: zonedDateTime;
 }
 
-model Datetimerfc1123Wrapper {
+model datetimerfc1123_wrapper {
   field?: zonedDateTime;
   now?: zonedDateTime;
 }
 
-model DurationWrapper {
+model duration_wrapper {
   field?: duration;
 }
 
-model ByteWrapper {
+model byte_wrapper {
   field?: bytes;
 }
 
-model ArrayWrapper {
+model array_wrapper {
   array?: string[];
 }
 
-model DictionaryWrapper {
+model dictionary_wrapper {
   @doc("Dictionary of <string>")
   defaultProgram?: Record<string>;
 }
 
-model Siamese {
-  ...Cat;
+model siamese {
+  ...cat;
   breed?: string;
 }
 
-model Cat {
-  ...Pet;
+model cat {
+  ...pet;
   color?: string;
-  hates?: Dog[];
+  hates?: dog[];
 }
 
-model Dog {
-  ...Pet;
+model dog {
+  ...pet;
   food?: string;
 }
 
-model Pet {
+model pet {
   id?: int32;
   name?: string;
 }
@@ -171,12 +154,12 @@ model DotSalmon extends DotFish {
 }
 
 @discriminator("fishtype")
-model Salmon extends Fish {
+model salmon extends Fish {
   location?: string;
   iswild?: boolean;
 }
 
-model ReadonlyObj {
+model readonly_obj {
   @visibility("read")
   id?: string;
   size?: int32;
@@ -192,24 +175,23 @@ model MyBaseHelperType {
   propBH1?: string;
 }
 
-model SmartSalmon extends Salmon {
-  @projectedName("json", "college_degree")
-  collegeDegree?: string;
+model smart_salmon extends salmon {
+  college_degree?: string;
   fishtype: "smart_salmon";
 }
 
 @discriminator("fishtype")
-model Shark extends Fish {
+model shark extends Fish {
   age?: int32;
   birthday: zonedDateTime;
 }
 
-model Sawshark extends Shark {
+model sawshark extends shark {
   picture?: bytes;
   fishtype: "sawshark";
 }
 
-model Goblinshark extends Shark {
+model goblinshark extends shark {
   jawsize?: int32;
 
   @doc("Colors possible")
@@ -217,7 +199,7 @@ model Goblinshark extends Shark {
   fishtype: "goblin";
 }
 
-model Cookiecuttershark extends Shark {
+model cookiecuttershark extends shark {
   fishtype: "cookiecuttershark";
 }
 

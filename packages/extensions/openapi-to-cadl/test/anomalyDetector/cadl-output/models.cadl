@@ -6,26 +6,20 @@ using Azure.Core;
 
 namespace AnomalyDetectorClient;
 
-enum ApiVersionKnownValues {
-  V11Preview1: "v1.1-preview.1",
+enum ApiVersion {
+  "v1.1-preview.1",
 }
 
-@knownValues(ApiVersionKnownValues)
-model ApiVersion is string;
-
-enum ImputeModeKnownValues {
-  Auto: "auto",
-  Previous: "previous",
-  Linear: "linear",
-  Fixed: "fixed",
-  Zero: "zero",
-  NotFill: "notFill",
+enum ImputeMode {
+  "auto",
+  "previous",
+  "linear",
+  "fixed",
+  "zero",
+  "notFill",
 }
 
-@knownValues(ImputeModeKnownValues)
-model ImputeMode is string;
-
-enum AnomalyDetectorErrorCodesKnownValues {
+enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",
   "InvalidGranularity",
@@ -39,10 +33,7 @@ enum AnomalyDetectorErrorCodesKnownValues {
   "InvalidImputeFixedValue",
 }
 
-@knownValues(AnomalyDetectorErrorCodesKnownValues)
-model AnomalyDetectorErrorCodes is string;
-
-enum FillNAMethodKnownValues {
+enum fillNAMethod {
   "Previous",
   "Subsequent",
   "Linear",
@@ -50,44 +41,41 @@ enum FillNAMethodKnownValues {
   "Fixed",
   "NotFill",
 }
-
-@knownValues(FillNAMethodKnownValues)
-model FillNAMethod is string;
-
+@Azure.Core.fixed
 enum TimeGranularity {
-  Yearly: "yearly",
-  Monthly: "monthly",
-  Weekly: "weekly",
-  Daily: "daily",
-  Hourly: "hourly",
-  PerMinute: "minutely",
-  PerSecond: "secondly",
-  Microsecond: "microsecond",
-  None: "none",
+  "yearly",
+  "monthly",
+  "weekly",
+  "daily",
+  "hourly",
+  perMinute: "minutely",
+  perSecond: "secondly",
+  "microsecond",
+  "none",
 }
-
+@Azure.Core.fixed
 enum DetectionStatus {
-  Created: "CREATED",
-  Running: "RUNNING",
-  Ready: "READY",
-  Failed: "FAILED",
+  "CREATED",
+  "RUNNING",
+  "READY",
+  "FAILED",
 }
-
+@Azure.Core.fixed
 enum DataSchema {
   "OneTable",
   "MultiTable",
 }
-
-enum AlignMode {
+@Azure.Core.fixed
+enum alignMode {
   "Inner",
   "Outer",
 }
-
-enum ModelStatus {
-  Created: "CREATED",
-  Running: "RUNNING",
-  Ready: "READY",
-  Failed: "FAILED",
+@Azure.Core.fixed
+enum modelStatus {
+  "CREATED",
+  "RUNNING",
+  "READY",
+  "FAILED",
 }
 
 @doc("The request of entire or last anomaly detection.")
@@ -495,7 +483,7 @@ the anomaly score of the subsequent point.
   alignPolicy?: AlignPolicy;
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
-  status?: ModelStatus;
+  status?: modelStatus;
 
   @doc("Error messages when failed to create a model.")
   errors?: ErrorResponse[];
@@ -510,14 +498,14 @@ model AlignPolicy {
 An optional field, indicating how we align different variables to the same
 time-range. Either Inner or Outer. 
 """)
-  alignMode?: AlignMode;
+  alignMode?: alignMode;
 
   @doc("""
 An optional field, indicating how missing values will be filled. One of
 Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to
 NotFill, when the alignMode is Outer.
 """)
-  fillNAMethod?: FillNAMethod;
+  fillNAMethod?: fillNAMethod;
 
   @doc("An optional field. Required when fillNAMethod is Fixed.")
   paddingValue?: float32;
@@ -569,7 +557,7 @@ model ModelSnapshot {
   lastUpdatedTime: zonedDateTime;
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
-  status: ModelStatus;
+  status: modelStatus;
   displayName?: string;
 
   @doc("Total number of variables.")

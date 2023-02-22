@@ -7,33 +7,33 @@ using Cadl.Http;
 
 namespace Azure.AI.OpenAI;
 
-interface CompletionsOperations {
+interface completionsOperations {
   @summary("Create a completion from a chosen model")
   @doc("Create a completion from a chosen model")
   @route("/deployments/{deployment-id}/completions")
   @post
-  Create is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @path "deployment-id": string;
       @body
-      body: Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
+      body: paths·1vtxb06·deployments_deployment_id_completions·post·requestbody·content·application_json·schema;
     },
-    PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema
+    paths·maorw9·deployments_deployment_id_completions·post·responses·200·content·application_json·schema
   >;
 }
 
-interface EmbeddingsOperations {
+interface embeddingsOperations {
   @summary("Return the embeddings for a given prompt.")
   @doc("Return the embeddings for a given prompt.")
   @route("/deployments/{deployment-id}/embeddings")
   @post
-  Create is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("deployment id of the model which was deployed")
       @path
       "deployment-id": string;
       @body
-      body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
+      body: paths·13piqoc·deployments_deployment_id_embeddings·post·requestbody·content·application_json·schema;
     },
     void
   >;

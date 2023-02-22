@@ -1,21 +1,19 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
 
 using Cadl.Rest;
 
 namespace AzureMessagingWebPubSubServiceClient;
 
-enum WebPubSubPermissionKnownValues {
-  SendToGroup: "sendToGroup",
-  JoinLeaveGroup: "joinLeaveGroup",
+enum WebPubSubPermission {
+  "sendToGroup",
+  "joinLeaveGroup",
 }
-
-@knownValues(WebPubSubPermissionKnownValues)
-model WebPubSubPermission is string;
-
+@Azure.Core.fixed
 enum ContentType {
-  ApplicationJson: "application/json",
-  ApplicationOctetStream: "application/octet-stream",
-  TextPlain: "text/plain",
+  @doc("Content Type 'application/json'") "application/json",
+  @doc("Content Type 'application/octet-stream'") "application/octet-stream",
+  @doc("Content Type 'text/plain'") "text/plain",
 }
 
 @doc("The error object.")

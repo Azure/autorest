@@ -4,7 +4,7 @@ using Cadl.Rest;
 
 namespace Azure.AI.OpenAI;
 
-model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema {
+model paths·1vtxb06·deployments_deployment_id_completions·post·requestbody·content·application_json·schema {
   @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -14,11 +14,10 @@ during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-  prompt?: PostContentSchemaPrompt;
+  prompt?: post_content_schema_prompt;
 
   @doc("The maximum number of tokens to generate. Has minimum of 0.")
-  @projectedName("json", "max_tokens")
-  maxTokens?: int32;
+  max_tokens?: int32;
 
   @doc("""
 What sampling temperature to use. Higher values means the model will take more
@@ -41,8 +40,7 @@ both.
 Minimum of 0 and maximum of 1 allowed.
 
 """)
-  @projectedName("json", "top_p")
-  topP?: float32;
+  top_p?: float32;
 
   @doc("""
 Defaults to null. Modify the likelihood of specified tokens appearing in the
@@ -56,8 +54,7 @@ like -100 or 100 should result in a ban or exclusive selection of the relevant
 token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
-  @projectedName("json", "logit_bias")
-  logitBias?: object;
+  logit_bias?: unknown;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -89,39 +86,33 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
   echo?: boolean;
 
   @doc("A sequence which indicates the end of the current document.")
-  stop?: PostContentSchemaStop;
-
-  @projectedName("json", "completion_config")
-  completionConfig?: string;
+  stop?: post_content_schema_stop;
+  completion_config?: string;
 
   @doc("""
 can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
 enabled, 2=full cache
 """)
-  @projectedName("json", "cache_level")
-  cacheLevel?: int32;
+  cache_level?: int32;
 
   @doc("""
 How much to penalize new tokens based on their existing frequency in the text
 so far. Decreases the model's likelihood to repeat the same line verbatim. Has
 minimum of -2 and maximum of 2.
 """)
-  @projectedName("json", "presence_penalty")
-  presencePenalty?: float32;
+  presence_penalty?: float32;
 
   @doc("""
 How much to penalize new tokens based on whether they appear in the text so
 far. Increases the model's likelihood to talk about new topics.
 """)
-  @projectedName("json", "frequency_penalty")
-  frequencyPenalty?: float32;
+  frequency_penalty?: float32;
 
   @doc("""
 How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
-  @projectedName("json", "best_of")
-  bestOf?: int32;
+  best_of?: int32;
 }
 
 @doc("""
@@ -133,68 +124,57 @@ during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-model PostContentSchemaPrompt {}
+model post_content_schema_prompt {}
 
 @doc("A sequence which indicates the end of the current document.")
-model PostContentSchemaStop {}
+model post_content_schema_stop {}
 
-model PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema {
+model paths·maorw9·deployments_deployment_id_completions·post·responses·200·content·application_json·schema {
   id?: string;
   object?: string;
   created?: int32;
   "model"?: string;
-  choices?: Post200ApplicationJsonPropertiesItemsItem[];
+  choices?: post_200_application_json_properties_itemsItem[];
 }
 
-model Post200ApplicationJsonPropertiesItemsItem {
+model post_200_application_json_properties_itemsItem {
   text?: string;
   index?: int32;
-  logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
-
-  @projectedName("json", "finish_reason")
-  finishReason?: string;
+  logprobs?: post_responses_200_content_application_json_schema_choices_item_logprobs;
+  finish_reason?: string;
 }
 
-model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
+model post_responses_200_content_application_json_schema_choices_item_logprobs {
   tokens?: string[];
-
-  @projectedName("json", "token_logprobs")
-  tokenLogprobs?: float32[];
-
-  @projectedName("json", "top_logprobs")
-  topLogprobs?: Record<float32>[];
-
-  @projectedName("json", "text_offset")
-  textOffset?: int32[];
+  token_logprobs?: float32[];
+  top_logprobs?: Record<float32>[];
+  text_offset?: int32[];
 }
 
 @error
-model ErrorResponse {
-  error?: ErrorResponseError;
+model errorResponse {
+  error?: errorResponse_error;
 }
 
-model ErrorResponseError {
+model errorResponse_error {
   code?: string;
   message?: string;
   param?: string;
   type?: string;
 }
 
-model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema {
-  ...DictionaryOfany;
-
+model paths·13piqoc·deployments_deployment_id_embeddings·post·requestbody·content·application_json·schema {
   @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-  input: PostContentSchemaInput;
+  input: post_content_schema_input;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
 
   @doc("input type of embedding search to use")
-  @projectedName("json", "input_type")
-  inputType?: string;
+  input_type?: string;
 
   @doc("ID of the model to use")
   "model"?: string;
@@ -204,4 +184,4 @@ lists
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-model PostContentSchemaInput {}
+model post_content_schema_input {}

@@ -1,6 +1,8 @@
-import { ObjectSchema, Property } from "@autorest/codemodel";
+import { ChoiceSchema, ObjectSchema, Property, SealedChoiceSchema } from "@autorest/codemodel";
+import { Enum } from "@cadl-lang/compiler/*";
 import { CadlDecorator } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
+import { isSealedChoiceSchema } from "./schemas";
 
 export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   const decorators: CadlDecorator[] = [];
@@ -80,6 +82,18 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
   return decorators;
 }
 
+export function getEnumlDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): CadlDecorator[] {
+  const decorators: CadlDecorator[] = [];
+
+  if (isSealedChoiceSchema(enumeration)) {
+    decorators.push({
+      name: "Azure.Core.fixed",
+      module: "@azure-tools/cadl-azure-core",
+    });
+  }
+
+  return decorators;
+}
 export function generateDecorators(decorators: CadlDecorator[] = []): string {
   const definitions: string[] = [];
   for (const decorator of decorators ?? []) {

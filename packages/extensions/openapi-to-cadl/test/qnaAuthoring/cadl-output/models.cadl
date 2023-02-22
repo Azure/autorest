@@ -5,7 +5,7 @@ using Cadl.Rest;
 
 namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
-enum ErrorCodeKnownValues {
+enum ErrorCode {
   "InvalidRequest",
   "InvalidArgument",
   "Unauthorized",
@@ -26,10 +26,7 @@ enum ErrorCodeKnownValues {
   "Warning",
 }
 
-@knownValues(ErrorCodeKnownValues)
-model ErrorCode is string;
-
-enum InnerErrorCodeKnownValues {
+enum InnerErrorCode {
   "InvalidRequest",
   "InvalidParameterValue",
   "KnowledgeBaseNotFound",
@@ -46,62 +43,49 @@ enum InnerErrorCodeKnownValues {
   "InvalidCountryHint",
 }
 
-@knownValues(InnerErrorCodeKnownValues)
-model InnerErrorCode is string;
-
-enum JobStatusKnownValues {
-  NotStarted: "notStarted",
-  Running: "running",
-  Succeeded: "succeeded",
-  Failed: "failed",
-  Cancelled: "cancelled",
-  Cancelling: "cancelling",
-  PartiallyCompleted: "partiallyCompleted",
+enum jobStatus {
+  "notStarted",
+  "running",
+  "succeeded",
+  "failed",
+  "cancelled",
+  "cancelling",
+  "partiallyCompleted",
 }
 
-@knownValues(JobStatusKnownValues)
-model JobStatus is string;
-
-enum FormatKnownValues {
-  Json: "json",
-  Tsv: "tsv",
-  Excel: "excel",
+enum format {
+  @doc("Export or Import QnA assets in JSON format.") "json",
+  @doc("""
+Export or Import knowledge base replica including all assets and metadata in
+Excel format.
+""")
+  "tsv",
+  @doc("""
+Export or Import knowledge base replica including all assets and metadata in
+Tsv format.
+""")
+  "excel",
 }
 
-@knownValues(FormatKnownValues)
-model Format is string;
-
-enum AssetKindKnownValues {
-  Qnas: "qnas",
-  Synonyms: "synonyms",
+enum AssetKind {
+  "qnas",
+  "synonyms",
 }
 
-@knownValues(AssetKindKnownValues)
-model AssetKind is string;
-
-enum SourceKindKnownValues {
-  File: "file",
-  Url: "url",
+enum sourceKind {
+  "file",
+  "url",
 }
 
-@knownValues(SourceKindKnownValues)
-model SourceKind is string;
-
-enum SourceContentStructureKindKnownValues {
-  Unstructured: "unstructured",
+enum sourceContentStructureKind {
+  "unstructured",
 }
 
-@knownValues(SourceContentStructureKindKnownValues)
-model SourceContentStructureKind is string;
-
-enum UpdateOperationKindKnownValues {
-  Add: "add",
-  Delete: "delete",
-  Replace: "replace",
+enum updateOperationKind {
+  "add",
+  "delete",
+  "replace",
 }
-
-@knownValues(UpdateOperationKindKnownValues)
-model UpdateOperationKind is string;
 
 @doc("Collection of projects metadata and global settings.")
 model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
@@ -235,7 +219,7 @@ model JobMetadata {
   lastUpdatedDateTime: zonedDateTime;
 
   @doc("Job Status.")
-  status: JobStatus;
+  status: jobStatus;
 }
 
 @doc("Collection of Error types.")
@@ -427,24 +411,24 @@ model QnaSourceMetadata {
 Unique source identifier. Name of the file if it's a 'file' source; otherwise,
 the complete URL if it's a 'url' source.
 """)
-  source?: string;
-
-  @doc("URI location for the file or url.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
+  source: string;
+
+  @doc("URI location for the file or url.")
   sourceUri: string;
 
   @doc("Supported source types.")
-  sourceKind: SourceKind;
+  sourceKind: sourceKind;
 
   @doc("Content structure type for sources.")
-  contentStructureKind?: SourceContentStructureKind;
+  contentStructureKind?: sourceContentStructureKind;
 }
 
 @doc("Source to be updated.")
 model UpdateSourceRecord {
   @doc("Update operation type for assets.")
-  "op": UpdateOperationKind;
+  "op": updateOperationKind;
 
   @doc("Update source record.")
   value: UpdateQnaSourceRecord;
@@ -468,7 +452,7 @@ model QnaAssets is Azure.Core.Page<RetrieveQnaRecord>;
 @doc("QnA record to be updated.")
 model UpdateQnaRecord {
   @doc("Update operation type for assets.")
-  "op": UpdateOperationKind;
+  "op": updateOperationKind;
 
   @doc("QnA record.")
   value: QnaRecord;
