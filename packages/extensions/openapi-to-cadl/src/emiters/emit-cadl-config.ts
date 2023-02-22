@@ -1,4 +1,3 @@
-import { writeFileSync } from "fs";
 import { getSession } from "../autorest-session";
 import { formatFile } from "../utils/format";
 
