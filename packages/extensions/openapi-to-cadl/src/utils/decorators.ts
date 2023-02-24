@@ -81,7 +81,7 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
   return decorators;
 }
 
-export function getEnumlDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): CadlDecorator[] {
+export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): CadlDecorator[] {
   const decorators: CadlDecorator[] = [];
 
   if (isSealedChoiceSchema(enumeration)) {

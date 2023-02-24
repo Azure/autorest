@@ -4,7 +4,6 @@ import { getFirstEndpoint } from "../utils/get-endpoint";
 import { isConstantSchema } from "../utils/schemas";
 
 export function transformServiceInformation(model: CodeModel): ServiceInformation {
-  const foo = transformBaseUrl(model);
   return {
     name: model.info.title,
     doc: model.info.description ?? "// FIXME: (miissing-service-description) Add service description",
