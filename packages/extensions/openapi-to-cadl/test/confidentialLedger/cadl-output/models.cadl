@@ -6,30 +6,21 @@ using Azure.Core;
 
 namespace Azure.Language.Authoring;
 
-enum ConfidentialLedgerQueryStateKnownValues {
+enum ConfidentialLedgerQueryState {
   "Loading",
   "Ready",
 }
 
-@knownValues(ConfidentialLedgerQueryStateKnownValues)
-model ConfidentialLedgerQueryState is string;
-
-enum TransactionStateKnownValues {
+enum TransactionState {
   "Committed",
   "Pending",
 }
 
-@knownValues(TransactionStateKnownValues)
-model TransactionState is string;
-
-enum ConfidentialLedgerUserRoleNameKnownValues {
+enum ConfidentialLedgerUserRoleName {
   "Administrator",
   "Contributor",
   "Reader",
 }
-
-@knownValues(ConfidentialLedgerUserRoleNameKnownValues)
-model ConfidentialLedgerUserRoleName is string;
 
 @doc("The governance script for the application.")
 model Constitution {

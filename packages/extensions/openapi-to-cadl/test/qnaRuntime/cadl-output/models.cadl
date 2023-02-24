@@ -4,15 +4,12 @@ using Cadl.Rest;
 
 namespace QnAMakerRuntimeClient;
 
-enum StrictFiltersCompoundOperationTypeKnownValues {
+enum StrictFiltersCompoundOperationType {
   "AND",
   "OR",
 }
 
-@knownValues(StrictFiltersCompoundOperationTypeKnownValues)
-model StrictFiltersCompoundOperationType is string;
-
-enum ErrorCodeTypeKnownValues {
+enum ErrorCodeType {
   "BadArgument",
   "Forbidden",
   "NotFound",
@@ -28,9 +25,6 @@ enum ErrorCodeTypeKnownValues {
   "ValidationFailure",
   "ExtractionFailure",
 }
-
-@knownValues(ErrorCodeTypeKnownValues)
-model ErrorCodeType is string;
 
 @doc("POST body schema to query the knowledgebase.")
 model QueryDTO {

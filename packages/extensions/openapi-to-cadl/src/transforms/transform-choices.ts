@@ -1,6 +1,7 @@
 import { ChoiceSchema, ChoiceValue, CodeModel, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
 import { CadlChoiceValue, CadlEnum } from "../interfaces";
+import { getEnumDecorators } from "../utils/decorators";
 import { transformValue } from "../utils/values";
 
 export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeModel: CodeModel): CadlEnum {
@@ -10,6 +11,7 @@ export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeMod
 
   if (!cadlEnum) {
     cadlEnum = {
+      decorators: getEnumDecorators(schema),
       doc: schema.language.default.documentation,
       kind: "enum",
       name: schema.language.default.name.replace(/-/g, "_"),
@@ -31,6 +33,7 @@ function hasSyntheticName(schema: ChoiceSchema | SealedChoiceSchema) {
 
 function transformChoiceMember(member: ChoiceValue): CadlChoiceValue {
   return {
+    doc: member.language.default.description,
     name: member.language.default.name,
     value: transformValue(member.value),
   };

@@ -8,4 +8,5 @@ isAzureSpec: true
 namespace: "Azure.Language.Authoring"
 modelerfour:
   lenient-model-deduplication: true
+  prenamer: true
 ```

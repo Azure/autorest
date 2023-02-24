@@ -6,26 +6,20 @@ using Azure.Core;
 
 namespace AnomalyDetectorClient;
 
-enum ApiVersionKnownValues {
-  V11Preview1: "v1.1-preview.1",
+enum ApiVersion {
+  "v1.1-preview.1",
 }
 
-@knownValues(ApiVersionKnownValues)
-model ApiVersion is string;
-
-enum ImputeModeKnownValues {
-  Auto: "auto",
-  Previous: "previous",
-  Linear: "linear",
-  Fixed: "fixed",
-  Zero: "zero",
-  NotFill: "notFill",
+enum ImputeMode {
+  "auto",
+  "previous",
+  "linear",
+  "fixed",
+  "zero",
+  "notFill",
 }
 
-@knownValues(ImputeModeKnownValues)
-model ImputeMode is string;
-
-enum AnomalyDetectorErrorCodesKnownValues {
+enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",
   "InvalidGranularity",
@@ -39,10 +33,7 @@ enum AnomalyDetectorErrorCodesKnownValues {
   "InvalidImputeFixedValue",
 }
 
-@knownValues(AnomalyDetectorErrorCodesKnownValues)
-model AnomalyDetectorErrorCodes is string;
-
-enum FillNAMethodKnownValues {
+enum FillNAMethod {
   "Previous",
   "Subsequent",
   "Linear",
@@ -50,44 +41,41 @@ enum FillNAMethodKnownValues {
   "Fixed",
   "NotFill",
 }
-
-@knownValues(FillNAMethodKnownValues)
-model FillNAMethod is string;
-
+@Azure.Core.fixed
 enum TimeGranularity {
-  Yearly: "yearly",
-  Monthly: "monthly",
-  Weekly: "weekly",
-  Daily: "daily",
-  Hourly: "hourly",
-  PerMinute: "minutely",
-  PerSecond: "secondly",
-  Microsecond: "microsecond",
-  None: "none",
+  "yearly",
+  "monthly",
+  "weekly",
+  "daily",
+  "hourly",
+  perMinute: "minutely",
+  perSecond: "secondly",
+  "microsecond",
+  "none",
 }
-
+@Azure.Core.fixed
 enum DetectionStatus {
-  Created: "CREATED",
-  Running: "RUNNING",
-  Ready: "READY",
-  Failed: "FAILED",
+  "CREATED",
+  "RUNNING",
+  "READY",
+  "FAILED",
 }
-
+@Azure.Core.fixed
 enum DataSchema {
   "OneTable",
   "MultiTable",
 }
-
+@Azure.Core.fixed
 enum AlignMode {
   "Inner",
   "Outer",
 }
-
+@Azure.Core.fixed
 enum ModelStatus {
-  Created: "CREATED",
-  Running: "RUNNING",
-  Ready: "READY",
-  Failed: "FAILED",
+  "CREATED",
+  "RUNNING",
+  "READY",
+  "FAILED",
 }
 
 @doc("The request of entire or last anomaly detection.")

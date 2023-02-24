@@ -7,12 +7,12 @@ using Cadl.Http;
 
 namespace Azure.AI.OpenAI;
 
-interface CompletionsOperations {
+interface completionsOperations {
   @summary("Create a completion from a chosen model")
   @doc("Create a completion from a chosen model")
   @route("/deployments/{deployment-id}/completions")
   @post
-  Create is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @path "deployment-id": string;
       @body
@@ -22,12 +22,12 @@ interface CompletionsOperations {
   >;
 }
 
-interface EmbeddingsOperations {
+interface embeddingsOperations {
   @summary("Return the embeddings for a given prompt.")
   @doc("Return the embeddings for a given prompt.")
   @route("/deployments/{deployment-id}/embeddings")
   @post
-  Create is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("deployment id of the model which was deployed")
       @path

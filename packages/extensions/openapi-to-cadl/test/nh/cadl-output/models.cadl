@@ -6,162 +6,103 @@ using Azure.Core;
 
 namespace NotificationHubsClient;
 
-enum MSApiVersionTypeKnownValues {
-  TwoThousandFifteen01: "2015-01",
-  TwoThousandFifteen04: "2015-04",
-  TwoThousandFifteen08: "2015-08",
-  TwoThousandSixteen07: "2016-07",
+enum MSApiVersionType {
+  "2015-01",
+  "2015-04",
+  "2015-08",
+  "2016-07",
 }
 
-@knownValues(MSApiVersionTypeKnownValues)
-model MSApiVersionType is string;
-
-enum NotificationHubContentModelTypeKnownValues {
-  ApplicationXml: "application/xml",
+enum NotificationHubContentModelType {
+  "application/xml",
 }
 
-@knownValues(NotificationHubContentModelTypeKnownValues)
-model NotificationHubContentModelType is string;
-
-enum NotificationHubDescriptionModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum NotificationHubDescriptionModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(NotificationHubDescriptionModelXmlnsIKnownValues)
-model NotificationHubDescriptionModelXmlnsI is string;
-
-enum NotificationHubDescriptionModelAuthorizationRulesItemITypeKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum NotificationHubDescriptionModelAuthorizationRulesItemIType {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(
-  NotificationHubDescriptionModelAuthorizationRulesItemITypeKnownValues
-)
-model NotificationHubDescriptionModelAuthorizationRulesItemIType is string;
-
-enum NotificationHubDescriptionModelAuthorizationRulesItemClaimTypeKnownValues {
+enum NotificationHubDescriptionModelAuthorizationRulesItemClaimType {
   "SharedAccessAuthorizationRule",
 }
 
-@knownValues(
-  NotificationHubDescriptionModelAuthorizationRulesItemClaimTypeKnownValues
-)
-model NotificationHubDescriptionModelAuthorizationRulesItemClaimType is string;
-
-enum RegistrationEntryModelXmlnsMKnownValues {
-  HttpSchemasMicrosoftComAdo200708DataservicesMetadata: "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
+enum RegistrationEntryModelXmlnsM {
+  "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
 }
 
-@knownValues(RegistrationEntryModelXmlnsMKnownValues)
-model RegistrationEntryModelXmlnsM is string;
-
-enum PlatformTypeKnownValues {
-  Apns: "apns",
-  Wns: "wns",
-  Gcm: "gcm",
-  Baidu: "baidu",
-  Adm: "adm",
+enum PlatformType {
+  "apns",
+  "wns",
+  "gcm",
+  "baidu",
+  "adm",
 }
 
-@knownValues(PlatformTypeKnownValues)
-model PlatformType is string;
-
-enum InstallationPatchTypeKnownValues {
-  Add: "add",
-  Remove: "remove",
-  Replace: "replace",
+enum InstallationPatchType {
+  "add",
+  "remove",
+  "replace",
 }
 
-@knownValues(InstallationPatchTypeKnownValues)
-model InstallationPatchType is string;
-
-enum FormatParameterTypeKnownValues {
-  Apple: "apple",
-  Baidu: "baidu",
-  Gcm: "gcm",
-  Windows: "windows",
+enum FormatParameterType {
+  "apple",
+  "baidu",
+  "gcm",
+  "windows",
 }
 
-@knownValues(FormatParameterTypeKnownValues)
-model FormatParameterType is string;
-
-enum RegistrationContentModelTypeKnownValues {
-  ApplicationXml: "application/xml",
+enum RegistrationContentModelType {
+  "application/xml",
 }
 
-@knownValues(RegistrationContentModelTypeKnownValues)
-model RegistrationContentModelType is string;
-
-enum AppleRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum AppleRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(AppleRegistrationContentModelXmlnsIKnownValues)
-model AppleRegistrationContentModelXmlnsI is string;
-
-enum AppleTemplateRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum AppleTemplateRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(AppleTemplateRegistrationContentModelXmlnsIKnownValues)
-model AppleTemplateRegistrationContentModelXmlnsI is string;
-
-enum BaiduRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum BaiduRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(BaiduRegistrationContentModelXmlnsIKnownValues)
-model BaiduRegistrationContentModelXmlnsI is string;
-
-enum BaiduTemplateRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum BaiduTemplateRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(BaiduTemplateRegistrationContentModelXmlnsIKnownValues)
-model BaiduTemplateRegistrationContentModelXmlnsI is string;
-
-enum GcmRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum GcmRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(GcmRegistrationContentModelXmlnsIKnownValues)
-model GcmRegistrationContentModelXmlnsI is string;
-
-enum GcmTemplateRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum GcmTemplateRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(GcmTemplateRegistrationContentModelXmlnsIKnownValues)
-model GcmTemplateRegistrationContentModelXmlnsI is string;
-
-enum WindowsRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum WindowsRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(WindowsRegistrationContentModelXmlnsIKnownValues)
-model WindowsRegistrationContentModelXmlnsI is string;
-
-enum WindowsTemplateRegistrationContentModelXmlnsIKnownValues {
-  HttpWwwW3Org2001XMLSchemaInstance: "http://www.w3.org/2001/XMLSchema-instance",
+enum WindowsTemplateRegistrationContentModelXmlnsI {
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-@knownValues(WindowsTemplateRegistrationContentModelXmlnsIKnownValues)
-model WindowsTemplateRegistrationContentModelXmlnsI is string;
-
-enum ApiVersionTypeKnownValues {
-  TwoThousandFifteen01: "2015-01",
-  TwoThousandFifteen04: "2015-04",
-  TwoThousandFifteen08: "2015-08",
-  TwoThousandSixteen07: "2016-07",
-  TwoThousandTwenty06: "2020-06",
+enum ApiVersionType {
+  "2015-01",
+  "2015-04",
+  "2015-08",
+  "2016-07",
+  "2020-06",
 }
-
-@knownValues(ApiVersionTypeKnownValues)
-model ApiVersionType is string;
-
+@Azure.Core.fixed
 enum ContentType {
-  ApplicationJsonCharsetUtf8: "application/json;charset=utf-8",
-  ApplicationXmlCharsetUtf8: "application/xml;charset=utf-8",
+  @doc("Content Type 'application/json;charset=utf-8'")
+  "application/json;charset=utf-8",
+  @doc("Content Type 'application/xml;charset=utf-8'")
+  "application/xml;charset=utf-8",
 }
 
 model NotificationHubEntryModel {

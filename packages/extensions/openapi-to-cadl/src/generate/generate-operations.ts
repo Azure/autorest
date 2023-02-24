@@ -10,11 +10,15 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
   summary && statements.push(summary);
   statements.push(doc);
   generateMultiResponseWarning(responses, statements);
+
   for (const fixme of operation.fixMe ?? []) {
     statements.push(fixme);
   }
 
   if (!operation.resource) {
+    const names = [name, ...responses, ...parameters.map((p) => p.name)];
+    const duplicateNames = findDuplicates(names);
+    generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
       `@${verb} op ${name} is Azure.Core.Foundations.Operation<{${params ? params : ""}}, ${responses.join(
@@ -23,10 +27,12 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     );
   } else {
     const { resource } = operation;
+    const names = [name, ...responses, ...parameters.map((p) => p.name)];
+    const duplicateNames = findDuplicates(names);
+    generateNameCollisionWarning(duplicateNames, statements);
     const resourceParameters = generateParameters(
       parameters.filter((param) => !["path", "body"].some((p) => p === param.location)),
     );
-
     const parametersString = !resourceParameters ? `` : `, { parameters: {${resourceParameters}}}`;
     statements.push(
       `${operationGroup.name ? "" : "op "}`,
@@ -34,6 +40,22 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     );
   }
   return statements.join("\n");
+}
+
+function findDuplicates(arr: string[]) {
+  return arr.filter((item, index) => arr.indexOf(item) != index);
+}
+
+function generateNameCollisionWarning(duplicateNames: string[], statements: string[]) {
+  if (!duplicateNames.length) {
+    return;
+  }
+
+  const unique = [...new Set(duplicateNames)];
+  const message = `// FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
+          // Problematic names: [${unique.join()}]`;
+
+  statements.push(message);
 }
 
 function generateMultiResponseWarning(responses: string[], statements: string[]) {

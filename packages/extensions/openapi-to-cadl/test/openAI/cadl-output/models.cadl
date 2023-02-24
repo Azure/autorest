@@ -57,7 +57,7 @@ token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
   @projectedName("json", "logit_bias")
-  logitBias?: object;
+  logitBias?: unknown;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -181,7 +181,7 @@ model ErrorResponseError {
 }
 
 model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema {
-  ...DictionaryOfany;
+  ...Record<unknown>;
 
   @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token

@@ -11,7 +11,6 @@ using Cadl.Http;
   "{namespaceBaseUrl}",
   "The Notification Hubs client performs operations to register and query devices, and send notifications",
   {
-    @doc("The namespace name, for example https://mynamespace.servicebus.windows.net.")
     namespaceBaseUrl: string,
   }
 )

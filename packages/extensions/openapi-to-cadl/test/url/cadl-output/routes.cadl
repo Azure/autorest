@@ -7,11 +7,11 @@ using Cadl.Http;
 
 namespace AutoRestUrlTestService;
 
-interface PathsOperations {
+interface pathsOperations {
   @doc("Get true Boolean value on path")
   @route("/paths/bool/true/{boolPath}")
   @get
-  GetBooleanTrue is Azure.Core.Foundations.Operation<
+  getBooleanTrue is Azure.Core.Foundations.Operation<
     {
       @doc("true boolean value")
       @path
@@ -23,7 +23,7 @@ interface PathsOperations {
   @doc("Get false Boolean value on path")
   @route("/paths/bool/false/{boolPath}")
   @get
-  GetBooleanFalse is Azure.Core.Foundations.Operation<
+  getBooleanFalse is Azure.Core.Foundations.Operation<
     {
       @doc("false boolean value")
       @path
@@ -35,7 +35,7 @@ interface PathsOperations {
   @doc("Get '1000000' integer value")
   @route("/paths/int/1000000/{intPath}")
   @get
-  GetIntOneMillion is Azure.Core.Foundations.Operation<
+  getIntOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'1000000' integer value")
       @path
@@ -47,7 +47,7 @@ interface PathsOperations {
   @doc("Get '-1000000' integer value")
   @route("/paths/int/-1000000/{intPath}")
   @get
-  GetIntNegativeOneMillion is Azure.Core.Foundations.Operation<
+  getIntNegativeOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-1000000' integer value")
       @path
@@ -59,7 +59,7 @@ interface PathsOperations {
   @doc("Get '10000000000' 64 bit integer value")
   @route("/paths/long/10000000000/{longPath}")
   @get
-  GetTenBillion is Azure.Core.Foundations.Operation<
+  getTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'10000000000' 64 bit integer value")
       @path
@@ -71,7 +71,7 @@ interface PathsOperations {
   @doc("Get '-10000000000' 64 bit integer value")
   @route("/paths/long/-10000000000/{longPath}")
   @get
-  GetNegativeTenBillion is Azure.Core.Foundations.Operation<
+  getNegativeTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-10000000000' 64 bit integer value")
       @path
@@ -83,7 +83,7 @@ interface PathsOperations {
   @doc("Get '1.034E+20' numeric value")
   @route("/paths/float/1.034E+20/{floatPath}")
   @get
-  FloatScientificPositive is Azure.Core.Foundations.Operation<
+  floatScientificPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'1.034E+20'numeric value")
       @path
@@ -95,7 +95,7 @@ interface PathsOperations {
   @doc("Get '-1.034E-20' numeric value")
   @route("/paths/float/-1.034E-20/{floatPath}")
   @get
-  FloatScientificNegative is Azure.Core.Foundations.Operation<
+  floatScientificNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-1.034E-20'numeric value")
       @path
@@ -107,7 +107,7 @@ interface PathsOperations {
   @doc("Get '9999999.999' numeric value")
   @route("/paths/double/9999999.999/{doublePath}")
   @get
-  DoubleDecimalPositive is Azure.Core.Foundations.Operation<
+  doubleDecimalPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'9999999.999'numeric value")
       @path
@@ -119,7 +119,7 @@ interface PathsOperations {
   @doc("Get '-9999999.999' numeric value")
   @route("/paths/double/-9999999.999/{doublePath}")
   @get
-  DoubleDecimalNegative is Azure.Core.Foundations.Operation<
+  doubleDecimalNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-9999999.999'numeric value")
       @path
@@ -131,7 +131,7 @@ interface PathsOperations {
   @doc("Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value")
   @route("/paths/string/unicode/{stringPath}")
   @get
-  StringUnicode is Azure.Core.Foundations.Operation<
+  stringUnicode is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value")
       @path
@@ -143,7 +143,7 @@ interface PathsOperations {
   @doc("Get 'begin!*'();:@ &=+$,/?#[]end")
   @route("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
   @get
-  StringUrlEncoded is Azure.Core.Foundations.Operation<
+  stringUrlEncoded is Azure.Core.Foundations.Operation<
     {
       @doc("'begin!*'();:@ &=+$,/?#[]end' url encoded string value")
       @path
@@ -159,7 +159,7 @@ encoded
 """)
   @route("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
   @get
-  StringUrlNonEncoded is Azure.Core.Foundations.Operation<
+  stringUrlNonEncoded is Azure.Core.Foundations.Operation<
     {
       @doc("'begin!*'();:@&=+$,end' url encoded string value")
       @path
@@ -171,7 +171,7 @@ encoded
   @doc("Get ''")
   @route("/paths/string/empty/{stringPath}")
   @get
-  StringEmpty is Azure.Core.Foundations.Operation<
+  stringEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' string value")
       @path
@@ -183,7 +183,7 @@ encoded
   @doc("Get null (should throw)")
   @route("/paths/string/null/{stringPath}")
   @get
-  StringNull is Azure.Core.Foundations.Operation<
+  stringNull is Azure.Core.Foundations.Operation<
     {
       @doc("null string value")
       @path
@@ -195,7 +195,7 @@ encoded
   @doc("Get using uri with 'green color' in path parameter")
   @route("/paths/enum/green%20color/{enumPath}")
   @get
-  EnumValid is Azure.Core.Foundations.Operation<
+  enumValid is Azure.Core.Foundations.Operation<
     {
       @doc("send the value green")
       @path
@@ -207,7 +207,7 @@ encoded
   @doc("Get null (should throw on the client before the request is sent on wire)")
   @route("/paths/string/null/{enumPath}")
   @get
-  EnumNull is Azure.Core.Foundations.Operation<
+  enumNull is Azure.Core.Foundations.Operation<
     {
       @doc("send null should throw")
       @path
@@ -219,7 +219,7 @@ encoded
   @doc("Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array")
   @route("/paths/byte/multibyte/{bytePath}")
   @get
-  ByteMultiByte is Azure.Core.Foundations.Operation<
+  byteMultiByte is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array")
       @path
@@ -231,7 +231,7 @@ encoded
   @doc("Get '' as byte array")
   @route("/paths/byte/empty/{bytePath}")
   @get
-  ByteEmpty is Azure.Core.Foundations.Operation<
+  byteEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' as byte array")
       @path
@@ -243,7 +243,7 @@ encoded
   @doc("Get null as byte array (should throw)")
   @route("/paths/byte/null/{bytePath}")
   @get
-  ByteNull is Azure.Core.Foundations.Operation<
+  byteNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as byte array (should throw)")
       @path
@@ -309,7 +309,7 @@ representation of date-time
   @doc("Get 'lorem' encoded value as 'bG9yZW0' (base64url)")
   @route("/paths/string/bG9yZW0/{base64UrlPath}")
   @get
-  Base64Url is Azure.Core.Foundations.Operation<
+  base64Url is Azure.Core.Foundations.Operation<
     {
       @doc("base64url encoded value")
       @path
@@ -339,7 +339,7 @@ using the csv-array format
   @doc("Get the date 2016-04-13 encoded value as '1460505600' (Unix time)")
   @route("/paths/int/1460505600/{unixTimeUrlPath}")
   @get
-  UnixTimeUrl is Azure.Core.Foundations.Operation<
+  unixTimeUrl is Azure.Core.Foundations.Operation<
     {
       @doc("Unix time encoded value")
       @path
@@ -349,11 +349,11 @@ using the csv-array format
   >;
 }
 
-interface QueriesOperations {
+interface queriesOperations {
   @doc("Get true Boolean value on path")
   @route("/queries/bool/true")
   @get
-  GetBooleanTrue is Azure.Core.Foundations.Operation<
+  getBooleanTrue is Azure.Core.Foundations.Operation<
     {
       @doc("true boolean value")
       @query
@@ -365,7 +365,7 @@ interface QueriesOperations {
   @doc("Get false Boolean value on path")
   @route("/queries/bool/false")
   @get
-  GetBooleanFalse is Azure.Core.Foundations.Operation<
+  getBooleanFalse is Azure.Core.Foundations.Operation<
     {
       @doc("false boolean value")
       @query
@@ -377,7 +377,7 @@ interface QueriesOperations {
   @doc("Get null Boolean value on query (query string should be absent)")
   @route("/queries/bool/null")
   @get
-  GetBooleanNull is Azure.Core.Foundations.Operation<
+  getBooleanNull is Azure.Core.Foundations.Operation<
     {
       @doc("null boolean value")
       @query
@@ -389,7 +389,7 @@ interface QueriesOperations {
   @doc("Get '1000000' integer value")
   @route("/queries/int/1000000")
   @get
-  GetIntOneMillion is Azure.Core.Foundations.Operation<
+  getIntOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'1000000' integer value")
       @query
@@ -401,7 +401,7 @@ interface QueriesOperations {
   @doc("Get '-1000000' integer value")
   @route("/queries/int/-1000000")
   @get
-  GetIntNegativeOneMillion is Azure.Core.Foundations.Operation<
+  getIntNegativeOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-1000000' integer value")
       @query
@@ -413,7 +413,7 @@ interface QueriesOperations {
   @doc("Get null integer value (no query parameter)")
   @route("/queries/int/null")
   @get
-  GetIntNull is Azure.Core.Foundations.Operation<
+  getIntNull is Azure.Core.Foundations.Operation<
     {
       @doc("null integer value")
       @query
@@ -425,7 +425,7 @@ interface QueriesOperations {
   @doc("Get '10000000000' 64 bit integer value")
   @route("/queries/long/10000000000")
   @get
-  GetTenBillion is Azure.Core.Foundations.Operation<
+  getTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'10000000000' 64 bit integer value")
       @query
@@ -437,7 +437,7 @@ interface QueriesOperations {
   @doc("Get '-10000000000' 64 bit integer value")
   @route("/queries/long/-10000000000")
   @get
-  GetNegativeTenBillion is Azure.Core.Foundations.Operation<
+  getNegativeTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-10000000000' 64 bit integer value")
       @query
@@ -449,7 +449,7 @@ interface QueriesOperations {
   @doc("Get 'null 64 bit integer value (no query param in uri)")
   @route("/queries/long/null")
   @get
-  GetLongNull is Azure.Core.Foundations.Operation<
+  getLongNull is Azure.Core.Foundations.Operation<
     {
       @doc("null 64 bit integer value")
       @query
@@ -461,7 +461,7 @@ interface QueriesOperations {
   @doc("Get '1.034E+20' numeric value")
   @route("/queries/float/1.034E+20")
   @get
-  FloatScientificPositive is Azure.Core.Foundations.Operation<
+  floatScientificPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'1.034E+20'numeric value")
       @query
@@ -473,7 +473,7 @@ interface QueriesOperations {
   @doc("Get '-1.034E-20' numeric value")
   @route("/queries/float/-1.034E-20")
   @get
-  FloatScientificNegative is Azure.Core.Foundations.Operation<
+  floatScientificNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-1.034E-20'numeric value")
       @query
@@ -485,7 +485,7 @@ interface QueriesOperations {
   @doc("Get null numeric value (no query parameter)")
   @route("/queries/float/null")
   @get
-  FloatNull is Azure.Core.Foundations.Operation<
+  floatNull is Azure.Core.Foundations.Operation<
     {
       @doc("null numeric value")
       @query
@@ -497,7 +497,7 @@ interface QueriesOperations {
   @doc("Get '9999999.999' numeric value")
   @route("/queries/double/9999999.999")
   @get
-  DoubleDecimalPositive is Azure.Core.Foundations.Operation<
+  doubleDecimalPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'9999999.999'numeric value")
       @query
@@ -509,7 +509,7 @@ interface QueriesOperations {
   @doc("Get '-9999999.999' numeric value")
   @route("/queries/double/-9999999.999")
   @get
-  DoubleDecimalNegative is Azure.Core.Foundations.Operation<
+  doubleDecimalNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-9999999.999'numeric value")
       @query
@@ -521,7 +521,7 @@ interface QueriesOperations {
   @doc("Get null numeric value (no query parameter)")
   @route("/queries/double/null")
   @get
-  DoubleNull is Azure.Core.Foundations.Operation<
+  doubleNull is Azure.Core.Foundations.Operation<
     {
       @doc("null numeric value")
       @query
@@ -533,7 +533,7 @@ interface QueriesOperations {
   @doc("Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value")
   @route("/queries/string/unicode/")
   @get
-  StringUnicode is Azure.Core.Foundations.Operation<
+  stringUnicode is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value")
       @query
@@ -545,7 +545,7 @@ interface QueriesOperations {
   @doc("Get 'begin!*'();:@ &=+$,/?#[]end")
   @route("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
   @get
-  StringUrlEncoded is Azure.Core.Foundations.Operation<
+  stringUrlEncoded is Azure.Core.Foundations.Operation<
     {
       @doc("'begin!*'();:@ &=+$,/?#[]end' url encoded string value")
       @query
@@ -557,7 +557,7 @@ interface QueriesOperations {
   @doc("Get ''")
   @route("/queries/string/empty")
   @get
-  StringEmpty is Azure.Core.Foundations.Operation<
+  stringEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' string value")
       @query
@@ -569,7 +569,7 @@ interface QueriesOperations {
   @doc("Get null (no query parameter in url)")
   @route("/queries/string/null")
   @get
-  StringNull is Azure.Core.Foundations.Operation<
+  stringNull is Azure.Core.Foundations.Operation<
     {
       @doc("null string value")
       @query
@@ -581,7 +581,7 @@ interface QueriesOperations {
   @doc("Get using uri with query parameter 'green color'")
   @route("/queries/enum/green%20color")
   @get
-  EnumValid is Azure.Core.Foundations.Operation<
+  enumValid is Azure.Core.Foundations.Operation<
     {
       @doc("'green color' enum value")
       @query
@@ -593,7 +593,7 @@ interface QueriesOperations {
   @doc("Get null (no query parameter in url)")
   @route("/queries/enum/null")
   @get
-  EnumNull is Azure.Core.Foundations.Operation<
+  enumNull is Azure.Core.Foundations.Operation<
     {
       @doc("null string value")
       @query
@@ -605,7 +605,7 @@ interface QueriesOperations {
   @doc("Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array")
   @route("/queries/byte/multibyte")
   @get
-  ByteMultiByte is Azure.Core.Foundations.Operation<
+  byteMultiByte is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array")
       @query
@@ -617,7 +617,7 @@ interface QueriesOperations {
   @doc("Get '' as byte array")
   @route("/queries/byte/empty")
   @get
-  ByteEmpty is Azure.Core.Foundations.Operation<
+  byteEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' as byte array")
       @query
@@ -629,7 +629,7 @@ interface QueriesOperations {
   @doc("Get null as byte array (no query parameters in uri)")
   @route("/queries/byte/null")
   @get
-  ByteNull is Azure.Core.Foundations.Operation<
+  byteNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as byte array (no query parameters in uri)")
       @query
@@ -798,7 +798,7 @@ using the pipes-array format
   >;
 }
 
-interface PathItemsOperations {
+interface pathItemsOperations {
   @doc("""
 send globalStringPath='globalStringPath',
 pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
@@ -807,7 +807,7 @@ pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
 """)
   @route("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
   @get
-  GetAllWithValues is Azure.Core.Foundations.Operation<
+  getAllWithValues is Azure.Core.Foundations.Operation<
     {
       @doc("A string value 'pathItemStringPath' that appears in the path")
       @path
@@ -844,7 +844,7 @@ localStringQuery='localStringQuery'
 """)
   @route("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
   @get
-  GetGlobalQueryNull is Azure.Core.Foundations.Operation<
+  getGlobalQueryNull is Azure.Core.Foundations.Operation<
     {
       @doc("A string value 'pathItemStringPath' that appears in the path")
       @path
@@ -881,7 +881,7 @@ localStringQuery=null
 """)
   @route("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
   @get
-  GetGlobalAndLocalQueryNull is Azure.Core.Foundations.Operation<
+  getGlobalAndLocalQueryNull is Azure.Core.Foundations.Operation<
     {
       @doc("A string value 'pathItemStringPath' that appears in the path")
       @path
@@ -918,7 +918,7 @@ localStringQuery=null
 """)
   @route("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
   @get
-  GetLocalPathItemQueryNull is Azure.Core.Foundations.Operation<
+  getLocalPathItemQueryNull is Azure.Core.Foundations.Operation<
     {
       @doc("A string value 'pathItemStringPath' that appears in the path")
       @path

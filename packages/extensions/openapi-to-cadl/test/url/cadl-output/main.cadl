@@ -10,7 +10,6 @@ using Cadl.Http;
   "{$host}",
   "Test Infrastructure for AutoRest",
   {
-    @doc("server parameter")
     $host: string,
   }
 )

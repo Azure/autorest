@@ -6,269 +6,670 @@ using Azure.Core;
 
 namespace Azure.Batch;
 
+@Azure.Core.fixed
 enum OSType {
-  Linux: "linux",
-  Windows: "windows",
+  @doc("The Linux operating system.") "linux",
+  @doc("The Windows operating system.") "windows",
 }
-
+@Azure.Core.fixed
 enum VerificationType {
-  Verified: "verified",
-  Unverified: "unverified",
+  @doc("""
+The Image is guaranteed to be compatible with the associated Compute Node agent
+SKU and all Batch features have been confirmed to work as expected.
+""")
+  "verified",
+  @doc("""
+The associated Compute Node agent SKU should have binary compatibility with the
+Image, but specific functionality has not been verified.
+""")
+  "unverified",
 }
-
+@Azure.Core.fixed
 enum CertificateState {
-  Active: "active",
-  Deleting: "deleting",
-  DeleteFailed: "deletefailed",
+  @doc("The Certificate is available for use in Pools.") "active",
+  @doc("""
+The user has requested that the Certificate be deleted, but the delete
+operation has not yet completed. You may not reference the Certificate when
+creating or updating Pools.
+""")
+  "deleting",
+  @doc("""
+The user requested that the Certificate be deleted, but there are Pools that
+still have references to the Certificate, or it is still installed on one or
+more Nodes. (The latter can occur if the Certificate has been removed from the
+Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their
+Certificates only when they restart.) You may use the cancel Certificate delete
+operation to cancel the delete, or the delete Certificate operation to retry
+the delete.
+""")
+  deleteFailed: "deletefailed",
 }
-
+@Azure.Core.fixed
 enum CertificateFormat {
-  Pfx: "pfx",
-  Cer: "cer",
+  @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
+  "pfx",
+  @doc("The Certificate is a base64-encoded X.509 Certificate.") "cer",
 }
-
+@Azure.Core.fixed
 enum JobScheduleState {
-  Active: "active",
-  Completed: "completed",
-  Disabled: "disabled",
-  Terminating: "terminating",
-  Deleting: "deleting",
+  @doc("The Job Schedule is active and will create Jobs as per its schedule.")
+  "active",
+  @doc("""
+The Job Schedule has terminated, either by reaching its end time or by the user
+terminating it explicitly.
+""")
+  "completed",
+  @doc("""
+The user has disabled the Job Schedule. The scheduler will not initiate any new
+Jobs will on this schedule, but any existing active Job will continue to run.
+""")
+  "disabled",
+  @doc("""
+The Job Schedule has no more work to do, or has been explicitly terminated by
+the user, but the termination operation is still in progress. The scheduler
+will not initiate any new Jobs for this Job Schedule, nor is any existing Job
+active.
+""")
+  "terminating",
+  @doc("""
+The user has requested that the Job Schedule be deleted, but the delete
+operation is still in progress. The scheduler will not initiate any new Jobs
+for this Job Schedule, and will delete any existing Jobs and Tasks under the
+Job Schedule, including any active Job. The Job Schedule will be deleted when
+all Jobs and Tasks under the Job Schedule have been deleted.
+""")
+  "deleting",
 }
-
+@Azure.Core.fixed
 enum OnAllTasksComplete {
-  NoAction: "noaction",
-  TerminateJob: "terminatejob",
+  @doc("""
+Do nothing. The Job remains active unless terminated or disabled by some other
+means.
+""")
+  noAction: "noaction",
+  @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
+  terminateJob: "terminatejob",
 }
-
+@Azure.Core.fixed
 enum OnTaskFailure {
-  NoAction: "noaction",
-  PerformExitOptionsJobAction: "performexitoptionsjobaction",
+  @doc("""
+Do nothing. The Job remains active unless terminated or disabled by some other
+means.
+""")
+  noAction: "noaction",
+  @doc("""
+Take the action associated with the Task exit condition in the Task's
+exitConditions collection. (This may still result in no action being taken, if
+that is what the Task specifies.)
+""")
+  performExitOptionsJobAction: "performexitoptionsjobaction",
 }
-
+@Azure.Core.fixed
 enum ContainerWorkingDirectory {
-  TaskWorkingDirectory: "taskWorkingDirectory",
-  ContainerImageDefault: "containerImageDefault",
+  @doc("""
+Use the standard Batch service Task working directory, which will contain the
+Task Resource Files populated by Batch.
+""")
+  "taskWorkingDirectory",
+  @doc("""
+Use the working directory defined in the container Image. Beware that this
+directory will not contain the Resource Files downloaded by Batch.
+""")
+  "containerImageDefault",
 }
-
+@Azure.Core.fixed
 enum OutputFileUploadCondition {
-  TaskSuccess: "tasksuccess",
-  TaskFailure: "taskfailure",
-  TaskCompletion: "taskcompletion",
+  @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
+  taskSuccess: "tasksuccess",
+  @doc("Upload the file(s) only after the Task process exits with a nonzero exit code.")
+  taskFailure: "taskfailure",
+  @doc("""
+Upload the file(s) after the Task process exits, no matter what the exit code
+was.
+""")
+  taskCompletion: "taskcompletion",
 }
-
+@Azure.Core.fixed
 enum AutoUserScope {
-  Task: "task",
-  Pool: "pool",
+  @doc("Specifies that the service should create a new user for the Task.")
+  "task",
+  @doc("""
+Specifies that the Task runs as the common auto user Account which is created
+on every Compute Node in a Pool.
+""")
+  "pool",
 }
-
+@Azure.Core.fixed
 enum ElevationLevel {
-  NonAdmin: "nonadmin",
-  Admin: "admin",
+  @doc("The user is a standard user without elevated access.")
+  nonAdmin: "nonadmin",
+  @doc("""
+The user is a user with elevated access and operates with full Administrator
+permissions.
+""")
+  "admin",
 }
-
+@Azure.Core.fixed
 enum PoolLifetimeOption {
-  JobSchedule: "jobschedule",
-  Job: "job",
+  @doc("""
+The Pool exists for the lifetime of the Job Schedule. The Batch Service creates
+the Pool when it creates the first Job on the schedule. You may apply this
+option only to Job Schedules, not to Jobs.
+""")
+  jobSchedule: "jobschedule",
+  @doc("""
+The Pool exists for the lifetime of the Job to which it is dedicated. The Batch
+service creates the Pool when it creates the Job. If the 'job' option is
+applied to a Job Schedule, the Batch service creates a new auto Pool for every
+Job created on the schedule.
+""")
+  "job",
 }
-
+@Azure.Core.fixed
 enum CachingType {
-  None: "none",
-  ReadOnly: "readonly",
-  ReadWrite: "readwrite",
+  @doc("The caching mode for the disk is not enabled.") "none",
+  @doc("The caching mode for the disk is read only.") readOnly: "readonly",
+  @doc("The caching mode for the disk is read and write.")
+  readWrite: "readwrite",
 }
-
+@Azure.Core.fixed
 enum StorageAccountType {
+  @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
+  @doc("The data disk should use premium locally redundant storage.")
   PremiumLRS: "premium_lrs",
 }
-
+@Azure.Core.fixed
 enum DiskEncryptionTarget {
-  OsDisk: "osdisk",
+  @doc("The OS Disk on the compute node is encrypted.") OsDisk: "osdisk",
+  @doc("""
+The temporary disk on the compute node is encrypted. On Linux this encryption
+applies to other partitions (such as those on mounted data disks) when
+encryption occurs at boot time.
+""")
   TemporaryDisk: "temporarydisk",
 }
-
+@Azure.Core.fixed
 enum NodePlacementPolicyType {
-  Regional: "regional",
-  Zonal: "zonal",
+  @doc("All nodes in the pool will be allocated in the same region.")
+  "regional",
+  @doc("""
+Nodes in the pool will be spread across different availability zones with best
+effort balancing.
+""")
+  "zonal",
 }
-
+@Azure.Core.fixed
 enum ComputeNodeFillType {
-  Spread: "spread",
-  Pack: "pack",
+  @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
+  "spread",
+  @doc("""
+As many Tasks as possible (taskSlotsPerNode) should be assigned to each Compute
+Node in the Pool before any Tasks are assigned to the next Compute Node in the
+Pool.
+""")
+  "pack",
 }
-
+@Azure.Core.fixed
 enum DynamicVNetAssignmentScope {
-  None: "none",
-  Job: "job",
+  @doc("No dynamic VNet assignment is enabled.") "none",
+  @doc("Dynamic VNet assignment is done per-job.") "job",
 }
-
+@Azure.Core.fixed
 enum InboundEndpointProtocol {
-  Tcp: "tcp",
-  Udp: "udp",
+  @doc("Use TCP for the endpoint.") "tcp",
+  @doc("Use UDP for the endpoint.") "udp",
 }
-
+@Azure.Core.fixed
 enum NetworkSecurityGroupRuleAccess {
-  Allow: "allow",
-  Deny: "deny",
+  @doc("Allow access.") "allow",
+  @doc("Deny access.") "deny",
 }
-
+@Azure.Core.fixed
 enum IPAddressProvisioningType {
-  BatchManaged: "batchmanaged",
-  UserManaged: "usermanaged",
-  NoPublicIPAddresses: "nopublicipaddresses",
+  @doc("""
+A public IP will be created and managed by Batch. There may be multiple public
+IPs depending on the size of the Pool.
+""")
+  batchManaged: "batchmanaged",
+  @doc("""
+Public IPs are provided by the user and will be used to provision the Compute
+Nodes.
+""")
+  userManaged: "usermanaged",
+  @doc("No public IP Address will be created.")
+  noPublicIPAddresses: "nopublicipaddresses",
 }
-
+@Azure.Core.fixed
 enum CertificateStoreLocation {
-  CurrentUser: "currentuser",
-  LocalMachine: "localmachine",
+  @doc("Certificates should be installed to the CurrentUser Certificate store.")
+  currentUser: "currentuser",
+  @doc("Certificates should be installed to the LocalMachine Certificate store.")
+  localMachine: "localmachine",
 }
-
+@Azure.Core.fixed
 enum CertificateVisibility {
-  StartTask: "starttask",
-  Task: "task",
-  RemoteUser: "remoteuser",
+  @doc("""
+The Certificate should be visible to the user account under which the StartTask
+is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task,
+this certificate will be visible to the Task as well.
+""")
+  startTask: "starttask",
+  @doc("""
+The Certificate should be visible to the user accounts under which Job Tasks
+are run.
+""")
+  "task",
+  @doc("""
+The Certificate should be visible to the user accounts under which users
+remotely access the Compute Node.
+""")
+  remoteUser: "remoteuser",
 }
-
+@Azure.Core.fixed
 enum LoginMode {
-  Batch: "batch",
-  Interactive: "interactive",
+  @doc("""
+The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended
+for long running parallel processes.
+""")
+  "batch",
+  @doc("""
+The LOGON32_LOGON_INTERACTIVE Win32 login mode. UAC is enabled on Windows
+VirtualMachineConfiguration Pools. If this option is used with an elevated user
+identity in a Windows VirtualMachineConfiguration Pool, the user session will
+not be elevated unless the application executed by the Task command line is
+configured to always require administrative privilege or to always require
+maximum privilege.
+""")
+  "interactive",
 }
-
+@Azure.Core.fixed
 enum JobState {
-  Active: "active",
-  Disabling: "disabling",
-  Disabled: "disabled",
-  Enabling: "enabling",
-  Terminating: "terminating",
-  Completed: "completed",
-  Deleting: "deleting",
+  @doc("The Job is available to have Tasks scheduled.") "active",
+  @doc("""
+A user has requested that the Job be disabled, but the disable operation is
+still in progress (for example, waiting for Tasks to terminate).
+""")
+  "disabling",
+  @doc("""
+A user has disabled the Job. No Tasks are running, and no new Tasks will be
+scheduled.
+""")
+  "disabled",
+  @doc("""
+A user has requested that the Job be enabled, but the enable operation is still
+in progress.
+""")
+  "enabling",
+  @doc("""
+The Job is about to complete, either because a Job Manager Task has completed
+or because the user has terminated the Job, but the terminate operation is
+still in progress (for example, because Job Release Tasks are running).
+""")
+  "terminating",
+  @doc("""
+All Tasks have terminated, and the system will not accept any more Tasks or any
+further changes to the Job.
+""")
+  "completed",
+  @doc("""
+A user has requested that the Job be deleted, but the delete operation is still
+in progress (for example, because the system is still terminating running
+Tasks).
+""")
+  "deleting",
 }
-
+@Azure.Core.fixed
 enum ErrorCategory {
-  UserError: "usererror",
-  ServerError: "servererror",
+  @doc("The error is due to a user issue, such as misconfiguration.")
+  userError: "usererror",
+  @doc("The error is due to an internal server issue.")
+  serverError: "servererror",
 }
-
+@Azure.Core.fixed
 enum DisableJobOption {
-  Requeue: "requeue",
-  Terminate: "terminate",
-  Wait: "wait",
+  @doc("""
+Terminate running Tasks and requeue them. The Tasks will run again when the Job
+is enabled.
+""")
+  "requeue",
+  @doc("""
+Terminate running Tasks. The Tasks will be completed with failureInfo
+indicating that they were terminated, and will not run again.
+""")
+  "terminate",
+  @doc("Allow currently running Tasks to complete.") "wait",
 }
-
+@Azure.Core.fixed
 enum JobPreparationTaskState {
-  Running: "running",
-  Completed: "completed",
+  @doc("The Task is currently running (including retrying).") "running",
+  @doc("""
+The Task has exited with exit code 0, or the Task has exhausted its retry
+limit, or the Batch service was unable to start the Task due to Task
+preparation errors (such as resource file download failures).
+""")
+  "completed",
 }
-
+@Azure.Core.fixed
 enum TaskExecutionResult {
-  Success: "success",
-  Failure: "failure",
+  @doc("The Task ran successfully.") "success",
+  @doc("""
+There was an error during processing of the Task. The failure may have occurred
+before the Task process was launched, while the Task process was executing, or
+after the Task process exited.
+""")
+  "failure",
 }
-
+@Azure.Core.fixed
 enum JobReleaseTaskState {
-  Running: "running",
-  Completed: "completed",
+  @doc("The Task is currently running (including retrying).") "running",
+  @doc("""
+The Task has exited with exit code 0, or the Task has exhausted its retry
+limit, or the Batch service was unable to start the Task due to Task
+preparation errors (such as resource file download failures).
+""")
+  "completed",
 }
-
+@Azure.Core.fixed
 enum PoolState {
-  Active: "active",
-  Deleting: "deleting",
+  @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
+  "active",
+  @doc("""
+The user has requested that the Pool be deleted, but the delete operation has
+not yet completed.
+""")
+  "deleting",
 }
-
+@Azure.Core.fixed
 enum AllocationState {
-  Steady: "steady",
-  Resizing: "resizing",
-  Stopping: "stopping",
+  @doc("""
+The Pool is not resizing. There are no changes to the number of Compute Nodes
+in the Pool in progress. A Pool enters this state when it is created and when
+no operations are being performed on the Pool to change the number of Compute
+Nodes.
+""")
+  "steady",
+  @doc("""
+The Pool is resizing; that is, Compute Nodes are being added to or removed from
+the Pool.
+""")
+  "resizing",
+  @doc("""
+The Pool was resizing, but the user has requested that the resize be stopped,
+but the stop request has not yet been completed.
+""")
+  "stopping",
 }
-
+@Azure.Core.fixed
 enum PoolIdentityType {
-  "UserAssigned",
+  @doc("Batch pool has user assigned identities with it.") "UserAssigned",
+  @doc("""
+Batch pool has no identity associated with it. Setting `None` in update pool
+will remove existing identities.
+""")
   "None",
 }
-
+@Azure.Core.fixed
 enum ComputeNodeDeallocationOption {
-  Requeue: "requeue",
-  Terminate: "terminate",
-  TaskCompletion: "taskcompletion",
-  RetainedData: "retaineddata",
+  @doc("""
+Terminate running Task processes and requeue the Tasks. The Tasks will run
+again when a Compute Node is available. Remove Compute Nodes as soon as Tasks
+have been terminated.
+""")
+  "requeue",
+  @doc("""
+Terminate running Tasks. The Tasks will be completed with failureInfo
+indicating that they were terminated, and will not run again. Remove Compute
+Nodes as soon as Tasks have been terminated.
+""")
+  "terminate",
+  @doc("""
+Allow currently running Tasks to complete. Schedule no new Tasks while waiting.
+Remove Compute Nodes when all Tasks have completed.
+""")
+  taskCompletion: "taskcompletion",
+  @doc("""
+Allow currently running Tasks to complete, then wait for all Task data
+retention periods to expire. Schedule no new Tasks while waiting. Remove
+Compute Nodes when all Task retention periods have expired.
+""")
+  retainedData: "retaineddata",
 }
-
+@Azure.Core.fixed
 enum JobAction {
-  None: "none",
-  Disable: "disable",
-  Terminate: "terminate",
+  @doc("Take no action.") "none",
+  @doc("""
+Disable the Job. This is equivalent to calling the disable Job API, with a
+disableTasks value of requeue.
+""")
+  "disable",
+  @doc("""
+Terminate the Job. The terminateReason in the Job's executionInfo is set to
+\"TaskFailed\".
+""")
+  "terminate",
 }
-
+@Azure.Core.fixed
 enum DependencyAction {
-  Satisfy: "satisfy",
-  Block: "block",
+  @doc("""
+Satisfy tasks waiting on this task; once all dependencies are satisfied, the
+task will be scheduled to run.
+""")
+  "satisfy",
+  @doc("Blocks tasks waiting on this task, preventing them from being scheduled.")
+  "block",
 }
-
+@Azure.Core.fixed
 enum TaskState {
-  Active: "active",
-  Preparing: "preparing",
-  Running: "running",
-  Completed: "completed",
+  @doc("""
+The Task is queued and able to run, but is not currently assigned to a Compute
+Node. A Task enters this state when it is created, when it is enabled after
+being disabled, or when it is awaiting a retry after a failed run.
+""")
+  "active",
+  @doc("""
+The Task has been assigned to a Compute Node, but is waiting for a required Job
+Preparation Task to complete on the Compute Node. If the Job Preparation Task
+succeeds, the Task will move to running. If the Job Preparation Task fails, the
+Task will return to active and will be eligible to be assigned to a different
+Compute Node.
+""")
+  "preparing",
+  @doc("""
+The Task is running on a Compute Node. This includes task-level preparation
+such as downloading resource files or deploying Packages specified on the Task
+- it does not necessarily mean that the Task command line has started
+executing.
+""")
+  "running",
+  @doc("""
+The Task is no longer eligible to run, usually because the Task has finished
+successfully, or the Task has finished unsuccessfully and has exhausted its
+retry limit. A Task is also marked as completed if an error occurred launching
+the Task, or when the Task has been terminated.
+""")
+  "completed",
 }
-
+@Azure.Core.fixed
 enum TaskAddStatus {
-  Success: "success",
-  ClientError: "clienterror",
-  ServerError: "servererror",
+  @doc("The Task was added successfully.") "success",
+  @doc("""
+The Task failed to add due to a client error and should not be retried without
+modifying the request as appropriate.
+""")
+  clientError: "clienterror",
+  @doc("""
+Task failed to add due to a server error and can be retried without
+modification.
+""")
+  serverError: "servererror",
 }
-
+@Azure.Core.fixed
 enum SubtaskState {
-  Preparing: "preparing",
-  Running: "running",
-  Completed: "completed",
+  @doc("""
+The Task has been assigned to a Compute Node, but is waiting for a required Job
+Preparation Task to complete on the Compute Node. If the Job Preparation Task
+succeeds, the Task will move to running. If the Job Preparation Task fails, the
+Task will return to active and will be eligible to be assigned to a different
+Compute Node.
+""")
+  "preparing",
+  @doc("""
+The Task is running on a Compute Node. This includes task-level preparation
+such as downloading resource files or deploying Packages specified on the Task
+- it does not necessarily mean that the Task command line has started
+executing.
+""")
+  "running",
+  @doc("""
+The Task is no longer eligible to run, usually because the Task has finished
+successfully, or the Task has finished unsuccessfully and has exhausted its
+retry limit. A Task is also marked as completed if an error occurred launching
+the Task, or when the Task has been terminated.
+""")
+  "completed",
 }
-
+@Azure.Core.fixed
 enum ComputeNodeState {
-  Idle: "idle",
-  Rebooting: "rebooting",
-  Reimaging: "reimaging",
-  Running: "running",
-  Unusable: "unusable",
-  Creating: "creating",
-  Starting: "starting",
-  WaitingForStartTask: "waitingforstarttask",
-  StartTaskFailed: "starttaskfailed",
-  Unknown: "unknown",
-  LeavingPool: "leavingpool",
-  Offline: "offline",
-  Preempted: "preempted",
+  @doc("The Compute Node is not currently running a Task.") "idle",
+  @doc("The Compute Node is rebooting.") "rebooting",
+  @doc("The Compute Node is reimaging.") "reimaging",
+  @doc("The Compute Node is running one or more Tasks (other than a StartTask).")
+  "running",
+  @doc("The Compute Node cannot be used for Task execution due to errors.")
+  "unusable",
+  @doc("""
+The Batch service has obtained the underlying virtual machine from Azure
+Compute, but it has not yet started to join the Pool.
+""")
+  "creating",
+  @doc("The Batch service is starting on the underlying virtual machine.")
+  "starting",
+  @doc("""
+The StartTask has started running on the Compute Node, but waitForSuccess is
+set and the StartTask has not yet completed.
+""")
+  waitingForStartTask: "waitingforstarttask",
+  @doc("""
+The StartTask has failed on the Compute Node (and exhausted all retries), and
+waitForSuccess is set. The Compute Node is not usable for running Tasks.
+""")
+  startTaskFailed: "starttaskfailed",
+  @doc("""
+The Batch service has lost contact with the Compute Node, and does not know its
+true state.
+""")
+  "unknown",
+  @doc("""
+The Compute Node is leaving the Pool, either because the user explicitly
+removed it or because the Pool is resizing or autoscaling down.
+""")
+  leavingPool: "leavingpool",
+  @doc("""
+The Compute Node is not currently running a Task, and scheduling of new Tasks
+to the Compute Node is disabled.
+""")
+  "offline",
+  @doc("""
+The Spot/Low-priority Compute Node has been preempted. Tasks which were running
+on the Compute Node when it was preempted will be rescheduled when another
+Compute Node becomes available.
+""")
+  "preempted",
 }
-
+@Azure.Core.fixed
 enum SchedulingState {
-  Enabled: "enabled",
-  Disabled: "disabled",
+  @doc("Tasks can be scheduled on the Compute Node.") "enabled",
+  @doc("""
+No new Tasks will be scheduled on the Compute Node. Tasks already running on
+the Compute Node may still run to completion. All Compute Nodes start with
+scheduling enabled.
+""")
+  "disabled",
 }
-
+@Azure.Core.fixed
 enum StartTaskState {
-  Running: "running",
-  Completed: "completed",
+  @doc("The StartTask is currently running.") "running",
+  @doc("""
+The StartTask has exited with exit code 0, or the StartTask has failed and the
+retry limit has reached, or the StartTask process did not run due to Task
+preparation errors (such as resource file download failures).
+""")
+  "completed",
 }
-
+@Azure.Core.fixed
 enum ComputeNodeRebootOption {
-  Requeue: "requeue",
-  Terminate: "terminate",
-  TaskCompletion: "taskcompletion",
-  RetainedData: "retaineddata",
+  @doc("""
+Terminate running Task processes and requeue the Tasks. The Tasks will run
+again when a Compute Node is available. Restart the Compute Node as soon as
+Tasks have been terminated.
+""")
+  "requeue",
+  @doc("""
+Terminate running Tasks. The Tasks will be completed with failureInfo
+indicating that they were terminated, and will not run again. Restart the
+Compute Node as soon as Tasks have been terminated.
+""")
+  "terminate",
+  @doc("""
+Allow currently running Tasks to complete. Schedule no new Tasks while waiting.
+Restart the Compute Node when all Tasks have completed.
+""")
+  taskCompletion: "taskcompletion",
+  @doc("""
+Allow currently running Tasks to complete, then wait for all Task data
+retention periods to expire. Schedule no new Tasks while waiting. Restart the
+Compute Node when all Task retention periods have expired.
+""")
+  retainedData: "retaineddata",
 }
-
+@Azure.Core.fixed
 enum ComputeNodeReimageOption {
-  Requeue: "requeue",
-  Terminate: "terminate",
-  TaskCompletion: "taskcompletion",
-  RetainedData: "retaineddata",
+  @doc("""
+Terminate running Task processes and requeue the Tasks. The Tasks will run
+again when a Compute Node is available. Reimage the Compute Node as soon as
+Tasks have been terminated.
+""")
+  "requeue",
+  @doc("""
+Terminate running Tasks. The Tasks will be completed with failureInfo
+indicating that they were terminated, and will not run again. Reimage the
+Compute Node as soon as Tasks have been terminated.
+""")
+  "terminate",
+  @doc("""
+Allow currently running Tasks to complete. Schedule no new Tasks while waiting.
+Reimage the Compute Node when all Tasks have completed.
+""")
+  taskCompletion: "taskcompletion",
+  @doc("""
+Allow currently running Tasks to complete, then wait for all Task data
+retention periods to expire. Schedule no new Tasks while waiting. Reimage the
+Compute Node when all Task retention periods have expired.
+""")
+  retainedData: "retaineddata",
 }
-
+@Azure.Core.fixed
 enum DisableComputeNodeSchedulingOption {
-  Requeue: "requeue",
-  Terminate: "terminate",
-  TaskCompletion: "taskcompletion",
+  @doc("""
+Terminate running Task processes and requeue the Tasks. The Tasks may run again
+on other Compute Nodes, or when Task scheduling is re-enabled on this Compute
+Node. Enter offline state as soon as Tasks have been terminated.
+""")
+  "requeue",
+  @doc("""
+Terminate running Tasks. The Tasks will be completed with failureInfo
+indicating that they were terminated, and will not run again. Enter offline
+state as soon as Tasks have been terminated.
+""")
+  "terminate",
+  @doc("""
+Allow currently running Tasks to complete. Schedule no new Tasks while waiting.
+Enter offline state when all Tasks have completed.
+""")
+  taskCompletion: "taskcompletion",
 }
-
+@Azure.Core.fixed
 enum StatusLevelTypes {
   "Error",
   "Info",
@@ -2195,13 +2596,13 @@ upgrade minor versions unless redeployed, even with this property set to true.
   autoUpgradeMinorVersion?: boolean;
 
   @doc("JSON formatted public settings for the extension.")
-  settings?: object;
+  settings?: unknown;
 
   @doc("""
 The extension can contain either protectedSettings or
 protectedSettingsFromKeyVault or no protected settings at all. 
 """)
-  protectedSettings?: object;
+  protectedSettings?: unknown;
 
   @doc("""
 Collection of extension names after which this extension needs to be

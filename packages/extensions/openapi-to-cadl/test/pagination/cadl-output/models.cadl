@@ -6,10 +6,10 @@ using Azure.Core;
 
 namespace AutoRestPagingTestService;
 
-enum OperationResultStatusKnownValues {
+enum OperationResultStatus {
   "Succeeded",
   "Failed",
-  Canceled: "canceled",
+  "canceled",
   "Accepted",
   "Creating",
   "Created",
@@ -19,9 +19,6 @@ enum OperationResultStatusKnownValues {
   "Deleted",
   "OK",
 }
-
-@knownValues(OperationResultStatusKnownValues)
-model OperationResultStatus is string;
 
 model ProductResultValue is Azure.Core.Page<Product>;
 

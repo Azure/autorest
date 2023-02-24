@@ -1,11 +1,10 @@
-import { writeFileSync } from "fs";
 import { getSession } from "../autorest-session";
 import { formatFile } from "../utils/format";
 
 export async function emitCadlConfig(filePath: string): Promise<void> {
   const content = `
   emitters:
-    # "@azure-tools/cadl-autorest": true
+    "@azure-tools/cadl-autorest": true
     # Uncomment this line and add "@azure-tools/cadl-python" to your package.json to generate Python code
     # "@azure-tools/cadl-python":
     #   "basic-setup-py": true

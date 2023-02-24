@@ -11,10 +11,6 @@ using Cadl.Http;
   "{ledgerEndpoint}",
   "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service.",
   {
-    @doc("""
-The Confidential Ledger URL, for example
-https://contoso.confidentialledger.azure.com
-""")
     ledgerEndpoint: string,
   }
 )

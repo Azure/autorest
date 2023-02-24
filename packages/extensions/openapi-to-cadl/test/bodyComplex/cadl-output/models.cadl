@@ -4,33 +4,24 @@ using Cadl.Rest;
 
 namespace AutoRestComplexTestService;
 
-enum CMYKColorsKnownValues {
-  Cyan: "cyan",
+enum CmykColors {
+  "cyan",
   "Magenta",
-  Yellow: "YELLOW",
-  BlacK: "blacK",
+  "YELLOW",
+  "blacK",
 }
 
-@knownValues(CMYKColorsKnownValues)
-model CMYKColors is string;
-
-enum MyKindKnownValues {
+enum MyKind {
   "Kind1",
 }
 
-@knownValues(MyKindKnownValues)
-model MyKind is string;
-
-enum GoblinSharkColorKnownValues {
-  Pink: "pink",
-  Gray: "gray",
-  Brown: "brown",
-  UpperRed: "RED",
-  LowerRed: "red",
+enum GoblinSharkColor {
+  "pink",
+  "gray",
+  "brown",
+  @doc("Uppercase RED") upperRed: "RED",
+  @doc("Lowercase RED") lowerRed: "red",
 }
-
-@knownValues(GoblinSharkColorKnownValues)
-model GoblinSharkColor is string;
 
 model Basic {
   @doc("Basic Id")
@@ -41,7 +32,7 @@ Name property with a very long description that does not fit on a single line
 and a line break.
 """)
   name?: string;
-  color?: CMYKColors;
+  color?: CmykColors;
 }
 
 @error
@@ -193,6 +184,8 @@ model MyBaseHelperType {
 }
 
 model SmartSalmon extends Salmon {
+  ...Record<unknown>;
+
   @projectedName("json", "college_degree")
   collegeDegree?: string;
   fishtype: "smart_salmon";

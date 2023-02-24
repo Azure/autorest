@@ -15,7 +15,7 @@ each product, and lists the products in the proper display order.
 """)
 @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis")
 @get
-op List is Azure.Core.Foundations.Operation<
+op list is Azure.Core.Foundations.Operation<
   {
     @doc("Subscription ID.")
     @path
@@ -32,7 +32,7 @@ op List is Azure.Core.Foundations.Operation<
 @doc("Resets products.")
 @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis")
 @post
-op Create is Azure.Core.Foundations.Operation<
+op create is Azure.Core.Foundations.Operation<
   {
     @doc("Subscription ID.")
     @path
@@ -53,7 +53,7 @@ op Create is Azure.Core.Foundations.Operation<
 @doc("Resets products.")
 @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis")
 @put
-op Update is Azure.Core.Foundations.Operation<
+op update is Azure.Core.Foundations.Operation<
   {
     @doc("Subscription ID.")
     @path
