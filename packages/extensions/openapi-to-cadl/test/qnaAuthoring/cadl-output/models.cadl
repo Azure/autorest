@@ -43,7 +43,7 @@ enum InnerErrorCode {
   "InvalidCountryHint",
 }
 
-enum jobStatus {
+enum JobStatus {
   "notStarted",
   "running",
   "succeeded",
@@ -53,7 +53,7 @@ enum jobStatus {
   "partiallyCompleted",
 }
 
-enum format {
+enum Format {
   @doc("Export or Import QnA assets in JSON format.") "json",
   @doc("""
 Export or Import knowledge base replica including all assets and metadata in
@@ -72,16 +72,16 @@ enum AssetKind {
   "synonyms",
 }
 
-enum sourceKind {
+enum SourceKind {
   "file",
   "url",
 }
 
-enum sourceContentStructureKind {
+enum SourceContentStructureKind {
   "unstructured",
 }
 
-enum updateOperationKind {
+enum UpdateOperationKind {
   "add",
   "delete",
   "replace",
@@ -136,6 +136,8 @@ model ErrorResponse {
 
 @doc("The error object.")
 model Error {
+  ...Record<unknown>;
+
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
@@ -219,7 +221,7 @@ model JobMetadata {
   lastUpdatedDateTime: zonedDateTime;
 
   @doc("Job Status.")
-  status: jobStatus;
+  status: JobStatus;
 }
 
 @doc("Collection of Error types.")
@@ -419,16 +421,16 @@ the complete URL if it's a 'url' source.
   sourceUri: string;
 
   @doc("Supported source types.")
-  sourceKind: sourceKind;
+  sourceKind: SourceKind;
 
   @doc("Content structure type for sources.")
-  contentStructureKind?: sourceContentStructureKind;
+  contentStructureKind?: SourceContentStructureKind;
 }
 
 @doc("Source to be updated.")
 model UpdateSourceRecord {
   @doc("Update operation type for assets.")
-  "op": updateOperationKind;
+  "op": UpdateOperationKind;
 
   @doc("Update source record.")
   value: UpdateQnaSourceRecord;
@@ -452,7 +454,7 @@ model QnaAssets is Azure.Core.Page<RetrieveQnaRecord>;
 @doc("QnA record to be updated.")
 model UpdateQnaRecord {
   @doc("Update operation type for assets.")
-  "op": updateOperationKind;
+  "op": UpdateOperationKind;
 
   @doc("QnA record.")
   value: QnaRecord;

@@ -38,6 +38,7 @@
   ],
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
+    "@azure-tools/codegen": "~2.9.2",
     "@autorest/extension-base": "~3.5.1",
     "@autorest/codemodel": "~4.19.3",
     "@cadl-lang/compiler": "^0.40.0",

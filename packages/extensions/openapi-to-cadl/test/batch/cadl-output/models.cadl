@@ -685,7 +685,8 @@ model ApplicationListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
@@ -746,7 +747,8 @@ model PoolListUsageMetricsResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
@@ -783,7 +785,8 @@ model AccountListSupportedImagesResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -877,7 +880,8 @@ model PoolNodeCountsListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
@@ -1206,7 +1210,8 @@ model CertificateListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -1221,7 +1226,8 @@ model NodeFileListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("Information about a file or directory on a Compute Node.")
@@ -2985,7 +2991,7 @@ model MountConfiguration {
   nfsMountConfiguration?: NFSMountConfiguration;
 
   @doc("This property is mutually exclusive with all other properties.")
-  cifsMountConfiguration?: CIFSMountConfiguration;
+  cifsMountConfiguration?: CifsMountConfiguration;
 
   @doc("This property is mutually exclusive with all other properties.")
   azureFileShareConfiguration?: AzureFileShareConfiguration;
@@ -3043,7 +3049,7 @@ via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
 }
 
 @doc("Information used to connect to a CIFS file system.")
-model CIFSMountConfiguration {
+model CifsMountConfiguration {
   @doc("The user to use for authentication against the CIFS file system.")
   username: string;
 
@@ -3228,7 +3234,8 @@ model BatchJobScheduleListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("An Azure Batch Job.")
@@ -3529,7 +3536,8 @@ model BatchJobListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("""
@@ -3544,7 +3552,8 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
@@ -4095,7 +4104,8 @@ model BatchPoolListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The set of changes to be made to a Pool.")
@@ -4701,7 +4711,8 @@ model BatchTaskListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
@@ -5131,7 +5142,8 @@ model InboundEndpoint {
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
-  publicFQDN: string;
+  @projectedName("json", "publicFQDN")
+  publicFqdn: string;
 
   @doc("The public port number of the endpoint.")
   frontendPort: int32;
@@ -5253,7 +5265,8 @@ model ComputeNodeListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @doc("The configuration for virtual machine extension instance view.")
@@ -5307,5 +5320,6 @@ model NodeVMExtensionList {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }

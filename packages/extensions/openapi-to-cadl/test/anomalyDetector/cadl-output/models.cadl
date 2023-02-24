@@ -33,7 +33,7 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
-enum fillNAMethod {
+enum FillNAMethod {
   "Previous",
   "Subsequent",
   "Linear",
@@ -66,12 +66,12 @@ enum DataSchema {
   "MultiTable",
 }
 @Azure.Core.fixed
-enum alignMode {
+enum AlignMode {
   "Inner",
   "Outer",
 }
 @Azure.Core.fixed
-enum modelStatus {
+enum ModelStatus {
   "CREATED",
   "RUNNING",
   "READY",
@@ -483,7 +483,7 @@ the anomaly score of the subsequent point.
   alignPolicy?: AlignPolicy;
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
-  status?: modelStatus;
+  status?: ModelStatus;
 
   @doc("Error messages when failed to create a model.")
   errors?: ErrorResponse[];
@@ -498,14 +498,14 @@ model AlignPolicy {
 An optional field, indicating how we align different variables to the same
 time-range. Either Inner or Outer. 
 """)
-  alignMode?: alignMode;
+  alignMode?: AlignMode;
 
   @doc("""
 An optional field, indicating how missing values will be filled. One of
 Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to
 NotFill, when the alignMode is Outer.
 """)
-  fillNAMethod?: fillNAMethod;
+  fillNAMethod?: FillNAMethod;
 
   @doc("An optional field. Required when fillNAMethod is Fixed.")
   paddingValue?: float32;
@@ -557,7 +557,7 @@ model ModelSnapshot {
   lastUpdatedTime: zonedDateTime;
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
-  status: modelStatus;
+  status: ModelStatus;
   displayName?: string;
 
   @doc("Total number of variables.")

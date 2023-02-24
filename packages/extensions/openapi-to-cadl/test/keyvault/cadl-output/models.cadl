@@ -430,7 +430,7 @@ model CertificateItem {
 
   @doc("Thumbprint of the certificate.")
   @projectedName("json", "x5t")
-  X509Thumbprint?: bytes;
+  x509Thumbprint?: bytes;
 }
 
 @doc("The certificate management attributes.")
@@ -461,11 +461,11 @@ model Attributes {
 
   @doc("Not before date in UTC.")
   @projectedName("json", "nbf")
-  NotBefore?: plainTime;
+  notBefore?: plainTime;
 
   @doc("Expiry date in UTC.")
   @projectedName("json", "exp")
-  Expires?: plainTime;
+  expires?: plainTime;
 
   @doc("Creation time in UTC.")
   @visibility("read")
@@ -515,7 +515,7 @@ model CertificateBundle {
   @doc("Thumbprint of the certificate.")
   @visibility("read")
   @projectedName("json", "x5t")
-  X509Thumbprint?: bytes;
+  x509Thumbprint?: bytes;
 
   @doc("The management policy.")
   @visibility("read")
@@ -545,22 +545,23 @@ model CertificatePolicy {
 
   @doc("Properties of the key backing a certificate.")
   @projectedName("json", "key_props")
-  KeyProperties?: KeyProperties;
+  keyProperties?: KeyProperties;
 
   @doc("Properties of the secret backing a certificate.")
   @projectedName("json", "secret_props")
-  SecretProperties?: SecretProperties;
+  secretProperties?: SecretProperties;
 
   @doc("Properties of the X509 component of a certificate.")
   @projectedName("json", "x509_props")
-  X509CertificateProperties?: X509CertificateProperties;
+  x509CertificateProperties?: X509CertificateProperties;
 
   @doc("Actions that will be performed by Key Vault over the lifetime of a certificate.")
-  lifetime_actions?: LifetimeAction[];
+  @projectedName("json", "lifetime_actions")
+  lifetimeActions?: LifetimeAction[];
 
   @doc("Parameters for the issuer of the X509 component of a certificate.")
   @projectedName("json", "issuer")
-  IssuerParameters?: IssuerParameters;
+  issuerParameters?: IssuerParameters;
 
   @doc("The certificate attributes.")
   attributes?: CertificateAttributes;
@@ -579,10 +580,12 @@ when creating the first version of an exportable key.
   keyType?: JsonWebKeyType;
 
   @doc("The key size in bits. For example: 2048, 3072, or 4096 for RSA.")
-  key_size?: int32;
+  @projectedName("json", "key_size")
+  keySize?: int32;
 
   @doc("Indicates if the same key pair will be used on certificate renewal.")
-  reuse_key?: boolean;
+  @projectedName("json", "reuse_key")
+  reuseKey?: boolean;
 
   @doc("Elliptic curve name. For valid values, see JsonWebKeyCurveName.")
   @projectedName("json", "crv")
@@ -605,14 +608,15 @@ model X509CertificateProperties {
 
   @doc("The subject alternative names.")
   @projectedName("json", "sans")
-  SubjectAlternativeNames?: SubjectAlternativeNames;
+  subjectAlternativeNames?: SubjectAlternativeNames;
 
   @doc("Defines how the certificate's key may be used.")
-  key_usage?: KeyUsageType[];
+  @projectedName("json", "key_usage")
+  keyUsage?: KeyUsageType[];
 
   @doc("The duration that the certificate is valid in months.")
   @projectedName("json", "validity_months")
-  ValidityInMonths?: int32;
+  validityInMonths?: int32;
 }
 
 @doc("The subject alternate names of a X509 object.")
@@ -621,7 +625,8 @@ model SubjectAlternativeNames {
   emails?: string[];
 
   @doc("Domain names.")
-  dns_names?: string[];
+  @projectedName("json", "dns_names")
+  dnsNames?: string[];
 
   @doc("User principal names.")
   upns?: string[];
@@ -642,20 +647,23 @@ model LifetimeAction {
 @doc("A condition to be satisfied for an action to be executed.")
 model Trigger {
   @doc("Percentage of lifetime at which to trigger. Value should be between 1 and 99.")
-  lifetime_percentage?: int32;
+  @projectedName("json", "lifetime_percentage")
+  lifetimePercentage?: int32;
 
   @doc("""
 Days before expiry to attempt renewal. Value should be between 1 and
 validity_in_months multiplied by 27. If validity_in_months is 36, then value
 should be between 1 and 972 (36 * 27).
 """)
-  days_before_expiry?: int32;
+  @projectedName("json", "days_before_expiry")
+  daysBeforeExpiry?: int32;
 }
 
 @doc("The action that will be executed.")
 model Action {
   @doc("The type of the action.")
-  action_type?: ActionType;
+  @projectedName("json", "action_type")
+  actionType?: ActionType;
 }
 
 @doc("Parameters for the issuer of the X509 component of a certificate.")
@@ -671,14 +679,14 @@ Certificate type as supported by the provider (optional); for example 'OV-SSL',
 'EV-SSL'
 """)
   @projectedName("json", "cty")
-  CertificateType?: string;
+  certificateType?: string;
 
   @doc("""
 Indicates if the certificates generated under this policy should be published
 to certificate transparency logs.
 """)
   @projectedName("json", "cert_transparency")
-  CertificateTransparency?: boolean;
+  certificateTransparency?: boolean;
 }
 
 @doc("The contacts for the vault certificates.")
@@ -689,14 +697,14 @@ model Contacts {
 
   @doc("The contact list for the vault certificates.")
   @projectedName("json", "contacts")
-  ContactList?: Contact[];
+  contactList?: Contact[];
 }
 
 @doc("The contact information for the vault certificates.")
 model Contact {
   @doc("Email address.")
   @projectedName("json", "email")
-  EmailAddress?: string;
+  emailAddress?: string;
 
   @doc("Name.")
   name?: string;
@@ -727,7 +735,7 @@ model CertificateIssuerSetParameters {
 
   @doc("Details of the organization as provided to the issuer.")
   @projectedName("json", "org_details")
-  OrganizationDetails?: OrganizationDetails;
+  organizationDetails?: OrganizationDetails;
 
   @doc("Attributes of the issuer object.")
   attributes?: IssuerAttributes;
@@ -736,11 +744,12 @@ model CertificateIssuerSetParameters {
 @doc("The credentials to be used for the certificate issuer.")
 model IssuerCredentials {
   @doc("The user name/account name/account id.")
-  account_id?: string;
+  @projectedName("json", "account_id")
+  accountId?: string;
 
   @doc("The password/secret/account key.")
   @projectedName("json", "pwd")
-  Password?: string;
+  password?: string;
 }
 
 @doc("Details of the organization of the certificate issuer.")
@@ -749,20 +758,23 @@ model OrganizationDetails {
   id?: string;
 
   @doc("Details of the organization administrator.")
-  admin_details?: AdministratorDetails[];
+  @projectedName("json", "admin_details")
+  adminDetails?: AdministratorDetails[];
 }
 
 @doc("Details of the organization administrator of the certificate issuer.")
 model AdministratorDetails {
   @doc("First name.")
-  first_name?: string;
+  @projectedName("json", "first_name")
+  firstName?: string;
 
   @doc("Last name.")
-  last_name?: string;
+  @projectedName("json", "last_name")
+  lastName?: string;
 
   @doc("Email address.")
   @projectedName("json", "email")
-  EmailAddress?: string;
+  emailAddress?: string;
 
   @doc("Phone number.")
   phone?: string;
@@ -796,7 +808,7 @@ model IssuerBundle {
 
   @doc("Details of the organization as provided to the issuer.")
   @projectedName("json", "org_details")
-  OrganizationDetails?: OrganizationDetails;
+  organizationDetails?: OrganizationDetails;
 
   @doc("Attributes of the issuer object.")
   attributes?: IssuerAttributes;
@@ -812,7 +824,7 @@ model CertificateIssuerUpdateParameters {
 
   @doc("Details of the organization as provided to the issuer.")
   @projectedName("json", "org_details")
-  OrganizationDetails?: OrganizationDetails;
+  organizationDetails?: OrganizationDetails;
 
   @doc("Attributes of the issuer object.")
   attributes?: IssuerAttributes;
@@ -822,11 +834,11 @@ model CertificateIssuerUpdateParameters {
 model CertificateCreateParameters {
   @doc("The management policy for the certificate.")
   @projectedName("json", "policy")
-  CertificatePolicy?: CertificatePolicy;
+  certificatePolicy?: CertificatePolicy;
 
   @doc("The attributes of the certificate (optional).")
   @projectedName("json", "attributes")
-  CertificateAttributes?: CertificateAttributes;
+  certificateAttributes?: CertificateAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -840,7 +852,7 @@ model CertificateOperation {
 
   @doc("Parameters for the issuer of the X509 component of a certificate.")
   @projectedName("json", "issuer")
-  IssuerParameters?: IssuerParameters;
+  issuerParameters?: IssuerParameters;
 
   @doc("""
 The certificate signing request (CSR) that is being used in the certificate
@@ -849,13 +861,15 @@ operation.
   csr?: bytes;
 
   @doc("Indicates if cancellation was requested on the certificate operation.")
-  cancellation_requested?: boolean;
+  @projectedName("json", "cancellation_requested")
+  cancellationRequested?: boolean;
 
   @doc("Status of the certificate operation.")
   status?: string;
 
   @doc("The status details of the certificate operation.")
-  status_details?: string;
+  @projectedName("json", "status_details")
+  statusDetails?: string;
 
   @doc("Error encountered, if any, during the certificate operation.")
   error?: Error;
@@ -864,7 +878,8 @@ operation.
   target?: string;
 
   @doc("Identifier for the certificate operation.")
-  request_id?: string;
+  @projectedName("json", "request_id")
+  requestId?: string;
 }
 
 @doc("The certificate import parameters.")
@@ -885,11 +900,11 @@ for encryption.
 
   @doc("The management policy for the certificate.")
   @projectedName("json", "policy")
-  CertificatePolicy?: CertificatePolicy;
+  certificatePolicy?: CertificatePolicy;
 
   @doc("The attributes of the certificate (optional).")
   @projectedName("json", "attributes")
-  CertificateAttributes?: CertificateAttributes;
+  certificateAttributes?: CertificateAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -899,11 +914,11 @@ for encryption.
 model CertificateUpdateParameters {
   @doc("The management policy for the certificate.")
   @projectedName("json", "policy")
-  CertificatePolicy?: CertificatePolicy;
+  certificatePolicy?: CertificatePolicy;
 
   @doc("The attributes of the certificate (optional).")
   @projectedName("json", "attributes")
-  CertificateAttributes?: CertificateAttributes;
+  certificateAttributes?: CertificateAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -912,7 +927,8 @@ model CertificateUpdateParameters {
 @doc("The certificate operation update parameters.")
 model CertificateOperationUpdateParameter {
   @doc("Indicates if cancellation was requested on the certificate operation.")
-  cancellation_requested: boolean;
+  @projectedName("json", "cancellation_requested")
+  cancellationRequested: boolean;
 }
 
 @doc("The certificate merge parameters")
@@ -923,7 +939,7 @@ model CertificateMergeParameters {
 
   @doc("The attributes of the certificate (optional).")
   @projectedName("json", "attributes")
-  CertificateAttributes?: CertificateAttributes;
+  certificateAttributes?: CertificateAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -971,11 +987,15 @@ model KeyCreateParameters {
   kty: JsonWebKeyType;
 
   @doc("The key size in bits. For example: 2048, 3072, or 4096 for RSA.")
-  key_size?: int32;
+  @projectedName("json", "key_size")
+  keySize?: int32;
 
   @doc("The public exponent for a RSA key.")
-  public_exponent?: int32;
-  key_ops?: JsonWebKeyOperation[];
+  @projectedName("json", "public_exponent")
+  publicExponent?: int32;
+
+  @projectedName("json", "key_ops")
+  keyOps?: JsonWebKeyOperation[];
 
   @doc("The attributes of a key managed by the key vault service.")
   @projectedName("json", "attributes")
@@ -989,7 +1009,8 @@ model KeyCreateParameters {
   curve?: JsonWebKeyCurveName;
 
   @doc("The policy rules under which the key can be exported.")
-  release_policy?: KeyReleasePolicy;
+  @projectedName("json", "release_policy")
+  releasePolicy?: KeyReleasePolicy;
 }
 
 @doc("The attributes of a key managed by the key vault service.")
@@ -1057,7 +1078,8 @@ certificate, then managed will be true.
   managed?: boolean;
 
   @doc("The policy rules under which the key can be exported.")
-  release_policy?: KeyReleasePolicy;
+  @projectedName("json", "release_policy")
+  releasePolicy?: KeyReleasePolicy;
 }
 
 @doc("As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18")
@@ -1070,7 +1092,9 @@ JsonWebKey Key Type (kty), as defined in
 https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.
 """)
   kty?: JsonWebKeyType;
-  key_ops?: string[];
+
+  @projectedName("json", "key_ops")
+  keyOps?: string[];
 
   @doc("RSA modulus.")
   n?: bytes;
@@ -1119,7 +1143,8 @@ https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.
 @doc("The key import parameters.")
 model KeyImportParameters {
   @doc("Whether to import as a hardware key (HSM) or software key.")
-  Hsm?: boolean;
+  @projectedName("json", "Hsm")
+  hsm?: boolean;
 
   @doc("The Json web key")
   key: JsonWebKey;
@@ -1132,7 +1157,8 @@ model KeyImportParameters {
   tags?: Record<string>;
 
   @doc("The policy rules under which the key can be exported.")
-  release_policy?: KeyReleasePolicy;
+  @projectedName("json", "release_policy")
+  releasePolicy?: KeyReleasePolicy;
 }
 
 @doc("A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info")
@@ -1157,7 +1183,8 @@ model KeyUpdateParameters {
 Json web key operations. For more information on possible key operations, see
 JsonWebKeyOperation.
 """)
-  key_ops?: JsonWebKeyOperation[];
+  @projectedName("json", "key_ops")
+  keyOps?: JsonWebKeyOperation[];
 
   @doc("The attributes of a key managed by the key vault service.")
   @projectedName("json", "attributes")
@@ -1167,7 +1194,8 @@ JsonWebKeyOperation.
   tags?: Record<string>;
 
   @doc("The policy rules under which the key can be exported.")
-  release_policy?: KeyReleasePolicy;
+  @projectedName("json", "release_policy")
+  releasePolicy?: KeyReleasePolicy;
 }
 
 @doc("The key list result.")
@@ -1692,7 +1720,9 @@ model SecretRestoreParameters {
 model SecurityDomainOperationStatus {
   @doc("operation status")
   status?: OperationStatus;
-  status_details?: string;
+
+  @projectedName("json", "status_details")
+  statusDetails?: string;
 }
 
 model CertificateInfoObject {
@@ -1716,7 +1746,9 @@ https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For
 Security Domain this value must be RSA.
 """)
   kty: string;
-  key_ops: string[];
+
+  @projectedName("json", "key_ops")
+  keyOps: string[];
 
   @doc("RSA modulus.")
   n: string;
@@ -1725,16 +1757,19 @@ Security Domain this value must be RSA.
   e: string;
 
   @doc("X509 certificate chain parameter")
-  x5c: string[];
+  @projectedName("json", "x5c")
+  x5C: string[];
 
   @doc("Public Key Use Parameter. This is optional and if present must be enc.")
   use?: string;
 
   @doc("X509 certificate SHA1 thumbprint. This is optional.")
-  x5t?: string;
+  @projectedName("json", "x5t")
+  x5T?: string;
 
   @doc("X509 certificate SHA256 thumbprint.")
-  "x5t#S256": string;
+  @projectedName("json", "x5t#S256")
+  x5TS256: string;
 
   @doc("Algorithm intended for use with the key.")
   alg: string;
@@ -1748,10 +1783,12 @@ model SecurityDomainObject {
 
 model TransferKey {
   @doc("Specifies the format of the transfer key")
-  key_format?: string;
+  @projectedName("json", "key_format")
+  keyFormat?: string;
 
   @doc("Specifies the transfer key in JWK format")
-  transfer_key: SecurityDomainJsonWebKey;
+  @projectedName("json", "transfer_key")
+  transferKey: SecurityDomainJsonWebKey;
 }
 
 @doc("The update settings request object.")
@@ -1944,7 +1981,7 @@ model StorageAccountCreateParameters {
 
   @doc("The attributes of the storage account.")
   @projectedName("json", "attributes")
-  StorageAccountAttributes?: StorageAccountAttributes;
+  storageAccountAttributes?: StorageAccountAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -1963,7 +2000,7 @@ model StorageAccountUpdateParameters {
 
   @doc("The attributes of the storage account.")
   @projectedName("json", "attributes")
-  StorageAccountAttributes?: StorageAccountAttributes;
+  storageAccountAttributes?: StorageAccountAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -1987,7 +2024,7 @@ model SasDefinitionItem {
   @doc("The storage account SAS definition secret id.")
   @visibility("read")
   @projectedName("json", "sid")
-  SecretId?: string;
+  secretId?: string;
 
   @doc("The SAS definition management attributes.")
   @visibility("read")
@@ -2088,7 +2125,7 @@ model SasDefinitionBundle {
   @doc("Storage account SAS definition secret id.")
   @visibility("read")
   @projectedName("json", "sid")
-  SecretId?: string;
+  secretId?: string;
 
   @doc("""
 The SAS definition token template signed with an arbitrary key.  Tokens created
@@ -2130,7 +2167,7 @@ according to the SAS definition will have the same properties as the template.
 
   @doc("The attributes of the SAS definition.")
   @projectedName("json", "attributes")
-  SasDefinitionAttributes?: SasDefinitionAttributes;
+  sasDefinitionAttributes?: SasDefinitionAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;
@@ -2152,7 +2189,7 @@ according to the SAS definition will have the same properties as the template.
 
   @doc("The attributes of the SAS definition.")
   @projectedName("json", "attributes")
-  SasDefinitionAttributes?: SasDefinitionAttributes;
+  sasDefinitionAttributes?: SasDefinitionAttributes;
 
   @doc("Application specific metadata in the form of key-value pairs.")
   tags?: Record<string>;

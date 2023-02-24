@@ -97,7 +97,7 @@ interface QuestionAnsweringProjectsOperations {
 
       @doc("Knowledge base Import or Export format.")
       @query
-      format: format;
+      format: Format;
 
       @doc("Kind of the asset of the project.")
       @query
@@ -141,7 +141,7 @@ metadata, and assets.
 
       @doc("Knowledge base Import or Export format.")
       @query
-      format: format;
+      format: Format;
 
       @doc("Kind of the asset of the project.")
       @query

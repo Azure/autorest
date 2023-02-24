@@ -12,6 +12,7 @@ import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { getModel } from "./model";
+import { pretransformNames } from "./pretransforms/name-pretransform";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
@@ -20,6 +21,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
   const codeModel = session.model;
+  pretransformNames(codeModel);
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);

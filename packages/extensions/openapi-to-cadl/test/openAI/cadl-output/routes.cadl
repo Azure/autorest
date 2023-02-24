@@ -16,9 +16,9 @@ interface completionsOperations {
     {
       @path "deployment-id": string;
       @body
-      body: paths·1vtxb06·deployments_deployment_id_completions·post·requestbody·content·application_json·schema;
+      body: Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
     },
-    paths·maorw9·deployments_deployment_id_completions·post·responses·200·content·application_json·schema
+    PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema
   >;
 }
 
@@ -33,7 +33,7 @@ interface embeddingsOperations {
       @path
       "deployment-id": string;
       @body
-      body: paths·13piqoc·deployments_deployment_id_embeddings·post·requestbody·content·application_json·schema;
+      body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },
     void
   >;

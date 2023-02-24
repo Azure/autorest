@@ -72,7 +72,7 @@ enum StorageAccountTypes {
   "PremiumV2_LRS",
 }
 
-enum securityEncryptionTypes {
+enum SecurityEncryptionTypes {
   "VMGuestStateOnly",
   "DiskWithVMGuestState",
 }
@@ -375,7 +375,7 @@ enum VMGuestPatchRebootSetting {
   "Always",
 }
 
-enum VMGuestPatchClassification_Windows {
+enum VMGuestPatchClassificationWindows {
   "Critical",
   "Security",
   "UpdateRollUp",
@@ -386,7 +386,7 @@ enum VMGuestPatchClassification_Windows {
   "Updates",
 }
 
-enum VMGuestPatchClassification_Linux {
+enum VMGuestPatchClassificationLinux {
   "Critical",
   "Security",
   "Other",
@@ -1728,7 +1728,7 @@ DiskWithVMGuestState for encryption of the managed disk along with VMGuestState
 blob, and VMGuestStateOnly for encryption of just the VMGuestState blob.
 <br><br> NOTE: It can be set for only Confidential VMs.
 """)
-  securityEncryptionType?: securityEncryptionTypes;
+  securityEncryptionType?: SecurityEncryptionTypes;
 
   @doc("""
 Specifies the customer managed disk encryption set resource id for the managed
@@ -1779,7 +1779,8 @@ Specifies the Read-Write IOPS for the managed disk. Should be used only when
 StorageAccountType is UltraSSD_LRS. If not specified, a default value would be
 assigned based on diskSizeGB.
 """)
-  diskIOPSReadWrite?: int32;
+  @projectedName("json", "diskIOPSReadWrite")
+  diskIopsReadWrite?: int32;
 
   @doc("""
 Specifies the bandwidth in MB per second for the managed disk. Should be used
@@ -2456,10 +2457,10 @@ The list of user identities associated with the virtual machine scale set. The
 user identity dictionary key references will be ARM resource ids in the form:
 '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
 """)
-  userAssignedIdentities?: Record<userAssignedIdentitiesValue>;
+  userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
-model userAssignedIdentitiesValue {
+model UserAssignedIdentitiesValue {
   @doc("The principal id of user assigned identity.")
   @visibility("read")
   principalId?: string;
@@ -3916,7 +3917,8 @@ UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be
 updated only via updates to the VirtualMachine Scale Set.
 """)
   @visibility("read")
-  diskIOPSReadWrite?: int32;
+  @projectedName("json", "diskIOPSReadWrite")
+  diskIopsReadWrite?: int32;
 
   @doc("""
 Specifies the bandwidth in MB per second for the managed disk when
@@ -4327,7 +4329,7 @@ The list of user identities associated with the Virtual Machine. The user
 identity dictionary key references will be ARM resource ids in the form:
 '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
 """)
-  userAssignedIdentities?: Record<userAssignedIdentitiesValue>;
+  userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
 @doc("The List Virtual Machine Scale Set VMs operation response.")
@@ -4794,7 +4796,8 @@ model VirtualMachineCaptureResult {
 
   @doc("the schema of the captured virtual machine")
   @visibility("read")
-  $schema?: string;
+  @projectedName("json", "$schema")
+  schema?: string;
 
   @doc("the version of the content")
   @visibility("read")
@@ -4952,7 +4955,7 @@ ISO 8601-compliant duration string such as PT4H (4 hours)
 @doc("Input for InstallPatches on a Windows VM, as directly received by the API")
 model WindowsParameters {
   @doc("The update classifications to select when installing patches for Windows.")
-  classificationsToInclude?: VMGuestPatchClassification_Windows[];
+  classificationsToInclude?: VMGuestPatchClassificationWindows[];
 
   @doc("Kbs to include in the patch operation")
   kbNumbersToInclude?: string[];
@@ -4976,7 +4979,7 @@ published date.
 @doc("Input for InstallPatches on a Linux VM, as directly received by the API")
 model LinuxParameters {
   @doc("The update classifications to select when installing patches for Linux.")
-  classificationsToInclude?: VMGuestPatchClassification_Linux[];
+  classificationsToInclude?: VMGuestPatchClassificationLinux[];
 
   @doc("packages to include in the patch operation. Format: packageName_packageVersion")
   packageNameMasksToInclude?: string[];
@@ -5367,7 +5370,7 @@ placement group.
   colocationStatus?: InstanceViewStatus;
 
   @doc("Specifies the user intent of the proximity placement group.")
-  intent?: ProximityPlacementGroupProperties_intent;
+  intent?: ProximityPlacementGroupPropertiesIntent;
 }
 
 model SubResourceWithColocationStatus {
@@ -5378,7 +5381,7 @@ model SubResourceWithColocationStatus {
 }
 
 @doc("Specifies the user intent of the proximity placement group.")
-model ProximityPlacementGroupProperties_intent {
+model ProximityPlacementGroupPropertiesIntent {
   @doc("""
 Specifies possible sizes of virtual machines that can be created in the
 proximity placement group.
@@ -5445,7 +5448,7 @@ host group. The value is defaulted to 'false' when not provided.
 Enables or disables a capability on the dedicated host group.<br><br>Minimum
 api-version: 2022-03-01.
 """)
-  additionalCapabilities?: DedicatedHostGroupProperties_additionalCapabilities;
+  additionalCapabilities?: DedicatedHostGroupPropertiesAdditionalCapabilities;
 }
 
 model DedicatedHostGroupInstanceView {
@@ -5510,7 +5513,7 @@ remaining capacity.
 Enables or disables a capability on the dedicated host group.<br><br>Minimum
 api-version: 2022-03-01.
 """)
-model DedicatedHostGroupProperties_additionalCapabilities {
+model DedicatedHostGroupPropertiesAdditionalCapabilities {
   @doc("""
 The flag that enables or disables a capability to have UltraSSD Enabled Virtual
 Machines on Dedicated Hosts of the Dedicated Host Group. For the Virtual
@@ -5938,7 +5941,7 @@ model RestorePointSourceMetadata {
 @doc("Describes the storage profile.")
 model RestorePointSourceVMStorageProfile {
   @doc("Gets the OS disk of the VM captured at the time of the restore point creation.")
-  osDisk?: RestorePointSourceVMOSDisk;
+  osDisk?: RestorePointSourceVmosDisk;
 
   @doc("""
 Gets the data disks of the VM captured at the time of the restore point
@@ -5948,7 +5951,7 @@ creation.
 }
 
 @doc("Describes an Operating System disk.")
-model RestorePointSourceVMOSDisk {
+model RestorePointSourceVmosDisk {
   @doc("Gets the Operating System type.")
   osType?: OperatingSystemType;
 
@@ -6327,7 +6330,8 @@ model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 @doc("Describes the properties of a Run Command metadata.")
 model RunCommandDocumentBase {
   @doc("The VM run command schema.")
-  $schema: string;
+  @projectedName("json", "$schema")
+  schema: string;
 
   @doc("The VM run command id.")
   id: string;

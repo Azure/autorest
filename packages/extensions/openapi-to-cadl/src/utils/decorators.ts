@@ -1,5 +1,4 @@
 import { ChoiceSchema, ObjectSchema, Property, SealedChoiceSchema } from "@autorest/codemodel";
-import { Enum } from "@cadl-lang/compiler/*";
 import { CadlDecorator } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema } from "./schemas";

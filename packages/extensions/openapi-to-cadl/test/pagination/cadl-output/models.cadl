@@ -6,7 +6,7 @@ using Azure.Core;
 
 namespace AutoRestPagingTestService;
 
-enum OperationResult_status {
+enum OperationResultStatus {
   "Succeeded",
   "Failed",
   "canceled",
@@ -23,10 +23,10 @@ enum OperationResult_status {
 model ProductResultValue is Azure.Core.Page<Product>;
 
 model Product {
-  properties?: Product_properties;
+  properties?: ProductProperties;
 }
 
-model Product_properties {
+model ProductProperties {
   id?: int32;
   name?: string;
 }
@@ -46,14 +46,15 @@ model OdataProductResult {
   values?: Product[];
 
   @nextLink
-  "odata.nextLink"?: string;
+  @projectedName("json", "odata.nextLink")
+  odataNextLink?: string;
 }
 
 @pagedResult
 model ProductResultValueWithXMSClientName {
   @items
   @projectedName("json", "values")
-  Indexes?: Product[];
+  indexes?: Product[];
 
   @nextLink
   nextLink?: string;
@@ -61,5 +62,5 @@ model ProductResultValueWithXMSClientName {
 
 model OperationResult {
   @doc("The status of the request")
-  status?: OperationResult_status;
+  status?: OperationResultStatus;
 }

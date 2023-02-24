@@ -54,7 +54,7 @@ target=\"blank\">Analytics and Telemetry</a>.
   scoreThreshold?: float32;
 
   @doc("Context object with previous QnA's information.")
-  context?: QueryDTO_context;
+  context?: QueryDTOContext;
 
   @doc("Optional field. Set to 'QuestionOnly' for using a question only Ranker.")
   rankerType?: string;
@@ -67,7 +67,7 @@ target=\"blank\">Analytics and Telemetry</a>.
 }
 
 @doc("Context object with previous QnA's information.")
-model QueryDTO_context {
+model QueryDTOContext {
   ...QueryContextDTO;
 }
 
@@ -116,11 +116,11 @@ model QnASearchResult {
   metadata?: MetadataDTO[];
 
   @doc("Context object of the QnA")
-  context?: QnASearchResult_context;
+  context?: QnASearchResultContext;
 }
 
 @doc("Context object of the QnA")
-model QnASearchResult_context {
+model QnASearchResultContext {
   ...ContextDTO;
 }
 
@@ -151,19 +151,19 @@ ignored.
   qnaId?: int32;
 
   @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
-  qna?: PromptDTO_qna;
+  qna?: PromptDTOQna;
 
   @doc("Text displayed to represent a follow up question prompt")
   displayText?: string;
 }
 
 @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
-model PromptDTO_qna {
-  ...QnADTO;
+model PromptDTOQna {
+  ...QnAdto;
 }
 
 @doc("Q-A object.")
-model QnADTO {
+model QnAdto {
   @doc("Unique id for the Q-A.")
   id?: int32;
 
@@ -183,11 +183,11 @@ https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
   metadata?: MetadataDTO[];
 
   @doc("Context of a QnA")
-  context?: QnADTO_context;
+  context?: QnAdtoContext;
 }
 
 @doc("Context of a QnA")
-model QnADTO_context {
+model QnAdtoContext {
   ...ContextDTO;
 }
 
@@ -198,11 +198,11 @@ https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-
 @error
 model ErrorResponse {
   @doc("The error object.")
-  error?: ErrorResponse_error;
+  error?: ErrorResponseError;
 }
 
 @doc("The error object.")
-model ErrorResponse_error {
+model ErrorResponseError {
   ...Error;
 }
 
