@@ -1,6 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/cadl-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;

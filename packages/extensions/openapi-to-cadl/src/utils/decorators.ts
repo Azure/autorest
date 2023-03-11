@@ -87,7 +87,7 @@ export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema
   if (isSealedChoiceSchema(enumeration)) {
     decorators.push({
       name: "Azure.Core.fixed",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
     });
   }
 
