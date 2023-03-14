@@ -30,7 +30,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   await emitRoutes(getFilePath(session, "routes.tsp"), cadlProgramDetails);
   await emitMain(getFilePath(session, "main.tsp"), cadlProgramDetails);
   await emitPackage(getFilePath(session, "package.json"), cadlProgramDetails);
-  await emitCadlConfig(getFilePath(session, "tsproject.yaml"));
+  await emitCadlConfig(getFilePath(session, "tspconfig.yaml"));
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {
