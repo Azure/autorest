@@ -10,7 +10,7 @@ export function formatFile(content: string, filepath: string) {
 export function formatCadlFile(content: string, filepath: string): string {
   try {
     return format(content, {
-      plugins: ["@cadl-lang/prettier-plugin-cadl"],
+      plugins: ["@typespec/prettier-plugin-typespec"],
       pluginSearchDirs: ["./node_modules"],
       filepath,
     });

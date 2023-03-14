@@ -39,7 +39,7 @@ function generate(path: string, debug = false) {
     inputFile,
     "--use=.",
     `--output-folder=${dirname(path)}`,
-    "--src-path=cadl-output",
+    "--src-path=tsp-output",
     ...(debug ? ["--openapi-to-cadl.debugger"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
   ];

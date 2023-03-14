@@ -10,7 +10,7 @@ export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   if (paging.isPageable) {
     decorators.push({
       name: "pagedResult",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
       namespace: "Azure.Core",
     });
   }
@@ -36,7 +36,7 @@ export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
     }
     decorators.push({
       name: "resource",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
       namespace: "Azure.Core",
       arguments: [resource],
     });
@@ -87,7 +87,7 @@ export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema
   if (isSealedChoiceSchema(enumeration)) {
     decorators.push({
       name: "Azure.Core.fixed",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
     });
   }
 

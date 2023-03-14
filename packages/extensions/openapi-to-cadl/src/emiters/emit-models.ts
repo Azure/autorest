@@ -1,4 +1,3 @@
-import { writeFile } from "fs/promises";
 import { getSession } from "../autorest-session";
 import { generateEnums } from "../generate/generate-enums";
 import { generateObject } from "../generate/generate-object";
@@ -17,9 +16,11 @@ export async function emitModels(filePath: string, program: CadlProgram): Promis
 function generateModels(program: CadlProgram) {
   const { models } = program;
   const { modules, namespaces: namespacesSet } = getModelsImports(program);
-  const imports = [...new Set<string>([`import "@cadl-lang/rest";`, ...modules])].join("\n");
+  const imports = [...new Set<string>([`import "@typespec/rest";`, `import "@typespec/http";`, ...modules])].join("\n");
 
-  const namespaces = [...new Set<string>([`using Cadl.Rest;`, ...namespacesSet])].join("\n");
+  const namespaces = [...new Set<string>([`using TypeSpec.Rest;`, `using TypeSpec.Http;`, ...namespacesSet])].join(
+    "\n",
+  );
 
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
