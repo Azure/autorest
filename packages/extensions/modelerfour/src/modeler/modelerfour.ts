@@ -1602,7 +1602,6 @@ export class ModelerFour {
                 this.interpret.getDescription(pType.language.default.description, pSchema),
               pType,
               {
-                schema: pType,
                 required:
                   requestSchema.required && requestSchema.required.indexOf(propertyName) > -1 ? true : undefined,
                 implementation: ImplementationLocation.Method,
