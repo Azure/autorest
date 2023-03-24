@@ -88,7 +88,7 @@ View our [docs readme][docs_readme] as a starting point to find both general inf
 
 ### Contributing guide
 
-Check our [internal developer docs](./docs/internal/readme.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Autorest.
+Check our [internal developer docs](./docs/developer/readme.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Autorest.
 
 ### Code of Conduct
 
