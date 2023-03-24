@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "comment": "Update to generate TypeSpec after Cadl -> Typespec rename",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-cadl"
+}

@@ -339,4 +339,4 @@ packages/extensions/core/test/plugins/*/expected/*.json
 /SECURITY.md
 
 # Generated cadl
-packages/extensions/openapi-to-cadl/test/**/*.cadl
+packages/extensions/openapi-to-cadl/test/**/*.tsp

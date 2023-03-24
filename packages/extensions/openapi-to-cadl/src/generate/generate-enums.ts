@@ -1,4 +1,5 @@
 import { CadlEnum } from "../interfaces";
+import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 
 export function generateEnums(cadlEnum: CadlEnum) {
@@ -10,24 +11,20 @@ export function generateEnums(cadlEnum: CadlEnum) {
     definitions.push(`\n${fixme}`);
   }
 
+  const decorators = generateDecorators(cadlEnum.decorators);
+  decorators && definitions.push(decorators);
+
   const enumDefinition = `
-    enum ${cadlEnum.name}${cadlEnum.isExtensible ? "KnownValues" : ""} {
+    enum ${cadlEnum.name} {
         ${cadlEnum.members
           .map((m) => {
-            return `"${m.name}"` !== m.value ? `${m.name}: ${m.value}` : m.value;
+            const kv = `"${m.name}"` !== m.value ? `${m.name}: ${m.value}` : m.value;
+            return `${generateDocs(m)}${kv}`;
           })
           .join(", ")}
     }\n`;
 
   definitions.push(enumDefinition);
-
-  if (cadlEnum.isExtensible) {
-    const knownValues = `
-    @knownValues(${cadlEnum.name}KnownValues)
-    model ${cadlEnum.name} is string {}\n\n`;
-
-    definitions.push(knownValues);
-  }
 
   return definitions;
 }

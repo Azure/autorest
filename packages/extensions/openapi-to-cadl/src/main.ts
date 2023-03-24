@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
@@ -13,6 +12,7 @@ import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { getModel } from "./model";
+import { pretransformNames } from "./pretransforms/name-pretransform";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
@@ -21,28 +21,20 @@ export async function processRequest(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
   const codeModel = session.model;
+  pretransformNames(codeModel);
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);
   const cadlProgramDetails = getModel(codeModel);
-  createOutputFolder(getFilePath(session, ""));
-  await emitModels(getFilePath(session, "models.cadl"), cadlProgramDetails);
-  await emitRoutes(getFilePath(session, "routes.cadl"), cadlProgramDetails);
-  await emitMain(getFilePath(session, "main.cadl"), cadlProgramDetails);
+  await emitModels(getFilePath(session, "models.tsp"), cadlProgramDetails);
+  await emitRoutes(getFilePath(session, "routes.tsp"), cadlProgramDetails);
+  await emitMain(getFilePath(session, "main.tsp"), cadlProgramDetails);
   await emitPackage(getFilePath(session, "package.json"), cadlProgramDetails);
-  await emitCadlConfig(getFilePath(session, "cadl-project.yaml"));
-}
-
-function createOutputFolder(dir: string) {
-  if (!existsSync(dir)) {
-    mkdirSync(dir, { recursive: true });
-  }
+  await emitCadlConfig(getFilePath(session, "tspconfig.yaml"));
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {
-  const outputFolder = session.configuration["output-folder"] ?? ".";
-  const srcPath = session.configuration["src-path"] ?? "";
-  return join(outputFolder, srcPath);
+  return session.configuration["src-path"] ?? "";
 }
 
 function getFilePath(session: Session<CodeModel>, fileName: string) {

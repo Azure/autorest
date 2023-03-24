@@ -19,7 +19,8 @@ export function getOptions(): CadlOptions {
 }
 
 export function getGuessResourceKey(session: Session<CodeModel>) {
-  return session.configuration["guessResourceKey"] !== false;
+  const shouldGuess = session.configuration["guessResourceKey"] ?? false;
+  return shouldGuess !== false;
 }
 
 export function getIsAzureSpec(session: Session<CodeModel>) {

@@ -15,7 +15,7 @@ export function addCorePageAlias(cadlObject: CadlObject): CadlAlias | undefined 
   cadlObject.alias = {
     alias: "Azure.Core.Page",
     params: [value[0].type.replace("[]", "")],
-    module: "@azure-tools/cadl-azure-core",
+    module: "@azure-tools/typespec-azure-core",
   };
 
   return;

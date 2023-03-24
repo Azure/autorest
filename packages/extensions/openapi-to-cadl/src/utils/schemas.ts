@@ -8,6 +8,7 @@ import {
   SchemaType,
   SealedChoiceSchema,
   Response,
+  AnySchema,
 } from "@autorest/codemodel";
 
 export function isConstantSchema(schema: Schema): schema is ConstantSchema {
@@ -32,4 +33,8 @@ export function isDictionarySchema(schema: Schema): schema is DictionarySchema {
 
 export function isResponseSchema(response: Response | SchemaResponse): response is SchemaResponse {
   return (response as SchemaResponse).schema !== undefined;
+}
+
+export function isAnySchema(schema: Schema): schema is AnySchema {
+  return schema.type === SchemaType.Any || schema.type === SchemaType.AnyObject;
 }

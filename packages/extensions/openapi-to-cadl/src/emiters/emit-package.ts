@@ -1,4 +1,4 @@
-import { writeFile } from "fs/promises";
+import { getSession } from "../autorest-session";
 import { CadlProgram } from "../interfaces";
 import { formatFile } from "../utils/format";
 
@@ -6,22 +6,23 @@ export async function emitPackage(filePath: string, program: CadlProgram): Promi
   const name = program.serviceInformation.name.toLowerCase().replace(/ /g, "-");
   const description = program.serviceInformation.doc;
   const content = JSON.stringify(getPackage(name, description as string));
-  await writeFile(filePath, formatFile(content, filePath));
+  const session = getSession();
+  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
 }
 
 const getPackage = (name: string, description: string) => ({
-  name: `@cadl-api-spec/${name}`,
+  name: `@typespec-api-spec/${name}`,
   author: "Microsoft Corporation",
   description,
   license: "MIT",
   dependencies: {
-    "@cadl-lang/compiler": "^0.37.0",
-    "@cadl-lang/rest": "^0.19.0",
-    "@cadl-lang/versioning": "^0.10.0",
-    "@cadl-lang/prettier-plugin-cadl": "^0.5.17",
-    "@azure-tools/cadl-azure-core": "^0.9.0",
-    "@azure-tools/cadl-autorest": "^0.22.0",
-    "@azure-tools/cadl-python": "^0.4.10",
+    "@typespec/compiler": "^0.41.0",
+    "@typespec/rest": "^0.41.0",
+    "@typespec/http": "^0.41.0",
+    "@typespec/versioning": "^0.41.0",
+    "@typespec/prettier-plugin-typespec": "^0.41.0",
+    "@azure-tools/typespec-azure-core": "^0.27.0",
+    "@azure-tools/typespec-autorest": "^0.27.0",
     prettier: "^2.7.1",
   },
   private: true,
