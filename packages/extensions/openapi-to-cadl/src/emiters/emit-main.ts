@@ -10,7 +10,14 @@ export async function emitMain(filePath: string, program: CadlProgram): Promise<
 }
 
 function getServiceInformation(program: CadlProgram) {
-  const imports = [`import "@cadl-lang/rest";`, `import "./routes.cadl";`, ``, `using Cadl.Rest;`, `using Cadl.Http;`];
+  const imports = [
+    `import "@typespec/rest";`,
+    `import "@typespec/http";`,
+    `import "./routes.tsp";`,
+    ``,
+    `using TypeSpec.Rest;`,
+    `using TypeSpec.Http;`,
+  ];
   const content = generateServiceInformation(program);
 
   return [...imports, content].join("\n");
