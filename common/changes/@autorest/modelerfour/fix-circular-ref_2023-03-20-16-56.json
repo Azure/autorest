@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix issue with multipart request body could cause circular reference",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
