@@ -5,6 +5,9 @@
     },
     {
       "pattern": "^https://aka.ms/azsdk/dpcodegen"
+    },
+    {
+      "pattern": "^https://dev.azure.com/azure-sdk/internal"
     }
   ],
   "replacementPatterns": [
