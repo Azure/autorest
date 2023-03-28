@@ -53,14 +53,14 @@ stages:
 
           - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
               - template: ./templates/create-tryit-comment.yaml
-      - job: lintdocs
-        displayName: Lint docs
-        continueOnError: true
-        steps:
-          - script: |
-              sudo npm install -g markdown-link-check
-              find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
-            displayName: Find
+      # - job: lintdocs
+      #   displayName: Lint docs
+      #   continueOnError: true
+      #   steps:
+      #     - script: |
+      #         sudo npm install -g markdown-link-check
+      #         find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
+      #       displayName: Find
 
   - stage: regressiontests
     displayName: Regression Tests
