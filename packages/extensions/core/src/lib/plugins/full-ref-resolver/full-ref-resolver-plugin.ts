@@ -2,7 +2,7 @@ import { IAutorestLogger, PluginUserError } from "@autorest/common";
 import { DataHandle, DataSource, IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
 import { InvalidJsonPointer } from "@azure-tools/json";
 import { parseJsonRef } from "@azure-tools/jsonschema";
-import { createOpenAPIWorkspace, OpenAPIWorkspace } from "@azure-tools/openapi";
+import { createOpenAPIWorkspace, Discriminator, OpenAPIWorkspace } from "@azure-tools/openapi";
 import { resolveUri } from "@azure-tools/uri";
 import { PipelinePlugin } from "../../pipeline/common";
 
@@ -79,6 +79,23 @@ async function crawlRefs(
 ) {
   const promises: Promise<void>[] = [];
   function visit(obj: any, pointer: string[]) {
+    function resolveNewRef(value: string): string {
+      const { file, path } = parseJsonRef(value);
+      const newRefFileName = resolveUri(originalFileLocation, file ?? "");
+
+      const newReference = path ? `${newRefFileName}#${path}` : newRefFileName;
+
+      if (!checkReferenceIsValid(workspace, newRefFileName, path)) {
+        success = false;
+        logger.trackError({
+          code: "InvalidRef",
+          message: `Ref '${value}' is not referencing a valid location. ${pointer}`,
+          source: [{ document: dataHandle.key, position: { path: pointer } }],
+        });
+      }
+      return newReference;
+    }
+
     let success = true;
     for (const [key, value] of Object.entries(obj)) {
       // We don't want to navigate the examples.
@@ -93,21 +110,12 @@ async function crawlRefs(
         );
         continue;
       }
-      if (key === "$ref" && typeof value === "string") {
-        const { file, path } = parseJsonRef(value);
-        const newRefFileName = resolveUri(originalFileLocation, file ?? "");
-
-        const newReference = path ? `${newRefFileName}#${path}` : newRefFileName;
-
-        if (!checkReferenceIsValid(workspace, newRefFileName, path)) {
-          success = false;
-          logger.trackError({
-            code: "InvalidRef",
-            message: `Ref '${value}' is not referencing a valid location. ${pointer}`,
-            source: [{ document: dataHandle.key, position: { path: pointer } }],
-          });
+      if (key === "discriminator" && isDiscriminatorWithMapping(value)) {
+        for (const [key, mappedRef] of Object.entries(value.mapping)) {
+          value.mapping[key] = resolveNewRef(mappedRef);
         }
-        obj[key] = newReference;
+      } else if (key === "$ref" && typeof value === "string") {
+        obj[key] = resolveNewRef(value);
       } else if (Array.isArray(value)) {
         if (!visit(value, [...pointer, key])) {
           success = false;
@@ -124,6 +132,16 @@ async function crawlRefs(
   const result = visit(spec, []);
   await Promise.all(promises);
   return result;
+}
+
+function isDiscriminatorWithMapping(value: unknown): value is Discriminator & { mapping: Record<string, string> } {
+  return (
+    typeof value === "object" &&
+    value != null &&
+    "mapping" in value &&
+    typeof value.mapping === "object" &&
+    value.mapping !== null
+  );
 }
 
 function checkReferenceIsValid(workspace: OpenAPIWorkspace<any>, file: string, path: string | undefined): boolean {

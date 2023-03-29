@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: Issue with discriminator mapping not working across files",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
