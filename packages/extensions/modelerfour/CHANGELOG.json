@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.26.1",
+      "tag": "@autorest/modelerfour_v4.26.1",
+      "date": "Thu, 13 Apr 2023 04:20:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix issue with multipart request body could cause circular reference"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.26.0",
       "tag": "@autorest/modelerfour_v4.26.0",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

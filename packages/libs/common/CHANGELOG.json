@@ -2,6 +2,18 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.5.6",
+      "tag": "@autorest/common_v1.5.6",
+      "date": "Thu, 13 Apr 2023 04:20:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix: Suppression of the same code for different area could conflict each other"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.5",
       "tag": "@autorest/common_v1.5.5",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

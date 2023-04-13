@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+
+## 1.5.6
+Thu, 13 Apr 2023 04:20:09 GMT
+
+### Patches
+
+- Fix: Suppression of the same code for different area could conflict each other
 
 ## 1.5.5
 Wed, 07 Dec 2022 22:24:34 GMT
