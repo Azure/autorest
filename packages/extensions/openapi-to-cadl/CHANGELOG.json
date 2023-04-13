@@ -2,6 +2,29 @@
   "name": "@autorest/openapi-to-cadl",
   "entries": [
     {
+      "version": "0.4.0",
+      "tag": "@autorest/openapi-to-cadl_v0.4.0",
+      "date": "Thu, 13 Apr 2023 04:20:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Improvements on Enum translation"
+          },
+          {
+            "comment": "Update to generate TypeSpec after Cadl -> Typespec rename"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Fix issue with output-folder"
+          },
+          {
+            "comment": "Remove unnecessary dependency."
+          }
+        ]
+      }
+    },
+    {
       "version": "0.2.0",
       "tag": "@autorest/openapi-to-cadl_v0.2.0",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

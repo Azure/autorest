@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+
+## 4.26.1
+Thu, 13 Apr 2023 04:20:09 GMT
+
+### Patches
+
+- Fix issue with multipart request body could cause circular reference
 
 ## 4.26.0
 Wed, 07 Dec 2022 22:24:34 GMT

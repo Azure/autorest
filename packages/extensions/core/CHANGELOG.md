@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+
+## 3.9.5
+Thu, 13 Apr 2023 04:20:09 GMT
+
+### Patches
+
+- Fix: Issue with discriminator mapping not working across files
 
 ## 3.9.4
 Wed, 07 Dec 2022 22:24:34 GMT
