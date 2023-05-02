@@ -521,4 +521,114 @@ describe("Modelerfour.Schemas", () => {
       expect(schema).toBeInstanceOf(UriSchema);
     });
   });
+
+  describe("Validate auto-correct allOf/oneOf/anyOf", () => {
+    it("Auto-corrects schema with no type and allOf to type: object", async () => {
+      const spec = createTestSpec();
+      addSchema(
+        spec,
+        "Widget",
+        {
+          description: "A widget",
+          allOf: [{ $ref: "#/components/schemas/BaseWidget" }, { required: ["id"] }],
+        },
+        { name: "Widget" },
+      );
+
+      addSchema(
+        spec,
+        "BaseWidget",
+        {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            color: { type: "string" },
+          },
+        },
+        { name: "BaseWidget" },
+      );
+
+      const codeModel = await runModeler(spec);
+
+      const widget = findByName("Widget", codeModel.schemas.objects);
+      expect(widget).toBeDefined();
+      expect(widget?.type).toBe("object");
+    });
+
+    it("Auto-corrects schema with no type and allOf with no type to type: object", async () => {
+      const spec = createTestSpec();
+      addSchema(
+        spec,
+        "Widget",
+        {
+          description: "A widget",
+          allOf: [{ $ref: "#/components/schemas/BaseWidget" }, { $ref: "#/components/schemas/Metadata" }],
+        },
+        { name: "Widget" },
+      );
+
+      addSchema(
+        spec,
+        "BaseWidget",
+        {
+          properties: {
+            id: { type: "string" },
+            color: { type: "string" },
+          },
+        },
+        { name: "BaseWidget" },
+      );
+
+      addSchema(
+        spec,
+        "Metadata",
+        {
+          properties: {
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
+        { name: "Metadata" },
+      );
+
+      const codeModel = await runModeler(spec);
+
+      const widget = findByName("Widget", codeModel.schemas.objects);
+      expect(widget).toBeDefined();
+      expect(widget?.type).toBe("object");
+    });
+
+    it("Does not auto-correct schema with no type and oneOf with elements that are not type: object", async () => {
+      const spec = createTestSpec();
+      addSchema(
+        spec,
+        "Prompt",
+        {
+          description: "Prompt",
+          oneOf: [{ type: "string" }, { type: "array", items: { type: "string" } }],
+        },
+        { name: "Prompt" },
+      );
+      addSchema(
+        spec,
+        "Request",
+        {
+          description: "Request",
+          properties: {
+            prompt: { $ref: "#/components/schemas/Prompt" },
+          },
+        },
+        { name: "Request" },
+      );
+
+      const codeModel = await runModeler(spec);
+
+      const request = findByName("Request", codeModel.schemas.objects);
+      expect(request).toBeDefined();
+      expect(request?.properties?.find((x) => x.serializedName === "prompt")).toBeDefined();
+      const promptSchema = request?.properties?.find((x) => x.serializedName === "prompt")?.schema;
+      expect(promptSchema).toBeDefined();
+      expect(promptSchema?.type).toBe("any");
+    });
+  });
 });
