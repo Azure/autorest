@@ -1,7 +1,7 @@
 {
   "name": "@autorest/openapi-to-cadl",
-  "version": "0.2.0",
-  "description": "Autorest plugin to scaffold a CADL definition from an OpenAPI document",
+  "version": "0.4.0",
+  "description": "Autorest plugin to scaffold a Typespec definition from an OpenAPI document",
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "keywords": [
     "Autorest",
-    "cadl"
+    "TypeSpec"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
@@ -38,16 +38,18 @@
   ],
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
+    "@azure-tools/codegen": "~2.9.2",
     "@autorest/extension-base": "~3.5.1",
     "@autorest/codemodel": "~4.19.3",
-    "@cadl-lang/compiler": "^0.37.0",
-    "@cadl-lang/rest": "^0.19.0",
-    "@cadl-lang/versioning": "^0.10.0",
-    "@cadl-lang/prettier-plugin-cadl": "^0.5.17",
-    "@azure-tools/cadl-azure-core": "^0.9.0",
-    "@azure-tools/cadl-autorest": "^0.22.0",
-    "@cadl-lang/openapi": "^0.11.0",
-    "@cadl-lang/openapi3": "^0.14.0",
+    "@typespec/compiler": "^0.41.0",
+    "@typespec/rest": "^0.41.0",
+    "@typespec/http": "^0.41.0",
+    "@typespec/versioning": "^0.41.0",
+    "@typespec/prettier-plugin-typespec": "^0.41.0",
+    "@azure-tools/typespec-azure-core": "^0.27.0",
+    "@azure-tools/typespec-autorest": "^0.27.0",
+    "@typespec/openapi": "^0.41.0",
+    "@typespec/openapi3": "^0.41.0",
     "prettier": "~2.7.1"
   },
   "devDependencies": {
@@ -60,7 +62,7 @@
     "fs-extra": "^10.1.0",
     "@types/fs-extra": "^9.0.13",
     "chalk": "^4.1.0",
-    "@azure-tools/cadl-autorest": "^0.22.0",
+    "@azure-tools/typespec-autorest": "^0.27.0",
     "webpack-cli": "~4.7.2",
     "webpack": "~5.40.0",
     "@typescript-eslint/eslint-plugin": "^5.27.0",

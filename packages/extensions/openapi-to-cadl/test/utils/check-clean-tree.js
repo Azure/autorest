@@ -49,5 +49,5 @@ async function check_tree() {
 
 check_tree().catch((error) => {
   console.error(error);
-  process.exit(-1);
+  throw error;
 });

@@ -47,7 +47,7 @@
     "typescript": "~4.9.3"
   },
   "dependencies": {
-    "@autorest/common": "~1.5.5",
+    "@autorest/common": "~1.5.6",
     "@azure-tools/datastore": "~4.7.1",
     "@azure-tools/extension": "~3.6.1",
     "@azure-tools/uri": "~3.1.1",

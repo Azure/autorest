@@ -41,3 +41,61 @@ function getApiVersion(model: CodeModel): string | undefined {
 
   return undefined;
 }
+
+function getEndpointParameter(codeModel: CodeModel) {
+  if (!codeModel.globalParameters || !codeModel.globalParameters.length) {
+    return [];
+  }
+
+  const urlParameters = codeModel.globalParameters.filter(
+    (gp) => gp.implementation === ImplementationLocation.Client && gp.protocol.http?.in === ParameterLocation.Uri,
+  );
+
+  // Currently only support one parametrized host
+  if (!urlParameters.length) {
+    return [];
+  }
+
+  return urlParameters.map((urlParameter) => {
+    let value: string | undefined;
+    if (isConstantSchema(urlParameter.schema)) {
+      value = urlParameter.schema.value.value;
+    }
+    return {
+      name: urlParameter.language.default.serializedName,
+      type: "string",
+      description: urlParameter.language.default.description,
+      value,
+    };
+  });
+}
+
+export function transformBaseUrl(codeModel: CodeModel) {
+  let endpoint: string | undefined = "";
+  let isCustom = false;
+
+  const $host = (codeModel.globalParameters || []).find((p) => {
+    const { name } = p.language.default;
+    return name === "$host" && Boolean(p.clientDefaultValue);
+  });
+
+  let urlParameters: any[] = [];
+  if (!$host) {
+    // There are some swaggers that contain no operations for those we'll keep an empty endpoint
+    if (codeModel.operationGroups && codeModel.operationGroups.length) {
+      // No support yet for multi-baseUrl yet Issue #553
+      const { requests } = codeModel.operationGroups[0].operations[0];
+      urlParameters = getEndpointParameter(codeModel);
+      isCustom = true;
+      endpoint = requests?.[0].protocol.http?.uri;
+    }
+  } else {
+    endpoint = $host.clientDefaultValue;
+  }
+
+  return {
+    urlParameters,
+    endpoint: endpoint,
+    isCustom,
+  };
+}

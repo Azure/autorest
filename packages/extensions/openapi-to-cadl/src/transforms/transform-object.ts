@@ -1,4 +1,12 @@
-import { CodeModel, isObjectSchema, ObjectSchema, Property, Schema, SchemaType } from "@autorest/codemodel";
+import {
+  CodeModel,
+  DictionarySchema,
+  isObjectSchema,
+  ObjectSchema,
+  Property,
+  Schema,
+  SchemaType,
+} from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
 import { CadlObject, CadlObjectProperty } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
@@ -6,6 +14,7 @@ import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {
+  isAnySchema,
   isArraySchema,
   isChoiceSchema,
   isConstantSchema,
@@ -68,7 +77,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Cad
     properties,
     parents: getParents(schema),
     extendedParents: getExtendedParents(schema),
-    spreadParents: getSpreadParents(schema),
+    spreadParents: getSpreadParents(schema, codeModel),
     decorators: getModelDecorators(schema),
   };
 
@@ -141,12 +150,19 @@ function getExtendedParents(schema: ObjectSchema): string[] {
     .map((p) => p.language.default.name);
 }
 
-function getSpreadParents(schema: ObjectSchema): string[] {
+function getSpreadParents(schema: ObjectSchema, codeModel: CodeModel): string[] {
   const immediateParents = schema.parents?.immediate ?? [];
-  return immediateParents
+  const spreadingParents = immediateParents
     .filter((p) => p.language.default.name !== schema.language.default.name)
+    .filter((p) => !isDictionarySchema(p))
     .filter((p) => !getOwnDiscriminator(p as ObjectSchema))
     .map((p) => p.language.default.name);
+
+  const dictionaryParent = immediateParents.find((p) => isDictionarySchema(p)) as DictionarySchema | undefined;
+  if (dictionaryParent) {
+    spreadingParents.push(`Record<${getCadlType(dictionaryParent.elementType, codeModel)}>`);
+  }
+  return spreadingParents;
 }
 
 export function getCadlType(schema: Schema, codeModel: CodeModel): string {
@@ -178,10 +194,14 @@ export function getCadlType(schema: Schema, codeModel: CodeModel): string {
     return `Record<${getCadlType(schema.elementType, codeModel)}>`;
   }
 
+  if (isAnySchema(schema)) {
+    return `unknown`;
+  }
+
   const cadlType = cadlTypes.get(schemaType);
 
   if (!cadlType) {
-    throw new Error(`Unknown type ${schema.type}`);
+    throw new Error(`Unknown type ${(schema as any).type}`);
   }
 
   return cadlType;

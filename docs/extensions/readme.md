@@ -1082,8 +1082,6 @@ Some requests like creating/deleting a resource cannot be carried out immediatel
 
 When `x-ms-long-running-operation-options` is specified, there should also be a `x-ms-long-running-operation: true` specified.
 
-See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for asynchronous operation notes.
-
 **You probably don't need to use this option if you follow ARM guidelines**. This option is designed for cases where the server do NOT follow ARM, and we need to guide the runtime through a peculiar flow.
 
 **Schema**:

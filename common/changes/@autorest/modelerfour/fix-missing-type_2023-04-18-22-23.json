@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Bypass autocorrect to type: object in some cases",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}

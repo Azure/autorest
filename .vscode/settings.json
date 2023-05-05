@@ -24,5 +24,8 @@
   "files.eol": "\n",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+  },
+  "[typespec]": {
+    "editor.defaultFormatter": "Microsoft.typespec-vscode"
   }
 }

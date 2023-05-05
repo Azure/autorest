@@ -1,0 +1,17 @@
+{
+  "name": "@typespec-api-spec/microsoft-cognitive-language-service---analyze-text-authoring",
+  "author": "Microsoft Corporation",
+  "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service.",
+  "license": "MIT",
+  "dependencies": {
+    "@typespec/compiler": "^0.41.0",
+    "@typespec/rest": "^0.41.0",
+    "@typespec/http": "^0.41.0",
+    "@typespec/versioning": "^0.41.0",
+    "@typespec/prettier-plugin-typespec": "^0.41.0",
+    "@azure-tools/typespec-azure-core": "^0.27.0",
+    "@azure-tools/typespec-autorest": "^0.27.0",
+    "prettier": "^2.7.1"
+  },
+  "private": true
+}

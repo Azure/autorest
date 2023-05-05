@@ -1,6 +1,7 @@
-import { ObjectSchema, Property } from "@autorest/codemodel";
+import { ChoiceSchema, ObjectSchema, Property, SealedChoiceSchema } from "@autorest/codemodel";
 import { CadlDecorator } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
+import { isSealedChoiceSchema } from "./schemas";
 
 export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   const decorators: CadlDecorator[] = [];
@@ -9,7 +10,7 @@ export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   if (paging.isPageable) {
     decorators.push({
       name: "pagedResult",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
       namespace: "Azure.Core",
     });
   }
@@ -35,7 +36,7 @@ export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
     }
     decorators.push({
       name: "resource",
-      module: "@azure-tools/cadl-azure-core",
+      module: "@azure-tools/typespec-azure-core",
       namespace: "Azure.Core",
       arguments: [resource],
     });
@@ -80,6 +81,18 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
   return decorators;
 }
 
+export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): CadlDecorator[] {
+  const decorators: CadlDecorator[] = [];
+
+  if (isSealedChoiceSchema(enumeration)) {
+    decorators.push({
+      name: "Azure.Core.fixed",
+      module: "@azure-tools/typespec-azure-core",
+    });
+  }
+
+  return decorators;
+}
 export function generateDecorators(decorators: CadlDecorator[] = []): string {
   const definitions: string[] = [];
   for (const decorator of decorators ?? []) {
