@@ -303,7 +303,7 @@ The `WriteFile` message notifies AutoRest to write out a file with the given nam
 {
   "jsonrpc": "2.0",
   "method": "WriteFile",
-  "params": ["unique-session-id", "output.py", "contents of output.py]
+  "params": ["unique-session-id", "output.py", "contents of output.py"]
 }
 ```
 

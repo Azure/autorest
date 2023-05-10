@@ -1145,17 +1145,29 @@ export class ModelerFour {
         }
 
         if (schema.allOf || schema.anyOf || schema.oneOf) {
-          // if the model has properties, then we're going to assume they meant to say JsonType.object
-          // but we're going to warn them anyway.
-          this.session.warning(
-            `The schema '${
-              schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
-            ["Modeler", "MissingType"],
-            schema,
-          );
-          schema.type = OpenAPI.JsonType.Object;
-          break;
+          // The schema does not have properties or additionalProperties, but it does have allOf/anyOf/oneOf.
+          // The prior logic auto-corrected this to type: object, but that's not always appropriate.
+          // Check the child schemas and bypass the auto-correct if any are clearly not type: object.
+
+          // Return true if the schema has an explicit type that is not type: object.
+          const notTypeObject = (e: Refable<OpenAPI.Schema>): boolean => {
+            const s = this.resolve(e).instance;
+            return !!s.type && s.type !== OpenAPI.JsonType.Object;
+          };
+          let bypassAutoCorrect = schema.allOf && schema.allOf.some(notTypeObject);
+          bypassAutoCorrect ||= schema.anyOf && schema.anyOf.some(notTypeObject);
+          bypassAutoCorrect ||= schema.oneOf && schema.oneOf.some(notTypeObject);
+          if (!bypassAutoCorrect) {
+            this.session.warning(
+              `The schema '${
+                schema?.["x-ms-metadata"]?.name || name
+              }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
+              ["Modeler", "MissingType"],
+              schema,
+            );
+            schema.type = OpenAPI.JsonType.Object;
+            break;
+          }
         }
 
         {
@@ -1602,7 +1614,6 @@ export class ModelerFour {
                 this.interpret.getDescription(pType.language.default.description, pSchema),
               pType,
               {
-                schema: pType,
                 required:
                   requestSchema.required && requestSchema.required.indexOf(propertyName) > -1 ? true : undefined,
                 implementation: ImplementationLocation.Method,

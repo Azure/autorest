@@ -2,6 +2,12 @@
   "ignorePatterns": [
     {
       "pattern": "^https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx"
+    },
+    {
+      "pattern": "^https://aka.ms/azsdk/dpcodegen"
+    },
+    {
+      "pattern": "^https://dev.azure.com/azure-sdk/internal"
     }
   ],
   "replacementPatterns": [

@@ -13,6 +13,7 @@ export interface TestSessionInput {
 export interface TestSession<T> {
   session: Session<T>;
   errors: Array<any>;
+  warnings: Array<any>;
 }
 
 async function readData(folder: string, ...files: Array<string>): Promise<Map<string, TestSessionInput>> {
@@ -52,11 +53,15 @@ export async function createTestSession<TInputModel>(
 ): Promise<TestSession<TInputModel>> {
   const models = Array.isArray(inputs) ? inputs.reduce((m, x) => m.set(x.filename, x), new Map()) : inputs;
   const errors: Array<any> = [];
+  const warnings: Array<any> = [];
 
   const sendMessage = (message: any): void => {
     if (message.Channel === "warning" || message.Channel === "error" || message.Channel === "verbose") {
       if (message.Channel === "error") {
         errors.push(message);
+      }
+      if (message.Channel === "warning") {
+        warnings.push(message);
       }
     }
   };
@@ -73,5 +78,5 @@ export async function createTestSession<TInputModel>(
     UpdateConfigurationFile: (filename: string, content: string) => {},
     GetConfigurationFile: (filename: string) => Promise.resolve(""),
   } as any);
-  return { session, errors };
+  return { session, errors, warnings };
 }

@@ -179,4 +179,72 @@ describe("Prechecker", () => {
       });
     });
   });
+
+  describe("Validate auto-correct allOf/oneOf/anyOf", () => {
+    let spec: any;
+
+    beforeEach(() => {
+      spec = createTestSpec();
+    });
+
+    it("Auto-corrects schema with no type and allOf to type: object", async () => {
+      addSchema(
+        spec,
+        "Widget",
+        {
+          description: "A widget",
+          allOf: [{ $ref: "#/components/schemas/BaseWidget" }, { required: ["id"] }],
+        },
+        { name: "Widget" },
+      );
+
+      addSchema(
+        spec,
+        "BaseWidget",
+        {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            color: { type: "string" },
+          },
+        },
+        { name: "BaseWidget" },
+      );
+
+      const { session, errors, warnings } = await createTestSessionFromModel<Model>({}, spec);
+      const prechecker = new QualityPreChecker(session);
+      prechecker.process();
+      expect(errors).toHaveLength(0);
+      // Filter to get the warning about the auto-correct
+      const autoCorrectWarnings = warnings.filter((w) => w.Key[1] === "SchemaMissingType");
+      expect(autoCorrectWarnings).toHaveLength(1);
+      expect(autoCorrectWarnings[0]).toEqual({
+        Channel: "warning",
+        Details: undefined,
+        Key: ["PreCheck", "SchemaMissingType"],
+        Text: "The schema 'Widget' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'",
+        Source: [{ Position: { path: ["components", "schemas", "Widget"] }, document: "openapi-3.json" }],
+      });
+    });
+
+    it("Does not auto-correct schema with no type and oneOf with elements that are not type: object", async () => {
+      addSchema(
+        spec,
+        "Prompt",
+        {
+          description: "Prompt",
+          oneOf: [{ type: "string" }, { type: "array", items: { type: "string" } }],
+        },
+        { name: "Prompt" },
+      );
+
+      const { session, errors, warnings } = await createTestSessionFromModel<Model>({}, spec);
+      const prechecker = new QualityPreChecker(session);
+      prechecker.process();
+      expect(errors).toHaveLength(0);
+      // Filter to get the warning about the auto-correct
+      const autoCorrectWarnings = warnings.filter((w) => w.Key[1] === "SchemaMissingType");
+      expect(autoCorrectWarnings).toHaveLength(0);
+    });
+  });
 });
