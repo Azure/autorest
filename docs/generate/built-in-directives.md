@@ -105,7 +105,7 @@ Examples:
 ```yaml
 directive:
   # Rename model named MyModel to NewModel
-  - rename-operation:
+  - rename-model:
       from: MyModel
       to: NewModel
 ```
