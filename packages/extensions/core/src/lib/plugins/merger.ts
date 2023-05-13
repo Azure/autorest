@@ -375,6 +375,14 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             value.mapping[key] = newRef;
           }
         }
+
+        // Update ref in x-ms-long-running-operation-options.final-state-schema
+        if (key === "x-ms-long-running-operation-options" && value["final-state-schema"]) {
+          const ref = value["final-state-schema"];
+          const newRef = this.refs[ref];
+          value["final-state-schema"] = newRef;
+        }
+
         // now, recurse into this object
         this.updateRefs(value);
       }

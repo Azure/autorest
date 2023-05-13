@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Azure Monitor",
+    "version": "2023-01-01"
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "paths": {
+    "/createNotifications": {
+      "post": {
+        "description": "Send test notifications to a set of provided receivers",
+        "operationId": "ActionGroups_CreateNotificationsAtActionGroupResourceLevel",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/components/schemas/TestNotificationDetailsResponse"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationRequestBody"
+              }
+            }
+          },
+          "description": "The notification request body which includes the contact details",
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "The notification request accepted"
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificationStatus/{notificationId}": {
+      "get": {
+        "description": "Get the test notifications by the notification id",
+        "operationId": "ActionGroups_GetTestNotificationsAtActionGroupResourceLevel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/NotificationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestNotificationDetailsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://management.azure.com"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "NotificationIdParameter": {
+        "name": "notificationId",
+        "in": "path",
+        "required": true,
+        "description": "The notification id",
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+              "user_impersonation": "impersonate your user account"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "TestNotificationDetailsResponse": {
+        "description": "The details of the test notification results.",
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "The overall state"
+          },
+          "completedTime": {
+            "type": "string",
+            "description": "The completed time"
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "The created time"
+          }
+        },
+        "required": ["state"]
+      },
+      "NotificationRequestBody": {
+        "description": "The request body which contain contact detail metadata",
+        "type": "object",
+        "properties": {
+          "alertType": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "The value of the supported alert type. Supported alert type values are: servicehealth, metricstaticthreshold, metricsdynamicthreshold, logalertv2, smartalert, webtestalert, logalertv1numresult, logalertv1metricmeasurement, resourcehealth, activitylog, actualcostbudget, forecastedbudget"
+          }
+        },
+        "required": ["alertType"]
+      },
+      "ErrorResponse": {
+        "description": "Describes the format of Error response.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
