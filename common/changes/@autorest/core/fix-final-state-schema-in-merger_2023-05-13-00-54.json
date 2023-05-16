@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Update final-state-schema references in merger",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}

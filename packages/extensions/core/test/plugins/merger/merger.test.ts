@@ -1,6 +1,6 @@
-import { MultiAPIMerger } from "../../../src/lib/plugins/merger";
 import fs from "fs";
 import { createDataHandle } from "@autorest/test-utils";
+import { MultiAPIMerger } from "../../../src/lib/plugins/merger";
 
 async function readData(file: string, name?: string) {
   const content = await fs.promises.readFile(`${__dirname}/inputs/${file}`);
@@ -25,6 +25,11 @@ describe("MultiAPIMerger", () => {
   it("convert oai3 discriminator mapping references", async () => {
     // Here we should expect the mapping references to have been updated to the new "schemas:{id}" name.
     await expectScenarioToMatchSnapshot("discriminator-mapping", ["discriminator-mapping/discriminator-mapping.json"]);
+  });
+
+  it("convert final-state-schema references", async () => {
+    // Here we should expect the final-state-schema references to have been updated to the new "schemas:{id}" name.
+    await expectScenarioToMatchSnapshot("final-state-schema", ["final-state-schema/actionGroups.json"]);
   });
 
   describe("resolve server relative urls", () => {

@@ -1,0 +1,293 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "x-ms-metadata": {
+      "merged": true,
+      "apiVersions": [
+        "2023-01-01"
+      ]
+    },
+    "title": "Azure Monitor",
+    "version": "2023-01-01"
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "path:0": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "2023-01-01"
+        ],
+        "filename": [
+          "mem://final-state-schema/actionGroups.json"
+        ],
+        "path": "/createNotifications",
+        "originalLocations": [
+          "mem://final-state-schema/actionGroups.json#/paths/~1createNotifications"
+        ]
+      }
+    },
+    "path:0.post": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "2023-01-01"
+        ],
+        "filename": [
+          "mem://final-state-schema/actionGroups.json"
+        ],
+        "path": "/createNotifications",
+        "originalLocations": [
+          "mem://final-state-schema/actionGroups.json#/paths/~1createNotifications"
+        ]
+      },
+      "post": {
+        "description": "Send test notifications to a set of provided receivers",
+        "operationId": "ActionGroups_CreateNotificationsAtActionGroupResourceLevel",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/components/schemas/schemas:0"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/schemas:1"
+              }
+            }
+          },
+          "description": "The notification request body which includes the contact details",
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "The notification request accepted"
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas:2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "path:1": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "2023-01-01"
+        ],
+        "filename": [
+          "mem://final-state-schema/actionGroups.json"
+        ],
+        "path": "/notificationStatus/{notificationId}",
+        "originalLocations": [
+          "mem://final-state-schema/actionGroups.json#/paths/~1notificationStatus~1{notificationId}"
+        ]
+      }
+    },
+    "path:1.get": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "2023-01-01"
+        ],
+        "filename": [
+          "mem://final-state-schema/actionGroups.json"
+        ],
+        "path": "/notificationStatus/{notificationId}",
+        "originalLocations": [
+          "mem://final-state-schema/actionGroups.json#/paths/~1notificationStatus~1{notificationId}"
+        ]
+      },
+      "get": {
+        "description": "Get the test notifications by the notification id",
+        "operationId": "ActionGroups_GetTestNotificationsAtActionGroupResourceLevel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/parameters:0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas:0"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred while sending the test notifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas:2"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://management.azure.com"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "parameters:0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "2023-01-01"
+          ],
+          "filename": [
+            "mem://final-state-schema/actionGroups.json"
+          ],
+          "name": "NotificationIdParameter",
+          "originalLocations": [
+            "mem://final-state-schema/actionGroups.json#/components/parameters/NotificationIdParameter"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "name": "notificationId",
+        "in": "path",
+        "required": true,
+        "description": "The notification id",
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "securitySchemes:0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "2023-01-01"
+          ],
+          "filename": [
+            "mem://final-state-schema/actionGroups.json"
+          ],
+          "name": "azure_auth",
+          "originalLocations": [
+            "mem://final-state-schema/actionGroups.json#/components/securitySchemes/azure_auth"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+              "user_impersonation": "impersonate your user account"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "schemas:0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "2023-01-01"
+          ],
+          "filename": [
+            "mem://final-state-schema/actionGroups.json"
+          ],
+          "name": "TestNotificationDetailsResponse",
+          "originalLocations": [
+            "mem://final-state-schema/actionGroups.json#/components/schemas/TestNotificationDetailsResponse"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "description": "The details of the test notification results.",
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "The overall state"
+          },
+          "completedTime": {
+            "type": "string",
+            "description": "The completed time"
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "The created time"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "schemas:1": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "2023-01-01"
+          ],
+          "filename": [
+            "mem://final-state-schema/actionGroups.json"
+          ],
+          "name": "NotificationRequestBody",
+          "originalLocations": [
+            "mem://final-state-schema/actionGroups.json#/components/schemas/NotificationRequestBody"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "description": "The request body which contain contact detail metadata",
+        "type": "object",
+        "properties": {
+          "alertType": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "The value of the supported alert type. Supported alert type values are: servicehealth, metricstaticthreshold, metricsdynamicthreshold, logalertv2, smartalert, webtestalert, logalertv1numresult, logalertv1metricmeasurement, resourcehealth, activitylog, actualcostbudget, forecastedbudget"
+          }
+        },
+        "required": [
+          "alertType"
+        ]
+      },
+      "schemas:2": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "2023-01-01"
+          ],
+          "filename": [
+            "mem://final-state-schema/actionGroups.json"
+          ],
+          "name": "ErrorResponse",
+          "originalLocations": [
+            "mem://final-state-schema/actionGroups.json#/components/schemas/ErrorResponse"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "description": "Describes the format of Error response.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
