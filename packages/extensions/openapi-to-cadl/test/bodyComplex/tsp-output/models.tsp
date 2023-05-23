@@ -88,13 +88,13 @@ model DateWrapper {
 }
 
 model DatetimeWrapper {
-  field?: zonedDateTime;
-  now?: zonedDateTime;
+  field?: offsetDateTime;
+  now?: offsetDateTime;
 }
 
 model Datetimerfc1123Wrapper {
-  field?: zonedDateTime;
-  now?: zonedDateTime;
+  field?: offsetDateTime;
+  now?: offsetDateTime;
 }
 
 model DurationWrapper {
@@ -196,7 +196,7 @@ model SmartSalmon extends Salmon {
 @discriminator("fishtype")
 model Shark extends Fish {
   age?: int32;
-  birthday: zonedDateTime;
+  birthday: offsetDateTime;
 }
 
 model Sawshark extends Shark {

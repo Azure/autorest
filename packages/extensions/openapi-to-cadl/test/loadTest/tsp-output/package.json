@@ -1,7 +1,7 @@
 {
-  "name": "@typespec-api-spec/microsoft-azure-compute-management",
+  "name": "@typespec-api-spec/load-testing-service",
   "author": "Microsoft Corporation",
-  "description": "Compute Client",
+  "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
   "license": "MIT",
   "dependencies": {
     "@typespec/compiler": "^0.44.0",

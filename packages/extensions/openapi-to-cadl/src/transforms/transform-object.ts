@@ -25,7 +25,7 @@ import { transformValue } from "../utils/values";
 
 const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
-  [SchemaType.DateTime, "zonedDateTime"],
+  [SchemaType.DateTime, "offsetDateTime"],
   [SchemaType.UnixTime, "plainTime"],
   [SchemaType.String, "string"],
   [SchemaType.Time, "plainTime"],

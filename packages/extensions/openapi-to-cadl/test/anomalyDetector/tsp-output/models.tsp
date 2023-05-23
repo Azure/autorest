@@ -137,7 +137,7 @@ and imputeMode is \"fixed\".
 @doc("The definition of input timeseries points.")
 model TimeSeriesPoint {
   @doc("Optional argument, timestamp of a data point (ISO8601 format).")
-  timestamp?: zonedDateTime;
+  timestamp?: offsetDateTime;
 
   @doc("The measurement of that point, should be float.")
   value: float32;
@@ -383,10 +383,10 @@ model VariableState {
   effectiveCount?: int32;
 
   @doc("First timestamp of the variable.")
-  firstTimestamp?: zonedDateTime;
+  firstTimestamp?: offsetDateTime;
 
   @doc("Last timestamp of the variable.")
-  lastTimestamp?: zonedDateTime;
+  lastTimestamp?: offsetDateTime;
 }
 
 @doc("Detection request.")
@@ -406,18 +406,18 @@ used in the training phase.
 A required field, indicating the start time of data for detection. Should be
 date-time.
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 A required field, indicating the end time of data for detection. Should be
 date-time.
 """)
-  endTime: zonedDateTime;
+  endTime: offsetDateTime;
 }
 
 model AnomalyState {
   @doc("timestamp")
-  timestamp: zonedDateTime;
+  timestamp: offsetDateTime;
   value?: AnomalyValue;
 
   @doc("Error message for the current timestamp")
@@ -467,10 +467,10 @@ will be used as its variable name.
 A required field, indicating the start time of training data. Should be
 date-time.
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("A required field, indicating the end time of training data. Should be date-time.")
-  endTime: zonedDateTime;
+  endTime: offsetDateTime;
 
   @doc("An optional field. The name of the model whose maximum length is 24.")
   displayName?: string;
@@ -553,10 +553,10 @@ model ModelSnapshot {
   modelId: string;
 
   @doc("Date and time (UTC) when the model was created.")
-  createdTime: zonedDateTime;
+  createdTime: offsetDateTime;
 
   @doc("Date and time (UTC) when the model was last updated.")
-  lastUpdatedTime: zonedDateTime;
+  lastUpdatedTime: offsetDateTime;
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
   status: ModelStatus;
@@ -575,10 +575,10 @@ model Model {
   modelId: string;
 
   @doc("Date and time (UTC) when the model was created.")
-  createdTime: zonedDateTime;
+  createdTime: offsetDateTime;
 
   @doc("Date and time (UTC) when the model was last updated.")
-  lastUpdatedTime: zonedDateTime;
+  lastUpdatedTime: offsetDateTime;
 
   @doc("""
 Training result of a model including its status, errors and diagnostics

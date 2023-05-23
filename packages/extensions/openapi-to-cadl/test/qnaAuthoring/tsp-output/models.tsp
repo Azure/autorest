@@ -114,13 +114,13 @@ for English as default.
   settings?: ProjectSettings;
 
   @doc("Project creation date-time.")
-  createdDateTime?: zonedDateTime;
+  createdDateTime?: offsetDateTime;
 
   @doc("Represents the project last modified date-time.")
-  lastModifiedDateTime?: zonedDateTime;
+  lastModifiedDateTime?: offsetDateTime;
 
   @doc("Represents the project last deployment date-time.")
-  lastDeployedDateTime?: zonedDateTime;
+  lastDeployedDateTime?: offsetDateTime;
 }
 
 @doc("Configurable settings of the Project.")
@@ -214,13 +214,13 @@ model JobState {
 
 @doc("Represents the job metadata.")
 model JobMetadata {
-  createdDateTime: zonedDateTime;
-  expirationDateTime?: zonedDateTime;
+  createdDateTime: offsetDateTime;
+  expirationDateTime?: offsetDateTime;
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
 
   @key
   jobId: string;
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: offsetDateTime;
 
   @doc("Job Status.")
   status: JobStatus;
@@ -374,7 +374,7 @@ Learning algorithm.
 @doc("Last updated date-time parameter.")
 model LastUpdatedDateTimeParameter {
   @doc("Date-time when the QnA was last updated.")
-  lastUpdatedDateTime?: zonedDateTime;
+  lastUpdatedDateTime?: offsetDateTime;
 }
 
 model SourceDisplayNameParameter {
@@ -391,7 +391,7 @@ model ProjectDeployment {
   deploymentName?: string;
 
   @doc("Represents the project last deployment date-time.")
-  lastDeployedDateTime?: zonedDateTime;
+  lastDeployedDateTime?: offsetDateTime;
 }
 
 @doc("All synonym assets for this project.")

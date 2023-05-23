@@ -761,10 +761,10 @@ model PoolUsageMetrics {
   poolId: string;
 
   @doc("The start time of the aggregation interval covered by this entry.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("The end time of the aggregation interval covered by this entry.")
-  endTime: zonedDateTime;
+  endTime: offsetDateTime;
 
   @doc("""
 For information about available sizes of virtual machines in Pools, see Choose
@@ -822,7 +822,7 @@ other features in the Azure Batch service.
 The time when the Azure Batch service will stop accepting create Pool requests
 for the Image.
 """)
-  batchSupportEndOfLife?: zonedDateTime;
+  batchSupportEndOfLife?: offsetDateTime;
 
   @doc("""
 Whether the Azure Batch service actively verifies that the Image is compatible
@@ -953,13 +953,13 @@ model PoolStatistics {
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("Statistics related to Pool usage information.")
   usageStats?: UsageStatistics;
@@ -971,13 +971,13 @@ to the range between startTime and lastUpdateTime.
 @doc("Statistics related to Pool usage information.")
 model UsageStatistics {
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("""
 The aggregated wall-clock time of the dedicated Compute Node cores being part
@@ -989,13 +989,13 @@ of the Pool.
 @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
 model ResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("""
 The average CPU usage across all Compute Nodes in the Pool (percentage per
@@ -1054,13 +1054,13 @@ model JobStatistics {
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -1143,7 +1143,7 @@ digits.
 
   @doc("The time at which the Certificate entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property is not set if the Certificate is in its initial active state.")
   @visibility("read")
@@ -1151,7 +1151,7 @@ digits.
 
   @doc("This property is not set if the Certificate is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: offsetDateTime;
 
   @doc("The public part of the Certificate as a base-64 encoded .cer file.")
   @visibility("read")
@@ -1249,10 +1249,10 @@ model NodeFile {
 @doc("The properties of a file on a Compute Node.")
 model FileProperties {
   @doc("The creation time is not returned for files on Linux Compute Nodes.")
-  creationTime?: zonedDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("The time at which the file was last modified.")
-  lastModified: zonedDateTime;
+  lastModified: offsetDateTime;
 
   @doc("The length of the file.")
   contentLength: int32;
@@ -1294,11 +1294,11 @@ specification or recurrence information, changed. It does not factor in
 job-level changes such as new Jobs being created or Jobs changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The creation time of the Job Schedule.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("The state of the Job Schedule.")
   @visibility("read")
@@ -1306,7 +1306,7 @@ job-level changes such as new Jobs being created or Jobs changing state.
 
   @doc("The time at which the Job Schedule entered the current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
@@ -1314,7 +1314,7 @@ job-level changes such as new Jobs being created or Jobs changing state.
 
   @doc("This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: offsetDateTime;
 
   @doc("""
 All times are fixed respective to UTC and are not impacted by daylight saving
@@ -1352,14 +1352,14 @@ model Schedule {
 If you do not specify a doNotRunUntil time, the schedule becomes ready to
 create Jobs immediately.
 """)
-  doNotRunUntil?: zonedDateTime;
+  doNotRunUntil?: offsetDateTime;
 
   @doc("""
 If you do not specify a doNotRunAfter time, and you are creating a recurring
 Job Schedule, the Job Schedule will remain active until you explicitly
 terminate it.
 """)
-  doNotRunAfter?: zonedDateTime;
+  doNotRunAfter?: offsetDateTime;
 
   @doc("""
 If a Job is not created within the startWindow interval, then the 'opportunity'
@@ -3101,7 +3101,7 @@ This property is meaningful only if the schedule is in the active state when
 the time comes around. For example, if the schedule is disabled, no Job will be
 created at nextRunTime unless the Job is enabled before then.
 """)
-  nextRunTime?: zonedDateTime;
+  nextRunTime?: offsetDateTime;
 
   @doc("""
 This property is present only if the at least one Job has run under the
@@ -3110,7 +3110,7 @@ schedule.
   recentJob?: RecentJob;
 
   @doc("This property is set only if the Job Schedule is in the completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 }
 
 @doc("Information about the most recent Job to run under the Job Schedule.")
@@ -3128,13 +3128,13 @@ model JobScheduleStatistics {
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -3275,11 +3275,11 @@ priority, changed. It does not factor in task-level changes such as adding new
 Tasks or Tasks changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The creation time of the Job.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("The state of the Job.")
   @visibility("read")
@@ -3287,7 +3287,7 @@ Tasks or Tasks changing state.
 
   @doc("The time at which the Job entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property is not set if the Job is in its initial Active state.")
   @visibility("read")
@@ -3295,7 +3295,7 @@ Tasks or Tasks changing state.
 
   @doc("This property is not set if the Job is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: offsetDateTime;
 
   @doc("""
 Priority values can range from -1000 to 1000, with -1000 being the lowest
@@ -3406,10 +3406,10 @@ of statistics. The typical delay is about 30 minutes.
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
 model JobExecutionInformation {
   @doc("This is the time at which the Job was created.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("This property is set only if the Job is in the completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("""
 This element contains the actual Pool where the Job is assigned. When you get
@@ -3587,10 +3587,10 @@ model JobPreparationTaskExecutionInformation {
 If the Task has been restarted or retried, this is the most recent time at
 which the Task started running.
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("The current state of the Job Preparation Task on the Compute Node.")
   state: JobPreparationTaskState;
@@ -3637,7 +3637,7 @@ the Task has been restarted for reasons other than retry; for example, if the
 Compute Node was rebooted during a retry, then the startTime is updated but the
 lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: offsetDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -3694,10 +3694,10 @@ model JobReleaseTaskExecutionInformation {
 If the Task has been restarted or retried, this is the most recent time at
 which the Task started running.
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("The current state of the Job Release Task on the Compute Node.")
   state: JobReleaseTaskState;
@@ -3825,11 +3825,11 @@ targetDedicatedNodes or enableAutoscale settings, changed. It does not factor
 in node-level changes such as a Compute Node changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The creation time of the Pool.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("The current state of the Pool.")
   @visibility("read")
@@ -3837,7 +3837,7 @@ in node-level changes such as a Compute Node changing state.
 
   @doc("The time at which the Pool entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("Whether the Pool is resizing.")
   @visibility("read")
@@ -3845,7 +3845,7 @@ in node-level changes such as a Compute Node changing state.
 
   @doc("The time at which the Pool entered its current allocation state.")
   @visibility("read")
-  allocationStateTransitionTime?: zonedDateTime;
+  allocationStateTransitionTime?: offsetDateTime;
 
   @doc("""
 For information about available sizes of virtual machines in Pools, see Choose
@@ -4035,7 +4035,7 @@ model AutoScaleRun {
   @doc("The time at which the autoscale formula was last evaluated.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
-  timestamp: zonedDateTime;
+  timestamp: offsetDateTime;
 
   @doc("""
 Each variable value is returned in the form $variable=value, and variables are
@@ -4258,11 +4258,11 @@ modified the Task in the meantime.
 
   @doc("The last modified time of the Task.")
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The creation time of the Task.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("How the Batch service should respond when the Task completes.")
   exitConditions?: ExitConditions;
@@ -4273,7 +4273,7 @@ modified the Task in the meantime.
 
   @doc("The time at which the Task entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property is not set if the Task is in its initial Active state.")
   @visibility("read")
@@ -4281,7 +4281,7 @@ modified the Task in the meantime.
 
   @doc("This property is not set if the Task is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: offsetDateTime;
 
   @doc("""
 For multi-instance Tasks, the command line is executed as the primary Task,
@@ -4501,10 +4501,10 @@ started downloading or deploying these. If the Task has been restarted or
 retried, this is the most recent time at which the Task started running. This
 property is present only for Tasks that are in the running or completed state.
 """)
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("""
 This property is set only if the Task is in the completed state. In general,
@@ -4540,7 +4540,7 @@ different if the Task has been restarted for reasons other than retry; for
 example, if the Compute Node was rebooted during a retry, then the startTime is
 updated but the lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: offsetDateTime;
 
   @doc("""
 When the user removes Compute Nodes from a Pool (by resizing/shrinking the
@@ -4551,7 +4551,7 @@ many times the Task has been requeued for these reasons.
   requeueCount: int32;
 
   @doc("This property is set only if the requeueCount is nonzero.")
-  lastRequeueTime?: zonedDateTime;
+  lastRequeueTime?: offsetDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -4621,13 +4621,13 @@ model TaskStatistics {
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -4750,7 +4750,7 @@ in the meantime.
   eTag?: string;
 
   @doc("The last modified time of the Task.")
-  lastModified?: zonedDateTime;
+  lastModified?: offsetDateTime;
 
   @doc("The URL of the Task, if the Task was successfully added.")
   location?: string;
@@ -4778,10 +4778,10 @@ The time at which the subtask started running. If the subtask has been
 restarted or retried, this is the most recent time at which the subtask started
 running.
 """)
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("This property is set only if the subtask is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("""
 This property is set only if the subtask is in the completed state. In general,
@@ -4807,13 +4807,13 @@ a failure.
   state?: SubtaskState;
 
   @doc("The time at which the subtask entered its current state.")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property is not set if the subtask is in its initial running state.")
   previousState?: SubtaskState;
 
   @doc("This property is not set if the subtask is in its initial running state.")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: offsetDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -4834,7 +4834,7 @@ model ComputeNodeUser {
 If omitted, the default is 1 day from the current time. For Linux Compute
 Nodes, the expiryTime has a precision up to a day.
 """)
-  expiryTime?: zonedDateTime;
+  expiryTime?: offsetDateTime;
 
   @doc("""
 The password is required for Windows Compute Nodes (those created with
@@ -4869,7 +4869,7 @@ existing password is removed.
 If omitted, the default is 1 day from the current time. For Linux Compute
 Nodes, the expiryTime has a precision up to a day.
 """)
-  expiryTime?: zonedDateTime;
+  expiryTime?: offsetDateTime;
 
   @doc("""
 The public key should be compatible with OpenSSH encoding and should be base 64
@@ -4904,17 +4904,17 @@ Compute Node becomes available.
   schedulingState?: SchedulingState;
 
   @doc("The time at which the Compute Node entered its current state.")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: offsetDateTime;
 
   @doc("This property may not be present if the Compute Node state is unusable.")
-  lastBootTime?: zonedDateTime;
+  lastBootTime?: offsetDateTime;
 
   @doc("""
 This is the time when the Compute Node was initially allocated and doesn't
 change once set. It is not updated when the Compute Node is service healed or
 preempted.
 """)
-  allocationTime?: zonedDateTime;
+  allocationTime?: offsetDateTime;
 
   @doc("""
 Every Compute Node that is added to a Pool is assigned a unique IP address.
@@ -5055,14 +5055,14 @@ model StartTaskInformation {
 This value is reset every time the Task is restarted or retried (that is, this
 is the most recent time at which the StartTask started running).
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 This is the end time of the most recent run of the StartTask, if that run has
 completed (even if that run failed and a retry is pending). This element is not
 present if the StartTask is currently running.
 """)
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("""
 This property is set only if the StartTask is in the completed state. In
@@ -5098,7 +5098,7 @@ different if the Task has been restarted for reasons other than retry; for
 example, if the Compute Node was rebooted during a retry, then the startTime is
 updated but the lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: offsetDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -5169,7 +5169,7 @@ https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.
 This is the most recent time that the Compute Node agent was updated to a new
 version.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: offsetDateTime;
 }
 
 @doc("Info about the current state of the virtual machine.")
@@ -5227,7 +5227,7 @@ means that the operation might retrieve more logs than have been requested
 since the entire log file is always uploaded, but the operation should not
 retrieve fewer logs than have been requested.
 """)
-  startTime: zonedDateTime;
+  startTime: offsetDateTime;
 
   @doc("""
 Any log file containing a log message in the time range will be uploaded. This
@@ -5236,7 +5236,7 @@ since the entire log file is always uploaded, but the operation should not
 retrieve fewer logs than have been requested. If omitted, the default is to
 upload all logs available after the startTime.
 """)
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("The identity must have write access to the Azure Blob Storage container.")
   identityReference?: ComputeNodeIdentityReference;

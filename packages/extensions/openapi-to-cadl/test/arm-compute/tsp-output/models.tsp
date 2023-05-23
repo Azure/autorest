@@ -906,7 +906,7 @@ Specifies the time at which the Virtual Machine Scale Set resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 @doc("Describes an upgrade policy - automatic, manual, or rolling.")
@@ -2935,7 +2935,7 @@ model InstanceViewStatus {
   message?: string;
 
   @doc("The time of the status.")
-  time?: zonedDateTime;
+  time?: offsetDateTime;
 }
 
 @doc("Summary for an orchestration service of a virtual machine scale set.")
@@ -3065,11 +3065,11 @@ model UpgradeOperationHistoryStatus {
 
   @doc("Start time of the upgrade.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("End time of the upgrade.")
   @visibility("read")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 }
 
 @doc("Information about the number of virtual machine instances in each upgrade state.")
@@ -3170,7 +3170,7 @@ model RollingUpgradeRunningStatus {
 
   @doc("Start time of the upgrade.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("The last action performed on the rolling upgrade.")
   @visibility("read")
@@ -3178,7 +3178,7 @@ model RollingUpgradeRunningStatus {
 
   @doc("Last action time of the upgrade.")
   @visibility("read")
-  lastActionTime?: zonedDateTime;
+  lastActionTime?: offsetDateTime;
 }
 
 @doc("Response after calling a manual recovery walk")
@@ -3598,16 +3598,16 @@ model MaintenanceRedeployStatus {
   isCustomerInitiatedMaintenanceAllowed?: boolean;
 
   @doc("Start Time for the Pre Maintenance Window.")
-  preMaintenanceWindowStartTime?: zonedDateTime;
+  preMaintenanceWindowStartTime?: offsetDateTime;
 
   @doc("End Time for the Pre Maintenance Window.")
-  preMaintenanceWindowEndTime?: zonedDateTime;
+  preMaintenanceWindowEndTime?: offsetDateTime;
 
   @doc("Start Time for the Maintenance Window.")
-  maintenanceWindowStartTime?: zonedDateTime;
+  maintenanceWindowStartTime?: offsetDateTime;
 
   @doc("End Time for the Maintenance Window.")
-  maintenanceWindowEndTime?: zonedDateTime;
+  maintenanceWindowEndTime?: offsetDateTime;
 
   @doc("The Last Maintenance Operation Result Code.")
   lastOperationResultCode?: MaintenanceOperationResultCodeTypes;
@@ -4567,7 +4567,7 @@ Specifies the time at which the Virtual Machine resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 @doc("The instance view of a virtual machine.")
@@ -4693,11 +4693,11 @@ and not yet installed.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  lastModifiedTime?: zonedDateTime;
+  lastModifiedTime?: offsetDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -4762,11 +4762,11 @@ the patch installation operation.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  lastModifiedTime?: zonedDateTime;
+  lastModifiedTime?: offsetDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -4875,7 +4875,7 @@ and not yet installed.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startDateTime?: zonedDateTime;
+  startDateTime?: offsetDateTime;
 
   @doc("The list of patches that have been detected as available for installation.")
   @visibility("read")
@@ -4924,11 +4924,11 @@ correlate across CRP and extension logs.
 
   @doc("The UTC timestamp when the repository published this patch.")
   @visibility("read")
-  publishedDate?: zonedDateTime;
+  publishedDate?: offsetDateTime;
 
   @doc("The UTC timestamp of the last update to this patch record.")
   @visibility("read")
-  lastModifiedDateTime?: zonedDateTime;
+  lastModifiedDateTime?: offsetDateTime;
 
   @doc("Describes the availability of a given patch.")
   @visibility("read")
@@ -4974,7 +4974,7 @@ when this is set to true.
 This is used to install patches that were published on or before this given max
 published date.
 """)
-  maxPatchPublishDate?: zonedDateTime;
+  maxPatchPublishDate?: offsetDateTime;
 }
 
 @doc("Input for InstallPatches on a Linux VM, as directly received by the API")
@@ -5062,7 +5062,7 @@ for details.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startDateTime?: zonedDateTime;
+  startDateTime?: offsetDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -5597,7 +5597,7 @@ Default: **None**
 
   @doc("The date when the host was first provisioned.")
   @visibility("read")
-  provisioningTime?: zonedDateTime;
+  provisioningTime?: offsetDateTime;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -5612,7 +5612,7 @@ Specifies the time at which the Dedicated Host resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 @doc("""
@@ -5898,7 +5898,7 @@ input. Please refer to https://aka.ms/RestorePoints for more details.
   consistencyMode?: ConsistencyModeTypes;
 
   @doc("Gets the creation time of the restore point.")
-  timeCreated?: zonedDateTime;
+  timeCreated?: offsetDateTime;
 
   @doc("Resource Id of the source restore point from which a copy needs to be created.")
   sourceRestorePoint?: ApiEntityReference;
@@ -6226,7 +6226,7 @@ capacity reservation.
 
   @doc("The date time when the capacity reservation was last updated.")
   @visibility("read")
-  provisioningTime?: zonedDateTime;
+  provisioningTime?: offsetDateTime;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -6241,7 +6241,7 @@ Specifies the time at which the Capacity Reservation resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  timeCreated?: offsetDateTime;
 }
 
 @doc("""
@@ -6285,10 +6285,10 @@ logs to.
   blobContainerSasUri: string;
 
   @doc("From time of the query")
-  fromTime: zonedDateTime;
+  fromTime: offsetDateTime;
 
   @doc("To time of the query")
-  toTime: zonedDateTime;
+  toTime: offsetDateTime;
 
   @doc("Group query result by Throttle Policy applied.")
   groupByThrottlePolicy?: boolean;
@@ -6481,10 +6481,10 @@ model VirtualMachineRunCommandInstanceView {
   error?: string;
 
   @doc("Script start time.")
-  startTime?: zonedDateTime;
+  startTime?: offsetDateTime;
 
   @doc("Script end time.")
-  endTime?: zonedDateTime;
+  endTime?: offsetDateTime;
 
   @doc("The resource status information.")
   statuses?: InstanceViewStatus[];

@@ -111,16 +111,16 @@ model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
 @resource("authoring/analyze-text/projects")
 model ProjectMetadata {
   @doc("Represents the project creation datetime.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: offsetDateTime;
 
   @doc("Represents the project last modification datetime.")
-  lastModifiedDateTime: zonedDateTime;
+  lastModifiedDateTime: offsetDateTime;
 
   @doc("Represents the project last training datetime.")
-  lastTrainedDateTime?: zonedDateTime;
+  lastTrainedDateTime?: offsetDateTime;
 
   @doc("Represents the project last deployment datetime.")
-  lastDeployedDateTime?: zonedDateTime;
+  lastDeployedDateTime?: offsetDateTime;
 
   @doc("The project kind.")
   projectKind: ProjectKind;
@@ -305,10 +305,10 @@ model ProjectDeployment {
   modelId: string;
 
   @doc("Represents deployment last trained time.")
-  lastTrainedDateTime: zonedDateTime;
+  lastTrainedDateTime: offsetDateTime;
 
   @doc("Represents deployment last deployed time.")
-  lastDeployedDateTime: zonedDateTime;
+  lastDeployedDateTime: offsetDateTime;
 
   @doc("Represents deployment expiration date in the runtime.")
   deploymentExpirationDate: plainDate;
@@ -345,13 +345,13 @@ model JobState {
   jobId: string;
 
   @doc("The creation date time of the job.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: offsetDateTime;
 
   @doc("The last date time the job was updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: offsetDateTime;
 
   @doc("The expiration date time of the job.")
-  expirationDateTime?: zonedDateTime;
+  expirationDateTime?: offsetDateTime;
 
   @doc("The job status.")
   status: JobStatus;
@@ -400,7 +400,7 @@ model ProjectTrainedModel {
   modelId: string;
 
   @doc("The last trained date time of the model.")
-  lastTrainedDateTime: zonedDateTime;
+  lastTrainedDateTime: offsetDateTime;
 
   @doc("The duration of the model's last training request in seconds.")
   lastTrainingDurationInSeconds: int32;
@@ -466,7 +466,7 @@ model TrainingJobResult {
   evaluationStatus?: SubTrainingJobState;
 
   @doc("Represents the estimate end date time for training and evaluation.")
-  estimatedEndDateTime?: zonedDateTime;
+  estimatedEndDateTime?: offsetDateTime;
 }
 
 @doc("Represents the detailed state of a training sub-operation.")
@@ -475,10 +475,10 @@ model SubTrainingJobState {
   percentComplete: int32;
 
   @doc("Represents the start date time.")
-  startDateTime?: zonedDateTime;
+  startDateTime?: offsetDateTime;
 
   @doc("Represents the end date time.")
-  endDateTime?: zonedDateTime;
+  endDateTime?: offsetDateTime;
 
   @doc("Represents the status of the sub-operation.")
   status: JobStatus;
