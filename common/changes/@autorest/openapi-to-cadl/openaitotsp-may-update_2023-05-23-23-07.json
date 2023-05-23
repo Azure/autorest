@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "comment": "Fix pagination issue and update to compiler 0.44.0",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-cadl"
+}
