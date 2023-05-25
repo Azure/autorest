@@ -504,7 +504,10 @@ export class ModelerFour {
         example: this.interpret.getExample(schema),
         externalDocs: this.interpret.getExternalDocs(schema),
         serialization: this.interpret.getSerialization(schema),
-        format: schema.format === StringFormat.DateTimeRfc1123 ? StringFormat.DateTimeRfc1123 : StringFormat.DateTime,
+        format:
+          schema.format === StringFormat.DateTimeRfc1123 || schema.format === StringFormat.DateTimeRfc7231
+            ? StringFormat.DateTimeRfc1123
+            : StringFormat.DateTime,
       }),
     );
   }

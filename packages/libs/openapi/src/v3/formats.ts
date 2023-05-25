@@ -30,6 +30,9 @@ export enum StringFormat {
   /** @description a A Date-Time as defined by date-time - RFC1123 */
   DateTimeRfc1123 = "date-time-rfc1123",
 
+  /** @description a A Date-Time as defined by date-time - RFC1123 */
+  DateTimeRfc7231 = "date-time-rfc7231",
+
   /** @description a duration of time (todo: RFC reference? ) */
   Duration = "duration",
 
