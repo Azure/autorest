@@ -25,7 +25,7 @@ import { transformValue } from "../utils/values";
 
 const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
-  [SchemaType.DateTime, "offsetDateTime"],
+  [SchemaType.DateTime, "utcDateTime"],
   [SchemaType.UnixTime, "plainTime"],
   [SchemaType.String, "string"],
   [SchemaType.Time, "plainTime"],
@@ -131,7 +131,17 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     isOptional: propertySchema.required !== true,
     type: getCadlType(propertySchema.schema, codeModel),
     decorators: getPropertyDecorators(propertySchema),
+    fixMe: getFixme(propertySchema, codeModel),
   };
+}
+
+function getFixme(property: Property, codeModel: CodeModel): string[] {
+  const cadlType = getCadlType(property.schema, codeModel);
+  if (cadlType === "utcDateTime") {
+    return ["// FIXME: (utcDateTime) Please double check that this is the correct type for your scenario."];
+  }
+
+  return [];
 }
 
 function getParents(schema: ObjectSchema): string[] {

@@ -180,7 +180,8 @@ SECRET_VALUE.
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -188,7 +189,8 @@ SECRET_VALUE.
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")
@@ -334,7 +336,8 @@ model FileInfo {
   fileType?: FileType;
 
   @doc("Expiry time of the file (ISO 8601 literal format)")
-  expireDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expireDateTime?: utcDateTime;
 
   @doc("Validation status of the file")
   validationStatus?: FileStatus;
@@ -386,7 +389,8 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -394,7 +398,8 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")
@@ -449,7 +454,8 @@ for metric id).
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -457,7 +463,8 @@ for metric id).
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")
@@ -558,15 +565,18 @@ SECRET_VALUE.
 
   @doc("The test run start DateTime(ISO 8601 literal format).")
   @visibility("read")
-  startDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startDateTime?: utcDateTime;
 
   @doc("The test run end DateTime(ISO 8601 literal format).")
   @visibility("read")
-  endDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endDateTime?: utcDateTime;
 
   @doc("Test run initiated time.")
   @visibility("read")
-  executedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  executedDateTime?: utcDateTime;
 
   @doc("Portal url.")
   @visibility("read")
@@ -582,7 +592,8 @@ SECRET_VALUE.
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -590,7 +601,8 @@ SECRET_VALUE.
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")
@@ -841,7 +853,8 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -849,7 +862,8 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")
@@ -871,7 +885,8 @@ for metric id).
 
   @doc("The creation datetime(ISO 8601 literal format).")
   @visibility("read")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
   @visibility("read")
@@ -879,7 +894,8 @@ for metric id).
 
   @doc("The last Modified datetime(ISO 8601 literal format).")
   @visibility("read")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
   @visibility("read")

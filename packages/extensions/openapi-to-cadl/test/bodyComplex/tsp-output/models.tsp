@@ -88,13 +88,17 @@ model DateWrapper {
 }
 
 model DatetimeWrapper {
-  field?: offsetDateTime;
-  now?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  field?: utcDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  now?: utcDateTime;
 }
 
 model Datetimerfc1123Wrapper {
-  field?: offsetDateTime;
-  now?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  field?: utcDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  now?: utcDateTime;
 }
 
 model DurationWrapper {
@@ -196,7 +200,8 @@ model SmartSalmon extends Salmon {
 @discriminator("fishtype")
 model Shark extends Fish {
   age?: int32;
-  birthday: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  birthday: utcDateTime;
 }
 
 model Sawshark extends Shark {

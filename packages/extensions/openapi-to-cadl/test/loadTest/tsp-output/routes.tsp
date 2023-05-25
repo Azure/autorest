@@ -92,14 +92,14 @@ Start DateTime(ISO 8601 literal format) of the last updated time range to
 filter tests.
 """)
       @query
-      lastModifiedStartTime: offsetDateTime;
+      lastModifiedStartTime: utcDateTime;
 
       @doc("""
 End DateTime(ISO 8601 literal format) of the last updated time range to filter
 tests.
 """)
       @query
-      lastModifiedEndTime: offsetDateTime;
+      lastModifiedEndTime: utcDateTime;
 
       @doc("Number of results in response.")
       @query
@@ -382,11 +382,11 @@ the search parameter can be 500.
 
       @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
       @query
-      executionFrom: offsetDateTime;
+      executionFrom: utcDateTime;
 
       @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
       @query
-      executionTo: offsetDateTime;
+      executionTo: utcDateTime;
 
       @doc("Comma separated list of test run status.")
       @query

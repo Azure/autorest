@@ -114,13 +114,16 @@ for English as default.
   settings?: ProjectSettings;
 
   @doc("Project creation date-time.")
-  createdDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime?: utcDateTime;
 
   @doc("Represents the project last modified date-time.")
-  lastModifiedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("Represents the project last deployment date-time.")
-  lastDeployedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastDeployedDateTime?: utcDateTime;
 }
 
 @doc("Configurable settings of the Project.")
@@ -214,13 +217,16 @@ model JobState {
 
 @doc("Represents the job metadata.")
 model JobMetadata {
-  createdDateTime: offsetDateTime;
-  expirationDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime: utcDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationDateTime?: utcDateTime;
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
 
   @key
   jobId: string;
-  lastUpdatedDateTime: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("Job Status.")
   status: JobStatus;
@@ -374,7 +380,8 @@ Learning algorithm.
 @doc("Last updated date-time parameter.")
 model LastUpdatedDateTimeParameter {
   @doc("Date-time when the QnA was last updated.")
-  lastUpdatedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdatedDateTime?: utcDateTime;
 }
 
 model SourceDisplayNameParameter {
@@ -391,7 +398,8 @@ model ProjectDeployment {
   deploymentName?: string;
 
   @doc("Represents the project last deployment date-time.")
-  lastDeployedDateTime?: offsetDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastDeployedDateTime?: utcDateTime;
 }
 
 @doc("All synonym assets for this project.")

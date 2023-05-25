@@ -34,7 +34,7 @@ export function generateObject(cadlObject: CadlObject) {
     propertyDoc && definitions.push(propertyDoc);
     const decorators = generateDecorators(property.decorators);
     decorators && definitions.push(decorators);
-
+    property.fixMe && property.fixMe.length && definitions.push(property.fixMe.join("\n"));
     definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type};`);
   }
   definitions.push("}");

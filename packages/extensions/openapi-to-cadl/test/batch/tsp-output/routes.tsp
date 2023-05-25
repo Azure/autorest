@@ -51,7 +51,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -92,7 +92,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -121,7 +121,7 @@ a half hours before the current time. If not specified this defaults to the
 start time of the last aggregation interval currently available.
 """)
         @query
-        starttime: offsetDateTime;
+        starttime: utcDateTime;
 
         @doc("""
 The latest time from which to include metrics. This must be at least two hours
@@ -129,7 +129,7 @@ before the current time. If not specified this defaults to the end time of the
 last aggregation interval currently available.
 """)
         @query
-        endtime: offsetDateTime;
+        endtime: utcDateTime;
 
         @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -169,7 +169,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -209,7 +209,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     PoolStatistics
   >;
@@ -248,7 +248,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Pool to be added.")
       @body
@@ -309,7 +309,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchPoolListResult
   >;
@@ -361,7 +361,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -385,7 +385,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -393,7 +393,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -431,7 +431,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -455,7 +455,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -463,7 +463,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -509,7 +509,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -533,7 +533,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -541,7 +541,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     BatchPool
   >;
@@ -584,7 +584,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -608,7 +608,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -616,7 +616,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -659,7 +659,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -705,7 +705,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -729,7 +729,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -737,7 +737,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -784,7 +784,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -835,7 +835,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -859,7 +859,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -867,7 +867,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -918,7 +918,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -942,7 +942,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -950,7 +950,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -993,7 +993,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1040,7 +1040,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1064,7 +1064,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1072,7 +1072,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1127,7 +1127,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -1176,7 +1176,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -1218,7 +1218,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     JobStatistics
   >;
@@ -1266,7 +1266,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1290,7 +1290,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1298,7 +1298,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -1345,7 +1345,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1369,7 +1369,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1377,7 +1377,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     BatchJob
   >;
@@ -1420,7 +1420,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1444,7 +1444,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1452,7 +1452,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1499,7 +1499,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1523,7 +1523,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1531,7 +1531,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1583,7 +1583,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1607,7 +1607,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1615,7 +1615,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1665,7 +1665,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1689,7 +1689,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1697,7 +1697,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -1743,7 +1743,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1767,7 +1767,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1775,7 +1775,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -1824,7 +1824,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Job to be added.")
       @body
@@ -1885,7 +1885,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchJobListResult
   >;
@@ -1946,7 +1946,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchJobListResult
   >;
@@ -2013,7 +2013,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchJobListPreparationAndReleaseTaskStatusResult
   >;
@@ -2057,7 +2057,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     TaskCountsResult
   >;
@@ -2094,7 +2094,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Certificate to be added.")
       @body
@@ -2151,7 +2151,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     CertificateListResult
   >;
@@ -2202,7 +2202,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -2255,7 +2255,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -2301,7 +2301,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     Certificate
   >;
@@ -2359,7 +2359,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -2405,7 +2405,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
@@ -2420,7 +2420,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2428,7 +2428,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("Accept header")
       @header
@@ -2478,7 +2478,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2486,7 +2486,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2494,7 +2494,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -2550,7 +2550,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -2596,7 +2596,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
@@ -2611,7 +2611,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2619,7 +2619,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("Accept header")
       @header
@@ -2669,7 +2669,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2677,7 +2677,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2685,7 +2685,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -2749,7 +2749,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     NodeFileListResult
   >;
@@ -2810,7 +2810,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     NodeFileListResult
   >;
@@ -2851,7 +2851,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2875,7 +2875,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2883,7 +2883,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -2928,7 +2928,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2952,7 +2952,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2960,7 +2960,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -3006,7 +3006,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3030,7 +3030,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3038,7 +3038,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     BatchJobSchedule
   >;
@@ -3083,7 +3083,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3107,7 +3107,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3115,7 +3115,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -3164,7 +3164,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3188,7 +3188,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3196,7 +3196,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -3239,7 +3239,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3263,7 +3263,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3271,7 +3271,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -3310,7 +3310,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3334,7 +3334,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3342,7 +3342,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -3381,7 +3381,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3405,7 +3405,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3413,7 +3413,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -3448,7 +3448,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Job Schedule to be added.")
       @body
@@ -3509,7 +3509,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchJobScheduleListResult
   >;
@@ -3554,7 +3554,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Task to be added.")
       @body
@@ -3623,7 +3623,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchTaskListResult
   >;
@@ -3677,7 +3677,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The Tasks to be added.")
       @body
@@ -3730,7 +3730,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3754,7 +3754,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3762,7 +3762,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -3817,7 +3817,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3841,7 +3841,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3849,7 +3849,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     BatchTask
   >;
@@ -3891,7 +3891,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3915,7 +3915,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3923,7 +3923,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -3977,7 +3977,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     BatchTaskListSubtasksResult
   >;
@@ -4024,7 +4024,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4048,7 +4048,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4056,7 +4056,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -4110,7 +4110,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4134,7 +4134,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: offsetDateTime;
+      `If-Modified-Since`: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4142,7 +4142,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: offsetDateTime;
+      `If-Unmodified-Since`: utcDateTime;
     },
     void
   >;
@@ -4190,7 +4190,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The user Account to be created.")
       @body
@@ -4244,7 +4244,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -4299,7 +4299,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -4350,7 +4350,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     ComputeNode
   >;
@@ -4393,7 +4393,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -4444,7 +4444,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -4494,7 +4494,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("The parameters for the request.")
       @body
@@ -4544,7 +4544,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     void
   >;
@@ -4593,7 +4593,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     ComputeNodeGetRemoteLoginSettingsResult
   >;
@@ -4644,7 +4644,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
 
       @doc("Accept header")
       @header
@@ -4691,7 +4691,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: offsetDateTime;
+        `ocp-date`: utcDateTime;
       };
     }
   >;
@@ -4748,7 +4748,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     ComputeNodeListResult
   >;
@@ -4804,7 +4804,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     NodeVMExtension
   >;
@@ -4858,7 +4858,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: offsetDateTime;
+      `ocp-date`: utcDateTime;
     },
     NodeVMExtensionList
   >;
