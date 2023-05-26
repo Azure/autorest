@@ -1,6 +1,14 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+
+## 4.26.2
+Fri, 26 May 2023 14:12:36 GMT
+
+### Patches
+
+- Map `rfc7231` to `rfc1123` for date-time formats
+- Bypass autocorrect to type: object in some cases
 
 ## 4.26.1
 Thu, 13 Apr 2023 04:20:09 GMT

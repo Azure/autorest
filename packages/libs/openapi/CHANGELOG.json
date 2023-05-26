@@ -2,6 +2,18 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.5.0",
+      "tag": "@azure-tools/openapi_v3.5.0",
+      "date": "Fri, 26 May 2023 14:12:36 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add `rfc7231` format"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.1",
       "tag": "@azure-tools/openapi_v3.4.1",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

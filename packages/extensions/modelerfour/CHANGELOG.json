@@ -2,6 +2,29 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.26.2",
+      "tag": "@autorest/modelerfour_v4.26.2",
+      "date": "Fri, 26 May 2023 14:12:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Map `rfc7231` to `rfc1123` for date-time formats"
+          },
+          {
+            "comment": "Bypass autocorrect to type: object in some cases"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.5.1` to `~3.5.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.4.1` to `~3.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.26.1",
       "tag": "@autorest/modelerfour_v4.26.1",
       "date": "Thu, 13 Apr 2023 04:20:09 GMT",

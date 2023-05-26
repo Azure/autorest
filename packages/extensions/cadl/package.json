@@ -62,6 +62,6 @@
   },
   "dependencies": {
     "@cadl-lang/compiler": "^0.37.0",
-    "@autorest/extension-base": "~3.5.1"
+    "@autorest/extension-base": "~3.5.2"
   }
 }

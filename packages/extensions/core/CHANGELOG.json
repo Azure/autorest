@@ -2,6 +2,26 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.9.6",
+      "tag": "@autorest/core_v3.9.6",
+      "date": "Fri, 26 May 2023 14:12:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update final-state-schema references in merger"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.7.0` to `~4.7.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.4.1` to `~3.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.9.5",
       "tag": "@autorest/core_v3.9.5",
       "date": "Thu, 13 Apr 2023 04:20:09 GMT",

@@ -2,6 +2,18 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.7.1",
+      "tag": "@azure-tools/oai2-to-oai3_v4.7.1",
+      "date": "Fri, 26 May 2023 14:12:36 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.4.1` to `~3.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.7.0",
       "tag": "@azure-tools/oai2-to-oai3_v4.7.0",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

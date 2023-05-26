@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+
+## 3.5.0
+Fri, 26 May 2023 14:12:36 GMT
+
+### Minor changes
+
+- Add `rfc7231` format
 
 ## 3.4.1
 Wed, 07 Dec 2022 22:24:34 GMT
