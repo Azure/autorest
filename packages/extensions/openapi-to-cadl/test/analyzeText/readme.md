@@ -6,6 +6,7 @@ clear-output-folder: false
 guessResourceKey: true
 isAzureSpec: true
 namespace: "Azure.Language.Authoring"
+include-package: true
 modelerfour:
   lenient-model-deduplication: true
   prenamer: true

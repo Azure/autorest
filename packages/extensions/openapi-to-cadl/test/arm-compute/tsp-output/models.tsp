@@ -906,7 +906,8 @@ Specifies the time at which the Virtual Machine Scale Set resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeCreated?: utcDateTime;
 }
 
 @doc("Describes an upgrade policy - automatic, manual, or rolling.")
@@ -2935,7 +2936,8 @@ model InstanceViewStatus {
   message?: string;
 
   @doc("The time of the status.")
-  time?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  time?: utcDateTime;
 }
 
 @doc("Summary for an orchestration service of a virtual machine scale set.")
@@ -3065,11 +3067,13 @@ model UpgradeOperationHistoryStatus {
 
   @doc("Start time of the upgrade.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   @doc("End time of the upgrade.")
   @visibility("read")
-  endTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
 }
 
 @doc("Information about the number of virtual machine instances in each upgrade state.")
@@ -3170,7 +3174,8 @@ model RollingUpgradeRunningStatus {
 
   @doc("Start time of the upgrade.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   @doc("The last action performed on the rolling upgrade.")
   @visibility("read")
@@ -3178,7 +3183,8 @@ model RollingUpgradeRunningStatus {
 
   @doc("Last action time of the upgrade.")
   @visibility("read")
-  lastActionTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastActionTime?: utcDateTime;
 }
 
 @doc("Response after calling a manual recovery walk")
@@ -3598,16 +3604,20 @@ model MaintenanceRedeployStatus {
   isCustomerInitiatedMaintenanceAllowed?: boolean;
 
   @doc("Start Time for the Pre Maintenance Window.")
-  preMaintenanceWindowStartTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  preMaintenanceWindowStartTime?: utcDateTime;
 
   @doc("End Time for the Pre Maintenance Window.")
-  preMaintenanceWindowEndTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  preMaintenanceWindowEndTime?: utcDateTime;
 
   @doc("Start Time for the Maintenance Window.")
-  maintenanceWindowStartTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  maintenanceWindowStartTime?: utcDateTime;
 
   @doc("End Time for the Maintenance Window.")
-  maintenanceWindowEndTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  maintenanceWindowEndTime?: utcDateTime;
 
   @doc("The Last Maintenance Operation Result Code.")
   lastOperationResultCode?: MaintenanceOperationResultCodeTypes;
@@ -4567,7 +4577,8 @@ Specifies the time at which the Virtual Machine resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeCreated?: utcDateTime;
 }
 
 @doc("The instance view of a virtual machine.")
@@ -4693,11 +4704,13 @@ and not yet installed.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  lastModifiedTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedTime?: utcDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -4762,11 +4775,13 @@ the patch installation operation.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  lastModifiedTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedTime?: utcDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -4875,7 +4890,8 @@ and not yet installed.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startDateTime?: utcDateTime;
 
   @doc("The list of patches that have been detected as available for installation.")
   @visibility("read")
@@ -4924,11 +4940,13 @@ correlate across CRP and extension logs.
 
   @doc("The UTC timestamp when the repository published this patch.")
   @visibility("read")
-  publishedDate?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  publishedDate?: utcDateTime;
 
   @doc("The UTC timestamp of the last update to this patch record.")
   @visibility("read")
-  lastModifiedDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime?: utcDateTime;
 
   @doc("Describes the availability of a given patch.")
   @visibility("read")
@@ -4974,7 +4992,8 @@ when this is set to true.
 This is used to install patches that were published on or before this given max
 published date.
 """)
-  maxPatchPublishDate?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  maxPatchPublishDate?: utcDateTime;
 }
 
 @doc("Input for InstallPatches on a Linux VM, as directly received by the API")
@@ -5062,7 +5081,8 @@ for details.
 
   @doc("The UTC timestamp when the operation began.")
   @visibility("read")
-  startDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startDateTime?: utcDateTime;
 
   @doc("""
 The errors that were encountered during execution of the operation. The details
@@ -5597,7 +5617,8 @@ Default: **None**
 
   @doc("The date when the host was first provisioned.")
   @visibility("read")
-  provisioningTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  provisioningTime?: utcDateTime;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -5612,7 +5633,8 @@ Specifies the time at which the Dedicated Host resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeCreated?: utcDateTime;
 }
 
 @doc("""
@@ -5898,7 +5920,8 @@ input. Please refer to https://aka.ms/RestorePoints for more details.
   consistencyMode?: ConsistencyModeTypes;
 
   @doc("Gets the creation time of the restore point.")
-  timeCreated?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeCreated?: utcDateTime;
 
   @doc("Resource Id of the source restore point from which a copy needs to be created.")
   sourceRestorePoint?: ApiEntityReference;
@@ -6226,7 +6249,8 @@ capacity reservation.
 
   @doc("The date time when the capacity reservation was last updated.")
   @visibility("read")
-  provisioningTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  provisioningTime?: utcDateTime;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -6241,7 +6265,8 @@ Specifies the time at which the Capacity Reservation resource was
 created.<br><br>Minimum api-version: 2021-11-01.
 """)
   @visibility("read")
-  timeCreated?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeCreated?: utcDateTime;
 }
 
 @doc("""
@@ -6285,10 +6310,12 @@ logs to.
   blobContainerSasUri: string;
 
   @doc("From time of the query")
-  fromTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  fromTime: utcDateTime;
 
   @doc("To time of the query")
-  toTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  toTime: utcDateTime;
 
   @doc("Group query result by Throttle Policy applied.")
   groupByThrottlePolicy?: boolean;
@@ -6481,10 +6508,12 @@ model VirtualMachineRunCommandInstanceView {
   error?: string;
 
   @doc("Script start time.")
-  startTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
 
   @doc("Script end time.")
-  endTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
 
   @doc("The resource status information.")
   statuses?: InstanceViewStatus[];

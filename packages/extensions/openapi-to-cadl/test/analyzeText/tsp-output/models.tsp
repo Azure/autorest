@@ -111,16 +111,20 @@ model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
 @resource("authoring/analyze-text/projects")
 model ProjectMetadata {
   @doc("Represents the project creation datetime.")
-  createdDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime: utcDateTime;
 
   @doc("Represents the project last modification datetime.")
-  lastModifiedDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedDateTime: utcDateTime;
 
   @doc("Represents the project last training datetime.")
-  lastTrainedDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastTrainedDateTime?: utcDateTime;
 
   @doc("Represents the project last deployment datetime.")
-  lastDeployedDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastDeployedDateTime?: utcDateTime;
 
   @doc("The project kind.")
   projectKind: ProjectKind;
@@ -305,10 +309,12 @@ model ProjectDeployment {
   modelId: string;
 
   @doc("Represents deployment last trained time.")
-  lastTrainedDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastTrainedDateTime: utcDateTime;
 
   @doc("Represents deployment last deployed time.")
-  lastDeployedDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastDeployedDateTime: utcDateTime;
 
   @doc("Represents deployment expiration date in the runtime.")
   deploymentExpirationDate: plainDate;
@@ -345,13 +351,16 @@ model JobState {
   jobId: string;
 
   @doc("The creation date time of the job.")
-  createdDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateTime: utcDateTime;
 
   @doc("The last date time the job was updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("The expiration date time of the job.")
-  expirationDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationDateTime?: utcDateTime;
 
   @doc("The job status.")
   status: JobStatus;
@@ -400,7 +409,8 @@ model ProjectTrainedModel {
   modelId: string;
 
   @doc("The last trained date time of the model.")
-  lastTrainedDateTime: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastTrainedDateTime: utcDateTime;
 
   @doc("The duration of the model's last training request in seconds.")
   lastTrainingDurationInSeconds: int32;
@@ -466,7 +476,8 @@ model TrainingJobResult {
   evaluationStatus?: SubTrainingJobState;
 
   @doc("Represents the estimate end date time for training and evaluation.")
-  estimatedEndDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  estimatedEndDateTime?: utcDateTime;
 }
 
 @doc("Represents the detailed state of a training sub-operation.")
@@ -475,10 +486,12 @@ model SubTrainingJobState {
   percentComplete: int32;
 
   @doc("Represents the start date time.")
-  startDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startDateTime?: utcDateTime;
 
   @doc("Represents the end date time.")
-  endDateTime?: zonedDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endDateTime?: utcDateTime;
 
   @doc("Represents the status of the sub-operation.")
   status: JobStatus;

@@ -270,12 +270,10 @@ function getPageableResource(codeModel: CodeModel, operation: Operation): CadlRe
         const dataTypes = getDataTypes(codeModel);
 
         const elementType = property.schema.elementType;
-        if (!isObjectSchema(elementType)) {
-          continue;
-        }
-
-        if (!markResource(operation, elementType)) {
-          return undefined;
+        if (isObjectSchema(elementType)) {
+          if (!markResource(operation, elementType)) {
+            return undefined;
+          }
         }
 
         const cadlResponse = dataTypes.get(elementType) ?? transformDataType(elementType, codeModel);

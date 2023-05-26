@@ -301,7 +301,7 @@ representation of date-time
     {
       @doc("null as date-time")
       @path
-      dateTimePath: zonedDateTime;
+      dateTimePath: utcDateTime;
     },
     void
   >;
@@ -681,7 +681,7 @@ interface queriesOperations {
     {
       @doc("null as date-time (no query parameters)")
       @query
-      dateTimeQuery: zonedDateTime;
+      dateTimeQuery: utcDateTime;
     },
     void
   >;
