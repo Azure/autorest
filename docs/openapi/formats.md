@@ -19,6 +19,7 @@ Those formats can be used to specify a more accurate type of data that is sent a
 - `time`: A time as defined by ISO 8661
 - `date-time`: A Date-Time as defined by date-time - RFC3339
 - `date-time-rfc1123`: A Date-Time as defined by date-time - RFC1123
+- `date-time-rfc7231`: A Date-Time as defined by date-time - RFC7231
 - `duration`: A duration of time
 - `password`: A hint to UIs to obscure input.
 - `uuid`: Universally Unique Identifier

@@ -123,6 +123,7 @@ export class Interpretations {
             return value;
 
           case StringFormat.DateTimeRfc1123:
+          case StringFormat.DateTimeRfc7231:
             // return this.parseDateTimeRfc1123Value(value);
             return value;
 
