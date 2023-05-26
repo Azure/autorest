@@ -3,10 +3,17 @@ import { CadlProgram } from "../interfaces";
 import { formatFile } from "../utils/format";
 
 export async function emitPackage(filePath: string, program: CadlProgram): Promise<void> {
+  const session = getSession();
+  // Default to false;
+  const includePackage = session.configuration["include-package"] === true;
+
+  if (!includePackage) {
+    return;
+  }
+
   const name = program.serviceInformation.name.toLowerCase().replace(/ /g, "-");
   const description = program.serviceInformation.doc;
   const content = JSON.stringify(getPackage(name, description as string));
-  const session = getSession();
   session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
 }
 

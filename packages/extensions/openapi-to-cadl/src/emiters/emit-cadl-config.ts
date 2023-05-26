@@ -4,7 +4,7 @@ import { formatFile } from "../utils/format";
 export async function emitCadlConfig(filePath: string): Promise<void> {
   const content = `
   emit:
-    - "@azure-tools/typespec-autorest": true
+    - "@azure-tools/typespec-autorest":
     # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
     # "@azure-tools/typespec-python":
     #   "basic-setup-py": true
