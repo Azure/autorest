@@ -1,6 +1,13 @@
 # Change Log - @autorest/extension-base
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+
+## 3.5.2
+Fri, 26 May 2023 14:12:36 GMT
+
+### Patches
+
+- Bypass autocorrect to type: object in some cases
 
 ## 3.5.1
 Wed, 07 Dec 2022 22:24:34 GMT

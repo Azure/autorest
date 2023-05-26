@@ -1,6 +1,11 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+
+## 4.7.1
+Fri, 26 May 2023 14:12:36 GMT
+
+_Version update only_
 
 ## 4.7.0
 Wed, 07 Dec 2022 22:24:34 GMT

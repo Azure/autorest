@@ -2,6 +2,18 @@
   "name": "@autorest/extension-base",
   "entries": [
     {
+      "version": "3.5.2",
+      "tag": "@autorest/extension-base_v3.5.2",
+      "date": "Fri, 26 May 2023 14:12:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bypass autocorrect to type: object in some cases"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.5.1",
       "tag": "@autorest/extension-base_v3.5.1",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

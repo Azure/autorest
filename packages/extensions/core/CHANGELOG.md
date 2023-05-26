@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+
+## 3.9.6
+Fri, 26 May 2023 14:12:36 GMT
+
+### Patches
+
+- Update final-state-schema references in merger
 
 ## 3.9.5
 Thu, 13 Apr 2023 04:20:09 GMT

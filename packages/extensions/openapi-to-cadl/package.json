@@ -39,7 +39,7 @@
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
     "@azure-tools/codegen": "~2.9.2",
-    "@autorest/extension-base": "~3.5.1",
+    "@autorest/extension-base": "~3.5.2",
     "@autorest/codemodel": "~4.19.3",
     "@typespec/compiler": "^0.41.0",
     "@typespec/rest": "^0.41.0",
