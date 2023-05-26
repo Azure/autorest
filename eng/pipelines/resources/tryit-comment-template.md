@@ -8,10 +8,12 @@ Add the following CLI flags
 | @autorest/core        | `--version:{{AUTOREST_CORE_DOWNLOAD_URL}}`    | For changes to autorest core. |
 | @autorest/modelerfour | `--use:{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}` | For changes to modelerfour.   |
 
+<!-- CONFIG_EXTENSIONS -->
+
 Or with all
 
 ```bash
-autorest --version:{{AUTOREST_CORE_DOWNLOAD_URL}} --use:{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}
+autorest --version:{{AUTOREST_CORE_DOWNLOAD_URL}} --use:{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}} <!-- CLI_FLAGS -->
 ```
 
 <hr>
@@ -24,6 +26,7 @@ version: "{{AUTOREST_CORE_DOWNLOAD_URL}}"
 # For changes to modelerfour
 use-extension:
   "@autorest/modelerfour": "{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}"
+  {{AUTOREST_OPENAPI_TYPESPEC_EXTENSION}}
 ```
 
 <hr>

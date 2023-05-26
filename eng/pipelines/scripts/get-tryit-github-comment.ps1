@@ -28,14 +28,36 @@ function Get-PackageVersion([string] $packageRoot) {
     return $version;
 }
 
-function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownloadUrl) {
+function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownloadUrl, [hashtable] $extensions = @{}) {
     $template = get-content -raw -encoding utf8 "$root/eng/pipelines/resources/tryit-comment-template.md";
     $AUTOREST_CORE_DOWNLOAD_URL = $coreDownloadUrl
     $AUTOREST_MODELERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
 
-    return $template `
-        -replace "{{AUTOREST_CORE_DOWNLOAD_URL}}", $coreDownloadUrl `
-        -replace "{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}", $modelerfourDownloadUrl
+    # Figure out if there are any other extensions to include in the comment
+    $extensionTableRow, $cliFlags = ProcessExtensionsForComment $extensions
+
+    # Replace placeholders in the template
+    $template = $template -replace "{{AUTOREST_CORE_DOWNLOAD_URL}}", $coreDownloadUrl
+    $template = $template -replace "{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}", $modelerfourDownloadUrl
+    $template = $template -replace "\n<!-- CONFIG_EXTENSIONS -->", $extensionTableRow
+    $template = $template -replace "<!-- CLI_FLAGS -->", $cliFlags
+
+    return $template
+}
+
+function ProcessExtensionsForComment([hashtable] $extensions) {
+    $extensionTableRow = ""
+    $cliFlags= ""
+
+    foreach ($extension in $extensions.GetEnumerator()) {
+        $extensionName = $extension.Key
+        $extensionDownloadUrl = $extension.Value
+
+        $extensionTableRow += "| $extensionName | `--use:$extensionName@$extensionDownloadUrl` | For changes to $extensionName. |`n"
+        $cliFlags += "  --use:$extensionName@$extensionDownloadUrl `n"
+    }
+
+    return $cliFlags, $extensionTableRow
 }
 
 function Run() {
@@ -44,11 +66,23 @@ function Run() {
 
     $coreVersion = Get-PackageVersion -packageRoot $root/packages/extensions/core
     $m4Version = Get-PackageVersion -packageRoot $root/packages/extensions/modelerfour
+    $openApiToTypespecVersion = Get-PackageVersion -packageRoot $root/packages/extensions/openapi-to-cadl
 
     $coreDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$coreVersion.tgz";
     $modelerfourDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$m4Version.tgz";
+    $openApiToTypespecDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "openapi-to-cadl-$coreVersion.tgz";
 
-    $comment = Format-Comment -coreDownloadUrl $coreDownloadUrl -modelerfourDownloadUrl $modelerfourDownloadUrl
+    $extensions = @{
+        # Add more extensions as needed
+        #"@autorest/extension-name" = "extension-name"
+    }
+
+    if (![string]::IsNullOrEmpty($openApiToTypespecDownloadUrl)) {
+        $extensions["@autorest/openapi-to-cadl"] = $openApiToTypespecDownloadUrl
+    }
+
+
+    $comment = Format-Comment -coreDownloadUrl $coreDownloadUrl -modelerfourDownloadUrl $modelerfourDownloadUrl -extensions $extensions
 
     Write-Host "Github comment content:"
     Write-Host "-----------------------"
