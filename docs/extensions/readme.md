@@ -26,6 +26,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 - [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
 - [x-nullable](#x-nullable) - when `true`, specifies that `null` is a valid value for the associated schema
 - [x-ms-header-collection-prefix](#x-ms-header-collection-prefix) - Handle collections of arbitrary headers by distinguishing them with a specified prefix.
+- [x-ms-internal](#x-ms-internal) - allow specifc operations not be exposed to users in generated clients
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 
@@ -1476,6 +1477,27 @@ headers:
 ```
 
 What is returned to users is just `key: value`.
+
+## x-ms-internal
+
+When an operation contains this extensions, the operation will be generated but not be exposed to user in generated clients.
+
+**Schema**:
+`true|false`
+
+**Example**:
+
+```json5
+"paths": {
+  "/test": {
+    "put": {
+      "operationId": "test_put",
+      "x-ms-internal": true,
+      "description": "This operation will not be exposed to user in clients"
+    }
+  }
+}
+```
 
 # Metadata Extensions
 
