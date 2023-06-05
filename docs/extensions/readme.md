@@ -1480,7 +1480,7 @@ What is returned to users is just `key: value`.
 
 ## x-ms-internal
 
-When an operation contains this extension, it will be generated but not be exposed to user in generated client.
+When an operation contains this extension, it will be generated but not be exposed to user in generated client. This extension is always used in situation when an operation needs to be wrapped by manual customization code.
 
 **Schema**:
 `true|false`
