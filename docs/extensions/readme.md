@@ -1086,10 +1086,11 @@ When `x-ms-long-running-operation-options` is specified, there should also be a 
 **You probably don't need to use this option if you follow ARM guidelines**. This option is designed for cases where the server do NOT follow ARM, and we need to guide the runtime through a peculiar flow.
 
 **Schema**:
-Field Name | Type | Description
----|:---:|---
-final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | see below
-final-state-schema | A `ref` to the schema of the final result | For languages that make this the result of the LRO
+
+| Field Name | Type | Description |
+|---|---|---|
+| final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | see below |
+| final-state-schema | A `ref` to the schema of the final result | For languages that make this the result of the LRO |
 
 `final-state-via` SHOULD BE one of
 
