@@ -1222,6 +1222,7 @@ When set, specifies the set of resource types which can be referenced by this `a
 #### Allowed Scopes
 
 The following values are allowed for `scopes`. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
+
 | Scope | URL prefix | Meaning |
 | ----------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Tenant` | `/` | The resource is deployed into a tenant |
@@ -1229,7 +1230,7 @@ The following values are allowed for `scopes`. These values were derived from th
 | `ResourceGroup` | `/subscriptions/{subscriptionId}/resourceGroups/{group}` | The resource is deployed into a resource group |
 | `ManagementGroup` | `/providers/Microsoft.Management/managementGroups/{managementGroupName}/` | The resource is deployed into a management group |
 | `Extension` | `{parentScope}/providers/{extensionNamespace}/{extensionType}/{extensionName}/` | The resource is an extension resource and may be deployed as a subresource of another resource. `parentScope` may be a resource in any of the above scopes. |
-| `*` | Any of the above | The resource may be deployed into any of the above scopes. This is identical to `["Tenant", "Subscription", "ResourceGroup", "ManagementGroup", "Extension"`] |
+| `*` | Any of the above | The resource may be deployed into any of the above scopes. This is identical to `["Tenant", "Subscription", "ResourceGroup", "ManagementGroup", "Extension"]` |
 
 #### Example Types
 
