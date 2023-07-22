@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix for final-state-schema with external ref",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
