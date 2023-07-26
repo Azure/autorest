@@ -10,7 +10,7 @@ import oai3 from "@azure-tools/openapi";
 import { AutoRest } from "../src/exports";
 import { AppRoot } from "../src/lib/constants";
 
-const generate = async (additionalConfig: any): Promise<oai3.Model> => {
+const generate = async (additionalConfig: any): Promise<oai3.OpenAPI3Document> => {
   const logger = new AutorestTestLogger();
   const autoRest = new AutoRest(logger, new RealFileSystem());
   autoRest.AddConfiguration({
@@ -22,7 +22,7 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   });
   autoRest.AddConfiguration(additionalConfig);
 
-  let resolvedDocument: oai3.Model | undefined;
+  let resolvedDocument: oai3.OpenAPI3Document | undefined;
 
   autoRest.GeneratedFile.Subscribe((sender, args) => {
     if (args.type === "openapi-document") {
@@ -42,13 +42,7 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   return resolvedDocument;
 };
 
-const findModel = (spec: oai3.Model, name: string): oai3.Schema | undefined => {
-  return Object.values(spec.components?.schemas ?? [])
-    .filter((x) => !("$ref" in x))
-    .find((schema: oai3.Schema) => schema["x-ms-metadata"].name === name);
-};
-
-const findOperation = (spec: oai3.Model, name: string): oai3.HttpOperation | undefined => {
+const findOperation = (spec: oai3.OpenAPI3Document, name: string): oai3.HttpOperation | undefined => {
   for (const pathItem of Object.values(spec.paths)) {
     for (const operation of Object.values(pathItem)) {
       if (operation.operationId === name) {
@@ -56,21 +50,7 @@ const findOperation = (spec: oai3.Model, name: string): oai3.HttpOperation | und
       }
     }
   }
-
-  for (const pathItem of Object.values(spec["x-ms-paths"] ?? [])) {
-    for (const operation of Object.values(pathItem as object)) {
-      if (operation.operationId === name) {
-        return operation;
-      }
-    }
-  }
   return undefined;
-};
-
-const findParameter = (spec: oai3.Model, name: string): oai3.Parameter | undefined => {
-  return Object.values((spec.components?.parameters as Record<string, oai3.Parameter>) ?? [])
-    .filter((x) => !("$ref" in x))
-    .find((parameter: oai3.Parameter) => parameter.name === name);
 };
 
 describe("final-state-schema", () => {
