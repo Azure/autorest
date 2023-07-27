@@ -114,6 +114,9 @@ async function crawlRefs(
         for (const [key, mappedRef] of Object.entries(value.mapping)) {
           value.mapping[key] = resolveNewRef(mappedRef);
         }
+      } else if (key === "x-ms-long-running-operation-options" && isLroOptionsWithFinalStateSchema(value)) {
+        // Update ref in x-ms-long-running-operation-options.final-state-schema
+        value["final-state-schema"] = resolveNewRef(value["final-state-schema"]);
       } else if (key === "$ref" && typeof value === "string") {
         obj[key] = resolveNewRef(value);
       } else if (Array.isArray(value)) {
@@ -142,6 +145,10 @@ function isDiscriminatorWithMapping(value: unknown): value is Discriminator & { 
     typeof value.mapping === "object" &&
     value.mapping !== null
   );
+}
+
+function isLroOptionsWithFinalStateSchema(value: unknown): value is { "final-state-schema": string } {
+  return (typeof value === "object" && value != null && "final-state-schema" in value) as boolean;
 }
 
 function checkReferenceIsValid(workspace: OpenAPIWorkspace<any>, file: string, path: string | undefined): boolean {
