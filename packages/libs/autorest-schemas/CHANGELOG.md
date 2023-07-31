@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Mon, 31 Jul 2023 14:56:21 GMT and should not be manually modified.
+
+## 1.3.5
+Mon, 31 Jul 2023 14:56:21 GMT
+
+### Patches
+
+- Fix for final-state-schema with external ref
 
 ## 1.3.4
 Tue, 15 Mar 2022 16:00:38 GMT
