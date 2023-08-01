@@ -1751,6 +1751,10 @@
           "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `operation-location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Operation-Location`",
           "type": "string",
           "enum": ["azure-async-operation", "location", "original-uri", "operation-location"]
+        },
+        "final-state-schema": {
+          "description": "The schema of the response of whichever means is indicated in final-state-via for obtaining the final result.",
+          "type": "string"
         }
       },
       "required": ["final-state-via"]
