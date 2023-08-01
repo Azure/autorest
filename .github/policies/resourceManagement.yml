@@ -1,0 +1,378 @@
+id:
+name: GitOps.PullRequestIssueManagement
+description: GitOps.PullRequestIssueManagement primitive
+owner:
+resource: repository
+disabled: false
+where:
+configuration:
+  resourceManagementConfiguration:
+    scheduledSearches:
+      - description:
+        frequencies:
+          - daily:
+              time: 1:0
+        filters:
+          - isIssue
+          - isOpen
+          - hasLabel:
+              label: needs-author-feedback
+          - hasLabel:
+              label: no-recent-activity
+          - noActivitySince:
+              days: 14
+        actions:
+          - closeIssue
+      - description:
+        frequencies:
+          - hourly:
+              hour: 6
+        filters:
+          - isIssue
+          - isOpen
+          - hasLabel:
+              label: needs-author-feedback
+          - noActivitySince:
+              days: 7
+          - isNotLabeledWith:
+              label: no-recent-activity
+        actions:
+          - addLabel:
+              label: no-recent-activity
+          - addReply:
+              reply: Hi, we're sending this friendly reminder because we haven't heard back from you in **7 days**. We need more information about this issue to help address it. Please be sure to give us your input. If we don't hear back from you within **14 days** of this comment the issue will be automatically closed. Thank you!
+      - description:
+        frequencies:
+          - hourly:
+              hour: 6
+        filters:
+          - isIssue
+          - isOpen
+          - hasLabel:
+              label: issue-addressed
+          - noActivitySince:
+              days: 7
+        actions:
+          - addReply:
+              reply: Hi @${issueAuthor}, since you haven’t asked that we “`/unresolve`” the issue, we’ll close this out. If you believe further discussion is needed, please add a comment “`/unresolve`” to reopen the issue.
+          - closeIssue
+      - description:
+        frequencies:
+          - hourly:
+              hour: 6
+        filters:
+          - isOpen
+          - hasLabel:
+              label: no-recent-activity
+          - isPullRequest
+          - noActivitySince:
+              days: 7
+        actions:
+          - closeIssue
+          - addReply:
+              reply: 'Hi @${issueAuthor}.  Thank you for your contribution.  Since there hasn''t been recent engagement, we''re going to close this out.  Feel free to respond with a comment containing "/reopen" if you''d like to continue working on these changes.  Please be sure to use the command to reopen or remove the "no-recent-activity" label; otherwise, this is likely to be closed again with the next cleanup pass.  '
+      - description:
+        frequencies:
+          - weekday:
+              day: Friday
+              time: 5:0
+        filters:
+          - isOpen
+          - isNotLabeledWith:
+              label: no-recent-activity
+          - noActivitySince:
+              days: 60
+          - isPullRequest
+        actions:
+          - addLabel:
+              label: no-recent-activity
+          - addReply:
+              reply: Hi @${issueAuthor}.  Thank you for your interest in helping to improve the Azure SDK experience and for your contribution.  We've noticed that there hasn't been recent engagement on this pull request.  If this is still an active work stream, please let us know by pushing some changes or leaving a comment.  Otherwise, we'll close this out in 7 days.
+    eventResponderTasks:
+      - if:
+          - payloadType: Issue_Comment
+          - isAction:
+              action: Created
+          - isActivitySender:
+              issueAuthor: True
+          - hasLabel:
+              label: needs-author-feedback
+          - isOpen
+        then:
+          - addLabel:
+              label: needs-team-attention
+          - removeLabel:
+              label: needs-author-feedback
+        description:
+      - if:
+          - payloadType: Issues
+          - not:
+              isAction:
+                action: Closed
+          - hasLabel:
+              label: no-recent-activity
+        then:
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Issue_Comment
+          - hasLabel:
+              label: no-recent-activity
+        then:
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Issues
+          - isAction:
+              action: Opened
+          - and:
+              - not:
+                  activitySenderHasPermission:
+                    permission: Write
+              - not:
+                  activitySenderHasAssociation:
+                    association: Member
+              - not:
+                  activitySenderHasAssociation:
+                    association: Collaborator
+              - not:
+                  activitySenderHasPermission:
+                    permission: Admin
+        then:
+          - addLabel:
+              label: customer-reported
+          - addLabel:
+              label: question
+        description:
+      - if:
+          - payloadType: Issues
+          - isAction:
+              action: Labeled
+          - labelAdded:
+              label: needs-author-feedback
+        then:
+          - removeLabel:
+              label: needs-team-attention
+          - removeLabel:
+              label: triage
+          - removeLabel:
+              label: needs-team triage
+        description:
+      - if:
+          - payloadType: Pull_Request
+          - isAction:
+              action: Opened
+          - and:
+              - not:
+                  activitySenderHasPermission:
+                    permission: Write
+              - not:
+                  activitySenderHasAssociation:
+                    association: Member
+              - not:
+                  activitySenderHasAssociation:
+                    association: Collaborator
+              - not:
+                  activitySenderHasPermission:
+                    permission: Admin
+        then:
+          - addLabel:
+              label: customer-reported
+          - addReply:
+              reply: Thank you for your contribution @${issueAuthor}! We will review the pull request and get back to you soon.
+          - addLabel:
+              label: Community Contribution
+        description:
+      - if:
+          - payloadType: Issues
+          - isAction:
+              action: Labeled
+          - not:
+              hasLabel:
+                label: needs-triage
+          - not:
+              hasLabel:
+                label: needs-team-triage
+          - not:
+              hasLabel:
+                label: needs-author-feedback
+          - hasLabel:
+              label: customer-reported
+          - not:
+              isInMilestone:
+                milestone: ""
+          - isOpen
+          - not:
+              hasLabel:
+                label: issue-addressed
+        then:
+          - addLabel:
+              label: needs-team-attention
+        description:
+      - if:
+          - payloadType: Pull_Request
+          - isOpen
+          - hasLabel:
+              label: auto-merge
+          - isAction:
+              action: Synchronize
+          - and:
+              - not:
+                  activitySenderHasPermission:
+                    permission: Admin
+              - not:
+                  activitySenderHasPermission:
+                    permission: Write
+        then:
+          - dismissPullRequestReview:
+              message: Hi @{issueAuthor}.  We've noticed that new changes have been pushed to this pull request.  Because it is set to automatically merge, we've reset the approvals to allow the opportunity to review the updates.
+        description:
+      - if:
+          - payloadType: Issues
+          - labelAdded:
+              label: issue-addressed
+        then:
+          - addReply:
+              reply: Hi @${issueAuthor}.  Thank you for opening this issue and giving us the opportunity to assist.  We believe that this has been addressed.  If you feel that further discussion is needed, please add a comment with the text “`/unresolve`” to remove the “issue-addressed” label and continue the conversation.
+          - removeLabel:
+              label: needs-triage
+          - removeLabel:
+              label: needs-team-triage
+          - removeLabel:
+              label: needs-team-attention
+          - removeLabel:
+              label: needs-author-feedback
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Issue_Comment
+          - hasLabel:
+              label: issue-addressed
+          - commentContains:
+              pattern: /unresolve
+              isRegex: False
+          - or:
+              - isActivitySender:
+                  issueAuthor: True
+              - activitySenderHasPermission:
+                  permission: Admin
+              - activitySenderHasPermission:
+                  permission: Write
+        then:
+          - reopenIssue
+          - removeLabel:
+              label: issue-addressed
+          - addLabel:
+              label: needs-team-attention
+        description:
+      - if:
+          - payloadType: Issue_Comment
+          - hasLabel:
+              label: issue-addressed
+          - commentContains:
+              pattern: /unresolve
+              isRegex: False
+          - and:
+              - not:
+                  isActivitySender:
+                    issueAuthor: True
+              - not:
+                  activitySenderHasPermission:
+                    permission: Admin
+              - not:
+                  activitySenderHasPermission:
+                    permission: Write
+        then:
+          - addReply:
+              reply: Hi ${contextualAuthor}, only the original author of the issue can ask that it be unresolved.  Please open a new issue with your scenario and details if you would like to discuss this topic with the team.
+        description:
+      - if:
+          - payloadType: Issues
+          - isOpen
+          - hasLabel:
+              label: issue-addressed
+          - or:
+              - labelAdded:
+                  label: needs-team-attention
+              - labelAdded:
+                  label: needs-author-feedback
+              - labelAdded:
+                  label: Service Attention
+              - labelAdded:
+                  label: needs-triage
+              - labelAdded:
+                  label: needs-team-triage
+        then:
+          - removeLabel:
+              label: issue-addressed
+        description:
+      - if:
+          - payloadType: Pull_Request
+          - hasLabel:
+              label: no-recent-activity
+          - isOpen
+          - or:
+              - isAction:
+                  action: Null
+              - isAction:
+                  action: Synchronize
+              - isAction:
+                  action: Null
+        then:
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Pull_Request_Review
+          - hasLabel:
+              label: no-recent-activity
+          - isOpen
+        then:
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Issue_Comment
+          - isAction:
+              action: Created
+          - hasLabel:
+              label: no-recent-activity
+          - isOpen
+          - and:
+              - not:
+                  commentContains:
+                    pattern: What is Check Enforcer?
+                    isRegex: False
+              - not:
+                  commentContains:
+                    pattern: Since there hasn't been recent engagement, this is being closed out.
+                    isRegex: False
+        then:
+          - removeLabel:
+              label: no-recent-activity
+        description:
+      - if:
+          - payloadType: Issue_Comment
+          - not: isOpen
+          - commentContains:
+              pattern: /reopen
+              isRegex: False
+          - hasLabel:
+              label: no-recent-activity
+          - or:
+              - isActivitySender:
+                  issueAuthor: True
+              - activitySenderHasPermission:
+                  permission: Admin
+              - activitySenderHasPermission:
+                  permission: Write
+        then:
+          - reopenIssue
+          - removeLabel:
+              label: no-recent-activity
+        description:
+onFailure:
+onSuccess:
