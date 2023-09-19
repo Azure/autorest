@@ -73,7 +73,7 @@ directive:
   # Rename operation with operationId: Foo_Get to Bar_Get
   - rename-operation:
       from: Foo_Get
-      to: Foo_Get
+      to: Bar_Get
 ```
 
 ### Remove model
