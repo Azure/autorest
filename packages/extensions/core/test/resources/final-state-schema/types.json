@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "4.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    }
+  }
+}

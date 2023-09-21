@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The Network Cloud APIs",
+    "title": "NetworkCloud",
+    "version": "2023-05-01-preview",
+    "contact": {
+      "email": "admin@contoso.com"
+    }
+  },
+  "host": "management.azure.com",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "schemes": ["https"],
+  "tags": [
+    {
+      "name": "BareMetalMachines",
+      "description": "BareMetalMachines operations."
+    }
+  ],
+  "paths": {
+    "/bareMetalMachines/{bareMetalMachineName}/cordon": {
+      "post": {
+        "description": "Cordon the provided bare metal machine's Kubernetes node.",
+        "summary": "Cordon the bare metal machine.",
+        "operationId": "BareMetalMachines_Cordon",
+        "tags": ["BareMetalMachines"],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BareMetalMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "bareMetalMachineCordonParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BareMetalMachineCordonParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "./types.json#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BareMetalMachineCordonParameters": {
+      "type": "object",
+      "title": "BareMetalMachineCordonParameters represents the body of the request to evacuate workloads from node on a bare metal machine.",
+      "properties": {
+        "evacuate": {
+          "description": "The indicator of whether to evacuate the node workload when the bare metal machine is cordoned.",
+          "type": "string",
+          "default": "False",
+          "enum": ["True", "False"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BareMetalMachineEvacuate"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BareMetalMachineNameParameter": {
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the bare metal machine.",
+      "name": "bareMetalMachineName",
+      "in": "path",
+      "required": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ]
+}

@@ -263,11 +263,31 @@ class UnsuedComponentFinder {
           }
           this.crawlObject(componentTypes[componentUid]);
         }
+      } else if (key === "x-ms-long-running-operation-options" && isLroOptionsWithFinalStateSchema(value)) {
+        const refParts = value["final-state-schema"].split("/");
+        const componentUid = refParts.pop() as string;
+        const t: ComponentType = refParts.pop() as ComponentType;
+        if (this.visitedComponents[t] && !this.visitedComponents[t].has(componentUid)) {
+          this.visitedComponents[t].add(componentUid);
+          this.componentsToKeep[t].add(componentUid);
+          const componentTypes = this.components[t];
+          if (componentTypes === undefined) {
+            throw new Error(`Reference '${value}' could not be found.`);
+          }
+          this.crawlObject(componentTypes[componentUid]);
+        }
       } else if (value && typeof value === "object") {
         this.crawlObject(value);
       }
     }
   }
+}
+
+function isLroOptionsWithFinalStateSchema(value: unknown): value is { "final-state-schema": string } {
+  return (typeof value === "object" &&
+    value != null &&
+    "final-state-schema" in value &&
+    typeof value["final-state-schema"] === "string") as boolean;
 }
 
 async function clean(config: AutorestContext, input: DataSource, sink: DataSink) {
