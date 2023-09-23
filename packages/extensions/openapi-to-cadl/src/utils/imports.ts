@@ -1,9 +1,28 @@
 import { CadlProgram } from "../interfaces";
+import { ArmResourcesCache } from "../transforms/transform-resources";
 
 type Imports = {
   modules: string[];
   namespaces: string[];
 };
+
+export function getResourcesImports(_program: CadlProgram) {
+  const imports: Imports = {
+    modules: [
+      `import "@azure-tools/typespec-azure-core";`,
+      `import "@azure-tools/typespec-azure-resource-manager";`,
+      `import "@typespec/rest";`,
+      `import "./models.tsp";`,
+    ],
+    namespaces: [
+      `using TypeSpec.Rest;`,
+      `using Azure.ResourceManager;`,
+      `using Azure.ResourceManager.Foundations;`,
+      `using TypeSpec.Http;`,
+    ],
+  };
+  return imports;
+}
 
 export function getModelsImports(program: CadlProgram) {
   const modules = new Set<string>();
@@ -27,6 +46,12 @@ export function getModelsImports(program: CadlProgram) {
         decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
       }
     }
+  }
+
+  if (ArmResourcesCache.size) {
+    modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
+    namespaces.add(`using Azure.ResourceManager;`);
+    namespaces.add(`using Azure.ResourceManager.Foundations;`);
   }
 
   return {

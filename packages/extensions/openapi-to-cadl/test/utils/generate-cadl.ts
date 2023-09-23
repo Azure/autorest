@@ -52,7 +52,7 @@ function generate(path: string, debug = false) {
 
 async function main() {
   const folder = process.argv[4];
-  const debug = process.argv[5] === "--debug";
+  // const debug = process.argv[5] === "--debug";
   const { path: root } = await resolveProject(__dirname);
 
   const folders: string[] = folder
@@ -61,7 +61,7 @@ async function main() {
 
   for (const folder of folders) {
     try {
-      await generateCadl(folder, debug);
+      await generateCadl(folder, true);
     } catch (e) {
       throw new Error(`Failed to generate ${folder}`);
     }

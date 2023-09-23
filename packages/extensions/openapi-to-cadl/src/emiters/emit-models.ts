@@ -1,3 +1,4 @@
+import { ArmResourcesCache } from "transforms/transform-resources";
 import { getSession } from "../autorest-session";
 import { generateEnums } from "../generate/generate-enums";
 import { generateObject } from "../generate/generate-object";

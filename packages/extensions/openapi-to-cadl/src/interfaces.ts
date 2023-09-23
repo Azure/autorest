@@ -1,3 +1,5 @@
+import { ObjectSchema } from "@autorest/codemodel";
+
 export interface CadlProgram {
   models: Models;
   operationGroups: CadlOperationGroup[];
@@ -8,6 +10,7 @@ export interface CadlOptions {
   isAzureSpec: boolean;
   namespace?: string;
   guessResourceKey: boolean;
+  isArm: boolean;
 }
 
 export interface CadlChoiceValue extends WithDoc {
@@ -129,6 +132,20 @@ export interface CadlObject extends CadlDataType {
   spreadParents?: string[];
   decorators?: CadlDecorator[];
   alias?: CadlAlias;
+}
+
+export type ArmResourceKind = "TrackedResource" | "ProxyResource";
+
+export type ArmResourceHierarchy = {
+  name: string;
+  parent?: ArmResourceHierarchy;
+};
+
+export interface TypespecArmResource extends CadlObject {
+  resourceKind: ArmResourceKind;
+  propertiesModelName: string;
+  path: string;
+  schema: ObjectSchema;
 }
 
 export interface Models {

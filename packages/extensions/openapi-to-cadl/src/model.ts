@@ -4,6 +4,7 @@ import { CadlDataType, CadlProgram } from "./interfaces";
 import { transformEnum } from "./transforms/transform-choices";
 import { getCadlType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
+import { ArmResourcesCache } from "./transforms/transform-resources";
 import { transformServiceInformation } from "./transforms/transform-service-information";
 import { isChoiceSchema } from "./utils/schemas";
 
@@ -37,12 +38,24 @@ export function transformDataType(schema: Schema, codeModel: CodeModel): CadlDat
   };
 }
 
+const _commonArmResources = ["TrackedResource", "Resource", "ProxyResource"];
+
 function transformModel(codeModel: CodeModel): CadlProgram {
   const caldEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])].map((c) =>
     transformEnum(c, codeModel),
   );
 
-  const cadlObjects = codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
+  let cadlObjects = codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
+
+  if (ArmResourcesCache.size) {
+    const armResourceNames: Set<string> = new Set();
+    for (const resource of ArmResourcesCache.values()) {
+      armResourceNames.add(resource.name);
+    }
+    cadlObjects = cadlObjects
+      .filter((o) => !armResourceNames.has(o.name))
+      .filter((o) => !_commonArmResources.includes(o.name));
+  }
 
   const serviceInformation = transformServiceInformation(codeModel);
 

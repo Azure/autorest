@@ -22,6 +22,7 @@ import {
   isSealedChoiceSchema,
 } from "../utils/schemas";
 import { transformValue } from "../utils/values";
+import { ArmResourcesCache } from "./transform-resources";
 
 const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
@@ -41,6 +42,8 @@ const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.AnyObject, "object"],
 ]);
 
+const _armResources = ArmResourcesCache;
+
 export function transformObject(schema: ObjectSchema, codeModel: CodeModel): CadlObject {
   const cadlTypes = getDataTypes(codeModel);
   let visited: Partial<CadlObject> = cadlTypes.get(schema) as CadlObject;
@@ -48,7 +51,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Cad
     return visited as CadlObject;
   }
 
-  const logger = getLogger("transformOperationGroup");
+  const logger = getLogger("transformObject");
 
   logger.info(`Transforming object ${schema.language.default.name}`);
 
@@ -60,32 +63,38 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Cad
   visited = { name, doc };
   cadlTypes.set(schema, visited as any);
 
-  const properties = (schema.properties ?? [])
-    .filter((p) => !p.isDiscriminator)
-    .map((p) => transformObjectProperty(p, codeModel));
+  const armResource = _armResources.get(schema);
 
-  const ownDiscriminator = getOwnDiscriminator(schema);
-  if (!ownDiscriminator) {
-    const discriminatorProperty = getDiscriminator(schema);
-    discriminatorProperty && properties.push(discriminatorProperty);
+  if (armResource) {
+    cadlTypes.set(schema, armResource);
+    return armResource;
+  } else {
+    const properties = (schema.properties ?? [])
+      .filter((p) => !p.isDiscriminator)
+      .map((p) => transformObjectProperty(p, codeModel));
+
+    const ownDiscriminator = getOwnDiscriminator(schema);
+    if (!ownDiscriminator) {
+      const discriminatorProperty = getDiscriminator(schema);
+      discriminatorProperty && properties.push(discriminatorProperty);
+    }
+
+    const updatedVisited: CadlObject = {
+      name,
+      doc,
+      kind: "object",
+      properties,
+      parents: getParents(schema),
+      extendedParents: getExtendedParents(schema),
+      spreadParents: getSpreadParents(schema, codeModel),
+      decorators: getModelDecorators(schema),
+    };
+
+    addCorePageAlias(updatedVisited);
+    addFixmes(updatedVisited);
+    cadlTypes.set(schema, updatedVisited);
+    return updatedVisited;
   }
-
-  const updatedVisited: CadlObject = {
-    name,
-    doc,
-    kind: "object",
-    properties,
-    parents: getParents(schema),
-    extendedParents: getExtendedParents(schema),
-    spreadParents: getSpreadParents(schema, codeModel),
-    decorators: getModelDecorators(schema),
-  };
-
-  addCorePageAlias(updatedVisited);
-  addFixmes(updatedVisited);
-
-  cadlTypes.set(schema, updatedVisited);
-  return updatedVisited;
 }
 
 function addFixmes(cadlObject: CadlObject): void {

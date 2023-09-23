@@ -12,6 +12,7 @@ export function getOptions(): CadlOptions {
       isAzureSpec: getIsAzureSpec(session),
       namespace: getNamespace(session),
       guessResourceKey: getGuessResourceKey(session),
+      isArm: getIsArm(session),
     };
   }
 
@@ -29,4 +30,8 @@ export function getIsAzureSpec(session: Session<CodeModel>) {
 
 export function getNamespace(session: Session<CodeModel>) {
   return session.configuration["namespace"];
+}
+
+export function getIsArm(session: Session<CodeModel>) {
+  return session.configuration["azure-arm"] === true;
 }

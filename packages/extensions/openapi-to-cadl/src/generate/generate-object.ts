@@ -1,6 +1,11 @@
-import { CadlObject, CadlObjectProperty } from "../interfaces";
+import { Schema } from "@autorest/codemodel";
+import { CadlObject, CadlObjectProperty, TypespecArmResource } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+
+function isArmResource(schema: CadlObject): schema is TypespecArmResource {
+  return Boolean((schema as TypespecArmResource).resourceKind);
+}
 
 export function generateObject(cadlObject: CadlObject) {
   const definitions: string[] = [];
@@ -14,19 +19,23 @@ export function generateObject(cadlObject: CadlObject) {
   const decorators = generateDecorators(cadlObject.decorators);
   decorators && definitions.push(decorators);
 
-  if (cadlObject.extendedParents?.length) {
-    const firstParent = cadlObject.extendedParents[0];
-    definitions.push(`model ${cadlObject.name} extends ${firstParent} {`);
-  } else if (cadlObject.alias) {
-    const { alias, params } = cadlObject.alias;
-
-    definitions.push(`model ${cadlObject.name} is ${alias}${params ? `<${params.join(",")}>` : ""} {`);
+  if (isArmResource(cadlObject)) {
+    definitions.push(`model ${cadlObject.name} is ${cadlObject.resourceKind}<${cadlObject.propertiesModelName}> {`);
   } else {
-    definitions.push(`model ${cadlObject.name} {`);
-  }
+    if (cadlObject.extendedParents?.length) {
+      const firstParent = cadlObject.extendedParents[0];
+      definitions.push(`model ${cadlObject.name} extends ${firstParent} {`);
+    } else if (cadlObject.alias) {
+      const { alias, params } = cadlObject.alias;
 
-  for (const parent of cadlObject.spreadParents ?? []) {
-    definitions.push(`...${parent};`);
+      definitions.push(`model ${cadlObject.name} is ${alias}${params ? `<${params.join(",")}>` : ""} {`);
+    } else {
+      definitions.push(`model ${cadlObject.name} {`);
+    }
+
+    for (const parent of cadlObject.spreadParents ?? []) {
+      definitions.push(`...${parent};`);
+    }
   }
 
   for (const property of cadlObject.properties) {

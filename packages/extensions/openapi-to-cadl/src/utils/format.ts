@@ -1,5 +1,5 @@
 import { format } from "prettier";
-import { getLogger } from "./logger";
+// import { getLogger } from "./logger";
 
 export function formatFile(content: string, filepath: string) {
   return format(content, {
@@ -8,6 +8,7 @@ export function formatFile(content: string, filepath: string) {
 }
 
 export function formatCadlFile(content: string, filepath: string): string {
+  // const logger = getLogger("formatCadlFile");
   try {
     return format(content, {
       plugins: ["@typespec/prettier-plugin-typespec"],
@@ -15,6 +16,7 @@ export function formatCadlFile(content: string, filepath: string): string {
       filepath,
     });
   } catch {
+    // logger.warning(JSON.stringify(e));
     return content;
   }
 }
