@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
+@doc("An deployment resource belonging to a device group resource.")
 @parentResource("DeviceGroup")
 model Deployment is ProxyResource<DeploymentProperties> {
   @doc("""
@@ -16,5 +17,13 @@ deployment for the associated device group.
 """)
   @key("deploymentName")
   @path
+  @segment("deployments")
   name: string;
 }
+
+@armResourceOperations
+interface Deployments
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      Deployment,
+      DeploymentProperties
+    > {}

@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
+@doc("An certificate resource belonging to a catalog resource.")
 @parentResource("Catalog")
 model Certificate is ProxyResource<CertificateProperties> {
   @doc("""
@@ -16,5 +17,28 @@ certificate.
 """)
   @key("serialNumber")
   @path
+  @segment("certificates")
   name: string;
+}
+
+@armResourceOperations
+interface Certificates
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      Certificate,
+      CertificateProperties
+    > {
+  @autoroute
+  @doc("Retrieves cert chain.")
+  @armResourceLocation(Certificate)
+  @post
+  retrieveCertChain(
+    ...ResourceInstanceParameters<Certificate>
+  ): ArmResponse<CertificateChainResponse> | ErrorResponse;
+  @autoroute
+  @doc("Gets the proof of possession nonce.")
+  @armResourceLocation(Certificate)
+  @post
+  retrieveProofOfPossessionNonce(
+    ...ResourceInstanceParameters<Certificate>
+  ): ArmResponse<ProofOfPossessionNonceResponse> | ErrorResponse;
 }

@@ -1,35 +1,29 @@
-import { CodeModel, HttpRequest, ObjectSchema, Operation, StringSchema } from "@autorest/codemodel";
+import { CodeModel, ObjectSchema, Operation, StringSchema } from "@autorest/codemodel";
 import { upperFirst } from "lodash";
-import { singular } from "pluralize";
-import { getSession } from "../autorest-session";
+import pluralize, { singular } from "pluralize";
 import { ArmResourceHierarchy, CadlDecorator, TypespecArmResource } from "../interfaces";
 import { isResponseSchema } from "../utils/schemas";
+import { transformOperation } from "./transform-operations";
 
 const _resourceKinds = ["ProxyResource", "TrackedResource"];
 export const ArmResourcesCache = new Map<ObjectSchema, TypespecArmResource>();
+let _armResourcesnameCache: Set<string> | undefined;
 export interface ArmResourceSchema extends ObjectSchema {
   armResource?: TypespecArmResource;
 }
 
-// export function getResources(codeModel: CodeModel) {
-//   const resources: TypespecArmResource[] = [];
-//   for (const schema of codeModel.schemas?.objects ?? []) {
-//     if (isResourceModel(schema)) {
-//       const resourceOperation = findResourceOperation(codeModel, schema);
-//       const path = getOperationPath(resourceOperation);
-//       const key = findResourceKey(resourceOperation);
-//       schema.armResource = {
-//         kind: "object",
-//         resourceKind: getResourceKind(schema),
-//         name: schema.language.default.name,
-//         schema,
-//         path,
-//         properties: [],
-//         parents: [],
-//       };
-//     }
-//   }
-// }
+export function getArmResourceNames(): Set<string> {
+  if (_armResourcesnameCache) {
+    return _armResourcesnameCache;
+  }
+
+  _armResourcesnameCache = new Set<string>();
+  for (const resource of ArmResourcesCache.values()) {
+    _armResourcesnameCache.add(resource.name);
+  }
+
+  return _armResourcesnameCache;
+}
 
 function getPropertiesModelName(schema: ObjectSchema) {
   const property = schema.properties?.find((p) => p.serializedName === "properties");
@@ -46,7 +40,8 @@ export function calculateArmResources(codeModel: CodeModel) {
   }
   for (const schema of codeModel.schemas?.objects ?? []) {
     if (isResourceModel(schema)) {
-      const resourceOperation = findResourceOperation(codeModel, schema);
+      const resourceOperation = findResourceFirstOperation(codeModel, schema);
+
       const path = getOperationPath(resourceOperation);
       const key = findResourceKey(resourceOperation);
 
@@ -58,11 +53,17 @@ export function calculateArmResources(codeModel: CodeModel) {
         resourceDecorators.push({ name: "parentResource", arguments: [hierarchy.parent.name] });
       }
 
+      const resourceName = schema.language.default.name;
+
+      const operations = findResourceOperations(codeModel, resourceName);
+
       ArmResourcesCache.set(schema, {
         kind: "object",
+        operations,
+        doc: schema.language.default.description,
         propertiesModelName: getPropertiesModelName(schema),
         resourceKind: getResourceKind(schema),
-        name: schema.language.default.name,
+        name: resourceName,
         schema,
         path,
         decorators: resourceDecorators,
@@ -74,9 +75,10 @@ export function calculateArmResources(codeModel: CodeModel) {
             name: "name",
             type: "string",
             decorators: [
-              { name: "key", arguments: [key.name] },
               ...(key.pattern ? [{ name: "pattern", arguments: [escapeRegex(key.pattern)] }] : []),
+              { name: "key", arguments: [key.name] },
               { name: key.location },
+              { name: "segment", arguments: [key.segmentName] },
             ],
           },
         ],
@@ -121,18 +123,6 @@ function escapeRegex(str: string) {
   // return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 
-// export function getArmResource(schema: ObjectSchema): TypespecArmResource | undefined {
-//   const session = getSession();
-//   const codeModel = session.model;
-//   if (!isResourceModel(schema)) {
-//     return undefined;
-//   }
-//   const resourceOperation = findResourceOperation(codeModel, schema);
-//   const path = getOperationPath(resourceOperation);
-//   const key = findResourceKey(resourceOperation);
-//   return { kind: getResourceKind(schema), name: schema.language.default.name, schema, path };
-// }
-
 function findResourceKey(operation: Operation) {
   const path = getOperationPath(operation);
   const segments = path.split("/").filter((s) => s !== "");
@@ -151,7 +141,7 @@ function findResourceKey(operation: Operation) {
   };
 }
 
-function findResourceOperation(codeModel: CodeModel, schema: ObjectSchema): Operation {
+function findResourceFirstOperation(codeModel: CodeModel, schema: ObjectSchema): Operation {
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       for (const response of operation.responses ?? []) {
@@ -166,6 +156,14 @@ function findResourceOperation(codeModel: CodeModel, schema: ObjectSchema): Oper
   throw new Error(`Unable to determine path for resource ${schema.language.default.name}`);
 }
 
+const _defaultVerbs = ["get", "put", "patch", "delete"];
+
+function findResourceOperations(codeModel: CodeModel, resourceName: string): Operation[] {
+  return codeModel.operationGroups
+    .filter((o) => o.language.default.name === pluralize(resourceName))
+    .flatMap((og) => og.operations.filter((op) => !_defaultVerbs.includes(op.requests?.[0].protocol?.http?.method)));
+}
+
 function getOperationPath(operation: Operation): string {
   for (const request of operation.requests ?? []) {
     if (request.protocol.http?.path) {
@@ -174,14 +172,6 @@ function getOperationPath(operation: Operation): string {
   }
 
   throw new Error(`Unable to determine path for operation ${operation.language.default.name}`);
-}
-
-function isResourceResponse(request: HttpRequest, schema: ObjectSchema) {
-  for (const response of request.responses ?? []) {
-    if (isResourceResponse(response, schema)) {
-      return true;
-    }
-  }
 }
 
 function getResourceKind(schema: ObjectSchema) {

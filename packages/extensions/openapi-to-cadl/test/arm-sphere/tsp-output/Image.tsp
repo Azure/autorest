@@ -8,10 +8,19 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
+@doc("An image resource belonging to a catalog resource.")
 @parentResource("Catalog")
 model Image is ProxyResource<ImageProperties> {
   @doc("Image name. Use .default for image creation.")
   @key("imageName")
   @path
+  @segment("images")
   name: string;
 }
+
+@armResourceOperations
+interface Images
+  extends Azure.ResourceManager.ProxyResourceOperations<
+      Image,
+      ImageProperties
+    > {}

@@ -1,5 +1,6 @@
 import { join } from "path";
 import { getSession } from "../autorest-session";
+import { generateArmOperations } from "../generate/generate-arm-operations";
 import { generateObject } from "../generate/generate-object";
 import { CadlProgram } from "../interfaces";
 import { ArmResourcesCache } from "../transforms/transform-resources";
@@ -13,7 +14,16 @@ export function emitArmResources(program: CadlProgram, basePath: string) {
     const { modules, namespaces } = getResourcesImports(program);
     const filePath = join(basePath, `${armResource.name}.tsp`);
     const generatedResource = generateObject(armResource);
-    const content = [modules.join("\n"), "\n", namespaces.join("\n"), "\n", generatedResource].join("\n");
+    const armOperations = generateArmOperations(armResource);
+    const content = [
+      modules.join("\n"),
+      "\n",
+      namespaces.join("\n"),
+      "\n",
+      generatedResource,
+      "\n",
+      armOperations.join("\n"),
+    ].join("\n");
     session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
   }
 }

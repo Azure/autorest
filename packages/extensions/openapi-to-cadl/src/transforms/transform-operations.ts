@@ -97,7 +97,7 @@ function transformRequest(_request: Request, operation: Operation, codeModel: Co
     verb: transformVerb(requests?.[0].protocol),
     route: transformRoute(requests?.[0].protocol),
     responses: [...new Set(transformedResponses)],
-    extensions: [],
+    extensions,
     resource,
   };
 }

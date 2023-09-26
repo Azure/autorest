@@ -1,4 +1,4 @@
-import { ObjectSchema } from "@autorest/codemodel";
+import { ObjectSchema, Operation } from "@autorest/codemodel";
 
 export interface CadlProgram {
   models: Models;
@@ -145,6 +145,7 @@ export interface TypespecArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   path: string;
+  operations: Operation[];
   schema: ObjectSchema;
 }
 
