@@ -1,0 +1,368 @@
+{
+  "Resources": {
+    "Catalog": {
+      "Name": "Catalog",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "GET",
+          "OperationID": "Catalogs_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "DELETE",
+          "OperationID": "Catalogs_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PATCH",
+          "OperationID": "Catalogs_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices",
+          "Method": "POST",
+          "OperationID": "Catalogs_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeployments",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeployments"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceGroups",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeviceGroups"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceInsights",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeviceInsights"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDevices",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PUT",
+          "OperationID": "Catalogs_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs",
+          "Method": "GET",
+          "OperationID": "Catalogs_ListByResourceGroup"
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "Catalog",
+      "ResourceType": "Microsoft.AzureSphere/catalogs",
+      "ResourceKey": "catalogName",
+      "ResourceKeySegment": "catalogs",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    },
+    "Certificate": {
+      "Name": "Certificate",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}",
+          "Method": "GET",
+          "OperationID": "Certificates_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveCertChain",
+          "Method": "POST",
+          "OperationID": "Certificates_RetrieveCertChain"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveProofOfPossessionNonce",
+          "Method": "POST",
+          "OperationID": "Certificates_RetrieveProofOfPossessionNonce"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates",
+          "Method": "GET",
+          "OperationID": "Certificates_ListByCatalog"
+        }
+      ],
+      "Parents": ["Catalog"],
+      "SwaggerModelName": "Certificate",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/certificates",
+      "ResourceKey": "serialNumber",
+      "ResourceKeySegment": "certificates",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": false,
+        "HasUpdateOperation": false,
+        "HasDeleteOperation": false
+      }
+    },
+    "Image": {
+      "Name": "Image",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "GET",
+          "OperationID": "Images_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "DELETE",
+          "OperationID": "Images_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "PUT",
+          "OperationID": "Images_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images",
+          "Method": "GET",
+          "OperationID": "Images_ListByCatalog"
+        }
+      ],
+      "Parents": ["Catalog"],
+      "SwaggerModelName": "Image",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/images",
+      "ResourceKey": "imageName",
+      "ResourceKeySegment": "images",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    },
+    "Product": {
+      "Name": "Product",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "GET",
+          "OperationID": "Products_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "DELETE",
+          "OperationID": "Products_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PATCH",
+          "OperationID": "Products_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices",
+          "Method": "POST",
+          "OperationID": "Products_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/generateDefaultDeviceGroups",
+          "Method": "POST",
+          "OperationID": "Products_GenerateDefaultDeviceGroups"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PUT",
+          "OperationID": "Products_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products",
+          "Method": "GET",
+          "OperationID": "Products_ListByCatalog"
+        }
+      ],
+      "Parents": ["Catalog"],
+      "SwaggerModelName": "Product",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/products",
+      "ResourceKey": "productName",
+      "ResourceKeySegment": "products",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    },
+    "DeviceGroup": {
+      "Name": "DeviceGroup",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "GET",
+          "OperationID": "DeviceGroups_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "DELETE",
+          "OperationID": "DeviceGroups_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PATCH",
+          "OperationID": "DeviceGroups_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/claimDevices",
+          "Method": "POST",
+          "OperationID": "DeviceGroups_ClaimDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices",
+          "Method": "POST",
+          "OperationID": "DeviceGroups_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PUT",
+          "OperationID": "DeviceGroups_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups",
+          "Method": "GET",
+          "OperationID": "DeviceGroups_ListByProduct"
+        }
+      ],
+      "Parents": ["Product"],
+      "SwaggerModelName": "DeviceGroup",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/products/deviceGroups",
+      "ResourceKey": "deviceGroupName",
+      "ResourceKeySegment": "deviceGroups",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    },
+    "Deployment": {
+      "Name": "Deployment",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "GET",
+          "OperationID": "Deployments_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "DELETE",
+          "OperationID": "Deployments_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "PUT",
+          "OperationID": "Deployments_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments",
+          "Method": "GET",
+          "OperationID": "Deployments_ListByDeviceGroup"
+        }
+      ],
+      "Parents": ["DeviceGroup"],
+      "SwaggerModelName": "Deployment",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/products/deviceGroups/deployments",
+      "ResourceKey": "deploymentName",
+      "ResourceKeySegment": "deployments",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    },
+    "Device": {
+      "Name": "Device",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "GET",
+          "OperationID": "Devices_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "DELETE",
+          "OperationID": "Devices_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PATCH",
+          "OperationID": "Devices_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}/generateCapabilityImage",
+          "Method": "POST",
+          "OperationID": "Devices_GenerateCapabilityImage"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PUT",
+          "OperationID": "Devices_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices",
+          "Method": "GET",
+          "OperationID": "Devices_ListByDeviceGroup"
+        }
+      ],
+      "Parents": ["DeviceGroup"],
+      "SwaggerModelName": "Device",
+      "ResourceType": "Microsoft.AzureSphere/catalogs/products/deviceGroups/devices",
+      "ResourceKey": "deviceName",
+      "ResourceKeySegment": "devices",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false,
+      "ResourceOperationsMetadata": {
+        "HasGetOperation": true,
+        "HasCreateOrUpdateOperation": true,
+        "HasUpdateOperation": true,
+        "HasDeleteOperation": true
+      }
+    }
+  }
+}

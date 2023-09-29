@@ -12,9 +12,9 @@ export async function generateCadl(folder: string, debug = false) {
     throw new Error(`No files found in ${path}`);
   }
 
-  const firstSwagger = dir.find(
-    (f) => f.endsWith(".json") || f.endsWith(".yaml") || f.endsWith(".yml") || f.endsWith(".md"),
-  );
+  const firstSwagger = dir
+    .filter((d) => d !== "resources.json")
+    .find((f) => f.endsWith(".json") || f.endsWith(".yaml") || f.endsWith(".yml") || f.endsWith(".md"));
 
   if (!firstSwagger) {
     throw new Error("No swagger file found");
@@ -61,9 +61,9 @@ async function main() {
 
   for (const folder of folders) {
     try {
-      await generateCadl(folder, debug);
+      await generateCadl(folder, true);
     } catch (e) {
-      throw new Error(`Failed to generate ${folder}`);
+      throw new Error(`Failed to generate ${e}`);
     }
   }
 }
