@@ -216,14 +216,6 @@ model ErrorAdditionalInfo {
 @doc("The response of a Catalog list operation.")
 model CatalogListResult is Azure.Core.Page<Catalog>;
 
-@doc("An Azure Sphere catalog")
-model Catalog {
-  ...TrackedResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: CatalogProperties;
-}
-
 @doc("Catalog properties")
 model CatalogProperties {
   @doc("The status of the last operation.")
@@ -307,14 +299,6 @@ model CatalogUpdate {
 @doc("The response of a Certificate list operation.")
 model CertificateListResult is Azure.Core.Page<Certificate>;
 
-@doc("An certificate resource belonging to a catalog resource.")
-model Certificate {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: CertificateProperties;
-}
-
 @doc("The properties of certificate")
 model CertificateProperties {
   @doc("The certificate as a UTF-8 encoded base 64 string.")
@@ -390,14 +374,6 @@ model CountElementsResponse {
 @doc("The response of a Image list operation.")
 model ImageListResult is Azure.Core.Page<Image>;
 
-@doc("An image resource belonging to a catalog resource.")
-model Image {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: ImageProperties;
-}
-
 @doc("The properties of image")
 model ImageProperties {
   @doc("""
@@ -440,14 +416,6 @@ the image URI on image reads.
 @doc("The response of a Deployment list operation.")
 model DeploymentListResult is Azure.Core.Page<Deployment>;
 
-@doc("An deployment resource belonging to a device group resource.")
-model Deployment {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: DeploymentProperties;
-}
-
 @doc("The properties of deployment")
 model DeploymentProperties {
   @doc("Deployment ID")
@@ -474,14 +442,6 @@ model ListDeviceGroupsRequest {
 
 @doc("The response of a DeviceGroup list operation.")
 model DeviceGroupListResult is Azure.Core.Page<DeviceGroup>;
-
-@doc("An device group resource belonging to a product resource.")
-model DeviceGroup {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: DeviceGroupProperties;
-}
 
 @doc("The properties of deviceGroup")
 model DeviceGroupProperties {
@@ -544,14 +504,6 @@ model DeviceInsight {
 @doc("The response of a Device list operation.")
 model DeviceListResult is Azure.Core.Page<Device>;
 
-@doc("An device resource belonging to a device group resource.")
-model Device {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: DeviceProperties;
-}
-
 @doc("The properties of device")
 model DeviceProperties {
   @doc("Device ID")
@@ -586,14 +538,6 @@ model DeviceProperties {
 
 @doc("The response of a Product list operation.")
 model ProductListResult is Azure.Core.Page<Product>;
-
-@doc("An product resource belonging to a catalog resource.")
-model Product {
-  ...ProxyResource;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: ProductProperties;
-}
 
 @doc("The properties of product")
 model ProductProperties {

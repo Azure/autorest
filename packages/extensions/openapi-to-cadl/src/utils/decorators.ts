@@ -1,7 +1,7 @@
-import { ChoiceSchema, ObjectSchema, Property, SealedChoiceSchema } from "@autorest/codemodel";
-import { CadlDecorator } from "../interfaces";
+import { ChoiceSchema, ObjectSchema, Parameter, Property, Schema, SealedChoiceSchema } from "@autorest/codemodel";
+import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
-import { isSealedChoiceSchema } from "./schemas";
+import { isSealedChoiceSchema, isStringSchema } from "./schemas";
 
 export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   const decorators: CadlDecorator[] = [];
@@ -45,12 +45,12 @@ export function getModelDecorators(model: ObjectSchema): CadlDecorator[] {
   return decorators;
 }
 
-export function getPropertyDecorators(property: Property): CadlDecorator[] {
+export function getPropertyDecorators(element: Property | Parameter): CadlDecorator[] {
   const decorators: CadlDecorator[] = [];
 
-  const paging = property.language.default.paging ?? {};
+  const paging = element.language.default.paging ?? {};
 
-  if (property.readOnly) {
+  if ((element as Property).readOnly) {
     decorators.push({ name: "visibility", arguments: ["read"] });
   }
 
@@ -62,7 +62,9 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
     decorators.push({ name: "items" });
   }
 
-  if (property.language.default.isResourceKey) {
+  getStringSchemaDecorators(element.schema, decorators);
+
+  if (element.language.default.isResourceKey) {
     decorators.push({
       name: "key",
       fixMe: [
@@ -71,14 +73,46 @@ export function getPropertyDecorators(property: Property): CadlDecorator[] {
     });
   }
 
-  if (property.serializedName !== property.language.default.name) {
+  if (isParameter(element) && element?.protocol?.http?.in) {
+    decorators.push({
+      name: element.protocol.http.in,
+    });
+  }
+
+  if (!isParameter(element) && element.serializedName !== element.language.default.name) {
     decorators.push({
       name: "projectedName",
-      arguments: ["json", property.serializedName],
+      arguments: ["json", (element as Property).serializedName],
     });
   }
 
   return decorators;
+}
+
+function isParameter(schema: Parameter | Property): schema is Parameter {
+  return !(schema as Property).serializedName;
+}
+
+function getStringSchemaDecorators(schema: Schema, decorators: CadlDecorator[]): void {
+  if (!isStringSchema(schema)) {
+    return;
+  }
+
+  if (schema.maxLength) {
+    decorators.push({ name: "maxLength", arguments: [schema.maxLength] });
+  }
+
+  if (schema.minLength) {
+    decorators.push({ name: "minLength", arguments: [schema.minLength] });
+  }
+
+  if (schema.pattern) {
+    decorators.push({ name: "pattern", arguments: [escapeRegex(schema.pattern)] });
+  }
+}
+
+function escapeRegex(str: string) {
+  return str.replace(/\\/g, "\\\\");
 }
 
 export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): CadlDecorator[] {
@@ -100,11 +134,26 @@ export function generateDecorators(decorators: CadlDecorator[] = []): string {
       definitions.push(decorator.fixMe.join(`\n`));
     }
     if (decorator.arguments) {
-      definitions.push(`@${decorator.name}(${decorator.arguments?.map((a) => `"${a}"`).join(", ")})`);
+      definitions.push(`@${decorator.name}(${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`);
     } else {
       definitions.push(`@${decorator.name}`);
     }
   }
 
   return definitions.join("\n");
+}
+
+function getArgumentValue(argument: DecoratorArgument | string | number): string {
+  if (typeof argument === "string") {
+    return `"${argument}"`;
+  } else if (typeof argument === "number") {
+    return `${argument}`;
+  } else {
+    let value = argument.value;
+    if (!argument.options?.unwrap) {
+      value = `${argument.value}`;
+    }
+
+    return value;
+  }
 }

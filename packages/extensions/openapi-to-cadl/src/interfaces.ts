@@ -81,6 +81,15 @@ export interface CadlWildcardType extends CadlDataType {
   kind: "wildcard";
 }
 
+export interface DecoratorArgumentOptions {
+  unwrap?: boolean;
+}
+
+export interface DecoratorArgument {
+  value: string;
+  options?: DecoratorArgumentOptions;
+}
+
 export interface CadlEnum extends CadlDataType {
   kind: "enum";
   members: CadlChoiceValue[];
@@ -97,6 +106,7 @@ export interface CadlParameter extends CadlDataType {
   kind: "parameter";
   isOptional: boolean;
   type: string;
+  decorators?: CadlDecorator[];
   location: CadlParameterLocation;
 }
 
@@ -110,7 +120,7 @@ export interface CadlObjectProperty extends CadlDataType {
 
 export interface CadlDecorator extends WithFixMe {
   name: string;
-  arguments?: string[];
+  arguments?: (string | number)[] | DecoratorArgument[];
   module?: string;
   namespace?: string;
 }
@@ -134,4 +144,16 @@ export interface CadlObject extends CadlDataType {
 export interface Models {
   enums: CadlEnum[];
   objects: CadlObject[];
+  armResources: TspArmResource[];
+}
+
+export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "MinProxyResource";
+
+export interface TspArmResource extends CadlObject {
+  resourceKind: ArmResourceKind;
+  propertiesModelName: string;
+  resourceParent?: TspArmResource;
+  // keyProperty: CadlObjectProperty;
+  // operations: Operation[];
+  // schema: ObjectSchema;
 }

@@ -1,6 +1,7 @@
 import { dirname, join } from "path";
 import { ObjectSchema } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
+import { CadlObject, TspArmResource } from "../interfaces";
 
 interface _ArmResourceOperation {
   Path: string;
@@ -57,10 +58,10 @@ function getArmResourcesMetadata(): Record<string, ArmResource> {
 }
 
 export interface ArmResourceSchema extends ObjectSchema {
-  resourceMetadata?: ArmResource;
+  resourceMetadata: ArmResource;
 }
 
-export function tagSchemaAsResource(schema: ArmResourceSchema): void {
+export function tagSchemaAsResource(schema: ObjectSchema): void {
   const resourcesMetadata = getArmResourcesMetadata();
   const resourceMetadata = resourcesMetadata[schema.language.default.name];
 
@@ -68,9 +69,13 @@ export function tagSchemaAsResource(schema: ArmResourceSchema): void {
     return;
   }
 
-  schema.resourceMetadata = resourceMetadata;
+  (schema as ArmResourceSchema).resourceMetadata = resourceMetadata;
 }
 
 export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSchema {
   return Boolean((schema as ArmResourceSchema).resourceMetadata);
+}
+
+export function isTspArmResource(schema: CadlObject): schema is TspArmResource {
+  return Boolean((schema as TspArmResource).resourceKind);
 }

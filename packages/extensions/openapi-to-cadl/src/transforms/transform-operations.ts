@@ -12,6 +12,7 @@ import {
 import { getDataTypes } from "../data-types";
 import { CadlOperation, CadlOperationGroup, CadlParameter, CadlParameterLocation, Extension } from "../interfaces";
 import { transformDataType } from "../model";
+import { getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isConstantSchema } from "../utils/schemas";
@@ -156,6 +157,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     isOptional: parameter.required !== true,
     type: visited.name,
     location: transformParameterLocation(parameter),
+    decorators: getPropertyDecorators(parameter),
   };
 }
 

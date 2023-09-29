@@ -1,4 +1,6 @@
 import { CodeModel, isObjectSchema, Schema } from "@autorest/codemodel";
+import { transformTspArmResource } from "./transforms/transform-arm-resources";
+import { ArmResourceSchema, isResourceSchema } from "./utils/resource-discovery";
 import { getDataTypes } from "./data-types";
 import { CadlDataType, CadlProgram } from "./interfaces";
 import { transformEnum } from "./transforms/transform-choices";
@@ -42,7 +44,12 @@ function transformModel(codeModel: CodeModel): CadlProgram {
     transformEnum(c, codeModel),
   );
 
-  const cadlObjects = codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
+  const cadlObjects =
+    codeModel.schemas.objects?.filter((o) => !isResourceSchema(o)).map((o) => transformObject(o, codeModel)) ?? [];
+  const armResources =
+    codeModel.schemas.objects
+      ?.filter((o) => isResourceSchema(o))
+      .map((o) => transformTspArmResource(codeModel, o as ArmResourceSchema)) ?? [];
 
   const serviceInformation = transformServiceInformation(codeModel);
 
@@ -53,6 +60,7 @@ function transformModel(codeModel: CodeModel): CadlProgram {
     models: {
       enums: caldEnums,
       objects: cadlObjects,
+      armResources,
     },
     operationGroups: cadlOperationGroups,
   };

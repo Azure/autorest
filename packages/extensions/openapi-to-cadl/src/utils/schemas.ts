@@ -9,10 +9,15 @@ import {
   SealedChoiceSchema,
   Response,
   AnySchema,
+  StringSchema,
 } from "@autorest/codemodel";
 
 export function isConstantSchema(schema: Schema): schema is ConstantSchema {
   return schema.type === SchemaType.Constant;
+}
+
+export function isStringSchema(schema: Schema): schema is StringSchema {
+  return schema.type === SchemaType.String;
 }
 
 export function isArraySchema(schema: Schema): schema is ArraySchema {

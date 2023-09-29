@@ -5,6 +5,7 @@ import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
 import { setSession } from "./autorest-session";
+import { emitArmResources } from "./emiters/emit-arm-resources";
 import { emitCadlConfig } from "./emiters/emit-cadl-config";
 import { emitMain } from "./emiters/emit-main";
 
@@ -28,6 +29,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   markErrorModels(codeModel);
   markResources(codeModel);
   const cadlProgramDetails = getModel(codeModel);
+  emitArmResources(cadlProgramDetails, getOutuptDirectory(session));
   await emitModels(getFilePath(session, "models.tsp"), cadlProgramDetails);
   await emitRoutes(getFilePath(session, "routes.tsp"), cadlProgramDetails);
   await emitMain(getFilePath(session, "main.tsp"), cadlProgramDetails);

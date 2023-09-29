@@ -60,7 +60,7 @@ interface CatalogsOperations {
       @path
       catalogName: string;
     },
-    Catalog
+    void
   >;
 
   @doc("Create a Catalog")
@@ -84,7 +84,7 @@ interface CatalogsOperations {
       @body
       resource: Catalog;
     },
-    Catalog
+    void
   >;
 
   @doc("Update a Catalog")
@@ -361,7 +361,7 @@ certificate.
       @path
       serialNumber: string;
     },
-    Certificate
+    void
   >;
 
   @doc("Retrieves cert chain.")
@@ -481,7 +481,7 @@ interface ImagesOperations {
       @path
       imageName: string;
     },
-    Image
+    void
   >;
 
   @doc("Create a Image")
@@ -509,7 +509,7 @@ interface ImagesOperations {
       @body
       resource: Image;
     },
-    Image
+    void
   >;
 
   @doc("Delete a Image")
@@ -582,7 +582,7 @@ cannot be used for product name.
       @path
       productName: string;
     },
-    Product
+    void
   >;
 
   @doc("""
@@ -613,7 +613,7 @@ cannot be used for product name.
       @body
       resource: Product;
     },
-    Product
+    void
   >;
 
   @doc("""
@@ -801,7 +801,7 @@ cannot be used for product or device group name.
       @path
       deviceGroupName: string;
     },
-    DeviceGroup
+    void
   >;
 
   @doc("""
@@ -836,7 +836,7 @@ and cannot be used for product or device group name.
       @body
       resource: DeviceGroup;
     },
-    DeviceGroup
+    void
   >;
 
   @doc("""
@@ -1055,7 +1055,7 @@ deployment for the associated device group.
       @path
       deploymentName: string;
     },
-    Deployment
+    void
   >;
 
   @doc("""
@@ -1097,7 +1097,7 @@ deployment for the associated device group.
       @body
       resource: Deployment;
     },
-    Deployment
+    void
   >;
 
   @doc("""
@@ -1203,7 +1203,7 @@ names when a device does not belong to a device group and product.
       @path
       deviceName: string;
     },
-    Device
+    void
   >;
 
   @doc("""
@@ -1242,7 +1242,7 @@ product names to claim a device to the catalog only.
       @body
       resource: Device;
     },
-    Device
+    void
   >;
 
   @doc("""

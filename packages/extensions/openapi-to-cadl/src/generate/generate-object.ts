@@ -1,9 +1,10 @@
-import { CadlObject, CadlObjectProperty } from "../interfaces";
+import { CadlObject } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { getModelPropertiesDeclarations } from "../utils/model-generation";
 
 export function generateObject(cadlObject: CadlObject) {
-  const definitions: string[] = [];
+  let definitions: string[] = [];
 
   const fixme = getFixme(cadlObject);
   fixme && definitions.push(fixme);
@@ -29,14 +30,7 @@ export function generateObject(cadlObject: CadlObject) {
     definitions.push(`...${parent};`);
   }
 
-  for (const property of cadlObject.properties) {
-    const propertyDoc = generateDocs(property);
-    propertyDoc && definitions.push(propertyDoc);
-    const decorators = generateDecorators(property.decorators);
-    decorators && definitions.push(decorators);
-    property.fixMe && property.fixMe.length && definitions.push(property.fixMe.join("\n"));
-    definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type};`);
-  }
+  definitions = [...definitions, ...getModelPropertiesDeclarations(cadlObject.properties)];
   definitions.push("}");
 
   return definitions.join("\n");
@@ -48,8 +42,4 @@ function getFixme(cadlObject: CadlObject): string | undefined {
   }
 
   return cadlObject.fixMe.join("\n");
-}
-
-function getOptionalOperator(property: CadlObjectProperty) {
-  return property.isOptional ? "?" : "";
 }

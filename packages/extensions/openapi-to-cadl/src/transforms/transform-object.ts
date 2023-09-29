@@ -48,7 +48,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Cad
     return visited as CadlObject;
   }
 
-  const logger = getLogger("transformOperationGroup");
+  const logger = getLogger("transformObject");
 
   logger.info(`Transforming object ${schema.language.default.name}`);
 
