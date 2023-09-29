@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
+namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
@@ -24,43 +25,107 @@ interface Catalogs
       Catalog,
       CatalogProperties
     > {
-  @autoroute
+  @autoRoute
   @doc("Counts devices in catalog.")
-  @armResourceLocation(Catalog)
+  @armResourceAction(Catalog)
   @post
   countDevices(
     ...ResourceInstanceParameters<Catalog>
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
-  @autoroute
+  @autoRoute
   @doc("Lists deployments for catalog.")
-  @armResourceLocation(Catalog)
+  @armResourceAction(Catalog)
   @post
   listDeployments(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
-  ): ArmResponse<ResourceListResult<DeploymentListResult>> | ErrorResponse;
-  @autoroute
+
+    @doc("Filter the result list using the given expression")
+    @query
+    $filter: string,
+
+    @doc("The number of result items to return.")
+    @query
+    $top: int32,
+
+    @doc("The number of result items to skip.")
+    @query
+    $skip: int32,
+
+    @doc("The maximum number of result items per page.")
+    @query
+    $maxpagesize: int32
+  ): ArmResponse<ResourceListResult<Deployment>> | ErrorResponse;
+  @autoRoute
   @doc("List the device groups for the catalog.")
-  @armResourceLocation(Catalog)
+  @armResourceAction(Catalog)
   @post
   listDeviceGroups(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
-  ): ArmResponse<ResourceListResult<DeviceGroupListResult>> | ErrorResponse;
-  @autoroute
+
+    @doc("Filter the result list using the given expression")
+    @query
+    $filter: string,
+
+    @doc("The number of result items to return.")
+    @query
+    $top: int32,
+
+    @doc("The number of result items to skip.")
+    @query
+    $skip: int32,
+
+    @doc("The maximum number of result items per page.")
+    @query
+    $maxpagesize: int32,
+
+    @doc("List device groups for catalog.")
+    @body
+    listDeviceGroupsRequest: ListDeviceGroupsRequest
+  ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
+  @autoRoute
   @doc("Lists device insights for catalog.")
-  @armResourceLocation(Catalog)
+  @armResourceAction(Catalog)
   @post
   listDeviceInsights(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
+
+    @doc("Filter the result list using the given expression")
+    @query
+    $filter: string,
+
+    @doc("The number of result items to return.")
+    @query
+    $top: int32,
+
+    @doc("The number of result items to skip.")
+    @query
+    $skip: int32,
+
+    @doc("The maximum number of result items per page.")
+    @query
+    $maxpagesize: int32
   ): ArmResponse<Page<PagedDeviceInsight>> | ErrorResponse;
-  @autoroute
+  @autoRoute
   @doc("Lists devices for catalog.")
-  @armResourceLocation(Catalog)
+  @armResourceAction(Catalog)
   @post
   listDevices(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
-  ): ArmResponse<ResourceListResult<DeviceListResult>> | ErrorResponse;
+
+    @doc("Filter the result list using the given expression")
+    @query
+    $filter: string,
+
+    @doc("The number of result items to return.")
+    @query
+    $top: int32,
+
+    @doc("The number of result items to skip.")
+    @query
+    $skip: int32,
+
+    @doc("The maximum number of result items per page.")
+    @query
+    $maxpagesize: int32
+  ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
 }

@@ -1,5 +1,5 @@
 import { ChoiceSchema, ObjectSchema, Property, SealedChoiceSchema } from "@autorest/codemodel";
-import { CadlDecorator } from "../interfaces";
+import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema } from "./schemas";
 
@@ -100,11 +100,24 @@ export function generateDecorators(decorators: CadlDecorator[] = []): string {
       definitions.push(decorator.fixMe.join(`\n`));
     }
     if (decorator.arguments) {
-      definitions.push(`@${decorator.name}(${decorator.arguments?.map((a) => `"${a}"`).join(", ")})`);
+      definitions.push(`@${decorator.name}(${decorator.arguments?.map((a) => getArgumentValue(a)).join(", ")})`);
     } else {
       definitions.push(`@${decorator.name}`);
     }
   }
 
   return definitions.join("\n");
+}
+
+function getArgumentValue(argument: DecoratorArgument | string): string {
+  if (typeof argument === "string") {
+    return `"${argument}"`;
+  } else {
+    let value = argument.value;
+    if (!argument.options?.unwrap) {
+      value = `${argument.value}`;
+    }
+
+    return value;
+  }
 }

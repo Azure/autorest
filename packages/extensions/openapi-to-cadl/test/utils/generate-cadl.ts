@@ -13,7 +13,8 @@ export async function generateCadl(folder: string, debug = false) {
   }
 
   const firstSwagger = dir.find(
-    (f) => f.endsWith(".json") || f.endsWith(".yaml") || f.endsWith(".yml") || f.endsWith(".md"),
+    (f) =>
+      f !== "resources.json" && (f.endsWith(".json") || f.endsWith(".yaml") || f.endsWith(".yml") || f.endsWith(".md")),
   );
 
   if (!firstSwagger) {

@@ -27,5 +27,8 @@
   },
   "[typespec]": {
     "editor.defaultFormatter": "Microsoft.typespec-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

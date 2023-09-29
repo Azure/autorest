@@ -1,5 +1,13 @@
-import { Operation, Schema, SchemaResponse, isObjectSchema } from "@autorest/codemodel";
-import { lowerFirst } from "lodash";
+import {
+  ArraySchema,
+  ObjectSchema,
+  Operation,
+  Response,
+  Schema,
+  SchemaResponse,
+  isObjectSchema,
+} from "@autorest/codemodel";
+import { lowerFirst, toLower } from "lodash";
 import { plural } from "pluralize";
 import { getSession } from "../autorest-session";
 import { CadlObject, CadlObjectProperty, CadlOperation, TypespecArmResource } from "../interfaces";
@@ -8,6 +16,7 @@ import { ArmResourcesCache, getArmResourceNames } from "../transforms/transform-
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
+import { generateParameters } from "./generate-operations";
 
 export function generateArmOperations(resource: TypespecArmResource) {
   const definitions: string[] = [];
@@ -16,17 +25,17 @@ export function generateArmOperations(resource: TypespecArmResource) {
   const resourceOperationsKind = getResourceOperationsKind(resource);
   definitions.push("@armResourceOperations");
   definitions.push(
-    `interface ${plural(resource.name)} extends Azure.ResourceManager.${resourceOperationsKind}<${resource.name}, ${
-      resource.propertiesModelName
-    }>{`,
+    `interface ${plural(resource.name)} extends Azure.ResourceManager.${
+      resourceOperationsKind.name
+    }<${resourceOperationsKind.parameters.join()}>{`,
   );
 
   for (const operation of resource.operations) {
     const typespecOperations = transformOperation(operation, codeModel).flatMap((p) => p);
     for (const op of typespecOperations) {
-      definitions.push("@autoroute");
+      definitions.push("@autoRoute");
       definitions.push(generateDocs(op));
-      definitions.push(`@armResourceLocation(${resource.name})`);
+      definitions.push(`@armResourceAction(${resource.name})`);
       definitions.push(`@${op.verb}`);
       definitions.push(
         `${lowerFirst(op.name)}(${getOperationParameters(resource, op)}): ArmResponse<${getResponseType(
@@ -41,12 +50,32 @@ export function generateArmOperations(resource: TypespecArmResource) {
   return definitions;
 }
 
+const defaultResourceParameters = ["resourcegroupname", "subscriptionid", "apiversion"];
+
+function getParentKeys(resource: TypespecArmResource): string[] {
+  if (!resource.resourceParent) {
+    return [];
+  }
+
+  return [resource.resourceParent.metadata.name, ...getParentKeys(resource.resourceParent)];
+}
+
 function getOperationParameters(resource: TypespecArmResource, operation: CadlOperation) {
   const params = [`...ResourceInstanceParameters<${resource.name}>`];
-
-  if (operation.extensions.includes("Pageable")) {
-    params.push(`...ListQueryParameters`);
-  }
+  const parentsKeys = getParentKeys(resource);
+  params.push(
+    generateParameters(
+      operation.parameters
+        .filter((p) => !parentsKeys.includes(p.name))
+        .filter(
+          (p) =>
+            p.name !== resource.metadata.name &&
+            p.implementation === "Method" &&
+            p.name.toLowerCase() !== `${resource.name}Name`.toLowerCase() &&
+            !defaultResourceParameters.includes(p.name.toLowerCase()),
+        ),
+    ),
+  );
 
   return params.join(", ");
 }
@@ -54,13 +83,25 @@ function getOperationParameters(resource: TypespecArmResource, operation: CadlOp
 function getResponseType(operation: CadlOperation, rawOperation: Operation) {
   const responseTypes = operation.responses.join(" |");
   if (operation.extensions.includes("Pageable")) {
-    const armResourceNames = getArmResourceNames();
-
     if (!isResultResourceList(rawOperation)) {
       return `Page<${responseTypes}>`;
     }
 
-    return `ResourceListResult<${operation.responses[0]}>`;
+    const responses = rawOperation.responses ?? [];
+    if (responses.length && isResponseSchema(responses[0])) {
+      const schema = responses[0].schema as ObjectSchema;
+      const valuesProperty = schema.properties?.find((p) => p.serializedName === "value");
+      if (!valuesProperty) {
+        throw new Error(`Unable to determine response type for operation ${operation.name}`);
+      }
+      if (!isArraySchema(valuesProperty.schema)) {
+        throw new Error(`Unable to determine response type for operation ${operation.name}`);
+      }
+      const elementType = valuesProperty.schema.elementType.language.default.name;
+      return `ResourceListResult<${elementType}>`;
+    }
+
+    throw new Error(`Unable to determine response type for operation ${operation.name}`);
   }
 
   return responseTypes;
@@ -101,12 +142,19 @@ function isResultResourceList(operation: Operation) {
   return resources.has(resultName);
 }
 
-function getResourceOperationsKind(resource: TypespecArmResource) {
+interface ResourceOperationsKind {
+  name: "ProxyResourceOperations" | "TrackedResourceOperations";
+  parameters: string[];
+}
+
+function getResourceOperationsKind(resource: TypespecArmResource): ResourceOperationsKind {
   switch (resource.resourceKind) {
     case "ProxyResource":
-      return "ProxyResourceOperations";
+    case "ExtensionResource":
+    case "SingletonResource":
+      return { name: "ProxyResourceOperations", parameters: [resource.name] };
     case "TrackedResource":
-      return "TrackedResourceOperations";
+      return { name: "TrackedResourceOperations", parameters: [resource.name, resource.propertiesModelName] };
     default:
       throw new Error(`Generating operations for ${resource.resourceKind} is not yet supported`);
   }

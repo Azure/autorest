@@ -1,0 +1,291 @@
+{
+  "Resources": [
+    {
+      "Name": "SphereCatalog",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "GET",
+          "OperationID": "Catalogs_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "DELETE",
+          "OperationID": "Catalogs_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PATCH",
+          "OperationID": "Catalogs_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices",
+          "Method": "POST",
+          "OperationID": "Catalogs_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeployments",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeployments"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceGroups",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeviceGroups"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceInsights",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDeviceInsights"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDevices",
+          "Method": "POST",
+          "OperationID": "Catalogs_ListDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
+          "Method": "PUT",
+          "OperationID": "Catalogs_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs",
+          "Method": "GET",
+          "OperationID": "Catalogs_ListByResourceGroup"
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "ModelName": "Catalog",
+      "IsTrackedResource": true,
+      "IsResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereCertificate",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}",
+          "Method": "GET",
+          "OperationID": "Certificates_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveCertChain",
+          "Method": "POST",
+          "OperationID": "Certificates_RetrieveCertChain"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveProofOfPossessionNonce",
+          "Method": "POST",
+          "OperationID": "Certificates_RetrieveProofOfPossessionNonce"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates",
+          "Method": "GET",
+          "OperationID": "Certificates_ListByCatalog"
+        }
+      ],
+      "Parents": ["SphereCatalog"],
+      "ModelName": "Certificate",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereImage",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "GET",
+          "OperationID": "Images_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "DELETE",
+          "OperationID": "Images_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}",
+          "Method": "PUT",
+          "OperationID": "Images_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images",
+          "Method": "GET",
+          "OperationID": "Images_ListByCatalog"
+        }
+      ],
+      "Parents": ["SphereCatalog"],
+      "ModelName": "Image",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereProduct",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "GET",
+          "OperationID": "Products_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "DELETE",
+          "OperationID": "Products_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PATCH",
+          "OperationID": "Products_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices",
+          "Method": "POST",
+          "OperationID": "Products_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/generateDefaultDeviceGroups",
+          "Method": "POST",
+          "OperationID": "Products_GenerateDefaultDeviceGroups"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}",
+          "Method": "PUT",
+          "OperationID": "Products_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products",
+          "Method": "GET",
+          "OperationID": "Products_ListByCatalog"
+        }
+      ],
+      "Parents": ["SphereCatalog"],
+      "ModelName": "Product",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereDeviceGroup",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "GET",
+          "OperationID": "DeviceGroups_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "DELETE",
+          "OperationID": "DeviceGroups_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PATCH",
+          "OperationID": "DeviceGroups_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/claimDevices",
+          "Method": "POST",
+          "OperationID": "DeviceGroups_ClaimDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices",
+          "Method": "POST",
+          "OperationID": "DeviceGroups_CountDevices"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}",
+          "Method": "PUT",
+          "OperationID": "DeviceGroups_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups",
+          "Method": "GET",
+          "OperationID": "DeviceGroups_ListByProduct"
+        }
+      ],
+      "Parents": ["SphereProduct"],
+      "ModelName": "DeviceGroup",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereDeployment",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "GET",
+          "OperationID": "Deployments_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "DELETE",
+          "OperationID": "Deployments_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}",
+          "Method": "PUT",
+          "OperationID": "Deployments_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments",
+          "Method": "GET",
+          "OperationID": "Deployments_ListByDeviceGroup"
+        }
+      ],
+      "Parents": ["SphereDeviceGroup"],
+      "ModelName": "Deployment",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    {
+      "Name": "SphereDevice",
+      "Operations": [
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "GET",
+          "OperationID": "Devices_Get"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "DELETE",
+          "OperationID": "Devices_Delete"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PATCH",
+          "OperationID": "Devices_Update"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}/generateCapabilityImage",
+          "Method": "POST",
+          "OperationID": "Devices_GenerateCapabilityImage"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}",
+          "Method": "PUT",
+          "OperationID": "Devices_CreateOrUpdate"
+        },
+        {
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices",
+          "Method": "GET",
+          "OperationID": "Devices_ListByDeviceGroup"
+        }
+      ],
+      "Parents": ["SphereDeviceGroup"],
+      "ModelName": "Device",
+      "IsTrackedResource": false,
+      "IsResource": true,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  ]
+}

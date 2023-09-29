@@ -152,6 +152,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
   return {
     kind: "parameter",
     doc,
+    implementation: parameter.implementation,
     name,
     isOptional: parameter.required !== true,
     type: visited.name,

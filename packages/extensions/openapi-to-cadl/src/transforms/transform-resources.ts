@@ -1,12 +1,13 @@
 import { CodeModel, ObjectSchema, Operation, StringSchema } from "@autorest/codemodel";
 import { upperFirst } from "lodash";
+import { ArmCodeModel } from "main";
 import pluralize, { singular } from "pluralize";
-import { ArmResourceHierarchy, CadlDecorator, TypespecArmResource } from "../interfaces";
+import { ArmResourceKind, ArmResourceObjectSchema, CadlDecorator, TypespecArmResource } from "../interfaces";
 import { isResponseSchema } from "../utils/schemas";
-import { transformOperation } from "./transform-operations";
 
 const _resourceKinds = ["ProxyResource", "TrackedResource"];
 export const ArmResourcesCache = new Map<ObjectSchema, TypespecArmResource>();
+export let ArmResourcesCacheByName: Map<string, TypespecArmResource> | undefined;
 let _armResourcesnameCache: Set<string> | undefined;
 export interface ArmResourceSchema extends ObjectSchema {
   armResource?: TypespecArmResource;
@@ -34,38 +35,53 @@ function getPropertiesModelName(schema: ObjectSchema) {
   return property.schema.language.default.name;
 }
 
+function isArmObjectSchema(schema: ObjectSchema): schema is ArmResourceObjectSchema {
+  return Boolean((schema as ArmResourceObjectSchema).resourceInformation);
+}
+
+function getModelName(codeModel: ArmCodeModel, resoureName: string) {
+  return codeModel.armResources?.find((r) => r.Name === resoureName)?.ModelName;
+}
+
 export function calculateArmResources(codeModel: CodeModel) {
   if (ArmResourcesCache.size) {
     return ArmResourcesCache;
   }
   for (const schema of codeModel.schemas?.objects ?? []) {
-    if (isResourceModel(schema)) {
+    if (isArmObjectSchema(schema)) {
       const resourceOperation = findResourceFirstOperation(codeModel, schema);
+      const resourceInformation = schema.resourceInformation;
 
-      const path = getOperationPath(resourceOperation);
+      if (!resourceInformation) {
+        throw new Error(`model ${schema.language.default.name} is a resource but doesn't contain resource information`);
+      }
+
+      const path = resourceInformation.Operations.find((o) => o.Method === "GET");
       const key = findResourceKey(resourceOperation);
-
-      const hierarchy = extractResourceHierarchy(path);
-
       const resourceDecorators: CadlDecorator[] = [];
 
-      if (hierarchy?.parent) {
-        resourceDecorators.push({ name: "parentResource", arguments: [hierarchy.parent.name] });
+      if (resourceInformation.Parents.length) {
+        const parent = getModelName(codeModel, resourceInformation.Parents[0]);
+        parent &&
+          resourceDecorators.push({
+            name: "parentResource",
+            arguments: [{ value: parent, options: { unwrap: true } }],
+          });
       }
 
       const resourceName = schema.language.default.name;
 
       const operations = findResourceOperations(codeModel, resourceName);
 
-      ArmResourcesCache.set(schema, {
+      const res: TypespecArmResource = {
         kind: "object",
+        metadata: key,
         operations,
         doc: schema.language.default.description,
         propertiesModelName: getPropertiesModelName(schema),
         resourceKind: getResourceKind(schema),
         name: resourceName,
         schema,
-        path,
         decorators: resourceDecorators,
         properties: [
           {
@@ -83,14 +99,33 @@ export function calculateArmResources(codeModel: CodeModel) {
           },
         ],
         parents: [],
-      });
+      };
+
+      ArmResourcesCache.set(schema, res);
+      const parent = extractResourceParent(path?.Path ?? "");
+      if (parent) {
+        res.resourceParent = parent;
+      }
     }
   }
-
   return ArmResourcesCache;
 }
 
-function extractResourceHierarchy(url: string): ArmResourceHierarchy | undefined {
+function getArmResourcesCacheByName() {
+  if (ArmResourcesCacheByName) {
+    return ArmResourcesCacheByName;
+  }
+
+  ArmResourcesCacheByName = new Map<string, TypespecArmResource>();
+
+  for (const resource of ArmResourcesCache.values()) {
+    ArmResourcesCacheByName.set(resource.name, resource);
+  }
+
+  return ArmResourcesCacheByName;
+}
+
+function extractResourceParent(url: string): TypespecArmResource | undefined {
   // Split the URL by slashes
   const parts = url.split("/").filter((p) => p); // filter removes empty strings
 
@@ -101,21 +136,27 @@ function extractResourceHierarchy(url: string): ArmResourceHierarchy | undefined
   }
 
   // Extract resources from URL
-  const resources: string[] = [];
+  let resources: string[] = [];
   for (let i = providerIndex + 2; i < parts.length; i += 2) {
     resources.push(parts[i]);
   }
 
+  resources = resources.reverse();
+  resources.shift();
+  resources = resources.reverse();
+
   // Build the hierarchy from the resources
-  let hierarchy: ArmResourceHierarchy | undefined;
+  let parent: TypespecArmResource | undefined;
+  const _cache = getArmResourcesCacheByName();
   for (const resource of resources) {
-    hierarchy = {
-      name: upperFirst(singular(resource)),
-      parent: hierarchy,
-    };
+    const resourceName = upperFirst(singular(resource));
+    parent = _cache.get(resourceName);
+    if (parent) {
+      return parent;
+    }
   }
 
-  return hierarchy || undefined;
+  return undefined;
 }
 
 function escapeRegex(str: string) {
@@ -174,18 +215,22 @@ function getOperationPath(operation: Operation): string {
   throw new Error(`Unable to determine path for operation ${operation.language.default.name}`);
 }
 
-function getResourceKind(schema: ObjectSchema) {
-  for (const parent of schema.parents?.immediate ?? []) {
-    switch (parent.language.default.name) {
-      case "ProxyResource":
-        return "ProxyResource";
-      case "TrackedResource":
-        return "TrackedResource";
-      default:
-        continue;
-    }
+function getResourceKind(schema: ArmResourceObjectSchema): ArmResourceKind {
+  if (!schema.resourceInformation) {
+    throw new Error(`Unable to determine resource kind for schema ${schema.language.default.name}`);
   }
 
+  if (schema.resourceInformation.IsTrackedResource) {
+    return "TrackedResource";
+  }
+
+  if (schema.resourceInformation.IsResource) {
+    return "ProxyResource";
+  }
+
+  if (schema.resourceInformation.IsExtensionResource) {
+    return "ExtensionResource";
+  }
   throw new Error(`Unable to determine resource kind for schema ${schema.language.default.name}`);
 }
 

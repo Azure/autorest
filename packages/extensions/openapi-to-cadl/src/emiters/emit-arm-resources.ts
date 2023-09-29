@@ -6,12 +6,13 @@ import { CadlProgram } from "../interfaces";
 import { ArmResourcesCache } from "../transforms/transform-resources";
 import { formatCadlFile } from "../utils/format";
 import { getResourcesImports } from "../utils/imports";
+import { getNamespace } from "../utils/namespace";
 
 export function emitArmResources(program: CadlProgram, basePath: string) {
   // Create a file per resource
   const session = getSession();
   for (const [_schema, armResource] of ArmResourcesCache.entries()) {
-    const { modules, namespaces } = getResourcesImports(program);
+    const { modules, namespaces } = getResourcesImports(program, armResource);
     const filePath = join(basePath, `${armResource.name}.tsp`);
     const generatedResource = generateObject(armResource);
     const armOperations = generateArmOperations(armResource);
@@ -20,6 +21,7 @@ export function emitArmResources(program: CadlProgram, basePath: string) {
       "\n",
       namespaces.join("\n"),
       "\n",
+      getNamespace(program),
       generatedResource,
       "\n",
       armOperations.join("\n"),

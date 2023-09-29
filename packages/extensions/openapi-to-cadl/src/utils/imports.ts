@@ -1,4 +1,4 @@
-import { CadlProgram } from "../interfaces";
+import { CadlProgram, TypespecArmResource } from "../interfaces";
 import { ArmResourcesCache } from "../transforms/transform-resources";
 
 type Imports = {
@@ -6,7 +6,7 @@ type Imports = {
   namespaces: string[];
 };
 
-export function getResourcesImports(_program: CadlProgram) {
+export function getResourcesImports(_program: CadlProgram, armResource: TypespecArmResource) {
   const imports: Imports = {
     modules: [
       `import "@azure-tools/typespec-azure-core";`,
@@ -21,6 +21,11 @@ export function getResourcesImports(_program: CadlProgram) {
       `using TypeSpec.Http;`,
     ],
   };
+
+  if (armResource.resourceParent?.name) {
+    imports.modules.push(`import "./${armResource.resourceParent.name}.tsp";`);
+  }
+
   return imports;
 }
 

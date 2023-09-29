@@ -66,7 +66,7 @@ function generateMultiResponseWarning(responses: string[], statements: string[])
     );
 }
 
-function generateParameters(parameters: CadlParameter[]) {
+export function generateParameters(parameters: CadlParameter[]) {
   const params: string[] = [];
   for (const parameter of parameters) {
     const location = parameter.location;

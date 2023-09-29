@@ -1,4 +1,4 @@
-import { ObjectSchema, Operation } from "@autorest/codemodel";
+import { ImplementationLocation, ObjectSchema, Operation } from "@autorest/codemodel";
 
 export interface CadlProgram {
   models: Models;
@@ -101,6 +101,7 @@ export interface CadlParameter extends CadlDataType {
   isOptional: boolean;
   type: string;
   location: CadlParameterLocation;
+  implementation?: "Method" | "Client" | "Context";
 }
 
 export interface CadlObjectProperty extends CadlDataType {
@@ -110,10 +111,18 @@ export interface CadlObjectProperty extends CadlDataType {
   decorators?: CadlDecorator[];
   visibility?: "read";
 }
+export interface DecoratorArgumentOptions {
+  unwrap?: boolean;
+}
+
+export interface DecoratorArgument {
+  value: string;
+  options?: DecoratorArgumentOptions;
+}
 
 export interface CadlDecorator extends WithFixMe {
   name: string;
-  arguments?: string[];
+  arguments?: string[] | DecoratorArgument[];
   module?: string;
   namespace?: string;
 }
@@ -134,17 +143,21 @@ export interface CadlObject extends CadlDataType {
   alias?: CadlAlias;
 }
 
-export type ArmResourceKind = "TrackedResource" | "ProxyResource";
+export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "ExtensionResource" | "SingletonResource";
 
-export type ArmResourceHierarchy = {
+export interface ArmResourceMetadata {
   name: string;
-  parent?: ArmResourceHierarchy;
-};
+  doc: string;
+  location: any;
+  pattern: string;
+  segmentName: string;
+}
 
 export interface TypespecArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
-  path: string;
+  resourceParent?: TypespecArmResource;
+  metadata: ArmResourceMetadata;
   operations: Operation[];
   schema: ObjectSchema;
 }
@@ -153,3 +166,30 @@ export interface Models {
   enums: CadlEnum[];
   objects: CadlObject[];
 }
+
+export interface InternalArmResources {
+  Resources: InternalArmResource[];
+}
+
+export interface InternalArmResource {
+  Name: string;
+  Operations: InternalArmResourceOperation[];
+  Parents: string[];
+  ModelName: string;
+  IsTrackedResource: boolean;
+  IsResource: boolean;
+  IsExtensionResource: boolean;
+  IsSingletonResource: boolean;
+}
+
+export interface InternalArmResourceOperation {
+  Path: string;
+  Method: HttpMethod;
+  OperationID: string;
+}
+
+export interface ArmResourceObjectSchema extends ObjectSchema {
+  resourceInformation?: InternalArmResource;
+}
+
+type HttpMethod = "GET" | "POST" | "DELETE" | "PATCH" | "PUT";
