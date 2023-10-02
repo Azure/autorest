@@ -8,6 +8,7 @@ export interface CadlOptions {
   isAzureSpec: boolean;
   namespace?: string;
   guessResourceKey: boolean;
+  isArm: boolean;
 }
 
 export interface CadlChoiceValue extends WithDoc {
@@ -147,12 +148,15 @@ export interface Models {
   armResources: TspArmResource[];
 }
 
-export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "MinProxyResource";
+export type ArmResourceKind = "TrackedResource" | "ProxyResource";
+export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
+export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update" | "Get";
 
 export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;
+  resourceStandardOperations: ArmResourceStandardOperation[];
   // keyProperty: CadlObjectProperty;
   // operations: Operation[];
   // schema: ObjectSchema;

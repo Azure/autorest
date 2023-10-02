@@ -1,5 +1,12 @@
 import { CodeModel, Parameter } from "@autorest/codemodel";
-import { ArmResourceKind, CadlDecorator, CadlObjectProperty, CadlParameter, TspArmResource } from "../interfaces";
+import {
+  ArmResourceKind,
+  ArmResourceStandardOperation,
+  CadlDecorator,
+  CadlObjectProperty,
+  CadlParameter,
+  TspArmResource,
+} from "../interfaces";
 import { ArmResourceSchema, isResourceSchema } from "../utils/resource-discovery";
 import { transformParameter } from "./transform-operations";
 
@@ -38,6 +45,7 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     propertiesModelName: `${schema.resourceMetadata.SwaggerModelName}Properties`,
     doc: schema.language.default.description,
     decorators: resourceModelDecorators,
+    resourceStandardOperations: getStandardOperations(schema),
   };
 }
 
@@ -104,13 +112,27 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
     return "TrackedResource";
   }
 
-  if (
-    schema.resourceMetadata.ResourceOperationsMetadata.HasCreateOrUpdateOperation &&
-    schema.resourceMetadata.ResourceOperationsMetadata.HasDeleteOperation &&
-    schema.resourceMetadata.ResourceOperationsMetadata.HasUpdateOperation
-  ) {
-    return "ProxyResource";
+  return "ProxyResource";
+}
+
+function getStandardOperations(schema: ArmResourceSchema): ArmResourceStandardOperation[] {
+  const operations: ArmResourceStandardOperation[] = [];
+
+  if (schema.resourceMetadata.ResourceOperationsMetadata.HasCreateOrUpdateOperation) {
+    operations.push("CreateOrUpdate");
   }
 
-  return "MinProxyResource";
+  if (schema.resourceMetadata.ResourceOperationsMetadata.HasDeleteOperation) {
+    operations.push("Delete");
+  }
+
+  if (schema.resourceMetadata.ResourceOperationsMetadata.HasUpdateOperation) {
+    operations.push("Update");
+  }
+
+  if (schema.resourceMetadata.ResourceOperationsMetadata.HasGetOperation) {
+    operations.push("Get");
+  }
+
+  return operations;
 }
