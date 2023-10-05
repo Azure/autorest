@@ -1,22 +1,25 @@
 import { dirname, join } from "path";
-import { ObjectSchema } from "@autorest/codemodel";
+import { ObjectSchema, Operation } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { CadlObject, TspArmResource } from "../interfaces";
 
-interface _ArmResourceOperation {
+export interface _ArmResourceOperation {
   Path: string;
   Method: string;
   OperationID: string;
+  IsLongRunning: boolean;
+  Description?: string;
+  PagingMetadata: _ArmPagingMetadata | null;
 }
 
-interface _ArmResourceOperationsMetadata {
-  HasGetOperation: boolean;
-  HasCreateOrUpdateOperation?: boolean;
-  HasUpdateOperation?: boolean;
-  HasDeleteOperation: boolean;
+export interface _ArmPagingMetadata {
+  Method: string;
+  NextPageMethod?: string;
+  ItemName: string;
+  NextLinkName: string;
 }
 
-interface ArmResource {
+export interface ArmResource {
   Name: string;
   Operations: _ArmResourceOperation[];
   Parents: string[];
@@ -30,12 +33,27 @@ interface ArmResource {
   IsManagementGroupResource: boolean;
   IsExtensionResource: boolean;
   IsSingletonResource: boolean;
-  ResourceOperationsMetadata: _ArmResourceOperationsMetadata;
 }
 
 let armResourceCache: Record<string, ArmResource> | undefined;
 
-function getArmResourcesMetadata(): Record<string, ArmResource> {
+export function getResourceOperations(resource: ArmResource): Operation[] {
+  const operations: Operation[] = [];
+  const codeModel = getSession().model;
+  for (const operationMetadata of resource.Operations) {
+    for (const operationGroup of codeModel.operationGroups) {
+      for (const operation of operationGroup.operations) {
+        if (operation.operationId === operationMetadata.OperationID) {
+          operations.push(operation);
+        }
+      }
+    }
+  }
+
+  return operations;
+}
+
+export function getArmResourcesMetadata(): Record<string, ArmResource> {
   if (armResourceCache) {
     return armResourceCache;
   }

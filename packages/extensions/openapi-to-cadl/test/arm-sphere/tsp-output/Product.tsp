@@ -18,5 +18,45 @@ model Product is ProxyResource<ProductProperties> {
   @path
   @key("productName")
   @segment("products")
-  productName: string;
+  name: string;
+}
+
+@armResourceOperations
+interface Products {
+  @doc("""
+Get a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name.
+""")
+  get is ArmResourceRead<Product>;
+  @doc("""
+Delete a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name'
+""")
+  delete is ArmResourceDeleteAsync<Product>;
+  @doc("""
+Update a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name.
+""")
+  update is ArmResourcePatchAsync<Product, ProductProperties>;
+  @doc("""
+Counts devices in product. '.default' and '.unassigned' are system defined
+values and cannot be used for product name.
+""")
+  countDevices is ArmResourceActionSync<Product, {}, CountDeviceResponse>;
+  @doc("""
+Generates default device groups for the product. '.default' and '.unassigned'
+are system defined values and cannot be used for product name.
+""")
+  generateDefaultDeviceGroups is ArmResourceActionSync<
+    Product,
+    {},
+    DeviceGroupListResult
+  >;
+  @doc("""
+Create a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
+  @doc("List Product resources by Catalog")
+  listByCatalog is ArmResourceListByParent<Product>;
 }

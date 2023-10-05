@@ -1,5 +1,5 @@
 import { CodeModel } from "@autorest/codemodel";
-import { getOptions } from "options";
+import { getOptions } from "../options";
 import { tagSchemaAsResource } from "../utils/resource-discovery";
 
 export function pretransformArmResources(codeModel: CodeModel): void {

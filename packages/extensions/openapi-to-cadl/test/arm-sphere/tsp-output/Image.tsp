@@ -17,5 +17,17 @@ model Image is ProxyResource<ImageProperties> {
   @path
   @key("imageName")
   @segment("images")
-  imageName: string;
+  name: string;
+}
+
+@armResourceOperations
+interface Images {
+  @doc("Get a Image")
+  get is ArmResourceRead<Image>;
+  @doc("Delete a Image")
+  delete is ArmResourceDeleteAsync<Image>;
+  @doc("Create a Image")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
+  @doc("List Image resources by Catalog")
+  listByCatalog is ArmResourceListByParent<Image>;
 }

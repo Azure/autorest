@@ -93,12 +93,6 @@ enum CapabilityType {
   @doc("Field servicing capability") FieldServicing,
 }
 
-@doc("""
-A list of REST API operations supported by an Azure Resource Provider. It
-contains an URL link to get the next set of results.
-""")
-model OperationListResult is Azure.Core.Page<Operation>;
-
 @doc("The response of a Catalog list operation.")
 model CatalogListResult is Azure.Core.Page<Catalog>;
 

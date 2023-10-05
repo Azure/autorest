@@ -20,5 +20,29 @@ deployment for the associated device group.
   @path
   @key("deploymentName")
   @segment("deployments")
-  deploymentName: string;
+  name: string;
+}
+
+@armResourceOperations
+interface Deployments {
+  @doc("""
+Get a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  get is ArmResourceRead<Deployment>;
+  @doc("""
+Delete a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  delete is ArmResourceDeleteAsync<Deployment>;
+  @doc("""
+Create a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
+  @doc("""
+List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
+system defined values and cannot be used for product or device group name.
+""")
+  listByDeviceGroup is ArmResourceListByParent<Deployment>;
 }

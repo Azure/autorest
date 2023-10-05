@@ -18,5 +18,41 @@ model Device is ProxyResource<DeviceProperties> {
   @path
   @key("deviceName")
   @segment("devices")
-  deviceName: string;
+  name: string;
+}
+
+@armResourceOperations
+interface Devices {
+  @doc("""
+Get a Device. Use '.unassigned' or '.default' for the device group and product
+names when a device does not belong to a device group and product.
+""")
+  get is ArmResourceRead<Device>;
+  @doc("Delete a Device")
+  delete is ArmResourceDeleteAsync<Device>;
+  @doc("""
+Update a Device. Use '.unassigned' or '.default' for the device group and
+product names to move a device to the catalog level.
+""")
+  update is ArmResourcePatchAsync<Device, DeviceProperties>;
+  @doc("""
+Generates the capability image for the device. Use '.unassigned' or '.default'
+for the device group and product names to generate the image for a device that
+does not belong to a specific device group and product.
+""")
+  generateCapabilityImage is ArmResourceActionAsync<
+    Device,
+    {},
+    SignedCapabilityImageResponse
+  >;
+  @doc("""
+Create a Device. Use '.unassigned' or '.default' for the device group and
+product names to claim a device to the catalog only.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
+  @doc("""
+List Device resources by DeviceGroup. '.default' and '.unassigned' are system
+defined values and cannot be used for product or device group name.
+""")
+  listByDeviceGroup is ArmResourceListByParent<Device>;
 }

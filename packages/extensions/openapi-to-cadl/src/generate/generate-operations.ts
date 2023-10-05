@@ -61,12 +61,12 @@ function generateNameCollisionWarning(duplicateNames: string[], statements: stri
 function generateMultiResponseWarning(responses: string[], statements: string[]) {
   responses.length > 2 &&
     statements.push(
-      `// FIXME: (multi-response) Swagger defines multiple requests and responses. 
+      `// FIXME: (multi-response) Swagger defines multiple requests and responses.
        //      This needs to be revisited as CADL supports linking specific responses to each request`,
     );
 }
 
-function generateParameters(parameters: CadlParameter[]) {
+export function generateParameters(parameters: CadlParameter[]) {
   const params: string[] = [];
   for (const parameter of parameters) {
     const location = parameter.location;

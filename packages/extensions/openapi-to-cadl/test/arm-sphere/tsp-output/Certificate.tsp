@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.AzureSphere;
 @doc("An certificate resource belonging to a catalog resource.")
 @parentResource(Catalog)
-model Certificate is MinProxyResource<CertificateProperties> {
+model Certificate is ProxyResource<CertificateProperties> {
   @doc("""
 Serial number of the certificate. Use '.default' to get current active
 certificate.
@@ -20,5 +20,25 @@ certificate.
   @path
   @key("serialNumber")
   @segment("certificates")
-  serialNumber: string;
+  name: string;
+}
+
+@armResourceOperations
+interface Certificates {
+  @doc("Get a Certificate")
+  get is ArmResourceRead<Certificate>;
+  @doc("Retrieves cert chain.")
+  retrieveCertChain is ArmResourceActionSync<
+    Certificate,
+    {},
+    CertificateChainResponse
+  >;
+  @doc("Gets the proof of possession nonce.")
+  retrieveProofOfPossessionNonce is ArmResourceActionSync<
+    Certificate,
+    {},
+    ProofOfPossessionNonceResponse
+  >;
+  @doc("List Certificate resources by Catalog")
+  listByCatalog is ArmResourceListByParent<Certificate>;
 }

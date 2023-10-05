@@ -50,7 +50,9 @@
     "@azure-tools/typespec-autorest": "^0.30.0",
     "@typespec/openapi": "^0.44.0",
     "@typespec/openapi3": "^0.44.0",
-    "prettier": "~2.7.1"
+    "prettier": "~2.7.1",
+    "lodash": "~4.17.20",
+    "pluralize": "^8.0.0"
   },
   "devDependencies": {
     "typescript": "~4.9.3",
@@ -73,6 +75,8 @@
     "eslint-plugin-unicorn": "~44.0.2",
     "eslint-plugin-import": "~2.26.0",
     "eslint": "^8.28.0",
-    "ts-loader": "~9.2.3"
+    "ts-loader": "~9.2.3",
+    "@types/lodash": "~4.14.168",
+    "@types/pluralize": "^0.0.30"
   }
 }

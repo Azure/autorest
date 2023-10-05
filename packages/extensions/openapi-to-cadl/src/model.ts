@@ -20,9 +20,11 @@ const _ArmCoreTypes = [
   "ErrorDetail",
   "ErrorResponse",
   "Operation",
+  "OperationListResult",
   "OperationDisplay",
   "Origin",
   "SystemData",
+  "Origin",
 ];
 
 export function getModel(codeModel: CodeModel): CadlProgram {

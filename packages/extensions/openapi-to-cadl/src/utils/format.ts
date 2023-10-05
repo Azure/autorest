@@ -14,7 +14,9 @@ export function formatCadlFile(content: string, filepath: string): string {
       pluginSearchDirs: ["./node_modules"],
       filepath,
     });
-  } catch {
+  } catch (e) {
+    // const logger = getLogger("formatCadlFile");
+    // logger.error(`Failed to format file ${filepath} \n ${e}`);
     return content;
   }
 }

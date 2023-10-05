@@ -5,5 +5,6 @@ title: "Azure Sphere resource management API."
 clear-output-folder: false
 guessResourceKey: true
 isAzureSpec: true
+isArm: true
 namespace: "Microsoft.AzureSphere"
 ```

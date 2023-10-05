@@ -152,12 +152,31 @@ export type ArmResourceKind = "TrackedResource" | "ProxyResource";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
 export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update" | "Get";
 
+export interface TspArmResourceOperation extends WithDoc, WithFixMe {
+  kind:
+    | "ArmResourceRead"
+    | "ArmListBySubscription"
+    | "ArmResourceListByParent"
+    | "ArmResourceListByParent"
+    | "ArmResourceCreateOrUpdateSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionAsync"
+    | "ArmListBySubscription";
+  name: string;
+  templateParameters: string[];
+  decorators?: CadlDecorator[];
+}
+
 export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;
-  resourceStandardOperations: ArmResourceStandardOperation[];
   // keyProperty: CadlObjectProperty;
-  // operations: Operation[];
+  operations: TspArmResourceOperation[];
   // schema: ObjectSchema;
 }

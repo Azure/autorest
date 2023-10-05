@@ -1,18 +1,31 @@
-import { CodeModel, Parameter } from "@autorest/codemodel";
+import { CodeModel, Operation, Parameter } from "@autorest/codemodel";
+import { lowerFirst } from "lodash";
+import pluralize from "pluralize";
+import { getSession } from "../autorest-session";
+import { generateParameters } from "../generate/generate-operations";
 import {
   ArmResourceKind,
-  ArmResourceStandardOperation,
   CadlDecorator,
   CadlObjectProperty,
   CadlParameter,
   TspArmResource,
+  TspArmResourceOperation,
 } from "../interfaces";
-import { ArmResourceSchema, isResourceSchema } from "../utils/resource-discovery";
+import {
+  ArmResource,
+  ArmResourceSchema,
+  _ArmResourceOperation,
+  getArmResourcesMetadata,
+  getResourceOperations,
+  isResourceSchema,
+} from "../utils/resource-discovery";
+import { isResponseSchema } from "../utils/schemas";
 import { transformParameter } from "./transform-operations";
 
+const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName"];
+
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
-  const keyProperty = getKeyParameter(codeModel, schema);
-  //schema.properties?.find((p) => p.serializedName === schema.resourceMetadata.ResourceKey);
+  const keyProperty = getKeyParameter(codeModel, schema.resourceMetadata);
   if (!keyProperty) {
     throw new Error(
       `Failed to find key property ${schema.resourceMetadata.ResourceKey} for ${schema.language.default.name}`,
@@ -29,10 +42,12 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   const resourceModelDecorators: CadlDecorator[] = [];
 
   if (schema.resourceMetadata.Parents && schema.resourceMetadata.Parents.length > 0) {
-    resourceModelDecorators.push({
-      name: "parentResource",
-      arguments: [{ value: schema.resourceMetadata.Parents[0], options: { unwrap: true } }],
-    });
+    if (schema.resourceMetadata.Parents[0] !== "ResourceGroupResource") {
+      resourceModelDecorators.push({
+        name: "parentResource",
+        arguments: [{ value: schema.resourceMetadata.Parents[0], options: { unwrap: true } }],
+      });
+    }
   }
 
   return {
@@ -45,14 +60,168 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     propertiesModelName: `${schema.resourceMetadata.SwaggerModelName}Properties`,
     doc: schema.language.default.description,
     decorators: resourceModelDecorators,
-    resourceStandardOperations: getStandardOperations(schema),
+    operations: getTspOperations(schema),
   };
 }
 
-function getKeyParameter(codeModel: CodeModel, schema: ArmResourceSchema): Parameter {
-  const getOperation = schema.resourceMetadata.Operations.find((o) => o.Method === "GET");
+function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation[] {
+  const resourceMetadata = armSchema.resourceMetadata;
+  const operations = getResourceOperations(resourceMetadata);
+  const tspOperations: TspArmResourceOperation[] = [];
+  for (const operation of resourceMetadata.Operations) {
+    const rawOperation = operations.find((o) => o.operationId === operation.OperationID);
+    const baseParameters = rawOperation ? getOperationParameters(rawOperation, armSchema.resourceMetadata) : "";
+
+    const operationResponse = rawOperation?.responses?.[0];
+    let operationResponseName: string = resourceMetadata.Name;
+    if (operationResponse && isResponseSchema(operationResponse)) {
+      operationResponseName = operationResponse.schema.language.default.name;
+    }
+    const operationIdPrefix = pluralize(resourceMetadata.Name);
+    if (operation.OperationID === `${operationIdPrefix}_Get`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: "ArmResourceRead",
+        name: "get",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_ListBySubscription`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: "ArmListBySubscription",
+        name: "listBySubscription",
+        templateParameters: [operationResponseName],
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_ListByResourceGroup`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: "ArmResourceListByParent",
+        name: "listByResourceGroup",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    if (
+      resourceMetadata.Parents.length &&
+      operation.OperationID === `${operationIdPrefix}_ListBy${resourceMetadata.Parents[0]}`
+    ) {
+      const templateParameters = [resourceMetadata.Name];
+      tspOperations.push({
+        doc: operation.Description,
+        kind: "ArmResourceListByParent",
+        name: `listBy${resourceMetadata.Parents[0]}`,
+        templateParameters,
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_CreateOrUpdate`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
+        name: "createOrUpdate",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_Update`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync",
+        name: "update",
+        templateParameters: [resourceMetadata.Name, `${resourceMetadata.Name}Properties`],
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_Delete`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: operation.IsLongRunning ? "ArmResourceDeleteAsync" : "ArmResourceDeleteSync",
+        name: "delete",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    if (operation.OperationID === `${operationIdPrefix}_ListBySubscription`) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: "ArmListBySubscription",
+        name: "listBySubscription",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    const operationName = operation.OperationID.replace(`${operationIdPrefix}_`, "");
+    const fixMe: string[] = [];
+
+    if (!baseParameters) {
+      fixMe.push(
+        "// FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter",
+      );
+    }
+    tspOperations.push({
+      fixMe,
+      doc: operation.Description,
+      kind: operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync",
+      name: lowerFirst(operationName),
+      templateParameters: [resourceMetadata.Name, `{${baseParameters}}`, operationResponseName],
+    });
+    continue;
+  }
+
+  return tspOperations;
+}
+
+function getOperationParameters(operation: Operation, resource: ArmResource): string {
+  const codeModel = getSession().model;
+  const parameters: CadlParameter[] = [];
+  if (operation.parameters) {
+    for (const parameter of operation.parameters) {
+      if (
+        !resourceParameters.includes(parameter.language.default.name) &&
+        !parameter.origin?.startsWith("modelerfour:synthesized") &&
+        !isParentIdPrameter(parameter, resource)
+      ) {
+        parameters.push(transformParameter(parameter, codeModel));
+      }
+    }
+  }
+
+  return generateParameters(parameters);
+}
+
+function isParentIdPrameter(parameter: Parameter, resource: ArmResource): boolean {
+  const codeModel = getSession().model;
+  const selfKey = getKeyParameter(codeModel, resource);
+
+  if (selfKey.language.default.name === parameter.language.default.name) {
+    return true;
+  }
+
+  const parent = getArmResourcesMetadata()[resource.Parents[0]];
+
+  if (!parent) {
+    return false;
+  }
+
+  return isParentIdPrameter(parameter, parent);
+}
+
+function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter {
+  const getOperation = resourceMetadata.Operations.find((o) => o.Method === "GET");
   if (!getOperation) {
-    throw new Error(`Failed to find GET operation for ${schema.language.default.name}`);
+    throw new Error(`Failed to find GET operation for ${resourceMetadata.Name}`);
   }
 
   for (const operationGroup of codeModel.operationGroups) {
@@ -62,7 +231,7 @@ function getKeyParameter(codeModel: CodeModel, schema: ArmResourceSchema): Param
       }
 
       for (const parameter of operation.parameters) {
-        if (parameter.language.default.name === schema.resourceMetadata.ResourceKey) {
+        if (parameter.language.default.name === resourceMetadata.ResourceKey) {
           return parameter;
         }
       }
@@ -105,6 +274,9 @@ function decorateKeyProperty(property: CadlParameter, schema: ArmResourceSchema)
       arguments: [schema.resourceMetadata.ResourceKeySegment],
     },
   );
+
+  // By convention the property itself needs to be called "name"
+  property.name = "name";
 }
 
 function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
@@ -113,26 +285,4 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   }
 
   return "ProxyResource";
-}
-
-function getStandardOperations(schema: ArmResourceSchema): ArmResourceStandardOperation[] {
-  const operations: ArmResourceStandardOperation[] = [];
-
-  if (schema.resourceMetadata.ResourceOperationsMetadata.HasCreateOrUpdateOperation) {
-    operations.push("CreateOrUpdate");
-  }
-
-  if (schema.resourceMetadata.ResourceOperationsMetadata.HasDeleteOperation) {
-    operations.push("Delete");
-  }
-
-  if (schema.resourceMetadata.ResourceOperationsMetadata.HasUpdateOperation) {
-    operations.push("Update");
-  }
-
-  if (schema.resourceMetadata.ResourceOperationsMetadata.HasGetOperation) {
-    operations.push("Get");
-  }
-
-  return operations;
 }

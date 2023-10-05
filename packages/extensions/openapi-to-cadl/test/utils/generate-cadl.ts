@@ -61,7 +61,7 @@ async function main() {
 
   for (const folder of folders) {
     try {
-      await generateCadl(folder, debug);
+      await generateCadl(folder, true);
     } catch (e) {
       throw new Error(`Failed to generate ${e}`);
     }
