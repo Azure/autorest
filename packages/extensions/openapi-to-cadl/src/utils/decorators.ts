@@ -50,8 +50,11 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
 
   const paging = element.language.default.paging ?? {};
 
-  if ((element as Property).readOnly) {
-    decorators.push({ name: "visibility", arguments: ["read"] });
+  if (!isParameter(element)) {
+    const visibility = getPropertyVisibility(element);
+    if (visibility.length) {
+      decorators.push({ name: "visibility", arguments: visibility });
+    }
   }
 
   if (paging.isNextLink) {
@@ -96,6 +99,29 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
 
 function isParameter(schema: Parameter | Property): schema is Parameter {
   return !(schema as Property).serializedName;
+}
+
+export function getPropertyVisibility(property: Property): string[] {
+  const xmsMutability = property.extensions?.["x-ms-mutability"];
+  if (!xmsMutability) {
+    return property.readOnly ? ["read"] : [];
+  }
+
+  const visibility: string[] = [];
+
+  if (Array.isArray(xmsMutability)) {
+    if (xmsMutability.includes("read")) {
+      visibility.push("read");
+    }
+    if (xmsMutability.includes("create")) {
+      visibility.push("create");
+    }
+    if (xmsMutability.includes("update")) {
+      visibility.push("update");
+    }
+  }
+
+  return visibility;
 }
 
 function getStringSchemaDecorators(schema: Schema, decorators: CadlDecorator[]): void {

@@ -117,7 +117,6 @@ export interface CadlObjectProperty extends CadlDataType {
   isOptional: boolean;
   type: string;
   decorators?: CadlDecorator[];
-  visibility?: "read";
 }
 
 export interface CadlDecorator extends WithFixMe {

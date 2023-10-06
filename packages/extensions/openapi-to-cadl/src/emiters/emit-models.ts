@@ -24,7 +24,18 @@ function generateModels(program: CadlProgram) {
 
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
-  return [imports, "\n", namespaces, "\n", getNamespace(program), "\n", enums, "\n", objects].join("\n");
+  return [
+    imports,
+    "\n",
+    namespaces,
+    "\n",
+    getNamespace(program),
+    "\n",
+    "interface Operations extends Azure.ResourceManager.Operations {} \n",
+    enums,
+    "\n",
+    objects,
+  ].join("\n");
 }
 
 function flattenEnums(enums: CadlEnum[]) {

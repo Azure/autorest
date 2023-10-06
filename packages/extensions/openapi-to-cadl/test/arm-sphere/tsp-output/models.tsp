@@ -7,6 +7,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 enum Origin {
   user,
   system,
@@ -179,9 +181,11 @@ model ImageProperties {
 Image as a UTF-8 encoded base 64 string on image create. This field contains
 the image URI on image reads.
 """)
+  @visibility("read", "create")
   image?: string;
 
   @doc("Image ID")
+  @visibility("read", "create")
   imageId?: string;
 
   @doc("Image name")
@@ -189,6 +193,7 @@ the image URI on image reads.
   imageName?: string;
 
   @doc("Regional data boundary for an image")
+  @visibility("read", "create")
   regionalDataBoundary?: RegionalDataBoundary;
 
   @doc("Location the image")
@@ -218,9 +223,11 @@ model DeploymentListResult is Azure.Core.Page<Deployment>;
 @doc("The properties of deployment")
 model DeploymentProperties {
   @doc("Deployment ID")
+  @visibility("read", "create")
   deploymentId?: string;
 
   @doc("Images deployed")
+  @visibility("read", "create")
   deployedImages?: Image[];
 
   @doc("Deployment date UTC")
@@ -306,6 +313,7 @@ model DeviceListResult is Azure.Core.Page<Device>;
 @doc("The properties of device")
 model DeviceProperties {
   @doc("Device ID")
+  @visibility("read", "create")
   deviceId?: string;
 
   @doc("SKU of the chip")
