@@ -109,6 +109,7 @@ export interface CadlParameter extends CadlDataType {
   type: string;
   decorators?: CadlDecorator[];
   location: CadlParameterLocation;
+  serializedName: string;
 }
 
 export interface CadlObjectProperty extends CadlDataType {

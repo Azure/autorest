@@ -88,6 +88,19 @@
           "Description": "Lists devices for catalog."
         },
         {
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/catalogs",
+          "Method": "GET",
+          "OperationID": "Catalogs_ListBySubscription",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySubscription",
+            "NextPageMethod": "ListBySubscriptionNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List Catalog resources by subscription ID"
+        },
+        {
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}",
           "Method": "PUT",
           "OperationID": "Catalogs_CreateOrUpdate",

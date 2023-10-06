@@ -34,20 +34,20 @@ interface Catalogs {
     Catalog,
     {
       @doc("Filter the result list using the given expression")
-      @query
-      $filter: string;
+      @query("$filter")
+      filter?: string;
 
       @doc("The number of result items to return.")
-      @query
-      $top: int32;
+      @query("$top")
+      top?: int32;
 
       @doc("The number of result items to skip.")
-      @query
-      $skip: int32;
+      @query("$skip")
+      skip?: int32;
 
       @doc("The maximum number of result items per page.")
-      @query
-      $maxpagesize: int32;
+      @query("$maxpagesize")
+      maxpagesize?: int32;
     },
     DeploymentListResult
   >;
@@ -56,20 +56,21 @@ interface Catalogs {
     Catalog,
     {
       @doc("Filter the result list using the given expression")
-      @query
-      $filter: string;
+      @query("$filter")
+      filter?: string;
 
       @doc("The number of result items to return.")
-      @query
-      $top: int32;
+      @query("$top")
+      top?: int32;
 
       @doc("The number of result items to skip.")
-      @query
-      $skip: int32;
+      @query("$skip")
+      skip?: int32;
 
       @doc("The maximum number of result items per page.")
-      @query
-      $maxpagesize: int32;
+      @query("$maxpagesize")
+      maxpagesize?: int32;
+      ...ListDeviceGroupsRequest;
     },
     DeviceGroupListResult
   >;
@@ -78,20 +79,20 @@ interface Catalogs {
     Catalog,
     {
       @doc("Filter the result list using the given expression")
-      @query
-      $filter: string;
+      @query("$filter")
+      filter?: string;
 
       @doc("The number of result items to return.")
-      @query
-      $top: int32;
+      @query("$top")
+      top?: int32;
 
       @doc("The number of result items to skip.")
-      @query
-      $skip: int32;
+      @query("$skip")
+      skip?: int32;
 
       @doc("The maximum number of result items per page.")
-      @query
-      $maxpagesize: int32;
+      @query("$maxpagesize")
+      maxpagesize?: int32;
     },
     PagedDeviceInsight
   >;
@@ -100,23 +101,25 @@ interface Catalogs {
     Catalog,
     {
       @doc("Filter the result list using the given expression")
-      @query
-      $filter: string;
+      @query("$filter")
+      filter?: string;
 
       @doc("The number of result items to return.")
-      @query
-      $top: int32;
+      @query("$top")
+      top?: int32;
 
       @doc("The number of result items to skip.")
-      @query
-      $skip: int32;
+      @query("$skip")
+      skip?: int32;
 
       @doc("The maximum number of result items per page.")
-      @query
-      $maxpagesize: int32;
+      @query("$maxpagesize")
+      maxpagesize?: int32;
     },
     DeviceListResult
   >;
+  @doc("List Catalog resources by subscription ID")
+  listBySubscription is ArmListBySubscription<Catalog>;
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("List Catalog resources by resource group")

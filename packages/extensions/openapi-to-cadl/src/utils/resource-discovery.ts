@@ -94,6 +94,21 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
   return Boolean((schema as ArmResourceSchema).resourceMetadata);
 }
 
+export function isResourceUpdateSchema(schema: ObjectSchema): boolean {
+  const resourcesMetadata = getArmResourcesMetadata();
+  for (const [key, resource] of Object.entries(resourcesMetadata)) {
+    if (`${resource.Name}Update` === schema.language.default.name) {
+      return true;
+    }
+
+    if (`${resource.Name}UpdateProperties` === schema.language.default.name) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function isTspArmResource(schema: CadlObject): schema is TspArmResource {
   return Boolean((schema as TspArmResource).resourceKind);
 }

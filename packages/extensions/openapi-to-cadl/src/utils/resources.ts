@@ -15,6 +15,7 @@ import { CadlResource } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
 import { hasLROExtension } from "./lro";
+import { getHttpMethod } from "./operations";
 import { getPageableResponse, isPageableOperation, isPageValue } from "./paging";
 import { isArraySchema, isResponseSchema } from "./schemas";
 
@@ -193,10 +194,6 @@ function getResourcePath(operation: Operation): string {
   }
 
   throw new Error(`Couldn't find a resource path for operation ${operation.language.default.name}`);
-}
-
-function getHttpMethod(_codeModel: CodeModel, operation: Operation): HttpMethod {
-  return operation.requests?.[0].protocol.http?.method;
 }
 
 function getNonPageableListResource(operation: Operation): ArraySchema | undefined {

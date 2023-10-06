@@ -1,4 +1,4 @@
-import { CodeModel, Operation, Parameter } from "@autorest/codemodel";
+import { CodeModel, HttpMethod, Operation, Parameter } from "@autorest/codemodel";
 import { lowerFirst } from "lodash";
 import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
@@ -11,6 +11,7 @@ import {
   TspArmResource,
   TspArmResourceOperation,
 } from "../interfaces";
+import { getHttpMethod } from "../utils/operations";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -88,16 +89,6 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
-    if (operation.OperationID === `${operationIdPrefix}_ListBySubscription`) {
-      tspOperations.push({
-        doc: operation.Description,
-        kind: "ArmListBySubscription",
-        name: "listBySubscription",
-        templateParameters: [operationResponseName],
-      });
-      continue;
-    }
-
     if (operation.OperationID === `${operationIdPrefix}_ListByResourceGroup`) {
       tspOperations.push({
         doc: operation.Description,
@@ -113,6 +104,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       operation.OperationID === `${operationIdPrefix}_ListBy${resourceMetadata.Parents[0]}`
     ) {
       const templateParameters = [resourceMetadata.Name];
+      if (baseParameters) {
+        templateParameters.push(`{${baseParameters}}`);
+      }
       tspOperations.push({
         doc: operation.Description,
         kind: "ArmResourceListByParent",
@@ -195,6 +189,16 @@ function getOperationParameters(operation: Operation, resource: ArmResource): st
       ) {
         parameters.push(transformParameter(parameter, codeModel));
       }
+    }
+  }
+
+  if (getHttpMethod(codeModel, operation) === HttpMethod.Post) {
+    const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
+      (p) => p.protocol.http?.in === "body",
+    );
+    if (bodyParam) {
+      const transformed = transformParameter(bodyParam, codeModel);
+      parameters.push(transformed);
     }
   }
 

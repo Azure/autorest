@@ -74,9 +74,14 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
   }
 
   if (isParameter(element) && element?.protocol?.http?.in) {
-    decorators.push({
-      name: element.protocol.http.in,
-    });
+    const location = element.protocol.http.in;
+    const locationDecorator: CadlDecorator = { name: location };
+
+    if (location === "query") {
+      locationDecorator.arguments = [element.language.default.serializedName];
+    }
+
+    decorators.push(locationDecorator);
   }
 
   if (!isParameter(element) && element.serializedName !== element.language.default.name) {

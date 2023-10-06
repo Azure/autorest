@@ -144,7 +144,7 @@ function filterOperationParameters(parameter: Parameter, visitedParameters: Set<
 
 export function transformParameter(parameter: Parameter, codeModel: CodeModel): CadlParameter {
   // Body parameter doesn't have a serializedName, in that case we get the name
-  const name = parameter.language.default.serializedName ?? parameter.language.default.name;
+  const name = parameter.language.default.name;
   const doc = parameter.language.default.description;
 
   const dataTypes = getDataTypes(codeModel);
@@ -158,6 +158,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     type: visited.name,
     location: transformParameterLocation(parameter),
     decorators: getPropertyDecorators(parameter),
+    serializedName: parameter.language.default.serializedName ?? parameter.language.default.name,
   };
 }
 

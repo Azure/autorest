@@ -1,5 +1,6 @@
 import { CadlOperation, CadlOperationGroup, CadlParameter } from "../interfaces";
 import { generateDocs, generateSummary } from "../utils/docs";
+import { generateParameter } from "./generate-parameter";
 
 export function generateOperation(operation: CadlOperation, operationGroup: CadlOperationGroup) {
   const doc = generateDocs(operation);
@@ -69,9 +70,7 @@ function generateMultiResponseWarning(responses: string[], statements: string[])
 export function generateParameters(parameters: CadlParameter[]) {
   const params: string[] = [];
   for (const parameter of parameters) {
-    const location = parameter.location;
-    params.push(generateDocs(parameter));
-    params.push(`@${location} "${parameter.name}": ${parameter.type},`);
+    params.push(generateParameter(parameter));
   }
   return params.join("\n");
 }

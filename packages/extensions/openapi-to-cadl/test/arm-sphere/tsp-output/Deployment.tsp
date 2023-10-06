@@ -44,5 +44,24 @@ cannot be used for product or device group name.
 List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
 system defined values and cannot be used for product or device group name.
 """)
-  listByDeviceGroup is ArmResourceListByParent<Deployment>;
+  listByDeviceGroup is ArmResourceListByParent<
+    Deployment,
+    {
+      @doc("Filter the result list using the given expression")
+      @query("$filter")
+      filter?: string;
+
+      @doc("The number of result items to return.")
+      @query("$top")
+      top?: int32;
+
+      @doc("The number of result items to skip.")
+      @query("$skip")
+      skip?: int32;
+
+      @doc("The maximum number of result items per page.")
+      @query("$maxpagesize")
+      maxpagesize?: int32;
+    }
+  >;
 }

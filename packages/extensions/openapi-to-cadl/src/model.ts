@@ -7,7 +7,7 @@ import { transformEnum } from "./transforms/transform-choices";
 import { getCadlType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
-import { ArmResourceSchema, isResourceSchema } from "./utils/resource-discovery";
+import { ArmResourceSchema, isResourceSchema, isResourceUpdateSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
 
 const models: Map<CodeModel, CadlProgram> = new Map();
@@ -66,6 +66,7 @@ function transformModel(codeModel: CodeModel): CadlProgram {
     codeModel.schemas.objects
       ?.filter((o) => isArm && !_ArmCoreTypes.includes(o.language.default.name))
       ?.filter((o) => !isResourceSchema(o))
+      .filter((o) => !isResourceUpdateSchema(o))
       .map((o) => transformObject(o, codeModel)) ?? [];
   const armResources =
     codeModel.schemas.objects

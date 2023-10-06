@@ -36,9 +36,30 @@ interface Certificates {
   @doc("Gets the proof of possession nonce.")
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
-    {},
+    {
+      ...ProofOfPossessionNonceRequest;
+    },
     ProofOfPossessionNonceResponse
   >;
   @doc("List Certificate resources by Catalog")
-  listByCatalog is ArmResourceListByParent<Certificate>;
+  listByCatalog is ArmResourceListByParent<
+    Certificate,
+    {
+      @doc("Filter the result list using the given expression")
+      @query("$filter")
+      filter?: string;
+
+      @doc("The number of result items to return.")
+      @query("$top")
+      top?: int32;
+
+      @doc("The number of result items to skip.")
+      @query("$skip")
+      skip?: int32;
+
+      @doc("The maximum number of result items per page.")
+      @query("$maxpagesize")
+      maxpagesize?: int32;
+    }
+  >;
 }
