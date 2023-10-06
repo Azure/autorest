@@ -1,8 +1,8 @@
+import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { ObjectSchema, Operation } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { CadlObject, TspArmResource } from "../interfaces";
-
 export interface _ArmResourceOperation {
   Path: string;
   Method: string;
@@ -60,18 +60,26 @@ export function getArmResourcesMetadata(): Record<string, ArmResource> {
   const session = getSession();
   const configPath: string = session.configuration.configFileFolderUri;
   const configFiles: string[] = session.configuration.configurationFiles;
+  const inputPath: string | undefined = (session.configuration.inputFileUris ?? [])[0];
+  // const inputFiles: string[] = session.configuration["input-file"] ?? [];
+
   const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file://", "");
+  let localInputFolder: string | undefined;
+
+  if (inputPath && inputPath.startsWith("file://")) {
+    localInputFolder = dirname(inputPath).replace("file://", "");
+  }
+
+  const resourcesPath = localInputFolder ?? localConfigFolder;
 
   try {
-    const { Resources }: { Resources: Record<string, ArmResource> } = require(join(
-      localConfigFolder,
-      "resources.json",
-    ));
+    const content = readFileSync(join(resourcesPath, "resources.json"), "utf-8");
+    const { Resources }: { Resources: Record<string, ArmResource> } = JSON.parse(content);
     armResourceCache = Resources;
 
     return armResourceCache;
   } catch (e) {
-    throw new Error(`Failed to load resources.json from ${localConfigFolder} \n ${e}`);
+    throw new Error(`Failed to load resources.json from ${resourcesPath} \n ${e}`);
   }
 }
 
