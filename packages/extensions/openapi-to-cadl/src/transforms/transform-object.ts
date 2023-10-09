@@ -22,7 +22,7 @@ import {
   isSealedChoiceSchema,
 } from "../utils/schemas";
 import { transformValue } from "../utils/values";
-import { ArmResourcesCache } from "./transform-resources";
+import { getAllArmResources } from "./transform-resources";
 
 const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
@@ -41,8 +41,6 @@ const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Duration, "duration"],
   [SchemaType.AnyObject, "object"],
 ]);
-
-const _armResources = ArmResourcesCache;
 
 export function transformObject(schema: ObjectSchema, codeModel: CodeModel): CadlObject {
   const cadlTypes = getDataTypes(codeModel);
@@ -63,7 +61,8 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Cad
   visited = { name, doc };
   cadlTypes.set(schema, visited as any);
 
-  const armResource = _armResources.get(schema);
+  const allArmResources = getAllArmResources(codeModel);
+  const armResource = allArmResources.get(schema);
 
   if (armResource) {
     cadlTypes.set(schema, armResource);

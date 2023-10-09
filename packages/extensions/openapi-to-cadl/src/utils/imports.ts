@@ -1,5 +1,6 @@
+import { getSession } from "../autorest-session";
 import { CadlProgram, TypespecArmResource } from "../interfaces";
-import { ArmResourcesCache } from "../transforms/transform-resources";
+import { getAllArmResources } from "../transforms/transform-resources";
 
 type Imports = {
   modules: string[];
@@ -53,7 +54,9 @@ export function getModelsImports(program: CadlProgram) {
     }
   }
 
-  if (ArmResourcesCache.size) {
+  const session = getSession();
+  const allArmResources = getAllArmResources(session.model);
+  if (allArmResources.size) {
     modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
     namespaces.add(`using Azure.ResourceManager;`);
     namespaces.add(`using Azure.ResourceManager.Foundations;`);

@@ -1,19 +1,10 @@
-import {
-  ArraySchema,
-  ObjectSchema,
-  Operation,
-  Response,
-  Schema,
-  SchemaResponse,
-  isObjectSchema,
-} from "@autorest/codemodel";
-import { lowerFirst, toLower } from "lodash";
+import { ObjectSchema, Operation, isObjectSchema } from "@autorest/codemodel";
+import { lowerFirst } from "lodash";
 import { plural } from "pluralize";
 import { getSession } from "../autorest-session";
-import { CadlObject, CadlObjectProperty, CadlOperation, TypespecArmResource } from "../interfaces";
+import { CadlOperation, TypespecArmResource } from "../interfaces";
 import { transformOperation } from "../transforms/transform-operations";
-import { ArmResourcesCache, getArmResourceNames } from "../transforms/transform-resources";
-import { generateDecorators } from "../utils/decorators";
+import { getArmResourceNames } from "../transforms/transform-resources";
 import { generateDocs } from "../utils/docs";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
 import { generateParameters } from "./generate-operations";

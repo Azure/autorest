@@ -4,7 +4,7 @@ import { CadlDataType, CadlProgram } from "./interfaces";
 import { transformEnum } from "./transforms/transform-choices";
 import { getCadlType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
-import { ArmResourcesCache } from "./transforms/transform-resources";
+import { getAllArmResources } from "./transforms/transform-resources";
 import { transformServiceInformation } from "./transforms/transform-service-information";
 import { isChoiceSchema } from "./utils/schemas";
 
@@ -46,10 +46,10 @@ function transformModel(codeModel: CodeModel): CadlProgram {
   );
 
   let cadlObjects = codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
-
-  if (ArmResourcesCache.size) {
+  const armResourcesCache = getAllArmResources(codeModel);
+  if (armResourcesCache.size) {
     const armResourceNames: Set<string> = new Set();
-    for (const resource of ArmResourcesCache.values()) {
+    for (const resource of armResourcesCache.values()) {
       armResourceNames.add(resource.name);
     }
     cadlObjects = cadlObjects

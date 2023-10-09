@@ -317,8 +317,6 @@ model CountDeviceResponse {
 @doc("Response of the count for elements.")
 model CountElementsResponse {
   @doc("Number of children resources in parent resource.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   value: int32;
 }
 

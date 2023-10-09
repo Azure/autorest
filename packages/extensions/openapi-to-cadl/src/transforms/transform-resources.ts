@@ -6,7 +6,7 @@ import { ArmResourceKind, ArmResourceObjectSchema, CadlDecorator, TypespecArmRes
 import { isResponseSchema } from "../utils/schemas";
 
 const _resourceKinds = ["ProxyResource", "TrackedResource"];
-export const ArmResourcesCache = new Map<ObjectSchema, TypespecArmResource>();
+const ArmResourcesCache = new Map<ObjectSchema, TypespecArmResource>();
 export let ArmResourcesCacheByName: Map<string, TypespecArmResource> | undefined;
 let _armResourcesnameCache: Set<string> | undefined;
 export interface ArmResourceSchema extends ObjectSchema {
@@ -40,10 +40,10 @@ function isArmObjectSchema(schema: ObjectSchema): schema is ArmResourceObjectSch
 }
 
 function getModelName(codeModel: ArmCodeModel, resoureName: string) {
-  return codeModel.armResources?.find((r) => r.Name === resoureName)?.ModelName;
+  return codeModel.armResources?.find((r) => r.Name === resoureName)?.SwaggerModelName;
 }
 
-export function calculateArmResources(codeModel: CodeModel) {
+export function getAllArmResources(codeModel: CodeModel) {
   if (ArmResourcesCache.size) {
     return ArmResourcesCache;
   }
@@ -224,14 +224,10 @@ function getResourceKind(schema: ArmResourceObjectSchema): ArmResourceKind {
     return "TrackedResource";
   }
 
-  if (schema.resourceInformation.IsResource) {
-    return "ProxyResource";
-  }
-
   if (schema.resourceInformation.IsExtensionResource) {
     return "ExtensionResource";
   }
-  throw new Error(`Unable to determine resource kind for schema ${schema.language.default.name}`);
+  return "ProxyResource";
 }
 
 function isResourceModel(schema: ObjectSchema): schema is ArmResourceSchema {

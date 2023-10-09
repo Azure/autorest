@@ -14,9 +14,10 @@ import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { getModel } from "./model";
+import { getOptions } from "./options";
 import { preTransformArmResources } from "./pretransforms/arm-resource-pretrasnform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
-import { calculateArmResources } from "./transforms/transform-resources";
+import { getAllArmResources } from "./transforms/transform-resources";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
@@ -26,10 +27,11 @@ export interface ArmCodeModel extends CodeModel {
 export async function processRequest(host: AutorestExtensionHost) {
   const session = await startSession<ArmCodeModel>(host, codeModelSchema);
   setSession(session);
+  const options = getOptions();
   const codeModel = session.model;
 
   preTransformArmResources(codeModel);
-  calculateArmResources(codeModel);
+  getAllArmResources(codeModel);
   pretransformNames(codeModel);
 
   markPagination(codeModel);

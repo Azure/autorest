@@ -175,7 +175,7 @@ export interface InternalArmResource {
   Name: string;
   Operations: InternalArmResourceOperation[];
   Parents: string[];
-  ModelName: string;
+  SwaggerModelName: string;
   IsTrackedResource: boolean;
   IsResource: boolean;
   IsExtensionResource: boolean;
