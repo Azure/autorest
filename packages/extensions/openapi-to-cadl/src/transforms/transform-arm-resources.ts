@@ -51,6 +51,13 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     }
   }
 
+  const propertiesProperty = schema.properties?.find((p) => p.language.default.name === "properties");
+
+  if (!propertiesProperty) {
+    throw new Error(`Failed to find properties property for ${schema.language.default.name}`);
+  }
+
+  const propertiesName = propertiesProperty.schema.language.default.name;
   return {
     resourceKind: getResourceKind(schema),
     kind: "object",
@@ -58,7 +65,7 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     name: schema.resourceMetadata.Name,
     parents: [],
     resourceParent,
-    propertiesModelName: `${schema.resourceMetadata.SwaggerModelName}Properties`,
+    propertiesModelName: propertiesName,
     doc: schema.language.default.description,
     decorators: resourceModelDecorators,
     operations: getTspOperations(schema),
@@ -76,7 +83,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     const operationResponse = rawOperation?.responses?.[0];
     let operationResponseName: string = resourceMetadata.Name;
     if (operationResponse && isResponseSchema(operationResponse)) {
-      operationResponseName = operationResponse.schema.language.default.name;
+      if (!operationResponse.schema.language.default.name.includes("·")) {
+        operationResponseName = operationResponse.schema.language.default.name;
+      }
     }
     const operationIdPrefix = pluralize(resourceMetadata.Name);
     if (operation.OperationID === `${operationIdPrefix}_Get`) {

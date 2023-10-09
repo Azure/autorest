@@ -292,7 +292,8 @@ function markModelWithResource(elementType: Schema, resource: string) {
 
 function markWithKey(schema: ObjectSchema): boolean {
   const { properties, parents } = schema;
-  const { guessResourceKey } = getOptions();
+  const options = getOptions();
+  const { guessResourceKey } = options;
 
   if (!guessResourceKey) {
     return false;

@@ -89,13 +89,13 @@ export interface ArmResourceSchema extends ObjectSchema {
 
 export function tagSchemaAsResource(schema: ObjectSchema): void {
   const resourcesMetadata = getArmResourcesMetadata();
-  const resourceMetadata = resourcesMetadata[schema.language.default.name];
 
-  if (!resourceMetadata) {
-    return;
+  for (const resourceName in resourcesMetadata) {
+    if (resourceName.toLowerCase() === schema.language.default.name.toLowerCase()) {
+      (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
+      return;
+    }
   }
-
-  (schema as ArmResourceSchema).resourceMetadata = resourceMetadata;
 }
 
 export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSchema {
