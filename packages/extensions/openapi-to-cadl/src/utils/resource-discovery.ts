@@ -63,11 +63,11 @@ export function getArmResourcesMetadata(): Record<string, ArmResource> {
   const inputPath: string | undefined = (session.configuration.inputFileUris ?? [])[0];
   // const inputFiles: string[] = session.configuration["input-file"] ?? [];
 
-  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file://", "");
+  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file:", "").replace(/^\/+/g, "");
   let localInputFolder: string | undefined;
 
-  if (inputPath && inputPath.startsWith("file://")) {
-    localInputFolder = dirname(inputPath).replace("file://", "");
+  if (inputPath && inputPath.startsWith("file:")) {
+    localInputFolder = dirname(inputPath).replace("file:", "").replace(/^\/+/g, "");
   }
 
   const resourcesPath = localInputFolder ?? localConfigFolder;
