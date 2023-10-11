@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Product.tsp";
+import "./SphereProduct.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 @doc("An device group resource belonging to a product resource.")
-@parentResource(Product)
-model DeviceGroup is ProxyResource<DeviceGroupProperties> {
+@parentResource(SphereProduct)
+model SphereDeviceGroup is ProxyResource<DeviceGroupProperties> {
   @doc("Name of device group.")
   @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$")
   @path
@@ -22,49 +22,53 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 }
 
 @armResourceOperations
-interface DeviceGroups {
+interface SphereDeviceGroups {
   @doc("""
 Get a DeviceGroup. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  get is ArmResourceRead<DeviceGroup>;
+  get is ArmResourceRead<SphereDeviceGroup>;
   @doc("""
 Delete a DeviceGroup. '.default' and '.unassigned' are system defined values
 and cannot be used for product or device group name.
 """)
-  delete is ArmResourceDeleteAsync<DeviceGroup>;
+  delete is ArmResourceDeleteAsync<SphereDeviceGroup>;
   @doc("""
 Update a DeviceGroup. '.default' and '.unassigned' are system defined values
 and cannot be used for product or device group name.
 """)
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+  update is ArmResourcePatchAsync<SphereDeviceGroup, DeviceGroupProperties>;
   @doc("""
 Bulk claims the devices. Use '.unassigned' or '.default' for the device group
 and product names when bulk claiming devices to a catalog only.
 """)
   claimDevices is ArmResourceActionAsync<
-    DeviceGroup,
+    SphereDeviceGroup,
     {
       ...ClaimDevicesRequest;
     },
-    DeviceGroup
+    SphereDeviceGroup
   >;
   @doc("""
 Counts devices in device group. '.default' and '.unassigned' are system defined
 values and cannot be used for product or device group name.
 """)
-  countDevices is ArmResourceActionSync<DeviceGroup, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<
+    SphereDeviceGroup,
+    {},
+    CountDeviceResponse
+  >;
   @doc("""
 Create a DeviceGroup. '.default' and '.unassigned' are system defined values
 and cannot be used for product or device group name.
 """)
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereDeviceGroup>;
   @doc("""
 List DeviceGroup resources by Product. '.default' and '.unassigned' are system
 defined values and cannot be used for product name.
 """)
-  listByProduct is ArmResourceListByParent<
-    DeviceGroup,
+  listBySphereProduct is ArmResourceListByParent<
+    SphereDeviceGroup,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")

@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
-model Catalog is TrackedResource<CatalogProperties> {
+model SphereCatalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
   @pattern("^[A-Za-z0-9_-]{1,50}$")
   @path
@@ -20,18 +20,18 @@ model Catalog is TrackedResource<CatalogProperties> {
 }
 
 @armResourceOperations
-interface Catalogs {
+interface SphereCatalogs {
   @doc("Get a Catalog")
-  get is ArmResourceRead<Catalog>;
+  get is ArmResourceRead<SphereCatalog>;
   @doc("Delete a Catalog")
-  delete is ArmResourceDeleteAsync<Catalog>;
+  delete is ArmResourceDeleteAsync<SphereCatalog>;
   @doc("Update a Catalog")
-  update is ArmResourcePatchSync<Catalog, CatalogProperties>;
+  update is ArmResourcePatchSync<SphereCatalog, CatalogProperties>;
   @doc("Counts devices in catalog.")
-  countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<SphereCatalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
-    Catalog,
+    SphereCatalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -53,7 +53,7 @@ interface Catalogs {
   >;
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
-    Catalog,
+    SphereCatalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -76,7 +76,7 @@ interface Catalogs {
   >;
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
-    Catalog,
+    SphereCatalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -98,7 +98,7 @@ interface Catalogs {
   >;
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
-    Catalog,
+    SphereCatalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -119,9 +119,9 @@ interface Catalogs {
     DeviceListResult
   >;
   @doc("List Catalog resources by subscription ID")
-  listBySubscription is ArmListBySubscription<Catalog>;
+  listBySubscription is ArmListBySubscription<SphereCatalog>;
   @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereCatalog>;
   @doc("List Catalog resources by resource group")
-  listByResourceGroup is ArmResourceListByParent<Catalog>;
+  listByResourceGroup is ArmResourceListByParent<SphereCatalog>;
 }

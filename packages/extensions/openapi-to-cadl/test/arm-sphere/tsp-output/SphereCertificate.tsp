@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Catalog.tsp";
+import "./SphereCatalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 @doc("An certificate resource belonging to a catalog resource.")
-@parentResource(Catalog)
-model Certificate is ProxyResource<CertificateProperties> {
+@parentResource(SphereCatalog)
+model SphereCertificate is ProxyResource<CertificateProperties> {
   @doc("""
 Serial number of the certificate. Use '.default' to get current active
 certificate.
@@ -24,26 +24,26 @@ certificate.
 }
 
 @armResourceOperations
-interface Certificates {
+interface SphereCertificates {
   @doc("Get a Certificate")
-  get is ArmResourceRead<Certificate>;
+  get is ArmResourceRead<SphereCertificate>;
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
-    Certificate,
+    SphereCertificate,
     {},
     CertificateChainResponse
   >;
   @doc("Gets the proof of possession nonce.")
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
-    Certificate,
+    SphereCertificate,
     {
       ...ProofOfPossessionNonceRequest;
     },
     ProofOfPossessionNonceResponse
   >;
   @doc("List Certificate resources by Catalog")
-  listByCatalog is ArmResourceListByParent<
-    Certificate,
+  listBySphereCatalog is ArmResourceListByParent<
+    SphereCertificate,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")

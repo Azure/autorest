@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DeviceGroup.tsp";
+import "./SphereDeviceGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
 @doc("An deployment resource belonging to a device group resource.")
-@parentResource(DeviceGroup)
-model Deployment is ProxyResource<DeploymentProperties> {
+@parentResource(SphereDeviceGroup)
+model SphereDeployment is ProxyResource<DeploymentProperties> {
   @doc("""
 Deployment name. Use .default for deployment creation and to get the current
 deployment for the associated device group.
@@ -24,28 +24,28 @@ deployment for the associated device group.
 }
 
 @armResourceOperations
-interface Deployments {
+interface SphereDeployments {
   @doc("""
 Get a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  get is ArmResourceRead<Deployment>;
+  get is ArmResourceRead<SphereDeployment>;
   @doc("""
 Delete a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  delete is ArmResourceDeleteAsync<Deployment>;
+  delete is ArmResourceDeleteAsync<SphereDeployment>;
   @doc("""
 Create a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereDeployment>;
   @doc("""
 List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
 system defined values and cannot be used for product or device group name.
 """)
-  listByDeviceGroup is ArmResourceListByParent<
-    Deployment,
+  listBySphereDeviceGroup is ArmResourceListByParent<
+    SphereDeployment,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
