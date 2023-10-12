@@ -2,17 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SphereCatalog.tsp";
+import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An image resource belonging to a catalog resource.")
-@parentResource(SphereCatalog)
-model SphereImage is ProxyResource<ImageProperties> {
+@parentResource(Catalog)
+model Image is ProxyResource<ImageProperties> {
   @doc("Image name. Use .default for image creation.")
   @path
   @key("imageName")
@@ -21,16 +21,16 @@ model SphereImage is ProxyResource<ImageProperties> {
 }
 
 @armResourceOperations
-interface SphereImages {
+interface Images {
   @doc("Get a Image")
-  get is ArmResourceRead<SphereImage>;
+  get is ArmResourceRead<Image>;
   @doc("Delete a Image")
-  delete is ArmResourceDeleteAsync<SphereImage>;
+  delete is ArmResourceDeleteAsync<Image>;
   @doc("Create a Image")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereImage>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
   @doc("List Image resources by Catalog")
-  listBySphereCatalog is ArmResourceListByParent<
-    SphereImage,
+  listByCatalog is ArmResourceListByParent<
+    Image,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")

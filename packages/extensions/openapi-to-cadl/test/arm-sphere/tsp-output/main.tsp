@@ -3,13 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./SphereCatalog.tsp";
-import "./SphereCertificate.tsp";
-import "./SphereImage.tsp";
-import "./SphereProduct.tsp";
-import "./SphereDeviceGroup.tsp";
-import "./SphereDeployment.tsp";
-import "./SphereDevice.tsp";
+import "./Catalog.tsp";
+import "./Certificate.tsp";
+import "./Image.tsp";
+import "./Product.tsp";
+import "./DeviceGroup.tsp";
+import "./Deployment.tsp";
+import "./Device.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -25,4 +25,4 @@ using TypeSpec.Versioning;
 @doc("Azure Sphere resource management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;

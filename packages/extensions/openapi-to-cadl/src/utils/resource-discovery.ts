@@ -90,9 +90,9 @@ export interface ArmResourceSchema extends ObjectSchema {
 export function tagSchemaAsResource(schema: ObjectSchema): void {
   const resourcesMetadata = getArmResourcesMetadata();
 
-  for (const [key, resource] of Object.entries(resourcesMetadata)) {
-    if (resource.SwaggerModelName.toLowerCase() === schema.language.default.name.toLowerCase()) {
-      (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resource.Name];
+  for (const resourceName in resourcesMetadata) {
+    if (resourceName.toLowerCase() === schema.language.default.name.toLowerCase()) {
+      (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
       return;
     }
   }
@@ -105,11 +105,11 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
 export function isResourceUpdateSchema(schema: ObjectSchema): boolean {
   const resourcesMetadata = getArmResourcesMetadata();
   for (const [key, resource] of Object.entries(resourcesMetadata)) {
-    if (`${resource.SwaggerModelName}Update` === schema.language.default.name) {
+    if (`${resource.Name}Update` === schema.language.default.name) {
       return true;
     }
 
-    if (`${resource.SwaggerModelName}UpdateProperties` === schema.language.default.name) {
+    if (`${resource.Name}UpdateProperties` === schema.language.default.name) {
       return true;
     }
   }

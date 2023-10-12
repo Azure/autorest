@@ -8,9 +8,9 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An Azure Sphere catalog")
-model SphereCatalog is TrackedResource<CatalogProperties> {
+model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
   @pattern("^[A-Za-z0-9_-]{1,50}$")
   @path
@@ -20,18 +20,18 @@ model SphereCatalog is TrackedResource<CatalogProperties> {
 }
 
 @armResourceOperations
-interface SphereCatalogs {
+interface Catalogs {
   @doc("Get a Catalog")
-  get is ArmResourceRead<SphereCatalog>;
+  get is ArmResourceRead<Catalog>;
   @doc("Delete a Catalog")
-  delete is ArmResourceDeleteAsync<SphereCatalog>;
+  delete is ArmResourceDeleteAsync<Catalog>;
   @doc("Update a Catalog")
-  update is ArmResourcePatchSync<SphereCatalog, CatalogProperties>;
+  update is ArmResourcePatchSync<Catalog, CatalogProperties>;
   @doc("Counts devices in catalog.")
-  countDevices is ArmResourceActionSync<SphereCatalog, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
-    SphereCatalog,
+    Catalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -53,7 +53,7 @@ interface SphereCatalogs {
   >;
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
-    SphereCatalog,
+    Catalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -76,7 +76,7 @@ interface SphereCatalogs {
   >;
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
-    SphereCatalog,
+    Catalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -98,7 +98,7 @@ interface SphereCatalogs {
   >;
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
-    SphereCatalog,
+    Catalog,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
@@ -119,9 +119,9 @@ interface SphereCatalogs {
     DeviceListResult
   >;
   @doc("List Catalog resources by subscription ID")
-  listBySubscription is ArmListBySubscription<SphereCatalog>;
+  listBySubscription is ArmListBySubscription<Catalog>;
   @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereCatalog>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("List Catalog resources by resource group")
-  listByResourceGroup is ArmResourceListByParent<SphereCatalog>;
+  listByResourceGroup is ArmResourceListByParent<Catalog>;
 }

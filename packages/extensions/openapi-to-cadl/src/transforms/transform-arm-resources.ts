@@ -161,7 +161,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         doc: operation.Description,
         kind: operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync",
         name: "update",
-        templateParameters: [resourceMetadata.Name, `${resourceMetadata.SwaggerModelName}Properties`],
+        templateParameters: [resourceMetadata.Name, `${resourceMetadata.Name}Properties`],
       });
       continue;
     }
@@ -176,7 +176,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
-    const operationName = operation.OperationID.replace(`${pluralize(resourceMetadata.SwaggerModelName)}_`, "");
+    const operationName = operation.OperationID.replace(`${pluralize(resourceMetadata.Name)}_`, "");
     const fixMe: string[] = [];
 
     if (!baseParameters) {

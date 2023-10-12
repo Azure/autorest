@@ -2,17 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SphereDeviceGroup.tsp";
+import "./DeviceGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An deployment resource belonging to a device group resource.")
-@parentResource(SphereDeviceGroup)
-model SphereDeployment is ProxyResource<DeploymentProperties> {
+@parentResource(DeviceGroup)
+model Deployment is ProxyResource<DeploymentProperties> {
   @doc("""
 Deployment name. Use .default for deployment creation and to get the current
 deployment for the associated device group.
@@ -24,28 +24,28 @@ deployment for the associated device group.
 }
 
 @armResourceOperations
-interface SphereDeployments {
+interface Deployments {
   @doc("""
 Get a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  get is ArmResourceRead<SphereDeployment>;
+  get is ArmResourceRead<Deployment>;
   @doc("""
 Delete a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  delete is ArmResourceDeleteAsync<SphereDeployment>;
+  delete is ArmResourceDeleteAsync<Deployment>;
   @doc("""
 Create a Deployment. '.default' and '.unassigned' are system defined values and
 cannot be used for product or device group name.
 """)
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SphereDeployment>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
   @doc("""
 List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
 system defined values and cannot be used for product or device group name.
 """)
-  listBySphereDeviceGroup is ArmResourceListByParent<
-    SphereDeployment,
+  listByDeviceGroup is ArmResourceListByParent<
+    Deployment,
     {
       @doc("Filter the result list using the given expression")
       @query("$filter")
