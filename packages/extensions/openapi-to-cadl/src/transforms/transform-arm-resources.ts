@@ -60,6 +60,7 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   if (schema.resourceMetadata.IsSingletonResource) {
     resourceModelDecorators.push({
       name: "singleton",
+      arguments: [schema.resourceMetadata.ResourceKey],
     });
   }
 
