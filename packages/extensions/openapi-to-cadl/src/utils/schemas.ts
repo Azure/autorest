@@ -43,3 +43,7 @@ export function isResponseSchema(response: Response | SchemaResponse): response 
 export function isAnySchema(schema: Schema): schema is AnySchema {
   return schema.type === SchemaType.Any || schema.type === SchemaType.AnyObject;
 }
+
+export function isArmIdSchema(schema: Schema): boolean {
+  return schema.type === SchemaType.ArmId;
+}

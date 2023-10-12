@@ -154,24 +154,28 @@ export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update
 
 export interface TspArmResourceOperation extends WithDoc, WithFixMe {
   kind:
-    | "ArmResourceRead"
-    | "ArmListBySubscription"
-    | "ArmResourceListByParent"
-    | "ArmResourceListByParent"
-    | "ArmResourceCreateOrUpdateSync"
-    | "ArmResourceCreateOrUpdateAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionAsync"
-    | "ArmListBySubscription";
+  | "ArmResourceRead"
+  | "ArmListBySubscription"
+  | "ArmResourceListByParent"
+  | "ArmResourceListByParent"
+  | "ArmResourceCreateOrUpdateSync"
+  | "ArmResourceCreateOrUpdateAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoContentAsync"
+  | "ArmListBySubscription";
   name: string;
   templateParameters: string[];
   decorators?: CadlDecorator[];
 }
 
+export type MSIType = "ManagedServiceIdentity" | "ManagedSystemAssignedIdentity";
 export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
@@ -179,4 +183,5 @@ export interface TspArmResource extends CadlObject {
   // keyProperty: CadlObjectProperty;
   operations: TspArmResourceOperation[];
   // schema: ObjectSchema;
+  msiType?: MSIType;
 }

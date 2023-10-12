@@ -42,7 +42,7 @@ and cannot be used for product or device group name.
 Bulk claims the devices. Use '.unassigned' or '.default' for the device group
 and product names when bulk claiming devices to a catalog only.
 """)
-  claimDevices is ArmResourceActionAsync<
+  claimDevices is ArmResourceActionNoContentAsync<
     DeviceGroup,
     {
       ...ClaimDevicesRequest;

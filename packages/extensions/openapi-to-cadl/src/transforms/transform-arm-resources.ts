@@ -8,6 +8,7 @@ import {
   CadlDecorator,
   CadlObjectProperty,
   CadlParameter,
+  MSIType,
   TspArmResource,
   TspArmResourceOperation,
 } from "../interfaces";
@@ -68,6 +69,13 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     throw new Error(`Failed to find properties property for ${schema.language.default.name}`);
   }
 
+  let msiType: MSIType | undefined;
+  if (schema.properties?.find((p) => p.schema.language.default.name === "ManagedServiceIdentity")) {
+    msiType = "ManagedServiceIdentity";
+  } else if (schema.properties?.find((p) => p.schema.language.default.name === "SystemAssignedServiceIdentity")) {
+    msiType = "ManagedSystemAssignedIdentity";
+  }
+
   const propertiesName = propertiesProperty.schema.language.default.name;
   return {
     resourceKind: getResourceKind(schema),
@@ -80,6 +88,7 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     doc: schema.language.default.description,
     decorators: resourceModelDecorators,
     operations: getTspOperations(schema),
+    msiType,
   };
 }
 
@@ -90,6 +99,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   for (const operation of resourceMetadata.Operations) {
     const rawOperation = operations.find((o) => o.operationId === operation.OperationID);
     const baseParameters = rawOperation ? getOperationParameters(rawOperation, armSchema.resourceMetadata) : "";
+    const hasOkResponse = rawOperation?.responses?.find((o) => o.protocol.http?.statusCodes.includes("200"));
 
     const operationResponse = rawOperation?.responses?.[0];
     let operationResponseName: string = resourceMetadata.Name;
@@ -156,6 +166,16 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
+    if (operation.Method === "PUT" && operation.OperationID.endsWith("_Create")) {
+      tspOperations.push({
+        doc: operation.Description,
+        kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
+        name: "create",
+        templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
     if (operation.OperationID.endsWith("_Update")) {
       tspOperations.push({
         doc: operation.Description,
@@ -169,7 +189,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     if (operation.OperationID.endsWith("_Delete")) {
       tspOperations.push({
         doc: operation.Description,
-        kind: operation.IsLongRunning ? "ArmResourceDeleteAsync" : "ArmResourceDeleteSync",
+        kind: operation.IsLongRunning ? (hasOkResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
         name: "delete",
         templateParameters: [resourceMetadata.Name],
       });
@@ -187,9 +207,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     tspOperations.push({
       fixMe,
       doc: operation.Description,
-      kind: operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync",
+      kind: `ArmResourceAction${hasOkResponse ? "" : "NoContent"}${operation.IsLongRunning ? "Async" : "Sync"}` as any,
       name: lowerFirst(operationName),
-      templateParameters: [resourceMetadata.Name, `{${baseParameters}}`, operationResponseName],
+      templateParameters: hasOkResponse ? [resourceMetadata.Name, `{${baseParameters}}`, operationResponseName] : [resourceMetadata.Name, `{${baseParameters}}`],
     });
     continue;
   }
