@@ -39,7 +39,7 @@ const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Number, "float32"],
   [SchemaType.Integer, "int32"],
   [SchemaType.Boolean, "boolean"],
-  [SchemaType.Credential, "@secret string"],
+  [SchemaType.Credential, "string"],
   [SchemaType.Duration, "duration"],
   [SchemaType.AnyObject, "object"],
 ]);

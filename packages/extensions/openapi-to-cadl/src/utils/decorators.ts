@@ -1,4 +1,4 @@
-import { ChoiceSchema, ObjectSchema, Parameter, Property, Schema, SealedChoiceSchema } from "@autorest/codemodel";
+import { ChoiceSchema, ObjectSchema, Parameter, Property, Schema, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
 import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";
@@ -63,6 +63,10 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
 
   if (paging.isValue) {
     decorators.push({ name: "items" });
+  }
+
+  if (element.schema.type === SchemaType.Credential) {
+    decorators.push({ name: "secret" });
   }
 
   getStringSchemaDecorators(element.schema, decorators);
