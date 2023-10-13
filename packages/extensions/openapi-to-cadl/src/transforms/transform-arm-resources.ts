@@ -99,7 +99,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   const tspOperations: TspArmResourceOperation[] = [];
   for (const operation of resourceMetadata.Operations) {
     const rawOperation = operations.find((o) => o.operationId === operation.OperationID);
-    const baseParameters = rawOperation ? getOperationParameters(rawOperation, armSchema.resourceMetadata) : "";
+    let baseParameters = rawOperation ? getOperationParameters(rawOperation, armSchema.resourceMetadata) : "";
     const hasOkResponse = rawOperation?.responses?.find((o) => o.protocol.http?.statusCodes.includes("200"));
 
     const operationResponse = rawOperation?.responses?.[0];
@@ -146,7 +146,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     ) {
       const templateParameters = [resourceMetadata.Name];
       if (baseParameters) {
-        templateParameters.push(`{${baseParameters}}`);
+        templateParameters.push(baseParameters);
       }
       tspOperations.push({
         doc: operation.Description,
@@ -204,13 +204,14 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       fixMe.push(
         "// FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter",
       );
+      baseParameters = "{}";
     }
     tspOperations.push({
       fixMe,
       doc: operation.Description,
       kind: `ArmResourceAction${hasOkResponse ? "" : "NoContent"}${operation.IsLongRunning ? "Async" : "Sync"}` as any,
       name: lowerFirst(operationName),
-      templateParameters: hasOkResponse ? [resourceMetadata.Name, `{${baseParameters}}`, operationResponseName] : [resourceMetadata.Name, `{${baseParameters}}`],
+      templateParameters: hasOkResponse ? [resourceMetadata.Name, baseParameters, operationResponseName] : [resourceMetadata.Name, baseParameters],
     });
     continue;
   }

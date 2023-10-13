@@ -36,9 +36,7 @@ interface Certificates {
   @doc("Gets the proof of possession nonce.")
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
-    {
-      ...ProofOfPossessionNonceRequest;
-    },
+    ProofOfPossessionNonceRequest,
     ProofOfPossessionNonceResponse
   >;
   @doc("List Certificate resources by Catalog")

@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.NetworkAnalytics;
 @doc("The data catalog resource.")
-@singleton
+@singleton("default")
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
   @key("default")
   @segment("dataProductsCatalogs")

@@ -44,10 +44,7 @@ and product names when bulk claiming devices to a catalog only.
 """)
   claimDevices is ArmResourceActionNoContentAsync<
     DeviceGroup,
-    {
-      ...ClaimDevicesRequest;
-    },
-    DeviceGroup
+    ClaimDevicesRequest
   >;
   @doc("""
 Counts devices in device group. '.default' and '.unassigned' are system defined

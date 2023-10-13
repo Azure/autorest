@@ -42,9 +42,7 @@ does not belong to a specific device group and product.
 """)
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
-    {
-      ...GenerateCapabilityImageRequest;
-    },
+    GenerateCapabilityImageRequest,
     SignedCapabilityImageResponse
   >;
   @doc("""

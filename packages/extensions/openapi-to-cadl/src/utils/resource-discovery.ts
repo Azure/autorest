@@ -40,12 +40,17 @@ let armResourceCache: Record<string, ArmResource> | undefined;
 export function getResourceOperations(resource: ArmResource): Operation[] {
   const operations: Operation[] = [];
   const codeModel = getSession().model;
-  for (const operationMetadata of resource.Operations) {
-    for (const operationGroup of codeModel.operationGroups) {
-      for (const operation of operationGroup.operations) {
+
+  for (const operationGroup of codeModel.operationGroups) {
+    for (const operation of operationGroup.operations) {
+      for (const operationMetadata of resource.Operations) {
         if (operation.operationId === operationMetadata.OperationID) {
           operations.push(operation);
         }
+      }
+      if (resource.IsSingletonResource) {
+        // for singleton resource, c# will drop the list operation but we need to get it back
+        
       }
     }
   }

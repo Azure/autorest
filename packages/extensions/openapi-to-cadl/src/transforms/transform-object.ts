@@ -15,6 +15,7 @@ import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {
+  isAnyObjectSchema,
   isAnySchema,
   isArmIdSchema,
   isArraySchema,
@@ -216,6 +217,10 @@ export function getCadlType(schema: Schema, codeModel: CodeModel): string {
 
   if (isAnySchema(schema)) {
     return `unknown`;
+  }
+
+  if (isAnyObjectSchema(schema)) {
+    return `Record<unknown>`;
   }
 
   if (isArmIdSchema(schema)) {
