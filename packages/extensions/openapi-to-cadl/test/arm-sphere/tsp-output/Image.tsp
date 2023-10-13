@@ -22,12 +22,6 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images {
-  @doc("Get a Image")
-  get is ArmResourceRead<Image>;
-  @doc("Delete a Image")
-  delete is ArmResourceDeleteAsync<Image>;
-  @doc("Create a Image")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
   @doc("List Image resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Image,
@@ -49,4 +43,10 @@ interface Images {
       maxpagesize?: int32;
     }
   >;
+  @doc("Get a Image")
+  get is ArmResourceRead<Image>;
+  @doc("Create a Image")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
+  @doc("Delete a Image")
+  delete is ArmResourceDeleteAsync<Image>;
 }

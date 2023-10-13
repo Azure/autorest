@@ -25,20 +25,6 @@ certificate.
 
 @armResourceOperations
 interface Certificates {
-  @doc("Get a Certificate")
-  get is ArmResourceRead<Certificate>;
-  @doc("Retrieves cert chain.")
-  retrieveCertChain is ArmResourceActionSync<
-    Certificate,
-    {},
-    CertificateChainResponse
-  >;
-  @doc("Gets the proof of possession nonce.")
-  retrieveProofOfPossessionNonce is ArmResourceActionSync<
-    Certificate,
-    ProofOfPossessionNonceRequest,
-    ProofOfPossessionNonceResponse
-  >;
   @doc("List Certificate resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
@@ -59,5 +45,19 @@ interface Certificates {
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
+  >;
+  @doc("Get a Certificate")
+  get is ArmResourceRead<Certificate>;
+  @doc("Retrieves cert chain.")
+  retrieveCertChain is ArmResourceActionSync<
+    Certificate,
+    {},
+    CertificateChainResponse
+  >;
+  @doc("Gets the proof of possession nonce.")
+  retrieveProofOfPossessionNonce is ArmResourceActionSync<
+    Certificate,
+    ProofOfPossessionNonceRequest,
+    ProofOfPossessionNonceResponse
   >;
 }

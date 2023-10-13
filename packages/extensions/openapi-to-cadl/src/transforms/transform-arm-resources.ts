@@ -97,12 +97,12 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   const resourceMetadata = armSchema.resourceMetadata;
   const operations = getResourceOperations(resourceMetadata);
   const tspOperations: TspArmResourceOperation[] = [];
-  for (const operation of resourceMetadata.Operations) {
-    const rawOperation = operations.find((o) => o.operationId === operation.OperationID);
-    let baseParameters = rawOperation ? getOperationParameters(rawOperation, armSchema.resourceMetadata) : "";
-    const hasOkResponse = rawOperation?.responses?.find((o) => o.protocol.http?.statusCodes.includes("200"));
+  for (const operation of operations) {
+    const operationMetadata = resourceMetadata.Operations.find((o) => o.OperationID === operation.operationId);
+    let baseParameters = operation ? getOperationParameters(operation, armSchema.resourceMetadata) : "";
+    const hasOkResponse = operation?.responses?.find((o) => o.protocol.http?.statusCodes.includes("200"));
 
-    const operationResponse = rawOperation?.responses?.[0];
+    const operationResponse = operation?.responses?.[0];
     let operationResponseName: string = resourceMetadata.Name;
     if (operationResponse && isResponseSchema(operationResponse)) {
       if (!operationResponse.schema.language.default.name.includes("·")) {
@@ -110,9 +110,22 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       }
     }
 
-    if (operation.OperationID.endsWith("_Get")) {
+    if (!operationMetadata) {
+      if (resourceMetadata.IsSingletonResource) {
+        tspOperations.push({
+          doc: operation.language.default.description,
+          kind: "ArmResourceListByParent",
+          name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
+          templateParameters: [resourceMetadata.Name],
+        });
+        continue;
+      }
+      continue;
+    }
+
+    if (operationMetadata.OperationID.endsWith("_Get")) {
       tspOperations.push({
-        doc: operation.Description,
+        doc: operationMetadata.Description,
         kind: "ArmResourceRead",
         name: "get",
         templateParameters: [resourceMetadata.Name],
@@ -120,9 +133,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
-    if (operation.OperationID.endsWith("_ListByResourceGroup")) {
+    if (operationMetadata.OperationID.endsWith("_ListByResourceGroup")) {
       tspOperations.push({
-        doc: operation.Description,
+        doc: operationMetadata.Description,
         kind: "ArmResourceListByParent",
         name: "listByResourceGroup",
         templateParameters: [resourceMetadata.Name],
@@ -130,9 +143,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
-    if (operation.OperationID.endsWith("_ListBySubscription")) {
+    if (operationMetadata.OperationID.endsWith("_ListBySubscription")) {
       tspOperations.push({
-        doc: operation.Description,
+        doc: operationMetadata.Description,
         kind: "ArmListBySubscription",
         name: "listBySubscription",
         templateParameters: [resourceMetadata.Name],
@@ -142,14 +155,14 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
 
     if (
       resourceMetadata.Parents.length &&
-      operation.OperationID.includes("_ListBy")
+      operationMetadata.OperationID.includes("_ListBy")
     ) {
       const templateParameters = [resourceMetadata.Name];
       if (baseParameters) {
         templateParameters.push(baseParameters);
       }
       tspOperations.push({
-        doc: operation.Description,
+        doc: operationMetadata.Description,
         kind: "ArmResourceListByParent",
         name: `listBy${resourceMetadata.Parents[0]}`,
         templateParameters,
@@ -157,47 +170,47 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       continue;
     }
 
-    if (operation.OperationID.endsWith("_CreateOrUpdate")) {
+    if (operationMetadata.OperationID.endsWith("_CreateOrUpdate")) {
       tspOperations.push({
-        doc: operation.Description,
-        kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
+        doc: operationMetadata.Description,
+        kind: operationMetadata.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
         name: "createOrUpdate",
         templateParameters: [resourceMetadata.Name],
       });
       continue;
     }
 
-    if (operation.Method === "PUT" && operation.OperationID.endsWith("_Create")) {
+    if (operationMetadata.Method === "PUT" && operationMetadata.OperationID.endsWith("_Create")) {
       tspOperations.push({
-        doc: operation.Description,
-        kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
+        doc: operationMetadata.Description,
+        kind: operationMetadata.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
         name: "create",
         templateParameters: [resourceMetadata.Name],
       });
       continue;
     }
 
-    if (operation.OperationID.endsWith("_Update")) {
+    if (operationMetadata.OperationID.endsWith("_Update")) {
       tspOperations.push({
-        doc: operation.Description,
-        kind: operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync",
+        doc: operationMetadata.Description,
+        kind: operationMetadata.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync",
         name: "update",
         templateParameters: [resourceMetadata.Name, `${resourceMetadata.Name}Properties`],
       });
       continue;
     }
 
-    if (operation.OperationID.endsWith("_Delete")) {
+    if (operationMetadata.OperationID.endsWith("_Delete")) {
       tspOperations.push({
-        doc: operation.Description,
-        kind: operation.IsLongRunning ? (hasOkResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
+        doc: operationMetadata.Description,
+        kind: operationMetadata.IsLongRunning ? (hasOkResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
         name: "delete",
         templateParameters: [resourceMetadata.Name],
       });
       continue;
     }
 
-    const operationName = operation.OperationID.replace(`${pluralize(resourceMetadata.Name)}_`, "");
+    const operationName = operationMetadata.OperationID.replace(`${pluralize(resourceMetadata.Name)}_`, "");
     const fixMe: string[] = [];
 
     if (!baseParameters) {
@@ -208,8 +221,8 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     }
     tspOperations.push({
       fixMe,
-      doc: operation.Description,
-      kind: `ArmResourceAction${hasOkResponse ? "" : "NoContent"}${operation.IsLongRunning ? "Async" : "Sync"}` as any,
+      doc: operationMetadata.Description,
+      kind: `ArmResourceAction${hasOkResponse ? "" : "NoContent"}${operationMetadata.IsLongRunning ? "Async" : "Sync"}` as any,
       name: lowerFirst(operationName),
       templateParameters: hasOkResponse ? [resourceMetadata.Name, baseParameters, operationResponseName] : [resourceMetadata.Name, baseParameters],
     });

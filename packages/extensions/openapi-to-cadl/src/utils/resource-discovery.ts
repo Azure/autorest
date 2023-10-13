@@ -41,6 +41,13 @@ export function getResourceOperations(resource: ArmResource): Operation[] {
   const operations: Operation[] = [];
   const codeModel = getSession().model;
 
+  let predictSingletonResourcePath: string | undefined;
+  if (resource.IsSingletonResource) {
+    resource.Operations.filter((o) => o.Method === "GET" && o.OperationID.endsWith("_Get")).forEach((o) => {
+      predictSingletonResourcePath = o.Path.split("/").slice(0, -1).join("/");
+    });
+  }
+
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       for (const operationMetadata of resource.Operations) {
@@ -50,7 +57,9 @@ export function getResourceOperations(resource: ArmResource): Operation[] {
       }
       if (resource.IsSingletonResource) {
         // for singleton resource, c# will drop the list operation but we need to get it back
-        
+        if (operation.requests?.length && operation.requests[0].protocol?.http?.path === predictSingletonResourcePath && operation.requests[0].protocol.http?.method === "get") {
+          operations.push(operation);
+        }
       }
     }
   }

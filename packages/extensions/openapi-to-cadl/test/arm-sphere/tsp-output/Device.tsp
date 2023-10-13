@@ -24,10 +24,20 @@ model Device is ProxyResource<DeviceProperties> {
 @armResourceOperations
 interface Devices {
   @doc("""
+List Device resources by DeviceGroup. '.default' and '.unassigned' are system
+defined values and cannot be used for product or device group name.
+""")
+  listByDeviceGroup is ArmResourceListByParent<Device>;
+  @doc("""
 Get a Device. Use '.unassigned' or '.default' for the device group and product
 names when a device does not belong to a device group and product.
 """)
   get is ArmResourceRead<Device>;
+  @doc("""
+Create a Device. Use '.unassigned' or '.default' for the device group and
+product names to claim a device to the catalog only.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
   @doc("Delete a Device")
   delete is ArmResourceDeleteAsync<Device>;
   @doc("""
@@ -45,14 +55,4 @@ does not belong to a specific device group and product.
     GenerateCapabilityImageRequest,
     SignedCapabilityImageResponse
   >;
-  @doc("""
-Create a Device. Use '.unassigned' or '.default' for the device group and
-product names to claim a device to the catalog only.
-""")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
-  @doc("""
-List Device resources by DeviceGroup. '.default' and '.unassigned' are system
-defined values and cannot be used for product or device group name.
-""")
-  listByDeviceGroup is ArmResourceListByParent<Device>;
 }
