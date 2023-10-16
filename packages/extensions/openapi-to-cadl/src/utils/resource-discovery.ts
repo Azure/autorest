@@ -131,6 +131,38 @@ export function isResourceUpdateSchema(schema: ObjectSchema): boolean {
   return false;
 }
 
+const _ArmCoreTypes = [
+  "Resource",
+  "ProxyResource",
+  "TrackedResource",
+  "ErrorAdditionalInfo",
+  "ErrorDetail",
+  "ErrorResponse",
+  "Operation",
+  "OperationListResult",
+  "OperationDisplay",
+  "Origin",
+  "SystemData",
+  "Origin",
+];
+
+export function filterResourceRelatedObjects(object: ObjectSchema[] | undefined, armResources: TspArmResource[]): ObjectSchema[] | undefined {
+  const resultListResultSchemas = new Set<string>();
+  armResources.forEach((r) => {
+    r.operations.forEach((o) => {
+      if ((o.kind === "ArmResourceListByParent" || o.kind === "ArmListBySubscription") && o.resultSchemaName) {
+        resultListResultSchemas.add(o.resultSchemaName);
+      }
+    });
+  });
+  return object?.filter((o) =>
+    !_ArmCoreTypes.includes(o.language.default.name) &&
+    !isResourceSchema(o) &&
+    !isResourceUpdateSchema(o) &&
+    !resultListResultSchemas.has(o.language.default.name)
+  );
+}
+
 export function isTspArmResource(schema: CadlObject): schema is TspArmResource {
   return Boolean((schema as TspArmResource).resourceKind);
 }

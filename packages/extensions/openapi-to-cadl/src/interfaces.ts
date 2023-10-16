@@ -152,27 +152,36 @@ export type ArmResourceKind = "TrackedResource" | "ProxyResource";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
 export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update" | "Get";
 
-export interface TspArmResourceOperation extends WithDoc, WithFixMe {
+export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
+  kind: string,
+  name: string;
+  templateParameters: string[];
+  decorators?: CadlDecorator[];
+}
+
+export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResourceNonListOperation;
+
+export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
   | "ArmResourceRead"
-  | "ArmListBySubscription"
-  | "ArmResourceListByParent"
-  | "ArmResourceListByParent"
   | "ArmResourceCreateOrUpdateSync"
   | "ArmResourceCreateOrUpdateAsync"
   | "ArmResourcePatchSync"
   | "ArmResourcePatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
   | "ArmResourceDeleteSync"
   | "ArmResourceDeleteAsync"
   | "ArmResourceDeleteWithoutOkAsync"
   | "ArmResourceActionSync"
   | "ArmResourceActionNoContentSync"
   | "ArmResourceActionAsync"
-  | "ArmResourceActionNoContentAsync"
-  | "ArmListBySubscription";
-  name: string;
-  templateParameters: string[];
-  decorators?: CadlDecorator[];
+  | "ArmResourceActionNoContentAsync";
+}
+
+export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
+  kind: "ArmResourceListByParent" | "ArmListBySubscription";
+  resultSchemaName?: string;
 }
 
 export type MSIType = "ManagedServiceIdentity" | "ManagedSystemAssignedIdentity";

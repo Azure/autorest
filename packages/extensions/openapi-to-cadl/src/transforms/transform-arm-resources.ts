@@ -1,4 +1,4 @@
-import { CodeModel, HttpMethod, Operation, Parameter } from "@autorest/codemodel";
+import { CodeModel, HttpMethod, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
 import { lowerFirst } from "lodash";
 import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
@@ -100,7 +100,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   for (const operation of operations) {
     const operationMetadata = resourceMetadata.Operations.find((o) => o.OperationID === operation.operationId);
     let baseParameters = operation ? getOperationParameters(operation, armSchema.resourceMetadata) : "";
-    const hasOkResponse = operation?.responses?.find((o) => o.protocol.http?.statusCodes.includes("200"));
+    const okResponse = operation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
     const operationResponse = operation?.responses?.[0];
     let operationResponseName: string = resourceMetadata.Name;
@@ -117,6 +117,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
           kind: "ArmResourceListByParent",
           name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
           templateParameters: [resourceMetadata.Name],
+          resultSchemaName: getSchemaResponseSchemaName(okResponse),
         });
         continue;
       }
@@ -139,6 +140,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         kind: "ArmResourceListByParent",
         name: "listByResourceGroup",
         templateParameters: [resourceMetadata.Name],
+        resultSchemaName: getSchemaResponseSchemaName(okResponse),
       });
       continue;
     }
@@ -149,6 +151,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         kind: "ArmListBySubscription",
         name: "listBySubscription",
         templateParameters: [resourceMetadata.Name],
+        resultSchemaName: getSchemaResponseSchemaName(okResponse),
       });
       continue;
     }
@@ -166,6 +169,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         kind: "ArmResourceListByParent",
         name: `listBy${resourceMetadata.Parents[0]}`,
         templateParameters,
+        resultSchemaName: getSchemaResponseSchemaName(okResponse),
       });
       continue;
     }
@@ -203,9 +207,21 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     if (operationMetadata.OperationID.endsWith("_Delete")) {
       tspOperations.push({
         doc: operationMetadata.Description,
-        kind: operationMetadata.IsLongRunning ? (hasOkResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
+        kind: operationMetadata.IsLongRunning ? (okResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
         name: "delete",
         templateParameters: [resourceMetadata.Name],
+      });
+      continue;
+    }
+
+    if (operationMetadata.Method === "PATCH") {
+      const bodyParam = operation?.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+      const operationName = operationMetadata.OperationID.split("_")[1];
+      tspOperations.push({
+        doc: operationMetadata.Description,
+        kind: operationMetadata.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync",
+        name: operationName[0].toLowerCase() + operationName.slice(1),
+        templateParameters: [resourceMetadata.Name, bodyParam?.schema.language.default.name ?? "{}"],
       });
       continue;
     }
@@ -222,9 +238,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     tspOperations.push({
       fixMe,
       doc: operationMetadata.Description,
-      kind: `ArmResourceAction${hasOkResponse ? "" : "NoContent"}${operationMetadata.IsLongRunning ? "Async" : "Sync"}` as any,
+      kind: `ArmResourceAction${okResponse ? "" : "NoContent"}${operationMetadata.IsLongRunning ? "Async" : "Sync"}` as any,
       name: lowerFirst(operationName),
-      templateParameters: hasOkResponse ? [resourceMetadata.Name, baseParameters, operationResponseName] : [resourceMetadata.Name, baseParameters],
+      templateParameters: okResponse ? [resourceMetadata.Name, baseParameters, operationResponseName] : [resourceMetadata.Name, baseParameters],
     });
     continue;
   }
@@ -357,4 +373,12 @@ function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   }
 
   return "ProxyResource";
+}
+
+function getSchemaResponseSchemaName(response: Response | undefined): string | undefined {
+  if (!response || !(response as SchemaResponse).schema) {
+    return undefined;
+  }
+
+  return (response as SchemaResponse).schema.language.default.name;
 }

@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -78,9 +77,6 @@ enum Bypass {
 enum Versions {
   @doc("The 2023-11-15 stable version.") v2023_11_15: "2023-11-15",
 }
-
-@doc("The response of a DataProduct list operation.")
-model DataProductListResult is Azure.Core.Page<DataProduct>;
 
 @doc("The data product properties.")
 model DataProductProperties {
@@ -306,9 +302,6 @@ model UserAssignedIdentity {
   clientId?: string;
 }
 
-@doc("The response of a DataProductsCatalog list operation.")
-model DataProductsCatalogListResult is Azure.Core.Page<DataProductsCatalog>;
-
 @doc("Details for data catalog properties.")
 model DataProductsCatalogProperties {
   @doc("The data catalog provisioning state.")
@@ -390,9 +383,6 @@ model RoleAssignmentDetail {
   @doc("Id of role assignment request")
   roleAssignmentId: string;
 }
-
-@doc("The response of a DataType list operation.")
-model DataTypeListResult is Azure.Core.Page<DataType>;
 
 @doc("The data type properties")
 model DataTypeProperties {
