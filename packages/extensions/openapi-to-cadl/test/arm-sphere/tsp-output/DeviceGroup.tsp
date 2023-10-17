@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An device group resource belonging to a product resource.")
 @parentResource(Product)
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {
@@ -23,42 +23,6 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 
 @armResourceOperations
 interface DeviceGroups {
-  @doc("""
-Get a DeviceGroup. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
-  get is ArmResourceRead<DeviceGroup>;
-  @doc("""
-Delete a DeviceGroup. '.default' and '.unassigned' are system defined values
-and cannot be used for product or device group name.
-""")
-  delete is ArmResourceDeleteAsync<DeviceGroup>;
-  @doc("""
-Update a DeviceGroup. '.default' and '.unassigned' are system defined values
-and cannot be used for product or device group name.
-""")
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
-  @doc("""
-Bulk claims the devices. Use '.unassigned' or '.default' for the device group
-and product names when bulk claiming devices to a catalog only.
-""")
-  claimDevices is ArmResourceActionAsync<
-    DeviceGroup,
-    {
-      ...ClaimDevicesRequest;
-    },
-    DeviceGroup
-  >;
-  @doc("""
-Counts devices in device group. '.default' and '.unassigned' are system defined
-values and cannot be used for product or device group name.
-""")
-  countDevices is ArmResourceActionSync<DeviceGroup, {}, CountDeviceResponse>;
-  @doc("""
-Create a DeviceGroup. '.default' and '.unassigned' are system defined values
-and cannot be used for product or device group name.
-""")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
   @doc("""
 List DeviceGroup resources by Product. '.default' and '.unassigned' are system
 defined values and cannot be used for product name.
@@ -83,4 +47,37 @@ defined values and cannot be used for product name.
       maxpagesize?: int32;
     }
   >;
+  @doc("""
+Get a DeviceGroup. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  get is ArmResourceRead<DeviceGroup>;
+  @doc("""
+Create a DeviceGroup. '.default' and '.unassigned' are system defined values
+and cannot be used for product or device group name.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  @doc("""
+Delete a DeviceGroup. '.default' and '.unassigned' are system defined values
+and cannot be used for product or device group name.
+""")
+  delete is ArmResourceDeleteAsync<DeviceGroup>;
+  @doc("""
+Update a DeviceGroup. '.default' and '.unassigned' are system defined values
+and cannot be used for product or device group name.
+""")
+  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+  @doc("""
+Bulk claims the devices. Use '.unassigned' or '.default' for the device group
+and product names when bulk claiming devices to a catalog only.
+""")
+  claimDevices is ArmResourceActionNoContentAsync<
+    DeviceGroup,
+    ClaimDevicesRequest
+  >;
+  @doc("""
+Counts devices in device group. '.default' and '.unassigned' are system defined
+values and cannot be used for product or device group name.
+""")
+  countDevices is ArmResourceActionSync<DeviceGroup, {}, CountDeviceResponse>;
 }

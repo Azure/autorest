@@ -7,6 +7,7 @@ import {
   Schema,
   SchemaType,
 } from "@autorest/codemodel";
+import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { CadlObject, CadlObjectProperty } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
@@ -14,7 +15,9 @@ import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {
+  isAnyObjectSchema,
   isAnySchema,
+  isArmIdSchema,
   isArraySchema,
   isChoiceSchema,
   isConstantSchema,
@@ -36,7 +39,7 @@ const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Number, "float32"],
   [SchemaType.Integer, "int32"],
   [SchemaType.Boolean, "boolean"],
-  [SchemaType.Credential, "@secret string"],
+  [SchemaType.Credential, "string"],
   [SchemaType.Duration, "duration"],
   [SchemaType.AnyObject, "object"],
 ]);
@@ -174,6 +177,15 @@ function getSpreadParents(schema: ObjectSchema, codeModel: CodeModel): string[] 
   return spreadingParents;
 }
 
+function getArmIdType(schema: Schema): string {
+  const allowedResources = schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"]
+  if (allowedResources) {
+    return `ResourceIdentifier<[${schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"].map((r: { [x: string]: string; }) => "{type: \"" + r["type"] + "\";}").join(",")}]>`;
+  } else {
+    return "ResourceIdentifier";
+  }
+}
+
 export function getCadlType(schema: Schema, codeModel: CodeModel): string {
   const schemaType = schema.type;
   const visited = getDataTypes(codeModel).get(schema);
@@ -205,6 +217,14 @@ export function getCadlType(schema: Schema, codeModel: CodeModel): string {
 
   if (isAnySchema(schema)) {
     return `unknown`;
+  }
+
+  if (isAnyObjectSchema(schema)) {
+    return `Record<unknown>`;
+  }
+
+  if (isArmIdSchema(schema)) {
+    return getArmIdType(schema);
   }
 
   const cadlType = cadlTypes.get(schemaType);

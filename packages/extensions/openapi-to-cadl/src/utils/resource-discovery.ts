@@ -40,10 +40,24 @@ let armResourceCache: Record<string, ArmResource> | undefined;
 export function getResourceOperations(resource: ArmResource): Operation[] {
   const operations: Operation[] = [];
   const codeModel = getSession().model;
-  for (const operationMetadata of resource.Operations) {
-    for (const operationGroup of codeModel.operationGroups) {
-      for (const operation of operationGroup.operations) {
+
+  let predictSingletonResourcePath: string | undefined;
+  if (resource.IsSingletonResource) {
+    resource.Operations.filter((o) => o.Method === "GET" && o.OperationID.endsWith("_Get")).forEach((o) => {
+      predictSingletonResourcePath = o.Path.split("/").slice(0, -1).join("/");
+    });
+  }
+
+  for (const operationGroup of codeModel.operationGroups) {
+    for (const operation of operationGroup.operations) {
+      for (const operationMetadata of resource.Operations) {
         if (operation.operationId === operationMetadata.OperationID) {
+          operations.push(operation);
+        }
+      }
+      if (resource.IsSingletonResource) {
+        // for singleton resource, c# will drop the list operation but we need to get it back
+        if (operation.requests?.length && operation.requests[0].protocol?.http?.path === predictSingletonResourcePath && operation.requests[0].protocol.http?.method === "get") {
           operations.push(operation);
         }
       }
@@ -63,11 +77,11 @@ export function getArmResourcesMetadata(): Record<string, ArmResource> {
   const inputPath: string | undefined = (session.configuration.inputFileUris ?? [])[0];
   // const inputFiles: string[] = session.configuration["input-file"] ?? [];
 
-  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file://", "");
+  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file:", "").replace(/^\/+/g, "");
   let localInputFolder: string | undefined;
 
-  if (inputPath && inputPath.startsWith("file://")) {
-    localInputFolder = dirname(inputPath).replace("file://", "");
+  if (inputPath && inputPath.startsWith("file:")) {
+    localInputFolder = dirname(inputPath).replace("file:", "").replace(/^\/+/g, "");
   }
 
   const resourcesPath = localInputFolder ?? localConfigFolder;
@@ -115,6 +129,38 @@ export function isResourceUpdateSchema(schema: ObjectSchema): boolean {
   }
 
   return false;
+}
+
+const _ArmCoreTypes = [
+  "Resource",
+  "ProxyResource",
+  "TrackedResource",
+  "ErrorAdditionalInfo",
+  "ErrorDetail",
+  "ErrorResponse",
+  "Operation",
+  "OperationListResult",
+  "OperationDisplay",
+  "Origin",
+  "SystemData",
+  "Origin",
+];
+
+export function filterResourceRelatedObjects(object: ObjectSchema[] | undefined, armResources: TspArmResource[]): ObjectSchema[] | undefined {
+  const resultListResultSchemas = new Set<string>();
+  armResources.forEach((r) => {
+    r.operations.forEach((o) => {
+      if ((o.kind === "ArmResourceListByParent" || o.kind === "ArmListBySubscription") && o.resultSchemaName) {
+        resultListResultSchemas.add(o.resultSchemaName);
+      }
+    });
+  });
+  return object?.filter((o) =>
+    !_ArmCoreTypes.includes(o.language.default.name) &&
+    !isResourceSchema(o) &&
+    !isResourceUpdateSchema(o) &&
+    !resultListResultSchemas.has(o.language.default.name)
+  );
 }
 
 export function isTspArmResource(schema: CadlObject): schema is TspArmResource {

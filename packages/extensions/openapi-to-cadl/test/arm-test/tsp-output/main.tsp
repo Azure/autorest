@@ -3,13 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./Catalog.tsp";
-import "./Certificate.tsp";
-import "./Image.tsp";
-import "./Product.tsp";
-import "./DeviceGroup.tsp";
-import "./Deployment.tsp";
-import "./Device.tsp";
+import "./Employee.tsp";
+import "./Enroll.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -19,10 +14,10 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
-  title: "Azure Sphere resource management API.",
-  version: "2022-09-01-preview",
+  title: "Azure Test resource management API.",
+  version: "2023-10-12",
 })
-@doc("Azure Sphere resource management API.")
+@doc("For test.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace Azure.ResourceManager.Sphere;
+namespace Azure.ResourceManager.Test;

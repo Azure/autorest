@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -95,18 +95,12 @@ enum CapabilityType {
   @doc("Field servicing capability") FieldServicing,
 }
 
-@doc("The response of a Catalog list operation.")
-model CatalogListResult is Azure.Core.Page<Catalog>;
-
 @doc("Catalog properties")
 model CatalogProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
-
-@doc("The response of a Certificate list operation.")
-model CertificateListResult is Azure.Core.Page<Certificate>;
 
 @doc("The properties of certificate")
 model CertificateProperties {
@@ -170,9 +164,6 @@ model CountElementsResponse {
   value: int32;
 }
 
-@doc("The response of a Image list operation.")
-model ImageListResult is Azure.Core.Page<Image>;
-
 @doc("The properties of image")
 model ImageProperties {
   @doc("""
@@ -215,9 +206,6 @@ the image URI on image reads.
   provisioningState?: ProvisioningState;
 }
 
-@doc("The response of a Deployment list operation.")
-model DeploymentListResult is Azure.Core.Page<Deployment>;
-
 @doc("The properties of deployment")
 model DeploymentProperties {
   @doc("Deployment ID")
@@ -243,9 +231,6 @@ model ListDeviceGroupsRequest {
   @doc("Device Group name.")
   deviceGroupName?: string;
 }
-
-@doc("The response of a DeviceGroup list operation.")
-model DeviceGroupListResult is Azure.Core.Page<DeviceGroup>;
 
 @doc("The properties of deviceGroup")
 model DeviceGroupProperties {
@@ -305,9 +290,6 @@ model DeviceInsight {
   eventCount: int32;
 }
 
-@doc("The response of a Device list operation.")
-model DeviceListResult is Azure.Core.Page<Device>;
-
 @doc("The properties of device")
 model DeviceProperties {
   @doc("Device ID")
@@ -340,9 +322,6 @@ model DeviceProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
-
-@doc("The response of a Product list operation.")
-model ProductListResult is Azure.Core.Page<Product>;
 
 @doc("The properties of product")
 model ProductProperties {

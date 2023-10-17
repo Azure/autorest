@@ -7,25 +7,10 @@ import { transformEnum } from "./transforms/transform-choices";
 import { getCadlType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
-import { ArmResourceSchema, isResourceSchema, isResourceUpdateSchema } from "./utils/resource-discovery";
+import { ArmResourceSchema, filterResourceRelatedObjects, isResourceSchema, isResourceUpdateSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
 
 const models: Map<CodeModel, CadlProgram> = new Map();
-
-const _ArmCoreTypes = [
-  "Resource",
-  "ProxyResource",
-  "TrackedResource",
-  "ErrorAdditionalInfo",
-  "ErrorDetail",
-  "ErrorResponse",
-  "Operation",
-  "OperationListResult",
-  "OperationDisplay",
-  "Origin",
-  "SystemData",
-  "Origin",
-];
 
 export function getModel(codeModel: CodeModel): CadlProgram {
   let model = models.get(codeModel);
@@ -62,16 +47,12 @@ function transformModel(codeModel: CodeModel): CadlProgram {
 
   const { isArm } = getOptions();
 
-  const cadlObjects =
-    codeModel.schemas.objects
-      ?.filter((o) => isArm && !_ArmCoreTypes.includes(o.language.default.name))
-      ?.filter((o) => !isResourceSchema(o))
-      .filter((o) => !isResourceUpdateSchema(o))
-      .map((o) => transformObject(o, codeModel)) ?? [];
   const armResources =
     codeModel.schemas.objects
       ?.filter((o) => isResourceSchema(o))
       .map((o) => transformTspArmResource(codeModel, o as ArmResourceSchema)) ?? [];
+
+  const cadlObjects = ((isArm ? filterResourceRelatedObjects(codeModel.schemas.objects, armResources) : codeModel.schemas.objects) ?? []).map((o) => transformObject(o, codeModel));
 
   const serviceInformation = transformServiceInformation(codeModel);
 

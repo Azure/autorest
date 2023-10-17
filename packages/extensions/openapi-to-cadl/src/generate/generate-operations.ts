@@ -22,7 +22,7 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op ${name} is Azure.Core.Foundations.Operation<{${params ? params : ""}}, ${responses.join(
+      `@${verb} op ${name} is Azure.Core.Foundations.Operation<${params ? params : "{}"}}, ${responses.join(
         " | ",
       )}>;\n\n\n`,
     );
@@ -34,7 +34,7 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     const resourceParameters = generateParameters(
       parameters.filter((param) => !["path", "body"].some((p) => p === param.location)),
     );
-    const parametersString = !resourceParameters ? `` : `, { parameters: {${resourceParameters}}}`;
+    const parametersString = !resourceParameters ? "" : `, { parameters: ${resourceParameters}}`;
     statements.push(
       `${operationGroup.name ? "" : "op "}`,
       `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,
@@ -68,11 +68,21 @@ function generateMultiResponseWarning(responses: string[], statements: string[])
 }
 
 export function generateParameters(parameters: CadlParameter[]) {
+  if (parameters.length === 0) {
+    return "";
+  }
+  if (parameters.length === 1 && parameters[0].location === "body") {
+    if (parameters[0].type === "unknown") {
+      return "unknown";
+    } else {
+      return parameters[0].type;
+    }
+  }
   const params: string[] = [];
   for (const parameter of parameters) {
     params.push(generateParameter(parameter));
   }
-  return params.join("\n");
+  return `{${params.join("\n")}}`;
 }
 
 export function generateOperationGroup(operationGroup: CadlOperationGroup) {

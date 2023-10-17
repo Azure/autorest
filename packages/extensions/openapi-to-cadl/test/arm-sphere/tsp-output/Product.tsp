@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An product resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Product is ProxyResource<ProductProperties> {
@@ -23,11 +23,18 @@ model Product is ProxyResource<ProductProperties> {
 
 @armResourceOperations
 interface Products {
+  @doc("List Product resources by Catalog")
+  listByCatalog is ArmResourceListByParent<Product>;
   @doc("""
 Get a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name.
 """)
   get is ArmResourceRead<Product>;
+  @doc("""
+Create a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
   @doc("""
 Delete a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name'
@@ -52,11 +59,4 @@ are system defined values and cannot be used for product name.
     {},
     DeviceGroupListResult
   >;
-  @doc("""
-Create a Product. '.default' and '.unassigned' are system defined values and
-cannot be used for product name.
-""")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
-  @doc("List Product resources by Catalog")
-  listByCatalog is ArmResourceListByParent<Product>;
 }

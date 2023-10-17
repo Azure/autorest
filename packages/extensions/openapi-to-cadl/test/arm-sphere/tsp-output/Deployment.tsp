@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
@@ -25,21 +25,6 @@ deployment for the associated device group.
 
 @armResourceOperations
 interface Deployments {
-  @doc("""
-Get a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
-  get is ArmResourceRead<Deployment>;
-  @doc("""
-Delete a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
-  delete is ArmResourceDeleteAsync<Deployment>;
-  @doc("""
-Create a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
   @doc("""
 List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
 system defined values and cannot be used for product or device group name.
@@ -64,4 +49,19 @@ system defined values and cannot be used for product or device group name.
       maxpagesize?: int32;
     }
   >;
+  @doc("""
+Get a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  get is ArmResourceRead<Deployment>;
+  @doc("""
+Create a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
+  @doc("""
+Delete a Deployment. '.default' and '.unassigned' are system defined values and
+cannot be used for product or device group name.
+""")
+  delete is ArmResourceDeleteAsync<Deployment>;
 }

@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Azure.ResourceManager.Sphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
@@ -21,12 +21,18 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @armResourceOperations
 interface Catalogs {
+  @doc("List Catalog resources by subscription ID")
+  listBySubscription is ArmListBySubscription<Catalog>;
+  @doc("List Catalog resources by resource group")
+  listByResourceGroup is ArmResourceListByParent<Catalog>;
   @doc("Get a Catalog")
   get is ArmResourceRead<Catalog>;
-  @doc("Delete a Catalog")
-  delete is ArmResourceDeleteAsync<Catalog>;
+  @doc("Create a Catalog")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("Update a Catalog")
   update is ArmResourcePatchSync<Catalog, CatalogProperties>;
+  @doc("Delete a Catalog")
+  delete is ArmResourceDeleteAsync<Catalog>;
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")
@@ -118,10 +124,4 @@ interface Catalogs {
     },
     DeviceListResult
   >;
-  @doc("List Catalog resources by subscription ID")
-  listBySubscription is ArmListBySubscription<Catalog>;
-  @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
-  @doc("List Catalog resources by resource group")
-  listByResourceGroup is ArmResourceListByParent<Catalog>;
 }
