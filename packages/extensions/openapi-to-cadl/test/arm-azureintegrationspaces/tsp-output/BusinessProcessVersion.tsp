@@ -22,6 +22,8 @@ model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
 
 @armResourceOperations
 interface BusinessProcessVersions {
+  @doc("Get a BusinessProcessVersion")
+  get is ArmResourceRead<BusinessProcessVersion>;
   @doc("List BusinessProcessVersion resources by BusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
@@ -55,6 +57,4 @@ interface BusinessProcessVersions {
       orderby?: string[];
     }
   >;
-  @doc("Get a BusinessProcessVersion")
-  get is ArmResourceRead<BusinessProcessVersion>;
 }

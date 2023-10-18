@@ -3,7 +3,7 @@ param(
     [string]$swaggerConfigFile,
     [string]$outputFolder,
     [string]$registry = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/",
-    [string]$csharpCodegen = "@autorest/csharp@3.0.0-alpha.20231011.12",
+    [string]$csharpCodegen = "@autorest/csharp@3.0.0-alpha.20231017.8",
     [string]$converterCodegen = ""
 )
 

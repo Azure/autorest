@@ -24,6 +24,17 @@ model InfrastructureResource
 
 @armResourceOperations
 interface InfrastructureResources {
+  @doc("Get a InfrastructureResource")
+  get is ArmResourceRead<InfrastructureResource>;
+  @doc("Create a InfrastructureResource")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<InfrastructureResource>;
+  @doc("Update a InfrastructureResource")
+  patch is ArmResourcePatchSync<
+    InfrastructureResource,
+    InfrastructureResourceUpdateProperties
+  >;
+  @doc("Delete a InfrastructureResource")
+  delete is ArmResourceDeleteAsync<InfrastructureResource>;
   @doc("List InfrastructureResource resources by Space")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
@@ -57,15 +68,4 @@ interface InfrastructureResources {
       orderby?: string[];
     }
   >;
-  @doc("Get a InfrastructureResource")
-  get is ArmResourceRead<InfrastructureResource>;
-  @doc("Create a InfrastructureResource")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InfrastructureResource>;
-  @doc("Update a InfrastructureResource")
-  patch is ArmCustomPatchSync<
-    InfrastructureResource,
-    InfrastructureResourceUpdate
-  >;
-  @doc("Delete a InfrastructureResource")
-  delete is ArmResourceDeleteAsync<InfrastructureResource>;
 }

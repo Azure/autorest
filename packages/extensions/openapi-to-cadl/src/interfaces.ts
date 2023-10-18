@@ -168,6 +168,8 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
   | "ArmResourceCreateOrUpdateAsync"
   | "ArmResourcePatchSync"
   | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
   | "ArmCustomPatchSync"
   | "ArmCustomPatchAsync"
   | "ArmResourceDeleteSync"
@@ -176,11 +178,11 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
   | "ArmResourceActionSync"
   | "ArmResourceActionNoContentSync"
   | "ArmResourceActionAsync"
-  | "ArmResourceActionNoContentAsync";
+  | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
-  kind: "ArmResourceListByParent" | "ArmListBySubscription";
+  kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
   resultSchemaName?: string;
 }
 

@@ -23,6 +23,14 @@ model Application is TrackedResource<ApplicationProperties> {
 
 @armResourceOperations
 interface Applications {
+  @doc("Get a Application")
+  get is ArmResourceRead<Application>;
+  @doc("Create a Application")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Application>;
+  @doc("Update a Application")
+  patch is ArmResourcePatchSync<Application, ApplicationUpdateProperties>;
+  @doc("Delete a Application")
+  delete is ArmResourceDeleteAsync<Application>;
   @doc("List Application resources by Space")
   listBySpace is ArmResourceListByParent<
     Application,
@@ -56,19 +64,11 @@ interface Applications {
       orderby?: string[];
     }
   >;
-  @doc("Get a Application")
-  get is ArmResourceRead<Application>;
-  @doc("Create a Application")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Application>;
-  @doc("Update a Application")
-  patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
-  @doc("Delete a Application")
-  delete is ArmResourceDeleteAsync<Application>;
   @doc("The delete business process development artifact action.")
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
-    Application
+    {}
   >;
   @doc("The get business process development artifact action.")
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
@@ -92,6 +92,6 @@ interface Applications {
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
-    Application
+    {}
   >;
 }

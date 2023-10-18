@@ -21,18 +21,18 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @armResourceOperations
 interface Catalogs {
-  @doc("List Catalog resources by subscription ID")
-  listBySubscription is ArmListBySubscription<Catalog>;
-  @doc("List Catalog resources by resource group")
-  listByResourceGroup is ArmResourceListByParent<Catalog>;
   @doc("Get a Catalog")
   get is ArmResourceRead<Catalog>;
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("Update a Catalog")
-  update is ArmResourcePatchSync<Catalog, CatalogProperties>;
+  update is ArmTagsPatchSync<Catalog>;
   @doc("Delete a Catalog")
   delete is ArmResourceDeleteAsync<Catalog>;
+  @doc("List Catalog resources by resource group")
+  listByResourceGroup is ArmResourceListByParent<Catalog>;
+  @doc("List Catalog resources by subscription ID")
+  listBySubscription is ArmListBySubscription<Catalog>;
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")

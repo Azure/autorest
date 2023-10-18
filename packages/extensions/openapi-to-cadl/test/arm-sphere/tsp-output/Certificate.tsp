@@ -25,6 +25,8 @@ certificate.
 
 @armResourceOperations
 interface Certificates {
+  @doc("Get a Certificate")
+  get is ArmResourceRead<Certificate>;
   @doc("List Certificate resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
@@ -46,8 +48,6 @@ interface Certificates {
       maxpagesize?: int32;
     }
   >;
-  @doc("Get a Certificate")
-  get is ArmResourceRead<Certificate>;
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,

@@ -25,16 +25,16 @@ model DataType is ProxyResource<DataTypeProperties> {
 
 @armResourceOperations
 interface DataTypes {
-  @doc("List data type by parent resource.")
-  listByDataProduct is ArmResourceListByParent<DataType>;
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataType>;
   @doc("Create data type resource.")
   create is ArmResourceCreateOrUpdateAsync<DataType>;
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
+  update is ArmResourcePatchAsync<DataType, DataTypeUpdateProperties>;
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
+  @doc("List data type by parent resource.")
+  listByDataProduct is ArmResourceListByParent<DataType>;
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoContentAsync<DataType, Record<unknown>>;
   @doc("Generate sas token for storage container.")

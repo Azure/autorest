@@ -4,6 +4,7 @@ import { ObjectSchema, Operation } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { CadlObject, TspArmResource } from "../interfaces";
 export interface _ArmResourceOperation {
+  Name: string;
   Path: string;
   Method: string;
   OperationID: string;
@@ -21,7 +22,16 @@ export interface _ArmPagingMetadata {
 
 export interface ArmResource {
   Name: string;
-  Operations: _ArmResourceOperation[];
+  GetOperations: _ArmResourceOperation[];
+  CreateOperations: _ArmResourceOperation[];
+  UpdateOperations: _ArmResourceOperation[];
+  DeleteOperations: _ArmResourceOperation[];
+  ListOperations: _ArmResourceOperation[];
+  OperationsFromResourceGroupExtension: _ArmResourceOperation[];
+  OperationsFromSubscriptionExtension: _ArmResourceOperation[];
+  OperationsFromManagementGroupExtension: _ArmResourceOperation[];
+  OperationsFromTenantExtension: _ArmResourceOperation[];
+  OtherOperations: _ArmResourceOperation[];
   Parents: string[];
   SwaggerModelName: string;
   ResourceType: string;
@@ -37,34 +47,51 @@ export interface ArmResource {
 
 let armResourceCache: Record<string, ArmResource> | undefined;
 
-export function getResourceOperations(resource: ArmResource): Operation[] {
-  const operations: Operation[] = [];
+export function getResourceOperations(resource: ArmResource): Record<string, Operation> {
+  const operations: Record<string, Operation> = {};
   const codeModel = getSession().model;
 
-  let predictSingletonResourcePath: string | undefined;
-  if (resource.IsSingletonResource) {
-    resource.Operations.filter((o) => o.Method === "GET" && o.OperationID.endsWith("_Get")).forEach((o) => {
-      predictSingletonResourcePath = o.Path.split("/").slice(0, -1).join("/");
-    });
-  }
-
+  const allOperations = resource.GetOperations.
+    concat(resource.CreateOperations).
+    concat(resource.UpdateOperations).
+    concat(resource.DeleteOperations).
+    concat(resource.ListOperations).
+    concat(resource.OperationsFromResourceGroupExtension).
+    concat(resource.OperationsFromSubscriptionExtension).
+    concat(resource.OperationsFromManagementGroupExtension).
+    concat(resource.OperationsFromTenantExtension).
+    concat(resource.OtherOperations);
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
-      for (const operationMetadata of resource.Operations) {
+      for (const operationMetadata of allOperations) {
         if (operation.operationId === operationMetadata.OperationID) {
-          operations.push(operation);
-        }
-      }
-      if (resource.IsSingletonResource) {
-        // for singleton resource, c# will drop the list operation but we need to get it back
-        if (operation.requests?.length && operation.requests[0].protocol?.http?.path === predictSingletonResourcePath && operation.requests[0].protocol.http?.method === "get") {
-          operations.push(operation);
+          operations[operation.operationId] = operation;
         }
       }
     }
   }
 
   return operations;
+}
+
+export function getSingletonResouceListOperation(resource: ArmResource): Operation | undefined {
+  const codeModel = getSession().model;
+
+  let predictSingletonResourcePath: string | undefined;
+  if (resource.IsSingletonResource) {
+    predictSingletonResourcePath = resource.GetOperations[0].Path.split("/").slice(0, -1).join("/");
+  }
+
+  for (const operationGroup of codeModel.operationGroups) {
+    for (const operation of operationGroup.operations) {
+      if (resource.IsSingletonResource) {
+        // for singleton resource, c# will drop the list operation but we need to get it back
+        if (operation.requests?.length && operation.requests[0].protocol?.http?.path === predictSingletonResourcePath && operation.requests[0].protocol.http?.method === "get") {
+          return operation;
+        }
+      }
+    }
+  }
 }
 
 export function getArmResourcesMetadata(): Record<string, ArmResource> {

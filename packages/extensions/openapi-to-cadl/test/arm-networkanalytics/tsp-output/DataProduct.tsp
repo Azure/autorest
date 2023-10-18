@@ -24,18 +24,18 @@ model DataProduct is TrackedResource<DataProductProperties> {
 
 @armResourceOperations
 interface DataProducts {
-  @doc("List data products by subscription.")
-  listBySubscription is ArmListBySubscription<DataProduct>;
-  @doc("List data products by resource group.")
-  listByResourceGroup is ArmResourceListByParent<DataProduct>;
   @doc("Retrieve data product resource.")
   get is ArmResourceRead<DataProduct>;
   @doc("Create data product resource.")
   create is ArmResourceCreateOrUpdateAsync<DataProduct>;
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmResourcePatchAsync<DataProduct, DataProductUpdateProperties>;
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
+  @doc("List data products by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProduct>;
+  @doc("List data products by subscription.")
+  listBySubscription is ArmListBySubscription<DataProduct>;
   @doc("Assign role to the data product.")
   addUserRole is ArmResourceActionSync<
     DataProduct,

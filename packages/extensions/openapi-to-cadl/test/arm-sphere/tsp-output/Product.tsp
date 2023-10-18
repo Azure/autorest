@@ -23,8 +23,6 @@ model Product is ProxyResource<ProductProperties> {
 
 @armResourceOperations
 interface Products {
-  @doc("List Product resources by Catalog")
-  listByCatalog is ArmResourceListByParent<Product>;
   @doc("""
 Get a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name.
@@ -36,15 +34,17 @@ cannot be used for product name.
 """)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
   @doc("""
+Update a Product. '.default' and '.unassigned' are system defined values and
+cannot be used for product name.
+""")
+  update is ArmResourcePatchAsync<Product, ProductUpdateProperties>;
+  @doc("""
 Delete a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name'
 """)
   delete is ArmResourceDeleteAsync<Product>;
-  @doc("""
-Update a Product. '.default' and '.unassigned' are system defined values and
-cannot be used for product name.
-""")
-  update is ArmResourcePatchAsync<Product, ProductProperties>;
+  @doc("List Product resources by Catalog")
+  listByCatalog is ArmResourceListByParent<Product>;
   @doc("""
 Counts devices in product. '.default' and '.unassigned' are system defined
 values and cannot be used for product name.
