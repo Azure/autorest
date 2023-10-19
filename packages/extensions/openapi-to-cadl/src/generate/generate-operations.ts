@@ -22,7 +22,7 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op ${name} is Azure.Core.Foundations.Operation<${params ? params : "{}"}}, ${responses.join(
+      `@${verb} op ${name} is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${responses.join(
         " | ",
       )}>;\n\n\n`,
     );

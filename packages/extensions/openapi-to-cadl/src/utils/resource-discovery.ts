@@ -47,6 +47,10 @@ export interface ArmResource {
 
 let armResourceCache: Record<string, ArmResource> | undefined;
 
+export interface OperationWithResourceOperationFlag extends Operation {
+  isResourceOperation?: boolean;
+}
+
 export function getResourceOperations(resource: ArmResource): Record<string, Operation> {
   const operations: Record<string, Operation> = {};
   const codeModel = getSession().model;
@@ -65,6 +69,7 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
       for (const operationMetadata of allOperations) {
         if (operation.operationId === operationMetadata.OperationID) {
           operations[operation.operationId] = operation;
+          (operation as OperationWithResourceOperationFlag).isResourceOperation = true;
         }
       }
     }

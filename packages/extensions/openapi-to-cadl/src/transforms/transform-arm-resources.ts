@@ -24,6 +24,7 @@ import { getHttpMethod } from "../utils/operations";
 import {
   ArmResource,
   ArmResourceSchema,
+  OperationWithResourceOperationFlag,
   _ArmResourceOperation,
   getArmResourcesMetadata,
   getResourceOperations,
@@ -38,7 +39,7 @@ const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
   const fixMe: string[] = [];
 
-  // TODO: deal with a resource with multiple parents, or say scoped resource
+  // TODO: deal with a resource with multiple parents
   if (schema.resourceMetadata.Parents.length > 1) {
     fixMe.push(`// FIXME: ${schema.resourceMetadata.Name} has more than one parent, currently converter will only use the first one`)
   }
@@ -278,6 +279,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         templateParameters: [resourceMetadata.Name],
         resultSchemaName: getSchemaResponseSchemaName(okResponse),
       });
+      (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
     }
   }
 

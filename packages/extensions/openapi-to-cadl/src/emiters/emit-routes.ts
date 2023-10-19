@@ -8,7 +8,7 @@ import { getNamespace } from "../utils/namespace";
 
 export async function emitRoutes(filePath: string, program: CadlProgram): Promise<void> {
   const options = getOptions();
-  if (options.isArm) {
+  if (program.operationGroups.length === 0) {
     return;
   }
   const content = generateRoutes(program);

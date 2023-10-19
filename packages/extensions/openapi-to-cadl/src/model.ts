@@ -63,7 +63,14 @@ function transformModel(codeModel: CodeModel): CadlProgram {
 
   const serviceInformation = transformServiceInformation(codeModel);
 
-  const cadlOperationGroups = codeModel.operationGroups.map((g) => transformOperationGroup(g, codeModel));
+  const cadlOperationGroups = [];
+
+  for (const og of codeModel.operationGroups) {
+    const cadlOperationGroup = transformOperationGroup(og, codeModel);
+    if (cadlOperationGroup.operations.length > 0) {
+      cadlOperationGroups.push(cadlOperationGroup);
+    }
+  }
 
   return {
     serviceInformation,

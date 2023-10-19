@@ -9,9 +9,11 @@ import {
   Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
+import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
 import { CadlOperation, CadlOperationGroup, CadlParameter, CadlParameterLocation, Extension } from "../interfaces";
 import { transformDataType } from "../model";
+import { getOptions } from "../options";
 import { getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
@@ -60,6 +62,13 @@ function transformResponses(responses: SchemaResponse[] = [], codeModel: CodeMod
 }
 
 export function transformOperation(operation: Operation, codeModel: CodeModel): CadlOperation[] {
+  const { isArm } = getOptions();
+  if (isArm) {
+    if ((operation as OperationWithResourceOperationFlag).isResourceOperation ||
+      transformRoute(operation.requests?.[0].protocol)?.match(/^\/providers\/[^/]+\/operations$/)) {
+      return [];
+    }
+  }
   return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel));
 }
 
