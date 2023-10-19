@@ -36,7 +36,10 @@ interface DataTypes {
   @doc("List data type by parent resource.")
   listByDataProduct is ArmResourceListByParent<DataType>;
   @doc("Delete data for data type.")
-  deleteData is ArmResourceActionNoContentAsync<DataType, Record<unknown>>;
+  deleteData is ArmResourceActionNoResponseContentAsync<
+    DataType,
+    Record<unknown>
+  >;
   @doc("Generate sas token for storage container.")
   generateStorageContainerSasToken is ArmResourceActionSync<
     DataType,

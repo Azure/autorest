@@ -48,6 +48,7 @@ interface Certificates {
       maxpagesize?: int32;
     }
   >;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,

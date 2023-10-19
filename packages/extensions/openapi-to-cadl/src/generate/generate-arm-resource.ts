@@ -7,6 +7,10 @@ import { getModelPropertiesDeclarations } from "../utils/model-generation";
 export function generateArmResource(resource: TspArmResource): string {
   let definitions: string[] = [];
 
+  for (const fixme of resource.fixMe ?? []) {
+    definitions.push(fixme);
+  }
+
   const doc = generateDocs(resource);
   definitions.push(doc);
 
@@ -35,6 +39,9 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   definitions.push("@armResourceOperations");
   definitions.push(`interface ${plural(resource.name)} {`);
   for (const operation of resource.operations) {
+    for (const fixme of operation.fixMe ?? []) {
+      definitions.push(fixme);
+    }
     definitions.push(generateDocs(operation));
     definitions.push(`${operation.name} is ${operation.kind}<${operation.templateParameters.join()}>`);
   }

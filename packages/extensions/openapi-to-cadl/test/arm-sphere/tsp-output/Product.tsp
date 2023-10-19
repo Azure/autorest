@@ -45,11 +45,13 @@ cannot be used for product name'
   delete is ArmResourceDeleteAsync<Product>;
   @doc("List Product resources by Catalog")
   listByCatalog is ArmResourceListByParent<Product>;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Counts devices in product. '.default' and '.unassigned' are system defined
 values and cannot be used for product name.
 """)
   countDevices is ArmResourceActionSync<Product, {}, CountDeviceResponse>;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Generates default device groups for the product. '.default' and '.unassigned'
 are system defined values and cannot be used for product name.

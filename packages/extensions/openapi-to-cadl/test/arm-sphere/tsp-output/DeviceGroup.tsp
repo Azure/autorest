@@ -71,10 +71,8 @@ defined values and cannot be used for product name.
 Bulk claims the devices. Use '.unassigned' or '.default' for the device group
 and product names when bulk claiming devices to a catalog only.
 """)
-  claimDevices is ArmResourceActionNoContentAsync<
-    DeviceGroup,
-    ClaimDevicesRequest
-  >;
+  claimDevices is ArmResourceActionAsync<DeviceGroup, ClaimDevicesRequest>;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Counts devices in device group. '.default' and '.unassigned' are system defined
 values and cannot be used for product or device group name.

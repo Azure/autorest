@@ -148,9 +148,15 @@ export interface Models {
   armResources: TspArmResource[];
 }
 
-export type ArmResourceKind = "TrackedResource" | "ProxyResource";
+export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "ExtensionResource";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
-export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update" | "Get";
+
+const FIRST_LEVEL_RESOURCE = ["ResourceGroupResource", "SubscriptionResource", "ManagementGroupResource", "TenantResource"] as const;
+export type FirstLevelResource = (typeof FIRST_LEVEL_RESOURCE)[number];
+
+export function isFirstLevelResource(value: string): value is FirstLevelResource {
+  return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);
+}
 
 export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   kind: string;
@@ -163,22 +169,22 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrUpdateSync"
-    | "ArmResourceCreateOrUpdateAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrUpdateSync"
+  | "ArmResourceCreateOrUpdateAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
@@ -191,8 +197,6 @@ export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;
-  // keyProperty: CadlObjectProperty;
   operations: TspArmResourceOperation[];
-  // schema: ObjectSchema;
   msiType?: MSIType;
 }

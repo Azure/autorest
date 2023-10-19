@@ -33,6 +33,7 @@ interface Catalogs {
   listByResourceGroup is ArmResourceListByParent<Catalog>;
   @doc("List Catalog resources by subscription ID")
   listBySubscription is ArmListBySubscription<Catalog>;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")

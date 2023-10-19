@@ -76,6 +76,7 @@ interface Applications {
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     SaveOrGetBusinessProcessDevelopmentArtifactResponse
   >;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The list business process development artifacts action.")
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,

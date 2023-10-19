@@ -8,7 +8,6 @@ import {
   SchemaResponse,
 } from "@autorest/codemodel";
 import _ from "lodash";
-import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
 import { generateParameters } from "../generate/generate-operations";
 import {
@@ -19,6 +18,7 @@ import {
   MSIType,
   TspArmResource,
   TspArmResourceOperation,
+  isFirstLevelResource,
 } from "../interfaces";
 import { getHttpMethod } from "../utils/operations";
 import {
@@ -36,47 +36,19 @@ import { transformParameter } from "./transform-operations";
 const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName"];
 
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
-  let parameter;
-  if (!schema.resourceMetadata.IsSingletonResource) {
-    const keyProperty = getKeyParameter(codeModel, schema.resourceMetadata);
-    if (!keyProperty) {
-      throw new Error(
-        `Failed to find key property ${schema.resourceMetadata.ResourceKey} for ${schema.language.default.name}`,
-      );
-    }
-    parameter = transformParameter(keyProperty, codeModel);
-  } else {
-    parameter = generateSingletonKeyParameter();
+  const fixMe: string[] = [];
+
+  // TODO: deal with a resource with multiple parents, or say scoped resource
+  if (schema.resourceMetadata.Parents.length > 1) {
+    fixMe.push(`// FIXME: ${schema.resourceMetadata.Name} has more than one parent, currently converter will only use the first one`)
   }
 
-  decorateKeyProperty(parameter, schema);
+  let propertiesModelName = schema.properties?.find((p) => p.language.default.name === "properties")?.schema.language.default.name;
 
-  const resourceParent = getParentResourceSchema(codeModel, schema);
-
-  const prop: CadlObjectProperty = { ...parameter, kind: "property" };
-
-  const resourceModelDecorators: CadlDecorator[] = [];
-
-  if (schema.resourceMetadata.Parents && schema.resourceMetadata.Parents.length > 0) {
-    if (schema.resourceMetadata.Parents[0] !== "ResourceGroupResource") {
-      resourceModelDecorators.push({
-        name: "parentResource",
-        arguments: [{ value: schema.resourceMetadata.Parents[0], options: { unwrap: true } }],
-      });
-    }
-  }
-
-  if (schema.resourceMetadata.IsSingletonResource) {
-    resourceModelDecorators.push({
-      name: "singleton",
-      arguments: [schema.resourceMetadata.ResourceKey],
-    });
-  }
-
-  const propertiesProperty = schema.properties?.find((p) => p.language.default.name === "properties");
-
-  if (!propertiesProperty) {
-    throw new Error(`Failed to find properties property for ${schema.language.default.name}`);
+  // TODO: deal with resources that has no properties property
+  if (!propertiesModelName) {
+    fixMe.push(`// FIXME: ${schema.resourceMetadata.Name} has no properties property`);
+    propertiesModelName = "{}";
   }
 
   let msiType: MSIType | undefined;
@@ -86,17 +58,17 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     msiType = "ManagedSystemAssignedIdentity";
   }
 
-  const propertiesModelName = propertiesProperty.schema.language.default.name;
   return {
+    fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
-    properties: [prop],
+    properties: [buildKeyProperty(codeModel, schema)],
     name: schema.resourceMetadata.Name,
     parents: [],
-    resourceParent,
+    resourceParent: getParentResource(codeModel, schema),
     propertiesModelName,
     doc: schema.language.default.description,
-    decorators: resourceModelDecorators,
+    decorators: buildResourceDecorators(schema),
     operations: getTspOperations(schema),
     msiType,
   };
@@ -294,6 +266,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     }
   }
 
+  // add list operation for singleton resource if exists
   if (resourceMetadata.IsSingletonResource) {
     const swaggerOperation = getSingletonResouceListOperation(resourceMetadata);
     if (swaggerOperation) {
@@ -323,7 +296,7 @@ function getOperationParameters(operation: Operation, resource: ArmResource): st
       if (
         !resourceParameters.includes(parameter.language.default.name) &&
         !parameter.origin?.startsWith("modelerfour:synthesized") &&
-        !isParentIdPrameter(parameter, resource)
+        !isParentIdParameter(parameter, resource)
       ) {
         parameters.push(transformParameter(parameter, codeModel));
       }
@@ -343,7 +316,7 @@ function getOperationParameters(operation: Operation, resource: ArmResource): st
   return generateParameters(parameters);
 }
 
-function isParentIdPrameter(parameter: Parameter, resource: ArmResource): boolean {
+function isParentIdParameter(parameter: Parameter, resource: ArmResource): boolean {
   if (!resource.IsSingletonResource) {
     const codeModel = getSession().model;
     const selfKey = getKeyParameter(codeModel, resource);
@@ -359,7 +332,7 @@ function isParentIdPrameter(parameter: Parameter, resource: ArmResource): boolea
     return false;
   }
 
-  return isParentIdPrameter(parameter, parent);
+  return isParentIdParameter(parameter, parent);
 }
 
 function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter {
@@ -389,10 +362,10 @@ function generateSingletonKeyParameter(): CadlParameter {
   };
 }
 
-function getParentResourceSchema(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource | undefined {
+function getParentResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource | undefined {
   const resourceParent = schema.resourceMetadata.Parents?.[0];
 
-  if (!resourceParent) {
+  if (!resourceParent || isFirstLevelResource(resourceParent)) {
     return undefined;
   }
 
@@ -407,27 +380,11 @@ function getParentResourceSchema(codeModel: CodeModel, schema: ArmResourceSchema
   }
 }
 
-function decorateKeyProperty(property: CadlParameter, schema: ArmResourceSchema): void {
-  if (!property.decorators) {
-    property.decorators = [];
+function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
+  if (schema.resourceMetadata.IsExtensionResource) {
+    return "ExtensionResource";
   }
 
-  property.decorators.push(
-    {
-      name: "key",
-      arguments: [schema.resourceMetadata.ResourceKey],
-    },
-    {
-      name: "segment",
-      arguments: [schema.resourceMetadata.ResourceKeySegment],
-    },
-  );
-
-  // By convention the property itself needs to be called "name"
-  property.name = "name";
-}
-
-function getResourceKind(schema: ArmResourceSchema): ArmResourceKind {
   if (schema.resourceMetadata.IsTrackedResource) {
     return "TrackedResource";
   }
@@ -442,3 +399,79 @@ function getSchemaResponseSchemaName(response: Response | undefined): string | u
 
   return (response as SchemaResponse).schema.language.default.name;
 }
+
+function buildKeyProperty(codeModel: CodeModel, schema: ArmResourceSchema): CadlObjectProperty {
+  let parameter;
+  if (!schema.resourceMetadata.IsSingletonResource) {
+    const keyProperty = getKeyParameter(codeModel, schema.resourceMetadata);
+    if (!keyProperty) {
+      throw new Error(
+        `Failed to find key property ${schema.resourceMetadata.ResourceKey} for ${schema.language.default.name}`,
+      );
+    }
+    parameter = transformParameter(keyProperty, codeModel);
+  } else {
+    parameter = generateSingletonKeyParameter();
+  }
+
+  if (!parameter.decorators) {
+    parameter.decorators = [];
+  }
+
+  parameter.decorators.push(
+    {
+      name: "key",
+      arguments: [schema.resourceMetadata.ResourceKey],
+    },
+    {
+      name: "segment",
+      arguments: [schema.resourceMetadata.ResourceKeySegment],
+    },
+  );
+
+  // by convention the property itself needs to be called "name"
+  parameter.name = "name";
+
+  return { ...parameter, kind: "property" }
+}
+
+function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
+  const resourceModelDecorators: CadlDecorator[] = [];
+
+  for (const parent of schema.resourceMetadata.Parents) {
+    if (!isFirstLevelResource(parent)) {
+      resourceModelDecorators.push({
+        name: "parentResource",
+        arguments: [{ value: parent, options: { unwrap: true } }],
+      });
+    }
+  }
+
+  if (schema.resourceMetadata.IsSingletonResource) {
+    resourceModelDecorators.push({
+      name: "singleton",
+      arguments: [schema.resourceMetadata.ResourceKey],
+    });
+  }
+
+  if (schema.resourceMetadata.IsTenantResource) {
+    resourceModelDecorators.push({
+      name: "tenantResource",
+    });
+  }
+
+  if (schema.resourceMetadata.IsSubscriptionResource) {
+    resourceModelDecorators.push({
+      name: "subscriptionResource",
+    });
+  }
+
+  if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
+    resourceModelDecorators.push({
+      name: "locationResource",
+    });
+  }
+
+  return resourceModelDecorators;
+}
+
