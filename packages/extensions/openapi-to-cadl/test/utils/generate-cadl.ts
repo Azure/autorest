@@ -25,9 +25,7 @@ export async function generateCadl(folder: string, debug = false) {
 }
 
 function generate(path: string, debug = false) {
-  const autorestCommand = `autorest${
-    /^win/.test(process.platform) ? ".cmd" : ""
-  }`;
+  const autorestCommand = `autorest${/^win/.test(process.platform) ? ".cmd" : ""}`;
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
 

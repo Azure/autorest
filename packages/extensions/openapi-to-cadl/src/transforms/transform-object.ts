@@ -178,9 +178,11 @@ function getSpreadParents(schema: ObjectSchema, codeModel: CodeModel): string[] 
 }
 
 function getArmIdType(schema: Schema): string {
-  const allowedResources = schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"]
+  const allowedResources = schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"];
   if (allowedResources) {
-    return `ResourceIdentifier<[${schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"].map((r: { [x: string]: string; }) => "{type: \"" + r["type"] + "\";}").join(",")}]>`;
+    return `ResourceIdentifier<[${schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"]
+      .map((r: { [x: string]: string }) => '{type: "' + r["type"] + '";}')
+      .join(",")}]>`;
   } else {
     return "ResourceIdentifier";
   }

@@ -1,4 +1,12 @@
-import { ChoiceSchema, ObjectSchema, Parameter, Property, Schema, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
+import {
+  ChoiceSchema,
+  ObjectSchema,
+  Parameter,
+  Property,
+  Schema,
+  SchemaType,
+  SealedChoiceSchema,
+} from "@autorest/codemodel";
 import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";

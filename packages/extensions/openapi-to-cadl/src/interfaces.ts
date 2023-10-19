@@ -153,7 +153,7 @@ export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResou
 export type ArmResourceStandardOperation = "CreateOrUpdate" | "Delete" | "Update" | "Get";
 
 export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
-  kind: string,
+  kind: string;
   name: string;
   templateParameters: string[];
   decorators?: CadlDecorator[];
@@ -163,22 +163,22 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrUpdateSync"
-  | "ArmResourceCreateOrUpdateAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrUpdateSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {

@@ -49,9 +49,7 @@
           "description": "The provisioning state of the private endpoint connection resource."
         }
       },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ],
+      "required": ["privateLinkServiceConnectionState"],
       "description": "Properties of the PrivateEndpointConnectProperties."
     },
     "PrivateLinkServiceConnectionState": {
@@ -75,11 +73,7 @@
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
       "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
+      "enum": ["Pending", "Approved", "Rejected"],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
         "modelAsString": true
@@ -89,12 +83,7 @@
       "type": "string",
       "readOnly": true,
       "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
+      "enum": ["Succeeded", "Creating", "Deleting", "Failed"],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true

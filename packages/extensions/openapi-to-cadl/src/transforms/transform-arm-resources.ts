@@ -1,4 +1,12 @@
-import { CodeModel, HttpMethod, ObjectSchema, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
+import {
+  CodeModel,
+  HttpMethod,
+  ObjectSchema,
+  Operation,
+  Parameter,
+  Response,
+  SchemaResponse,
+} from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
@@ -126,11 +134,18 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   if (resourceMetadata.UpdateOperations.length) {
     // TODO: TBaseParameters
     const operation = resourceMetadata.UpdateOperations[0];
-    if (!resourceMetadata.CreateOperations.length || resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID) {
-      const swaggerOperation = operations[resourceMetadata.UpdateOperations[0].OperationID]
+    if (
+      !resourceMetadata.CreateOperations.length ||
+      resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
+    ) {
+      const swaggerOperation = operations[resourceMetadata.UpdateOperations[0].OperationID];
       const bodyParam = swaggerOperation!.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find((p) => p.language.default.name === "properties");
-      const tagsProperty = (bodyParam?.schema as ObjectSchema).properties?.find((p) => p.language.default.name === "tags");
+      const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
+        (p) => p.language.default.name === "properties",
+      );
+      const tagsProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
+        (p) => p.language.default.name === "tags",
+      );
       const fixMe: string[] = [];
       if (!bodyParam || (!propertiesProperty && !tagsProperty)) {
         fixMe.push(
@@ -164,12 +179,16 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   if (resourceMetadata.DeleteOperations.length) {
     // TODO: TBaseParameters
     const operation = resourceMetadata.DeleteOperations[0];
-    const swaggerOperation = operations[resourceMetadata.DeleteOperations[0].OperationID]
+    const swaggerOperation = operations[resourceMetadata.DeleteOperations[0].OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
     tspOperations.push({
       doc: operation.Description,
-      kind: operation.IsLongRunning ? (okResponse ? "ArmResourceDeleteAsync" : "ArmResourceDeleteWithoutOkAsync") : "ArmResourceDeleteSync",
+      kind: operation.IsLongRunning
+        ? okResponse
+          ? "ArmResourceDeleteAsync"
+          : "ArmResourceDeleteWithoutOkAsync"
+        : "ArmResourceDeleteSync",
       name: getOperationName(operation.OperationID),
       templateParameters: [resourceMetadata.Name],
     });
@@ -179,7 +198,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
   if (resourceMetadata.ListOperations.length) {
     // TODO: TParentName, TParentFriendlyName
     const operation = resourceMetadata.ListOperations[0];
-    const swaggerOperation = operations[resourceMetadata.ListOperations[0].OperationID]
+    const swaggerOperation = operations[resourceMetadata.ListOperations[0].OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const templateParameters = [resourceMetadata.Name];
     const baseParameters = swaggerOperation ? getOperationParameters(swaggerOperation, resourceMetadata) : "";
@@ -200,8 +219,10 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
       // TODO: handle other kinds of operations
       if (operation.PagingMetadata) {
-        const swaggerOperation = operations[operation.OperationID]
-        const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+        const swaggerOperation = operations[operation.OperationID];
+        const okResponse = swaggerOperation?.responses?.filter((o) =>
+          o.protocol.http?.statusCodes.includes("200"),
+        )?.[0];
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
           tspOperations.push({
@@ -231,10 +252,14 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     for (const operation of resourceMetadata.OtherOperations) {
       // TODO: handle other kinds of methods
       if (operation.Method === "POST") {
-        const swaggerOperation = operations[operation.OperationID]
+        const swaggerOperation = operations[operation.OperationID];
         let baseParameters = swaggerOperation ? getOperationParameters(swaggerOperation, resourceMetadata) : "";
-        const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-        const noContentResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("204"))?.[0];
+        const okResponse = swaggerOperation?.responses?.filter((o) =>
+          o.protocol.http?.statusCodes.includes("200"),
+        )?.[0];
+        const noContentResponse = swaggerOperation?.responses?.filter((o) =>
+          o.protocol.http?.statusCodes.includes("204"),
+        )?.[0];
         // TODO: deal with non-schema response for action
         let operationResponseName;
         if (okResponse && isResponseSchema(okResponse)) {
@@ -261,7 +286,9 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          templateParameters: okResponse ? [resourceMetadata.Name, baseParameters, operationResponseName ?? "{}"] : [resourceMetadata.Name, baseParameters],
+          templateParameters: okResponse
+            ? [resourceMetadata.Name, baseParameters, operationResponseName ?? "{}"]
+            : [resourceMetadata.Name, baseParameters],
         });
       }
     }

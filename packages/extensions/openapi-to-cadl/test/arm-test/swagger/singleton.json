@@ -5,21 +5,13 @@
     "version": "2023-10-12",
     "description": "For test."
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -42,9 +34,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/enrolls/default": {
       "get": {
         "operationId": "Enrolls_Get",
-        "tags": [
-          "Enrolls"
-        ],
+        "tags": ["Enrolls"],
         "description": "Get a Enroll.",
         "parameters": [
           {
@@ -91,10 +81,7 @@
           "$ref": "#/definitions/EnrollProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         }
       },
       "allOf": [

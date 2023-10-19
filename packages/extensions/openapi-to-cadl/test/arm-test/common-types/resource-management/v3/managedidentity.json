@@ -34,12 +34,7 @@
     },
     "ManagedServiceIdentityType": {
       "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
+      "enum": ["None", "SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned"],
       "type": "string",
       "x-ms-enum": {
         "name": "ManagedServiceIdentityType",
@@ -69,16 +64,11 @@
           "$ref": "#/definitions/UserAssignedIdentities"
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "SystemAssignedServiceIdentityType": {
       "description": "Type of managed service identity (either system assigned, or none).",
-      "enum": [
-        "None",
-        "SystemAssigned"
-      ],
+      "enum": ["None", "SystemAssigned"],
       "type": "string",
       "x-ms-enum": {
         "name": "SystemAssignedServiceIdentityType",
@@ -105,9 +95,7 @@
           "$ref": "#/definitions/SystemAssignedServiceIdentityType"
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     }
   }
 }

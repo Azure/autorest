@@ -10,7 +10,7 @@ namespace: "Azure.ResourceManager.Compute"
 
 ### Config for csharp
 
-``` yaml
+```yaml
 modelerfour:
   flatten-payloads: false
 
@@ -18,16 +18,16 @@ update-required-copy:
   GalleryImage: OSType
 
 format-by-name-rules:
-  'tenantId': 'uuid'
-  'etag': 'etag'
-  'location': 'azure-location'
-  'locations': 'azure-location'
-  '*Uri': 'Uri'
-  '*Uris': 'Uri'
+  "tenantId": "uuid"
+  "etag": "etag"
+  "location": "azure-location"
+  "locations": "azure-location"
+  "*Uri": "Uri"
+  "*Uris": "Uri"
 
 keep-plural-enums:
-- IntervalInMins
-- VmGuestPatchClassificationForWindows # we have this because the generator will change windows to window which does not make sense
+  - IntervalInMins
+  - VmGuestPatchClassificationForWindows # we have this because the generator will change windows to window which does not make sense
 
 acronym-mapping:
   CPU: Cpu
@@ -65,8 +65,8 @@ acronym-mapping:
   VHDX: Vhdx
 
 list-exception:
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName} # compute RP did not provide an API for listing this resource
-- /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}
+  - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName} # compute RP did not provide an API for listing this resource
+  - /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}
 
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}: VirtualMachineScaleSetVmRunCommand
@@ -98,25 +98,25 @@ request-path-to-resource-data:
   /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}: CommunityGalleryImageVersion
 
 prepend-rp-prefix:
-- UsageName
-- UsageUnit
-- ApiError
-- ApiErrorBase
-- DeleteOptions
-- ResourceSku
-- ResourceSkuCapacity
-- ResourceSkuLocationInfo
-- ResourceSkuRestrictions
-- ResourceSkuRestrictionInfo
-- ResourceSkuRestrictionsReasonCode
-- ResourceSkuRestrictionsType
-- ResourceSkuZoneDetails
-- ResourceSkuCapacityScaleType
-- EncryptionType
-- PublicIPAddressSku
-- PublicIPAddressSkuName
-- PublicIPAddressSkuTier
-- StatusLevelTypes
+  - UsageName
+  - UsageUnit
+  - ApiError
+  - ApiErrorBase
+  - DeleteOptions
+  - ResourceSku
+  - ResourceSkuCapacity
+  - ResourceSkuLocationInfo
+  - ResourceSkuRestrictions
+  - ResourceSkuRestrictionInfo
+  - ResourceSkuRestrictionsReasonCode
+  - ResourceSkuRestrictionsType
+  - ResourceSkuZoneDetails
+  - ResourceSkuCapacityScaleType
+  - EncryptionType
+  - PublicIPAddressSku
+  - PublicIPAddressSkuName
+  - PublicIPAddressSkuTier
+  - StatusLevelTypes
 
 # mgmt-debug:
 #   show-serialized-names: true
@@ -254,8 +254,8 @@ rename-mapping:
   VirtualMachineScaleSetUpdateNetworkConfiguration.properties.disableTcpStateTracking: IsTcpStateTrackingDisabled
   AlternativeOption: ImageAlternativeOption
   AlternativeType: ImageAlternativeType
-  VirtualMachineScaleSet.properties.constrainedMaximumCapacity : IsMaximumCapacityConstrained
-  RollingUpgradePolicy.maxSurge : IsMaxSurgeEnabled
+  VirtualMachineScaleSet.properties.constrainedMaximumCapacity: IsMaximumCapacityConstrained
+  RollingUpgradePolicy.maxSurge: IsMaxSurgeEnabled
   ScheduledEventsProfile: ComputeScheduledEventsProfile
   ExpandTypeForListVMs: GetVirtualMachineExpandType
   ExpandTypesForListVm: GetVirtualMachineExpandType
@@ -270,7 +270,7 @@ rename-mapping:
   NetworkInterfaceAuxiliaryMode: ComputeNetworkInterfaceAuxiliaryMode
 
 directive:
-# copy the systemData from common-types here so that it will be automatically replaced
+  # copy the systemData from common-types here so that it will be automatically replaced
   - from: common.json
     where: $.definitions
     transform: >
@@ -337,7 +337,7 @@ directive:
     where: $.definitions
     transform: >
       $.VirtualMachineImageProperties.properties.dataDiskImages.description = "The list of data disk images information.";
-# resolve the duplicate schema issue
+  # resolve the duplicate schema issue
   - from: diskRPCommon.json
     where: $.definitions
     transform: >

@@ -51,16 +51,15 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
   const operations: Record<string, Operation> = {};
   const codeModel = getSession().model;
 
-  const allOperations = resource.GetOperations.
-    concat(resource.CreateOperations).
-    concat(resource.UpdateOperations).
-    concat(resource.DeleteOperations).
-    concat(resource.ListOperations).
-    concat(resource.OperationsFromResourceGroupExtension).
-    concat(resource.OperationsFromSubscriptionExtension).
-    concat(resource.OperationsFromManagementGroupExtension).
-    concat(resource.OperationsFromTenantExtension).
-    concat(resource.OtherOperations);
+  const allOperations = resource.GetOperations.concat(resource.CreateOperations)
+    .concat(resource.UpdateOperations)
+    .concat(resource.DeleteOperations)
+    .concat(resource.ListOperations)
+    .concat(resource.OperationsFromResourceGroupExtension)
+    .concat(resource.OperationsFromSubscriptionExtension)
+    .concat(resource.OperationsFromManagementGroupExtension)
+    .concat(resource.OperationsFromTenantExtension)
+    .concat(resource.OtherOperations);
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       for (const operationMetadata of allOperations) {
@@ -86,7 +85,11 @@ export function getSingletonResouceListOperation(resource: ArmResource): Operati
     for (const operation of operationGroup.operations) {
       if (resource.IsSingletonResource) {
         // for singleton resource, c# will drop the list operation but we need to get it back
-        if (operation.requests?.length && operation.requests[0].protocol?.http?.path === predictSingletonResourcePath && operation.requests[0].protocol.http?.method === "get") {
+        if (
+          operation.requests?.length &&
+          operation.requests[0].protocol?.http?.path === predictSingletonResourcePath &&
+          operation.requests[0].protocol.http?.method === "get"
+        ) {
           return operation;
         }
       }
@@ -104,7 +107,9 @@ export function getArmResourcesMetadata(): Record<string, ArmResource> {
   const inputPath: string | undefined = (session.configuration.inputFileUris ?? [])[0];
   // const inputFiles: string[] = session.configuration["input-file"] ?? [];
 
-  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "").replace("file:", "").replace(/^\/+/g, "");
+  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "")
+    .replace("file:", "")
+    .replace(/^\/+/g, "");
   let localInputFolder: string | undefined;
 
   if (inputPath && inputPath.startsWith("file:")) {
@@ -173,7 +178,10 @@ const _ArmCoreTypes = [
   "Origin",
 ];
 
-export function filterResourceRelatedObjects(object: ObjectSchema[] | undefined, armResources: TspArmResource[]): ObjectSchema[] | undefined {
+export function filterResourceRelatedObjects(
+  object: ObjectSchema[] | undefined,
+  armResources: TspArmResource[],
+): ObjectSchema[] | undefined {
   const resultListResultSchemas = new Set<string>();
   armResources.forEach((r) => {
     r.operations.forEach((o) => {
@@ -182,11 +190,12 @@ export function filterResourceRelatedObjects(object: ObjectSchema[] | undefined,
       }
     });
   });
-  return object?.filter((o) =>
-    !_ArmCoreTypes.includes(o.language.default.name) &&
-    !isResourceSchema(o) &&
-    !isResourceUpdateSchema(o) &&
-    !resultListResultSchemas.has(o.language.default.name)
+  return object?.filter(
+    (o) =>
+      !_ArmCoreTypes.includes(o.language.default.name) &&
+      !isResourceSchema(o) &&
+      !isResourceUpdateSchema(o) &&
+      !resultListResultSchemas.has(o.language.default.name),
   );
 }
 

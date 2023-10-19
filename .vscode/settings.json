@@ -27,5 +27,8 @@
   },
   "[typespec]": {
     "editor.defaultFormatter": "Microsoft.typespec-vscode"
+  },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
   }
 }
