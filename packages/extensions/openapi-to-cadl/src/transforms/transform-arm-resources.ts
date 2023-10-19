@@ -139,7 +139,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
     ) {
       const swaggerOperation = operations[resourceMetadata.UpdateOperations[0].OperationID];
-      const bodyParam = swaggerOperation!.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
         (p) => p.language.default.name === "properties",
       );
@@ -366,7 +366,7 @@ function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): P
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       if (operation.operationId === resourceMetadata.GetOperations[0].OperationID) {
-        for (const parameter of operation.parameters!) {
+        for (const parameter of operation.parameters ?? []) {
           if (parameter.language.default.name === resourceMetadata.ResourceKey) {
             return parameter;
           }
