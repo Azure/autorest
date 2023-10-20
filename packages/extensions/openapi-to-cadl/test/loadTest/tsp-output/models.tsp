@@ -161,12 +161,17 @@ SECRET_VALUE.
 
   @doc("Unique test name as identifier.")
   @visibility("read")
+  @maxLength(50)
+  @minLength(2)
   testId?: string;
 
   @doc("The test description.")
+  @maxLength(100)
   description?: string;
 
   @doc("Display name of a test.")
+  @maxLength(50)
+  @minLength(2)
   displayName?: string;
 
   @doc("Subnet ID on which the load test instances should run.")
@@ -551,12 +556,17 @@ SECRET_VALUE.
   testRunId?: string;
 
   @doc("Display name of a testRun.")
+  @maxLength(50)
+  @minLength(2)
   displayName?: string;
 
   @doc("Associated test Id.")
+  @maxLength(50)
+  @minLength(2)
   testId?: string;
 
   @doc("The test run description.")
+  @maxLength(100)
   description?: string;
 
   @doc("The test run status.")

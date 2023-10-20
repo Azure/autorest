@@ -2166,13 +2166,13 @@ platform if there is a newer version of the extension available.
   enableAutomaticUpgrade?: boolean;
 
   @doc("Json formatted public settings for the extension.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("""
 The extension can contain either protectedSettings or
 protectedSettingsFromKeyVault or no protected settings at all.
 """)
-  protectedSettings?: unknown;
+  protectedSettings?: Record<unknown>;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -3267,13 +3267,13 @@ platform if there is a newer version of the extension available.
   enableAutomaticUpgrade?: boolean;
 
   @doc("Json formatted public settings for the extension.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("""
 The extension can contain either protectedSettings or
 protectedSettingsFromKeyVault or no protected settings at all.
 """)
-  protectedSettings?: unknown;
+  protectedSettings?: Record<unknown>;
 
   @doc("The provisioning state, which only appears in the response.")
   @visibility("read")
@@ -3361,13 +3361,13 @@ platform if there is a newer version of the extension available.
   enableAutomaticUpgrade?: boolean;
 
   @doc("Json formatted public settings for the extension.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("""
 The extension can contain either protectedSettings or
 protectedSettingsFromKeyVault or no protected settings at all.
 """)
-  protectedSettings?: unknown;
+  protectedSettings?: Record<unknown>;
 
   @doc("""
 Indicates whether failures stemming from the extension will be suppressed
@@ -4821,11 +4821,11 @@ model VirtualMachineCaptureResult {
 
   @doc("parameters of the captured virtual machine")
   @visibility("read")
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 
   @doc("a list of resource items of the captured virtual machine")
   @visibility("read")
-  resources?: unknown[];
+  resources?: Record<unknown>[];
 }
 
 @doc("Describes a Virtual Machine Update.")

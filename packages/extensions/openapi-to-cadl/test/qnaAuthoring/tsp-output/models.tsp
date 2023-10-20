@@ -298,12 +298,15 @@ model QnaRecord {
   id?: int32;
 
   @doc("Answer text.")
+  @maxLength(25000)
+  @minLength(1)
   answer?: string;
 
   @doc("""
 Source from which QnA was indexed e.g.
 https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .
 """)
+  @maxLength(300)
   source?: string;
 
   @doc("List of questions associated with the answer.")
@@ -347,6 +350,7 @@ model QnaPrompt {
   qna?: QnaRecord;
 
   @doc("Text displayed to represent a follow up question prompt.")
+  @maxLength(200)
   displayText?: string;
 }
 
@@ -386,6 +390,8 @@ model LastUpdatedDateTimeParameter {
 
 model SourceDisplayNameParameter {
   @doc("Friendly name of the Source.")
+  @maxLength(200)
+  @minLength(1)
   sourceDisplayName?: string;
 }
 
@@ -417,6 +423,8 @@ model QnaSourceRecord {
 @doc("Input source file or url details.")
 model QnaSourceMetadata {
   @doc("Friendly name of the Source.")
+  @maxLength(200)
+  @minLength(1)
   displayName?: string;
 
   @doc("""

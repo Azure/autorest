@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -35,9 +34,6 @@ enum CreatedByType {
   ManagedIdentity,
   Key,
 }
-
-@doc("The response of a Employee list operation.")
-model EmployeeListResult is Azure.Core.Page<Employee>;
 
 @doc("Employee properties")
 model EmployeeProperties {

@@ -1,8 +1,8 @@
 ```yaml
 openapi-type: arm
 input-file:
-  - ./basic.json
-  - ./singleton.json
+  - ./swagger/basic.json
+  - ./swagger/singleton.json
 ```
 
 ```yaml

@@ -46,7 +46,7 @@ op GetNotificationHub is Azure.Core.Foundations.Operation<
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   NotificationHubEntryModel | void
 >;
@@ -70,12 +70,12 @@ op CreateOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
 
     @doc("ETag as returned by creation, update, and retrieval, or * (overwrite).")
     @header
-    `If-Match`: string;
-    @body body: NotificationHubEntryModel;
+    `If-Match`?: string;
+    ...NotificationHubEntryModel;
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   NotificationHubEntryModel | void
 >;
@@ -105,16 +105,16 @@ op GetRegistrationsByTag is Azure.Core.Foundations.Operation<
 Contains the token to continue the enumeration of registrations, in case there
 are more.
 """)
-    @query
-    ContinuationToken: string;
+    @query("ContinuationToken")
+    ContinuationToken?: string;
 
     @doc("OData top parameter")
-    @query
-    $top: string;
+    @query("$top")
+    $top?: string;
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   void
 >;
@@ -160,20 +160,20 @@ op GetRegistrations is Azure.Core.Foundations.Operation<
 Contains the token to continue the enumeration of registrations, in case there
 are more.
 """)
-    @query
-    ContinuationToken: string;
+    @query("ContinuationToken")
+    ContinuationToken?: string;
 
     @doc("OData filter parameter")
-    @query
-    $filter: string;
+    @query("$filter")
+    $filter?: string;
 
     @doc("OData top parameter")
-    @query
-    $top: string;
+    @query("$top")
+    $top?: string;
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   void
 >;
@@ -197,7 +197,7 @@ op CreateRegistration is Azure.Core.Foundations.Operation<
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   RegistrationEntryModel | void
 >;
@@ -221,7 +221,7 @@ op DeleteRegistration is Azure.Core.Foundations.Operation<
 
     @doc("ETag as returned by creation, update, and retrieval, or * (overwrite).")
     @header
-    `If-Match`: string;
+    `If-Match`?: string;
 
     @doc("Authorization Header value")
     @header
@@ -253,7 +253,7 @@ op GetRegistration is Azure.Core.Foundations.Operation<
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   RegistrationEntryModel | void
 >;
@@ -278,11 +278,11 @@ op CreateOrUpdateRegistration is Azure.Core.Foundations.Operation<
     @doc("Authorization Header value")
     @header
     Authorization: string;
-    @body body: RegistrationEntryModel;
+    ...RegistrationEntryModel;
 
     @doc("Accept header")
     @header
-    Accept: "application/atom+xml;type=entry;charset=utf-8";
+    accept: "application/atom+xml;type=entry;charset=utf-8";
   },
   RegistrationEntryModel | void
 >;
@@ -382,7 +382,7 @@ op SendMessage is Azure.Core.Foundations.Operation<
 
     @doc("Device handle for the PNS")
     @header
-    `ServiceBusNotification-DeviceHandle`: string;
+    `ServiceBusNotification-DeviceHandle`?: string;
 
     @doc("Platform type for the notification")
     @header
@@ -390,55 +390,52 @@ op SendMessage is Azure.Core.Foundations.Operation<
 
     @doc("Notification message tags for targeting")
     @header
-    `ServiceBusNotification-Tags`: string;
+    `ServiceBusNotification-Tags`?: string;
 
     @doc("Direct Send")
-    @query
-    direct: boolean;
+    @query("direct")
+    direct?: boolean;
 
     @doc("The apns-topic header")
     @header
-    `apns-topic`: string;
+    `apns-topic`?: string;
 
     @doc("The apns-priority header")
     @header
-    `apns-priority`: string;
+    `apns-priority`?: string;
 
     @doc("The apns-push-type header")
     @header
-    `apns-push-type`: string;
+    `apns-push-type`?: string;
 
     @doc(" X-WNS-Cache-Policy header parameter")
     @header
-    `X-WNS-Cache-Policy`: string;
+    `X-WNS-Cache-Policy`?: string;
 
     @doc("X-WNS-PRIORITY header parameter")
     @header
-    `X-WNS-PRIORITY`: string;
+    `X-WNS-PRIORITY`?: string;
 
     @doc("X-WNS-RequestForStatus header parameter")
     @header
-    `X-WNS-RequestForStatus`: string;
+    `X-WNS-RequestForStatus`?: string;
 
     @doc("X-WNS-Tag header parameter")
     @header
-    `X-WNS-Tag`: string;
+    `X-WNS-Tag`?: string;
 
     @doc("X-WNS-TTL header parameter")
     @header
-    `X-WNS-TTL`: string;
+    `X-WNS-TTL`?: string;
 
     @doc("X-WNS-Type header parameter")
     @header
-    `X-WNS-Type`: string;
+    `X-WNS-Type`?: string;
 
     @doc("Upload file type")
     @header
-    `Content-Type`: ContentType;
-
-    @doc("The notification message body")
-    @body
-    body: string;
+    `content-type`: ContentType;
+    ...string;
   },
   void
 >;
@@ -462,7 +459,7 @@ op SendMessage is Azure.Core.Foundations.Operation<
 
     @doc("Device handle for the PNS")
     @header
-    `ServiceBusNotification-DeviceHandle`: string;
+    `ServiceBusNotification-DeviceHandle`?: string;
 
     @doc("Platform type for the notification")
     @header
@@ -470,55 +467,52 @@ op SendMessage is Azure.Core.Foundations.Operation<
 
     @doc("Notification message tags for targeting")
     @header
-    `ServiceBusNotification-Tags`: string;
+    `ServiceBusNotification-Tags`?: string;
 
     @doc("Direct Send")
-    @query
-    direct: boolean;
+    @query("direct")
+    direct?: boolean;
 
     @doc("The apns-topic header")
     @header
-    `apns-topic`: string;
+    `apns-topic`?: string;
 
     @doc("The apns-priority header")
     @header
-    `apns-priority`: string;
+    `apns-priority`?: string;
 
     @doc("The apns-push-type header")
     @header
-    `apns-push-type`: string;
+    `apns-push-type`?: string;
 
     @doc(" X-WNS-Cache-Policy header parameter")
     @header
-    `X-WNS-Cache-Policy`: string;
+    `X-WNS-Cache-Policy`?: string;
 
     @doc("X-WNS-PRIORITY header parameter")
     @header
-    `X-WNS-PRIORITY`: string;
+    `X-WNS-PRIORITY`?: string;
 
     @doc("X-WNS-RequestForStatus header parameter")
     @header
-    `X-WNS-RequestForStatus`: string;
+    `X-WNS-RequestForStatus`?: string;
 
     @doc("X-WNS-Tag header parameter")
     @header
-    `X-WNS-Tag`: string;
+    `X-WNS-Tag`?: string;
 
     @doc("X-WNS-TTL header parameter")
     @header
-    `X-WNS-TTL`: string;
+    `X-WNS-TTL`?: string;
 
     @doc("X-WNS-Type header parameter")
     @header
-    `X-WNS-Type`: string;
+    `X-WNS-Type`?: string;
 
     @doc("Upload file type")
     @header
-    `Content-Type`: ContentType;
-
-    @doc("The notification message body")
-    @body
-    body: string;
+    `content-type`: ContentType;
+    ...string;
   },
   void
 >;

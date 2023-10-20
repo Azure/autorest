@@ -85,9 +85,13 @@ model QueryContextDTO {
 @doc("Name - value pair of metadata.")
 model MetadataDTO {
   @doc("Metadata name.")
+  @maxLength(100)
+  @minLength(1)
   name: string;
 
   @doc("Metadata value.")
+  @maxLength(500)
+  @minLength(1)
   value: string;
 }
 
@@ -156,6 +160,7 @@ ignored.
   qna?: PromptDTOQna;
 
   @doc("Text displayed to represent a follow up question prompt")
+  @maxLength(200)
   displayText?: string;
 }
 
@@ -170,12 +175,15 @@ model QnAdto {
   id?: int32;
 
   @doc("Answer text")
+  @maxLength(25000)
+  @minLength(1)
   answer: string;
 
   @doc("""
 Source from which Q-A was indexed. eg.
 https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
 """)
+  @maxLength(300)
   source?: string;
 
   @doc("List of questions associated with the answer.")
@@ -260,6 +268,7 @@ model FeedbackRecordDTO {
   userId?: string;
 
   @doc("The suggested question being provided as feedback.")
+  @maxLength(1000)
   userQuestion?: string;
 
   @doc("The qnaId for which the suggested question is provided as feedback.")

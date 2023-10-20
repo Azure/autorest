@@ -17,14 +17,7 @@ user an overall status of the time series.
 @route("/timeseries/entire/detect")
 @post
 op DetectEntireSeries is Azure.Core.Foundations.Operation<
-  {
-    @doc("""
-Time series points and period if needed. Advanced model parameters can also be
-set in the request.
-""")
-    @body
-    body: DetectRequest;
-  },
+  DetectRequest,
   EntireDetectResponse
 >;
 
@@ -38,14 +31,7 @@ real-time monitoring of business metrics.
 @route("/timeseries/last/detect")
 @post
 op DetectLastPoint is Azure.Core.Foundations.Operation<
-  {
-    @doc("""
-Time series points and period if needed. Advanced model parameters can also be
-set in the request.
-""")
-    @body
-    body: DetectRequest;
-  },
+  DetectRequest,
   LastDetectResponse
 >;
 
@@ -54,14 +40,7 @@ set in the request.
 @route("/timeseries/changepoint/detect")
 @post
 op DetectChangePoint is Azure.Core.Foundations.Operation<
-  {
-    @doc("""
-Time series points and granularity is needed. Advanced model parameters can
-also be set in the request if needed.
-""")
-    @body
-    body: ChangePointDetectRequest;
-  },
+  ChangePointDetectRequest,
   ChangePointDetectResponse
 >;
 
@@ -83,14 +62,7 @@ column is value.
 """)
 @route("/multivariate/models")
 @post
-op TrainMultivariateModel is Azure.Core.Foundations.Operation<
-  {
-    @doc("Training request")
-    @body
-    body: ModelInfo;
-  },
-  void
->;
+op TrainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
 
 @summary("List Multivariate Models")
 @doc("List models of a subscription")
@@ -99,12 +71,12 @@ op ListMultivariateModel is Azure.Core.ResourceList<
   {
     parameters: {
       @doc("$skip indicates how many models will be skipped.")
-      @query
-      $skip: int32;
+      @query("$skip")
+      $skip?: int32;
 
       @doc("$top indicates how many models will be fetched.")
-      @query
-      $top: int32;
+      @query("$top")
+      $top?: int32;
     };
   }
 >;
@@ -147,10 +119,7 @@ op DetectAnomaly is Azure.Core.Foundations.Operation<
     @doc("Model identifier")
     @path
     modelId: string;
-
-    @doc("Detect anomaly request")
-    @body
-    body: DetectionRequest;
+    ...DetectionRequest;
   },
   void
 >;
@@ -164,10 +133,7 @@ op LastDetectAnomaly is Azure.Core.Foundations.Operation<
     @doc("Model identifier")
     @path
     modelId: string;
-
-    @doc("Request for last detection")
-    @body
-    body: LastDetectionRequest;
+    ...LastDetectionRequest;
   },
   LastDetectionResult
 >;

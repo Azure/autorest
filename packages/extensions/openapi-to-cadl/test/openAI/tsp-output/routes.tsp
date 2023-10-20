@@ -14,9 +14,9 @@ interface completionsOperations {
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      @path `deployment-id`: string;
-      @body
-      body: Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
+      @path
+      `deployment-id`: string;
+      ...Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
     },
     PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema
   >;
@@ -32,8 +32,7 @@ interface embeddingsOperations {
       @doc("deployment id of the model which was deployed")
       @path
       `deployment-id`: string;
-      @body
-      body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
+      ...Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },
     void
   >;

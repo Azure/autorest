@@ -356,7 +356,7 @@ interface queriesOperations {
   getBooleanTrue is Azure.Core.Foundations.Operation<
     {
       @doc("true boolean value")
-      @query
+      @query("boolQuery")
       boolQuery: true;
     },
     void
@@ -368,7 +368,7 @@ interface queriesOperations {
   getBooleanFalse is Azure.Core.Foundations.Operation<
     {
       @doc("false boolean value")
-      @query
+      @query("boolQuery")
       boolQuery: false;
     },
     void
@@ -380,8 +380,8 @@ interface queriesOperations {
   getBooleanNull is Azure.Core.Foundations.Operation<
     {
       @doc("null boolean value")
-      @query
-      boolQuery: boolean;
+      @query("boolQuery")
+      boolQuery?: boolean;
     },
     void
   >;
@@ -392,7 +392,7 @@ interface queriesOperations {
   getIntOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'1000000' integer value")
-      @query
+      @query("intQuery")
       intQuery: 1000000;
     },
     void
@@ -404,7 +404,7 @@ interface queriesOperations {
   getIntNegativeOneMillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-1000000' integer value")
-      @query
+      @query("intQuery")
       intQuery: -1000000;
     },
     void
@@ -416,8 +416,8 @@ interface queriesOperations {
   getIntNull is Azure.Core.Foundations.Operation<
     {
       @doc("null integer value")
-      @query
-      intQuery: int32;
+      @query("intQuery")
+      intQuery?: int32;
     },
     void
   >;
@@ -428,7 +428,7 @@ interface queriesOperations {
   getTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'10000000000' 64 bit integer value")
-      @query
+      @query("longQuery")
       longQuery: 10000000000;
     },
     void
@@ -440,7 +440,7 @@ interface queriesOperations {
   getNegativeTenBillion is Azure.Core.Foundations.Operation<
     {
       @doc("'-10000000000' 64 bit integer value")
-      @query
+      @query("longQuery")
       longQuery: -10000000000;
     },
     void
@@ -452,8 +452,8 @@ interface queriesOperations {
   getLongNull is Azure.Core.Foundations.Operation<
     {
       @doc("null 64 bit integer value")
-      @query
-      longQuery: int32;
+      @query("longQuery")
+      longQuery?: int32;
     },
     void
   >;
@@ -464,7 +464,7 @@ interface queriesOperations {
   floatScientificPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'1.034E+20'numeric value")
-      @query
+      @query("floatQuery")
       floatQuery: 103400000000000000000;
     },
     void
@@ -476,7 +476,7 @@ interface queriesOperations {
   floatScientificNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-1.034E-20'numeric value")
-      @query
+      @query("floatQuery")
       floatQuery: -1.034e-20;
     },
     void
@@ -488,8 +488,8 @@ interface queriesOperations {
   floatNull is Azure.Core.Foundations.Operation<
     {
       @doc("null numeric value")
-      @query
-      floatQuery: float32;
+      @query("floatQuery")
+      floatQuery?: float32;
     },
     void
   >;
@@ -500,7 +500,7 @@ interface queriesOperations {
   doubleDecimalPositive is Azure.Core.Foundations.Operation<
     {
       @doc("'9999999.999'numeric value")
-      @query
+      @query("doubleQuery")
       doubleQuery: 9999999.999;
     },
     void
@@ -512,7 +512,7 @@ interface queriesOperations {
   doubleDecimalNegative is Azure.Core.Foundations.Operation<
     {
       @doc("'-9999999.999'numeric value")
-      @query
+      @query("doubleQuery")
       doubleQuery: -9999999.999;
     },
     void
@@ -524,8 +524,8 @@ interface queriesOperations {
   doubleNull is Azure.Core.Foundations.Operation<
     {
       @doc("null numeric value")
-      @query
-      doubleQuery: float32;
+      @query("doubleQuery")
+      doubleQuery?: float32;
     },
     void
   >;
@@ -536,7 +536,7 @@ interface queriesOperations {
   stringUnicode is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value")
-      @query
+      @query("stringQuery")
       stringQuery: "啊齄丂狛狜隣郎隣兀﨩";
     },
     void
@@ -548,7 +548,7 @@ interface queriesOperations {
   stringUrlEncoded is Azure.Core.Foundations.Operation<
     {
       @doc("'begin!*'();:@ &=+$,/?#[]end' url encoded string value")
-      @query
+      @query("stringQuery")
       stringQuery: "begin!*'();:@ &=+$,/?#[]end";
     },
     void
@@ -560,7 +560,7 @@ interface queriesOperations {
   stringEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' string value")
-      @query
+      @query("stringQuery")
       stringQuery: "";
     },
     void
@@ -572,8 +572,8 @@ interface queriesOperations {
   stringNull is Azure.Core.Foundations.Operation<
     {
       @doc("null string value")
-      @query
-      stringQuery: string;
+      @query("stringQuery")
+      stringQuery?: string;
     },
     void
   >;
@@ -584,8 +584,8 @@ interface queriesOperations {
   enumValid is Azure.Core.Foundations.Operation<
     {
       @doc("'green color' enum value")
-      @query
-      enumQuery: UriColor;
+      @query("enumQuery")
+      enumQuery?: UriColor;
     },
     void
   >;
@@ -596,8 +596,8 @@ interface queriesOperations {
   enumNull is Azure.Core.Foundations.Operation<
     {
       @doc("null string value")
-      @query
-      enumQuery: UriColor;
+      @query("enumQuery")
+      enumQuery?: UriColor;
     },
     void
   >;
@@ -608,8 +608,8 @@ interface queriesOperations {
   byteMultiByte is Azure.Core.Foundations.Operation<
     {
       @doc("'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array")
-      @query
-      byteQuery: bytes;
+      @query("byteQuery")
+      byteQuery?: bytes;
     },
     void
   >;
@@ -620,7 +620,7 @@ interface queriesOperations {
   byteEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("'' as byte array")
-      @query
+      @query("byteQuery")
       byteQuery: "";
     },
     void
@@ -632,8 +632,8 @@ interface queriesOperations {
   byteNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as byte array (no query parameters in uri)")
-      @query
-      byteQuery: bytes;
+      @query("byteQuery")
+      byteQuery?: bytes;
     },
     void
   >;
@@ -644,7 +644,7 @@ interface queriesOperations {
   DateValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01' as date")
-      @query
+      @query("dateQuery")
       dateQuery: "2012-01-01";
     },
     void
@@ -656,8 +656,8 @@ interface queriesOperations {
   DateNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date (no query parameters in uri)")
-      @query
-      dateQuery: plainDate;
+      @query("dateQuery")
+      dateQuery?: plainDate;
     },
     void
   >;
@@ -668,7 +668,7 @@ interface queriesOperations {
   DateTimeValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01T01:01:01Z' as date-time")
-      @query
+      @query("dateTimeQuery")
       dateTimeQuery: "2012-01-01T01:01:01Z";
     },
     void
@@ -680,8 +680,8 @@ interface queriesOperations {
   DateTimeNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date-time (no query parameters)")
-      @query
-      dateTimeQuery: utcDateTime;
+      @query("dateTimeQuery")
+      dateTimeQuery?: utcDateTime;
     },
     void
   >;
@@ -698,8 +698,8 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the csv-array format
 """)
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -710,8 +710,8 @@ using the csv-array format
   ArrayStringCsvNull is Azure.Core.Foundations.Operation<
     {
       @doc("a null array of string using the csv-array format")
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -722,8 +722,8 @@ using the csv-array format
   ArrayStringCsvEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("an empty array [] of string using the csv-array format")
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -737,8 +737,8 @@ Array query has no defined collection format, should default to csv. Pass in
   ArrayStringNoCollectionFormatEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].")
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -755,8 +755,8 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the ssv-array format
 """)
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -773,8 +773,8 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the tsv-array format
 """)
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -791,8 +791,8 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the pipes-array format
 """)
-      @query
-      arrayQuery: string[];
+      @query("arrayQuery")
+      arrayQuery?: string[];
     },
     void
   >;
@@ -814,24 +814,24 @@ pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
       pathItemStringPath: string;
 
       @doc("A string value 'pathItemStringQuery' that appears as a query parameter")
-      @query
-      pathItemStringQuery: string;
+      @query("pathItemStringQuery")
+      pathItemStringQuery?: string;
 
       @doc("A string value 'globalItemStringPath' that appears in the path")
       @path
       globalStringPath: string;
 
       @doc("should contain value null")
-      @query
-      globalStringQuery: string;
+      @query("globalStringQuery")
+      globalStringQuery?: string;
 
       @doc("should contain value 'localStringPath'")
       @path
       localStringPath: string;
 
       @doc("should contain value 'localStringQuery'")
-      @query
-      localStringQuery: string;
+      @query("localStringQuery")
+      localStringQuery?: string;
     },
     void
   >;
@@ -851,24 +851,24 @@ localStringQuery='localStringQuery'
       pathItemStringPath: string;
 
       @doc("A string value 'pathItemStringQuery' that appears as a query parameter")
-      @query
-      pathItemStringQuery: string;
+      @query("pathItemStringQuery")
+      pathItemStringQuery?: string;
 
       @doc("A string value 'globalItemStringPath' that appears in the path")
       @path
       globalStringPath: string;
 
       @doc("should contain value null")
-      @query
-      globalStringQuery: string;
+      @query("globalStringQuery")
+      globalStringQuery?: string;
 
       @doc("should contain value 'localStringPath'")
       @path
       localStringPath: string;
 
       @doc("should contain value 'localStringQuery'")
-      @query
-      localStringQuery: string;
+      @query("localStringQuery")
+      localStringQuery?: string;
     },
     void
   >;
@@ -888,24 +888,24 @@ localStringQuery=null
       pathItemStringPath: string;
 
       @doc("A string value 'pathItemStringQuery' that appears as a query parameter")
-      @query
-      pathItemStringQuery: string;
+      @query("pathItemStringQuery")
+      pathItemStringQuery?: string;
 
       @doc("A string value 'globalItemStringPath' that appears in the path")
       @path
       globalStringPath: string;
 
       @doc("should contain value null")
-      @query
-      globalStringQuery: string;
+      @query("globalStringQuery")
+      globalStringQuery?: string;
 
       @doc("should contain value 'localStringPath'")
       @path
       localStringPath: string;
 
       @doc("should contain null value")
-      @query
-      localStringQuery: string;
+      @query("localStringQuery")
+      localStringQuery?: string;
     },
     void
   >;
@@ -925,24 +925,24 @@ localStringQuery=null
       pathItemStringPath: string;
 
       @doc("should contain value null")
-      @query
-      pathItemStringQuery: string;
+      @query("pathItemStringQuery")
+      pathItemStringQuery?: string;
 
       @doc("A string value 'globalItemStringPath' that appears in the path")
       @path
       globalStringPath: string;
 
       @doc("should contain value null")
-      @query
-      globalStringQuery: string;
+      @query("globalStringQuery")
+      globalStringQuery?: string;
 
       @doc("should contain value 'localStringPath'")
       @path
       localStringPath: string;
 
       @doc("should contain value null")
-      @query
-      localStringQuery: string;
+      @query("localStringQuery")
+      localStringQuery?: string;
     },
     void
   >;

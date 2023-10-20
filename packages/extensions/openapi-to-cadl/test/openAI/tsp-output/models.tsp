@@ -59,7 +59,7 @@ token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 <|endoftext|> token from being generated.
 """)
   @projectedName("json", "logit_bias")
-  logitBias?: unknown;
+  logitBias?: Record<unknown>;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -95,13 +95,6 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
 
   @projectedName("json", "completion_config")
   completionConfig?: string;
-
-  @doc("""
-can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
-enabled, 2=full cache
-""")
-  @projectedName("json", "cache_level")
-  cacheLevel?: int32;
 
   @doc("""
 How much to penalize new tokens based on their existing frequency in the text

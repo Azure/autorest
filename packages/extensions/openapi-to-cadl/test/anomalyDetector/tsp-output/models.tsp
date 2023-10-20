@@ -481,6 +481,7 @@ date-time.
   endTime: utcDateTime;
 
   @doc("An optional field. The name of the model whose maximum length is 24.")
+  @maxLength(24)
   displayName?: string;
 
   @doc("""

@@ -135,7 +135,7 @@ model ProjectMetadata {
   storageInputContainerName: string;
 
   @doc("The project settings.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("The new project name.")
   projectName: string;
@@ -217,7 +217,7 @@ model CreateProjectOptions {
   storageInputContainerName: string;
 
   @doc("The project settings.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("The new project name.")
   projectName: string;

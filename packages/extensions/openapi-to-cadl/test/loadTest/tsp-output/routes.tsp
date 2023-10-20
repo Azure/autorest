@@ -18,12 +18,12 @@ interface LoadTestAdministrationOperations {
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
-
-      @doc("Load test model")
-      @body
-      body: Test;
+      ...Test;
     },
     Test
   >;
@@ -38,6 +38,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
     },
@@ -54,6 +57,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
     },
@@ -76,34 +82,34 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 Sort on the supported fields in (field asc/desc) format. eg:
 lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
 """)
-      @query
-      orderby: string;
+      @query("orderby")
+      orderby?: string;
 
       @doc("""
 Prefix based, case sensitive search on searchable fields - displayName,
 createdBy. For example, to search for a test, with display name is Login Test,
 the search parameter can be Login.
 """)
-      @query
-      search: string;
+      @query("search")
+      search?: string;
 
       @doc("""
 Start DateTime(ISO 8601 literal format) of the last updated time range to
 filter tests.
 """)
-      @query
-      lastModifiedStartTime: utcDateTime;
+      @query("lastModifiedStartTime")
+      lastModifiedStartTime?: utcDateTime;
 
       @doc("""
 End DateTime(ISO 8601 literal format) of the last updated time range to filter
 tests.
 """)
-      @query
-      lastModifiedEndTime: utcDateTime;
+      @query("lastModifiedEndTime")
+      lastModifiedEndTime?: utcDateTime;
 
       @doc("Number of results in response.")
-      @query
-      maxpagesize: int32;
+      @query("maxpagesize")
+      maxpagesize?: int32;
     },
     TestsList
   >;
@@ -126,6 +132,9 @@ should be provided in the request body as application/octet-stream.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
 
@@ -134,12 +143,9 @@ numeric, underscore or hyphen characters.
       fileName: string;
 
       @doc("File type")
-      @query
-      fileType: FileType;
-
-      @doc("The file content as application/octet-stream.")
-      @body
-      body: bytes;
+      @query("fileType")
+      fileType?: FileType;
+      ...bytes;
     },
     FileInfo
   >;
@@ -154,6 +160,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
 
@@ -174,6 +183,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
 
@@ -194,6 +206,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
     },
@@ -210,12 +225,12 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
-
-      @doc("App Component model.")
-      @body
-      body: TestAppComponents;
+      ...TestAppComponents;
     },
     TestAppComponents
   >;
@@ -230,6 +245,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
     },
@@ -246,12 +264,12 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
-
-      @doc("Server metric configuration model.")
-      @body
-      body: TestServerMetricConfig;
+      ...TestServerMetricConfig;
     },
     TestServerMetricConfig
   >;
@@ -266,6 +284,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
     },
@@ -284,6 +305,9 @@ interface LoadTestRunOperations {
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
 
@@ -293,12 +317,9 @@ test will run with the JMX file, configuration and app components from the
 existing test run. You can override the configuration values for new test run
 in the request body.
 """)
-      @query
-      oldTestRunId: string;
-
-      @doc("Load test run model")
-      @body
-      body: TestRun;
+      @query("oldTestRunId")
+      oldTestRunId?: string;
+      ...TestRun;
     },
     TestRun
   >;
@@ -313,6 +334,9 @@ in the request body.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },
@@ -329,6 +353,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },
@@ -345,6 +372,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
 
@@ -365,36 +395,36 @@ numeric, underscore or hyphen characters.
 Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
 asc. Supported fields - executedDateTime
 """)
-      @query
-      orderby: string;
+      @query("orderby")
+      orderby?: string;
 
       @doc("""
 Prefix based, case sensitive search on searchable fields - description,
 executedUser. For example, to search for a test run, with description 500 VUs,
 the search parameter can be 500.
 """)
-      @query
-      search: string;
+      @query("search")
+      search?: string;
 
       @doc("Unique name of an existing load test.")
-      @query
-      testId: string;
+      @query("testId")
+      testId?: string;
 
       @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
-      @query
-      executionFrom: utcDateTime;
+      @query("executionFrom")
+      executionFrom?: utcDateTime;
 
       @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
-      @query
-      executionTo: utcDateTime;
+      @query("executionTo")
+      executionTo?: utcDateTime;
 
       @doc("Comma separated list of test run status.")
-      @query
-      status: string;
+      @query("status")
+      status?: string;
 
       @doc("Number of results in response.")
-      @query
-      maxpagesize: int32;
+      @query("maxpagesize")
+      maxpagesize?: int32;
     },
     TestRunsList
   >;
@@ -409,6 +439,9 @@ the search parameter can be 500.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },
@@ -425,6 +458,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },
@@ -441,11 +477,14 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
 
       @doc("Metric namespace to query metric definitions for.")
-      @query
+      @query("metricNamespace")
       metricNamespace: string;
     },
     MetricDefinitionCollection
@@ -461,35 +500,35 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
 
       @doc("The aggregation")
-      @query
-      aggregation: string;
+      @query("aggregation")
+      aggregation?: string;
 
       @doc("The interval (i.e. timegrain) of the query.")
-      @query
-      interval: Interval;
+      @query("interval")
+      interval?: Interval;
 
       @doc("Metric name")
-      @query
+      @query("metricname")
       metricname: string;
 
       @doc("Metric namespace to query metric definitions for.")
-      @query
+      @query("metricNamespace")
       metricNamespace: string;
 
       @doc("""
 The timespan of the query. It is a string with the following format
 'startDateTime_ISO/endDateTime_ISO'.
 """)
-      @query
+      @query("timespan")
       timespan: string;
-
-      @doc("Metric dimension filter ")
-      @body
-      body: MetricRequestPayload;
+      ...MetricRequestPayload;
     },
     Metrics
   >;
@@ -501,22 +540,22 @@ The timespan of the query. It is a string with the following format
     {
       parameters: {
         @doc("The interval (i.e. timegrain) of the query.")
-        @query
-        interval: Interval;
+        @query("interval")
+        interval?: Interval;
 
         @doc("Metric name")
-        @query
+        @query("metricname")
         metricname: string;
 
         @doc("Metric namespace to query metric definitions for.")
-        @query
+        @query("metricNamespace")
         metricNamespace: string;
 
         @doc("""
 The timespan of the query. It is a string with the following format
 'startDateTime_ISO/endDateTime_ISO'.
 """)
-        @query
+        @query("timespan")
         timespan: string;
       };
     }
@@ -532,12 +571,12 @@ The timespan of the query. It is a string with the following format
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
-
-      @doc("App Component model.")
-      @body
-      body: TestRunAppComponents;
+      ...TestRunAppComponents;
     },
     TestRunAppComponents
   >;
@@ -558,6 +597,9 @@ run.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },
@@ -574,12 +616,12 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
-
-      @doc("Server metric configuration model.")
-      @body
-      body: TestRunServerMetricConfig;
+      ...TestRunServerMetricConfig;
     },
     TestRunServerMetricConfig
   >;
@@ -594,6 +636,9 @@ numeric, underscore or hyphen characters.
 Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
     },

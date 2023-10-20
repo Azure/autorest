@@ -14,15 +14,7 @@ container.
 @route("/backup")
 @post
 op FullBackup is Azure.Core.Foundations.Operation<
-  {
-    @doc("""
-Azure blob shared access signature token pointing to a valid Azure blob
-container where full backup needs to be stored. This token needs to be valid
-for at least next 24 hours from the time of making this call
-""")
-    @body
-    azureStorageBlobContainerUri: SASTokenParameter;
-  },
+  SASTokenParameter,
   FullBackupOperation
 >;
 
@@ -45,14 +37,7 @@ Azure Blob storage backup folder
 @route("/restore")
 @put
 op FullRestoreOperation is Azure.Core.Foundations.Operation<
-  {
-    @doc("""
-The Azure blob SAS token pointing to a folder where the previous successful
-full backup was stored
-""")
-    @body
-    restoreBlobDetails: RestoreOperationParameters;
-  },
+  RestoreOperationParameters,
   RestoreOperation
 >;
 
@@ -81,13 +66,7 @@ op SelectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     @doc("The name of the key to be restored from the user supplied backup")
     @path
     keyName: string;
-
-    @doc("""
-The Azure blob SAS token pointing to a folder where the previous successful
-full backup was stored
-""")
-    @body
-    restoreBlobDetails: SelectiveKeyRestoreOperationParameters;
+    ...SelectiveKeyRestoreOperationParameters;
   },
   SelectiveKeyRestoreOperation
 >;
@@ -105,12 +84,12 @@ op GetCertificates is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
 
     @doc("Specifies whether to include certificates which are not completely provisioned.")
-    @query
-    includePending: boolean;
+    @query("includePending")
+    includePending?: boolean;
   },
   CertificateListResult
 >;
@@ -140,11 +119,7 @@ requires the certificates/managecontacts permission.
 @route("/certificates/contacts")
 @put
 op SetCertificateContacts is Azure.Core.Foundations.Operation<
-  {
-    @doc("The contacts for the key vault certificate.")
-    @body
-    contacts: Contacts;
-  },
+  Contacts,
   Contacts
 >;
 
@@ -181,8 +156,8 @@ op GetCertificateIssuers is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   CertificateIssuerListResult
 >;
@@ -203,10 +178,7 @@ personally identifiable or sensitive information.
 """)
     @path
     `issuer-name`: string;
-
-    @doc("Certificate issuer set parameter.")
-    @body
-    parameter: CertificateIssuerSetParameters;
+    ...CertificateIssuerSetParameters;
   },
   IssuerBundle
 >;
@@ -224,10 +196,7 @@ op UpdateCertificateIssuer is Azure.Core.Foundations.Operation<
     @doc("The name of the issuer.")
     @path
     `issuer-name`: string;
-
-    @doc("Certificate issuer update parameter.")
-    @body
-    parameter: CertificateIssuerUpdateParameters;
+    ...CertificateIssuerUpdateParameters;
   },
   IssuerBundle
 >;
@@ -280,12 +249,10 @@ The name of the certificate. The value you provide may be copied globally for
 the purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `certificate-name`: string;
-
-    @doc("The parameters to create a certificate.")
-    @body
-    parameters: CertificateCreateParameters;
+    ...CertificateCreateParameters;
   },
   CertificateOperation
 >;
@@ -307,12 +274,10 @@ The name of the certificate. The value you provide may be copied globally for
 the purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `certificate-name`: string;
-
-    @doc("The parameters to import the certificate.")
-    @body
-    parameters: CertificateImportParameters;
+    ...CertificateImportParameters;
   },
   CertificateBundle
 >;
@@ -335,8 +300,8 @@ op GetCertificateVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   CertificateListResult
 >;
@@ -370,10 +335,7 @@ op UpdateCertificatePolicy is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate in the given vault.")
     @path
     `certificate-name`: string;
-
-    @doc("The policy for the certificate.")
-    @body
-    certificatePolicy: CertificatePolicy;
+    ...CertificatePolicy;
   },
   CertificatePolicy
 >;
@@ -395,10 +357,7 @@ op UpdateCertificate is Azure.Core.Foundations.Operation<
     @doc("The version of the certificate.")
     @path
     `certificate-version`: string;
-
-    @doc("The parameters for certificate update.")
-    @body
-    parameters: CertificateUpdateParameters;
+    ...CertificateUpdateParameters;
   },
   CertificateBundle
 >;
@@ -438,10 +397,7 @@ op UpdateCertificateOperation is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate.")
     @path
     `certificate-name`: string;
-
-    @doc("The certificate operation response.")
-    @body
-    certificateOperation: CertificateOperationUpdateParameter;
+    ...CertificateOperationUpdateParameter;
   },
   CertificateOperation
 >;
@@ -495,10 +451,7 @@ op MergeCertificate is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate.")
     @path
     `certificate-name`: string;
-
-    @doc("The parameters to merge certificate.")
-    @body
-    parameters: CertificateMergeParameters;
+    ...CertificateMergeParameters;
   },
   CertificateBundle
 >;
@@ -528,11 +481,7 @@ operation requires the certificates/restore permission.
 @route("/certificates/restore")
 @post
 op RestoreCertificate is Azure.Core.Foundations.Operation<
-  {
-    @doc("The parameters to restore the certificate.")
-    @body
-    parameters: CertificateRestoreParameters;
-  },
+  CertificateRestoreParameters,
   CertificateBundle
 >;
 
@@ -555,12 +504,12 @@ op GetDeletedCertificates is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
 
     @doc("Specifies whether to include certificates which are not completely provisioned.")
-    @query
-    includePending: boolean;
+    @query("includePending")
+    includePending?: boolean;
   },
   DeletedCertificateListResult
 >;
@@ -642,12 +591,10 @@ key. The value you provide may be copied globally for the purpose of running
 the service. The value provided should not include personally identifiable or
 sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `key-name`: string;
-
-    @doc("The parameters to create a key.")
-    @body
-    parameters: KeyCreateParameters;
+    ...KeyCreateParameters;
   },
   KeyBundle
 >;
@@ -668,6 +615,7 @@ op RotateKey is Azure.Core.Foundations.Operation<
 The name of key to be rotated. The system will generate a new version in the
 specified key.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `key-name`: string;
   },
@@ -692,12 +640,10 @@ Name for the imported key. The value you provide may be copied globally for the
 purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `key-name`: string;
-
-    @doc("The parameters to import a key.")
-    @body
-    parameters: KeyImportParameters;
+    ...KeyImportParameters;
   },
   KeyBundle
 >;
@@ -740,10 +686,7 @@ op UpdateKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key to update.")
     @path
     `key-version`: string;
-
-    @doc("The parameters of the key to update.")
-    @body
-    parameters: KeyUpdateParameters;
+    ...KeyUpdateParameters;
   },
   KeyBundle
 >;
@@ -790,8 +733,8 @@ op GetKeyVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   KeyListResult
 >;
@@ -812,8 +755,8 @@ op GetKeys is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   KeyListResult
 >;
@@ -863,11 +806,7 @@ Vault. This operation requires the keys/restore permission.
 @route("/keys/restore")
 @post
 op RestoreKey is Azure.Core.Foundations.Operation<
-  {
-    @doc("The parameters to restore the key.")
-    @body
-    parameters: KeyRestoreParameters;
-  },
+  KeyRestoreParameters,
   KeyBundle
 >;
 
@@ -897,10 +836,7 @@ op encrypt is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for the encryption operation.")
-    @body
-    parameters: KeyOperationsParameters;
+    ...KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -930,10 +866,7 @@ op decrypt is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for the decryption operation.")
-    @body
-    parameters: KeyOperationsParameters;
+    ...KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -955,10 +888,7 @@ op sign is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for the signing operation.")
-    @body
-    parameters: KeySignParameters;
+    ...KeySignParameters;
   },
   KeyOperationResult
 >;
@@ -983,10 +913,7 @@ op verify is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for verify operations.")
-    @body
-    parameters: KeyVerifyParameters;
+    ...KeyVerifyParameters;
   },
   KeyVerifyResult
 >;
@@ -1012,10 +939,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for wrap operation.")
-    @body
-    parameters: KeyOperationsParameters;
+    ...KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -1042,10 +966,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for the key operation.")
-    @body
-    parameters: KeyOperationsParameters;
+    ...KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -1066,10 +987,7 @@ op release is Azure.Core.Foundations.Operation<
     @doc("Adding the version parameter retrieves a specific version of a key.")
     @path
     `key-version`: string;
-
-    @doc("The parameters for the key release operation.")
-    @body
-    parameters: KeyReleaseParameters;
+    ...KeyReleaseParameters;
   },
   KeyReleaseResult
 >;
@@ -1091,8 +1009,8 @@ op GetDeletedKeys is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   DeletedKeyListResult
 >;
@@ -1180,10 +1098,7 @@ op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @doc("The name of the key in the given vault.")
     @path
     `key-name`: string;
-
-    @doc("The policy for the key.")
-    @body
-    keyRotationPolicy: KeyRotationPolicy;
+    ...KeyRotationPolicy;
   },
   KeyRotationPolicy
 >;
@@ -1193,11 +1108,7 @@ op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
 @route("/rng")
 @post
 op GetRandomBytes is Azure.Core.Foundations.Operation<
-  {
-    @doc("The request object to get random bytes.")
-    @body
-    parameters: GetRandomBytesRequest;
-  },
+  GetRandomBytesRequest,
   RandomBytes
 >;
 
@@ -1216,12 +1127,10 @@ The name of the secret. The value you provide may be copied globally for the
 purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z-]+$")
     @path
     `secret-name`: string;
-
-    @doc("The parameters for setting the secret.")
-    @body
-    parameters: SecretSetParameters;
+    ...SecretSetParameters;
   },
   SecretBundle
 >;
@@ -1261,10 +1170,7 @@ op UpdateSecret is Azure.Core.Foundations.Operation<
     @doc("The version of the secret.")
     @path
     `secret-version`: string;
-
-    @doc("The parameters for update secret operation.")
-    @body
-    parameters: SecretUpdateParameters;
+    ...SecretUpdateParameters;
   },
   SecretBundle
 >;
@@ -1307,8 +1213,8 @@ op GetSecrets is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified, the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   SecretListResult
 >;
@@ -1331,8 +1237,8 @@ op GetSecretVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified, the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   SecretListResult
 >;
@@ -1351,8 +1257,8 @@ op GetDeletedSecrets is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   DeletedSecretListResult
 >;
@@ -1432,11 +1338,7 @@ requires the secrets/restore permission.
 @route("/secrets/restore")
 @post
 op RestoreSecret is Azure.Core.Foundations.Operation<
-  {
-    @doc("The parameters to restore the secret.")
-    @body
-    parameters: SecretRestoreParameters;
-  },
+  SecretRestoreParameters,
   SecretBundle
 >;
 
@@ -1452,10 +1354,7 @@ op UpdateSettings is Azure.Core.Foundations.Operation<
     @doc("The name of the account setting. Must be a valid settings option.")
     @path
     `setting-name`: string;
-
-    @doc("The parameters to update an account setting.")
-    @body
-    parameters: UpdateSettingsRequest;
+    ...UpdateSettingsRequest;
   },
   Setting
 >;
@@ -1491,8 +1390,8 @@ op GetStorageAccounts is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   StorageListResult
 >;
@@ -1511,8 +1410,8 @@ op GetDeletedStorageAccounts is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   DeletedStorageListResult
 >;
@@ -1528,6 +1427,7 @@ permission.
 op GetDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
   },
@@ -1546,6 +1446,7 @@ permission.
 op PurgeDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
   },
@@ -1563,6 +1464,7 @@ storage/recover permission.
 op RecoverDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
   },
@@ -1593,11 +1495,7 @@ storage/restore permission.
 @route("/storage/restore")
 @post
 op RestoreStorageAccount is Azure.Core.Foundations.Operation<
-  {
-    @doc("The parameters to restore the storage account.")
-    @body
-    parameters: StorageRestoreParameters;
-  },
+  StorageRestoreParameters,
   StorageBundle
 >;
 
@@ -1610,6 +1508,7 @@ permission.
 op DeleteStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
   },
@@ -1625,6 +1524,7 @@ storage/get permission.
 op GetStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
   },
@@ -1644,12 +1544,10 @@ The name of the storage account. The value you provide may be copied globally
 for the purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
-
-    @doc("The parameters to create a storage account.")
-    @body
-    parameters: StorageAccountCreateParameters;
+    ...StorageAccountCreateParameters;
   },
   StorageBundle
 >;
@@ -1663,12 +1561,10 @@ This operation requires the storage/set/update permission.
 op UpdateStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
-
-    @doc("The parameters to update a storage account.")
-    @body
-    parameters: StorageAccountUpdateParameters;
+    ...StorageAccountUpdateParameters;
   },
   StorageBundle
 >;
@@ -1682,12 +1578,10 @@ operation requires the storage/regeneratekey permission.
 op RegenerateStorageAccountKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
-
-    @doc("The parameters to regenerate storage account key.")
-    @body
-    parameters: StorageAccountRegenerteKeyParameters;
+    ...StorageAccountRegenerteKeyParameters;
   },
   StorageBundle
 >;
@@ -1701,6 +1595,7 @@ requires the storage/listsas permission.
 op GetSasDefinitions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
@@ -1708,8 +1603,8 @@ op GetSasDefinitions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   SasDefinitionListResult
 >;
@@ -1725,6 +1620,7 @@ storage/listsas permission.
 op GetDeletedSasDefinitions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
@@ -1732,8 +1628,8 @@ op GetDeletedSasDefinitions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
-    @query
-    maxresults: int32;
+    @query("maxresults")
+    maxresults?: int32;
   },
   DeletedSasDefinitionListResult
 >;
@@ -1749,10 +1645,12 @@ storage/getsas permission.
 op GetDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
     @doc("The name of the SAS definition.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
   },
@@ -1770,10 +1668,12 @@ requires the storage/recover permission.
 op RecoverDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
     @doc("The name of the SAS definition.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
   },
@@ -1789,10 +1689,12 @@ requires the storage/deletesas permission.
 op DeleteSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
     @doc("The name of the SAS definition.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
   },
@@ -1808,10 +1710,12 @@ operation requires the storage/getsas permission.
 op GetSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
     @doc("The name of the SAS definition.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
   },
@@ -1827,6 +1731,7 @@ operation requires the storage/setsas permission.
 op SetSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
@@ -1835,12 +1740,10 @@ The name of the SAS definition. The value you provide may be copied globally
 for the purpose of running the service. The value provided should not include
 personally identifiable or sensitive information.
 """)
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
-
-    @doc("The parameters to create a SAS definition.")
-    @body
-    parameters: SasDefinitionCreateParameters;
+    ...SasDefinitionCreateParameters;
   },
   SasDefinitionBundle
 >;
@@ -1854,16 +1757,15 @@ operation requires the storage/setsas permission.
 op UpdateSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
 
     @doc("The name of the SAS definition.")
+    @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
-
-    @doc("The parameters to update a SAS definition.")
-    @body
-    parameters: SasDefinitionUpdateParameters;
+    ...SasDefinitionUpdateParameters;
   },
   SasDefinitionBundle
 >;
@@ -1900,10 +1802,7 @@ The scope of the role definition to create or update. Managed HSM only supports
       @doc("The name of the role definition to create or update. It can be any valid GUID.")
       @path
       roleDefinitionName: string;
-
-      @doc("Parameters for the role definition.")
-      @body
-      parameters: RoleDefinitionCreateParameters;
+      ...RoleDefinitionCreateParameters;
     },
     RoleDefinition
   >;
@@ -1937,8 +1836,8 @@ The scope of the role definition to create or update. Managed HSM only supports
 The filter to apply on the operation. Use atScopeAndBelow filter to search
 below the given scope as well.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
     },
     RoleDefinitionListResult
   >;
@@ -1973,10 +1872,7 @@ interface RoleAssignmentsOperations {
       @doc("The name of the role assignment to create. It can be any valid GUID.")
       @path
       roleAssignmentName: string;
-
-      @doc("Parameters for the role assignment.")
-      @body
-      parameters: RoleAssignmentCreateParameters;
+      ...RoleAssignmentCreateParameters;
     },
     RoleAssignment
   >;
@@ -2011,8 +1907,8 @@ The filter to apply on the operation. Use $filter=atScope() to return all role
 assignments at or above the scope. Use $filter=principalId eq {id} to return
 all role assignments at, above or below the scope for the specified principal.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
     },
     RoleAssignmentListResult
   >;
@@ -2034,14 +1930,7 @@ be used to activate a provisioned managed HSM resource.
   @route("/securitydomain/download")
   @post
   Download is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-The Security Domain download operation requires customer to provide N
-certificates (minimum 3 and maximum 10) containing a public key in JWK format.
-""")
-      @body
-      CertificateInfoObject: CertificateInfoObject;
-    },
+    CertificateInfoObject,
     SecurityDomainObject
   >;
 
@@ -2056,11 +1945,7 @@ certificates (minimum 3 and maximum 10) containing a public key in JWK format.
   @route("/securitydomain/upload")
   @post
   Upload is Azure.Core.Foundations.Operation<
-    {
-      @doc("The Security Domain to be restored.")
-      @body
-      security_domain: SecurityDomainObject;
-    },
+    SecurityDomainObject,
     SecurityDomainOperationStatus | void
   >;
 

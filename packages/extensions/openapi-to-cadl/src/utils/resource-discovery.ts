@@ -107,30 +107,16 @@ export function getArmResourcesMetadata(): Record<string, ArmResource> {
     return armResourceCache;
   }
   const session = getSession();
-  const configPath: string = session.configuration.configFileFolderUri;
-  const configFiles: string[] = session.configuration.configurationFiles;
-  const inputPath: string | undefined = (session.configuration.inputFileUris ?? [])[0];
-  // const inputFiles: string[] = session.configuration["input-file"] ?? [];
-
-  const localConfigFolder = dirname(configFiles.find((c) => c.startsWith(configPath)) ?? "")
-    .replace("file:", "")
-    .replace(/^\/+/g, "");
-  let localInputFolder: string | undefined;
-
-  if (inputPath && inputPath.startsWith("file:")) {
-    localInputFolder = dirname(inputPath).replace("file:", "").replace(/^\/+/g, "");
-  }
-
-  const resourcesPath = localInputFolder ?? localConfigFolder;
+  const outputFolder: string = session.configuration["output-folder"] ?? "";
 
   try {
-    const content = readFileSync(join(resourcesPath, "resources.json"), "utf-8");
+    const content = readFileSync(join(outputFolder, "resources.json"), "utf-8");
     const { Resources }: { Resources: Record<string, ArmResource> } = JSON.parse(content);
     armResourceCache = Resources;
 
     return armResourceCache;
   } catch (e) {
-    throw new Error(`Failed to load resources.json from ${resourcesPath} \n ${e}`);
+    throw new Error(`Failed to load resources.json from ${outputFolder} \n ${e}`);
   }
 }
 

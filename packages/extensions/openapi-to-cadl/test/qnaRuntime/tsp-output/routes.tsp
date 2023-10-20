@@ -17,10 +17,7 @@ interface RuntimeOperations {
       @doc("Knowledgebase id.")
       @path
       kbId: string;
-
-      @doc("Post body of the request.")
-      @body
-      generateAnswerPayload: QueryDTO;
+      ...QueryDTO;
     },
     QnASearchResultList
   >;
@@ -34,10 +31,7 @@ interface RuntimeOperations {
       @doc("Knowledgebase id.")
       @path
       kbId: string;
-
-      @doc("Post body of the request.")
-      @body
-      trainPayload: FeedbackRecordsDTO;
+      ...FeedbackRecordsDTO;
     },
     void
   >;

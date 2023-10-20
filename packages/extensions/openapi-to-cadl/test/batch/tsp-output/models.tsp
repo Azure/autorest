@@ -1139,9 +1139,11 @@ model Certificate {
 The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex
 digits.
 """)
+  @visibility("read", "create")
   thumbprint?: string;
 
   @doc("The algorithm used to derive the thumbprint.")
+  @visibility("read", "create")
   thumbprintAlgorithm?: string;
 
   @doc("The URL of the Certificate.")
@@ -1175,12 +1177,15 @@ digits.
   deleteCertificateError?: DeleteCertificateError;
 
   @doc("The base64-encoded contents of the Certificate. The maximum size is 10KB.")
+  @visibility("create")
   data?: string;
 
   @doc("The format of the Certificate data.")
+  @visibility("create")
   certificateFormat?: CertificateFormat;
 
   @doc("This must be omitted if the Certificate format is cer.")
+  @visibility("create")
   password?: string;
 }
 
@@ -1285,9 +1290,11 @@ specification used to create each Job.
 """)
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
+  @visibility("read", "create")
   id?: string;
 
   @doc("The display name for the schedule.")
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("The URL of the Job Schedule.")
@@ -2618,13 +2625,13 @@ upgrade minor versions unless redeployed, even with this property set to true.
   autoUpgradeMinorVersion?: boolean;
 
   @doc("JSON formatted public settings for the extension.")
-  settings?: unknown;
+  settings?: Record<unknown>;
 
   @doc("""
 The extension can contain either protectedSettings or
 protectedSettingsFromKeyVault or no protected settings at all. 
 """)
-  protectedSettings?: unknown;
+  protectedSettings?: Record<unknown>;
 
   @doc("""
 Collection of extension names after which this extension needs to be
@@ -3270,15 +3277,18 @@ model BatchJob {
 The ID is case-preserving and case-insensitive (that is, you may not have two
 IDs within an Account that differ only by case).
 """)
+  @visibility("read", "create")
   id?: string;
 
   @doc("The display name for the Job.")
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("""
 Whether Tasks in the Job can define dependencies on each other. The default is
 false.
 """)
+  @visibility("read", "create")
   usesTaskDependencies?: boolean;
 
   @doc("The URL of the Job.")
@@ -3375,24 +3385,28 @@ to tolerate being interrupted and restarted without causing any corruption or
 duplicate data. The best practice for long running Tasks is to use some form of
 checkpointing.
 """)
+  @visibility("read", "create")
   jobManagerTask?: JobManagerTask;
 
   @doc("""
 The Job Preparation Task is a special Task run on each Compute Node before any
 other Task of the Job.
 """)
+  @visibility("read", "create")
   jobPreparationTask?: JobPreparationTask;
 
   @doc("""
 The Job Release Task is a special Task run at the end of the Job on each
 Compute Node that has run any other Task of the Job.
 """)
+  @visibility("read", "create")
   jobReleaseTask?: JobReleaseTask;
 
   @doc("""
 Individual Tasks can override an environment setting specified here by
 specifying the same setting name with a different value.
 """)
+  @visibility("read", "create")
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("Specifies how a Job should be assigned to a Pool.")
@@ -3407,9 +3421,11 @@ if the Task completes with a non-zero exit code after exhausting its retry
 count, or if there was an error starting the Task, for example due to a
 resource file download error. The default is noaction.
 """)
+  @visibility("read", "create")
   onTaskFailure?: OnTaskFailure;
 
   @doc("The network configuration for the Job.")
+  @visibility("read", "create")
   networkConfiguration?: JobNetworkConfiguration;
 
   @doc("""
@@ -3834,12 +3850,14 @@ and underscores, and cannot contain more than 64 characters. The ID is
 case-preserving and case-insensitive (that is, you may not have two IDs within
 an Account that differ only by case).
 """)
+  @visibility("read", "create")
   id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
 to a maximum length of 1024.
 """)
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("The URL of the Pool.")
@@ -3892,6 +3910,7 @@ For information about available sizes of virtual machines in Pools, see Choose
 a VM size for Compute Nodes in an Azure Batch Pool
 (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
 """)
+  @visibility("read", "create")
   vmSize?: string;
 
   @doc("""
@@ -3900,18 +3919,21 @@ the properties must be specified. This property cannot be specified if the
 Batch Account was created with its poolAllocationMode property set to
 'UserSubscription'.
 """)
+  @visibility("read", "create")
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
   @doc("""
 This property and cloudServiceConfiguration are mutually exclusive and one of
 the properties must be specified.
 """)
+  @visibility("read", "create")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("""
 This is the timeout for the most recent resize operation. (The initial sizing
 when the Pool is created counts as a resize.) The default value is 15 minutes.
 """)
+  @visibility("read", "create")
   resizeTimeout?: duration;
 
   @doc("""
@@ -3933,9 +3955,11 @@ count.
   currentLowPriorityNodes?: int32;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
+  @visibility("read", "create")
   targetDedicatedNodes?: int32;
 
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
+  @visibility("read", "create")
   targetLowPriorityNodes?: int32;
 
   @doc("""
@@ -3943,18 +3967,21 @@ If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must
 be specified. If true, the autoScaleFormula property is required and the Pool
 automatically resizes according to the formula. The default value is false.
 """)
+  @visibility("read", "create")
   enableAutoScale?: boolean;
 
   @doc("""
 This property is set only if the Pool automatically scales, i.e.
 enableAutoScale is true.
 """)
+  @visibility("read", "create")
   autoScaleFormula?: string;
 
   @doc("""
 This property is set only if the Pool automatically scales, i.e.
 enableAutoScale is true.
 """)
+  @visibility("read", "create")
   autoScaleEvaluationInterval?: duration;
 
   @doc("""
@@ -3969,9 +3996,11 @@ This imposes restrictions on which Compute Nodes can be assigned to the Pool.
 Specifying this value can reduce the chance of the requested number of Compute
 Nodes to be allocated in the Pool.
 """)
+  @visibility("read", "create")
   enableInterNodeCommunication?: boolean;
 
   @doc("The network configuration for a Pool.")
+  @visibility("read", "create")
   networkConfiguration?: NetworkConfiguration;
 
   @doc("""
@@ -4014,18 +4043,22 @@ The list of application licenses must be a subset of available Batch service
 application licenses. If a license is requested which is not supported, Pool
 creation will fail.
 """)
+  @visibility("read", "create")
   applicationLicenses?: string[];
 
   @doc("""
 The default value is 1. The maximum value is the smaller of 4 times the number
 of cores of the vmSize of the pool or 256.
 """)
+  @visibility("read", "create")
   taskSlotsPerNode?: int32;
 
   @doc("If not specified, the default is spread.")
+  @visibility("read", "create")
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
+  @visibility("read", "create")
   userAccounts?: UserAccount[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata.")
@@ -4041,6 +4074,7 @@ of statistics. The typical delay is about 30 minutes.
   stats?: PoolStatistics;
 
   @doc("This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
+  @visibility("read", "create")
   mountConfiguration?: MountConfiguration[];
 
   @doc("""
@@ -4276,12 +4310,14 @@ model BatchTask {
 The ID can contain any combination of alphanumeric characters including hyphens
 and underscores, and cannot contain more than 64 characters.
 """)
+  @visibility("read", "create")
   id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
 to a maximum length of 1024.
 """)
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("The URL of the Task.")
@@ -4308,6 +4344,7 @@ modified the Task in the meantime.
   creationTime?: utcDateTime;
 
   @doc("How the Batch service should respond when the Task completes.")
+  @visibility("read", "create")
   exitConditions?: ExitConditions;
 
   @doc("The state of the Task.")
@@ -4340,6 +4377,7 @@ file paths, it should use a relative path (relative to the Task working
 directory), or use the Batch provided environment variable
 (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
 """)
+  @visibility("read", "create")
   commandLine?: string;
 
   @doc("""
@@ -4353,6 +4391,7 @@ is executed in the container. Files produced in the container outside of
 AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that
 Batch file APIs will not be able to access those files.
 """)
+  @visibility("read", "create")
   containerSettings?: TaskContainerSettings;
 
   @doc("""
@@ -4363,21 +4402,25 @@ fail and the response error code will be RequestEntityTooLarge. If this occurs,
 the collection of ResourceFiles must be reduced in size. This can be achieved
 using .zip files, Application Packages, or Docker Containers.
 """)
+  @visibility("read", "create")
   resourceFiles?: ResourceFile[];
 
   @doc("""
 For multi-instance Tasks, the files will only be uploaded from the Compute Node
 on which the primary Task is executed.
 """)
+  @visibility("read", "create")
   outputFiles?: OutputFile[];
 
   @doc("A list of environment variable settings for the Task.")
+  @visibility("read", "create")
   environmentSettings?: EnvironmentSetting[];
 
   @doc("""
 A locality hint that can be used by the Batch service to select a Compute Node
 on which to start a Task.
 """)
+  @visibility("read", "create")
   affinityInfo?: AffinityInformation;
 
   @doc("Execution constraints to apply to a Task.")
@@ -4388,9 +4431,11 @@ The default is 1. A Task can only be scheduled to run on a compute node if the
 node has enough free scheduling slots available. For multi-instance Tasks, this
 must be 1.
 """)
+  @visibility("read", "create")
   requiredSlots?: int32;
 
   @doc("If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @visibility("read", "create")
   userIdentity?: UserIdentity;
 
   @doc("Information about the execution of a Task.")
@@ -4407,6 +4452,7 @@ if any of the subtasks fail (for example due to exiting with a non-zero exit
 code) the entire multi-instance Task fails. The multi-instance Task is then
 terminated and retried, up to its retry limit.
 """)
+  @visibility("read", "create")
   multiInstanceSettings?: MultiInstanceSettings;
 
   @doc("Resource usage statistics for a Task.")
@@ -4418,6 +4464,7 @@ This Task will not be scheduled until all Tasks that it depends on have
 completed successfully. If any of those Tasks fail and exhaust their retry
 counts, this Task will never be scheduled.
 """)
+  @visibility("read", "create")
   dependsOn?: TaskDependencies;
 
   @doc("""
@@ -4428,6 +4475,7 @@ Compute Node is used. If a referenced Package cannot be installed, for example
 because the package has been deleted or because download failed, the Task
 fails.
 """)
+  @visibility("read", "create")
   applicationPackageReferences?: ApplicationPackageReference[];
 
   @doc("""
@@ -4439,6 +4487,7 @@ Task can carry out using the token depend on the settings. For example, a Task
 can request Job permissions in order to add other Tasks to the Job, or check
 the status of the Job or of other Tasks under the Job.
 """)
+  @visibility("read", "create")
   authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 

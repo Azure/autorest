@@ -2,6 +2,7 @@ import { getSession } from "../autorest-session";
 import { generateEnums } from "../generate/generate-enums";
 import { generateObject } from "../generate/generate-object";
 import { CadlEnum, CadlProgram } from "../interfaces";
+import { getOptions } from "../options";
 import { formatCadlFile } from "../utils/format";
 import { getModelsImports } from "../utils/imports";
 import { getNamespace } from "../utils/namespace";
@@ -22,6 +23,8 @@ function generateModels(program: CadlProgram) {
     "\n",
   );
 
+  const isArm = getOptions().isArm;
+
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
   return [
@@ -30,8 +33,7 @@ function generateModels(program: CadlProgram) {
     namespaces,
     "\n",
     getNamespace(program),
-    "\n",
-    "interface Operations extends Azure.ResourceManager.Operations {} \n",
+    isArm ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n" : "\n",
     enums,
     "\n",
     objects,

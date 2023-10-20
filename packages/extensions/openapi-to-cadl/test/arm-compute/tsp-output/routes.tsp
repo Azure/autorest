@@ -24,6 +24,7 @@ information as well as the limits for compute resources under the subscription.
   List is Azure.Core.Foundations.Operation<
     {
       @doc("The location for which resource usage is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -48,6 +49,7 @@ Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
   List is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -72,6 +74,7 @@ location.
   ListByLocation is Azure.Core.Foundations.Operation<
     {
       @doc("The location for which VM scale sets under the subscription are queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -104,10 +107,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("The scale set object.")
-      @body
-      parameters: VirtualMachineScaleSet;
+      ...VirtualMachineScaleSet;
     },
     VirtualMachineScaleSet
   >;
@@ -131,10 +131,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("The scale set object.")
-      @body
-      parameters: VirtualMachineScaleSetUpdate;
+      ...VirtualMachineScaleSetUpdate;
     },
     VirtualMachineScaleSet
   >;
@@ -153,8 +150,8 @@ The subscription ID forms part of the URI for every service call.
       vmScaleSetName: string;
 
       @doc("Optional parameter to force delete a VM scale set. (Feature in Preview)")
-      @query
-      forceDeletion: boolean;
+      @query("forceDeletion")
+      forceDeletion?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -191,8 +188,8 @@ The expand expression to apply on the operation. 'UserData' retrieves the
 UserData property of the VM scale set that was provided by the user during the
 VM scale set Create/Update operation
 """)
-      @query
-      $expand: ExpandTypesForGetVMScaleSets;
+      @query("$expand")
+      $expand?: ExpandTypesForGetVMScaleSets;
     },
     VirtualMachineScaleSet
   >;
@@ -220,10 +217,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -245,8 +239,8 @@ The subscription ID forms part of the URI for every service call.
 Optional parameter to force delete virtual machines from the VM scale set.
 (Feature in Preview)
 """)
-      @query
-      forceDeletion: boolean;
+      @query("forceDeletion")
+      forceDeletion?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -254,10 +248,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceRequiredIDs;
+      ...VirtualMachineScaleSetVMInstanceRequiredIDs;
     },
     void
   >;
@@ -395,8 +386,8 @@ The parameter to request non-graceful VM shutdown. True value for this flag
 indicates non-graceful shutdown whereas false indicates otherwise. Default
 value for this flag is false if not specified
 """)
-      @query
-      skipShutdown: boolean;
+      @query("skipShutdown")
+      skipShutdown?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -404,10 +395,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -431,10 +419,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -458,10 +443,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -488,10 +470,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -520,10 +499,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -550,10 +526,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceRequiredIDs;
+      ...VirtualMachineScaleSetVMInstanceRequiredIDs;
     },
     void
   >;
@@ -581,10 +554,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters for Reimaging VM ScaleSet.")
-      @body
-      vmScaleSetReimageInput: VirtualMachineScaleSetReimageParameters;
+      ...VirtualMachineScaleSetReimageParameters;
     },
     void
   >;
@@ -611,10 +581,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("A list of virtual machine instance IDs from the VM scale set.")
-      @body
-      vmInstanceIDs: VirtualMachineScaleSetVMInstanceIDs;
+      ...VirtualMachineScaleSetVMInstanceIDs;
     },
     void
   >;
@@ -643,19 +610,19 @@ The subscription ID forms part of the URI for every service call.
       subscriptionId: string;
 
       @doc("The platform update domain for which a manual recovery walk is requested")
-      @query
+      @query("platformUpdateDomain")
       platformUpdateDomain: int32;
 
       @doc("""
 The zone in which the manual recovery walk is requested for cross zone virtual
 machine scale set
 """)
-      @query
-      zone: string;
+      @query("zone")
+      zone?: string;
 
       @doc("The placement group id for which the manual recovery walk is requested.")
-      @query
-      placementGroupId: string;
+      @query("placementGroupId")
+      placementGroupId?: string;
     },
     RecoveryWalkResponse
   >;
@@ -682,10 +649,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("The input object for ConvertToSinglePlacementGroup API.")
-      @body
-      parameters: VMScaleSetConvertToSinglePlacementGroupInput;
+      ...VMScaleSetConvertToSinglePlacementGroupInput;
     },
     void
   >;
@@ -709,10 +673,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("The input object for SetOrchestrationServiceState API.")
-      @body
-      parameters: OrchestrationServiceStateInput;
+      ...OrchestrationServiceStateInput;
     },
     void
   >;
@@ -742,10 +703,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create VM scale set Extension operation.")
-      @body
-      extensionParameters: VirtualMachineScaleSetExtension;
+      ...VirtualMachineScaleSetExtension;
     },
     VirtualMachineScaleSetExtension
   >;
@@ -773,10 +731,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update VM scale set Extension operation.")
-      @body
-      extensionParameters: VirtualMachineScaleSetExtensionUpdate;
+      ...VirtualMachineScaleSetExtensionUpdate;
     },
     VirtualMachineScaleSetExtension
   >;
@@ -826,8 +781,8 @@ The subscription ID forms part of the URI for every service call.
       vmssExtensionName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -993,10 +948,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Virtual Machine Extension operation.")
-      @body
-      extensionParameters: VirtualMachineScaleSetVMExtension;
+      ...VirtualMachineScaleSetVMExtension;
     },
     VirtualMachineScaleSetVMExtension
   >;
@@ -1028,10 +980,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine Extension operation.")
-      @body
-      extensionParameters: VirtualMachineScaleSetVMExtensionUpdate;
+      ...VirtualMachineScaleSetVMExtensionUpdate;
     },
     VirtualMachineScaleSetVMExtension
   >;
@@ -1089,8 +1038,8 @@ The subscription ID forms part of the URI for every service call.
       vmExtensionName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1120,8 +1069,8 @@ The subscription ID forms part of the URI for every service call.
       instanceId: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1161,10 +1110,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters for the Reimaging Virtual machine in ScaleSet.")
-      @body
-      vmScaleSetVMReimageInput: VirtualMachineScaleSetVMReimageParameters;
+      ...VirtualMachineScaleSetVMReimageParameters;
     },
     void
   >;
@@ -1253,10 +1199,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine Scale Sets VM operation.")
-      @body
-      parameters: VirtualMachineScaleSetVM;
+      ...VirtualMachineScaleSetVM;
     },
     VirtualMachineScaleSetVM
   >;
@@ -1282,8 +1225,8 @@ The subscription ID forms part of the URI for every service call.
 Optional parameter to force delete a virtual machine from a VM scale set.
 (Feature in Preview)
 """)
-      @query
-      forceDeletion: boolean;
+      @query("forceDeletion")
+      forceDeletion?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1317,8 +1260,8 @@ The expand expression to apply on the operation. 'InstanceView' will retrieve
 the instance view of the virtual machine. 'UserData' will retrieve the UserData
 of the virtual machine.
 """)
-      @query
-      $expand: InstanceViewTypes;
+      @query("$expand")
+      $expand?: InstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1376,19 +1319,19 @@ The filter to apply to the operation. Allowed values are
 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq
 false'.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The expand expression to apply to the operation. Allowed values are
 'instanceView'.
 """)
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1426,8 +1369,8 @@ The parameter to request non-graceful VM shutdown. True value for this flag
 indicates non-graceful shutdown whereas false indicates otherwise. Default
 value for this flag is false if not specified
 """)
-      @query
-      skipShutdown: boolean;
+      @query("skipShutdown")
+      skipShutdown?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1548,8 +1491,8 @@ Expiration duration in minutes for the SAS URIs with a value between 1 to 1440
 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a
 default expiration duration of 120 minutes.
 """)
-      @query
-      sasUriExpirationTimeInMinutes: int32;
+      @query("sasUriExpirationTimeInMinutes")
+      sasUriExpirationTimeInMinutes?: int32;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1641,14 +1584,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Run command operation.")
-      @body
-      parameters: RunCommandInput;
+      ...RunCommandInput;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     RunCommandResult | void
   >;
@@ -1681,10 +1621,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Virtual Machine Extension operation.")
-      @body
-      extensionParameters: VirtualMachineExtension;
+      ...VirtualMachineExtension;
     },
     VirtualMachineExtension
   >;
@@ -1712,10 +1649,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine Extension operation.")
-      @body
-      extensionParameters: VirtualMachineExtensionUpdate;
+      ...VirtualMachineExtensionUpdate;
     },
     VirtualMachineExtension
   >;
@@ -1765,8 +1699,8 @@ The subscription ID forms part of the URI for every service call.
       vmExtensionName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1792,8 +1726,8 @@ The subscription ID forms part of the URI for every service call.
       vmName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1816,6 +1750,7 @@ specified location.
   ListByLocation is Azure.Core.Foundations.Operation<
     {
       @doc("The location for which virtual machines under the subscription are queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -1851,10 +1786,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Capture Virtual Machine operation.")
-      @body
-      parameters: VirtualMachineCaptureParameters;
+      ...VirtualMachineCaptureParameters;
     },
     VirtualMachineCaptureResult | void
   >;
@@ -1881,10 +1813,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Virtual Machine operation.")
-      @body
-      parameters: VirtualMachine;
+      ...VirtualMachine;
     },
     VirtualMachine
   >;
@@ -1908,10 +1837,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine operation.")
-      @body
-      parameters: VirtualMachineUpdate;
+      ...VirtualMachineUpdate;
     },
     VirtualMachine
   >;
@@ -1930,8 +1856,8 @@ The subscription ID forms part of the URI for every service call.
       vmName: string;
 
       @doc("Optional parameter to force delete virtual machines.")
-      @query
-      forceDeletion: boolean;
+      @query("forceDeletion")
+      forceDeletion?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -1966,8 +1892,8 @@ the platform and can change outside of control plane operations. 'UserData'
 retrieves the UserData property as part of the VM model view that was provided
 by the user during the VM Create/Update operation.
 """)
-      @query
-      $expand: InstanceViewTypes;
+      @query("$expand")
+      $expand?: InstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2045,8 +1971,8 @@ billed for the compute resources that this virtual machine uses.
       vmName: string;
 
       @doc("Optional parameter to hibernate a virtual machine. (Feature in Preview)")
-      @query
-      hibernate: boolean;
+      @query("hibernate")
+      hibernate?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2105,8 +2031,8 @@ The system query option to filter VMs returned in the response. Allowed value
 is 'virtualMachineScaleSet/id' eq
 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2137,16 +2063,16 @@ The subscription ID forms part of the URI for every service call.
 statusOnly=true enables fetching run time status of all Virtual Machines in the
 subscription.
 """)
-      @query
-      statusOnly: string;
+      @query("statusOnly")
+      statusOnly?: string;
 
       @doc("""
 The system query option to filter VMs returned in the response. Allowed value
 is 'virtualMachineScaleSet/id' eq
 /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
     },
     VirtualMachineListResult
   >;
@@ -2199,8 +2125,8 @@ The parameter to request non-graceful VM shutdown. True value for this flag
 indicates non-graceful shutdown whereas false indicates otherwise. Default
 value for this flag is false if not specified
 """)
-      @query
-      skipShutdown: boolean;
+      @query("skipShutdown")
+      skipShutdown?: boolean;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2326,10 +2252,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Reimage Virtual Machine operation.")
-      @body
-      parameters: VirtualMachineReimageParameters;
+      ...VirtualMachineReimageParameters;
     },
     void
   >;
@@ -2352,8 +2275,8 @@ Expiration duration in minutes for the SAS URIs with a value between 1 to 1440
 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a
 default expiration duration of 120 minutes.
 """)
-      @query
-      sasUriExpirationTimeInMinutes: int32;
+      @query("sasUriExpirationTimeInMinutes")
+      sasUriExpirationTimeInMinutes?: int32;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2453,10 +2376,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Input for InstallPatches as directly received by the API")
-      @body
-      installPatchesInput: VirtualMachineInstallPatchesParameters;
+      ...VirtualMachineInstallPatchesParameters;
     },
     VirtualMachineInstallPatchesResult | void
   >;
@@ -2480,14 +2400,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Run command operation.")
-      @body
-      parameters: RunCommandInput;
+      ...RunCommandInput;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     RunCommandResult | void
   >;
@@ -2554,10 +2471,14 @@ publisher, offer, and SKU.
       skus: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
-      @query $top: int32;
-      @query $orderby: string;
+      @query("$expand")
+      $expand?: string;
+
+      @query("$top")
+      $top?: int32;
+
+      @query("$orderby")
+      $orderby?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2740,19 +2661,19 @@ edge zone, publisher, offer, and SKU.
       skus: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 An integer value specifying the number of images to return that matches
 supplied values.
 """)
-      @query
-      $top: int32;
+      @query("$top")
+      $top?: int32;
 
       @doc("Specifies the order of the results returned. Formatted as an OData query.")
-      @query
-      $orderby: string;
+      @query("$orderby")
+      $orderby?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2864,9 +2785,15 @@ interface VirtualMachineExtensionImagesOperations {
       @doc("The name of a supported Azure region.")
       @path
       location: string;
-      @path publisherName: string;
-      @path type: string;
-      @path version: string;
+
+      @path
+      publisherName: string;
+
+      @path
+      type: string;
+
+      @path
+      version: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2886,7 +2813,9 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of a supported Azure region.")
       @path
       location: string;
-      @path publisherName: string;
+
+      @path
+      publisherName: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2906,14 +2835,22 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of a supported Azure region.")
       @path
       location: string;
-      @path publisherName: string;
-      @path type: string;
+
+      @path
+      publisherName: string;
+
+      @path
+      type: string;
 
       @doc("The filter to apply on the operation.")
-      @query
-      $filter: string;
-      @query $top: int32;
-      @query $orderby: string;
+      @query("$filter")
+      $filter?: string;
+
+      @query("$top")
+      $top?: int32;
+
+      @query("$orderby")
+      $orderby?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -2946,10 +2883,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Availability Set operation.")
-      @body
-      parameters: AvailabilitySet;
+      ...AvailabilitySet;
     },
     AvailabilitySet
   >;
@@ -2973,10 +2907,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Availability Set operation.")
-      @body
-      parameters: AvailabilitySetUpdate;
+      ...AvailabilitySetUpdate;
     },
     AvailabilitySet
   >;
@@ -3043,8 +2974,8 @@ The subscription ID forms part of the URI for every service call.
 The expand expression to apply to the operation. Allowed values are
 'instanceView'.
 """)
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
     },
     AvailabilitySetListResult
   >;
@@ -3115,10 +3046,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Proximity Placement Group operation.")
-      @body
-      parameters: ProximityPlacementGroup;
+      ...ProximityPlacementGroup;
     },
     ProximityPlacementGroup
   >;
@@ -3142,10 +3070,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Proximity Placement Group operation.")
-      @body
-      parameters: ProximityPlacementGroupUpdate;
+      ...ProximityPlacementGroupUpdate;
     },
     ProximityPlacementGroup
   >;
@@ -3190,8 +3115,8 @@ The subscription ID forms part of the URI for every service call.
 includeColocationStatus=true enables fetching the colocation status of all the
 resources in the proximity placement group.
 """)
-      @query
-      includeColocationStatus: string;
+      @query("includeColocationStatus")
+      includeColocationStatus?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -3262,10 +3187,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Dedicated Host Group.")
-      @body
-      parameters: DedicatedHostGroup;
+      ...DedicatedHostGroup;
     },
     DedicatedHostGroup
   >;
@@ -3289,10 +3211,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Dedicated Host Group operation.")
-      @body
-      parameters: DedicatedHostGroupUpdate;
+      ...DedicatedHostGroupUpdate;
     },
     DedicatedHostGroup
   >;
@@ -3338,8 +3257,8 @@ The expand expression to apply on the operation. 'InstanceView' will retrieve
 the list of instance views of the dedicated hosts under the dedicated host
 group. 'UserData' is not supported for dedicated host group.
 """)
-      @query
-      $expand: InstanceViewTypes;
+      @query("$expand")
+      $expand?: InstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -3417,10 +3336,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Dedicated Host.")
-      @body
-      parameters: DedicatedHost;
+      ...DedicatedHost;
     },
     DedicatedHost
   >;
@@ -3448,10 +3364,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Dedicated Host operation.")
-      @body
-      parameters: DedicatedHostUpdate;
+      ...DedicatedHostUpdate;
     },
     DedicatedHost
   >;
@@ -3505,8 +3418,8 @@ The expand expression to apply on the operation. 'InstanceView' will retrieve
 the list of instance views of the dedicated host. 'UserData' is not supported
 for dedicated host.
 """)
-      @query
-      $expand: InstanceViewTypes;
+      @query("$expand")
+      $expand?: InstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -3639,10 +3552,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to create the SSH public key.")
-      @body
-      parameters: SshPublicKeyResource;
+      ...SshPublicKeyResource;
     },
     SshPublicKeyResource
   >;
@@ -3666,10 +3576,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to update the SSH public key.")
-      @body
-      parameters: SshPublicKeyUpdateResource;
+      ...SshPublicKeyUpdateResource;
     },
     SshPublicKeyResource
   >;
@@ -3768,10 +3675,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Image operation.")
-      @body
-      parameters: Image;
+      ...Image;
     },
     Image
   >;
@@ -3795,10 +3699,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Image operation.")
-      @body
-      parameters: ImageUpdate;
+      ...ImageUpdate;
     },
     Image
   >;
@@ -3840,8 +3741,8 @@ The subscription ID forms part of the URI for every service call.
       imageName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -3916,10 +3817,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of the restore point collection.")
       @path
       restorePointCollectionName: string;
-
-      @doc("Parameters supplied to the Create or Update restore point collection operation.")
-      @body
-      parameters: RestorePointCollection;
+      ...RestorePointCollection;
     },
     RestorePointCollection
   >;
@@ -3943,10 +3841,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of the restore point collection.")
       @path
       restorePointCollectionName: string;
-
-      @doc("Parameters supplied to the Update restore point collection operation.")
-      @body
-      parameters: RestorePointCollectionUpdate;
+      ...RestorePointCollectionUpdate;
     },
     RestorePointCollection
   >;
@@ -4001,8 +3896,8 @@ The subscription ID forms part of the URI for every service call.
 The expand expression to apply on the operation. If expand=restorePoints,
 server will return all contained restore points in the restorePointCollection.
 """)
-      @query
-      $expand: RestorePointCollectionExpandOptions;
+      @query("$expand")
+      $expand?: RestorePointCollectionExpandOptions;
     },
     RestorePointCollection
   >;
@@ -4073,10 +3968,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of the restore point.")
       @path
       restorePointName: string;
-
-      @doc("Parameters supplied to the Create restore point operation.")
-      @body
-      parameters: RestorePoint;
+      ...RestorePoint;
     },
     RestorePoint
   >;
@@ -4136,8 +4028,8 @@ The subscription ID forms part of the URI for every service call.
 The expand expression to apply on the operation. 'InstanceView' retrieves
 information about the run-time state of a restore point.
 """)
-      @query
-      $expand: RestorePointExpandOptions;
+      @query("$expand")
+      $expand?: RestorePointExpandOptions;
     },
     RestorePoint
   >;
@@ -4167,10 +4059,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create capacity reservation Group.")
-      @body
-      parameters: CapacityReservationGroup;
+      ...CapacityReservationGroup;
     },
     CapacityReservationGroup
   >;
@@ -4197,10 +4086,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update capacity reservation Group operation.")
-      @body
-      parameters: CapacityReservationGroupUpdate;
+      ...CapacityReservationGroupUpdate;
     },
     CapacityReservationGroup
   >;
@@ -4253,8 +4139,8 @@ reservation group which is a snapshot of the runtime properties of a capacity
 reservation that is managed by the platform and can change outside of control
 plane operations.
 """)
-      @query
-      $expand: CapacityReservationGroupInstanceViewTypes;
+      @query("$expand")
+      $expand?: CapacityReservationGroupInstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4291,8 +4177,8 @@ The expand expression to apply on the operation. Based on the expand param(s)
 specified we return Virtual Machine or ScaleSet VM Instance or both resource
 Ids which are associated to capacity reservation group in the response.
 """)
-      @query
-      $expand: ExpandTypesForGetCapacityReservationGroups;
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
     },
     CapacityReservationGroupListResult
   >;
@@ -4318,8 +4204,8 @@ The expand expression to apply on the operation. Based on the expand param(s)
 specified we return Virtual Machine or ScaleSet VM Instance or both resource
 Ids which are associated to capacity reservation group in the response.
 """)
-      @query
-      $expand: ExpandTypesForGetCapacityReservationGroups;
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
     },
     CapacityReservationGroupListResult
   >;
@@ -4353,10 +4239,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create capacity reservation.")
-      @body
-      parameters: CapacityReservation;
+      ...CapacityReservation;
     },
     CapacityReservation
   >;
@@ -4384,10 +4267,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update capacity reservation operation.")
-      @body
-      parameters: CapacityReservationUpdate;
+      ...CapacityReservationUpdate;
     },
     CapacityReservation | void
   >;
@@ -4446,8 +4326,8 @@ The expand expression to apply on the operation. 'InstanceView' retrieves a
 snapshot of the runtime properties of the capacity reservation that is managed
 by the platform and can change outside of control plane operations.
 """)
-      @query
-      $expand: CapacityReservationInstanceViewTypes;
+      @query("$expand")
+      $expand?: CapacityReservationInstanceViewTypes;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4497,6 +4377,7 @@ window to show throttling activities.
   ExportRequestRateByInterval is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -4506,10 +4387,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the LogAnalytics getRequestRateByInterval Api.")
-      @body
-      parameters: RequestRateByIntervalInput;
+      ...RequestRateByIntervalInput;
     },
     LogAnalyticsOperationResult | void
   >;
@@ -4523,6 +4401,7 @@ given time window.
   ExportThrottledRequests is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -4532,10 +4411,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the LogAnalytics getThrottledRequests Api.")
-      @body
-      parameters: ThrottledRequestsInput;
+      ...ThrottledRequestsInput;
     },
     LogAnalyticsOperationResult | void
   >;
@@ -4548,6 +4424,7 @@ interface VirtualMachineRunCommandsOperations {
   List is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which run commands is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -4560,7 +4437,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     RunCommandListResult
   >;
@@ -4571,6 +4448,7 @@ The subscription ID forms part of the URI for every service call.
   Get is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which run commands is queried.")
+      @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
@@ -4587,7 +4465,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     RunCommandDocument
   >;
@@ -4618,14 +4496,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Virtual Machine RunCommand operation.")
-      @body
-      runCommand: VirtualMachineRunCommand;
+      ...VirtualMachineRunCommand;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4653,14 +4528,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine RunCommand operation.")
-      @body
-      runCommand: VirtualMachineRunCommandUpdate;
+      ...VirtualMachineRunCommandUpdate;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4691,7 +4563,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     void
   >;
@@ -4714,8 +4586,8 @@ The subscription ID forms part of the URI for every service call.
       runCommandName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4726,7 +4598,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4745,8 +4617,8 @@ The subscription ID forms part of the URI for every service call.
       vmName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4757,7 +4629,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommandsListResult
   >;
@@ -4791,14 +4663,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Create Virtual Machine RunCommand operation.")
-      @body
-      runCommand: VirtualMachineRunCommand;
+      ...VirtualMachineRunCommand;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4830,14 +4699,11 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
-
-      @doc("Parameters supplied to the Update Virtual Machine RunCommand operation.")
-      @body
-      runCommand: VirtualMachineRunCommandUpdate;
+      ...VirtualMachineRunCommandUpdate;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4872,7 +4738,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     void
   >;
@@ -4899,8 +4765,8 @@ The subscription ID forms part of the URI for every service call.
       runCommandName: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4911,7 +4777,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
@@ -4937,8 +4803,8 @@ Scaleset.
       instanceId: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 Subscription credentials which uniquely identify Microsoft Azure subscription.
@@ -4949,7 +4815,7 @@ The subscription ID forms part of the URI for every service call.
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     VirtualMachineRunCommandsListResult
   >;

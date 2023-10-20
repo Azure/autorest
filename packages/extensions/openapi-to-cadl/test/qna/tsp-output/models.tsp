@@ -236,6 +236,7 @@ model KnowledgeBaseAnswerPrompt {
   qnaId?: int32;
 
   @doc("Text displayed to represent a follow up question prompt.")
+  @maxLength(200)
   displayText?: string;
 }
 

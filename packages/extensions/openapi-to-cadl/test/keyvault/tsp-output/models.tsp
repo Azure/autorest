@@ -1322,6 +1322,7 @@ model KeyVerifyResult {
 @doc("The release key parameters.")
 model KeyReleaseParameters {
   @doc("The attestation assertion for the target of the key release.")
+  @minLength(1)
   @projectedName("json", "target")
   targetAttestationToken: string;
 

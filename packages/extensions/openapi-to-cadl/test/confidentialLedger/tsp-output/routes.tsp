@@ -41,16 +41,16 @@ default) collection will be returned.
 op ListLedgerEntries is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
-    @query
-    collectionId: string;
+    @query("collectionId")
+    collectionId?: string;
 
     @doc("Specify the first transaction ID in a range.")
-    @query
-    fromTransactionId: string;
+    @query("fromTransactionId")
+    fromTransactionId?: string;
 
     @doc("Specify the last transaction ID in a range.")
-    @query
-    toTransactionId: string;
+    @query("toTransactionId")
+    toTransactionId?: string;
   },
   PagedLedgerEntries
 >;
@@ -62,8 +62,8 @@ op CreateLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
   {
     parameters: {
       @doc("The collection id.")
-      @query
-      collectionId: string;
+      @query("collectionId")
+      collectionId?: string;
     };
   }
 >;
@@ -84,8 +84,8 @@ if the loading is still ongoing.
 op GetLedgerEntry is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
-    @query
-    collectionId: string;
+    @query("collectionId")
+    collectionId?: string;
 
     @doc("Identifies a write transaction.")
     @path
@@ -109,8 +109,8 @@ op GetTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
 op GetCurrentLedgerEntry is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
-    @query
-    collectionId: string;
+    @query("collectionId")
+    collectionId?: string;
   },
   LedgerEntry
 >;
@@ -150,10 +150,7 @@ op CreateOrUpdateUser is Azure.Core.Foundations.Operation<
     @doc("The user id, either an AAD object ID or certificate fingerprint.")
     @path
     userId: string;
-
-    @doc("Details about a Confidential Ledger user.")
-    @body
-    userDetails: LedgerUser;
+    ...LedgerUser;
   },
   LedgerUser
 >;

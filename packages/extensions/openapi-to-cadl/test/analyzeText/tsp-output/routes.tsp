@@ -14,16 +14,16 @@ interface TextAnalysisAuthoringOperations {
     {
       parameters: {
         @doc("The maximum number of resources to return from the collection.")
-        @query
-        top: int32;
+        @query("top")
+        top?: int32;
 
         @doc("An offset into the collection of the first resource to be returned.")
-        @query
-        skip: int32;
+        @query("skip")
+        skip?: int32;
 
         @doc("The maximum number of resources to include in a single response.")
-        @query
-        maxpagesize: int32;
+        @query("maxpagesize")
+        maxpagesize?: int32;
       };
     }
   >;
@@ -43,6 +43,7 @@ interface TextAnalysisAuthoringOperations {
   Export is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -50,12 +51,12 @@ interface TextAnalysisAuthoringOperations {
 Specifies the method used to interpret string offsets. For additional
 information see https://aka.ms/text-analytics-offsets.
 """)
-      @query
+      @query("stringIndexType")
       stringIndexType: StringIndexType;
 
       @doc("Kind of asset to export.")
-      @query
-      assetKind: string;
+      @query("assetKind")
+      assetKind?: string;
     },
     void
   >;
@@ -69,12 +70,10 @@ exists, the data of that project is replaced.
   Import is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
-
-      @doc("The project data to import.")
-      @body
-      body: ExportedProject;
+      ...ExportedProject;
     },
     void
   >;
@@ -85,12 +84,10 @@ exists, the data of that project is replaced.
   Train is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
-
-      @doc("The training input parameters.")
-      @body
-      body: TrainingJobOptions;
+      ...TrainingJobOptions;
     },
     void
   >;
@@ -101,16 +98,16 @@ exists, the data of that project is replaced.
     {
       parameters: {
         @doc("The maximum number of resources to return from the collection.")
-        @query
-        top: int32;
+        @query("top")
+        top?: int32;
 
         @doc("An offset into the collection of the first resource to be returned.")
-        @query
-        skip: int32;
+        @query("skip")
+        skip?: int32;
 
         @doc("The maximum number of resources to include in a single response.")
-        @query
-        maxpagesize: int32;
+        @query("maxpagesize")
+        maxpagesize?: int32;
       };
     }
   >;
@@ -121,12 +118,10 @@ exists, the data of that project is replaced.
   SwapDeployments is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
-
-      @doc("The job object to swap two deployments.")
-      @body
-      body: SwapDeploymentsOptions;
+      ...SwapDeploymentsOptions;
     },
     void
   >;
@@ -146,6 +141,7 @@ exists, the data of that project is replaced.
   GetDeploymentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -166,6 +162,7 @@ exists, the data of that project is replaced.
   GetSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -185,6 +182,7 @@ metadata, and assets.
   GetExportStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -201,6 +199,7 @@ metadata, and assets.
   GetImportStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -217,16 +216,16 @@ metadata, and assets.
     {
       parameters: {
         @doc("The maximum number of resources to return from the collection.")
-        @query
-        top: int32;
+        @query("top")
+        top?: int32;
 
         @doc("An offset into the collection of the first resource to be returned.")
-        @query
-        skip: int32;
+        @query("skip")
+        skip?: int32;
 
         @doc("The maximum number of resources to include in a single response.")
-        @query
-        maxpagesize: int32;
+        @query("maxpagesize")
+        maxpagesize?: int32;
       };
     }
   >;
@@ -246,6 +245,7 @@ the raw inference results for the data included in the evaluation process.
   GetModelEvaluationResults is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -257,20 +257,20 @@ the raw inference results for the data included in the evaluation process.
 Specifies the method used to interpret string offsets. For additional
 information see https://aka.ms/text-analytics-offsets.
 """)
-      @query
+      @query("stringIndexType")
       stringIndexType: StringIndexType;
 
       @doc("The maximum number of resources to return from the collection.")
-      @query
-      top: int32;
+      @query("top")
+      top?: int32;
 
       @doc("An offset into the collection of the first resource to be returned.")
-      @query
-      skip: int32;
+      @query("skip")
+      skip?: int32;
 
       @doc("The maximum number of resources to include in a single response.")
-      @query
-      maxpagesize: int32;
+      @query("maxpagesize")
+      maxpagesize?: int32;
     },
     EvaluationResults
   >;
@@ -284,6 +284,7 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
   GetModelEvaluationSummary is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -300,20 +301,21 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
   ListTrainingJobs is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
       @doc("The maximum number of resources to return from the collection.")
-      @query
-      top: int32;
+      @query("top")
+      top?: int32;
 
       @doc("An offset into the collection of the first resource to be returned.")
-      @query
-      skip: int32;
+      @query("skip")
+      skip?: int32;
 
       @doc("The maximum number of resources to include in a single response.")
-      @query
-      maxpagesize: int32;
+      @query("maxpagesize")
+      maxpagesize?: int32;
     },
     TrainingJobs
   >;
@@ -324,6 +326,7 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
   GetTrainingStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -340,6 +343,7 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
   CancelTrainingJob is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
+      @maxLength(100)
       @path
       projectName: string;
 
@@ -368,16 +372,16 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
     {
       parameters: {
         @doc("The maximum number of resources to return from the collection.")
-        @query
-        top: int32;
+        @query("top")
+        top?: int32;
 
         @doc("An offset into the collection of the first resource to be returned.")
-        @query
-        skip: int32;
+        @query("skip")
+        skip?: int32;
 
         @doc("The maximum number of resources to include in a single response.")
-        @query
-        maxpagesize: int32;
+        @query("maxpagesize")
+        maxpagesize?: int32;
       };
     }
   >;
@@ -388,20 +392,20 @@ performance measurements of the model e.g., F1, Precision, Recall, etc.
   ListTrainingConfigVersions is Azure.Core.Foundations.Operation<
     {
       @doc("The project kind.")
-      @query
+      @query("projectKind")
       projectKind: ProjectKind;
 
       @doc("The maximum number of resources to return from the collection.")
-      @query
-      top: int32;
+      @query("top")
+      top?: int32;
 
       @doc("An offset into the collection of the first resource to be returned.")
-      @query
-      skip: int32;
+      @query("skip")
+      skip?: int32;
 
       @doc("The maximum number of resources to include in a single response.")
-      @query
-      maxpagesize: int32;
+      @query("maxpagesize")
+      maxpagesize?: int32;
     },
     TrainingConfigVersions
   >;

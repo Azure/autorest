@@ -23,14 +23,14 @@ model Employee is TrackedResource<EmployeeProperties> {
 interface Employees {
   @doc("Get a Employee")
   get is ArmResourceRead<Employee>;
-  @doc("Delete a Employee")
-  delete is ArmResourceDeleteAsync<Employee>;
-  @doc("Update a Employee")
-  update is ArmResourcePatchSync<Employee, EmployeeProperties>;
-  @doc("List Employee resources by subscription ID")
-  listBySubscription is ArmListBySubscription<Employee>;
   @doc("Create a Employee")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Employee>;
+  @doc("Update a Employee")
+  update is ArmResourcePatchSync<Employee, EmployeeUpdateProperties>;
+  @doc("Delete a Employee")
+  delete is ArmResourceDeleteAsync<Employee>;
   @doc("List Employee resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Employee>;
+  @doc("List Employee resources by subscription ID")
+  listBySubscription is ArmListBySubscription<Employee>;
 }

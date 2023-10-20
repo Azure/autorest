@@ -32,7 +32,7 @@ serialization of schema requested.
 
       @doc("Accept header")
       @header
-      Accept: "application/json; serialization=Avro";
+      accept: "application/json; serialization=Avro";
     },
     void
   >;
@@ -51,6 +51,8 @@ should match the serialization type specified in the request.
       groupName: string;
 
       @doc("Name of schema.")
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
     },
@@ -71,6 +73,8 @@ should match the serialization type specified in the request.
       groupName: string;
 
       @doc("Name of schema.")
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
 
@@ -98,12 +102,11 @@ should match the serialization type specified in the request.
       groupName: string;
 
       @doc("Name of schema.")
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
-
-      @doc("String representation (UTF-8) of the registered schema.")
-      @body
-      schemaContent: bytes;
+      ...bytes;
     },
     void
   >;
@@ -127,12 +130,11 @@ type should match the serialization type specified in the request.
       groupName: string;
 
       @doc("Name of schema.")
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
-
-      @doc("String representation (UTF-8) of the schema being registered.")
-      @body
-      schemaContent: bytes;
+      ...bytes;
     },
     void
   >;

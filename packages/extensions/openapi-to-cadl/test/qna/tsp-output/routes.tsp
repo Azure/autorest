@@ -15,16 +15,13 @@ interface QuestionAnsweringOperations {
   GetAnswers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
-      @query
+      @query("projectName")
       projectName: string;
 
       @doc("The name of the specific deployment of the project to use.")
-      @query
+      @query("deploymentName")
       deploymentName: string;
-
-      @doc("Post body of the request.")
-      @body
-      knowledgeBaseQueryOptions: AnswersOptions;
+      ...AnswersOptions;
     },
     AnswersResult
   >;
@@ -34,11 +31,7 @@ interface QuestionAnsweringOperations {
   @route("/:query-text")
   @post
   GetAnswersFromText is Azure.Core.Foundations.Operation<
-    {
-      @doc("Post body of the request.")
-      @body
-      textQueryOptions: AnswersFromTextOptions;
-    },
+    AnswersFromTextOptions,
     AnswersFromTextResult
   >;
 }

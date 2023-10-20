@@ -45,18 +45,19 @@ returns a next link. Second (and final) call, will give you an items list of 1.
   @get
   getMultiplePages is Azure.Core.Foundations.Operation<
     {
-      @header `client-request-id`: string;
+      @header
+      `client-request-id`?: string;
 
       @doc("Sets the maximum number of items to return in the response.")
       @header
-      maxresults: int32;
+      maxresults?: int32;
 
       @doc("""
 Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout: int32;
+      timeout?: int32;
     },
     ProductResult
   >;
@@ -71,14 +72,14 @@ ProductResult
   getWithQueryParams is Azure.Core.Foundations.Operation<
     {
       @doc("A required integer query parameter. Put in value '100' to pass test.")
-      @query
+      @query("requiredQueryParameter")
       requiredQueryParameter: int32;
 
       @doc("""
 A constant. Must be True and will be passed as a query parameter to
 nextOperationWithQueryParams
 """)
-      @query
+      @query("queryConstant")
       queryConstant: true;
     },
     ProductResult
@@ -94,8 +95,8 @@ duplicating the `filter` param in the url sent.
   duplicateParams is Azure.Core.Foundations.Operation<
     {
       @doc("OData filter options. Pass in 'foo'")
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
     },
     ProductResult
   >;
@@ -106,8 +107,8 @@ duplicating the `filter` param in the url sent.
   pageWithMaxPageSize is Azure.Core.Foundations.Operation<
     {
       @doc("Max page size query param. Don't send")
-      @query
-      $maxpagesize: "5";
+      @query("$maxpagesize")
+      $maxpagesize?: "5";
     },
     ProductResult
   >;
@@ -121,7 +122,7 @@ a ProductResult
   nextOperationWithQueryParams is Azure.Core.Foundations.Operation<
     {
       @doc("A constant. Must be True")
-      @query
+      @query("queryConstant")
       queryConstant: true;
     },
     ProductResult
@@ -132,18 +133,19 @@ a ProductResult
   @get
   getOdataMultiplePages is Azure.Core.Foundations.Operation<
     {
-      @header `client-request-id`: string;
+      @header
+      `client-request-id`?: string;
 
       @doc("Sets the maximum number of items to return in the response.")
       @header
-      maxresults: int32;
+      maxresults?: int32;
 
       @doc("""
 Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout: int32;
+      timeout?: int32;
     },
     OdataProductResult
   >;
@@ -153,11 +155,12 @@ seconds. The default is 30 seconds.
   @get
   getMultiplePagesWithOffset is Azure.Core.Foundations.Operation<
     {
-      @header `client-request-id`: string;
+      @header
+      `client-request-id`?: string;
 
       @doc("Sets the maximum number of items to return in the response.")
       @header
-      maxresults: int32;
+      maxresults?: int32;
 
       @doc("Offset of return value")
       @path
@@ -168,7 +171,7 @@ Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout: int32;
+      timeout?: int32;
     },
     ProductResult
   >;
@@ -223,7 +226,7 @@ eventually.
   getMultiplePagesFragmentNextLink is Azure.Core.Foundations.Operation<
     {
       @doc("Sets the api version to use.")
-      @query
+      @query("api_version")
       api_version: string;
 
       @doc("Sets the tenant to use.")
@@ -242,7 +245,7 @@ parameters grouped
   getMultiplePagesFragmentWithGroupingNextLink is Azure.Core.Foundations.Operation<
     {
       @doc("Sets the api version to use.")
-      @query
+      @query("api_version")
       api_version: string;
 
       @doc("Sets the tenant to use.")
@@ -257,18 +260,19 @@ parameters grouped
   @post
   GetMultiplePagesLRO is Azure.Core.Foundations.Operation<
     {
-      @header `client-request-id`: string;
+      @header
+      `client-request-id`?: string;
 
       @doc("Sets the maximum number of items to return in the response.")
       @header
-      maxresults: int32;
+      maxresults?: int32;
 
       @doc("""
 Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout: int32;
+      timeout?: int32;
     },
     ProductResult
   >;
@@ -296,7 +300,7 @@ version
   nextFragment is Azure.Core.Foundations.Operation<
     {
       @doc("Sets the api version to use.")
-      @query
+      @query("api_version")
       api_version: string;
 
       @doc("Sets the tenant to use.")
@@ -316,7 +320,7 @@ version
   nextFragmentWithGrouping is Azure.Core.Foundations.Operation<
     {
       @doc("Sets the api version to use.")
-      @query
+      @query("api_version")
       api_version: string;
 
       @doc("Sets the tenant to use.")

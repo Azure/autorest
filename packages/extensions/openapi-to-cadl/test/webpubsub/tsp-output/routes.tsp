@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureMessagingWebPubSubServiceClient;
+namespace AzureWebPubSubServiceRESTAPI;
 
 interface HealthApiOperations {
   @summary("Get service health status.")
@@ -16,6 +16,24 @@ interface HealthApiOperations {
 }
 
 interface WebPubSubOperations {
+  @summary("Add filtered connections to multiple groups.")
+  @doc("Add filtered connections to multiple groups.")
+  @route("/api/hubs/{hub}/:addToGroups")
+  @post
+  AddConnectionsToGroups is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Target hub name, which should start with alphabetic characters and only contain
+alpha-numeric characters or underscore.
+""")
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
+      @path
+      hub: string;
+      ...AddToGroupsRequest;
+    },
+    void
+  >;
+
   @summary("Close the connections in the hub.")
   @doc("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
@@ -26,16 +44,17 @@ interface WebPubSubOperations {
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Exclude these connectionIds when closing the connections in the hub.")
-      @query
-      excluded: string[];
+      @query("excluded")
+      excluded?: string[];
 
       @doc("The reason closing the client connection.")
-      @query
-      reason: string;
+      @query("reason")
+      reason?: string;
     },
     void
   >;
@@ -50,30 +69,49 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("User Id.")
-      @query
-      userId: string;
+      @query("userId")
+      userId?: string;
 
       @doc("Roles that the connection with the generated token will have.")
-      @query
-      role: string[];
+      @query("role")
+      role?: string[];
 
       @doc("The expire time of the generated token.")
-      @query
-      minutesToExpire: int32;
+      @query("minutesToExpire")
+      minutesToExpire?: int32;
 
       @doc("Groups that the connection will join when it connects.")
-      @query
-      group: string[];
+      @query("group")
+      group?: string[];
 
       @doc("Accept header")
       @header
-      Accept: "application/json, text/json";
+      accept: "application/json, text/json";
     },
     ClientTokenResponse
+  >;
+
+  @summary("Remove filtered connections from multiple groups.")
+  @doc("Remove filtered connections from multiple groups.")
+  @route("/api/hubs/{hub}/:removeFromGroups")
+  @post
+  RemoveConnectionsFromGroups is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Target hub name, which should start with alphabetic characters and only contain
+alpha-numeric characters or underscore.
+""")
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
+      @path
+      hub: string;
+      ...RemoveFromGroupsRequest;
+    },
+    void
   >;
 
   @summary("Broadcast content inside request body to all the connected client connections.")
@@ -86,27 +124,35 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Excluded connection Ids.")
-      @query
-      excluded: string[];
+      @query("excluded")
+      excluded?: string[];
 
       @doc("""
 Following OData filter syntax to filter out the subscribers receiving the
 messages.
 """)
-      @query
-      filter: string;
+      @query("filter")
+      filter?: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query("messageTtlSeconds")
+      messageTtlSeconds?: int32;
 
       @doc("Upload file type")
       @header
-      `Content-Type`: ContentType;
-
-      @doc("The payload body.")
-      @body
-      message: bytes;
+      `content-type`: ContentType;
+      ...bytes;
     },
     void
   >;
@@ -121,16 +167,18 @@ messages.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
 
       @doc("The reason closing the client connection.")
-      @query
-      reason: string;
+      @query("reason")
+      reason?: string;
     },
     void
   >;
@@ -145,10 +193,12 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("The connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
     },
@@ -165,20 +215,29 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("The connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
 
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query("messageTtlSeconds")
+      messageTtlSeconds?: int32;
+
       @doc("Upload file type")
       @header
-      `Content-Type`: ContentType;
-
-      @doc("The payload body.")
-      @body
-      message: bytes;
+      `content-type`: ContentType;
+      ...bytes;
     },
     void
   >;
@@ -193,10 +252,12 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
     },
@@ -213,10 +274,14 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
     },
@@ -233,20 +298,24 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Exclude these connectionIds when closing the connections in the group.")
-      @query
-      excluded: string[];
+      @query("excluded")
+      excluded?: string[];
 
       @doc("The reason closing the client connection.")
-      @query
-      reason: string;
+      @query("reason")
+      reason?: string;
     },
     void
   >;
@@ -261,31 +330,42 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Excluded connection Ids")
-      @query
-      excluded: string[];
+      @query("excluded")
+      excluded?: string[];
 
       @doc("""
 Following OData filter syntax to filter out the subscribers receiving the
 messages.
 """)
-      @query
-      filter: string;
+      @query("filter")
+      filter?: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query("messageTtlSeconds")
+      messageTtlSeconds?: int32;
 
       @doc("Upload file type")
       @header
-      `Content-Type`: ContentType;
-
-      @doc("The payload body.")
-      @body
-      message: bytes;
+      `content-type`: ContentType;
+      ...bytes;
     },
     void
   >;
@@ -300,14 +380,19 @@ messages.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
     },
@@ -324,14 +409,19 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Target connection Id")
+      @minLength(1)
       @path
       connectionId: string;
     },
@@ -348,6 +438,7 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
@@ -356,6 +447,7 @@ alpha-numeric characters or underscore.
       permission: WebPubSubPermission;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
 
@@ -364,8 +456,8 @@ The meaning of the target depends on the specific permission. For
 joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
 the group name.
 """)
-      @query
-      targetName: string;
+      @query("targetName")
+      targetName?: string;
     },
     void
   >;
@@ -380,6 +472,7 @@ the group name.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
@@ -388,6 +481,7 @@ alpha-numeric characters or underscore.
       permission: WebPubSubPermission;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
 
@@ -396,8 +490,8 @@ The meaning of the target depends on the specific permission. For
 joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
 the group name.
 """)
-      @query
-      targetName: string;
+      @query("targetName")
+      targetName?: string;
     },
     void
   >;
@@ -412,6 +506,7 @@ the group name.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
@@ -420,6 +515,7 @@ alpha-numeric characters or underscore.
       permission: WebPubSubPermission;
 
       @doc("Target connection Id.")
+      @minLength(1)
       @path
       connectionId: string;
 
@@ -428,8 +524,8 @@ The meaning of the target depends on the specific permission. For
 joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
 the group name.
 """)
-      @query
-      targetName: string;
+      @query("targetName")
+      targetName?: string;
     },
     void
   >;
@@ -444,10 +540,12 @@ the group name.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target user Id.")
+      @minLength(1)
       @path
       userId: string;
     },
@@ -464,20 +562,22 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("The user Id.")
+      @minLength(1)
       @path
       userId: string;
 
       @doc("Exclude these connectionIds when closing the connections for the user.")
-      @query
-      excluded: string[];
+      @query("excluded")
+      excluded?: string[];
 
       @doc("The reason closing the client connection.")
-      @query
-      reason: string;
+      @query("reason")
+      reason?: string;
     },
     void
   >;
@@ -492,10 +592,12 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("The user Id.")
+      @minLength(1)
       @path
       userId: string;
 
@@ -503,16 +605,23 @@ alpha-numeric characters or underscore.
 Following OData filter syntax to filter out the subscribers receiving the
 messages.
 """)
-      @query
-      filter: string;
+      @query("filter")
+      filter?: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query("messageTtlSeconds")
+      messageTtlSeconds?: int32;
 
       @doc("Upload file type")
       @header
-      `Content-Type`: ContentType;
-
-      @doc("The payload body.")
-      @body
-      message: bytes;
+      `content-type`: ContentType;
+      ...bytes;
     },
     void
   >;
@@ -527,10 +636,12 @@ messages.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target user Id.")
+      @minLength(1)
       @path
       userId: string;
     },
@@ -547,14 +658,19 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Target user Id.")
+      @minLength(1)
       @path
       userId: string;
     },
@@ -571,14 +687,19 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
+      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
       @doc("Target group name, which length should be greater than 0 and less than 1025.")
+      @maxLength(1024)
+      @minLength(1)
+      @pattern("^(?!\\s+$).+$")
       @path
       group: string;
 
       @doc("Target user Id.")
+      @minLength(1)
       @path
       userId: string;
     },

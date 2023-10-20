@@ -24,26 +24,26 @@ API.
 The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
-        @query
-        maxresults: int32;
+        @query("maxresults")
+        maxResults?: int32;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -51,7 +51,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -72,19 +72,19 @@ API.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -92,7 +92,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -120,48 +120,48 @@ The earliest time from which to include metrics. This must be at least two and
 a half hours before the current time. If not specified this defaults to the
 start time of the last aggregation interval currently available.
 """)
-        @query
-        starttime: utcDateTime;
+        @query("starttime")
+        startTime?: utcDateTime;
 
         @doc("""
 The latest time from which to include metrics. This must be at least two hours
 before the current time. If not specified this defaults to the end time of the
 last aggregation interval currently available.
 """)
-        @query
-        endtime: utcDateTime;
+        @query("endtime")
+        endTime?: utcDateTime;
 
         @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
 """)
-        @query
-        $filter: string;
+        @query("$filter")
+        $filter?: string;
 
         @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 results will be returned.
 """)
-        @query
-        maxresults: int32;
+        @query("maxresults")
+        maxResults?: int32;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -169,7 +169,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -189,19 +189,19 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -209,7 +209,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     PoolStatistics
   >;
@@ -228,19 +228,19 @@ to Microsoft Support engineers.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -248,11 +248,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Pool to be added.")
-      @body
-      pool: BatchPool;
+      `ocp-date`?: utcDateTime;
+      ...BatchPool;
     },
     void
   >;
@@ -267,41 +264,41 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Pools
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -309,7 +306,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchPoolListResult
   >;
@@ -341,19 +338,19 @@ error code PoolBeingDeleted.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -361,7 +358,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -369,7 +366,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -377,7 +374,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -385,7 +382,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -393,7 +390,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -411,19 +408,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -431,7 +428,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -439,7 +436,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -447,7 +444,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -455,7 +452,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -463,7 +460,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -478,30 +475,30 @@ not been modified since the specified time.
       poolId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -509,7 +506,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -517,7 +514,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -525,7 +522,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -533,7 +530,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -541,7 +538,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     BatchPool
   >;
@@ -564,19 +561,19 @@ a StartTask element, then the Pool keeps the existing StartTask.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -584,7 +581,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -592,7 +589,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -600,7 +597,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -608,7 +605,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -616,11 +613,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      poolUpdate: BatchPoolUpdate;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchPoolUpdate;
     },
     void
   >;
@@ -639,19 +633,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -659,7 +653,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -685,19 +679,19 @@ more than once every 30 seconds.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -705,7 +699,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -713,7 +707,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -721,7 +715,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -729,7 +723,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -737,11 +731,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchPoolEnableAutoScaleParameters;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchPoolEnableAutoScaleParameters;
     },
     void
   >;
@@ -764,19 +755,19 @@ scaling enabled in order to evaluate a formula.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -784,11 +775,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchPoolEvaluateAutoScaleParameters;
+      `ocp-date`?: utcDateTime;
+      ...BatchPoolEvaluateAutoScaleParameters;
     },
     AutoScaleRun
   >;
@@ -815,19 +803,19 @@ Nodes, use the Pool remove Compute Nodes API instead.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -835,7 +823,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -843,7 +831,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -851,7 +839,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -859,7 +847,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -867,11 +855,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchPoolResizeParameters;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchPoolResizeParameters;
     },
     void
   >;
@@ -898,19 +883,19 @@ be used to halt the initial sizing of the Pool when it is created.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -918,7 +903,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -926,7 +911,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -934,7 +919,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -942,7 +927,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -950,7 +935,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -973,19 +958,19 @@ with this request, then the Batch service will remove the existing StartTask.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -993,11 +978,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      poolUpdatePropertiesParameter: BatchPool;
+      `ocp-date`?: utcDateTime;
+      ...BatchPool;
     },
     void
   >;
@@ -1020,19 +1002,19 @@ Each request may remove up to 100 nodes.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1040,7 +1022,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1048,7 +1030,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1056,7 +1038,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1064,7 +1046,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1072,11 +1054,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeRemoveParameters;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...NodeRemoveParameters;
     },
     void
   >;
@@ -1093,33 +1072,33 @@ interface AccountOperations {
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
 """)
-        @query
-        $filter: string;
+        @query("$filter")
+        $filter?: string;
 
         @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 results will be returned.
 """)
-        @query
-        maxresults: int32;
+        @query("maxresults")
+        maxResults?: int32;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1127,7 +1106,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -1145,30 +1124,30 @@ use a list query.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch.
 """)
-        @query
-        $filter: string;
+        @query("$filter")
+        $filter?: string;
 
         @doc("The maximum number of items to return in the response.")
-        @query
-        maxresults: int32;
+        @query("maxresults")
+        maxResults?: int32;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1176,7 +1155,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -1198,19 +1177,19 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1218,7 +1197,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     JobStatistics
   >;
@@ -1246,19 +1225,19 @@ that the Job is being deleted.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1266,7 +1245,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1274,7 +1253,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1282,7 +1261,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1290,7 +1269,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1298,7 +1277,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -1314,30 +1293,30 @@ not been modified since the specified time.
       jobId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1345,7 +1324,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1353,7 +1332,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1361,7 +1340,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1369,7 +1348,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1377,7 +1356,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     BatchJob
   >;
@@ -1400,19 +1379,19 @@ element, then the Job keeps the existing constraints.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1420,7 +1399,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1428,7 +1407,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1436,7 +1415,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1444,7 +1423,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1452,11 +1431,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      jobUpdate: BatchJobUpdate;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJobUpdate;
     },
     void
   >;
@@ -1479,19 +1455,19 @@ with this request, then the Batch service will remove the existing constraints.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1499,7 +1475,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1507,7 +1483,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1515,7 +1491,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1523,7 +1499,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1531,11 +1507,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      job: BatchJob;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJob;
     },
     void
   >;
@@ -1563,19 +1536,19 @@ the request fails with status code 409.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1583,7 +1556,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1591,7 +1564,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1599,7 +1572,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1607,7 +1580,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1615,11 +1588,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchJobDisableParameters;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJobDisableParameters;
     },
     void
   >;
@@ -1645,19 +1615,19 @@ than 180 days ago, those Tasks will not run.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1665,7 +1635,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1673,7 +1643,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1681,7 +1651,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1689,7 +1659,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1697,7 +1667,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -1723,19 +1693,19 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1743,7 +1713,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1751,7 +1721,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -1759,7 +1729,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1767,7 +1737,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -1775,11 +1745,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchJobTerminateParameters;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJobTerminateParameters;
     },
     void
   >;
@@ -1804,19 +1771,19 @@ engineers.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1824,11 +1791,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Job to be added.")
-      @body
-      job: BatchJob;
+      `ocp-date`?: utcDateTime;
+      ...BatchJob;
     },
     void
   >;
@@ -1843,41 +1807,41 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Jobs
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1885,7 +1849,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchJobListResult
   >;
@@ -1904,41 +1868,41 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Jobs
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -1946,7 +1910,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchJobListResult
   >;
@@ -1975,37 +1939,37 @@ JobPreparationTaskNotSpecified.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Tasks
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2013,7 +1977,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchJobListPreparationAndReleaseTaskStatusResult
   >;
@@ -2037,19 +2001,19 @@ up to date. If you need exact task counts, use a list query.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2057,7 +2021,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     TaskCountsResult
   >;
@@ -2074,19 +2038,19 @@ interface CertificateOperations {
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2094,11 +2058,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Certificate to be added.")
-      @body
-      certificate: Certificate;
+      `ocp-date`?: utcDateTime;
+      ...Certificate;
     },
     void
   >;
@@ -2113,37 +2074,37 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 Certificates can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2151,7 +2112,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     CertificateListResult
   >;
@@ -2182,19 +2143,19 @@ then you can try again to delete the Certificate.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2202,7 +2163,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -2235,19 +2196,19 @@ active if you decide that you want to continue using the Certificate.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2255,7 +2216,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -2274,26 +2235,26 @@ directly.
       thumbprint: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2301,7 +2262,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     Certificate
   >;
@@ -2332,26 +2293,26 @@ a directory instead of a file, you can set recursive to true to delete the
 directory and all of the files and subdirectories in it. If recursive is false
 then the directory must be empty or deletion will fail.
 """)
-      @query
-      recursive: boolean;
+      @query("recursive")
+      recursive?: boolean;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2359,7 +2320,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -2385,19 +2346,19 @@ directly.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2405,14 +2366,14 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
       @header
-      `ocp-range`: string;
+      `ocp-range`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2420,7 +2381,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2428,11 +2389,11 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, application/octet-stream";
+      accept: "application/json, application/octet-stream";
     },
     void
   >;
@@ -2458,19 +2419,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2478,7 +2439,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2486,7 +2447,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2494,7 +2455,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -2523,26 +2484,26 @@ a directory instead of a file, you can set recursive to true to delete the
 directory and all of the files and subdirectories in it. If recursive is false
 then the directory must be empty or deletion will fail.
 """)
-      @query
-      recursive: boolean;
+      @query("recursive")
+      recursive?: boolean;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2550,7 +2511,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -2576,19 +2537,19 @@ directly.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2596,14 +2557,14 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
       @header
-      `ocp-range`: string;
+      `ocp-range`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2611,7 +2572,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2619,11 +2580,11 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, application/octet-stream";
+      accept: "application/json, application/octet-stream";
     },
     void
   >;
@@ -2649,19 +2610,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2669,7 +2630,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2677,7 +2638,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2685,7 +2646,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -2708,40 +2669,40 @@ not been modified since the specified time.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("""
 Whether to list children of the Task directory. This parameter can be used in
 combination with the filter parameter to list specific type of files.
 """)
-      @query
-      recursive: boolean;
+      @query("recursive")
+      recursive?: boolean;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 files
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2749,7 +2710,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     NodeFileListResult
   >;
@@ -2772,37 +2733,37 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("Whether to list children of a directory.")
-      @query
-      recursive: boolean;
+      @query("recursive")
+      recursive?: boolean;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 files
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2810,7 +2771,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     NodeFileListResult
   >;
@@ -2831,19 +2792,19 @@ interface JobScheduleOperations {
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2851,7 +2812,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2859,7 +2820,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2867,7 +2828,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2875,7 +2836,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2883,7 +2844,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -2908,19 +2869,19 @@ though they are still counted towards Account lifetime statistics.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2928,7 +2889,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2936,7 +2897,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2944,7 +2905,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2952,7 +2913,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2960,7 +2921,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -2975,30 +2936,30 @@ not been modified since the specified time.
       jobScheduleId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3006,7 +2967,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3014,7 +2975,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3022,7 +2983,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3030,7 +2991,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3038,7 +2999,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     BatchJobSchedule
   >;
@@ -3063,19 +3024,19 @@ running Jobs are unaffected.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3083,7 +3044,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3091,7 +3052,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3099,7 +3060,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3107,7 +3068,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3115,11 +3076,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      jobScheduleUpdate: BatchJobScheduleUpdate;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJobScheduleUpdate;
     },
     void
   >;
@@ -3144,19 +3102,19 @@ running Jobs are unaffected.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3164,7 +3122,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3172,7 +3130,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3180,7 +3138,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3188,7 +3146,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3196,11 +3154,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      jobSchedule: BatchJobSchedule;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchJobSchedule;
     },
     void
   >;
@@ -3219,19 +3174,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3239,7 +3194,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3247,7 +3202,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3255,7 +3210,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3263,7 +3218,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3271,7 +3226,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -3290,19 +3245,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3310,7 +3265,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3318,7 +3273,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3326,7 +3281,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3334,7 +3289,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3342,7 +3297,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -3361,19 +3316,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3381,7 +3336,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3389,7 +3344,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3397,7 +3352,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3405,7 +3360,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3413,7 +3368,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -3428,19 +3383,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3448,11 +3403,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Job Schedule to be added.")
-      @body
-      jobSchedule: BatchJobSchedule;
+      `ocp-date`?: utcDateTime;
+      ...BatchJobSchedule;
     },
     void
   >;
@@ -3467,41 +3419,41 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Job
 Schedules can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3509,7 +3461,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchJobScheduleListResult
   >;
@@ -3534,19 +3486,19 @@ the Batch service and left in whatever state it was in at that time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3554,11 +3506,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Task to be added.")
-      @body
-      task: BatchTask;
+      `ocp-date`?: utcDateTime;
+      ...BatchTask;
     },
     void
   >;
@@ -3581,41 +3530,41 @@ information about subtasks.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000 Tasks
 can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3623,7 +3572,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchTaskListResult
   >;
@@ -3657,19 +3606,19 @@ service and left in whatever state it was in at that time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3677,11 +3626,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The Tasks to be added.")
-      @body
-      taskCollection: BatchTaskCollection;
+      `ocp-date`?: utcDateTime;
+      ...BatchTaskCollection;
     },
     TaskAddCollectionResult
   >;
@@ -3710,19 +3656,19 @@ background.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3730,7 +3676,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3738,7 +3684,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3746,7 +3692,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3754,7 +3700,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3762,7 +3708,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -3786,30 +3732,30 @@ information about subtasks.
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("An OData $expand clause.")
-      @query
-      $expand: string;
+      @query("$expand")
+      $expand?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3817,7 +3763,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3825,7 +3771,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3833,7 +3779,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3841,7 +3787,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3849,7 +3795,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     BatchTask
   >;
@@ -3871,19 +3817,19 @@ not been modified since the specified time.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3891,7 +3837,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3899,7 +3845,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -3907,7 +3853,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3915,7 +3861,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -3923,11 +3869,8 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      task: BatchTask;
+      `If-Unmodified-Since`?: utcDateTime;
+      ...BatchTask;
     },
     void
   >;
@@ -3950,26 +3893,26 @@ Task.
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -3977,7 +3920,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     BatchTaskListSubtasksResult
   >;
@@ -4004,19 +3947,19 @@ primary task; subtasks are then terminated asynchronously in the background.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4024,7 +3967,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4032,7 +3975,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4040,7 +3983,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4048,7 +3991,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4056,7 +3999,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -4090,19 +4033,19 @@ will fail if the Job has completed (or is terminating or deleting).
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4110,7 +4053,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4118,7 +4061,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
       @header
-      `If-Match`: string;
+      `If-Match`?: string;
 
       @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -4126,7 +4069,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
       @header
-      `If-None-Match`: string;
+      `If-None-Match`?: string;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4134,7 +4077,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
       @header
-      `If-Modified-Since`: utcDateTime;
+      `If-Modified-Since`?: utcDateTime;
 
       @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -4142,7 +4085,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
       @header
-      `If-Unmodified-Since`: utcDateTime;
+      `If-Unmodified-Since`?: utcDateTime;
     },
     void
   >;
@@ -4170,19 +4113,19 @@ running state.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4190,11 +4133,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The user Account to be created.")
-      @body
-      user: ComputeNodeUser;
+      `ocp-date`?: utcDateTime;
+      ...ComputeNodeUser;
     },
     void
   >;
@@ -4224,19 +4164,19 @@ running state.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4244,7 +4184,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -4279,19 +4219,19 @@ Account on a Compute Node only when it is in the idle or running state.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4299,11 +4239,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeUpdateUserParameters;
+      `ocp-date`?: utcDateTime;
+      ...NodeUpdateUserParameters;
     },
     void
   >;
@@ -4323,26 +4260,26 @@ directly.
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4350,7 +4287,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     ComputeNode
   >;
@@ -4373,19 +4310,19 @@ directly.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4393,11 +4330,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeRebootParameters;
+      `ocp-date`?: utcDateTime;
+      ...NodeRebootParameters;
     },
     void
   >;
@@ -4424,19 +4358,19 @@ cloud service configuration property.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4444,11 +4378,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeReimageParameters;
+      `ocp-date`?: utcDateTime;
+      ...NodeReimageParameters;
     },
     void
   >;
@@ -4474,19 +4405,19 @@ scheduling state is enabled.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4494,11 +4425,8 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
-
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeDisableSchedulingParameters;
+      `ocp-date`?: utcDateTime;
+      ...NodeDisableSchedulingParameters;
     },
     void
   >;
@@ -4524,19 +4452,19 @@ state is disabled
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4544,7 +4472,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     void
   >;
@@ -4573,19 +4501,19 @@ API.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4593,7 +4521,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     ComputeNodeGetRemoteLoginSettingsResult
   >;
@@ -4624,19 +4552,19 @@ Protocol file.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4644,11 +4572,11 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
 
       @doc("Accept header")
       @header
-      Accept: "application/json, application/octet-stream";
+      accept: "application/json, application/octet-stream";
     },
     void
   >;
@@ -4671,19 +4599,19 @@ support to aid in debugging issues with the Batch service.
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-        @query
-        timeout: int32;
+        @query("timeout")
+        timeout?: int32;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
         @header
-        `client-request-id`: string;
+        `client-request-id`?: string;
 
         @doc("Whether the server should return the client-request-id in the response.")
         @header
-        `return-client-request-id`: boolean;
+        `return-client-request-id`?: boolean;
 
         @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4691,7 +4619,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
         @header
-        `ocp-date`: utcDateTime;
+        `ocp-date`?: utcDateTime;
       };
     }
   >;
@@ -4710,37 +4638,37 @@ directly.
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
 """)
-      @query
-      $filter: string;
+      @query("$filter")
+      $filter?: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 Compute Nodes can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4748,7 +4676,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     ComputeNodeListResult
   >;
@@ -4777,26 +4705,26 @@ about.
       extensionName: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4804,7 +4732,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     NodeVMExtension
   >;
@@ -4824,33 +4752,33 @@ directly.
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query
-      $select: string;
+      @query("$select")
+      $select?: string;
 
       @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 Compute Nodes can be returned.
 """)
-      @query
-      maxresults: int32;
+      @query("maxresults")
+      maxResults?: int32;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
-      @query
-      timeout: int32;
+      @query("timeout")
+      timeout?: int32;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
       @header
-      `client-request-id`: string;
+      `client-request-id`?: string;
 
       @doc("Whether the server should return the client-request-id in the response.")
       @header
-      `return-client-request-id`: boolean;
+      `return-client-request-id`?: boolean;
 
       @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -4858,7 +4786,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
       @header
-      `ocp-date`: utcDateTime;
+      `ocp-date`?: utcDateTime;
     },
     NodeVMExtensionList
   >;
