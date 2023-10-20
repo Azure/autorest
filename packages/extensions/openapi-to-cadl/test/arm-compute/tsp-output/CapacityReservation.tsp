@@ -1,0 +1,51 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./CapacityReservationGroup.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Compute;
+@doc("Specifies information about the capacity reservation.")
+@parentResource(CapacityReservationGroup)
+model CapacityReservation is TrackedResource<CapacityReservationProperties> {
+  @doc("The name of the capacity reservation.")
+  @path
+  @key("capacityReservationName")
+  @segment("capacityReservations")
+  name: string;
+}
+
+@armResourceOperations
+interface CapacityReservations {
+  @doc("The operation that retrieves information about the capacity reservation.")
+  get is ArmResourceRead<CapacityReservation>;
+  @doc("""
+The operation to create or update a capacity reservation. Please note some
+properties can be set only during capacity reservation creation. Please refer
+to https://aka.ms/CapacityReservation for more details.
+""")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<CapacityReservation>;
+  @doc("The operation to update a capacity reservation.")
+  update is ArmResourcePatchAsync<
+    CapacityReservation,
+    CapacityReservationProperties
+  >;
+  @doc("""
+The operation to delete a capacity reservation. This operation is allowed only
+when all the associated resources are disassociated from the capacity
+reservation. Please refer to https://aka.ms/CapacityReservation for more
+details.
+""")
+  delete is ArmResourceDeleteAsync<CapacityReservation>;
+  @doc("""
+Lists all of the capacity reservations in the specified capacity reservation
+group. Use the nextLink property in the response to get the next page of
+capacity reservations.
+""")
+  listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
+}

@@ -1,19 +1,62 @@
 import "@typespec/rest";
-import "@typespec/http";
-import "./routes.tsp";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
+import "./VirtualMachineScaleSet.tsp";
+import "./VirtualMachineScaleSetExtension.tsp";
+import "./RollingUpgradeStatusInfo.tsp";
+import "./VirtualMachineScaleSetVmExtension.tsp";
+import "./VirtualMachineScaleSetVm.tsp";
+import "./VirtualMachineExtension.tsp";
+import "./VirtualMachine.tsp";
+import "./VirtualMachineExtensionImage.tsp";
+import "./AvailabilitySet.tsp";
+import "./ProximityPlacementGroup.tsp";
+import "./DedicatedHostGroup.tsp";
+import "./DedicatedHost.tsp";
+import "./SshPublicKeyResource.tsp";
+import "./Image.tsp";
+import "./RestorePointGroup.tsp";
+import "./RestorePoint.tsp";
+import "./CapacityReservationGroup.tsp";
+import "./CapacityReservation.tsp";
+import "./VirtualMachineRunCommand.tsp";
+import "./VirtualMachineScaleSetVmRunCommand.tsp";
+import "./Disk.tsp";
+import "./DiskAccess.tsp";
+import "./ComputePrivateEndpointConnection.tsp";
+import "./DiskEncryptionSet.tsp";
+import "./DiskRestorePoint.tsp";
+import "./Snapshot.tsp";
+import "./Gallery.tsp";
+import "./GalleryImage.tsp";
+import "./GalleryImageVersion.tsp";
+import "./GalleryApplication.tsp";
+import "./GalleryApplicationVersion.tsp";
+import "./SharedGallery.tsp";
+import "./SharedGalleryImage.tsp";
+import "./SharedGalleryImageVersion.tsp";
+import "./CommunityGallery.tsp";
+import "./CommunityGalleryImage.tsp";
+import "./CommunityGalleryImageVersion.tsp";
+import "./RoleInstance.tsp";
+import "./CloudServiceRole.tsp";
+import "./CloudService.tsp";
+import "./OSVersion.tsp";
+import "./OSFamily.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+@armProviderNamespace
 @service({
-  title: "Microsoft Azure Compute Management",
-  version: "2022-08-01",
+  title: "Azure Compute resource management API.",
 })
-@server(
-  "{$host}",
-  "Compute Client",
-  {
-    $host: string,
-  }
-)
 @doc("Compute Client")
-namespace Compute;
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+namespace Azure.ResourceManager.Compute;

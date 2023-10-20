@@ -1,0 +1,48 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DedicatedHostGroup.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Compute;
+@doc("Specifies information about the Dedicated host.")
+@parentResource(DedicatedHostGroup)
+model DedicatedHost is TrackedResource<DedicatedHostProperties> {
+  @doc("The name of the dedicated host.")
+  @path
+  @key("hostName")
+  @segment("hosts")
+  name: string;
+}
+
+@armResourceOperations
+interface DedicatedHosts {
+  @doc("Retrieves information about a dedicated host.")
+  get is ArmResourceRead<DedicatedHost>;
+  @doc("Create or update a dedicated host .")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DedicatedHost>;
+  @doc("Update a dedicated host .")
+  update is ArmResourcePatchAsync<DedicatedHost, DedicatedHostProperties>;
+  @doc("Delete a dedicated host.")
+  delete is ArmResourceDeleteAsync<DedicatedHost>;
+  @doc("""
+Lists all of the dedicated hosts in the specified dedicated host group. Use the
+nextLink property in the response to get the next page of dedicated hosts.
+""")
+  listByHostGroup is ArmResourceListByParent<DedicatedHost>;
+  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
+  @doc("""
+Restart the dedicated host. The operation will complete successfully once the
+dedicated host has restarted and is running. To determine the health of VMs
+deployed on the dedicated host after the restart check the Resource Health
+Center in the Azure Portal. Please refer to
+https://docs.microsoft.com/azure/service-health/resource-health-overview for
+more details.
+""")
+  restart is ArmResourceActionAsync<DedicatedHost, {}, {}>;
+}
