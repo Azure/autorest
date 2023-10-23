@@ -170,7 +170,7 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
   | "ArmResourceRead"
-  | "ArmResourceCreateOrUpdateSync"
+  | "ArmResourceCreateOrReplaceSync"
   | "ArmResourceCreateOrUpdateAsync"
   | "ArmResourcePatchSync"
   | "ArmResourcePatchAsync"

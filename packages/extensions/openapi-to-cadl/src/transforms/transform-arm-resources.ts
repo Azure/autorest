@@ -92,12 +92,11 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
 
   // create operation
   if (resourceMetadata.CreateOperations.length) {
-    // TODO: CreateOrUpdate / CreateOrReplace
     // TODO: TBaseParameters
     const operation = resourceMetadata.CreateOperations[0];
     tspOperations.push({
       doc: operation.Description,
-      kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrUpdateSync",
+      kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
       name: getOperationName(operation.OperationID),
       templateParameters: [resourceMetadata.Name],
     });
