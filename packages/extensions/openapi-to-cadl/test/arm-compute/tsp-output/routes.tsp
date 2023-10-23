@@ -692,7 +692,7 @@ The subscription ID forms part of the URI for every service call.
       @header
       accept: "application/json, text/json";
     },
-    void
+    VirtualMachineRunCommand
   >;
 
   @doc("The operation to update the VMSS VM run command.")
@@ -840,7 +840,7 @@ The subscription ID forms part of the URI for every service call.
       @header
       accept: "application/json, text/json";
     },
-    void
+    VirtualMachineRunCommandsListResult
   >;
 }
 

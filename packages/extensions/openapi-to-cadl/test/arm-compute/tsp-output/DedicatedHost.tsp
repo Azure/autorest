@@ -45,4 +45,10 @@ https://docs.microsoft.com/azure/service-health/resource-health-overview for
 more details.
 """)
   restart is ArmResourceActionAsync<DedicatedHost, {}, {}>;
+  @doc("""
+Lists all available dedicated host sizes to which the specified dedicated host
+can be resized. NOTE: The dedicated host sizes provided can be used to only
+scale up the existing dedicated host.
+""")
+  ListAvailableSizes is Azure.Core.ResourceList<string>;
 }

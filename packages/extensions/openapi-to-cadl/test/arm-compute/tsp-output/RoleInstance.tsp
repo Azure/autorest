@@ -62,4 +62,64 @@ resources that are used by them. If you do not want to initialize storage
 resources, you can use Reimage Role Instance.
 """)
   rebuild is ArmResourceActionAsync<RoleInstance, {}, {}>;
+  @doc("""
+Retrieves information about the run-time state of a role instance in a cloud
+service.
+""")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
+  @get
+  GetInstanceView is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the role instance.")
+      @path
+      roleInstanceName: string;
+
+      @doc("Name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("Name of the cloud service.")
+      @path
+      cloudServiceName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    RoleInstanceInstanceView
+  >;
+
+  @doc("Gets a remote desktop file for a role instance in a cloud service.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile")
+  @get
+  GetRemoteDesktopFile is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the role instance.")
+      @path
+      roleInstanceName: string;
+
+      @doc("Name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("Name of the cloud service.")
+      @path
+      cloudServiceName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+
+      @doc("Accept header")
+      @header
+      accept: "application/x-rdp";
+    },
+    void
+  >;
 }

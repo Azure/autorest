@@ -333,10 +333,40 @@ model ProductProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the Product.")
+model ProductUpdateProperties {
+  @doc("Description of the product")
+  description?: string;
+}
+
+@doc("The updatable properties of the DeviceGroup.")
+model DeviceGroupUpdateProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+}
+
 @doc("Request to the action call to bulk claim devices.")
 model ClaimDevicesRequest {
   @doc("Device identifiers of the devices to be claimed.")
   deviceIdentifiers: string[];
+}
+
+@doc("The updatable properties of the Device.")
+model DeviceUpdateProperties {
+  @doc("Device group id")
+  deviceGroupId?: string;
 }
 
 @doc("Request of the action to create a signed device capability image")

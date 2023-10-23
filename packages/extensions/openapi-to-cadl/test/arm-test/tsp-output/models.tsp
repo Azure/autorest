@@ -51,6 +51,18 @@ model EmployeeProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the Employee.")
+model EmployeeUpdateProperties {
+  @doc("Age of employee")
+  age?: int32;
+
+  @doc("City of employee")
+  city?: string;
+
+  @doc("Profile of employee")
+  profile?: bytes;
+}
+
 @doc("Enroll properties")
 model EnrollProperties {
   @doc("Country of employee")

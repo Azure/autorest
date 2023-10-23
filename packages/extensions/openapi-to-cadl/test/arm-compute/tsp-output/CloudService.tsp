@@ -69,4 +69,84 @@ Role Instances.
   rebuild is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
   @doc("Deletes role instances in a cloud service.")
   deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
+  @doc("Gets the status of a cloud service.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")
+  @get
+  GetInstanceView is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("Name of the cloud service.")
+      @path
+      cloudServiceName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    CloudServiceInstanceView
+  >;
+
+  @doc("""
+Gets the specified update domain of a cloud service. Use nextLink property in
+the response to get the next page of update domains. Do this till nextLink is
+null to fetch all the update domains.
+""")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
+  @get
+  GetUpdateDomain is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("Name of the cloud service.")
+      @path
+      cloudServiceName: string;
+
+      @doc("""
+Specifies an integer value that identifies the update domain. Update domains
+are identified with a zero-based index: the first update domain has an ID of 0,
+the second has an ID of 1, and so on.
+""")
+      @path
+      updateDomain: int32;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    UpdateDomain
+  >;
+
+  @doc("Gets a list of all update domains in a cloud service.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
+  @get
+  ListUpdateDomains is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("Name of the cloud service.")
+      @path
+      cloudServiceName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    UpdateDomainListResult
+  >;
 }

@@ -149,4 +149,30 @@ set.
     RunCommandInput,
     RunCommandResult
   >;
+  @doc("Gets the status of a virtual machine from a VM scale set.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
+  @get
+  GetInstanceView is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("The instance ID of the virtual machine.")
+      @path
+      instanceId: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineScaleSetVMInstanceView
+  >;
 }

@@ -43,4 +43,29 @@ interface AvailabilitySets {
   list is ArmResourceListByParent<AvailabilitySet>;
   @doc("Lists all availability sets in a subscription.")
   listBySubscription is ArmListBySubscription<AvailabilitySet>;
+  @doc("""
+Lists all available virtual machine sizes that can be used to create a new
+virtual machine in an existing availability set.
+""")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")
+  @get
+  ListAvailableSizes is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the availability set.")
+      @path
+      availabilitySetName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineSizeListResult
+  >;
 }

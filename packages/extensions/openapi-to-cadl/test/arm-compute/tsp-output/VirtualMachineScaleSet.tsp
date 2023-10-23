@@ -226,4 +226,75 @@ already running the latest extension versions are not affected.
     {},
     {}
   >;
+  @doc("Gets the status of a VM scale set instance.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
+  @get
+  GetInstanceView is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineScaleSetInstanceView
+  >;
+
+  @doc("""
+Gets a list of SKUs available for your VM scale set, including the minimum and
+maximum VM instances allowed for each SKU.
+""")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
+  @get
+  ListSkus is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineScaleSetListSkusResult
+  >;
+
+  @doc("Gets list of OS upgrades on a VM scale set instance.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
+  @get
+  GetOSUpgradeHistory is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineScaleSetListOSUpgradeHistory
+  >;
 }

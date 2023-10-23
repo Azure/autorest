@@ -192,4 +192,52 @@ expiration duration of 120 minutes.
     RunCommandInput,
     RunCommandResult
   >;
+  @doc("Retrieves information about the run-time state of a virtual machine.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
+  @get
+  InstanceView is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the virtual machine.")
+      @path
+      vmName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineInstanceView
+  >;
+
+  @doc("""
+Lists all available virtual machine sizes to which the specified virtual
+machine can be resized.
+""")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
+  @get
+  ListAvailableSizes is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the virtual machine.")
+      @path
+      vmName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineSizeListResult
+  >;
 }

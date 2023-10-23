@@ -36,4 +36,30 @@ interface DiskAccesses {
   listByResourceGroup is ArmResourceListByParent<DiskAccess>;
   @doc("Lists all the disk access resources under a subscription.")
   list is ArmListBySubscription<DiskAccess>;
+  @doc("Gets the private link resources possible under disk access resource")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
+  @get
+  GetPrivateLinkResources is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("""
+The name of the disk access resource that is being created. The name can't be
+changed after the disk encryption set is created. Supported characters for the
+name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+""")
+      @path
+      diskAccessName: string;
+    },
+    PrivateLinkResourceListResult
+  >;
 }
