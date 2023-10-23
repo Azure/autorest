@@ -189,7 +189,6 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
-  resultSchemaName?: string;
 }
 
 export type MSIType = "ManagedServiceIdentity" | "ManagedSystemAssignedIdentity";
@@ -197,6 +196,7 @@ export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;
-  operations: TspArmResourceOperation[];
+  resourceOperations: TspArmResourceOperation[];
+  normalOperations: CadlOperation[];
   msiType?: MSIType;
 }

@@ -72,7 +72,7 @@ export function transformOperation(operation: Operation, codeModel: CodeModel): 
   return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel));
 }
 
-function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel): CadlOperation {
+export function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel): CadlOperation {
   const { language, responses, requests } = operation;
   const name = language.default.name;
   const doc = language.default.description;

@@ -2,7 +2,7 @@ import { CadlOperation, CadlOperationGroup, CadlParameter } from "../interfaces"
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
 
-export function generateOperation(operation: CadlOperation, operationGroup: CadlOperationGroup) {
+export function generateOperation(operation: CadlOperation, operationGroup?: CadlOperationGroup) {
   const doc = generateDocs(operation);
   const summary = generateSummary(operation);
   const { verb, name, route, responses, parameters } = operation;
@@ -36,7 +36,7 @@ export function generateOperation(operation: CadlOperation, operationGroup: Cadl
     );
     const parametersString = !resourceParameters ? "" : `, { parameters: ${resourceParameters}}`;
     statements.push(
-      `${operationGroup.name ? "" : "op "}`,
+      `${operationGroup?.name ? "" : "op "}`,
       `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,
     );
   }

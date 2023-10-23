@@ -1,8 +1,9 @@
 import { readFileSync } from "fs";
-import { dirname, join } from "path";
+import { join } from "path";
 import { ObjectSchema, Operation } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { CadlObject, TspArmResource } from "../interfaces";
+import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
 export interface _ArmResourceOperation {
   Name: string;
   Path: string;
@@ -139,21 +140,6 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
   return Boolean((schema as ArmResourceSchema).resourceMetadata);
 }
 
-export function isResourceUpdateSchema(schema: ObjectSchema): boolean {
-  const resourcesMetadata = getArmResourcesMetadata();
-  for (const [key, resource] of Object.entries(resourcesMetadata)) {
-    if (`${resource.Name}Update` === schema.language.default.name) {
-      return true;
-    }
-
-    if (`${resource.Name}UpdateProperties` === schema.language.default.name) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 const _ArmCoreTypes = [
   "Resource",
   "ProxyResource",
@@ -170,24 +156,9 @@ const _ArmCoreTypes = [
 ];
 
 export function filterResourceRelatedObjects(
-  object: ObjectSchema[] | undefined,
-  armResources: TspArmResource[],
-): ObjectSchema[] | undefined {
-  const resultListResultSchemas = new Set<string>();
-  armResources.forEach((r) => {
-    r.operations.forEach((o) => {
-      if ((o.kind === "ArmResourceListByParent" || o.kind === "ArmListBySubscription") && o.resultSchemaName) {
-        resultListResultSchemas.add(o.resultSchemaName);
-      }
-    });
-  });
-  return object?.filter(
-    (o) =>
-      !_ArmCoreTypes.includes(o.language.default.name) &&
-      !isResourceSchema(o) &&
-      !isResourceUpdateSchema(o) &&
-      !resultListResultSchemas.has(o.language.default.name),
-  );
+  objects: CadlObject[]
+): CadlObject[] {
+  return objects.filter(o => !_ArmCoreTypes.includes(o.name) && !isGeneratedResourceObject(o.name));
 }
 
 export function isTspArmResource(schema: CadlObject): schema is TspArmResource {

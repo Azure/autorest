@@ -14,6 +14,7 @@ import {
   ArmResourceKind,
   CadlDecorator,
   CadlObjectProperty,
+  CadlOperation,
   CadlParameter,
   MSIType,
   TspArmResource,
@@ -32,9 +33,15 @@ import {
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
-import { transformParameter } from "./transform-operations";
+import { transformParameter, transformRequest } from "./transform-operations";
 
 const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName"];
+
+const generatedResourceObjects: Set<string> = new Set();
+
+export function isGeneratedResourceObject(name: string): boolean {
+  return generatedResourceObjects.has(name);
+}
 
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
   const fixMe: string[] = [];
@@ -59,6 +66,10 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     msiType = "ManagedSystemAssignedIdentity";
   }
 
+  const operations = getTspOperations(codeModel, schema);
+
+  generatedResourceObjects.add(schema.resourceMetadata.Name);
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
@@ -70,41 +81,42 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     propertiesModelName,
     doc: schema.language.default.description,
     decorators: buildResourceDecorators(schema),
-    operations: getTspOperations(schema),
+    resourceOperations: operations[0],
+    normalOperations: operations[1],
     msiType,
   };
 }
 
-function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation[] {
-  const resourceMetadata = armSchema.resourceMetadata;
-  const operations = getResourceOperations(resourceMetadata);
-  const tspOperations: TspArmResourceOperation[] = [];
-
+function convertResourceReadOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
   // every resource should have a get operation
   // TODO: TBaseParameters
   const operation = resourceMetadata.GetOperations[0];
-  tspOperations.push({
+  generatedResourceObjects.add(resourceMetadata.Name);
+  return [{
     doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
     kind: "ArmResourceRead",
     name: getOperationName(operation.OperationID),
     templateParameters: [resourceMetadata.Name],
-  });
+  }];
+}
 
-  // create operation
+function convertResourceCreateOrUpdateOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
+  // TODO: TBaseParameters
   if (resourceMetadata.CreateOperations.length) {
-    // TODO: TBaseParameters
     const operation = resourceMetadata.CreateOperations[0];
-    tspOperations.push({
+    return [{
       doc: operation.Description,
       kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
       name: getOperationName(operation.OperationID),
       templateParameters: [resourceMetadata.Name],
-    });
+    }];
   }
+  return [];
+}
 
-  // patch update operation could either be patch for resource/tag or custom patch
+function convertResourceUpdateOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
+  // TODO: TBaseParameters
   if (resourceMetadata.UpdateOperations.length) {
-    // TODO: TBaseParameters
     const operation = resourceMetadata.UpdateOperations[0];
     if (
       !resourceMetadata.CreateOperations.length ||
@@ -128,8 +140,10 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
       if (propertiesProperty) {
         kind = operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
         templateBody = propertiesProperty.schema.language.default.name;
+        generatedResourceObjects.add(bodyParam?.schema.language.default.name ?? "");
       } else if (tagsProperty) {
         kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
+        generatedResourceObjects.add(bodyParam?.schema.language.default.name ?? "");
       } else if (bodyParam) {
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateBody = bodyParam.schema.language.default.name;
@@ -137,24 +151,26 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateBody = "{}";
       }
-      tspOperations.push({
+      return [{
         fixMe,
         doc: operation.Description,
         kind: kind as any,
         name: getOperationName(operation.OperationID),
         templateParameters: templateBody ? [resourceMetadata.Name, templateBody] : [resourceMetadata.Name],
-      });
+      }];
     }
   }
+  return [];
+}
 
-  // delete operation
+function convertResourceDeleteOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
   if (resourceMetadata.DeleteOperations.length) {
     // TODO: TBaseParameters
     const operation = resourceMetadata.DeleteOperations[0];
     const swaggerOperation = operations[resourceMetadata.DeleteOperations[0].OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
-    tspOperations.push({
+    return [{
       doc: operation.Description,
       kind: operation.IsLongRunning
         ? okResponse
@@ -163,8 +179,13 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         : "ArmResourceDeleteSync",
       name: getOperationName(operation.OperationID),
       templateParameters: [resourceMetadata.Name],
-    });
+    }];
   }
+  return [];
+}
+
+function convertResourceListOperations(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
+  const converted: TspArmResourceOperation[] = [];
 
   // list by parent operation
   if (resourceMetadata.ListOperations.length) {
@@ -177,12 +198,14 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     if (baseParameters) {
       templateParameters.push(baseParameters);
     }
-    tspOperations.push({
+
+    generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
+
+    converted.push({
       doc: operation.Description,
       kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
       templateParameters: templateParameters,
-      resultSchemaName: getSchemaResponseSchemaName(okResponse),
     });
   }
 
@@ -195,34 +218,53 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         const okResponse = swaggerOperation?.responses?.filter((o) =>
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
+
+        generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
-          tspOperations.push({
+          converted.push({
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
             templateParameters: [resourceMetadata.Name, `LocationScope<${resourceMetadata.Name}>`],
-            resultSchemaName: getSchemaResponseSchemaName(okResponse),
           });
         } else {
-          tspOperations.push({
+          converted.push({
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
             templateParameters: [resourceMetadata.Name],
-            resultSchemaName: getSchemaResponseSchemaName(okResponse),
           });
         }
       }
     }
   }
 
-  // TODO: handle operations under resource group / management group / tenant
+  // add list operation for singleton resource if exists
+  if (resourceMetadata.IsSingletonResource) {
+    const swaggerOperation = getSingletonResouceListOperation(resourceMetadata);
+    if (swaggerOperation) {
+      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
-  // other operations
+      generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
+      converted.push({
+        doc: swaggerOperation.language.default.description,
+        kind: "ArmResourceListByParent",
+        name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
+        templateParameters: [resourceMetadata.Name],
+      });
+      (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
+    }
+  }
+
+  return converted;
+}
+
+function convertResourceActionOperations(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
+  const converted: TspArmResourceOperation[] = [];
+
   if (resourceMetadata.OtherOperations.length) {
     for (const operation of resourceMetadata.OtherOperations) {
-      // TODO: handle other kinds of methods
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
         let baseParameters = swaggerOperation ? getOperationParameters(swaggerOperation, resourceMetadata) : "";
@@ -253,7 +295,7 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
         } else {
           kind = operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
         }
-        tspOperations.push({
+        converted.push({
           fixMe,
           doc: operation.Description,
           kind: kind as any,
@@ -266,23 +308,57 @@ function getTspOperations(armSchema: ArmResourceSchema): TspArmResourceOperation
     }
   }
 
-  // add list operation for singleton resource if exists
-  if (resourceMetadata.IsSingletonResource) {
-    const swaggerOperation = getSingletonResouceListOperation(resourceMetadata);
-    if (swaggerOperation) {
-      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-      tspOperations.push({
-        doc: swaggerOperation.language.default.description,
-        kind: "ArmResourceListByParent",
-        name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        templateParameters: [resourceMetadata.Name],
-        resultSchemaName: getSchemaResponseSchemaName(okResponse),
-      });
-      (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
+  return converted;
+}
+
+function convertResourceOtherGetOperations(resourceMetadata: ArmResource, operations: Record<string, Operation>, codeModel: CodeModel): CadlOperation[] {
+  const converted: CadlOperation[] = [];
+
+  if (resourceMetadata.OtherOperations.length) {
+    for (const operation of resourceMetadata.OtherOperations) {
+      if (operation.Method === "GET") {
+        const swaggerOperation = operations[operation.OperationID];
+        if (swaggerOperation.requests && swaggerOperation.requests[0]) {
+          converted.push(transformRequest(swaggerOperation.requests[0], swaggerOperation, codeModel));
+        }
+      }
     }
   }
 
-  return tspOperations;
+  return converted;
+}
+
+function getTspOperations(codeModel: CodeModel, armSchema: ArmResourceSchema): [TspArmResourceOperation[], CadlOperation[]] {
+  const resourceMetadata = armSchema.resourceMetadata;
+  const operations = getResourceOperations(resourceMetadata);
+  const tspOperations: TspArmResourceOperation[] = [];
+  const normalOperations: CadlOperation[] = [];
+
+  // TODO: handle operations under resource group / management group / tenant
+
+  // read operation
+  tspOperations.push(...convertResourceReadOperation(resourceMetadata));
+
+  // create operation
+  tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata));
+
+  // patch update operation could either be patch for resource/tag or custom patch
+  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
+
+  // delete operation
+  tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
+
+  // list operation
+  tspOperations.push(...convertResourceListOperations(resourceMetadata, operations));
+
+  // action operation
+  tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
+
+  // other get operations
+  normalOperations.push(...convertResourceOtherGetOperations(resourceMetadata, operations, codeModel));
+
+
+  return [tspOperations, normalOperations];
 }
 
 function getOperationName(name: string): string {

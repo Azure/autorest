@@ -3,6 +3,7 @@ import { plural } from "pluralize";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
+import { generateOperation } from "./generate-operations";
 
 export function generateArmResource(resource: TspArmResource): string {
   let definitions: string[] = [];
@@ -38,12 +39,15 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   const definitions: string[] = [];
   definitions.push("@armResourceOperations");
   definitions.push(`interface ${plural(resource.name)} {`);
-  for (const operation of resource.operations) {
+  for (const operation of resource.resourceOperations) {
     for (const fixme of operation.fixMe ?? []) {
       definitions.push(fixme);
     }
     definitions.push(generateDocs(operation));
     definitions.push(`${operation.name} is ${operation.kind}<${operation.templateParameters.join()}>`);
+  }
+  for (const operation of resource.normalOperations) {
+    definitions.push(generateOperation(operation));
   }
   definitions.push("}");
 

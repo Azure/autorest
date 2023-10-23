@@ -11,7 +11,6 @@ import {
   ArmResourceSchema,
   filterResourceRelatedObjects,
   isResourceSchema,
-  isResourceUpdateSchema,
 } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
 
@@ -52,14 +51,13 @@ function transformModel(codeModel: CodeModel): CadlProgram {
 
   const { isArm } = getOptions();
 
-  const armResources =
+  // objects need to be converted first because they are used in operation convertion
+  const cadlObjects = (codeModel.schemas.objects ?? []).map((o) => transformObject(o, codeModel));
+
+  const armResources = isArm ?
     codeModel.schemas.objects
       ?.filter((o) => isResourceSchema(o))
-      .map((o) => transformTspArmResource(codeModel, o as ArmResourceSchema)) ?? [];
-
-  const cadlObjects = (
-    (isArm ? filterResourceRelatedObjects(codeModel.schemas.objects, armResources) : codeModel.schemas.objects) ?? []
-  ).map((o) => transformObject(o, codeModel));
+      .map((o) => transformTspArmResource(codeModel, o as ArmResourceSchema)) ?? [] : [];
 
   const serviceInformation = transformServiceInformation(codeModel);
 
@@ -76,7 +74,7 @@ function transformModel(codeModel: CodeModel): CadlProgram {
     serviceInformation,
     models: {
       enums: caldEnums,
-      objects: cadlObjects,
+      objects: isArm ? filterResourceRelatedObjects(cadlObjects) : cadlObjects,
       armResources,
     },
     operationGroups: cadlOperationGroups,
