@@ -65,9 +65,9 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
 
   let msiType: MSIType | undefined;
   if (schema.properties?.find((p) => p.schema.language.default.name === "ManagedServiceIdentity")) {
-    msiType = "ManagedServiceIdentity";
+    msiType = "Azure.ResourceManager.ManagedServiceIdentity";
   } else if (schema.properties?.find((p) => p.schema.language.default.name === "SystemAssignedServiceIdentity")) {
-    msiType = "ManagedSystemAssignedIdentity";
+    msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
   }
 
   const operations = getTspOperations(codeModel, schema, propertiesModelName);

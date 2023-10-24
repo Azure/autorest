@@ -45,7 +45,7 @@ export function transformDataType(schema: Schema, codeModel: CodeModel): CadlDat
 }
 
 function transformModel(codeModel: CodeModel): CadlProgram {
-  const caldEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])].map((c) =>
+  const caldEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])].filter(c => c.language.default.name !== "Versions").map((c) =>
     transformEnum(c, codeModel),
   );
 

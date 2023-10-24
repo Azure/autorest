@@ -6,6 +6,7 @@ import {
   Schema,
   SchemaType,
   SealedChoiceSchema,
+  SerializationStyle,
 } from "@autorest/codemodel";
 import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
@@ -94,6 +95,29 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
 
     if (location === "query") {
       locationDecorator.arguments = [element.language.default.serializedName];
+      if (element.schema.type === SchemaType.Array) {
+        let format = "multi";
+        switch (element.protocol.http?.style) {
+          case SerializationStyle.Form:
+            if (!element.protocol.http?.explode) {
+              format = "csv";
+            }
+            break;
+          case SerializationStyle.PipeDelimited:
+            format = 'pipes';
+            break;
+          case SerializationStyle.Simple:
+            format = 'csv';
+            break;
+          case SerializationStyle.SpaceDelimited:
+            format = "ssv";
+            break;
+          case SerializationStyle.TabDelimited:
+            format = 'tsv';
+            break;
+        }
+        locationDecorator.arguments = [{ value: `{name: "${element.language.default.serializedName}", format: "${format}"}`, options: { unwrap: true } }];
+      }
     }
 
     decorators.push(locationDecorator);
