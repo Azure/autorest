@@ -56,15 +56,24 @@ interface InfrastructureResources {
       filter?: string;
 
       @doc("Select the specified fields to be included in the response.")
-      @query("select")
+      @query({
+        name: "select",
+        format: "multi",
+      })
       select?: string[];
 
       @doc("Expand the indicated resources into the response.")
-      @query("expand")
+      @query({
+        name: "expand",
+        format: "multi",
+      })
       expand?: string[];
 
       @doc("Expressions that specify the order of returned results.")
-      @query("orderby")
+      @query({
+        name: "orderby",
+        format: "multi",
+      })
       orderby?: string[];
     }
   >;

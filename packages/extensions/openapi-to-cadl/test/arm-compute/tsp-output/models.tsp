@@ -3768,63 +3768,6 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
-@doc("Describes a VMSS VM Extension.")
-model VirtualMachineScaleSetVMExtension {
-  ...SubResourceReadOnly;
-
-  @doc("The name of the extension.")
-  @visibility("read")
-  name?: string;
-
-  @doc("Resource type")
-  @visibility("read")
-  type?: string;
-
-  @doc("The location of the extension.")
-  @visibility("read", "create")
-  location?: string;
-
-  @doc("Describes the properties of a Virtual Machine Extension.")
-  properties?: VirtualMachineExtensionProperties;
-}
-
-@doc("Describes a virtual machine scale set virtual machine.")
-model VirtualMachineScaleSetVM {
-  ...Resource;
-
-  @doc("The virtual machine instance ID.")
-  @visibility("read")
-  instanceId?: string;
-
-  @doc("The virtual machine SKU.")
-  @visibility("read")
-  sku?: Sku;
-
-  @doc("Describes the properties of a virtual machine scale set virtual machine.")
-  properties?: VirtualMachineScaleSetVMProperties;
-
-  @doc("""
-Specifies information about the marketplace image used to create the virtual
-machine. This element is only used for marketplace images. Before you can use a
-marketplace image from an API, you must enable the image for programmatic use. 
-In the Azure portal, find the marketplace image that you want to use and then
-click **Want to deploy programmatically, Get Started ->**. Enter any required
-information and then click **Save**.
-""")
-  plan?: Plan;
-
-  @doc("The virtual machine child extension resources.")
-  @visibility("read")
-  resources?: VirtualMachineExtension[];
-
-  @doc("The virtual machine zones.")
-  @visibility("read")
-  zones?: string[];
-
-  @doc("The identity of the virtual machine, if configured.")
-  identity?: VirtualMachineIdentity;
-}
-
 @doc("Describes the properties of a virtual machine scale set virtual machine.")
 model VirtualMachineScaleSetVMProperties {
   @doc("Specifies whether the latest model has been applied to the virtual machine.")
@@ -6028,14 +5971,6 @@ disk attached to a VM.
   lun: int32;
 }
 
-@doc("Create or update Restore Point collection parameters.")
-model RestorePointCollection {
-  ...Resource;
-
-  @doc("The restore point collection properties.")
-  properties?: RestorePointCollectionProperties;
-}
-
 @doc("The restore point collection properties.")
 model RestorePointCollectionProperties {
   @doc("""
@@ -6291,18 +6226,6 @@ model DiskRestorePointReplicationStatus {
   @doc("Replication completion percentage.")
   completionPercent?: int32;
 }
-
-@doc("Update Restore Point collection parameters.")
-model RestorePointCollectionUpdate {
-  ...UpdateResource;
-
-  @doc("The restore point collection properties.")
-  properties?: RestorePointCollectionProperties;
-}
-
-@doc("The List restore point collection operation response.")
-model RestorePointCollectionListResult
-  is Azure.Core.Page<RestorePointCollection>;
 
 @doc("capacity reservation group Properties.")
 model CapacityReservationGroupProperties {
@@ -7208,24 +7131,6 @@ Currently only one endpoint connection is supported.
   timeCreated?: utcDateTime;
 }
 
-@doc("The Private Endpoint Connection resource.")
-model PrivateEndpointConnection {
-  @doc("Resource properties.")
-  properties?: PrivateEndpointConnectionProperties;
-
-  @doc("private endpoint connection Id")
-  @visibility("read")
-  id?: string;
-
-  @doc("private endpoint connection name")
-  @visibility("read")
-  name?: string;
-
-  @doc("private endpoint connection type")
-  @visibility("read")
-  type?: string;
-}
-
 @doc("Properties of the PrivateEndpointConnectProperties.")
 model PrivateEndpointConnectionProperties {
   @doc("The resource of private end point.")
@@ -7308,10 +7213,6 @@ model PrivateLinkResourceProperties {
   @doc("The private link resource DNS zone name.")
   requiredZoneNames?: string[];
 }
-
-@doc("A list of private link resources")
-model PrivateEndpointConnectionListResult
-  is Azure.Core.Page<PrivateEndpointConnection>;
 
 @doc("""
 The managed identity for the disk encryption set. It should be given permission

@@ -20,7 +20,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @segment("dataProducts")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
 @armResourceOperations

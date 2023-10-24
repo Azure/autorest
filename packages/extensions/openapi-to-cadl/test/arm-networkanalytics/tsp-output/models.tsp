@@ -74,10 +74,6 @@ enum Bypass {
   @doc("Represents bypassing azure services traffic.") AzureServices,
 }
 
-enum Versions {
-  @doc("The 2023-11-15 stable version.") v2023_11_15: "2023-11-15",
-}
-
 @doc("The data product properties.")
 model DataProductProperties {
   @doc("The resource GUID property of the data product resource.")
