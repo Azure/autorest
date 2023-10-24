@@ -1,5 +1,6 @@
 import { TspArmResource } from "interfaces";
 import { plural } from "pluralize";
+import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
@@ -44,7 +45,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(fixme);
     }
     definitions.push(generateDocs(operation));
-    definitions.push(`${operation.name} is ${operation.kind}<${operation.templateParameters.join()}>`);
+    definitions.push(`${operation.name} is ${operation.kind}<${operation.templateParameters.map(replaceGeneratedResourceObject).join()}>`);
   }
   for (const operation of resource.normalOperations) {
     definitions.push(generateOperation(operation));

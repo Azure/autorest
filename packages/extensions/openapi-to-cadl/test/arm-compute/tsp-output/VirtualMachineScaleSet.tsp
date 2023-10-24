@@ -28,7 +28,7 @@ interface VirtualMachineScaleSets {
   @doc("Update a VM scale set.")
   update is ArmResourcePatchAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetUpdateProperties
+    VirtualMachineScaleSetProperties
   >;
   @doc("Deletes a VM scale set.")
   delete is ArmResourceDeleteAsync<VirtualMachineScaleSet>;
@@ -63,6 +63,7 @@ feature is available for VMSS with Flexible OrchestrationMode only)
 """)
       @query("hibernate")
       hibernate?: boolean;
+
       ...VirtualMachineScaleSetVMInstanceIDs;
     },
     {}
@@ -77,6 +78,7 @@ Optional parameter to force delete virtual machines from the VM scale set.
 """)
       @query("forceDeletion")
       forceDeletion?: boolean;
+
       ...VirtualMachineScaleSetVMInstanceRequiredIDs;
     },
     {}
@@ -96,6 +98,7 @@ value for this flag is false if not specified
 """)
       @query("skipShutdown")
       skipShutdown?: boolean;
+
       ...VirtualMachineScaleSetVMInstanceIDs;
     },
     {}

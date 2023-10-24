@@ -2003,6 +2003,7 @@ and VHDs for Azure virtual
 machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
 """)
   dataDisks?: VirtualMachineScaleSetDataDisk[];
+
   diskControllerType?: string;
 }
 
@@ -3117,66 +3118,6 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
-@doc("Describes the properties of a Virtual Machine Scale Set.")
-model VirtualMachineScaleSetUpdateProperties {
-  @doc("The upgrade policy.")
-  upgradePolicy?: UpgradePolicy;
-
-  @doc("Policy for automatic repairs.")
-  automaticRepairsPolicy?: AutomaticRepairsPolicy;
-
-  @doc("The virtual machine profile.")
-  virtualMachineProfile?: VirtualMachineScaleSetUpdateVMProfile;
-
-  @doc("Specifies whether the Virtual Machine Scale Set should be overprovisioned.")
-  overprovision?: boolean;
-
-  @doc("""
-When Overprovision is enabled, extensions are launched only on the requested
-number of VMs which are finally kept. This property will hence ensure that the
-extensions do not run on the extra overprovisioned VMs.
-""")
-  doNotRunExtensionsOnOverprovisionedVMs?: boolean;
-
-  @doc("""
-When true this limits the scale set to a single placement group, of max size
-100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified
-to false. However, if singlePlacementGroup is false, it may not be modified to
-true.
-""")
-  singlePlacementGroup?: boolean;
-
-  @doc("""
-Specifies additional capabilities enabled or disabled on the Virtual Machines
-in the Virtual Machine Scale Set. For instance: whether the Virtual Machines
-have the capability to support attaching managed data disks with UltraSSD_LRS
-storage account type.
-""")
-  additionalCapabilities?: AdditionalCapabilities;
-
-  @doc("""
-Specifies the policies applied when scaling in Virtual Machines in the Virtual
-Machine Scale Set.
-""")
-  scaleInPolicy?: ScaleInPolicy;
-
-  @doc("""
-Specifies information about the proximity placement group that the virtual
-machine scale set should be assigned to. <br><br>Minimum api-version:
-2018-04-01.
-""")
-  proximityPlacementGroup?: SubResource;
-
-  @doc("""
-Specifies the desired targets for mixing Spot and Regular priority VMs within
-the same VMSS Flex instance.
-""")
-  priorityMixPolicy?: PriorityMixPolicy;
-
-  @doc("Specifies the Spot Restore properties for the virtual machine scale set.")
-  spotRestorePolicy?: SpotRestorePolicy;
-}
-
 @doc("Describes a virtual machine scale set virtual machine profile.")
 model VirtualMachineScaleSetUpdateVMProfile {
   @doc("The virtual machine scale set OS profile.")
@@ -3247,6 +3188,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
 
   @doc("The data disks.")
   dataDisks?: VirtualMachineScaleSetDataDisk[];
+
   diskControllerType?: string;
 }
 
@@ -3844,59 +3786,6 @@ model VirtualMachineScaleSetVMExtension {
 
   @doc("Describes the properties of a Virtual Machine Extension.")
   properties?: VirtualMachineExtensionProperties;
-}
-
-@doc("Describes the properties of a Virtual Machine Extension.")
-model VirtualMachineExtensionUpdateProperties {
-  @doc("""
-How the extension handler should be forced to update even if the extension
-configuration has not changed.
-""")
-  forceUpdateTag?: string;
-
-  @doc("The name of the extension handler publisher.")
-  publisher?: string;
-
-  @doc("Specifies the type of the extension; an example is \"CustomScriptExtension\".")
-  type?: string;
-
-  @doc("Specifies the version of the script handler.")
-  typeHandlerVersion?: string;
-
-  @doc("""
-Indicates whether the extension should use a newer minor version if one is
-available at deployment time. Once deployed, however, the extension will not
-upgrade minor versions unless redeployed, even with this property set to true.
-""")
-  autoUpgradeMinorVersion?: boolean;
-
-  @doc("""
-Indicates whether the extension should be automatically upgraded by the
-platform if there is a newer version of the extension available.
-""")
-  enableAutomaticUpgrade?: boolean;
-
-  @doc("Json formatted public settings for the extension.")
-  settings?: Record<unknown>;
-
-  @doc("""
-The extension can contain either protectedSettings or
-protectedSettingsFromKeyVault or no protected settings at all.
-""")
-  protectedSettings?: Record<unknown>;
-
-  @doc("""
-Indicates whether failures stemming from the extension will be suppressed
-(Operational failures such as not connecting to the VM will not be suppressed
-regardless of this value). The default is false.
-""")
-  suppressFailures?: boolean;
-
-  @doc("""
-The extensions protected settings that are passed by reference, and consumed
-from key vault
-""")
-  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
 }
 
 @doc("Describes a virtual machine scale set virtual machine.")
@@ -4666,6 +4555,7 @@ than 1 network interface.
 
   @doc("Specifies the IP configurations of the network interface.")
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
+
   dscpConfiguration?: SubResource;
 
   @doc("""
@@ -5590,6 +5480,7 @@ MarketPlace.
 
   @doc("Specifies disallowed configuration for the VirtualMachine created from the image")
   disallowed?: DisallowedConfiguration;
+
   features?: VirtualMachineImageFeature[];
 
   @doc("Specifies the Architecture Type")
@@ -7270,118 +7161,6 @@ disk encrypted with customer managed key
   secureVMDiskEncryptionSetId?: string;
 }
 
-@doc("Disk resource update properties.")
-model DiskUpdateProperties {
-  @doc("the Operating System type.")
-  osType?: OperatingSystemTypes;
-
-  @doc("""
-If creationData.createOption is Empty, this field is mandatory and it indicates
-the size of the disk to create. If this field is present for updates or
-creation with other options, it indicates a resize. Resizes are only allowed if
-the disk is not attached to a running VM, and can only increase the disk's
-size.
-""")
-  diskSizeGB?: int32;
-
-  @doc("""
-Encryption settings collection used be Azure Disk Encryption, can contain
-multiple encryption settings per disk or snapshot.
-""")
-  encryptionSettingsCollection?: EncryptionSettingsCollection;
-
-  @doc("""
-The number of IOPS allowed for this disk; only settable for UltraSSD disks. One
-operation can transfer between 4k and 256k bytes.
-""")
-  @projectedName("json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int32;
-
-  @doc("""
-The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps
-means millions of bytes per second - MB here uses the ISO notation, of powers
-of 10.
-""")
-  diskMBpsReadWrite?: int32;
-
-  @doc("""
-The total number of IOPS that will be allowed across all VMs mounting the
-shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
-""")
-  @projectedName("json", "diskIOPSReadOnly")
-  diskIopsReadOnly?: int32;
-
-  @doc("""
-The total throughput (MBps) that will be allowed across all VMs mounting the
-shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses
-the ISO notation, of powers of 10.
-""")
-  diskMBpsReadOnly?: int32;
-
-  @doc("""
-The maximum number of VMs that can attach to the disk at the same time. Value
-greater than one indicates a disk that can be mounted on multiple VMs at the
-same time.
-""")
-  maxShares?: int32;
-
-  @doc("""
-Encryption property can be used to encrypt data at rest with customer managed
-keys or platform managed keys.
-""")
-  encryption?: Encryption;
-
-  @doc("Policy for accessing the disk via network.")
-  networkAccessPolicy?: NetworkAccessPolicy;
-
-  @doc("ARM id of the DiskAccess resource for using private endpoints on disks.")
-  diskAccessId?: string;
-
-  @doc("""
-Performance tier of the disk (e.g, P4, S10) as described here:
-https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not
-apply to Ultra disks.
-""")
-  tier?: string;
-
-  @doc("""
-Set to true to enable bursting beyond the provisioned performance target of the
-disk. Bursting is disabled by default. Does not apply to Ultra disks.
-""")
-  burstingEnabled?: boolean;
-
-  @doc("Purchase plan information to be added on the OS disk")
-  purchasePlan?: DiskPurchasePlan;
-
-  @doc("List of supported capabilities to be added on the OS disk.")
-  supportedCapabilities?: SupportedCapabilities;
-
-  @doc("Properties of the disk for which update is pending.")
-  @visibility("read")
-  propertyUpdatesInProgress?: PropertyUpdatesInProgress;
-
-  @doc("Indicates the OS on a disk supports hibernation.")
-  supportsHibernation?: boolean;
-
-  @doc("Policy for controlling export on the disk.")
-  publicNetworkAccess?: PublicNetworkAccess;
-
-  @doc("""
-Additional authentication requirements when exporting or uploading to a disk or
-snapshot.
-""")
-  dataAccessAuthMode?: DataAccessAuthMode;
-
-  @doc("""
-Setting this property to true improves reliability and performance of data
-disks that are frequently (more than 5 times a day) by detached from one
-virtual machine and attached to another. This property should not be set for
-disks that are not detached and attached frequently as it causes the disks to
-not align with the fault domain of the virtual machine.
-""")
-  optimizedForFrequentAttach?: boolean;
-}
-
 @doc("Data used for requesting a SAS.")
 model GrantAccessData {
   @doc("The Access Level, accepted values include None, Read, Write.")
@@ -7636,30 +7415,6 @@ Url is required regardless of rotationToLatestKeyVersionEnabled value.
   keyUrl: string;
 }
 
-@doc("disk encryption set resource update properties.")
-model DiskEncryptionSetUpdateProperties {
-  @doc("The type of key used to encrypt the data of the disk.")
-  encryptionType?: DiskEncryptionSetType;
-
-  @doc("""
-Key Vault Key Url to be used for server side encryption of Managed Disks and
-Snapshots
-""")
-  activeKey?: KeyForDiskEncryptionSet;
-
-  @doc("""
-Set this flag to true to enable auto-updating of this disk encryption set to
-the latest key version.
-""")
-  rotationToLatestKeyVersionEnabled?: boolean;
-
-  @doc("""
-Multi-tenant application client id to access key vault in a different tenant.
-Setting the value to 'None' will clear the property.
-""")
-  federatedClientId?: string;
-}
-
 @doc("The List resources which are encrypted with the disk encryption set.")
 model ResourceUriList is Azure.Core.Page<string>;
 
@@ -7899,54 +7654,6 @@ Indicates the error message if the background copy of a resource created via
 the CopyStart operation fails.
 """)
   errorMessage: string;
-}
-
-@doc("Snapshot resource update properties.")
-model SnapshotUpdateProperties {
-  @doc("the Operating System type.")
-  osType?: OperatingSystemTypes;
-
-  @doc("""
-If creationData.createOption is Empty, this field is mandatory and it indicates
-the size of the disk to create. If this field is present for updates or
-creation with other options, it indicates a resize. Resizes are only allowed if
-the disk is not attached to a running VM, and can only increase the disk's
-size.
-""")
-  diskSizeGB?: int32;
-
-  @doc("""
-Encryption settings collection used be Azure Disk Encryption, can contain
-multiple encryption settings per disk or snapshot.
-""")
-  encryptionSettingsCollection?: EncryptionSettingsCollection;
-
-  @doc("""
-Encryption property can be used to encrypt data at rest with customer managed
-keys or platform managed keys.
-""")
-  encryption?: Encryption;
-
-  @doc("Policy for accessing the disk via network.")
-  networkAccessPolicy?: NetworkAccessPolicy;
-
-  @doc("ARM id of the DiskAccess resource for using private endpoints on disks.")
-  diskAccessId?: string;
-
-  @doc("Indicates the OS on a snapshot supports hibernation.")
-  supportsHibernation?: boolean;
-
-  @doc("Policy for controlling export on the disk.")
-  publicNetworkAccess?: PublicNetworkAccess;
-
-  @doc("""
-Additional authentication requirements when exporting or uploading to a disk or
-snapshot.
-""")
-  dataAccessAuthMode?: DataAccessAuthMode;
-
-  @doc("List of supported capabilities for the image from which the OS disk was created.")
-  supportedCapabilities?: SupportedCapabilities;
 }
 
 @doc("The List Resource Skus operation response.")
@@ -8850,6 +8557,7 @@ model GalleryApplicationVersionPublishingProfile {
 
   @doc("The source image from which the Image Version is going to be created.")
   source: UserArtifactSource;
+
   manageActions?: UserArtifactManage;
 
   @doc("""

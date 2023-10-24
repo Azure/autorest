@@ -129,6 +129,7 @@ interface ApplicationResourcesOperations {
       @pattern("[a-zA-Z0-9_.()-]{0,79}$")
       @path
       resourceName: string;
+
       ...ApplicationResource;
     },
     ApplicationResource
@@ -164,6 +165,7 @@ interface ApplicationResourcesOperations {
       @pattern("[a-zA-Z0-9_.()-]{0,79}$")
       @path
       resourceName: string;
+
       ...ApplicationResourceUpdate;
     },
     ApplicationResource

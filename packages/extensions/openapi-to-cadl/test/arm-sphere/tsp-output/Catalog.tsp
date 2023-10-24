@@ -56,7 +56,7 @@ interface Catalogs {
       @query("$maxpagesize")
       maxpagesize?: int32;
     },
-    DeploymentListResult
+    ResourceListResult<Deployment>
   >;
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
@@ -77,9 +77,10 @@ interface Catalogs {
       @doc("The maximum number of result items per page.")
       @query("$maxpagesize")
       maxpagesize?: int32;
+
       ...ListDeviceGroupsRequest;
     },
-    DeviceGroupListResult
+    ResourceListResult<DeviceGroup>
   >;
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
@@ -123,6 +124,6 @@ interface Catalogs {
       @query("$maxpagesize")
       maxpagesize?: int32;
     },
-    DeviceListResult
+    ResourceListResult<Device>
   >;
 }

@@ -37,7 +37,7 @@ and cannot be used for product or device group name.
 Update a DeviceGroup. '.default' and '.unassigned' are system defined values
 and cannot be used for product or device group name.
 """)
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupUpdateProperties>;
+  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
   @doc("""
 Delete a DeviceGroup. '.default' and '.unassigned' are system defined values
 and cannot be used for product or device group name.
@@ -71,7 +71,10 @@ defined values and cannot be used for product name.
 Bulk claims the devices. Use '.unassigned' or '.default' for the device group
 and product names when bulk claiming devices to a catalog only.
 """)
-  claimDevices is ArmResourceActionAsync<DeviceGroup, ClaimDevicesRequest>;
+  claimDevices is ArmResourceActionNoResponseContentAsync<
+    DeviceGroup,
+    ClaimDevicesRequest
+  >;
   // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Counts devices in device group. '.default' and '.unassigned' are system defined

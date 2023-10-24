@@ -66,6 +66,7 @@ op SelectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     @doc("The name of the key to be restored from the user supplied backup")
     @path
     keyName: string;
+
     ...SelectiveKeyRestoreOperationParameters;
   },
   SelectiveKeyRestoreOperation
@@ -178,6 +179,7 @@ personally identifiable or sensitive information.
 """)
     @path
     `issuer-name`: string;
+
     ...CertificateIssuerSetParameters;
   },
   IssuerBundle
@@ -196,6 +198,7 @@ op UpdateCertificateIssuer is Azure.Core.Foundations.Operation<
     @doc("The name of the issuer.")
     @path
     `issuer-name`: string;
+
     ...CertificateIssuerUpdateParameters;
   },
   IssuerBundle
@@ -252,6 +255,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z-]+$")
     @path
     `certificate-name`: string;
+
     ...CertificateCreateParameters;
   },
   CertificateOperation
@@ -277,6 +281,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z-]+$")
     @path
     `certificate-name`: string;
+
     ...CertificateImportParameters;
   },
   CertificateBundle
@@ -335,6 +340,7 @@ op UpdateCertificatePolicy is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate in the given vault.")
     @path
     `certificate-name`: string;
+
     ...CertificatePolicy;
   },
   CertificatePolicy
@@ -357,6 +363,7 @@ op UpdateCertificate is Azure.Core.Foundations.Operation<
     @doc("The version of the certificate.")
     @path
     `certificate-version`: string;
+
     ...CertificateUpdateParameters;
   },
   CertificateBundle
@@ -397,6 +404,7 @@ op UpdateCertificateOperation is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate.")
     @path
     `certificate-name`: string;
+
     ...CertificateOperationUpdateParameter;
   },
   CertificateOperation
@@ -451,6 +459,7 @@ op MergeCertificate is Azure.Core.Foundations.Operation<
     @doc("The name of the certificate.")
     @path
     `certificate-name`: string;
+
     ...CertificateMergeParameters;
   },
   CertificateBundle
@@ -594,6 +603,7 @@ sensitive information.
     @pattern("^[0-9a-zA-Z-]+$")
     @path
     `key-name`: string;
+
     ...KeyCreateParameters;
   },
   KeyBundle
@@ -643,6 +653,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z-]+$")
     @path
     `key-name`: string;
+
     ...KeyImportParameters;
   },
   KeyBundle
@@ -686,6 +697,7 @@ op UpdateKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key to update.")
     @path
     `key-version`: string;
+
     ...KeyUpdateParameters;
   },
   KeyBundle
@@ -836,6 +848,7 @@ op encrypt is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeyOperationsParameters;
   },
   KeyOperationResult
@@ -866,6 +879,7 @@ op decrypt is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeyOperationsParameters;
   },
   KeyOperationResult
@@ -888,6 +902,7 @@ op sign is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeySignParameters;
   },
   KeyOperationResult
@@ -913,6 +928,7 @@ op verify is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -939,6 +955,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeyOperationsParameters;
   },
   KeyOperationResult
@@ -966,6 +983,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     @doc("The version of the key.")
     @path
     `key-version`: string;
+
     ...KeyOperationsParameters;
   },
   KeyOperationResult
@@ -987,6 +1005,7 @@ op release is Azure.Core.Foundations.Operation<
     @doc("Adding the version parameter retrieves a specific version of a key.")
     @path
     `key-version`: string;
+
     ...KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -1098,6 +1117,7 @@ op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @doc("The name of the key in the given vault.")
     @path
     `key-name`: string;
+
     ...KeyRotationPolicy;
   },
   KeyRotationPolicy
@@ -1130,6 +1150,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z-]+$")
     @path
     `secret-name`: string;
+
     ...SecretSetParameters;
   },
   SecretBundle
@@ -1170,6 +1191,7 @@ op UpdateSecret is Azure.Core.Foundations.Operation<
     @doc("The version of the secret.")
     @path
     `secret-version`: string;
+
     ...SecretUpdateParameters;
   },
   SecretBundle
@@ -1354,6 +1376,7 @@ op UpdateSettings is Azure.Core.Foundations.Operation<
     @doc("The name of the account setting. Must be a valid settings option.")
     @path
     `setting-name`: string;
+
     ...UpdateSettingsRequest;
   },
   Setting
@@ -1547,6 +1570,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
+
     ...StorageAccountCreateParameters;
   },
   StorageBundle
@@ -1564,6 +1588,7 @@ op UpdateStorageAccount is Azure.Core.Foundations.Operation<
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
+
     ...StorageAccountUpdateParameters;
   },
   StorageBundle
@@ -1581,6 +1606,7 @@ op RegenerateStorageAccountKey is Azure.Core.Foundations.Operation<
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `storage-account-name`: string;
+
     ...StorageAccountRegenerteKeyParameters;
   },
   StorageBundle
@@ -1743,6 +1769,7 @@ personally identifiable or sensitive information.
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
+
     ...SasDefinitionCreateParameters;
   },
   SasDefinitionBundle
@@ -1765,6 +1792,7 @@ op UpdateSasDefinition is Azure.Core.Foundations.Operation<
     @pattern("^[0-9a-zA-Z]+$")
     @path
     `sas-definition-name`: string;
+
     ...SasDefinitionUpdateParameters;
   },
   SasDefinitionBundle
@@ -1802,6 +1830,7 @@ The scope of the role definition to create or update. Managed HSM only supports
       @doc("The name of the role definition to create or update. It can be any valid GUID.")
       @path
       roleDefinitionName: string;
+
       ...RoleDefinitionCreateParameters;
     },
     RoleDefinition
@@ -1872,6 +1901,7 @@ interface RoleAssignmentsOperations {
       @doc("The name of the role assignment to create. It can be any valid GUID.")
       @path
       roleAssignmentName: string;
+
       ...RoleAssignmentCreateParameters;
     },
     RoleAssignment

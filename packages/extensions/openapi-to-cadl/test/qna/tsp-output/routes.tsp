@@ -21,6 +21,7 @@ interface QuestionAnsweringOperations {
       @doc("The name of the specific deployment of the project to use.")
       @query("deploymentName")
       deploymentName: string;
+
       ...AnswersOptions;
     },
     AnswersResult

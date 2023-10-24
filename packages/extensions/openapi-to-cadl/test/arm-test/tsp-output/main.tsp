@@ -15,9 +15,14 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "Azure Test resource management API.",
-  version: "2023-10-12",
 })
+@versioned(Versions)
 @doc("For test.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Azure.ResourceManager.Test;
+
+@doc("The available API versions.")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_10_12: "2023-10-12",
+}

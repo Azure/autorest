@@ -106,6 +106,7 @@ should match the serialization type specified in the request.
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
+
       ...bytes;
     },
     void
@@ -134,6 +135,7 @@ type should match the serialization type specified in the request.
       @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
       @path
       schemaName: string;
+
       ...bytes;
     },
     void

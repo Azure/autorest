@@ -29,7 +29,7 @@ interface Disks {
   @doc("Creates or updates a disk.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Disk>;
   @doc("Updates (patches) a disk.")
-  update is ArmResourcePatchAsync<Disk, DiskUpdateProperties>;
+  update is ArmResourcePatchAsync<Disk, DiskProperties>;
   @doc("Deletes a disk.")
   delete is ArmResourceDeleteAsync<Disk>;
   @doc("Lists all the disks under a resource group.")

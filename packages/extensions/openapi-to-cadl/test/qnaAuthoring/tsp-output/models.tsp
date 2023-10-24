@@ -219,12 +219,14 @@ model JobState {
 model JobMetadata {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDateTime?: utcDateTime;
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
 
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   jobId: string;
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 

@@ -41,12 +41,14 @@ model ErrorDetail {
 
   @doc("An array of details about specific errors that led to this reported error.")
   details?: ErrorDetail[];
+
   inner?: InnerError;
 }
 
 model InnerError {
   @doc("A more specific error code than was provided by the containing error.")
   code?: string;
+
   inner?: InnerError;
 }
 

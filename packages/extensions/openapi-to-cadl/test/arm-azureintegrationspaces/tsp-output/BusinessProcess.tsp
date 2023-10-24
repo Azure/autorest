@@ -28,10 +28,7 @@ interface BusinessProcesses {
   @doc("Create a BusinessProcess")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BusinessProcess>;
   @doc("Update a BusinessProcess")
-  patch is ArmResourcePatchSync<
-    BusinessProcess,
-    BusinessProcessUpdateProperties
-  >;
+  patch is ArmResourcePatchSync<BusinessProcess, BusinessProcessProperties>;
   @doc("Delete a BusinessProcess")
   delete is ArmResourceDeleteAsync<BusinessProcess>;
   @doc("List BusinessProcess resources by Application")

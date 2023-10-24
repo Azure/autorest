@@ -358,6 +358,7 @@ model DetectionResultSummary {
 
   @doc("Error message when detection is failed.")
   errors?: ErrorResponse[];
+
   variableStates?: VariableState[];
 
   @doc("Detection request.")
@@ -424,6 +425,7 @@ model AnomalyState {
   @doc("timestamp")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp: utcDateTime;
+
   value?: AnomalyValue;
 
   @doc("Error message for the current timestamp")
@@ -442,6 +444,7 @@ significant the anomaly.
 
   @doc("Raw score from the model.")
   score: float32;
+
   interpretation?: AnomalyInterpretation[];
 }
 
@@ -467,6 +470,7 @@ columns, `timestamp` and `value`. By default, the file name of the variable
 will be used as its variable name.
 """)
   dataSource: string;
+
   dataSchema?: DataSchema;
 
   @doc("""
@@ -531,6 +535,7 @@ model DiagnosticsInfo {
 model ModelState {
   @doc("Epoch id")
   epochIds?: int32[];
+
   trainLosses?: float32[];
   validationLosses?: float32[];
   latenciesInSeconds?: float32[];
@@ -571,6 +576,7 @@ model ModelSnapshot {
 
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
   status: ModelStatus;
+
   displayName?: string;
 
   @doc("Total number of variables.")

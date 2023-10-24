@@ -1241,6 +1241,7 @@ model KeyOperationsParameters {
   @doc("algorithm identifier")
   @projectedName("json", "alg")
   algorithm: JsonWebKeyEncryptionAlgorithm;
+
   value: bytes;
 
   @doc("""
@@ -1292,6 +1293,7 @@ algorithm types, see JsonWebKeySignatureAlgorithm.
 """)
   @projectedName("json", "alg")
   algorithm: JsonWebKeySignatureAlgorithm;
+
   value: bytes;
 }
 

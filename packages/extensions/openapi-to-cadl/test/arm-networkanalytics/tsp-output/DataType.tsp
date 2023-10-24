@@ -30,7 +30,7 @@ interface DataTypes {
   @doc("Create data type resource.")
   create is ArmResourceCreateOrUpdateAsync<DataType>;
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeUpdateProperties>;
+  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
   @doc("List data type by parent resource.")

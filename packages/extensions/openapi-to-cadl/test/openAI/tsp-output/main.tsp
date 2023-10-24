@@ -6,8 +6,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 @service({
   title: "OpenAI",
-  version: "2022-06-01-preview",
 })
+@versioned(Versions)
 @server(
   "https://{endpoint}/openai",
   "Azure OpenAI APIs for completions and search",
@@ -17,3 +17,8 @@ using TypeSpec.Http;
 )
 @doc("Azure OpenAI APIs for completions and search")
 namespace Azure.AI.OpenAI;
+
+@doc("The available API versions.")
+enum Versions {
+  v2022_06_01_preview: "2022-06-01-preview",
+}

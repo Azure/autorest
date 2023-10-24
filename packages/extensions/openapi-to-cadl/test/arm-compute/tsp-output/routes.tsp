@@ -484,6 +484,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of the restore point collection.")
       @path
       restorePointCollectionName: string;
+
       ...RestorePointCollection;
     },
     RestorePointCollection
@@ -508,6 +509,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of the restore point collection.")
       @path
       restorePointCollectionName: string;
+
       ...RestorePointCollectionUpdate;
     },
     RestorePointCollection
@@ -628,6 +630,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
+
       ...RequestRateByIntervalInput;
     },
     LogAnalyticsOperationResult | void
@@ -652,6 +655,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
+
       ...ThrottledRequestsInput;
     },
     LogAnalyticsOperationResult | void
@@ -686,6 +690,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
+
       ...VirtualMachineRunCommand;
 
       @doc("Accept header")
@@ -722,6 +727,7 @@ The subscription ID forms part of the URI for every service call.
 """)
       @path
       subscriptionId: string;
+
       ...VirtualMachineRunCommandUpdate;
 
       @doc("Accept header")
@@ -875,6 +881,7 @@ name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
       @doc("The name of the private endpoint connection.")
       @path
       privateEndpointConnectionName: string;
+
       ...PrivateEndpointConnection;
     },
     PrivateEndpointConnection

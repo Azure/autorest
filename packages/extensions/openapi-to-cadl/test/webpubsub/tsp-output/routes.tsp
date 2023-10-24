@@ -29,6 +29,7 @@ alpha-numeric characters or underscore.
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
+
       ...AddToGroupsRequest;
     },
     void
@@ -109,6 +110,7 @@ alpha-numeric characters or underscore.
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
+
       ...RemoveFromGroupsRequest;
     },
     void
@@ -152,6 +154,7 @@ can help when the client's bandwidth is limited.
       @doc("Upload file type")
       @header
       `content-type`: ContentType;
+
       ...bytes;
     },
     void
@@ -237,6 +240,7 @@ can help when the client's bandwidth is limited.
       @doc("Upload file type")
       @header
       `content-type`: ContentType;
+
       ...bytes;
     },
     void
@@ -365,6 +369,7 @@ can help when the client's bandwidth is limited.
       @doc("Upload file type")
       @header
       `content-type`: ContentType;
+
       ...bytes;
     },
     void
@@ -621,6 +626,7 @@ can help when the client's bandwidth is limited.
       @doc("Upload file type")
       @header
       `content-type`: ContentType;
+
       ...bytes;
     },
     void

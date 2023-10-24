@@ -18,9 +18,14 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "Azure Integration Spaces resource management API.",
-  version: "2023-11-14-preview",
 })
+@versioned(Versions)
 @doc("The azure integration spaces resource provider.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Azure.ResourceManager.Integration.Spaces;
+
+@doc("The available API versions.")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_11_14_preview: "2023-11-14-preview",
+}

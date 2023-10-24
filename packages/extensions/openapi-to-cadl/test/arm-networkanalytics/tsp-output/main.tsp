@@ -16,9 +16,14 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "Azure Network Analytics resource management API.",
-  version: "2023-11-15",
 })
+@versioned(Versions)
 @doc("// FIXME: (miissing-service-description) Add service description")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Azure.ResourceManager.NetworkAnalytics;
+
+@doc("The available API versions.")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_11_15: "2023-11-15",
+}

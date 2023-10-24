@@ -30,7 +30,7 @@ interface VirtualMachineScaleSetVmExtensions {
   @doc("The operation to update the VMSS VM extension.")
   update is ArmResourcePatchAsync<
     VirtualMachineScaleSetVmExtension,
-    VirtualMachineExtensionUpdateProperties
+    VirtualMachineExtensionProperties
   >;
   @doc("The operation to delete the VMSS VM extension.")
   delete is ArmResourceDeleteAsync<VirtualMachineScaleSetVmExtension>;

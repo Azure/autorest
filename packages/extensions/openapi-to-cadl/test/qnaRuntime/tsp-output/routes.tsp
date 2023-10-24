@@ -17,6 +17,7 @@ interface RuntimeOperations {
       @doc("Knowledgebase id.")
       @path
       kbId: string;
+
       ...QueryDTO;
     },
     QnASearchResultList
@@ -31,6 +32,7 @@ interface RuntimeOperations {
       @doc("Knowledgebase id.")
       @path
       kbId: string;
+
       ...FeedbackRecordsDTO;
     },
     void

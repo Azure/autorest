@@ -28,7 +28,7 @@ interface Applications {
   @doc("Create a Application")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Application>;
   @doc("Update a Application")
-  patch is ArmResourcePatchSync<Application, ApplicationUpdateProperties>;
+  patch is ArmResourcePatchSync<Application, ApplicationProperties>;
   @doc("Delete a Application")
   delete is ArmResourceDeleteAsync<Application>;
   @doc("List Application resources by Space")

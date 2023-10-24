@@ -40,6 +40,7 @@ interface DiskRestorePoints {
       @doc("The name of the vm restore point that the disk disk restore point belongs.")
       @path
       vmRestorePointName: string;
+
       ...GrantAccessData;
     },
     AccessUri

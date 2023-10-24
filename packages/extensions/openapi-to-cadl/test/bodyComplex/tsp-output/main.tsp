@@ -6,8 +6,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 @service({
   title: "AutoRest Complex Test Service",
-  version: "2016-02-29",
 })
+@versioned(Versions)
 @server(
   "{$host}",
   "Test Infrastructure for AutoRest",
@@ -17,3 +17,8 @@ using TypeSpec.Http;
 )
 @doc("Test Infrastructure for AutoRest")
 namespace AutoRestComplexTestService;
+
+@doc("The available API versions.")
+enum Versions {
+  v2016_02_29: "2016-02-29",
+}

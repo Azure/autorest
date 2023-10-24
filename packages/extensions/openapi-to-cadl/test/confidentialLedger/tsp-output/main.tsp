@@ -6,8 +6,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
-  version: "2022-05-13",
 })
+@versioned(Versions)
 @server(
   "{ledgerEndpoint}",
   "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service.",
@@ -20,3 +20,8 @@ The ConfidentialLedgerClient writes and retrieves ledger entries against the
 Confidential Ledger service.
 """)
 namespace Azure.Language.Authoring;
+
+@doc("The available API versions.")
+enum Versions {
+  v2022_05_13: "2022-05-13",
+}

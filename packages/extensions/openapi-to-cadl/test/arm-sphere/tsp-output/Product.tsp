@@ -37,7 +37,7 @@ cannot be used for product name.
 Update a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name.
 """)
-  update is ArmResourcePatchAsync<Product, ProductUpdateProperties>;
+  update is ArmResourcePatchAsync<Product, ProductProperties>;
   @doc("""
 Delete a Product. '.default' and '.unassigned' are system defined values and
 cannot be used for product name'
@@ -59,6 +59,6 @@ are system defined values and cannot be used for product name.
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     {},
-    DeviceGroupListResult
+    ResourceListResult<DeviceGroup>
   >;
 }

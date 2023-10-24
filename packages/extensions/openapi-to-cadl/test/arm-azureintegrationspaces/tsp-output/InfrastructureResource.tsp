@@ -31,7 +31,7 @@ interface InfrastructureResources {
   @doc("Update a InfrastructureResource")
   patch is ArmResourcePatchSync<
     InfrastructureResource,
-    InfrastructureResourceUpdateProperties
+    InfrastructureResourceProperties
   >;
   @doc("Delete a InfrastructureResource")
   delete is ArmResourceDeleteAsync<InfrastructureResource>;

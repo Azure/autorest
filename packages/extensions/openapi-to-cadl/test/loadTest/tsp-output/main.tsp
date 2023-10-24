@@ -6,8 +6,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 @service({
   title: "Load Testing Service",
-  version: "2022-11-01",
 })
+@versioned(Versions)
 @server(
   "https://{Endpoint}",
   "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
@@ -20,3 +20,8 @@ These APIs allow end users to create, view and run load tests using Azure Load
 Test Service.
 """)
 namespace Azure.LoadTesting;
+
+@doc("The available API versions.")
+enum Versions {
+  v2022_11_01: "2022-11-01",
+}

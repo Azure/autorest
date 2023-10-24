@@ -41,6 +41,7 @@ op create is Azure.Core.Foundations.Operation<
     @doc("Resource Group ID.")
     @path
     resourceGroupName: string;
+
     ...CatalogDictionaryOfArray;
   },
   CatalogDictionary
@@ -59,6 +60,7 @@ op update is Azure.Core.Foundations.Operation<
     @doc("Resource Group ID.")
     @path
     resourceGroupName: string;
+
     ...CatalogArrayOfDictionary;
   },
   CatalogArray

@@ -30,7 +30,7 @@ interface VirtualMachineExtensions {
   @doc("The operation to update the extension.")
   update is ArmResourcePatchAsync<
     VirtualMachineExtension,
-    VirtualMachineExtensionUpdateProperties
+    VirtualMachineExtensionProperties
   >;
   @doc("The operation to delete the extension.")
   delete is ArmResourceDeleteAsync<VirtualMachineExtension>;

@@ -37,10 +37,14 @@ import { transformParameter, transformRequest } from "./transform-operations";
 
 const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName"];
 
-const generatedResourceObjects: Set<string> = new Set();
+const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
 export function isGeneratedResourceObject(name: string): boolean {
   return generatedResourceObjects.has(name);
+}
+
+export function replaceGeneratedResourceObject(name: string): string {
+  return generatedResourceObjects.get(name) ?? name;
 }
 
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
@@ -66,9 +70,7 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     msiType = "ManagedSystemAssignedIdentity";
   }
 
-  const operations = getTspOperations(codeModel, schema);
-
-  generatedResourceObjects.add(schema.resourceMetadata.Name);
+  const operations = getTspOperations(codeModel, schema, propertiesModelName);
 
   return {
     fixMe,
@@ -91,7 +93,7 @@ function convertResourceReadOperation(resourceMetadata: ArmResource): TspArmReso
   // every resource should have a get operation
   // TODO: TBaseParameters
   const operation = resourceMetadata.GetOperations[0];
-  generatedResourceObjects.add(resourceMetadata.Name);
+  generatedResourceObjects.set(resourceMetadata.Name, resourceMetadata.Name);
   return [{
     doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
     kind: "ArmResourceRead",
@@ -114,7 +116,7 @@ function convertResourceCreateOrUpdateOperation(resourceMetadata: ArmResource): 
   return [];
 }
 
-function convertResourceUpdateOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
+function convertResourceUpdateOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>, resourcePropertiesModelName: string): TspArmResourceOperation[] {
   // TODO: TBaseParameters
   if (resourceMetadata.UpdateOperations.length) {
     const operation = resourceMetadata.UpdateOperations[0];
@@ -139,11 +141,15 @@ function convertResourceUpdateOperation(resourceMetadata: ArmResource, operation
       let kind, templateBody;
       if (propertiesProperty) {
         kind = operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
-        templateBody = propertiesProperty.schema.language.default.name;
-        generatedResourceObjects.add(bodyParam?.schema.language.default.name ?? "");
+        // TODO: if update properties are different from resource properties, we need to use a different model
+        templateBody = resourcePropertiesModelName;
+        generatedResourceObjects.set(bodyParam?.schema.language.default.name ?? "", `ResourceUpdateModel<${resourceMetadata.Name}>`);
+        if (propertiesProperty.schema.language.default.name !== resourcePropertiesModelName) {
+          generatedResourceObjects.set(propertiesProperty.schema.language.default.name, `ResourceUpdateModelProperties<${resourceMetadata.Name}, ${resourcePropertiesModelName}>`);
+        }
       } else if (tagsProperty) {
         kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
-        generatedResourceObjects.add(bodyParam?.schema.language.default.name ?? "");
+        generatedResourceObjects.set(bodyParam?.schema.language.default.name ?? "", `TagsUpdateModel<${resourceMetadata.Name}>`);
       } else if (bodyParam) {
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateBody = bodyParam.schema.language.default.name;
@@ -199,7 +205,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
       templateParameters.push(baseParameters);
     }
 
-    generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
+    generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
 
     converted.push({
       doc: operation.Description,
@@ -219,7 +225,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
 
-        generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
+        generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
           converted.push({
@@ -246,7 +252,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
     if (swaggerOperation) {
       const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
-      generatedResourceObjects.add(getSchemaResponseSchemaName(okResponse) ?? "");
+      generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
       converted.push({
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceListByParent",
@@ -271,9 +277,6 @@ function convertResourceActionOperations(resourceMetadata: ArmResource, operatio
         const okResponse = swaggerOperation?.responses?.filter((o) =>
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
-        const noContentResponse = swaggerOperation?.responses?.filter((o) =>
-          o.protocol.http?.statusCodes.includes("204"),
-        )?.[0];
         // TODO: deal with non-schema response for action
         let operationResponseName;
         if (okResponse && isResponseSchema(okResponse)) {
@@ -290,7 +293,8 @@ function convertResourceActionOperations(resourceMetadata: ArmResource, operatio
           baseParameters = "{}";
         }
         let kind;
-        if (noContentResponse) {
+        if (!okResponse) {
+          // TODO: Sync operation should have a 204 response
           kind = operation.IsLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
         } else {
           kind = operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
@@ -328,7 +332,7 @@ function convertResourceOtherGetOperations(resourceMetadata: ArmResource, operat
   return converted;
 }
 
-function getTspOperations(codeModel: CodeModel, armSchema: ArmResourceSchema): [TspArmResourceOperation[], CadlOperation[]] {
+function getTspOperations(codeModel: CodeModel, armSchema: ArmResourceSchema, resourcePropertiesModelName: string): [TspArmResourceOperation[], CadlOperation[]] {
   const resourceMetadata = armSchema.resourceMetadata;
   const operations = getResourceOperations(resourceMetadata);
   const tspOperations: TspArmResourceOperation[] = [];
@@ -343,7 +347,7 @@ function getTspOperations(codeModel: CodeModel, armSchema: ArmResourceSchema): [
   tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata));
 
   // patch update operation could either be patch for resource/tag or custom patch
-  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
+  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations, resourcePropertiesModelName));
 
   // delete operation
   tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));

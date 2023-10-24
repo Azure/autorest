@@ -249,6 +249,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchPool;
     },
     void
@@ -614,6 +615,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchPoolUpdate;
     },
     void
@@ -732,6 +734,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchPoolEnableAutoScaleParameters;
     },
     void
@@ -776,6 +779,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchPoolEvaluateAutoScaleParameters;
     },
     AutoScaleRun
@@ -856,6 +860,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchPoolResizeParameters;
     },
     void
@@ -979,6 +984,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchPool;
     },
     void
@@ -1055,6 +1061,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...NodeRemoveParameters;
     },
     void
@@ -1432,6 +1439,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJobUpdate;
     },
     void
@@ -1508,6 +1516,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJob;
     },
     void
@@ -1589,6 +1598,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJobDisableParameters;
     },
     void
@@ -1746,6 +1756,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJobTerminateParameters;
     },
     void
@@ -1792,6 +1803,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchJob;
     },
     void
@@ -2059,6 +2071,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...Certificate;
     },
     void
@@ -3077,6 +3090,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJobScheduleUpdate;
     },
     void
@@ -3155,6 +3169,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchJobSchedule;
     },
     void
@@ -3404,6 +3419,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchJobSchedule;
     },
     void
@@ -3507,6 +3523,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchTask;
     },
     void
@@ -3627,6 +3644,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...BatchTaskCollection;
     },
     TaskAddCollectionResult
@@ -3870,6 +3888,7 @@ not been modified since the specified time.
 """)
       @header
       `If-Unmodified-Since`?: utcDateTime;
+
       ...BatchTask;
     },
     void
@@ -4134,6 +4153,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...ComputeNodeUser;
     },
     void
@@ -4240,6 +4260,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...NodeUpdateUserParameters;
     },
     void
@@ -4331,6 +4352,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...NodeRebootParameters;
     },
     void
@@ -4379,6 +4401,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...NodeReimageParameters;
     },
     void
@@ -4426,6 +4449,7 @@ directly.
 """)
       @header
       `ocp-date`?: utcDateTime;
+
       ...NodeDisableSchedulingParameters;
     },
     void

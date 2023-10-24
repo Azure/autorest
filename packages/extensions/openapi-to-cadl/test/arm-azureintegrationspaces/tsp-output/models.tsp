@@ -46,12 +46,6 @@ model SpaceResourceProperties {
   description?: string;
 }
 
-@doc("The updatable properties of the Space.")
-model SpaceUpdateProperties {
-  @doc("The description of the resource.")
-  description?: string;
-}
-
 @doc("The properties of application.")
 model ApplicationProperties {
   @doc("The status of the last operation.")
@@ -78,15 +72,6 @@ model TrackingDataStore {
 
   @doc("The data store ingestion URI.")
   dataStoreIngestionUri: string;
-}
-
-@doc("The updatable properties of the Application.")
-model ApplicationUpdateProperties {
-  @doc("The description of the resource.")
-  description?: string;
-
-  @doc("The tracking data stores.")
-  trackingDataStores?: Record<TrackingDataStore>;
 }
 
 @doc("The properties of business process.")
@@ -155,27 +140,6 @@ model BusinessProcessMappingItem {
 
   @doc("The mapping item operation type of the business process.")
   operationType?: string;
-}
-
-@doc("The updatable properties of the BusinessProcess.")
-model BusinessProcessUpdateProperties {
-  @doc("The description of the business process.")
-  description?: string;
-
-  @doc("The table name of the business process.")
-  tableName?: string;
-
-  @doc("The tracking data store reference name.")
-  trackingDataStoreReferenceName?: string;
-
-  @doc("The business process identifier.")
-  identifier?: BusinessProcessIdentifier;
-
-  @doc("The business process stages.")
-  businessProcessStages?: Record<BusinessProcessStage>;
-
-  @doc("The business process mapping.")
-  businessProcessMapping?: Record<BusinessProcessMappingItem>;
 }
 
 @doc("The business process development artifact get or delete request.")
@@ -350,13 +314,4 @@ model InfrastructureResourceProperties {
 
   @doc("The id of the infrastructure resource.")
   resourceId: string;
-}
-
-@doc("The updatable properties of the InfrastructureResource.")
-model InfrastructureResourceUpdateProperties {
-  @doc("The type of the infrastructure resource.")
-  resourceType?: string;
-
-  @doc("The id of the infrastructure resource.")
-  resourceId?: string;
 }

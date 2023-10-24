@@ -150,6 +150,7 @@ op CreateOrUpdateUser is Azure.Core.Foundations.Operation<
     @doc("The user id, either an AAD object ID or certificate fingerprint.")
     @path
     userId: string;
+
     ...LedgerUser;
   },
   LedgerUser

@@ -73,6 +73,7 @@ exists, the data of that project is replaced.
       @maxLength(100)
       @path
       projectName: string;
+
       ...ExportedProject;
     },
     void
@@ -87,6 +88,7 @@ exists, the data of that project is replaced.
       @maxLength(100)
       @path
       projectName: string;
+
       ...TrainingJobOptions;
     },
     void
@@ -121,6 +123,7 @@ exists, the data of that project is replaced.
       @maxLength(100)
       @path
       projectName: string;
+
       ...SwapDeploymentsOptions;
     },
     void

@@ -23,6 +23,7 @@ numeric, underscore or hyphen characters.
       @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
+
       ...Test;
     },
     Test
@@ -145,6 +146,7 @@ numeric, underscore or hyphen characters.
       @doc("File type")
       @query("fileType")
       fileType?: FileType;
+
       ...bytes;
     },
     FileInfo
@@ -230,6 +232,7 @@ numeric, underscore or hyphen characters.
       @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
+
       ...TestAppComponents;
     },
     TestAppComponents
@@ -269,6 +272,7 @@ numeric, underscore or hyphen characters.
       @pattern("^[a-z0-9_-]*$")
       @path
       testId: string;
+
       ...TestServerMetricConfig;
     },
     TestServerMetricConfig
@@ -319,6 +323,7 @@ in the request body.
 """)
       @query("oldTestRunId")
       oldTestRunId?: string;
+
       ...TestRun;
     },
     TestRun
@@ -528,6 +533,7 @@ The timespan of the query. It is a string with the following format
 """)
       @query("timespan")
       timespan: string;
+
       ...MetricRequestPayload;
     },
     Metrics
@@ -576,6 +582,7 @@ numeric, underscore or hyphen characters.
       @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
+
       ...TestRunAppComponents;
     },
     TestRunAppComponents
@@ -621,6 +628,7 @@ numeric, underscore or hyphen characters.
       @pattern("^[a-z0-9_-]*$")
       @path
       testRunId: string;
+
       ...TestRunServerMetricConfig;
     },
     TestRunServerMetricConfig

@@ -119,6 +119,7 @@ op DetectAnomaly is Azure.Core.Foundations.Operation<
     @doc("Model identifier")
     @path
     modelId: string;
+
     ...DetectionRequest;
   },
   void
@@ -133,6 +134,7 @@ op LastDetectAnomaly is Azure.Core.Foundations.Operation<
     @doc("Model identifier")
     @path
     modelId: string;
+
     ...LastDetectionRequest;
   },
   LastDetectionResult

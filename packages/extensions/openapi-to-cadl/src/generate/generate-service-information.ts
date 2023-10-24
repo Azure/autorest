@@ -13,8 +13,11 @@ export function generateServiceInformation(program: CadlProgram) {
 
   definitions.push(`@service({
     title: "${serviceInformation.name}"
-    ${serviceInformation.version ? `, version: "${serviceInformation.version}"` : ""}
   })`);
+
+  if (serviceInformation.version) {
+    definitions.push(`@versioned(Versions)`)
+  }
 
   if (!isArm && serviceInformation.endpoint) {
     definitions.push(`@server("${serviceInformation.endpoint}", ${JSON.stringify(serviceInformation.doc) ?? ""}`);
@@ -40,11 +43,20 @@ export function generateServiceInformation(program: CadlProgram) {
   }
   const serviceDoc = generateDocs(serviceInformation);
   serviceDoc && definitions.push(serviceDoc);
-  if (isArm) {
-    definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
-    definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
-  }
+
   definitions.push(getNamespace(program));
+
+  if (serviceInformation.version) {
+    definitions.push("");
+    definitions.push(`@doc("The available API versions.")`);
+    definitions.push(`enum Versions {`);
+    if (isArm) {
+      definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
+      definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
+    }
+    definitions.push(`v${serviceInformation.version.replaceAll("-", "_")}: "${serviceInformation.version}",`);
+    definitions.push("}");
+  }
 
   return definitions.join("\n");
 }

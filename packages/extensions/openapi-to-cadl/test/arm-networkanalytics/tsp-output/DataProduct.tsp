@@ -19,6 +19,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @key("dataProductName")
   @segment("dataProducts")
   name: string;
+
   ...ManagedServiceIdentity;
 }
 
@@ -29,7 +30,7 @@ interface DataProducts {
   @doc("Create data product resource.")
   create is ArmResourceCreateOrUpdateAsync<DataProduct>;
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductUpdateProperties>;
+  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
   @doc("List data products by resource group.")

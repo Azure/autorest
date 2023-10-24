@@ -16,6 +16,7 @@ interface completionsOperations {
     {
       @path
       `deployment-id`: string;
+
       ...Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplicationJsonSchema;
     },
     PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema
@@ -32,6 +33,7 @@ interface embeddingsOperations {
       @doc("deployment id of the model which was deployed")
       @path
       `deployment-id`: string;
+
       ...Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },
     void

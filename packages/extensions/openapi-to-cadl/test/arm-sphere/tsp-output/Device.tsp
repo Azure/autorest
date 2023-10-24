@@ -37,7 +37,7 @@ product names to claim a device to the catalog only.
 Update a Device. Use '.unassigned' or '.default' for the device group and
 product names to move a device to the catalog level.
 """)
-  update is ArmResourcePatchAsync<Device, DeviceUpdateProperties>;
+  update is ArmResourcePatchAsync<Device, DeviceProperties>;
   @doc("Delete a Device")
   delete is ArmResourceDeleteAsync<Device>;
   @doc("""
