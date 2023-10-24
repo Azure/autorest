@@ -129,7 +129,7 @@ export function tagSchemaAsResource(schema: ObjectSchema): void {
   const resourcesMetadata = getArmResourcesMetadata();
 
   for (const resourceName in resourcesMetadata) {
-    if (resourceName.toLowerCase() === schema.language.default.name.toLowerCase()) {
+    if (resourcesMetadata[resourceName].SwaggerModelName.toLowerCase() === schema.language.default.name.toLowerCase()) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
       return;
     }

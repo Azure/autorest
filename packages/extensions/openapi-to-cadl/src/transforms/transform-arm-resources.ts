@@ -47,6 +47,13 @@ export function replaceGeneratedResourceObject(name: string): string {
   return generatedResourceObjects.get(name) ?? name;
 }
 
+function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {
+  if (generatedResourceObjects.has(name)) {
+    return;
+  }
+  generatedResourceObjects.set(name, mapping);
+}
+
 export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
   const fixMe: string[] = [];
 
@@ -55,7 +62,9 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     fixMe.push(`// FIXME: ${schema.resourceMetadata.Name} has more than one parent, currently converter will only use the first one`)
   }
 
-  let propertiesModelName = schema.properties?.find((p) => p.language.default.name === "properties")?.schema.language.default.name;
+  addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.resourceMetadata.Name);
+
+  let propertiesModelName = schema.properties?.find((p) => p.serializedName === "properties")?.schema.language.default.name;
 
   // TODO: deal with resources that has no properties property
   if (!propertiesModelName) {
@@ -93,7 +102,6 @@ function convertResourceReadOperation(resourceMetadata: ArmResource): TspArmReso
   // every resource should have a get operation
   // TODO: TBaseParameters
   const operation = resourceMetadata.GetOperations[0];
-  generatedResourceObjects.set(resourceMetadata.Name, resourceMetadata.Name);
   return [{
     doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
     kind: "ArmResourceRead",
@@ -127,10 +135,10 @@ function convertResourceUpdateOperation(resourceMetadata: ArmResource, operation
       const swaggerOperation = operations[resourceMetadata.UpdateOperations[0].OperationID];
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
-        (p) => p.language.default.name === "properties",
+        (p) => p.serializedName === "properties",
       );
       const tagsProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
-        (p) => p.language.default.name === "tags",
+        (p) => p.serializedName === "tags",
       );
       const fixMe: string[] = [];
       if (!bodyParam || (!propertiesProperty && !tagsProperty)) {
@@ -143,13 +151,13 @@ function convertResourceUpdateOperation(resourceMetadata: ArmResource, operation
         kind = operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
         // TODO: if update properties are different from resource properties, we need to use a different model
         templateBody = resourcePropertiesModelName;
-        generatedResourceObjects.set(bodyParam?.schema.language.default.name ?? "", `ResourceUpdateModel<${resourceMetadata.Name}>`);
+        addGeneratedResourceObjectIfNotExits(bodyParam?.schema.language.default.name ?? "", `ResourceUpdateModel<${resourceMetadata.Name}>`);
         if (propertiesProperty.schema.language.default.name !== resourcePropertiesModelName) {
-          generatedResourceObjects.set(propertiesProperty.schema.language.default.name, `ResourceUpdateModelProperties<${resourceMetadata.Name}, ${resourcePropertiesModelName}>`);
+          addGeneratedResourceObjectIfNotExits(propertiesProperty.schema.language.default.name, `ResourceUpdateModelProperties<${resourceMetadata.Name}, ${resourcePropertiesModelName}>`);
         }
       } else if (tagsProperty) {
         kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
-        generatedResourceObjects.set(bodyParam?.schema.language.default.name ?? "", `TagsUpdateModel<${resourceMetadata.Name}>`);
+        addGeneratedResourceObjectIfNotExits(bodyParam?.schema.language.default.name ?? "", `TagsUpdateModel<${resourceMetadata.Name}>`);
       } else if (bodyParam) {
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateBody = bodyParam.schema.language.default.name;
@@ -205,7 +213,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
       templateParameters.push(baseParameters);
     }
 
-    generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
+    addGeneratedResourceObjectIfNotExits(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
 
     converted.push({
       doc: operation.Description,
@@ -225,7 +233,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
 
-        generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
+        addGeneratedResourceObjectIfNotExits(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
           converted.push({
@@ -252,7 +260,7 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
     if (swaggerOperation) {
       const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
 
-      generatedResourceObjects.set(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
+      addGeneratedResourceObjectIfNotExits(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
       converted.push({
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceListByParent",
