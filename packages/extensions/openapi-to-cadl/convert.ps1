@@ -3,7 +3,7 @@ param(
     [string]$swaggerConfigFile,
     [string]$outputFolder,
     [string]$csharpCodegen = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@autorest/csharp/-/csharp-3.0.0-alpha.20231017.8.tgz",
-    [string]$converterCodegen = "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzE5ODY0MS9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-cadl-0.6.0-ci.6969a70de.tgz"
+    [string]$converterCodegen = "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzE5ODY3OC9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-cadl-0.6.0-ci.83cedcacb.tgz"
 )
 
 function GenerateMetadata ()
