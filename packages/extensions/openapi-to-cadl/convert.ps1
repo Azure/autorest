@@ -3,13 +3,13 @@ param(
     [string]$swaggerConfigFile,
     [string]$outputFolder,
     [string]$csharpCodegen = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@autorest/csharp/-/csharp-3.0.0-alpha.20231017.8.tgz",
-    [string]$converterCodegen = ""
+    [string]$converterCodegen = "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzE5ODY0MS9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-cadl-0.6.0-ci.6969a70de.tgz"
 )
 
 function GenerateMetadata ()
 {
     Write-Host "##Generating metadata with csharp codegen in $outputFolder with $csharpCodegen"
-    $cmd = "autorest --csharp --max-memory-size=8192 --use=$csharpCodegen --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
+    $cmd = "autorest --csharp --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
@@ -23,7 +23,7 @@ function GenerateMetadata ()
 function DoConvert ()
 {
     Write-Host "##Converting from swagger to tsp with in $outputFolder with $converterCodegen"
-    $cmd = "autorest --openapi-to-cadl --isArm --use=$converterCodegen --output-folder=$outputFolder --src-path=tsp-output $swaggerConfigFile"
+    $cmd = "autorest --openapi-to-cadl --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder --src-path=tsp-output $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
