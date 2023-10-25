@@ -25,5 +25,5 @@ stages:
             displayName: Pack packages
 
           - script: |
-              NPM_AUTH_TOKEN="$(azure-sdk-devops-npm-token)" npx @microsoft/rush publish --publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --include-all --set-access-level public
+              npx @microsoft/rush publish --publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --npm-auth-token "$(azure-sdk-devops-npm-token)" --include-all --set-access-level public
             displayName: Publish packages
