@@ -10,12 +10,12 @@ namespace: "Microsoft.Storage"
 
 ### Config for csharp
 
-``` yaml
+```yaml
 modelerfour:
   flatten-payloads: false
 
 list-exception:
-- /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+  - /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
 
 # override-operation-name:
 #   StorageAccounts_CheckNameAvailability: CheckStorageAccountNameAvailability
@@ -27,13 +27,13 @@ request-path-to-singleton-resource:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}: inventoryPolicies/default
 
 format-by-name-rules:
-  'tenantId': 'uuid'
-  'ETag': 'etag'
-  'location': 'azure-location'
-  '*Uri': 'Uri'
-  '*Uris': 'Uri'
-  '*Guid': 'uuid'
-  'ifMatch': 'etag'
+  "tenantId": "uuid"
+  "ETag": "etag"
+  "location": "azure-location"
+  "*Uri": "Uri"
+  "*Uris": "Uri"
+  "*Guid": "uuid"
+  "ifMatch": "etag"
 
 acronym-mapping:
   CPU: Cpu
@@ -70,20 +70,20 @@ acronym-mapping:
   PUT: Put
 
 prepend-rp-prefix:
-- CorsRules
-- CorsRule
-- CustomDomain
-- DnsEndpointType
-- ListKeyExpand
-- MinimumTlsVersion
-- ProvisioningState
-- PermissionScope
-- SshPublicKey
-- PublicNetworkAccess
-- RoutingPreference
-- RoutingChoice
-- UsageName
-- UsageUnit
+  - CorsRules
+  - CorsRule
+  - CustomDomain
+  - DnsEndpointType
+  - ListKeyExpand
+  - MinimumTlsVersion
+  - ProvisioningState
+  - PermissionScope
+  - SshPublicKey
+  - PublicNetworkAccess
+  - RoutingPreference
+  - RoutingChoice
+  - UsageName
+  - UsageUnit
 
 # rename-mapping:
 #   BlobServiceProperties: BlobService
@@ -291,11 +291,11 @@ directive:
   - from: swagger-document
     where: $.definitions.Encryption
     transform: $.required = undefined; # this is a fix for swagger issue, and it should be resolved in azure-rest-api-specs/pull/19357
-# this is a temporary fix
+  # this is a temporary fix
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}"].put.parameters
     transform: $[2].required = true
-# convenience change: expand the array result out
+  # convenience change: expand the array result out
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"].post
     transform: >

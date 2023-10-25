@@ -64,8 +64,10 @@ function transformResponses(responses: SchemaResponse[] = [], codeModel: CodeMod
 export function transformOperation(operation: Operation, codeModel: CodeModel): CadlOperation[] {
   const { isArm } = getOptions();
   if (isArm) {
-    if ((operation as OperationWithResourceOperationFlag).isResourceOperation ||
-      transformRoute(operation.requests?.[0].protocol)?.match(/^\/providers\/[^/]+\/operations$/)) {
+    if (
+      (operation as OperationWithResourceOperationFlag).isResourceOperation ||
+      transformRoute(operation.requests?.[0].protocol)?.match(/^\/providers\/[^/]+\/operations$/)
+    ) {
       return [];
     }
   }

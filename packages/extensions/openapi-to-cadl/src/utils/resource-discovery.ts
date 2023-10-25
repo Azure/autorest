@@ -155,10 +155,8 @@ const _ArmCoreTypes = [
   "Origin",
 ];
 
-export function filterResourceRelatedObjects(
-  objects: CadlObject[]
-): CadlObject[] {
-  return objects.filter(o => !_ArmCoreTypes.includes(o.name) && !isGeneratedResourceObject(o.name));
+export function filterResourceRelatedObjects(objects: CadlObject[]): CadlObject[] {
+  return objects.filter((o) => !_ArmCoreTypes.includes(o.name) && !isGeneratedResourceObject(o.name));
 }
 
 export function isTspArmResource(schema: CadlObject): schema is TspArmResource {

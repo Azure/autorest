@@ -151,8 +151,13 @@ export interface Models {
 export type ArmResourceKind = "TrackedResource" | "ProxyResource" | "ExtensionResource";
 export type ArmResourceOperationKind = "TrackedResourceOperations" | "ProxyResourceOperations";
 
-const FIRST_LEVEL_RESOURCE = ["ResourceGroupResource", "SubscriptionResource", "ManagementGroupResource", "TenantResource"] as const;
-export type FirstLevelResource = (typeof FIRST_LEVEL_RESOURCE)[number];
+const FIRST_LEVEL_RESOURCE = [
+  "ResourceGroupResource",
+  "SubscriptionResource",
+  "ManagementGroupResource",
+  "TenantResource",
+] as const;
+export type FirstLevelResource = typeof FIRST_LEVEL_RESOURCE[number];
 
 export function isFirstLevelResource(value: string): value is FirstLevelResource {
   return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);
@@ -169,29 +174,31 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrReplaceSync"
-  | "ArmResourceCreateOrUpdateAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrReplaceSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
 }
 
-export type MSIType = "Azure.ResourceManager.ManagedServiceIdentity" | "Azure.ResourceManager.ManagedSystemAssignedIdentity";
+export type MSIType =
+  | "Azure.ResourceManager.ManagedServiceIdentity"
+  | "Azure.ResourceManager.ManagedSystemAssignedIdentity";
 export interface TspArmResource extends CadlObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;

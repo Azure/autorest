@@ -45,7 +45,11 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(fixme);
     }
     definitions.push(generateDocs(operation));
-    definitions.push(`${operation.name} is ${operation.kind}<${operation.templateParameters.map(replaceGeneratedResourceObject).join()}>`);
+    definitions.push(
+      `${operation.name} is ${operation.kind}<${operation.templateParameters
+        .map(replaceGeneratedResourceObject)
+        .join()}>`,
+    );
   }
   for (const operation of resource.normalOperations) {
     definitions.push(generateOperation(operation));

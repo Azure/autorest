@@ -16,7 +16,7 @@ export function generateServiceInformation(program: CadlProgram) {
   })`);
 
   if (serviceInformation.version) {
-    definitions.push(`@versioned(Versions)`)
+    definitions.push(`@versioned(Versions)`);
   }
 
   if (!isArm && serviceInformation.endpoint) {

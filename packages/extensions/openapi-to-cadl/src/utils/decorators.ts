@@ -104,19 +104,24 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
             }
             break;
           case SerializationStyle.PipeDelimited:
-            format = 'pipes';
+            format = "pipes";
             break;
           case SerializationStyle.Simple:
-            format = 'csv';
+            format = "csv";
             break;
           case SerializationStyle.SpaceDelimited:
             format = "ssv";
             break;
           case SerializationStyle.TabDelimited:
-            format = 'tsv';
+            format = "tsv";
             break;
         }
-        locationDecorator.arguments = [{ value: `{name: "${element.language.default.serializedName}", format: "${format}"}`, options: { unwrap: true } }];
+        locationDecorator.arguments = [
+          {
+            value: `{name: "${element.language.default.serializedName}", format: "${format}"}`,
+            options: { unwrap: true },
+          },
+        ];
       }
     }
 
