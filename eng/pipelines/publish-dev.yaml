@@ -1,0 +1,29 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+stages:
+  - stage: npm
+    jobs:
+      - job: dev
+        displayName: Publish dev
+        steps:
+          - template: ./templates/build.yaml
+
+          - script: |
+              commitId=$(git rev-parse --short HEAD)
+              npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
+            displayName: Bump versions
+
+          - script: npx @microsoft/rush publish --publish --pack --include-all
+            displayName: Pack packages
+
+          - script: |
+              NPM_AUTH_TOKEN="$(azure-sdk-devops-npm-token)" npx @microsoft/rush publish --publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --include-all --set-access-level public
+            displayName: Publish packages
