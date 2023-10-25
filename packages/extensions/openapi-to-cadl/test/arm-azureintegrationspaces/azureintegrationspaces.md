@@ -5,13 +5,5 @@ clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
 isArm: true
-namespace: "Azure.ResourceManager.Integration.Spaces"
-```
-
-### Config for csharp
-
-```yaml
-save-inputs: true
-request-path-to-resource-data:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}: ApplicationResource
+namespace: "Microsoft.IntegrationSpaces"
 ```

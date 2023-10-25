@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An certificate resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {
@@ -31,6 +31,8 @@ interface Certificates {
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
+      ...BaseParameters<Certificate>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -48,7 +50,6 @@ interface Certificates {
       maxpagesize?: int32;
     }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,

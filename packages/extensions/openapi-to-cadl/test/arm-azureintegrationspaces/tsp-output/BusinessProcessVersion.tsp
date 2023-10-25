@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 @doc("A business process version.")
 @parentResource(BusinessProcess)
 model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
@@ -28,6 +28,8 @@ interface BusinessProcessVersions {
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     {
+      ...BaseParameters<BusinessProcessVersion>;
+
       @doc("The number of result items to return.")
       @query("top")
       top?: int32;

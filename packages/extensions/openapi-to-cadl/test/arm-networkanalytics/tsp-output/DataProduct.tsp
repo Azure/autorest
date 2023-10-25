@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.NetworkAnalytics;
+namespace Microsoft.NetworkAnalytics;
 @doc("The data product resource.")
 model DataProduct is TrackedResource<DataProductProperties> {
   @doc("The data product resource name")

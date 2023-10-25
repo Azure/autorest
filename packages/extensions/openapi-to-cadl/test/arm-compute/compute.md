@@ -5,7 +5,7 @@ clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
 isArm: true
-namespace: "Azure.ResourceManager.Compute"
+namespace: "Microsoft.Compute"
 ```
 
 ### Config for csharp
@@ -122,55 +122,55 @@ prepend-rp-prefix:
 #   show-serialized-names: true
 
 rename-mapping:
-#   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
-#   SubResource: ComputeWriteableSubResourceData
-#   SubResourceReadOnly: ComputeSubResourceData
-#   HyperVGenerationType: HyperVGeneration
-#   HyperVGenerationTypes: HyperVGeneration
-#   VirtualMachineExtension.properties.type: ExtensionType
-#   VirtualMachineExtensionUpdate.properties.type: ExtensionType
-#   VirtualMachineScaleSetExtension.properties.type: ExtensionType
-#   VirtualMachineScaleSetExtensionUpdate.properties.type: ExtensionType
-#   VirtualMachineScaleSetVMExtension.properties.type: ExtensionType
-#   VirtualMachineScaleSetVMExtensionUpdate.properties.type: ExtensionType
-#   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
-#   OperatingSystemTypes: SupportedOperatingSystemType
-#   VirtualMachineImageResource: VirtualMachineImageBase
-#   RestorePointCollectionSourceProperties: RestorePointCollectionSource
-#   RestorePointExpandOptions: RestorePointExpand
-#   RestorePointCollectionExpandOptions: RestorePointCollectionExpand
-#   ImageReference.sharedGalleryImageId: sharedGalleryImageUniqueId
-#   UpdateResource: ComputeResourcePatch
-#   SubResourceWithColocationStatus: ComputeSubResourceDataWithColocationStatus
-#   SshPublicKey: SshPublicKeyConfiguration
-#   SshPublicKeyResource: SshPublicKey
-#   LogAnalyticsOperationResult: LogAnalytics
-#   PrivateLinkResource: ComputePrivateLinkResourceData
-#   PrivateLinkResource.properties.groupId: -|arm-id
-#   Disk: ManagedDisk
-#   Disk.managedBy: -|arm-id
-#   Disk.managedByExtended: -|arm-id
-#   Disk.properties.diskAccessId: -|arm-id
-#   DiskUpdate.properties.diskAccessId: -|arm-id
-#   DiskRestorePoint.properties.sourceResourceId: -|arm-id
-#   DiskRestorePoint.properties.diskAccessId: -|arm-id
-#   DiskRestorePoint.properties.sourceResourceLocation: -|azure-location
-#   Encryption: DiskEncryption
-#   Encryption.diskEncryptionSetId: -|arm-id
-#   Encryption.type: EncryptionType
-#   CreationData: DiskCreationData
-#   CreationData.storageAccountId: -|arm-id
-#   CreationData.sourceResourceId: -|arm-id
-#   Architecture: ArchitectureType
-#   OSFamily: CloudServiceOSFamily
-#   OSFamily.name: ResourceName
-#   OSFamily.properties.name: OSFamilyName
-#   OSVersion: CloudServiceOSVersion
-#   UpdateDomain: UpdateDomainIdentifier
-#   UpdateDomain.id: -|arm-id
-#   Extension: CloudServiceExtension
-#   RoleInstance: CloudServiceRoleInstance
-#   UpdateResourceDefinition: GalleryUpdateResourceData
+  #   DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey
+  #   SubResource: ComputeWriteableSubResourceData
+  #   SubResourceReadOnly: ComputeSubResourceData
+  #   HyperVGenerationType: HyperVGeneration
+  #   HyperVGenerationTypes: HyperVGeneration
+  #   VirtualMachineExtension.properties.type: ExtensionType
+  #   VirtualMachineExtensionUpdate.properties.type: ExtensionType
+  #   VirtualMachineScaleSetExtension.properties.type: ExtensionType
+  #   VirtualMachineScaleSetExtensionUpdate.properties.type: ExtensionType
+  #   VirtualMachineScaleSetVMExtension.properties.type: ExtensionType
+  #   VirtualMachineScaleSetVMExtensionUpdate.properties.type: ExtensionType
+  #   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
+  #   OperatingSystemTypes: SupportedOperatingSystemType
+  #   VirtualMachineImageResource: VirtualMachineImageBase
+  #   RestorePointCollectionSourceProperties: RestorePointCollectionSource
+  #   RestorePointExpandOptions: RestorePointExpand
+  #   RestorePointCollectionExpandOptions: RestorePointCollectionExpand
+  #   ImageReference.sharedGalleryImageId: sharedGalleryImageUniqueId
+  #   UpdateResource: ComputeResourcePatch
+  #   SubResourceWithColocationStatus: ComputeSubResourceDataWithColocationStatus
+  #   SshPublicKey: SshPublicKeyConfiguration
+  #   SshPublicKeyResource: SshPublicKey
+  #   LogAnalyticsOperationResult: LogAnalytics
+  #   PrivateLinkResource: ComputePrivateLinkResourceData
+  #   PrivateLinkResource.properties.groupId: -|arm-id
+  #   Disk: ManagedDisk
+  #   Disk.managedBy: -|arm-id
+  #   Disk.managedByExtended: -|arm-id
+  #   Disk.properties.diskAccessId: -|arm-id
+  #   DiskUpdate.properties.diskAccessId: -|arm-id
+  #   DiskRestorePoint.properties.sourceResourceId: -|arm-id
+  #   DiskRestorePoint.properties.diskAccessId: -|arm-id
+  #   DiskRestorePoint.properties.sourceResourceLocation: -|azure-location
+  #   Encryption: DiskEncryption
+  #   Encryption.diskEncryptionSetId: -|arm-id
+  #   Encryption.type: EncryptionType
+  #   CreationData: DiskCreationData
+  #   CreationData.storageAccountId: -|arm-id
+  #   CreationData.sourceResourceId: -|arm-id
+  #   Architecture: ArchitectureType
+  #   OSFamily: CloudServiceOSFamily
+  #   OSFamily.name: ResourceName
+  #   OSFamily.properties.name: OSFamilyName
+  #   OSVersion: CloudServiceOSVersion
+  #   UpdateDomain: UpdateDomainIdentifier
+  #   UpdateDomain.id: -|arm-id
+  #   Extension: CloudServiceExtension
+  #   RoleInstance: CloudServiceRoleInstance
+  #   UpdateResourceDefinition: GalleryUpdateResourceData
   StorageAccountType: ImageStorageAccountType
 #   SharingProfile.permissions: permission
 #   UserArtifactManage: UserArtifactManagement

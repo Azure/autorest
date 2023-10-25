@@ -18,7 +18,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("For test.")
-namespace Azure.ResourceManager.Test;
+namespace Microsoft.Test;
 
 @doc("The available API versions.")
 enum Versions {

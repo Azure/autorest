@@ -1,6 +1,5 @@
 import {
   CodeModel,
-  HttpMethod,
   ObjectSchema,
   Operation,
   Parameter,
@@ -9,7 +8,7 @@ import {
 } from "@autorest/codemodel";
 import _ from "lodash";
 import { getSession } from "../autorest-session";
-import { generateParameters } from "../generate/generate-operations";
+import { generateParameter } from "../generate/generate-parameter";
 import {
   ArmResourceKind,
   CadlDecorator,
@@ -21,21 +20,17 @@ import {
   TspArmResourceOperation,
   isFirstLevelResource,
 } from "../interfaces";
-import { getHttpMethod } from "../utils/operations";
 import {
   ArmResource,
   ArmResourceSchema,
   OperationWithResourceOperationFlag,
   _ArmResourceOperation,
-  getArmResourcesMetadata,
   getResourceOperations,
   getSingletonResouceListOperation,
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
 import { transformParameter, transformRequest } from "./transform-operations";
-
-const resourceParameters = ["subscriptionId", "resourceGroupName", "resourceName"];
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -98,41 +93,43 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   };
 }
 
-function convertResourceReadOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
+function convertResourceReadOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
   // every resource should have a get operation
-  // TODO: TBaseParameters
   const operation = resourceMetadata.GetOperations[0];
+  const swaggerOperation = operations[operation.OperationID];
+  const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
   return [{
     doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
     kind: "ArmResourceRead",
     name: getOperationName(operation.OperationID),
-    templateParameters: [resourceMetadata.Name],
+    templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
   }];
 }
 
-function convertResourceCreateOrUpdateOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
-  // TODO: TBaseParameters
+function convertResourceCreateOrUpdateOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
   if (resourceMetadata.CreateOperations.length) {
     const operation = resourceMetadata.CreateOperations[0];
+    const swaggerOperation = operations[operation.OperationID];
+    const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     return [{
       doc: operation.Description,
       kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
       name: getOperationName(operation.OperationID),
-      templateParameters: [resourceMetadata.Name],
+      templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
     }];
   }
   return [];
 }
 
 function convertResourceUpdateOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>, resourcePropertiesModelName: string): TspArmResourceOperation[] {
-  // TODO: TBaseParameters
   if (resourceMetadata.UpdateOperations.length) {
     const operation = resourceMetadata.UpdateOperations[0];
     if (
       !resourceMetadata.CreateOperations.length ||
       resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
     ) {
-      const swaggerOperation = operations[resourceMetadata.UpdateOperations[0].OperationID];
+      const swaggerOperation = operations[operation.OperationID];
+      const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
         (p) => p.serializedName === "properties",
@@ -146,31 +143,37 @@ function convertResourceUpdateOperation(resourceMetadata: ArmResource, operation
           "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
         );
       }
-      let kind, templateBody;
+      let kind
+      const templateParameters = [resourceMetadata.Name];
       if (propertiesProperty) {
         kind = operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
         // TODO: if update properties are different from resource properties, we need to use a different model
-        templateBody = resourcePropertiesModelName;
+        templateParameters.push(resourcePropertiesModelName);
         addGeneratedResourceObjectIfNotExits(bodyParam?.schema.language.default.name ?? "", `ResourceUpdateModel<${resourceMetadata.Name}>`);
         if (propertiesProperty.schema.language.default.name !== resourcePropertiesModelName) {
           addGeneratedResourceObjectIfNotExits(propertiesProperty.schema.language.default.name, `ResourceUpdateModelProperties<${resourceMetadata.Name}, ${resourcePropertiesModelName}>`);
         }
       } else if (tagsProperty) {
         kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
+        // TODO: if update properties are different from tag properties, we need to use a different model
+        templateParameters.push(`TagsUpdateModel<${resourceMetadata.Name}>`);
         addGeneratedResourceObjectIfNotExits(bodyParam?.schema.language.default.name ?? "", `TagsUpdateModel<${resourceMetadata.Name}>`);
       } else if (bodyParam) {
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateBody = bodyParam.schema.language.default.name;
+        templateParameters.push(bodyParam.schema.language.default.name);
       } else {
         kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateBody = "{}";
+        templateParameters.push("{}");
+      }
+      if (baseParameters) {
+        templateParameters.push(baseParameters);
       }
       return [{
         fixMe,
         doc: operation.Description,
         kind: kind as any,
         name: getOperationName(operation.OperationID),
-        templateParameters: templateBody ? [resourceMetadata.Name, templateBody] : [resourceMetadata.Name],
+        templateParameters,
       }];
     }
   }
@@ -179,10 +182,10 @@ function convertResourceUpdateOperation(resourceMetadata: ArmResource, operation
 
 function convertResourceDeleteOperation(resourceMetadata: ArmResource, operations: Record<string, Operation>): TspArmResourceOperation[] {
   if (resourceMetadata.DeleteOperations.length) {
-    // TODO: TBaseParameters
     const operation = resourceMetadata.DeleteOperations[0];
-    const swaggerOperation = operations[resourceMetadata.DeleteOperations[0].OperationID];
+    const swaggerOperation = operations[operation.OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+    const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
 
     return [{
       doc: operation.Description,
@@ -192,7 +195,7 @@ function convertResourceDeleteOperation(resourceMetadata: ArmResource, operation
           : "ArmResourceDeleteWithoutOkAsync"
         : "ArmResourceDeleteSync",
       name: getOperationName(operation.OperationID),
-      templateParameters: [resourceMetadata.Name],
+      templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
     }];
   }
   return [];
@@ -205,10 +208,10 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
   if (resourceMetadata.ListOperations.length) {
     // TODO: TParentName, TParentFriendlyName
     const operation = resourceMetadata.ListOperations[0];
-    const swaggerOperation = operations[resourceMetadata.ListOperations[0].OperationID];
+    const swaggerOperation = operations[operation.OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const templateParameters = [resourceMetadata.Name];
-    const baseParameters = swaggerOperation ? getOperationParameters(swaggerOperation, resourceMetadata) : "";
+    const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     if (baseParameters) {
       templateParameters.push(baseParameters);
     }
@@ -232,22 +235,27 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
         const okResponse = swaggerOperation?.responses?.filter((o) =>
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
+        const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
 
         addGeneratedResourceObjectIfNotExits(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
+          const templateParameters = [resourceMetadata.Name, `LocationScope<${resourceMetadata.Name}>`];
+          if (baseParameters) {
+            templateParameters.push(baseParameters);
+          }
           converted.push({
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
-            templateParameters: [resourceMetadata.Name, `LocationScope<${resourceMetadata.Name}>`],
+            templateParameters,
           });
         } else {
           converted.push({
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
-            templateParameters: [resourceMetadata.Name],
+            templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
           });
         }
       }
@@ -259,13 +267,14 @@ function convertResourceListOperations(resourceMetadata: ArmResource, operations
     const swaggerOperation = getSingletonResouceListOperation(resourceMetadata);
     if (swaggerOperation) {
       const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+      const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
 
       addGeneratedResourceObjectIfNotExits(getSchemaResponseSchemaName(okResponse) ?? "", `ResourceListResult<${resourceMetadata.Name}>`);
       converted.push({
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceListByParent",
         name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        templateParameters: [resourceMetadata.Name],
+        templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
       });
       (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
     }
@@ -281,7 +290,6 @@ function convertResourceActionOperations(resourceMetadata: ArmResource, operatio
     for (const operation of resourceMetadata.OtherOperations) {
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
-        let baseParameters = swaggerOperation ? getOperationParameters(swaggerOperation, resourceMetadata) : "";
         const okResponse = swaggerOperation?.responses?.filter((o) =>
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
@@ -293,13 +301,9 @@ function convertResourceActionOperations(resourceMetadata: ArmResource, operatio
           }
         }
 
-        const fixMe: string[] = [];
-        if (!baseParameters) {
-          fixMe.push(
-            "// FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter",
-          );
-          baseParameters = "{}";
-        }
+        // TODO: deal with request without body
+        const request = buildOperationBodyRequest(swaggerOperation, resourceMetadata) ?? "{}";
+        const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {
           // TODO: Sync operation should have a 204 response
@@ -307,14 +311,18 @@ function convertResourceActionOperations(resourceMetadata: ArmResource, operatio
         } else {
           kind = operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
         }
+        const templateParameters = [resourceMetadata.Name, request];
+        if (okResponse) {
+          templateParameters.push(operationResponseName ?? "{}");
+        }
+        if (baseParameters) {
+          templateParameters.push(baseParameters);
+        }
         converted.push({
-          fixMe,
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          templateParameters: okResponse
-            ? [resourceMetadata.Name, baseParameters, operationResponseName ?? "{}"]
-            : [resourceMetadata.Name, baseParameters],
+          templateParameters,
         });
       }
     }
@@ -349,10 +357,10 @@ function getTspOperations(codeModel: CodeModel, armSchema: ArmResourceSchema, re
   // TODO: handle operations under resource group / management group / tenant
 
   // read operation
-  tspOperations.push(...convertResourceReadOperation(resourceMetadata));
+  tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
 
   // create operation
-  tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata));
+  tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata, operations));
 
   // patch update operation could either be patch for resource/tag or custom patch
   tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations, resourcePropertiesModelName));
@@ -377,51 +385,46 @@ function getOperationName(name: string): string {
   return _.lowerFirst(_.last(name.split("_")));
 }
 
-function getOperationParameters(operation: Operation, resource: ArmResource): string {
+function buildOperationBodyRequest(operation: Operation, resource: ArmResource): string | undefined {
+  const codeModel = getSession().model;
+  const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
+    (p) => p.protocol.http?.in === "body",
+  );
+  if (bodyParam) {
+    const transformed = transformParameter(bodyParam, codeModel);
+    return transformed.type;
+  }
+}
+
+function buildOperationBaseParameters(operation: Operation, resource: ArmResource): string | undefined {
   const codeModel = getSession().model;
   const parameters: CadlParameter[] = [];
+  const resourceBasicParameters = [];
+  resource.GetOperations[0].Path.split("/").forEach((p) => {
+    if (p.match(/^{.+}$/)) {
+      resourceBasicParameters.push(p.replace("{", "").replace("}", ""));
+    }
+  });
+  resourceBasicParameters.push("api-version");
+  resourceBasicParameters.push("$host");
   if (operation.parameters) {
     for (const parameter of operation.parameters) {
-      if (
-        !resourceParameters.includes(parameter.language.default.name) &&
-        !parameter.origin?.startsWith("modelerfour:synthesized") &&
-        !isParentIdParameter(parameter, resource)
-      ) {
+      if (!resourceBasicParameters.includes(parameter.language.default.serializedName)) {
         parameters.push(transformParameter(parameter, codeModel));
       }
     }
   }
 
-  if (getHttpMethod(codeModel, operation) === HttpMethod.Post) {
-    const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
-      (p) => p.protocol.http?.in === "body",
-    );
-    if (bodyParam) {
-      const transformed = transformParameter(bodyParam, codeModel);
-      parameters.push(transformed);
+  if (parameters.length) {
+    const params: string[] = [];
+    for (const parameter of parameters) {
+      params.push(generateParameter(parameter));
     }
+    return `{
+    ...BaseParameters<${resource.Name}>,
+    ${params.join("\n")}
+    }`;
   }
-
-  return generateParameters(parameters);
-}
-
-function isParentIdParameter(parameter: Parameter, resource: ArmResource): boolean {
-  if (!resource.IsSingletonResource) {
-    const codeModel = getSession().model;
-    const selfKey = getKeyParameter(codeModel, resource);
-
-    if (selfKey.language.default.name === parameter.language.default.name) {
-      return true;
-    }
-  }
-
-  const parent = getArmResourcesMetadata()[resource.Parents[0]];
-
-  if (!parent) {
-    return false;
-  }
-
-  return isParentIdParameter(parameter, parent);
 }
 
 function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter {

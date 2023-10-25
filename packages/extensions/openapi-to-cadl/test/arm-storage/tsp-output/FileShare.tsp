@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("Properties of the file share, including Id, resource name, resource type, Etag.")
 @parentResource(FileServiceProperty)
 model FileShare is ProxyResource<FileShareProperties> {
@@ -30,13 +30,41 @@ preceded and followed by a letter or number.
 @armResourceOperations
 interface FileShares {
   @doc("Gets properties of a specified share.")
-  get is ArmResourceRead<FileShare>;
+  get is ArmResourceRead<
+    FileShare,
+    {
+      ...BaseParameters<FileShare>;
+
+      @doc("""
+Optional, used to expand the properties within share's properties. Valid values
+are: stats. Should be passed as a string with delimiter ','.
+""")
+      @query("$expand")
+      $expand?: string;
+
+      @doc("Optional, used to retrieve properties of a snapshot.")
+      @header
+      `x-ms-snapshot`?: string;
+    }
+  >;
   @doc("""
 Creates a new share under the specified account as described by request body.
 The share resource includes metadata and properties for that share. It does not
 include a list of the files contained by the share. 
 """)
-  create is ArmResourceCreateOrUpdateAsync<FileShare>;
+  create is ArmResourceCreateOrUpdateAsync<
+    FileShare,
+    {
+      ...BaseParameters<FileShare>;
+
+      @doc("""
+Optional, used to expand the properties within share's properties. Valid values
+are: snapshots. Should be passed as a string with delimiter ','
+""")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   @doc("""
 Updates share properties as specified in request body. Properties not mentioned
 in the request will not be changed. Update fails if the specified share does
@@ -44,11 +72,34 @@ not already exist.
 """)
   update is ArmResourcePatchSync<FileShare, FileShareProperties>;
   @doc("Deletes specified share under its account.")
-  delete is ArmResourceDeleteAsync<FileShare>;
+  delete is ArmResourceDeleteAsync<
+    FileShare,
+    {
+      ...BaseParameters<FileShare>;
+
+      @doc("Optional, used to delete a snapshot.")
+      @header
+      `x-ms-snapshot`?: string;
+
+      @doc("""
+Optional. Valid values are: snapshots, leased-snapshots, none. The default
+value is snapshots. For 'snapshots', the file share is deleted including all of
+its file share snapshots. If the file share contains leased-snapshots, the
+deletion fails. For 'leased-snapshots', the file share is deleted included all
+of its file share snapshots (leased/unleased). For 'none', the file share is
+deleted if it has no share snapshots. If the file share contains any snapshots
+(leased or unleased), the deletion fails.
+""")
+      @query("$include")
+      $include?: string;
+    }
+  >;
   @doc("Lists all shares.")
   list is ArmResourceListByParent<
     FileShare,
     {
+      ...BaseParameters<FileShare>;
+
       @doc("Optional. Specified maximum number of shares that can be included in the list.")
       @query("$maxpagesize")
       $maxpagesize?: string;
@@ -79,13 +130,14 @@ operations. The lock duration can be 15 to 60 seconds, or can be infinite.
 """)
   lease is ArmResourceActionSync<
     FileShare,
+    LeaseShareRequest,
+    LeaseShareResponse,
     {
+      ...BaseParameters<FileShare>;
+
       @doc("Optional. Specify the snapshot time to lease a snapshot.")
       @header
       `x-ms-snapshot`?: string;
-
-      ...LeaseShareRequest;
-    },
-    LeaseShareResponse
+    }
   >;
 }

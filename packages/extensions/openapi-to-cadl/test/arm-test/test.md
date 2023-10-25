@@ -11,5 +11,5 @@ clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
 isArm: true
-namespace: "Azure.ResourceManager.Test"
+namespace: "Microsoft.Test"
 ```

@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the Shared Image Gallery that you want to create or
 update.
@@ -24,7 +24,20 @@ model Gallery is TrackedResource<GalleryProperties> {
 @armResourceOperations
 interface Galleries {
   @doc("Retrieves information about a Shared Image Gallery.")
-  get is ArmResourceRead<Gallery>;
+  get is ArmResourceRead<
+    Gallery,
+    {
+      ...BaseParameters<Gallery>;
+
+      @doc("The select expression to apply on the operation.")
+      @query("$select")
+      $select?: SelectPermissions;
+
+      @doc("The expand query option to apply on the operation.")
+      @query("$expand")
+      $expand?: GalleryExpandParams;
+    }
+  >;
   @doc("Create or update a Shared Image Gallery.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Gallery>;
   @doc("Update a Shared Image Gallery.")

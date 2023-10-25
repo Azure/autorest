@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The local user associated with the storage accounts.")
 @parentResource(StorageAccount)
 model LocalUser is ProxyResource<LocalUserProperties> {
@@ -38,10 +38,8 @@ account
   delete is ArmResourceDeleteAsync<LocalUser>;
   @doc("List the local users associated with the storage account.")
   list is ArmResourceListByParent<LocalUser>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("List SSH authorized keys and shared key of the local user.")
   listKeys is ArmResourceActionSync<LocalUser, {}, LocalUserKeys>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Regenerate the local user SSH password.")
   regeneratePassword is ArmResourceActionSync<
     LocalUser,

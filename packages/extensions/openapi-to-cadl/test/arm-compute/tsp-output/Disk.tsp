@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Disk resource.")
 model Disk is TrackedResource<DiskProperties> {
   @doc("""
@@ -38,7 +38,6 @@ interface Disks {
   list is ArmListBySubscription<Disk>;
   @doc("Grants access to a disk.")
   grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Revokes access to a disk.")
   revokeAccess is ArmResourceActionAsync<Disk, {}, {}>;
 }

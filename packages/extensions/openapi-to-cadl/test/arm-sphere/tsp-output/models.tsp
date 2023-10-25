@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

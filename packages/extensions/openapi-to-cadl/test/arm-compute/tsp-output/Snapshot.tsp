@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Snapshot resource.")
 model Snapshot is TrackedResource<SnapshotProperties> {
   @doc("""
@@ -38,7 +38,6 @@ interface Snapshots {
   list is ArmListBySubscription<Snapshot>;
   @doc("Grants access to a snapshot.")
   grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Revokes access to a snapshot.")
   revokeAccess is ArmResourceActionAsync<Snapshot, {}, {}>;
 }

@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The Private Endpoint Connection resource.")
 @parentResource(StorageAccount)
 model StoragePrivateEndpointConnection

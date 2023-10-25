@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 // FIXME: SharedGallery has no properties property
 @doc("""
 Specifies information about the Shared Gallery that you want to create or
@@ -32,9 +32,7 @@ interface SharedGalleries {
   list is ArmResourceListByParent<
     SharedGallery,
     {
-      @doc("Resource location.")
-      @path
-      location: string;
+      ...BaseParameters<SharedGallery>;
 
       @doc("""
 The query parameter to decide what shared galleries to fetch when doing listing

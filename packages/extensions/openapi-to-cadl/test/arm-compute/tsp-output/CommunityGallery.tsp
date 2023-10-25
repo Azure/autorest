@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 // FIXME: CommunityGallery has no properties property
 @doc("""
 Specifies information about the Community Gallery that you want to create or

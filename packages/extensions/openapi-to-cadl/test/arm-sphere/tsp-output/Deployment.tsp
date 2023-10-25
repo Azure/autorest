@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
@@ -47,6 +47,8 @@ system defined values and cannot be used for product or device group name.
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {
+      ...BaseParameters<Deployment>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;

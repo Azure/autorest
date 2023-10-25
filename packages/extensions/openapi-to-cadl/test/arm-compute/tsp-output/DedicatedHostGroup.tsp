@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the dedicated host group that the dedicated hosts
 should be assigned to. Currently, a dedicated host can only be added to a
@@ -26,7 +26,20 @@ model DedicatedHostGroup is TrackedResource<DedicatedHostGroupProperties> {
 @armResourceOperations
 interface DedicatedHostGroups {
   @doc("Retrieves information about a dedicated host group.")
-  get is ArmResourceRead<DedicatedHostGroup>;
+  get is ArmResourceRead<
+    DedicatedHostGroup,
+    {
+      ...BaseParameters<DedicatedHostGroup>;
+
+      @doc("""
+The expand expression to apply on the operation. 'InstanceView' will retrieve
+the list of instance views of the dedicated hosts under the dedicated host
+group. 'UserData' is not supported for dedicated host group.
+""")
+      @query("$expand")
+      $expand?: InstanceViewTypes;
+    }
+  >;
   @doc("""
 Create or update a dedicated host group. For details of Dedicated Host and
 Dedicated Host Groups please see [Dedicated Host Documentation]

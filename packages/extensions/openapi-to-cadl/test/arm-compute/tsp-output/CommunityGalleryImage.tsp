@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the gallery image definition that you want to
 create or update.
@@ -29,12 +29,5 @@ interface CommunityGalleryImages {
   @doc("Get a community gallery image.")
   get is ArmResourceRead<CommunityGalleryImage>;
   @doc("List community gallery images inside a gallery.")
-  list is ArmResourceListByParent<
-    CommunityGalleryImage,
-    {
-      @doc("Resource location.")
-      @path
-      location: string;
-    }
-  >;
+  list is ArmResourceListByParent<CommunityGalleryImage>;
 }

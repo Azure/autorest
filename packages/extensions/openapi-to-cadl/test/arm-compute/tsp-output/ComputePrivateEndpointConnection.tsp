@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("The Private Endpoint Connection resource.")
 @parentResource(DiskAccess)
 model ComputePrivateEndpointConnection

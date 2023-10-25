@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
@@ -26,20 +26,23 @@ interface Catalogs {
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("Update a Catalog")
-  update is ArmTagsPatchSync<Catalog>;
+  update is ArmTagsPatchSync<Catalog, TagsUpdateModel<Catalog>>;
   @doc("Delete a Catalog")
   delete is ArmResourceDeleteAsync<Catalog>;
   @doc("List Catalog resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
   @doc("List Catalog resources by subscription ID")
   listBySubscription is ArmListBySubscription<Catalog>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
     Catalog,
+    {},
+    ResourceListResult<Deployment>,
     {
+      ...BaseParameters<Catalog>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -55,13 +58,16 @@ interface Catalogs {
       @doc("The maximum number of result items per page.")
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    ResourceListResult<Deployment>
+    }
   >;
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
+    ListDeviceGroupsRequest,
+    ResourceListResult<DeviceGroup>,
     {
+      ...BaseParameters<Catalog>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -77,15 +83,16 @@ interface Catalogs {
       @doc("The maximum number of result items per page.")
       @query("$maxpagesize")
       maxpagesize?: int32;
-
-      ...ListDeviceGroupsRequest;
-    },
-    ResourceListResult<DeviceGroup>
+    }
   >;
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
+    {},
+    PagedDeviceInsight,
     {
+      ...BaseParameters<Catalog>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -101,13 +108,16 @@ interface Catalogs {
       @doc("The maximum number of result items per page.")
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    PagedDeviceInsight
+    }
   >;
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
     Catalog,
+    {},
+    ResourceListResult<Device>,
     {
+      ...BaseParameters<Catalog>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -123,7 +133,6 @@ interface Catalogs {
       @doc("The maximum number of result items per page.")
       @query("$maxpagesize")
       maxpagesize?: int32;
-    },
-    ResourceListResult<Device>
+    }
   >;
 }

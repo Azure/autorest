@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Test;
+namespace Microsoft.Test;
 @doc("A Test resource")
 model Employee is TrackedResource<EmployeeProperties> {
   @doc("Name of employee")

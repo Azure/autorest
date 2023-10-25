@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine.")
 model VirtualMachine is TrackedResource<VirtualMachineProperties> {
   @doc("The name of the virtual machine.")
@@ -24,7 +24,22 @@ interface VirtualMachines {
 Retrieves information about the model view or the instance view of a virtual
 machine.
 """)
-  get is ArmResourceRead<VirtualMachine>;
+  get is ArmResourceRead<
+    VirtualMachine,
+    {
+      ...BaseParameters<VirtualMachine>;
+
+      @doc("""
+The expand expression to apply on the operation. 'InstanceView' retrieves a
+snapshot of the runtime properties of the virtual machine that is managed by
+the platform and can change outside of control plane operations. 'UserData'
+retrieves the UserData property as part of the VM model view that was provided
+by the user during the VM Create/Update operation.
+""")
+      @query("$expand")
+      $expand?: InstanceViewTypes;
+    }
+  >;
   @doc("""
 The operation to create or update a virtual machine. Please note some
 properties can be set only during virtual machine creation.
@@ -33,7 +48,16 @@ properties can be set only during virtual machine creation.
   @doc("The operation to update a virtual machine.")
   update is ArmResourcePatchAsync<VirtualMachine, VirtualMachineProperties>;
   @doc("The operation to delete a virtual machine.")
-  delete is ArmResourceDeleteAsync<VirtualMachine>;
+  delete is ArmResourceDeleteAsync<
+    VirtualMachine,
+    {
+      ...BaseParameters<VirtualMachine>;
+
+      @doc("Optional parameter to force delete virtual machines.")
+      @query("forceDeletion")
+      forceDeletion?: boolean;
+    }
+  >;
   @doc("""
 Lists all of the virtual machines in the specified resource group. Use the
 nextLink property in the response to get the next page of virtual machines.
@@ -41,6 +65,8 @@ nextLink property in the response to get the next page of virtual machines.
   list is ArmResourceListByParent<
     VirtualMachine,
     {
+      ...BaseParameters<VirtualMachine>;
+
       @doc("""
 The system query option to filter VMs returned in the response. Allowed value
 is 'virtualMachineScaleSet/id' eq
@@ -64,13 +90,49 @@ specified location.
 """)
   listByLocation is ArmResourceListAtScope<
     VirtualMachine,
-    LocationScope<VirtualMachine>
+    LocationScope<VirtualMachine>,
+    {
+      ...BaseParameters<VirtualMachine>;
+
+      @doc("The location for which virtual machines under the subscription are queried.")
+      @pattern("^[-\\w\\._]+$")
+      @path
+      location: string;
+    }
   >;
   @doc("""
 Lists all of the virtual machines in the specified subscription. Use the
 nextLink property in the response to get the next page of virtual machines.
 """)
-  listAll is ArmListBySubscription<VirtualMachine>;
+  listAll is ArmListBySubscription<
+    VirtualMachine,
+    {
+      ...BaseParameters<VirtualMachine>;
+
+      @doc("""
+statusOnly=true enables fetching run time status of all Virtual Machines in the
+subscription.
+""")
+      @query("statusOnly")
+      statusOnly?: string;
+
+      @doc("""
+The system query option to filter VMs returned in the response. Allowed value
+is 'virtualMachineScaleSet/id' eq
+/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
+""")
+      @query("$filter")
+      $filter?: string;
+
+      @doc("""
+The expand expression to apply on operation. 'instanceView' enables fetching
+run time status of all Virtual Machines, this can only be specified if a valid
+$filter option is specified
+""")
+      @query("$expand")
+      $expand?: ExpandTypesForListVMs;
+    }
+  >;
   @doc("""
 Captures the VM by copying virtual hard disks of the VM and outputs a template
 that can be used to create similar VMs.
@@ -80,7 +142,6 @@ that can be used to create similar VMs.
     VirtualMachineCaptureParameters,
     VirtualMachineCaptureResult
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Converts virtual machine disks from blob-based to managed disks. Virtual
 machine must be stop-deallocated before invoking this operation.
@@ -92,14 +153,16 @@ billed for the compute resources that this virtual machine uses.
 """)
   deallocate is ArmResourceActionAsync<
     VirtualMachine,
+    {},
+    {},
     {
+      ...BaseParameters<VirtualMachine>;
+
       @doc("Optional parameter to hibernate a virtual machine. (Feature in Preview)")
       @query("hibernate")
       hibernate?: boolean;
-    },
-    {}
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Sets the OS state of the virtual machine to generalized. It is recommended to
 sysprep the virtual machine before performing this operation. For Windows,
@@ -116,7 +179,11 @@ virtual machine.
 """)
   powerOff is ArmResourceActionAsync<
     VirtualMachine,
+    {},
+    {},
     {
+      ...BaseParameters<VirtualMachine>;
+
       @doc("""
 The parameter to request non-graceful VM shutdown. True value for this flag
 indicates non-graceful shutdown whereas false indicates otherwise. Default
@@ -124,19 +191,14 @@ value for this flag is false if not specified
 """)
       @query("skipShutdown")
       skipShutdown?: boolean;
-    },
-    {}
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to reapply a virtual machine's state.")
   reapply is ArmResourceActionAsync<VirtualMachine, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to restart a virtual machine.")
   restart is ArmResourceActionAsync<VirtualMachine, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to start a virtual machine.")
   start is ArmResourceActionAsync<VirtualMachine, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Shuts down the virtual machine, moves it to a new node, and powers it back on.")
   redeploy is ArmResourceActionAsync<VirtualMachine, {}, {}>;
   @doc("""
@@ -156,7 +218,11 @@ be updated accordingly before performing the reimage.
   @doc("The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachine,
+    {},
+    RetrieveBootDiagnosticsDataResult,
     {
+      ...BaseParameters<VirtualMachine>;
+
       @doc("""
 Expiration duration in minutes for the SAS URIs with a value between 1 to 1440
 minutes. **Note:** If not specified, SAS URIs will be generated with a default
@@ -164,16 +230,12 @@ expiration duration of 120 minutes.
 """)
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
-    },
-    RetrieveBootDiagnosticsDataResult
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to perform maintenance on a virtual machine.")
   performMaintenance is ArmResourceActionAsync<VirtualMachine, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to simulate the eviction of spot virtual machine.")
   simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Assess patches on the VM.")
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,

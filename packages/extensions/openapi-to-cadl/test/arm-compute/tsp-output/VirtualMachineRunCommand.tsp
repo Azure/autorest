@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine run command.")
 @parentResource(VirtualMachine)
 model VirtualMachineRunCommand
@@ -24,7 +24,16 @@ model VirtualMachineRunCommand
 @armResourceOperations
 interface VirtualMachineRunCommands {
   @doc("The operation to get the run command.")
-  getByVirtualMachine is ArmResourceRead<VirtualMachineRunCommand>;
+  getByVirtualMachine is ArmResourceRead<
+    VirtualMachineRunCommand,
+    {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
+      @doc("The expand expression to apply on the operation.")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   @doc("The operation to create or update the run command.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
   @doc("The operation to update the run command.")
@@ -38,6 +47,8 @@ interface VirtualMachineRunCommands {
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
     {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
       @doc("The expand expression to apply on the operation.")
       @query("$expand")
       $expand?: string;
@@ -46,6 +57,14 @@ interface VirtualMachineRunCommands {
   @doc("Lists all available run commands for a subscription in a location.")
   list is ArmResourceListAtScope<
     VirtualMachineRunCommand,
-    LocationScope<VirtualMachineRunCommand>
+    LocationScope<VirtualMachineRunCommand>,
+    {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
+      @doc("The location upon which run commands is queried.")
+      @pattern("^[-\\w\\._]+$")
+      @path
+      location: string;
+    }
   >;
 }

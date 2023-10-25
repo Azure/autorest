@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine Extension Image.")
 @subscriptionResource
 @locationResource
@@ -25,15 +25,5 @@ interface VirtualMachineExtensionImages {
   @doc("Gets a virtual machine extension image.")
   get is ArmResourceRead<VirtualMachineExtensionImage>;
   @doc("Gets a list of virtual machine extension image types.")
-  listTypes is ArmResourceListByParent<
-    VirtualMachineExtensionImage,
-    {
-      @doc("The name of a supported Azure region.")
-      @path
-      location: string;
-
-      @path
-      publisherName: string;
-    }
-  >;
+  listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }

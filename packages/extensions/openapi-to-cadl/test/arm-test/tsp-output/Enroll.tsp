@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Test;
+namespace Microsoft.Test;
 @doc("A Test resource")
 @parentResource(Employee)
 @singleton("default")

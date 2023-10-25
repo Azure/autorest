@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("Properties of the table, including Id, resource name, resource type.")
 @parentResource(TableServiceProperty)
 model Table is ProxyResource<TableProperties> {

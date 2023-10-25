@@ -50,7 +50,10 @@ alpha-numeric characters or underscore.
       hub: string;
 
       @doc("Exclude these connectionIds when closing the connections in the hub.")
-      @query("excluded")
+      @query({
+        name: "excluded",
+        format: "multi",
+      })
       excluded?: string[];
 
       @doc("The reason closing the client connection.")
@@ -79,7 +82,10 @@ alpha-numeric characters or underscore.
       userId?: string;
 
       @doc("Roles that the connection with the generated token will have.")
-      @query("role")
+      @query({
+        name: "role",
+        format: "multi",
+      })
       role?: string[];
 
       @doc("The expire time of the generated token.")
@@ -87,7 +93,10 @@ alpha-numeric characters or underscore.
       minutesToExpire?: int32;
 
       @doc("Groups that the connection will join when it connects.")
-      @query("group")
+      @query({
+        name: "group",
+        format: "multi",
+      })
       group?: string[];
 
       @doc("Accept header")
@@ -131,7 +140,10 @@ alpha-numeric characters or underscore.
       hub: string;
 
       @doc("Excluded connection Ids.")
-      @query("excluded")
+      @query({
+        name: "excluded",
+        format: "multi",
+      })
       excluded?: string[];
 
       @doc("""
@@ -314,7 +326,10 @@ alpha-numeric characters or underscore.
       group: string;
 
       @doc("Exclude these connectionIds when closing the connections in the group.")
-      @query("excluded")
+      @query({
+        name: "excluded",
+        format: "multi",
+      })
       excluded?: string[];
 
       @doc("The reason closing the client connection.")
@@ -346,7 +361,10 @@ alpha-numeric characters or underscore.
       group: string;
 
       @doc("Excluded connection Ids")
-      @query("excluded")
+      @query({
+        name: "excluded",
+        format: "multi",
+      })
       excluded?: string[];
 
       @doc("""
@@ -577,7 +595,10 @@ alpha-numeric characters or underscore.
       userId: string;
 
       @doc("Exclude these connectionIds when closing the connections for the user.")
-      @query("excluded")
+      @query({
+        name: "excluded",
+        format: "multi",
+      })
       excluded?: string[];
 
       @doc("The reason closing the client connection.")

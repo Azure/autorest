@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 
 interface UsageOperations {
   @doc("""

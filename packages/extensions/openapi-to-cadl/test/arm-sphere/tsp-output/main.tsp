@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("Azure Sphere resource management API.")
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 
 @doc("The available API versions.")
 enum Versions {

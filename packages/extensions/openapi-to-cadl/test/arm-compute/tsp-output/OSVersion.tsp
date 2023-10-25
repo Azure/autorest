@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a cloud service OS version.")
 @subscriptionResource
 @locationResource
@@ -33,12 +33,5 @@ the XML service configuration (.cscfg) for a cloud service. Use nextLink
 property in the response to get the next page of OS versions. Do this till
 nextLink is null to fetch all the OS versions.
 """)
-  listOSVersions is ArmResourceListByParent<
-    OSVersion,
-    {
-      @doc("Name of the location that the OS versions pertain to.")
-      @path
-      location: string;
-    }
-  >;
+  listOSVersions is ArmResourceListByParent<OSVersion>;
 }

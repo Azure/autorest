@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 The source user image virtual hard disk. The virtual hard disk will be copied
 before being attached to the virtual machine. If SourceImage is provided, the
@@ -25,7 +25,16 @@ model Image is TrackedResource<ImageProperties> {
 @armResourceOperations
 interface Images {
   @doc("Gets an image.")
-  get is ArmResourceRead<Image>;
+  get is ArmResourceRead<
+    Image,
+    {
+      ...BaseParameters<Image>;
+
+      @doc("The expand expression to apply on the operation.")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   @doc("Create or update an image.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
   @doc("Update an image.")

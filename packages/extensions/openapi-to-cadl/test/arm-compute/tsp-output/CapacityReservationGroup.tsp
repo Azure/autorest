@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the capacity reservation group that the capacity
 reservations should be assigned to. Currently, a capacity reservation can only
@@ -27,7 +27,22 @@ model CapacityReservationGroup
 @armResourceOperations
 interface CapacityReservationGroups {
   @doc("The operation that retrieves information about a capacity reservation group.")
-  get is ArmResourceRead<CapacityReservationGroup>;
+  get is ArmResourceRead<
+    CapacityReservationGroup,
+    {
+      ...BaseParameters<CapacityReservationGroup>;
+
+      @doc("""
+The expand expression to apply on the operation. 'InstanceView' will retrieve
+the list of instance views of the capacity reservations under the capacity
+reservation group which is a snapshot of the runtime properties of a capacity
+reservation that is managed by the platform and can change outside of control
+plane operations.
+""")
+      @query("$expand")
+      $expand?: CapacityReservationGroupInstanceViewTypes;
+    }
+  >;
   @doc("""
 The operation to create or update a capacity reservation group. When updating a
 capacity reservation group, only tags may be modified. Please refer to
@@ -57,6 +72,8 @@ reservation groups.
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
     {
+      ...BaseParameters<CapacityReservationGroup>;
+
       @doc("""
 The expand expression to apply on the operation. Based on the expand param(s)
 specified we return Virtual Machine or ScaleSet VM Instance or both resource
@@ -71,5 +88,18 @@ Lists all of the capacity reservation groups in the subscription. Use the
 nextLink property in the response to get the next page of capacity reservation
 groups.
 """)
-  listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
+  listBySubscription is ArmListBySubscription<
+    CapacityReservationGroup,
+    {
+      ...BaseParameters<CapacityReservationGroup>;
+
+      @doc("""
+The expand expression to apply on the operation. Based on the expand param(s)
+specified we return Virtual Machine or ScaleSet VM Instance or both resource
+Ids which are associated to capacity reservation group in the response.
+""")
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
+    }
+  >;
 }

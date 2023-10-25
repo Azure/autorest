@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Specifies information about the SSH public key.")
 model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
   @doc("The name of the SSH public key.")
@@ -41,7 +41,6 @@ Lists all of the SSH public keys in the subscription. Use the nextLink property
 in the response to get the next page of SSH public keys.
 """)
   listBySubscription is ArmListBySubscription<SshPublicKeyResource>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Generates and returns a public/private key pair and populates the SSH public
 key resource with the public key. The length of the key will be 3072 bits. This

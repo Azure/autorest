@@ -21,7 +21,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("The azure integration spaces resource provider.")
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 
 @doc("The available API versions.")
 enum Versions {

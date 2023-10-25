@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine Scale Set.")
 model VirtualMachineScaleSet
   is TrackedResource<VirtualMachineScaleSetProperties> {
@@ -22,16 +22,62 @@ model VirtualMachineScaleSet
 @armResourceOperations
 interface VirtualMachineScaleSets {
   @doc("Display information about a virtual machine scale set.")
-  get is ArmResourceRead<VirtualMachineScaleSet>;
+  get is ArmResourceRead<
+    VirtualMachineScaleSet,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("""
+The expand expression to apply on the operation. 'UserData' retrieves the
+UserData property of the VM scale set that was provided by the user during the
+VM scale set Create/Update operation
+""")
+      @query("$expand")
+      $expand?: ExpandTypesForGetVMScaleSets;
+    }
+  >;
   @doc("Create or update a VM scale set.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineScaleSet>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    VirtualMachineScaleSet,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set to create or update.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
   @doc("Update a VM scale set.")
   update is ArmResourcePatchAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetProperties
+    VirtualMachineScaleSetProperties,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set to create or update.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("Deletes a VM scale set.")
-  delete is ArmResourceDeleteAsync<VirtualMachineScaleSet>;
+  delete is ArmResourceDeleteAsync<
+    VirtualMachineScaleSet,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
+      @doc("Optional parameter to force delete a VM scale set. (Feature in Preview)")
+      @query("forceDeletion")
+      forceDeletion?: boolean;
+    }
+  >;
   @doc("Gets a list of all VM scale sets under a resource group.")
   list is ArmResourceListByParent<VirtualMachineScaleSet>;
   @doc("""
@@ -40,7 +86,15 @@ location.
 """)
   listByLocation is ArmResourceListAtScope<
     VirtualMachineScaleSet,
-    LocationScope<VirtualMachineScaleSet>
+    LocationScope<VirtualMachineScaleSet>,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The location for which VM scale sets under the subscription are queried.")
+      @pattern("^[-\\w\\._]+$")
+      @path
+      location: string;
+    }
   >;
   @doc("""
 Gets a list of all VM Scale Sets in the subscription, regardless of the
@@ -56,32 +110,42 @@ resources that this virtual machine scale set deallocates.
 """)
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    {},
     {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
       @doc("""
 Optional parameter to hibernate a virtual machine from the VM scale set. (This
 feature is available for VMSS with Flexible OrchestrationMode only)
 """)
       @query("hibernate")
       hibernate?: boolean;
-
-      ...VirtualMachineScaleSetVMInstanceIDs;
-    },
-    {}
+    }
   >;
   @doc("Deletes virtual machines in a VM scale set.")
   deleteInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceRequiredIDs,
+    {},
     {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
       @doc("""
 Optional parameter to force delete virtual machines from the VM scale set.
 (Feature in Preview)
 """)
       @query("forceDeletion")
       forceDeletion?: boolean;
-
-      ...VirtualMachineScaleSetVMInstanceRequiredIDs;
-    },
-    {}
+    }
   >;
   @doc("""
 Power off (stop) one or more virtual machines in a VM scale set. Note that
@@ -90,7 +154,15 @@ Instead, use deallocate to release resources and avoid charges.
 """)
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    {},
     {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
       @doc("""
 The parameter to request non-graceful VM shutdown. True value for this flag
 indicates non-graceful shutdown whereas false indicates otherwise. Default
@@ -98,29 +170,50 @@ value for this flag is false if not specified
 """)
       @query("skipShutdown")
       skipShutdown?: boolean;
-
-      ...VirtualMachineScaleSetVMInstanceIDs;
-    },
-    {}
+    }
   >;
   @doc("Restarts one or more virtual machines in a VM scale set.")
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("Starts one or more virtual machines in a VM scale set.")
   start is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual
 Machine Instances
 """)
-  reapply is ArmResourceActionAsync<VirtualMachineScaleSet, {}, {}>;
+  reapply is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    {},
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
   @doc("""
 Shuts down all the virtual machines in the virtual machine scale set, moves
 them to a new node, and powers them back on.
@@ -128,7 +221,14 @@ them to a new node, and powers them back on.
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("""
 Perform maintenance on one or more virtual machines in a VM scale set.
@@ -139,7 +239,14 @@ https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scal
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("""
 Upgrades one or more virtual machines to the latest SKU set in the VM scale set
@@ -148,7 +255,14 @@ model.
   updateInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("""
 Reimages (upgrade the operating system) one or more virtual machines in a VM
@@ -158,7 +272,14 @@ ephemeral OS disk the virtual machine is reset to initial state.
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetReimageParameters,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("""
 Reimages all the disks ( including data disks ) in the virtual machines in a VM
@@ -167,7 +288,14 @@ scale set. This operation is only supported for managed disks.
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("""
 Manual platform update domain walk to update virtual machines in a service
@@ -175,7 +303,15 @@ fabric virtual machine scale set.
 """)
   forceRecoveryServiceFabricPlatformUpdateDomainWalk is ArmResourceActionSync<
     VirtualMachineScaleSet,
+    {},
+    RecoveryWalkResponse,
     {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+
       @doc("The platform update domain for which a manual recovery walk is requested")
       @query("platformUpdateDomain")
       platformUpdateDomain: int32;
@@ -190,8 +326,7 @@ machine scale set
       @doc("The placement group id for which the manual recovery walk is requested.")
       @query("placementGroupId")
       placementGroupId?: string;
-    },
-    RecoveryWalkResponse
+    }
   >;
   @doc("""
 Converts SinglePlacementGroup property to false for a existing virtual machine
@@ -200,25 +335,58 @@ scale set.
   convertToSinglePlacementGroup is ArmResourceActionSync<
     VirtualMachineScaleSet,
     VMScaleSetConvertToSinglePlacementGroupInput,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the virtual machine scale set to create or update.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("Changes ServiceState property for a given service")
   setOrchestrationServiceState is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the virtual machine scale set to create or update.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Cancels the current virtual machine scale set rolling upgrade.")
-  cancel is ArmResourceActionAsync<VirtualMachineScaleSet, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
+  cancel is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    {},
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
   @doc("""
 Starts a rolling upgrade to move all virtual machine scale set instances to the
 latest available Platform Image OS version. Instances which are already running
 the latest available OS version are not affected.
 """)
-  startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
+  startOSUpgrade is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    {},
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
   @doc("""
 Starts a rolling upgrade to move all extensions for all virtual machine scale
 set instances to the latest available extension version. Instances which are
@@ -227,7 +395,14 @@ already running the latest extension versions are not affected.
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     {},
-    {}
+    {},
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
   @doc("Gets the status of a VM scale set instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")

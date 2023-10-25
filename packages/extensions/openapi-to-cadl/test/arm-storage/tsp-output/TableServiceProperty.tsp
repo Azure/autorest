@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The properties of a storage account’s Table service.")
 @parentResource(StorageAccount)
 @singleton("tableServiceName")
@@ -25,12 +25,36 @@ interface TableServiceProperties {
 Gets the properties of a storage account’s Table service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
 """)
-  getServiceProperties is ArmResourceRead<TableServiceProperty>;
+  getServiceProperties is ArmResourceRead<
+    TableServiceProperty,
+    {
+      ...BaseParameters<TableServiceProperty>;
+
+      @doc("""
+The name of the Table Service within the specified storage account. Table
+Service Name must be 'default'
+""")
+      @path
+      tableServiceName: "default";
+    }
+  >;
   @doc("""
 Sets the properties of a storage account’s Table service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. 
 """)
-  setServiceProperties is ArmResourceCreateOrUpdateAsync<TableServiceProperty>;
+  setServiceProperties is ArmResourceCreateOrUpdateAsync<
+    TableServiceProperty,
+    {
+      ...BaseParameters<TableServiceProperty>;
+
+      @doc("""
+The name of the Table Service within the specified storage account. Table
+Service Name must be 'default'
+""")
+      @path
+      tableServiceName: "default";
+    }
+  >;
   @doc("List all table services for the storage account.")
   listByStorageAccount is ArmResourceListByParent<TableServiceProperty>;
 }

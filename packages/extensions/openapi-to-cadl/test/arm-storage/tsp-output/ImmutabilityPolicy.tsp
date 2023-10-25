@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("""
 The ImmutabilityPolicy property of a blob container, including Id, resource
 name, resource type, Etag.
@@ -28,12 +28,52 @@ interface ImmutabilityPolicies {
 Gets the existing immutability policy along with the corresponding ETag in
 response headers and body.
 """)
-  getImmutabilityPolicy is ArmResourceRead<ImmutabilityPolicy>;
+  getImmutabilityPolicy is ArmResourceRead<
+    ImmutabilityPolicy,
+    {
+      ...BaseParameters<ImmutabilityPolicy>;
+
+      @doc("""
+The name of the blob container immutabilityPolicy within the specified storage
+account. ImmutabilityPolicy Name must be 'default'
+""")
+      @path
+      immutabilityPolicyName: "default";
+
+      @doc("""
+The entity state (ETag) version of the immutability policy to update. A value
+of \"*\" can be used to apply the operation only if the immutability policy
+already exists. If omitted, this operation will always be applied.
+""")
+      @header
+      `If-Match`?: string;
+    }
+  >;
   @doc("""
 Creates or updates an unlocked immutability policy. ETag in If-Match is honored
 if given but not required for this operation.
 """)
-  createOrUpdateImmutabilityPolicy is ArmResourceCreateOrUpdateAsync<ImmutabilityPolicy>;
+  createOrUpdateImmutabilityPolicy is ArmResourceCreateOrUpdateAsync<
+    ImmutabilityPolicy,
+    {
+      ...BaseParameters<ImmutabilityPolicy>;
+
+      @doc("""
+The name of the blob container immutabilityPolicy within the specified storage
+account. ImmutabilityPolicy Name must be 'default'
+""")
+      @path
+      immutabilityPolicyName: "default";
+
+      @doc("""
+The entity state (ETag) version of the immutability policy to update. A value
+of \"*\" can be used to apply the operation only if the immutability policy
+already exists. If omitted, this operation will always be applied.
+""")
+      @header
+      `If-Match`?: string;
+    }
+  >;
   @doc("""
 Aborts an unlocked immutability policy. The response of delete has
 immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required
@@ -41,15 +81,18 @@ for this operation. Deleting a locked immutability policy is not allowed, the
 only way is to delete the container after deleting all expired blobs inside the
 policy locked container.
 """)
-  deleteImmutabilityPolicy is ArmResourceDeleteAsync<ImmutabilityPolicy>;
-  @doc("""
-Sets the ImmutabilityPolicy to Locked state. The only action allowed on a
-Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required
-for this operation.
-""")
-  lockImmutabilityPolicy is ArmResourceActionSync<
+  deleteImmutabilityPolicy is ArmResourceDeleteAsync<
     ImmutabilityPolicy,
     {
+      ...BaseParameters<ImmutabilityPolicy>;
+
+      @doc("""
+The name of the blob container immutabilityPolicy within the specified storage
+account. ImmutabilityPolicy Name must be 'default'
+""")
+      @path
+      immutabilityPolicyName: "default";
+
       @doc("""
 The entity state (ETag) version of the immutability policy to update. A value
 of \"*\" can be used to apply the operation only if the immutability policy
@@ -57,8 +100,28 @@ already exists. If omitted, this operation will always be applied.
 """)
       @header
       `If-Match`: string;
-    },
-    ImmutabilityPolicy
+    }
+  >;
+  @doc("""
+Sets the ImmutabilityPolicy to Locked state. The only action allowed on a
+Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required
+for this operation.
+""")
+  lockImmutabilityPolicy is ArmResourceActionSync<
+    ImmutabilityPolicy,
+    {},
+    ImmutabilityPolicy,
+    {
+      ...BaseParameters<ImmutabilityPolicy>;
+
+      @doc("""
+The entity state (ETag) version of the immutability policy to update. A value
+of \"*\" can be used to apply the operation only if the immutability policy
+already exists. If omitted, this operation will always be applied.
+""")
+      @header
+      `If-Match`: string;
+    }
   >;
   @doc("""
 Extends the immutabilityPeriodSinceCreationInDays of a locked
@@ -67,7 +130,11 @@ action. ETag in If-Match is required for this operation.
 """)
   extendImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
+    ImmutabilityPolicy,
+    ImmutabilityPolicy,
     {
+      ...BaseParameters<ImmutabilityPolicy>;
+
       @doc("""
 The entity state (ETag) version of the immutability policy to update. A value
 of \"*\" can be used to apply the operation only if the immutability policy
@@ -75,9 +142,6 @@ already exists. If omitted, this operation will always be applied.
 """)
       @header
       `If-Match`: string;
-
-      ...ImmutabilityPolicy;
-    },
-    ImmutabilityPolicy
+    }
   >;
 }

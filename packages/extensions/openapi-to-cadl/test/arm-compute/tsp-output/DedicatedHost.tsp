@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Specifies information about the Dedicated host.")
 @parentResource(DedicatedHostGroup)
 model DedicatedHost is TrackedResource<DedicatedHostProperties> {
@@ -23,7 +23,20 @@ model DedicatedHost is TrackedResource<DedicatedHostProperties> {
 @armResourceOperations
 interface DedicatedHosts {
   @doc("Retrieves information about a dedicated host.")
-  get is ArmResourceRead<DedicatedHost>;
+  get is ArmResourceRead<
+    DedicatedHost,
+    {
+      ...BaseParameters<DedicatedHost>;
+
+      @doc("""
+The expand expression to apply on the operation. 'InstanceView' will retrieve
+the list of instance views of the dedicated host. 'UserData' is not supported
+for dedicated host.
+""")
+      @query("$expand")
+      $expand?: InstanceViewTypes;
+    }
+  >;
   @doc("Create or update a dedicated host .")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DedicatedHost>;
   @doc("Update a dedicated host .")
@@ -35,7 +48,6 @@ Lists all of the dedicated hosts in the specified dedicated host group. Use the
 nextLink property in the response to get the next page of dedicated hosts.
 """)
   listByHostGroup is ArmResourceListByParent<DedicatedHost>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Restart the dedicated host. The operation will complete successfully once the
 dedicated host has restarted and is running. To determine the health of VMs

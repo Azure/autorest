@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("The Azure Storage Management API.")
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 
 @doc("The available API versions.")
 enum Versions {

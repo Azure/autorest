@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Specifies information about the capacity reservation.")
 @parentResource(CapacityReservationGroup)
 model CapacityReservation is TrackedResource<CapacityReservationProperties> {
@@ -23,7 +23,20 @@ model CapacityReservation is TrackedResource<CapacityReservationProperties> {
 @armResourceOperations
 interface CapacityReservations {
   @doc("The operation that retrieves information about the capacity reservation.")
-  get is ArmResourceRead<CapacityReservation>;
+  get is ArmResourceRead<
+    CapacityReservation,
+    {
+      ...BaseParameters<CapacityReservation>;
+
+      @doc("""
+The expand expression to apply on the operation. 'InstanceView' retrieves a
+snapshot of the runtime properties of the capacity reservation that is managed
+by the platform and can change outside of control plane operations.
+""")
+      @query("$expand")
+      $expand?: CapacityReservationInstanceViewTypes;
+    }
+  >;
   @doc("""
 The operation to create or update a capacity reservation. Please note some
 properties can be set only during capacity reservation creation. Please refer

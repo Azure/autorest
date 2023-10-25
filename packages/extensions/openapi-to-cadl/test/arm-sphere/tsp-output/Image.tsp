@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
@@ -32,6 +32,8 @@ interface Images {
   listByCatalog is ArmResourceListByParent<
     Image,
     {
+      ...BaseParameters<Image>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;

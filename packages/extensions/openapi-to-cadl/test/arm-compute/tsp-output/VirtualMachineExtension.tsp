@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine Extension.")
 @parentResource(VirtualMachine)
 model VirtualMachineExtension
@@ -24,7 +24,16 @@ model VirtualMachineExtension
 @armResourceOperations
 interface VirtualMachineExtensions {
   @doc("The operation to get the extension.")
-  get is ArmResourceRead<VirtualMachineExtension>;
+  get is ArmResourceRead<
+    VirtualMachineExtension,
+    {
+      ...BaseParameters<VirtualMachineExtension>;
+
+      @doc("The expand expression to apply on the operation.")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   @doc("The operation to create or update the extension.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineExtension>;
   @doc("The operation to update the extension.")
@@ -38,6 +47,8 @@ interface VirtualMachineExtensions {
   list is ArmResourceListByParent<
     VirtualMachineExtension,
     {
+      ...BaseParameters<VirtualMachineExtension>;
+
       @doc("The expand expression to apply on the operation.")
       @query("$expand")
       $expand?: string;

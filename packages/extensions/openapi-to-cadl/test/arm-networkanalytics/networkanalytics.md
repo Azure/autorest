@@ -5,5 +5,5 @@ clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
 isArm: true
-namespace: "Azure.ResourceManager.NetworkAnalytics"
+namespace: "Microsoft.NetworkAnalytics"
 ```

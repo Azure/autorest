@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The Get Storage Account ManagementPolicies operation response.")
 @parentResource(StorageAccount)
 @singleton("managementPolicyName")

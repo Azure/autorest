@@ -57,4 +57,4 @@ using TypeSpec.Versioning;
   title: "Azure Compute resource management API.",
 })
 @doc("Compute Client")
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;

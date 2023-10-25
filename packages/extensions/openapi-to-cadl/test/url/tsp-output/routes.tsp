@@ -698,7 +698,10 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the csv-array format
 """)
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "csv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -710,7 +713,10 @@ using the csv-array format
   ArrayStringCsvNull is Azure.Core.Foundations.Operation<
     {
       @doc("a null array of string using the csv-array format")
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "csv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -722,7 +728,10 @@ using the csv-array format
   ArrayStringCsvEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("an empty array [] of string using the csv-array format")
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "csv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -737,7 +746,10 @@ Array query has no defined collection format, should default to csv. Pass in
   ArrayStringNoCollectionFormatEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].")
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "csv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -755,7 +767,10 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the ssv-array format
 """)
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "ssv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -773,7 +788,10 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the tsv-array format
 """)
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "tsv",
+      })
       arrayQuery?: string[];
     },
     void
@@ -791,7 +809,10 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
 using the pipes-array format
 """)
-      @query("arrayQuery")
+      @query({
+        name: "arrayQuery",
+        format: "pipes",
+      })
       arrayQuery?: string[];
     },
     void

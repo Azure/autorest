@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the gallery image version that you want to create
 or update.
@@ -38,9 +38,7 @@ interface SharedGalleryImageVersions {
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
     {
-      @doc("Resource location.")
-      @path
-      location: string;
+      ...BaseParameters<SharedGalleryImageVersion>;
 
       @doc("""
 The query parameter to decide what shared galleries to fetch when doing listing

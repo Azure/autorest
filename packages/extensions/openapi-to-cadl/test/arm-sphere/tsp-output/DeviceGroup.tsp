@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An device group resource belonging to a product resource.")
 @parentResource(Product)
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {
@@ -50,6 +50,8 @@ defined values and cannot be used for product name.
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {
+      ...BaseParameters<DeviceGroup>;
+
       @doc("Filter the result list using the given expression")
       @query("$filter")
       filter?: string;
@@ -75,7 +77,6 @@ and product names when bulk claiming devices to a catalog only.
     DeviceGroup,
     ClaimDevicesRequest
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Counts devices in device group. '.default' and '.unassigned' are system defined
 values and cannot be used for product or device group name.

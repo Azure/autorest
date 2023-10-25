@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes the cloud service.")
 model CloudService is TrackedResource<CloudServiceProperties> {
   @doc("Name of the cloud service.")
@@ -28,7 +28,7 @@ during cloud service creation.
 """)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
   @doc("Update a cloud service.")
-  update is ArmTagsPatchAsync<CloudService>;
+  update is ArmTagsPatchAsync<CloudService, TagsUpdateModel<CloudService>>;
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
   @doc("""
@@ -44,10 +44,8 @@ next page of Cloud Services. Do this till nextLink is null to fetch all the
 Cloud Services.
 """)
   listAll is ArmListBySubscription<CloudService>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Starts the cloud service.")
   start is ArmResourceActionAsync<CloudService, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 Power off the cloud service. Note that resources are still attached and you are
 getting charged for the resources.

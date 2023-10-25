@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("disk encryption set resource.")
 model DiskEncryptionSet is TrackedResource<EncryptionSetProperties> {
   @doc("""

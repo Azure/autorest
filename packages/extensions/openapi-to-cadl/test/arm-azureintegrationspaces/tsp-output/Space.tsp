@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 @doc("An integration space.")
 model Space is TrackedResource<SpaceResourceProperties> {
   @doc("The name of the space")
@@ -33,6 +33,8 @@ interface Spaces {
   listByResourceGroup is ArmResourceListByParent<
     Space,
     {
+      ...BaseParameters<Space>;
+
       @doc("The number of result items to return.")
       @query("top")
       top?: int32;

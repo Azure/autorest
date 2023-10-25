@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Sphere;
+namespace Microsoft.AzureSphere;
 @doc("An device resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Device is ProxyResource<DeviceProperties> {

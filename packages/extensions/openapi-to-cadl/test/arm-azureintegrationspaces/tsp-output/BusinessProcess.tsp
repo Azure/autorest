@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 @doc("A business process under application.")
 @parentResource(Application)
 model BusinessProcess is ProxyResource<BusinessProcessProperties> {
@@ -35,6 +35,8 @@ interface BusinessProcesses {
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {
+      ...BaseParameters<BusinessProcess>;
+
       @doc("The number of result items to return.")
       @query("top")
       top?: int32;

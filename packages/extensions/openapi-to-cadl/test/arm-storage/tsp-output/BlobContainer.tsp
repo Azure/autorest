@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("""
 Properties of the blob container, including Id, resource name, resource type,
 Etag.
@@ -55,6 +55,8 @@ today does not return continuation token.
   list is ArmResourceListByParent<
     BlobContainer,
     {
+      ...BaseParameters<BlobContainer>;
+
       @doc("""
 Optional. Specified maximum number of containers that can be included in the
 list.
@@ -96,7 +98,6 @@ infinite.
     LeaseContainerRequest,
     LeaseContainerResponse
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 This operation migrates a blob container from container level WORM to object
 level immutability enabled container. Prerequisites require a container level

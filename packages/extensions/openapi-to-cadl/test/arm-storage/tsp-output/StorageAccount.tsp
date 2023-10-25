@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The storage account.")
 model StorageAccount is TrackedResource<StorageAccountProperties> {
   @doc("""
@@ -31,7 +31,20 @@ Returns the properties for the specified storage account including but not
 limited to name, SKU name, location, and account status. The ListKeys operation
 should be used to retrieve storage keys.
 """)
-  getProperties is ArmResourceRead<StorageAccount>;
+  getProperties is ArmResourceRead<
+    StorageAccount,
+    {
+      ...BaseParameters<StorageAccount>;
+
+      @doc("""
+May be used to expand the properties within account's properties. By default,
+data is not included when fetching properties. Currently we only support
+geoReplicationStats and blobRestoreStatus.
+""")
+      @query("$expand")
+      $expand?: StorageAccountExpand;
+    }
+  >;
   @doc("""
 Asynchronously creates a new storage account with the specified parameters. If
 an account is already created and a subsequent create request is issued with
@@ -70,12 +83,15 @@ specified storage account.
 """)
   listKeys is ArmResourceActionSync<
     StorageAccount,
+    {},
+    StorageAccountListKeysResult,
     {
+      ...BaseParameters<StorageAccount>;
+
       @doc("Specifies type of the key to be listed. Possible value is kerb.")
       @query("$expand")
       $expand?: "kerb";
-    },
-    StorageAccountListKeysResult
+    }
   >;
   @doc("""
 Regenerates one of the access keys or Kerberos keys for the specified storage
@@ -115,20 +131,27 @@ https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery
 """)
   failover is ArmResourceActionAsync<
     StorageAccount,
+    {},
+    {},
     {
+      ...BaseParameters<StorageAccount>;
+
       @doc("""
 The parameter is set to 'Planned' to indicate whether a Planned failover is
 requested.
 """)
       @query("failoverType")
       failoverType?: "Planned";
-    },
-    {}
+    }
   >;
   @doc("Live Migration of storage account to enable Hns")
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
+    {},
+    {},
     {
+      ...BaseParameters<StorageAccount>;
+
       @doc("""
 Required. Hierarchical namespace migration type can either be a hierarchical
 namespace validation request 'HnsOnValidationRequest' or a hydration request
@@ -137,10 +160,8 @@ whereas the hydration request will migrate the account.
 """)
       @query("requestType")
       requestType: string;
-    },
-    {}
+    }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Abort live Migration of storage account to enable Hns")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
@@ -153,7 +174,6 @@ whereas the hydration request will migrate the account.
     BlobRestoreParameters,
     BlobRestoreStatus
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("Revoke user delegation keys.")
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, {}, {}>;
   @doc("Gets the private link resources that need to be created for a storage account.")

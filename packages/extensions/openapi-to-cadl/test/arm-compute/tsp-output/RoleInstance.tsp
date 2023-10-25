@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes the cloud service role instance.")
 @parentResource(CloudService)
 model RoleInstance is ProxyResource<RoleInstanceProperties> {
@@ -23,7 +23,19 @@ model RoleInstance is ProxyResource<RoleInstanceProperties> {
 @armResourceOperations
 interface RoleInstances {
   @doc("Gets a role instance from a cloud service.")
-  get is ArmResourceRead<RoleInstance>;
+  get is ArmResourceRead<
+    RoleInstance,
+    {
+      ...BaseParameters<RoleInstance>;
+
+      @doc("""
+The expand expression to apply to the operation. 'UserData' is not supported
+for cloud services.
+""")
+      @query("$expand")
+      $expand?: InstanceViewTypes;
+    }
+  >;
   @doc("Deletes a role instance from a cloud service.")
   delete is ArmResourceDeleteAsync<RoleInstance>;
   @doc("""
@@ -34,6 +46,8 @@ is null to fetch all the role instances.
   list is ArmResourceListByParent<
     RoleInstance,
     {
+      ...BaseParameters<RoleInstance>;
+
       @doc("""
 The expand expression to apply to the operation. 'UserData' is not supported
 for cloud services.
@@ -42,19 +56,16 @@ for cloud services.
       $expand?: InstanceViewTypes;
     }
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 The Reboot Role Instance asynchronous operation requests a reboot of a role
 instance in the cloud service.
 """)
   restart is ArmResourceActionAsync<RoleInstance, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 The Reimage Role Instance asynchronous operation reinstalls the operating
 system on instances of web roles or worker roles.
 """)
   reimage is ArmResourceActionAsync<RoleInstance, {}, {}>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("""
 The Rebuild Role Instance asynchronous operation reinstalls the operating
 system on instances of web roles or worker roles and initializes the storage

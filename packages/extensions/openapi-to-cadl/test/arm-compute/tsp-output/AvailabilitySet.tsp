@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the availability set that the virtual machine
 should be assigned to. Virtual machines specified in the same availability set
@@ -42,7 +42,19 @@ interface AvailabilitySets {
   @doc("Lists all availability sets in a resource group.")
   list is ArmResourceListByParent<AvailabilitySet>;
   @doc("Lists all availability sets in a subscription.")
-  listBySubscription is ArmListBySubscription<AvailabilitySet>;
+  listBySubscription is ArmListBySubscription<
+    AvailabilitySet,
+    {
+      ...BaseParameters<AvailabilitySet>;
+
+      @doc("""
+The expand expression to apply to the operation. Allowed values are
+'instanceView'.
+""")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
   @doc("""
 Lists all available virtual machine sizes that can be used to create a new
 virtual machine in an existing availability set.

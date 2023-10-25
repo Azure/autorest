@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("// FIXME: (miissing-service-description) Add service description")
-namespace Azure.ResourceManager.NetworkAnalytics;
+namespace Microsoft.NetworkAnalytics;
 
 @doc("The available API versions.")
 enum Versions {

@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.NetworkAnalytics;
+namespace Microsoft.NetworkAnalytics;
 @doc("The data catalog resource.")
 @singleton("default")
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {

@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 
 interface SkusOperations {
   @doc("Lists the available SKUs supported by Microsoft.Storage for given subscription.")

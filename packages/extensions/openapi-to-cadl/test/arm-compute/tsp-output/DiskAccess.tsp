@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("disk access resource.")
 model DiskAccess is TrackedResource<DiskAccessProperties> {
   @doc("""
@@ -29,7 +29,7 @@ interface DiskAccesses {
   @doc("Creates or updates a disk access resource")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskAccess>;
   @doc("Updates (patches) a disk access resource.")
-  update is ArmTagsPatchAsync<DiskAccess>;
+  update is ArmTagsPatchAsync<DiskAccess, TagsUpdateModel<DiskAccess>>;
   @doc("Deletes a disk access resource.")
   delete is ArmResourceDeleteAsync<DiskAccess>;
   @doc("Lists all the disk access resources under a resource group.")

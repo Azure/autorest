@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("""
 Specifies information about the gallery image version that you want to create
 or update.
@@ -35,12 +35,5 @@ interface CommunityGalleryImageVersions {
   @doc("Get a community gallery image version.")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
   @doc("List community gallery image versions inside an image.")
-  list is ArmResourceListByParent<
-    CommunityGalleryImageVersion,
-    {
-      @doc("Resource location.")
-      @path
-      location: string;
-    }
-  >;
+  list is ArmResourceListByParent<CommunityGalleryImageVersion>;
 }

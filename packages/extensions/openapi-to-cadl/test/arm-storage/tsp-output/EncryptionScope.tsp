@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The Encryption Scope resource.")
 @parentResource(StorageAccount)
 model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
@@ -47,6 +47,8 @@ fails if the specified encryption scope does not already exist.
   list is ArmResourceListByParent<
     EncryptionScope,
     {
+      ...BaseParameters<EncryptionScope>;
+
       @doc("""
 Optional, specifies the maximum number of encryption scopes that will be
 included in the list response.

@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.NetworkAnalytics;
+namespace Microsoft.NetworkAnalytics;
 @doc("The data type resource.")
 @parentResource(DataProduct)
 model DataType is ProxyResource<DataTypeProperties> {

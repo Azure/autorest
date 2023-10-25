@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Test;
+namespace Microsoft.Test;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

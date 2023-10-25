@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 @doc("The properties of a storage account’s Queue service.")
 @parentResource(StorageAccount)
 @singleton("queueServiceName")
@@ -25,12 +25,36 @@ interface QueueServiceProperties {
 Gets the properties of a storage account’s Queue service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
 """)
-  getServiceProperties is ArmResourceRead<QueueServiceProperty>;
+  getServiceProperties is ArmResourceRead<
+    QueueServiceProperty,
+    {
+      ...BaseParameters<QueueServiceProperty>;
+
+      @doc("""
+The name of the Queue Service within the specified storage account. Queue
+Service Name must be 'default'
+""")
+      @path
+      queueServiceName: "default";
+    }
+  >;
   @doc("""
 Sets the properties of a storage account’s Queue service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. 
 """)
-  setServiceProperties is ArmResourceCreateOrUpdateAsync<QueueServiceProperty>;
+  setServiceProperties is ArmResourceCreateOrUpdateAsync<
+    QueueServiceProperty,
+    {
+      ...BaseParameters<QueueServiceProperty>;
+
+      @doc("""
+The name of the Queue Service within the specified storage account. Queue
+Service Name must be 'default'
+""")
+      @path
+      queueServiceName: "default";
+    }
+  >;
   @doc("List all queue services for the storage account")
   listByStorageAccount is ArmResourceListByParent<QueueServiceProperty>;
 }

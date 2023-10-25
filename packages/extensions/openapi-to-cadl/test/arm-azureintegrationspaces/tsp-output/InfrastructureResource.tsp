@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 @doc("An infrastructure resource under Space.")
 @parentResource(Space)
 model InfrastructureResource
@@ -39,6 +39,8 @@ interface InfrastructureResources {
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     {
+      ...BaseParameters<InfrastructureResource>;
+
       @doc("The number of result items to return.")
       @query("top")
       top?: int32;

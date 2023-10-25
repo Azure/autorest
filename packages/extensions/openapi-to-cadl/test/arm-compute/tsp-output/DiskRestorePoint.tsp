@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Properties of disk restore point")
 @parentResource(RestorePoint)
 model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
@@ -23,36 +23,51 @@ model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
 @armResourceOperations
 interface DiskRestorePoints {
   @doc("Get disk restorePoint resource")
-  get is ArmResourceRead<DiskRestorePoint>;
+  get is ArmResourceRead<
+    DiskRestorePoint,
+    {
+      ...BaseParameters<DiskRestorePoint>;
+
+      @doc("The name of the restore point collection that the disk restore point belongs.")
+      @path
+      restorePointCollectionName: string;
+    }
+  >;
   @doc("Lists diskRestorePoints under a vmRestorePoint.")
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     {
-      @doc("The name of the vm restore point that the disk disk restore point belongs.")
+      ...BaseParameters<DiskRestorePoint>;
+
+      @doc("The name of the restore point collection that the disk restore point belongs.")
       @path
-      vmRestorePointName: string;
+      restorePointCollectionName: string;
     }
   >;
   @doc("Grants access to a diskRestorePoint.")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
+    GrantAccessData,
+    AccessUri,
     {
-      @doc("The name of the vm restore point that the disk disk restore point belongs.")
-      @path
-      vmRestorePointName: string;
+      ...BaseParameters<DiskRestorePoint>;
 
-      ...GrantAccessData;
-    },
-    AccessUri
+      @doc("The name of the restore point collection that the disk restore point belongs.")
+      @path
+      restorePointCollectionName: string;
+    }
   >;
   @doc("Revokes access to a diskRestorePoint.")
   revokeAccess is ArmResourceActionAsync<
     DiskRestorePoint,
+    {},
+    {},
     {
-      @doc("The name of the vm restore point that the disk disk restore point belongs.")
+      ...BaseParameters<DiskRestorePoint>;
+
+      @doc("The name of the restore point collection that the disk restore point belongs.")
       @path
-      vmRestorePointName: string;
-    },
-    {}
+      restorePointCollectionName: string;
+    }
   >;
 }

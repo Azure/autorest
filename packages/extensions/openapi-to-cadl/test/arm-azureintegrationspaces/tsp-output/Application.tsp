@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 @doc("An integration application under space.")
 @parentResource(Space)
 model Application is TrackedResource<ApplicationProperties> {
@@ -35,6 +35,8 @@ interface Applications {
   listBySpace is ArmResourceListByParent<
     Application,
     {
+      ...BaseParameters<Application>;
+
       @doc("The number of result items to return.")
       @query("top")
       top?: int32;
@@ -85,7 +87,6 @@ interface Applications {
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     SaveOrGetBusinessProcessDevelopmentArtifactResponse
   >;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The list business process development artifacts action.")
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,

@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.NetworkAnalytics;
+namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

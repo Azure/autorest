@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("Describes a role of the cloud service.")
 @parentResource(CloudService)
 model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {

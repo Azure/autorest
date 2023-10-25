@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 
 @parentResource(QueueServiceProperty)
 model StorageQueue is ProxyResource<QueueProperties> {
@@ -48,6 +48,8 @@ it exists.
   list is ArmResourceListByParent<
     StorageQueue,
     {
+      ...BaseParameters<StorageQueue>;
+
       @doc("""
 Optional, a maximum number of queues that should be included in a list queue
 response

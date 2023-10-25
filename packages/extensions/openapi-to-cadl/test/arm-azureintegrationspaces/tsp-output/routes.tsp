@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Integration.Spaces;
+namespace Microsoft.IntegrationSpaces;
 
 interface ApplicationResourcesOperations {
   @doc("List ApplicationResource resources by Application")

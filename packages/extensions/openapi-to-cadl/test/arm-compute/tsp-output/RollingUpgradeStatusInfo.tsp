@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.Compute;
+namespace Microsoft.Compute;
 @doc("The status of the latest virtual machine scale set rolling upgrade.")
 @parentResource(VirtualMachineScaleSet)
 @singleton("latest")
@@ -23,5 +23,14 @@ model RollingUpgradeStatusInfo
 @armResourceOperations
 interface RollingUpgradeStatusInfos {
   @doc("Gets the status of the latest virtual machine scale set rolling upgrade.")
-  getLatest is ArmResourceRead<RollingUpgradeStatusInfo>;
+  getLatest is ArmResourceRead<
+    RollingUpgradeStatusInfo,
+    {
+      ...BaseParameters<RollingUpgradeStatusInfo>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
 }
