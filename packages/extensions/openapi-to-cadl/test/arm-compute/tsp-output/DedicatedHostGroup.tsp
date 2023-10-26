@@ -21,6 +21,14 @@ model DedicatedHostGroup is TrackedResource<DedicatedHostGroupProperties> {
   @key("hostGroupName")
   @segment("hostGroups")
   name: string;
+
+  @doc("""
+Availability Zone to use for this host group. Only single zone is supported.
+The zone can be assigned only during creation. If not provided, the group
+supports all zones in the region. If provided, enforces each host in the group
+to be in the same zone.
+""")
+  zones?: string[];
 }
 
 @armResourceOperations

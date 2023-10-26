@@ -20,6 +20,15 @@ and -. The max name length is 80 characters.
   @key("snapshotName")
   @segment("snapshots")
   name: string;
+
+  @doc("""
+The extended location where the snapshot will be created. Extended location
+cannot be changed.
+""")
+  extendedLocation?: ExtendedLocation;
+
+  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedBy;
 }
 
 @armResourceOperations

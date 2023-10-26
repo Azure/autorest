@@ -19,6 +19,22 @@ model VirtualMachineScaleSetVm
   @key("instanceId")
   @segment("virtualMachines")
   name: string;
+
+  @doc("The virtual machine instance ID.")
+  @visibility("read")
+  instanceId?: string;
+
+  @doc("The virtual machine child extension resources.")
+  @visibility("read")
+  resources?: VirtualMachineExtension[];
+
+  @doc("The virtual machine zones.")
+  @visibility("read")
+  zones?: string[];
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourcePlan;
 }
 
 @armResourceOperations

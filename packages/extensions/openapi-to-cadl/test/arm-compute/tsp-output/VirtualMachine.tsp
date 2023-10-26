@@ -16,6 +16,19 @@ model VirtualMachine is TrackedResource<VirtualMachineProperties> {
   @key("vmName")
   @segment("virtualMachines")
   name: string;
+
+  @doc("The virtual machine child extension resources.")
+  @visibility("read")
+  resources?: VirtualMachineExtension[];
+
+  @doc("The virtual machine zones.")
+  zones?: string[];
+
+  @doc("The extended location of the Virtual Machine.")
+  extendedLocation?: ExtendedLocation;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourcePlan;
 }
 
 @armResourceOperations

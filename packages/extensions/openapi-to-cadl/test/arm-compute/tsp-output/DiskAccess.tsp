@@ -20,6 +20,12 @@ name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
   @key("diskAccessName")
   @segment("diskAccesses")
   name: string;
+
+  @doc("""
+The extended location where the disk access will be created. Extended location
+cannot be changed.
+""")
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations

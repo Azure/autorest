@@ -17,6 +17,19 @@ model VirtualMachineScaleSet
   @key("vmScaleSetName")
   @segment("virtualMachineScaleSets")
   name: string;
+
+  @doc("""
+The virtual machine scale set zones. NOTE: Availability zones can only be set
+when you create the scale set
+""")
+  zones?: string[];
+
+  @doc("The extended location of the Virtual Machine Scale Set.")
+  extendedLocation?: ExtendedLocation;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourcePlan;
 }
 
 @armResourceOperations

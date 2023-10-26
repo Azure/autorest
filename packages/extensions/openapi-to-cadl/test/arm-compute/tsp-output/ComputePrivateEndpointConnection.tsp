@@ -19,6 +19,10 @@ model ComputePrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  @doc("private endpoint connection name")
+  @visibility("read")
+  name?: string;
 }
 
 @armResourceOperations

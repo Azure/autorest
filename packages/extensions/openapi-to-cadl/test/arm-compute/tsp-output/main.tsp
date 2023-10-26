@@ -45,6 +45,7 @@ import "./CloudServiceRole.tsp";
 import "./CloudService.tsp";
 import "./OSVersion.tsp";
 import "./OSFamily.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

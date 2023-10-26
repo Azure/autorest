@@ -23,6 +23,9 @@ lower-case letters only.
   @segment("storageAccounts")
   name: string;
 
+  @doc("The extendedLocation of the resource.")
+  extendedLocation?: ExtendedLocation;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
   ...Azure.ResourceManager.ResourceKind;

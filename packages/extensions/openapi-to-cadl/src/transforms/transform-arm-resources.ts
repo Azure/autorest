@@ -22,6 +22,7 @@ import {
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
+import { transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
@@ -41,7 +42,7 @@ function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {
   generatedResourceObjects.set(name, mapping);
 }
 
-export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource {
+export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
   const fixMe: string[] = [];
 
   // TODO: deal with a resource with multiple parents
@@ -62,26 +63,48 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     propertiesModelName = "{}";
   }
 
-  const operations = getTspOperations(codeModel, schema, propertiesModelName);
-  const optionalStandardProperties = getResourceOptionalStandardProperties(schema);
+  const operations = getTspOperations(schema, propertiesModelName);
 
   return {
     resourceGroupName: _.first(schema.resourceMetadata.GetOperations[0].OperationID.split("_")) ?? "",
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
-    properties: [buildKeyProperty(codeModel, schema)],
+    properties: [buildKeyProperty(schema), ...getOtherProperties(schema)],
     name: schema.resourceMetadata.Name,
     parents: [],
-    resourceParent: getParentResource(codeModel, schema),
+    resourceParent: getParentResource(schema),
     propertiesModelName,
     doc: schema.language.default.description,
     decorators: buildResourceDecorators(schema),
     resourceOperations: operations[0],
     normalOperations: operations[1],
-    otherProperties: [],
-    optionalStandardProperties,
+    optionalStandardProperties: getResourceOptionalStandardProperties(schema),
   };
+}
+
+function getOtherProperties(schema: ArmResourceSchema): CadlObjectProperty[] {
+  const knownProperties = [
+    "properties",
+    "id",
+    "type",
+    "systemData",
+    "location",
+    "tags",
+    "identity",
+    "sku",
+    "eTag",
+    "plan",
+    "kind",
+    "managedBy",
+  ];
+  const otherProperties: CadlObjectProperty[] = [];
+  for (const property of schema.properties ?? []) {
+    if (!knownProperties.includes(property.serializedName)) {
+      otherProperties.push(transformObjectProperty(property, getSession().model));
+    }
+  }
+  return otherProperties;
 }
 
 function getResourceOptionalStandardProperties(schema: ArmResourceSchema): string[] {
@@ -412,7 +435,6 @@ function convertResourceActionOperations(
 function convertResourceOtherGetOperations(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
-  codeModel: CodeModel,
 ): CadlOperation[] {
   const converted: CadlOperation[] = [];
 
@@ -421,7 +443,7 @@ function convertResourceOtherGetOperations(
       if (operation.Method === "GET") {
         const swaggerOperation = operations[operation.OperationID];
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
-          converted.push(transformRequest(swaggerOperation.requests[0], swaggerOperation, codeModel));
+          converted.push(transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model));
         }
       }
     }
@@ -431,7 +453,6 @@ function convertResourceOtherGetOperations(
 }
 
 function getTspOperations(
-  codeModel: CodeModel,
   armSchema: ArmResourceSchema,
   resourcePropertiesModelName: string,
 ): [TspArmResourceOperation[], CadlOperation[]] {
@@ -461,7 +482,7 @@ function getTspOperations(
   tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
 
   // other get operations
-  normalOperations.push(...convertResourceOtherGetOperations(resourceMetadata, operations, codeModel));
+  normalOperations.push(...convertResourceOtherGetOperations(resourceMetadata, operations));
 
   return [tspOperations, normalOperations];
 }
@@ -512,8 +533,8 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
   }
 }
 
-function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter | undefined {
-  for (const operationGroup of codeModel.operationGroups) {
+function getKeyParameter(resourceMetadata: ArmResource): Parameter | undefined {
+  for (const operationGroup of getSession().model.operationGroups) {
     for (const operation of operationGroup.operations) {
       if (operation.operationId === resourceMetadata.GetOperations[0].OperationID) {
         for (const parameter of operation.parameters ?? []) {
@@ -537,20 +558,20 @@ function generateSingletonKeyParameter(): CadlParameter {
   };
 }
 
-function getParentResource(codeModel: CodeModel, schema: ArmResourceSchema): TspArmResource | undefined {
+function getParentResource(schema: ArmResourceSchema): TspArmResource | undefined {
   const resourceParent = schema.resourceMetadata.Parents?.[0];
 
   if (!resourceParent || isFirstLevelResource(resourceParent)) {
     return undefined;
   }
 
-  for (const objectSchema of codeModel.schemas.objects ?? []) {
+  for (const objectSchema of getSession().model.schemas.objects ?? []) {
     if (!isResourceSchema(objectSchema)) {
       continue;
     }
 
     if (objectSchema.resourceMetadata.Name === resourceParent) {
-      return transformTspArmResource(codeModel, objectSchema);
+      return transformTspArmResource(objectSchema);
     }
   }
 }
@@ -575,16 +596,16 @@ function getSchemaResponseSchemaName(response: Response | undefined): string | u
   return (response as SchemaResponse).schema.language.default.name;
 }
 
-function buildKeyProperty(codeModel: CodeModel, schema: ArmResourceSchema): CadlObjectProperty {
+function buildKeyProperty(schema: ArmResourceSchema): CadlObjectProperty {
   let parameter;
   if (!schema.resourceMetadata.IsSingletonResource) {
-    const keyProperty = getKeyParameter(codeModel, schema.resourceMetadata);
+    const keyProperty = getKeyParameter(schema.resourceMetadata);
     if (!keyProperty) {
       throw new Error(
         `Failed to find key property ${schema.resourceMetadata.ResourceKey} for ${schema.language.default.name}`,
       );
     }
-    parameter = transformParameter(keyProperty, codeModel);
+    parameter = transformParameter(keyProperty, getSession().model);
   } else {
     parameter = generateSingletonKeyParameter();
   }
@@ -662,4 +683,3 @@ function getSingletonName(schema: ArmResourceSchema): string {
   }
   return key;
 }
-

@@ -16,6 +16,16 @@ model CloudService is TrackedResource<CloudServiceProperties> {
   @key("cloudServiceName")
   @segment("cloudServices")
   name: string;
+
+  @doc("Resource name.")
+  @visibility("read")
+  name?: string;
+
+  @doc("""
+List of logical availability zone of the resource. List should contain only 1
+zone where cloud service should be provisioned. This field is optional.
+""")
+  zones?: string[];
 }
 
 @armResourceOperations

@@ -8,6 +8,7 @@ import "./Application.tsp";
 import "./BusinessProcess.tsp";
 import "./BusinessProcessVersion.tsp";
 import "./InfrastructureResource.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

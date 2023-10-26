@@ -18,6 +18,18 @@ model CapacityReservation is TrackedResource<CapacityReservationProperties> {
   @key("capacityReservationName")
   @segment("capacityReservations")
   name: string;
+
+  @doc("""
+Availability Zone to use for this capacity reservation. The zone has to be
+single value and also should be part for the list of zones specified during the
+capacity reservation group creation. The zone can be assigned only during
+creation. If not provided, the reservation supports only non-zonal deployments.
+If provided, enforces VM/VMSS using this capacity reservation to be in same
+zone.
+""")
+  zones?: string[];
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

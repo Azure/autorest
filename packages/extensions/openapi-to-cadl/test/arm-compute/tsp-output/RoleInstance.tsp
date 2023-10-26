@@ -18,6 +18,12 @@ model RoleInstance is ProxyResource<RoleInstanceProperties> {
   @key("roleInstanceName")
   @segment("roleInstances")
   name: string;
+
+  @doc("Resource Name.")
+  @visibility("read")
+  name?: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

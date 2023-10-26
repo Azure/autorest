@@ -174,22 +174,22 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrReplaceSync"
-  | "ArmResourceCreateOrUpdateAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrReplaceSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
@@ -203,7 +203,5 @@ export interface TspArmResource extends CadlObject {
   resourceParent?: TspArmResource;
   resourceOperations: TspArmResourceOperation[];
   normalOperations: CadlOperation[];
-  otherProperties: CadlObjectProperty[];
   optionalStandardProperties: string[];
 }
-

@@ -17,6 +17,10 @@ model OSVersion is ProxyResource<OSVersionProperties> {
   @key("osVersionName")
   @segment("cloudServiceOsVersions")
   name: string;
+
+  @doc("Resource name.")
+  @visibility("read")
+  name?: string;
 }
 
 @armResourceOperations

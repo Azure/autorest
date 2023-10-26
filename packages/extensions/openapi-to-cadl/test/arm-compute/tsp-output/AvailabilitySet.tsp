@@ -27,6 +27,8 @@ model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
   @key("availabilitySetName")
   @segment("availabilitySets")
   name: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

@@ -18,6 +18,12 @@ model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {
   @key("roleName")
   @segment("roles")
   name: string;
+
+  @doc("Resource name")
+  @visibility("read")
+  name?: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

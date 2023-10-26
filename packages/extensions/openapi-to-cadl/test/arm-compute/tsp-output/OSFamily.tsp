@@ -17,6 +17,10 @@ model OSFamily is ProxyResource<OSFamilyProperties> {
   @key("osFamilyName")
   @segment("cloudServiceOsFamilies")
   name: string;
+
+  @doc("Resource name.")
+  @visibility("read")
+  name?: string;
 }
 
 @armResourceOperations

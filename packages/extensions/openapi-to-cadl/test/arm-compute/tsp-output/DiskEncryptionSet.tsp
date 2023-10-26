@@ -20,6 +20,8 @@ name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
   @key("diskEncryptionSetName")
   @segment("diskEncryptionSets")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
 @armResourceOperations

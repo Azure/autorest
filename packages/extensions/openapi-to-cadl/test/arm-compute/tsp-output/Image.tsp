@@ -20,6 +20,9 @@ model Image is TrackedResource<ImageProperties> {
   @key("imageName")
   @segment("images")
   name: string;
+
+  @doc("The extended location of the Image.")
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations

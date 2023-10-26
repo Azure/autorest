@@ -19,6 +19,10 @@ model VirtualMachineScaleSetExtension
   @key("vmssExtensionName")
   @segment("extensions")
   name: string;
+
+  @doc("The name of the extension.")
+  @visibility("read")
+  name?: string;
 }
 
 @armResourceOperations

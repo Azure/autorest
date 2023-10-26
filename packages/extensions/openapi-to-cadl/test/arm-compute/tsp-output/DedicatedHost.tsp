@@ -18,6 +18,8 @@ model DedicatedHost is TrackedResource<DedicatedHostProperties> {
   @key("hostName")
   @segment("hosts")
   name: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

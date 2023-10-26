@@ -17,6 +17,13 @@ model ProximityPlacementGroup
   @key("proximityPlacementGroupName")
   @segment("proximityPlacementGroups")
   name: string;
+
+  @doc("""
+Specifies the Availability Zone where virtual machine, virtual machine scale
+set or availability set associated with the  proximity placement group can be
+created.
+""")
+  zones?: string[];
 }
 
 @armResourceOperations
