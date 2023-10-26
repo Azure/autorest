@@ -22,7 +22,7 @@ model ComputePrivateEndpointConnection
 }
 
 @armResourceOperations
-interface PrivateEndpointConnections {
+interface DiskAccesses {
   @doc("""
 Gets information about a private endpoint connection under a disk access
 resource.

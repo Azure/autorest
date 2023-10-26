@@ -20,7 +20,7 @@ model VirtualMachineExtensionImage
 }
 
 @armResourceOperations
-interface Versions {
+interface VirtualMachineExtensionImages {
   @doc("Gets a virtual machine extension image.")
   get is ArmResourceRead<VirtualMachineExtensionImage>;
   @doc("Gets a list of virtual machine extension image types.")

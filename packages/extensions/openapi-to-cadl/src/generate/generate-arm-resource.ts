@@ -38,7 +38,7 @@ export function generateArmResource(resource: TspArmResource): string {
 function generateArmResourceOperation(resource: TspArmResource): string {
   const definitions: string[] = [];
   definitions.push("@armResourceOperations");
-  definitions.push(`interface ${resource.resourceName} {`);
+  definitions.push(`interface ${resource.resourceGroupName} {`);
   for (const operation of resource.resourceOperations) {
     for (const fixme of operation.fixMe ?? []) {
       definitions.push(fixme);

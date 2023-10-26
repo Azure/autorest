@@ -15,7 +15,6 @@ Specifies information about the gallery image definition that you want to
 create or update.
 """)
 @parentResource(CommunityGallery)
-@locationResource
 model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
   @doc("The name of the community gallery image definition.")
   @path
@@ -25,7 +24,7 @@ model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
 }
 
 @armResourceOperations
-interface Images {
+interface CommunityGalleryImages {
   @doc("Get a community gallery image.")
   get is ArmResourceRead<CommunityGalleryImage>;
   @doc("List community gallery images inside a gallery.")

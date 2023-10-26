@@ -28,7 +28,7 @@ cannot begin with a numeric character.
 }
 
 @armResourceOperations
-interface Tables {
+interface Table {
   @doc("""
 Gets the table with the specified table name, under the specified account if it
 exists.

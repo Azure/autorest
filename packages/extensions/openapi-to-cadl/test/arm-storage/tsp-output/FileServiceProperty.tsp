@@ -20,7 +20,7 @@ model FileServiceProperty is ProxyResource<FileServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface FileServiceProperties {
+interface FileServices {
   @doc("""
 Gets the properties of file services in storage accounts, including CORS
 (Cross-Origin Resource Sharing) rules.

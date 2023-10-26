@@ -20,7 +20,7 @@ model QueueServiceProperty is ProxyResource<QueueServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface QueueServiceProperties {
+interface QueueServices {
   @doc("""
 Gets the properties of a storage account’s Queue service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.

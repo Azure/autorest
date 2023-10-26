@@ -22,7 +22,7 @@ model VirtualMachineScaleSetExtension
 }
 
 @armResourceOperations
-interface Extensions {
+interface VirtualMachineScaleSetExtensions {
   @doc("The operation to get the extension.")
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,

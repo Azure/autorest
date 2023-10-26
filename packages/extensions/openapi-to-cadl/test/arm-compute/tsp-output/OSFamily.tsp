@@ -20,7 +20,7 @@ model OSFamily is ProxyResource<OSFamilyProperties> {
 }
 
 @armResourceOperations
-interface CloudServiceOsFamilies {
+interface CloudServiceOperatingSystems {
   @doc("""
 Gets properties of a guest operating system family that can be specified in the
 XML service configuration (.cscfg) for a cloud service.

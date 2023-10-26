@@ -24,7 +24,7 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
 }
 
 @armResourceOperations
-interface Images {
+interface GalleryImages {
   @doc("Retrieves information about a gallery image definition.")
   get is ArmResourceRead<GalleryImage>;
   @doc("Create or update a gallery image definition.")

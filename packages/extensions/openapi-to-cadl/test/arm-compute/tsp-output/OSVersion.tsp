@@ -20,7 +20,7 @@ model OSVersion is ProxyResource<OSVersionProperties> {
 }
 
 @armResourceOperations
-interface CloudServiceOsVersions {
+interface CloudServiceOperatingSystems {
   @doc("""
 Gets properties of a guest operating system version that can be specified in
 the XML service configuration (.cscfg) for a cloud service.

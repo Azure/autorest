@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("Deleted storage account")
-@subscriptionResource
 @locationResource
 model DeletedAccount is ProxyResource<DeletedAccountProperties> {
   @doc("Name of the deleted storage account.")

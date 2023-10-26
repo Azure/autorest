@@ -26,7 +26,7 @@ interface Catalogs {
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("Update a Catalog")
-  update is ArmTagsPatchSync<Catalog, TagsUpdateModel<Catalog>>;
+  update is ArmTagsPatchSync<Catalog>;
   @doc("Delete a Catalog")
   delete is ArmResourceDeleteAsync<Catalog>;
   @doc("List Catalog resources by resource group")

@@ -28,7 +28,7 @@ during cloud service creation.
 """)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
   @doc("Update a cloud service.")
-  update is ArmTagsPatchAsync<CloudService, TagsUpdateModel<CloudService>>;
+  update is ArmTagsPatchAsync<CloudService>;
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
   @doc("""

@@ -24,7 +24,7 @@ model GalleryImageVersion is TrackedResource<GalleryImageVersionProperties> {
 }
 
 @armResourceOperations
-interface Versions {
+interface GalleryImageVersions {
   @doc("Retrieves information about a gallery image version.")
   get is ArmResourceRead<
     GalleryImageVersion,

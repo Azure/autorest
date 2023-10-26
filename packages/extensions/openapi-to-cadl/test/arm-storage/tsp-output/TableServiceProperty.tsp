@@ -20,7 +20,7 @@ model TableServiceProperty is ProxyResource<TableServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface TableServiceProperties {
+interface TableServices {
   @doc("""
 Gets the properties of a storage account’s Table service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.

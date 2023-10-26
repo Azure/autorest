@@ -29,7 +29,7 @@ cannot have two consecutive dash(-) characters.
 }
 
 @armResourceOperations
-interface StorageQueues {
+interface Queue {
   @doc("""
 Gets the queue with the specified queue name, under the specified account if it
 exists.

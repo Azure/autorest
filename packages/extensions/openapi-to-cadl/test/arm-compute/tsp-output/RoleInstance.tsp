@@ -21,7 +21,7 @@ model RoleInstance is ProxyResource<RoleInstanceProperties> {
 }
 
 @armResourceOperations
-interface RoleInstances {
+interface CloudServiceRoleInstances {
   @doc("Gets a role instance from a cloud service.")
   get is ArmResourceRead<
     RoleInstance,

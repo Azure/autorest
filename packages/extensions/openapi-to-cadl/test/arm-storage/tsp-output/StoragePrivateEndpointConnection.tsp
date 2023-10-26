@@ -22,7 +22,7 @@ model StoragePrivateEndpointConnection
 }
 
 @armResourceOperations
-interface StoragePrivateEndpointConnections {
+interface PrivateEndpointConnections {
   @doc("""
 Gets the specified private endpoint connection associated with the storage
 account.

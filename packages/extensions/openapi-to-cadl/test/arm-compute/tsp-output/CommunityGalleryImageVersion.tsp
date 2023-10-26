@@ -15,7 +15,6 @@ Specifies information about the gallery image version that you want to create
 or update.
 """)
 @parentResource(CommunityGalleryImage)
-@locationResource
 model CommunityGalleryImageVersion
   is ProxyResource<CommunityGalleryImageVersionProperties> {
   @doc("""
@@ -31,7 +30,7 @@ be within the range of a 32-bit integer. Format:
 }
 
 @armResourceOperations
-interface Versions {
+interface CommunityGalleryImageVersions {
   @doc("Get a community gallery image version.")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
   @doc("List community gallery image versions inside an image.")

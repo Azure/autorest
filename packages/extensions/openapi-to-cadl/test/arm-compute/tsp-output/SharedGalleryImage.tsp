@@ -15,7 +15,6 @@ Specifies information about the gallery image definition that you want to
 create or update.
 """)
 @parentResource(SharedGallery)
-@locationResource
 model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
   @doc("""
 The name of the Shared Gallery Image Definition from which the Image Versions
@@ -28,7 +27,7 @@ are to be listed.
 }
 
 @armResourceOperations
-interface Images {
+interface SharedGalleryImages {
   @doc("Get a shared gallery image by subscription id or tenant id.")
   get is ArmResourceRead<SharedGalleryImage>;
   @doc("List shared gallery images by subscription id or tenant id.")

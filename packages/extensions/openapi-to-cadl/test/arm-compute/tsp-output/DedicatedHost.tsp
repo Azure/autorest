@@ -21,7 +21,7 @@ model DedicatedHost is TrackedResource<DedicatedHostProperties> {
 }
 
 @armResourceOperations
-interface Hosts {
+interface DedicatedHosts {
   @doc("Retrieves information about a dedicated host.")
   get is ArmResourceRead<
     DedicatedHost,

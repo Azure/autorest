@@ -22,7 +22,7 @@ model VirtualMachineRunCommand
 }
 
 @armResourceOperations
-interface RunCommands {
+interface VirtualMachineRunCommands {
   @doc("The operation to get the run command.")
   getByVirtualMachine is ArmResourceRead<
     VirtualMachineRunCommand,

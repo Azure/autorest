@@ -71,9 +71,9 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   }
 
   const operations = getTspOperations(codeModel, schema, propertiesModelName);
-  const resourceName = upperFirst(schema.resourceMetadata.ResourceKeySegment);
+
   return {
-    resourceName,
+    resourceGroupName: _.first(schema.resourceMetadata.GetOperations[0].OperationID.split("_")) ?? "",
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
@@ -171,7 +171,6 @@ function convertResourceUpdateOperation(
       } else if (tagsProperty) {
         kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
         // TODO: if update properties are different from tag properties, we need to use a different model
-        templateParameters.push(`TagsUpdateModel<${resourceMetadata.Name}>`);
         addGeneratedResourceObjectIfNotExits(
           bodyParam?.schema.language.default.name ?? "",
           `TagsUpdateModel<${resourceMetadata.Name}>`,
@@ -251,7 +250,7 @@ function convertResourceListOperations(
 
     converted.push({
       doc: operation.Description,
-      kind: operation.OperationID.endsWith("_ListBySubscription") ? "ArmListBySubscription" :"ArmResourceListByParent",
+      kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
       templateParameters: templateParameters,
     });
@@ -584,25 +583,30 @@ function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
         arguments: [{ value: parent, options: { unwrap: true } }],
       });
     }
-  } 
-  
+  }
+
   if (schema.resourceMetadata.IsSingletonResource) {
     resourceModelDecorators.push({
       name: "singleton",
       arguments: [schema.resourceMetadata.ResourceKey],
     });
-  } else if (schema.resourceMetadata.IsTenantResource) {
+  }
+
+  if (schema.resourceMetadata.IsTenantResource) {
     resourceModelDecorators.push({
       name: "tenantResource",
     });
-  } else if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
-    resourceModelDecorators.push({
-      name: "locationResource",
-    });
   } else if (schema.resourceMetadata.IsSubscriptionResource) {
-    resourceModelDecorators.push({
-      name: "subscriptionResource",
-    });
+    // TODO: need to change after TSP support location resource for other resource types
+    if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
+      resourceModelDecorators.push({
+        name: "locationResource",
+      });
+    } else {
+      resourceModelDecorators.push({
+        name: "subscriptionResource",
+      });
+    }
   }
 
   return resourceModelDecorators;

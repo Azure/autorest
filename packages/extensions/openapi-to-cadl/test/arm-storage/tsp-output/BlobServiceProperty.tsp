@@ -20,7 +20,7 @@ model BlobServiceProperty is ProxyResource<BlobServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface BlobServiceProperties {
+interface BlobServices {
   @doc("""
 Gets the properties of a storage account’s Blob service, including properties
 for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
