@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.Storage;
 @doc("The properties of a storage account’s Queue service.")
 @parentResource(StorageAccount)
-@singleton("queueServiceName")
+@singleton("default")
 model QueueServiceProperty is ProxyResource<QueueServicePropertiesProperties> {
   @key("queueServiceName")
   @segment("queueServices")

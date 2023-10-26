@@ -15,7 +15,7 @@ The ImmutabilityPolicy property of a blob container, including Id, resource
 name, resource type, Etag.
 """)
 @parentResource(BlobContainer)
-@singleton("immutabilityPolicyName")
+@singleton("default")
 model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
   @key("immutabilityPolicyName")
   @segment("immutabilityPolicies")

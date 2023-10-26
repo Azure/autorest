@@ -174,22 +174,22 @@ export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResour
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrUpdateAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrUpdateAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
@@ -206,5 +206,16 @@ export interface TspArmResource extends CadlObject {
   resourceParent?: TspArmResource;
   resourceOperations: TspArmResourceOperation[];
   normalOperations: CadlOperation[];
-  msiType?: MSIType;
+  otherProperties: CadlObjectProperty[];
+  optionalStandardProperties: TspArmOptionalStandardProperty;
 }
+
+export interface TspArmOptionalStandardProperty {
+  managedIdentity?: MSIType;
+  sku?: "Azure.ResourceManager.ResourceSku";
+  eTags?: "Azure.ResourceManager.EntityTag";
+  plan?: "Azure.ResourceManager.ResourcePlan";
+  resourceKind?: "Azure.ResourceManager.ResourceKind";
+  managedBy?: "Azure.ResourceManager.ManagedBy";
+}
+

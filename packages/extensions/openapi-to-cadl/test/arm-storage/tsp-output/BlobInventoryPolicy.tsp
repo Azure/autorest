@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.Storage;
 @doc("The storage account blob inventory policy.")
 @parentResource(StorageAccount)
-@singleton("blobInventoryPolicyName")
+@singleton("default")
 model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
   @key("blobInventoryPolicyName")
   @segment("inventoryPolicies")

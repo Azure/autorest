@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.Storage;
 @doc("The properties of File services in storage account.")
 @parentResource(StorageAccount)
-@singleton("FileServicesName")
+@singleton("default")
 model FileServiceProperty is ProxyResource<FileServicePropertiesProperties> {
   @key("FileServicesName")
   @segment("fileServices")

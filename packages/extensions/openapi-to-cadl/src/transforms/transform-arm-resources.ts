@@ -9,6 +9,7 @@ import {
   CadlOperation,
   CadlParameter,
   MSIType,
+  TspArmOptionalStandardProperty,
   TspArmResource,
   TspArmResourceOperation,
   isFirstLevelResource,
@@ -63,14 +64,8 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     propertiesModelName = "{}";
   }
 
-  let msiType: MSIType | undefined;
-  if (schema.properties?.find((p) => p.schema.language.default.name === "ManagedServiceIdentity")) {
-    msiType = "Azure.ResourceManager.ManagedServiceIdentity";
-  } else if (schema.properties?.find((p) => p.schema.language.default.name === "SystemAssignedServiceIdentity")) {
-    msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
-  }
-
   const operations = getTspOperations(codeModel, schema, propertiesModelName);
+  const optionalStandardProperties = getResourceOptionalStandardProperties(schema);
 
   return {
     resourceGroupName: _.first(schema.resourceMetadata.GetOperations[0].OperationID.split("_")) ?? "",
@@ -86,8 +81,25 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
     decorators: buildResourceDecorators(schema),
     resourceOperations: operations[0],
     normalOperations: operations[1],
-    msiType,
+    otherProperties: [],
+    optionalStandardProperties,
   };
+}
+
+function getResourceOptionalStandardProperties(schema: ArmResourceSchema): TspArmOptionalStandardProperty {
+  const optionalStandardProperties: TspArmOptionalStandardProperty = {};
+  let msiType: MSIType | undefined;
+
+  // TODO: handle non-standard or self-defined properties
+
+  if (schema.properties?.find((p) => p.schema.language.default.name === "ManagedServiceIdentity")) {
+    msiType = "Azure.ResourceManager.ManagedServiceIdentity";
+  } else if (schema.properties?.find((p) => p.schema.language.default.name === "SystemAssignedServiceIdentity")) {
+    msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
+  }
+
+
+  return optionalStandardProperties;
 }
 
 function convertResourceReadOperation(
@@ -473,7 +485,7 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
   }
 }
 
-function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter {
+function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): Parameter | undefined {
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       if (operation.operationId === resourceMetadata.GetOperations[0].OperationID) {
@@ -485,8 +497,6 @@ function getKeyParameter(codeModel: CodeModel, resourceMetadata: ArmResource): P
       }
     }
   }
-
-  throw new Error(`Failed to find key parameter for ${resourceMetadata.Name}`);
 }
 
 function generateSingletonKeyParameter(): CadlParameter {
@@ -588,7 +598,7 @@ function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
   if (schema.resourceMetadata.IsSingletonResource) {
     resourceModelDecorators.push({
       name: "singleton",
-      arguments: [schema.resourceMetadata.ResourceKey],
+      arguments: [getSingletonName(schema)],
     });
   }
 
@@ -611,3 +621,18 @@ function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
 
   return resourceModelDecorators;
 }
+
+function getSingletonName(schema: ArmResourceSchema): string {
+  const key = schema.resourceMetadata.ResourceKey;
+  const pathLast = schema.resourceMetadata.GetOperations[0].Path.split("/").pop() ?? "";
+  if (key !== pathLast) {
+    if (pathLast?.includes("{")) {
+      // TODO: need tsp to support custom singleton name
+      return "default";
+    } else {
+      return pathLast;
+    }
+  }
+  return key;
+}
+
