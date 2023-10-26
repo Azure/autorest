@@ -19,7 +19,7 @@ model RestorePointGroup is TrackedResource<RestorePointCollectionProperties> {
 }
 
 @armResourceOperations
-interface RestorePointGroups {
+interface RestorePointCollections {
   @doc("The operation to get the restore point collection.")
   get is ArmResourceRead<
     RestorePointGroup,

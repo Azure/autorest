@@ -22,7 +22,7 @@ model VirtualMachineScaleSetVm
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVms {
+interface VirtualMachines {
   @doc("Gets a virtual machine from a VM scale set.")
   get is ArmResourceRead<
     VirtualMachineScaleSetVm,

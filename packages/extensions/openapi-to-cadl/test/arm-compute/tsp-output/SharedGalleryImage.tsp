@@ -28,7 +28,7 @@ are to be listed.
 }
 
 @armResourceOperations
-interface SharedGalleryImages {
+interface Images {
   @doc("Get a shared gallery image by subscription id or tenant id.")
   get is ArmResourceRead<SharedGalleryImage>;
   @doc("List shared gallery images by subscription id or tenant id.")

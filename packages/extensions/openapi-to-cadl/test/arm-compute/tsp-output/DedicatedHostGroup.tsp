@@ -24,7 +24,7 @@ model DedicatedHostGroup is TrackedResource<DedicatedHostGroupProperties> {
 }
 
 @armResourceOperations
-interface DedicatedHostGroups {
+interface HostGroups {
   @doc("Retrieves information about a dedicated host group.")
   get is ArmResourceRead<
     DedicatedHostGroup,

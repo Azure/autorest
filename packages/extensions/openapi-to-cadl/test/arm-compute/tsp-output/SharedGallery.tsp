@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 Specifies information about the Shared Gallery that you want to create or
 update.
 """)
-@subscriptionResource
 @locationResource
 model SharedGallery is ProxyResource<{}> {
   @doc("The unique name of the Shared Gallery.")

@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("Describes a cloud service OS family.")
-@subscriptionResource
 @locationResource
 model OSFamily is ProxyResource<OSFamilyProperties> {
   @doc("Name of the OS family.")
@@ -21,7 +20,7 @@ model OSFamily is ProxyResource<OSFamilyProperties> {
 }
 
 @armResourceOperations
-interface OSFamilies {
+interface CloudServiceOsFamilies {
   @doc("""
 Gets properties of a guest operating system family that can be specified in the
 XML service configuration (.cscfg) for a cloud service.

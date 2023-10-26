@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine Extension Image.")
-@subscriptionResource
 @locationResource
 model VirtualMachineExtensionImage
   is TrackedResource<VirtualMachineExtensionImageProperties> {
@@ -21,7 +20,7 @@ model VirtualMachineExtensionImage
 }
 
 @armResourceOperations
-interface VirtualMachineExtensionImages {
+interface Versions {
   @doc("Gets a virtual machine extension image.")
   get is ArmResourceRead<VirtualMachineExtensionImage>;
   @doc("Gets a list of virtual machine extension image types.")

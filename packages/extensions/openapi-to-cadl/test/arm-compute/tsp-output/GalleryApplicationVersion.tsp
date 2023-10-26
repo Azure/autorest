@@ -25,7 +25,7 @@ model GalleryApplicationVersion
 }
 
 @armResourceOperations
-interface GalleryApplicationVersions {
+interface Versions {
   @doc("Retrieves information about a gallery Application Version.")
   get is ArmResourceRead<
     GalleryApplicationVersion,

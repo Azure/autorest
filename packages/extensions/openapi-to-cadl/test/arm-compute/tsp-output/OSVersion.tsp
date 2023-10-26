@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("Describes a cloud service OS version.")
-@subscriptionResource
 @locationResource
 model OSVersion is ProxyResource<OSVersionProperties> {
   @doc("Name of the OS version.")
@@ -21,7 +20,7 @@ model OSVersion is ProxyResource<OSVersionProperties> {
 }
 
 @armResourceOperations
-interface OSVersions {
+interface CloudServiceOsVersions {
   @doc("""
 Gets properties of a guest operating system version that can be specified in
 the XML service configuration (.cscfg) for a cloud service.

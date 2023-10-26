@@ -1,5 +1,5 @@
 import { CodeModel, ObjectSchema, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
-import _ from "lodash";
+import _, { upperFirst } from "lodash";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -71,8 +71,9 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   }
 
   const operations = getTspOperations(codeModel, schema, propertiesModelName);
-
+  const resourceName = upperFirst(schema.resourceMetadata.ResourceKeySegment);
   return {
+    resourceName,
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
@@ -250,7 +251,7 @@ function convertResourceListOperations(
 
     converted.push({
       doc: operation.Description,
-      kind: "ArmResourceListByParent",
+      kind: operation.OperationID.endsWith("_ListBySubscription") ? "ArmListBySubscription" :"ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
       templateParameters: templateParameters,
     });
@@ -583,30 +584,24 @@ function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
         arguments: [{ value: parent, options: { unwrap: true } }],
       });
     }
-  }
-
+  } 
+  
   if (schema.resourceMetadata.IsSingletonResource) {
     resourceModelDecorators.push({
       name: "singleton",
       arguments: [schema.resourceMetadata.ResourceKey],
     });
-  }
-
-  if (schema.resourceMetadata.IsTenantResource) {
+  } else if (schema.resourceMetadata.IsTenantResource) {
     resourceModelDecorators.push({
       name: "tenantResource",
     });
-  }
-
-  if (schema.resourceMetadata.IsSubscriptionResource) {
-    resourceModelDecorators.push({
-      name: "subscriptionResource",
-    });
-  }
-
-  if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
+  } else if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
     resourceModelDecorators.push({
       name: "locationResource",
+    });
+  } else if (schema.resourceMetadata.IsSubscriptionResource) {
+    resourceModelDecorators.push({
+      name: "subscriptionResource",
     });
   }
 

@@ -24,7 +24,7 @@ model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
 }
 
 @armResourceOperations
-interface GalleryApplications {
+interface Applications {
   @doc("Retrieves information about a gallery Application Definition.")
   get is ArmResourceRead<GalleryApplication>;
   @doc("Create or update a gallery Application Definition.")

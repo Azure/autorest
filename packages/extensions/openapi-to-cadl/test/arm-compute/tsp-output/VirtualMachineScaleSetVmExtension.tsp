@@ -22,7 +22,7 @@ model VirtualMachineScaleSetVmExtension
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVmExtensions {
+interface Extensions {
   @doc("The operation to get the VMSS VM extension.")
   get is ArmResourceRead<
     VirtualMachineScaleSetVmExtension,

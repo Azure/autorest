@@ -31,7 +31,7 @@ be within the range of a 32-bit integer. Format:
 }
 
 @armResourceOperations
-interface CommunityGalleryImageVersions {
+interface Versions {
   @doc("Get a community gallery image version.")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
   @doc("List community gallery image versions inside an image.")

@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 Specifies information about the Community Gallery that you want to create or
 update.
 """)
-@subscriptionResource
 @locationResource
 model CommunityGallery is ProxyResource<{}> {
   @doc("The public name of the community gallery.")

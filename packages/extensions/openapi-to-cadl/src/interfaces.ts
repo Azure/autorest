@@ -200,6 +200,7 @@ export type MSIType =
   | "Azure.ResourceManager.ManagedServiceIdentity"
   | "Azure.ResourceManager.ManagedSystemAssignedIdentity";
 export interface TspArmResource extends CadlObject {
+  resourceName: string;
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;

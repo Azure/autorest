@@ -1,5 +1,4 @@
 import { TspArmResource } from "interfaces";
-import { plural } from "pluralize";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -39,7 +38,7 @@ export function generateArmResource(resource: TspArmResource): string {
 function generateArmResourceOperation(resource: TspArmResource): string {
   const definitions: string[] = [];
   definitions.push("@armResourceOperations");
-  definitions.push(`interface ${plural(resource.name)} {`);
+  definitions.push(`interface ${resource.resourceName} {`);
   for (const operation of resource.resourceOperations) {
     for (const fixme of operation.fixMe ?? []) {
       definitions.push(fixme);
