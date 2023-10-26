@@ -17,6 +17,8 @@ model BlobServiceProperty is ProxyResource<BlobServicePropertiesProperties> {
   @key("BlobServicesName")
   @segment("blobServices")
   name: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

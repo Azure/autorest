@@ -22,9 +22,9 @@ export function generateArmResource(resource: TspArmResource): string {
 
   definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
 
-  // if (resource.msiType) {
-  //   definitions.push(`\n...${resource.msiType}\n`);
-  // }
+  for (const p of resource.optionalStandardProperties) {
+    definitions.push(`\n...${p}`);
+  }
 
   definitions.push("}\n");
 

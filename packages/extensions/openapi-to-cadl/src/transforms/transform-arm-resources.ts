@@ -1,5 +1,5 @@
 import { CodeModel, ObjectSchema, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
-import _, { upperFirst } from "lodash";
+import _ from "lodash";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -8,8 +8,6 @@ import {
   CadlObjectProperty,
   CadlOperation,
   CadlParameter,
-  MSIType,
-  TspArmOptionalStandardProperty,
   TspArmResource,
   TspArmResourceOperation,
   isFirstLevelResource,
@@ -86,18 +84,47 @@ export function transformTspArmResource(codeModel: CodeModel, schema: ArmResourc
   };
 }
 
-function getResourceOptionalStandardProperties(schema: ArmResourceSchema): TspArmOptionalStandardProperty {
-  const optionalStandardProperties: TspArmOptionalStandardProperty = {};
-  let msiType: MSIType | undefined;
+function getResourceOptionalStandardProperties(schema: ArmResourceSchema): string[] {
+  const optionalStandardProperties = [];
 
-  // TODO: handle non-standard or self-defined properties
-
-  if (schema.properties?.find((p) => p.schema.language.default.name === "ManagedServiceIdentity")) {
-    msiType = "Azure.ResourceManager.ManagedServiceIdentity";
-  } else if (schema.properties?.find((p) => p.schema.language.default.name === "SystemAssignedServiceIdentity")) {
-    msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
+  const msi = schema.properties?.find((p) => p.serializedName === "identity");
+  if (msi) {
+    let msiType;
+    if (msi.schema.language.default.name === "ManagedServiceIdentity") {
+      msiType = "Azure.ResourceManager.ManagedServiceIdentity";
+    } else if (msi.schema.language.default.name === "SystemAssignedServiceIdentity") {
+      msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
+    } else {
+      // TODO: handle non-standard property
+      msiType = "Azure.ResourceManager.ManagedServiceIdentity";
+    }
+    optionalStandardProperties.push(msiType);
   }
 
+  if (schema.properties?.find((p) => p.serializedName === "sku")) {
+    // TODO: handle non-standard property
+    optionalStandardProperties.push("Azure.ResourceManager.ResourceSku");
+  }
+
+  if (schema.properties?.find((p) => p.serializedName === "eTag")) {
+    // TODO: handle non-standard property
+    optionalStandardProperties.push("Azure.ResourceManager.EntityTag");
+  }
+
+  if (schema.properties?.find((p) => p.serializedName === "plan")) {
+    // TODO: handle non-standard property
+    optionalStandardProperties.push("Azure.ResourceManager.ResourcePlan");
+  }
+
+  if (schema.properties?.find((p) => p.serializedName === "kind")) {
+    // TODO: handle non-standard property
+    optionalStandardProperties.push("Azure.ResourceManager.ResourceKind");
+  }
+
+  if (schema.properties?.find((p) => p.serializedName === "managedBy")) {
+    // TODO: handle non-standard property
+    optionalStandardProperties.push("Azure.ResourceManager.ManagedBy");
+  }
 
   return optionalStandardProperties;
 }

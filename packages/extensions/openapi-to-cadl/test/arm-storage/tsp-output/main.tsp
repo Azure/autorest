@@ -20,6 +20,7 @@ import "./QueueServiceProperty.tsp";
 import "./StorageQueue.tsp";
 import "./TableServiceProperty.tsp";
 import "./Table.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

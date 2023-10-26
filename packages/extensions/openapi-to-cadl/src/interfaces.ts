@@ -196,9 +196,6 @@ export interface TspArmResourceListOperation extends TspArmResourceOperationBase
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
 }
 
-export type MSIType =
-  | "Azure.ResourceManager.ManagedServiceIdentity"
-  | "Azure.ResourceManager.ManagedSystemAssignedIdentity";
 export interface TspArmResource extends CadlObject {
   resourceGroupName: string;
   resourceKind: ArmResourceKind;
@@ -207,15 +204,6 @@ export interface TspArmResource extends CadlObject {
   resourceOperations: TspArmResourceOperation[];
   normalOperations: CadlOperation[];
   otherProperties: CadlObjectProperty[];
-  optionalStandardProperties: TspArmOptionalStandardProperty;
-}
-
-export interface TspArmOptionalStandardProperty {
-  managedIdentity?: MSIType;
-  sku?: "Azure.ResourceManager.ResourceSku";
-  eTags?: "Azure.ResourceManager.EntityTag";
-  plan?: "Azure.ResourceManager.ResourcePlan";
-  resourceKind?: "Azure.ResourceManager.ResourceKind";
-  managedBy?: "Azure.ResourceManager.ManagedBy";
+  optionalStandardProperties: string[];
 }
 

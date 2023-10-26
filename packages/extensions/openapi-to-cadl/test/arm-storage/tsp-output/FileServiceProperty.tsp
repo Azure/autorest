@@ -17,6 +17,8 @@ model FileServiceProperty is ProxyResource<FileServicePropertiesProperties> {
   @key("FileServicesName")
   @segment("fileServices")
   name: string;
+
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations

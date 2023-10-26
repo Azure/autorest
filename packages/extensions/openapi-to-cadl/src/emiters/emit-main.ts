@@ -33,7 +33,7 @@ function getArmServiceInformation(program: CadlProgram) {
     `import "@azure-tools/typespec-azure-core";`,
     `import "@azure-tools/typespec-azure-resource-manager";`,
     `import "./models.tsp";`,
-    ...getArmResourceImports(),
+    ...getArmResourceImports(program),
     ``,
     `using TypeSpec.Rest;`,
     `using TypeSpec.Http;`,
@@ -47,12 +47,16 @@ function getArmServiceInformation(program: CadlProgram) {
   return [...imports, content].join("\n");
 }
 
-function getArmResourceImports(): string[] {
+function getArmResourceImports(program: CadlProgram): string[] {
   const resourceMetadata = getArmResourcesMetadata();
   const imports: string[] = [];
 
   for (const resource in resourceMetadata) {
     imports.push(`import "./${resource}.tsp";`);
+  }
+
+  if (program.operationGroups.length > 0) {
+    imports.push(`import "./routes.tsp";`);
   }
 
   return imports;

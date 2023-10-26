@@ -22,6 +22,10 @@ lower-case letters only.
   @key("accountName")
   @segment("storageAccounts")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
