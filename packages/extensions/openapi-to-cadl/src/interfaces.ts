@@ -166,34 +166,40 @@ export function isFirstLevelResource(value: string): value is FirstLevelResource
 export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   kind: string;
   name: string;
-  templateParameters: string[];
+  templateParameters?: string[];
   decorators?: CadlDecorator[];
 }
 
-export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResourceNonListOperation;
+export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResourceNonListOperation | TspArmResourceExistsOperation;
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrUpdateAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrUpdateAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
   kind: "ArmResourceListByParent" | "ArmListBySubscription" | "ArmResourceListAtScope";
+}
+
+export interface TspArmResourceExistsOperation extends TspArmResourceOperationBase {
+  kind: "ArmResourceExists";
+  parameters: string[];
+  responses: string[];
 }
 
 export interface TspArmResource extends CadlObject {

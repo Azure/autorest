@@ -82,14 +82,14 @@ export function getResourceOperations(resource: ArmResource): Record<string, Ope
 export function getSingletonResouceListOperation(resource: ArmResource): Operation | undefined {
   const codeModel = getSession().model;
 
-  let predictSingletonResourcePath: string | undefined;
   if (resource.IsSingletonResource) {
-    predictSingletonResourcePath = resource.GetOperations[0].Path.split("/").slice(0, -1).join("/");
-  }
+    let predictSingletonResourcePath: string | undefined;
+    if (resource.IsSingletonResource) {
+      predictSingletonResourcePath = resource.GetOperations[0].Path.split("/").slice(0, -1).join("/");
+    }
 
-  for (const operationGroup of codeModel.operationGroups) {
-    for (const operation of operationGroup.operations) {
-      if (resource.IsSingletonResource) {
+    for (const operationGroup of codeModel.operationGroups) {
+      for (const operation of operationGroup.operations) {
         // for singleton resource, c# will drop the list operation but we need to get it back
         if (
           operation.requests?.length &&
@@ -98,6 +98,21 @@ export function getSingletonResouceListOperation(resource: ArmResource): Operati
         ) {
           return operation;
         }
+      }
+    }
+  }
+}
+
+export function getResourceExistOperation(resource: ArmResource): Operation | undefined {
+  const codeModel = getSession().model;
+  for (const operationGroup of codeModel.operationGroups) {
+    for (const operation of operationGroup.operations) {
+      if (
+        operation.requests?.length &&
+        operation.requests[0].protocol?.http?.path === resource.GetOperations[0].Path &&
+        operation.requests[0].protocol.http?.method === "head"
+      ) {
+        return operation;
       }
     }
   }
@@ -153,6 +168,13 @@ const _ArmCoreTypes = [
   "Origin",
   "SystemData",
   "Origin",
+  "ManagedServiceIdentity",
+  "ManagedSystemAssignedIdentity",
+  "EntityTag",
+  "ResourceKind",
+  "ResourcePlan",
+  "ResourceSku",
+  "ManagedBy",
 ];
 
 export function filterResourceRelatedObjects(objects: CadlObject[]): CadlObject[] {

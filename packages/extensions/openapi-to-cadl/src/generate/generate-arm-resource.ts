@@ -44,11 +44,19 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(fixme);
     }
     definitions.push(generateDocs(operation));
-    definitions.push(
-      `${operation.name} is ${operation.kind}<${operation.templateParameters
-        .map(replaceGeneratedResourceObject)
-        .join()}>`,
-    );
+    const decorators = generateDecorators(operation.decorators);
+    decorators && definitions.push(decorators);
+    if (operation.kind === "ArmResourceExists") {
+      definitions.push(
+        `op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`,
+      );
+    } else {
+      definitions.push(
+        `${operation.name} is ${operation.kind}<${operation.templateParameters ?? []
+          .map(replaceGeneratedResourceObject)
+          .join()}>`,
+      );
+    }
   }
   for (const operation of resource.normalOperations) {
     definitions.push(generateOperation(operation));

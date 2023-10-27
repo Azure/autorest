@@ -17,6 +17,7 @@ import {
   ArmResourceSchema,
   OperationWithResourceOperationFlag,
   _ArmResourceOperation,
+  getResourceExistOperation as getResourceExistsOperation,
   getResourceOperations,
   getSingletonResouceListOperation,
   isResourceSchema,
@@ -170,6 +171,25 @@ function convertResourceReadOperation(
   ];
 }
 
+function convertResourceExistsOperation(
+  resourceMetadata: ArmResource,
+): TspArmResourceOperation[] {
+  const swaggerOperation = getResourceExistsOperation(resourceMetadata);
+  if (swaggerOperation) {
+    return [
+      {
+        doc: swaggerOperation.language.default.description,
+        kind: "ArmResourceExists",
+        name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
+        parameters: [`...ResourceInstanceParameters<${resourceMetadata.Name}, BaseParameters<${resourceMetadata.Name}>>`],
+        responses: ["OkResponse", "ErrorResponse"],
+        decorators: [{ name: "head" }],
+      },
+    ];
+  }
+  return [];
+}
+
 function convertResourceCreateOrUpdateOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
@@ -177,11 +197,12 @@ function convertResourceCreateOrUpdateOperation(
   if (resourceMetadata.CreateOperations.length) {
     const operation = resourceMetadata.CreateOperations[0];
     const swaggerOperation = operations[operation.OperationID];
+    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     return [
       {
         doc: operation.Description,
-        kind: operation.IsLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
+        kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
         name: getOperationName(operation.OperationID),
         templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
       },
@@ -202,6 +223,7 @@ function convertResourceUpdateOperation(
       resourceMetadata.CreateOperations[0].OperationID !== operation.OperationID
     ) {
       const swaggerOperation = operations[operation.OperationID];
+      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
@@ -217,7 +239,7 @@ function convertResourceUpdateOperation(
       let kind;
       const templateParameters = [resourceMetadata.Name];
       if (propertiesProperty) {
-        kind = operation.IsLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
+        kind = isLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
         // TODO: if update properties are different from resource properties, we need to use a different model
         templateParameters.push(resourcePropertiesModelName);
         addGeneratedResourceObjectIfNotExits(
@@ -231,17 +253,17 @@ function convertResourceUpdateOperation(
           );
         }
       } else if (tagsProperty) {
-        kind = operation.IsLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
+        kind = isLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
         // TODO: if update properties are different from tag properties, we need to use a different model
         addGeneratedResourceObjectIfNotExits(
           bodyParam?.schema.language.default.name ?? "",
           `TagsUpdateModel<${resourceMetadata.Name}>`,
         );
       } else if (bodyParam) {
-        kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
+        kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
       } else {
-        kind = operation.IsLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
+        kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push("{}");
       }
       if (baseParameters) {
@@ -268,13 +290,14 @@ function convertResourceDeleteOperation(
   if (resourceMetadata.DeleteOperations.length) {
     const operation = resourceMetadata.DeleteOperations[0];
     const swaggerOperation = operations[operation.OperationID];
+    const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
 
     return [
       {
         doc: operation.Description,
-        kind: operation.IsLongRunning
+        kind: isLongRunning
           ? okResponse
             ? "ArmResourceDeleteAsync"
             : "ArmResourceDeleteWithoutOkAsync"
@@ -391,6 +414,7 @@ function convertResourceActionOperations(
     for (const operation of resourceMetadata.OtherOperations) {
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
+        const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
         const okResponse = swaggerOperation?.responses?.filter((o) =>
           o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
@@ -408,9 +432,9 @@ function convertResourceActionOperations(
         let kind;
         if (!okResponse) {
           // TODO: Sync operation should have a 204 response
-          kind = operation.IsLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
+          kind = isLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
         } else {
-          kind = operation.IsLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
+          kind = isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
         }
         const templateParameters = [resourceMetadata.Name, request];
         if (okResponse) {
@@ -465,6 +489,9 @@ function getTspOperations(
 
   // read operation
   tspOperations.push(...convertResourceReadOperation(resourceMetadata, operations));
+
+  // exist operation
+  tspOperations.push(...convertResourceExistsOperation(resourceMetadata));
 
   // create operation
   tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata, operations));
