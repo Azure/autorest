@@ -675,7 +675,7 @@ function getSingletonName(schema: ArmResourceSchema): string {
   const pathLast = schema.resourceMetadata.GetOperations[0].Path.split("/").pop() ?? "";
   if (key !== pathLast) {
     if (pathLast?.includes("{")) {
-      // TODO: need tsp to support custom singleton name
+      // this is from c# config, which need confirm with service
       return "default";
     } else {
       return pathLast;
