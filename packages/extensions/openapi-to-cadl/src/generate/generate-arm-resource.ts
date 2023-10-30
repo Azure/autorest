@@ -50,9 +50,9 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       definitions.push(`op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`);
     } else {
       definitions.push(
-        `${operation.name} is ${operation.kind}<${
-          operation.templateParameters ?? [].map(replaceGeneratedResourceObject).join()
-        }>`,
+        `${operation.name} is ${operation.kind}<${(operation.templateParameters ?? [])
+          .map(replaceGeneratedResourceObject)
+          .join()}>`,
       );
     }
   }

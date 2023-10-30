@@ -3,7 +3,7 @@ param(
     [string]$swaggerConfigFile,
     [string]$outputFolder,
     [string]$csharpCodegen = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@autorest/csharp/-/csharp-3.0.0-alpha.20231017.8.tgz",
-    [string]$converterCodegen = "~/microsoft/autorest/packages/extensions/openapi-to-cadl"
+    [string]$converterCodegen = ""
 )
 
 function GenerateMetadata ()
