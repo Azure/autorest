@@ -88,13 +88,14 @@ function getOtherProperties(schema: ArmResourceSchema): CadlObjectProperty[] {
   const knownProperties = [
     "properties",
     "id",
+    "name",
     "type",
     "systemData",
     "location",
     "tags",
     "identity",
     "sku",
-    "eTag",
+    "etag",
     "plan",
     "kind",
     "managedBy",
@@ -171,9 +172,7 @@ function convertResourceReadOperation(
   ];
 }
 
-function convertResourceExistsOperation(
-  resourceMetadata: ArmResource,
-): TspArmResourceOperation[] {
+function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmResourceOperation[] {
   const swaggerOperation = getResourceExistsOperation(resourceMetadata);
   if (swaggerOperation) {
     return [
@@ -181,7 +180,9 @@ function convertResourceExistsOperation(
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
         name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
-        parameters: [`...ResourceInstanceParameters<${resourceMetadata.Name}, BaseParameters<${resourceMetadata.Name}>>`],
+        parameters: [
+          `...ResourceInstanceParameters<${resourceMetadata.Name}, BaseParameters<${resourceMetadata.Name}>>`,
+        ],
         responses: ["OkResponse", "ErrorResponse"],
         decorators: [{ name: "head" }],
       },

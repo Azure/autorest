@@ -170,26 +170,29 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   decorators?: CadlDecorator[];
 }
 
-export type TspArmResourceOperation = TspArmResourceListOperation | TspArmResourceNonListOperation | TspArmResourceExistsOperation;
+export type TspArmResourceOperation =
+  | TspArmResourceListOperation
+  | TspArmResourceNonListOperation
+  | TspArmResourceExistsOperation;
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrReplaceSync"
-  | "ArmResourceCreateOrUpdateAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrReplaceSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
