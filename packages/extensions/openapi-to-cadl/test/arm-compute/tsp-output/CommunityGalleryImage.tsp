@@ -10,10 +10,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the gallery image definition that you want to
-create or update.
-""")
+@doc("Specifies information about the gallery image definition that you want to create or update.")
 @parentResource(CommunityGallery)
 model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
   @doc("The name of the community gallery image definition.")

@@ -38,7 +38,7 @@ model VirtualMachineScaleSetVm
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVMs {
+interface VirtualMachineScaleSetVms {
   @doc("Gets a virtual machine from a VM scale set.")
   get is ArmResourceRead<
     VirtualMachineScaleSetVm,
@@ -49,11 +49,7 @@ interface VirtualMachineScaleSetVMs {
       @path
       vmScaleSetName: string;
 
-      @doc("""
-The expand expression to apply on the operation. 'InstanceView' will retrieve
-the instance view of the virtual machine. 'UserData' will retrieve the UserData
-of the virtual machine.
-""")
+      @doc("The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.")
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
@@ -79,10 +75,7 @@ of the virtual machine.
       @path
       vmScaleSetName: string;
 
-      @doc("""
-Optional parameter to force delete a virtual machine from a VM scale set.
-(Feature in Preview)
-""")
+      @doc("Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)")
       @query("forceDeletion")
       forceDeletion?: boolean;
     }
@@ -93,12 +86,7 @@ Optional parameter to force delete a virtual machine from a VM scale set.
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
-      @doc("""
-The filter to apply to the operation. Allowed values are
-'startswith(instanceView/statuses/code, 'PowerState') eq true',
-'properties/latestModelApplied eq true', 'properties/latestModelApplied eq
-false'.
-""")
+      @doc("The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.")
       @query("$filter")
       $filter?: string;
 
@@ -106,18 +94,12 @@ false'.
       @query("$select")
       $select?: string;
 
-      @doc("""
-The expand expression to apply to the operation. Allowed values are
-'instanceView'.
-""")
+      @doc("The expand expression to apply to the operation. Allowed values are 'instanceView'.")
       @query("$expand")
       $expand?: string;
     }
   >;
-  @doc("""
-Reimages (upgrade the operating system) a specific virtual machine in a VM
-scale set.
-""")
+  @doc("Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.")
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     VirtualMachineScaleSetVMReimageParameters,
@@ -130,10 +112,7 @@ scale set.
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-Allows you to re-image all the disks ( including data disks ) in the a VM scale
-set instance. This operation is only supported for managed disks.
-""")
+  @doc("Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     {},
@@ -146,11 +125,7 @@ set instance. This operation is only supported for managed disks.
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-Deallocates a specific virtual machine in a VM scale set. Shuts down the
-virtual machine and releases the compute resources it uses. You are not billed
-for the compute resources of this virtual machine once it is deallocated.
-""")
+  @doc("Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.")
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     {},
@@ -163,11 +138,7 @@ for the compute resources of this virtual machine once it is deallocated.
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-Power off (stop) a virtual machine in a VM scale set. Note that resources are
-still attached and you are getting charged for the resources. Instead, use
-deallocate to release resources and avoid charges.
-""")
+  @doc("Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     {},
@@ -179,11 +150,7 @@ deallocate to release resources and avoid charges.
       @path
       vmScaleSetName: string;
 
-      @doc("""
-The parameter to request non-graceful VM shutdown. True value for this flag
-indicates non-graceful shutdown whereas false indicates otherwise. Default
-value for this flag is false if not specified
-""")
+      @doc("The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified")
       @query("skipShutdown")
       skipShutdown?: boolean;
     }
@@ -214,10 +181,7 @@ value for this flag is false if not specified
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-Shuts down the virtual machine in the virtual machine scale set, moves it to a
-new node, and powers it back on.
-""")
+  @doc("Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.")
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     {},
@@ -230,10 +194,7 @@ new node, and powers it back on.
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-The operation to retrieve SAS URIs of boot diagnostic logs for a virtual
-machine in a VM scale set.
-""")
+  @doc("The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVm,
     {},
@@ -245,11 +206,7 @@ machine in a VM scale set.
       @path
       vmScaleSetName: string;
 
-      @doc("""
-Expiration duration in minutes for the SAS URIs with a value between 1 to 1440
-minutes. **Note:** If not specified, SAS URIs will be generated with a default
-expiration duration of 120 minutes.
-""")
+      @doc("Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.")
       @query("sasUriExpirationTimeInMinutes")
       sasUriExpirationTimeInMinutes?: int32;
     }
@@ -267,10 +224,7 @@ expiration duration of 120 minutes.
       vmScaleSetName: string;
     }
   >;
-  @doc("""
-The operation to simulate the eviction of spot virtual machine in a VM scale
-set.
-""")
+  @doc("The operation to simulate the eviction of spot virtual machine in a VM scale set.")
   simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVm,
     {},
@@ -312,10 +266,7 @@ set.
       @path
       instanceId: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },

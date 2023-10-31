@@ -9,10 +9,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ServiceNetworking;
-@doc("""
-Concrete tracked resource types can be created by aliasing this type using a
-specific property type.
-""")
+@doc("Concrete tracked resource types can be created by aliasing this type using a specific property type.")
 model TrafficController is TrackedResource<TrafficControllerProperties> {
   @doc("traffic controller name for path")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -23,7 +20,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 }
 
 @armResourceOperations
-interface TrafficControllerInterface {
+interface TrafficControllers {
   @doc("Get a TrafficController")
   get is ArmResourceRead<TrafficController>;
   @doc("Create a TrafficController")

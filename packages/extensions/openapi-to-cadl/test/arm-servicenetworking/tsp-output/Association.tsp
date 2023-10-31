@@ -22,7 +22,7 @@ model Association is TrackedResource<AssociationProperties> {
 }
 
 @armResourceOperations
-interface AssociationsInterface {
+interface Associations {
   @doc("Get a Association")
   get is ArmResourceRead<Association>;
   @doc("Create a Association")

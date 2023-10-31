@@ -10,10 +10,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 // FIXME: SharedGallery has no properties property
-@doc("""
-Specifies information about the Shared Gallery that you want to create or
-update.
-""")
+@doc("Specifies information about the Shared Gallery that you want to create or update.")
 @locationResource
 model SharedGallery is ProxyResource<{}> {
   @doc("The unique name of the Shared Gallery.")
@@ -33,10 +30,7 @@ interface SharedGalleries {
     {
       ...BaseParameters<SharedGallery>;
 
-      @doc("""
-The query parameter to decide what shared galleries to fetch when doing listing
-operations.
-""")
+      @doc("The query parameter to decide what shared galleries to fetch when doing listing operations.")
       @query("sharedTo")
       sharedTo?: SharedToValues;
     }

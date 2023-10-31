@@ -22,22 +22,13 @@ model StoragePrivateEndpointConnection
 }
 
 @armResourceOperations
-interface PrivateEndpointConnections {
-  @doc("""
-Gets the specified private endpoint connection associated with the storage
-account.
-""")
+interface StoragePrivateEndpointConnections {
+  @doc("Gets the specified private endpoint connection associated with the storage account.")
   get is ArmResourceRead<StoragePrivateEndpointConnection>;
-  @doc("""
-Update the state of specified private endpoint connection associated with the
-storage account.
-""")
-  put is ArmResourceCreateOrUpdateAsync<StoragePrivateEndpointConnection>;
-  @doc("""
-Deletes the specified private endpoint connection associated with the storage
-account.
-""")
-  delete is ArmResourceDeleteAsync<StoragePrivateEndpointConnection>;
+  @doc("Update the state of specified private endpoint connection associated with the storage account.")
+  put is ArmResourceCreateOrReplaceSync<StoragePrivateEndpointConnection>;
+  @doc("Deletes the specified private endpoint connection associated with the storage account.")
+  delete is ArmResourceDeleteSync<StoragePrivateEndpointConnection>;
   @doc("List all the private endpoint connections associated with the storage account.")
   list is ArmResourceListByParent<StoragePrivateEndpointConnection>;
 }

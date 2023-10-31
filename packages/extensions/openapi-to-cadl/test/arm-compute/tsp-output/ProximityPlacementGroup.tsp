@@ -18,11 +18,7 @@ model ProximityPlacementGroup
   @segment("proximityPlacementGroups")
   name: string;
 
-  @doc("""
-Specifies the Availability Zone where virtual machine, virtual machine scale
-set or availability set associated with the  proximity placement group can be
-created.
-""")
+  @doc("Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.")
   zones?: string[];
 }
 
@@ -34,16 +30,13 @@ interface ProximityPlacementGroups {
     {
       ...BaseParameters<ProximityPlacementGroup>;
 
-      @doc("""
-includeColocationStatus=true enables fetching the colocation status of all the
-resources in the proximity placement group.
-""")
+      @doc("includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.")
       @query("includeColocationStatus")
       includeColocationStatus?: string;
     }
   >;
   @doc("Create or update a proximity placement group.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ProximityPlacementGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
   // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update a proximity placement group.")
   update is ArmCustomPatchSync<
@@ -51,7 +44,7 @@ resources in the proximity placement group.
     ProximityPlacementGroupUpdate
   >;
   @doc("Delete a proximity placement group.")
-  delete is ArmResourceDeleteAsync<ProximityPlacementGroup>;
+  delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
   @doc("Lists all proximity placement groups in a resource group.")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
   @doc("Lists all proximity placement groups in a subscription.")

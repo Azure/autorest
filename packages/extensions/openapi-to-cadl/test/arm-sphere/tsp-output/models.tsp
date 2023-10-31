@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.AzureSphere;
 
@@ -166,10 +168,7 @@ model CountElementsResponse {
 
 @doc("The properties of image")
 model ImageProperties {
-  @doc("""
-Image as a UTF-8 encoded base 64 string on image create. This field contains
-the image URI on image reads.
-""")
+  @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
   @visibility("read", "create")
   image?: string;
 

@@ -19,70 +19,42 @@ model RoleInstance is ProxyResource<RoleInstanceProperties> {
   @segment("roleInstances")
   name: string;
 
-  @doc("Resource Name.")
-  @visibility("read")
-  name?: string;
-
   ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations
-interface CloudServiceRoleInstances {
+interface RoleInstances {
   @doc("Gets a role instance from a cloud service.")
   get is ArmResourceRead<
     RoleInstance,
     {
       ...BaseParameters<RoleInstance>;
 
-      @doc("""
-The expand expression to apply to the operation. 'UserData' is not supported
-for cloud services.
-""")
+      @doc("The expand expression to apply to the operation. 'UserData' is not supported for cloud services.")
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
   >;
   @doc("Deletes a role instance from a cloud service.")
   delete is ArmResourceDeleteAsync<RoleInstance>;
-  @doc("""
-Gets the list of all role instances in a cloud service. Use nextLink property
-in the response to get the next page of role instances. Do this till nextLink
-is null to fetch all the role instances.
-""")
+  @doc("Gets the list of all role instances in a cloud service. Use nextLink property in the response to get the next page of role instances. Do this till nextLink is null to fetch all the role instances.")
   list is ArmResourceListByParent<
     RoleInstance,
     {
       ...BaseParameters<RoleInstance>;
 
-      @doc("""
-The expand expression to apply to the operation. 'UserData' is not supported
-for cloud services.
-""")
+      @doc("The expand expression to apply to the operation. 'UserData' is not supported for cloud services.")
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
   >;
-  @doc("""
-The Reboot Role Instance asynchronous operation requests a reboot of a role
-instance in the cloud service.
-""")
+  @doc("The Reboot Role Instance asynchronous operation requests a reboot of a role instance in the cloud service.")
   restart is ArmResourceActionAsync<RoleInstance, {}, {}>;
-  @doc("""
-The Reimage Role Instance asynchronous operation reinstalls the operating
-system on instances of web roles or worker roles.
-""")
+  @doc("The Reimage Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles.")
   reimage is ArmResourceActionAsync<RoleInstance, {}, {}>;
-  @doc("""
-The Rebuild Role Instance asynchronous operation reinstalls the operating
-system on instances of web roles or worker roles and initializes the storage
-resources that are used by them. If you do not want to initialize storage
-resources, you can use Reimage Role Instance.
-""")
+  @doc("The Rebuild Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instance.")
   rebuild is ArmResourceActionAsync<RoleInstance, {}, {}>;
-  @doc("""
-Retrieves information about the run-time state of a role instance in a cloud
-service.
-""")
+  @doc("Retrieves information about the run-time state of a role instance in a cloud service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<
@@ -99,10 +71,7 @@ service.
       @path
       cloudServiceName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -126,10 +95,7 @@ The subscription ID forms part of the URI for every service call.
       @path
       cloudServiceName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 

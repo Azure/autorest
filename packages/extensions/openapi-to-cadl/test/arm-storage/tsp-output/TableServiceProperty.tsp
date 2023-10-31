@@ -20,37 +20,25 @@ model TableServiceProperty is ProxyResource<TableServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface TableServices {
-  @doc("""
-Gets the properties of a storage account’s Table service, including properties
-for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-""")
+interface TableServiceProperties {
+  @doc("Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     TableServiceProperty,
     {
       ...BaseParameters<TableServiceProperty>;
 
-      @doc("""
-The name of the Table Service within the specified storage account. Table
-Service Name must be 'default'
-""")
+      @doc("The name of the Table Service within the specified storage account. Table Service Name must be 'default'")
       @path
       tableServiceName: "default";
     }
   >;
-  @doc("""
-Sets the properties of a storage account’s Table service, including properties
-for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. 
-""")
-  setServiceProperties is ArmResourceCreateOrUpdateAsync<
+  @doc("Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
     TableServiceProperty,
     {
       ...BaseParameters<TableServiceProperty>;
 
-      @doc("""
-The name of the Table Service within the specified storage account. Table
-Service Name must be 'default'
-""")
+      @doc("The name of the Table Service within the specified storage account. Table Service Name must be 'default'")
       @path
       tableServiceName: "default";
     }

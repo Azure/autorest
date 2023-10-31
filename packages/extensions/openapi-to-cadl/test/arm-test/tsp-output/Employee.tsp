@@ -28,7 +28,7 @@ interface Employees {
   @doc("Update a Employee")
   update is ArmResourcePatchSync<Employee, EmployeeProperties>;
   @doc("Delete a Employee")
-  delete is ArmResourceDeleteAsync<Employee>;
+  delete is ArmResourceDeleteSync<Employee>;
   @doc("List Employee resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Employee>;
   @doc("List Employee resources by subscription ID")
