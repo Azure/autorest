@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Microsoft.Storage;
 
@@ -457,10 +459,7 @@ model StorageSkuListResult {
 
 @doc("Storage SKU and its properties")
 model SkuInformation {
-  @doc("""
-The SKU name. Required for account creation; optional for update. Note that in
-older versions, SKU name was called accountType.
-""")
+  @doc("The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.")
   name: SkuName;
 
   @doc("The SKU tier. This is based on the SKU name.")
@@ -475,43 +474,25 @@ older versions, SKU name was called accountType.
   @visibility("read")
   kind?: Kind;
 
-  @doc("""
-The set of locations that the SKU is available. This will be supported and
-registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.).
-""")
+  @doc("The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.).")
   @visibility("read")
   locations?: string[];
 
-  @doc("""
-The capability information in the specified SKU, including file encryption,
-network ACLs, change notification, etc.
-""")
+  @doc("The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.")
   @visibility("read")
   capabilities?: SKUCapability[];
 
-  @doc("""
-The restrictions because of which SKU cannot be used. This is empty if there
-are no restrictions.
-""")
+  @doc("The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.")
   restrictions?: Restriction[];
 }
 
-@doc("""
-The capability information in the specified SKU, including file encryption,
-network ACLs, change notification, etc.
-""")
+@doc("The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.")
 model SKUCapability {
-  @doc("""
-The name of capability, The capability information in the specified SKU,
-including file encryption, network ACLs, change notification, etc.
-""")
+  @doc("The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.")
   @visibility("read")
   name?: string;
 
-  @doc("""
-A string value to indicate states of given capability. Possibly 'true' or
-'false'.
-""")
+  @doc("A string value to indicate states of given capability. Possibly 'true' or 'false'.")
   @visibility("read")
   value?: string;
 }
@@ -522,19 +503,11 @@ model Restriction {
   @visibility("read")
   type?: string;
 
-  @doc("""
-The value of restrictions. If the restriction type is set to location. This
-would be different locations where the SKU is restricted.
-""")
+  @doc("The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.")
   @visibility("read")
   values?: string[];
 
-  @doc("""
-The reason for the restriction. As of now this can be \"QuotaId\" or
-\"NotAvailableForSubscription\". Quota Id is set when the SKU has
-requiredQuotas parameter as the subscription does not belong to that quota. The
-\"NotAvailableForSubscription\" is related to capacity at DC.
-""")
+  @doc("The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC.")
   reasonCode?: ReasonCode;
 }
 
@@ -549,18 +522,11 @@ model StorageAccountCheckNameAvailabilityParameters {
 
 @doc("The CheckNameAvailability operation response.")
 model CheckNameAvailabilityResult {
-  @doc("""
-Gets a boolean value that indicates whether the name is available for you to
-use. If true, the name is available. If false, the name has already been taken
-or is invalid and cannot be used.
-""")
+  @doc("Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.")
   @visibility("read")
   nameAvailable?: boolean;
 
-  @doc("""
-Gets the reason that a storage account name could not be used. The Reason
-element is only returned if NameAvailable is false.
-""")
+  @doc("Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.")
   @visibility("read")
   reason?: Reason;
 
@@ -577,29 +543,13 @@ model StorageAccountCreateParameters {
   @doc("Required. Indicates the type of storage account.")
   kind: Kind;
 
-  @doc("""
-Required. Gets or sets the location of the resource. This will be one of the
-supported and registered Azure Geo Regions (e.g. West US, East US, Southeast
-Asia, etc.). The geo region of a resource cannot be changed once it is created,
-but if an identical geo region is specified on update, the request will
-succeed.
-""")
+  @doc("Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed.")
   location: string;
 
-  @doc("""
-Optional. Set the extended location of the resource. If not set, the storage
-account will be created in Azure main region. Otherwise it will be created in
-the specified extended location
-""")
+  @doc("Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location")
   extendedLocation?: ExtendedLocation;
 
-  @doc("""
-Gets or sets a list of key value pairs that describe the resource. These tags
-can be used for viewing and grouping this resource (across resource groups). A
-maximum of 15 tags can be provided for a resource. Each tag must have a key
-with a length no greater than 128 characters and a value with a length no
-greater than 256 characters.
-""")
+  @doc("Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters.")
   tags?: Record<string>;
 
   @doc("The identity of the resource.")
@@ -611,10 +561,7 @@ greater than 256 characters.
 
 @doc("The SKU of the storage account.")
 model Sku {
-  @doc("""
-The SKU name. Required for account creation; optional for update. Note that in
-older versions, SKU name was called accountType.
-""")
+  @doc("The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.")
   name: SkuName;
 
   @doc("The SKU tier. This is based on the SKU name.")
@@ -644,12 +591,7 @@ model Identity {
   @doc("The identity type.")
   type: IdentityType;
 
-  @doc("""
-Gets or sets a list of key value pairs that describe the set of User Assigned
-identities that will be used with this storage account. The key is the ARM
-resource identifier of the identity. Only 1 User Assigned identity is permitted
-here.
-""")
+  @doc("Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.")
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -666,16 +608,10 @@ model UserAssignedIdentity {
 
 @doc("The parameters used to create the storage account.")
 model StorageAccountPropertiesCreateParameters {
-  @doc("""
-Restrict copy to and from Storage Accounts within an AAD tenant or with Private
-Links to the same VNet.
-""")
+  @doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
   allowedCopyScope?: AllowedCopyScope;
 
-  @doc("""
-Allow or disallow public network access to Storage Account. Value is optional
-but if passed in, must be 'Enabled' or 'Disabled'.
-""")
+  @doc("Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
   publicNetworkAccess?: PublicNetworkAccess;
 
   @doc("SasPolicy assigned to the storage account.")
@@ -684,39 +620,23 @@ but if passed in, must be 'Enabled' or 'Disabled'.
   @doc("KeyPolicy assigned to the storage account.")
   keyPolicy?: KeyPolicy;
 
-  @doc("""
-User domain assigned to the storage account. Name is the CNAME source. Only one
-custom domain is supported per storage account at this time. To clear the
-existing custom domain, use an empty string for the custom domain name
-property.
-""")
+  @doc("User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.")
   customDomain?: CustomDomain;
 
-  @doc("""
-Encryption settings to be used for server-side encryption for the storage
-account.
-""")
+  @doc("Encryption settings to be used for server-side encryption for the storage account.")
   encryption?: Encryption;
 
   @doc("Network rule set")
   @projectedName("json", "networkAcls")
   networkRuleSet?: NetworkRuleSet;
 
-  @doc("""
-Required for storage accounts where kind = BlobStorage. The access tier is used
-for billing. The 'Premium' access tier is the default value for premium block
-blobs storage account type and it cannot be changed for the premium block blobs
-storage account type.
-""")
+  @doc("Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.")
   accessTier?: AccessTier;
 
   @doc("Provides the identity based authentication settings for Azure Files.")
   azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
 
-  @doc("""
-Allows https traffic only to storage service if sets to true. The default value
-is true since API version 2019-04-01.
-""")
+  @doc("Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.")
   @projectedName("json", "supportsHttpsTrafficOnly")
   enableHttpsTrafficOnly?: boolean;
 
@@ -732,67 +652,35 @@ is true since API version 2019-04-01.
   @projectedName("json", "isHnsEnabled")
   IsHnsEnabled?: boolean;
 
-  @doc("""
-Allow large file shares if sets to Enabled. It cannot be disabled once it is
-enabled.
-""")
+  @doc("Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.")
   largeFileSharesState?: LargeFileSharesState;
 
-  @doc("""
-Maintains information about the network routing choice opted by the user for
-data transfer
-""")
+  @doc("Maintains information about the network routing choice opted by the user for data transfer")
   routingPreference?: RoutingPreference;
 
-  @doc("""
-Allow or disallow public access to all blobs or containers in the storage
-account. The default interpretation is true for this property.
-""")
+  @doc("Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property.")
   allowBlobPublicAccess?: boolean;
 
-  @doc("""
-Set the minimum TLS version to be permitted on requests to storage. The default
-interpretation is TLS 1.0 for this property.
-""")
+  @doc("Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.")
   minimumTlsVersion?: MinimumTlsVersion;
 
-  @doc("""
-Indicates whether the storage account permits requests to be authorized with
-the account access key via Shared Key. If false, then all requests, including
-shared access signatures, must be authorized with Azure Active Directory (Azure
-AD). The default value is null, which is equivalent to true.
-""")
+  @doc("Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.")
   allowSharedKeyAccess?: boolean;
 
   @doc("NFS 3.0 protocol support enabled if set to true.")
   @projectedName("json", "isNfsV3Enabled")
   enableNfsV3?: boolean;
 
-  @doc("""
-Allow or disallow cross AAD tenant object replication. The default
-interpretation is true for this property.
-""")
+  @doc("Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.")
   allowCrossTenantReplication?: boolean;
 
-  @doc("""
-A boolean flag which indicates whether the default authentication is OAuth or
-not. The default interpretation is false for this property.
-""")
+  @doc("A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.")
   defaultToOAuthAuthentication?: boolean;
 
-  @doc("""
-The property is immutable and can only be set to true at the account creation
-time. When set to true, it enables object level immutability for all the new
-containers in the account by default.
-""")
+  @doc("The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default.")
   immutableStorageWithVersioning?: ImmutableStorageAccount;
 
-  @doc("""
-Allows you to specify the type of endpoint. Set this to AzureDNSZone to create
-a large number of accounts in a single subscription, which creates accounts in
-an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone
-identifier.
-""")
+  @doc("Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.")
   dnsEndpointType?: DnsEndpointType;
 }
 
@@ -813,16 +701,10 @@ model KeyPolicy {
 
 @doc("The custom domain assigned to this storage account. This can be set via Update.")
 model CustomDomain {
-  @doc("""
-Gets or sets the custom domain name assigned to the storage account. Name is
-the CNAME source.
-""")
+  @doc("Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source.")
   name: string;
 
-  @doc("""
-Indicates whether indirect CName validation is enabled. Default value is false.
-This should only be set on updates.
-""")
+  @doc("Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.")
   useSubDomainName?: boolean;
 }
 
@@ -831,16 +713,10 @@ model Encryption {
   @doc("List of services which support encryption.")
   services?: EncryptionServices;
 
-  @doc("""
-The encryption keySource (provider). Possible values (case-insensitive): 
-Microsoft.Storage, Microsoft.Keyvault
-""")
+  @doc("The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault")
   keySource?: KeySource;
 
-  @doc("""
-A boolean indicating whether or not the service applies a secondary layer of
-encryption with platform managed keys for data at rest.
-""")
+  @doc("A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest.")
   requireInfrastructureEncryption?: boolean;
 
   @doc("Properties provided by key vault.")
@@ -869,25 +745,15 @@ model EncryptionServices {
 
 @doc("A service that allows server-side encryption to be used.")
 model EncryptionService {
-  @doc("""
-A boolean indicating whether or not the service encrypts the data as it is
-stored. Encryption at rest is enabled by default today and cannot be disabled.
-""")
+  @doc("A boolean indicating whether or not the service encrypts the data as it is stored. Encryption at rest is enabled by default today and cannot be disabled.")
   enabled?: boolean;
 
-  @doc("""
-Gets a rough estimate of the date/time when the encryption was last enabled by
-the user. Data is encrypted at rest by default today and cannot be disabled.
-""")
+  @doc("Gets a rough estimate of the date/time when the encryption was last enabled by the user. Data is encrypted at rest by default today and cannot be disabled.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastEnabledTime?: utcDateTime;
 
-  @doc("""
-Encryption key type to be used for the encryption service. 'Account' key type
-implies that an account-scoped encryption key will be used. 'Service' key type
-implies that a default service key is used.
-""")
+  @doc("Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.")
   @visibility("read", "create")
   keyType?: KeyType;
 }
@@ -915,10 +781,7 @@ model KeyVaultProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
 
-  @doc("""
-This is a read only property that represents the expiration time of the current
-version of the customer managed key used for encryption.
-""")
+  @doc("This is a read only property that represents the expiration time of the current version of the customer managed key used for encryption.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   currentVersionedKeyExpirationTimestamp?: utcDateTime;
@@ -926,29 +789,18 @@ version of the customer managed key used for encryption.
 
 @doc("Encryption identity for the storage account.")
 model EncryptionIdentity {
-  @doc("""
-Resource identifier of the UserAssigned identity to be associated with
-server-side encryption on the storage account.
-""")
+  @doc("Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.")
   @projectedName("json", "userAssignedIdentity")
   encryptionUserAssignedIdentity?: string;
 
-  @doc("""
-ClientId of the multi-tenant application to be used in conjunction with the
-user-assigned identity for cross-tenant customer-managed-keys server-side
-encryption on the storage account.
-""")
+  @doc("ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.")
   @projectedName("json", "federatedIdentityClientId")
   encryptionFederatedIdentityClientId?: string;
 }
 
 @doc("Network rule set")
 model NetworkRuleSet {
-  @doc("""
-Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
-Possible values are any combination of Logging|Metrics|AzureServices (For
-example, \"Logging, Metrics\"), or None to bypass none of those traffics.
-""")
+  @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
   bypass?: Bypass;
 
   @doc("Sets the resource access rules")
@@ -975,10 +827,7 @@ model ResourceAccessRule {
 
 @doc("Virtual Network rule.")
 model VirtualNetworkRule {
-  @doc("""
-Resource ID of a subnet, for example:
-/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
-""")
+  @doc("Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.")
   @projectedName("json", "id")
   virtualNetworkResourceId: string;
 
@@ -1001,19 +850,13 @@ model IPRule {
 
 @doc("Settings for Azure Files identity based authentication.")
 model AzureFilesIdentityBasedAuthentication {
-  @doc("""
-Indicates the directory service used. Note that this enum may be extended in
-the future.
-""")
+  @doc("Indicates the directory service used. Note that this enum may be extended in the future.")
   directoryServiceOptions: DirectoryServiceOptions;
 
   @doc("Required if directoryServiceOptions are AD, optional if they are AADKERB.")
   activeDirectoryProperties?: ActiveDirectoryProperties;
 
-  @doc("""
-Default share permission for users using Kerberos authentication if RBAC role
-is not assigned.
-""")
+  @doc("Default share permission for users using Kerberos authentication if RBAC role is not assigned.")
   defaultSharePermission?: DefaultSharePermission;
 }
 
@@ -1044,74 +887,36 @@ model ActiveDirectoryProperties {
   accountType?: AccountType;
 }
 
-@doc("""
-Routing preference defines the type of network, either microsoft or internet
-routing to be used to deliver the user data, the default option is microsoft
-routing
-""")
+@doc("Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing")
 model RoutingPreference {
   @doc("Routing Choice defines the kind of network routing opted by the user.")
   routingChoice?: RoutingChoice;
 
-  @doc("""
-A boolean flag which indicates whether microsoft routing storage endpoints are
-to be published
-""")
+  @doc("A boolean flag which indicates whether microsoft routing storage endpoints are to be published")
   publishMicrosoftEndpoints?: boolean;
 
-  @doc("""
-A boolean flag which indicates whether internet routing storage endpoints are
-to be published
-""")
+  @doc("A boolean flag which indicates whether internet routing storage endpoints are to be published")
   publishInternetEndpoints?: boolean;
 }
 
-@doc("""
-This property enables and defines account-level immutability. Enabling the
-feature auto-enables Blob Versioning.
-""")
+@doc("This property enables and defines account-level immutability. Enabling the feature auto-enables Blob Versioning.")
 model ImmutableStorageAccount {
-  @doc("""
-A boolean flag which enables account-level immutability. All the containers
-under such an account have object-level immutability enabled by default.
-""")
+  @doc("A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default.")
   enabled?: boolean;
 
-  @doc("""
-Specifies the default account-level immutability policy which is inherited and
-applied to objects that do not possess an explicit immutability policy at the
-object level. The object-level immutability policy has higher precedence than
-the container-level immutability policy, which has a higher precedence than the
-account-level immutability policy.
-""")
+  @doc("Specifies the default account-level immutability policy which is inherited and applied to objects that do not possess an explicit immutability policy at the object level. The object-level immutability policy has higher precedence than the container-level immutability policy, which has a higher precedence than the account-level immutability policy.")
   immutabilityPolicy?: AccountImmutabilityPolicyProperties;
 }
 
 @doc("This defines account-level immutability policy properties.")
 model AccountImmutabilityPolicyProperties {
-  @doc("""
-The immutability period for the blobs in the container since the policy
-creation, in days.
-""")
+  @doc("The immutability period for the blobs in the container since the policy creation, in days.")
   immutabilityPeriodSinceCreationInDays?: int32;
 
-  @doc("""
-The ImmutabilityPolicy state defines the mode of the policy. Disabled state
-disables the policy, Unlocked state allows increase and decrease of
-immutability retention time and also allows toggling allowProtectedAppendWrites
-property, Locked state only allows the increase of the immutability retention
-time. A policy can only be created in a Disabled or Unlocked state and can be
-toggled between the two states. Only a policy in an Unlocked state can
-transition to a Locked state which cannot be reverted.
-""")
+  @doc("The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.")
   state?: AccountImmutabilityPolicyState;
 
-  @doc("""
-This property can only be changed for disabled and unlocked time-based
-retention policies. When enabled, new blocks can be written to an append blob
-while maintaining immutability protection and compliance. Only new blocks can
-be added and any existing blocks cannot be modified or deleted.
-""")
+  @doc("This property can only be changed for disabled and unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.")
   allowProtectedAppendWrites?: boolean;
 }
 
@@ -1121,11 +926,7 @@ model StorageAccountProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("""
-Gets the URLs that are used to perform a retrieval of a public blob, queue, or
-table object. Note that Standard_ZRS and Premium_LRS accounts only return the
-blob endpoint.
-""")
+  @doc("Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint.")
   @visibility("read")
   primaryEndpoints?: Endpoints;
 
@@ -1133,35 +934,20 @@ blob endpoint.
   @visibility("read")
   primaryLocation?: string;
 
-  @doc("""
-Gets the status indicating whether the primary location of the storage account
-is available or unavailable.
-""")
+  @doc("Gets the status indicating whether the primary location of the storage account is available or unavailable.")
   @visibility("read")
   statusOfPrimary?: AccountStatus;
 
-  @doc("""
-Gets the timestamp of the most recent instance of a failover to the secondary
-location. Only the most recent timestamp is retained. This element is not
-returned if there has never been a failover instance. Only available if the
-accountType is Standard_GRS or Standard_RAGRS.
-""")
+  @doc("Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastGeoFailoverTime?: utcDateTime;
 
-  @doc("""
-Gets the location of the geo-replicated secondary for the storage account. Only
-available if the accountType is Standard_GRS or Standard_RAGRS.
-""")
+  @doc("Gets the location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS.")
   @visibility("read")
   secondaryLocation?: string;
 
-  @doc("""
-Gets the status indicating whether the secondary location of the storage
-account is available or unavailable. Only available if the SKU name is
-Standard_GRS or Standard_RAGRS.
-""")
+  @doc("Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.")
   @visibility("read")
   statusOfSecondary?: AccountStatus;
 
@@ -1186,27 +972,15 @@ Standard_GRS or Standard_RAGRS.
   @visibility("read")
   keyCreationTime?: KeyCreationTime;
 
-  @doc("""
-Gets the URLs that are used to perform a retrieval of a public blob, queue, or
-table object from the secondary location of the storage account. Only available
-if the SKU name is Standard_RAGRS.
-""")
+  @doc("Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS.")
   @visibility("read")
   secondaryEndpoints?: Endpoints;
 
-  @doc("""
-Encryption settings to be used for server-side encryption for the storage
-account.
-""")
+  @doc("Encryption settings to be used for server-side encryption for the storage account.")
   @visibility("read")
   encryption?: Encryption;
 
-  @doc("""
-Required for storage accounts where kind = BlobStorage. The access tier is used
-for billing. The 'Premium' access tier is the default value for premium block
-blobs storage account type and it cannot be changed for the premium block blobs
-storage account type.
-""")
+  @doc("Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.")
   @visibility("read")
   accessTier?: AccessTier;
 
@@ -1238,110 +1012,60 @@ storage account type.
   @visibility("read")
   geoReplicationStats?: GeoReplicationStats;
 
-  @doc("""
-If the failover is in progress, the value will be true, otherwise, it will be
-null.
-""")
+  @doc("If the failover is in progress, the value will be true, otherwise, it will be null.")
   @visibility("read")
   failoverInProgress?: boolean;
 
-  @doc("""
-Allow large file shares if sets to Enabled. It cannot be disabled once it is
-enabled.
-""")
+  @doc("Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.")
   largeFileSharesState?: LargeFileSharesState;
 
-  @doc("""
-List of private endpoint connection associated with the specified storage
-account
-""")
+  @doc("List of private endpoint connection associated with the specified storage account")
   @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
 
-  @doc("""
-Maintains information about the network routing choice opted by the user for
-data transfer
-""")
+  @doc("Maintains information about the network routing choice opted by the user for data transfer")
   routingPreference?: RoutingPreference;
 
   @doc("Blob restore status")
   @visibility("read")
   blobRestoreStatus?: BlobRestoreStatus;
 
-  @doc("""
-Allow or disallow public access to all blobs or containers in the storage
-account. The default interpretation is true for this property.
-""")
+  @doc("Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property.")
   allowBlobPublicAccess?: boolean;
 
-  @doc("""
-Set the minimum TLS version to be permitted on requests to storage. The default
-interpretation is TLS 1.0 for this property.
-""")
+  @doc("Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.")
   minimumTlsVersion?: MinimumTlsVersion;
 
-  @doc("""
-Indicates whether the storage account permits requests to be authorized with
-the account access key via Shared Key. If false, then all requests, including
-shared access signatures, must be authorized with Azure Active Directory (Azure
-AD). The default value is null, which is equivalent to true.
-""")
+  @doc("Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.")
   allowSharedKeyAccess?: boolean;
 
   @doc("NFS 3.0 protocol support enabled if set to true.")
   @projectedName("json", "isNfsV3Enabled")
   enableNfsV3?: boolean;
 
-  @doc("""
-Allow or disallow cross AAD tenant object replication. The default
-interpretation is true for this property.
-""")
+  @doc("Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.")
   allowCrossTenantReplication?: boolean;
 
-  @doc("""
-A boolean flag which indicates whether the default authentication is OAuth or
-not. The default interpretation is false for this property.
-""")
+  @doc("A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.")
   defaultToOAuthAuthentication?: boolean;
 
-  @doc("""
-Allow or disallow public network access to Storage Account. Value is optional
-but if passed in, must be 'Enabled' or 'Disabled'.
-""")
+  @doc("Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
   publicNetworkAccess?: PublicNetworkAccess;
 
-  @doc("""
-The property is immutable and can only be set to true at the account creation
-time. When set to true, it enables object level immutability for all the
-containers in the account by default.
-""")
+  @doc("The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default.")
   immutableStorageWithVersioning?: ImmutableStorageAccount;
 
-  @doc("""
-Restrict copy to and from Storage Accounts within an AAD tenant or with Private
-Links to the same VNet.
-""")
+  @doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
   allowedCopyScope?: AllowedCopyScope;
 
-  @doc("""
-This property is readOnly and is set by server during asynchronous storage
-account sku conversion operations.
-""")
+  @doc("This property is readOnly and is set by server during asynchronous storage account sku conversion operations.")
   storageAccountSkuConversionStatus?: StorageAccountSkuConversionStatus;
 
-  @doc("""
-Allows you to specify the type of endpoint. Set this to AzureDNSZone to create
-a large number of accounts in a single subscription, which creates accounts in
-an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone
-identifier.
-""")
+  @doc("Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.")
   dnsEndpointType?: DnsEndpointType;
 }
 
-@doc("""
-The URIs that are used to perform a retrieval of a public blob, queue, table,
-web or dfs object.
-""")
+@doc("The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object.")
 model Endpoints {
   @doc("Gets the blob endpoint.")
   @visibility("read")
@@ -1374,10 +1098,7 @@ model Endpoints {
   internetEndpoints?: StorageAccountInternetEndpoints;
 }
 
-@doc("""
-The URIs that are used to perform a retrieval of a public blob, queue, table,
-web or dfs object via a microsoft routing endpoint.
-""")
+@doc("The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via a microsoft routing endpoint.")
 model StorageAccountMicrosoftEndpoints {
   @doc("Gets the blob endpoint.")
   @visibility("read")
@@ -1404,10 +1125,7 @@ model StorageAccountMicrosoftEndpoints {
   dfs?: string;
 }
 
-@doc("""
-The URIs that are used to perform a retrieval of a public blob, file, web or
-dfs object via a internet routing endpoint.
-""")
+@doc("The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint.")
 model StorageAccountInternetEndpoints {
   @doc("Gets the blob endpoint.")
   @visibility("read")
@@ -1435,37 +1153,18 @@ model KeyCreationTime {
   key2?: utcDateTime;
 }
 
-@doc("""
-Statistics related to replication for storage account's Blob, Table, Queue and
-File services. It is only available when geo-redundant replication is enabled
-for the storage account.
-""")
+@doc("Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account.")
 model GeoReplicationStats {
-  @doc("""
-The status of the secondary location. Possible values are: - Live: Indicates
-that the secondary location is active and operational. - Bootstrap: Indicates
-initial synchronization from the primary location to the secondary location is
-in progress.This typically occurs when replication is first enabled. -
-Unavailable: Indicates that the secondary location is temporarily unavailable.
-""")
+  @doc("The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.")
   @visibility("read")
   status?: GeoReplicationStatus;
 
-  @doc("""
-All primary writes preceding this UTC date/time value are guaranteed to be
-available for read operations. Primary writes following this point in time may
-or may not be available for reads. Element may be default value if value of
-LastSyncTime is not available, this can happen if secondary is offline or we
-are in bootstrap.
-""")
+  @doc("All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSyncTime?: utcDateTime;
 
-  @doc("""
-A boolean flag which indicates whether or not account failover is supported for
-the account.
-""")
+  @doc("A boolean flag which indicates whether or not account failover is supported for the account.")
   @visibility("read")
   canFailover?: boolean;
 }
@@ -1475,10 +1174,7 @@ model PrivateEndpointConnectionProperties {
   @doc("The resource of private end point.")
   privateEndpoint?: PrivateEndpoint;
 
-  @doc("""
-A collection of information about the state of the connection between service
-consumer and provider.
-""")
+  @doc("A collection of information about the state of the connection between service consumer and provider.")
   privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
 
   @doc("The provisioning state of the private endpoint connection resource.")
@@ -1493,35 +1189,21 @@ model PrivateEndpoint {
   id?: string;
 }
 
-@doc("""
-A collection of information about the state of the connection between service
-consumer and provider.
-""")
+@doc("A collection of information about the state of the connection between service consumer and provider.")
 model PrivateLinkServiceConnectionState {
-  @doc("""
-Indicates whether the connection has been Approved/Rejected/Removed by the
-owner of the service.
-""")
+  @doc("Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.")
   status?: PrivateEndpointServiceConnectionStatus;
 
   @doc("The reason for approval/rejection of the connection.")
   description?: string;
 
-  @doc("""
-A message indicating if changes on the service provider require any updates on
-the consumer.
-""")
+  @doc("A message indicating if changes on the service provider require any updates on the consumer.")
   actionRequired?: string;
 }
 
 @doc("Blob restore status.")
 model BlobRestoreStatus {
-  @doc("""
-The status of blob restore progress. Possible values are: - InProgress:
-Indicates that blob restore is ongoing. - Complete: Indicates that blob restore
-has been completed successfully. - Failed: Indicates that blob restore is
-failed.
-""")
+  @doc("The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.")
   @visibility("read")
   status?: BlobRestoreProgressStatus;
 
@@ -1564,10 +1246,7 @@ model StorageAccountSkuConversionStatus {
   @visibility("read")
   skuConversionStatus?: SkuConversionStatus;
 
-  @doc("""
-This property represents the target sku name to which the account sku is being
-converted asynchronously.
-""")
+  @doc("This property represents the target sku name to which the account sku is being converted asynchronously.")
   targetSkuName?: SkuName;
 
   @doc("This property represents the sku conversion start time.")
@@ -1591,10 +1270,7 @@ model DeletedAccountProperties {
   @visibility("read")
   location?: string;
 
-  @doc("""
-Can be used to attempt recovering this deleted account via PutStorageAccount
-API.
-""")
+  @doc("Can be used to attempt recovering this deleted account via PutStorageAccount API.")
   @visibility("read")
   restoreReference?: string;
 
@@ -1611,26 +1287,17 @@ API.
 
 @doc("Error response body contract.")
 model ErrorResponseBody {
-  @doc("""
-An identifier for the error. Codes are invariant and are intended to be
-consumed programmatically.
-""")
+  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the error, intended to be suitable for display in a user
-interface.
-""")
+  @doc("A message describing the error, intended to be suitable for display in a user interface.")
   message?: string;
 }
 
 @doc("The response from the ListKeys operation.")
 @pagedResult
 model StorageAccountListKeysResult {
-  @doc("""
-Gets the list of storage account keys and their properties for the specified
-storage account.
-""")
+  @doc("Gets the list of storage account keys and their properties for the specified storage account.")
   @visibility("read")
   @items
   keys?: StorageAccountKey[];
@@ -1658,10 +1325,7 @@ model StorageAccountKey {
 
 @doc("The parameters used to regenerate the storage account key.")
 model StorageAccountRegenerateKeyParameters {
-  @doc("""
-The name of storage keys that want to be regenerated, possible values are key1,
-key2, kerb1, kerb2.
-""")
+  @doc("The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2.")
   keyName: string;
 }
 
@@ -1683,10 +1347,7 @@ model Usage {
   @visibility("read")
   currentValue?: int32;
 
-  @doc("""
-Gets the maximum count of the resources that can be allocated in the
-subscription.
-""")
+  @doc("Gets the maximum count of the resources that can be allocated in the subscription.")
   @visibility("read")
   limit?: int32;
 
@@ -1708,27 +1369,15 @@ model UsageName {
 
 @doc("The parameters to list SAS credentials of a storage account.")
 model AccountSasParameters {
-  @doc("""
-The signed services accessible with the account SAS. Possible values include:
-Blob (b), Queue (q), Table (t), File (f).
-""")
+  @doc("The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).")
   @projectedName("json", "signedServices")
   services: Services;
 
-  @doc("""
-The signed resource types that are accessible with the account SAS. Service
-(s): Access to service-level APIs; Container (c): Access to container-level
-APIs; Object (o): Access to object-level APIs for blobs, queue messages, table
-entities, and files.
-""")
+  @doc("The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.")
   @projectedName("json", "signedResourceTypes")
   resourceTypes: SignedResourceTypes;
 
-  @doc("""
-The signed permissions for the account SAS. Possible values include: Read (r),
-Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process
-(p).
-""")
+  @doc("The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).")
   @projectedName("json", "signedPermission")
   permissions: Permissions;
 
@@ -1766,18 +1415,11 @@ model ServiceSasParameters {
   @doc("The canonical path to the signed resource.")
   canonicalizedResource: string;
 
-  @doc("""
-The signed services accessible with the service SAS. Possible values include:
-Blob (b), Container (c), File (f), Share (s).
-""")
+  @doc("The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).")
   @projectedName("json", "signedResource")
   resource?: SignedResource;
 
-  @doc("""
-The signed permissions for the service SAS. Possible values include: Read (r),
-Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process
-(p).
-""")
+  @doc("The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).")
   @projectedName("json", "signedPermission")
   permissions?: Permissions;
 
@@ -1799,10 +1441,7 @@ Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sharedAccessExpiryTime?: utcDateTime;
 
-  @doc("""
-A unique value up to 64 characters in length that correlates to an access
-policy specified for the container, queue, or table.
-""")
+  @doc("A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.")
   @maxLength(64)
   @projectedName("json", "signedIdentifier")
   identifier?: string;
@@ -1861,22 +1500,13 @@ model ManagementPolicyProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
-  @doc("""
-The Storage Account ManagementPolicy, in JSON format. See more details in:
-https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.
-""")
+  @doc("The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.")
   policy: ManagementPolicySchema;
 }
 
-@doc("""
-The Storage Account ManagementPolicies Rules. See more details in:
-https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.
-""")
+@doc("The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.")
 model ManagementPolicySchema {
-  @doc("""
-The Storage Account ManagementPolicies Rules. See more details in:
-https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.
-""")
+  @doc("The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.")
   rules: ManagementPolicyRule[];
 }
 
@@ -1885,10 +1515,7 @@ model ManagementPolicyRule {
   @doc("Rule is enabled if set to true.")
   enabled?: boolean;
 
-  @doc("""
-A rule name can contain any combination of alpha numeric characters. Rule name
-is case-sensitive. It must be unique within a policy.
-""")
+  @doc("A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy.")
   name: string;
 
   @doc("The valid value is Lifecycle")
@@ -1898,10 +1525,7 @@ is case-sensitive. It must be unique within a policy.
   definition: ManagementPolicyDefinition;
 }
 
-@doc("""
-An object that defines the Lifecycle rule. Each definition is made up with a
-filters set and an actions set.
-""")
+@doc("An object that defines the Lifecycle rule. Each definition is made up with a filters set and an actions set.")
 model ManagementPolicyDefinition {
   @doc("An object that defines the action set.")
   actions: ManagementPolicyAction;
@@ -1933,47 +1557,25 @@ model ManagementPolicyBaseBlob {
   @doc("The function to tier blobs to cold storage.")
   tierToCold?: DateAfterModification;
 
-  @doc("""
-The function to tier blobs to hot storage. This action can only be used with
-Premium Block Blob Storage Accounts
-""")
+  @doc("The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts")
   tierToHot?: DateAfterModification;
 
   @doc("The function to delete the blob")
   delete?: DateAfterModification;
 
-  @doc("""
-This property enables auto tiering of a blob from cool to hot on a blob access.
-This property requires tierToCool.daysAfterLastAccessTimeGreaterThan.
-""")
+  @doc("This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan.")
   enableAutoTierToHotFromCool?: boolean;
 }
 
-@doc("""
-Object to define the base blob action conditions. Properties
-daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan and
-daysAfterCreationGreaterThan are mutually exclusive. The
-daysAfterLastTierChangeGreaterThan property is only applicable for
-tierToArchive actions which requires daysAfterModificationGreaterThan to be
-set, also it cannot be used in conjunction with
-daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan.
-""")
+@doc("Object to define the base blob action conditions. Properties daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan and daysAfterCreationGreaterThan are mutually exclusive. The daysAfterLastTierChangeGreaterThan property is only applicable for tierToArchive actions which requires daysAfterModificationGreaterThan to be set, also it cannot be used in conjunction with daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan.")
 model DateAfterModification {
   @doc("Value indicating the age in days after last modification")
   daysAfterModificationGreaterThan?: float32;
 
-  @doc("""
-Value indicating the age in days after last blob access. This property can only
-be used in conjunction with last access time tracking policy
-""")
+  @doc("Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy")
   daysAfterLastAccessTimeGreaterThan?: float32;
 
-  @doc("""
-Value indicating the age in days after last blob tier change time. This
-property is only applicable for tierToArchive actions and requires
-daysAfterModificationGreaterThan to be set for baseBlobs based actions. The
-blob will be archived if both the conditions are satisfied.
-""")
+  @doc("Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterModificationGreaterThan to be set for baseBlobs based actions. The blob will be archived if both the conditions are satisfied.")
   daysAfterLastTierChangeGreaterThan?: float32;
 
   @doc("Value indicating the age in days after blob creation.")
@@ -1991,10 +1593,7 @@ model ManagementPolicySnapShot {
   @doc("The function to tier blobs to cold storage.")
   tierToCold?: DateAfterCreation;
 
-  @doc("""
-The function to tier blobs to hot storage. This action can only be used with
-Premium Block Blob Storage Accounts
-""")
+  @doc("The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts")
   tierToHot?: DateAfterCreation;
 
   @doc("The function to delete the blob snapshot")
@@ -2006,12 +1605,7 @@ model DateAfterCreation {
   @doc("Value indicating the age in days after creation")
   daysAfterCreationGreaterThan: float32;
 
-  @doc("""
-Value indicating the age in days after last blob tier change time. This
-property is only applicable for tierToArchive actions and requires
-daysAfterCreationGreaterThan to be set for snapshots and blob version based
-actions. The blob will be archived if both the conditions are satisfied.
-""")
+  @doc("Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterCreationGreaterThan to be set for snapshots and blob version based actions. The blob will be archived if both the conditions are satisfied.")
   daysAfterLastTierChangeGreaterThan?: float32;
 }
 
@@ -2026,28 +1620,19 @@ model ManagementPolicyVersion {
   @doc("The function to tier blobs to cold storage.")
   tierToCold?: DateAfterCreation;
 
-  @doc("""
-The function to tier blobs to hot storage. This action can only be used with
-Premium Block Blob Storage Accounts
-""")
+  @doc("The function to tier blobs to hot storage. This action can only be used with Premium Block Blob Storage Accounts")
   tierToHot?: DateAfterCreation;
 
   @doc("The function to delete the blob version")
   delete?: DateAfterCreation;
 }
 
-@doc("""
-Filters limit rule actions to a subset of blobs within the storage account. If
-multiple filters are defined, a logical AND is performed on all filters. 
-""")
+@doc("Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. ")
 model ManagementPolicyFilter {
   @doc("An array of strings for prefixes to be match.")
   prefixMatch?: string[];
 
-  @doc("""
-An array of predefined enum values. Currently blockBlob supports all tiering
-and delete actions. Only delete actions are supported for appendBlob.
-""")
+  @doc("An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob.")
   blobTypes: string[];
 
   @doc("An array of blob index tag based filters, there can be at most 10 tag filters")
@@ -2061,16 +1646,10 @@ model TagFilter {
   @minLength(1)
   name: string;
 
-  @doc("""
-This is the comparison operator which is used for object comparison and
-filtering. Only == (equality operator) is currently supported
-""")
+  @doc("This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported")
   `op`: string;
 
-  @doc("""
-This is the filter tag value field used for tag based filtering, it can have 0
-- 256 characters
-""")
+  @doc("This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters")
   @maxLength(256)
   value: string;
 }
@@ -2082,10 +1661,7 @@ model BlobInventoryPolicyProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
-  @doc("""
-The storage account blob inventory policy object. It is composed of policy
-rules.
-""")
+  @doc("The storage account blob inventory policy object. It is composed of policy rules.")
   policy: BlobInventoryPolicySchema;
 }
 
@@ -2094,36 +1670,23 @@ model BlobInventoryPolicySchema {
   @doc("Policy is enabled if set to true.")
   enabled: boolean;
 
-  @doc("""
-Deprecated Property from API version 2021-04-01 onwards, the required
-destination container name must be specified at the rule level
-'policy.rule.destination'
-""")
+  @doc("Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be specified at the rule level 'policy.rule.destination'")
   @visibility("read")
   destination?: string;
 
   @doc("The valid value is Inventory")
   type: InventoryRuleType;
 
-  @doc("""
-The storage account blob inventory policy rules. The rule is applied when it is
-enabled.
-""")
+  @doc("The storage account blob inventory policy rules. The rule is applied when it is enabled.")
   rules: BlobInventoryPolicyRule[];
 }
 
-@doc("""
-An object that wraps the blob inventory rule. Each rule is uniquely defined by
-name.
-""")
+@doc("An object that wraps the blob inventory rule. Each rule is uniquely defined by name.")
 model BlobInventoryPolicyRule {
   @doc("Rule is enabled when set to true.")
   enabled: boolean;
 
-  @doc("""
-A rule name can contain any combination of alpha numeric characters. Rule name
-is case-sensitive. It must be unique within a policy.
-""")
+  @doc("A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy.")
   name: string;
 
   @doc("Container name where blob inventory files are stored. Must be pre-created.")
@@ -2144,90 +1707,31 @@ model BlobInventoryPolicyDefinition {
   @doc("This is a required field. This field is used to schedule an inventory formation.")
   schedule: Schedule;
 
-  @doc("""
-This is a required field. This field specifies the scope of the inventory
-created either at the blob or container level.
-""")
+  @doc("This is a required field. This field specifies the scope of the inventory created either at the blob or container level.")
   objectType: ObjectType;
 
-  @doc("""
-This is a required field. This field specifies the fields and properties of the
-object to be included in the inventory. The Schema field value 'Name' is always
-required. The valid values for this field for the 'Blob' definition.objectType
-include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5,
-BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags,
-Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId,
-IsCurrentVersion, Metadata, LastAccessTime, Tags, Etag, ContentType,
-ContentEncoding, ContentLanguage, ContentCRC64, CacheControl,
-ContentDisposition, LeaseStatus, LeaseState, LeaseDuration, ServerEncrypted,
-Deleted, DeletionId, DeletedTime, RemainingRetentionDays,
-ImmutabilityPolicyUntilDate, ImmutabilityPolicyMode, LegalHold, CopyId,
-CopyStatus, CopySource, CopyProgress, CopyCompletionTime,
-CopyStatusDescription, CustomerProvidedKeySha256, RehydratePriority,
-ArchiveStatus, XmsBlobSequenceNumber, EncryptionScope, IncrementalCopy,
-TagCount'. For Blob object type schema field value 'DeletedTime' is applicable
-only for Hns enabled accounts. The valid values for 'Container'
-definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus,
-LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold,
-Etag, DefaultEncryptionScope, DenyEncryptionScopeOverride,
-ImmutableStorageWithVersioningEnabled, Deleted, Version, DeletedTime,
-RemainingRetentionDays'. Schema field values 'Expiry-Time, hdi_isfolder, Owner,
-Group, Permissions, Acl, DeletionId' are valid only for Hns enabled
-accounts.Schema field values 'Tags, TagCount' are only valid for Non-Hns
-accounts.
-""")
+  @doc("This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime, Tags, Etag, ContentType, ContentEncoding, ContentLanguage, ContentCRC64, CacheControl, ContentDisposition, LeaseStatus, LeaseState, LeaseDuration, ServerEncrypted, Deleted, DeletionId, DeletedTime, RemainingRetentionDays, ImmutabilityPolicyUntilDate, ImmutabilityPolicyMode, LegalHold, CopyId, CopyStatus, CopySource, CopyProgress, CopyCompletionTime, CopyStatusDescription, CustomerProvidedKeySha256, RehydratePriority, ArchiveStatus, XmsBlobSequenceNumber, EncryptionScope, IncrementalCopy, TagCount'. For Blob object type schema field value 'DeletedTime' is applicable only for Hns enabled accounts. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold, Etag, DefaultEncryptionScope, DenyEncryptionScopeOverride, ImmutableStorageWithVersioningEnabled, Deleted, Version, DeletedTime, RemainingRetentionDays'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, DeletionId' are valid only for Hns enabled accounts.Schema field values 'Tags, TagCount' are only valid for Non-Hns accounts.")
   schemaFields: string[];
 }
 
-@doc("""
-An object that defines the blob inventory rule filter conditions. For 'Blob'
-definition.objectType all filter properties are applicable, 'blobTypes' is
-required and others are optional. For 'Container' definition.objectType only
-prefixMatch is applicable and is optional.
-""")
+@doc("An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional.")
 model BlobInventoryPolicyFilter {
-  @doc("""
-An array of strings with maximum 10 blob prefixes to be included in the
-inventory.
-""")
+  @doc("An array of strings with maximum 10 blob prefixes to be included in the inventory.")
   prefixMatch?: string[];
 
-  @doc("""
-An array of strings with maximum 10 blob prefixes to be excluded from the
-inventory.
-""")
+  @doc("An array of strings with maximum 10 blob prefixes to be excluded from the inventory.")
   excludePrefix?: string[];
 
-  @doc("""
-An array of predefined enum values. Valid values include blockBlob, appendBlob,
-pageBlob. Hns accounts does not support pageBlobs. This field is required when
-definition.objectType property is set to 'Blob'.
-""")
+  @doc("An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs. This field is required when definition.objectType property is set to 'Blob'.")
   blobTypes?: string[];
 
-  @doc("""
-Includes blob versions in blob inventory when value is set to true. The
-definition.schemaFields values 'VersionId and IsCurrentVersion' are required if
-this property is set to true, else they must be excluded.
-""")
+  @doc("Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion' are required if this property is set to true, else they must be excluded.")
   includeBlobVersions?: boolean;
 
-  @doc("""
-Includes blob snapshots in blob inventory when value is set to true. The
-definition.schemaFields value 'Snapshot' is required if this property is set to
-true, else it must be excluded.
-""")
+  @doc("Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded.")
   includeSnapshots?: boolean;
 
-  @doc("""
-For 'Container' definition.objectType the definition.schemaFields must include
-'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob'
-definition.objectType and HNS enabled storage accounts the
-definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and
-RemainingRetentionDays' and for Hns disabled accounts the
-definition.schemaFields must include 'Deleted and RemainingRetentionDays', else
-it must be excluded.
-""")
+  @doc("For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded.")
   includeDeleted?: boolean;
 }
 
@@ -2240,22 +1744,13 @@ model CloudError {
 
 @doc("An error response from the Storage service.")
 model CloudErrorBody {
-  @doc("""
-An identifier for the error. Codes are invariant and are intended to be
-consumed programmatically.
-""")
+  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the error, intended to be suitable for display in a user
-interface.
-""")
+  @doc("A message describing the error, intended to be suitable for display in a user interface.")
   message?: string;
 
-  @doc("""
-The target of the particular error. For example, the name of the property in
-error.
-""")
+  @doc("The target of the particular error. For example, the name of the property in error.")
   target?: string;
 
   @doc("A list of additional details about the error.")
@@ -2301,16 +1796,10 @@ model ObjectReplicationPolicyProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   enabledTime?: utcDateTime;
 
-  @doc("""
-Required. Source account name. It should be full resource id if
-allowCrossTenantReplication set to false.
-""")
+  @doc("Required. Source account name. It should be full resource id if allowCrossTenantReplication set to false.")
   sourceAccount: string;
 
-  @doc("""
-Required. Destination account name. It should be full resource id if
-allowCrossTenantReplication set to false.
-""")
+  @doc("Required. Destination account name. It should be full resource id if allowCrossTenantReplication set to false.")
   destinationAccount: string;
 
   @doc("The storage account object replication rules.")
@@ -2319,10 +1808,7 @@ allowCrossTenantReplication set to false.
 
 @doc("The replication policy rule between two containers.")
 model ObjectReplicationPolicyRule {
-  @doc("""
-Rule Id is auto-generated for each new rule on destination account. It is
-required for put policy on source account.
-""")
+  @doc("Rule Id is auto-generated for each new rule on destination account. It is required for put policy on source account.")
   ruleId?: string;
 
   @doc("Required. Source container name.")
@@ -2335,22 +1821,12 @@ required for put policy on source account.
   filters?: ObjectReplicationPolicyFilter;
 }
 
-@doc("""
-Filters limit replication to a subset of blobs within the storage account. A
-logical OR is performed on values in the filter. If multiple filters are
-defined, a logical AND is performed on all filters.
-""")
+@doc("Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters.")
 model ObjectReplicationPolicyFilter {
-  @doc("""
-Optional. Filters the results to replicate only blobs whose names begin with
-the specified prefix.
-""")
+  @doc("Optional. Filters the results to replicate only blobs whose names begin with the specified prefix.")
   prefixMatch?: string[];
 
-  @doc("""
-Blobs created after the time will be replicated to the destination. It must be
-in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z
-""")
+  @doc("Blobs created after the time will be replicated to the destination. It must be in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z")
   minCreationTime?: string;
 }
 
@@ -2369,36 +1845,24 @@ model LocalUserProperties {
   @visibility("read")
   sid?: string;
 
-  @doc("""
-Indicates whether shared key exists. Set it to false to remove existing shared
-key.
-""")
+  @doc("Indicates whether shared key exists. Set it to false to remove existing shared key.")
   hasSharedKey?: boolean;
 
   @doc("Indicates whether ssh key exists. Set it to false to remove existing SSH key.")
   hasSshKey?: boolean;
 
-  @doc("""
-Indicates whether ssh password exists. Set it to false to remove existing SSH
-password.
-""")
+  @doc("Indicates whether ssh password exists. Set it to false to remove existing SSH password.")
   hasSshPassword?: boolean;
 }
 
 model PermissionScope {
-  @doc("""
-The permissions for the local user. Possible values include: Read (r), Write
-(w), Delete (d), List (l), and Create (c).
-""")
+  @doc("The permissions for the local user. Possible values include: Read (r), Write (w), Delete (d), List (l), and Create (c).")
   permissions: string;
 
   @doc("The service used by the local user, e.g. blob, file.")
   service: string;
 
-  @doc("""
-The name of resource, normally the container name or the file share name, used
-by the local user.
-""")
+  @doc("The name of resource, normally the container name or the file share name, used by the local user.")
   resourceName: string;
 }
 
@@ -2406,10 +1870,7 @@ model SshPublicKey {
   @doc("Optional. It is used to store the function/usage of the key")
   description?: string;
 
-  @doc("""
-Ssh public key base64 encoded. The format should be: '<keyType> <keyData>',
-e.g. ssh-rsa AAAABBBB
-""")
+  @doc("Ssh public key base64 encoded. The format should be: '<keyType> <keyData>', e.g. ssh-rsa AAAABBBB")
   key?: string;
 }
 
@@ -2425,26 +1886,17 @@ model LocalUserKeys {
 
 @doc("The secrets of Storage Account Local User.")
 model LocalUserRegeneratePasswordResult {
-  @doc("""
-Auto generated password by the server for SSH authentication if hasSshPassword
-is set to true on the creation of local user.
-""")
+  @doc("Auto generated password by the server for SSH authentication if hasSshPassword is set to true on the creation of local user.")
   @visibility("read")
   sshPassword?: string;
 }
 
 @doc("Properties of the encryption scope.")
 model EncryptionScopeProperties {
-  @doc("""
-The provider for the encryption scope. Possible values (case-insensitive): 
-Microsoft.Storage, Microsoft.KeyVault.
-""")
+  @doc("The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.")
   source?: EncryptionScopeSource;
 
-  @doc("""
-The state of the encryption scope. Possible values (case-insensitive): 
-Enabled, Disabled.
-""")
+  @doc("The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled.")
   state?: EncryptionScopeState;
 
   @doc("Gets the creation date and time of the encryption scope in UTC.")
@@ -2457,29 +1909,16 @@ Enabled, Disabled.
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
 
-  @doc("""
-The key vault properties for the encryption scope. This is a required field if
-encryption scope 'source' attribute is set to 'Microsoft.KeyVault'.
-""")
+  @doc("The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'.")
   keyVaultProperties?: EncryptionScopeKeyVaultProperties;
 
-  @doc("""
-A boolean indicating whether or not the service applies a secondary layer of
-encryption with platform managed keys for data at rest.
-""")
+  @doc("A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest.")
   requireInfrastructureEncryption?: boolean;
 }
 
-@doc("""
-The key vault properties for the encryption scope. This is a required field if
-encryption scope 'source' attribute is set to 'Microsoft.KeyVault'.
-""")
+@doc("The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'.")
 model EncryptionScopeKeyVaultProperties {
-  @doc("""
-The object identifier for a key vault key object. When applied, the encryption
-scope will use the key referenced by the identifier to enable customer-managed
-key support on this encryption scope.
-""")
+  @doc("The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope.")
   keyUri?: string;
 
   @doc("The object identifier of the current versioned Key Vault Key in use.")
@@ -2494,19 +1933,10 @@ key support on this encryption scope.
 
 @doc("The properties of a storage account’s Blob service.")
 model BlobServicePropertiesProperties {
-  @doc("""
-Specifies CORS rules for the Blob service. You can include up to five CorsRule
-elements in the request. If no CorsRule elements are included in the request
-body, all CORS rules will be deleted, and CORS will be disabled for the Blob
-service.
-""")
+  @doc("Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service.")
   cors?: CorsRules;
 
-  @doc("""
-DefaultServiceVersion indicates the default version to use for requests to the
-Blob service if an incoming request’s version is not specified. Possible values
-include version 2008-10-27 and all more recent versions.
-""")
+  @doc("DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions.")
   defaultServiceVersion?: string;
 
   @doc("The blob service properties for blob soft delete.")
@@ -2531,48 +1961,27 @@ include version 2008-10-27 and all more recent versions.
   lastAccessTimeTrackingPolicy?: LastAccessTimeTrackingPolicy;
 }
 
-@doc("""
-Sets the CORS rules. You can include up to five CorsRule elements in the
-request. 
-""")
+@doc("Sets the CORS rules. You can include up to five CorsRule elements in the request. ")
 model CorsRules {
-  @doc("""
-The List of CORS rules. You can include up to five CorsRule elements in the
-request. 
-""")
+  @doc("The List of CORS rules. You can include up to five CorsRule elements in the request. ")
   corsRules?: CorsRule[];
 }
 
 @doc("Specifies a CORS rule for the Blob service.")
 model CorsRule {
-  @doc("""
-Required if CorsRule element is present. A list of origin domains that will be
-allowed via CORS, or \"*\" to allow all domains
-""")
+  @doc("Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or \"*\" to allow all domains")
   allowedOrigins: string[];
 
-  @doc("""
-Required if CorsRule element is present. A list of HTTP methods that are
-allowed to be executed by the origin.
-""")
+  @doc("Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin.")
   allowedMethods: AllowedMethods[];
 
-  @doc("""
-Required if CorsRule element is present. The number of seconds that the
-client/browser should cache a preflight response.
-""")
+  @doc("Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response.")
   maxAgeInSeconds: int32;
 
-  @doc("""
-Required if CorsRule element is present. A list of response headers to expose
-to CORS clients.
-""")
+  @doc("Required if CorsRule element is present. A list of response headers to expose to CORS clients.")
   exposedHeaders: string[];
 
-  @doc("""
-Required if CorsRule element is present. A list of headers allowed to be part
-of the cross-origin request.
-""")
+  @doc("Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request.")
   allowedHeaders: string[];
 }
 
@@ -2581,18 +1990,10 @@ model DeleteRetentionPolicy {
   @doc("Indicates whether DeleteRetentionPolicy is enabled.")
   enabled?: boolean;
 
-  @doc("""
-Indicates the number of days that the deleted item should be retained. The
-minimum specified value can be 1 and the maximum value can be 365.
-""")
+  @doc("Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365.")
   days?: int32;
 
-  @doc("""
-This property when set to true allows deletion of the soft deleted blob
-versions and snapshots. This property cannot be used blob restore policy. This
-property only applies to blob service and does not apply to containers or file
-share.
-""")
+  @doc("This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share.")
   allowPermanentDelete?: boolean;
 }
 
@@ -2601,11 +2002,7 @@ model ChangeFeed {
   @doc("Indicates whether change feed event logging is enabled for the Blob service.")
   enabled?: boolean;
 
-  @doc("""
-Indicates the duration of changeFeed retention in days. Minimum value is 1 day
-and maximum value is 146000 days (400 years). A null value indicates an
-infinite retention of the change feed.
-""")
+  @doc("Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum value is 146000 days (400 years). A null value indicates an infinite retention of the change feed.")
   retentionInDays?: int32;
 }
 
@@ -2614,10 +2011,7 @@ model RestorePolicyProperties {
   @doc("Blob restore is enabled if set to true.")
   enabled: boolean;
 
-  @doc("""
-how long this blob can be restored. It should be great than zero and less than
-DeleteRetentionPolicy.days.
-""")
+  @doc("how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days.")
   days?: int32;
 
   @doc("Deprecated in favor of minRestoreTime property.")
@@ -2636,23 +2030,13 @@ model LastAccessTimeTrackingPolicy {
   @doc("When set to true last access time based tracking is enabled.")
   enable: boolean;
 
-  @doc("""
-Name of the policy. The valid value is AccessTimeTracking. This field is
-currently read only
-""")
+  @doc("Name of the policy. The valid value is AccessTimeTracking. This field is currently read only")
   name?: Name;
 
-  @doc("""
-The field specifies blob object tracking granularity in days, typically how
-often the blob object should be tracked.This field is currently read only with
-value as 1
-""")
+  @doc("The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1")
   trackingGranularityInDays?: int32;
 
-  @doc("""
-An array of predefined supported blob types. Only blockBlob is the supported
-value. This field is currently read only
-""")
+  @doc("An array of predefined supported blob types. Only blockBlob is the supported value. This field is currently read only")
   blobType?: string[];
 }
 
@@ -2681,10 +2065,7 @@ model ContainerProperties {
   @doc("Block override of encryption scope from the container default.")
   denyEncryptionScopeOverride?: boolean;
 
-  @doc("""
-Specifies whether data in the container may be accessed publicly and the level
-of access.
-""")
+  @doc("Specifies whether data in the container may be accessed publicly and the level of access.")
   publicAccess?: PublicAccess;
 
   @doc("Returns the date and time the container was last modified.")
@@ -2700,10 +2081,7 @@ of access.
   @visibility("read")
   leaseState?: LeaseState;
 
-  @doc("""
-Specifies whether the lease on a container is of infinite or fixed duration,
-only when the container is leased.
-""")
+  @doc("Specifies whether the lease on a container is of infinite or fixed duration, only when the container is leased.")
   @visibility("read")
   leaseDuration?: LeaseDuration;
 
@@ -2718,29 +2096,15 @@ only when the container is leased.
   @visibility("read")
   legalHold?: LegalHoldProperties;
 
-  @doc("""
-The hasLegalHold public property is set to true by SRP if there are at least
-one existing tag. The hasLegalHold public property is set to false by SRP if
-all existing legal hold tags are cleared out. There can be a maximum of 1000
-blob containers with hasLegalHold=true for a given account.
-""")
+  @doc("The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.")
   @visibility("read")
   hasLegalHold?: boolean;
 
-  @doc("""
-The hasImmutabilityPolicy public property is set to true by SRP if
-ImmutabilityPolicy has been created for this container. The
-hasImmutabilityPolicy public property is set to false by SRP if
-ImmutabilityPolicy has not been created for this container.
-""")
+  @doc("The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container.")
   @visibility("read")
   hasImmutabilityPolicy?: boolean;
 
-  @doc("""
-The object level immutability property of the container. The property is
-immutable and can only be set to true at the container creation time. Existing
-containers must undergo a migration process.
-""")
+  @doc("The object level immutability property of the container. The property is immutable and can only be set to true at the container creation time. Existing containers must undergo a migration process.")
   immutableStorageWithVersioning?: ImmutableStorageWithVersioning;
 
   @doc("Enable NFSv3 root squash on blob container.")
@@ -2766,53 +2130,27 @@ model ImmutabilityPolicyProperties {
 
 @doc("The properties of an ImmutabilityPolicy of a blob container.")
 model ImmutabilityPolicyProperty {
-  @doc("""
-The immutability period for the blobs in the container since the policy
-creation, in days.
-""")
+  @doc("The immutability period for the blobs in the container since the policy creation, in days.")
   immutabilityPeriodSinceCreationInDays?: int32;
 
-  @doc("""
-The ImmutabilityPolicy state of a blob container, possible values include:
-Locked and Unlocked.
-""")
+  @doc("The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.")
   @visibility("read")
   state?: ImmutabilityPolicyState;
 
-  @doc("""
-This property can only be changed for unlocked time-based retention policies.
-When enabled, new blocks can be written to an append blob while maintaining
-immutability protection and compliance. Only new blocks can be added and any
-existing blocks cannot be modified or deleted. This property cannot be changed
-with ExtendImmutabilityPolicy API.
-""")
+  @doc("This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API.")
   allowProtectedAppendWrites?: boolean;
 
-  @doc("""
-This property can only be changed for unlocked time-based retention policies.
-When enabled, new blocks can be written to both 'Append and Bock Blobs' while
-maintaining immutability protection and compliance. Only new blocks can be
-added and any existing blocks cannot be modified or deleted. This property
-cannot be changed with ExtendImmutabilityPolicy API. The
-'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are
-mutually exclusive.
-""")
+  @doc("This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive.")
   allowProtectedAppendWritesAll?: boolean;
 }
 
 @doc("An update history of the ImmutabilityPolicy of a blob container.")
 model UpdateHistoryProperty {
-  @doc("""
-The ImmutabilityPolicy update type of a blob container, possible values
-include: put, lock and extend.
-""")
+  @doc("The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend.")
   @visibility("read")
   update?: ImmutabilityPolicyUpdateType;
 
-  @doc("""
-The immutability period for the blobs in the container since the policy
-creation, in days.
-""")
+  @doc("The immutability period for the blobs in the container since the policy creation, in days.")
   @visibility("read")
   immutabilityPeriodSinceCreationInDays?: int32;
 
@@ -2825,10 +2163,7 @@ creation, in days.
   @visibility("read")
   objectIdentifier?: string;
 
-  @doc("""
-Returns the Tenant ID that issued the token for the user who updated the
-ImmutabilityPolicy.
-""")
+  @doc("Returns the Tenant ID that issued the token for the user who updated the ImmutabilityPolicy.")
   @visibility("read")
   tenantId?: string;
 
@@ -2836,35 +2171,16 @@ ImmutabilityPolicy.
   @visibility("read")
   upn?: string;
 
-  @doc("""
-This property can only be changed for unlocked time-based retention policies.
-When enabled, new blocks can be written to an append blob while maintaining
-immutability protection and compliance. Only new blocks can be added and any
-existing blocks cannot be modified or deleted. This property cannot be changed
-with ExtendImmutabilityPolicy API.
-""")
+  @doc("This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API.")
   allowProtectedAppendWrites?: boolean;
 
-  @doc("""
-This property can only be changed for unlocked time-based retention policies.
-When enabled, new blocks can be written to both 'Append and Bock Blobs' while
-maintaining immutability protection and compliance. Only new blocks can be
-added and any existing blocks cannot be modified or deleted. This property
-cannot be changed with ExtendImmutabilityPolicy API. The
-'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are
-mutually exclusive.
-""")
+  @doc("This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive.")
   allowProtectedAppendWritesAll?: boolean;
 }
 
 @doc("The LegalHold property of a blob container.")
 model LegalHoldProperties {
-  @doc("""
-The hasLegalHold public property is set to true by SRP if there are at least
-one existing tag. The hasLegalHold public property is set to false by SRP if
-all existing legal hold tags are cleared out. There can be a maximum of 1000
-blob containers with hasLegalHold=true for a given account.
-""")
+  @doc("The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.")
   @visibility("read")
   hasLegalHold?: boolean;
 
@@ -2901,11 +2217,7 @@ model TagProperty {
 
 @doc("Protected append writes history setting for the blob container with Legal holds.")
 model ProtectedAppendWritesHistory {
-  @doc("""
-When enabled, new blocks can be written to both 'Append and Bock Blobs' while
-maintaining legal hold protection and compliance. Only new blocks can be added
-and any existing blocks cannot be modified or deleted.
-""")
+  @doc("When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.")
   allowProtectedAppendWritesAll?: boolean;
 
   @doc("Returns the date and time the tag was added.")
@@ -2916,10 +2228,7 @@ and any existing blocks cannot be modified or deleted.
 
 @doc("Object level immutability properties of the container.")
 model ImmutableStorageWithVersioning {
-  @doc("""
-This is an immutable property, when set to true it enables object level
-immutability at the container level.
-""")
+  @doc("This is an immutable property, when set to true it enables object level immutability at the container level.")
   enabled?: boolean;
 
   @doc("Returns the date and time the object level immutability was enabled.")
@@ -2927,18 +2236,12 @@ immutability at the container level.
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeStamp?: utcDateTime;
 
-  @doc("""
-This property denotes the container level immutability to object level
-immutability migration state.
-""")
+  @doc("This property denotes the container level immutability to object level immutability migration state.")
   @visibility("read")
   migrationState?: MigrationState;
 }
 
-@doc("""
-The resource model definition for an Azure Resource Manager resource with an
-etag.
-""")
+@doc("The resource model definition for an Azure Resource Manager resource with an etag.")
 model AzureEntityResource {
   ...Resource;
 
@@ -2949,26 +2252,14 @@ model AzureEntityResource {
 
 @doc("The LegalHold property of a blob container.")
 model LegalHold {
-  @doc("""
-The hasLegalHold public property is set to true by SRP if there are at least
-one existing tag. The hasLegalHold public property is set to false by SRP if
-all existing legal hold tags are cleared out. There can be a maximum of 1000
-blob containers with hasLegalHold=true for a given account.
-""")
+  @doc("The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account.")
   @visibility("read")
   hasLegalHold?: boolean;
 
-  @doc("""
-Each tag should be 3 to 23 alphanumeric characters and is normalized to lower
-case at SRP.
-""")
+  @doc("Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP.")
   tags: string[];
 
-  @doc("""
-When enabled, new blocks can be written to both 'Append and Bock Blobs' while
-maintaining legal hold protection and compliance. Only new blocks can be added
-and any existing blocks cannot be modified or deleted.
-""")
+  @doc("When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.")
   allowProtectedAppendWritesAll?: boolean;
 }
 
@@ -2980,31 +2271,19 @@ model LeaseContainerRequest {
   @doc("Identifies the lease. Can be specified in any valid GUID string format.")
   leaseId?: string;
 
-  @doc("""
-Optional. For a break action, proposed duration the lease should continue
-before it is broken, in seconds, between 0 and 60.
-""")
+  @doc("Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60.")
   breakPeriod?: int32;
 
-  @doc("""
-Required for acquire. Specifies the duration of the lease, in seconds, or
-negative one (-1) for a lease that never expires.
-""")
+  @doc("Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires.")
   leaseDuration?: int32;
 
-  @doc("""
-Optional for acquire, required for change. Proposed lease ID, in a GUID string
-format.
-""")
+  @doc("Optional for acquire, required for change. Proposed lease ID, in a GUID string format.")
   proposedLeaseId?: string;
 }
 
 @doc("Lease Container response schema.")
 model LeaseContainerResponse {
-  @doc("""
-Returned unique lease ID that must be included with any request to delete the
-container, or to renew, change, or release the lease.
-""")
+  @doc("Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.")
   leaseId?: string;
 
   @doc("Approximate time remaining in the lease period, in seconds.")
@@ -3013,12 +2292,7 @@ container, or to renew, change, or release the lease.
 
 @doc("The properties of File services in storage account.")
 model FileServicePropertiesProperties {
-  @doc("""
-Specifies CORS rules for the File service. You can include up to five CorsRule
-elements in the request. If no CorsRule elements are included in the request
-body, all CORS rules will be deleted, and CORS will be disabled for the File
-service.
-""")
+  @doc("Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service.")
   cors?: CorsRules;
 
   @doc("The file service properties for share soft delete.")
@@ -3039,28 +2313,16 @@ model SmbSetting {
   @doc("Multichannel setting. Applies to Premium FileStorage only.")
   multichannel?: Multichannel;
 
-  @doc("""
-SMB protocol versions supported by server. Valid values are SMB2.1, SMB3.0,
-SMB3.1.1. Should be passed as a string with delimiter ';'.
-""")
+  @doc("SMB protocol versions supported by server. Valid values are SMB2.1, SMB3.0, SMB3.1.1. Should be passed as a string with delimiter ';'.")
   versions?: string;
 
-  @doc("""
-SMB authentication methods supported by server. Valid values are NTLMv2,
-Kerberos. Should be passed as a string with delimiter ';'.
-""")
+  @doc("SMB authentication methods supported by server. Valid values are NTLMv2, Kerberos. Should be passed as a string with delimiter ';'.")
   authenticationMethods?: string;
 
-  @doc("""
-Kerberos ticket encryption supported by server. Valid values are RC4-HMAC,
-AES-256. Should be passed as a string with delimiter ';'
-""")
+  @doc("Kerberos ticket encryption supported by server. Valid values are RC4-HMAC, AES-256. Should be passed as a string with delimiter ';'")
   kerberosTicketEncryption?: string;
 
-  @doc("""
-SMB channel encryption supported by server. Valid values are AES-128-CCM,
-AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'.
-""")
+  @doc("SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'.")
   channelEncryption?: string;
 }
 
@@ -3080,16 +2342,10 @@ model FileShareProperties {
   @doc("A name-value pair to associate with the share as metadata.")
   metadata?: Record<string>;
 
-  @doc("""
-The maximum size of the share, in gigabytes. Must be greater than 0, and less
-than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.
-""")
+  @doc("The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.")
   shareQuota?: int32;
 
-  @doc("""
-The authentication protocol that is used for the file share. Can only be
-specified when creating a share.
-""")
+  @doc("The authentication protocol that is used for the file share. Can only be specified when creating a share.")
   @visibility("read", "create")
   enabledProtocols?: EnabledProtocols;
 
@@ -3113,11 +2369,7 @@ specified when creating a share.
   @visibility("read")
   remainingRetentionDays?: int32;
 
-  @doc("""
-Access tier for specific share. GpV2 account can choose between
-TransactionOptimized (default), Hot, and Cool. FileStorage account can choose
-Premium.
-""")
+  @doc("Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.")
   accessTier?: ShareAccessTier;
 
   @doc("Indicates the last modification time for share access tier.")
@@ -3129,10 +2381,7 @@ Premium.
   @visibility("read")
   accessTierStatus?: string;
 
-  @doc("""
-The approximate size of the data stored on the share. Note that this value may
-not include all recently created or recently resized files.
-""")
+  @doc("The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.")
   @visibility("read")
   shareUsageBytes?: int32;
 
@@ -3144,20 +2393,14 @@ not include all recently created or recently resized files.
   @visibility("read")
   leaseState?: LeaseState;
 
-  @doc("""
-Specifies whether the lease on a share is of infinite or fixed duration, only
-when the share is leased.
-""")
+  @doc("Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased.")
   @visibility("read")
   leaseDuration?: LeaseDuration;
 
   @doc("List of stored access policies specified on the share.")
   signedIdentifiers?: SignedIdentifier[];
 
-  @doc("""
-Creation time of share snapshot returned in the response of list shares with
-expand param \"snapshots\".
-""")
+  @doc("Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\".")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   snapshotTime?: utcDateTime;
@@ -3201,31 +2444,19 @@ model LeaseShareRequest {
   @doc("Identifies the lease. Can be specified in any valid GUID string format.")
   leaseId?: string;
 
-  @doc("""
-Optional. For a break action, proposed duration the lease should continue
-before it is broken, in seconds, between 0 and 60.
-""")
+  @doc("Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60.")
   breakPeriod?: int32;
 
-  @doc("""
-Required for acquire. Specifies the duration of the lease, in seconds, or
-negative one (-1) for a lease that never expires.
-""")
+  @doc("Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires.")
   leaseDuration?: int32;
 
-  @doc("""
-Optional for acquire, required for change. Proposed lease ID, in a GUID string
-format.
-""")
+  @doc("Optional for acquire, required for change. Proposed lease ID, in a GUID string format.")
   proposedLeaseId?: string;
 }
 
 @doc("Lease Share response schema.")
 model LeaseShareResponse {
-  @doc("""
-Returned unique lease ID that must be included with any request to delete the
-share, or to renew, change, or release the lease.
-""")
+  @doc("Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease.")
   leaseId?: string;
 
   @doc("Approximate time remaining in the lease period, in seconds.")
@@ -3234,12 +2465,7 @@ share, or to renew, change, or release the lease.
 
 @doc("The properties of a storage account’s Queue service.")
 model QueueServicePropertiesProperties {
-  @doc("""
-Specifies CORS rules for the Queue service. You can include up to five CorsRule
-elements in the request. If no CorsRule elements are included in the request
-body, all CORS rules will be deleted, and CORS will be disabled for the Queue
-service.
-""")
+  @doc("Specifies CORS rules for the Queue service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Queue service.")
   cors?: CorsRules;
 }
 
@@ -3247,23 +2473,14 @@ model QueueProperties {
   @doc("A name-value pair that represents queue metadata.")
   metadata?: Record<string>;
 
-  @doc("""
-Integer indicating an approximate number of messages in the queue. This number
-is not lower than the actual number of messages in the queue, but could be
-higher.
-""")
+  @doc("Integer indicating an approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher.")
   @visibility("read")
   approximateMessageCount?: int32;
 }
 
 @doc("The properties of a storage account’s Table service.")
 model TableServicePropertiesProperties {
-  @doc("""
-Specifies CORS rules for the Table service. You can include up to five CorsRule
-elements in the request. If no CorsRule elements are included in the request
-body, all CORS rules will be deleted, and CORS will be disabled for the Table
-service.
-""")
+  @doc("Specifies CORS rules for the Table service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Table service.")
   cors?: CorsRules;
 }
 
@@ -3295,10 +2512,7 @@ model TableAccessPolicy {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTime?: utcDateTime;
 
-  @doc("""
-Required. List of abbreviated permissions. Supported permission values include
-'r','a','u','d'
-""")
+  @doc("Required. List of abbreviated permissions. Supported permission values include 'r','a','u','d'")
   permission: string;
 }
 

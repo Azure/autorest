@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.IntegrationSpaces;
 
@@ -120,10 +122,7 @@ model BusinessProcessStage {
   @doc("The properties within the properties of the business process stage.")
   properties?: Record<string>;
 
-  @doc("""
-The property to keep track of stages before current in the business process
-stage.
-""")
+  @doc("The property to keep track of stages before current in the business process stage.")
   stagesBefore?: string[];
 }
 

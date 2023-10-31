@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.AzurePlaywrightService;
 
@@ -44,12 +46,7 @@ enum FreeTrialState {
 }
 
 enum QuotaNames {
-  @doc("""
-The quota details for scalable execution feature. When enabled, Playwright
-client workers can connect to cloud-hosted browsers. This can increase the
-number of parallel workers for a test run, significantly minimizing test
-completion durations.
-""")
+  @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   ScalableExecution,
 }
 
@@ -59,26 +56,13 @@ model AccountProperties {
   @visibility("read")
   dashboardUri?: string;
 
-  @doc("""
-This property sets the connection region for Playwright client workers to
-cloud-hosted browsers. If enabled, workers connect to browsers in the closest
-Azure region, ensuring lower latency. If disabled, workers connect to browsers
-in the Azure region in which the workspace was initially created.
-""")
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
   regionalAffinity?: EnablementStatus;
 
-  @doc("""
-When enabled, Playwright client workers can connect to cloud-hosted browsers.
-This can increase the number of parallel workers for a test run, significantly
-minimizing test completion durations.
-""")
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
   scalableExecution?: EnablementStatus;
 
-  @doc("""
-When enabled, this feature allows the workspace to upload and display test
-results, including artifacts like traces and screenshots, in the Playwright
-portal. This enables faster and more efficient troubleshooting.
-""")
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   reporting?: EnablementStatus;
 
   @doc("The status of the last operation.")

@@ -22,37 +22,25 @@ model FileServiceProperty is ProxyResource<FileServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface FileServices {
-  @doc("""
-Gets the properties of file services in storage accounts, including CORS
-(Cross-Origin Resource Sharing) rules.
-""")
+interface FileServiceProperties {
+  @doc("Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     FileServiceProperty,
     {
       ...BaseParameters<FileServiceProperty>;
 
-      @doc("""
-The name of the file Service within the specified storage account. File Service
-Name must be \"default\"
-""")
+      @doc("The name of the file Service within the specified storage account. File Service Name must be \"default\"")
       @path
       FileServicesName: "default";
     }
   >;
-  @doc("""
-Sets the properties of file services in storage accounts, including CORS
-(Cross-Origin Resource Sharing) rules. 
-""")
-  setServiceProperties is ArmResourceCreateOrUpdateAsync<
+  @doc("Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ")
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
     FileServiceProperty,
     {
       ...BaseParameters<FileServiceProperty>;
 
-      @doc("""
-The name of the file Service within the specified storage account. File Service
-Name must be \"default\"
-""")
+      @doc("The name of the file Service within the specified storage account. File Service Name must be \"default\"")
       @path
       FileServicesName: "default";
     }

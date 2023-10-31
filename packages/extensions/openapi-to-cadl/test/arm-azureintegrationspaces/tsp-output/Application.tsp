@@ -26,11 +26,11 @@ interface Applications {
   @doc("Get a Application")
   get is ArmResourceRead<Application>;
   @doc("Create a Application")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Application>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
   @doc("Update a Application")
   patch is ArmResourcePatchSync<Application, ApplicationProperties>;
   @doc("Delete a Application")
-  delete is ArmResourceDeleteAsync<Application>;
+  delete is ArmResourceDeleteSync<Application>;
   @doc("List Application resources by Space")
   listBySpace is ArmResourceListByParent<
     Application,

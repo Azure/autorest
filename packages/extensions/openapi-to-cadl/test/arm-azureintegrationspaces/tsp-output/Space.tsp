@@ -24,11 +24,11 @@ interface Spaces {
   @doc("Get a Space")
   get is ArmResourceRead<Space>;
   @doc("Create a Space")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Space>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
   @doc("Update a Space")
   patch is ArmResourcePatchSync<Space, SpaceResourceProperties>;
   @doc("Delete a Space")
-  delete is ArmResourceDeleteAsync<Space>;
+  delete is ArmResourceDeleteSync<Space>;
   @doc("List Space resources by resource group")
   listByResourceGroup is ArmResourceListByParent<
     Space,

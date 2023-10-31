@@ -1,5 +1,6 @@
 import { CodeModel, ObjectSchema, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
 import _ from "lodash";
+import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -25,6 +26,7 @@ import {
 import { isResponseSchema } from "../utils/schemas";
 import { transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
+
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -67,7 +69,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const operations = getTspOperations(schema, propertiesModelName);
 
   return {
-    resourceGroupName: _.first(schema.resourceMetadata.GetOperations[0].OperationID.split("_")) ?? "",
+    resourceGroupName: pluralize(schema.resourceMetadata.Name),
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
@@ -374,7 +376,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
-            templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
+            templateParameters: [resourceMetadata.Name],
           });
         }
       }

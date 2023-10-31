@@ -10,10 +10,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the gallery image version that you want to create
-or update.
-""")
+@doc("Specifies information about the gallery image version that you want to create or update.")
 @parentResource(GalleryImage)
 model GalleryImageVersion is TrackedResource<GalleryImageVersionProperties> {
   @doc("The name of the gallery image version to be retrieved.")

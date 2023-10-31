@@ -9,10 +9,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the Shared Image Gallery that you want to create or
-update.
-""")
+@doc("Specifies information about the Shared Image Gallery that you want to create or update.")
 model Gallery is TrackedResource<GalleryProperties> {
   @doc("The name of the Shared Image Gallery.")
   @path

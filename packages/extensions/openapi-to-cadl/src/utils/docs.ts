@@ -1,4 +1,5 @@
 import { WithSummary } from "../interfaces";
+import { getOptions } from "../options";
 
 interface WithDocs {
   doc?: string | string[];
@@ -27,7 +28,8 @@ export function generateSummary({ summary }: WithSummary): string {
 }
 
 function lineWrap(doc: string) {
-  const maxLength = 80;
+  const { isArm } = getOptions();
+  const maxLength = isArm ? Number.POSITIVE_INFINITY : 80;
 
   if (doc.length <= maxLength && !doc.includes("\n")) {
     return `"${doc}"`;

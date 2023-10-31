@@ -19,33 +19,23 @@ model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
 }
 
 @armResourceOperations
-interface SshPublicKeys {
+interface SshPublicKeyResources {
   @doc("Retrieves information about an SSH public key.")
   get is ArmResourceRead<SshPublicKeyResource>;
   @doc("Creates a new SSH public key resource.")
-  create is ArmResourceCreateOrUpdateAsync<SshPublicKeyResource>;
+  create is ArmResourceCreateOrReplaceSync<SshPublicKeyResource>;
   @doc("Updates a new SSH public key resource.")
   update is ArmResourcePatchSync<
     SshPublicKeyResource,
     SshPublicKeyResourceProperties
   >;
   @doc("Delete an SSH public key.")
-  delete is ArmResourceDeleteAsync<SshPublicKeyResource>;
-  @doc("""
-Lists all of the SSH public keys in the specified resource group. Use the
-nextLink property in the response to get the next page of SSH public keys.
-""")
+  delete is ArmResourceDeleteSync<SshPublicKeyResource>;
+  @doc("Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.")
   listByResourceGroup is ArmResourceListByParent<SshPublicKeyResource>;
-  @doc("""
-Lists all of the SSH public keys in the subscription. Use the nextLink property
-in the response to get the next page of SSH public keys.
-""")
+  @doc("Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.")
   listBySubscription is ArmListBySubscription<SshPublicKeyResource>;
-  @doc("""
-Generates and returns a public/private key pair and populates the SSH public
-key resource with the public key. The length of the key will be 3072 bits. This
-operation can only be performed once per SSH public key resource.
-""")
+  @doc("Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.")
   generateKeyPair is ArmResourceActionSync<
     SshPublicKeyResource,
     {},

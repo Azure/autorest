@@ -32,18 +32,12 @@ interface RestorePoints {
       @path
       restorePointCollectionName: string;
 
-      @doc("""
-The expand expression to apply on the operation. 'InstanceView' retrieves
-information about the run-time state of a restore point.
-""")
+      @doc("The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.")
       @query("$expand")
       $expand?: RestorePointExpandOptions;
     }
   >;
-  @doc("""
-The operation to create the restore point. Updating properties of an existing
-restore point is not allowed
-""")
+  @doc("The operation to create the restore point. Updating properties of an existing restore point is not allowed")
   create is ArmResourceCreateOrUpdateAsync<
     RestorePoint,
     {

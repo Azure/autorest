@@ -1,4 +1,5 @@
 import { CadlProgram } from "../interfaces";
+import { getOptions } from "../options";
 
 type Imports = {
   modules: string[];
@@ -27,6 +28,12 @@ export function getModelsImports(program: CadlProgram) {
         decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
       }
     }
+  }
+  const {isArm} = getOptions();
+  
+  if(isArm) {
+    modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
+    namespaces.add(`using Azure.ResourceManager;`);
   }
 
   return {

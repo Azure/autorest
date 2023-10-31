@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.NetworkAnalytics;
 
@@ -56,8 +58,7 @@ enum DataProductUserRole {
   @doc("Field to specify user of type Reader.") Reader,
   @doc("""
 Field to specify user of type SensitiveReader.
-This user has privileged access
-to read sensitive data of a data product.
+This user has privileged access to read sensitive data of a data product.
 """)
   SensitiveReader,
 }
@@ -177,10 +178,7 @@ model DataProductNetworkAcls {
   @doc("IP rule with specific IP or IP range in CIDR format.")
   ipRules: IPRules[];
 
-  @doc("""
-The list of query ips in the format of CIDR allowed to connect to
-query/visualization endpoint.
-""")
+  @doc("The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.")
   allowedQueryIpRangeList: string[];
 
   @doc("Default Action")
@@ -254,37 +252,6 @@ model ConsumptionEndpointsProperties {
       type: "Microsoft.Kusto/clusters";
     }
   ]>;
-}
-
-@doc("Managed service identity (system assigned and/or user assigned identities)")
-model ManagedServiceIdentity {
-  @doc("""
-The service principal ID of the system assigned identity. This property will
-only be provided for a system assigned identity.
-""")
-  @visibility("read")
-  principalId?: string;
-
-  @doc("""
-The tenant ID of the system assigned identity. This property will only be
-provided for a system assigned identity.
-""")
-  @visibility("read")
-  tenantId?: string;
-
-  @doc("""
-Type of managed service identity (where both SystemAssigned and UserAssigned
-types are allowed).
-""")
-  type: ManagedServiceIdentityType;
-
-  @doc("""
-The set of user assigned identities associated with the resource. The
-userAssignedIdentities dictionary keys will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
-The dictionary values can be empty objects ({}) in requests.
-""")
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 @doc("User assigned identity properties")

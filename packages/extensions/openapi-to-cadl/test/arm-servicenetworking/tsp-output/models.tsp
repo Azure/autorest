@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.ServiceNetworking;
 
@@ -91,10 +93,7 @@ model AssociationSubnetUpdate {
 
 @doc("Frontend Properties.")
 model FrontendProperties {
-  @doc("""
-The Fully Qualified Domain Name of the DNS record associated to a Traffic
-Controller frontend.
-""")
+  @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
   @visibility("read")
   fqdn?: string;
 

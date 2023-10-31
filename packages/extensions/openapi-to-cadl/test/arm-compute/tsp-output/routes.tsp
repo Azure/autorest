@@ -8,10 +8,7 @@ using TypeSpec.Http;
 namespace Microsoft.Compute;
 
 interface UsageOperations {
-  @doc("""
-Gets, for the specified location, the current compute resource usage
-information as well as the limits for compute resources under the subscription.
-""")
+  @doc("Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -21,10 +18,7 @@ information as well as the limits for compute resources under the subscription.
       @path
       location: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -33,10 +27,7 @@ The subscription ID forms part of the URI for every service call.
 }
 
 interface VirtualMachineSizesOperations {
-  @doc("""
-This API is deprecated. Use [Resources
-Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
-""")
+  @doc("This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -46,10 +37,7 @@ Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
       @path
       location: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -83,20 +71,14 @@ interface VirtualMachineImagesOperations {
       @path
       version: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     VirtualMachineImage
   >;
 
-  @doc("""
-Gets a list of all virtual machine image versions for the specified location,
-publisher, offer, and SKU.
-""")
+  @doc("Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -127,20 +109,14 @@ publisher, offer, and SKU.
       @query("$orderby")
       $orderby?: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image offers for the specified location and
-publisher.
-""")
+  @doc("Gets a list of virtual machine image offers for the specified location and publisher.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   ListOffers is Azure.Core.Foundations.Operation<
@@ -153,20 +129,14 @@ publisher.
       @path
       publisherName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image publishers for the specified Azure
-location.
-""")
+  @doc("Gets a list of virtual machine image publishers for the specified Azure location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
   @get
   ListPublishers is Azure.Core.Foundations.Operation<
@@ -175,20 +145,14 @@ location.
       @path
       location: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image SKUs for the specified location,
-publisher, and offer.
-""")
+  @doc("Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   ListSkus is Azure.Core.Foundations.Operation<
@@ -205,10 +169,7 @@ publisher, and offer.
       @path
       offer: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -228,10 +189,7 @@ The subscription ID forms part of the URI for every service call.
       @path
       edgeZone: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -269,20 +227,14 @@ interface VirtualMachineImagesEdgeZoneOperations {
       @path
       version: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     VirtualMachineImage
   >;
 
-  @doc("""
-Gets a list of all virtual machine image versions for the specified location,
-edge zone, publisher, offer, and SKU.
-""")
+  @doc("Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -311,10 +263,7 @@ edge zone, publisher, offer, and SKU.
       @query("$expand")
       $expand?: string;
 
-      @doc("""
-An integer value specifying the number of images to return that matches
-supplied values.
-""")
+      @doc("An integer value specifying the number of images to return that matches supplied values.")
       @query("$top")
       $top?: int32;
 
@@ -322,20 +271,14 @@ supplied values.
       @query("$orderby")
       $orderby?: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image offers for the specified location, edge
-zone and publisher.
-""")
+  @doc("Gets a list of virtual machine image offers for the specified location, edge zone and publisher.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   ListOffers is Azure.Core.Foundations.Operation<
@@ -352,20 +295,14 @@ zone and publisher.
       @path
       publisherName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image publishers for the specified Azure
-location and edge zone.
-""")
+  @doc("Gets a list of virtual machine image publishers for the specified Azure location and edge zone.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
   @get
   ListPublishers is Azure.Core.Foundations.Operation<
@@ -378,20 +315,14 @@ location and edge zone.
       @path
       edgeZone: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("""
-Gets a list of virtual machine image SKUs for the specified location, edge
-zone, publisher, and offer.
-""")
+  @doc("Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   ListSkus is Azure.Core.Foundations.Operation<
@@ -412,10 +343,7 @@ zone, publisher, and offer.
       @path
       offer: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -449,10 +377,7 @@ interface VirtualMachineExtensionImagesOperations {
       @query("$orderby")
       $orderby?: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -461,10 +386,7 @@ The subscription ID forms part of the URI for every service call.
 }
 
 interface LogAnalyticsOperations {
-  @doc("""
-Export logs that show Api requests made by this subscription in the given time
-window to show throttling activities.
-""")
+  @doc("Export logs that show Api requests made by this subscription in the given time window to show throttling activities.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval")
   @post
   ExportRequestRateByInterval is Azure.Core.Foundations.Operation<
@@ -474,10 +396,7 @@ window to show throttling activities.
       @path
       location: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -486,10 +405,7 @@ The subscription ID forms part of the URI for every service call.
     LogAnalyticsOperationResult | void
   >;
 
-  @doc("""
-Export logs that show total throttled Api requests for this subscription in the
-given time window.
-""")
+  @doc("Export logs that show total throttled Api requests for this subscription in the given time window.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests")
   @post
   ExportThrottledRequests is Azure.Core.Foundations.Operation<
@@ -499,10 +415,7 @@ given time window.
       @path
       location: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -534,10 +447,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
       @path
       runCommandName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -571,10 +481,7 @@ The subscription ID forms part of the URI for every service call.
       @path
       runCommandName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -608,10 +515,7 @@ The subscription ID forms part of the URI for every service call.
       @path
       runCommandName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -647,10 +551,7 @@ The subscription ID forms part of the URI for every service call.
       @query("$expand")
       $expand?: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -661,10 +562,7 @@ The subscription ID forms part of the URI for every service call.
     VirtualMachineRunCommand
   >;
 
-  @doc("""
-The operation to get all run commands of an instance in Virtual Machine
-Scaleset.
-""")
+  @doc("The operation to get all run commands of an instance in Virtual Machine Scaleset.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -685,10 +583,7 @@ Scaleset.
       @query("$expand")
       $expand?: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
@@ -706,17 +601,11 @@ interface ResourceSkusOperations {
   @get
   List is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
 
-      @doc("""
-The filter to apply on the operation. Only **location** filter is supported
-currently.
-""")
+      @doc("The filter to apply on the operation. Only **location** filter is supported currently.")
       @query("$filter")
       $filter?: string;
 

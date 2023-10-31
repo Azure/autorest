@@ -19,23 +19,13 @@ model ComputePrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
-
-  @doc("private endpoint connection name")
-  @visibility("read")
-  name?: string;
 }
 
 @armResourceOperations
-interface DiskAccesses {
-  @doc("""
-Gets information about a private endpoint connection under a disk access
-resource.
-""")
+interface ComputePrivateEndpointConnections {
+  @doc("Gets information about a private endpoint connection under a disk access resource.")
   getAPrivateEndpointConnection is ArmResourceRead<ComputePrivateEndpointConnection>;
-  @doc("""
-Approve or reject a private endpoint connection under disk access resource,
-this can't be used to create a new private endpoint connection.
-""")
+  @doc("Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.")
   updateAPrivateEndpointConnection is ArmResourceCreateOrUpdateAsync<ComputePrivateEndpointConnection>;
   @doc("Deletes a private endpoint connection under a disk access resource.")
   deleteAPrivateEndpointConnection is ArmResourceDeleteAsync<ComputePrivateEndpointConnection>;

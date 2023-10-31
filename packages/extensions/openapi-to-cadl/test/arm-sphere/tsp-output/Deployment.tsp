@@ -13,10 +13,7 @@ namespace Microsoft.AzureSphere;
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
-  @doc("""
-Deployment name. Use .default for deployment creation and to get the current
-deployment for the associated device group.
-""")
+  @doc("Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.")
   @path
   @key("deploymentName")
   @segment("deployments")
@@ -25,25 +22,13 @@ deployment for the associated device group.
 
 @armResourceOperations
 interface Deployments {
-  @doc("""
-Get a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
+  @doc("Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   get is ArmResourceRead<Deployment>;
-  @doc("""
-Create a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
+  @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
-  @doc("""
-Delete a Deployment. '.default' and '.unassigned' are system defined values and
-cannot be used for product or device group name.
-""")
+  @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<Deployment>;
-  @doc("""
-List Deployment resources by DeviceGroup. '.default' and '.unassigned' are
-system defined values and cannot be used for product or device group name.
-""")
+  @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {

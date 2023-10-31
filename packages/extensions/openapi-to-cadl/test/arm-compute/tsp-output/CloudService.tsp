@@ -17,14 +17,7 @@ model CloudService is TrackedResource<CloudServiceProperties> {
   @segment("cloudServices")
   name: string;
 
-  @doc("Resource name.")
-  @visibility("read")
-  name?: string;
-
-  @doc("""
-List of logical availability zone of the resource. List should contain only 1
-zone where cloud service should be provisioned. This field is optional.
-""")
+  @doc("List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.")
   zones?: string[];
 }
 
@@ -32,48 +25,25 @@ zone where cloud service should be provisioned. This field is optional.
 interface CloudServices {
   @doc("Display information about a cloud service.")
   get is ArmResourceRead<CloudService>;
-  @doc("""
-Create or update a cloud service. Please note some properties can be set only
-during cloud service creation.
-""")
+  @doc("Create or update a cloud service. Please note some properties can be set only during cloud service creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
   @doc("Update a cloud service.")
   update is ArmTagsPatchAsync<CloudService>;
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
-  @doc("""
-Gets a list of all cloud services under a resource group. Use nextLink property
-in the response to get the next page of Cloud Services. Do this till nextLink
-is null to fetch all the Cloud Services.
-""")
+  @doc("Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")
   list is ArmResourceListByParent<CloudService>;
-  @doc("""
-Gets a list of all cloud services in the subscription, regardless of the
-associated resource group. Use nextLink property in the response to get the
-next page of Cloud Services. Do this till nextLink is null to fetch all the
-Cloud Services.
-""")
+  @doc("Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")
   listAll is ArmListBySubscription<CloudService>;
   @doc("Starts the cloud service.")
   start is ArmResourceActionAsync<CloudService, {}, {}>;
-  @doc("""
-Power off the cloud service. Note that resources are still attached and you are
-getting charged for the resources.
-""")
+  @doc("Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.")
   powerOff is ArmResourceActionAsync<CloudService, {}, {}>;
   @doc("Restarts one or more role instances in a cloud service.")
   restart is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
-  @doc("""
-Reimage asynchronous operation reinstalls the operating system on instances of
-web roles or worker roles.
-""")
+  @doc("Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.")
   reimage is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
-  @doc("""
-Rebuild Role Instances reinstalls the operating system on instances of web
-roles or worker roles and initializes the storage resources that are used by
-them. If you do not want to initialize storage resources, you can use Reimage
-Role Instances.
-""")
+  @doc("Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.")
   rebuild is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
   @doc("Deletes role instances in a cloud service.")
   deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, {}>;
@@ -90,21 +60,14 @@ Role Instances.
       @path
       cloudServiceName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
     CloudServiceInstanceView
   >;
 
-  @doc("""
-Gets the specified update domain of a cloud service. Use nextLink property in
-the response to get the next page of update domains. Do this till nextLink is
-null to fetch all the update domains.
-""")
+  @doc("Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
   GetUpdateDomain is Azure.Core.Foundations.Operation<
@@ -117,18 +80,11 @@ null to fetch all the update domains.
       @path
       cloudServiceName: string;
 
-      @doc("""
-Specifies an integer value that identifies the update domain. Update domains
-are identified with a zero-based index: the first update domain has an ID of 0,
-the second has an ID of 1, and so on.
-""")
+      @doc("Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.")
       @path
       updateDomain: int32;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
@@ -148,10 +104,7 @@ The subscription ID forms part of the URI for every service call.
       @path
       cloudServiceName: string;
 
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },

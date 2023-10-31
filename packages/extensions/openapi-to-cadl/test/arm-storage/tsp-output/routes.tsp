@@ -23,10 +23,7 @@ interface SkusOperations {
 }
 
 interface UsagesOperations {
-  @doc("""
-Gets the current usage count and the limit for the resources of the location
-under the subscription.
-""")
+  @doc("Gets the current usage count and the limit for the resources of the location under the subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages")
   @get
   ListByLocation is Azure.Core.Foundations.Operation<

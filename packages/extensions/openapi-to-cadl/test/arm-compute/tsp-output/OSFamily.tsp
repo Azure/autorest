@@ -17,24 +17,12 @@ model OSFamily is ProxyResource<OSFamilyProperties> {
   @key("osFamilyName")
   @segment("cloudServiceOsFamilies")
   name: string;
-
-  @doc("Resource name.")
-  @visibility("read")
-  name?: string;
 }
 
 @armResourceOperations
-interface CloudServiceOperatingSystems {
-  @doc("""
-Gets properties of a guest operating system family that can be specified in the
-XML service configuration (.cscfg) for a cloud service.
-""")
+interface OSFamilies {
+  @doc("Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service.")
   getOSFamily is ArmResourceRead<OSFamily>;
-  @doc("""
-Gets a list of all guest operating system families available to be specified in
-the XML service configuration (.cscfg) for a cloud service. Use nextLink
-property in the response to get the next page of OS Families. Do this till
-nextLink is null to fetch all the OS Families.
-""")
+  @doc("Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.")
   listOSFamilies is ArmResourceListByParent<OSFamily>;
 }

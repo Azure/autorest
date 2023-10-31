@@ -10,10 +10,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the gallery image definition that you want to
-create or update.
-""")
+@doc("Specifies information about the gallery image definition that you want to create or update.")
 @parentResource(Gallery)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
   @doc("The name of the gallery image definition to be retrieved.")

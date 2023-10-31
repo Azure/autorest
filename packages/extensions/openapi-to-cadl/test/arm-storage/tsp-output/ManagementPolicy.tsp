@@ -24,7 +24,7 @@ interface ManagementPolicies {
   @doc("Gets the managementpolicy associated with the specified storage account.")
   get is ArmResourceRead<ManagementPolicy>;
   @doc("Sets the managementpolicy to the specified storage account.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ManagementPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ManagementPolicy>;
   @doc("Deletes the managementpolicy associated with the specified storage account.")
-  delete is ArmResourceDeleteAsync<ManagementPolicy>;
+  delete is ArmResourceDeleteSync<ManagementPolicy>;
 }

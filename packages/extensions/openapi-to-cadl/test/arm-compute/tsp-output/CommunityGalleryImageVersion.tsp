@@ -10,19 +10,11 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the gallery image version that you want to create
-or update.
-""")
+@doc("Specifies information about the gallery image version that you want to create or update.")
 @parentResource(CommunityGalleryImage)
 model CommunityGalleryImageVersion
   is ProxyResource<CommunityGalleryImageVersionProperties> {
-  @doc("""
-The name of the community gallery image version. Needs to follow semantic
-version name pattern: The allowed characters are digit and period. Digits must
-be within the range of a 32-bit integer. Format:
-<MajorVersion>.<MinorVersion>.<Patch>
-""")
+  @doc("The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
   @path
   @key("galleryImageVersionName")
   @segment("versions")

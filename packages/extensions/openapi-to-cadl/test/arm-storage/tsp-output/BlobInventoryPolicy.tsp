@@ -24,9 +24,9 @@ interface BlobInventoryPolicies {
   @doc("Gets the blob inventory policy associated with the specified storage account.")
   get is ArmResourceRead<BlobInventoryPolicy>;
   @doc("Sets the blob inventory policy to the specified storage account.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BlobInventoryPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<BlobInventoryPolicy>;
   @doc("Deletes the blob inventory policy associated with the specified storage account.")
-  delete is ArmResourceDeleteAsync<BlobInventoryPolicy>;
+  delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
   @doc("Gets the blob inventory policy associated with the specified storage account.")
   listByStorageAccount is ArmResourceListByParent<BlobInventoryPolicy>;
 }

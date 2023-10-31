@@ -13,10 +13,7 @@ namespace Microsoft.Storage;
 @doc("The local user associated with the storage accounts.")
 @parentResource(StorageAccount)
 model LocalUser is ProxyResource<LocalUserProperties> {
-  @doc("""
-The name of local user. The username must contain lowercase letters and numbers
-only. It must be unique only within the storage account.
-""")
+  @doc("The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.")
   @maxLength(64)
   @minLength(3)
   @path
@@ -29,13 +26,10 @@ only. It must be unique only within the storage account.
 interface LocalUsers {
   @doc("Get the local user of the storage account by username.")
   get is ArmResourceRead<LocalUser>;
-  @doc("""
-Create or update the properties of a local user associated with the storage
-account
-""")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LocalUser>;
+  @doc("Create or update the properties of a local user associated with the storage account")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LocalUser>;
   @doc("Deletes the local user associated with the specified storage account.")
-  delete is ArmResourceDeleteAsync<LocalUser>;
+  delete is ArmResourceDeleteSync<LocalUser>;
   @doc("List the local users associated with the storage account.")
   list is ArmResourceListByParent<LocalUser>;
   @doc("List SSH authorized keys and shared key of the local user.")

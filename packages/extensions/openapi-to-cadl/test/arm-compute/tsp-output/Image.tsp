@@ -9,11 +9,7 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-The source user image virtual hard disk. The virtual hard disk will be copied
-before being attached to the virtual machine. If SourceImage is provided, the
-destination virtual hard drive must not exist.
-""")
+@doc("The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.")
 model Image is TrackedResource<ImageProperties> {
   @doc("The name of the image.")
   @path
@@ -44,16 +40,8 @@ interface Images {
   update is ArmResourcePatchAsync<Image, ImageProperties>;
   @doc("Deletes an Image.")
   delete is ArmResourceDeleteAsync<Image>;
-  @doc("""
-Gets the list of images under a resource group. Use nextLink property in the
-response to get the next page of Images. Do this till nextLink is null to fetch
-all the Images.
-""")
+  @doc("Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
   listByResourceGroup is ArmResourceListByParent<Image>;
-  @doc("""
-Gets the list of Images in the subscription. Use nextLink property in the
-response to get the next page of Images. Do this till nextLink is null to fetch
-all the Images.
-""")
+  @doc("Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
   list is ArmListBySubscription<Image>;
 }

@@ -20,37 +20,25 @@ model QueueServiceProperty is ProxyResource<QueueServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface QueueServices {
-  @doc("""
-Gets the properties of a storage account’s Queue service, including properties
-for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-""")
+interface QueueServiceProperties {
+  @doc("Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     QueueServiceProperty,
     {
       ...BaseParameters<QueueServiceProperty>;
 
-      @doc("""
-The name of the Queue Service within the specified storage account. Queue
-Service Name must be 'default'
-""")
+      @doc("The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'")
       @path
       queueServiceName: "default";
     }
   >;
-  @doc("""
-Sets the properties of a storage account’s Queue service, including properties
-for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. 
-""")
-  setServiceProperties is ArmResourceCreateOrUpdateAsync<
+  @doc("Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
+  setServiceProperties is ArmResourceCreateOrReplaceSync<
     QueueServiceProperty,
     {
       ...BaseParameters<QueueServiceProperty>;
 
-      @doc("""
-The name of the Queue Service within the specified storage account. Queue
-Service Name must be 'default'
-""")
+      @doc("The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'")
       @path
       queueServiceName: "default";
     }

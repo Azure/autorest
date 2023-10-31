@@ -10,16 +10,10 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
-@doc("""
-Specifies information about the gallery image definition that you want to
-create or update.
-""")
+@doc("Specifies information about the gallery image definition that you want to create or update.")
 @parentResource(SharedGallery)
 model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
-  @doc("""
-The name of the Shared Gallery Image Definition from which the Image Versions
-are to be listed.
-""")
+  @doc("The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.")
   @path
   @key("galleryImageName")
   @segment("images")
@@ -36,10 +30,7 @@ interface SharedGalleryImages {
     {
       ...BaseParameters<SharedGalleryImage>;
 
-      @doc("""
-The query parameter to decide what shared galleries to fetch when doing listing
-operations.
-""")
+      @doc("The query parameter to decide what shared galleries to fetch when doing listing operations.")
       @query("sharedTo")
       sharedTo?: SharedToValues;
     }
