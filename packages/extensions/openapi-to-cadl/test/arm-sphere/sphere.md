@@ -5,5 +5,4 @@ clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
 isArm: true
-namespace: "Microsoft.AzureSphere"
 ```

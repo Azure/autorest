@@ -7,16 +7,20 @@ export let options: CadlOptions;
 
 export function getOptions(): CadlOptions {
   if (!options) {
-    const session = getSession();
-    options = {
-      isAzureSpec: getIsAzureSpec(session),
-      namespace: getNamespace(session),
-      guessResourceKey: getGuessResourceKey(session),
-      isArm: getIsArm(session),
-    };
+    updateOptions();
   }
 
   return options;
+}
+
+export function updateOptions() {
+  const session = getSession();
+  options = {
+    isAzureSpec: getIsAzureSpec(session),
+    namespace: getNamespace(session),
+    guessResourceKey: getGuessResourceKey(session),
+    isArm: getIsArm(session),
+  };
 }
 
 export function getGuessResourceKey(session: Session<CodeModel>) {

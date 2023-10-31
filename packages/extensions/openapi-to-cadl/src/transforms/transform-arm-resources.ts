@@ -21,6 +21,7 @@ import {
   TspArmResourceOperation,
   isFirstLevelResource,
 } from "../interfaces";
+import { updateOptions } from "../options";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -54,6 +55,17 @@ function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {
 
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
   const fixMe: string[] = [];
+
+  if (!getSession().configuration["namespace"]) {
+    const segments = schema.resourceMetadata.GetOperations[0].Path.split("/");
+    for (let i = segments.length - 1; i >= 0; i--) {
+      if (segments[i] === "providers") {
+        getSession().configuration["namespace"] = segments[i + 1];
+        updateOptions();
+        break;
+      }
+    }
+  }
 
   // TODO: deal with a resource with multiple parents
   if (schema.resourceMetadata.Parents.length > 1) {
