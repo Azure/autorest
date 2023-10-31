@@ -3,6 +3,7 @@ openapi-type: arm
 input-file:
   - ./swagger/basic.json
   - ./swagger/singleton.json
+  - ./swagger/dict-properties.json
 ```
 
 ```yaml

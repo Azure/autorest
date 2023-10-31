@@ -29,9 +29,9 @@ export function getModelsImports(program: CadlProgram) {
       }
     }
   }
-  const {isArm} = getOptions();
-  
-  if(isArm) {
+  const { isArm } = getOptions();
+
+  if (isArm) {
     modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
     namespaces.add(`using Azure.ResourceManager;`);
   }

@@ -127,6 +127,55 @@
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
       "IsSingletonResource": true
+    },
+    "DictProperty": {
+      "Name": "DictProperty",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties/{name}",
+          "Method": "GET",
+          "OperationID": "DictProperties_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Resource."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties",
+          "Method": "GET",
+          "OperationID": "DictProperties_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List resources by resource group"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["Employee"],
+      "SwaggerModelName": "DictProperty",
+      "ResourceType": "Microsoft.Test/employees/dictproperties",
+      "ResourceKey": "name",
+      "ResourceKeySegment": "dictproperties",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
     }
   }
 }

@@ -1,4 +1,12 @@
-import { CodeModel, ObjectSchema, Operation, Parameter, Response, SchemaResponse } from "@autorest/codemodel";
+import {
+  CodeModel,
+  ObjectSchema,
+  Operation,
+  Parameter,
+  Response,
+  SchemaResponse,
+  SchemaType,
+} from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
@@ -26,7 +34,6 @@ import {
 import { isResponseSchema } from "../utils/schemas";
 import { transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
-
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -57,8 +64,12 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.resourceMetadata.Name);
 
-  let propertiesModelName = schema.properties?.find((p) => p.serializedName === "properties")?.schema.language.default
-    .name;
+  const propertiesModelSchema = schema.properties?.find((p) => p.serializedName === "properties")?.schema;
+  let propertiesModelName = propertiesModelSchema?.language.default.name;
+
+  if (propertiesModelSchema?.type === SchemaType.Dictionary) {
+    propertiesModelName = "Record<unknown>";
+  }
 
   // TODO: deal with resources that has no properties property
   if (!propertiesModelName) {

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Employee.tsp";
 import "./Enroll.tsp";
+import "./DictProperty.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
