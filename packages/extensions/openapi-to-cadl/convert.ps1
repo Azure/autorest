@@ -1,3 +1,14 @@
+<#
+  .SYNOPSIS
+  Convert ARM swagger to TypeSpec.
+
+  .DESCRIPTION
+  This script will help to call csharp codegen and converter codegen to convert an ARM specific swagger into TypeSpec.
+
+  .EXAMPLE
+  pwsh convert.ps1 https://github.com/Azure/azure-rest-api-specs/blob/main/specification/sphere/resource-manager/readme.md
+#>
+
 param(
     [Parameter(Mandatory)]
     [string]
@@ -13,17 +24,6 @@ param(
     # Specified the converter codegen, default to https://aka.ms/azsdk/openapi-to-typespec.
     $converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
 )
-
-<#
-  .SYNOPSIS
-  Convert ARM swagger to TypeSpec.
-
-  .DESCRIPTION
-  This script will help to call csharp codegen and converter codegen to convert an ARM specific swagger into TypeSpec.
-
-  .EXAMPLE
-  pwsh convert.ps1 https://github.com/Azure/azure-rest-api-specs/blob/main/specification/sphere/resource-manager/readme.md
-#>
 
 function GenerateMetadata ()
 {
