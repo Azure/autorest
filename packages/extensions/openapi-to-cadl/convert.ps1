@@ -2,8 +2,8 @@ param(
     [Parameter(Mandatory)]
     [string]$swaggerConfigFile,
     [string]$outputFolder,
-    [string]$csharpCodegen = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/@autorest/csharp/-/csharp-3.0.0-alpha.20231017.8.tgz",
-    [string]$converterCodegen = ""
+    [string]$csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
+    [string]$converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
 )
 
 function GenerateMetadata ()
