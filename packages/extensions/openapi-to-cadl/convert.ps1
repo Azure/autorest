@@ -1,10 +1,29 @@
 param(
     [Parameter(Mandatory)]
-    [string]$swaggerConfigFile,
-    [string]$outputFolder,
-    [string]$csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
-    [string]$converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
+    [string]
+    # Specifies the swagger config file, not the swagger json, but the readme config.
+    $swaggerConfigFile,
+    [string]
+    # Specified the output folder, deafult to current folder.
+    $outputFolder,
+    [string]
+    # Specified the csharp codegen, default to https://aka.ms/azsdk/openapi-to-typespec-csharp.
+    $csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
+    [string]
+    # Specified the converter codegen, default to https://aka.ms/azsdk/openapi-to-typespec.
+    $converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
 )
+
+<#
+  .SYNOPSIS
+  Convert ARM swagger to TypeSpec.
+
+  .DESCRIPTION
+  This script will help to call csharp codegen and converter codegen to convert an ARM specific swagger into TypeSpec.
+
+  .EXAMPLE
+  pwsh convert.ps1 https://github.com/Azure/azure-rest-api-specs/blob/main/specification/sphere/resource-manager/readme.md
+#>
 
 function GenerateMetadata ()
 {
