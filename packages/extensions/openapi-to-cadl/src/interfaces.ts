@@ -156,6 +156,7 @@ const FIRST_LEVEL_RESOURCE = [
   "SubscriptionResource",
   "ManagementGroupResource",
   "TenantResource",
+  "ArmResource",
 ] as const;
 export type FirstLevelResource = typeof FIRST_LEVEL_RESOURCE[number];
 
