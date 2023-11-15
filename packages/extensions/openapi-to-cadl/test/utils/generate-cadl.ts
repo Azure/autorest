@@ -46,7 +46,9 @@ function generate(path: string, debug = false) {
   const spawn = spawnSync("autorest", args, { stdio: "inherit" });
 
   if (spawn.status !== 0) {
-    throw new Error(`Generation failed, command:\n autorest ${args.join(" ")}`);
+    throw new Error(
+      `Generation failed, command:\n autorest ${args.join(" ")}\nStdout:\n${spawn.stdout}\nStderr:\n${spawn.stderr}`,
+    );
   }
 }
 
