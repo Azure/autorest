@@ -1,6 +1,6 @@
 import { EnhancedPosition } from "@azure-tools/datastore";
 import { serializeJsonPointer } from "@azure-tools/json";
-import chalk, { level } from "chalk";
+import chalk from "chalk";
 import { color } from "../utils";
 import { EnhancedLogInfo, EnhancedSourceLocation } from "./types";
 import { LogLevel } from ".";
