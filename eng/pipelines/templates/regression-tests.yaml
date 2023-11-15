@@ -34,10 +34,11 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
+      # https://github.com/nodejs/node-gyp/issues/2869
       - task: UsePythonVersion@0
         inputs:
           versionSpec: "3.11"
-        displayName: "Use Python 3.11" // https://github.com/nodejs/node-gyp/issues/2869
+        displayName: "Use Python 3.11"
 
       - task: NodeTool@0
         inputs:
