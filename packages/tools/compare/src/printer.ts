@@ -1,16 +1,16 @@
-import chalk from "chalk";
+import chalk, { ChalkInstance } from "chalk";
 import { CompareMessage, MessageType } from "./comparers";
 
 interface MessageVisual {
   prefix: string;
-  color: chalk.ChalkFunction;
-  prefixColor: chalk.ChalkFunction;
+  color: ChalkInstance;
+  prefixColor: ChalkInstance;
 }
 
 function getMessageVisual(messageType: MessageType): MessageVisual {
   let prefix = "•";
-  let color: chalk.ChalkFunction = chalk;
-  let prefixColor: chalk.ChalkFunction | undefined;
+  let color: ChalkInstance = chalk;
+  let prefixColor: ChalkInstance | undefined;
 
   switch (messageType) {
     case MessageType.Added:
