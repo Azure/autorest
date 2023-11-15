@@ -5,15 +5,15 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 @service({
-  title: "AzureMessagingWebPubSubServiceClient",
-  version: "2022-11-01",
+  title: "Azure Web PubSub Service REST API",
+  version: "2023-07-01",
 })
 @server(
-  "{Endpoint}",
+  "{endpoint}",
   "// FIXME: (miissing-service-description) Add service description",
   {
-    Endpoint: string,
+    endpoint: string,
   }
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
-namespace AzureMessagingWebPubSubServiceClient;
+namespace AzureWebPubSubServiceRESTAPI;

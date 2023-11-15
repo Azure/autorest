@@ -13,6 +13,7 @@ using TypeSpec.Http;
   {
     @doc("server parameter")
     $host: string,
+
     Endpoint: string,
     ApiVersion: string,
   }
