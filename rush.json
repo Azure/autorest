@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.71.0",
+  "rushVersion": "5.110.1",
   "pnpmVersion": "6.32.4",
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=12.0.0",
