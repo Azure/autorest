@@ -18,6 +18,10 @@ stages:
         steps:
           - template: ./templates/build.yaml
 
+          - script: npm run generate
+            displayName: Gene oai -> typespec for test
+            workingDirectory: packages/extensions/openapi-to-cadl
+
           - script: npx @microsoft/rush test:ci -v
             displayName: Test
 
