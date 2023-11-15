@@ -43,7 +43,7 @@ function generate(path: string, debug = false) {
     ...(debug ? ["--openapi-to-cadl.debugger"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
   ];
-  const spawn = spawnSync("autorest", args, { stdio: "inherit" });
+  const spawn = spawnSync("autorest", args, { stdio: "pipe" });
 
   if (spawn.status !== 0) {
     throw new Error(
