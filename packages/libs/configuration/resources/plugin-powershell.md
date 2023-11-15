@@ -12,7 +12,7 @@ try-require: ./readme.powershell.md
 Note: if the --powershell is mentioned, but they are using autorest.powershell locally, don't try to load the autorest.powershell from npm.
 
 ```yaml $(powershell) && !isLoaded('@autorest/powershell')
-# load the extension  (3.0+)
+# load the extension  (4.0+)
 use-extension:
-  "@autorest/powershell": "~3.0.0"
+  "@autorest/powershell": "~4.0.0"
 ```
