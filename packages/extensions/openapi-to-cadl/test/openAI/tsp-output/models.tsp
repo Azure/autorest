@@ -97,6 +97,13 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
   completionConfig?: string;
 
   @doc("""
+can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
+enabled, 2=full cache
+""")
+  @projectedName("json", "cache_level")
+  cacheLevel?: int32;
+
+  @doc("""
 How much to penalize new tokens based on their existing frequency in the text
 so far. Decreases the model's likelihood to repeat the same line verbatim. Has
 minimum of -2 and maximum of 2.
