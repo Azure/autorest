@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as path from "path";
-import * as chalk from "chalk";
+import chalk from "chalk";
 
 const printModes = ["info", "warn", "error", "success", "debug"] as const;
 
