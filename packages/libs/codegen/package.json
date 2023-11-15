@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@azure-tools/async-io": "~3.0.0",
-    "js-yaml": "~4.0.0",
+    "js-yaml": "~4.1.0",
     "semver": "^7.3.5"
   }
 }
