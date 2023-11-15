@@ -56,7 +56,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
         case "components":
           {
             const components = targetParent.components || this.newObject(targetParent, "components", pointer);
-            this.visitComponents(components, children);
+            this.visitComponents(components as any, children);
           }
           break;
 

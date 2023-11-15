@@ -7,7 +7,7 @@ import { toSemver, maximum } from "@azure-tools/codegen";
 import { visit } from "@azure-tools/datastore";
 import { areSimilar } from "@azure-tools/object-comparison";
 import { YieldCPU } from "@azure-tools/tasks";
-import compareVersions from "compare-versions";
+import { compareVersions } from "compare-versions";
 import { cloneDeep } from "lodash";
 
 type componentType =
@@ -99,7 +99,10 @@ export class Deduplicator {
 
   // initially the target is the same as the original object
   private target: any;
-  constructor(originalFile: any, protected deduplicateInlineModels = false) {
+  constructor(
+    originalFile: any,
+    protected deduplicateInlineModels = false,
+  ) {
     this.target = cloneDeep(originalFile);
     this.target.info["x-ms-metadata"].deduplicated = true;
   }

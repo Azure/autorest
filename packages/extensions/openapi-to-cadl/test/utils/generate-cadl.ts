@@ -63,7 +63,7 @@ async function main() {
     try {
       await generateCadl(folder, debug);
     } catch (e) {
-      throw new Error(`Failed to generate ${folder}`);
+      throw new Error(`Failed to generate ${folder}, error:\n${e}`);
     }
   }
 }

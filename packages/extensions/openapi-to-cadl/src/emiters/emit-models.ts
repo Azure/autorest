@@ -10,7 +10,7 @@ export async function emitModels(filePath: string, program: CadlProgram): Promis
   const content = generateModels(program);
 
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
 }
 
 function generateModels(program: CadlProgram) {

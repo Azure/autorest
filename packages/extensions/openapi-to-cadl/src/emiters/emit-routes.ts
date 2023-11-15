@@ -8,7 +8,7 @@ import { getNamespace } from "../utils/namespace";
 export async function emitRoutes(filePath: string, program: CadlProgram): Promise<void> {
   const content = generateRoutes(program);
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
 }
 
 function generateRoutes(program: CadlProgram) {
