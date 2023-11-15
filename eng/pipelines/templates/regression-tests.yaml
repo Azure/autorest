@@ -55,8 +55,8 @@ jobs:
         displayName: Install dependencies
         workingDirectory: regression-tests
 
-      - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
+      - script: node ./packages/tools/compare/dist/index.js --compare:./regression-tests/regression-compare.yaml --language:python
         displayName: Regression Test - @autorest/python
 
-      - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
+      - script: node ./packages/tools/compare/dist/index.js --compare:./regression-tests/regression-compare.yaml --language:typescript
         displayName: Regression Test - @autorest/typescript
