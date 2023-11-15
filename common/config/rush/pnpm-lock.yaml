@@ -282,8 +282,8 @@ dependencies:
     specifier: ^7.3.5
     version: 7.5.4
   source-map:
-    specifier: 0.7.3
-    version: 0.7.3
+    specifier: ^0.8.0-beta.0
+    version: 0.8.0-beta.0
   source-map-support:
     specifier: ^0.5.19
     version: 0.5.21
@@ -1458,7 +1458,7 @@ packages:
     dependencies:
       '@types/node': 14.14.45
       '@types/source-list-map': 0.1.5
-      source-map: 0.7.3
+      source-map: 0.7.4
     dev: false
 
   /@types/webpack@4.41.36:
@@ -5247,6 +5247,10 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: false
 
+  /lodash.sortby@4.7.0:
+    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
+    dev: false
+
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
@@ -6838,9 +6842,16 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /source-map@0.7.3:
-    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==}
+  /source-map@0.7.4:
+    resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
     engines: {node: '>= 8'}
+    dev: false
+
+  /source-map@0.8.0-beta.0:
+    resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
+    engines: {node: '>= 8'}
+    dependencies:
+      whatwg-url: 7.1.0
     dev: false
 
   /spdx-correct@3.2.0:
@@ -7191,6 +7202,12 @@ packages:
       extend-shallow: 3.0.2
       regex-not: 1.0.2
       safe-regex: 1.1.0
+    dev: false
+
+  /tr46@1.0.1:
+    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
+    dependencies:
+      punycode: 2.3.1
     dev: false
 
   /tree-sitter-python@0.20.1:
@@ -7723,6 +7740,10 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
+  /webidl-conversions@4.0.2:
+    resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
+    dev: false
+
   /webpack-cli@4.7.2(webpack@5.40.0):
     resolution: {integrity: sha512-mEoLmnmOIZQNiRl0ebnjzQ74Hk0iKS5SiEEnpq3dRezoyR3yPaeQZCMCe+db4524pj1Pd5ghZXjT41KLzIhSLw==}
     engines: {node: '>=10.13.0'}
@@ -7819,6 +7840,14 @@ packages:
       - '@swc/core'
       - esbuild
       - uglify-js
+    dev: false
+
+  /whatwg-url@7.1.0:
+    resolution: {integrity: sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==}
+    dependencies:
+      lodash.sortby: 4.7.0
+      tr46: 1.0.1
+      webidl-conversions: 4.0.2
     dev: false
 
   /which-boxed-primitive@1.0.2:
@@ -8009,7 +8038,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-QcSy8p8EStluzaLB0NmR8cVXteiChqoTaNw/BIaFh8+I0LYqpe2/oi1vFrgSITJLkeSUb0PfhXK9A0wNRPsLGg==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-tOPjMetchdE1bCtfp/bhNZHLpPUgHLf+569vG03izYGnbySJMH3uWcuPPJag4K5lM8Tzt9MbTKM/MvRoc6JYvw==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -8040,7 +8069,7 @@ packages:
       rimraf: 3.0.2
       safe-buffer: 5.2.0
       semver: 7.5.4
-      source-map: 0.7.3
+      source-map: 0.8.0-beta.0
       source-map-support: 0.5.21
       ts-jest: 29.1.1(jest@29.7.0)(typescript@4.9.5)
       ts-loader: 9.2.9(typescript@4.9.5)(webpack@5.40.0)
@@ -8295,7 +8324,7 @@ packages:
     dev: false
 
   file:projects/core.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-3tSn+wh0YXj0kpBBZ9y/EwqDczEduqVTEV/KLHCkLSgf++7qfG8Uu31P9VWNf+51MX0My35mT0b7F2xUWTfnYQ==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-SupSV4ndsGKXk55Kaz0/MXqhSz0eiBiwOXdoDcfNXu2e/h+IWoJ7KFuaXE+s7vnC3//J38dvdoY+26l8zDXh7w==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     version: 0.0.0
@@ -8330,7 +8359,7 @@ packages:
       prettier: 2.7.1
       rimraf: 3.0.2
       safe-buffer: 5.2.0
-      source-map: 0.7.3
+      source-map: 0.8.0-beta.0
       source-map-support: 0.5.21
       ts-jest: 29.1.1(jest@29.7.0)(typescript@4.9.5)
       ts-loader: 9.2.9(typescript@4.9.5)(webpack@5.40.0)
@@ -8360,7 +8389,7 @@ packages:
     dev: false
 
   file:projects/datastore.tgz(prettier@2.7.1)(ts-node@10.9.1):
-    resolution: {integrity: sha512-Q4CafVANlOz/ZYs+raiB2zrQ0Aa3HnU1w72xmshaVIb6tkP/Bfd26p6LJuNL/d/ibl6daAG4uFJF2B+vtko9Aw==, tarball: file:projects/datastore.tgz}
+    resolution: {integrity: sha512-Sqy7MNXd83gBTTl/dFd01qjFvKrjrg5kooHSP2Bax/t5UMEEQH5ZmhipCpIk9zTw2iVY/QlJd0E54i/F2gJ6Kw==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     version: 0.0.0
@@ -8383,7 +8412,7 @@ packages:
       jsonpath-plus: 6.0.1
       lodash: 4.17.21
       rimraf: 3.0.2
-      source-map: 0.7.3
+      source-map: 0.8.0-beta.0
       ts-jest: 29.1.1(jest@29.7.0)(typescript@4.9.5)
       typescript: 4.9.5
     transitivePeerDependencies:
@@ -8654,7 +8683,7 @@ packages:
     dev: false
 
   file:projects/oai2-to-oai3.tgz(prettier@2.7.1)(ts-node@10.9.1):
-    resolution: {integrity: sha512-s6Qki7bLVUxEJ4/uDEXHX3sifZWRQ5cyjouQv4L+CHpXdWj8NThvnCWdp91AiaMQtj+wF22OEnSTXL9im2YVMA==, tarball: file:projects/oai2-to-oai3.tgz}
+    resolution: {integrity: sha512-A5VD4PXGnwFXQzyjYKYbIw+k8yK+uMC/aJFWJqQS/IAfTtKMFlxBqllpX6wvW5/7kgMt47y24wSQUPGCLzG2Pw==, tarball: file:projects/oai2-to-oai3.tgz}
     id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
     version: 0.0.0
@@ -8672,7 +8701,7 @@ packages:
       eslint-plugin-unicorn: 44.0.2(eslint@8.53.0)
       jest: 29.7.0(@types/node@14.14.45)(ts-node@10.9.1)
       rimraf: 3.0.2
-      source-map: 0.7.3
+      source-map: 0.8.0-beta.0
       source-map-support: 0.5.21
       ts-jest: 29.1.1(jest@29.7.0)(typescript@4.9.5)
       typescript: 4.9.5

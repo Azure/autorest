@@ -58,6 +58,6 @@
     "@azure-tools/datastore": "~4.7.1",
     "@azure-tools/openapi": "~3.5.0",
     "@azure-tools/json": "~1.2.3",
-    "source-map": "0.7.3"
+    "source-map": "^0.8.0-beta.0"
   }
 }
