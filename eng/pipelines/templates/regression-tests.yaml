@@ -40,8 +40,12 @@ jobs:
         displayName: Install Python 3
 
       - script: |
-          comprePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-compare-*.tgz" )"
-          npm install -g $comprePkg
+          npx @microsoft/rush update
+          npx @microsoft/rush rebuild
+          cd ./packages/tools/compare
+          npm link --force
+          cd ./packages/apps/autorest
+          npm link --force
         displayName: Install autorest-compare
 
       - script: |
