@@ -42,9 +42,15 @@ jobs:
       - script: |
           npx @microsoft/rush update
           npx @microsoft/rush rebuild
-          cd ./packages/tools/compare
+        displayName: Install and build
+
+      - script: |
+          echo "Linking autorest-compare"
+          cd $(Pipeline.Workspace)/packages/tools/compare
           npm link --force
-          cd ./packages/apps/autorest
+
+          echo "Linking autorest"
+          cd $(Pipeline.Workspace)/packages/apps/autorest
           npm link --force
         displayName: Install autorest-compare
 
