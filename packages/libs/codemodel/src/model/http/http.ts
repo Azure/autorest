@@ -94,7 +94,11 @@ export interface HttpHeader extends Extensions {
 }
 
 export class HttpHeader extends Initializer implements HttpHeader {
-  constructor(public header: string, public schema: Schema, objectInitializer?: DeepPartial<HttpHeader>) {
+  constructor(
+    public header: string,
+    public schema: Schema,
+    objectInitializer?: DeepPartial<HttpHeader>,
+  ) {
     super();
     this.apply(objectInitializer);
   }

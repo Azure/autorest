@@ -103,7 +103,10 @@ interface NamerEntry {
 export class ScopeNamer {
   private names = new Map<string, NamerEntry[]>();
 
-  public constructor(private session: Session<unknown>, private options: ScopeNamerOptions) {}
+  public constructor(
+    private session: Session<unknown>,
+    private options: ScopeNamerOptions,
+  ) {}
 
   /**
    * Add a nameable entity to be styled and named.

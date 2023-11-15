@@ -111,8 +111,8 @@ export async function emitArtifacts(
       ? typeof artifactTypeFilter === "string"
         ? fileArtifact === artifactTypeFilter // A string filter is a singular type
         : Array.isArray(artifactTypeFilter)
-        ? artifactTypeFilter.includes(fileArtifact) // an array is any one of the types
-        : true // if it's not a string or array, just emit it (no filter)
+          ? artifactTypeFilter.includes(fileArtifact) // an array is any one of the types
+          : true // if it's not a string or array, just emit it (no filter)
       : true; // if it's null, just emit it.
 
     if (ok) {

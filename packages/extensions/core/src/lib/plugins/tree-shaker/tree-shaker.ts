@@ -49,7 +49,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     },
   };
 
-  constructor(originalFile: Source, private isSimpleTreeShake: boolean) {
+  constructor(
+    originalFile: Source,
+    private isSimpleTreeShake: boolean,
+  ) {
     super([originalFile]);
   }
 
@@ -78,8 +81,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     return this.components[key]
       ? this.components[key]
       : this.current.components && this.current.components[key]
-      ? this.newObject(this.components, key, `/components/${key}`)
-      : this.newObject(this.components, key, "/");
+        ? this.newObject(this.components, key, `/components/${key}`)
+        : this.newObject(this.components, key, "/");
   }
 
   get schemas(): AnyObject {

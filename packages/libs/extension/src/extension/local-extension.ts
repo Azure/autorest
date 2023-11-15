@@ -6,7 +6,10 @@ import { Package } from "./package";
  * @extends Extension
  * */
 export class LocalExtension extends Extension {
-  public constructor(pkg: Package, private extensionPath: string) {
+  public constructor(
+    pkg: Package,
+    private extensionPath: string,
+  ) {
     super(pkg, "");
   }
 

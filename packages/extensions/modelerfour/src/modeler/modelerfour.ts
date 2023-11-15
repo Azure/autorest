@@ -2067,8 +2067,8 @@ export class ModelerFour {
             ? ImplementationLocation.Method
             : ImplementationLocation.Client
           : "client" === parameter["x-ms-parameter-location"]
-          ? ImplementationLocation.Client
-          : ImplementationLocation.Method;
+            ? ImplementationLocation.Client
+            : ImplementationLocation.Method;
 
         const preferredName = this.interpret.getPreferredName(parameter, schema["x-ms-client-name"] || parameter.name);
         if (implementation === ImplementationLocation.Client) {

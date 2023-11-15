@@ -37,10 +37,10 @@ export function getLogLevel(config: LogOptions): LogLevel {
   return config.debug
     ? "debug"
     : config.verbose
-    ? "verbose"
-    : config.level && isValidLogLevel(config.level)
-    ? config.level
-    : "information";
+      ? "verbose"
+      : config.level && isValidLogLevel(config.level)
+        ? config.level
+        : "information";
 }
 
 export function isValidLogLevel(level: string): level is LogLevel {

@@ -35,7 +35,11 @@ export class DataHandle {
   /**
    * @param autoUnload If the data unhandled should automatically unload files after they are not used for a while.
    */
-  constructor(public readonly key: string, private item: Data, private autoUnload = true) {
+  constructor(
+    public readonly key: string,
+    private item: Data,
+    private autoUnload = true,
+  ) {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
