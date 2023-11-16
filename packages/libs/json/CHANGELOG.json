@@ -2,6 +2,18 @@
   "name": "@azure-tools/json",
   "entries": [
     {
+      "version": "1.3.0",
+      "tag": "@azure-tools/json_v1.3.0",
+      "date": "Thu, 16 Nov 2023 16:00:04 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Upgrade dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.3",
       "tag": "@azure-tools/json_v1.2.3",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

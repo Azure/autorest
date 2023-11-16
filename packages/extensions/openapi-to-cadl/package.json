@@ -1,6 +1,6 @@
 {
   "name": "@autorest/openapi-to-cadl",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Autorest plugin to scaffold a Typespec definition from an OpenAPI document",
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",
@@ -38,9 +38,9 @@
   ],
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
-    "@azure-tools/codegen": "~2.9.2",
-    "@autorest/extension-base": "~3.5.2",
-    "@autorest/codemodel": "~4.19.3",
+    "@azure-tools/codegen": "~2.10.0",
+    "@autorest/extension-base": "~3.6.0",
+    "@autorest/codemodel": "~4.20.0",
     "@typespec/compiler": "^0.50.0",
     "@typespec/rest": "^0.50.0",
     "@typespec/http": "^0.50.0",

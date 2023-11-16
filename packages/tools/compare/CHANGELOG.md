@@ -1,6 +1,13 @@
 # Change Log - @autorest/compare
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 0.5.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Upgrade dependencies
 
 ## 0.4.5
 Wed, 07 Dec 2022 22:24:34 GMT

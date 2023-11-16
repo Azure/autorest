@@ -2,6 +2,23 @@
   "name": "@autorest/cadl",
   "entries": [
     {
+      "version": "0.3.0",
+      "tag": "@autorest/cadl_v0.3.0",
+      "date": "Thu, 16 Nov 2023 16:00:04 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Upgrade dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.5.2` to `~3.6.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.2.2",
       "tag": "@autorest/cadl_v0.2.2",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

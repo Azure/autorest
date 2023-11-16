@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 31 Jul 2023 14:56:21 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 3.10.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Update dependencies
 
 ## 3.9.7
 Mon, 31 Jul 2023 14:56:21 GMT

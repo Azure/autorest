@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-cadl
 
-This log was last generated on Fri, 26 May 2023 15:35:37 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 0.6.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Update dependencies
 
 ## 0.5.0
 Fri, 26 May 2023 15:35:37 GMT
