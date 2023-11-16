@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/cadl",
+      "comment": "Upgrade dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/cadl"
+}

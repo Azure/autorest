@@ -36,7 +36,7 @@ async function check_tree() {
     // run git diff again, this time forwarding the stout to present
     // a readable hint to the user
     await onExit(
-      spawn("git", ["diff", "--staged", "--compact-summary"], {
+      spawn("git", ["diff", "--staged"], {
         stdio: [process.stdin, process.stdout, process.stderr],
       }),
     );

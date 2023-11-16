@@ -55,14 +55,20 @@ export class Contact extends Initializer implements Contact {
 }
 
 export class Info extends Initializer implements Info {
-  constructor(public title: string, initializer?: DeepPartial<Info>) {
+  constructor(
+    public title: string,
+    initializer?: DeepPartial<Info>,
+  ) {
     super();
     this.apply(initializer);
   }
 }
 
 export class License extends Initializer implements License {
-  constructor(public name: string, initializer?: DeepPartial<License>) {
+  constructor(
+    public name: string,
+    initializer?: DeepPartial<License>,
+  ) {
     super();
     this.apply(initializer);
   }

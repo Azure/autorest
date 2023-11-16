@@ -1534,6 +1534,7 @@ machines in the scale set. <br><br> For more information about disks, see
 machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
 """)
   dataDisks?: VirtualMachineScaleSetDataDisk[];
+
   diskControllerType?: string;
 }
 
@@ -2643,6 +2644,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
 
   @doc("The data disks.")
   dataDisks?: VirtualMachineScaleSetDataDisk[];
+
   diskControllerType?: string;
 }
 
@@ -4139,6 +4141,7 @@ than 1 network interface.
 
   @doc("Specifies the IP configurations of the network interface.")
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
+
   dscpConfiguration?: SubResource;
 }
 
@@ -5143,6 +5146,7 @@ MarketPlace.
 
   @doc("Contains the os disk image information.")
   osDiskImage?: OSDiskImage;
+
   dataDiskImages?: DataDiskImage[];
 
   @doc("Describes automatic OS upgrade properties on the image.")
@@ -5153,6 +5157,7 @@ MarketPlace.
 
   @doc("Specifies disallowed configuration for the VirtualMachine created from the image")
   disallowed?: DisallowedConfiguration;
+
   features?: VirtualMachineImageFeature[];
 
   @doc("Specifies the Architecture Type")

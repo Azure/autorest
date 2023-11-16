@@ -5,7 +5,10 @@ import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { getDiff, rdiffResult } from "recursive-diff";
 
 export class DuplicateSchemaMerger {
-  public constructor(private session: Session<oai3.Model>, private options: ModelerFourOptions) {}
+  public constructor(
+    private session: Session<oai3.Model>,
+    private options: ModelerFourOptions,
+  ) {}
 
   public findDuplicateSchemas(spec: oai3.Model): oai3.Model {
     if (!spec.components?.schemas) {

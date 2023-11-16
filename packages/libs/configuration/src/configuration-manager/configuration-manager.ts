@@ -31,7 +31,10 @@ type ConfigurationItem = ConfigurationFile | SimpleConfiguration;
 export class ConfigurationManager {
   private configItems: ConfigurationItem[] = [];
 
-  public constructor(private configFileOrFolderUri: string, private fileSystem: IFileSystem) {}
+  public constructor(
+    private configFileOrFolderUri: string,
+    private fileSystem: IFileSystem,
+  ) {}
 
   public async addConfig(config: AutorestNormalizedConfiguration) {
     this.configItems.push({ type: "simple", config: await desugarRawConfig(config) });

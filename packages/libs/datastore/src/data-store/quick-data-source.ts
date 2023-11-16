@@ -3,7 +3,10 @@ import { DataSource } from "./data-source";
 import { PipeState } from "./misc";
 
 export class QuickDataSource extends DataSource {
-  public constructor(private handles: Array<DataHandle>, pipeState?: PipeState) {
+  public constructor(
+    private handles: Array<DataHandle>,
+    pipeState?: PipeState,
+  ) {
     super();
     this.pipeState = pipeState || {};
   }

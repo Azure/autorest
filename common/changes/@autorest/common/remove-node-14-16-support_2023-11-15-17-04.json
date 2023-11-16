@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "Upgrade dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/common"
+}

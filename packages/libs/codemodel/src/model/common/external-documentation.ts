@@ -9,7 +9,10 @@ export interface ExternalDocumentation extends Extensions {
 }
 
 export class ExternalDocumentation extends Initializer implements ExternalDocumentation {
-  constructor(public url: uri, initializer?: DeepPartial<ExternalDocumentation>) {
+  constructor(
+    public url: uri,
+    initializer?: DeepPartial<ExternalDocumentation>,
+  ) {
     super();
     this.apply(initializer);
   }

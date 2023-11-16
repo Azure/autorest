@@ -30,12 +30,16 @@ export interface Data {
 }
 
 export class DataHandle {
-  private unloadTimer: NodeJS.Timer | undefined;
+  private unloadTimer: NodeJS.Timeout | undefined;
 
   /**
-   * @param autoUnload If the data unhandle should automatically unload files after they are not used for a while.
+   * @param autoUnload If the data unhandled should automatically unload files after they are not used for a while.
    */
-  constructor(public readonly key: string, private item: Data, private autoUnload = true) {
+  constructor(
+    public readonly key: string,
+    private item: Data,
+    private autoUnload = true,
+  ) {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time

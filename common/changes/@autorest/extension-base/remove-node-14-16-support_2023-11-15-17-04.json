@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/extension-base",
+      "comment": "Upgrade dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/extension-base"
+}

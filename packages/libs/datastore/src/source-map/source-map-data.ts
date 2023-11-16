@@ -6,7 +6,10 @@ import fs from "fs";
 export abstract class SourceMapData<T> {
   private data: { value: T; status: "loaded" } | { status: "unloaded" };
 
-  public constructor(private filename: string, value: T) {
+  public constructor(
+    private filename: string,
+    value: T,
+  ) {
     this.data = { value, status: "loaded" };
   }
 

@@ -799,22 +799,6 @@
         }
       ]
     },
-    "Response": {
-      "description": "a response from a service.",
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Metadata"
-        }
-      ]
-    },
     "BinaryResponse": {
       "description": "a response where the content should be treated as a binary instead of a value or object",
       "type": "object",
@@ -966,36 +950,6 @@
       "required": [
         "language",
         "protocol"
-      ]
-    },
-    "Request": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "description": "the parameter inputs to the operation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Parameter"
-          }
-        },
-        "signatureParameters": {
-          "description": "a filtered list of parameters that is (assumably) the actual method signature parameters",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Parameter"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Metadata"
-        }
       ]
     },
     "OperationGroup": {
@@ -3167,6 +3121,52 @@
       "type": "object",
       "defaultProperties": [],
       "additionalProperties": false
+    },
+    "Request": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "the parameter inputs to the operation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "signatureParameters": {
+          "description": "a filtered list of parameters that is (assumably) the actual method signature parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Metadata"
+        }
+      ]
+    },
+    "Response": {
+      "description": "a response from a service.",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Metadata"
+        }
+      ]
     },
     "Record<string,ApiVersion>": {
       "type": "object",

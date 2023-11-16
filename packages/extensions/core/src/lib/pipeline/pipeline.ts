@@ -145,10 +145,10 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     const plugin = usenull
       ? CORE_PLUGIN_MAP.null
       : passthru
-      ? CORE_PLUGIN_MAP.identity
-      : pluginName === "pipeline-emitter"
-      ? pipelineEmitterPlugin
-      : plugins[pluginName]?.plugin;
+        ? CORE_PLUGIN_MAP.identity
+        : pluginName === "pipeline-emitter"
+          ? pipelineEmitterPlugin
+          : plugins[pluginName]?.plugin;
 
     if (!plugin) {
       throw new Error(`Plugin '${pluginName}' not found.`);

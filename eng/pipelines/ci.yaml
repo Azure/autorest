@@ -68,16 +68,12 @@ stages:
     jobs:
       - template: ./templates/regression-tests.yaml
         parameters:
-          name: node14
-          nodeVersion: 14.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node16
-          nodeVersion: 16.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
           name: node18
           nodeVersion: 18.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node20
+          nodeVersion: 20.x
 
   - stage: smoketests
     displayName: Smoke Tests
@@ -85,5 +81,5 @@ stages:
     jobs:
       - template: ./templates/smoke-tests.yaml
         parameters:
-          name: node14
-          nodeVersion: 14.x
+          name: node20
+          nodeVersion: 20.x

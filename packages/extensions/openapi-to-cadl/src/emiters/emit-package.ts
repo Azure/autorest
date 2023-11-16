@@ -14,7 +14,7 @@ export async function emitPackage(filePath: string, program: CadlProgram): Promi
   const name = program.serviceInformation.name.toLowerCase().replace(/ /g, "-");
   const description = program.serviceInformation.doc;
   const content = JSON.stringify(getPackage(name, description as string));
-  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatFile(content, filePath) });
 }
 
 const getPackage = (name: string, description: string) => ({

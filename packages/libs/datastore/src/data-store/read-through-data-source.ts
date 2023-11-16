@@ -9,7 +9,10 @@ export class ReadThroughDataSource extends DataSource {
   private uris: Array<string> = [];
   private cache: { [uri: string]: Promise<DataHandle | null> } = {};
 
-  constructor(private store: DataStore, private fs: IFileSystem) {
+  constructor(
+    private store: DataStore,
+    private fs: IFileSystem,
+  ) {
     super();
   }
 

@@ -2556,6 +2556,7 @@ publisher, offer, and SKU.
       @doc("The expand expression to apply on the operation.")
       @query
       $expand: string;
+
       @query $top: int32;
       @query $orderby: string;
 
@@ -2864,6 +2865,7 @@ interface VirtualMachineExtensionImagesOperations {
       @doc("The name of a supported Azure region.")
       @path
       location: string;
+
       @path publisherName: string;
       @path type: string;
       @path version: string;
@@ -2886,6 +2888,7 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of a supported Azure region.")
       @path
       location: string;
+
       @path publisherName: string;
 
       @doc("""
@@ -2906,12 +2909,14 @@ The subscription ID forms part of the URI for every service call.
       @doc("The name of a supported Azure region.")
       @path
       location: string;
+
       @path publisherName: string;
       @path type: string;
 
       @doc("The filter to apply on the operation.")
       @query
       $filter: string;
+
       @query $top: int32;
       @query $orderby: string;
 

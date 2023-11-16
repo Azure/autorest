@@ -96,8 +96,8 @@ function normalize(
         maxUppercasePreserve,
       )
     : removeDuplicates
-    ? removeSequentialDuplicates(identifier)
-    : identifier;
+      ? removeSequentialDuplicates(identifier)
+      : identifier;
 }
 export class Style {
   static select(style: any, fallback: Styler, maxUppercasePreserve: number): Styler {

@@ -1,5 +1,4 @@
 import { format } from "prettier";
-import { getLogger } from "./logger";
 
 export function formatFile(content: string, filepath: string) {
   return format(content, {
@@ -7,11 +6,10 @@ export function formatFile(content: string, filepath: string) {
   });
 }
 
-export function formatCadlFile(content: string, filepath: string): string {
+export async function formatCadlFile(content: string, filepath: string): Promise<string> {
   try {
-    return format(content, {
+    return await format(content, {
       plugins: ["@typespec/prettier-plugin-typespec"],
-      pluginSearchDirs: ["./node_modules"],
       filepath,
     });
   } catch {

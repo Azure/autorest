@@ -52,8 +52,8 @@ export interface MappingTreeArray<T> extends ReadonlyArray<MappingTreeItem<T>> {
 export type MappingTreeItem<T> = T extends Array<any>
   ? MappingTreeArray<T[number]>
   : T extends {}
-  ? MappingTreeObject<T>
-  : T;
+    ? MappingTreeObject<T>
+    : T;
 
 /**
  * Create a proxy tree

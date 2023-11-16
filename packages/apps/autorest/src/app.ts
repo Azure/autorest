@@ -15,7 +15,7 @@ const cwd = process.cwd();
 
 const isDebuggerEnabled =
   // eslint-disable-next-line node/no-unsupported-features/node-builtins
-  !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
+  !!require("inspector").url() || (globalThis as any).v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
 // aliases, round one.

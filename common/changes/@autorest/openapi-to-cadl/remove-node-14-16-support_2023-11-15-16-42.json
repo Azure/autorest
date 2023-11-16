@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "comment": "Update dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-cadl"
+}

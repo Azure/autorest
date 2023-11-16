@@ -34,15 +34,29 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
+      - task: NodeTool@0
+        inputs:
+          versionSpec: ${{ parameters.nodeVersion }}
+        displayName: "Install Node.js"
+
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: "3.x"
-        displayName: Install Python 3
+          versionSpec: "3.11"
+        displayName: "Use Python 3.11"
 
       - script: |
+          npm install -g npm
           npx @microsoft/rush update
           npx @microsoft/rush rebuild
-          cd ./packages/tools/compare
+        displayName: Install and build
+
+      - script: |
+          echo "Linking autorest-compare"
+          cd $(Build.SourcesDirectory)/packages/tools/compare
+          npm link --force
+
+          echo "Linking autorest"
+          cd $(Build.SourcesDirectory)/packages/apps/autorest
           npm link --force
         displayName: Install autorest-compare
 

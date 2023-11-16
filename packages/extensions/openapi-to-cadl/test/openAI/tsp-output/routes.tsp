@@ -32,6 +32,7 @@ interface embeddingsOperations {
       @doc("deployment id of the model which was deployed")
       @path
       `deployment-id`: string;
+
       @body
       body: Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema;
     },

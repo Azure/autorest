@@ -64,12 +64,12 @@ languages:
     oldArgs:
       - --version:3.6.2
       - --use:@autorest/modelerfour@4.23.0
-      - --use:@autorest/python@6.1.7
+      - --use:@autorest/python@6.9.9
 
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@6.1.7
+      - --use:@autorest/python@6.9.9
 
   - language: typescript
     outputPath: ./output/typescript
