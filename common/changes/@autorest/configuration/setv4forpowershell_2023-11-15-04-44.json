@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "Set autorest.powershell v4 the default version loaded by autorest",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/configuration"
+}

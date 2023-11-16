@@ -268,7 +268,7 @@ export class ConfigurationLoader {
     // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
     if (shortname === "powershell") {
       this.logger.info(
-        `\n## The default version of @autorest/powershell has been bumped from 2.1+ to 3.0+.\n > If you still want to use 2.1+ version, please specify it with --use:@autorest/powershell@2.1.{x}, e.g 2.1.401.\n`,
+        `\n## The default version of @autorest/powershell has been bumped from 3.0+ to 4.0+.\n > If you still want to use 3.0+ version, please specify it with --use:@autorest/powershell@3.0.{x}, e.g 3.0.512.\n`,
       );
     }
 
