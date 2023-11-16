@@ -20,5 +20,5 @@ export async function emitCadlConfig(filePath: string): Promise<void> {
 `;
 
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatFile(content, filePath) });
 }

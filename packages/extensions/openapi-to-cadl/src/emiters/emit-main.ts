@@ -6,7 +6,7 @@ import { formatCadlFile } from "../utils/format";
 export async function emitMain(filePath: string, program: CadlProgram): Promise<void> {
   const content = getServiceInformation(program);
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
 }
 
 function getServiceInformation(program: CadlProgram) {

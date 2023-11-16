@@ -10,7 +10,7 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { areSimilar } from "@azure-tools/object-comparison";
-import compareVersions from "compare-versions";
+import { compareVersions } from "compare-versions";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 
@@ -63,8 +63,8 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     return this.components[key]
       ? this.components[key]
       : this.current.components && this.current.components[key]
-      ? this.newObject(this.components, key, `/components/${key}`)
-      : this.newObject(this.components, key, "/");
+        ? this.newObject(this.components, key, `/components/${key}`)
+        : this.newObject(this.components, key, "/");
   }
 
   get schemas(): AnyObject {

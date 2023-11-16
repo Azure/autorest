@@ -9,7 +9,10 @@ import { Package } from "./package";
  * @extends Package
  * */
 export class Extension extends Package {
-  /* @internal */ public constructor(pkg: Package, private installationPath: string) {
+  /* @internal */ public constructor(
+    pkg: Package,
+    private installationPath: string,
+  ) {
     super(pkg.resolvedInfo, pkg.packageMetadata, pkg.extensionManager);
   }
   /**

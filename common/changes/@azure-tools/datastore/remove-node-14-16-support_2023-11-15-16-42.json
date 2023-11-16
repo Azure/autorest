@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "Update dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/datastore"
+}

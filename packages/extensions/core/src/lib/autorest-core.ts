@@ -262,8 +262,8 @@ export async function IdentifyDocument(content: string): Promise<DocumentType> {
       return doc.swagger && doc.swagger === "2.0"
         ? DocumentType.OpenAPI2
         : doc.openapi && doc.openapi === "3.0.0"
-        ? DocumentType.OpenAPI3
-        : DocumentType.Unknown;
+          ? DocumentType.OpenAPI3
+          : DocumentType.Unknown;
     }
   }
   return DocumentType.Unknown;

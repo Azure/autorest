@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureMessagingWebPubSubServiceClient;
+namespace AzureWebPubSubServiceRESTAPI;
 
 enum WebPubSubPermission {
   sendToGroup,
@@ -16,6 +16,15 @@ enum ContentType {
   @doc("Content Type 'application/json'") `application/json`,
   @doc("Content Type 'application/octet-stream'") `application/octet-stream`,
   @doc("Content Type 'text/plain'") `text/plain`,
+}
+
+@doc("The request object containing targets groups and a connection filter")
+model AddToGroupsRequest {
+  @doc("A list of groups which target connections will be added into")
+  groups?: string[];
+
+  @doc("An OData filter which target connections satisfy")
+  filter?: string;
 }
 
 @doc("The error object.")
@@ -32,12 +41,14 @@ model ErrorDetail {
 
   @doc("An array of details about specific errors that led to this reported error.")
   details?: ErrorDetail[];
+
   inner?: InnerError;
 }
 
 model InnerError {
   @doc("A more specific error code than was provided by the containing error.")
   code?: string;
+
   inner?: InnerError;
 }
 
@@ -45,4 +56,13 @@ model InnerError {
 model ClientTokenResponse {
   @doc("The token value for the WebSocket client to connect to the service")
   token: string;
+}
+
+@doc("The request object containing targets groups and a connection filter")
+model RemoveFromGroupsRequest {
+  @doc("A list of groups which target connections will be removed from")
+  groups?: string[];
+
+  @doc("An OData filter which target connections satisfy")
+  filter?: string;
 }

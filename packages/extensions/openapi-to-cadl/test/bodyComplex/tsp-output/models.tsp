@@ -34,6 +34,7 @@ Name property with a very long description that does not fit on a single line
 and a line break.
 """)
   name?: string;
+
   color?: CmykColors;
 }
 
@@ -90,6 +91,7 @@ model DateWrapper {
 model DatetimeWrapper {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   field?: utcDateTime;
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   now?: utcDateTime;
 }
@@ -97,6 +99,7 @@ model DatetimeWrapper {
 model Datetimerfc1123Wrapper {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   field?: utcDateTime;
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   now?: utcDateTime;
 }
@@ -142,10 +145,11 @@ model Pet {
 @discriminator("fishtype")
 model Fish {
   species?: string;
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
 
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   length: float32;
+
   siblings?: Fish[];
 }
 
@@ -176,6 +180,7 @@ model Salmon extends Fish {
 model ReadonlyObj {
   @visibility("read")
   id?: string;
+
   size?: int32;
 }
 
@@ -194,12 +199,14 @@ model SmartSalmon extends Salmon {
 
   @projectedName("json", "college_degree")
   collegeDegree?: string;
+
   fishtype: "smart_salmon";
 }
 
 @discriminator("fishtype")
 model Shark extends Fish {
   age?: int32;
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   birthday: utcDateTime;
 }
@@ -214,6 +221,7 @@ model Goblinshark extends Shark {
 
   @doc("Colors possible")
   color?: GoblinSharkColor;
+
   fishtype: "goblin";
 }
 

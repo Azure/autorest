@@ -16,7 +16,10 @@ export interface Security {
 }
 
 export class Security extends Initializer implements Security {
-  constructor(public authenticationRequired: boolean, objectInitializer?: DeepPartial<Security>) {
+  constructor(
+    public authenticationRequired: boolean,
+    objectInitializer?: DeepPartial<Security>,
+  ) {
     super();
     this.schemes = [];
     this.apply(objectInitializer);

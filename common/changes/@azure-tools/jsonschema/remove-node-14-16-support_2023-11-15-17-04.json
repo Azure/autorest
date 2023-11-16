@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/jsonschema",
+      "comment": "Upgrade dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/jsonschema"
+}

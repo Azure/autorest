@@ -4,7 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 export class Exception extends Error {
-  constructor(message: string, public exitCode: number = 1) {
+  constructor(
+    message: string,
+    public exitCode: number = 1,
+  ) {
     super(message.includes("[") ? message : `[Exception] ${message}`);
 
     Object.setPrototypeOf(this, Exception.prototype);
@@ -12,7 +15,10 @@ export class Exception extends Error {
 }
 
 export class OperationCanceledException extends Exception {
-  constructor(message = "Cancelation Requested", public exitCode: number = 1) {
+  constructor(
+    message = "Cancelation Requested",
+    public exitCode: number = 1,
+  ) {
     super(`[OperationCanceledException] ${message}`, exitCode);
     Object.setPrototypeOf(this, OperationCanceledException.prototype);
   }

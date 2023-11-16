@@ -2,7 +2,7 @@ import { toSemver, maximum, pascalCase } from "@azure-tools/codegen";
 import { AnyObject, Node, TransformerViaPointer, visit } from "@azure-tools/datastore";
 import * as oai3 from "@azure-tools/openapi";
 import { includeXDashKeys } from "@azure-tools/openapi";
-import compareVersions from "compare-versions";
+import { compareVersions } from "compare-versions";
 import { cloneDeep } from "lodash";
 
 interface EnumEntry {

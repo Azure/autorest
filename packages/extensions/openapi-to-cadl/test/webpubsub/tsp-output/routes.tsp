@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureMessagingWebPubSubServiceClient;
+namespace AzureWebPubSubServiceRESTAPI;
 
 interface HealthApiOperations {
   @summary("Get service health status.")
@@ -16,6 +16,26 @@ interface HealthApiOperations {
 }
 
 interface WebPubSubOperations {
+  @summary("Add filtered connections to multiple groups.")
+  @doc("Add filtered connections to multiple groups.")
+  @route("/api/hubs/{hub}/:addToGroups")
+  @post
+  AddConnectionsToGroups is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Target hub name, which should start with alphabetic characters and only contain
+alpha-numeric characters or underscore.
+""")
+      @path
+      hub: string;
+
+      @doc("Target groups and connection filter.")
+      @body
+      groupsToAdd: AddToGroupsRequest;
+    },
+    void
+  >;
+
   @summary("Close the connections in the hub.")
   @doc("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
@@ -76,6 +96,26 @@ alpha-numeric characters or underscore.
     ClientTokenResponse
   >;
 
+  @summary("Remove filtered connections from multiple groups.")
+  @doc("Remove filtered connections from multiple groups.")
+  @route("/api/hubs/{hub}/:removeFromGroups")
+  @post
+  RemoveConnectionsFromGroups is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Target hub name, which should start with alphabetic characters and only contain
+alpha-numeric characters or underscore.
+""")
+      @path
+      hub: string;
+
+      @doc("Target groups and connection filter.")
+      @body
+      groupsToRemove: RemoveFromGroupsRequest;
+    },
+    void
+  >;
+
   @summary("Broadcast content inside request body to all the connected client connections.")
   @doc("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
@@ -99,6 +139,16 @@ messages.
 """)
       @query
       filter: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -171,6 +221,16 @@ alpha-numeric characters or underscore.
       @doc("The connection Id.")
       @path
       connectionId: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -278,6 +338,16 @@ messages.
 """)
       @query
       filter: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -505,6 +575,16 @@ messages.
 """)
       @query
       filter: string;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
