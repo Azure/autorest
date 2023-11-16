@@ -518,6 +518,7 @@
     {
       "version": "3.0.x",
       "date": "Mon, 10 Feb 2020 00:00:00 GMT",
+      "tag": "autorest_v3.0.0",
       "comments": {
         "patch": [
           {
