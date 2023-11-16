@@ -9,4 +9,5 @@ words:
   - autorest
   - codemodel
   - Deduplicator
+  - Regen
   - yada
