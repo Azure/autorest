@@ -1,6 +1,5 @@
 name: Prepare Auto Release Branch
 
-# Disable as MS Org doesn't allow github action to create PR anymore. Can be re-added if a solution is found.
 on:
   push:
     branches:
