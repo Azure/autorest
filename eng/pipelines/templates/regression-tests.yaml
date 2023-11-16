@@ -34,15 +34,15 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: "3.11"
-        displayName: "Use Python 3.11"
-
       - task: NodeTool@0
         inputs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
+
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "3.11"
+        displayName: "Use Python 3.11"
 
       - script: |
           npm install -g npm
