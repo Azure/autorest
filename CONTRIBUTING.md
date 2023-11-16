@@ -1,5 +1,9 @@
 # Developping autorest
 
+Branch `publish/auto-release` should be automatically updated with the latest changelog. Give it 5min after merging a PR or check the status of the [Release action](https://github.com/Azure/autorest/actions/workflows/release.yml)
+
+Then go to https://github.com/Azure/autorest/pull/new/publish/auto-release and create this PR.
+
 ## Requirements
 
 - `node` (LTS recommended)
