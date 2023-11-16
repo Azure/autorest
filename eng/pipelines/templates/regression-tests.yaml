@@ -51,6 +51,7 @@ jobs:
         displayName: Install Python 3
 
       - script: |
+          npm install -g npm
           npx @microsoft/rush update
           npx @microsoft/rush rebuild
         displayName: Install and build
