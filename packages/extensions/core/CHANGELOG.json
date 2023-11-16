@@ -1342,6 +1342,7 @@
     {
       "version": "3.0.x",
       "date": "Tue, 4 Feb 2020 00:00:00 GMT",
+      "tag": "@autorest/core_v3.0.0",
       "comments": {
         "patch": [
           {

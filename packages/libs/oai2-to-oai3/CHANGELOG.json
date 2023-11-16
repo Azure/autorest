@@ -324,6 +324,7 @@
     {
       "version": "4.1.0",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "tag":"@azure-tools/oai2-to-oai3_v4.1.0",
       "comments": {
         "minor": [
           {
