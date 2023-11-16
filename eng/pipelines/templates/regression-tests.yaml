@@ -44,11 +44,6 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: "3.x"
-        displayName: Install Python 3
-
       - script: |
           npm install -g npm
           npx @microsoft/rush update
