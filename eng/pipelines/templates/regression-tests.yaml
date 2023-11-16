@@ -52,11 +52,11 @@ jobs:
 
       - script: |
           echo "Linking autorest-compare"
-          cd $(Pipeline.Workspace)/packages/tools/compare
+          cd $(Build.SourcesDirectory)/packages/tools/compare
           npm link --force
 
           echo "Linking autorest"
-          cd $(Pipeline.Workspace)/packages/apps/autorest
+          cd $(Build.SourcesDirectory)/packages/apps/autorest
           npm link --force
         displayName: Install autorest-compare
 
