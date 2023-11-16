@@ -30,3 +30,6 @@ jobs:
 
       - name: Create release branch
         run: node ./eng/publish.mjs
+
+      - run: node common/scripts/install-run-rush.js update
+        name: Regen lock file
