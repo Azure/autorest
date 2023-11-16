@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/jsonschema",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Json schema utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

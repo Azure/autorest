@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Thu, 13 Apr 2023 04:20:09 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 1.6.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Upgrade dependencies
 
 ## 1.5.6
 Thu, 13 Apr 2023 04:20:09 GMT

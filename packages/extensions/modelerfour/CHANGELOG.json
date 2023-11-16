@@ -2,6 +2,38 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.27.0",
+      "tag": "@autorest/modelerfour_v4.27.0",
+      "date": "Thu, 16 Nov 2023 16:00:04 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Upgrade dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.19.3` to `~4.20.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.5.2` to `~3.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.5.3` to `~0.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.9.2` to `~2.10.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.7.1` to `~4.8.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.5.0` to `~3.6.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.26.2",
       "tag": "@autorest/modelerfour_v4.26.2",
       "date": "Fri, 26 May 2023 14:12:36 GMT",
@@ -922,7 +954,6 @@
     {
       "version": "4.13.x",
       "tag": "@autorest/modelerfour_v4.13.0",
-
       "comments": {
         "patch": [
           {
