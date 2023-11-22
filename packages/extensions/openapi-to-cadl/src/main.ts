@@ -29,7 +29,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   markErrorModels(codeModel);
   markResources(codeModel);
   const cadlProgramDetails = getModel(codeModel);
-  emitArmResources(cadlProgramDetails, getOutuptDirectory(session));
+  await emitArmResources(cadlProgramDetails, getOutuptDirectory(session));
   await emitModels(getFilePath(session, "models.tsp"), cadlProgramDetails);
   await emitRoutes(getFilePath(session, "routes.tsp"), cadlProgramDetails);
   await emitMain(getFilePath(session, "main.tsp"), cadlProgramDetails);
