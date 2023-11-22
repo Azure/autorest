@@ -26,11 +26,12 @@ interface WebPubSubOperations {
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
-      ...AddToGroupsRequest;
+      @doc("Target groups and connection filter.")
+      @body
+      groupsToAdd: AddToGroupsRequest;
     },
     void
   >;
@@ -116,11 +117,12 @@ alpha-numeric characters or underscore.
 Target hub name, which should start with alphabetic characters and only contain
 alpha-numeric characters or underscore.
 """)
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
 
-      ...RemoveFromGroupsRequest;
+      @doc("Target groups and connection filter.")
+      @body
+      groupsToRemove: RemoveFromGroupsRequest;
     },
     void
   >;
@@ -162,6 +164,16 @@ can help when the client's bandwidth is limited.
 """)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -246,8 +258,8 @@ value. If this parameter is non-zero, messages that are not consumed by the
 client within the specified TTL will be dropped by the service. This parameter
 can help when the client's bandwidth is limited.
 """)
-      @query("messageTtlSeconds")
-      messageTtlSeconds?: int32;
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -383,6 +395,16 @@ can help when the client's bandwidth is limited.
 """)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header
@@ -643,6 +665,16 @@ can help when the client's bandwidth is limited.
 """)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
+
+      @doc("""
+The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
+the default value, which means the message never expires. 300 is the maximum
+value. If this parameter is non-zero, messages that are not consumed by the
+client within the specified TTL will be dropped by the service. This parameter
+can help when the client's bandwidth is limited.
+""")
+      @query
+      messageTtlSeconds: int32;
 
       @doc("Upload file type")
       @header

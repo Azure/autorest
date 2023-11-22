@@ -9,7 +9,7 @@ import * as chalk from "chalk";
 const printModes = ["info", "warn", "error", "success", "debug"] as const;
 
 export type Fn<T = void> = (...values: any[]) => T;
-export type ModeMap<T> = { [k in typeof printModes[number]]: T };
+export type ModeMap<T> = { [k in (typeof printModes)[number]]: T };
 
 // Compute the base directory of the dev-tool command package
 // We must do this specially for the printer module because using

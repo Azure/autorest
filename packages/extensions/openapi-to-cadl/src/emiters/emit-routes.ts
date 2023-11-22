@@ -11,7 +11,7 @@ export async function emitRoutes(filePath: string, program: CadlProgram): Promis
   }
   const content = generateRoutes(program);
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
 }
 
 function generateRoutes(program: CadlProgram) {

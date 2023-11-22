@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Fri, 26 May 2023 14:12:36 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 3.6.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Upgrade dependencies
 
 ## 3.5.0
 Fri, 26 May 2023 14:12:36 GMT

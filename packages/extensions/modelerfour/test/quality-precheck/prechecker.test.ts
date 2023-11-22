@@ -6,7 +6,10 @@ import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
 import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
 
 class PreCheckerClient {
-  private constructor(private input: Model, public result: Model) {}
+  private constructor(
+    private input: Model,
+    public result: Model,
+  ) {}
 
   resolve<T extends {} | undefined>(item: Refable<T>): Dereferenced<T> {
     return dereference(this.input, item);

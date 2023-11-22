@@ -2,6 +2,18 @@
   "name": "@azure-tools/codegen",
   "entries": [
     {
+      "version": "2.10.0",
+      "tag": "@azure-tools/codegen_v2.10.0",
+      "date": "Thu, 16 Nov 2023 16:00:04 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Upgrade dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.9.2",
       "tag": "@azure-tools/codegen_v2.9.2",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",

@@ -1,10 +1,10 @@
 import { spawnSync } from "child_process";
 import { readFileSync } from "fs";
 import { readdir } from "fs/promises";
-import { join, dirname, extname } from "path";
+import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
 
-export async function generateCadl(folder: string, debug = false) {
+export async function generateCadl(repoRoot: string, folder: string, debug = false) {
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder);
   const dir = await readdir(path);
@@ -21,10 +21,10 @@ export async function generateCadl(folder: string, debug = false) {
   }
 
   const swaggerPath = join(path, firstSwagger);
-  generate(swaggerPath, debug);
+  generate(repoRoot, swaggerPath, debug);
 }
 
-function generate(path: string, debug = false) {
+function generate(root: string, path: string, debug = false) {
   const autorestCommand = `autorest${/^win/.test(process.platform) ? ".cmd" : ""}`;
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
@@ -36,6 +36,7 @@ function generate(path: string, debug = false) {
   }
 
   const args = [
+    resolve(root, "packages/apps/autorest/entrypoints/app.js"),
     "--openapi-to-cadl",
     inputFile,
     "--use=.",
@@ -47,7 +48,9 @@ function generate(path: string, debug = false) {
   const spawn = spawnSync(autorestCommand, args, { stdio: "inherit" });
 
   if (spawn.status !== 0) {
-    throw new Error(`Generation failed, command:\n autorest ${args.join(" ")}`);
+    throw new Error(
+      `Generation failed, command:\n autorest ${args.join(" ")}\nStdout:\n${spawn.stdout}\nStderr:\n${spawn.stderr}`,
+    );
   }
 }
 
@@ -55,16 +58,16 @@ async function main() {
   const folder = process.argv[4];
   const debug = process.argv[5] === "--debug";
   const { path: root } = await resolveProject(__dirname);
-
+  const repoRoot = resolve(root, "..", "..", "..");
   const folders: string[] = folder
     ? [folder as string]
     : (await readdir(join(root, "test"))).filter((d) => d !== "utils");
 
   for (const folder of folders) {
     try {
-      await generateCadl(folder, debug);
+      await generateCadl(repoRoot, folder, debug);
     } catch (e) {
-      throw new Error(`Failed to generate ${e}`);
+      throw new Error(`Failed to generate ${folder}, error:\n${e}`);
     }
   }
 }

@@ -302,10 +302,10 @@ export function pascalCase(identifier: string | Array<string>, removeDuplicates 
   return identifier === undefined
     ? ""
     : typeof identifier === "string"
-    ? pascalCase(fixLeadingNumber(deconstruct(identifier)), removeDuplicates)
-    : (removeDuplicates ? [...removeSequentialDuplicates(identifier)] : identifier)
-        .map((each) => capitalize(each))
-        .join("");
+      ? pascalCase(fixLeadingNumber(deconstruct(identifier)), removeDuplicates)
+      : (removeDuplicates ? [...removeSequentialDuplicates(identifier)] : identifier)
+          .map((each) => capitalize(each))
+          .join("");
 }
 
 export function camelCase(identifier: string | Array<string>): string {

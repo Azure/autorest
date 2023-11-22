@@ -9,7 +9,7 @@ export async function emitMain(filePath: string, program: CadlProgram): Promise<
   const { isArm } = getOptions();
   const content = isArm ? getArmServiceInformation(program) : getServiceInformation(program);
   const session = getSession();
-  session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
 }
 
 function getServiceInformation(program: CadlProgram) {

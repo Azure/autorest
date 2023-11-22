@@ -14,7 +14,7 @@ interface AutorestResult {
 async function runAutorest(args: string[]): Promise<AutorestResult> {
   return new Promise((resolve, reject) => {
     execFile("node", [cliEntrypoint, `--version=${coreRoot}`, ...args], (error, stdout, stderr) => {
-      resolve({ stdout, stderr, exitCode: error?.code ?? 0, error: error === null ? undefined : error });
+      resolve({ stdout, stderr, exitCode: (error?.code as any) ?? 0, error: error === null ? undefined : error });
     });
   });
 }
@@ -22,7 +22,6 @@ async function runAutorest(args: string[]): Promise<AutorestResult> {
 describe("Failures", () => {
   it("returns zero exit code on success", async () => {
     const { exitCode, stdout, stderr } = await runAutorest(["--help"]);
-    console.log(stdout, stderr);
     expect(exitCode).toEqual(0);
   });
 

@@ -15,6 +15,7 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.prettierPath": "./packages/extensions/core/node_modules/prettier/index.cjs",
   "files.associations": {
     "rush.json": "jsonc",
     "command-line.json": "jsonc",

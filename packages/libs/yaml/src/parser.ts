@@ -94,8 +94,8 @@ function computeScalarNodeValue<T>(yamlNodeScalar: YamlScalar, cache: WeakMap<Ya
     yamlNodeScalar.valueObject !== undefined
       ? yamlNodeScalar.valueObject
       : yamlNodeScalar.singleQuoted
-      ? yamlNodeScalar.value
-      : load(yamlNodeScalar.rawValue);
+        ? yamlNodeScalar.value
+        : load(yamlNodeScalar.rawValue);
   cache.set(yamlNodeScalar, value);
 
   return { result: value, errors: [] };

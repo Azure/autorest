@@ -106,7 +106,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         case "components":
           {
             const components = target.components || this.newObject(target, "components", pointer);
-            this.visitComponents(components, children);
+            this.visitComponents(components as any, children);
           }
           break;
 

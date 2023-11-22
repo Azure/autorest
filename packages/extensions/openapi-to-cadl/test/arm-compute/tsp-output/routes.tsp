@@ -100,8 +100,11 @@ interface VirtualMachineImagesOperations {
       skus: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query("$expand")
-      $expand?: string;
+      @query
+      $expand: string;
+
+      @query $top: int32;
+      @query $orderby: string;
 
       @query("$top")
       $top?: int32;
@@ -352,6 +355,50 @@ interface VirtualMachineImagesEdgeZoneOperations {
 }
 
 interface VirtualMachineExtensionImagesOperations {
+  @doc("Gets a virtual machine extension image.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of a supported Azure region.")
+      @path
+      location: string;
+
+      @path publisherName: string;
+      @path type: string;
+      @path version: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    VirtualMachineExtensionImage
+  >;
+
+  @doc("Gets a list of virtual machine extension image types.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
+  @get
+  ListTypes is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of a supported Azure region.")
+      @path
+      location: string;
+
+      @path publisherName: string;
+
+      @doc("""
+Subscription credentials which uniquely identify Microsoft Azure subscription.
+The subscription ID forms part of the URI for every service call.
+""")
+      @path
+      subscriptionId: string;
+    },
+    void
+  >;
+
   @doc("Gets a list of virtual machine extension image versions.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   @get
@@ -361,15 +408,15 @@ interface VirtualMachineExtensionImagesOperations {
       @path
       location: string;
 
-      @path
-      publisherName: string;
-
-      @path
-      type: string;
+      @path publisherName: string;
+      @path type: string;
 
       @doc("The filter to apply on the operation.")
-      @query("$filter")
-      $filter?: string;
+      @query
+      $filter: string;
+
+      @query $top: int32;
+      @query $orderby: string;
 
       @query("$top")
       $top?: int32;

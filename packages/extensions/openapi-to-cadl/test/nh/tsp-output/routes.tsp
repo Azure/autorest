@@ -70,9 +70,9 @@ op CreateOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
 
     @doc("ETag as returned by creation, update, and retrieval, or * (overwrite).")
     @header
-    `If-Match`?: string;
+    `If-Match`: string;
 
-    ...NotificationHubEntryModel;
+    @body body: NotificationHubEntryModel;
 
     @doc("Accept header")
     @header
@@ -280,7 +280,7 @@ op CreateOrUpdateRegistration is Azure.Core.Foundations.Operation<
     @header
     Authorization: string;
 
-    ...RegistrationEntryModel;
+    @body body: RegistrationEntryModel;
 
     @doc("Accept header")
     @header

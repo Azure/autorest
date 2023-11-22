@@ -43,8 +43,8 @@ export async function loadAllReferencedFiles(
         secondaryFileContent.swagger
           ? "swagger-document"
           : secondaryFileContent.openapi
-          ? "openapi-document"
-          : file.artifactType,
+            ? "openapi-document"
+            : file.artifactType,
         { pathMappings: [] },
       );
 

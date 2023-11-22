@@ -1,0 +1,34 @@
+name: Prepare Auto Release Branch
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - run: node common/scripts/install-run-rush.js install
+        name: Install dependencies
+
+      - name: Create release branch
+        run: node ./eng/scripts/publish.mjs
+
+      - run: node common/scripts/install-run-rush.js update
+        name: Regen lock file

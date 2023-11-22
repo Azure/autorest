@@ -38,5 +38,5 @@ linter:
 `;
   }
 
-  session.writeFile({ filename: filePath, content: formatFile(content, filePath) });
+  session.writeFile({ filename: filePath, content: await formatFile(content, filePath) });
 }

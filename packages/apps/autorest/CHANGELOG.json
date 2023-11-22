@@ -2,6 +2,32 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.7.0",
+      "tag": "autorest_v3.7.0",
+      "date": "Thu, 16 Nov 2023 16:00:04 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.11.0` to `~1.12.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.9.7` to `~3.10.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.5.6` to `~1.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.6.1` to `~3.7.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.6.3",
       "tag": "autorest_v3.6.3",
       "date": "Wed, 07 Dec 2022 22:24:34 GMT",
@@ -518,6 +544,7 @@
     {
       "version": "3.0.x",
       "date": "Mon, 10 Feb 2020 00:00:00 GMT",
+      "tag": "autorest_v3.0.0",
       "comments": {
         "patch": [
           {

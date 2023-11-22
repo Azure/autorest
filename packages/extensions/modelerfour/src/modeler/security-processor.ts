@@ -28,7 +28,10 @@ export interface SecurityConfiguration {
  */
 export class SecurityProcessor {
   private securityConfig!: SecurityConfiguration;
-  public constructor(private session: Session<oai3.Model>, private interpret: Interpretations) {}
+  public constructor(
+    private session: Session<oai3.Model>,
+    private interpret: Interpretations,
+  ) {}
 
   public async init() {
     this.securityConfig = await this.getSecurityConfig();

@@ -1,6 +1,14 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Wed, 07 Dec 2022 22:24:34 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+
+## 1.12.0
+Thu, 16 Nov 2023 16:00:04 GMT
+
+### Minor changes
+
+- Upgrade dependencies
+- Set autorest.powershell v4 the default version loaded by autorest
 
 ## 1.11.0
 Wed, 07 Dec 2022 22:24:34 GMT

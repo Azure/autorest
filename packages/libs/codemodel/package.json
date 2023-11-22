@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.19.3",
+  "version": "4.20.0",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -37,24 +37,24 @@
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/codemodel/readme.md",
   "devDependencies": {
     "@types/js-yaml": "~4.0.0",
-    "@types/node": "~14.14.20",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
-    "eslint-plugin-jest": "~27.1.5",
+    "@types/node": "~20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint-plugin-jest": "~27.6.0",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~4.2.1",
-    "eslint-plugin-unicorn": "~44.0.2",
-    "eslint-plugin-import": "~2.26.0",
+    "eslint-plugin-prettier": "~5.0.1",
+    "eslint-plugin-unicorn": "~49.0.0",
+    "eslint-plugin-import": "~2.29.0",
     "eslint": "^8.28.0",
     "glob": "~7.1.4",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.5",
     "ts-morph": "~13.0.3",
     "typescript-json-schema": "~0.53.0",
-    "typescript": "~4.9.3"
+    "typescript": "~5.2.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.9.2",
-    "js-yaml": "~4.0.0"
+    "@azure-tools/codegen": "~2.10.0",
+    "js-yaml": "~4.1.0"
   },
   "publishConfig": {
     "access": "public"

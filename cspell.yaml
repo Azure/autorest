@@ -8,4 +8,6 @@ words:
   - arrayify
   - autorest
   - codemodel
+  - Deduplicator
+  - Regen
   - yada
