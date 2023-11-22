@@ -151,7 +151,9 @@ op CreateOrUpdateUser is Azure.Core.Foundations.Operation<
     @path
     userId: string;
 
-    ...LedgerUser;
+    @doc("Details about a Confidential Ledger user.")
+    @body
+    userDetails: LedgerUser;
   },
   LedgerUser
 >;

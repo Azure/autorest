@@ -18,7 +18,9 @@ interface RuntimeOperations {
       @path
       kbId: string;
 
-      ...QueryDTO;
+      @doc("Post body of the request.")
+      @body
+      generateAnswerPayload: QueryDTO;
     },
     QnASearchResultList
   >;
@@ -33,7 +35,9 @@ interface RuntimeOperations {
       @path
       kbId: string;
 
-      ...FeedbackRecordsDTO;
+      @doc("Post body of the request.")
+      @body
+      trainPayload: FeedbackRecordsDTO;
     },
     void
   >;

@@ -158,7 +158,7 @@ const FIRST_LEVEL_RESOURCE = [
   "TenantResource",
   "ArmResource",
 ] as const;
-export type FirstLevelResource = typeof FIRST_LEVEL_RESOURCE[number];
+export type FirstLevelResource = (typeof FIRST_LEVEL_RESOURCE)[number];
 
 export function isFirstLevelResource(value: string): value is FirstLevelResource {
   return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);

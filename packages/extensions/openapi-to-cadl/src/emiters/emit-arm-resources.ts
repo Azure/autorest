@@ -5,7 +5,7 @@ import { CadlProgram, TspArmResource } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
 import { getNamespace } from "../utils/namespace";
 
-export function emitArmResources(program: CadlProgram, basePath: string) {
+export async function emitArmResources(program: CadlProgram, basePath: string) {
   // Create a file per resource
   const session = getSession();
   for (const armResource of program.models.armResources) {
@@ -20,7 +20,7 @@ export function emitArmResources(program: CadlProgram, basePath: string) {
       getNamespace(program),
       generatedResource,
     ].join("\n");
-    session.writeFile({ filename: filePath, content: formatCadlFile(content, filePath) });
+    session.writeFile({ filename: filePath, content: await formatCadlFile(content, filePath) });
   }
 }
 

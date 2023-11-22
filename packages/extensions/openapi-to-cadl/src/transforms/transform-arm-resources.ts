@@ -373,8 +373,8 @@ function convertResourceListOperations(
       // TODO: handle other kinds of operations
       if (operation.PagingMetadata) {
         const swaggerOperation = operations[operation.OperationID];
-        const okResponse = swaggerOperation?.responses?.filter((o) =>
-          o.protocol.http?.statusCodes.includes("200"),
+        const okResponse = swaggerOperation?.responses?.filter(
+          (o) => o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
 
@@ -441,8 +441,8 @@ function convertResourceActionOperations(
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
         const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-        const okResponse = swaggerOperation?.responses?.filter((o) =>
-          o.protocol.http?.statusCodes.includes("200"),
+        const okResponse = swaggerOperation?.responses?.filter(
+          (o) => o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
         // TODO: deal with non-schema response for action
         let operationResponseName;

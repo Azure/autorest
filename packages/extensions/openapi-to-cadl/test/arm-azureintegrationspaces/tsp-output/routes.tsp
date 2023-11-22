@@ -139,7 +139,9 @@ interface ApplicationResourcesOperations {
       @path
       resourceName: string;
 
-      ...ApplicationResource;
+      @doc("Resource create parameters.")
+      @body
+      resource: ApplicationResource;
     },
     ApplicationResource
   >;
@@ -175,7 +177,9 @@ interface ApplicationResourcesOperations {
       @path
       resourceName: string;
 
-      ...ApplicationResourceUpdate;
+      @doc("The resource properties to be updated.")
+      @body
+      properties: ApplicationResourceUpdate;
     },
     ApplicationResource
   >;

@@ -34,7 +34,7 @@ export function generateOperation(operation: CadlOperation, operationGroup?: Cad
     const resourceParameters = generateParameters(
       parameters.filter((param) => !["path", "body"].some((p) => p === param.location)),
     );
-    const parametersString = !resourceParameters ? "" : `, { parameters: ${resourceParameters}}`;
+    const parametersString = resourceParameters ? `, { parameters: ${resourceParameters}}` : "";
     statements.push(
       `${operationGroup?.name ? "" : "op "}`,
       `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,

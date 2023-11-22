@@ -42,7 +42,9 @@ op create is Azure.Core.Foundations.Operation<
     @path
     resourceGroupName: string;
 
-    ...CatalogDictionaryOfArray;
+    @doc("body Parameter")
+    @body
+    bodyParameter: CatalogDictionaryOfArray;
   },
   CatalogDictionary
 >;
@@ -61,7 +63,9 @@ op update is Azure.Core.Foundations.Operation<
     @path
     resourceGroupName: string;
 
-    ...CatalogArrayOfDictionary;
+    @doc("body Parameter")
+    @body
+    bodyParameter: CatalogArrayOfDictionary;
   },
   CatalogArray
 >;

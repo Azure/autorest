@@ -74,7 +74,9 @@ exists, the data of that project is replaced.
       @path
       projectName: string;
 
-      ...ExportedProject;
+      @doc("The project data to import.")
+      @body
+      body: ExportedProject;
     },
     void
   >;
@@ -89,7 +91,9 @@ exists, the data of that project is replaced.
       @path
       projectName: string;
 
-      ...TrainingJobOptions;
+      @doc("The training input parameters.")
+      @body
+      body: TrainingJobOptions;
     },
     void
   >;
@@ -124,7 +128,9 @@ exists, the data of that project is replaced.
       @path
       projectName: string;
 
-      ...SwapDeploymentsOptions;
+      @doc("The job object to swap two deployments.")
+      @body
+      body: SwapDeploymentsOptions;
     },
     void
   >;

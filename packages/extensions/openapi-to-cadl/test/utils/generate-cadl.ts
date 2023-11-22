@@ -25,7 +25,6 @@ export async function generateCadl(repoRoot: string, folder: string, debug = fal
 }
 
 function generate(root: string, path: string, debug = false) {
-  const autorestCommand = `autorest${/^win/.test(process.platform) ? ".cmd" : ""}`;
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
 
@@ -45,7 +44,7 @@ function generate(root: string, path: string, debug = false) {
     ...(debug ? ["--openapi-to-cadl.debugger"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
   ];
-  const spawn = spawnSync(autorestCommand, args, { stdio: "inherit" });
+  const spawn = spawnSync("node", args, { stdio: "inherit" });
 
   if (spawn.status !== 0) {
     throw new Error(

@@ -67,7 +67,12 @@ op SelectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     @path
     keyName: string;
 
-    ...SelectiveKeyRestoreOperationParameters;
+    @doc("""
+The Azure blob SAS token pointing to a folder where the previous successful
+full backup was stored
+""")
+    @body
+    restoreBlobDetails?: SelectiveKeyRestoreOperationParameters;
   },
   SelectiveKeyRestoreOperation
 >;
@@ -180,7 +185,9 @@ personally identifiable or sensitive information.
     @path
     `issuer-name`: string;
 
-    ...CertificateIssuerSetParameters;
+    @doc("Certificate issuer set parameter.")
+    @body
+    parameter: CertificateIssuerSetParameters;
   },
   IssuerBundle
 >;
@@ -199,7 +206,9 @@ op UpdateCertificateIssuer is Azure.Core.Foundations.Operation<
     @path
     `issuer-name`: string;
 
-    ...CertificateIssuerUpdateParameters;
+    @doc("Certificate issuer update parameter.")
+    @body
+    parameter: CertificateIssuerUpdateParameters;
   },
   IssuerBundle
 >;
@@ -256,7 +265,9 @@ personally identifiable or sensitive information.
     @path
     `certificate-name`: string;
 
-    ...CertificateCreateParameters;
+    @doc("The parameters to create a certificate.")
+    @body
+    parameters: CertificateCreateParameters;
   },
   CertificateOperation
 >;
@@ -282,7 +293,9 @@ personally identifiable or sensitive information.
     @path
     `certificate-name`: string;
 
-    ...CertificateImportParameters;
+    @doc("The parameters to import the certificate.")
+    @body
+    parameters: CertificateImportParameters;
   },
   CertificateBundle
 >;
@@ -341,7 +354,9 @@ op UpdateCertificatePolicy is Azure.Core.Foundations.Operation<
     @path
     `certificate-name`: string;
 
-    ...CertificatePolicy;
+    @doc("The policy for the certificate.")
+    @body
+    certificatePolicy: CertificatePolicy;
   },
   CertificatePolicy
 >;
@@ -364,7 +379,9 @@ op UpdateCertificate is Azure.Core.Foundations.Operation<
     @path
     `certificate-version`: string;
 
-    ...CertificateUpdateParameters;
+    @doc("The parameters for certificate update.")
+    @body
+    parameters: CertificateUpdateParameters;
   },
   CertificateBundle
 >;
@@ -405,7 +422,9 @@ op UpdateCertificateOperation is Azure.Core.Foundations.Operation<
     @path
     `certificate-name`: string;
 
-    ...CertificateOperationUpdateParameter;
+    @doc("The certificate operation response.")
+    @body
+    certificateOperation: CertificateOperationUpdateParameter;
   },
   CertificateOperation
 >;
@@ -460,7 +479,9 @@ op MergeCertificate is Azure.Core.Foundations.Operation<
     @path
     `certificate-name`: string;
 
-    ...CertificateMergeParameters;
+    @doc("The parameters to merge certificate.")
+    @body
+    parameters: CertificateMergeParameters;
   },
   CertificateBundle
 >;
@@ -604,7 +625,9 @@ sensitive information.
     @path
     `key-name`: string;
 
-    ...KeyCreateParameters;
+    @doc("The parameters to create a key.")
+    @body
+    parameters: KeyCreateParameters;
   },
   KeyBundle
 >;
@@ -654,7 +677,9 @@ personally identifiable or sensitive information.
     @path
     `key-name`: string;
 
-    ...KeyImportParameters;
+    @doc("The parameters to import a key.")
+    @body
+    parameters: KeyImportParameters;
   },
   KeyBundle
 >;
@@ -698,7 +723,9 @@ op UpdateKey is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyUpdateParameters;
+    @doc("The parameters of the key to update.")
+    @body
+    parameters: KeyUpdateParameters;
   },
   KeyBundle
 >;
@@ -849,7 +876,9 @@ op encrypt is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyOperationsParameters;
+    @doc("The parameters for the encryption operation.")
+    @body
+    parameters: KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -880,7 +909,9 @@ op decrypt is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyOperationsParameters;
+    @doc("The parameters for the decryption operation.")
+    @body
+    parameters: KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -903,7 +934,9 @@ op sign is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeySignParameters;
+    @doc("The parameters for the signing operation.")
+    @body
+    parameters: KeySignParameters;
   },
   KeyOperationResult
 >;
@@ -929,7 +962,9 @@ op verify is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyVerifyParameters;
+    @doc("The parameters for verify operations.")
+    @body
+    parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
 >;
@@ -956,7 +991,9 @@ op wrapKey is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyOperationsParameters;
+    @doc("The parameters for wrap operation.")
+    @body
+    parameters: KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -984,7 +1021,9 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyOperationsParameters;
+    @doc("The parameters for the key operation.")
+    @body
+    parameters: KeyOperationsParameters;
   },
   KeyOperationResult
 >;
@@ -1006,7 +1045,9 @@ op release is Azure.Core.Foundations.Operation<
     @path
     `key-version`: string;
 
-    ...KeyReleaseParameters;
+    @doc("The parameters for the key release operation.")
+    @body
+    parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
 >;
@@ -1118,7 +1159,9 @@ op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @path
     `key-name`: string;
 
-    ...KeyRotationPolicy;
+    @doc("The policy for the key.")
+    @body
+    keyRotationPolicy: KeyRotationPolicy;
   },
   KeyRotationPolicy
 >;
@@ -1151,7 +1194,9 @@ personally identifiable or sensitive information.
     @path
     `secret-name`: string;
 
-    ...SecretSetParameters;
+    @doc("The parameters for setting the secret.")
+    @body
+    parameters: SecretSetParameters;
   },
   SecretBundle
 >;
@@ -1192,7 +1237,9 @@ op UpdateSecret is Azure.Core.Foundations.Operation<
     @path
     `secret-version`: string;
 
-    ...SecretUpdateParameters;
+    @doc("The parameters for update secret operation.")
+    @body
+    parameters: SecretUpdateParameters;
   },
   SecretBundle
 >;
@@ -1377,7 +1424,9 @@ op UpdateSettings is Azure.Core.Foundations.Operation<
     @path
     `setting-name`: string;
 
-    ...UpdateSettingsRequest;
+    @doc("The parameters to update an account setting.")
+    @body
+    parameters: UpdateSettingsRequest;
   },
   Setting
 >;
@@ -1571,7 +1620,9 @@ personally identifiable or sensitive information.
     @path
     `storage-account-name`: string;
 
-    ...StorageAccountCreateParameters;
+    @doc("The parameters to create a storage account.")
+    @body
+    parameters: StorageAccountCreateParameters;
   },
   StorageBundle
 >;
@@ -1589,7 +1640,9 @@ op UpdateStorageAccount is Azure.Core.Foundations.Operation<
     @path
     `storage-account-name`: string;
 
-    ...StorageAccountUpdateParameters;
+    @doc("The parameters to update a storage account.")
+    @body
+    parameters: StorageAccountUpdateParameters;
   },
   StorageBundle
 >;
@@ -1607,7 +1660,9 @@ op RegenerateStorageAccountKey is Azure.Core.Foundations.Operation<
     @path
     `storage-account-name`: string;
 
-    ...StorageAccountRegenerteKeyParameters;
+    @doc("The parameters to regenerate storage account key.")
+    @body
+    parameters: StorageAccountRegenerteKeyParameters;
   },
   StorageBundle
 >;
@@ -1770,7 +1825,9 @@ personally identifiable or sensitive information.
     @path
     `sas-definition-name`: string;
 
-    ...SasDefinitionCreateParameters;
+    @doc("The parameters to create a SAS definition.")
+    @body
+    parameters: SasDefinitionCreateParameters;
   },
   SasDefinitionBundle
 >;
@@ -1793,7 +1850,9 @@ op UpdateSasDefinition is Azure.Core.Foundations.Operation<
     @path
     `sas-definition-name`: string;
 
-    ...SasDefinitionUpdateParameters;
+    @doc("The parameters to update a SAS definition.")
+    @body
+    parameters: SasDefinitionUpdateParameters;
   },
   SasDefinitionBundle
 >;
@@ -1831,7 +1890,9 @@ The scope of the role definition to create or update. Managed HSM only supports
       @path
       roleDefinitionName: string;
 
-      ...RoleDefinitionCreateParameters;
+      @doc("Parameters for the role definition.")
+      @body
+      parameters: RoleDefinitionCreateParameters;
     },
     RoleDefinition
   >;
@@ -1902,7 +1963,9 @@ interface RoleAssignmentsOperations {
       @path
       roleAssignmentName: string;
 
-      ...RoleAssignmentCreateParameters;
+      @doc("Parameters for the role assignment.")
+      @body
+      parameters: RoleAssignmentCreateParameters;
     },
     RoleAssignment
   >;

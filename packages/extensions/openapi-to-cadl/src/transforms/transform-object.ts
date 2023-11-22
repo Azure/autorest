@@ -6,6 +6,7 @@ import {
   Property,
   Schema,
   SchemaType,
+  StringSchema,
 } from "@autorest/codemodel";
 import { get } from "lodash";
 import { getDataTypes } from "../data-types";
@@ -23,6 +24,7 @@ import {
   isConstantSchema,
   isDictionarySchema,
   isSealedChoiceSchema,
+  isStringSchema,
 } from "../utils/schemas";
 import { transformValue } from "../utils/values";
 
@@ -225,7 +227,7 @@ export function getCadlType(schema: Schema, codeModel: CodeModel): string {
     return `Record<unknown>`;
   }
 
-  if (isArmIdSchema(schema)) {
+  if (isArmIdSchema(schema) || (schema as StringSchema).extensions?.["x-ms-arm-id-details"]) {
     return getArmIdType(schema);
   }
 

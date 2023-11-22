@@ -22,7 +22,9 @@ interface QuestionAnsweringOperations {
       @query("deploymentName")
       deploymentName: string;
 
-      ...AnswersOptions;
+      @doc("Post body of the request.")
+      @body
+      knowledgeBaseQueryOptions: AnswersOptions;
     },
     AnswersResult
   >;

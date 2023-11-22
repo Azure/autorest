@@ -120,7 +120,9 @@ op DetectAnomaly is Azure.Core.Foundations.Operation<
     @path
     modelId: string;
 
-    ...DetectionRequest;
+    @doc("Detect anomaly request")
+    @body
+    body: DetectionRequest;
   },
   void
 >;
@@ -135,7 +137,9 @@ op LastDetectAnomaly is Azure.Core.Foundations.Operation<
     @path
     modelId: string;
 
-    ...LastDetectionRequest;
+    @doc("Request for last detection")
+    @body
+    body: LastDetectionRequest;
   },
   LastDetectionResult
 >;

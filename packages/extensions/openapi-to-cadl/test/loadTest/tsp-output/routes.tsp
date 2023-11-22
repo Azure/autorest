@@ -24,7 +24,9 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
 
-      ...Test;
+      @doc("Load test model")
+      @body
+      body: Test;
     },
     Test
   >;
@@ -147,7 +149,9 @@ numeric, underscore or hyphen characters.
       @query("fileType")
       fileType?: FileType;
 
-      ...bytes;
+      @doc("The file content as application/octet-stream.")
+      @body
+      body: bytes;
     },
     FileInfo
   >;
@@ -233,7 +237,9 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
 
-      ...TestAppComponents;
+      @doc("App Component model.")
+      @body
+      body: TestAppComponents;
     },
     TestAppComponents
   >;
@@ -273,7 +279,9 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
 
-      ...TestServerMetricConfig;
+      @doc("Server metric configuration model.")
+      @body
+      body: TestServerMetricConfig;
     },
     TestServerMetricConfig
   >;
@@ -324,7 +332,9 @@ in the request body.
       @query("oldTestRunId")
       oldTestRunId?: string;
 
-      ...TestRun;
+      @doc("Load test run model")
+      @body
+      body: TestRun;
     },
     TestRun
   >;
@@ -534,7 +544,9 @@ The timespan of the query. It is a string with the following format
       @query("timespan")
       timespan: string;
 
-      ...MetricRequestPayload;
+      @doc("Metric dimension filter ")
+      @body
+      body?: MetricRequestPayload;
     },
     Metrics
   >;
@@ -583,7 +595,9 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
 
-      ...TestRunAppComponents;
+      @doc("App Component model.")
+      @body
+      body: TestRunAppComponents;
     },
     TestRunAppComponents
   >;
@@ -629,7 +643,9 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
 
-      ...TestRunServerMetricConfig;
+      @doc("Server metric configuration model.")
+      @body
+      body: TestRunServerMetricConfig;
     },
     TestRunServerMetricConfig
   >;

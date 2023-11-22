@@ -250,7 +250,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchPool;
+      @doc("The Pool to be added.")
+      @body
+      pool: BatchPool;
     },
     void
   >;
@@ -616,7 +618,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchPoolUpdate;
+      @doc("The parameters for the request.")
+      @body
+      poolUpdate: BatchPoolUpdate;
     },
     void
   >;
@@ -735,7 +739,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchPoolEnableAutoScaleParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: BatchPoolEnableAutoScaleParameters;
     },
     void
   >;
@@ -780,7 +786,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchPoolEvaluateAutoScaleParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: BatchPoolEvaluateAutoScaleParameters;
     },
     AutoScaleRun
   >;
@@ -861,7 +869,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchPoolResizeParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: BatchPoolResizeParameters;
     },
     void
   >;
@@ -985,7 +995,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchPool;
+      @doc("The parameters for the request.")
+      @body
+      poolUpdatePropertiesParameter: BatchPool;
     },
     void
   >;
@@ -1062,7 +1074,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...NodeRemoveParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: NodeRemoveParameters;
     },
     void
   >;
@@ -1440,7 +1454,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJobUpdate;
+      @doc("The parameters for the request.")
+      @body
+      jobUpdate: BatchJobUpdate;
     },
     void
   >;
@@ -1517,7 +1533,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJob;
+      @doc("The parameters for the request.")
+      @body
+      job: BatchJob;
     },
     void
   >;
@@ -1599,7 +1617,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJobDisableParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: BatchJobDisableParameters;
     },
     void
   >;
@@ -1757,7 +1777,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJobTerminateParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters?: BatchJobTerminateParameters;
     },
     void
   >;
@@ -1804,7 +1826,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchJob;
+      @doc("The Job to be added.")
+      @body
+      job: BatchJob;
     },
     void
   >;
@@ -2072,7 +2096,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...Certificate;
+      @doc("The Certificate to be added.")
+      @body
+      certificate: Certificate;
     },
     void
   >;
@@ -3091,7 +3117,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJobScheduleUpdate;
+      @doc("The parameters for the request.")
+      @body
+      jobScheduleUpdate: BatchJobScheduleUpdate;
     },
     void
   >;
@@ -3170,7 +3198,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchJobSchedule;
+      @doc("The parameters for the request.")
+      @body
+      jobSchedule: BatchJobSchedule;
     },
     void
   >;
@@ -3420,7 +3450,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchJobSchedule;
+      @doc("The Job Schedule to be added.")
+      @body
+      jobSchedule: BatchJobSchedule;
     },
     void
   >;
@@ -3524,7 +3556,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchTask;
+      @doc("The Task to be added.")
+      @body
+      task: BatchTask;
     },
     void
   >;
@@ -3645,7 +3679,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...BatchTaskCollection;
+      @doc("The Tasks to be added.")
+      @body
+      taskCollection: BatchTaskCollection;
     },
     TaskAddCollectionResult
   >;
@@ -3889,7 +3925,9 @@ not been modified since the specified time.
       @header
       `If-Unmodified-Since`?: utcDateTime;
 
-      ...BatchTask;
+      @doc("The parameters for the request.")
+      @body
+      task: BatchTask;
     },
     void
   >;
@@ -4154,7 +4192,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...ComputeNodeUser;
+      @doc("The user Account to be created.")
+      @body
+      user: ComputeNodeUser;
     },
     void
   >;
@@ -4261,7 +4301,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...NodeUpdateUserParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters: NodeUpdateUserParameters;
     },
     void
   >;
@@ -4353,7 +4395,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...NodeRebootParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters?: NodeRebootParameters;
     },
     void
   >;
@@ -4402,7 +4446,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...NodeReimageParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters?: NodeReimageParameters;
     },
     void
   >;
@@ -4450,7 +4496,9 @@ directly.
       @header
       `ocp-date`?: utcDateTime;
 
-      ...NodeDisableSchedulingParameters;
+      @doc("The parameters for the request.")
+      @body
+      parameters?: NodeDisableSchedulingParameters;
     },
     void
   >;

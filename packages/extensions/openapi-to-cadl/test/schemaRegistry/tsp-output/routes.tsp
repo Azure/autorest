@@ -107,7 +107,9 @@ should match the serialization type specified in the request.
       @path
       schemaName: string;
 
-      ...bytes;
+      @doc("String representation (UTF-8) of the registered schema.")
+      @body
+      schemaContent: bytes;
     },
     void
   >;
@@ -136,7 +138,9 @@ type should match the serialization type specified in the request.
       @path
       schemaName: string;
 
-      ...bytes;
+      @doc("String representation (UTF-8) of the schema being registered.")
+      @body
+      schemaContent: bytes;
     },
     void
   >;

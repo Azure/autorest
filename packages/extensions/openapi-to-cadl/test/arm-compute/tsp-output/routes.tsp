@@ -100,11 +100,8 @@ interface VirtualMachineImagesOperations {
       skus: string;
 
       @doc("The expand expression to apply on the operation.")
-      @query
-      $expand: string;
-
-      @query $top: int32;
-      @query $orderby: string;
+      @query("$expand")
+      $expand?: string;
 
       @query("$top")
       $top?: int32;
@@ -355,50 +352,6 @@ interface VirtualMachineImagesEdgeZoneOperations {
 }
 
 interface VirtualMachineExtensionImagesOperations {
-  @doc("Gets a virtual machine extension image.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of a supported Azure region.")
-      @path
-      location: string;
-
-      @path publisherName: string;
-      @path type: string;
-      @path version: string;
-
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineExtensionImage
-  >;
-
-  @doc("Gets a list of virtual machine extension image types.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
-  @get
-  ListTypes is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of a supported Azure region.")
-      @path
-      location: string;
-
-      @path publisherName: string;
-
-      @doc("""
-Subscription credentials which uniquely identify Microsoft Azure subscription.
-The subscription ID forms part of the URI for every service call.
-""")
-      @path
-      subscriptionId: string;
-    },
-    void
-  >;
-
   @doc("Gets a list of virtual machine extension image versions.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   @get
@@ -408,15 +361,15 @@ The subscription ID forms part of the URI for every service call.
       @path
       location: string;
 
-      @path publisherName: string;
-      @path type: string;
+      @path
+      publisherName: string;
+
+      @path
+      type: string;
 
       @doc("The filter to apply on the operation.")
-      @query
-      $filter: string;
-
-      @query $top: int32;
-      @query $orderby: string;
+      @query("$filter")
+      $filter?: string;
 
       @query("$top")
       $top?: int32;
@@ -447,7 +400,9 @@ interface LogAnalyticsOperations {
       @path
       subscriptionId: string;
 
-      ...RequestRateByIntervalInput;
+      @doc("Parameters supplied to the LogAnalytics getRequestRateByInterval Api.")
+      @body
+      parameters: RequestRateByIntervalInput;
     },
     LogAnalyticsOperationResult | void
   >;
@@ -466,7 +421,9 @@ interface LogAnalyticsOperations {
       @path
       subscriptionId: string;
 
-      ...ThrottledRequestsInput;
+      @doc("Parameters supplied to the LogAnalytics getThrottledRequests Api.")
+      @body
+      parameters: ThrottledRequestsInput;
     },
     LogAnalyticsOperationResult | void
   >;
@@ -498,7 +455,9 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
       @path
       subscriptionId: string;
 
-      ...VirtualMachineRunCommand;
+      @doc("Parameters supplied to the Create Virtual Machine RunCommand operation.")
+      @body
+      runCommand: VirtualMachineRunCommand;
 
       @doc("Accept header")
       @header
@@ -532,7 +491,9 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
       @path
       subscriptionId: string;
 
-      ...VirtualMachineRunCommandUpdate;
+      @doc("Parameters supplied to the Update Virtual Machine RunCommand operation.")
+      @body
+      runCommand: VirtualMachineRunCommandUpdate;
 
       @doc("Accept header")
       @header
