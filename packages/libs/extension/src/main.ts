@@ -315,11 +315,7 @@ export class ExtensionManager {
 
     // each folder will contain a node_modules folder, which should have a folder by
     // in the node_modules folder there should be a folder by the name of the
-    return results
-      .sort((a, b) => {
-        return 1 - semver.compare(a[1], b[1]);
-      })
-      .map((each) => each[0]);
+    return results.sort((a, b) => semver.compare(b[1], a[1])).map((each) => each[0]);
   }
 
   private static lock = new AsyncLock();
