@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Thu, 16 Nov 2023 16:00:04 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Nov 2023 19:02:52 GMT and should not be manually modified.
+
+## 3.7.1
+Tue, 28 Nov 2023 19:02:52 GMT
+
+### Patches
+
+- Resolve latest installed instead of first
 
 ## 3.7.0
 Thu, 16 Nov 2023 16:00:04 GMT
