@@ -279,7 +279,7 @@ export class ExtensionManager {
   }
 
   public async getInstalledExtensions(): Promise<Array<Extension>> {
-    const results = new Array<Extension>();
+    const results = new Array<[Extension, string]>();
 
     // iterate thru the folders.
     // the folder name should have the pattern @ORG#NAME@VER or NAME@VER
@@ -305,7 +305,7 @@ export class ExtensionManager {
               );
               continue;
             }
-            results.push(ext);
+            results.push([ext, version]);
           } catch (e) {
             // ignore things that don't look right.
           }
@@ -315,7 +315,7 @@ export class ExtensionManager {
 
     // each folder will contain a node_modules folder, which should have a folder by
     // in the node_modules folder there should be a folder by the name of the
-    return results;
+    return results.sort((a, b) => semver.compare(b[1], a[1])).map((each) => each[0]);
   }
 
   private static lock = new AsyncLock();
