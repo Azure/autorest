@@ -58,7 +58,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [core_chg]: packages/extensions/core/CHANGELOG.md
 [modelerfour_chg]: packages/extensions/modelerfour/CHANGELOG.md
 [csharp_chg]: https://github.com/Azure/autorest.csharp
-[python_chg]: https://github.com/Azure/autorest.python/blob/autorestv3/ChangeLog.md
+[python_chg]: https://github.com/Azure/autorest.python/blob/main/packages/autorest.python/ChangeLog.md
 [go_chg]: https://github.com/Azure/autorest.go
 [java_chg]: https://github.com/Azure/autorest.java/releases
 [swift_chg]: https://github.com/Azure/autorest.swift
