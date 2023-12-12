@@ -103,7 +103,7 @@ interface VirtualMachineScaleSetVms {
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
     VirtualMachineScaleSetVMReimageParameters,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -115,8 +115,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -128,8 +128,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.")
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -141,8 +141,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -158,8 +158,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Restarts a virtual machine in a VM scale set.")
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -171,8 +171,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Starts a virtual machine in a VM scale set.")
   start is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -184,8 +184,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.")
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -197,7 +197,7 @@ interface VirtualMachineScaleSetVms {
   @doc("The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVm,
-    {},
+    void,
     RetrieveBootDiagnosticsDataResult,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
@@ -214,8 +214,8 @@ interface VirtualMachineScaleSetVms {
   @doc("Performs maintenance on a virtual machine in a VM scale set.")
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVm,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 
@@ -227,7 +227,7 @@ interface VirtualMachineScaleSetVms {
   @doc("The operation to simulate the eviction of spot virtual machine in a VM scale set.")
   simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVm,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSetVm>;
 

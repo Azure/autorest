@@ -452,8 +452,7 @@ function convertResourceActionOperations(
           }
         }
 
-        // TODO: deal with request without body
-        const request = buildOperationBodyRequest(swaggerOperation, resourceMetadata) ?? "{}";
+        const request = buildOperationBodyRequest(swaggerOperation, resourceMetadata) ?? "void";
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {
@@ -464,7 +463,7 @@ function convertResourceActionOperations(
         }
         const templateParameters = [resourceMetadata.Name, request];
         if (okResponse) {
-          templateParameters.push(operationResponseName ?? "{}");
+          templateParameters.push(operationResponseName ?? "void");
         }
         if (baseParameters) {
           templateParameters.push(baseParameters);

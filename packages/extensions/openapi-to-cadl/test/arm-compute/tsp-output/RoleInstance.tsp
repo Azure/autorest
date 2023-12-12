@@ -49,11 +49,11 @@ interface RoleInstances {
     }
   >;
   @doc("The Reboot Role Instance asynchronous operation requests a reboot of a role instance in the cloud service.")
-  restart is ArmResourceActionAsync<RoleInstance, {}, {}>;
+  restart is ArmResourceActionAsync<RoleInstance, void, void>;
   @doc("The Reimage Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles.")
-  reimage is ArmResourceActionAsync<RoleInstance, {}, {}>;
+  reimage is ArmResourceActionAsync<RoleInstance, void, void>;
   @doc("The Rebuild Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instance.")
-  rebuild is ArmResourceActionAsync<RoleInstance, {}, {}>;
+  rebuild is ArmResourceActionAsync<RoleInstance, void, void>;
   @doc("Retrieves information about the run-time state of a role instance in a cloud service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
   @get

@@ -41,5 +41,5 @@ interface Snapshots {
   @doc("Grants access to a snapshot.")
   grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
   @doc("Revokes access to a snapshot.")
-  revokeAccess is ArmResourceActionAsync<Snapshot, {}, {}>;
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }

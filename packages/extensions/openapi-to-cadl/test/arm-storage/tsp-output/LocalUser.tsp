@@ -33,11 +33,11 @@ interface LocalUsers {
   @doc("List the local users associated with the storage account.")
   list is ArmResourceListByParent<LocalUser>;
   @doc("List SSH authorized keys and shared key of the local user.")
-  listKeys is ArmResourceActionSync<LocalUser, {}, LocalUserKeys>;
+  listKeys is ArmResourceActionSync<LocalUser, void, LocalUserKeys>;
   @doc("Regenerate the local user SSH password.")
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
-    {},
+    void,
     LocalUserRegeneratePasswordResult
   >;
 }

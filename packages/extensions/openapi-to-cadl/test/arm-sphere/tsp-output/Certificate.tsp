@@ -50,7 +50,7 @@ interface Certificates {
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
-    {},
+    void,
     CertificateChainResponse
   >;
   @doc("Gets the proof of possession nonce.")

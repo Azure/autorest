@@ -53,7 +53,7 @@ interface StorageAccounts {
   @doc("Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.")
   listKeys is ArmResourceActionSync<
     StorageAccount,
-    {},
+    void,
     StorageAccountListKeysResult,
     {
       ...BaseParameters<StorageAccount>;
@@ -84,8 +84,8 @@ interface StorageAccounts {
   @doc("A failover request can be triggered for a storage account in the event a primary endpoint becomes unavailable for any reason. The failover occurs from the storage account's primary cluster to the secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover and the account is converted to LRS. In the case of a Planned Failover, the primary and secondary clusters are swapped after failover and the account remains geo-replicated. Failover should continue to be used in the event of availability issues as Planned failover is only available while the primary and secondary endpoints are available. The primary use case of a Planned Failover is disaster recovery testing drills. This type of failover is invoked by setting FailoverType parameter to 'Planned'. Learn more about the failover options here- https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery-guidance")
   failover is ArmResourceActionAsync<
     StorageAccount,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<StorageAccount>;
 
@@ -97,8 +97,8 @@ interface StorageAccounts {
   @doc("Live Migration of storage account to enable Hns")
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<StorageAccount>;
 
@@ -110,8 +110,8 @@ interface StorageAccounts {
   @doc("Abort live Migration of storage account to enable Hns")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
-    {},
-    {}
+    void,
+    void
   >;
   @doc("Restore blobs in the specified blob ranges")
   restoreBlobRanges is ArmResourceActionAsync<
@@ -120,7 +120,7 @@ interface StorageAccounts {
     BlobRestoreStatus
   >;
   @doc("Revoke user delegation keys.")
-  revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, {}, {}>;
+  revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
   @doc("Gets the private link resources that need to be created for a storage account.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get

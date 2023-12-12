@@ -38,7 +38,7 @@ interface SshPublicKeyResources {
   @doc("Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.")
   generateKeyPair is ArmResourceActionSync<
     SshPublicKeyResource,
-    {},
+    void,
     SshPublicKeyGenerateKeyPairResult
   >;
 }

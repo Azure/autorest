@@ -60,5 +60,5 @@ interface DeviceGroups {
     ClaimDevicesRequest
   >;
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  countDevices is ArmResourceActionSync<DeviceGroup, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }

@@ -87,7 +87,7 @@ interface FileShares {
     }
   >;
   @doc("Restore a file share within a valid retention days if share soft delete is enabled")
-  restore is ArmResourceActionSync<FileShare, DeletedShare, {}>;
+  restore is ArmResourceActionSync<FileShare, DeletedShare, void>;
   @doc("The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.")
   lease is ArmResourceActionSync<
     FileShare,

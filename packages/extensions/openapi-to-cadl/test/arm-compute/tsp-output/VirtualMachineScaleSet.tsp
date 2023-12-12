@@ -105,7 +105,7 @@ interface VirtualMachineScaleSets {
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -122,7 +122,7 @@ interface VirtualMachineScaleSets {
   deleteInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -139,7 +139,7 @@ interface VirtualMachineScaleSets {
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -156,7 +156,7 @@ interface VirtualMachineScaleSets {
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -169,7 +169,7 @@ interface VirtualMachineScaleSets {
   start is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -181,8 +181,8 @@ interface VirtualMachineScaleSets {
   @doc("Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances")
   reapply is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -195,7 +195,7 @@ interface VirtualMachineScaleSets {
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -208,7 +208,7 @@ interface VirtualMachineScaleSets {
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -221,7 +221,7 @@ interface VirtualMachineScaleSets {
   updateInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -234,7 +234,7 @@ interface VirtualMachineScaleSets {
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetReimageParameters,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -247,7 +247,7 @@ interface VirtualMachineScaleSets {
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -259,7 +259,7 @@ interface VirtualMachineScaleSets {
   @doc("Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.")
   forceRecoveryServiceFabricPlatformUpdateDomainWalk is ArmResourceActionSync<
     VirtualMachineScaleSet,
-    {},
+    void,
     RecoveryWalkResponse,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
@@ -285,7 +285,7 @@ interface VirtualMachineScaleSets {
   convertToSinglePlacementGroup is ArmResourceActionSync<
     VirtualMachineScaleSet,
     VMScaleSetConvertToSinglePlacementGroupInput,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -298,7 +298,7 @@ interface VirtualMachineScaleSets {
   setOrchestrationServiceState is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
-    {},
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -310,8 +310,8 @@ interface VirtualMachineScaleSets {
   @doc("Cancels the current virtual machine scale set rolling upgrade.")
   cancel is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -323,8 +323,8 @@ interface VirtualMachineScaleSets {
   @doc("Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.")
   startOSUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 
@@ -336,8 +336,8 @@ interface VirtualMachineScaleSets {
   @doc("Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.")
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 

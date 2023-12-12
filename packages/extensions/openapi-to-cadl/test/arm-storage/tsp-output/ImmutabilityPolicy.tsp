@@ -69,7 +69,7 @@ interface ImmutabilityPolicies {
   @doc("Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.")
   lockImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
-    {},
+    void,
     ImmutabilityPolicy,
     {
       ...BaseParameters<ImmutabilityPolicy>;

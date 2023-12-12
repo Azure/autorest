@@ -60,8 +60,8 @@ interface DiskRestorePoints {
   @doc("Revokes access to a diskRestorePoint.")
   revokeAccess is ArmResourceActionAsync<
     DiskRestorePoint,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<DiskRestorePoint>;
 

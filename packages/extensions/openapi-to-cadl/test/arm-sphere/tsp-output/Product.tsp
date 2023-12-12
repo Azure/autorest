@@ -34,11 +34,11 @@ interface Products {
   @doc("List Product resources by Catalog")
   listByCatalog is ArmResourceListByParent<Product>;
   @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  countDevices is ArmResourceActionSync<Product, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<Product, void, CountDeviceResponse>;
   @doc("Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
-    {},
+    void,
     ResourceListResult<DeviceGroup>
   >;
 }

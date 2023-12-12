@@ -79,7 +79,7 @@ interface Applications {
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
-    {}
+    void
   >;
   @doc("The get business process development artifact action.")
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
@@ -90,7 +90,7 @@ interface Applications {
   @doc("The list business process development artifacts action.")
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
-    {},
+    void,
     ListBusinessProcessDevelopmentArtifactsResponse
   >;
   @doc("The save business process development artifact action.")
@@ -103,6 +103,6 @@ interface Applications {
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
-    {}
+    void
   >;
 }

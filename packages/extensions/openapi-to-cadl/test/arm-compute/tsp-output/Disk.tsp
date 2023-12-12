@@ -48,5 +48,5 @@ interface Disks {
   @doc("Grants access to a disk.")
   grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
   @doc("Revokes access to a disk.")
-  revokeAccess is ArmResourceActionAsync<Disk, {}, {}>;
+  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
 }

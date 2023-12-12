@@ -96,12 +96,12 @@ interface VirtualMachines {
     VirtualMachineCaptureResult
   >;
   @doc("Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.")
-  convertToManagedDisks is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  convertToManagedDisks is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.")
   deallocate is ArmResourceActionAsync<
     VirtualMachine,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachine>;
 
@@ -111,12 +111,12 @@ interface VirtualMachines {
     }
   >;
   @doc("Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).")
-  generalize is ArmResourceActionSync<VirtualMachine, {}, {}>;
+  generalize is ArmResourceActionSync<VirtualMachine, void, void>;
   @doc("The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.")
   powerOff is ArmResourceActionAsync<
     VirtualMachine,
-    {},
-    {},
+    void,
+    void,
     {
       ...BaseParameters<VirtualMachine>;
 
@@ -126,23 +126,23 @@ interface VirtualMachines {
     }
   >;
   @doc("The operation to reapply a virtual machine's state.")
-  reapply is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  reapply is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("The operation to restart a virtual machine.")
-  restart is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  restart is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("The operation to start a virtual machine.")
-  start is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  start is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("Shuts down the virtual machine, moves it to a new node, and powers it back on.")
-  redeploy is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  redeploy is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage.")
   reimage is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineReimageParameters,
-    {}
+    void
   >;
   @doc("The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachine,
-    {},
+    void,
     RetrieveBootDiagnosticsDataResult,
     {
       ...BaseParameters<VirtualMachine>;
@@ -153,13 +153,13 @@ interface VirtualMachines {
     }
   >;
   @doc("The operation to perform maintenance on a virtual machine.")
-  performMaintenance is ArmResourceActionAsync<VirtualMachine, {}, {}>;
+  performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
   @doc("The operation to simulate the eviction of spot virtual machine.")
-  simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, {}>;
+  simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, void>;
   @doc("Assess patches on the VM.")
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
-    {},
+    void,
     VirtualMachineAssessPatchesResult
   >;
   @doc("Installs patches on the VM.")
