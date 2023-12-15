@@ -267,7 +267,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   profile: {
     type: "array",
     category: "core",
-    description: "Reservered for future use.",
+    description: "Reserved for future use.",
     items: { type: "string" },
   },
 
