@@ -252,10 +252,10 @@ function convertResourceUpdateOperation(
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      const propertiesProperty = (bodyParam?.schema as ObjectSchema).properties?.find(
+      const propertiesProperty = (bodyParam?.schema as ObjectSchema)?.properties?.find(
         (p) => p.serializedName === "properties",
       );
-      const tagsProperty = (bodyParam?.schema as ObjectSchema).properties?.find((p) => p.serializedName === "tags");
+      const tagsProperty = (bodyParam?.schema as ObjectSchema)?.properties?.find((p) => p.serializedName === "tags");
       const fixMe: string[] = [];
       if (!bodyParam || (!propertiesProperty && !tagsProperty)) {
         fixMe.push(
@@ -290,7 +290,7 @@ function convertResourceUpdateOperation(
         templateParameters.push(bodyParam.schema.language.default.name);
       } else {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateParameters.push("{}");
+        templateParameters.push("void");
       }
       if (baseParameters) {
         templateParameters.push(baseParameters);
