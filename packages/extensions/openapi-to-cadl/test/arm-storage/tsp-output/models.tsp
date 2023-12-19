@@ -911,6 +911,8 @@ model ImmutableStorageAccount {
 @doc("This defines account-level immutability policy properties.")
 model AccountImmutabilityPolicyProperties {
   @doc("The immutability period for the blobs in the container since the policy creation, in days.")
+  @maxValue(146000)
+  @minValue(1)
   immutabilityPeriodSinceCreationInDays?: int32;
 
   @doc("The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.")
@@ -1991,6 +1993,8 @@ model DeleteRetentionPolicy {
   enabled?: boolean;
 
   @doc("Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365.")
+  @maxValue(365)
+  @minValue(1)
   days?: int32;
 
   @doc("This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share.")
@@ -2003,6 +2007,8 @@ model ChangeFeed {
   enabled?: boolean;
 
   @doc("Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum value is 146000 days (400 years). A null value indicates an infinite retention of the change feed.")
+  @maxValue(146000)
+  @minValue(1)
   retentionInDays?: int32;
 }
 
@@ -2012,6 +2018,8 @@ model RestorePolicyProperties {
   enabled: boolean;
 
   @doc("how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days.")
+  @maxValue(365)
+  @minValue(1)
   days?: int32;
 
   @doc("Deprecated in favor of minRestoreTime property.")
@@ -2343,6 +2351,8 @@ model FileShareProperties {
   metadata?: Record<string>;
 
   @doc("The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.")
+  @maxValue(102400)
+  @minValue(1)
   shareQuota?: int32;
 
   @doc("The authentication protocol that is used for the file share. Can only be specified when creating a share.")

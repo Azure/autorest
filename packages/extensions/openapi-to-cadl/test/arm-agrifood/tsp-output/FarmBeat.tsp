@@ -40,8 +40,10 @@ interface FarmBeats {
 Maximum number of items needed (inclusive).
 Minimum = 10, Maximum = 1000, Default value = 50.
 """)
+      @maxValue(1000)
+      @minValue(10)
       @query("$maxPageSize")
-      $maxPageSize?: int32;
+      $maxPageSize?: int32 = 50;
 
       @doc("Continuation token for getting next set of results.")
       @query("$skipToken")

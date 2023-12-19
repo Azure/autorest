@@ -37,6 +37,8 @@ interface EncryptionScopes {
       ...BaseParameters<EncryptionScope>;
 
       @doc("Optional, specifies the maximum number of encryption scopes that will be included in the list response.")
+      @maxValue(5000)
+      @minValue(1)
       @query("$maxpagesize")
       $maxpagesize?: int32;
 

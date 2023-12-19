@@ -110,6 +110,7 @@ export interface CadlParameter extends CadlDataType {
   decorators?: CadlDecorator[];
   location: CadlParameterLocation;
   serializedName: string;
+  defaultValue?: any;
 }
 
 export interface CadlObjectProperty extends CadlDataType {
@@ -117,6 +118,7 @@ export interface CadlObjectProperty extends CadlDataType {
   isOptional: boolean;
   type: string;
   decorators?: CadlDecorator[];
+  defaultValue?: any;
 }
 
 export interface CadlDecorator extends WithFixMe {

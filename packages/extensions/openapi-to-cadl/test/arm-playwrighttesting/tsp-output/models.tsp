@@ -106,6 +106,7 @@ model FreeTrialProperties {
 
   @doc("The free-trial percentage used.")
   @visibility("read")
+  @maxValue(100)
   percentageUsed: float32;
 
   @doc("The free-trial state.")

@@ -7,6 +7,7 @@ import {
   SchemaType,
   SealedChoiceSchema,
   SerializationStyle,
+  isNumberSchema,
 } from "@autorest/codemodel";
 import { CadlDecorator, DecoratorArgument } from "../interfaces";
 import { getOwnDiscriminator } from "./discriminator";
@@ -78,6 +79,7 @@ export function getPropertyDecorators(element: Property | Parameter): CadlDecora
     decorators.push({ name: "secret" });
   }
 
+  getNumberSchemaDecorators(element.schema, decorators);
   getStringSchemaDecorators(element.schema, decorators);
 
   if (element.language.default.isResourceKey) {
@@ -163,6 +165,28 @@ export function getPropertyVisibility(property: Property): string[] {
   }
 
   return visibility;
+}
+
+function getNumberSchemaDecorators(schema: Schema, decorators: CadlDecorator[]): void {
+  if (!isNumberSchema(schema)) {
+    return;
+  }
+
+  if (schema.maximum) {
+    if (schema.exclusiveMaximum) {
+      decorators.push({ name: "maxValueExclusive", arguments: [schema.maximum] });
+    } else {
+      decorators.push({ name: "maxValue", arguments: [schema.maximum] });
+    }
+  }
+
+  if (schema.minimum) {
+    if (schema.exclusiveMinimum) {
+      decorators.push({ name: "minValueExclusive", arguments: [schema.minimum] });
+    } else {
+      decorators.push({ name: "minValue", arguments: [schema.minimum] });
+    }
+  }
 }
 
 function getStringSchemaDecorators(schema: Schema, decorators: CadlDecorator[]): void {

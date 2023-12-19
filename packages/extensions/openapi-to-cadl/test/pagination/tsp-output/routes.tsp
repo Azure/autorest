@@ -57,7 +57,7 @@ Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout?: int32;
+      timeout?: int32 = 30;
     },
     ProductResult
   >;
@@ -145,7 +145,7 @@ Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout?: int32;
+      timeout?: int32 = 30;
     },
     OdataProductResult
   >;
@@ -171,7 +171,7 @@ Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout?: int32;
+      timeout?: int32 = 30;
     },
     ProductResult
   >;
@@ -272,7 +272,7 @@ Sets the maximum time that the server can spend processing the request, in
 seconds. The default is 30 seconds.
 """)
       @header
-      timeout?: int32;
+      timeout?: int32 = 30;
     },
     ProductResult
   >;

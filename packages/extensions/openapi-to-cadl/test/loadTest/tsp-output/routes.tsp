@@ -112,7 +112,7 @@ tests.
 
       @doc("Number of results in response.")
       @query("maxpagesize")
-      maxpagesize?: int32;
+      maxpagesize?: int32 = 50;
     },
     TestsList
   >;
@@ -439,7 +439,7 @@ the search parameter can be 500.
 
       @doc("Number of results in response.")
       @query("maxpagesize")
-      maxpagesize?: int32;
+      maxpagesize?: int32 = 50;
     },
     TestRunsList
   >;

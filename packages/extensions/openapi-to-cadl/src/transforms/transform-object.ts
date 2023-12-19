@@ -122,6 +122,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       isOptional: propertySchema.required !== true,
       type: visited.name,
       decorators: getPropertyDecorators(propertySchema),
+      defaultValue: propertySchema.schema.defaultValue,
     };
   }
 

@@ -94,6 +94,7 @@ question.
   userId?: string;
 
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
+  @maxValue(1)
   @projectedName("json", "confidenceScoreThreshold")
   confidenceThreshold?: float32;
 
@@ -167,10 +168,13 @@ model ShortAnswerOptions {
 Minimum threshold score required to include an answer span, value ranges from 0
 to 1.
 """)
+  @maxValue(1)
   @projectedName("json", "confidenceScoreThreshold")
   confidenceThreshold?: float32;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
+  @maxValue(10)
+  @minValue(1)
   @projectedName("json", "topAnswersWithSpan")
   top?: int32;
 }
@@ -190,6 +194,7 @@ model KnowledgeBaseAnswer {
   answer?: string;
 
   @doc("Answer confidence score, value ranges from 0 to 1.")
+  @maxValue(1)
   @projectedName("json", "confidenceScore")
   confidence?: float32;
 
@@ -246,6 +251,7 @@ model AnswerSpan {
   text?: string;
 
   @doc("Predicted score of answer span, value ranges from 0 to 1.")
+  @maxValue(1)
   @projectedName("json", "confidenceScore")
   confidence?: float32;
 
@@ -356,6 +362,7 @@ model TextAnswer {
   answer?: string;
 
   @doc("answer confidence score, value ranges from 0 to 1.")
+  @maxValue(1)
   @projectedName("json", "confidenceScore")
   confidence?: float32;
 

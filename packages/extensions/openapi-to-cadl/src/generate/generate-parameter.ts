@@ -1,6 +1,7 @@
 import { CadlParameter } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { transformValue } from "../utils/values";
 
 export function generateParameter(parameter: CadlParameter): string {
   const definitions: string[] = [];
@@ -9,7 +10,11 @@ export function generateParameter(parameter: CadlParameter): string {
 
   const decorators = generateDecorators(parameter.decorators);
   decorators && definitions.push(decorators);
-  definitions.push(`"${parameter.name}"${parameter.isOptional ? "?" : ""}: ${parameter.type}`);
+  let defaultValue = "";
+  if (parameter.defaultValue) {
+    defaultValue = ` = ${transformValue(parameter.defaultValue)}`;
+  }
+  definitions.push(`"${parameter.name}"${parameter.isOptional ? "?" : ""}: ${parameter.type}${defaultValue}`);
 
   return definitions.join("\n");
 }

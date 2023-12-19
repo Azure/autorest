@@ -24,15 +24,17 @@ API.
 The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
+        @maxValue(1000)
+        @minValue(1)
         @query("maxresults")
-        maxResults?: int32;
+        maxResults?: int32 = 1000;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -73,7 +75,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -142,15 +144,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000
 results will be returned.
 """)
+        @maxValue(1000)
+        @minValue(1)
         @query("maxresults")
-        maxResults?: int32;
+        maxResults?: int32 = 1000;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -190,7 +194,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -229,7 +233,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -282,15 +286,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Pools
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -342,7 +348,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -412,7 +418,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -490,7 +496,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -565,7 +571,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -640,7 +646,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -686,7 +692,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -765,7 +771,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -816,7 +822,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -899,7 +905,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -974,7 +980,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1021,7 +1027,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1100,15 +1106,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000
 results will be returned.
 """)
+        @maxValue(1000)
+        @minValue(1)
         @query("maxresults")
-        maxResults?: int32;
+        maxResults?: int32 = 1000;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1149,15 +1157,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch.
         $filter?: string;
 
         @doc("The maximum number of items to return in the response.")
+        @maxValue(10)
+        @minValue(1)
         @query("maxresults")
-        maxResults?: int32;
+        maxResults?: int32 = 10;
 
         @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1199,7 +1209,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1247,7 +1257,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1326,7 +1336,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1401,7 +1411,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1480,7 +1490,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1564,7 +1574,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1646,7 +1656,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1724,7 +1734,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1805,7 +1815,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1858,15 +1868,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Jobs
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1919,15 +1931,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Jobs
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -1986,15 +2000,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Tasks
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2038,7 +2054,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2075,7 +2091,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2124,15 +2140,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000
 Certificates can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2183,7 +2201,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2236,7 +2254,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2282,7 +2300,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2340,7 +2358,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2386,7 +2404,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2459,7 +2477,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2531,7 +2549,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2577,7 +2595,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2650,7 +2668,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2722,15 +2740,17 @@ combination with the filter parameter to list specific type of files.
 The maximum number of items to return in the response. A maximum of 1000 files
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2783,15 +2803,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 files
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2832,7 +2854,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2909,7 +2931,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -2987,7 +3009,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3064,7 +3086,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3145,7 +3167,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3220,7 +3242,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3291,7 +3313,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3362,7 +3384,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3429,7 +3451,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3482,15 +3504,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Job
 Schedules can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3535,7 +3559,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3596,15 +3620,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000 Tasks
 can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3658,7 +3684,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3711,7 +3737,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3798,7 +3824,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3872,7 +3898,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -3958,7 +3984,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4005,7 +4031,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4091,7 +4117,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4171,7 +4197,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4225,7 +4251,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4280,7 +4306,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4331,7 +4357,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4374,7 +4400,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4425,7 +4451,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4475,7 +4501,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4525,7 +4551,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4574,7 +4600,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4625,7 +4651,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4672,7 +4698,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
         @query("timeout")
-        timeout?: int32;
+        timeout?: int32 = 30;
 
         @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4721,15 +4747,17 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 The maximum number of items to return in the response. A maximum of 1000
 Compute Nodes can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4785,7 +4813,7 @@ The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
@@ -4831,15 +4859,17 @@ directly.
 The maximum number of items to return in the response. A maximum of 1000
 Compute Nodes can be returned.
 """)
+      @maxValue(1000)
+      @minValue(1)
       @query("maxresults")
-      maxResults?: int32;
+      maxResults?: int32 = 1000;
 
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
 The default is 30 seconds.
 """)
       @query("timeout")
-      timeout?: int32;
+      timeout?: int32 = 30;
 
       @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration

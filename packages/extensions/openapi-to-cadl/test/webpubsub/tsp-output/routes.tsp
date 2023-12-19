@@ -91,8 +91,9 @@ alpha-numeric characters or underscore.
       role?: string[];
 
       @doc("The expire time of the generated token.")
+      @minValue(1)
       @query("minutesToExpire")
-      minutesToExpire?: int32;
+      minutesToExpire?: int32 = 60;
 
       @doc("Groups that the connection will join when it connects.")
       @query({
@@ -164,6 +165,7 @@ value. If this parameter is non-zero, messages that are not consumed by the
 client within the specified TTL will be dropped by the service. This parameter
 can help when the client's bandwidth is limited.
 """)
+      @maxValue(300)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
@@ -252,6 +254,7 @@ value. If this parameter is non-zero, messages that are not consumed by the
 client within the specified TTL will be dropped by the service. This parameter
 can help when the client's bandwidth is limited.
 """)
+      @maxValue(300)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
@@ -389,6 +392,7 @@ value. If this parameter is non-zero, messages that are not consumed by the
 client within the specified TTL will be dropped by the service. This parameter
 can help when the client's bandwidth is limited.
 """)
+      @maxValue(300)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 
@@ -651,6 +655,7 @@ value. If this parameter is non-zero, messages that are not consumed by the
 client within the specified TTL will be dropped by the service. This parameter
 can help when the client's bandwidth is limited.
 """)
+      @maxValue(300)
       @query("messageTtlSeconds")
       messageTtlSeconds?: int32;
 

@@ -1,6 +1,7 @@
 import { CadlObjectProperty } from "../interfaces";
 import { generateDecorators } from "./decorators";
 import { generateDocs } from "./docs";
+import { transformValue } from "./values";
 
 export function getModelPropertiesDeclarations(properties: CadlObjectProperty[]): string[] {
   const definitions: string[] = [];
@@ -10,7 +11,11 @@ export function getModelPropertiesDeclarations(properties: CadlObjectProperty[])
     const decorators = generateDecorators(property.decorators);
     decorators && definitions.push(decorators);
     property.fixMe && property.fixMe.length && definitions.push(property.fixMe.join("\n"));
-    definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type};`);
+    let defaultValue = "";
+    if (property.defaultValue) {
+      defaultValue = ` = ${transformValue(property.defaultValue)}`;
+    }
+    definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type}${defaultValue};`);
   }
 
   return definitions;

@@ -590,7 +590,7 @@ function getKeyParameter(resourceMetadata: ArmResource): Parameter | undefined {
     for (const operation of operationGroup.operations) {
       if (operation.operationId === resourceMetadata.GetOperations[0].OperationID) {
         for (const parameter of operation.parameters ?? []) {
-          if (parameter.language.default.name === resourceMetadata.ResourceKey) {
+          if (parameter.language.default.serializedName === resourceMetadata.ResourceKey) {
             return parameter;
           }
         }

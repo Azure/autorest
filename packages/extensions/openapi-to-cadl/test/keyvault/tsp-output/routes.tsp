@@ -90,6 +90,8 @@ op GetCertificates is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
 
@@ -162,6 +164,8 @@ op GetCertificateIssuers is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -318,6 +322,8 @@ op GetCertificateVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -534,6 +540,8 @@ op GetDeletedCertificates is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
 
@@ -772,6 +780,8 @@ op GetKeyVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -794,6 +804,8 @@ op GetKeys is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1069,6 +1081,8 @@ op GetDeletedKeys is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1282,6 +1296,8 @@ op GetSecrets is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified, the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1306,6 +1322,8 @@ op GetSecretVersions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified, the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1326,6 +1344,8 @@ op GetDeletedSecrets is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1462,6 +1482,8 @@ op GetStorageAccounts is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1482,6 +1504,8 @@ op GetDeletedStorageAccounts is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1684,6 +1708,8 @@ op GetSasDefinitions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },
@@ -1709,6 +1735,8 @@ op GetDeletedSasDefinitions is Azure.Core.Foundations.Operation<
 Maximum number of results to return in a page. If not specified the service
 will return up to 25 results.
 """)
+    @maxValue(25)
+    @minValue(1)
     @query("maxresults")
     maxresults?: int32;
   },

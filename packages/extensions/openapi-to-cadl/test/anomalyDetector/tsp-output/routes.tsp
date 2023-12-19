@@ -76,7 +76,7 @@ op ListMultivariateModel is Azure.Core.ResourceList<
 
       @doc("$top indicates how many models will be fetched.")
       @query("$top")
-      $top?: int32;
+      $top?: int32 = 10;
     };
   }
 >;

@@ -379,6 +379,7 @@ model VariableState {
   variable?: string;
 
   @doc("Proportion of NaN values filled of the variable.")
+  @maxValue(1)
   filledNARatio?: float32;
 
   @doc("Number of effective points counted.")
@@ -440,9 +441,11 @@ model AnomalyValue {
 Indicates the significance of the anomaly. The higher the severity, the more
 significant the anomaly.
 """)
+  @maxValue(1)
   severity: float32;
 
   @doc("Raw score from the model.")
+  @maxValue(2)
   score: float32;
 
   interpretation?: AnomalyInterpretation[];

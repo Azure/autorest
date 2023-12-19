@@ -649,6 +649,8 @@ model LifetimeAction {
 @doc("A condition to be satisfied for an action to be executed.")
 model Trigger {
   @doc("Percentage of lifetime at which to trigger. Value should be between 1 and 99.")
+  @maxValue(99)
+  @minValue(1)
   @projectedName("json", "lifetime_percentage")
   lifetimePercentage?: int32;
 
@@ -1436,6 +1438,8 @@ hours: PT48H, 1 year and 10 days: P1Y10D
 @doc("The get random bytes request object.")
 model GetRandomBytesRequest {
   @doc("The requested number of random bytes.")
+  @maxValue(128)
+  @minValue(1)
   count: int32;
 }
 
@@ -1738,6 +1742,8 @@ model CertificateInfoObject {
 Customer to specify the number of certificates (minimum 2 and maximum 10) to
 restore Security Domain
 """)
+  @maxValue(10)
+  @minValue(2)
   required?: int32;
 }
 
