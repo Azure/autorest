@@ -121,6 +121,10 @@ interface StorageAccounts {
   >;
   @doc("Revoke user delegation keys.")
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets the private link resources that need to be created for a storage account.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get

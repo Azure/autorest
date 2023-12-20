@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./QueueServiceProperty.tsp";
+import "./QueueServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 
-@parentResource(QueueServiceProperty)
+@parentResource(QueueServiceProperties)
 model StorageQueue is ProxyResource<QueueProperties> {
   @doc("A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.")
   @maxLength(63)
@@ -24,7 +24,7 @@ model StorageQueue is ProxyResource<QueueProperties> {
 }
 
 @armResourceOperations
-interface StorageQueues {
+interface Queue {
   @doc("Gets the queue with the specified queue name, under the specified account if it exists.")
   get is ArmResourceRead<StorageQueue>;
   @doc("Creates a new queue with the specified queue name, under the specified account.")

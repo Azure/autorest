@@ -307,45 +307,6 @@ interface VirtualMachineScaleSets {
       vmScaleSetName: string;
     }
   >;
-  @doc("Cancels the current virtual machine scale set rolling upgrade.")
-  cancel is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...BaseParameters<VirtualMachineScaleSet>;
-
-      @doc("The name of the VM scale set.")
-      @path
-      vmScaleSetName: string;
-    }
-  >;
-  @doc("Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.")
-  startOSUpgrade is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...BaseParameters<VirtualMachineScaleSet>;
-
-      @doc("The name of the VM scale set.")
-      @path
-      vmScaleSetName: string;
-    }
-  >;
-  @doc("Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.")
-  startExtensionUpgrade is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...BaseParameters<VirtualMachineScaleSet>;
-
-      @doc("The name of the VM scale set.")
-      @path
-      vmScaleSetName: string;
-    }
-  >;
   @doc("Gets the status of a VM scale set instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
   @get
@@ -404,5 +365,48 @@ interface VirtualMachineScaleSets {
       subscriptionId: string;
     },
     VirtualMachineScaleSetListOSUpgradeHistory
+  >;
+}
+
+@armResourceOperations
+interface VirtualMachineScaleSetRollingUpgrades {
+  @doc("Cancels the current virtual machine scale set rolling upgrade.")
+  cancel is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    void,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
+  @doc("Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.")
+  startOSUpgrade is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    void,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
+  >;
+  @doc("Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.")
+  startExtensionUpgrade is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    void,
+    {
+      ...BaseParameters<VirtualMachineScaleSet>;
+
+      @doc("The name of the VM scale set.")
+      @path
+      vmScaleSetName: string;
+    }
   >;
 }

@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.")
-@parentResource(BlobContainer)
 @singleton("default")
+@parentResource(BlobContainer)
 model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
   @key("immutabilityPolicyName")
   @segment("immutabilityPolicies")
@@ -20,7 +20,7 @@ model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
 }
 
 @armResourceOperations
-interface ImmutabilityPolicies {
+interface BlobContainers {
   @doc("Gets the existing immutability policy along with the corresponding ETag in response headers and body.")
   getImmutabilityPolicy is ArmResourceRead<
     ImmutabilityPolicy,

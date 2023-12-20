@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("The storage account blob inventory policy.")
-@parentResource(StorageAccount)
 @singleton("default")
+@parentResource(StorageAccount)
 model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
   @key("blobInventoryPolicyName")
   @segment("inventoryPolicies")
@@ -28,5 +28,5 @@ interface BlobInventoryPolicies {
   @doc("Deletes the blob inventory policy associated with the specified storage account.")
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
   @doc("Gets the blob inventory policy associated with the specified storage account.")
-  listByStorageAccount is ArmResourceListByParent<BlobInventoryPolicy>;
+  list is ArmResourceListByParent<BlobInventoryPolicy>;
 }

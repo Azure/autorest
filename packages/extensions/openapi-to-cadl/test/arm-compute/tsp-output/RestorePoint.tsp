@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./RestorePointGroup.tsp";
+import "./RestorePointCollection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("Restore Point details.")
-@parentResource(RestorePointGroup)
+@parentResource(RestorePointCollection)
 model RestorePoint is ProxyResource<RestorePointProperties> {
   @doc("The name of the restore point.")
   @path

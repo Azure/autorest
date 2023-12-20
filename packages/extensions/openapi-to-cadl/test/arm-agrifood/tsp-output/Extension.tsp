@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FarmBeat.tsp";
+import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,17 +11,13 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("Extension resource.")
-@parentResource(FarmBeat)
+@parentResource(DataManagerForAgriculture)
 model Extension is ProxyResource<ExtensionProperties> {
   @doc("Id of extension resource.")
   @path
   @key("extensionId")
   @segment("extensions")
   name: string;
-
-  @doc("The ETag value to implement optimistic concurrency.")
-  @visibility("read")
-  eTag?: string;
 
   ...Azure.ResourceManager.EntityTag;
 }
@@ -30,15 +26,12 @@ model Extension is ProxyResource<ExtensionProperties> {
 interface Extensions {
   @doc("Get installed extension details by extension id.")
   get is ArmResourceRead<Extension>;
-  @doc("Install extension.")
-  create is ArmResourceCreateOrReplaceSync<Extension>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
-  @doc("Upgrade to latest extension.")
-  update is ArmCustomPatchSync<Extension, void>;
+  @doc("Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Extension>;
   @doc("Uninstall extension.")
   delete is ArmResourceDeleteSync<Extension>;
   @doc("Get installed extensions details.")
-  listByFarmBeats is ArmResourceListByParent<
+  listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     {
       ...BaseParameters<Extension>;

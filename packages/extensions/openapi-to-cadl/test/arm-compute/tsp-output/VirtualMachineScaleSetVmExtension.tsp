@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./VirtualMachineScaleSetVm.tsp";
+import "./VirtualMachineScaleSetVM.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("Describes a VMSS VM Extension.")
-@parentResource(VirtualMachineScaleSetVm)
-model VirtualMachineScaleSetVmExtension
+@parentResource(VirtualMachineScaleSetVM)
+model VirtualMachineScaleSetVMExtension
   is ProxyResource<VirtualMachineExtensionProperties> {
   @doc("The name of the virtual machine extension.")
   @path
@@ -22,12 +22,12 @@ model VirtualMachineScaleSetVmExtension
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVmExtensions {
+interface VirtualMachineScaleSetVMExtensions {
   @doc("The operation to get the VMSS VM extension.")
   get is ArmResourceRead<
-    VirtualMachineScaleSetVmExtension,
+    VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVmExtension>;
+      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -40,9 +40,9 @@ interface VirtualMachineScaleSetVmExtensions {
   >;
   @doc("The operation to create or update the VMSS VM extension.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    VirtualMachineScaleSetVmExtension,
+    VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVmExtension>;
+      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -51,10 +51,10 @@ interface VirtualMachineScaleSetVmExtensions {
   >;
   @doc("The operation to update the VMSS VM extension.")
   update is ArmResourcePatchAsync<
-    VirtualMachineScaleSetVmExtension,
+    VirtualMachineScaleSetVMExtension,
     VirtualMachineExtensionProperties,
     {
-      ...BaseParameters<VirtualMachineScaleSetVmExtension>;
+      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -63,9 +63,9 @@ interface VirtualMachineScaleSetVmExtensions {
   >;
   @doc("The operation to delete the VMSS VM extension.")
   delete is ArmResourceDeleteAsync<
-    VirtualMachineScaleSetVmExtension,
+    VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVmExtension>;
+      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -74,9 +74,9 @@ interface VirtualMachineScaleSetVmExtensions {
   >;
   @doc("The operation to get all extensions of an instance in Virtual Machine Scaleset.")
   list is ArmResourceListByParent<
-    VirtualMachineScaleSetVmExtension,
+    VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVmExtension>;
+      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       @doc("The name of the VM scale set.")
       @path

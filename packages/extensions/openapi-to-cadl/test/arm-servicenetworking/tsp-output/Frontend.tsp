@@ -22,7 +22,7 @@ model Frontend is TrackedResource<FrontendProperties> {
 }
 
 @armResourceOperations
-interface Frontends {
+interface FrontendsInterface {
   @doc("Get a Frontend")
   get is ArmResourceRead<Frontend>;
   @doc("Create a Frontend")

@@ -38,6 +38,7 @@ export interface CadlOperation extends WithDoc, WithSummary, WithFixMe {
   parameters: CadlParameter[];
   extensions: Extension[];
   resource?: CadlResource;
+  operationGroupName?: string;
 }
 
 export type ResourceKind =
@@ -172,6 +173,7 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   name: string;
   templateParameters?: string[];
   decorators?: CadlDecorator[];
+  operationGroupName: string;
 }
 
 export type TspArmResourceOperation =
@@ -210,7 +212,6 @@ export interface TspArmResourceExistsOperation extends TspArmResourceOperationBa
 }
 
 export interface TspArmResource extends CadlObject {
-  resourceGroupName: string;
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
   resourceParent?: TspArmResource;

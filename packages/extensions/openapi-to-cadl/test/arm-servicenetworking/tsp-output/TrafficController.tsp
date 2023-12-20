@@ -20,7 +20,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 }
 
 @armResourceOperations
-interface TrafficControllers {
+interface TrafficControllerInterface {
   @doc("Get a TrafficController")
   get is ArmResourceRead<TrafficController>;
   @doc("Create a TrafficController")

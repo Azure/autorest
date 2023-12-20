@@ -70,11 +70,11 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   // TODO: deal with a resource with multiple parents
   if (schema.resourceMetadata.Parents.length > 1) {
     fixMe.push(
-      `// FIXME: ${schema.resourceMetadata.Name} has more than one parent, currently converter will only use the first one`,
+      `// FIXME: ${schema.resourceMetadata.SwaggerModelName} has more than one parent, currently converter will only use the first one`,
     );
   }
 
-  addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.resourceMetadata.Name);
+  addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.language.default.name);
 
   const propertiesModelSchema = schema.properties?.find((p) => p.serializedName === "properties")?.schema;
   let propertiesModelName = propertiesModelSchema?.language.default.name;
@@ -85,19 +85,18 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   // TODO: deal with resources that has no properties property
   if (!propertiesModelName) {
-    fixMe.push(`// FIXME: ${schema.resourceMetadata.Name} has no properties property`);
+    fixMe.push(`// FIXME: ${schema.resourceMetadata.SwaggerModelName} has no properties property`);
     propertiesModelName = "{}";
   }
 
   const operations = getTspOperations(schema, propertiesModelName);
 
   return {
-    resourceGroupName: pluralize(schema.resourceMetadata.Name),
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
     properties: [buildKeyProperty(schema), ...getOtherProperties(schema)],
-    name: schema.resourceMetadata.Name,
+    name: schema.resourceMetadata.SwaggerModelName,
     parents: [],
     resourceParent: getParentResource(schema),
     propertiesModelName,
@@ -120,7 +119,7 @@ function getOtherProperties(schema: ArmResourceSchema): CadlObjectProperty[] {
     "tags",
     "identity",
     "sku",
-    "etag",
+    "eTag",
     "plan",
     "kind",
     "managedBy",
@@ -192,7 +191,10 @@ function convertResourceReadOperation(
       doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
       kind: "ArmResourceRead",
       name: getOperationName(operation.OperationID),
-      templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
+      operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+      templateParameters: baseParameters
+        ? [resourceMetadata.SwaggerModelName, baseParameters]
+        : [resourceMetadata.SwaggerModelName],
     },
   ];
 }
@@ -205,8 +207,9 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
         name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
+        operationGroupName: getOperationGroupName(swaggerOperation.operationId, resourceMetadata.Name),
         parameters: [
-          `...ResourceInstanceParameters<${resourceMetadata.Name}, BaseParameters<${resourceMetadata.Name}>>`,
+          `...ResourceInstanceParameters<${resourceMetadata.SwaggerModelName}, BaseParameters<${resourceMetadata.SwaggerModelName}>>`,
         ],
         responses: ["OkResponse", "ErrorResponse"],
         decorators: [{ name: "head" }],
@@ -230,7 +233,10 @@ function convertResourceCreateOrUpdateOperation(
         doc: operation.Description,
         kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
         name: getOperationName(operation.OperationID),
-        templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
+        operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+        templateParameters: baseParameters
+          ? [resourceMetadata.SwaggerModelName, baseParameters]
+          : [resourceMetadata.SwaggerModelName],
       },
     ];
   }
@@ -263,19 +269,19 @@ function convertResourceUpdateOperation(
         );
       }
       let kind;
-      const templateParameters = [resourceMetadata.Name];
+      const templateParameters = [resourceMetadata.SwaggerModelName];
       if (propertiesProperty) {
         kind = isLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
         // TODO: if update properties are different from resource properties, we need to use a different model
         templateParameters.push(resourcePropertiesModelName);
         addGeneratedResourceObjectIfNotExits(
           bodyParam?.schema.language.default.name ?? "",
-          `ResourceUpdateModel<${resourceMetadata.Name}>`,
+          `ResourceUpdateModel<${resourceMetadata.SwaggerModelName}>`,
         );
         if (propertiesProperty.schema.language.default.name !== resourcePropertiesModelName) {
           addGeneratedResourceObjectIfNotExits(
             propertiesProperty.schema.language.default.name,
-            `ResourceUpdateModelProperties<${resourceMetadata.Name}, ${resourcePropertiesModelName}>`,
+            `ResourceUpdateModelProperties<${resourceMetadata.SwaggerModelName}, ${resourcePropertiesModelName}>`,
           );
         }
       } else if (tagsProperty) {
@@ -283,14 +289,14 @@ function convertResourceUpdateOperation(
         // TODO: if update properties are different from tag properties, we need to use a different model
         addGeneratedResourceObjectIfNotExits(
           bodyParam?.schema.language.default.name ?? "",
-          `TagsUpdateModel<${resourceMetadata.Name}>`,
+          `TagsUpdateModel<${resourceMetadata.SwaggerModelName}>`,
         );
       } else if (bodyParam) {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
       } else {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
-        templateParameters.push("void");
+        templateParameters.push("{}");
       }
       if (baseParameters) {
         templateParameters.push(baseParameters);
@@ -301,6 +307,7 @@ function convertResourceUpdateOperation(
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
+          operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
           templateParameters,
         },
       ];
@@ -329,7 +336,10 @@ function convertResourceDeleteOperation(
             : "ArmResourceDeleteWithoutOkAsync"
           : "ArmResourceDeleteSync",
         name: getOperationName(operation.OperationID),
-        templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
+        operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+        templateParameters: baseParameters
+          ? [resourceMetadata.SwaggerModelName, baseParameters]
+          : [resourceMetadata.SwaggerModelName],
       },
     ];
   }
@@ -348,7 +358,7 @@ function convertResourceListOperations(
     const operation = resourceMetadata.ListOperations[0];
     const swaggerOperation = operations[operation.OperationID];
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-    const templateParameters = [resourceMetadata.Name];
+    const templateParameters = [resourceMetadata.SwaggerModelName];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     if (baseParameters) {
       templateParameters.push(baseParameters);
@@ -356,13 +366,14 @@ function convertResourceListOperations(
 
     addGeneratedResourceObjectIfNotExits(
       getSchemaResponseSchemaName(okResponse) ?? "",
-      `ResourceListResult<${resourceMetadata.Name}>`,
+      `ResourceListResult<${resourceMetadata.SwaggerModelName}>`,
     );
 
     converted.push({
       doc: operation.Description,
       kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
+      operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
       templateParameters: templateParameters,
     });
   }
@@ -380,11 +391,14 @@ function convertResourceListOperations(
 
         addGeneratedResourceObjectIfNotExits(
           getSchemaResponseSchemaName(okResponse) ?? "",
-          `ResourceListResult<${resourceMetadata.Name}>`,
+          `ResourceListResult<${resourceMetadata.SwaggerModelName}>`,
         );
         // either list in location or list in subscription
         if (operation.Path.includes("/locations/")) {
-          const templateParameters = [resourceMetadata.Name, `LocationScope<${resourceMetadata.Name}>`];
+          const templateParameters = [
+            resourceMetadata.SwaggerModelName,
+            `LocationScope<${resourceMetadata.SwaggerModelName}>`,
+          ];
           if (baseParameters) {
             templateParameters.push(baseParameters);
           }
@@ -392,6 +406,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
+            operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
             templateParameters,
           });
         } else {
@@ -399,7 +414,8 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
-            templateParameters: [resourceMetadata.Name],
+            operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+            templateParameters: [resourceMetadata.SwaggerModelName],
           });
         }
       }
@@ -415,13 +431,18 @@ function convertResourceListOperations(
 
       addGeneratedResourceObjectIfNotExits(
         getSchemaResponseSchemaName(okResponse) ?? "",
-        `ResourceListResult<${resourceMetadata.Name}>`,
+        `ResourceListResult<${resourceMetadata.SwaggerModelName}>`,
       );
       converted.push({
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceListByParent",
-        name: `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        templateParameters: baseParameters ? [resourceMetadata.Name, baseParameters] : [resourceMetadata.Name],
+        name: swaggerOperation.operationId
+          ? getOperationName(swaggerOperation.operationId)
+          : `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
+        operationGroupName: getOperationGroupName(swaggerOperation.operationId, resourceMetadata.Name),
+        templateParameters: baseParameters
+          ? [resourceMetadata.SwaggerModelName, baseParameters]
+          : [resourceMetadata.SwaggerModelName],
       });
       (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
     }
@@ -461,7 +482,7 @@ function convertResourceActionOperations(
         } else {
           kind = isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
         }
-        const templateParameters = [resourceMetadata.Name, request];
+        const templateParameters = [resourceMetadata.SwaggerModelName, request];
         if (okResponse) {
           templateParameters.push(operationResponseName ?? "void");
         }
@@ -472,6 +493,7 @@ function convertResourceActionOperations(
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
+          operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
           templateParameters,
         });
       }
@@ -492,7 +514,9 @@ function convertResourceOtherGetOperations(
       if (operation.Method === "GET") {
         const swaggerOperation = operations[operation.OperationID];
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
-          converted.push(transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model));
+          const op = transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model);
+          op.operationGroupName = getOperationGroupName(operation.OperationID, resourceMetadata.Name);
+          converted.push(op);
         }
       }
     }
@@ -543,6 +567,14 @@ function getOperationName(name: string): string {
   return _.lowerFirst(_.last(name.split("_")));
 }
 
+function getOperationGroupName(name: string | undefined, resourceName: string): string {
+  if (name && name.includes("_")) {
+    return _.first(name.split("_"))!;
+  } else {
+    return pluralize(resourceName);
+  }
+}
+
 function buildOperationBodyRequest(operation: Operation, resource: ArmResource): string | undefined {
   const codeModel = getSession().model;
   const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
@@ -579,7 +611,7 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
       params.push(generateParameter(parameter));
     }
     return `{
-    ...BaseParameters<${resource.Name}>,
+    ...BaseParameters<${resource.SwaggerModelName}>,
     ${params.join("\n")}
     }`;
   }
@@ -685,15 +717,6 @@ function buildKeyProperty(schema: ArmResourceSchema): CadlObjectProperty {
 
 function buildResourceDecorators(schema: ArmResourceSchema): CadlDecorator[] {
   const resourceModelDecorators: CadlDecorator[] = [];
-
-  for (const parent of schema.resourceMetadata.Parents) {
-    if (!isFirstLevelResource(parent)) {
-      resourceModelDecorators.push({
-        name: "parentResource",
-        arguments: [{ value: parent, options: { unwrap: true } }],
-      });
-    }
-  }
 
   if (schema.resourceMetadata.IsSingletonResource) {
     resourceModelDecorators.push({

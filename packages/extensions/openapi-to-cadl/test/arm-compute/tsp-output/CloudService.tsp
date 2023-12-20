@@ -66,7 +66,10 @@ interface CloudServices {
     },
     CloudServiceInstanceView
   >;
+}
 
+@armResourceOperations
+interface CloudServicesUpdateDomain {
   @doc("Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get

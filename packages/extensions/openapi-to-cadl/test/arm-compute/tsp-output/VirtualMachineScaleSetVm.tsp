@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.Compute;
 @doc("Describes a virtual machine scale set virtual machine.")
 @parentResource(VirtualMachineScaleSet)
-model VirtualMachineScaleSetVm
+model VirtualMachineScaleSetVM
   is TrackedResource<VirtualMachineScaleSetVMProperties> {
   @doc("The instance ID of the virtual machine.")
   @path
@@ -38,12 +38,12 @@ model VirtualMachineScaleSetVm
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVms {
+interface VirtualMachineScaleSetVMs {
   @doc("Gets a virtual machine from a VM scale set.")
   get is ArmResourceRead<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -56,9 +56,9 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Updates a virtual machine of a VM scale set.")
   update is ArmResourceCreateOrUpdateAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set where the extension should be create or updated.")
       @path
@@ -67,9 +67,9 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Deletes a virtual machine from a VM scale set.")
   delete is ArmResourceDeleteAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -82,9 +82,9 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Gets a list of all virtual machines in a VM scale sets.")
   list is ArmResourceListByParent<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.")
       @query("$filter")
@@ -101,11 +101,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.")
   reimage is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     VirtualMachineScaleSetVMReimageParameters,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -114,11 +114,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.")
   reimageAll is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -127,11 +127,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.")
   deallocate is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -140,11 +140,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.")
   powerOff is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -157,11 +157,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Restarts a virtual machine in a VM scale set.")
   restart is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -170,11 +170,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Starts a virtual machine in a VM scale set.")
   start is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -183,11 +183,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.")
   redeploy is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -196,11 +196,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     RetrieveBootDiagnosticsDataResult,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -213,11 +213,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Performs maintenance on a virtual machine in a VM scale set.")
   performMaintenance is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -226,10 +226,10 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("The operation to simulate the eviction of spot virtual machine in a VM scale set.")
   simulateEviction is ArmResourceActionNoContentSync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path
@@ -238,11 +238,11 @@ interface VirtualMachineScaleSetVms {
   >;
   @doc("Run command on a virtual machine in a VM scale set.")
   runCommand is ArmResourceActionAsync<
-    VirtualMachineScaleSetVm,
+    VirtualMachineScaleSetVM,
     RunCommandInput,
     RunCommandResult,
     {
-      ...BaseParameters<VirtualMachineScaleSetVm>;
+      ...BaseParameters<VirtualMachineScaleSetVM>;
 
       @doc("The name of the VM scale set.")
       @path

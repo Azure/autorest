@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Test;
 @doc("A Test resource")
-@parentResource(Employee)
 @singleton("default")
+@parentResource(Employee)
 model Enroll is TrackedResource<EnrollProperties> {
   @key("default")
   @segment("enrolls")

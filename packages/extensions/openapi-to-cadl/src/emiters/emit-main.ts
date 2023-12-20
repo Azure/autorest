@@ -52,7 +52,7 @@ function getArmResourceImports(program: CadlProgram): string[] {
   const imports: string[] = [];
 
   for (const resource in resourceMetadata) {
-    imports.push(`import "./${resource}.tsp";`);
+    imports.push(`import "./${resourceMetadata[resource].SwaggerModelName}.tsp";`);
   }
 
   if (program.operationGroups.length > 0) {

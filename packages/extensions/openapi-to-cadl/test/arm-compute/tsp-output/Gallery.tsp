@@ -45,6 +45,10 @@ interface Galleries {
   listByResourceGroup is ArmResourceListByParent<Gallery>;
   @doc("List galleries under a subscription.")
   list is ArmListBySubscription<Gallery>;
+}
+
+@armResourceOperations
+interface GallerySharingProfile {
   @doc("Update sharing profile of a gallery.")
   update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
 }

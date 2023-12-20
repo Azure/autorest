@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute;
 @doc("The status of the latest virtual machine scale set rolling upgrade.")
-@parentResource(VirtualMachineScaleSet)
 @singleton("latest")
+@parentResource(VirtualMachineScaleSet)
 model RollingUpgradeStatusInfo
   is TrackedResource<RollingUpgradeStatusInfoProperties> {
   @key("latest")
@@ -21,7 +21,7 @@ model RollingUpgradeStatusInfo
 }
 
 @armResourceOperations
-interface RollingUpgradeStatusInfos {
+interface VirtualMachineScaleSetRollingUpgrades {
   @doc("Gets the status of the latest virtual machine scale set rolling upgrade.")
   getLatest is ArmResourceRead<
     RollingUpgradeStatusInfo,

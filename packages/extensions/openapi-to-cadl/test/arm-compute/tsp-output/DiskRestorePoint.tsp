@@ -21,7 +21,7 @@ model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
 }
 
 @armResourceOperations
-interface DiskRestorePoints {
+interface DiskRestorePoint {
   @doc("Get disk restorePoint resource")
   get is ArmResourceRead<
     DiskRestorePoint,

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./TableServiceProperty.tsp";
+import "./TableServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("Properties of the table, including Id, resource name, resource type.")
-@parentResource(TableServiceProperty)
+@parentResource(TableServiceProperties)
 model Table is ProxyResource<TableProperties> {
   @doc("A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.")
   @maxLength(63)
@@ -24,7 +24,7 @@ model Table is ProxyResource<TableProperties> {
 }
 
 @armResourceOperations
-interface Tables {
+interface Table {
   @doc("Gets the table with the specified table name, under the specified account if it exists.")
   get is ArmResourceRead<Table>;
   @doc("Creates a new table with the specified table name, under the specified account.")

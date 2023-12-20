@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./BlobServiceProperty.tsp";
+import "./BlobServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("Properties of the blob container, including Id, resource name, resource type, Etag.")
-@parentResource(BlobServiceProperty)
+@parentResource(BlobServiceProperties)
 model BlobContainer is ProxyResource<ContainerProperties> {
   @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
   @maxLength(63)

@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Storage;
 @doc("The Get Storage Account ManagementPolicies operation response.")
-@parentResource(StorageAccount)
 @singleton("default")
+@parentResource(StorageAccount)
 model ManagementPolicy is ProxyResource<ManagementPolicyProperties> {
   @key("managementPolicyName")
   @segment("managementPolicies")
