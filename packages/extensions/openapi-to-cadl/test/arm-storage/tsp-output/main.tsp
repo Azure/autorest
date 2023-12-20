@@ -33,6 +33,7 @@ using TypeSpec.Versioning;
   title: "Azure Storage resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v1)
 @doc("The Azure Storage Management API.")
 namespace Microsoft.Storage;
 

@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
   title: "Azure AgFoodPlatform RP Service",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("APIs documentation for Azure AgFoodPlatform Resource Provider Service.")
 namespace Azure.ResourceManager.AgFoodPlatform;
 

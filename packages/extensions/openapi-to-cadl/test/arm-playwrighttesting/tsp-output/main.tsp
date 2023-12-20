@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
   title: "Microsoft AzurePlaywrightService Management API",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("Azure Playwright testing management service")
 namespace Microsoft.AzurePlaywrightService;
 

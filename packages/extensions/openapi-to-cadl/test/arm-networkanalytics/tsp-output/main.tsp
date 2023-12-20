@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
   title: "Azure Network Analytics resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("// FIXME: (miissing-service-description) Add service description")
 namespace Microsoft.NetworkAnalytics;
 

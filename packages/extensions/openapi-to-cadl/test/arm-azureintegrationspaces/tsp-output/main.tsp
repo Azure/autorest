@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
   title: "Azure Integration Spaces resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("The azure integration spaces resource provider.")
 namespace Microsoft.IntegrationSpaces;
 

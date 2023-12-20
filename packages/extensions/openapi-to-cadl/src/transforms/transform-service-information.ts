@@ -1,15 +1,19 @@
 import { CodeModel, ImplementationLocation, ParameterLocation } from "@autorest/codemodel";
+import { getArmCommonTypeVersion } from "../autorest-session";
 import { EndpointParameter, ServiceInformation } from "../interfaces";
+import { getOptions } from "../options";
 import { getFirstEndpoint } from "../utils/get-endpoint";
 import { isConstantSchema } from "../utils/schemas";
 
 export function transformServiceInformation(model: CodeModel): ServiceInformation {
+  const { isArm } = getOptions();
   return {
     name: model.info.title,
     doc: model.info.description ?? "// FIXME: (miissing-service-description) Add service description",
     endpoint: getFirstEndpoint(model),
     endpointParameters: transformEndpointParameters(model),
     version: getApiVersion(model),
+    armCommonTypeVersion: isArm ? getArmCommonTypeVersion() : undefined,
   };
 }
 

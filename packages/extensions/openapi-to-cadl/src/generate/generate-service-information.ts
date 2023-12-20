@@ -19,6 +19,10 @@ export function generateServiceInformation(program: CadlProgram) {
     definitions.push(`@versioned(Versions)`);
   }
 
+  if(isArm && serviceInformation.armCommonTypeVersion) {
+    definitions.push(`@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`);
+  }
+
   if (!isArm && serviceInformation.endpoint) {
     definitions.push(`@server("${serviceInformation.endpoint}", ${JSON.stringify(serviceInformation.doc) ?? ""}`);
     const parametrizedHost = getEndpointParameters(serviceInformation.endpoint);

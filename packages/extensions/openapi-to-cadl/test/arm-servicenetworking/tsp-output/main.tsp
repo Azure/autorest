@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
   title: "Traffic Controller Provider management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("Traffic Controller Provider management API.")
 namespace Microsoft.ServiceNetworking;
 

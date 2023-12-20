@@ -37,8 +37,12 @@ openapi-to-cadl-scope/emitter:
 output-artifact: openapi-to-cadl-files
 
 pipeline:
+  source-swagger-detector:
+    input: openapi-document/multi-api/identity
   openapi-to-cadl: # <- name of plugin
-    input: modelerfour/identity
+    input:
+      - modelerfour/identity
+      - source-swagger-detector
     output-artifact: openapi-to-cadl-files
 
   openapi-to-cadl/emitter:

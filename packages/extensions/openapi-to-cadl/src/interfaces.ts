@@ -67,6 +67,7 @@ export interface ServiceInformation extends WithDoc {
   endpointParameters?: EndpointParameter[];
   produces?: string[];
   consumes?: string[];
+  armCommonTypeVersion?: string;
 }
 
 export interface EndpointParameter extends WithDoc {

@@ -79,6 +79,7 @@
     "eslint": "^8.28.0",
     "ts-loader": "~9.5.1",
     "@types/lodash": "~4.14.168",
-    "@types/pluralize": "^0.0.30"
+    "@types/pluralize": "^0.0.30",
+    "@azure-tools/openapi": "~3.6.0"
   }
 }

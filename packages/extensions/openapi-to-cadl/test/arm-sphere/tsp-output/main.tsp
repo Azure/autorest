@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
   title: "Azure Sphere resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("Azure Sphere resource management API.")
 namespace Microsoft.AzureSphere;
 
