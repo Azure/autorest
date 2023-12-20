@@ -151,14 +151,10 @@ model ProofOfPossessionNonceRequest {
 }
 
 @doc("Result of the action to generate a proof of possession nonce")
-model ProofOfPossessionNonceResponse {
-  ...CertificateProperties;
-}
+model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
 @doc("Response to the action call for count devices in a catalog.")
-model CountDeviceResponse {
-  ...CountElementsResponse;
-}
+model CountDeviceResponse extends CountElementsResponse {}
 
 @doc("Response of the count for elements.")
 model CountElementsResponse {

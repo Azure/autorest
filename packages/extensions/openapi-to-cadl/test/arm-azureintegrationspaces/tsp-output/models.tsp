@@ -251,9 +251,7 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
 model ApplicationResourceListResult is Azure.Core.Page<ApplicationResource>;
 
 @doc("A resource under application.")
-model ApplicationResource {
-  ...ProxyResource;
-
+model ApplicationResource extends ProxyResource {
   @doc("The resource-specific properties for this resource.")
   @visibility("read", "create")
   properties?: ApplicationResourceProperties;

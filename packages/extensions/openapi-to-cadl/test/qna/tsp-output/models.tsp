@@ -270,9 +270,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-model Error {
-  ...Record<unknown>;
-
+model Error extends Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 

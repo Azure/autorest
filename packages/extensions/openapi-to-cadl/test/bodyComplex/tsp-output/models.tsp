@@ -121,19 +121,16 @@ model DictionaryWrapper {
   defaultProgram?: Record<string>;
 }
 
-model Siamese {
-  ...Cat;
+model Siamese extends Cat {
   breed?: string;
 }
 
-model Cat {
-  ...Pet;
+model Cat extends Pet {
   color?: string;
   hates?: Dog[];
 }
 
-model Dog {
-  ...Pet;
+model Dog extends Pet {
   food?: string;
 }
 

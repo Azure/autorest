@@ -182,9 +182,8 @@ model ErrorResponseError {
   type?: string;
 }
 
-model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema {
-  ...Record<unknown>;
-
+model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplicationJsonSchema
+  extends Record<unknown> {
   @doc("""
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists

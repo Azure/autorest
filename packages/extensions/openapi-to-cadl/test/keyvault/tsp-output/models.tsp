@@ -436,9 +436,7 @@ model CertificateItem {
 }
 
 @doc("The certificate management attributes.")
-model CertificateAttributes {
-  ...Attributes;
-
+model CertificateAttributes extends Attributes {
   @doc("""
 softDelete data retention days. Value should be >=7 and <=90 when softDelete
 enabled, otherwise 0.
@@ -482,9 +480,7 @@ model Attributes {
 A Deleted Certificate consisting of its previous id, attributes and its tags,
 as well as information on when it will be purged.
 """)
-model DeletedCertificateBundle {
-  ...CertificateBundle;
-
+model DeletedCertificateBundle extends CertificateBundle {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted
 certificate.
@@ -967,9 +963,7 @@ model CertificateRestoreParameters {
 model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 
 @doc("The deleted certificate item containing metadata about the deleted certificate.")
-model DeletedCertificateItem {
-  ...CertificateItem;
-
+model DeletedCertificateItem extends CertificateItem {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted
 certificate.
@@ -1018,9 +1012,7 @@ model KeyCreateParameters {
 }
 
 @doc("The attributes of a key managed by the key vault service.")
-model KeyAttributes {
-  ...Attributes;
-
+model KeyAttributes extends Attributes {
   @doc("""
 softDelete data retention days. Value should be >=7 and <=90 when softDelete
 enabled, otherwise 0.
@@ -1166,9 +1158,7 @@ model KeyImportParameters {
 }
 
 @doc("A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info")
-model DeletedKeyBundle {
-  ...KeyBundle;
-
+model DeletedKeyBundle extends KeyBundle {
   @doc("The url of the recovery object, used to identify and recover the deleted key.")
   recoveryId?: string;
 
@@ -1351,9 +1341,7 @@ model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
 The deleted key item containing the deleted key metadata and information about
 deletion.
 """)
-model DeletedKeyItem {
-  ...KeyItem;
-
+model DeletedKeyItem extends KeyItem {
   @doc("The url of the recovery object, used to identify and recover the deleted key.")
   recoveryId?: string;
 
@@ -1584,9 +1572,7 @@ model SecretSetParameters {
 }
 
 @doc("The secret management attributes.")
-model SecretAttributes {
-  ...Attributes;
-
+model SecretAttributes extends Attributes {
   @doc("""
 softDelete data retention days. Value should be >=7 and <=90 when softDelete
 enabled, otherwise 0.
@@ -1640,9 +1626,7 @@ backing a certificate, then managed will be true.
 A Deleted Secret consisting of its previous id, attributes and its tags, as
 well as information on when it will be purged.
 """)
-model DeletedSecretBundle {
-  ...SecretBundle;
-
+model DeletedSecretBundle extends SecretBundle {
   @doc("The url of the recovery object, used to identify and recover the deleted secret.")
   recoveryId?: string;
 
@@ -1697,9 +1681,7 @@ a certificate, then managed will be true.
 model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 
 @doc("The deleted secret item containing metadata about the deleted secret.")
-model DeletedSecretItem {
-  ...SecretItem;
-
+model DeletedSecretItem extends SecretItem {
   @doc("The url of the recovery object, used to identify and recover the deleted secret.")
   recoveryId?: string;
 
@@ -1888,9 +1870,7 @@ model DeletedStorageListResult is Azure.Core.Page<DeletedStorageAccountItem>;
 The deleted storage account item containing metadata about the deleted storage
 account.
 """)
-model DeletedStorageAccountItem {
-  ...StorageAccountItem;
-
+model DeletedStorageAccountItem extends StorageAccountItem {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted
 storage account.
@@ -1910,9 +1890,7 @@ storage account.
 A deleted storage account bundle consisting of its previous id, attributes and
 its tags, as well as information on when it will be purged.
 """)
-model DeletedStorageBundle {
-  ...StorageBundle;
-
+model DeletedStorageBundle extends StorageBundle {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted
 storage account.
@@ -2084,9 +2062,7 @@ model DeletedSasDefinitionListResult
 The deleted SAS definition item containing metadata about the deleted SAS
 definition.
 """)
-model DeletedSasDefinitionItem {
-  ...SasDefinitionItem;
-
+model DeletedSasDefinitionItem extends SasDefinitionItem {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted SAS
 definition.
@@ -2106,9 +2082,7 @@ definition.
 A deleted SAS definition bundle consisting of its previous id, attributes and
 its tags, as well as information on when it will be purged.
 """)
-model DeletedSasDefinitionBundle {
-  ...SasDefinitionBundle;
-
+model DeletedSasDefinitionBundle extends SasDefinitionBundle {
   @doc("""
 The url of the recovery object, used to identify and recover the deleted SAS
 definition.

@@ -69,9 +69,7 @@ target=\"blank\">Analytics and Telemetry</a>.
 }
 
 @doc("Context object with previous QnA's information.")
-model QueryDTOContext {
-  ...QueryContextDTO;
-}
+model QueryDTOContext extends QueryContextDTO {}
 
 @doc("Context object with previous QnA's information.")
 model QueryContextDTO {
@@ -126,9 +124,7 @@ model QnASearchResult {
 }
 
 @doc("Context object of the QnA")
-model QnASearchResultContext {
-  ...ContextDTO;
-}
+model QnASearchResultContext extends ContextDTO {}
 
 @doc("Context associated with Qna.")
 model ContextDTO {
@@ -165,9 +161,7 @@ ignored.
 }
 
 @doc("QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object")
-model PromptDTOQna {
-  ...QnAdto;
-}
+model PromptDTOQna extends QnAdto {}
 
 @doc("Q-A object.")
 model QnAdto {
@@ -197,9 +191,7 @@ https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs
 }
 
 @doc("Context of a QnA")
-model QnAdtoContext {
-  ...ContextDTO;
-}
+model QnAdtoContext extends ContextDTO {}
 
 @doc("""
 Error response. As per Microsoft One API guidelines -
@@ -212,9 +204,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-model ErrorResponseError {
-  ...Error;
-}
+model ErrorResponseError extends Error {}
 
 @doc("""
 The error object. As per Microsoft One API guidelines -

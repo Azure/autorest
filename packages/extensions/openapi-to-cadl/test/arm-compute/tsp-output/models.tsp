@@ -1504,9 +1504,7 @@ model VirtualMachineScaleSetStorageProfile {
 }
 
 @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set.")
-model ImageReference {
-  ...SubResource;
-
+model ImageReference extends SubResource {
   @doc("The image publisher.")
   publisher?: string;
 
@@ -1594,9 +1592,7 @@ model VirtualMachineScaleSetManagedDiskParameters {
 }
 
 @doc("Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. **Note:** The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.")
-model DiskEncryptionSetParameters {
-  ...SubResource;
-}
+model DiskEncryptionSetParameters extends SubResource {}
 
 @doc("Specifies the security profile settings for the managed disk. **Note:** It can only be set for Confidential VMs.")
 model VMDiskSecurityProfile {
@@ -2591,17 +2587,15 @@ model RollbackStatusInfo {
 }
 
 @doc("Describes a Virtual Machine Scale Set VM Reimage Parameters.")
-model VirtualMachineScaleSetReimageParameters {
-  ...VirtualMachineScaleSetVMReimageParameters;
-
+model VirtualMachineScaleSetReimageParameters
+  extends VirtualMachineScaleSetVMReimageParameters {
   @doc("The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set.")
   instanceIds?: string[];
 }
 
 @doc("Describes a Virtual Machine Scale Set VM Reimage Parameters.")
-model VirtualMachineScaleSetVMReimageParameters {
-  ...VirtualMachineReimageParameters;
-}
+model VirtualMachineScaleSetVMReimageParameters
+  extends VirtualMachineReimageParameters {}
 
 @doc("Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged")
 model VirtualMachineReimageParameters {
@@ -2977,9 +2971,7 @@ model OSDisk {
 }
 
 @doc("The parameters of a managed disk.")
-model ManagedDiskParameters {
-  ...SubResource;
-
+model ManagedDiskParameters extends SubResource {
   @doc("Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.")
   storageAccountType?: StorageAccountTypes;
 
@@ -3081,9 +3073,7 @@ model NetworkProfile {
 }
 
 @doc("Describes a network interface reference.")
-model NetworkInterfaceReference {
-  ...SubResource;
-
+model NetworkInterfaceReference extends SubResource {
   @doc("Describes a network interface reference properties.")
   properties?: NetworkInterfaceReferenceProperties;
 }
@@ -3531,9 +3521,7 @@ model VirtualMachineCaptureParameters {
 }
 
 @doc("Output of virtual machine capture operation.")
-model VirtualMachineCaptureResult {
-  ...SubResource;
-
+model VirtualMachineCaptureResult extends SubResource {
   @doc("the schema of the captured virtual machine")
   @visibility("read")
   @projectedName("json", "$schema")
@@ -3762,9 +3750,7 @@ model PatchInstallationDetail {
 }
 
 @doc("Describes a Virtual Machine Image.")
-model VirtualMachineImage {
-  ...VirtualMachineImageResource;
-
+model VirtualMachineImage extends VirtualMachineImageResource {
   @doc("Describes the properties of a Virtual Machine Image.")
   properties?: VirtualMachineImageProperties;
 }
@@ -3867,9 +3853,7 @@ model AlternativeOption {
 }
 
 @doc("Virtual machine image resource information.")
-model VirtualMachineImageResource {
-  ...SubResource;
-
+model VirtualMachineImageResource extends SubResource {
   @doc("The name of the resource.")
   name: string;
 
@@ -3953,9 +3937,7 @@ model ProximityPlacementGroupProperties {
   intent?: ProximityPlacementGroupPropertiesIntent;
 }
 
-model SubResourceWithColocationStatus {
-  ...SubResource;
-
+model SubResourceWithColocationStatus extends SubResource {
   @doc("Describes colocation status of a resource in the Proximity Placement Group.")
   colocationStatus?: InstanceViewStatus;
 }
@@ -3967,9 +3949,7 @@ model ProximityPlacementGroupPropertiesIntent {
 }
 
 @doc("Specifies information about the proximity placement group.")
-model ProximityPlacementGroupUpdate {
-  ...UpdateResource;
-}
+model ProximityPlacementGroupUpdate extends UpdateResource {}
 
 @doc("Dedicated Host Group Properties.")
 model DedicatedHostGroupProperties {
@@ -3998,9 +3978,7 @@ model DedicatedHostGroupInstanceView {
 }
 
 @doc("The instance view of a dedicated host that includes the name of the dedicated host. It is used for the response to the instance view of a dedicated host group.")
-model DedicatedHostInstanceViewWithName {
-  ...DedicatedHostInstanceView;
-
+model DedicatedHostInstanceViewWithName extends DedicatedHostInstanceView {
   @doc("The name of the dedicated host.")
   @visibility("read")
   name?: string;
@@ -4133,9 +4111,7 @@ model ImageStorageProfile {
 }
 
 @doc("Describes an Operating System disk.")
-model ImageOSDisk {
-  ...ImageDisk;
-
+model ImageOSDisk extends ImageDisk {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. Possible values are: **Windows,** **Linux.**")
   osType: OperatingSystemTypes;
 
@@ -4168,9 +4144,7 @@ model ImageDisk {
 }
 
 @doc("Describes a data disk.")
-model ImageDataDisk {
-  ...ImageDisk;
-
+model ImageDataDisk extends ImageDisk {
   @doc("Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.")
   lun: int32;
 }
@@ -4316,9 +4290,7 @@ model RestorePointSourceVmosDisk {
 }
 
 @doc("Disk Restore Point details.")
-model DiskRestorePointAttributes {
-  ...SubResourceReadOnly;
-
+model DiskRestorePointAttributes extends SubResourceReadOnly {
   @doc("Encryption at rest settings for disk restore point. It is an optional property that can be specified in the input while creating a restore point.")
   encryption?: RestorePointEncryption;
 
@@ -4413,9 +4385,8 @@ model CapacityReservationGroupInstanceView {
 }
 
 @doc("The instance view of a capacity reservation that includes the name of the capacity reservation. It is used for the response to the instance view of a capacity reservation group.")
-model CapacityReservationInstanceViewWithName {
-  ...CapacityReservationInstanceView;
-
+model CapacityReservationInstanceViewWithName
+  extends CapacityReservationInstanceView {
   @doc("The name of the capacity reservation.")
   @visibility("read")
   name?: string;
@@ -4475,9 +4446,7 @@ model CapacityReservationProperties {
 }
 
 @doc("Api request input for LogAnalytics getRequestRateByInterval Api.")
-model RequestRateByIntervalInput {
-  ...LogAnalyticsInputBase;
-
+model RequestRateByIntervalInput extends LogAnalyticsInputBase {
   @doc("Interval value in minutes used to create LogAnalytics call rate logs.")
   intervalLength: IntervalInMins;
 }
@@ -4526,9 +4495,7 @@ model LogAnalyticsOutput {
 }
 
 @doc("Api request input for LogAnalytics getThrottledRequests Api.")
-model ThrottledRequestsInput {
-  ...LogAnalyticsInputBase;
-}
+model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 
 @doc("Describes the properties of a Run Command metadata.")
 model RunCommandDocumentBase {
@@ -4550,9 +4517,7 @@ model RunCommandDocumentBase {
 }
 
 @doc("Describes the properties of a Run Command.")
-model RunCommandDocument {
-  ...RunCommandDocumentBase;
-
+model RunCommandDocument extends RunCommandDocumentBase {
   @doc("The script to be executed.")
   script: string[];
 
@@ -5692,9 +5657,8 @@ model GalleryImageVersionProperties {
 }
 
 @doc("The publishing profile of a gallery image Version.")
-model GalleryImageVersionPublishingProfile {
-  ...GalleryArtifactPublishingProfileBase;
-}
+model GalleryImageVersionPublishingProfile
+  extends GalleryArtifactPublishingProfileBase {}
 
 @doc("Describes the basic gallery artifact publishing profile.")
 model GalleryArtifactPublishingProfileBase {
@@ -5754,9 +5718,7 @@ model EncryptionImages {
 }
 
 @doc("Contains encryption settings for an OS disk image.")
-model OSDiskImageEncryption {
-  ...DiskImageEncryption;
-
+model OSDiskImageEncryption extends DiskImageEncryption {
   @doc("This property specifies the security profile of an OS disk image.")
   securityProfile?: OSDiskImageSecurityProfile;
 }
@@ -5777,9 +5739,7 @@ model DiskImageEncryption {
 }
 
 @doc("Contains encryption settings for a data disk image.")
-model DataDiskImageEncryption {
-  ...DiskImageEncryption;
-
+model DataDiskImageEncryption extends DiskImageEncryption {
   @doc("This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.")
   lun: int32;
 }
@@ -5822,9 +5782,7 @@ model GalleryImageVersionStorageProfile {
 }
 
 @doc("The source of the gallery artifact version.")
-model GalleryArtifactVersionFullSource {
-  ...GalleryArtifactVersionSource;
-
+model GalleryArtifactVersionFullSource extends GalleryArtifactVersionSource {
   @doc("The resource Id of the source Community Gallery Image.  Only required when using Community Gallery Image as a source.")
   communityGalleryImageId?: string;
 }
@@ -5836,9 +5794,7 @@ model GalleryArtifactVersionSource {
 }
 
 @doc("This is the OS disk image.")
-model GalleryOSDiskImage {
-  ...GalleryDiskImage;
-}
+model GalleryOSDiskImage extends GalleryDiskImage {}
 
 @doc("This is the disk image base class.")
 model GalleryDiskImage {
@@ -5854,9 +5810,7 @@ model GalleryDiskImage {
 }
 
 @doc("The source for the disk image.")
-model GalleryDiskImageSource {
-  ...GalleryArtifactVersionSource;
-
+model GalleryDiskImageSource extends GalleryArtifactVersionSource {
   @doc("The uri of the gallery artifact version source. Currently used to specify vhd/blob source.")
   uri?: string;
 
@@ -5865,17 +5819,14 @@ model GalleryDiskImageSource {
 }
 
 @doc("This is the data disk image.")
-model GalleryDataDiskImage {
-  ...GalleryDiskImage;
-
+model GalleryDataDiskImage extends GalleryDiskImage {
   @doc("This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.")
   lun: int32;
 }
 
 @doc("This is the safety profile of the Gallery Image Version.")
-model GalleryImageVersionSafetyProfile {
-  ...GalleryArtifactSafetyProfileBase;
-
+model GalleryImageVersionSafetyProfile
+  extends GalleryArtifactSafetyProfileBase {
   @doc("Indicates whether this image has been reported as violating Microsoft's policies.")
   @visibility("read")
   reportedForPolicyViolation?: boolean;
@@ -6006,9 +5957,8 @@ model GalleryApplicationVersionProperties {
 }
 
 @doc("The publishing profile of a gallery image version.")
-model GalleryApplicationVersionPublishingProfile {
-  ...GalleryArtifactPublishingProfileBase;
-
+model GalleryApplicationVersionPublishingProfile
+  extends GalleryArtifactPublishingProfileBase {
   @doc("The source image from which the Image Version is going to be created.")
   source: UserArtifactSource;
 
@@ -6057,9 +6007,8 @@ model UserArtifactSettings {
 }
 
 @doc("The safety profile of the Gallery Application Version.")
-model GalleryApplicationVersionSafetyProfile {
-  ...GalleryArtifactSafetyProfileBase;
-}
+model GalleryApplicationVersionSafetyProfile
+  extends GalleryArtifactSafetyProfileBase {}
 
 @doc("Specifies information about the gallery sharing profile update.")
 model SharingUpdate {
@@ -6071,9 +6020,7 @@ model SharingUpdate {
 }
 
 @doc("Base information about the shared gallery resource in pir.")
-model PirSharedGalleryResource {
-  ...PirResource;
-
+model PirSharedGalleryResource extends PirResource {
   @doc("The identifier information of shared gallery.")
   identifier?: SharedGalleryIdentifier;
 }
@@ -6162,9 +6109,7 @@ model SharedGalleryImageVersionStorageProfile {
 }
 
 @doc("This is the OS disk image.")
-model SharedGalleryOSDiskImage {
-  ...SharedGalleryDiskImage;
-}
+model SharedGalleryOSDiskImage extends SharedGalleryDiskImage {}
 
 @doc("This is the disk image base class.")
 model SharedGalleryDiskImage {
@@ -6177,9 +6122,7 @@ model SharedGalleryDiskImage {
 }
 
 @doc("This is the data disk image.")
-model SharedGalleryDataDiskImage {
-  ...SharedGalleryDiskImage;
-
+model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
   @doc("This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.")
   lun: int32;
 }

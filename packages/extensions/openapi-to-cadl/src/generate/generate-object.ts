@@ -18,6 +18,8 @@ export function generateObject(cadlObject: CadlObject) {
   if (cadlObject.extendedParents?.length) {
     const firstParent = cadlObject.extendedParents[0];
     definitions.push(`model ${cadlObject.name} extends ${firstParent} {`);
+  } else if (cadlObject.spreadParents && cadlObject.spreadParents.length === 1) {
+    definitions.push(`model ${cadlObject.name} extends ${cadlObject.spreadParents[0]} {`);
   } else if (cadlObject.alias) {
     const { alias, params } = cadlObject.alias;
 
@@ -26,8 +28,12 @@ export function generateObject(cadlObject: CadlObject) {
     definitions.push(`model ${cadlObject.name} {`);
   }
 
-  for (const parent of cadlObject.spreadParents ?? []) {
-    definitions.push(`...${parent};`);
+  if (cadlObject.spreadParents?.length) {
+    if (cadlObject.extendedParents?.length || cadlObject.spreadParents.length > 1) {
+      for (const parent of cadlObject.spreadParents) {
+        definitions.push(`...${parent};`);
+      }
+    }
   }
 
   definitions = [...definitions, ...getModelPropertiesDeclarations(cadlObject.properties)];

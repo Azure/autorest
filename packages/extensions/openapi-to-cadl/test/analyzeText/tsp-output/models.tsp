@@ -161,9 +161,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-model Error {
-  ...Record<unknown>;
-
+model Error extends Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
@@ -339,9 +337,7 @@ model CreateDeploymentOptions {
 }
 
 @doc("Represents the state of a deployment job.")
-model DeploymentJobState {
-  ...JobState;
-}
+model DeploymentJobState extends JobState {}
 
 @doc("Represents a job's state.")
 model JobState {
@@ -382,17 +378,13 @@ model Warning {
 }
 
 @doc("Represents the state of an export job.")
-model ExportProjectJobState {
-  ...JobState;
-
+model ExportProjectJobState extends JobState {
   @doc("The URL to use in order to download the exported project.")
   resultUrl?: string;
 }
 
 @doc("Represents the state of an import job.")
-model ImportProjectJobState {
-  ...JobState;
-}
+model ImportProjectJobState extends JobState {}
 
 @doc("Represents a list of retrieved trained models.")
 model ProjectTrainedModels is Azure.Core.Page<ProjectTrainedModel>;
@@ -454,9 +446,7 @@ model EvaluationSummary {
 model TrainingJobs is Azure.Core.Page<TrainingJobState>;
 
 @doc("Represents the state of a training job.")
-model TrainingJobState {
-  ...JobState;
-
+model TrainingJobState extends JobState {
   @doc("Represents training tasks detailed result.")
   result: TrainingJobResult;
 }
@@ -498,9 +488,7 @@ model SubTrainingJobState {
 }
 
 @doc("Represents the state of a project deletion job.")
-model ProjectDeletionJobState {
-  ...JobState;
-}
+model ProjectDeletionJobState extends JobState {}
 
 @doc("Represents a list of retrieved languages.")
 model SupportedLanguages is Azure.Core.Page<SupportedLanguage>;

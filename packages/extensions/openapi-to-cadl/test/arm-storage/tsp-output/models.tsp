@@ -1766,9 +1766,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -2250,9 +2248,7 @@ model ImmutableStorageWithVersioning {
 }
 
 @doc("The resource model definition for an Azure Resource Manager resource with an etag.")
-model AzureEntityResource {
-  ...Resource;
-
+model AzureEntityResource extends Resource {
   @doc("Resource Etag.")
   @visibility("read")
   etag?: string;
@@ -2527,24 +2523,18 @@ model TableAccessPolicy {
 }
 
 @doc("The blob container properties be listed out.")
-model ListContainerItem {
-  ...AzureEntityResource;
-
+model ListContainerItem extends AzureEntityResource {
   @doc("The blob container properties be listed out.")
   properties?: ContainerProperties;
 }
 
 @doc("The file share properties be listed out.")
-model FileShareItem {
-  ...AzureEntityResource;
-
+model FileShareItem extends AzureEntityResource {
   @doc("The file share properties be listed out.")
   properties?: FileShareProperties;
 }
 
-model ListQueue {
-  ...Resource;
-
+model ListQueue extends Resource {
   @doc("List Queue resource properties.")
   @projectedName("json", "properties")
   queueProperties?: ListQueueProperties;
