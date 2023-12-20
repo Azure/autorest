@@ -1,7 +1,4 @@
-
-
-``` yaml
-
+```yaml
 library-name: ApiManagement
 namespace: Azure.ResourceManager.ApiManagement
 isAzureSpec: true
@@ -13,13 +10,13 @@ modelerfour:
 skip-serialization-format-xml: true
 
 list-exception:
-- /subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}
+  - /subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}
 
 request-path-is-non-resource:
-# The Id of content type does not meet the criteria of ResourceIdentifier (E.g. /contentTypes/page)
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}
-# The Id of content item does not meet the criteria of ResourceIdentifier (E.g. /contentTypes/page/contentItems/4e3cf6a5-574a-ba08-1f23-2e7a38faa6d8)
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}
+  # The Id of content type does not meet the criteria of ResourceIdentifier (E.g. /contentTypes/page)
+  - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}
+  # The Id of content item does not meet the criteria of ResourceIdentifier (E.g. /contentTypes/page/contentItems/4e3cf6a5-574a-ba08-1f23-2e7a38faa6d8)
+  - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}
 
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}: ApiDiagnostic
@@ -39,17 +36,17 @@ request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions/{sid}: ApiManagementUserSubscription
 
 format-by-name-rules:
-  'tenantId': 'uuid'
-  'ETag': 'etag'
-  'location': 'azure-location'
-  'locations': 'azure-location'
-  'locationName': 'azure-location'
-  '*Uri': 'Uri'
-  '*Uris': 'Uri'
-  'ApiVersionSetId': 'arm-id'
-  'SourceApiId': 'arm-id'
-  'PrivateIPAddresses': 'ip-address'
-  'PublicIPAddresses': 'ip-address'
+  "tenantId": "uuid"
+  "ETag": "etag"
+  "location": "azure-location"
+  "locations": "azure-location"
+  "locationName": "azure-location"
+  "*Uri": "Uri"
+  "*Uris": "Uri"
+  "ApiVersionSetId": "arm-id"
+  "SourceApiId": "arm-id"
+  "PrivateIPAddresses": "ip-address"
+  "PublicIPAddresses": "ip-address"
 
 acronym-mapping:
   CPU: Cpu
@@ -102,8 +99,8 @@ override-operation-name:
   ProductSubscriptions_List: GetAllProductSubscriptionData # temporary - to be removed once the polymorphic resource change is merged.
 
 prepend-rp-prefix:
-- ResourceSkuCapacity
-- ResourceSkuCapacityScaleType
+  - ResourceSkuCapacity
+  - ResourceSkuCapacityScaleType
 
 rename-mapping:
   GatewayHostnameConfigurationContract.properties.negotiateClientCertificate: IsClientCertificateRequired
@@ -156,7 +153,7 @@ rename-mapping:
   DeployConfigurationParameters: ConfigurationDeployContent
   DeployConfigurationParameters.properties.force: ForceDelete
   ApiVersionSetContract: ApiVersionSet
-  AuthorizationServerContract:  ApiManagementAuthorizationServer
+  AuthorizationServerContract: ApiManagementAuthorizationServer
   BackendContract: ApiManagementBackend
   CacheContract: ApiManagementCache
   CertificateContract: ApiManagementCertificate
@@ -265,7 +262,7 @@ rename-mapping:
   ApiRevisionContract.privateUrl: privateUrlString
 
 directive:
-  - remove-operation: 'ApiManagementOperations_List'
+  - remove-operation: "ApiManagementOperations_List"
   - from: definitions.json
     where: $.definitions
     transform: >
@@ -542,5 +539,4 @@ directive:
   - from: swagger-document
     where: $..[?(@.name=='$orderby')]
     transform: $['x-ms-client-name'] = 'orderBy'
-
 ```

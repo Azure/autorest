@@ -19,8 +19,10 @@ export function generateServiceInformation(program: CadlProgram) {
     definitions.push(`@versioned(Versions)`);
   }
 
-  if(isArm && serviceInformation.armCommonTypeVersion) {
-    definitions.push(`@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`);
+  if (isArm && serviceInformation.armCommonTypeVersion) {
+    definitions.push(
+      `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
+    );
   }
 
   if (!isArm && serviceInformation.endpoint) {
