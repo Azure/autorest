@@ -11,7 +11,13 @@ import {
 } from "@autorest/codemodel";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
-import { TypespecOperation, TypespecOperationGroup, TypespecParameter, TypespecParameterLocation, Extension } from "../interfaces";
+import {
+  TypespecOperation,
+  TypespecOperationGroup,
+  TypespecParameter,
+  TypespecParameterLocation,
+  Extension,
+} from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
 import { getPropertyDecorators } from "../utils/decorators";

@@ -52,8 +52,8 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
 
   const armResources = isArm
     ? codeModel.schemas.objects
-      ?.filter((o) => isResourceSchema(o))
-      .map((o) => transformTspArmResource(o as ArmResourceSchema)) ?? []
+        ?.filter((o) => isResourceSchema(o))
+        .map((o) => transformTspArmResource(o as ArmResourceSchema)) ?? []
     : [];
 
   const serviceInformation = transformServiceInformation(codeModel);

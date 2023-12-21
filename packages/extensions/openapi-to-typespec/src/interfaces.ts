@@ -183,22 +183,22 @@ export type TspArmResourceOperation =
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrReplaceSync"
-  | "ArmResourceCreateOrUpdateAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrReplaceSync"
+    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
