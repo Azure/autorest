@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "rename openapi-to-cadl to openapi-to-typespec",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/configuration"
+}
