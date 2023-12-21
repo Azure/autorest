@@ -86,9 +86,9 @@ dependencies:
   '@rush-temp/openapi':
     specifier: file:./projects/openapi.tgz
     version: file:projects/openapi.tgz(prettier@3.1.0)(ts-node@10.9.1)
-  '@rush-temp/openapi-to-cadl':
-    specifier: file:./projects/openapi-to-cadl.tgz
-    version: file:projects/openapi-to-cadl.tgz(jest@29.7.0)
+  '@rush-temp/openapi-to-typespec':
+    specifier: file:./projects/openapi-to-typespec.tgz
+    version: file:projects/openapi-to-typespec.tgz(jest@29.7.0)
   '@rush-temp/schemas':
     specifier: file:./projects/schemas.tgz
     version: file:projects/schemas.tgz
@@ -9316,10 +9316,10 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/openapi-to-cadl.tgz(jest@29.7.0):
-    resolution: {integrity: sha512-yHEsteTUR9G0FlrPi6LxjFpyiz5rUp7IzM8ZkNausGlT9ZWfhBKrzYOuYVTNJJoWS7k5W2La3UpJe8+T4UavHg==, tarball: file:projects/openapi-to-cadl.tgz}
-    id: file:projects/openapi-to-cadl.tgz
-    name: '@rush-temp/openapi-to-cadl'
+  file:projects/openapi-to-typespec.tgz(jest@29.7.0):
+    resolution: {integrity: sha512-RqW7Hnn2Gm4Ytv2iUSt/wcaMZNUG15OZhayym0nAWp4BqpvjnV6UzruHlBu9pth0oZVC0uPK0dqIYZ/rDcLJ6g==, tarball: file:projects/openapi-to-typespec.tgz}
+    id: file:projects/openapi-to-typespec.tgz
+    name: '@rush-temp/openapi-to-typespec'
     version: 0.0.0
     dependencies:
       '@azure-tools/typespec-autorest': 0.37.2(@azure-tools/typespec-azure-core@0.37.2)(@typespec/compiler@0.51.0)(@typespec/http@0.51.0)(@typespec/openapi@0.50.0)(@typespec/rest@0.51.0)(@typespec/versioning@0.51.0)
