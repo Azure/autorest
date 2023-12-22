@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TestClient",
+    "version": "2023-10-12",
+    "description": "For test."
+  },
+  "schemes": ["https"],
+  "host": "management.azure.com",
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Enrolls"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/enrolls/default": {
+      "get": {
+        "operationId": "Enrolls_Get",
+        "tags": ["Enrolls"],
+        "description": "Get a Enroll.",
+        "parameters": [
+          {
+            "$ref": "./common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "employeeName",
+            "in": "path",
+            "description": "Name of employee",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Enroll"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Enroll": {
+      "type": "object",
+      "description": "A Test resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnrollProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": ["read", "create"]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EnrollProperties": {
+      "type": "object",
+      "description": "Enroll properties",
+      "properties": {
+        "country": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Country of employee"
+        },
+        "city": {
+          "type": "string",
+          "description": "City of employee"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

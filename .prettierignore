@@ -338,5 +338,5 @@ packages/extensions/core/test/plugins/*/expected/*.json
 # MICROSOFT SECURITY.md
 /SECURITY.md
 
-# Generated cadl
-packages/extensions/openapi-to-cadl/test/**/*.tsp
+# Generated typespec
+packages/extensions/openapi-to-typespec/test/**/*.tsp

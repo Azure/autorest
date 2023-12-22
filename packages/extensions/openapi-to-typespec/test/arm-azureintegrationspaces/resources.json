@@ -1,0 +1,435 @@
+{
+  "Resources": {
+    "Space": {
+      "Name": "Space",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}",
+          "Method": "GET",
+          "OperationID": "Spaces_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Space"
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}",
+          "Method": "PUT",
+          "OperationID": "Spaces_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Space"
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}",
+          "Method": "PATCH",
+          "OperationID": "Spaces_Patch",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Space"
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}",
+          "Method": "DELETE",
+          "OperationID": "Spaces_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Space"
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces",
+          "Method": "GET",
+          "OperationID": "Spaces_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List Space resources by resource group"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetSpaces",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.IntegrationSpaces/spaces",
+          "Method": "GET",
+          "OperationID": "Spaces_ListBySubscription",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySubscription",
+            "NextPageMethod": "ListBySubscriptionNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List Space resources by subscription ID"
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "Space",
+      "ResourceType": "Microsoft.IntegrationSpaces/spaces",
+      "ResourceKey": "spaceName",
+      "ResourceKeySegment": "spaces",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "Application": {
+      "Name": "Application",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}",
+          "Method": "GET",
+          "OperationID": "Applications_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a Application"
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}",
+          "Method": "PUT",
+          "OperationID": "Applications_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a Application"
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}",
+          "Method": "PATCH",
+          "OperationID": "Applications_Patch",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a Application"
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}",
+          "Method": "DELETE",
+          "OperationID": "Applications_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a Application"
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications",
+          "Method": "GET",
+          "OperationID": "Applications_ListBySpace",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySpace",
+            "NextPageMethod": "ListBySpaceNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List Application resources by Space"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "DeleteBusinessProcessDevelopmentArtifact",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/deleteBusinessProcessDevelopmentArtifact",
+          "Method": "POST",
+          "OperationID": "Applications_DeleteBusinessProcessDevelopmentArtifact",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The delete business process development artifact action."
+        },
+        {
+          "Name": "GetBusinessProcessDevelopmentArtifact",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/getBusinessProcessDevelopmentArtifact",
+          "Method": "POST",
+          "OperationID": "Applications_GetBusinessProcessDevelopmentArtifact",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The get business process development artifact action."
+        },
+        {
+          "Name": "GetBusinessProcessDevelopmentArtifacts",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/listBusinessProcessDevelopmentArtifacts",
+          "Method": "POST",
+          "OperationID": "Applications_ListBusinessProcessDevelopmentArtifacts",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBusinessProcessDevelopmentArtifacts",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "The list business process development artifacts action."
+        },
+        {
+          "Name": "SaveBusinessProcessDevelopmentArtifact",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/saveBusinessProcessDevelopmentArtifact",
+          "Method": "POST",
+          "OperationID": "Applications_SaveBusinessProcessDevelopmentArtifact",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The save business process development artifact action."
+        },
+        {
+          "Name": "ValidateBusinessProcessDevelopmentArtifact",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/validateBusinessProcessDevelopmentArtifact",
+          "Method": "POST",
+          "OperationID": "Applications_ValidateBusinessProcessDevelopmentArtifact",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The validate business process development artifact action."
+        }
+      ],
+      "Parents": ["Space"],
+      "SwaggerModelName": "Application",
+      "ResourceType": "Microsoft.IntegrationSpaces/spaces/applications",
+      "ResourceKey": "applicationName",
+      "ResourceKeySegment": "applications",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "BusinessProcess": {
+      "Name": "BusinessProcess",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}",
+          "Method": "GET",
+          "OperationID": "BusinessProcesses_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a BusinessProcess"
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}",
+          "Method": "PUT",
+          "OperationID": "BusinessProcesses_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a BusinessProcess"
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}",
+          "Method": "PATCH",
+          "OperationID": "BusinessProcesses_Patch",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a BusinessProcess"
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}",
+          "Method": "DELETE",
+          "OperationID": "BusinessProcesses_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a BusinessProcess"
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses",
+          "Method": "GET",
+          "OperationID": "BusinessProcesses_ListByApplication",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByApplication",
+            "NextPageMethod": "ListByApplicationNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List BusinessProcess resources by Application"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["Application"],
+      "SwaggerModelName": "BusinessProcess",
+      "ResourceType": "Microsoft.IntegrationSpaces/spaces/applications/businessProcesses",
+      "ResourceKey": "businessProcessName",
+      "ResourceKeySegment": "businessProcesses",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "BusinessProcessVersion": {
+      "Name": "BusinessProcessVersion",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}/versions/{businessProcessVersion}",
+          "Method": "GET",
+          "OperationID": "BusinessProcessVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a BusinessProcessVersion"
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/businessProcesses/{businessProcessName}/versions",
+          "Method": "GET",
+          "OperationID": "BusinessProcessVersions_ListByBusinessProcess",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByBusinessProcess",
+            "NextPageMethod": "ListByBusinessProcessNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List BusinessProcessVersion resources by BusinessProcess"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["BusinessProcess"],
+      "SwaggerModelName": "BusinessProcessVersion",
+      "ResourceType": "Microsoft.IntegrationSpaces/spaces/applications/businessProcesses/versions",
+      "ResourceKey": "businessProcessVersion",
+      "ResourceKeySegment": "versions",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "InfrastructureResource": {
+      "Name": "InfrastructureResource",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}",
+          "Method": "GET",
+          "OperationID": "InfrastructureResources_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a InfrastructureResource"
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}",
+          "Method": "PUT",
+          "OperationID": "InfrastructureResources_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create a InfrastructureResource"
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}",
+          "Method": "PATCH",
+          "OperationID": "InfrastructureResources_Patch",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update a InfrastructureResource"
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources/{infrastructureResourceName}",
+          "Method": "DELETE",
+          "OperationID": "InfrastructureResources_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a InfrastructureResource"
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/infrastructureResources",
+          "Method": "GET",
+          "OperationID": "InfrastructureResources_ListBySpace",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySpace",
+            "NextPageMethod": "ListBySpaceNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List InfrastructureResource resources by Space"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["Space"],
+      "SwaggerModelName": "InfrastructureResource",
+      "ResourceType": "Microsoft.IntegrationSpaces/spaces/infrastructureResources",
+      "ResourceKey": "infrastructureResourceName",
+      "ResourceKeySegment": "infrastructureResources",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}

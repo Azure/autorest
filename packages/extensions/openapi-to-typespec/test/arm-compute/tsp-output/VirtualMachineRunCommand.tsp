@@ -1,0 +1,70 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VirtualMachine.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.Compute;
+@doc("Describes a Virtual Machine run command.")
+@parentResource(VirtualMachine)
+model VirtualMachineRunCommand
+  is TrackedResource<VirtualMachineRunCommandProperties> {
+  @doc("The name of the virtual machine run command.")
+  @path
+  @key("runCommandName")
+  @segment("runCommands")
+  name: string;
+}
+
+@armResourceOperations
+interface VirtualMachineRunCommands {
+  @doc("The operation to get the run command.")
+  getByVirtualMachine is ArmResourceRead<
+    VirtualMachineRunCommand,
+    {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
+      @doc("The expand expression to apply on the operation.")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+  @doc("The operation to create or update the run command.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
+  @doc("The operation to update the run command.")
+  update is ArmResourcePatchAsync<
+    VirtualMachineRunCommand,
+    VirtualMachineRunCommandProperties
+  >;
+  @doc("The operation to delete the run command.")
+  delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
+  @doc("The operation to get all run commands of a Virtual Machine.")
+  listByVirtualMachine is ArmResourceListByParent<
+    VirtualMachineRunCommand,
+    {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
+      @doc("The expand expression to apply on the operation.")
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+  @doc("Lists all available run commands for a subscription in a location.")
+  list is ArmResourceListAtScope<
+    VirtualMachineRunCommand,
+    LocationScope<VirtualMachineRunCommand>,
+    {
+      ...BaseParameters<VirtualMachineRunCommand>;
+
+      @doc("The location upon which run commands is queried.")
+      @pattern("^[-\\w\\._]+$")
+      @path
+      location: string;
+    }
+  >;
+}

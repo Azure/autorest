@@ -30,7 +30,7 @@ require:
   - $(this-folder)plugin-az.md
   - $(this-folder)plugin-terraform.md
   - $(this-folder)plugin-azure-functions.md
-  - $(this-folder)plugin-openapi-to-cadl.md
+  - $(this-folder)plugin-openapi-to-typespec.md
 
   - $(this-folder)graphs.md
   - $(this-folder)help-configuration.md

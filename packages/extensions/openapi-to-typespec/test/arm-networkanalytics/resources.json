@@ -1,0 +1,291 @@
+{
+  "Resources": {
+    "DataProduct": {
+      "Name": "DataProduct",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "GET",
+          "OperationID": "DataProducts_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data product resource."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "PUT",
+          "OperationID": "DataProducts_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create data product resource."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "PATCH",
+          "OperationID": "DataProducts_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update data product resource."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}",
+          "Method": "DELETE",
+          "OperationID": "DataProducts_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete data product resource."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts",
+          "Method": "GET",
+          "OperationID": "DataProducts_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List data products by resource group."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetDataProducts",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProducts",
+          "Method": "GET",
+          "OperationID": "DataProducts_ListBySubscription",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySubscription",
+            "NextPageMethod": "ListBySubscriptionNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List data products by subscription."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "AddUserRole",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/addUserRole",
+          "Method": "POST",
+          "OperationID": "DataProducts_AddUserRole",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Assign role to the data product."
+        },
+        {
+          "Name": "GenerateStorageAccountSasToken",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/generateStorageAccountSasToken",
+          "Method": "POST",
+          "OperationID": "DataProducts_GenerateStorageAccountSasToken",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Generate sas token for storage account."
+        },
+        {
+          "Name": "GetRolesAssignments",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/listRolesAssignments",
+          "Method": "POST",
+          "OperationID": "DataProducts_ListRolesAssignments",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "List user roles associated with the data product."
+        },
+        {
+          "Name": "RemoveUserRole",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/removeUserRole",
+          "Method": "POST",
+          "OperationID": "DataProducts_RemoveUserRole",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Remove role from the data product."
+        },
+        {
+          "Name": "RotateKey",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/rotateKey",
+          "Method": "POST",
+          "OperationID": "DataProducts_RotateKey",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Initiate key rotation on Data Product."
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "DataProduct",
+      "ResourceType": "Microsoft.NetworkAnalytics/dataProducts",
+      "ResourceKey": "dataProductName",
+      "ResourceKeySegment": "dataProducts",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DataProductsCatalog": {
+      "Name": "DataProductsCatalog",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs/default",
+          "Method": "GET",
+          "OperationID": "DataProductsCatalogs_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data type resource."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetDataProductsCatalogs",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs",
+          "Method": "GET",
+          "OperationID": "DataProductsCatalogs_ListBySubscription",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySubscription",
+            "NextPageMethod": "ListBySubscriptionNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List data catalog by subscription."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "DataProductsCatalog",
+      "ResourceType": "Microsoft.NetworkAnalytics/dataProductsCatalogs",
+      "ResourceKey": "default",
+      "ResourceKeySegment": "dataProductsCatalogs",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "DataType": {
+      "Name": "DataType",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "GET",
+          "OperationID": "DataTypes_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Retrieve data type resource."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "PUT",
+          "OperationID": "DataTypes_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create data type resource."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "PATCH",
+          "OperationID": "DataTypes_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update data type resource."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}",
+          "Method": "DELETE",
+          "OperationID": "DataTypes_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete data type resource."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes",
+          "Method": "GET",
+          "OperationID": "DataTypes_ListByDataProduct",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByDataProduct",
+            "NextPageMethod": "ListByDataProductNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List data type by parent resource."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "DeleteData",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}/deleteData",
+          "Method": "POST",
+          "OperationID": "DataTypes_DeleteData",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete data for data type."
+        },
+        {
+          "Name": "GenerateStorageContainerSasToken",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes/{dataTypeName}/generateStorageContainerSasToken",
+          "Method": "POST",
+          "OperationID": "DataTypes_GenerateStorageContainerSasToken",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Generate sas token for storage container."
+        }
+      ],
+      "Parents": ["DataProduct"],
+      "SwaggerModelName": "DataType",
+      "ResourceType": "Microsoft.NetworkAnalytics/dataProducts/dataTypes",
+      "ResourceKey": "dataTypeName",
+      "ResourceKeySegment": "dataTypes",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}
