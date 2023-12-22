@@ -519,9 +519,7 @@ function convertResourceOtherGetOperations(
           if (!op.fixMe) {
             op.fixMe = [];
           }
-          op.fixMe.push(
-            `// FIXME: ${operation.OperationID} could not be converted to a resource operation`,
-          );
+          op.fixMe.push(`// FIXME: ${operation.OperationID} could not be converted to a resource operation`);
           converted.push(op);
         }
       }
@@ -594,26 +592,26 @@ function buildOperationBodyRequest(operation: Operation, resource: ArmResource):
 
 function buildOperationBaseParameters(operation: Operation, resource: ArmResource): string | undefined {
   const codeModel = getSession().model;
-  const parameters: TypespecParameter[] = [];
-  const resourceBasicParameters = [];
+  const otherParameters: TypespecParameter[] = [];
+  const pathParameters = [];
   resource.GetOperations[0].Path.split("/").forEach((p) => {
     if (p.match(/^{.+}$/)) {
-      resourceBasicParameters.push(p.replace("{", "").replace("}", ""));
+      pathParameters.push(p.replace("{", "").replace("}", ""));
     }
   });
-  resourceBasicParameters.push("api-version");
-  resourceBasicParameters.push("$host");
+  pathParameters.push("api-version");
+  pathParameters.push("$host");
   if (operation.parameters) {
     for (const parameter of operation.parameters) {
-      if (!resourceBasicParameters.includes(parameter.language.default.serializedName)) {
-        parameters.push(transformParameter(parameter, codeModel));
+      if (!pathParameters.includes(parameter.language.default.serializedName)) {
+        otherParameters.push(transformParameter(parameter, codeModel));
       }
     }
   }
 
-  if (parameters.length) {
+  if (otherParameters.length) {
     const params: string[] = [];
-    for (const parameter of parameters) {
+    for (const parameter of otherParameters) {
       params.push(generateParameter(parameter));
     }
     return `{
