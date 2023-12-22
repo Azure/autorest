@@ -516,6 +516,12 @@ function convertResourceOtherGetOperations(
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
           const op = transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model);
           op.operationGroupName = getOperationGroupName(operation.OperationID, resourceMetadata.Name);
+          if (!op.fixMe) {
+            op.fixMe = [];
+          }
+          op.fixMe.push(
+            `// FIXME: ${operation.OperationID} could not be converted to a resource operation`,
+          );
           converted.push(op);
         }
       }
