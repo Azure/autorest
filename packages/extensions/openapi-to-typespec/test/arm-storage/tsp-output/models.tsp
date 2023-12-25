@@ -595,17 +595,6 @@ model Identity {
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
-@doc("UserAssignedIdentity for the resource.")
-model UserAssignedIdentity {
-  @doc("The principal ID of the identity.")
-  @visibility("read")
-  principalId?: string;
-
-  @doc("The client ID of the identity.")
-  @visibility("read")
-  clientId?: string;
-}
-
 @doc("The parameters used to create the storage account.")
 model StorageAccountPropertiesCreateParameters {
   @doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
@@ -1201,6 +1190,21 @@ model PrivateLinkServiceConnectionState {
 
   @doc("A message indicating if changes on the service provider require any updates on the consumer.")
   actionRequired?: string;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
 }
 
 @doc("Blob restore status.")

@@ -254,15 +254,23 @@ model ConsumptionEndpointsProperties {
   ]>;
 }
 
-@doc("User assigned identity properties")
-model UserAssignedIdentity {
-  @doc("The principal ID of the assigned identity.")
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility("read")
-  principalId?: string;
+  id?: string;
 
-  @doc("The client ID of the assigned identity.")
+  @doc("The name of the resource")
   @visibility("read")
-  clientId?: string;
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Details for data catalog properties.")

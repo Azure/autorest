@@ -1705,17 +1705,6 @@ model ResourceName {
   localizedValue?: string;
 }
 
-@doc("User assigned identity properties")
-model UserAssignedIdentity {
-  @doc("The principal ID of the assigned identity.")
-  @visibility("read")
-  principalId?: string;
-
-  @doc("The client ID of the assigned identity.")
-  @visibility("read")
-  clientId?: string;
-}
-
 @doc("The resource model definition representing SKU")
 model Sku {
   @doc("The name of the SKU. Ex - P3. It is typically a letter+number code")
@@ -1732,6 +1721,25 @@ model Sku {
 
   @doc("If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.")
   capacity?: int32;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 model ComputeResourceSchema {
@@ -3551,17 +3559,6 @@ model AmlUserFeature {
 
   @doc("Describes the feature for user experience")
   description?: string;
-}
-
-@doc("An array of operations supported by the resource provider.")
-@pagedResult
-model AmlOperationListResult {
-  @doc("""
-Gets or sets list of AML team account operations supported by the
-AML team account resource provider.
-""")
-  @items
-  value?: AmlOperation[];
 }
 
 @doc("Azure Machine Learning team account REST API operation")

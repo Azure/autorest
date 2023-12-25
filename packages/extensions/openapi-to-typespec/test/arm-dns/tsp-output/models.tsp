@@ -250,6 +250,30 @@ model ZoneProperties {
   resolutionVirtualNetworks?: SubResource[];
 }
 
+@doc("Common properties of an Azure Resource Manager resource")
+model Resource {
+  @doc("Resource ID.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Resource name.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Resource type.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Resource location.")
+  @visibility("read", "create")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  location: string;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
 @doc("Represents the properties of the Dns Resource Reference Request.")
 model DnsResourceReferenceRequest {
   @doc("The properties of the Resource Reference Request.")

@@ -33,7 +33,8 @@ export function getModelsImports(program: TypespecProgram) {
 
   if (isArm) {
     modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
-    namespaces.add(`using Azure.ResourceManager;`);
+    namespaces.add("using Azure.ResourceManager;");
+    namespaces.add("using Azure.ResourceManager.Foundations;");
   }
 
   return {

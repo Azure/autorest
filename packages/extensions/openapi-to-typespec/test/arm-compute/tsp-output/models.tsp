@@ -947,15 +947,6 @@ enum GalleryApplicationCustomActionParameterType {
   LogOutputBlob,
 }
 
-@doc("The List Compute Operation operation response.")
-@pagedResult
-model ComputeOperationListResult {
-  @doc("The list of compute operations")
-  @visibility("read")
-  @items
-  value?: ComputeOperationValue[];
-}
-
 @doc("Describes the properties of a Compute Operation value.")
 model ComputeOperationValue {
   @doc("The origin of the compute operation.")
@@ -2167,6 +2158,27 @@ model ExtendedLocation {
 
   @doc("The type of the extended location.")
   type?: ExtendedLocationTypes;
+}
+
+@doc("The Resource model definition.")
+model Resource {
+  @doc("Resource Id")
+  @visibility("read")
+  id?: string;
+
+  @doc("Resource name")
+  @visibility("read")
+  name?: string;
+
+  @doc("Resource type")
+  @visibility("read")
+  type?: string;
+
+  @doc("Resource location")
+  location: string;
+
+  @doc("Resource tags")
+  tags?: Record<string>;
 }
 
 @doc("Describes a virtual machine scale set virtual machine profile.")

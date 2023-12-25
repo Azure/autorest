@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
-import { ObjectSchema, Operation } from "@autorest/codemodel";
+import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource } from "../interfaces";
 import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
@@ -156,18 +156,10 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
 }
 
 const _ArmCoreTypes = [
-  "Resource",
-  "ProxyResource",
   "TrackedResource",
-  "ErrorAdditionalInfo",
-  "ErrorDetail",
-  "ErrorResponse",
-  "Operation",
-  "OperationListResult",
-  "OperationDisplay",
-  "Origin",
-  "SystemData",
-  "Origin",
+  "ProxyResource",
+  "ExtensionResource",
+  "ResourceProvisioningState",
   "ManagedServiceIdentity",
   "ManagedSystemAssignedIdentity",
   "EntityTag",
@@ -175,10 +167,34 @@ const _ArmCoreTypes = [
   "ResourcePlan",
   "ResourceSku",
   "ManagedBy",
+  "OperationListResult",
+  "Origin",
+  "OperationDisplay",
+  "OperationStatusResult",
+  "ErrorDetail",
+  "ErrorAdditionalInfo",
+  "SystemData",
+  "ManagedIdentityProperties",
+  "ManagedSystemIdentityProperties",
+  "UserAssignedIdentity",
+  "Operation",
+  "ErrorResponse",
 ];
 
-export function filterResourceRelatedObjects(objects: TypespecObject[]): TypespecObject[] {
-  return objects.filter((o) => !_ArmCoreTypes.includes(o.name) && !isGeneratedResourceObject(o.name));
+export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[]): TypespecObject[] {
+  const filtered = [..._ArmCoreTypes];
+  for (const operationGroup of codeModel.operationGroups) {
+    for (const operation of operationGroup.operations) {
+      if (operation.requests?.[0].protocol?.http?.path.match(/^\/providers\/[^/]+\/operations$/)) {
+        const okResponse = operation.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
+        const objectName = (okResponse as SchemaResponse)?.schema?.language.default.name;
+        if (objectName) {
+          filtered.push(objectName);
+        }
+      }
+    }
+  }
+  return objects.filter((o) => !filtered.includes(o.name) && !isGeneratedResourceObject(o.name));
 }
 
 export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {

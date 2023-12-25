@@ -48,6 +48,25 @@ model SpaceResourceProperties {
   description?: string;
 }
 
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
 @doc("The properties of application.")
 model ApplicationProperties {
   @doc("The status of the last operation.")

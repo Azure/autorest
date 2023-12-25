@@ -26,8 +26,7 @@ export function generateServiceInformation(program: TypespecProgram) {
       definitions.push(
         `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
       );
-    }
-    else {
+    } else {
       definitions.push(
         `// FIXME: Common type version ${serviceInformation.armCommonTypeVersion} is not supportted for now.`,
       );
