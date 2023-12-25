@@ -18,7 +18,7 @@ export function generateEnums(typespecEnum: TypespecEnum) {
     enum ${typespecEnum.name} {
         ${typespecEnum.members
           .map((m) => {
-            const kv = `"${m.name}"` !== m.value ? `${m.name}: ${m.value}` : m.value;
+            const kv = `"${m.name}"` !== m.value ? `"${m.name}": ${m.value}` : m.value;
             return `${generateDocs(m)}${kv}`;
           })
           .join(", ")}
