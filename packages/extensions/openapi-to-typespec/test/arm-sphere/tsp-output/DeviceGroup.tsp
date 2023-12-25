@@ -28,7 +28,7 @@ interface DeviceGroups {
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+  update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<DeviceGroup>;
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")

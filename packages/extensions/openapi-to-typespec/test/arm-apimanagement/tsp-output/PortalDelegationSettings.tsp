@@ -44,9 +44,9 @@ interface DelegationSettings {
     }
   >;
   @doc("Update Delegation settings.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     PortalDelegationSettings,
-    PortalDelegationSettingsProperties,
+    PortalDelegationSettings,
     {
       ...BaseParameters<PortalDelegationSettings>;
 

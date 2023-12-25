@@ -28,7 +28,7 @@ interface Products {
   @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
   @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  update is ArmResourcePatchAsync<Product, ProductProperties>;
+  update is ArmCustomPatchAsync<Product, ProductUpdate>;
   @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
   delete is ArmResourceDeleteAsync<Product>;
   @doc("List Product resources by Catalog")

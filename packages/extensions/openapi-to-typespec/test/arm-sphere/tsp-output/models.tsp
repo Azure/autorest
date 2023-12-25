@@ -124,6 +124,12 @@ model Resource {
   systemData?: SystemData;
 }
 
+@doc("The type used for update operations of the Catalog.")
+model CatalogUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
 @doc("The properties of certificate")
 model CertificateProperties {
   @doc("The certificate as a UTF-8 encoded base 64 string.")
@@ -348,10 +354,58 @@ model ProductProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The type used for update operations of the Product.")
+model ProductUpdate {
+  @doc("The updatable properties of the Product.")
+  properties?: ProductUpdateProperties;
+}
+
+@doc("The updatable properties of the Product.")
+model ProductUpdateProperties {
+  @doc("Description of the product")
+  description?: string;
+}
+
+@doc("The type used for update operations of the DeviceGroup.")
+model DeviceGroupUpdate {
+  @doc("The updatable properties of the DeviceGroup.")
+  properties?: DeviceGroupUpdateProperties;
+}
+
+@doc("The updatable properties of the DeviceGroup.")
+model DeviceGroupUpdateProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+}
+
 @doc("Request to the action call to bulk claim devices.")
 model ClaimDevicesRequest {
   @doc("Device identifiers of the devices to be claimed.")
   deviceIdentifiers: string[];
+}
+
+@doc("The type used for update operations of the Device.")
+model DeviceUpdate {
+  @doc("The updatable properties of the Device.")
+  properties?: DeviceUpdateProperties;
+}
+
+@doc("The updatable properties of the Device.")
+model DeviceUpdateProperties {
+  @doc("Device group id")
+  deviceGroupId?: string;
 }
 
 @doc("Request of the action to create a signed device capability image")

@@ -29,9 +29,9 @@ interface Servers {
   @doc("Provisions the specified Analysis Services server based on the configuration specified in the request.")
   create is ArmResourceCreateOrUpdateAsync<AnalysisServicesServer>;
   @doc("Updates the current state of the specified Analysis Services server.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     AnalysisServicesServer,
-    AnalysisServicesServerProperties
+    AnalysisServicesServerUpdateParameters
   >;
   @doc("Deletes the specified Analysis Services server.")
   delete is ArmResourceDeleteAsync<AnalysisServicesServer>;

@@ -1788,6 +1788,18 @@ model Compute {
   disableLocalAuth?: boolean;
 }
 
+@doc("AmlCompute update parameters.")
+model ClusterUpdateParameters {
+  @doc("The properties of the amlCompute.")
+  properties?: ClusterUpdateProperties;
+}
+
+@doc("The properties of a amlCompute that need to be updated.")
+model ClusterUpdateProperties {
+  @doc("Properties of ClusterUpdate")
+  properties?: ScaleSettingsInformation;
+}
+
 @doc("Desired scale settings for the amlCompute.")
 model ScaleSettingsInformation {
   @doc("scale settings for AML Compute")
@@ -2581,6 +2593,21 @@ model CodeConfiguration {
   scoringScript: string;
 }
 
+@doc("Strictly used in update requests.")
+model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
+  @doc("Additional attributes of the entity.")
+  properties?: PartialBatchDeployment;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Mutable batch inference settings per deployment.")
+model PartialBatchDeployment {
+  @doc("Description of the endpoint deployment.")
+  description?: string;
+}
+
 @doc("Base definition for datastore contents configuration.")
 @discriminator("datastoreType")
 model Datastore extends ResourceBase {
@@ -2935,6 +2962,18 @@ If Nodes is not set or set to null, the service will only be started on leader n
 @doc("Abstract Nodes definition")
 @discriminator("nodesValueType")
 model Nodes {}
+
+@doc("Azure Resource Manager resource envelope strictly used in update requests.")
+model PartialJobBasePartialResource {
+  @doc("Additional attributes of the entity.")
+  properties?: PartialJobBase;
+}
+
+@doc("Mutable base definition for a job.")
+model PartialJobBase {
+  @doc("Mutable notification setting for the job")
+  notificationSetting?: PartialNotificationSetting;
+}
 
 @doc("Mutable configuration for notification.")
 model PartialNotificationSetting {
@@ -3544,6 +3583,18 @@ model UserCreatedStorageAccount {
   armResourceId?: ArmResourceId;
 }
 
+@doc("Strictly used in update requests.")
+model PartialRegistryPartialTrackedResource {
+  @doc("Managed service identity (system assigned and/or user assigned identities)")
+  identity?: RegistryPartialManagedServiceIdentity;
+
+  @doc("Sku details required for ARM contract for Autoscaling.")
+  sku?: PartialSku;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
 @doc("Managed service identity (system assigned and/or user assigned identities)")
 model RegistryPartialManagedServiceIdentity extends ManagedServiceIdentity {}
 
@@ -3875,6 +3926,63 @@ model WorkspaceHubConfig {
   defaultWorkspaceResourceGroup?: string;
 }
 
+@doc("The parameters for updating a machine learning workspace.")
+model WorkspaceUpdateParameters {
+  @doc("Managed service identity (system assigned and/or user assigned identities)")
+  identity?: ManagedServiceIdentity;
+
+  @doc("The properties that the machine learning workspace will be updated with.")
+  properties?: WorkspacePropertiesUpdateParameters;
+
+  @doc("Optional. This field is required to be implemented by the RP because AML is supporting more than one tier")
+  sku?: Sku;
+
+  @doc("The resource tags for the machine learning workspace.")
+  tags?: Record<string>;
+}
+
+@doc("The parameters for updating a machine learning workspace.")
+model WorkspacePropertiesUpdateParameters {
+  @doc("ARM id of the application insights associated with this workspace.")
+  applicationInsights?: string;
+
+  @doc("ARM id of the container registry associated with this workspace.")
+  containerRegistry?: string;
+
+  @doc("The description of this workspace.")
+  description?: string;
+
+  enableDataIsolation?: boolean;
+  encryption?: EncryptionUpdateProperties;
+
+  @doc("Settings for feature store type workspace.")
+  featureStoreSettings?: FeatureStoreSettings;
+
+  @doc("The friendly name for this workspace. This name in mutable")
+  friendlyName?: string;
+
+  @doc("The compute name for image build")
+  imageBuildCompute?: string;
+
+  @doc("Managed Network settings for a machine learning workspace.")
+  managedNetwork?: ManagedNetworkSettings;
+
+  @doc("The user assigned identity resource id that represents the workspace identity.")
+  primaryUserAssignedIdentity?: string;
+
+  @doc("Whether requests from Public Network are allowed.")
+  publicNetworkAccess?: PublicNetworkAccessType;
+
+  @doc("The service managed resource settings.")
+  serviceManagedResourcesSettings?: ServiceManagedResourcesSettings;
+
+  @doc("Retention time in days after workspace get soft deleted.")
+  softDeleteRetentionInDays?: int32;
+
+  @doc("Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.")
+  v1LegacyMode?: boolean;
+}
+
 model EncryptionUpdateProperties {
   keyVaultProperties: EncryptionKeyVaultUpdateProperties;
 }
@@ -3897,6 +4005,12 @@ model WorkspaceConnectionPropertiesV2 {
   metadata?: Record<unknown>;
 
   target?: string;
+}
+
+@doc("The properties that the machine learning workspace connection will be updated with.")
+model WorkspaceConnectionUpdateParameter {
+  @doc("The properties that the machine learning workspace connection will be updated with.")
+  properties?: WorkspaceConnectionPropertiesV2;
 }
 
 @doc("Parameters to diagnose a workspace")

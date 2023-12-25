@@ -46,9 +46,9 @@ interface NamedValue {
     }
   >;
   @doc("Updates the specific named value.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     NamedValueContract,
-    NamedValueContractProperties,
+    NamedValueUpdateParameters,
     {
       ...BaseParameters<NamedValueContract>;
 

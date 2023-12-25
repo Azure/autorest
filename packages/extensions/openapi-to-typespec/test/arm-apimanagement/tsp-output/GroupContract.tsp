@@ -43,9 +43,9 @@ interface Group {
     }
   >;
   @doc("Updates the details of the group specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     GroupContract,
-    GroupContractProperties,
+    GroupUpdateParameters,
     {
       ...BaseParameters<GroupContract>;
 

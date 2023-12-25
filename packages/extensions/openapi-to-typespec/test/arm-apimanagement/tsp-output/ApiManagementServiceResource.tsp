@@ -39,9 +39,9 @@ interface ApiManagementService {
   @doc("Creates or updates an API Management service. This is long running operation and could take several minutes to complete.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiManagementServiceResource>;
   @doc("Updates an existing API Management service.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
-    ApiManagementServiceProperties
+    ApiManagementServiceUpdateParameters
   >;
   @doc("Deletes an existing API Management service.")
   delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;

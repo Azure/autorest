@@ -30,7 +30,6 @@ interface OnlineDeployments {
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
   @doc("Create or update Inference Endpoint Deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineDeploymentTrackedResource>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update Online Deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,

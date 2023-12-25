@@ -31,9 +31,9 @@ interface BatchDeployments {
   @doc("Creates/updates a batch inference deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchDeploymentTrackedResource>;
   @doc("Update a batch inference deployment (asynchronous).")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
-    BatchDeployment
+    PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
   @doc("Delete Batch Inference deployment (asynchronous).")
   delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;

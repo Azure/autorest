@@ -24,10 +24,7 @@ interface RoleManagementPolicies {
   @doc("Get the specified role management policy for a resource scope")
   get is ArmResourceRead<RoleManagementPolicy>;
   @doc("Update a role management policy")
-  update is ArmResourcePatchSync<
-    RoleManagementPolicy,
-    RoleManagementPolicyProperties
-  >;
+  update is ArmCustomPatchSync<RoleManagementPolicy, RoleManagementPolicy>;
   @doc("Gets role management policies for a resource scope.")
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }

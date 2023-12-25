@@ -28,7 +28,7 @@ interface FrontendsInterface {
   @doc("Create a Frontend")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Frontend>;
   @doc("Update a Frontend")
-  update is ArmTagsPatchSync<Frontend>;
+  update is ArmCustomPatchSync<Frontend, FrontendUpdate>;
   @doc("Delete a Frontend")
   delete is ArmResourceDeleteAsync<Frontend>;
   @doc("List Frontend resources by TrafficController")

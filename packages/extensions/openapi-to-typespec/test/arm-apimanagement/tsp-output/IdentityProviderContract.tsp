@@ -45,9 +45,9 @@ interface IdentityProvider {
     }
   >;
   @doc("Updates an existing IdentityProvider configuration.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     IdentityProviderContract,
-    IdentityProviderContractProperties,
+    IdentityProviderUpdateParameters,
     {
       ...BaseParameters<IdentityProviderContract>;
 

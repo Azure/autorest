@@ -48,9 +48,9 @@ interface AuthorizationServer {
     }
   >;
   @doc("Updates the details of the authorization server specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     AuthorizationServerContract,
-    AuthorizationServerContractProperties,
+    AuthorizationServerUpdateContract,
     {
       ...BaseParameters<AuthorizationServerContract>;
 

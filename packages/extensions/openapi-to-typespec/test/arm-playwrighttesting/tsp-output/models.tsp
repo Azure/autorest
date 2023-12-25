@@ -133,3 +133,24 @@ model FreeTrialProperties {
   @visibility("read")
   state: FreeTrialState;
 }
+
+@doc("The type used for update operations of the Account.")
+model AccountUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Account.")
+  properties?: AccountUpdateProperties;
+}
+
+@doc("The updatable properties of the Account.")
+model AccountUpdateProperties {
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  regionalAffinity?: EnablementStatus;
+
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  scalableExecution?: EnablementStatus;
+
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  reporting?: EnablementStatus;
+}

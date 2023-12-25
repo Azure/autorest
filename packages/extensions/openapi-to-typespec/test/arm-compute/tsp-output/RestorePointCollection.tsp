@@ -48,9 +48,9 @@ interface RestorePointCollections {
     }
   >;
   @doc("The operation to update the restore point collection.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     RestorePointCollection,
-    RestorePointCollectionProperties,
+    RestorePointCollectionUpdate,
     {
       ...BaseParameters<RestorePointCollection>;
 

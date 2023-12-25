@@ -38,7 +38,7 @@ interface Galleries {
   @doc("Create or update a Shared Image Gallery.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Gallery>;
   @doc("Update a Shared Image Gallery.")
-  update is ArmResourcePatchAsync<Gallery, GalleryProperties>;
+  update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;
   @doc("Delete a Shared Image Gallery.")
   delete is ArmResourceDeleteAsync<Gallery>;
   @doc("List galleries under a resource group.")

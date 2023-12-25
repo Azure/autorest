@@ -738,6 +738,32 @@ model ApiCreateOrUpdatePropertiesWsdlSelector {
   wsdlEndpointName?: string;
 }
 
+@doc("API update contract details.")
+model ApiUpdateContract {
+  @doc("Properties of the API entity that can be updated.")
+  properties?: ApiContractUpdateProperties;
+}
+
+@doc("API update contract properties.")
+model ApiContractUpdateProperties extends ApiEntityBaseContract {
+  @doc("API name.")
+  @maxLength(300)
+  @minLength(1)
+  displayName?: string;
+
+  @doc("Absolute URL of the backend service implementing this API.")
+  @maxLength(2000)
+  @minLength(1)
+  serviceUrl?: string;
+
+  @doc("Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.")
+  @maxLength(400)
+  path?: string;
+
+  @doc("Describes on which protocols the operations in this API can be invoked.")
+  protocols?: Protocol[];
+}
+
 @doc("Paged API Revision list representation.")
 model ApiRevisionListResult is Azure.Core.Page<ApiRevisionContract> {
   @doc("Total record count number across all pages.")
@@ -931,6 +957,28 @@ model ResponseContract {
   headers?: ParameterContract[];
 }
 
+@doc("API Operation Update Contract details.")
+model OperationUpdateContract {
+  @doc("Properties of the API Operation entity that can be updated.")
+  properties?: OperationUpdateContractProperties;
+}
+
+@doc("Operation Update Contract Properties.")
+model OperationUpdateContractProperties extends OperationEntityBaseContract {
+  @doc("Operation Name.")
+  @maxLength(300)
+  @minLength(1)
+  displayName?: string;
+
+  @doc("A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.")
+  method?: string;
+
+  @doc("Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}")
+  @maxLength(1000)
+  @minLength(1)
+  urlTemplate?: string;
+}
+
 @doc("Policy contract Properties.")
 model PolicyContractProperties {
   @doc("Contents of the Policy as defined by the format.")
@@ -1111,6 +1159,24 @@ model IssueContractBaseProperties {
 
   @doc("A resource identifier for the API the issue was created for.")
   apiId?: string;
+}
+
+@doc("Issue update Parameters.")
+model IssueUpdateContract {
+  @doc("Issue entity Update contract properties.")
+  properties?: IssueUpdateContractProperties;
+}
+
+@doc("Issue contract Update Properties.")
+model IssueUpdateContractProperties extends IssueContractBaseProperties {
+  @doc("The issue title.")
+  title?: string;
+
+  @doc("Text describing the issue.")
+  description?: string;
+
+  @doc("A resource identifier for the user created the issue.")
+  userId?: string;
 }
 
 @doc("Issue Comment contract Properties.")
@@ -1316,6 +1382,23 @@ model ApiVersionSetEntityBase {
   versionHeaderName?: string;
 }
 
+@doc("Parameters to update or create an API Version Set Contract.")
+model ApiVersionSetUpdateParameters {
+  @doc("Parameters to update or create an API Version Set Contract.")
+  properties?: ApiVersionSetUpdateParametersProperties;
+}
+
+@doc("Properties used to create or update an API Version Set.")
+model ApiVersionSetUpdateParametersProperties extends ApiVersionSetEntityBase {
+  @doc("Name of API Version Set")
+  @maxLength(100)
+  @minLength(1)
+  displayName?: string;
+
+  @doc("An value that determines where the API Version identifier will be located in a HTTP request.")
+  versioningScheme?: VersioningScheme;
+}
+
 @doc("External OAuth authorization server settings Properties.")
 model AuthorizationServerContractProperties
   extends AuthorizationServerContractBaseProperties {
@@ -1382,6 +1465,36 @@ model TokenBodyParameterContract {
 
   @doc("body parameter value.")
   value: string;
+}
+
+@doc("External OAuth authorization server settings.")
+model AuthorizationServerUpdateContract extends Resource {
+  @doc("Properties of the External OAuth authorization server update Contract.")
+  properties?: AuthorizationServerUpdateContractProperties;
+}
+
+@doc("External OAuth authorization server Update settings contract.")
+model AuthorizationServerUpdateContractProperties
+  extends AuthorizationServerContractBaseProperties {
+  @doc("User-friendly authorization server name.")
+  @maxLength(50)
+  @minLength(1)
+  displayName?: string;
+
+  @doc("Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.")
+  clientRegistrationEndpoint?: string;
+
+  @doc("OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.")
+  authorizationEndpoint?: string;
+
+  @doc("Form of an authorization grant, which the client uses to request the access token.")
+  grantTypes?: GrantType[];
+
+  @doc("Client or app id registered with this authorization server.")
+  clientId?: string;
+
+  @doc("Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.")
+  clientSecret?: string;
 }
 
 @doc("OAuth Server Secrets Contract.")
@@ -1527,6 +1640,23 @@ model BackendTlsProperties {
   validateCertificateName?: boolean;
 }
 
+@doc("Backend update parameters.")
+model BackendUpdateParameters {
+  @doc("Backend entity update contract properties.")
+  properties?: BackendUpdateParameterProperties;
+}
+
+@doc("Parameters supplied to the Update Backend operation.")
+model BackendUpdateParameterProperties extends BackendBaseParameters {
+  @doc("Runtime Url of the Backend.")
+  @maxLength(2000)
+  @minLength(1)
+  url?: string;
+
+  @doc("Backend communication protocol.")
+  protocol?: BackendProtocol;
+}
+
 @doc("Reconnect request parameters.")
 model BackendReconnectContract extends Resource {
   @doc("Reconnect request properties.")
@@ -1552,6 +1682,32 @@ model CacheContractProperties {
   @doc("Location identifier to use cache from (should be either 'default' or valid Azure region identifier)")
   @maxLength(256)
   useFromLocation: string;
+
+  @doc("Original uri of entity in external system cache points to")
+  @maxLength(2000)
+  @projectedName("json", "resourceId")
+  resourceUri?: string;
+}
+
+@doc("Cache update details.")
+model CacheUpdateParameters {
+  @doc("Cache update properties details.")
+  properties?: CacheUpdateProperties;
+}
+
+@doc("Parameters supplied to the Update Cache operation.")
+model CacheUpdateProperties {
+  @doc("Cache description")
+  @maxLength(2000)
+  description?: string;
+
+  @doc("Runtime connection string to cache")
+  @maxLength(300)
+  connectionString?: string;
+
+  @doc("Location identifier to use cache from (should be either 'default' or valid Azure region identifier)")
+  @maxLength(256)
+  useFromLocation?: string;
 
   @doc("Original uri of entity in external system cache points to")
   @maxLength(2000)
@@ -2210,6 +2366,37 @@ model ApimResource {
   tags?: Record<string>;
 }
 
+@doc("Parameter supplied to Update Api Management Service.")
+model ApiManagementServiceUpdateParameters extends ApimResource {
+  @doc("Properties of the API Management service.")
+  properties?: ApiManagementServiceUpdateProperties;
+
+  @doc("SKU properties of the API Management service.")
+  sku?: ApiManagementServiceSkuProperties;
+
+  @doc("Managed service identity of the Api Management service.")
+  identity?: ApiManagementServiceIdentity;
+
+  @doc("ETag of the resource.")
+  @visibility("read")
+  etag?: string;
+
+  @doc("A list of availability zones denoting where the resource needs to come from.")
+  zones?: string[];
+}
+
+@doc("Properties of an API Management service resource description.")
+model ApiManagementServiceUpdateProperties
+  extends ApiManagementServiceBaseProperties {
+  @doc("Publisher email.")
+  @maxLength(100)
+  publisherEmail?: string;
+
+  @doc("Publisher name.")
+  @maxLength(100)
+  publisherName?: string;
+}
+
 @doc("The response of the GetSsoToken operation.")
 model ApiManagementServiceGetSsoTokenResult {
   @doc("Redirect URL to the Publisher Portal containing the SSO token.")
@@ -2292,6 +2479,33 @@ model EmailTemplateParametersContractProperties {
   @minLength(1)
   @pattern("^[A-Za-z0-9-._]+$")
   description?: string;
+}
+
+@doc("Email Template update Parameters.")
+model EmailTemplateUpdateParameters {
+  @doc("Email Template Update contract properties.")
+  properties?: EmailTemplateUpdateParameterProperties;
+}
+
+@doc("Email Template Update Contract properties.")
+model EmailTemplateUpdateParameterProperties {
+  @doc("Subject of the Template.")
+  @maxLength(1000)
+  @minLength(1)
+  subject?: string;
+
+  @doc("Title of the Template.")
+  title?: string;
+
+  @doc("Description of the Email Template.")
+  description?: string;
+
+  @doc("Email Template Body. This should be a valid XDocument")
+  @minLength(1)
+  body?: string;
+
+  @doc("Email Template Parameter values.")
+  parameters?: EmailTemplateParametersContractProperties[];
 }
 
 @doc("Properties of the Gateway contract.")
@@ -2449,6 +2663,29 @@ model GroupCreateParametersProperties {
   externalId?: string;
 }
 
+@doc("Parameters supplied to the Update Group operation.")
+model GroupUpdateParameters {
+  @doc("Group entity update contract properties.")
+  properties?: GroupUpdateParametersProperties;
+}
+
+@doc("Parameters supplied to the Update Group operation.")
+model GroupUpdateParametersProperties {
+  @doc("Group name.")
+  @maxLength(300)
+  @minLength(1)
+  displayName?: string;
+
+  @doc("Group description.")
+  description?: string;
+
+  @doc("Group type.")
+  type?: GroupType;
+
+  @doc("Identifier of the external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory `aad://<tenant>.onmicrosoft.com/groups/<group object id>`; otherwise the value is null.")
+  externalId?: string;
+}
+
 @doc("Paged Group Users list representation.")
 model ApiManagementGroupUserListResult
   is Azure.Core.Page<ApiManagementGroupUserData> {
@@ -2567,6 +2804,23 @@ model IdentityProviderCreateContractProperties
   clientSecret: string;
 }
 
+@doc("Parameters supplied to update Identity Provider")
+model IdentityProviderUpdateParameters {
+  @doc("Identity Provider update properties.")
+  properties?: IdentityProviderUpdateProperties;
+}
+
+@doc("Parameters supplied to the Update Identity Provider operation.")
+model IdentityProviderUpdateProperties extends IdentityProviderBaseParameters {
+  @doc("Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.")
+  @minLength(1)
+  clientId?: string;
+
+  @doc("Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.")
+  @minLength(1)
+  clientSecret?: string;
+}
+
 @doc("Client or app secret used in IdentityProviders, Aad, OpenID or OAuth.")
 model ClientSecretContract {
   @doc("Client or app secret used in IdentityProviders, Aad, OpenID or OAuth.")
@@ -2593,6 +2847,27 @@ Instrumentation key for applicationInsights logger.
 
   @doc("Azure Resource Id of a log target (either Azure Event Hub resource or Azure Application Insights resource).")
   resourceId?: string;
+}
+
+@doc("Logger update contract.")
+model LoggerUpdateContract {
+  @doc("Logger entity update contract properties.")
+  properties?: LoggerUpdateParameters;
+}
+
+@doc("Parameters supplied to the Update Logger operation.")
+model LoggerUpdateParameters {
+  @doc("Logger type.")
+  loggerType?: LoggerType;
+
+  @doc("Logger description.")
+  description?: string;
+
+  @doc("Logger credentials.")
+  credentials?: Record<string>;
+
+  @doc("Whether records are buffered in the logger before publishing. Default is assumed to be true.")
+  isBuffered?: boolean;
 }
 
 @doc("NamedValue Contract properties.")
@@ -2638,6 +2913,30 @@ model NamedValueCreateContractProperties
 
   @doc("Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.")
   @maxLength(4096)
+  value?: string;
+
+  @doc("KeyVault location details of the namedValue.")
+  keyVault?: KeyVaultContractCreateProperties;
+}
+
+@doc("NamedValue update Parameters.")
+model NamedValueUpdateParameters {
+  @doc("NamedValue entity Update contract properties.")
+  properties?: NamedValueUpdateParameterProperties;
+}
+
+@doc("NamedValue Contract properties.")
+model NamedValueUpdateParameterProperties
+  extends NamedValueEntityBaseParameters {
+  @doc("Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.")
+  @maxLength(256)
+  @minLength(1)
+  @pattern("^[A-Za-z0-9-._]+$")
+  displayName?: string;
+
+  @doc("Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.")
+  @maxLength(4096)
+  @minLength(1)
   value?: string;
 
   @doc("KeyVault location details of the namedValue.")
@@ -2789,6 +3088,31 @@ model OpenidConnectProviderContractProperties {
 
   @doc("Client ID of developer console which is the client application.")
   clientId: string;
+
+  @doc("Client Secret of developer console which is the client application.")
+  clientSecret?: string;
+}
+
+@doc("Parameters supplied to the Update OpenID Connect Provider operation.")
+model OpenidConnectProviderUpdateContract {
+  @doc("OpenId Connect Provider Update contract properties.")
+  properties?: OpenidConnectProviderUpdateContractProperties;
+}
+
+@doc("Parameters supplied to the Update OpenID Connect Provider operation.")
+model OpenidConnectProviderUpdateContractProperties {
+  @doc("User-friendly OpenID Connect Provider name.")
+  @maxLength(50)
+  displayName?: string;
+
+  @doc("User-friendly description of OpenID Connect Provider.")
+  description?: string;
+
+  @doc("Metadata endpoint URI.")
+  metadataEndpoint?: string;
+
+  @doc("Client ID of developer console which is the client application.")
+  clientId?: string;
 
   @doc("Client Secret of developer console which is the client application.")
   clientSecret?: string;
@@ -3023,6 +3347,20 @@ model PrivateLinkResourceProperties {
 
   @doc("The private link resource Private link DNS zone name.")
   requiredZoneNames?: string[];
+}
+
+@doc("Product Update parameters.")
+model ProductUpdateParameters {
+  @doc("Product entity Update contract properties.")
+  properties?: ProductUpdateProperties;
+}
+
+@doc("Parameters supplied to the Update Product operation.")
+model ProductUpdateProperties extends ProductEntityBaseParameters {
+  @doc("Product name.")
+  @maxLength(300)
+  @minLength(1)
+  displayName?: string;
 }
 
 @doc("Paged API list representation.")
@@ -3564,6 +3902,47 @@ model SubscriptionCreateParameterProperties {
   allowTracing?: boolean;
 }
 
+@doc("Subscription update details.")
+model SubscriptionUpdateParameters {
+  @doc("Subscription Update contract properties.")
+  properties?: SubscriptionUpdateParameterProperties;
+}
+
+@doc("Parameters supplied to the Update subscription operation.")
+model SubscriptionUpdateParameterProperties {
+  @doc("User identifier path: /users/{userId}")
+  ownerId?: string;
+
+  @doc("Scope like /products/{productId} or /apis or /apis/{apiId}")
+  scope?: string;
+
+  @doc("Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationDate?: utcDateTime;
+
+  @doc("Subscription name.")
+  displayName?: string;
+
+  @doc("Primary subscription key.")
+  @maxLength(256)
+  @minLength(1)
+  primaryKey?: string;
+
+  @doc("Secondary subscription key.")
+  @maxLength(256)
+  @minLength(1)
+  secondaryKey?: string;
+
+  @doc("Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.")
+  state?: SubscriptionState;
+
+  @doc("Comments describing subscription state change by the administrator when the state is changed to the 'rejected'.")
+  stateComment?: string;
+
+  @doc("Determines whether tracing can be enabled")
+  allowTracing?: boolean;
+}
+
 @doc("Subscription keys.")
 model SubscriptionKeysContract {
   @doc("Subscription primary key.")
@@ -3612,6 +3991,18 @@ model AccessInformationCreateParameterProperties {
   @doc("Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.")
   secondaryKey?: string;
 
+  @doc("Determines whether direct access is enabled.")
+  enabled?: boolean;
+}
+
+@doc("Tenant access information update parameters.")
+model AccessInformationUpdateParameters {
+  @doc("Tenant access information update parameter properties.")
+  properties?: AccessInformationUpdateParameterProperties;
+}
+
+@doc("Tenant access information update parameters of the API Management service")
+model AccessInformationUpdateParameterProperties {
   @doc("Determines whether direct access is enabled.")
   enabled?: boolean;
 }
@@ -3787,6 +4178,33 @@ model UserCreateParameterProperties extends UserEntityBaseParameters {
 
   @doc("Determines the type of confirmation e-mail that will be sent to the newly created user.")
   confirmation?: Confirmation;
+}
+
+@doc("User update parameters.")
+model UserUpdateParameters {
+  @doc("User entity update contract properties.")
+  properties?: UserUpdateParametersProperties;
+}
+
+@doc("Parameters supplied to the Update User operation.")
+model UserUpdateParametersProperties extends UserEntityBaseParameters {
+  @doc("Email address. Must not be empty and must be unique within the service instance.")
+  @maxLength(254)
+  @minLength(1)
+  email?: string;
+
+  @doc("User Password.")
+  password?: string;
+
+  @doc("First name.")
+  @maxLength(100)
+  @minLength(1)
+  firstName?: string;
+
+  @doc("Last name.")
+  @maxLength(100)
+  @minLength(1)
+  lastName?: string;
 }
 
 @doc("Generate SSO Url operations response details.")

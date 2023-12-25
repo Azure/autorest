@@ -30,7 +30,7 @@ interface Registries {
   @doc("Create or update registry")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Registry>;
   @doc("Update tags")
-  update is ArmTagsPatchSync<Registry>;
+  update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
   @doc("Delete registry")
   delete is ArmResourceDeleteAsync<Registry>;
   @doc("List registries")

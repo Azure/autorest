@@ -29,9 +29,9 @@ interface InfrastructureResources {
   @doc("Create a InfrastructureResource")
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
   @doc("Update a InfrastructureResource")
-  patch is ArmResourcePatchSync<
+  patch is ArmCustomPatchSync<
     InfrastructureResource,
-    InfrastructureResourceProperties
+    InfrastructureResourceUpdate
   >;
   @doc("Delete a InfrastructureResource")
   delete is ArmResourceDeleteSync<InfrastructureResource>;

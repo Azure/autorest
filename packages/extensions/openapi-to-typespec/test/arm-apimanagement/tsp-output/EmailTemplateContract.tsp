@@ -44,9 +44,9 @@ interface EmailTemplate {
     }
   >;
   @doc("Updates API Management email template")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     EmailTemplateContract,
-    EmailTemplateContractProperties,
+    EmailTemplateUpdateParameters,
     {
       ...BaseParameters<EmailTemplateContract>;
 

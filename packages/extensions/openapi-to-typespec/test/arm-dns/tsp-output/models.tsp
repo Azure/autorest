@@ -275,6 +275,12 @@ model Resource {
   tags?: Record<string>;
 }
 
+@doc("Describes a request to update a DNS zone.")
+model ZoneUpdateOptions {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
 @doc("Represents the properties of the Dns Resource Reference Request.")
 model DnsResourceReferenceRequest {
   @doc("The properties of the Resource Reference Request.")

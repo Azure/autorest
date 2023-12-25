@@ -291,6 +291,21 @@ model AlertProcessingRuleErrorResponseBody {
   details?: AlertProcessingRuleErrorResponseBody[];
 }
 
+@doc("Data contract for patch.")
+model PatchObject {
+  @doc("Properties supported by patch operation.")
+  properties?: PatchProperties;
+
+  @doc("Tags to be updated.")
+  tags?: Record<string>;
+}
+
+@doc("Alert processing rule properties supported by patch.")
+model PatchProperties {
+  @doc("Indicates if the given alert processing rule is enabled or disabled.")
+  enabled?: boolean;
+}
+
 @doc("An error response from the service.")
 @error
 model AlertsManagementErrorResponse {

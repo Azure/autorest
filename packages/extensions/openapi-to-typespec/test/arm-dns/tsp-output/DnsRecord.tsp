@@ -56,9 +56,9 @@ interface RecordSets {
     }
   >;
   @doc("Updates a record set within a DNS zone.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     DnsRecord,
-    RecordSetProperties,
+    DnsRecord,
     {
       ...BaseParameters<DnsRecord>;
 

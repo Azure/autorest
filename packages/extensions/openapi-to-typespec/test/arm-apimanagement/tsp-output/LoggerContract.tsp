@@ -46,9 +46,9 @@ interface Logger {
     }
   >;
   @doc("Updates an existing logger.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     LoggerContract,
-    LoggerContractProperties,
+    LoggerUpdateContract,
     {
       ...BaseParameters<LoggerContract>;
 

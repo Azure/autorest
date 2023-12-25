@@ -28,7 +28,7 @@ interface Devices {
   @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
-  update is ArmResourcePatchAsync<Device, DeviceProperties>;
+  update is ArmCustomPatchAsync<Device, DeviceUpdate>;
   @doc("Delete a Device")
   delete is ArmResourceDeleteAsync<Device>;
   @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")

@@ -50,9 +50,9 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
   @doc("The operation to update the VMSS VM extension.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
-    VirtualMachineExtensionProperties,
+    VirtualMachineScaleSetVMExtensionUpdate,
     {
       ...BaseParameters<VirtualMachineScaleSetVMExtension>;
 

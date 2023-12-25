@@ -47,9 +47,9 @@ interface User {
     }
   >;
   @doc("Updates the details of the user specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     UserContract,
-    UserContractProperties,
+    UserUpdateParameters,
     {
       ...BaseParameters<UserContract>;
 

@@ -56,9 +56,9 @@ interface OpenIdConnectProvider {
     }
   >;
   @doc("Updates the specific OpenID Connect Provider.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
-    OpenidConnectProviderContractProperties,
+    OpenidConnectProviderUpdateContract,
     {
       ...BaseParameters<OpenidConnectProviderContract>;
 

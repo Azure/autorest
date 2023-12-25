@@ -25,10 +25,7 @@ interface AlertProcessingRules {
   @doc("Create or update an alert processing rule.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
   @doc("Enable, disable, or update tags for an alert processing rule.")
-  update is ArmResourcePatchSync<
-    AlertProcessingRule,
-    AlertProcessingRuleProperties
-  >;
+  update is ArmCustomPatchSync<AlertProcessingRule, PatchObject>;
   @doc("Delete an alert processing rule.")
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
   @doc("List all alert processing rules in a resource group.")

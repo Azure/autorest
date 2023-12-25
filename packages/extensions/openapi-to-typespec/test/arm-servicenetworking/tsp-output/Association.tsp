@@ -28,7 +28,7 @@ interface AssociationsInterface {
   @doc("Create a Association")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Association>;
   @doc("Update a Association")
-  update is ArmResourcePatchSync<Association, AssociationProperties>;
+  update is ArmCustomPatchSync<Association, AssociationUpdate>;
   @doc("Delete a Association")
   delete is ArmResourceDeleteAsync<Association>;
   @doc("List Association resources by TrafficController")

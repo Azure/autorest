@@ -73,6 +73,27 @@ model Resource {
   systemData?: SystemData;
 }
 
+@doc("The type used for update operations of the Employee.")
+model EmployeeUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Employee.")
+  properties?: EmployeeUpdateProperties;
+}
+
+@doc("The updatable properties of the Employee.")
+model EmployeeUpdateProperties {
+  @doc("Age of employee")
+  age?: int32;
+
+  @doc("City of employee")
+  city?: string;
+
+  @doc("Profile of employee")
+  profile?: bytes;
+}
+
 @doc("Enroll properties")
 model EnrollProperties {
   @doc("Country of employee")

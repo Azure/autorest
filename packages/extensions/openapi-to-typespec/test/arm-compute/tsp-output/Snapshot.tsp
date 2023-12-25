@@ -31,7 +31,7 @@ interface Snapshots {
   @doc("Creates or updates a snapshot.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Snapshot>;
   @doc("Updates (patches) a snapshot.")
-  update is ArmResourcePatchAsync<Snapshot, SnapshotProperties>;
+  update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
   @doc("Deletes a snapshot.")
   delete is ArmResourceDeleteAsync<Snapshot>;
   @doc("Lists snapshots under a resource group.")

@@ -46,9 +46,9 @@ interface Backend {
     }
   >;
   @doc("Updates an existing backend.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     BackendContract,
-    BackendContractProperties,
+    BackendUpdateParameters,
     {
       ...BaseParameters<BackendContract>;
 

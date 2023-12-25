@@ -30,7 +30,7 @@ interface Workspaces {
   @doc("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Workspace>;
   @doc("Updates a machine learning workspace with the specified parameters.")
-  update is ArmResourcePatchAsync<Workspace, WorkspaceProperties>;
+  update is ArmCustomPatchAsync<Workspace, WorkspaceUpdateParameters>;
   @doc("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteAsync<
     Workspace,

@@ -30,7 +30,7 @@ interface DataProducts {
   @doc("Create data product resource.")
   create is ArmResourceCreateOrUpdateAsync<DataProduct>;
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
   @doc("List data products by resource group.")

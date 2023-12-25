@@ -29,9 +29,9 @@ interface WorkspaceConnections {
   @doc("Create or update machine learning workspaces connections under the specified workspace.")
   create is ArmResourceCreateOrReplaceSync<WorkspaceConnectionPropertiesV2BasicResource>;
   @doc("Update machine learning workspaces connections under the specified workspace.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
-    WorkspaceConnectionPropertiesV2
+    WorkspaceConnectionUpdateParameter
   >;
   @doc("Delete machine learning workspaces connections by name.")
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;

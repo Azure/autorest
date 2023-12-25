@@ -44,9 +44,9 @@ interface Api {
     }
   >;
   @doc("Updates the specified API of the API Management service instance.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ApiContract,
-    ApiContractProperties,
+    ApiUpdateContract,
     {
       ...BaseParameters<ApiContract>;
 

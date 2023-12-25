@@ -27,7 +27,7 @@ interface AvailabilitySets {
   @doc("Create or update an availability set.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AvailabilitySet>;
   @doc("Update an availability set.")
-  update is ArmResourcePatchSync<AvailabilitySet, AvailabilitySetProperties>;
+  update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
   @doc("Delete an availability set.")
   delete is ArmResourceDeleteSync<AvailabilitySet>;
   @doc("Lists all availability sets in a resource group.")

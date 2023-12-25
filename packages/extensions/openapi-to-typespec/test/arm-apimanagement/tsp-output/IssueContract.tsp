@@ -53,9 +53,9 @@ interface ApiIssue {
     }
   >;
   @doc("Updates an existing issue for an API.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     IssueContract,
-    IssueContractProperties,
+    IssueUpdateContract,
     {
       ...BaseParameters<IssueContract>;
 

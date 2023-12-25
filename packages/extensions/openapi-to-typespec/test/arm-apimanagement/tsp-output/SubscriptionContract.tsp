@@ -56,9 +56,9 @@ Notify change in Subscription State.
     }
   >;
   @doc("Updates the details of a subscription specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     SubscriptionContract,
-    SubscriptionContractProperties,
+    SubscriptionUpdateParameters,
     {
       ...BaseParameters<SubscriptionContract>;
 

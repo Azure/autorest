@@ -38,9 +38,9 @@ interface PortalRevision {
   @doc("Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PortalRevisionContract>;
   @doc("Updates the description of specified portal revision or makes it current.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     PortalRevisionContract,
-    PortalRevisionContractProperties,
+    PortalRevisionContract,
     {
       ...BaseParameters<PortalRevisionContract>;
 

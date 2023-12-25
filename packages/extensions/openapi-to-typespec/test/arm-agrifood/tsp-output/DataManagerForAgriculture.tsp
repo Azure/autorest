@@ -31,9 +31,9 @@ interface DataManagerForAgricultureResources {
   @doc("Create or update Data Manager For Agriculture resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataManagerForAgriculture>;
   @doc("Update a Data Manager For Agriculture resource.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
-    DataManagerForAgricultureProperties
+    DataManagerForAgricultureUpdateRequestModel
   >;
   @doc("Delete a Data Manager For Agriculture resource.")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;

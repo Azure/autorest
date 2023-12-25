@@ -27,7 +27,7 @@ interface DiskEncryptionSets {
   @doc("Creates or updates a disk encryption set")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskEncryptionSet>;
   @doc("Updates (patches) a disk encryption set.")
-  update is ArmResourcePatchAsync<DiskEncryptionSet, EncryptionSetProperties>;
+  update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
   @doc("Deletes a disk encryption set.")
   delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
   @doc("Lists all the disk encryption sets under a resource group.")

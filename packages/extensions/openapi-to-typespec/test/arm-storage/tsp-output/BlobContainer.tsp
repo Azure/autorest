@@ -29,7 +29,7 @@ interface BlobContainers {
   @doc("Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ")
   create is ArmResourceCreateOrReplaceSync<BlobContainer>;
   @doc("Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. ")
-  update is ArmResourcePatchSync<BlobContainer, ContainerProperties>;
+  update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
   @doc("Deletes specified container under its account.")
   delete is ArmResourceDeleteSync<BlobContainer>;
   @doc("Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.")

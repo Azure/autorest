@@ -43,9 +43,9 @@ interface SignInSettings {
     }
   >;
   @doc("Update Sign-In settings.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     PortalSigninSettings,
-    PortalSigninSettingProperties,
+    PortalSigninSettings,
     {
       ...BaseParameters<PortalSigninSettings>;
 

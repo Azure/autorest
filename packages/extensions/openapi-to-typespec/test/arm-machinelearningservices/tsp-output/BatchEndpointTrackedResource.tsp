@@ -30,7 +30,6 @@ interface BatchEndpoints {
   get is ArmResourceRead<BatchEndpointTrackedResource>;
   @doc("Creates a batch inference endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchEndpointTrackedResource>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update a batch inference endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,

@@ -46,9 +46,9 @@ interface Gateway {
     }
   >;
   @doc("Updates the details of the gateway specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     GatewayContract,
-    GatewayContractProperties,
+    GatewayContract,
     {
       ...BaseParameters<GatewayContract>;
 

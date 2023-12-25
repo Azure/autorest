@@ -36,10 +36,7 @@ interface GalleryImageVersions {
   @doc("Create or update a gallery image version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryImageVersion>;
   @doc("Update a gallery image version.")
-  update is ArmResourcePatchAsync<
-    GalleryImageVersion,
-    GalleryImageVersionProperties
-  >;
+  update is ArmCustomPatchAsync<GalleryImageVersion, GalleryImageVersionUpdate>;
   @doc("Delete a gallery image version.")
   delete is ArmResourceDeleteAsync<GalleryImageVersion>;
   @doc("List gallery image versions in a gallery image definition.")

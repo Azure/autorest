@@ -31,7 +31,7 @@ interface Compute {
   @doc("Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ComputeResource>;
   @doc("Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.")
-  update is ArmResourcePatchAsync<ComputeResource, {}>;
+  update is ArmCustomPatchAsync<ComputeResource, ClusterUpdateParameters>;
   @doc("Deletes specified Machine Learning compute.")
   delete is ArmResourceDeleteAsync<
     ComputeResource,

@@ -44,9 +44,9 @@ interface Cache {
     }
   >;
   @doc("Updates the details of the cache specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     CacheContract,
-    CacheContractProperties,
+    CacheUpdateParameters,
     {
       ...BaseParameters<CacheContract>;
 

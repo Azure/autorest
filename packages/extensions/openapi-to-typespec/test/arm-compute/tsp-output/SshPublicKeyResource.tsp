@@ -25,9 +25,9 @@ interface SshPublicKeys {
   @doc("Creates a new SSH public key resource.")
   create is ArmResourceCreateOrReplaceSync<SshPublicKeyResource>;
   @doc("Updates a new SSH public key resource.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     SshPublicKeyResource,
-    SshPublicKeyResourceProperties
+    SshPublicKeyUpdateResource
   >;
   @doc("Delete an SSH public key.")
   delete is ArmResourceDeleteSync<SshPublicKeyResource>;

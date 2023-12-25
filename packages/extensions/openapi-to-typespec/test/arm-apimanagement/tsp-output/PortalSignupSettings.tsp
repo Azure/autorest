@@ -43,9 +43,9 @@ interface SignUpSettings {
     }
   >;
   @doc("Update Sign-Up settings.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     PortalSignupSettings,
-    PortalSignupSettingsProperties,
+    PortalSignupSettings,
     {
       ...BaseParameters<PortalSignupSettings>;
 

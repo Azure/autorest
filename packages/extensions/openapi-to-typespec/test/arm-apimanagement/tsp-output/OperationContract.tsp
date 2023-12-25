@@ -46,9 +46,9 @@ interface ApiOperation {
     }
   >;
   @doc("Updates the details of the operation in the API specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     OperationContract,
-    OperationContractProperties,
+    OperationUpdateContract,
     {
       ...BaseParameters<OperationContract>;
 

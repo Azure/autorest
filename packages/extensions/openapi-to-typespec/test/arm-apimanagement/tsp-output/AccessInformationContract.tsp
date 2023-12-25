@@ -45,9 +45,9 @@ interface TenantAccess {
     }
   >;
   @doc("Update tenant access information details.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     AccessInformationContract,
-    AccessInformationContractProperties,
+    AccessInformationUpdateParameters,
     {
       ...BaseParameters<AccessInformationContract>;
 

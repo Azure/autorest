@@ -28,7 +28,7 @@ interface Accounts {
   @doc("Create a Account")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Account>;
   @doc("Update a Account")
-  update is ArmResourcePatchSync<Account, AccountProperties>;
+  update is ArmCustomPatchSync<Account, AccountUpdate>;
   @doc("Delete a Account")
   delete is ArmResourceDeleteAsync<Account>;
   @doc("List Account resources by resource group")

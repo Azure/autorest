@@ -47,9 +47,9 @@ interface ApiVersionSet {
     }
   >;
   @doc("Updates the details of the Api VersionSet specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ApiVersionSetContract,
-    ApiVersionSetContractProperties,
+    ApiVersionSetUpdateParameters,
     {
       ...BaseParameters<ApiVersionSetContract>;
 

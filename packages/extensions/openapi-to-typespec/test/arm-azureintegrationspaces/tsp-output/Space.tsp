@@ -26,7 +26,7 @@ interface Spaces {
   @doc("Create a Space")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
   @doc("Update a Space")
-  patch is ArmResourcePatchSync<Space, SpaceResourceProperties>;
+  patch is ArmCustomPatchSync<Space, SpaceUpdate>;
   @doc("Delete a Space")
   delete is ArmResourceDeleteSync<Space>;
   @doc("List Space resources by resource group")

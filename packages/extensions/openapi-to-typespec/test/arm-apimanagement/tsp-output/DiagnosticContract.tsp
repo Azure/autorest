@@ -47,9 +47,9 @@ interface ApiDiagnostic {
     }
   >;
   @doc("Updates the details of the Diagnostic for an API specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     DiagnosticContract,
-    DiagnosticContractProperties,
+    DiagnosticContract,
     {
       ...BaseParameters<DiagnosticContract>;
 

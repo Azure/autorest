@@ -299,6 +299,30 @@ model PrivateLinkServiceConnectionState {
   actionsRequired?: string;
 }
 
+@doc("DataManagerForAgriculture update request.")
+model DataManagerForAgricultureUpdateRequestModel {
+  @doc("Geo-location where the resource lives.")
+  location?: string;
+
+  @doc("Identity for the resource.")
+  identity?: Identity;
+
+  @doc("Data Manager For Agriculture ARM Resource properties.")
+  properties?: DataManagerForAgricultureUpdateProperties;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Data Manager For Agriculture ARM Resource properties.")
+model DataManagerForAgricultureUpdateProperties {
+  @doc("Sensor integration request model.")
+  sensorIntegration?: SensorIntegration;
+
+  @doc("Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.")
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
 @doc("""
 Arm async operation class.
 Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.

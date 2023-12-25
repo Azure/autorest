@@ -38,9 +38,9 @@ interface CapacityReservationGroups {
   @doc("The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<CapacityReservationGroup>;
   @doc("The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     CapacityReservationGroup,
-    CapacityReservationGroupProperties
+    CapacityReservationGroupUpdate
   >;
   @doc("The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.")
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;

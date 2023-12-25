@@ -82,6 +82,30 @@ model AnalysisServicesServerProperties
   sku?: ResourceSku;
 }
 
+@doc("An object that represents a set of mutable Analysis Services resource properties.")
+model AnalysisServicesServerMutableProperties {
+  @doc("A collection of AS server administrators")
+  asAdministrators?: ServerAdministrators;
+
+  @doc("The SAS container URI to the backup container.")
+  backupBlobContainerUri?: string;
+
+  @doc("The gateway details configured for the AS server.")
+  gatewayDetails?: GatewayDetails;
+
+  @doc("The firewall settings for the AS server.")
+  ipV4FirewallSettings?: IPv4FirewallSettings;
+
+  @doc("How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.")
+  querypoolConnectionMode?: ConnectionMode;
+
+  @doc("The managed mode of the server (0 = not managed, 1 = managed).")
+  managedMode?: ManagedMode;
+
+  @doc("The server monitor mode for AS server")
+  serverMonitorMode?: ServerMonitorMode;
+}
+
 @doc("An array of administrator user identities.")
 model ServerAdministrators {
   @doc("An array of administrator user identities.")
@@ -148,6 +172,18 @@ model Resource {
 
   @doc("Key-value pairs of additional resource provisioning properties.")
   tags?: Record<string>;
+}
+
+@doc("Provision request specification")
+model AnalysisServicesServerUpdateParameters {
+  @doc("The SKU of the Analysis Services resource.")
+  sku?: ResourceSku;
+
+  @doc("Key-value pairs of additional provisioning properties.")
+  tags?: Record<string>;
+
+  @doc("Properties of the provision operation request.")
+  properties?: AnalysisServicesServerMutableProperties;
 }
 
 @doc("An object that represents enumerating SKUs for existing resources.")

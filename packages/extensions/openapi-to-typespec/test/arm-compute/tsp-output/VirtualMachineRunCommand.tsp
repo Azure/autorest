@@ -37,9 +37,9 @@ interface VirtualMachineRunCommands {
   @doc("The operation to create or update the run command.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
   @doc("The operation to update the run command.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
-    VirtualMachineRunCommandProperties
+    VirtualMachineRunCommandUpdate
   >;
   @doc("The operation to delete the run command.")
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;

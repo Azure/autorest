@@ -1,7 +1,4 @@
-
-
-``` yaml
-
+```yaml
 library-name: Analysiservices
 namespace: Azure.ResourceManager.Analysis
 isAzureSpec: true
@@ -17,7 +14,7 @@ rename-mapping:
   Status: AnalysisStatus
   OperationStatus: AnalysisOperationStatus
   AnalysisServicesServers.value: AnalysisResources
-#   SkuEnumerationForNewResourceResult.value: SKUs
+  #   SkuEnumerationForNewResourceResult.value: SKUs
   Resource.sku: AnalysisSku
   AnalysisServicesServer.properties.sku: AnalysisServerSku
   ServerAdministrators.members: AsAdministratorIdentities
@@ -27,7 +24,7 @@ rename-mapping:
   SkuEnumerationForExistingResourceResult: ExistingResourceResultSkuEnumeration
   SkuEnumerationForNewResourceResult: NewResourceResultSkuEnumeration
   CheckServerNameAvailabilityContent: AnalysisServicesServerNameAvailabilityContent
-#   SkuEnumerationForExistingResourceResult.value: ExistingResources
+  #   SkuEnumerationForExistingResourceResult.value: ExistingResources
   AnalysisServicesServer.properties.ipV4FirewallSettings: IPv4FirewallSettings
   AnalysisServicesServer.properties.querypoolConnectionMode: QueryPoolConnectionMode
   CheckServerNameAvailabilityParameters: AnalysisServerNameAvailabilityContent
@@ -48,13 +45,12 @@ rename-mapping:
   GatewayListStatusLive: AnalysisGatewayStatus
   Status.0: Zero
 
-
 format-by-name-rules:
-  'tenantId': 'uuid'
-  'ETag': 'etag'
-  'location': 'azure-location'
-  '*Uri': 'Uri'
-  '*Uris': 'Uri'
+  "tenantId": "uuid"
+  "ETag": "etag"
+  "location": "azure-location"
+  "*Uri": "Uri"
+  "*Uris": "Uri"
 
 acronym-mapping:
   CPU: Cpu
@@ -101,5 +97,4 @@ directive:
   - from: analysisservices.json
     where: $.definitions.SkuDetailsForExistingResource.properties.resourceType
     transform: $["x-ms-format"] = "resource-type"
-
 ```

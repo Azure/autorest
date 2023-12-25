@@ -37,9 +37,9 @@ interface GalleryApplicationVersions {
   @doc("Create or update a gallery Application Version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryApplicationVersion>;
   @doc("Update a gallery Application Version.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
-    GalleryApplicationVersionProperties
+    GalleryApplicationVersionUpdate
   >;
   @doc("Delete a gallery Application Version.")
   delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;

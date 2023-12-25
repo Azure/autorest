@@ -86,6 +86,12 @@ model Resource {
   systemData?: SystemData;
 }
 
+@doc("The type used for update operations of the TrafficController.")
+model TrafficControllerUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
 @doc("Association Properties.")
 model AssociationProperties {
   @doc("Association Type")
@@ -105,6 +111,24 @@ model AssociationSubnet {
   id: string;
 }
 
+@doc("The type used for update operations of the Association.")
+model AssociationUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Association.")
+  properties?: AssociationUpdateProperties;
+}
+
+@doc("The updatable properties of the Association.")
+model AssociationUpdateProperties {
+  @doc("Association Type")
+  associationType?: AssociationType;
+
+  @doc("Association Subnet")
+  subnet?: AssociationSubnetUpdate;
+}
+
 @doc("Association Subnet.")
 model AssociationSubnetUpdate {
   @doc("Association ID.")
@@ -120,4 +144,10 @@ model FrontendProperties {
   @doc("Provisioning State of Traffic Controller Frontend Resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+@doc("The type used for update operations of the Frontend.")
+model FrontendUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
 }

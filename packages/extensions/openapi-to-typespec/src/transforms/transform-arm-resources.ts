@@ -258,40 +258,15 @@ function convertResourceUpdateOperation(
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-      const propertiesProperty = (bodyParam?.schema as ObjectSchema)?.properties?.find(
-        (p) => p.serializedName === "properties",
-      );
-      const tagsProperty = (bodyParam?.schema as ObjectSchema)?.properties?.find((p) => p.serializedName === "tags");
       const fixMe: string[] = [];
-      if (!bodyParam || (!propertiesProperty && !tagsProperty)) {
+      if (!bodyParam) {
         fixMe.push(
           "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
         );
       }
       let kind;
       const templateParameters = [resourceMetadata.SwaggerModelName];
-      if (propertiesProperty) {
-        kind = isLongRunning ? "ArmResourcePatchAsync" : "ArmResourcePatchSync";
-        // TODO: if update properties are different from resource properties, we need to use a different model
-        templateParameters.push(resourcePropertiesModelName);
-        addGeneratedResourceObjectIfNotExits(
-          bodyParam?.schema.language.default.name ?? "",
-          `ResourceUpdateModel<${resourceMetadata.SwaggerModelName}>`,
-        );
-        if (propertiesProperty.schema.language.default.name !== resourcePropertiesModelName) {
-          addGeneratedResourceObjectIfNotExits(
-            propertiesProperty.schema.language.default.name,
-            `ResourceUpdateModelProperties<${resourceMetadata.SwaggerModelName}, ${resourcePropertiesModelName}>`,
-          );
-        }
-      } else if (tagsProperty) {
-        kind = isLongRunning ? "ArmTagsPatchAsync" : "ArmTagsPatchSync";
-        // TODO: if update properties are different from tag properties, we need to use a different model
-        addGeneratedResourceObjectIfNotExits(
-          bodyParam?.schema.language.default.name ?? "",
-          `TagsUpdateModel<${resourceMetadata.SwaggerModelName}>`,
-        );
-      } else if (bodyParam) {
+      if (bodyParam) {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
       } else {

@@ -2182,6 +2182,57 @@ model Resource {
   tags?: Record<string>;
 }
 
+@doc("Describes a Virtual Machine Scale Set.")
+model VirtualMachineScaleSetUpdate extends UpdateResource {
+  @doc("The virtual machine scale set sku.")
+  sku?: Sku;
+
+  @doc("The purchase plan when deploying a virtual machine scale set from VM Marketplace images.")
+  plan?: Plan;
+
+  @doc("Describes the properties of a Virtual Machine Scale Set.")
+  properties?: VirtualMachineScaleSetUpdateProperties;
+
+  @doc("The identity of the virtual machine scale set, if configured.")
+  identity?: VirtualMachineScaleSetIdentity;
+}
+
+@doc("Describes the properties of a Virtual Machine Scale Set.")
+model VirtualMachineScaleSetUpdateProperties {
+  @doc("The upgrade policy.")
+  upgradePolicy?: UpgradePolicy;
+
+  @doc("Policy for automatic repairs.")
+  automaticRepairsPolicy?: AutomaticRepairsPolicy;
+
+  @doc("The virtual machine profile.")
+  virtualMachineProfile?: VirtualMachineScaleSetUpdateVMProfile;
+
+  @doc("Specifies whether the Virtual Machine Scale Set should be overprovisioned.")
+  overprovision?: boolean;
+
+  @doc("When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.")
+  doNotRunExtensionsOnOverprovisionedVMs?: boolean;
+
+  @doc("When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.")
+  singlePlacementGroup?: boolean;
+
+  @doc("Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type.")
+  additionalCapabilities?: AdditionalCapabilities;
+
+  @doc("Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set.")
+  scaleInPolicy?: ScaleInPolicy;
+
+  @doc("Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01.")
+  proximityPlacementGroup?: SubResource;
+
+  @doc("Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance.")
+  priorityMixPolicy?: PriorityMixPolicy;
+
+  @doc("Specifies the Spot Restore properties for the virtual machine scale set.")
+  spotRestorePolicy?: SpotRestorePolicy;
+}
+
 @doc("Describes a virtual machine scale set virtual machine profile.")
 model VirtualMachineScaleSetUpdateVMProfile {
   @doc("The virtual machine scale set OS profile.")
@@ -2464,6 +2515,20 @@ model OrchestrationServiceSummary {
   serviceState?: OrchestrationServiceState;
 }
 
+@doc("Describes a Virtual Machine Scale Set Extension.")
+model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
+  @doc("The name of the extension.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Resource type")
+  @visibility("read")
+  type?: string;
+
+  @doc("Describes the properties of a Virtual Machine Scale Set Extension.")
+  properties?: VirtualMachineScaleSetExtensionProperties;
+}
+
 @doc("The Virtual Machine Scale Set List Skus operation response.")
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
@@ -2694,6 +2759,53 @@ model OrchestrationServiceStateInput {
 
   @doc("The action to be performed.")
   action: OrchestrationServiceStateAction;
+}
+
+@doc("Describes a VMSS VM Extension.")
+model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
+  @doc("The name of the extension.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Resource type")
+  @visibility("read")
+  type?: string;
+
+  @doc("Describes the properties of a Virtual Machine Extension.")
+  properties?: VirtualMachineExtensionUpdateProperties;
+}
+
+@doc("Describes the properties of a Virtual Machine Extension.")
+model VirtualMachineExtensionUpdateProperties {
+  @doc("How the extension handler should be forced to update even if the extension configuration has not changed.")
+  forceUpdateTag?: string;
+
+  @doc("The name of the extension handler publisher.")
+  publisher?: string;
+
+  @doc("Specifies the type of the extension; an example is \"CustomScriptExtension\".")
+  type?: string;
+
+  @doc("Specifies the version of the script handler.")
+  typeHandlerVersion?: string;
+
+  @doc("Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.")
+  autoUpgradeMinorVersion?: boolean;
+
+  @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
+  enableAutomaticUpgrade?: boolean;
+
+  @doc("Json formatted public settings for the extension.")
+  settings?: Record<unknown>;
+
+  @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
+  protectedSettings?: Record<unknown>;
+
+  @doc("Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.")
+  suppressFailures?: boolean;
+
+  @doc("The extensions protected settings that are passed by reference, and consumed from key vault")
+  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
 }
 
 @doc("Describes the properties of a virtual machine scale set virtual machine.")
@@ -3283,6 +3395,12 @@ model RetrieveBootDiagnosticsDataResult {
   serialConsoleLogBlobUri?: string;
 }
 
+@doc("Describes a Virtual Machine Extension.")
+model VirtualMachineExtensionUpdate extends UpdateResource {
+  @doc("Describes the properties of a Virtual Machine Extension.")
+  properties?: VirtualMachineExtensionUpdateProperties;
+}
+
 @doc("Describes the properties of a Virtual Machine.")
 model VirtualMachineProperties {
   @doc("Specifies the hardware settings for the virtual machine.")
@@ -3551,6 +3669,21 @@ model VirtualMachineCaptureResult extends SubResource {
   @doc("a list of resource items of the captured virtual machine")
   @visibility("read")
   resources?: Record<unknown>[];
+}
+
+@doc("Describes a Virtual Machine Update.")
+model VirtualMachineUpdate extends UpdateResource {
+  @doc("Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.")
+  plan?: Plan;
+
+  @doc("Describes the properties of a Virtual Machine.")
+  properties?: VirtualMachineProperties;
+
+  @doc("The identity of the virtual machine, if configured.")
+  identity?: VirtualMachineIdentity;
+
+  @doc("The virtual machine zones.")
+  zones?: string[];
 }
 
 @doc("Describes the properties of an AssessPatches result.")
@@ -3926,6 +4059,15 @@ model AvailabilitySetProperties {
   statuses?: InstanceViewStatus[];
 }
 
+@doc("Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.")
+model AvailabilitySetUpdate extends UpdateResource {
+  @doc("The instance view of a resource.")
+  properties?: AvailabilitySetProperties;
+
+  @doc("Sku of the availability set")
+  sku?: Sku;
+}
+
 @doc("Describes the properties of a Proximity Placement Group.")
 model ProximityPlacementGroupProperties {
   @doc("Specifies the type of the proximity placement group. Possible values are: **Standard** : Co-locate resources within an Azure region or Availability Zone. **Ultra** : For future use.")
@@ -4031,6 +4173,15 @@ model DedicatedHostGroupPropertiesAdditionalCapabilities {
   ultraSSDEnabled?: boolean;
 }
 
+@doc("Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated.")
+model DedicatedHostGroupUpdate extends UpdateResource {
+  @doc("Dedicated Host Group Properties.")
+  properties?: DedicatedHostGroupProperties;
+
+  @doc("Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.")
+  zones?: string[];
+}
+
 @doc("Properties of the dedicated host.")
 model DedicatedHostProperties {
   @doc("Fault domain of the dedicated host within a dedicated host group.")
@@ -4069,6 +4220,15 @@ model DedicatedHostProperties {
   timeCreated?: utcDateTime;
 }
 
+@doc("Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated.")
+model DedicatedHostUpdate extends UpdateResource {
+  @doc("Properties of the dedicated host.")
+  properties?: DedicatedHostProperties;
+
+  @doc("[List all available dedicated host sizes for resizing] (https://docs.microsoft.com/rest/api/compute/dedicated-hosts/listavailablesizes). Resizing can be only used to scale up DedicatedHost. Only name is required to be set. ")
+  sku?: Sku;
+}
+
 @doc("The List Dedicated Host sizes operation response.")
 @pagedResult
 model DedicatedHostSizeListResult {
@@ -4081,6 +4241,12 @@ model DedicatedHostSizeListResult {
 model SshPublicKeyResourceProperties {
   @doc("SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.")
   publicKey?: string;
+}
+
+@doc("Specifies information about the SSH public key.")
+model SshPublicKeyUpdateResource extends UpdateResource {
+  @doc("Properties of the SSH public key.")
+  properties?: SshPublicKeyResourceProperties;
 }
 
 @doc("Response from generation of an SSH key pair.")
@@ -4160,6 +4326,12 @@ model ImageDisk {
 model ImageDataDisk extends ImageDisk {
   @doc("Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.")
   lun: int32;
+}
+
+@doc("The source user image virtual hard disk. Only tags may be updated.")
+model ImageUpdate extends UpdateResource {
+  @doc("Describes the properties of an Image.")
+  properties?: ImageProperties;
 }
 
 @doc("The restore point collection properties.")
@@ -4376,6 +4548,12 @@ model DiskRestorePointReplicationStatus {
   completionPercent?: int32;
 }
 
+@doc("Update Restore Point collection parameters.")
+model RestorePointCollectionUpdate extends UpdateResource {
+  @doc("The restore point collection properties.")
+  properties?: RestorePointCollectionProperties;
+}
+
 @doc("capacity reservation group Properties.")
 model CapacityReservationGroupProperties {
   @doc("A list of all capacity reservation resource ids that belong to capacity reservation group.")
@@ -4425,6 +4603,12 @@ model CapacityReservationUtilization {
   virtualMachinesAllocated?: SubResourceReadOnly[];
 }
 
+@doc("Specifies information about the capacity reservation group. Only tags can be updated.")
+model CapacityReservationGroupUpdate extends UpdateResource {
+  @doc("capacity reservation group Properties.")
+  properties?: CapacityReservationGroupProperties;
+}
+
 @doc("Properties of the Capacity reservation.")
 model CapacityReservationProperties {
   @doc("A unique id generated and assigned to the capacity reservation by the platform which does not change throughout the lifetime of the resource.")
@@ -4456,6 +4640,15 @@ model CapacityReservationProperties {
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCreated?: utcDateTime;
+}
+
+@doc("Specifies information about the capacity reservation. Only tags and sku.capacity can be updated.")
+model CapacityReservationUpdate extends UpdateResource {
+  @doc("Properties of the Capacity reservation.")
+  properties?: CapacityReservationProperties;
+
+  @doc("SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.")
+  sku?: Sku;
 }
 
 @doc("Api request input for LogAnalytics getRequestRateByInterval Api.")
@@ -4677,6 +4870,12 @@ model VirtualMachineRunCommandInstanceView {
 
   @doc("The resource status information.")
   statuses?: InstanceViewStatus[];
+}
+
+@doc("Describes a Virtual Machine run command.")
+model VirtualMachineRunCommandUpdate extends UpdateResource {
+  @doc("Describes the properties of a Virtual Machine run command.")
+  properties?: VirtualMachineRunCommandProperties;
 }
 
 @doc("The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.")
@@ -4960,6 +5159,84 @@ model DiskSecurityProfile {
   secureVMDiskEncryptionSetId?: string;
 }
 
+@doc("Disk update resource.")
+model DiskUpdate {
+  @doc("Disk resource update properties.")
+  properties?: DiskUpdateProperties;
+
+  @doc("Resource tags")
+  tags?: Record<string>;
+
+  @doc("The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.")
+  sku?: DiskSku;
+}
+
+@doc("Disk resource update properties.")
+model DiskUpdateProperties {
+  @doc("the Operating System type.")
+  osType?: OperatingSystemTypes;
+
+  @doc("If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.")
+  diskSizeGB?: int32;
+
+  @doc("Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot.")
+  encryptionSettingsCollection?: EncryptionSettingsCollection;
+
+  @doc("The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.")
+  @projectedName("json", "diskIOPSReadWrite")
+  diskIopsReadWrite?: int32;
+
+  @doc("The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
+  diskMBpsReadWrite?: int32;
+
+  @doc("The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.")
+  @projectedName("json", "diskIOPSReadOnly")
+  diskIopsReadOnly?: int32;
+
+  @doc("The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
+  diskMBpsReadOnly?: int32;
+
+  @doc("The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.")
+  maxShares?: int32;
+
+  @doc("Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.")
+  encryption?: Encryption;
+
+  @doc("Policy for accessing the disk via network.")
+  networkAccessPolicy?: NetworkAccessPolicy;
+
+  @doc("ARM id of the DiskAccess resource for using private endpoints on disks.")
+  diskAccessId?: string;
+
+  @doc("Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.")
+  tier?: string;
+
+  @doc("Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.")
+  burstingEnabled?: boolean;
+
+  @doc("Purchase plan information to be added on the OS disk")
+  purchasePlan?: DiskPurchasePlan;
+
+  @doc("List of supported capabilities to be added on the OS disk.")
+  supportedCapabilities?: SupportedCapabilities;
+
+  @doc("Properties of the disk for which update is pending.")
+  @visibility("read")
+  propertyUpdatesInProgress?: PropertyUpdatesInProgress;
+
+  @doc("Indicates the OS on a disk supports hibernation.")
+  supportsHibernation?: boolean;
+
+  @doc("Policy for controlling export on the disk.")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  @doc("Additional authentication requirements when exporting or uploading to a disk or snapshot.")
+  dataAccessAuthMode?: DataAccessAuthMode;
+
+  @doc("Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.")
+  optimizedForFrequentAttach?: boolean;
+}
+
 @doc("Data used for requesting a SAS.")
 model GrantAccessData {
   @doc("The Access Level, accepted values include None, Read, Write.")
@@ -5032,6 +5309,12 @@ model PrivateLinkServiceConnectionState {
 
   @doc("A message indicating if changes on the service provider require any updates on the consumer.")
   actionsRequired?: string;
+}
+
+@doc("Used for updating a disk access resource.")
+model DiskAccessUpdate {
+  @doc("Resource tags")
+  tags?: Record<string>;
 }
 
 @doc("A list of private link resources")
@@ -5127,6 +5410,33 @@ model KeyForDiskEncryptionSet {
 
   @doc("Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.")
   keyUrl: string;
+}
+
+@doc("disk encryption set update resource.")
+model DiskEncryptionSetUpdate {
+  @doc("disk encryption set resource update properties.")
+  properties?: DiskEncryptionSetUpdateProperties;
+
+  @doc("Resource tags")
+  tags?: Record<string>;
+
+  @doc("The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.")
+  identity?: EncryptionSetIdentity;
+}
+
+@doc("disk encryption set resource update properties.")
+model DiskEncryptionSetUpdateProperties {
+  @doc("The type of key used to encrypt the data of the disk.")
+  encryptionType?: DiskEncryptionSetType;
+
+  @doc("Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots")
+  activeKey?: KeyForDiskEncryptionSet;
+
+  @doc("Set this flag to true to enable auto-updating of this disk encryption set to the latest key version.")
+  rotationToLatestKeyVersionEnabled?: boolean;
+
+  @doc("Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property.")
+  federatedClientId?: string;
 }
 
 @doc("The List resources which are encrypted with the disk encryption set.")
@@ -5306,6 +5616,51 @@ model CopyCompletionError {
 
   @doc("Indicates the error message if the background copy of a resource created via the CopyStart operation fails.")
   errorMessage: string;
+}
+
+@doc("Snapshot update resource.")
+model SnapshotUpdate {
+  @doc("Snapshot resource update properties.")
+  properties?: SnapshotUpdateProperties;
+
+  @doc("Resource tags")
+  tags?: Record<string>;
+
+  @doc("The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot")
+  sku?: SnapshotSku;
+}
+
+@doc("Snapshot resource update properties.")
+model SnapshotUpdateProperties {
+  @doc("the Operating System type.")
+  osType?: OperatingSystemTypes;
+
+  @doc("If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.")
+  diskSizeGB?: int32;
+
+  @doc("Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot.")
+  encryptionSettingsCollection?: EncryptionSettingsCollection;
+
+  @doc("Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.")
+  encryption?: Encryption;
+
+  @doc("Policy for accessing the disk via network.")
+  networkAccessPolicy?: NetworkAccessPolicy;
+
+  @doc("ARM id of the DiskAccess resource for using private endpoints on disks.")
+  diskAccessId?: string;
+
+  @doc("Indicates the OS on a snapshot supports hibernation.")
+  supportsHibernation?: boolean;
+
+  @doc("Policy for controlling export on the disk.")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  @doc("Additional authentication requirements when exporting or uploading to a disk or snapshot.")
+  dataAccessAuthMode?: DataAccessAuthMode;
+
+  @doc("List of supported capabilities for the image from which the OS disk was created.")
+  supportedCapabilities?: SupportedCapabilities;
 }
 
 @doc("The List Resource Skus operation response.")
@@ -5524,6 +5879,12 @@ model RegionalSharingStatus {
   details?: string;
 }
 
+@doc("Specifies information about the Shared Image Gallery that you want to update.")
+model GalleryUpdate extends UpdateResourceDefinition {
+  @doc("Describes the properties of a Shared Image Gallery.")
+  properties?: GalleryProperties;
+}
+
 @doc("The Update Resource model definition.")
 model UpdateResourceDefinition {
   @doc("Resource Id")
@@ -5647,6 +6008,12 @@ model GalleryImageFeature {
 
   @doc("The value of the gallery image feature.")
   value?: string;
+}
+
+@doc("Specifies information about the gallery image definition that you want to update.")
+model GalleryImageUpdate extends UpdateResourceDefinition {
+  @doc("Describes the properties of a gallery image definition.")
+  properties?: GalleryImageProperties;
 }
 
 @doc("Describes the properties of a gallery image version.")
@@ -5894,6 +6261,12 @@ model RegionalReplicationStatus {
   progress?: int32;
 }
 
+@doc("Specifies information about the gallery image version that you want to update.")
+model GalleryImageVersionUpdate extends UpdateResourceDefinition {
+  @doc("Describes the properties of a gallery image version.")
+  properties?: GalleryImageVersionProperties;
+}
+
 @doc("Describes the properties of a gallery Application Definition.")
 model GalleryApplicationProperties {
   @doc("The description of this gallery Application Definition resource. This property is updatable.")
@@ -5950,6 +6323,12 @@ model GalleryApplicationCustomActionParameter {
 
   @doc("A description to help users understand what this parameter means")
   description?: string;
+}
+
+@doc("Specifies information about the gallery Application Definition that you want to update.")
+model GalleryApplicationUpdate extends UpdateResourceDefinition {
+  @doc("Describes the properties of a gallery Application Definition.")
+  properties?: GalleryApplicationProperties;
 }
 
 @doc("Describes the properties of a gallery image version.")
@@ -6022,6 +6401,12 @@ model UserArtifactSettings {
 @doc("The safety profile of the Gallery Application Version.")
 model GalleryApplicationVersionSafetyProfile
   extends GalleryArtifactSafetyProfileBase {}
+
+@doc("Specifies information about the gallery Application Version that you want to update.")
+model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
+  @doc("Describes the properties of a gallery image version.")
+  properties?: GalleryApplicationVersionProperties;
+}
 
 @doc("Specifies information about the gallery sharing profile update.")
 model SharingUpdate {
@@ -6530,6 +6915,11 @@ model CloudServiceVaultAndSecretReference {
 
   @doc("Secret URL which contains the protected settings of the extension")
   secretUrl?: string;
+}
+
+model CloudServiceUpdate {
+  @doc("Resource tags")
+  tags?: Record<string>;
 }
 
 @doc("InstanceView of CloudService as a whole")

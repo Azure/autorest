@@ -46,9 +46,9 @@ interface Product {
     }
   >;
   @doc("Update existing product details.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ProductContract,
-    ProductContractProperties,
+    ProductUpdateParameters,
     {
       ...BaseParameters<ProductContract>;
 

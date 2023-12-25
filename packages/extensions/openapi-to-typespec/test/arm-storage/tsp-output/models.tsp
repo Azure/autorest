@@ -1267,6 +1267,94 @@ model StorageAccountSkuConversionStatus {
   endTime?: utcDateTime;
 }
 
+@doc("The parameters that can be provided when updating the storage account properties.")
+model StorageAccountUpdateParameters {
+  @doc("Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value.")
+  sku?: Sku;
+
+  @doc("Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.")
+  tags?: Record<string>;
+
+  @doc("The identity of the resource.")
+  identity?: Identity;
+
+  @doc("The parameters used when updating a storage account.")
+  properties?: StorageAccountPropertiesUpdateParameters;
+
+  @doc("Optional. Indicates the type of storage account. Currently only StorageV2 value supported by server.")
+  kind?: Kind;
+}
+
+@doc("The parameters used when updating a storage account.")
+model StorageAccountPropertiesUpdateParameters {
+  @doc("Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.")
+  customDomain?: CustomDomain;
+
+  @doc("Not applicable. Azure Storage encryption at rest is enabled by default for all storage accounts and cannot be disabled.")
+  encryption?: Encryption;
+
+  @doc("SasPolicy assigned to the storage account.")
+  sasPolicy?: SasPolicy;
+
+  @doc("KeyPolicy assigned to the storage account.")
+  keyPolicy?: KeyPolicy;
+
+  @doc("Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.")
+  accessTier?: AccessTier;
+
+  @doc("Provides the identity based authentication settings for Azure Files.")
+  azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
+
+  @doc("Allows https traffic only to storage service if sets to true.")
+  @projectedName("json", "supportsHttpsTrafficOnly")
+  enableHttpsTrafficOnly?: boolean;
+
+  @doc("Enables Secure File Transfer Protocol, if set to true")
+  @projectedName("json", "isSftpEnabled")
+  IsSftpEnabled?: boolean;
+
+  @doc("Enables local users feature, if set to true")
+  @projectedName("json", "isLocalUserEnabled")
+  IsLocalUserEnabled?: boolean;
+
+  @doc("Network rule set")
+  @projectedName("json", "networkAcls")
+  networkRuleSet?: NetworkRuleSet;
+
+  @doc("Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.")
+  largeFileSharesState?: LargeFileSharesState;
+
+  @doc("Maintains information about the network routing choice opted by the user for data transfer")
+  routingPreference?: RoutingPreference;
+
+  @doc("Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property.")
+  allowBlobPublicAccess?: boolean;
+
+  @doc("Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.")
+  minimumTlsVersion?: MinimumTlsVersion;
+
+  @doc("Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.")
+  allowSharedKeyAccess?: boolean;
+
+  @doc("Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.")
+  allowCrossTenantReplication?: boolean;
+
+  @doc("A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.")
+  defaultToOAuthAuthentication?: boolean;
+
+  @doc("Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  @doc("The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default.")
+  immutableStorageWithVersioning?: ImmutableStorageAccount;
+
+  @doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
+  allowedCopyScope?: AllowedCopyScope;
+
+  @doc("Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.")
+  dnsEndpointType?: DnsEndpointType;
+}
+
 @doc("Attributes of a deleted storage account.")
 model DeletedAccountProperties {
   @doc("Full resource id of the original storage account.")

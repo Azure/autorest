@@ -51,7 +51,7 @@ interface FileShares {
     }
   >;
   @doc("Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ")
-  update is ArmResourcePatchSync<FileShare, FileShareProperties>;
+  update is ArmCustomPatchSync<FileShare, FileShare>;
   @doc("Deletes specified share under its account.")
   delete is ArmResourceDeleteSync<
     FileShare,

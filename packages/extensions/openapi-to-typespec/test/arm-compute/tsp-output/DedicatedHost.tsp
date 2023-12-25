@@ -38,7 +38,7 @@ interface DedicatedHosts {
   @doc("Create or update a dedicated host .")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DedicatedHost>;
   @doc("Update a dedicated host .")
-  update is ArmResourcePatchAsync<DedicatedHost, DedicatedHostProperties>;
+  update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
   @doc("Delete a dedicated host.")
   delete is ArmResourceDeleteAsync<DedicatedHost>;
   @doc("Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.")

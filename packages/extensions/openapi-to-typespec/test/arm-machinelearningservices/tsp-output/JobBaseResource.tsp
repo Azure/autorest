@@ -27,7 +27,7 @@ interface Jobs {
   @doc("Creates and executes a Job.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
   @doc("Updates a Job.")
-  update is ArmResourcePatchSync<JobBaseResource, JobBase>;
+  update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
   @doc("Deletes a Job (asynchronous).")
   delete is ArmResourceDeleteAsync<JobBaseResource>;
   @doc("Lists Jobs in the workspace.")

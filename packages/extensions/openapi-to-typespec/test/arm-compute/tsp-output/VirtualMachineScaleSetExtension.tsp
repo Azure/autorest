@@ -50,9 +50,9 @@ interface VirtualMachineScaleSetExtensions {
     }
   >;
   @doc("The operation to update an extension.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
-    VirtualMachineScaleSetExtensionProperties,
+    VirtualMachineScaleSetExtensionUpdate,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 

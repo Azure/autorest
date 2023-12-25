@@ -37,7 +37,7 @@ interface Images {
   @doc("Create or update an image.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
   @doc("Update an image.")
-  update is ArmResourcePatchAsync<Image, ImageProperties>;
+  update is ArmCustomPatchAsync<Image, ImageUpdate>;
   @doc("Deletes an Image.")
   delete is ArmResourceDeleteAsync<Image>;
   @doc("Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")

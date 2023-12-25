@@ -37,7 +37,6 @@ interface ProximityPlacementGroups {
   >;
   @doc("Create or update a proximity placement group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update a proximity placement group.")
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,

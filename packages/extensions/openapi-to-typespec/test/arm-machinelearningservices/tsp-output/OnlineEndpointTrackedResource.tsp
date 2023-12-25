@@ -30,7 +30,6 @@ interface OnlineEndpoints {
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
   @doc("Create or update Online Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineEndpointTrackedResource>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update Online Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,

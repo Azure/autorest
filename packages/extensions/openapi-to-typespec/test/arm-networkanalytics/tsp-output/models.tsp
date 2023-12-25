@@ -311,6 +311,41 @@ model DataProductVersion {
   version: string;
 }
 
+@doc("The type used for update operations of the DataProduct.")
+model DataProductUpdate {
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentity;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the DataProduct.")
+  properties?: DataProductUpdateProperties;
+}
+
+@doc("The updatable properties of the DataProduct.")
+model DataProductUpdateProperties {
+  @doc("List of name or email associated with data product resource deployment.")
+  @visibility("read", "create", "update")
+  owners?: string[];
+
+  @doc("Purview account url for data product to connect to.")
+  @visibility("read", "create", "update")
+  purviewAccount?: string;
+
+  @doc("Purview collection url for data product to connect to.")
+  @visibility("read", "create", "update")
+  purviewCollection?: string;
+
+  @doc("Flag to enable or disable private link for data product resource.")
+  @visibility("read", "create", "update")
+  privateLinksEnabled?: ControlState;
+
+  @doc("Current configured minor version of the data product resource.")
+  @visibility("read", "update")
+  currentMinorVersion?: string;
+}
+
 @doc("The details for role assignment common properties.")
 model RoleAssignmentCommonProperties {
   @doc("Role Id of the Built-In Role")
@@ -385,6 +420,31 @@ model DataTypeProperties {
   @doc("Url for data visualization.")
   @visibility("read")
   visualizationUrl?: string;
+}
+
+@doc("The type used for update operations of the DataType.")
+model DataTypeUpdate {
+  @doc("The updatable properties of the DataType.")
+  properties?: DataTypeUpdateProperties;
+}
+
+@doc("The updatable properties of the DataType.")
+model DataTypeUpdateProperties {
+  @doc("State of data type.")
+  @visibility("read", "create", "update")
+  state?: DataTypeState;
+
+  @doc("Field for storage output retention in days.")
+  @visibility("read", "create", "update")
+  storageOutputRetention?: int32;
+
+  @doc("Field for database cache retention in days.")
+  @visibility("read", "create", "update")
+  databaseCacheRetention?: int32;
+
+  @doc("Field for database data retention in days.")
+  @visibility("read", "create", "update")
+  databaseRetention?: int32;
 }
 
 @doc("The details for container sas creation.")

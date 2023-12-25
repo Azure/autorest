@@ -47,9 +47,9 @@ interface ApiRelease {
     }
   >;
   @doc("Updates the details of the release of the API specified by its identifier.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     ApiReleaseContract,
-    ApiReleaseContractProperties,
+    ApiReleaseContract,
     {
       ...BaseParameters<ApiReleaseContract>;
 

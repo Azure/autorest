@@ -58,9 +58,9 @@ interface VirtualMachineScaleSets {
     }
   >;
   @doc("Update a VM scale set.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetProperties,
+    VirtualMachineScaleSetUpdate,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
 

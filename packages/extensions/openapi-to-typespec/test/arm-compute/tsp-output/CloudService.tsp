@@ -28,7 +28,7 @@ interface CloudServices {
   @doc("Create or update a cloud service. Please note some properties can be set only during cloud service creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
   @doc("Update a cloud service.")
-  update is ArmTagsPatchAsync<CloudService>;
+  update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
   @doc("Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")

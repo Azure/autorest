@@ -26,7 +26,7 @@ interface TrafficControllerInterface {
   @doc("Create a TrafficController")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<TrafficController>;
   @doc("Update a TrafficController")
-  update is ArmTagsPatchSync<TrafficController>;
+  update is ArmCustomPatchSync<TrafficController, TrafficControllerUpdate>;
   @doc("Delete a TrafficController")
   delete is ArmResourceDeleteAsync<TrafficController>;
   @doc("List TrafficController resources by resource group")

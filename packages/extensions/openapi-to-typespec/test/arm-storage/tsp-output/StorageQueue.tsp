@@ -30,7 +30,7 @@ interface Queue {
   @doc("Creates a new queue with the specified queue name, under the specified account.")
   create is ArmResourceCreateOrReplaceSync<StorageQueue>;
   @doc("Creates a new queue with the specified queue name, under the specified account.")
-  update is ArmResourcePatchSync<StorageQueue, QueueProperties>;
+  update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
   @doc("Deletes the queue with the specified queue name, under the specified account if it exists.")
   delete is ArmResourceDeleteSync<StorageQueue>;
   @doc("Gets a list of all the queues under the specified storage account")

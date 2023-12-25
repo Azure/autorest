@@ -41,8 +41,9 @@ interface Zones {
     }
   >;
   @doc("Updates a DNS zone. Does not modify DNS records within the zone.")
-  update is ArmTagsPatchSync<
+  update is ArmCustomPatchSync<
     DnsZone,
+    ZoneUpdateOptions,
     {
       ...BaseParameters<DnsZone>;
 
