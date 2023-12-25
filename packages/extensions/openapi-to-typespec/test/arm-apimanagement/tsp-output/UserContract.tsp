@@ -138,6 +138,7 @@ interface UserConfirmationPassword {
 @armResourceOperations
 interface UserGroup {
   @doc("Lists all user groups.")
+  // FIXME: UserGroup_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
   @get
   List is Azure.Core.Foundations.Operation<
@@ -183,6 +184,7 @@ interface UserGroup {
 @armResourceOperations
 interface UserIdentities {
   @doc("List of all user identities.")
+  // FIXME: UserIdentities_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
   @get
   List is Azure.Core.Foundations.Operation<

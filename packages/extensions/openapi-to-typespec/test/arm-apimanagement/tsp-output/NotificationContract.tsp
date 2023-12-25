@@ -56,6 +56,7 @@ interface Notification {
 @armResourceOperations
 interface NotificationRecipientUser {
   @doc("Gets the list of the Notification Recipient User subscribed to the notification.")
+  // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
   ListByNotification is Azure.Core.Foundations.Operation<
@@ -86,6 +87,7 @@ interface NotificationRecipientUser {
 @armResourceOperations
 interface NotificationRecipientEmail {
   @doc("Gets the list of the Notification Recipient Emails subscribed to a notification.")
+  // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
   ListByNotification is Azure.Core.Foundations.Operation<

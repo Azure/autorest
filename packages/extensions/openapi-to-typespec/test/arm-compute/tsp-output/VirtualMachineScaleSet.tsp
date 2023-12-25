@@ -308,6 +308,7 @@ interface VirtualMachineScaleSets {
     }
   >;
   @doc("Gets the status of a VM scale set instance.")
+  // FIXME: VirtualMachineScaleSets_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<
@@ -328,6 +329,7 @@ interface VirtualMachineScaleSets {
   >;
 
   @doc("Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.")
+  // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
   @get
   ListSkus is Azure.Core.Foundations.Operation<
@@ -348,6 +350,7 @@ interface VirtualMachineScaleSets {
   >;
 
   @doc("Gets list of OS upgrades on a VM scale set instance.")
+  // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get
   GetOSUpgradeHistory is Azure.Core.Foundations.Operation<

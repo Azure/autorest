@@ -105,6 +105,7 @@ interface Product {
 @armResourceOperations
 interface ProductApi {
   @doc("Lists a collection of the APIs associated with a product.")
+  // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
   @get
   ListByProduct is Azure.Core.Foundations.Operation<
@@ -150,6 +151,7 @@ interface ProductApi {
 @armResourceOperations
 interface ProductGroup {
   @doc("Lists the collection of developer groups associated with the specified product.")
+  // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
   @get
   ListByProduct is Azure.Core.Foundations.Operation<
@@ -195,6 +197,7 @@ interface ProductGroup {
 @armResourceOperations
 interface ProductSubscriptions {
   @doc("Lists the collection of subscriptions to the specified product.")
+  // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")
   @get
   List is Azure.Core.Foundations.Operation<

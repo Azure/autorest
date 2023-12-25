@@ -55,6 +55,7 @@ interface CloudServiceRoleInstances {
   @doc("The Rebuild Role Instance asynchronous operation reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instance.")
   rebuild is ArmResourceActionAsync<RoleInstance, void, void>;
   @doc("Retrieves information about the run-time state of a role instance in a cloud service.")
+  // FIXME: CloudServiceRoleInstances_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<
@@ -79,6 +80,7 @@ interface CloudServiceRoleInstances {
   >;
 
   @doc("Gets a remote desktop file for a role instance in a cloud service.")
+  // FIXME: CloudServiceRoleInstances_GetRemoteDesktopFile could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile")
   @get
   GetRemoteDesktopFile is Azure.Core.Foundations.Operation<

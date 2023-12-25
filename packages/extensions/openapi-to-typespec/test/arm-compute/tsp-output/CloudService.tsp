@@ -48,6 +48,7 @@ interface CloudServices {
   @doc("Deletes role instances in a cloud service.")
   deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, void>;
   @doc("Gets the status of a cloud service.")
+  // FIXME: CloudServices_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<
@@ -71,6 +72,7 @@ interface CloudServices {
 @armResourceOperations
 interface CloudServicesUpdateDomain {
   @doc("Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.")
+  // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
   GetUpdateDomain is Azure.Core.Foundations.Operation<
@@ -95,6 +97,7 @@ interface CloudServicesUpdateDomain {
   >;
 
   @doc("Gets a list of all update domains in a cloud service.")
+  // FIXME: CloudServicesUpdateDomain_ListUpdateDomains could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
   @get
   ListUpdateDomains is Azure.Core.Foundations.Operation<

@@ -35,5 +35,6 @@ interface DiskEncryptionSets {
   @doc("Lists all the disk encryption sets under a subscription.")
   list is ArmListBySubscription<DiskEncryptionSet>;
   @doc("Lists all resources that are encrypted with this disk encryption set.")
+  // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
   ListAssociatedResources is Azure.Core.ResourceList<string>;
 }

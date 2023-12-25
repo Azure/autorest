@@ -175,6 +175,7 @@ interface VirtualMachines {
     RunCommandResult
   >;
   @doc("Retrieves information about the run-time state of a virtual machine.")
+  // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
   @get
   InstanceView is Azure.Core.Foundations.Operation<
@@ -195,6 +196,7 @@ interface VirtualMachines {
   >;
 
   @doc("Lists all available virtual machine sizes to which the specified virtual machine can be resized.")
+  // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
   @get
   ListAvailableSizes is Azure.Core.Foundations.Operation<

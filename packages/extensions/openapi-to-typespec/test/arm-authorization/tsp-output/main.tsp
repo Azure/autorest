@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
 @service({
   title: "AuthorizationManagementClient",
 })
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+// FIXME: Common type version v2 is not supportted for now.
+// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
 @doc("Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.")
 namespace Azure.ResourceManager.Authorization;

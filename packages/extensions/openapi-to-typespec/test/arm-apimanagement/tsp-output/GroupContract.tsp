@@ -90,6 +90,7 @@ interface Group {
 @armResourceOperations
 interface GroupUser {
   @doc("Lists a collection of user entities associated with the group.")
+  // FIXME: GroupUser_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")
   @get
   List is Azure.Core.Foundations.Operation<

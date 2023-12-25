@@ -127,6 +127,7 @@ interface TenantConfiguration {
     }
   >;
   @doc("Gets the status of the most recent synchronization between the configuration database and the Git repository.")
+  // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
   GetSyncState is Azure.Core.Foundations.Operation<
@@ -157,6 +158,7 @@ interface TenantConfiguration {
 @armResourceOperations
 interface Api {
   @doc("Lists a collection of apis associated with tags.")
+  // FIXME: Api_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<
@@ -200,6 +202,7 @@ interface Api {
 @armResourceOperations
 interface ContentType {
   @doc("Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.")
+  // FIXME: ContentType_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -223,6 +226,7 @@ interface ContentType {
   >;
 
   @doc("Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.")
+  // FIXME: ContentType_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}")
   @get
   Get is Azure.Core.Foundations.Operation<
@@ -255,6 +259,7 @@ interface ContentType {
 @armResourceOperations
 interface ContentItem {
   @doc("Lists developer portal's content items specified by the provided content type.")
+  // FIXME: ContentItem_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -284,6 +289,7 @@ interface ContentItem {
   >;
 
   @doc("Returns the developer portal's content item specified by its identifier.")
+  // FIXME: ContentItem_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}")
   @get
   Get is Azure.Core.Foundations.Operation<
@@ -323,6 +329,7 @@ interface ContentItem {
 interface ApiManagementServiceSkus {
   @summary("Gets available SKUs for API Management service")
   @doc("Gets all available SKU for a given API Management service")
+  // FIXME: ApiManagementServiceSkus_ListAvailableServiceSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus")
   @get
   ListAvailableServiceSkus is Azure.Core.Foundations.Operation<
@@ -349,6 +356,7 @@ interface ApiManagementServiceSkus {
 @armResourceOperations
 interface NetworkStatus {
   @doc("Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.")
+  // FIXME: NetworkStatus_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -372,6 +380,7 @@ interface NetworkStatus {
   >;
 
   @doc("Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.")
+  // FIXME: NetworkStatus_ListByLocation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus")
   @get
   ListByLocation is Azure.Core.Foundations.Operation<
@@ -403,6 +412,7 @@ interface NetworkStatus {
 @armResourceOperations
 interface OutboundNetworkDependenciesEndpoints {
   @doc("Gets the network endpoints of all outbound dependencies of a ApiManagement service.")
+  // FIXME: OutboundNetworkDependenciesEndpoints_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/outboundNetworkDependenciesEndpoints")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -429,6 +439,7 @@ interface OutboundNetworkDependenciesEndpoints {
 @armResourceOperations
 interface PolicyDescription {
   @doc("Lists all policy descriptions.")
+  // FIXME: PolicyDescription_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -459,6 +470,7 @@ interface PolicyDescription {
 @armResourceOperations
 interface PortalSettings {
   @doc("Lists a collection of portalsettings defined within a service instance..")
+  // FIXME: PortalSettings_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -485,6 +497,7 @@ interface PortalSettings {
 @armResourceOperations
 interface Product {
   @doc("Lists a collection of products associated with tags.")
+  // FIXME: Product_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<
@@ -528,6 +541,7 @@ interface Product {
 @armResourceOperations
 interface QuotaByCounterKeys {
   @doc("Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.")
+  // FIXME: QuotaByCounterKeys_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -558,12 +572,14 @@ interface QuotaByCounterKeys {
 @armResourceOperations
 interface QuotaByPeriodKeys {
   @doc("Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.")
+  // FIXME: QuotaByPeriodKeys_Get could not be converted to a resource operation
   Get is Azure.Core.ResourceRead<QuotaCounterContract>;
 }
 
 @armResourceOperations
 interface Region {
   @doc("Lists all azure regions in which the service exists.")
+  // FIXME: Region_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -590,6 +606,7 @@ interface Region {
 @armResourceOperations
 interface Reports {
   @doc("Lists report records by API.")
+  // FIXME: Reports_ListByApi could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi")
   @get
   ListByApi is Azure.Core.Foundations.Operation<
@@ -630,6 +647,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by User.")
+  // FIXME: Reports_ListByUser could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser")
   @get
   ListByUser is Azure.Core.Foundations.Operation<
@@ -670,6 +688,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by API Operations.")
+  // FIXME: Reports_ListByOperation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation")
   @get
   ListByOperation is Azure.Core.Foundations.Operation<
@@ -710,6 +729,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by Product.")
+  // FIXME: Reports_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct")
   @get
   ListByProduct is Azure.Core.Foundations.Operation<
@@ -750,6 +770,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by geography.")
+  // FIXME: Reports_ListByGeo could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo")
   @get
   ListByGeo is Azure.Core.Foundations.Operation<
@@ -786,6 +807,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by subscription.")
+  // FIXME: Reports_ListBySubscription could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription")
   @get
   ListBySubscription is Azure.Core.Foundations.Operation<
@@ -826,6 +848,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by Time.")
+  // FIXME: Reports_ListByTime could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime")
   @get
   ListByTime is Azure.Core.Foundations.Operation<
@@ -870,6 +893,7 @@ interface Reports {
   >;
 
   @doc("Lists report records by Request.")
+  // FIXME: Reports_ListByRequest could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest")
   @get
   ListByRequest is Azure.Core.Foundations.Operation<
@@ -909,6 +933,7 @@ interface Reports {
 @armResourceOperations
 interface TagResource {
   @doc("Lists a collection of resources associated with tags.")
+  // FIXME: TagResource_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources")
   @get
   ListByService is Azure.Core.Foundations.Operation<

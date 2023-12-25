@@ -103,6 +103,7 @@ interface Api {
 @armResourceOperations
 interface ApiRevision {
   @doc("Lists all revisions of an API.")
+  // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -148,6 +149,7 @@ interface ApiRevision {
 @armResourceOperations
 interface ApiProduct {
   @doc("Lists all Products, which the API is part of.")
+  // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
   ListByApis is Azure.Core.Foundations.Operation<
@@ -193,6 +195,7 @@ interface ApiProduct {
 @armResourceOperations
 interface Operation {
   @doc("Lists a collection of operations associated with tags.")
+  // FIXME: Operation_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<

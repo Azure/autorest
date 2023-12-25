@@ -35,6 +35,7 @@ interface AvailabilitySets {
   @doc("Lists all availability sets in a subscription.")
   listBySubscription is ArmListBySubscription<AvailabilitySet>;
   @doc("Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.")
+  // FIXME: AvailabilitySets_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")
   @get
   ListAvailableSizes is Azure.Core.Foundations.Operation<

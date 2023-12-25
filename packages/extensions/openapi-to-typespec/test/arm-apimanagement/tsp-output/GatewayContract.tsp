@@ -106,6 +106,7 @@ interface Gateway {
 @armResourceOperations
 interface GatewayApi {
   @doc("Lists a collection of the APIs associated with a gateway.")
+  // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
   ListByService is Azure.Core.Foundations.Operation<

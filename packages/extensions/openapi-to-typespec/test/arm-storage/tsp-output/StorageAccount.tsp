@@ -126,6 +126,7 @@ interface StorageAccounts {
 @armResourceOperations
 interface PrivateLinkResources {
   @doc("Gets the private link resources that need to be created for a storage account.")
+  // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
   ListByStorageAccount is Azure.Core.Foundations.Operation<

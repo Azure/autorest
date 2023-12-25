@@ -36,6 +36,7 @@ interface DiskAccesses {
   @doc("Lists all the disk access resources under a subscription.")
   list is ArmListBySubscription<DiskAccess>;
   @doc("Gets the private link resources possible under disk access resource")
+  // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
   @get
   GetPrivateLinkResources is Azure.Core.Foundations.Operation<

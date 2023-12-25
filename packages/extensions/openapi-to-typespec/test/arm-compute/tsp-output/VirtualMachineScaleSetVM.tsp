@@ -250,6 +250,7 @@ interface VirtualMachineScaleSetVMs {
     }
   >;
   @doc("Gets the status of a virtual machine from a VM scale set.")
+  // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<
