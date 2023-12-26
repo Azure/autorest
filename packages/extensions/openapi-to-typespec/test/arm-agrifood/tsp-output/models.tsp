@@ -100,7 +100,7 @@ model AuthCredentials {}
 model Resource {
   @doc("Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"")
   @visibility("read")
-  id?: string;
+  id?: ResourceIdentifier;
 
   @doc("The name of the resource")
   @visibility("read")
