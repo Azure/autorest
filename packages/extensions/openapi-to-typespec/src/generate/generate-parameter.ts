@@ -1,7 +1,7 @@
 import { TypespecParameter } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
-import { transformValue } from "../utils/values";
+import { transformDefaultValue } from "../utils/values";
 
 export function generateParameter(parameter: TypespecParameter): string {
   const definitions: string[] = [];
@@ -12,7 +12,7 @@ export function generateParameter(parameter: TypespecParameter): string {
   decorators && definitions.push(decorators);
   let defaultValue = "";
   if (parameter.defaultValue) {
-    defaultValue = ` = ${transformValue(parameter.defaultValue)}`;
+    defaultValue = ` = ${transformDefaultValue(parameter.type, parameter.defaultValue)}`;
   }
   definitions.push(`"${parameter.name}"${parameter.isOptional ? "?" : ""}: ${parameter.type}${defaultValue}`);
 

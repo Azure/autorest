@@ -30,7 +30,7 @@ interface ApiOperationPolicy {
 
       @doc("Policy Export Format.")
       @query("format")
-      format?: PolicyExportFormat = "xml";
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
   @doc("Gets the entity state (Etag) version of the API operation policy specified by its identifier.")

@@ -692,7 +692,7 @@ interface ApiPolicyOperations {
 
       @doc("Policy Export Format.")
       @query("format")
-      format?: PolicyExportFormat = "xml";
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
 
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
@@ -1175,7 +1175,7 @@ interface PolicyOperations {
 
       @doc("Policy Export Format.")
       @query("format")
-      format?: PolicyExportFormat = "xml";
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
 
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
@@ -1342,7 +1342,7 @@ interface ProductPolicyOperations {
 
       @doc("Policy Export Format.")
       @query("format")
-      format?: PolicyExportFormat = "xml";
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
 
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path

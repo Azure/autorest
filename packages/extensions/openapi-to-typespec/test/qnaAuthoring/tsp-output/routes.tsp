@@ -101,7 +101,7 @@ interface QuestionAnsweringProjectsOperations {
 
       @doc("Knowledge base Import or Export format.")
       @query("format")
-      format?: Format = "json";
+      format?: Format = Format.json;
 
       @doc("Kind of the asset of the project.")
       @query("assetKind")
@@ -147,7 +147,7 @@ metadata, and assets.
 
       @doc("Knowledge base Import or Export format.")
       @query("format")
-      format?: Format = "json";
+      format?: Format = Format.json;
 
       @doc("Kind of the asset of the project.")
       @query("assetKind")

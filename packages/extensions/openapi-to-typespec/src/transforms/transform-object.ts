@@ -26,7 +26,7 @@ import {
   isSealedChoiceSchema,
   isStringSchema,
 } from "../utils/schemas";
-import { transformValue } from "../utils/values";
+import { getDefaultValue, transformValue } from "../utils/values";
 
 const typespecTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
@@ -122,7 +122,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       isOptional: propertySchema.required !== true,
       type: visited.name,
       decorators: getPropertyDecorators(propertySchema),
-      defaultValue: propertySchema.schema.defaultValue,
+      defaultValue: getDefaultValue(propertySchema.schema),
     };
   }
 
