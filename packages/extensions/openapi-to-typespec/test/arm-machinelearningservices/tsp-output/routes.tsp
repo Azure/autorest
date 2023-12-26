@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.MachineLearning;
 
@@ -116,7 +118,7 @@ interface CodeContainersOperations {
       @query("$skip")
       $skip?: string;
     },
-    CodeContainerResourceArmPaginatedResult
+    ResourceListResult<CodeContainerResource>
   >;
 
   @summary("Delete container.")
@@ -259,7 +261,7 @@ interface CodeVersionsOperations {
       @query("hashVersion")
       hashVersion?: string;
     },
-    CodeVersionResourceArmPaginatedResult
+    ResourceListResult<CodeVersionResource>
   >;
 
   @summary("Delete version.")
@@ -435,7 +437,7 @@ interface ComponentContainersOperations {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    ComponentContainerResourceArmPaginatedResult
+    ResourceListResult<ComponentContainerResource>
   >;
 
   @summary("Delete container.")
@@ -578,7 +580,7 @@ interface ComponentVersionsOperations {
       @query("stage")
       stage?: string;
     },
-    ComponentVersionResourceArmPaginatedResult
+    ResourceListResult<ComponentVersionResource>
   >;
 
   @summary("Delete version.")
@@ -717,7 +719,7 @@ interface DataContainersOperations {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    DataContainerResourceArmPaginatedResult
+    ResourceListResult<DataContainerResource>
   >;
 
   @summary("Delete container.")
@@ -867,7 +869,7 @@ Top count of results, top count cannot be greater than the page size.
       @query("stage")
       stage?: string;
     },
-    DataVersionBaseResourceArmPaginatedResult
+    ResourceListResult<DataVersionBaseResource>
   >;
 
   @summary("Delete version.")
@@ -1006,7 +1008,7 @@ interface EnvironmentContainersOperations {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    EnvironmentContainerResourceArmPaginatedResult
+    ResourceListResult<EnvironmentContainerResource>
   >;
 
   @summary("Delete container.")
@@ -1149,7 +1151,7 @@ interface EnvironmentVersionsOperations {
       @query("stage")
       stage?: string;
     },
-    EnvironmentVersionResourceArmPaginatedResult
+    ResourceListResult<EnvironmentVersionResource>
   >;
 
   @summary("Delete version.")
@@ -1292,7 +1294,7 @@ interface ModelContainersOperations {
       @query("listViewType")
       listViewType?: ListViewType;
     },
-    ModelContainerResourceArmPaginatedResult
+    ResourceListResult<ModelContainerResource>
   >;
 
   @summary("Delete container.")
@@ -1459,7 +1461,7 @@ interface ModelVersionsOperations {
       @query("stage")
       stage?: string;
     },
-    ModelVersionResourceArmPaginatedResult
+    ResourceListResult<ModelVersionResource>
   >;
 
   @summary("Delete version.")

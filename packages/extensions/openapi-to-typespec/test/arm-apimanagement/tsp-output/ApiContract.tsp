@@ -188,7 +188,7 @@ interface ApiProduct {
       @path
       subscriptionId: string;
     },
-    ProductListResult
+    ResourceListResult<ProductContract>
   >;
 }
 

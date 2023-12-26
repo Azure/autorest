@@ -236,6 +236,6 @@ interface ProductSubscriptions {
       @path
       subscriptionId: string;
     },
-    SubscriptionListResult
+    ResourceListResult<SubscriptionContract>
   >;
 }

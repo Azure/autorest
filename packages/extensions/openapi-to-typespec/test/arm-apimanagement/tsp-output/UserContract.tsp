@@ -177,7 +177,7 @@ interface UserGroup {
       @path
       subscriptionId: string;
     },
-    GroupListResult
+    ResourceListResult<GroupContract>
   >;
 }
 

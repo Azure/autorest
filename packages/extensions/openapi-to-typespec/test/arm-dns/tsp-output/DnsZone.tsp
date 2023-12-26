@@ -106,6 +106,6 @@ interface RecordSets {
       @path
       subscriptionId: string;
     },
-    DnsRecordListResult
+    ResourceListResult<DnsRecord>
   >;
 }

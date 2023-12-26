@@ -49,5 +49,12 @@ export function getRoutesImports(_program: TypespecProgram) {
     namespaces: [`using TypeSpec.Rest;`, `using TypeSpec.Http;`],
   };
 
+  const { isArm } = getOptions();
+
+  if (isArm) {
+    imports.modules.push(`import "@azure-tools/typespec-azure-resource-manager";`);
+    imports.namespaces.push("using Azure.ResourceManager;");
+  }
+
   return imports;
 }

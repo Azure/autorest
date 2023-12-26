@@ -1,11 +1,13 @@
 import { TypespecOperation, TypespecOperationGroup, TypespecParameter } from "../interfaces";
+import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
   const doc = generateDocs(operation);
   const summary = generateSummary(operation);
-  const { verb, name, route, responses, parameters } = operation;
+  const { verb, name, route, parameters } = operation;
+  const responses = operation.responses.map(replaceGeneratedResourceObject);
   const params = generateParameters(parameters);
   const statements: string[] = [];
   summary && statements.push(summary);

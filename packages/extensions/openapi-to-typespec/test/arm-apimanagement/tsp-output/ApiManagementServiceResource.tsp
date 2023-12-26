@@ -490,7 +490,7 @@ interface PortalSettings {
       @path
       subscriptionId: string;
     },
-    PortalSettingsListResult
+    ResourceListResult<PortalSigninSettings>
   >;
 }
 

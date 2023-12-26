@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 
@@ -599,7 +601,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
       @header
       accept: "application/json, text/json";
     },
-    VirtualMachineRunCommandsListResult
+    ResourceListResult<VirtualMachineRunCommand>
   >;
 }
 

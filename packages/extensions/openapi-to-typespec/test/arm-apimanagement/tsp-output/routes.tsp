@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.ApiManagement;
 
@@ -48,7 +50,7 @@ interface TagOperations {
       @path
       subscriptionId: string;
     },
-    TagListResult
+    ResourceListResult<TagContract>
   >;
 
   @doc("Gets the entity state version of the tag specified by its identifier.")
@@ -238,7 +240,7 @@ interface TagOperations {
       @path
       subscriptionId: string;
     },
-    TagListResult
+    ResourceListResult<TagContract>
   >;
 
   @doc("Gets the entity state version of the tag specified by its identifier.")
@@ -422,7 +424,7 @@ interface TagOperations {
       @path
       subscriptionId: string;
     },
-    TagListResult
+    ResourceListResult<TagContract>
   >;
 
   @doc("Gets the entity state version of the tag specified by its identifier.")
@@ -624,7 +626,7 @@ interface ApiPolicyOperations {
       @path
       subscriptionId: string;
     },
-    PolicyListResult
+    ResourceListResult<PolicyContract>
   >;
 
   @doc("Gets the entity state (Etag) version of the API policy specified by its identifier.")
@@ -858,7 +860,7 @@ interface DiagnosticOperations {
       @path
       subscriptionId: string;
     },
-    DiagnosticListResult
+    ResourceListResult<DiagnosticContract>
   >;
 
   @doc("Gets the entity state (Etag) version of the Diagnostic specified by its identifier.")
@@ -1066,7 +1068,7 @@ interface IssueOperations {
       @path
       subscriptionId: string;
     },
-    IssueListResult
+    ResourceListResult<IssueContract>
   >;
 
   @doc("Gets API Management issue details")
@@ -1121,7 +1123,7 @@ interface PolicyOperations {
       @path
       subscriptionId: string;
     },
-    PolicyListResult
+    ResourceListResult<PolicyContract>
   >;
 
   @doc("Gets the entity state (Etag) version of the Global policy definition in the Api Management service.")
@@ -1276,7 +1278,7 @@ interface ProductPolicyOperations {
       @path
       subscriptionId: string;
     },
-    PolicyListResult
+    ResourceListResult<PolicyContract>
   >;
 
   @doc("Get the ETag of the policy configuration at the Product level.")
@@ -1482,7 +1484,7 @@ interface UserSubscriptionOperations {
       @path
       subscriptionId: string;
     },
-    SubscriptionListResult
+    ResourceListResult<SubscriptionContract>
   >;
 
   @doc("Gets the specified Subscription entity associated with a particular user.")
