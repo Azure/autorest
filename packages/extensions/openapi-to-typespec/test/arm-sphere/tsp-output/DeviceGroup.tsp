@@ -15,7 +15,6 @@ namespace Microsoft.AzureSphere;
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {
   @doc("Name of device group.")
   @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$")
-  @path
   @key("deviceGroupName")
   @segment("deviceGroups")
   name: string;

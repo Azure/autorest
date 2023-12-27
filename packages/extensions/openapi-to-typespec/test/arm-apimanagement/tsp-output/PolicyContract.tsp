@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(OperationContract)
 model PolicyContract is ProxyResource<PolicyContractProperties> {
   @doc("The identifier of the Policy.")
-  @path
   @key("policyId")
   @segment("policies")
   name: PolicyIdName;

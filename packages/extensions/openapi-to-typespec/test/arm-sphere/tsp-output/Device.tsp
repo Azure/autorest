@@ -15,7 +15,6 @@ namespace Microsoft.AzureSphere;
 model Device is ProxyResource<DeviceProperties> {
   @doc("Device name")
   @pattern("^[a-zA-Z0-9-]{128}$")
-  @path
   @key("deviceName")
   @segment("devices")
   name: string;

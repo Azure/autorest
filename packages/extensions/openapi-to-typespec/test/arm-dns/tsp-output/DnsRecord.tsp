@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.Dns;
 @parentResource(DnsZone)
 model DnsRecord is ProxyResource<RecordSetProperties> {
   @doc("The name of the record set, relative to the name of the zone.")
-  @path
   @key("relativeRecordSetName")
   @segment("A")
   name: string;

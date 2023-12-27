@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(CommunityGallery)
 model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
   @doc("The name of the community gallery image definition.")
-  @path
   @key("galleryImageName")
   @segment("images")
   name: string;

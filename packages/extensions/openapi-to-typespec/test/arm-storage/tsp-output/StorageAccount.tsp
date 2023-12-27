@@ -14,7 +14,6 @@ model StorageAccount is TrackedResource<StorageAccountProperties> {
   @doc("The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.")
   @maxLength(24)
   @minLength(3)
-  @path
   @key("accountName")
   @segment("storageAccounts")
   name: string;

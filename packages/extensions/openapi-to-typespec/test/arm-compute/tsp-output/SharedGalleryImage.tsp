@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(SharedGallery)
 model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
   @doc("The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.")
-  @path
   @key("galleryImageName")
   @segment("images")
   name: string;

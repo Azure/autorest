@@ -16,7 +16,6 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
   @doc("Schema id identifier. Must be unique in the current API Management service instance.")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("schemaId")
   @segment("schemas")
   name: string;

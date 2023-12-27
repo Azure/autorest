@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.")
 model Image is TrackedResource<ImageProperties> {
   @doc("The name of the image.")
-  @path
   @key("imageName")
   @segment("images")
   name: string;

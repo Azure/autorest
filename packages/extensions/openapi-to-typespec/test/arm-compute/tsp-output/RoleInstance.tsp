@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(CloudService)
 model RoleInstance is ProxyResource<RoleInstanceProperties> {
   @doc("Name of the role instance.")
-  @path
   @key("roleInstanceName")
   @segment("roleInstances")
   name: string;

@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @locationResource
 model CommunityGallery is ProxyResource<{}> {
   @doc("The public name of the community gallery.")
-  @path
   @key("publicGalleryName")
   @segment("communityGalleries")
   name: string;

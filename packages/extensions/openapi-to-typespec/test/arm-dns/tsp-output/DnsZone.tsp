@@ -12,7 +12,6 @@ namespace Azure.ResourceManager.Dns;
 @doc("Describes a DNS zone.")
 model DnsZone is TrackedResource<ZoneProperties> {
   @doc("The name of the DNS zone (without a terminating dot).")
-  @path
   @key("zoneName")
   @segment("dnsZones")
   name: string;

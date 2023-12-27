@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.ApiManagement;
 model IdentityProviderContract
   is ProxyResource<IdentityProviderContractProperties> {
   @doc("Identity Provider Type identifier.")
-  @path
   @key("identityProviderName")
   @segment("identityProviders")
   name: IdentityProviderType;

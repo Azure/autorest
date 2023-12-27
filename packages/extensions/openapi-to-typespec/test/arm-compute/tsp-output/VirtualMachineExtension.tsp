@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model VirtualMachineExtension
   is TrackedResource<VirtualMachineExtensionProperties> {
   @doc("The name of the virtual machine extension.")
-  @path
   @key("vmExtensionName")
   @segment("extensions")
   name: string;

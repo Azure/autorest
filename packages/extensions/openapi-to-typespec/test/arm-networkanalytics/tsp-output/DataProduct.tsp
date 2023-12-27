@@ -15,7 +15,6 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]*$")
-  @path
   @key("dataProductName")
   @segment("dataProducts")
   name: string;

@@ -16,7 +16,6 @@ model WorkspaceConnectionPropertiesV2BasicResource
   is ProxyResource<WorkspaceConnectionPropertiesV2> {
   @doc("Friendly name of the workspace connection")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @path
   @key("connectionName")
   @segment("connections")
   name: string;

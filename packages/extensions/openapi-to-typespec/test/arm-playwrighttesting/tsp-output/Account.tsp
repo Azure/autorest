@@ -15,7 +15,6 @@ model Account is TrackedResource<AccountProperties> {
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
-  @path
   @key("name")
   @segment("accounts")
   name: string;

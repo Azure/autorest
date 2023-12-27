@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.AlertsManagement;
 @subscriptionResource
 model SmartGroup is ProxyResource<SmartGroupProperties> {
   @doc("Smart group unique id. ")
-  @path
   @key("smartGroupId")
   @segment("smartGroups")
   name: string;

@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model FeaturestoreEntityContainer
   is ProxyResource<FeaturestoreEntityContainerProperties> {
   @doc("Container name. This is case-sensitive.")
-  @path
   @key("name")
   @segment("featurestoreEntities")
   name: string;

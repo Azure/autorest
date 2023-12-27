@@ -13,7 +13,6 @@ namespace Microsoft.Test;
 model Employee is TrackedResource<EmployeeProperties> {
   @doc("Name of employee")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
   @key("employeeName")
   @segment("employees")
   name: string;

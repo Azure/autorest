@@ -16,7 +16,6 @@ model OperationContract is ProxyResource<OperationContractProperties> {
   @doc("Operation identifier within an API. Must be unique in the current API Management service instance.")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("operationId")
   @segment("operations")
   name: string;

@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model ModelContainerResource is ProxyResource<ModelContainer> {
   @doc("Container name. This is case-sensitive.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
   @key("modelName")
   @segment("models")
   name: string;

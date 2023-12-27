@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
   @doc("Online Endpoint name.")
-  @path
   @key("endpointName")
   @segment("onlineEndpoints")
   name: string;

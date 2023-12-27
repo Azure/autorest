@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 model NotificationContract is ProxyResource<NotificationContractProperties> {
   @doc("Notification Name Identifier.")
-  @path
   @key("notificationName")
   @segment("notifications")
   name: NotificationName;

@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(Gallery)
 model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
   @doc("The name of the gallery Application Definition to be retrieved.")
-  @path
   @key("galleryApplicationName")
   @segment("applications")
   name: string;

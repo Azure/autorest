@@ -17,7 +17,6 @@ model OpenidConnectProviderContract
   @doc("Identifier of the OpenID Connect Provider.")
   @maxLength(256)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("opid")
   @segment("openidConnectProviders")
   name: string;

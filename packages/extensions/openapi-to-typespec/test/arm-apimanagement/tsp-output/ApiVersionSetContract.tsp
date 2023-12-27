@@ -17,7 +17,6 @@ model ApiVersionSetContract is ProxyResource<ApiVersionSetContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("versionSetId")
   @segment("apiVersionSets")
   name: string;

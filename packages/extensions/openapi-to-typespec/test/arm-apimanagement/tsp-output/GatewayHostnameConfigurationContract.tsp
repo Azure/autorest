@@ -17,7 +17,6 @@ model GatewayHostnameConfigurationContract
   @doc("Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("hcId")
   @segment("hostnameConfigurations")
   name: string;

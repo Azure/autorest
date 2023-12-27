@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model Registry is TrackedResource<RegistryProperties> {
   @doc("Name of Azure Machine Learning registry. This is case-insensitive")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-  @path
   @key("registryName")
   @segment("registries")
   name: string;

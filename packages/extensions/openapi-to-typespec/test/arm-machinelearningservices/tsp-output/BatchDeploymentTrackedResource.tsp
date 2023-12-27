@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(BatchEndpointTrackedResource)
 model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
   @doc("The identifier for the Batch deployments.")
-  @path
   @key("deploymentName")
   @segment("deployments")
   name: string;

@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 @locationResource
 model OSFamily is ProxyResource<OSFamilyProperties> {
   @doc("Name of the OS family.")
-  @path
   @key("osFamilyName")
   @segment("cloudServiceOsFamilies")
   name: string;

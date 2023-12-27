@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model GalleryApplicationVersion
   is TrackedResource<GalleryApplicationVersionProperties> {
   @doc("The name of the gallery Application Version to be retrieved.")
-  @path
   @key("galleryApplicationVersionName")
   @segment("versions")
   name: string;

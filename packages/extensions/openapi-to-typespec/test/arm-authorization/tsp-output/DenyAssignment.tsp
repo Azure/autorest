@@ -12,7 +12,6 @@ namespace Azure.ResourceManager.Authorization;
 @doc("Deny Assignment")
 model DenyAssignment is ExtensionResource<DenyAssignmentProperties> {
   @doc("The ID of the deny assignment to get.")
-  @path
   @key("denyAssignmentId")
   @segment("denyAssignments")
   name: string;

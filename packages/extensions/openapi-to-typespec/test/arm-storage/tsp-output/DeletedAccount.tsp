@@ -15,7 +15,6 @@ model DeletedAccount is ProxyResource<DeletedAccountProperties> {
   @doc("Name of the deleted storage account.")
   @maxLength(24)
   @minLength(3)
-  @path
   @key("deletedAccountName")
   @segment("deletedAccounts")
   name: string;

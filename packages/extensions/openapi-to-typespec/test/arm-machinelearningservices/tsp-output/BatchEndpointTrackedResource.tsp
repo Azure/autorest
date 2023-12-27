@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
   @doc("Name for the Batch Endpoint.")
-  @path
   @key("endpointName")
   @segment("batchEndpoints")
   name: string;

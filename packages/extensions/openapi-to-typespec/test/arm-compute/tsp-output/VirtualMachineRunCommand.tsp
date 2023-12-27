@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model VirtualMachineRunCommand
   is TrackedResource<VirtualMachineRunCommandProperties> {
   @doc("The name of the virtual machine run command.")
-  @path
   @key("runCommandName")
   @segment("runCommands")
   name: string;

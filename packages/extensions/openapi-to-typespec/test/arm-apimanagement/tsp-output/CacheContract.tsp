@@ -17,7 +17,6 @@ model CacheContract is ProxyResource<CacheContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("cacheId")
   @segment("caches")
   name: string;

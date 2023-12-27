@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(OnlineEndpointTrackedResource)
 model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
   @doc("Inference Endpoint Deployment name.")
-  @path
   @key("deploymentName")
   @segment("deployments")
   name: string;

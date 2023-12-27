@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.Authorization;
 model RoleAssignmentScheduleRequest
   is ExtensionResource<RoleAssignmentScheduleRequestProperties> {
   @doc("The name (guid) of the role assignment schedule request to get.")
-  @path
   @key("roleAssignmentScheduleRequestName")
   @segment("roleAssignmentScheduleRequests")
   name: string;

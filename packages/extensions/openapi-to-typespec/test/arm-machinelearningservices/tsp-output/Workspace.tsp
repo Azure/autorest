@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model Workspace is TrackedResource<WorkspaceProperties> {
   @doc("Name of Azure Machine Learning workspace.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @path
   @key("workspaceName")
   @segment("workspaces")
   name: string;

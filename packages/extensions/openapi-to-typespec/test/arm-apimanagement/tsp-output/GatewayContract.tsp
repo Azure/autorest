@@ -16,7 +16,6 @@ model GatewayContract is ProxyResource<GatewayContractProperties> {
   @doc("Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("gatewayId")
   @segment("gateways")
   name: string;

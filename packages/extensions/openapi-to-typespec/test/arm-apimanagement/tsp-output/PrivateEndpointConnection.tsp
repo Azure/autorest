@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.ApiManagement;
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("Name of the private endpoint connection.")
-  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

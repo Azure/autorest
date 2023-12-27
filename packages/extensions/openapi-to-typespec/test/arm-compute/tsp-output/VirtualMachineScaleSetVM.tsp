@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model VirtualMachineScaleSetVM
   is TrackedResource<VirtualMachineScaleSetVMProperties> {
   @doc("The instance ID of the virtual machine.")
-  @path
   @key("instanceId")
   @segment("virtualMachines")
   name: string;

@@ -16,7 +16,6 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
   @doc("Connector name.")
   @maxLength(63)
   @minLength(1)
-  @path
   @key("dataConnectorName")
   @segment("dataConnectors")
   name: string;

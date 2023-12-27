@@ -17,7 +17,6 @@ model DeletedServiceContract
   @maxLength(50)
   @minLength(1)
   @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-  @path
   @key("serviceName")
   @segment("deletedservices")
   name: string;

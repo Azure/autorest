@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 @locationResource
 model VirtualMachineExtensionImage
   is TrackedResource<VirtualMachineExtensionImageProperties> {
-  @path
   @key("version")
   @segment("versions")
   name: string;

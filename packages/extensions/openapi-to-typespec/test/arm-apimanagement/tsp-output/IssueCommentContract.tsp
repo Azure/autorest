@@ -17,7 +17,6 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("commentId")
   @segment("comments")
   name: string;

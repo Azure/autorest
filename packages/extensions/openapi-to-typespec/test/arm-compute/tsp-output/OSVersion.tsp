@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 @locationResource
 model OSVersion is ProxyResource<OSVersionProperties> {
   @doc("Name of the OS version.")
-  @path
   @key("osVersionName")
   @segment("cloudServiceOsVersions")
   name: string;

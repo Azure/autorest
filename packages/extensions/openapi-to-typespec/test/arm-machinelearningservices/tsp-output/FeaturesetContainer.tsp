@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
   @doc("Container name. This is case-sensitive.")
-  @path
   @key("name")
   @segment("featuresets")
   name: string;

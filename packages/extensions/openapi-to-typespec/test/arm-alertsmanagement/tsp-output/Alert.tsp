@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.AlertsManagement;
 @subscriptionResource
 model Alert is ProxyResource<AlertProperties> {
   @doc("Unique ID of an alert instance.")
-  @path
   @key("alertId")
   @segment("alerts")
   name: string;

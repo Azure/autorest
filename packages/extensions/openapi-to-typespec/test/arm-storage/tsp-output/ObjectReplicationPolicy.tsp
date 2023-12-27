@@ -16,7 +16,6 @@ model ObjectReplicationPolicy
   is ProxyResource<ObjectReplicationPolicyProperties> {
   @doc("For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.")
   @minLength(1)
-  @path
   @key("objectReplicationPolicyId")
   @segment("objectReplicationPolicies")
   name: string;

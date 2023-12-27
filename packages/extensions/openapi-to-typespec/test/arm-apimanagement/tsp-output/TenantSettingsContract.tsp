@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.ApiManagement;
 model TenantSettingsContract
   is ProxyResource<TenantSettingsContractProperties> {
   @doc("The identifier of the settings.")
-  @path
   @key("settingsType")
   @segment("settings")
   name: SettingsTypeName;

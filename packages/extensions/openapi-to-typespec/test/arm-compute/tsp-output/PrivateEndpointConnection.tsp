@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("The name of the private endpoint connection.")
-  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

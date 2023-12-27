@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(CapacityReservationGroup)
 model CapacityReservation is TrackedResource<CapacityReservationProperties> {
   @doc("The name of the capacity reservation.")
-  @path
   @key("capacityReservationName")
   @segment("capacityReservations")
   name: string;

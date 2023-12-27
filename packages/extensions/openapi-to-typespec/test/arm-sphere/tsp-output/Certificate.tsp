@@ -14,7 +14,6 @@ namespace Microsoft.AzureSphere;
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {
   @doc("Serial number of the certificate. Use '.default' to get current active certificate.")
-  @path
   @key("serialNumber")
   @segment("certificates")
   name: string;

@@ -17,7 +17,6 @@ model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("releaseId")
   @segment("releases")
   name: string;

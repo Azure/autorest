@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model Schedule is ProxyResource<ScheduleProperties> {
   @doc("Schedule name.")
-  @path
   @key("name")
   @segment("schedules")
   name: string;

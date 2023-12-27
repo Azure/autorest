@@ -16,7 +16,6 @@ model BackendContract is ProxyResource<BackendContractProperties> {
   @doc("Identifier of the Backend entity. Must be unique in the current API Management service instance.")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("backendId")
   @segment("backends")
   name: string;

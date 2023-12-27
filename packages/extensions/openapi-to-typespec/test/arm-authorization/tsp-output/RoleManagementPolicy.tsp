@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.Authorization;
 model RoleManagementPolicy
   is ExtensionResource<RoleManagementPolicyProperties> {
   @doc("The name (guid) of the role management policy to get.")
-  @path
   @key("roleManagementPolicyName")
   @segment("roleManagementPolicies")
   name: string;

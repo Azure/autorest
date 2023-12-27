@@ -13,7 +13,6 @@ namespace Microsoft.AzurePlaywrightService;
 @locationResource
 model Quota is ProxyResource<QuotaProperties> {
   @doc("The quota name.")
-  @path
   @key("name")
   @segment("quotas")
   name: QuotaNames;

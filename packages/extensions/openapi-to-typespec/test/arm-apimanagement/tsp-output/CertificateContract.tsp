@@ -17,7 +17,6 @@ model CertificateContract is ProxyResource<CertificateContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("certificateId")
   @segment("certificates")
   name: string;

@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine.")
 model VirtualMachine is TrackedResource<VirtualMachineProperties> {
   @doc("The name of the virtual machine.")
-  @path
   @key("vmName")
   @segment("virtualMachines")
   name: string;

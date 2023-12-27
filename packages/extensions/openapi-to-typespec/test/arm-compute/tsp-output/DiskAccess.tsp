@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("disk access resource.")
 model DiskAccess is TrackedResource<DiskAccessProperties> {
   @doc("The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.")
-  @path
   @key("diskAccessName")
   @segment("diskAccesses")
   name: string;

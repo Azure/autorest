@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("Describes the cloud service.")
 model CloudService is TrackedResource<CloudServiceProperties> {
   @doc("Name of the cloud service.")
-  @path
   @key("cloudServiceName")
   @segment("cloudServices")
   name: string;

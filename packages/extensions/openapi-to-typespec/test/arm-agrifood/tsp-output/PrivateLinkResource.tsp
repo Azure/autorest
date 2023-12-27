@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Sub resource name.")
-  @path
   @key("subResourceName")
   @segment("privateLinkResources")
   name: string;

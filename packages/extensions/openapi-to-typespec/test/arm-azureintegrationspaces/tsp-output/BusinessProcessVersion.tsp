@@ -14,7 +14,6 @@ namespace Microsoft.IntegrationSpaces;
 @parentResource(BusinessProcess)
 model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
   @doc("The version of the business process")
-  @path
   @key("businessProcessVersion")
   @segment("versions")
   name: string;

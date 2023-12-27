@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model CodeContainerResource is ProxyResource<CodeContainer> {
   @doc("Container name.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
   @key("codeName")
   @segment("codes")
   name: string;

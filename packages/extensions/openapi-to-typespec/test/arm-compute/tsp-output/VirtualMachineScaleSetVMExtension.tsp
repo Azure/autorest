@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model VirtualMachineScaleSetVMExtension
   is ProxyResource<VirtualMachineExtensionProperties> {
   @doc("The name of the virtual machine extension.")
-  @path
   @key("vmExtensionName")
   @segment("extensions")
   name: string;

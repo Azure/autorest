@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 model Solution is ProxyResource<SolutionProperties> {
   @doc("SolutionId for Data Manager For Agriculture Resource.")
   @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
-  @path
   @key("solutionId")
   @segment("solutions")
   name: string;

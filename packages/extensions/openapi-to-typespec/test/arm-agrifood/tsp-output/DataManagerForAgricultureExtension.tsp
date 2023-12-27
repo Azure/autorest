@@ -15,7 +15,6 @@ model DataManagerForAgricultureExtension
   is ProxyResource<DataManagerForAgricultureExtensionProperties> {
   @doc("dataManagerForAgricultureExtensionId to be queried.")
   @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
-  @path
   @key("dataManagerForAgricultureExtensionId")
   @segment("farmBeatsExtensionDefinitions")
   name: string;

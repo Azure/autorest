@@ -16,7 +16,6 @@ model LoggerContract is ProxyResource<LoggerContractProperties> {
   @doc("Logger identifier. Must be unique in the API Management service instance.")
   @maxLength(256)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("loggerId")
   @segment("loggers")
   name: string;

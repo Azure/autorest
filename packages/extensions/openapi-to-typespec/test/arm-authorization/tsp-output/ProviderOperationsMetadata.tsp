@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.Authorization;
 @tenantResource
 model ProviderOperationsMetadata is ProxyResource<{}> {
   @doc("The namespace of the resource provider.")
-  @path
   @key("resourceProviderNamespace")
   @segment("providerOperations")
   name: string;

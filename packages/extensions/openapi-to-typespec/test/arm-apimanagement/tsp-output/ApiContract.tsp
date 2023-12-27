@@ -17,7 +17,6 @@ model ApiContract is ProxyResource<ApiContractProperties> {
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("apiId")
   @segment("apis")
   name: string;

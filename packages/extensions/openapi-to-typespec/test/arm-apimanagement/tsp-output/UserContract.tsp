@@ -16,7 +16,6 @@ model UserContract is ProxyResource<UserContractProperties> {
   @doc("User identifier. Must be unique in the current API Management service instance.")
   @maxLength(80)
   @minLength(1)
-  @path
   @key("userId")
   @segment("users")
   name: string;

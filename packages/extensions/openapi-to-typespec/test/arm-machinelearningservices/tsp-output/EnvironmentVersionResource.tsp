@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(EnvironmentContainerResource)
 model EnvironmentVersionResource is ProxyResource<EnvironmentVersion> {
   @doc("Version identifier. This is case-sensitive.")
-  @path
   @key("version")
   @segment("versions")
   name: string;

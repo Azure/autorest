@@ -18,7 +18,6 @@ model GatewayCertificateAuthorityContract
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("certificateId")
   @segment("certificateAuthorities")
   name: string;

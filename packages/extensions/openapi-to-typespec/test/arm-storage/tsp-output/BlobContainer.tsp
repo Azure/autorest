@@ -16,7 +16,6 @@ model BlobContainer is ProxyResource<ContainerProperties> {
   @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
   @maxLength(63)
   @minLength(3)
-  @path
   @key("containerName")
   @segment("containers")
   name: string;

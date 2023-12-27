@@ -16,7 +16,6 @@ model AnalysisServicesServer
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]*$")
-  @path
   @key("serverName")
   @segment("servers")
   name: string;

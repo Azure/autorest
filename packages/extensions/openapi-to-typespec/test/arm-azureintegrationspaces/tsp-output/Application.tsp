@@ -15,7 +15,6 @@ namespace Microsoft.IntegrationSpaces;
 model Application is TrackedResource<ApplicationProperties> {
   @doc("The name of the Application")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
   @key("applicationName")
   @segment("applications")
   name: string;

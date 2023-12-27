@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 model VirtualMachineScaleSet
   is TrackedResource<VirtualMachineScaleSetProperties> {
   @doc("The name of the VM scale set.")
-  @path
   @key("vmScaleSetName")
   @segment("virtualMachineScaleSets")
   name: string;

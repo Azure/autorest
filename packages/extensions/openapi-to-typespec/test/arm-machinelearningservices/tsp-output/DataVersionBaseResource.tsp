@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(DataContainerResource)
 model DataVersionBaseResource is ProxyResource<DataVersionBase> {
   @doc("Version identifier.")
-  @path
   @key("version")
   @segment("versions")
   name: string;

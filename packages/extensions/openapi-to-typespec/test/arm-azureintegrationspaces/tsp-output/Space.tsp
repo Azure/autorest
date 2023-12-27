@@ -13,7 +13,6 @@ namespace Microsoft.IntegrationSpaces;
 model Space is TrackedResource<SpaceResourceProperties> {
   @doc("The name of the space")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
   @key("spaceName")
   @segment("spaces")
   name: string;

@@ -16,7 +16,6 @@ model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
   @doc("The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
   @maxLength(63)
   @minLength(3)
-  @path
   @key("encryptionScopeName")
   @segment("encryptionScopes")
   name: string;

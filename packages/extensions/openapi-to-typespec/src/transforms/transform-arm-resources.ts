@@ -688,6 +688,9 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
     },
   );
 
+  // remove @path decorator for key parameter
+  parameter.decorators = parameter.decorators.filter((d) => d.name !== "path");
+
   // by convention the property itself needs to be called "name"
   parameter.name = "name";
 

@@ -18,7 +18,6 @@ model TagDescriptionContract
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("tagDescriptionId")
   @segment("tagDescriptions")
   name: string;

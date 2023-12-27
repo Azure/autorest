@@ -16,7 +16,6 @@ model InfrastructureResource
   is ProxyResource<InfrastructureResourceProperties> {
   @doc("The name of the infrastructure resource in the space.")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
   @key("infrastructureResourceName")
   @segment("infrastructureResources")
   name: string;

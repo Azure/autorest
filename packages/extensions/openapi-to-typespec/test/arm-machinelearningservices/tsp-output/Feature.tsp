@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model Feature is ProxyResource<FeatureProperties> {
   @doc("Feature Name. This is case-sensitive.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
   @key("featureName")
   @segment("features")
   name: string;

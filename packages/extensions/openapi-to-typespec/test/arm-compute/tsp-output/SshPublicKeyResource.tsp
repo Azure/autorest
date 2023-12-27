@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("Specifies information about the SSH public key.")
 model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
   @doc("The name of the SSH public key.")
-  @path
   @key("sshPublicKeyName")
   @segment("sshPublicKeys")
   name: string;

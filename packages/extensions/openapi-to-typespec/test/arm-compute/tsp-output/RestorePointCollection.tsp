@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 model RestorePointCollection
   is TrackedResource<RestorePointCollectionProperties> {
   @doc("The name of the restore point collection.")
-  @path
   @key("restorePointCollectionName")
   @segment("restorePointCollections")
   name: string;

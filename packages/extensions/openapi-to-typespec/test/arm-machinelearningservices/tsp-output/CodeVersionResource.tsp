@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(CodeContainerResource)
 model CodeVersionResource is ProxyResource<CodeVersion> {
   @doc("Version identifier.")
-  @path
   @key("version")
   @segment("versions")
   name: string;

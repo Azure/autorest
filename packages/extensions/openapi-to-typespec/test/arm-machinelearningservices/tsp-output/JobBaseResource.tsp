@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model JobBaseResource is ProxyResource<JobBase> {
   @doc("The name and identifier for the Job. This is case-sensitive.")
-  @path
   @key("id")
   @segment("jobs")
   name: string;

@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.Authorization;
 model RoleAssignmentScheduleInstance
   is ExtensionResource<RoleAssignmentScheduleInstanceProperties> {
   @doc("The name (hash of schedule name + time) of the role assignment schedule to get.")
-  @path
   @key("roleAssignmentScheduleInstanceName")
   @segment("roleAssignmentScheduleInstances")
   name: string;

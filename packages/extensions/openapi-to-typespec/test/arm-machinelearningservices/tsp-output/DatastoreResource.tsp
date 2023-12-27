@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model DatastoreResource is ProxyResource<Datastore> {
   @doc("Datastore name.")
-  @path
   @key("name")
   @segment("datastores")
   name: string;

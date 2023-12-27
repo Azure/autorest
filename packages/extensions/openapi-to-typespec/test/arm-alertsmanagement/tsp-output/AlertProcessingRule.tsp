@@ -12,7 +12,6 @@ namespace Azure.ResourceManager.AlertsManagement;
 @doc("Alert processing rule object containing target scopes, conditions and scheduling logic.")
 model AlertProcessingRule is TrackedResource<AlertProcessingRuleProperties> {
   @doc("The name of the alert processing rule that needs to be fetched.")
-  @path
   @key("alertProcessingRuleName")
   @segment("actionRules")
   name: string;

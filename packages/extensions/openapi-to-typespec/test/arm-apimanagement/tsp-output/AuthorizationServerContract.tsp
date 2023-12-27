@@ -18,7 +18,6 @@ model AuthorizationServerContract
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("authsid")
   @segment("authorizationServers")
   name: string;

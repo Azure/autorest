@@ -12,7 +12,6 @@ namespace Azure.ResourceManager.Authorization;
 @doc("Role definition.")
 model RoleDefinition is ExtensionResource<RoleDefinitionProperties> {
   @doc("The ID of the role definition.")
-  @path
   @key("roleDefinitionId")
   @segment("roleDefinitions")
   name: string;

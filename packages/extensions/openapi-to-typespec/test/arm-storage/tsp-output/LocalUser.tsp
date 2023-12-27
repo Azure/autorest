@@ -16,7 +16,6 @@ model LocalUser is ProxyResource<LocalUserProperties> {
   @doc("The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.")
   @maxLength(64)
   @minLength(3)
-  @path
   @key("username")
   @segment("localUsers")
   name: string;

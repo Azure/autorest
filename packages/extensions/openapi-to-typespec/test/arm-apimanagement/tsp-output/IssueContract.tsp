@@ -17,7 +17,6 @@ model IssueContract is ProxyResource<IssueContractProperties> {
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("issueId")
   @segment("issues")
   name: string;

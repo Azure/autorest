@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 model CapacityReservationGroup
   is TrackedResource<CapacityReservationGroupProperties> {
   @doc("The name of the capacity reservation group.")
-  @path
   @key("capacityReservationGroupName")
   @segment("capacityReservationGroups")
   name: string;

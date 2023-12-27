@@ -13,7 +13,6 @@ namespace Microsoft.Compute;
 model ProximityPlacementGroup
   is TrackedResource<ProximityPlacementGroupProperties> {
   @doc("The name of the proximity placement group.")
-  @path
   @key("proximityPlacementGroupName")
   @segment("proximityPlacementGroups")
   name: string;

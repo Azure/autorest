@@ -15,7 +15,6 @@ namespace Microsoft.Compute;
 model SharedGalleryImageVersion
   is ProxyResource<SharedGalleryImageVersionProperties> {
   @doc("The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
-  @path
   @key("galleryImageVersionName")
   @segment("versions")
   name: string;

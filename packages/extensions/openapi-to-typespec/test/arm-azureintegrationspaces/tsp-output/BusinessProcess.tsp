@@ -15,7 +15,6 @@ namespace Microsoft.IntegrationSpaces;
 model BusinessProcess is ProxyResource<BusinessProcessProperties> {
   @doc("The name of the business process")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
   @key("businessProcessName")
   @segment("businessProcesses")
   name: string;

@@ -16,7 +16,6 @@ model ProductContract is ProxyResource<ProductContractProperties> {
   @doc("Product identifier. Must be unique in the current API Management service instance.")
   @maxLength(256)
   @minLength(1)
-  @path
   @key("productId")
   @segment("products")
   name: string;

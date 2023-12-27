@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model LabelingJob is ProxyResource<LabelingJobProperties> {
   @doc("The name and identifier for the LabelingJob.")
-  @path
   @key("id")
   @segment("labelingJobs")
   name: string;

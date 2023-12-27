@@ -22,7 +22,7 @@ param(
     $csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
     [string]
     # Specified the converter codegen, default to https://aka.ms/azsdk/openapi-to-typespec.
-    $converterCodegen = ""
+    $converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
 )
 
 function GenerateMetadata ()

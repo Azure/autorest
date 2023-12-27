@@ -17,7 +17,6 @@ model StorageQueue is ProxyResource<QueueProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$")
-  @path
   @key("queueName")
   @segment("queues")
   name: string;

@@ -12,7 +12,6 @@ namespace Azure.ResourceManager.Authorization;
 @doc("Role Assignments")
 model RoleAssignment is ExtensionResource<RoleAssignmentProperties> {
   @doc("The name of the role assignment. It can be any valid GUID.")
-  @path
   @key("roleAssignmentName")
   @segment("roleAssignments")
   name: string;

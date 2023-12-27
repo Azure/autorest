@@ -17,7 +17,6 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("diagnosticId")
   @segment("diagnostics")
   name: string;

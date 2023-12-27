@@ -16,7 +16,6 @@ model GroupContract is ProxyResource<GroupContractProperties> {
   @doc("Group identifier. Must be unique in the current API Management service instance.")
   @maxLength(256)
   @minLength(1)
-  @path
   @key("groupId")
   @segment("groups")
   name: string;

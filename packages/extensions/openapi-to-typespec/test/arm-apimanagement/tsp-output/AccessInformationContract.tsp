@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.ApiManagement;
 model AccessInformationContract
   is ProxyResource<AccessInformationContractProperties> {
   @doc("The identifier of the Access configuration.")
-  @path
   @key("accessName")
   @segment("tenant")
   name: AccessIdName;

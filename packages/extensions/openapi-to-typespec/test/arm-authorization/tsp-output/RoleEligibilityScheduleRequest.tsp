@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.Authorization;
 model RoleEligibilityScheduleRequest
   is ExtensionResource<RoleEligibilityScheduleRequestProperties> {
   @doc("The name (guid) of the role eligibility schedule request to get.")
-  @path
   @key("roleEligibilityScheduleRequestName")
   @segment("roleEligibilityScheduleRequests")
   name: string;

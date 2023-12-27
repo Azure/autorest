@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model OutboundRuleBasicResource is ProxyResource<OutboundRule> {
   @doc("Name of the workspace managed network outbound rule")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @path
   @key("ruleName")
   @segment("outboundRules")
   name: string;

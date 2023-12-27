@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model PrivateEndpointConnection
   is TrackedResource<PrivateEndpointConnectionProperties> {
   @doc("NRP Private Endpoint Connection Name")
-  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

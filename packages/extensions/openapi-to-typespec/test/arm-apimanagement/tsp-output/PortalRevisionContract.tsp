@@ -17,7 +17,6 @@ model PortalRevisionContract
   @doc("Portal revision identifier. Must be unique in the current API Management service instance.")
   @maxLength(256)
   @minLength(1)
-  @path
   @key("portalRevisionId")
   @segment("portalRevisions")
   name: string;

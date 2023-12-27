@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 model FeaturestoreEntityVersion
   is ProxyResource<FeaturestoreEntityVersionProperties> {
   @doc("Version identifier. This is case-sensitive.")
-  @path
   @key("version")
   @segment("versions")
   name: string;

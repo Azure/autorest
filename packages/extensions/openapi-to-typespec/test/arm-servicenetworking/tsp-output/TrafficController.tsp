@@ -13,7 +13,6 @@ namespace Microsoft.ServiceNetworking;
 model TrafficController is TrackedResource<TrafficControllerProperties> {
   @doc("traffic controller name for path")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  @path
   @key("trafficControllerName")
   @segment("trafficControllers")
   name: string;

@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @locationResource
 model SharedGallery is ProxyResource<{}> {
   @doc("The unique name of the Shared Gallery.")
-  @path
   @key("galleryUniqueName")
   @segment("sharedGalleries")
   name: string;

@@ -18,7 +18,6 @@ model IssueAttachmentContract
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("attachmentId")
   @segment("attachments")
   name: string;

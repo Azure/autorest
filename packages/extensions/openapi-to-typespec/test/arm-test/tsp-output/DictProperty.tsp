@@ -15,7 +15,6 @@ namespace Microsoft.Test;
 model DictProperty is TrackedResource<Record<unknown>> {
   @doc("Name of resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
   @key("name")
   @segment("dictproperties")
   name: string;

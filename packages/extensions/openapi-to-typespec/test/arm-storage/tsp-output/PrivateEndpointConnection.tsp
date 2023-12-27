@@ -15,7 +15,6 @@ namespace Microsoft.Storage;
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("The name of the private endpoint connection associated with the Azure resource")
-  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

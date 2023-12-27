@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("Private endpoint connection name.")
-  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

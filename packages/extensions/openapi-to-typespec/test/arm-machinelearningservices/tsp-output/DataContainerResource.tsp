@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 model DataContainerResource is ProxyResource<DataContainer> {
   @doc("Container name.")
-  @path
   @key("name")
   @segment("data")
   name: string;

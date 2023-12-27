@@ -17,7 +17,6 @@ model DataType is ProxyResource<DataTypeProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9-]*$")
-  @path
   @key("dataTypeName")
   @segment("dataTypes")
   name: string;

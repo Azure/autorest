@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Name of the private link resource.")
-  @path
   @key("privateLinkSubResourceName")
   @segment("privateLinkResources")
   name: string;

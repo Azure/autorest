@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 model Extension is ProxyResource<ExtensionProperties> {
   @doc("Id of extension resource.")
-  @path
   @key("extensionId")
   @segment("extensions")
   name: string;

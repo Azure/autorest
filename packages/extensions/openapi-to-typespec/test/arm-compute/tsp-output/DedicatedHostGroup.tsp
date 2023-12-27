@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("Specifies information about the dedicated host group that the dedicated hosts should be assigned to. Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group.")
 model DedicatedHostGroup is TrackedResource<DedicatedHostGroupProperties> {
   @doc("The name of the dedicated host group.")
-  @path
   @key("hostGroupName")
   @segment("hostGroups")
   name: string;

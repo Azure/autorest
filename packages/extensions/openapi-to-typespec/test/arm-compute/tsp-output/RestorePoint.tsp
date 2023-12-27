@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(RestorePointCollection)
 model RestorePoint is ProxyResource<RestorePointProperties> {
   @doc("The name of the restore point.")
-  @path
   @key("restorePointName")
   @segment("restorePoints")
   name: string;

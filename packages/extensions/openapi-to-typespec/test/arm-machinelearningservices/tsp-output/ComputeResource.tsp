@@ -15,7 +15,6 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 model ComputeResource is TrackedResource<{}> {
   @doc("Name of the Azure Machine Learning compute.")
-  @path
   @key("computeName")
   @segment("computes")
   name: string;

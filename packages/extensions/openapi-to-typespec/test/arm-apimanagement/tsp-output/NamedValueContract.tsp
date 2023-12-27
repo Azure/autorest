@@ -16,7 +16,6 @@ model NamedValueContract is ProxyResource<NamedValueContractProperties> {
   @doc("Identifier of the NamedValue.")
   @maxLength(256)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("namedValueId")
   @segment("namedValues")
   name: string;

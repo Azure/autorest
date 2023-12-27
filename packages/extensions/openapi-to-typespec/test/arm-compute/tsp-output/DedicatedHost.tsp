@@ -14,7 +14,6 @@ namespace Microsoft.Compute;
 @parentResource(DedicatedHostGroup)
 model DedicatedHost is TrackedResource<DedicatedHostProperties> {
   @doc("The name of the dedicated host.")
-  @path
   @key("hostName")
   @segment("hosts")
   name: string;

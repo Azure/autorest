@@ -15,7 +15,6 @@ namespace Microsoft.AzureSphere;
 model Product is ProxyResource<ProductProperties> {
   @doc("Name of product.")
   @pattern("^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$")
-  @path
   @key("productName")
   @segment("products")
   name: string;

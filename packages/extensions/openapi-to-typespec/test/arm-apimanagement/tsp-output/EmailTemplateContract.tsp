@@ -14,7 +14,6 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 model EmailTemplateContract is ProxyResource<EmailTemplateContractProperties> {
   @doc("Email Template Name Identifier.")
-  @path
   @key("templateName")
   @segment("templates")
   name: TemplateName;

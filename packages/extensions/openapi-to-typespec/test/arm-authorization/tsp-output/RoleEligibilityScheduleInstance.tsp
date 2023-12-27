@@ -13,7 +13,6 @@ namespace Azure.ResourceManager.Authorization;
 model RoleEligibilityScheduleInstance
   is ExtensionResource<RoleEligibilityScheduleInstanceProperties> {
   @doc("The name (hash of schedule name + time) of the role eligibility schedule to get.")
-  @path
   @key("roleEligibilityScheduleInstanceName")
   @segment("roleEligibilityScheduleInstances")
   name: string;

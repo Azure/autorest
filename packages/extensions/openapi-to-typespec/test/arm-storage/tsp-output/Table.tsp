@@ -17,7 +17,6 @@ model Table is ProxyResource<TableProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[A-Za-z][A-Za-z0-9]{2,62}$")
-  @path
   @key("tableName")
   @segment("tables")
   name: string;

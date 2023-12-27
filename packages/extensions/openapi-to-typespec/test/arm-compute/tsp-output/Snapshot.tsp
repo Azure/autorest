@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
 @doc("Snapshot resource.")
 model Snapshot is TrackedResource<SnapshotProperties> {
   @doc("The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.")
-  @path
   @key("snapshotName")
   @segment("snapshots")
   name: string;

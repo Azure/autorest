@@ -17,7 +17,6 @@ model TagContract is ProxyResource<TagContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
-  @path
   @key("tagId")
   @segment("tags")
   name: string;
