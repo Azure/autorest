@@ -8,7 +8,6 @@ import {
   SchemaType,
 } from "@autorest/codemodel";
 import _ from "lodash";
-import pluralize from "pluralize";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -89,7 +88,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     propertiesModelName = "{}";
   }
 
-  const operations = getTspOperations(schema, propertiesModelName);
+  const operations = getTspOperations(schema);
 
   return {
     fixMe,
@@ -191,7 +190,7 @@ function convertResourceReadOperation(
       doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
       kind: "ArmResourceRead",
       name: getOperationName(operation.OperationID),
-      operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+      operationGroupName: getOperationGroupName(operation.OperationID),
       templateParameters: baseParameters
         ? [resourceMetadata.SwaggerModelName, baseParameters]
         : [resourceMetadata.SwaggerModelName],
@@ -207,7 +206,7 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
         name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
-        operationGroupName: getOperationGroupName(swaggerOperation.operationId, resourceMetadata.Name),
+        operationGroupName: getOperationGroupName(swaggerOperation.operationId),
         parameters: [
           `...ResourceInstanceParameters<${resourceMetadata.SwaggerModelName}, BaseParameters<${resourceMetadata.SwaggerModelName}>>`,
         ],
@@ -233,7 +232,7 @@ function convertResourceCreateOrUpdateOperation(
         doc: operation.Description,
         kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
         name: getOperationName(operation.OperationID),
-        operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+        operationGroupName: getOperationGroupName(operation.OperationID),
         templateParameters: baseParameters
           ? [resourceMetadata.SwaggerModelName, baseParameters]
           : [resourceMetadata.SwaggerModelName],
@@ -246,7 +245,6 @@ function convertResourceCreateOrUpdateOperation(
 function convertResourceUpdateOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
-  resourcePropertiesModelName: string,
 ): TspArmResourceOperation[] {
   if (resourceMetadata.UpdateOperations.length) {
     const operation = resourceMetadata.UpdateOperations[0];
@@ -282,7 +280,7 @@ function convertResourceUpdateOperation(
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+          operationGroupName: getOperationGroupName(operation.OperationID),
           templateParameters,
         },
       ];
@@ -311,7 +309,7 @@ function convertResourceDeleteOperation(
             : "ArmResourceDeleteWithoutOkAsync"
           : "ArmResourceDeleteSync",
         name: getOperationName(operation.OperationID),
-        operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+        operationGroupName: getOperationGroupName(operation.OperationID),
         templateParameters: baseParameters
           ? [resourceMetadata.SwaggerModelName, baseParameters]
           : [resourceMetadata.SwaggerModelName],
@@ -348,7 +346,7 @@ function convertResourceListOperations(
       doc: operation.Description,
       kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
-      operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+      operationGroupName: getOperationGroupName(operation.OperationID),
       templateParameters: templateParameters,
     });
   }
@@ -381,7 +379,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
-            operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+            operationGroupName: getOperationGroupName(operation.OperationID),
             templateParameters,
           });
         } else {
@@ -389,7 +387,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
-            operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+            operationGroupName: getOperationGroupName(operation.OperationID),
             templateParameters: [resourceMetadata.SwaggerModelName],
           });
         }
@@ -414,7 +412,7 @@ function convertResourceListOperations(
         name: swaggerOperation.operationId
           ? getOperationName(swaggerOperation.operationId)
           : `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        operationGroupName: getOperationGroupName(swaggerOperation.operationId, resourceMetadata.Name),
+        operationGroupName: getOperationGroupName(swaggerOperation.operationId),
         templateParameters: baseParameters
           ? [resourceMetadata.SwaggerModelName, baseParameters]
           : [resourceMetadata.SwaggerModelName],
@@ -468,7 +466,7 @@ function convertResourceActionOperations(
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          operationGroupName: getOperationGroupName(operation.OperationID, resourceMetadata.Name),
+          operationGroupName: getOperationGroupName(operation.OperationID),
           templateParameters,
         });
       }
@@ -490,7 +488,7 @@ function convertResourceOtherGetOperations(
         const swaggerOperation = operations[operation.OperationID];
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
           const op = transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model);
-          op.operationGroupName = getOperationGroupName(operation.OperationID, resourceMetadata.Name);
+          op.operationGroupName = getOperationGroupName(operation.OperationID);
           if (!op.fixMe) {
             op.fixMe = [];
           }
@@ -504,10 +502,7 @@ function convertResourceOtherGetOperations(
   return converted;
 }
 
-function getTspOperations(
-  armSchema: ArmResourceSchema,
-  resourcePropertiesModelName: string,
-): [TspArmResourceOperation[], TypespecOperation[]] {
+function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperation[], TypespecOperation[]] {
   const resourceMetadata = armSchema.resourceMetadata;
   const operations = getResourceOperations(resourceMetadata);
   const tspOperations: TspArmResourceOperation[] = [];
@@ -525,7 +520,7 @@ function getTspOperations(
   tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata, operations));
 
   // patch update operation could either be patch for resource/tag or custom patch
-  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations, resourcePropertiesModelName));
+  tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));
 
   // delete operation
   tspOperations.push(...convertResourceDeleteOperation(resourceMetadata, operations));
@@ -546,11 +541,11 @@ function getOperationName(name: string): string {
   return _.lowerFirst(_.last(name.split("_")));
 }
 
-function getOperationGroupName(name: string | undefined, resourceName: string): string {
+function getOperationGroupName(name: string | undefined): string {
   if (name && name.includes("_")) {
     return _.first(name.split("_"))!;
   } else {
-    return pluralize(resourceName);
+    return "";
   }
 }
 

@@ -21,7 +21,8 @@ model CodeContainerResource is ProxyResource<CodeContainer> {
 }
 
 @armResourceOperations
-interface RegistryCodeContainers {
+@projectedName("client", "RegistryCodeContainers")
+interface CodeContainerResources_RegistryCodeContainers {
   @doc("Get Code container.")
   get is ArmResourceRead<CodeContainerResource>;
   @doc("Create or update Code container.")

@@ -23,7 +23,8 @@ model DeletedServiceContract
 }
 
 @armResourceOperations
-interface DeletedServices {
+@projectedName("client", "DeletedServices")
+interface DeletedServiceContracts_DeletedServices {
   @doc("Get soft-deleted Api Management Service by name.")
   getByName is ArmResourceRead<DeletedServiceContract>;
   @doc("Purges Api Management Service (deletes it with no option to undelete).")

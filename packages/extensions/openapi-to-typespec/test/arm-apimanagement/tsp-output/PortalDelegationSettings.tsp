@@ -21,7 +21,8 @@ model PortalDelegationSettings
 }
 
 @armResourceOperations
-interface DelegationSettings {
+@projectedName("client", "DelegationSettings")
+interface PortalDelegationSettings_DelegationSettings {
   @doc("Get Delegation Settings for the Portal.")
   get is ArmResourceRead<PortalDelegationSettings>;
   @doc("Gets the entity state (Etag) version of the DelegationSettings.")
@@ -64,7 +65,8 @@ interface DelegationSettings {
 }
 
 @armResourceOperations
-interface PortalSettings {
+@projectedName("client", "PortalSettings")
+interface PortalDelegationSettings_PortalSettings {
   @doc("Lists a collection of portalsettings defined within a service instance..")
   listByService is ArmResourceListByParent<PortalDelegationSettings>;
 }

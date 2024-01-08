@@ -21,7 +21,8 @@ model DnsZone is TrackedResource<ZoneProperties> {
 }
 
 @armResourceOperations
-interface Zones {
+@projectedName("client", "Zones")
+interface DnsZones_Zones {
   @doc("Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.")
   get is ArmResourceRead<DnsZone>;
   @doc("Creates or updates a DNS zone. Does not modify DNS records within the zone.")
@@ -78,7 +79,8 @@ interface Zones {
 }
 
 @armResourceOperations
-interface RecordSets {
+@projectedName("client", "RecordSets")
+interface DnsZones_RecordSets {
   @doc("Lists all record sets in a DNS zone.")
   // FIXME: RecordSets_ListByDnsZone could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets")

@@ -20,7 +20,8 @@ model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
 }
 
 @armResourceOperations
-interface Subscription {
+@projectedName("client", "Subscription")
+interface SubscriptionContracts_Subscription {
   @doc("Gets the specified Subscription entity.")
   get is ArmResourceRead<SubscriptionContract>;
   @doc("Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.")

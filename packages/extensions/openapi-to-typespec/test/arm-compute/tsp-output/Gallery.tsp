@@ -47,7 +47,8 @@ interface Galleries {
 }
 
 @armResourceOperations
-interface GallerySharingProfile {
+@projectedName("client", "GallerySharingProfile")
+interface Galleries_GallerySharingProfile {
   @doc("Update sharing profile of a gallery.")
   update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
 }

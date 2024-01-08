@@ -24,7 +24,8 @@ model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
 }
 
 @armResourceOperations
-interface OnlineEndpoints {
+@projectedName("client", "OnlineEndpoints")
+interface OnlineEndpointTrackedResources_OnlineEndpoints {
   @doc("Get Online Endpoint.")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
   @doc("Create or update Online Endpoint (asynchronous).")

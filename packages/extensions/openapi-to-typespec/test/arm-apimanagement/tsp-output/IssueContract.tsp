@@ -23,7 +23,8 @@ model IssueContract is ProxyResource<IssueContractProperties> {
 }
 
 @armResourceOperations
-interface ApiIssue {
+@projectedName("client", "ApiIssue")
+interface IssueContracts_ApiIssue {
   @doc("Gets the details of the Issue for an API specified by its identifier.")
   get is ArmResourceRead<
     IssueContract,

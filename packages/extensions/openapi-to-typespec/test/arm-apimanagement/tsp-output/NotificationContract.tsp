@@ -20,7 +20,8 @@ model NotificationContract is ProxyResource<NotificationContractProperties> {
 }
 
 @armResourceOperations
-interface Notification {
+@projectedName("client", "Notification")
+interface NotificationContracts_Notification {
   @doc("Gets the details of the Notification specified by its identifier.")
   get is ArmResourceRead<NotificationContract>;
   @doc("Create or Update API Management publisher notification.")
@@ -53,7 +54,8 @@ interface Notification {
 }
 
 @armResourceOperations
-interface NotificationRecipientUser {
+@projectedName("client", "NotificationRecipientUser")
+interface NotificationContracts_NotificationRecipientUser {
   @doc("Gets the list of the Notification Recipient User subscribed to the notification.")
   // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
@@ -84,7 +86,8 @@ interface NotificationRecipientUser {
 }
 
 @armResourceOperations
-interface NotificationRecipientEmail {
+@projectedName("client", "NotificationRecipientEmail")
+interface NotificationContracts_NotificationRecipientEmail {
   @doc("Gets the list of the Notification Recipient Emails subscribed to a notification.")
   // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")

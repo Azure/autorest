@@ -1,5 +1,6 @@
 import { Dictionary } from "@azure-tools/openapi/v3";
 import { TypespecOperation, TspArmResource, TspArmResourceOperation } from "interfaces";
+import pluralize from "pluralize";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -41,6 +42,8 @@ export function generateArmResource(resource: TspArmResource): string {
 }
 
 function generateArmResourceOperation(resource: TspArmResource): string {
+  const formalOperationGroupName = pluralize(resource.name);
+
   const groupedOperations: Dictionary<(TspArmResourceOperation | TypespecOperation)[]> = {};
   for (const operation of resource.resourceOperations) {
     if (!groupedOperations[operation.operationGroupName]) {
@@ -58,7 +61,17 @@ function generateArmResourceOperation(resource: TspArmResource): string {
 
   for (const [operationGroupName, operations] of Object.entries(groupedOperations)) {
     definitions.push("@armResourceOperations");
-    definitions.push(`interface ${operationGroupName} {`);
+    if (operationGroupName === formalOperationGroupName) {
+      if (resource.name === formalOperationGroupName) {
+        definitions.push(`@projectedName("client", "${operationGroupName}")`);
+        definitions.push(`interface ${operationGroupName}OperationGroup {`);
+      } else {
+        definitions.push(`interface ${operationGroupName} {`);
+      }
+    } else {
+      definitions.push(`@projectedName("client", "${operationGroupName}")`);
+      definitions.push(`interface ${formalOperationGroupName}_${operationGroupName} {`);
+    }
     for (let operation of operations) {
       if ((operation as TspArmResourceOperation).kind) {
         operation = operation as TspArmResourceOperation;

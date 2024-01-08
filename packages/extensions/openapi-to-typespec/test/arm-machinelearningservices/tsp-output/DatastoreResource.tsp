@@ -20,7 +20,8 @@ model DatastoreResource is ProxyResource<Datastore> {
 }
 
 @armResourceOperations
-interface Datastores {
+@projectedName("client", "Datastores")
+interface DatastoreResources_Datastores {
   @doc("Get datastore.")
   get is ArmResourceRead<DatastoreResource>;
   @doc("Create or update datastore.")

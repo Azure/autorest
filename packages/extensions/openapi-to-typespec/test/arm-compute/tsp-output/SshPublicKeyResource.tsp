@@ -18,7 +18,8 @@ model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
 }
 
 @armResourceOperations
-interface SshPublicKeys {
+@projectedName("client", "SshPublicKeys")
+interface SshPublicKeyResources_SshPublicKeys {
   @doc("Retrieves information about an SSH public key.")
   get is ArmResourceRead<SshPublicKeyResource>;
   @doc("Creates a new SSH public key resource.")

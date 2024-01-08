@@ -20,7 +20,8 @@ model PortalSigninSettings is ProxyResource<PortalSigninSettingProperties> {
 }
 
 @armResourceOperations
-interface SignInSettings {
+@projectedName("client", "SignInSettings")
+interface PortalSigninSettings_SignInSettings {
   @doc("Get Sign In Settings for the Portal")
   get is ArmResourceRead<PortalSigninSettings>;
   @doc("Gets the entity state (Etag) version of the SignInSettings.")
@@ -57,7 +58,8 @@ interface SignInSettings {
 }
 
 @armResourceOperations
-interface PortalSettings {
+@projectedName("client", "PortalSettings")
+interface PortalSigninSettings_PortalSettings {
   @doc("Lists a collection of portalsettings defined within a service instance..")
   listByService is ArmResourceListByParent<PortalSigninSettings>;
 }

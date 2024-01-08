@@ -21,7 +21,8 @@ model Association is TrackedResource<AssociationProperties> {
 }
 
 @armResourceOperations
-interface AssociationsInterface {
+@projectedName("client", "AssociationsInterface")
+interface Associations_AssociationsInterface {
   @doc("Get a Association")
   get is ArmResourceRead<Association>;
   @doc("Create a Association")

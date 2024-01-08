@@ -22,7 +22,8 @@ model LoggerContract is ProxyResource<LoggerContractProperties> {
 }
 
 @armResourceOperations
-interface Logger {
+@projectedName("client", "Logger")
+interface LoggerContracts_Logger {
   @doc("Gets the details of the logger specified by its identifier.")
   get is ArmResourceRead<LoggerContract>;
   @doc("Gets the entity state (Etag) version of the logger specified by its identifier.")

@@ -120,7 +120,8 @@ interface Workspaces {
 }
 
 @armResourceOperations
-interface ManagedNetworkProvisions {
+@projectedName("client", "ManagedNetworkProvisions")
+interface Workspaces_ManagedNetworkProvisions {
   @doc("Provisions the managed network of a machine learning workspace.")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
@@ -130,7 +131,8 @@ interface ManagedNetworkProvisions {
 }
 
 @armResourceOperations
-interface WorkspaceFeatures {
+@projectedName("client", "WorkspaceFeatures")
+interface Workspaces_WorkspaceFeatures {
   @doc("Lists all enabled features for a workspace")
   // FIXME: WorkspaceFeatures_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features")
@@ -158,7 +160,8 @@ interface WorkspaceFeatures {
 }
 
 @armResourceOperations
-interface PrivateLinkResources {
+@projectedName("client", "PrivateLinkResources")
+interface Workspaces_PrivateLinkResources {
   @summary("""
 Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
 Each "private link resource" is a connection endpoint (IP address) to the resource.

@@ -21,7 +21,8 @@ model QueueServiceProperties
 }
 
 @armResourceOperations
-interface QueueServices {
+@projectedName("client", "QueueServices")
+interface QueueServiceProperties_QueueServices {
   @doc("Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     QueueServiceProperties,

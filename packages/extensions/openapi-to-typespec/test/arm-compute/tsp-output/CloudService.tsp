@@ -69,7 +69,8 @@ interface CloudServices {
 }
 
 @armResourceOperations
-interface CloudServicesUpdateDomain {
+@projectedName("client", "CloudServicesUpdateDomain")
+interface CloudServices_CloudServicesUpdateDomain {
   @doc("Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.")
   // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")

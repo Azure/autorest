@@ -24,7 +24,8 @@ model DataManagerForAgriculture
 }
 
 @armResourceOperations
-interface DataManagerForAgricultureResources {
+@projectedName("client", "DataManagerForAgricultureResources")
+interface DataManagerForAgricultures_DataManagerForAgricultureResources {
   @doc("Get DataManagerForAgriculture resource.")
   get is ArmResourceRead<DataManagerForAgriculture>;
   @doc("Create or update Data Manager For Agriculture resource.")

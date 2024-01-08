@@ -23,7 +23,8 @@ model OpenidConnectProviderContract
 }
 
 @armResourceOperations
-interface OpenIdConnectProvider {
+@projectedName("client", "OpenIdConnectProvider")
+interface OpenidConnectProviderContracts_OpenIdConnectProvider {
   @doc("Gets specific OpenID Connect Provider without secrets.")
   get is ArmResourceRead<
     OpenidConnectProviderContract,

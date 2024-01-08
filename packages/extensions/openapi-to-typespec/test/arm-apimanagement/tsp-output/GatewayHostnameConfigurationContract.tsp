@@ -23,7 +23,8 @@ model GatewayHostnameConfigurationContract
 }
 
 @armResourceOperations
-interface GatewayHostnameConfiguration {
+@projectedName("client", "GatewayHostnameConfiguration")
+interface GatewayHostnameConfigurationContracts_GatewayHostnameConfiguration {
   @doc("Get details of a hostname configuration")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
   @doc("Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.")

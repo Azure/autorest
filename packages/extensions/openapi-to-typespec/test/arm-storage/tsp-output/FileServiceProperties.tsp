@@ -22,7 +22,8 @@ model FileServiceProperties is ProxyResource<FileServicePropertiesProperties> {
 }
 
 @armResourceOperations
-interface FileServices {
+@projectedName("client", "FileServices")
+interface FileServiceProperties_FileServices {
   @doc("Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     FileServiceProperties,

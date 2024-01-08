@@ -23,7 +23,8 @@ model ApiVersionSetContract is ProxyResource<ApiVersionSetContractProperties> {
 }
 
 @armResourceOperations
-interface ApiVersionSet {
+@projectedName("client", "ApiVersionSet")
+interface ApiVersionSetContracts_ApiVersionSet {
   @doc("Gets the details of the Api Version Set specified by its identifier.")
   get is ArmResourceRead<ApiVersionSetContract>;
   @doc("Gets the entity state (Etag) version of the Api Version Set specified by its identifier.")

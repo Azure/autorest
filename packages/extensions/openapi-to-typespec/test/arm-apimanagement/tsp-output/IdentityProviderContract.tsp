@@ -21,7 +21,8 @@ model IdentityProviderContract
 }
 
 @armResourceOperations
-interface IdentityProvider {
+@projectedName("client", "IdentityProvider")
+interface IdentityProviderContracts_IdentityProvider {
   @doc("Gets the configuration details of the identity Provider configured in specified service instance.")
   get is ArmResourceRead<IdentityProviderContract>;
   @doc("Gets the entity state (Etag) version of the identityProvider specified by its identifier.")

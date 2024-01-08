@@ -24,7 +24,8 @@ model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
 }
 
 @armResourceOperations
-interface OnlineDeployments {
+@projectedName("client", "OnlineDeployments")
+interface OnlineDeploymentTrackedResources_OnlineDeployments {
   @doc("Get Inference Deployment Deployment.")
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
   @doc("Create or update Inference Endpoint Deployment (asynchronous).")

@@ -22,7 +22,8 @@ model SchemaContract is ProxyResource<SchemaContractProperties> {
 }
 
 @armResourceOperations
-interface ApiSchema {
+@projectedName("client", "ApiSchema")
+interface SchemaContracts_ApiSchema {
   @doc("Get the schema configuration at the API level.")
   get is ArmResourceRead<SchemaContract>;
   @doc("Gets the entity state (Etag) version of the schema specified by its identifier.")

@@ -20,7 +20,8 @@ model ModelVersionResource is ProxyResource<ModelVersion> {
 }
 
 @armResourceOperations
-interface RegistryModelVersions {
+@projectedName("client", "RegistryModelVersions")
+interface ModelVersionResources_RegistryModelVersions {
   @doc("Get version.")
   get is ArmResourceRead<ModelVersionResource>;
   @doc("Create or update version.")

@@ -24,7 +24,8 @@ model IssueAttachmentContract
 }
 
 @armResourceOperations
-interface ApiIssueAttachment {
+@projectedName("client", "ApiIssueAttachment")
+interface IssueAttachmentContracts_ApiIssueAttachment {
   @doc("Gets the details of the issue Attachment for an API specified by its identifier.")
   get is ArmResourceRead<IssueAttachmentContract>;
   @doc("Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.")

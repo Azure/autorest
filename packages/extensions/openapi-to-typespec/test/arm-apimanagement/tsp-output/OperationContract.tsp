@@ -22,7 +22,8 @@ model OperationContract is ProxyResource<OperationContractProperties> {
 }
 
 @armResourceOperations
-interface ApiOperation {
+@projectedName("client", "ApiOperation")
+interface OperationContracts_ApiOperation {
   @doc("Gets the details of the API Operation specified by its identifier.")
   get is ArmResourceRead<OperationContract>;
   @doc("Gets the entity state (Etag) version of the API operation specified by its identifier.")

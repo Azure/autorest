@@ -22,7 +22,8 @@ model NamedValueContract is ProxyResource<NamedValueContractProperties> {
 }
 
 @armResourceOperations
-interface NamedValue {
+@projectedName("client", "NamedValue")
+interface NamedValueContracts_NamedValue {
   @doc("Gets the details of the named value specified by its identifier.")
   get is ArmResourceRead<NamedValueContract>;
   @doc("Gets the entity state (Etag) version of the named value specified by its identifier.")

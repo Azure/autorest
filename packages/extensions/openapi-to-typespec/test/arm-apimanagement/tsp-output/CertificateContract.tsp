@@ -23,7 +23,8 @@ model CertificateContract is ProxyResource<CertificateContractProperties> {
 }
 
 @armResourceOperations
-interface Certificate {
+@projectedName("client", "Certificate")
+interface CertificateContracts_Certificate {
   @doc("Gets the details of the certificate specified by its identifier.")
   get is ArmResourceRead<CertificateContract>;
   @doc("Gets the entity state (Etag) version of the certificate specified by its identifier.")

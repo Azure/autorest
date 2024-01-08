@@ -21,7 +21,8 @@ model PrivateEndpointConnection
 }
 
 @armResourceOperations
-interface PrivateEndpointConnection {
+@projectedName("client", "PrivateEndpointConnection")
+interface PrivateEndpointConnections_PrivateEndpointConnection {
   @doc("Gets the details of the Private Endpoint Connection specified by its identifier.")
   getByName is ArmResourceRead<PrivateEndpointConnection>;
   @doc("Creates a new Private Endpoint Connection or updates an existing one.")

@@ -23,7 +23,8 @@ model CacheContract is ProxyResource<CacheContractProperties> {
 }
 
 @armResourceOperations
-interface Cache {
+@projectedName("client", "Cache")
+interface CacheContracts_Cache {
   @doc("Gets the details of the Cache specified by its identifier.")
   get is ArmResourceRead<CacheContract>;
   @doc("Gets the entity state (Etag) version of the Cache specified by its identifier.")

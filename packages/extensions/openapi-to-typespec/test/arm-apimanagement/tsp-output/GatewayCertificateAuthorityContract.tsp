@@ -24,7 +24,8 @@ model GatewayCertificateAuthorityContract
 }
 
 @armResourceOperations
-interface GatewayCertificateAuthority {
+@projectedName("client", "GatewayCertificateAuthority")
+interface GatewayCertificateAuthorityContracts_GatewayCertificateAuthority {
   @doc("Get assigned Gateway Certificate Authority details.")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
   @doc("Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.")

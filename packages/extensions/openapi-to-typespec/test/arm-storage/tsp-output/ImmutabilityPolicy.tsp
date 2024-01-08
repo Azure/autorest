@@ -20,7 +20,8 @@ model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
 }
 
 @armResourceOperations
-interface BlobContainers {
+@projectedName("client", "BlobContainers")
+interface ImmutabilityPolicies_BlobContainers {
   @doc("Gets the existing immutability policy along with the corresponding ETag in response headers and body.")
   getImmutabilityPolicy is ArmResourceRead<
     ImmutabilityPolicy,

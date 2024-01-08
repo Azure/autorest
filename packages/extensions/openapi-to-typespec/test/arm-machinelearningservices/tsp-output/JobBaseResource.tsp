@@ -20,7 +20,8 @@ model JobBaseResource is ProxyResource<JobBase> {
 }
 
 @armResourceOperations
-interface Jobs {
+@projectedName("client", "Jobs")
+interface JobBaseResources_Jobs {
   @doc("Gets a Job by name/id.")
   get is ArmResourceRead<JobBaseResource>;
   @doc("Creates and executes a Job.")

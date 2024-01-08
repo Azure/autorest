@@ -22,7 +22,8 @@ model UserContract is ProxyResource<UserContractProperties> {
 }
 
 @armResourceOperations
-interface User {
+@projectedName("client", "User")
+interface UserContracts_User {
   @doc("Gets the details of the user specified by its identifier.")
   get is ArmResourceRead<UserContract>;
   @doc("Gets the entity state (Etag) version of the user specified by its identifier.")
@@ -119,7 +120,8 @@ interface User {
 }
 
 @armResourceOperations
-interface UserConfirmationPassword {
+@projectedName("client", "UserConfirmationPassword")
+interface UserContracts_UserConfirmationPassword {
   @doc("Sends confirmation")
   send is ArmResourceActionNoContentSync<
     UserContract,
@@ -135,7 +137,8 @@ interface UserConfirmationPassword {
 }
 
 @armResourceOperations
-interface UserGroup {
+@projectedName("client", "UserGroup")
+interface UserContracts_UserGroup {
   @doc("Lists all user groups.")
   // FIXME: UserGroup_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
@@ -181,7 +184,8 @@ interface UserGroup {
 }
 
 @armResourceOperations
-interface UserIdentities {
+@projectedName("client", "UserIdentities")
+interface UserContracts_UserIdentities {
   @doc("List of all user identities.")
   // FIXME: UserIdentities_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")

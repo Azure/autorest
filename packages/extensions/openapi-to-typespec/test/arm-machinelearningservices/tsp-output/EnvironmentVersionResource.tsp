@@ -20,7 +20,8 @@ model EnvironmentVersionResource is ProxyResource<EnvironmentVersion> {
 }
 
 @armResourceOperations
-interface RegistryEnvironmentVersions {
+@projectedName("client", "RegistryEnvironmentVersions")
+interface EnvironmentVersionResources_RegistryEnvironmentVersions {
   @doc("Get version.")
   get is ArmResourceRead<EnvironmentVersionResource>;
   @doc("Create or update version.")

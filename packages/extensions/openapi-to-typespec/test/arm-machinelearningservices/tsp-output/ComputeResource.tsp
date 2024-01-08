@@ -24,7 +24,8 @@ model ComputeResource is TrackedResource<{}> {
 }
 
 @armResourceOperations
-interface Compute {
+@projectedName("client", "Compute")
+interface ComputeResources_Compute {
   @doc("Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.")
   get is ArmResourceRead<ComputeResource>;
   @doc("Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.")

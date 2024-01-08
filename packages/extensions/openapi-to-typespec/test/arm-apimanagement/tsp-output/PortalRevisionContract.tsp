@@ -23,7 +23,8 @@ model PortalRevisionContract
 }
 
 @armResourceOperations
-interface PortalRevision {
+@projectedName("client", "PortalRevision")
+interface PortalRevisionContracts_PortalRevision {
   @doc("Gets the developer portal's revision specified by its identifier.")
   get is ArmResourceRead<PortalRevisionContract>;
   @doc("Gets the developer portal revision specified by its identifier.")

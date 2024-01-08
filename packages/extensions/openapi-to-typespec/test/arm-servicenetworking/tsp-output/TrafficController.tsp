@@ -19,7 +19,8 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 }
 
 @armResourceOperations
-interface TrafficControllerInterface {
+@projectedName("client", "TrafficControllerInterface")
+interface TrafficControllers_TrafficControllerInterface {
   @doc("Get a TrafficController")
   get is ArmResourceRead<TrafficController>;
   @doc("Create a TrafficController")

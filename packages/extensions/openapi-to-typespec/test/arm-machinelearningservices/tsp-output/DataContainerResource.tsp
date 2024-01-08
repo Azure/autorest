@@ -20,7 +20,8 @@ model DataContainerResource is ProxyResource<DataContainer> {
 }
 
 @armResourceOperations
-interface RegistryDataContainers {
+@projectedName("client", "RegistryDataContainers")
+interface DataContainerResources_RegistryDataContainers {
   @doc("Get container.")
   get is ArmResourceRead<DataContainerResource>;
   @doc("Create or update container.")

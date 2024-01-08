@@ -21,7 +21,8 @@ model Frontend is TrackedResource<FrontendProperties> {
 }
 
 @armResourceOperations
-interface FrontendsInterface {
+@projectedName("client", "FrontendsInterface")
+interface Frontends_FrontendsInterface {
   @doc("Get a Frontend")
   get is ArmResourceRead<Frontend>;
   @doc("Create a Frontend")

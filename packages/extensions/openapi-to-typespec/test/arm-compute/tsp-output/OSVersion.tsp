@@ -19,7 +19,8 @@ model OSVersion is ProxyResource<OSVersionProperties> {
 }
 
 @armResourceOperations
-interface CloudServiceOperatingSystems {
+@projectedName("client", "CloudServiceOperatingSystems")
+interface OSVersions_CloudServiceOperatingSystems {
   @doc("Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service.")
   getOSVersion is ArmResourceRead<OSVersion>;
   @doc("Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.")

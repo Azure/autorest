@@ -21,7 +21,8 @@ model ModelContainerResource is ProxyResource<ModelContainer> {
 }
 
 @armResourceOperations
-interface RegistryModelContainers {
+@projectedName("client", "RegistryModelContainers")
+interface ModelContainerResources_RegistryModelContainers {
   @doc("Get container.")
   get is ArmResourceRead<ModelContainerResource>;
   @doc("Create or update model container.")

@@ -22,7 +22,8 @@ model WorkspaceConnectionPropertiesV2BasicResource
 }
 
 @armResourceOperations
-interface WorkspaceConnections {
+@projectedName("client", "WorkspaceConnections")
+interface WorkspaceConnectionPropertiesV2BasicResources_WorkspaceConnections {
   @doc("Lists machine learning workspaces connections by name.")
   get is ArmResourceRead<WorkspaceConnectionPropertiesV2BasicResource>;
   @doc("Create or update machine learning workspaces connections under the specified workspace.")

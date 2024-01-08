@@ -21,7 +21,8 @@ model PrivateEndpointConnection
 }
 
 @armResourceOperations
-interface DiskAccesses {
+@projectedName("client", "DiskAccesses")
+interface PrivateEndpointConnections_DiskAccesses {
   @doc("Gets information about a private endpoint connection under a disk access resource.")
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
   @doc("Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.")

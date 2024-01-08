@@ -21,7 +21,8 @@ model RollingUpgradeStatusInfo
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetRollingUpgrades {
+@projectedName("client", "VirtualMachineScaleSetRollingUpgrades")
+interface RollingUpgradeStatusInfos_VirtualMachineScaleSetRollingUpgrades {
   @doc("Gets the status of the latest virtual machine scale set rolling upgrade.")
   getLatest is ArmResourceRead<
     RollingUpgradeStatusInfo,

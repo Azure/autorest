@@ -21,7 +21,8 @@ model AccessInformationContract
 }
 
 @armResourceOperations
-interface TenantAccess {
+@projectedName("client", "TenantAccess")
+interface AccessInformationContracts_TenantAccess {
   @doc("Get tenant access information details without secrets.")
   get is ArmResourceRead<AccessInformationContract>;
   @doc("Tenant access metadata")
@@ -85,7 +86,8 @@ interface TenantAccess {
 }
 
 @armResourceOperations
-interface TenantAccessGit {
+@projectedName("client", "TenantAccessGit")
+interface AccessInformationContracts_TenantAccessGit {
   @doc("Regenerate primary access key for GIT.")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,

@@ -23,7 +23,8 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
 }
 
 @armResourceOperations
-interface ApiIssueComment {
+@projectedName("client", "ApiIssueComment")
+interface IssueCommentContracts_ApiIssueComment {
   @doc("Gets the details of the issue Comment for an API specified by its identifier.")
   get is ArmResourceRead<IssueCommentContract>;
   @doc("Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.")

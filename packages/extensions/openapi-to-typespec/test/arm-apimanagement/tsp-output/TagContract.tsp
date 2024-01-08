@@ -23,7 +23,8 @@ model TagContract is ProxyResource<TagContractProperties> {
 }
 
 @armResourceOperations
-interface Tag {
+@projectedName("client", "Tag")
+interface TagContracts_Tag {
   @doc("Get tag associated with the Operation.")
   getByOperation is ArmResourceRead<TagContract>;
   @doc("Gets the entity state version of the tag specified by its identifier.")

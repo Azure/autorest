@@ -20,7 +20,8 @@ model CodeVersionResource is ProxyResource<CodeVersion> {
 }
 
 @armResourceOperations
-interface RegistryCodeVersions {
+@projectedName("client", "RegistryCodeVersions")
+interface CodeVersionResources_RegistryCodeVersions {
   @doc("Get version.")
   get is ArmResourceRead<CodeVersionResource>;
   @doc("Create or update version.")

@@ -22,7 +22,8 @@ model BackendContract is ProxyResource<BackendContractProperties> {
 }
 
 @armResourceOperations
-interface Backend {
+@projectedName("client", "Backend")
+interface BackendContracts_Backend {
   @doc("Gets the details of the backend specified by its identifier.")
   get is ArmResourceRead<BackendContract>;
   @doc("Gets the entity state (Etag) version of the backend specified by its identifier.")

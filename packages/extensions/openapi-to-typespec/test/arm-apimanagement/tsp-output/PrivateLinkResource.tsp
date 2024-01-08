@@ -20,7 +20,8 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 }
 
 @armResourceOperations
-interface PrivateEndpointConnection {
+@projectedName("client", "PrivateEndpointConnection")
+interface PrivateLinkResources_PrivateEndpointConnection {
   @doc("Gets the private link resources")
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
   @doc("Gets the private link resources")

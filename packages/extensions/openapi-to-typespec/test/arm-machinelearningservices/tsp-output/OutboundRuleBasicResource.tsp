@@ -21,7 +21,8 @@ model OutboundRuleBasicResource is ProxyResource<OutboundRule> {
 }
 
 @armResourceOperations
-interface ManagedNetworkSettingsRule {
+@projectedName("client", "ManagedNetworkSettingsRule")
+interface OutboundRuleBasicResources_ManagedNetworkSettingsRule {
   @doc("Gets an outbound rule from the managed network of a machine learning workspace.")
   get is ArmResourceRead<OutboundRuleBasicResource>;
   @doc("Creates or updates an outbound rule in the managed network of a machine learning workspace.")

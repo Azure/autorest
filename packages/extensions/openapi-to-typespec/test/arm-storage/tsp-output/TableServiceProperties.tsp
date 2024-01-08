@@ -21,7 +21,8 @@ model TableServiceProperties
 }
 
 @armResourceOperations
-interface TableServices {
+@projectedName("client", "TableServices")
+interface TableServiceProperties_TableServices {
   @doc("Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
     TableServiceProperties,

@@ -29,7 +29,8 @@ model ProviderOperationsMetadata is ProxyResource<{}> {
 }
 
 @armResourceOperations
-interface ProviderOperationsMetadata {
+@projectedName("client", "ProviderOperationsMetadata")
+interface ProviderOperationsMetadataOperationGroup {
   @doc("Gets provider operations metadata for the specified resource provider.")
   get is ArmResourceRead<
     ProviderOperationsMetadata,

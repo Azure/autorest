@@ -23,7 +23,8 @@ model Table is ProxyResource<TableProperties> {
 }
 
 @armResourceOperations
-interface Table {
+@projectedName("client", "Table")
+interface Tables_Table {
   @doc("Gets the table with the specified table name, under the specified account if it exists.")
   get is ArmResourceRead<Table>;
   @doc("Creates a new table with the specified table name, under the specified account.")

@@ -20,7 +20,8 @@ model PolicyContract is ProxyResource<PolicyContractProperties> {
 }
 
 @armResourceOperations
-interface ApiOperationPolicy {
+@projectedName("client", "ApiOperationPolicy")
+interface PolicyContracts_ApiOperationPolicy {
   @doc("Get the policy configuration at the API Operation level.")
   get is ArmResourceRead<
     PolicyContract,

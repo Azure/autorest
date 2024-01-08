@@ -23,7 +23,8 @@ model ApiContract is ProxyResource<ApiContractProperties> {
 }
 
 @armResourceOperations
-interface Api {
+@projectedName("client", "Api")
+interface ApiContracts_Api {
   @doc("Gets the details of the API specified by its identifier.")
   get is ArmResourceRead<ApiContract>;
   @doc("Gets the entity state (Etag) version of the API specified by its identifier.")
@@ -100,7 +101,8 @@ interface Api {
 }
 
 @armResourceOperations
-interface ApiRevision {
+@projectedName("client", "ApiRevision")
+interface ApiContracts_ApiRevision {
   @doc("Lists all revisions of an API.")
   // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
@@ -146,7 +148,8 @@ interface ApiRevision {
 }
 
 @armResourceOperations
-interface ApiProduct {
+@projectedName("client", "ApiProduct")
+interface ApiContracts_ApiProduct {
   @doc("Lists all Products, which the API is part of.")
   // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
@@ -192,7 +195,8 @@ interface ApiProduct {
 }
 
 @armResourceOperations
-interface Operation {
+@projectedName("client", "Operation")
+interface ApiContracts_Operation {
   @doc("Lists a collection of operations associated with tags.")
   // FIXME: Operation_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")

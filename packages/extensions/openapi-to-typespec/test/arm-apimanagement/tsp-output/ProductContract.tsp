@@ -22,7 +22,8 @@ model ProductContract is ProxyResource<ProductContractProperties> {
 }
 
 @armResourceOperations
-interface Product {
+@projectedName("client", "Product")
+interface ProductContracts_Product {
   @doc("Gets the details of the product specified by its identifier.")
   get is ArmResourceRead<ProductContract>;
   @doc("Gets the entity state (Etag) version of the product specified by its identifier.")
@@ -102,7 +103,8 @@ interface Product {
 }
 
 @armResourceOperations
-interface ProductApi {
+@projectedName("client", "ProductApi")
+interface ProductContracts_ProductApi {
   @doc("Lists a collection of the APIs associated with a product.")
   // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
@@ -148,7 +150,8 @@ interface ProductApi {
 }
 
 @armResourceOperations
-interface ProductGroup {
+@projectedName("client", "ProductGroup")
+interface ProductContracts_ProductGroup {
   @doc("Lists the collection of developer groups associated with the specified product.")
   // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
@@ -194,7 +197,8 @@ interface ProductGroup {
 }
 
 @armResourceOperations
-interface ProductSubscriptions {
+@projectedName("client", "ProductSubscriptions")
+interface ProductContracts_ProductSubscriptions {
   @doc("Lists the collection of subscriptions to the specified product.")
   // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")

@@ -22,7 +22,8 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
 }
 
 @armResourceOperations
-interface GlobalSchema {
+@projectedName("client", "GlobalSchema")
+interface GlobalSchemaContracts_GlobalSchema {
   @doc("Gets the details of the Schema specified by its identifier.")
   get is ArmResourceRead<GlobalSchemaContract>;
   @doc("Gets the entity state (Etag) version of the Schema specified by its identifier.")

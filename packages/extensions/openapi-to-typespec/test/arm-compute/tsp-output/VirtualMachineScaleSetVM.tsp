@@ -37,7 +37,8 @@ model VirtualMachineScaleSetVM
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVMs {
+@projectedName("client", "VirtualMachineScaleSetVMs")
+interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
   @doc("Gets a virtual machine from a VM scale set.")
   get is ArmResourceRead<
     VirtualMachineScaleSetVM,

@@ -24,7 +24,8 @@ model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
 }
 
 @armResourceOperations
-interface BatchEndpoints {
+@projectedName("client", "BatchEndpoints")
+interface BatchEndpointTrackedResources_BatchEndpoints {
   @doc("Gets a batch inference endpoint by name.")
   get is ArmResourceRead<BatchEndpointTrackedResource>;
   @doc("Creates a batch inference endpoint (asynchronous).")

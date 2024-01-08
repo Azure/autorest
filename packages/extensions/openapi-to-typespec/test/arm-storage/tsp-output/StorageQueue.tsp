@@ -23,7 +23,8 @@ model StorageQueue is ProxyResource<QueueProperties> {
 }
 
 @armResourceOperations
-interface Queue {
+@projectedName("client", "Queue")
+interface StorageQueues_Queue {
   @doc("Gets the queue with the specified queue name, under the specified account if it exists.")
   get is ArmResourceRead<StorageQueue>;
   @doc("Creates a new queue with the specified queue name, under the specified account.")

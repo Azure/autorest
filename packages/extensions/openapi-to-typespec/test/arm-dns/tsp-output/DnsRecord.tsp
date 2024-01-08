@@ -23,7 +23,8 @@ model DnsRecord is ProxyResource<RecordSetProperties> {
 }
 
 @armResourceOperations
-interface RecordSets {
+@projectedName("client", "RecordSets")
+interface DnsRecords_RecordSets {
   @doc("Gets a record set.")
   get is ArmResourceRead<
     DnsRecord,

@@ -20,7 +20,8 @@ model EmailTemplateContract is ProxyResource<EmailTemplateContractProperties> {
 }
 
 @armResourceOperations
-interface EmailTemplate {
+@projectedName("client", "EmailTemplate")
+interface EmailTemplateContracts_EmailTemplate {
   @doc("Gets the details of the email template specified by its identifier.")
   get is ArmResourceRead<EmailTemplateContract>;
   @doc("Gets the entity state (Etag) version of the email template specified by its identifier.")

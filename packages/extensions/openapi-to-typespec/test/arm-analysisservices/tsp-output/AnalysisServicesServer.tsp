@@ -22,7 +22,8 @@ model AnalysisServicesServer
 }
 
 @armResourceOperations
-interface Servers {
+@projectedName("client", "Servers")
+interface AnalysisServicesServers_Servers {
   @doc("Gets details about the specified Analysis Services server.")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
   @doc("Provisions the specified Analysis Services server based on the configuration specified in the request.")

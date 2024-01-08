@@ -24,7 +24,8 @@ model TagDescriptionContract
 }
 
 @armResourceOperations
-interface ApiTagDescription {
+@projectedName("client", "ApiTagDescription")
+interface TagDescriptionContracts_ApiTagDescription {
   @doc("Get Tag description in scope of API")
   get is ArmResourceRead<TagDescriptionContract>;
   @doc("Gets the entity state version of the tag specified by its identifier.")

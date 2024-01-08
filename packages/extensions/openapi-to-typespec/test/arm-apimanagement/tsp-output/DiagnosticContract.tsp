@@ -23,7 +23,8 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
 }
 
 @armResourceOperations
-interface ApiDiagnostic {
+@projectedName("client", "ApiDiagnostic")
+interface DiagnosticContracts_ApiDiagnostic {
   @doc("Gets the details of the Diagnostic for an API specified by its identifier.")
   get is ArmResourceRead<DiagnosticContract>;
   @doc("Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.")

@@ -22,7 +22,8 @@ model GroupContract is ProxyResource<GroupContractProperties> {
 }
 
 @armResourceOperations
-interface Group {
+@projectedName("client", "Group")
+interface GroupContracts_Group {
   @doc("Gets the details of the group specified by its identifier.")
   get is ArmResourceRead<GroupContract>;
   @doc("Gets the entity state (Etag) version of the group specified by its identifier.")
@@ -87,7 +88,8 @@ interface Group {
 }
 
 @armResourceOperations
-interface GroupUser {
+@projectedName("client", "GroupUser")
+interface GroupContracts_GroupUser {
   @doc("Lists a collection of user entities associated with the group.")
   // FIXME: GroupUser_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")

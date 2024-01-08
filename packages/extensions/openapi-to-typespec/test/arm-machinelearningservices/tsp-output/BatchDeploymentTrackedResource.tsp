@@ -24,7 +24,8 @@ model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
 }
 
 @armResourceOperations
-interface BatchDeployments {
+@projectedName("client", "BatchDeployments")
+interface BatchDeploymentTrackedResources_BatchDeployments {
   @doc("Gets a batch inference deployment by id.")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
   @doc("Creates/updates a batch inference deployment (asynchronous).")

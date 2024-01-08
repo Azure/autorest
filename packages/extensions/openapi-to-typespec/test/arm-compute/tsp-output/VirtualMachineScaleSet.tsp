@@ -371,7 +371,8 @@ interface VirtualMachineScaleSets {
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetRollingUpgrades {
+@projectedName("client", "VirtualMachineScaleSetRollingUpgrades")
+interface VirtualMachineScaleSets_VirtualMachineScaleSetRollingUpgrades {
   @doc("Cancels the current virtual machine scale set rolling upgrade.")
   cancel is ArmResourceActionAsync<
     VirtualMachineScaleSet,

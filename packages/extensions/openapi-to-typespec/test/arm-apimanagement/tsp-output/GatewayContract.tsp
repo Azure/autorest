@@ -22,7 +22,8 @@ model GatewayContract is ProxyResource<GatewayContractProperties> {
 }
 
 @armResourceOperations
-interface Gateway {
+@projectedName("client", "Gateway")
+interface GatewayContracts_Gateway {
   @doc("Gets the details of the Gateway specified by its identifier.")
   get is ArmResourceRead<GatewayContract>;
   @doc("Gets the entity state (Etag) version of the Gateway specified by its identifier.")
@@ -103,7 +104,8 @@ interface Gateway {
 }
 
 @armResourceOperations
-interface GatewayApi {
+@projectedName("client", "GatewayApi")
+interface GatewayContracts_GatewayApi {
   @doc("Lists a collection of the APIs associated with a gateway.")
   // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")

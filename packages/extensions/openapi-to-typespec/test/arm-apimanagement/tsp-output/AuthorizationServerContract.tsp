@@ -24,7 +24,8 @@ model AuthorizationServerContract
 }
 
 @armResourceOperations
-interface AuthorizationServer {
+@projectedName("client", "AuthorizationServer")
+interface AuthorizationServerContracts_AuthorizationServer {
   @doc("Gets the details of the authorization server specified by its identifier.")
   get is ArmResourceRead<AuthorizationServerContract>;
   @doc("Gets the entity state (Etag) version of the authorizationServer specified by its identifier.")

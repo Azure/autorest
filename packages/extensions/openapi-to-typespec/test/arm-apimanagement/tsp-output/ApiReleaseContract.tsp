@@ -23,7 +23,8 @@ model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
 }
 
 @armResourceOperations
-interface ApiRelease {
+@projectedName("client", "ApiRelease")
+interface ApiReleaseContracts_ApiRelease {
   @doc("Returns the details of an API release.")
   get is ArmResourceRead<ApiReleaseContract>;
   @doc("Returns the etag of an API release.")

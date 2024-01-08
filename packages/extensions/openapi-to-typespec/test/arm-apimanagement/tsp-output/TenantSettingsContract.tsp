@@ -21,7 +21,8 @@ model TenantSettingsContract
 }
 
 @armResourceOperations
-interface TenantSettings {
+@projectedName("client", "TenantSettings")
+interface TenantSettingsContracts_TenantSettings {
   @doc("Get tenant settings.")
   get is ArmResourceRead<TenantSettingsContract>;
   @doc("Public settings.")
