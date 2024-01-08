@@ -8,6 +8,7 @@ import {
   SchemaType,
 } from "@autorest/codemodel";
 import _ from "lodash";
+import { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -675,7 +676,7 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
   parameter.decorators.push(
     {
       name: "key",
-      arguments: [schema.resourceMetadata.ResourceKey],
+      arguments: [schema.resourceMetadata.IsSingletonResource ? singular(schema.resourceMetadata.ResourceKeySegment) : schema.resourceMetadata.ResourceKey],
     },
     {
       name: "segment",

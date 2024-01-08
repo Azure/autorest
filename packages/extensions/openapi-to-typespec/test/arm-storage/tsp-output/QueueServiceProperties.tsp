@@ -15,7 +15,7 @@ namespace Microsoft.Storage;
 @parentResource(StorageAccount)
 model QueueServiceProperties
   is ProxyResource<QueueServicePropertiesProperties> {
-  @key("queueServiceName")
+  @key("queueService")
   @segment("queueServices")
   name: string;
 }

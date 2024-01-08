@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 @singleton("default")
 @parentResource(StorageAccount)
 model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
-  @key("blobInventoryPolicyName")
+  @key("inventoryPolicy")
   @segment("inventoryPolicies")
   name: string;
 }

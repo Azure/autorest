@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 @singleton("default")
 @parentResource(StorageAccount)
 model BlobServiceProperties is ProxyResource<BlobServicePropertiesProperties> {
-  @key("BlobServicesName")
+  @key("blobService")
   @segment("blobServices")
   name: string;
 

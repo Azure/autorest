@@ -14,7 +14,7 @@ namespace Microsoft.Test;
 @singleton("default")
 @parentResource(Employee)
 model Enroll is TrackedResource<EnrollProperties> {
-  @key("default")
+  @key("enroll")
   @segment("enrolls")
   name: string;
 }

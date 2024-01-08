@@ -15,7 +15,7 @@ namespace Microsoft.Storage;
 @parentResource(StorageAccount)
 model TableServiceProperties
   is ProxyResource<TableServicePropertiesProperties> {
-  @key("tableServiceName")
+  @key("tableService")
   @segment("tableServices")
   name: string;
 }

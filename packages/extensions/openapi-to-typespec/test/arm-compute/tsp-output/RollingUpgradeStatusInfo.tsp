@@ -15,7 +15,7 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 model RollingUpgradeStatusInfo
   is TrackedResource<RollingUpgradeStatusInfoProperties> {
-  @key("latest")
+  @key("rollingUpgrade")
   @segment("rollingUpgrades")
   name: string;
 }

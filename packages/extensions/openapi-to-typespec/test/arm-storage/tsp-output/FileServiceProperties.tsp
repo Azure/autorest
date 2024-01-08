@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 @singleton("default")
 @parentResource(StorageAccount)
 model FileServiceProperties is ProxyResource<FileServicePropertiesProperties> {
-  @key("FileServicesName")
+  @key("fileService")
   @segment("fileServices")
   name: string;
 

@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 @singleton("default")
 @parentResource(StorageAccount)
 model ManagementPolicy is ProxyResource<ManagementPolicyProperties> {
-  @key("managementPolicyName")
+  @key("managementPolicy")
   @segment("managementPolicies")
   name: string;
 }

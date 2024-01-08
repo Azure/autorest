@@ -16,7 +16,7 @@ during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-  prompt?: unknown;
+  prompt?: PostContentSchemaPrompt;
 
   @doc("The maximum number of tokens to generate. Has minimum of 0.")
   @projectedName("json", "max_tokens")
@@ -91,7 +91,7 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
   echo?: boolean;
 
   @doc("A sequence which indicates the end of the current document.")
-  stop?: unknown;
+  stop?: PostContentSchemaStop;
 
   @projectedName("json", "completion_config")
   completionConfig?: string;
@@ -125,6 +125,20 @@ stream intermediate progress if best_of > 1. Has maximum value of 128.
   @projectedName("json", "best_of")
   bestOf?: int32;
 }
+
+@doc("""
+An optional prompt to complete from, encoded as a string, a list of strings, or
+a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
+If you would like to provide multiple prompts, use the POST variant of this
+method. Note that <|endoftext|> is the document separator that the model sees
+during training, so if a prompt is not specified the model will generate as if
+from the beginning of a new document. Maximum allowed size of string list is
+2048.
+""")
+model PostContentSchemaPrompt {}
+
+@doc("A sequence which indicates the end of the current document.")
+model PostContentSchemaStop {}
 
 model PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema {
   id?: string;
@@ -174,7 +188,7 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
 An input to embed, encoded as a string, a list of strings, or a list of token
 lists
 """)
-  input: unknown;
+  input: PostContentSchemaInput;
 
   @doc("The ID of the end-user, for use in tracking and rate-limiting.")
   user?: string;
@@ -186,3 +200,9 @@ lists
   @doc("ID of the model to use")
   `model`?: string;
 }
+
+@doc("""
+An input to embed, encoded as a string, a list of strings, or a list of token
+lists
+""")
+model PostContentSchemaInput {}

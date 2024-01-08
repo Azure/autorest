@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 model PortalDelegationSettings
   is ProxyResource<PortalDelegationSettingsProperties> {
-  @key("delegation")
+  @key("portalsetting")
   @segment("portalsettings")
   name: string;
 }

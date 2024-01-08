@@ -12,7 +12,7 @@ namespace Microsoft.NetworkAnalytics;
 @doc("The data catalog resource.")
 @singleton("default")
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
-  @key("default")
+  @key("dataProductsCatalog")
   @segment("dataProductsCatalogs")
   name: string;
 }

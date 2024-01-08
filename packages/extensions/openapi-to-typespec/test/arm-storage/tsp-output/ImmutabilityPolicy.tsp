@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 @singleton("default")
 @parentResource(BlobContainer)
 model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
-  @key("immutabilityPolicyName")
+  @key("immutabilityPolicy")
   @segment("immutabilityPolicies")
   name: string;
 }

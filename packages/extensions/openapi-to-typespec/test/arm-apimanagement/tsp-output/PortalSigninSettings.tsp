@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @singleton("signin")
 @parentResource(ApiManagementServiceResource)
 model PortalSigninSettings is ProxyResource<PortalSigninSettingProperties> {
-  @key("signin")
+  @key("portalsetting")
   @segment("portalsettings")
   name: string;
 }
