@@ -28,10 +28,6 @@ interface ImmutabilityPolicies_BlobContainers {
     {
       ...BaseParameters<ImmutabilityPolicy>;
 
-      @doc("The name of the blob container immutabilityPolicy within the specified storage account. ImmutabilityPolicy Name must be 'default'")
-      @path
-      immutabilityPolicyName: "default";
-
       @doc("The entity state (ETag) version of the immutability policy to update. A value of \"*\" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.")
       @header
       `If-Match`?: string;
@@ -44,10 +40,6 @@ interface ImmutabilityPolicies_BlobContainers {
     {
       ...BaseParameters<ImmutabilityPolicy>;
 
-      @doc("The name of the blob container immutabilityPolicy within the specified storage account. ImmutabilityPolicy Name must be 'default'")
-      @path
-      immutabilityPolicyName: "default";
-
       @doc("The entity state (ETag) version of the immutability policy to update. A value of \"*\" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.")
       @header
       `If-Match`?: string;
@@ -59,10 +51,6 @@ interface ImmutabilityPolicies_BlobContainers {
     ImmutabilityPolicy,
     {
       ...BaseParameters<ImmutabilityPolicy>;
-
-      @doc("The name of the blob container immutabilityPolicy within the specified storage account. ImmutabilityPolicy Name must be 'default'")
-      @path
-      immutabilityPolicyName: "default";
 
       @doc("The entity state (ETag) version of the immutability policy to update. A value of \"*\" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.")
       @header

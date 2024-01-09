@@ -24,28 +24,10 @@ model QueueServiceProperties
 @projectedName("client", "QueueServices")
 interface QueueServiceProperties_QueueServices {
   @doc("Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
-  getServiceProperties is ArmResourceRead<
-    QueueServiceProperties,
-    {
-      ...BaseParameters<QueueServiceProperties>;
-
-      @doc("The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'")
-      @path
-      queueServiceName: "default";
-    }
-  >;
+  getServiceProperties is ArmResourceRead<QueueServiceProperties>;
 
   @doc("Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<
-    QueueServiceProperties,
-    {
-      ...BaseParameters<QueueServiceProperties>;
-
-      @doc("The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'")
-      @path
-      queueServiceName: "default";
-    }
-  >;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<QueueServiceProperties>;
 
   @doc("List all queue services for the storage account")
   list is ArmResourceListByParent<QueueServiceProperties>;

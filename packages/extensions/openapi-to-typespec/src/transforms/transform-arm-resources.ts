@@ -1,6 +1,4 @@
 import {
-  CodeModel,
-  ObjectSchema,
   Operation,
   Parameter,
   Response,
@@ -574,7 +572,7 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
   pathParameters.push("$host");
   if (operation.parameters) {
     for (const parameter of operation.parameters) {
-      if (resource.IsSingletonResource === true && parameter.schema.type === SchemaType.Constant) {
+      if (resource.IsSingletonResource && parameter.schema.type === SchemaType.Constant) {
         continue;
       }
       if (!pathParameters.includes(parameter.language.default.serializedName)) {

@@ -24,28 +24,10 @@ model TableServiceProperties
 @projectedName("client", "TableServices")
 interface TableServiceProperties_TableServices {
   @doc("Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
-  getServiceProperties is ArmResourceRead<
-    TableServiceProperties,
-    {
-      ...BaseParameters<TableServiceProperties>;
-
-      @doc("The name of the Table Service within the specified storage account. Table Service Name must be 'default'")
-      @path
-      tableServiceName: "default";
-    }
-  >;
+  getServiceProperties is ArmResourceRead<TableServiceProperties>;
 
   @doc("Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
-  setServiceProperties is ArmResourceCreateOrReplaceSync<
-    TableServiceProperties,
-    {
-      ...BaseParameters<TableServiceProperties>;
-
-      @doc("The name of the Table Service within the specified storage account. Table Service Name must be 'default'")
-      @path
-      tableServiceName: "default";
-    }
-  >;
+  setServiceProperties is ArmResourceCreateOrReplaceSync<TableServiceProperties>;
 
   @doc("List all table services for the storage account.")
   list is ArmResourceListByParent<TableServiceProperties>;
