@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -158,7 +159,7 @@ enum DaysOfWeek {
   Friday,
   Saturday,
 }
-@Azure.Core.fixed
+@fixed
 enum AlertModificationEvent {
   AlertCreated,
   StateChange,
@@ -170,7 +171,7 @@ enum AlertModificationEvent {
   ActionsSuppressed,
   ActionsFailed,
 }
-@Azure.Core.fixed
+@fixed
 enum SmartGroupModificationEvent {
   SmartGroupCreated,
   StateChange,

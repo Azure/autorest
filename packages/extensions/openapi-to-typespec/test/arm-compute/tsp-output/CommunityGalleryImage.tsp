@@ -23,6 +23,7 @@ model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
 interface CommunityGalleryImages {
   @doc("Get a community gallery image.")
   get is ArmResourceRead<CommunityGalleryImage>;
+
   @doc("List community gallery images inside a gallery.")
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }

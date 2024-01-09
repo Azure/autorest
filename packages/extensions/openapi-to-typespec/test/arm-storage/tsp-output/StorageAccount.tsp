@@ -39,16 +39,22 @@ interface StorageAccounts {
       $expand?: StorageAccountExpand;
     }
   >;
+
   @doc("Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.")
   create is ArmResourceCreateOrUpdateAsync<StorageAccount>;
+
   @doc("The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.")
   update is ArmCustomPatchSync<StorageAccount, StorageAccountUpdateParameters>;
+
   @doc("Deletes a storage account in Microsoft Azure.")
   delete is ArmResourceDeleteSync<StorageAccount>;
+
   @doc("Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.")
   listByResourceGroup is ArmResourceListByParent<StorageAccount>;
+
   @doc("Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.")
   list is ArmListBySubscription<StorageAccount>;
+
   @doc("Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.")
   listKeys is ArmResourceActionSync<
     StorageAccount,
@@ -62,24 +68,28 @@ interface StorageAccounts {
       $expand?: "kerb";
     }
   >;
+
   @doc("Regenerates one of the access keys or Kerberos keys for the specified storage account.")
   regenerateKey is ArmResourceActionSync<
     StorageAccount,
     StorageAccountRegenerateKeyParameters,
     StorageAccountListKeysResult
   >;
+
   @doc("List SAS credentials of a storage account.")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
     ListAccountSasResponse
   >;
+
   @doc("List service SAS credentials of a specific resource.")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
     ListServiceSasResponse
   >;
+
   @doc("A failover request can be triggered for a storage account in the event a primary endpoint becomes unavailable for any reason. The failover occurs from the storage account's primary cluster to the secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover and the account is converted to LRS. In the case of a Planned Failover, the primary and secondary clusters are swapped after failover and the account remains geo-replicated. Failover should continue to be used in the event of availability issues as Planned failover is only available while the primary and secondary endpoints are available. The primary use case of a Planned Failover is disaster recovery testing drills. This type of failover is invoked by setting FailoverType parameter to 'Planned'. Learn more about the failover options here- https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery-guidance")
   failover is ArmResourceActionAsync<
     StorageAccount,
@@ -93,6 +103,7 @@ interface StorageAccounts {
       failoverType?: "Planned";
     }
   >;
+
   @doc("Live Migration of storage account to enable Hns")
   hierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
@@ -106,18 +117,21 @@ interface StorageAccounts {
       requestType: string;
     }
   >;
+
   @doc("Abort live Migration of storage account to enable Hns")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
     void
   >;
+
   @doc("Restore blobs in the specified blob ranges")
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
     BlobRestoreStatus
   >;
+
   @doc("Revoke user delegation keys.")
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
 }

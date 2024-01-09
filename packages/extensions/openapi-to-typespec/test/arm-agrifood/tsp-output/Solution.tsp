@@ -26,10 +26,13 @@ model Solution is ProxyResource<SolutionProperties> {
 interface Solutions {
   @doc("Get installed Solution details by Solution id.")
   get is ArmResourceRead<Solution>;
+
   @doc("Install Or Update Solution.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Solution>;
+
   @doc("Uninstall Solution.")
   delete is ArmResourceDeleteSync<Solution>;
+
   @doc("Get installed Solutions details.")
   list is ArmResourceListByParent<
     Solution,

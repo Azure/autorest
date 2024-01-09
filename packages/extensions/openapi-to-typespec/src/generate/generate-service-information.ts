@@ -3,7 +3,7 @@ import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespace } from "../utils/namespace";
 
-const VALID_VERSION = ["v3", "v4", "v5"];
+const VALID_VERSIONS = ["v3", "v4", "v5"];
 
 export function generateServiceInformation(program: TypespecProgram) {
   const { serviceInformation } = program;
@@ -22,13 +22,13 @@ export function generateServiceInformation(program: TypespecProgram) {
   }
 
   if (isArm && serviceInformation.armCommonTypeVersion) {
-    if (VALID_VERSION.includes(serviceInformation.armCommonTypeVersion)) {
+    if (VALID_VERSIONS.includes(serviceInformation.armCommonTypeVersion)) {
       definitions.push(
         `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
       );
     } else {
       definitions.push(
-        `// FIXME: Common type version ${serviceInformation.armCommonTypeVersion} is not supportted for now.`,
+        `// FIXME: Common type version ${serviceInformation.armCommonTypeVersion} is not supported for now.`,
       );
       definitions.push(
         `// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,

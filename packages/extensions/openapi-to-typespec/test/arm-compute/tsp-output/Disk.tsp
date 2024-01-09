@@ -34,18 +34,25 @@ model Disk is TrackedResource<DiskProperties> {
 interface Disks {
   @doc("Gets information about a disk.")
   get is ArmResourceRead<Disk>;
+
   @doc("Creates or updates a disk.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Disk>;
+
   @doc("Updates (patches) a disk.")
   update is ArmCustomPatchAsync<Disk, DiskUpdate>;
+
   @doc("Deletes a disk.")
   delete is ArmResourceDeleteAsync<Disk>;
+
   @doc("Lists all the disks under a resource group.")
   listByResourceGroup is ArmResourceListByParent<Disk>;
+
   @doc("Lists all the disks under a subscription.")
   list is ArmListBySubscription<Disk>;
+
   @doc("Grants access to a disk.")
   grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
+
   @doc("Revokes access to a disk.")
   revokeAccess is ArmResourceActionAsync<Disk, void, void>;
 }

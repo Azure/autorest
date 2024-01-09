@@ -22,18 +22,25 @@ model Catalog is TrackedResource<CatalogProperties> {
 interface Catalogs {
   @doc("Get a Catalog")
   get is ArmResourceRead<Catalog>;
+
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
+
   @doc("Update a Catalog")
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
+
   @doc("Delete a Catalog")
   delete is ArmResourceDeleteAsync<Catalog>;
+
   @doc("List Catalog resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
+
   @doc("List Catalog resources by subscription ID")
   listBySubscription is ArmListBySubscription<Catalog>;
+
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, void, CountDeviceResponse>;
+
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
     Catalog,
@@ -59,6 +66,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
@@ -84,6 +92,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
@@ -109,6 +118,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
     Catalog,

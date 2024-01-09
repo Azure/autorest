@@ -26,6 +26,7 @@ model SchemaContract is ProxyResource<SchemaContractProperties> {
 interface SchemaContracts_ApiSchema {
   @doc("Get the schema configuration at the API level.")
   get is ArmResourceRead<SchemaContract>;
+
   @doc("Gets the entity state (Etag) version of the schema specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface SchemaContracts_ApiSchema {
       BaseParameters<SchemaContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates schema configuration for the API.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     SchemaContract,
@@ -45,6 +47,7 @@ interface SchemaContracts_ApiSchema {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes the schema configuration at the Api.")
   delete is ArmResourceDeleteSync<
     SchemaContract,
@@ -60,6 +63,7 @@ interface SchemaContracts_ApiSchema {
       `If-Match`: string;
     }
   >;
+
   @doc("Get the schema configuration at the API level.")
   listByApi is ArmResourceListByParent<
     SchemaContract,

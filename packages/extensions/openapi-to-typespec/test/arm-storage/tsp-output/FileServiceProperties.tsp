@@ -35,6 +35,7 @@ interface FileServiceProperties_FileServices {
       FileServicesName: "default";
     }
   >;
+
   @doc("Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     FileServiceProperties,
@@ -46,6 +47,7 @@ interface FileServiceProperties_FileServices {
       FileServicesName: "default";
     }
   >;
+
   @doc("List all file services in storage accounts")
   list is ArmResourceListByParent<FileServiceProperties>;
 }

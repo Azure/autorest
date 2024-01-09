@@ -424,12 +424,12 @@ enum Confirmation {
   @doc("Send an e-mail inviting the user to sign-up and complete registration.")
   invite,
 }
-@Azure.Core.fixed
+@fixed
 enum ProductState {
   notPublished,
   published,
 }
-@Azure.Core.fixed
+@fixed
 enum AuthorizationMethod {
   HEAD,
   OPTIONS,
@@ -440,29 +440,29 @@ enum AuthorizationMethod {
   PATCH,
   DELETE,
 }
-@Azure.Core.fixed
+@fixed
 enum NameAvailabilityReason {
   Valid,
   Invalid,
   AlreadyExists,
 }
-@Azure.Core.fixed
+@fixed
 enum GatewayRegenerateKeyType {
   primary,
   secondary,
 }
-@Azure.Core.fixed
+@fixed
 enum KeyType {
   primary,
   secondary,
 }
-@Azure.Core.fixed
+@fixed
 enum GroupType {
   custom,
   system,
   external,
 }
-@Azure.Core.fixed
+@fixed
 enum PolicyScopeContract {
   Tenant,
   Product,
@@ -470,7 +470,7 @@ enum PolicyScopeContract {
   Operation,
   All,
 }
-@Azure.Core.fixed
+@fixed
 enum SubscriptionState {
   suspended,
   active,
@@ -479,23 +479,23 @@ enum SubscriptionState {
   rejected,
   cancelled,
 }
-@Azure.Core.fixed
+@fixed
 enum ApiManagementSkuCapacityScaleType {
   Automatic,
   Manual,
   None,
 }
-@Azure.Core.fixed
+@fixed
 enum ApiManagementSkuRestrictionsType {
   Location,
   Zone,
 }
-@Azure.Core.fixed
+@fixed
 enum ApiManagementSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
 }
-@Azure.Core.fixed
+@fixed
 enum AsyncOperationStatus {
   Started,
   InProgress,

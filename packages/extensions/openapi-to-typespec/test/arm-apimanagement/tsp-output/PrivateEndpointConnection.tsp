@@ -25,10 +25,13 @@ model PrivateEndpointConnection
 interface PrivateEndpointConnections_PrivateEndpointConnection {
   @doc("Gets the details of the Private Endpoint Connection specified by its identifier.")
   getByName is ArmResourceRead<PrivateEndpointConnection>;
+
   @doc("Creates a new Private Endpoint Connection or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
+
   @doc("Deletes the specified Private Endpoint Connection.")
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+
   @doc("Lists all private endpoint connections of the API Management service instance.")
   listByService is ArmResourceListByParent<PrivateEndpointConnection>;
 }

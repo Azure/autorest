@@ -24,10 +24,13 @@ model ModelVersionResource is ProxyResource<ModelVersion> {
 interface ModelVersionResources_RegistryModelVersions {
   @doc("Get version.")
   get is ArmResourceRead<ModelVersionResource>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ModelVersionResource>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<ModelVersionResource>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     ModelVersionResource,
@@ -63,12 +66,14 @@ interface ModelVersionResources_RegistryModelVersions {
       listViewType?: ListViewType;
     }
   >;
+
   @doc("Model Version Package operation.")
   package is ArmResourceActionAsync<
     ModelVersionResource,
     PackageRequest,
     PackageResponse
   >;
+
   @doc("Generate a storage location and credential for the client to upload a model asset to.")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     ModelVersionResource,

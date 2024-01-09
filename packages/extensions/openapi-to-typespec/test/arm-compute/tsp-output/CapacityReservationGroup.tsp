@@ -34,15 +34,19 @@ interface CapacityReservationGroups {
       $expand?: CapacityReservationGroupInstanceViewTypes;
     }
   >;
+
   @doc("The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<CapacityReservationGroup>;
+
   @doc("The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.")
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
     CapacityReservationGroupUpdate
   >;
+
   @doc("The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.")
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
+
   @doc("Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.")
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
@@ -54,6 +58,7 @@ interface CapacityReservationGroups {
       $expand?: ExpandTypesForGetCapacityReservationGroups;
     }
   >;
+
   @doc("Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.")
   listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
 }

@@ -24,6 +24,7 @@ model DeletedAccount is ProxyResource<DeletedAccountProperties> {
 interface DeletedAccounts {
   @doc("Get properties of specified deleted account resource.")
   get is ArmResourceRead<DeletedAccount>;
+
   @doc("Lists deleted accounts under the subscription.")
   list is ArmListBySubscription<DeletedAccount>;
 }

@@ -37,6 +37,7 @@ interface VirtualMachineScaleSetVMExtensions {
       $expand?: string;
     }
   >;
+
   @doc("The operation to create or update the VMSS VM extension.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     VirtualMachineScaleSetVMExtension,
@@ -48,6 +49,7 @@ interface VirtualMachineScaleSetVMExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to update the VMSS VM extension.")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
@@ -60,6 +62,7 @@ interface VirtualMachineScaleSetVMExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to delete the VMSS VM extension.")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVMExtension,
@@ -71,6 +74,7 @@ interface VirtualMachineScaleSetVMExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to get all extensions of an instance in Virtual Machine Scaleset.")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVMExtension,

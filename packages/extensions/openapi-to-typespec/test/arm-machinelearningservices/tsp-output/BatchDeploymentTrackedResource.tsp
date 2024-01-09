@@ -28,15 +28,19 @@ model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
 interface BatchDeploymentTrackedResources_BatchDeployments {
   @doc("Gets a batch inference deployment by id.")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
+
   @doc("Creates/updates a batch inference deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchDeploymentTrackedResource>;
+
   @doc("Update a batch inference deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
     PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
+
   @doc("Delete Batch Inference deployment (asynchronous).")
   delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;
+
   @doc("Lists Batch inference deployments in the workspace.")
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,

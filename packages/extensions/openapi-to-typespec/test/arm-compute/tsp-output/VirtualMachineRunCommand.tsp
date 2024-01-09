@@ -33,15 +33,19 @@ interface VirtualMachineRunCommands {
       $expand?: string;
     }
   >;
+
   @doc("The operation to create or update the run command.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
+
   @doc("The operation to update the run command.")
   update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate
   >;
+
   @doc("The operation to delete the run command.")
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
+
   @doc("The operation to get all run commands of a Virtual Machine.")
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
@@ -53,6 +57,7 @@ interface VirtualMachineRunCommands {
       $expand?: string;
     }
   >;
+
   @doc("Lists all available run commands for a subscription in a location.")
   list is ArmResourceListAtScope<
     VirtualMachineRunCommand,

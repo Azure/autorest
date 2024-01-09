@@ -22,6 +22,7 @@ model VirtualMachineExtensionImage
 interface VirtualMachineExtensionImages {
   @doc("Gets a virtual machine extension image.")
   get is ArmResourceRead<VirtualMachineExtensionImage>;
+
   @doc("Gets a list of virtual machine extension image types.")
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }

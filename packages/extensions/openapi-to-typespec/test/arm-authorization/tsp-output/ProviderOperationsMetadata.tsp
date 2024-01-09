@@ -42,6 +42,7 @@ interface ProviderOperationsMetadataOperationGroup {
       $expand?: string = "resourceTypes";
     }
   >;
+
   @doc("Gets provider operations metadata for all resource providers.")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,

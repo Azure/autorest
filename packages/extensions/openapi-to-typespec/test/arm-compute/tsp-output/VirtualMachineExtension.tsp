@@ -33,15 +33,19 @@ interface VirtualMachineExtensions {
       $expand?: string;
     }
   >;
+
   @doc("The operation to create or update the extension.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineExtension>;
+
   @doc("The operation to update the extension.")
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate
   >;
+
   @doc("The operation to delete the extension.")
   delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
+
   @doc("The operation to get all extensions of a Virtual Machine.")
   list is ArmResourceListByParent<
     VirtualMachineExtension,

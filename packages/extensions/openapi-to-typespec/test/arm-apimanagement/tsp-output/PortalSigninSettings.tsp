@@ -24,6 +24,7 @@ model PortalSigninSettings is ProxyResource<PortalSigninSettingProperties> {
 interface PortalSigninSettings_SignInSettings {
   @doc("Get Sign In Settings for the Portal")
   get is ArmResourceRead<PortalSigninSettings>;
+
   @doc("Gets the entity state (Etag) version of the SignInSettings.")
   @head
   getEntityTag(
@@ -32,6 +33,7 @@ interface PortalSigninSettings_SignInSettings {
       BaseParameters<PortalSigninSettings>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Create or Update Sign-In settings.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSigninSettings,
@@ -43,6 +45,7 @@ interface PortalSigninSettings_SignInSettings {
       `If-Match`?: string;
     }
   >;
+
   @doc("Update Sign-In settings.")
   update is ArmCustomPatchSync<
     PortalSigninSettings,

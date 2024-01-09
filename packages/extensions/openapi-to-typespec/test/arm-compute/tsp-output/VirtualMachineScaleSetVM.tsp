@@ -54,6 +54,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       $expand?: InstanceViewTypes;
     }
   >;
+
   @doc("Updates a virtual machine of a VM scale set.")
   update is ArmResourceCreateOrUpdateAsync<
     VirtualMachineScaleSetVM,
@@ -65,6 +66,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Deletes a virtual machine from a VM scale set.")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVM,
@@ -80,6 +82,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       forceDeletion?: boolean;
     }
   >;
+
   @doc("Gets a list of all virtual machines in a VM scale sets.")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVM,
@@ -99,6 +102,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       $expand?: string;
     }
   >;
+
   @doc("Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.")
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -112,6 +116,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -125,6 +130,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.")
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -138,6 +144,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -155,6 +162,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       skipShutdown?: boolean;
     }
   >;
+
   @doc("Restarts a virtual machine in a VM scale set.")
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -168,6 +176,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Starts a virtual machine in a VM scale set.")
   start is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -181,6 +190,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.")
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -194,6 +204,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
@@ -211,6 +222,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       sasUriExpirationTimeInMinutes?: int32;
     }
   >;
+
   @doc("Performs maintenance on a virtual machine in a VM scale set.")
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -224,6 +236,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to simulate the eviction of spot virtual machine in a VM scale set.")
   simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVM,
@@ -236,6 +249,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Run command on a virtual machine in a VM scale set.")
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
@@ -249,6 +263,7 @@ interface VirtualMachineScaleSetVMS_VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Gets the status of a virtual machine from a VM scale set.")
   // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")

@@ -27,6 +27,7 @@ model ApiVersionSetContract is ProxyResource<ApiVersionSetContractProperties> {
 interface ApiVersionSetContracts_ApiVersionSet {
   @doc("Gets the details of the Api Version Set specified by its identifier.")
   get is ArmResourceRead<ApiVersionSetContract>;
+
   @doc("Gets the entity state (Etag) version of the Api Version Set specified by its identifier.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface ApiVersionSetContracts_ApiVersionSet {
       BaseParameters<ApiVersionSetContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a Api Version Set.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
@@ -46,6 +48,7 @@ interface ApiVersionSetContracts_ApiVersionSet {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the Api VersionSet specified by its identifier.")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
@@ -58,6 +61,7 @@ interface ApiVersionSetContracts_ApiVersionSet {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific Api Version Set.")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
@@ -69,6 +73,7 @@ interface ApiVersionSetContracts_ApiVersionSet {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of API Version Sets in the specified service instance.")
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,

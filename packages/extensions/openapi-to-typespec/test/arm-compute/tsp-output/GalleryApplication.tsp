@@ -23,12 +23,16 @@ model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
 interface GalleryApplications {
   @doc("Retrieves information about a gallery Application Definition.")
   get is ArmResourceRead<GalleryApplication>;
+
   @doc("Create or update a gallery Application Definition.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryApplication>;
+
   @doc("Update a gallery Application Definition.")
   update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
+
   @doc("Delete a gallery Application.")
   delete is ArmResourceDeleteAsync<GalleryApplication>;
+
   @doc("List gallery Application Definitions in a gallery.")
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }

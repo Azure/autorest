@@ -24,6 +24,7 @@ model DataManagerForAgricultureExtension
 interface DataManagerForAgricultureExtensions {
   @doc("Get Data Manager For Agriculture extension.")
   get is ArmResourceRead<DataManagerForAgricultureExtension>;
+
   @doc("Get list of Data Manager For Agriculture extension.")
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,

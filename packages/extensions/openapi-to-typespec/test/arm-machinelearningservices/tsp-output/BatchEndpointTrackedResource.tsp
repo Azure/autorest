@@ -28,15 +28,19 @@ model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
 interface BatchEndpointTrackedResources_BatchEndpoints {
   @doc("Gets a batch inference endpoint by name.")
   get is ArmResourceRead<BatchEndpointTrackedResource>;
+
   @doc("Creates a batch inference endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchEndpointTrackedResource>;
+
   @doc("Update a batch inference endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,
     PartialMinimalTrackedResourceWithIdentity
   >;
+
   @doc("Delete Batch Inference Endpoint (asynchronous).")
   delete is ArmResourceDeleteAsync<BatchEndpointTrackedResource>;
+
   @doc("Lists Batch inference endpoint in the workspace.")
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
@@ -52,6 +56,7 @@ interface BatchEndpointTrackedResources_BatchEndpoints {
       $skip?: string;
     }
   >;
+
   @doc("Lists batch Inference Endpoint keys.")
   listKeys is ArmResourceActionSync<
     BatchEndpointTrackedResource,

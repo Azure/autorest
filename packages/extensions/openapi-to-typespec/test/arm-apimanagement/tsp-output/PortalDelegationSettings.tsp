@@ -25,6 +25,7 @@ model PortalDelegationSettings
 interface PortalDelegationSettings_DelegationSettings {
   @doc("Get Delegation Settings for the Portal.")
   get is ArmResourceRead<PortalDelegationSettings>;
+
   @doc("Gets the entity state (Etag) version of the DelegationSettings.")
   @head
   getEntityTag(
@@ -33,6 +34,7 @@ interface PortalDelegationSettings_DelegationSettings {
       BaseParameters<PortalDelegationSettings>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Create or Update Delegation settings.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
@@ -44,6 +46,7 @@ interface PortalDelegationSettings_DelegationSettings {
       `If-Match`?: string;
     }
   >;
+
   @doc("Update Delegation settings.")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
@@ -56,6 +59,7 @@ interface PortalDelegationSettings_DelegationSettings {
       `If-Match`: string;
     }
   >;
+
   @doc("Gets the secret validation key of the DelegationSettings.")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,

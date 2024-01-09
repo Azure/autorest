@@ -90,8 +90,10 @@ function generateArmResourceOperation(resource: TspArmResource): string {
               .join(",")}>`,
           );
         }
+        definitions.push("");
       } else {
         definitions.push(generateOperation(operation as TypespecOperation));
+        definitions.push("");
       }
     }
     definitions.push("}\n");

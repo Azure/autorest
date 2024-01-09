@@ -24,10 +24,13 @@ model FeaturestoreEntityVersion
 interface FeaturestoreEntityVersions {
   @doc("Get version.")
   get is ArmResourceRead<FeaturestoreEntityVersion>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturestoreEntityVersion>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,

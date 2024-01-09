@@ -25,10 +25,13 @@ model Extension is ProxyResource<ExtensionProperties> {
 interface Extensions {
   @doc("Get installed extension details by extension id.")
   get is ArmResourceRead<Extension>;
+
   @doc("Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Extension>;
+
   @doc("Uninstall extension.")
   delete is ArmResourceDeleteSync<Extension>;
+
   @doc("Get installed extensions details.")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,

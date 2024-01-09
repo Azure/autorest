@@ -21,10 +21,13 @@ model RoleDefinition is ExtensionResource<RoleDefinitionProperties> {
 interface RoleDefinitions {
   @doc("Get role definition by name (GUID).")
   get is ArmResourceRead<RoleDefinition>;
+
   @doc("Creates or updates a role definition.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<RoleDefinition>;
+
   @doc("Deletes a role definition.")
   delete is ArmResourceDeleteSync<RoleDefinition>;
+
   @doc("Get all role definitions that are applicable at scope and above.")
   list is ArmResourceListByParent<
     RoleDefinition,

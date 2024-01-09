@@ -33,6 +33,7 @@ interface PolicyContracts_ApiOperationPolicy {
       format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
+
   @doc("Gets the entity state (Etag) version of the API operation policy specified by its identifier.")
   @head
   getEntityTag(
@@ -41,6 +42,7 @@ interface PolicyContracts_ApiOperationPolicy {
       BaseParameters<PolicyContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates policy configuration for the API Operation level.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PolicyContract,
@@ -52,6 +54,7 @@ interface PolicyContracts_ApiOperationPolicy {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes the policy configuration at the Api Operation.")
   delete is ArmResourceDeleteSync<
     PolicyContract,
@@ -63,6 +66,7 @@ interface PolicyContracts_ApiOperationPolicy {
       `If-Match`: string;
     }
   >;
+
   @doc("Get the list of policy configuration at the API Operation level.")
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }

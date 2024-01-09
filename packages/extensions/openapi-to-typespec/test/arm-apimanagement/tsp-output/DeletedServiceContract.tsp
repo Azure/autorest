@@ -27,8 +27,10 @@ model DeletedServiceContract
 interface DeletedServiceContracts_DeletedServices {
   @doc("Get soft-deleted Api Management Service by name.")
   getByName is ArmResourceRead<DeletedServiceContract>;
+
   @doc("Purges Api Management Service (deletes it with no option to undelete).")
   purge is ArmResourceDeleteAsync<DeletedServiceContract>;
+
   @doc("Lists all soft-deleted services available for undelete for the given subscription.")
   listBySubscription is ArmListBySubscription<DeletedServiceContract>;
 }

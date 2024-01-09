@@ -4,10 +4,11 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace AutoRestUrlTestService;
 
-@Azure.Core.fixed
+@fixed
 enum UriColor {
   `red color`,
   `green color`,

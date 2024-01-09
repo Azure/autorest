@@ -25,12 +25,16 @@ model Association is TrackedResource<AssociationProperties> {
 interface Associations_AssociationsInterface {
   @doc("Get a Association")
   get is ArmResourceRead<Association>;
+
   @doc("Create a Association")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Association>;
+
   @doc("Update a Association")
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
+
   @doc("Delete a Association")
   delete is ArmResourceDeleteAsync<Association>;
+
   @doc("List Association resources by TrafficController")
   listByTrafficController is ArmResourceListByParent<Association>;
 }

@@ -24,6 +24,7 @@ model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
 interface SubscriptionContracts_Subscription {
   @doc("Gets the specified Subscription entity.")
   get is ArmResourceRead<SubscriptionContract>;
+
   @doc("Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.")
   @head
   getEntityTag(
@@ -32,6 +33,7 @@ interface SubscriptionContracts_Subscription {
       BaseParameters<SubscriptionContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates the subscription of specified user to the specified product.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
@@ -55,6 +57,7 @@ Notify change in Subscription State.
       appType?: AppType;
     }
   >;
+
   @doc("Updates the details of a subscription specified by its identifier.")
   update is ArmCustomPatchSync<
     SubscriptionContract,
@@ -79,6 +82,7 @@ Notify change in Subscription State.
       appType?: AppType;
     }
   >;
+
   @doc("Deletes the specified subscription.")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
@@ -90,6 +94,7 @@ Notify change in Subscription State.
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all subscriptions of the API Management service instance.")
   list is ArmResourceListByParent<
     SubscriptionContract,
@@ -110,16 +115,19 @@ Notify change in Subscription State.
       $skip?: int32;
     }
   >;
+
   @doc("Regenerates primary key of existing subscription of the API Management service instance.")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
   >;
+
   @doc("Regenerates secondary key of existing subscription of the API Management service instance.")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
   >;
+
   @doc("Gets the specified Subscription keys.")
   listSecrets is ArmResourceActionSync<
     SubscriptionContract,

@@ -1481,7 +1481,7 @@ enum RuleAction {
   Allow,
   Deny,
 }
-@Azure.Core.fixed
+@fixed
 enum SkuTier {
   Free,
   Basic,

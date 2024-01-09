@@ -24,6 +24,7 @@ model PortalSignupSettings is ProxyResource<PortalSignupSettingsProperties> {
 interface PortalSignupSettings_SignUpSettings {
   @doc("Get Sign Up Settings for the Portal")
   get is ArmResourceRead<PortalSignupSettings>;
+
   @doc("Gets the entity state (Etag) version of the SignUpSettings.")
   @head
   getEntityTag(
@@ -32,6 +33,7 @@ interface PortalSignupSettings_SignUpSettings {
       BaseParameters<PortalSignupSettings>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Create or Update Sign-Up settings.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
@@ -43,6 +45,7 @@ interface PortalSignupSettings_SignUpSettings {
       `If-Match`?: string;
     }
   >;
+
   @doc("Update Sign-Up settings.")
   update is ArmCustomPatchSync<
     PortalSignupSettings,

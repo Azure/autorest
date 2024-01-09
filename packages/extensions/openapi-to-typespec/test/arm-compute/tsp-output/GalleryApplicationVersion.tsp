@@ -33,15 +33,19 @@ interface GalleryApplicationVersions {
       $expand?: ReplicationStatusTypes;
     }
   >;
+
   @doc("Create or update a gallery Application Version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryApplicationVersion>;
+
   @doc("Update a gallery Application Version.")
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     GalleryApplicationVersionUpdate
   >;
+
   @doc("Delete a gallery Application Version.")
   delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;
+
   @doc("List gallery Application Versions in a gallery Application Definition.")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }

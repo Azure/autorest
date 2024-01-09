@@ -36,11 +36,13 @@ interface IssueContracts_ApiIssue {
       expandCommentsAttachments?: boolean;
     }
   >;
+
   @doc("Gets the entity state (Etag) version of the Issue for an API specified by its identifier.")
   @head
   getEntityTag(
     ...ResourceInstanceParameters<IssueContract, BaseParameters<IssueContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new Issue for an API or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueContract,
@@ -52,6 +54,7 @@ interface IssueContracts_ApiIssue {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates an existing issue for an API.")
   update is ArmCustomPatchSync<
     IssueContract,
@@ -64,6 +67,7 @@ interface IssueContracts_ApiIssue {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified Issue from an API.")
   delete is ArmResourceDeleteSync<
     IssueContract,
@@ -75,6 +79,7 @@ interface IssueContracts_ApiIssue {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all issues associated with the specified API.")
   listByService is ArmResourceListByParent<
     IssueContract,

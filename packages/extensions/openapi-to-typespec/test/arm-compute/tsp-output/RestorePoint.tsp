@@ -36,6 +36,7 @@ interface RestorePoints {
       $expand?: RestorePointExpandOptions;
     }
   >;
+
   @doc("The operation to create the restore point. Updating properties of an existing restore point is not allowed")
   create is ArmResourceCreateOrUpdateAsync<
     RestorePoint,
@@ -47,6 +48,7 @@ interface RestorePoints {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("The operation to delete the restore point.")
   delete is ArmResourceDeleteAsync<
     RestorePoint,

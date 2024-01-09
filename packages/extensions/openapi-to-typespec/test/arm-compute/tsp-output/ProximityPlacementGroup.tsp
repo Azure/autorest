@@ -34,17 +34,22 @@ interface ProximityPlacementGroups {
       includeColocationStatus?: string;
     }
   >;
+
   @doc("Create or update a proximity placement group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
+
   @doc("Update a proximity placement group.")
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
   >;
+
   @doc("Delete a proximity placement group.")
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
+
   @doc("Lists all proximity placement groups in a resource group.")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
+
   @doc("Lists all proximity placement groups in a subscription.")
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }

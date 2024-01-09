@@ -25,15 +25,19 @@ model InfrastructureResource
 interface InfrastructureResources {
   @doc("Get a InfrastructureResource")
   get is ArmResourceRead<InfrastructureResource>;
+
   @doc("Create a InfrastructureResource")
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
+
   @doc("Update a InfrastructureResource")
   patch is ArmCustomPatchSync<
     InfrastructureResource,
     InfrastructureResourceUpdate
   >;
+
   @doc("Delete a InfrastructureResource")
   delete is ArmResourceDeleteSync<InfrastructureResource>;
+
   @doc("List InfrastructureResource resources by Space")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,

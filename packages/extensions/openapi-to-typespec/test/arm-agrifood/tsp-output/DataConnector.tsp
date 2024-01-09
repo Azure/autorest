@@ -27,10 +27,13 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
 interface DataConnectors {
   @doc("Get specific Data Connector resource by DataConnectorName.")
   get is ArmResourceRead<DataConnector>;
+
   @doc("Create or update Data Connector For MADMA resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
+
   @doc("Delete a Data Connectors with given dataConnector name.")
   delete is ArmResourceDeleteSync<DataConnector>;
+
   @doc("Lists the Data Connector Credentials for MADMA instance.")
   list is ArmResourceListByParent<
     DataConnector,

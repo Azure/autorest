@@ -38,6 +38,7 @@ interface OpenidConnectProviderContracts_OpenIdConnectProvider {
       OpenId: string;
     }
   >;
+
   @doc("Creates or updates the OpenID Connect Provider.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
@@ -55,6 +56,7 @@ interface OpenidConnectProviderContracts_OpenIdConnectProvider {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the specific OpenID Connect Provider.")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
@@ -73,6 +75,7 @@ interface OpenidConnectProviderContracts_OpenIdConnectProvider {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific OpenID Connect Provider of the API Management service instance.")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
@@ -90,6 +93,7 @@ interface OpenidConnectProviderContracts_OpenIdConnectProvider {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists of all the OpenId Connect Providers.")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
@@ -110,6 +114,7 @@ interface OpenidConnectProviderContracts_OpenIdConnectProvider {
       $skip?: int32;
     }
   >;
+
   @doc("Gets the client secret details of the OpenID Connect Provider.")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,

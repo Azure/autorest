@@ -34,6 +34,7 @@ interface TableServiceProperties_TableServices {
       tableServiceName: "default";
     }
   >;
+
   @doc("Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     TableServiceProperties,
@@ -45,6 +46,7 @@ interface TableServiceProperties_TableServices {
       tableServiceName: "default";
     }
   >;
+
   @doc("List all table services for the storage account.")
   list is ArmResourceListByParent<TableServiceProperties>;
 }

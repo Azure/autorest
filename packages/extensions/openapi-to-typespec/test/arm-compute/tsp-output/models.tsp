@@ -819,129 +819,129 @@ enum AvailabilitySetSkuTypes {
   Classic,
   Aligned,
 }
-@Azure.Core.fixed
+@fixed
 enum UpgradeMode {
   Automatic,
   Manual,
   Rolling,
 }
-@Azure.Core.fixed
+@fixed
 enum SettingNames {
   AutoLogon,
   FirstLogonCommands,
 }
-@Azure.Core.fixed
+@fixed
 enum ProtocolTypes {
   Http,
   Https,
 }
-@Azure.Core.fixed
+@fixed
 enum CachingTypes {
   None,
   ReadOnly,
   ReadWrite,
 }
-@Azure.Core.fixed
+@fixed
 enum OperatingSystemTypes {
   Windows,
   Linux,
 }
-@Azure.Core.fixed
+@fixed
 enum StatusLevelTypes {
   Info,
   Warning,
   Error,
 }
-@Azure.Core.fixed
+@fixed
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
   `SystemAssigned, UserAssigned`,
   None,
 }
-@Azure.Core.fixed
+@fixed
 enum VirtualMachineScaleSetSkuScaleType {
   Automatic,
   None,
 }
-@Azure.Core.fixed
+@fixed
 enum UpgradeState {
   RollingForward,
   Cancelled,
   Completed,
   Faulted,
 }
-@Azure.Core.fixed
+@fixed
 enum UpgradeOperationInvoker {
   Unknown,
   User,
   Platform,
 }
-@Azure.Core.fixed
+@fixed
 enum RollingUpgradeStatusCode {
   RollingForward,
   Cancelled,
   Completed,
   Faulted,
 }
-@Azure.Core.fixed
+@fixed
 enum RollingUpgradeActionType {
   Start,
   Cancel,
 }
-@Azure.Core.fixed
+@fixed
 enum MaintenanceOperationResultCodeTypes {
   None,
   RetryLater,
   MaintenanceAborted,
   MaintenanceCompleted,
 }
-@Azure.Core.fixed
+@fixed
 enum InstanceViewTypes {
   instanceView,
   userData,
 }
-@Azure.Core.fixed
+@fixed
 enum DedicatedHostLicenseTypes {
   None,
   Windows_Server_Hybrid,
   Windows_Server_Perpetual,
 }
-@Azure.Core.fixed
+@fixed
 enum OperatingSystemStateTypes {
   Generalized,
   Specialized,
 }
-@Azure.Core.fixed
+@fixed
 enum IntervalInMins {
   ThreeMins,
   FiveMins,
   ThirtyMins,
   SixtyMins,
 }
-@Azure.Core.fixed
+@fixed
 enum ResourceSkuCapacityScaleType {
   Automatic,
   Manual,
   None,
 }
-@Azure.Core.fixed
+@fixed
 enum ResourceSkuRestrictionsType {
   Location,
   Zone,
 }
-@Azure.Core.fixed
+@fixed
 enum ResourceSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
 }
-@Azure.Core.fixed
+@fixed
 enum HostCaching {
   None,
   ReadOnly,
   ReadWrite,
 }
-@Azure.Core.fixed
+@fixed
 enum GalleryApplicationCustomActionParameterType {
   String,
   ConfigurationDataBlob,

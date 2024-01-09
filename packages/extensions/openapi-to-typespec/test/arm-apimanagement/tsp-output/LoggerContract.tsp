@@ -26,6 +26,7 @@ model LoggerContract is ProxyResource<LoggerContractProperties> {
 interface LoggerContracts_Logger {
   @doc("Gets the details of the logger specified by its identifier.")
   get is ArmResourceRead<LoggerContract>;
+
   @doc("Gets the entity state (Etag) version of the logger specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface LoggerContracts_Logger {
       BaseParameters<LoggerContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a logger.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
@@ -45,6 +47,7 @@ interface LoggerContracts_Logger {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates an existing logger.")
   update is ArmCustomPatchSync<
     LoggerContract,
@@ -57,6 +60,7 @@ interface LoggerContracts_Logger {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified logger.")
   delete is ArmResourceDeleteSync<
     LoggerContract,
@@ -68,6 +72,7 @@ interface LoggerContracts_Logger {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of loggers in the specified service instance.")
   listByService is ArmResourceListByParent<
     LoggerContract,

@@ -24,6 +24,7 @@ model Feature is ProxyResource<FeatureProperties> {
 interface Features {
   @doc("Get feature.")
   get is ArmResourceRead<Feature>;
+
   @doc("List Features.")
   list is ArmResourceListByParent<
     Feature,

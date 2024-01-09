@@ -24,14 +24,19 @@ model Account is TrackedResource<AccountProperties> {
 interface Accounts {
   @doc("Get a Account")
   get is ArmResourceRead<Account>;
+
   @doc("Create a Account")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Account>;
+
   @doc("Update a Account")
   update is ArmCustomPatchSync<Account, AccountUpdate>;
+
   @doc("Delete a Account")
   delete is ArmResourceDeleteAsync<Account>;
+
   @doc("List Account resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Account>;
+
   @doc("List Account resources by subscription ID")
   listBySubscription is ArmListBySubscription<Account>;
 }

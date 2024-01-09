@@ -26,6 +26,7 @@ model BackendContract is ProxyResource<BackendContractProperties> {
 interface BackendContracts_Backend {
   @doc("Gets the details of the backend specified by its identifier.")
   get is ArmResourceRead<BackendContract>;
+
   @doc("Gets the entity state (Etag) version of the backend specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface BackendContracts_Backend {
       BaseParameters<BackendContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a backend.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
@@ -45,6 +47,7 @@ interface BackendContracts_Backend {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates an existing backend.")
   update is ArmCustomPatchSync<
     BackendContract,
@@ -57,6 +60,7 @@ interface BackendContracts_Backend {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified backend.")
   delete is ArmResourceDeleteSync<
     BackendContract,
@@ -68,6 +72,7 @@ interface BackendContracts_Backend {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of backends in the specified service instance.")
   listByService is ArmResourceListByParent<
     BackendContract,
@@ -88,6 +93,7 @@ interface BackendContracts_Backend {
       $skip?: int32;
     }
   >;
+
   @doc("Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.")
   reconnect is ArmResourceActionNoContentSync<
     BackendContract,

@@ -21,6 +21,7 @@ model DenyAssignment is ExtensionResource<DenyAssignmentProperties> {
 interface DenyAssignments {
   @doc("Get the specified deny assignment.")
   get is ArmResourceRead<DenyAssignment>;
+
   @doc("Gets deny assignments for a resource.")
   listForResource is ArmResourceListByParent<
     DenyAssignment,

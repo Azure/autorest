@@ -216,8 +216,9 @@ export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema
 
   if (isSealedChoiceSchema(enumeration)) {
     decorators.push({
-      name: "Azure.Core.fixed",
+      name: "fixed",
       module: "@azure-tools/typespec-azure-core",
+      namespace: "Azure.Core",
     });
   }
 

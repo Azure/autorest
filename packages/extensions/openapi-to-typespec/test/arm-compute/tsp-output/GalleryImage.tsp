@@ -23,12 +23,16 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
 interface GalleryImages {
   @doc("Retrieves information about a gallery image definition.")
   get is ArmResourceRead<GalleryImage>;
+
   @doc("Create or update a gallery image definition.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryImage>;
+
   @doc("Update a gallery image definition.")
   update is ArmCustomPatchAsync<GalleryImage, GalleryImageUpdate>;
+
   @doc("Delete a gallery image.")
   delete is ArmResourceDeleteAsync<GalleryImage>;
+
   @doc("List gallery image definitions in a gallery.")
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }

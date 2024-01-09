@@ -27,6 +27,7 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
 interface DiagnosticContracts_ApiDiagnostic {
   @doc("Gets the details of the Diagnostic for an API specified by its identifier.")
   get is ArmResourceRead<DiagnosticContract>;
+
   @doc("Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface DiagnosticContracts_ApiDiagnostic {
       BaseParameters<DiagnosticContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new Diagnostic for an API or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
@@ -46,6 +48,7 @@ interface DiagnosticContracts_ApiDiagnostic {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the Diagnostic for an API specified by its identifier.")
   update is ArmCustomPatchSync<
     DiagnosticContract,
@@ -58,6 +61,7 @@ interface DiagnosticContracts_ApiDiagnostic {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified Diagnostic from an API.")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
@@ -69,6 +73,7 @@ interface DiagnosticContracts_ApiDiagnostic {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all diagnostics of an API.")
   listByService is ArmResourceListByParent<
     DiagnosticContract,

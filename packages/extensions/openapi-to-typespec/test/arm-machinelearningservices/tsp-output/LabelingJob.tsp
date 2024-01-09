@@ -36,10 +36,13 @@ interface LabelingJobs {
       includeLabelCategories?: boolean;
     }
   >;
+
   @doc("Creates or updates a labeling job (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<LabelingJob>;
+
   @doc("Delete a labeling job.")
   delete is ArmResourceDeleteSync<LabelingJob>;
+
   @doc("Lists labeling jobs in the workspace.")
   list is ArmResourceListByParent<
     LabelingJob,
@@ -55,14 +58,17 @@ interface LabelingJobs {
       $top?: int32;
     }
   >;
+
   @doc("Export labels from a labeling job (asynchronous).")
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
     ExportSummary
   >;
+
   @doc("Pause a labeling job.")
   pause is ArmResourceActionSync<LabelingJob, void, void>;
+
   @doc("Resume a labeling job (asynchronous).")
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }

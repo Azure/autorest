@@ -24,10 +24,13 @@ model DataVersionBaseResource is ProxyResource<DataVersionBase> {
 interface DataVersionBaseResources_RegistryDataVersions {
   @doc("Get version.")
   get is ArmResourceRead<DataVersionBaseResource>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataVersionBaseResource>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<DataVersionBaseResource>;
+
   @doc("List data versions in the data container")
   list is ArmResourceListByParent<
     DataVersionBaseResource,
@@ -58,6 +61,7 @@ Top count of results, top count cannot be greater than the page size.
       listViewType?: ListViewType;
     }
   >;
+
   @doc("Generate a storage location and credential for the client to upload a data asset to.")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     DataVersionBaseResource,

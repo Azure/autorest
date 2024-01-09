@@ -28,6 +28,7 @@ model GatewayCertificateAuthorityContract
 interface GatewayCertificateAuthorityContracts_GatewayCertificateAuthority {
   @doc("Get assigned Gateway Certificate Authority details.")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
+
   @doc("Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.")
   @head
   getEntityTag(
@@ -36,6 +37,7 @@ interface GatewayCertificateAuthorityContracts_GatewayCertificateAuthority {
       BaseParameters<GatewayCertificateAuthorityContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Assign Certificate entity to Gateway entity as Certificate Authority.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
@@ -47,6 +49,7 @@ interface GatewayCertificateAuthorityContracts_GatewayCertificateAuthority {
       `If-Match`?: string;
     }
   >;
+
   @doc("Remove relationship between Certificate Authority and Gateway entity.")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
@@ -58,6 +61,7 @@ interface GatewayCertificateAuthorityContracts_GatewayCertificateAuthority {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists the collection of Certificate Authorities for the specified Gateway entity.")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,

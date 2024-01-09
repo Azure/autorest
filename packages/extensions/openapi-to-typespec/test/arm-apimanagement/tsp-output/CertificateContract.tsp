@@ -27,6 +27,7 @@ model CertificateContract is ProxyResource<CertificateContractProperties> {
 interface CertificateContracts_Certificate {
   @doc("Gets the details of the certificate specified by its identifier.")
   get is ArmResourceRead<CertificateContract>;
+
   @doc("Gets the entity state (Etag) version of the certificate specified by its identifier.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface CertificateContracts_Certificate {
       BaseParameters<CertificateContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates the certificate being used for authentication with the backend.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
@@ -46,6 +48,7 @@ interface CertificateContracts_Certificate {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes specific certificate.")
   delete is ArmResourceDeleteSync<
     CertificateContract,
@@ -57,6 +60,7 @@ interface CertificateContracts_Certificate {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of all certificates in the specified service instance.")
   listByService is ArmResourceListByParent<
     CertificateContract,
@@ -81,6 +85,7 @@ interface CertificateContracts_Certificate {
       isKeyVaultRefreshFailed?: boolean;
     }
   >;
+
   @doc("From KeyVault, Refresh the certificate being used for authentication with the backend.")
   refreshSecret is ArmResourceActionSync<
     CertificateContract,

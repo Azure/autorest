@@ -25,6 +25,7 @@ model DnsZone is TrackedResource<ZoneProperties> {
 interface DnsZones_Zones {
   @doc("Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.")
   get is ArmResourceRead<DnsZone>;
+
   @doc("Creates or updates a DNS zone. Does not modify DNS records within the zone.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsZone,
@@ -40,6 +41,7 @@ interface DnsZones_Zones {
       IfNoneMatch?: string;
     }
   >;
+
   @doc("Updates a DNS zone. Does not modify DNS records within the zone.")
   update is ArmCustomPatchSync<
     DnsZone,
@@ -52,6 +54,7 @@ interface DnsZones_Zones {
       IfMatch?: string;
     }
   >;
+
   @doc("Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.")
   delete is ArmResourceDeleteAsync<
     DnsZone,
@@ -63,6 +66,7 @@ interface DnsZones_Zones {
       IfMatch?: string;
     }
   >;
+
   @doc("Lists the DNS zones within a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     DnsZone,
@@ -74,6 +78,7 @@ interface DnsZones_Zones {
       $top?: int32;
     }
   >;
+
   @doc("Lists the DNS zones in all resource groups in a subscription.")
   list is ArmListBySubscription<DnsZone>;
 }

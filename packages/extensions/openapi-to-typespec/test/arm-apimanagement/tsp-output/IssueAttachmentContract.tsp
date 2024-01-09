@@ -28,6 +28,7 @@ model IssueAttachmentContract
 interface IssueAttachmentContracts_ApiIssueAttachment {
   @doc("Gets the details of the issue Attachment for an API specified by its identifier.")
   get is ArmResourceRead<IssueAttachmentContract>;
+
   @doc("Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.")
   @head
   getEntityTag(
@@ -36,6 +37,7 @@ interface IssueAttachmentContracts_ApiIssueAttachment {
       BaseParameters<IssueAttachmentContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new Attachment for the Issue in an API or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
@@ -47,6 +49,7 @@ interface IssueAttachmentContracts_ApiIssueAttachment {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes the specified comment from an Issue.")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
@@ -58,6 +61,7 @@ interface IssueAttachmentContracts_ApiIssueAttachment {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all attachments for the Issue associated with the specified API.")
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,

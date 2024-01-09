@@ -26,39 +26,49 @@ model DataProduct is TrackedResource<DataProductProperties> {
 interface DataProducts {
   @doc("Retrieve data product resource.")
   get is ArmResourceRead<DataProduct>;
+
   @doc("Create data product resource.")
   create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+
   @doc("Update data product resource.")
   update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
+
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
+
   @doc("List data products by resource group.")
   listByResourceGroup is ArmResourceListByParent<DataProduct>;
+
   @doc("List data products by subscription.")
   listBySubscription is ArmListBySubscription<DataProduct>;
+
   @doc("Assign role to the data product.")
   addUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentCommonProperties,
     RoleAssignmentDetail
   >;
+
   @doc("Generate sas token for storage account.")
   generateStorageAccountSasToken is ArmResourceActionSync<
     DataProduct,
     AccountSas,
     AccountSasToken
   >;
+
   @doc("List user roles associated with the data product.")
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
     Record<unknown>,
     ListRoleAssignments
   >;
+
   @doc("Remove role from the data product.")
   removeUserRole is ArmResourceActionNoContentSync<
     DataProduct,
     RoleAssignmentDetail
   >;
+
   @doc("Initiate key rotation on Data Product.")
   rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
 }

@@ -25,10 +25,13 @@ model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
 interface EncryptionScopes {
   @doc("Returns the properties for the specified encryption scope.")
   get is ArmResourceRead<EncryptionScope>;
+
   @doc("Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.")
   put is ArmResourceCreateOrReplaceSync<EncryptionScope>;
+
   @doc("Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.")
   patch is ArmCustomPatchSync<EncryptionScope, EncryptionScope>;
+
   @doc("Lists all the encryption scopes available under the specified storage account.")
   list is ArmResourceListByParent<
     EncryptionScope,

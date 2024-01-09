@@ -24,12 +24,16 @@ model JobBaseResource is ProxyResource<JobBase> {
 interface JobBaseResources_Jobs {
   @doc("Gets a Job by name/id.")
   get is ArmResourceRead<JobBaseResource>;
+
   @doc("Creates and executes a Job.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
+
   @doc("Updates a Job.")
   update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
+
   @doc("Deletes a Job (asynchronous).")
   delete is ArmResourceDeleteAsync<JobBaseResource>;
+
   @doc("Lists Jobs in the workspace.")
   list is ArmResourceListByParent<
     JobBaseResource,
@@ -65,6 +69,7 @@ interface JobBaseResources_Jobs {
       scheduleId?: string;
     }
   >;
+
   @doc("Cancels a Job (asynchronous).")
   cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }

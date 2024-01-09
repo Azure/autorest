@@ -17,7 +17,7 @@ using TypeSpec.Versioning;
 @service({
   title: "AlertsManagementClient",
 })
-// FIXME: Common type version v2 is not supportted for now.
+// FIXME: Common type version v2 is not supported for now.
 // @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
 @doc("AlertsManagement Client")
 namespace Azure.ResourceManager.AlertsManagement;

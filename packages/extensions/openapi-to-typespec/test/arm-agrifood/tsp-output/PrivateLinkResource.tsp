@@ -23,6 +23,7 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 interface PrivateLinkResources {
   @doc("Get Private link resource object.")
   get is ArmResourceRead<PrivateLinkResource>;
+
   @doc("Get list of Private link resources.")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }

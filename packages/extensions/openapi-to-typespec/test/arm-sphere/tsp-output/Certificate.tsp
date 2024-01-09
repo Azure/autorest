@@ -23,6 +23,7 @@ model Certificate is ProxyResource<CertificateProperties> {
 interface Certificates {
   @doc("Get a Certificate")
   get is ArmResourceRead<Certificate>;
+
   @doc("List Certificate resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
@@ -46,12 +47,14 @@ interface Certificates {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
     void,
     CertificateChainResponse
   >;
+
   @doc("Gets the proof of possession nonce.")
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,

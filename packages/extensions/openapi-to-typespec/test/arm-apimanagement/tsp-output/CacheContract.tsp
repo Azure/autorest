@@ -27,11 +27,13 @@ model CacheContract is ProxyResource<CacheContractProperties> {
 interface CacheContracts_Cache {
   @doc("Gets the details of the Cache specified by its identifier.")
   get is ArmResourceRead<CacheContract>;
+
   @doc("Gets the entity state (Etag) version of the Cache specified by its identifier.")
   @head
   getEntityTag(
     ...ResourceInstanceParameters<CacheContract, BaseParameters<CacheContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates an External Cache to be used in Api Management instance.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
@@ -43,6 +45,7 @@ interface CacheContracts_Cache {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the cache specified by its identifier.")
   update is ArmCustomPatchSync<
     CacheContract,
@@ -55,6 +58,7 @@ interface CacheContracts_Cache {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific Cache.")
   delete is ArmResourceDeleteSync<
     CacheContract,
@@ -66,6 +70,7 @@ interface CacheContracts_Cache {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of all external Caches in the specified service instance.")
   listByService is ArmResourceListByParent<
     CacheContract,

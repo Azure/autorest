@@ -24,10 +24,13 @@ model FeaturestoreEntityContainer
 interface FeaturestoreEntityContainers {
   @doc("Get container.")
   getEntity is ArmResourceRead<FeaturestoreEntityContainer>;
+
   @doc("Create or update container.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturestoreEntityContainer>;
+
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<FeaturestoreEntityContainer>;
+
   @doc("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,

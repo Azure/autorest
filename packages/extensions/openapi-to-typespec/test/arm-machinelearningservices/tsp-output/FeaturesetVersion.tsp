@@ -23,10 +23,13 @@ model FeaturesetVersion is ProxyResource<FeaturesetVersionProperties> {
 interface FeaturesetVersions {
   @doc("Get version.")
   get is ArmResourceRead<FeaturesetVersion>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetVersion>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<FeaturesetVersion>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     FeaturesetVersion,
@@ -66,12 +69,14 @@ interface FeaturesetVersions {
       stage?: string;
     }
   >;
+
   @doc("Backfill.")
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
     FeaturesetJob
   >;
+
   @doc("List materialization Jobs.")
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,

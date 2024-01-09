@@ -26,11 +26,13 @@ model UserContract is ProxyResource<UserContractProperties> {
 interface UserContracts_User {
   @doc("Gets the details of the user specified by its identifier.")
   get is ArmResourceRead<UserContract>;
+
   @doc("Gets the entity state (Etag) version of the user specified by its identifier.")
   @head
   getEntityTag(
     ...ResourceInstanceParameters<UserContract, BaseParameters<UserContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a user.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     UserContract,
@@ -46,6 +48,7 @@ interface UserContracts_User {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the user specified by its identifier.")
   update is ArmCustomPatchSync<
     UserContract,
@@ -58,6 +61,7 @@ interface UserContracts_User {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific user.")
   delete is ArmResourceDeleteSync<
     UserContract,
@@ -81,6 +85,7 @@ interface UserContracts_User {
       appType?: AppType;
     }
   >;
+
   @doc("Lists a collection of registered users in the specified service instance.")
   listByService is ArmResourceListByParent<
     UserContract,
@@ -105,12 +110,14 @@ interface UserContracts_User {
       expandGroups?: boolean;
     }
   >;
+
   @doc("Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.")
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
     GenerateSsoUrlResult
   >;
+
   @doc("Gets the Shared Access Authorization Token for the User.")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,

@@ -26,11 +26,13 @@ model GroupContract is ProxyResource<GroupContractProperties> {
 interface GroupContracts_Group {
   @doc("Gets the details of the group specified by its identifier.")
   get is ArmResourceRead<GroupContract>;
+
   @doc("Gets the entity state (Etag) version of the group specified by its identifier.")
   @head
   getEntityTag(
     ...ResourceInstanceParameters<GroupContract, BaseParameters<GroupContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
@@ -42,6 +44,7 @@ interface GroupContracts_Group {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the group specified by its identifier.")
   update is ArmCustomPatchSync<
     GroupContract,
@@ -54,6 +57,7 @@ interface GroupContracts_Group {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific group of the API Management service instance.")
   delete is ArmResourceDeleteSync<
     GroupContract,
@@ -65,6 +69,7 @@ interface GroupContracts_Group {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of groups defined within a service instance.")
   listByService is ArmResourceListByParent<
     GroupContract,

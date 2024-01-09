@@ -25,6 +25,7 @@ model IdentityProviderContract
 interface IdentityProviderContracts_IdentityProvider {
   @doc("Gets the configuration details of the identity Provider configured in specified service instance.")
   get is ArmResourceRead<IdentityProviderContract>;
+
   @doc("Gets the entity state (Etag) version of the identityProvider specified by its identifier.")
   @head
   getEntityTag(
@@ -33,6 +34,7 @@ interface IdentityProviderContracts_IdentityProvider {
       BaseParameters<IdentityProviderContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates the IdentityProvider configuration.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
@@ -44,6 +46,7 @@ interface IdentityProviderContracts_IdentityProvider {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates an existing IdentityProvider configuration.")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
@@ -56,6 +59,7 @@ interface IdentityProviderContracts_IdentityProvider {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified identity provider configuration.")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
@@ -67,8 +71,10 @@ interface IdentityProviderContracts_IdentityProvider {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of Identity Provider configured in the specified service instance.")
   listByService is ArmResourceListByParent<IdentityProviderContract>;
+
   @doc("Gets the client secret details of the Identity Provider.")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,

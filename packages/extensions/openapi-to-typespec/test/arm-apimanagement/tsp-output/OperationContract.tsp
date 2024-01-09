@@ -26,6 +26,7 @@ model OperationContract is ProxyResource<OperationContractProperties> {
 interface OperationContracts_ApiOperation {
   @doc("Gets the details of the API Operation specified by its identifier.")
   get is ArmResourceRead<OperationContract>;
+
   @doc("Gets the entity state (Etag) version of the API operation specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface OperationContracts_ApiOperation {
       BaseParameters<OperationContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new operation in the API or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
@@ -45,6 +47,7 @@ interface OperationContracts_ApiOperation {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the operation in the API specified by its identifier.")
   update is ArmCustomPatchSync<
     OperationContract,
@@ -57,6 +60,7 @@ interface OperationContracts_ApiOperation {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified operation in the API.")
   delete is ArmResourceDeleteSync<
     OperationContract,
@@ -68,6 +72,7 @@ interface OperationContracts_ApiOperation {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of the operations for the specified API.")
   listByApi is ArmResourceListByParent<
     OperationContract,

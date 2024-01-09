@@ -25,6 +25,7 @@ model AccessInformationContract
 interface AccessInformationContracts_TenantAccess {
   @doc("Get tenant access information details without secrets.")
   get is ArmResourceRead<AccessInformationContract>;
+
   @doc("Tenant access metadata")
   @head
   getEntityTag(
@@ -33,6 +34,7 @@ interface AccessInformationContracts_TenantAccess {
       BaseParameters<AccessInformationContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Update tenant access information details.")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
@@ -44,6 +46,7 @@ interface AccessInformationContracts_TenantAccess {
       `If-Match`: string;
     }
   >;
+
   @doc("Update tenant access information details.")
   update is ArmCustomPatchSync<
     AccessInformationContract,
@@ -56,6 +59,7 @@ interface AccessInformationContracts_TenantAccess {
       `If-Match`: string;
     }
   >;
+
   @doc("Returns list of access infos - for Git and Management endpoints.")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
@@ -67,16 +71,19 @@ interface AccessInformationContracts_TenantAccess {
       $filter?: string;
     }
   >;
+
   @doc("Regenerate primary access key")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
+
   @doc("Regenerate secondary access key")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
+
   @doc("Get tenant access information details.")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
@@ -93,6 +100,7 @@ interface AccessInformationContracts_TenantAccessGit {
     AccessInformationContract,
     void
   >;
+
   @doc("Regenerate secondary access key for GIT.")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,

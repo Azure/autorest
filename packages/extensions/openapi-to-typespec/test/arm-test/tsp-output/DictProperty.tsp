@@ -24,6 +24,7 @@ model DictProperty is TrackedResource<Record<unknown>> {
 interface DictProperties {
   @doc("Get a Resource.")
   get is ArmResourceRead<DictProperty>;
+
   @doc("List resources by resource group")
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }

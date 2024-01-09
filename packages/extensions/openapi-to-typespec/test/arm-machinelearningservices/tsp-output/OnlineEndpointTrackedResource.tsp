@@ -28,15 +28,19 @@ model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
 interface OnlineEndpointTrackedResources_OnlineEndpoints {
   @doc("Get Online Endpoint.")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
+
   @doc("Create or update Online Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineEndpointTrackedResource>;
+
   @doc("Update Online Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,
     PartialMinimalTrackedResourceWithIdentity
   >;
+
   @doc("Delete Online Endpoint (asynchronous).")
   delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
+
   @doc("List Online Endpoints.")
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
@@ -72,18 +76,21 @@ interface OnlineEndpointTrackedResources_OnlineEndpoints {
       orderBy?: OrderString;
     }
   >;
+
   @doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,
     EndpointAuthKeys
   >;
+
   @doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
     void
   >;
+
   @doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,

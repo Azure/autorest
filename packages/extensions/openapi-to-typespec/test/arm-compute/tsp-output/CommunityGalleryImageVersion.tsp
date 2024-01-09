@@ -24,6 +24,7 @@ model CommunityGalleryImageVersion
 interface CommunityGalleryImageVersions {
   @doc("Get a community gallery image version.")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
+
   @doc("List community gallery image versions inside an image.")
   list is ArmResourceListByParent<CommunityGalleryImageVersion>;
 }

@@ -24,12 +24,16 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 interface DeviceGroups {
   @doc("Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   get is ArmResourceRead<DeviceGroup>;
+
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
+
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<DeviceGroup>;
+
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
@@ -53,11 +57,13 @@ interface DeviceGroups {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   claimDevices is ArmResourceActionNoResponseContentAsync<
     DeviceGroup,
     ClaimDevicesRequest
   >;
+
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }

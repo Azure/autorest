@@ -25,10 +25,13 @@ model PrivateEndpointConnection
 interface PrivateEndpointConnections_DiskAccesses {
   @doc("Gets information about a private endpoint connection under a disk access resource.")
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
+
   @doc("Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.")
   updateAPrivateEndpointConnection is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
+
   @doc("Deletes a private endpoint connection under a disk access resource.")
   deleteAPrivateEndpointConnection is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+
   @doc("List information about private endpoint connections under a disk access resource")
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }

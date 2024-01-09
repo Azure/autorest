@@ -22,8 +22,10 @@ model RoleManagementPolicyAssignment
 interface RoleManagementPolicyAssignments {
   @doc("Get the specified role management policy assignment for a resource scope")
   get is ArmResourceRead<RoleManagementPolicyAssignment>;
+
   @doc("Create a role management policy assignment")
   create is ArmResourceCreateOrReplaceSync<RoleManagementPolicyAssignment>;
+
   @doc("Gets role management assignment policies for a resource scope.")
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }

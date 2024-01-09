@@ -30,8 +30,10 @@ interface RoleAssignments {
       tenantId?: string;
     }
   >;
+
   @doc("Create or update a role assignment by scope and name.")
   create is ArmResourceCreateOrReplaceSync<RoleAssignment>;
+
   @doc("Delete a role assignment by scope and name.")
   delete is ArmResourceDeleteSync<
     RoleAssignment,
@@ -43,6 +45,7 @@ interface RoleAssignments {
       tenantId?: string;
     }
   >;
+
   @doc("List all role assignments that apply to a scope.")
   listForScope is ArmResourceListByParent<
     RoleAssignment,

@@ -26,10 +26,13 @@ model Workspace is TrackedResource<WorkspaceProperties> {
 interface Workspaces {
   @doc("Gets the properties of the specified machine learning workspace.")
   get is ArmResourceRead<Workspace>;
+
   @doc("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Workspace>;
+
   @doc("Updates a machine learning workspace with the specified parameters.")
   update is ArmCustomPatchAsync<Workspace, WorkspaceUpdateParameters>;
+
   @doc("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteAsync<
     Workspace,
@@ -41,6 +44,7 @@ interface Workspaces {
       forceToPurge?: boolean;
     }
   >;
+
   @doc("Lists all the available machine learning workspaces under the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
@@ -56,42 +60,51 @@ interface Workspaces {
       kind?: string;
     }
   >;
+
   @doc("Lists all the available machine learning workspaces under the specified subscription.")
   listBySubscription is ArmListBySubscription<Workspace>;
+
   @doc("Diagnose workspace setup issue.")
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
     DiagnoseResponseResult
   >;
+
   @doc("Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.")
   listKeys is ArmResourceActionSync<Workspace, void, ListWorkspaceKeysResult>;
+
   @doc("Get Azure Machine Learning Workspace notebook access token")
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
     NotebookAccessTokenResult
   >;
+
   @doc("Lists keys of Azure Machine Learning Workspaces notebook.")
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
     ListNotebookKeysResult
   >;
+
   @doc("Lists keys of Azure Machine Learning Workspace's storage account.")
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
     ListStorageAccountKeysResult
   >;
+
   @doc("Prepare Azure Machine Learning Workspace's notebook resource")
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
     NotebookResourceInfo
   >;
+
   @doc("Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry")
   resyncKeys is ArmResourceActionAsync<Workspace, void, void>;
+
   @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
   @doc("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
   // FIXME: Workspaces_ListOutboundNetworkDependenciesEndpoints could not be converted to a resource operation

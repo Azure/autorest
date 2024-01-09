@@ -22,6 +22,7 @@ model RoleEligibilityScheduleInstance
 interface RoleEligibilityScheduleInstances {
   @doc("Gets the specified role eligibility schedule instance.")
   get is ArmResourceRead<RoleEligibilityScheduleInstance>;
+
   @doc("Gets role eligibility schedule instances of a role eligibility schedule.")
   listForScope is ArmResourceListByParent<
     RoleEligibilityScheduleInstance,

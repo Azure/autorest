@@ -8,12 +8,12 @@ using Azure.Core;
 
 namespace Azure.Batch;
 
-@Azure.Core.fixed
+@fixed
 enum OSType {
   @doc("The Linux operating system.") linux,
   @doc("The Windows operating system.") windows,
 }
-@Azure.Core.fixed
+@fixed
 enum VerificationType {
   @doc("""
 The Image is guaranteed to be compatible with the associated Compute Node agent
@@ -26,7 +26,7 @@ Image, but specific functionality has not been verified.
 """)
   unverified,
 }
-@Azure.Core.fixed
+@fixed
 enum CertificateState {
   @doc("The Certificate is available for use in Pools.") active,
   @doc("""
@@ -46,13 +46,13 @@ the delete.
 """)
   deleteFailed: "deletefailed",
 }
-@Azure.Core.fixed
+@fixed
 enum CertificateFormat {
   @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
   pfx,
   @doc("The Certificate is a base64-encoded X.509 Certificate.") cer,
 }
-@Azure.Core.fixed
+@fixed
 enum JobScheduleState {
   @doc("The Job Schedule is active and will create Jobs as per its schedule.")
   active,
@@ -82,7 +82,7 @@ all Jobs and Tasks under the Job Schedule have been deleted.
 """)
   deleting,
 }
-@Azure.Core.fixed
+@fixed
 enum OnAllTasksComplete {
   @doc("""
 Do nothing. The Job remains active unless terminated or disabled by some other
@@ -92,7 +92,7 @@ means.
   @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
   terminateJob: "terminatejob",
 }
-@Azure.Core.fixed
+@fixed
 enum OnTaskFailure {
   @doc("""
 Do nothing. The Job remains active unless terminated or disabled by some other
@@ -106,7 +106,7 @@ that is what the Task specifies.)
 """)
   performExitOptionsJobAction: "performexitoptionsjobaction",
 }
-@Azure.Core.fixed
+@fixed
 enum ContainerWorkingDirectory {
   @doc("""
 Use the standard Batch service Task working directory, which will contain the
@@ -119,7 +119,7 @@ directory will not contain the Resource Files downloaded by Batch.
 """)
   containerImageDefault,
 }
-@Azure.Core.fixed
+@fixed
 enum OutputFileUploadCondition {
   @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
   taskSuccess: "tasksuccess",
@@ -131,7 +131,7 @@ was.
 """)
   taskCompletion: "taskcompletion",
 }
-@Azure.Core.fixed
+@fixed
 enum AutoUserScope {
   @doc("Specifies that the service should create a new user for the Task.")
   task,
@@ -141,7 +141,7 @@ on every Compute Node in a Pool.
 """)
   pool,
 }
-@Azure.Core.fixed
+@fixed
 enum ElevationLevel {
   @doc("The user is a standard user without elevated access.")
   nonAdmin: "nonadmin",
@@ -151,7 +151,7 @@ permissions.
 """)
   admin,
 }
-@Azure.Core.fixed
+@fixed
 enum PoolLifetimeOption {
   @doc("""
 The Pool exists for the lifetime of the Job Schedule. The Batch Service creates
@@ -167,21 +167,21 @@ Job created on the schedule.
 """)
   job,
 }
-@Azure.Core.fixed
+@fixed
 enum CachingType {
   @doc("The caching mode for the disk is not enabled.") none,
   @doc("The caching mode for the disk is read only.") readOnly: "readonly",
   @doc("The caching mode for the disk is read and write.")
   readWrite: "readwrite",
 }
-@Azure.Core.fixed
+@fixed
 enum StorageAccountType {
   @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
   @doc("The data disk should use premium locally redundant storage.")
   PremiumLRS: "premium_lrs",
 }
-@Azure.Core.fixed
+@fixed
 enum DiskEncryptionTarget {
   @doc("The OS Disk on the compute node is encrypted.") OsDisk: "osdisk",
   @doc("""
@@ -191,7 +191,7 @@ encryption occurs at boot time.
 """)
   TemporaryDisk: "temporarydisk",
 }
-@Azure.Core.fixed
+@fixed
 enum NodePlacementPolicyType {
   @doc("All nodes in the pool will be allocated in the same region.") regional,
   @doc("""
@@ -200,7 +200,7 @@ effort balancing.
 """)
   zonal,
 }
-@Azure.Core.fixed
+@fixed
 enum ComputeNodeFillType {
   @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
   spread,
@@ -211,22 +211,22 @@ Pool.
 """)
   pack,
 }
-@Azure.Core.fixed
+@fixed
 enum DynamicVNetAssignmentScope {
   @doc("No dynamic VNet assignment is enabled.") none,
   @doc("Dynamic VNet assignment is done per-job.") job,
 }
-@Azure.Core.fixed
+@fixed
 enum InboundEndpointProtocol {
   @doc("Use TCP for the endpoint.") tcp,
   @doc("Use UDP for the endpoint.") udp,
 }
-@Azure.Core.fixed
+@fixed
 enum NetworkSecurityGroupRuleAccess {
   @doc("Allow access.") allow,
   @doc("Deny access.") deny,
 }
-@Azure.Core.fixed
+@fixed
 enum IPAddressProvisioningType {
   @doc("""
 A public IP will be created and managed by Batch. There may be multiple public
@@ -241,14 +241,14 @@ Nodes.
   @doc("No public IP Address will be created.")
   noPublicIPAddresses: "nopublicipaddresses",
 }
-@Azure.Core.fixed
+@fixed
 enum CertificateStoreLocation {
   @doc("Certificates should be installed to the CurrentUser Certificate store.")
   currentUser: "currentuser",
   @doc("Certificates should be installed to the LocalMachine Certificate store.")
   localMachine: "localmachine",
 }
-@Azure.Core.fixed
+@fixed
 enum CertificateVisibility {
   @doc("""
 The Certificate should be visible to the user account under which the StartTask
@@ -267,7 +267,7 @@ remotely access the Compute Node.
 """)
   remoteUser: "remoteuser",
 }
-@Azure.Core.fixed
+@fixed
 enum LoginMode {
   @doc("""
 The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended
@@ -284,7 +284,7 @@ maximum privilege.
 """)
   interactive,
 }
-@Azure.Core.fixed
+@fixed
 enum JobState {
   @doc("The Job is available to have Tasks scheduled.") active,
   @doc("""
@@ -320,14 +320,14 @@ Tasks).
 """)
   deleting,
 }
-@Azure.Core.fixed
+@fixed
 enum ErrorCategory {
   @doc("The error is due to a user issue, such as misconfiguration.")
   userError: "usererror",
   @doc("The error is due to an internal server issue.")
   serverError: "servererror",
 }
-@Azure.Core.fixed
+@fixed
 enum DisableJobOption {
   @doc("""
 Terminate running Tasks and requeue them. The Tasks will run again when the Job
@@ -341,7 +341,7 @@ indicating that they were terminated, and will not run again.
   terminate,
   @doc("Allow currently running Tasks to complete.") wait,
 }
-@Azure.Core.fixed
+@fixed
 enum JobPreparationTaskState {
   @doc("The Task is currently running (including retrying).") running,
   @doc("""
@@ -351,7 +351,7 @@ preparation errors (such as resource file download failures).
 """)
   completed,
 }
-@Azure.Core.fixed
+@fixed
 enum TaskExecutionResult {
   @doc("The Task ran successfully.") success,
   @doc("""
@@ -361,7 +361,7 @@ after the Task process exited.
 """)
   failure,
 }
-@Azure.Core.fixed
+@fixed
 enum JobReleaseTaskState {
   @doc("The Task is currently running (including retrying).") running,
   @doc("""
@@ -371,7 +371,7 @@ preparation errors (such as resource file download failures).
 """)
   completed,
 }
-@Azure.Core.fixed
+@fixed
 enum PoolState {
   @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
   active,
@@ -381,7 +381,7 @@ not yet completed.
 """)
   deleting,
 }
-@Azure.Core.fixed
+@fixed
 enum AllocationState {
   @doc("""
 The Pool is not resizing. There are no changes to the number of Compute Nodes
@@ -401,7 +401,7 @@ but the stop request has not yet been completed.
 """)
   stopping,
 }
-@Azure.Core.fixed
+@fixed
 enum PoolIdentityType {
   @doc("Batch pool has user assigned identities with it.") UserAssigned,
   @doc("""
@@ -410,7 +410,7 @@ will remove existing identities.
 """)
   None,
 }
-@Azure.Core.fixed
+@fixed
 enum ComputeNodeDeallocationOption {
   @doc("""
 Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -436,7 +436,7 @@ Compute Nodes when all Task retention periods have expired.
 """)
   retainedData: "retaineddata",
 }
-@Azure.Core.fixed
+@fixed
 enum JobAction {
   @doc("Take no action.") none,
   @doc("""
@@ -450,7 +450,7 @@ Terminate the Job. The terminateReason in the Job's executionInfo is set to
 """)
   terminate,
 }
-@Azure.Core.fixed
+@fixed
 enum DependencyAction {
   @doc("""
 Satisfy tasks waiting on this task; once all dependencies are satisfied, the
@@ -460,7 +460,7 @@ task will be scheduled to run.
   @doc("Blocks tasks waiting on this task, preventing them from being scheduled.")
   block,
 }
-@Azure.Core.fixed
+@fixed
 enum TaskState {
   @doc("""
 The Task is queued and able to run, but is not currently assigned to a Compute
@@ -491,7 +491,7 @@ the Task, or when the Task has been terminated.
 """)
   completed,
 }
-@Azure.Core.fixed
+@fixed
 enum TaskAddStatus {
   @doc("The Task was added successfully.") success,
   @doc("""
@@ -505,7 +505,7 @@ modification.
 """)
   serverError: "servererror",
 }
-@Azure.Core.fixed
+@fixed
 enum SubtaskState {
   @doc("""
 The Task has been assigned to a Compute Node, but is waiting for a required Job
@@ -530,7 +530,7 @@ the Task, or when the Task has been terminated.
 """)
   completed,
 }
-@Azure.Core.fixed
+@fixed
 enum ComputeNodeState {
   @doc("The Compute Node is not currently running a Task.") idle,
   @doc("The Compute Node is rebooting.") rebooting,
@@ -578,7 +578,7 @@ Compute Node becomes available.
 """)
   preempted,
 }
-@Azure.Core.fixed
+@fixed
 enum SchedulingState {
   @doc("Tasks can be scheduled on the Compute Node.") enabled,
   @doc("""
@@ -588,7 +588,7 @@ scheduling enabled.
 """)
   disabled,
 }
-@Azure.Core.fixed
+@fixed
 enum StartTaskState {
   @doc("The StartTask is currently running.") running,
   @doc("""
@@ -598,7 +598,7 @@ preparation errors (such as resource file download failures).
 """)
   completed,
 }
-@Azure.Core.fixed
+@fixed
 enum ComputeNodeRebootOption {
   @doc("""
 Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -624,7 +624,7 @@ Compute Node when all Task retention periods have expired.
 """)
   retainedData: "retaineddata",
 }
-@Azure.Core.fixed
+@fixed
 enum ComputeNodeReimageOption {
   @doc("""
 Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -650,7 +650,7 @@ Compute Node when all Task retention periods have expired.
 """)
   retainedData: "retaineddata",
 }
-@Azure.Core.fixed
+@fixed
 enum DisableComputeNodeSchedulingOption {
   @doc("""
 Terminate running Task processes and requeue the Tasks. The Tasks may run again
@@ -670,7 +670,7 @@ Enter offline state when all Tasks have completed.
 """)
   taskCompletion: "taskcompletion",
 }
-@Azure.Core.fixed
+@fixed
 enum StatusLevelTypes {
   Error,
   Info,

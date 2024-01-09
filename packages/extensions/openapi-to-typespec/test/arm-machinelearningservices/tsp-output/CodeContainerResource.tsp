@@ -25,10 +25,13 @@ model CodeContainerResource is ProxyResource<CodeContainer> {
 interface CodeContainerResources_RegistryCodeContainers {
   @doc("Get Code container.")
   get is ArmResourceRead<CodeContainerResource>;
+
   @doc("Create or update Code container.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CodeContainerResource>;
+
   @doc("Delete Code container.")
   delete is ArmResourceDeleteAsync<CodeContainerResource>;
+
   @doc("List containers.")
   list is ArmResourceListByParent<
     CodeContainerResource,

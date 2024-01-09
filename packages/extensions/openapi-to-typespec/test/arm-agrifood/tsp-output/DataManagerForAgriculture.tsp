@@ -28,15 +28,19 @@ model DataManagerForAgriculture
 interface DataManagerForAgricultures_DataManagerForAgricultureResources {
   @doc("Get DataManagerForAgriculture resource.")
   get is ArmResourceRead<DataManagerForAgriculture>;
+
   @doc("Create or update Data Manager For Agriculture resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataManagerForAgriculture>;
+
   @doc("Update a Data Manager For Agriculture resource.")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
     DataManagerForAgricultureUpdateRequestModel
   >;
+
   @doc("Delete a Data Manager For Agriculture resource.")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
+
   @doc("Lists the DataManagerForAgriculture instances for a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     DataManagerForAgriculture,
@@ -57,6 +61,7 @@ Minimum = 10, Maximum = 1000, Default value = 50.
       $skipToken?: string;
     }
   >;
+
   @doc("Lists the DataManagerForAgriculture instances for a subscription.")
   listBySubscription is ArmListBySubscription<DataManagerForAgriculture>;
 }

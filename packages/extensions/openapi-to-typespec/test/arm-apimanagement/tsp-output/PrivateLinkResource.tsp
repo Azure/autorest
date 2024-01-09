@@ -24,6 +24,7 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 interface PrivateLinkResources_PrivateEndpointConnection {
   @doc("Gets the private link resources")
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
+
   @doc("Gets the private link resources")
   listPrivateLinkResources is ArmResourceListByParent<PrivateLinkResource>;
 }

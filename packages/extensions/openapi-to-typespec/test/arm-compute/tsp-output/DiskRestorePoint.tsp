@@ -33,6 +33,7 @@ interface DiskRestorePoints_DiskRestorePoint {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("Lists diskRestorePoints under a vmRestorePoint.")
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
@@ -44,6 +45,7 @@ interface DiskRestorePoints_DiskRestorePoint {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("Grants access to a diskRestorePoint.")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
@@ -57,6 +59,7 @@ interface DiskRestorePoints_DiskRestorePoint {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("Revokes access to a diskRestorePoint.")
   revokeAccess is ArmResourceActionAsync<
     DiskRestorePoint,

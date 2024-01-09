@@ -26,6 +26,7 @@ model NamedValueContract is ProxyResource<NamedValueContractProperties> {
 interface NamedValueContracts_NamedValue {
   @doc("Gets the details of the named value specified by its identifier.")
   get is ArmResourceRead<NamedValueContract>;
+
   @doc("Gets the entity state (Etag) version of the named value specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface NamedValueContracts_NamedValue {
       BaseParameters<NamedValueContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates named value.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NamedValueContract,
@@ -45,6 +47,7 @@ interface NamedValueContracts_NamedValue {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the specific named value.")
   update is ArmCustomPatchAsync<
     NamedValueContract,
@@ -57,6 +60,7 @@ interface NamedValueContracts_NamedValue {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific named value from the API Management service instance.")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
@@ -68,6 +72,7 @@ interface NamedValueContracts_NamedValue {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of named values defined within a service instance.")
   listByService is ArmResourceListByParent<
     NamedValueContract,
@@ -92,12 +97,14 @@ interface NamedValueContracts_NamedValue {
       isKeyVaultRefreshFailed?: boolean;
     }
   >;
+
   @doc("Gets the secret of the named value specified by its identifier.")
   listValue is ArmResourceActionSync<
     NamedValueContract,
     void,
     NamedValueSecretContract
   >;
+
   @doc("Refresh the secret of the named value specified by its identifier.")
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,

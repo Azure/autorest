@@ -99,7 +99,7 @@ enum ApiVersionType {
   `2016-07`,
   `2020-06`,
 }
-@Azure.Core.fixed
+@fixed
 enum ContentType {
   @doc("Content Type 'application/json;charset=utf-8'")
   `application/json;charset=utf-8`,

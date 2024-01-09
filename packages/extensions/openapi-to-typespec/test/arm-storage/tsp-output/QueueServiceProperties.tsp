@@ -34,6 +34,7 @@ interface QueueServiceProperties_QueueServices {
       queueServiceName: "default";
     }
   >;
+
   @doc("Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     QueueServiceProperties,
@@ -45,6 +46,7 @@ interface QueueServiceProperties_QueueServices {
       queueServiceName: "default";
     }
   >;
+
   @doc("List all queue services for the storage account")
   list is ArmResourceListByParent<QueueServiceProperties>;
 }

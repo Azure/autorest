@@ -24,6 +24,7 @@ model EmailTemplateContract is ProxyResource<EmailTemplateContractProperties> {
 interface EmailTemplateContracts_EmailTemplate {
   @doc("Gets the details of the email template specified by its identifier.")
   get is ArmResourceRead<EmailTemplateContract>;
+
   @doc("Gets the entity state (Etag) version of the email template specified by its identifier.")
   @head
   getEntityTag(
@@ -32,6 +33,7 @@ interface EmailTemplateContracts_EmailTemplate {
       BaseParameters<EmailTemplateContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Updates an Email Template.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
@@ -43,6 +45,7 @@ interface EmailTemplateContracts_EmailTemplate {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates API Management email template")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
@@ -55,6 +58,7 @@ interface EmailTemplateContracts_EmailTemplate {
       `If-Match`: string;
     }
   >;
+
   @doc("Reset the Email Template to default template provided by the API Management service instance.")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
@@ -66,6 +70,7 @@ interface EmailTemplateContracts_EmailTemplate {
       `If-Match`: string;
     }
   >;
+
   @doc("Gets all email templates")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,

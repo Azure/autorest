@@ -25,10 +25,13 @@ model ObjectReplicationPolicy
 interface ObjectReplicationPolicies {
   @doc("Get the object replication policy of the storage account by policy ID.")
   get is ArmResourceRead<ObjectReplicationPolicy>;
+
   @doc("Create or update the object replication policy of the storage account.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ObjectReplicationPolicy>;
+
   @doc("Deletes the object replication policy associated with the specified storage account.")
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
+
   @doc("List the object replication policies associated with the storage account.")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }

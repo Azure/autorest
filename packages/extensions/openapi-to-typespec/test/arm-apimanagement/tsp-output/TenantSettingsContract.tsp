@@ -25,6 +25,7 @@ model TenantSettingsContract
 interface TenantSettingsContracts_TenantSettings {
   @doc("Get tenant settings.")
   get is ArmResourceRead<TenantSettingsContract>;
+
   @doc("Public settings.")
   listByService is ArmResourceListByParent<
     TenantSettingsContract,

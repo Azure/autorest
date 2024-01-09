@@ -27,12 +27,16 @@ model Table is ProxyResource<TableProperties> {
 interface Tables_Table {
   @doc("Gets the table with the specified table name, under the specified account if it exists.")
   get is ArmResourceRead<Table>;
+
   @doc("Creates a new table with the specified table name, under the specified account.")
   create is ArmResourceCreateOrReplaceSync<Table>;
+
   @doc("Creates a new table with the specified table name, under the specified account.")
   update is ArmCustomPatchSync<Table, Table>;
+
   @doc("Deletes the table with the specified table name, under the specified account if it exists.")
   delete is ArmResourceDeleteSync<Table>;
+
   @doc("Gets a list of all the tables under the specified storage account")
   list is ArmResourceListByParent<Table>;
 }

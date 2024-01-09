@@ -335,49 +335,49 @@ enum LeaseShareAction {
   Release,
   Break,
 }
-@Azure.Core.fixed
+@fixed
 enum SkuTier {
   Standard,
   Premium,
 }
-@Azure.Core.fixed
+@fixed
 enum Reason {
   AccountNameInvalid,
   AlreadyExists,
 }
-@Azure.Core.fixed
+@fixed
 enum DefaultAction {
   Allow,
   Deny,
 }
-@Azure.Core.fixed
+@fixed
 enum AccessTier {
   Hot,
   Cool,
   Premium,
 }
-@Azure.Core.fixed
+@fixed
 enum ProvisioningState {
   Creating,
   ResolvingDNS,
   Succeeded,
 }
-@Azure.Core.fixed
+@fixed
 enum AccountStatus {
   available,
   unavailable,
 }
-@Azure.Core.fixed
+@fixed
 enum StorageAccountExpand {
   geoReplicationStats,
   blobRestoreStatus,
 }
-@Azure.Core.fixed
+@fixed
 enum KeyPermission {
   Read,
   Full,
 }
-@Azure.Core.fixed
+@fixed
 enum UsageUnit {
   Count,
   Bytes,
@@ -386,12 +386,12 @@ enum UsageUnit {
   CountsPerSecond,
   BytesPerSecond,
 }
-@Azure.Core.fixed
+@fixed
 enum HttpProtocol {
   `https,http`,
   https,
 }
-@Azure.Core.fixed
+@fixed
 enum PublicAccess {
   Container,
   Blob,

@@ -37,6 +37,7 @@ interface VirtualMachineScaleSetExtensions {
       $expand?: string;
     }
   >;
+
   @doc("The operation to create or update an extension.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     VirtualMachineScaleSetExtension,
@@ -48,6 +49,7 @@ interface VirtualMachineScaleSetExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to update an extension.")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
@@ -60,6 +62,7 @@ interface VirtualMachineScaleSetExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("The operation to delete the extension.")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetExtension,
@@ -71,6 +74,7 @@ interface VirtualMachineScaleSetExtensions {
       vmScaleSetName: string;
     }
   >;
+
   @doc("Gets a list of all extensions in a VM scale set.")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetExtension,

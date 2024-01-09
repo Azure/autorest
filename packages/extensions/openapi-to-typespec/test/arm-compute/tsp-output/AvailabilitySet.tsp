@@ -23,16 +23,22 @@ model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
 interface AvailabilitySets {
   @doc("Retrieves information about an availability set.")
   get is ArmResourceRead<AvailabilitySet>;
+
   @doc("Create or update an availability set.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AvailabilitySet>;
+
   @doc("Update an availability set.")
   update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
+
   @doc("Delete an availability set.")
   delete is ArmResourceDeleteSync<AvailabilitySet>;
+
   @doc("Lists all availability sets in a resource group.")
   list is ArmResourceListByParent<AvailabilitySet>;
+
   @doc("Lists all availability sets in a subscription.")
   listBySubscription is ArmListBySubscription<AvailabilitySet>;
+
   @doc("Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.")
   // FIXME: AvailabilitySets_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")

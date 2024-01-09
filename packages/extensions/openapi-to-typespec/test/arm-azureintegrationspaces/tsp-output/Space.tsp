@@ -22,12 +22,16 @@ model Space is TrackedResource<SpaceResourceProperties> {
 interface Spaces {
   @doc("Get a Space")
   get is ArmResourceRead<Space>;
+
   @doc("Create a Space")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
+
   @doc("Update a Space")
   patch is ArmCustomPatchSync<Space, SpaceUpdate>;
+
   @doc("Delete a Space")
   delete is ArmResourceDeleteSync<Space>;
+
   @doc("List Space resources by resource group")
   listByResourceGroup is ArmResourceListByParent<
     Space,
@@ -72,6 +76,7 @@ interface Spaces {
       orderby?: string[];
     }
   >;
+
   @doc("List Space resources by subscription ID")
   listBySubscription is ArmListBySubscription<Space>;
 }

@@ -23,6 +23,7 @@ model SharedGallery is ProxyResource<{}> {
 interface SharedGalleries {
   @doc("Get a shared gallery by subscription id or tenant id.")
   get is ArmResourceRead<SharedGallery>;
+
   @doc("List shared galleries by subscription id or tenant id.")
   list is ArmResourceListByParent<
     SharedGallery,

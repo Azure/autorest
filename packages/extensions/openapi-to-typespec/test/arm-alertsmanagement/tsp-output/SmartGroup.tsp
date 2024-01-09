@@ -22,6 +22,7 @@ model SmartGroup is ProxyResource<SmartGroupProperties> {
 interface SmartGroups {
   @doc("Get information related to a specific Smart Group.")
   getById is ArmResourceRead<SmartGroup>;
+
   @doc("List all the Smart Groups within a specified subscription. ")
   getAll is ArmResourceListByParent<
     SmartGroup,
@@ -73,6 +74,7 @@ interface SmartGroups {
       sortOrder?: SortOrder;
     }
   >;
+
   @doc("Change the state of a Smart Group.")
   changeState is ArmResourceActionSync<
     SmartGroup,
@@ -86,6 +88,7 @@ interface SmartGroups {
       newState: AlertState;
     }
   >;
+
   @doc("Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .")
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")

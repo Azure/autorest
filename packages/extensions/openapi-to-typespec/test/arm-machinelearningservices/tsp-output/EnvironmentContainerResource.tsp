@@ -25,10 +25,13 @@ model EnvironmentContainerResource is ProxyResource<EnvironmentContainer> {
 interface EnvironmentContainerResources_RegistryEnvironmentContainers {
   @doc("Get container.")
   get is ArmResourceRead<EnvironmentContainerResource>;
+
   @doc("Create or update container.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentContainerResource>;
+
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<EnvironmentContainerResource>;
+
   @doc("List environment containers.")
   list is ArmResourceListByParent<
     EnvironmentContainerResource,

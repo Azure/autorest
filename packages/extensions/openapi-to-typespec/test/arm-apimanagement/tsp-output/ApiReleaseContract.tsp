@@ -27,6 +27,7 @@ model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
 interface ApiReleaseContracts_ApiRelease {
   @doc("Returns the details of an API release.")
   get is ArmResourceRead<ApiReleaseContract>;
+
   @doc("Returns the etag of an API release.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface ApiReleaseContracts_ApiRelease {
       BaseParameters<ApiReleaseContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new Release for the API.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiReleaseContract,
@@ -46,6 +48,7 @@ interface ApiReleaseContracts_ApiRelease {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the release of the API specified by its identifier.")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
@@ -58,6 +61,7 @@ interface ApiReleaseContracts_ApiRelease {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified release in the API.")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
@@ -69,6 +73,7 @@ interface ApiReleaseContracts_ApiRelease {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.")
   listByService is ArmResourceListByParent<
     ApiReleaseContract,

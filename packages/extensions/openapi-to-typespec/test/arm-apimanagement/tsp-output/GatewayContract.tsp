@@ -26,6 +26,7 @@ model GatewayContract is ProxyResource<GatewayContractProperties> {
 interface GatewayContracts_Gateway {
   @doc("Gets the details of the Gateway specified by its identifier.")
   get is ArmResourceRead<GatewayContract>;
+
   @doc("Gets the entity state (Etag) version of the Gateway specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface GatewayContracts_Gateway {
       BaseParameters<GatewayContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or updates a Gateway to be used in Api Management instance.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
@@ -45,6 +47,7 @@ interface GatewayContracts_Gateway {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the gateway specified by its identifier.")
   update is ArmCustomPatchSync<
     GatewayContract,
@@ -57,6 +60,7 @@ interface GatewayContracts_Gateway {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific Gateway.")
   delete is ArmResourceDeleteSync<
     GatewayContract,
@@ -68,6 +72,7 @@ interface GatewayContracts_Gateway {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of gateways registered with service instance.")
   listByService is ArmResourceListByParent<
     GatewayContract,
@@ -88,13 +93,16 @@ interface GatewayContracts_Gateway {
       $skip?: int32;
     }
   >;
+
   @doc("Retrieves gateway keys.")
   listKeys is ArmResourceActionSync<GatewayContract, void, GatewayKeysContract>;
+
   @doc("Regenerates specified gateway key invalidating any tokens created with it.")
   regenerateKey is ArmResourceActionNoContentSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract
   >;
+
   @doc("Gets the Shared Access Authorization Token for the gateway.")
   generateToken is ArmResourceActionSync<
     GatewayContract,

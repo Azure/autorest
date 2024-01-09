@@ -24,28 +24,40 @@ model CloudService is TrackedResource<CloudServiceProperties> {
 interface CloudServices {
   @doc("Display information about a cloud service.")
   get is ArmResourceRead<CloudService>;
+
   @doc("Create or update a cloud service. Please note some properties can be set only during cloud service creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
+
   @doc("Update a cloud service.")
   update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;
+
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
+
   @doc("Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")
   list is ArmResourceListByParent<CloudService>;
+
   @doc("Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")
   listAll is ArmListBySubscription<CloudService>;
+
   @doc("Starts the cloud service.")
   start is ArmResourceActionAsync<CloudService, void, void>;
+
   @doc("Power off the cloud service. Note that resources are still attached and you are getting charged for the resources.")
   powerOff is ArmResourceActionAsync<CloudService, void, void>;
+
   @doc("Restarts one or more role instances in a cloud service.")
   restart is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+
   @doc("Reimage asynchronous operation reinstalls the operating system on instances of web roles or worker roles.")
   reimage is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+
   @doc("Rebuild Role Instances reinstalls the operating system on instances of web roles or worker roles and initializes the storage resources that are used by them. If you do not want to initialize storage resources, you can use Reimage Role Instances.")
   rebuild is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+
   @doc("Deletes role instances in a cloud service.")
   deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, void>;
+
   @doc("Gets the status of a cloud service.")
   // FIXME: CloudServices_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")

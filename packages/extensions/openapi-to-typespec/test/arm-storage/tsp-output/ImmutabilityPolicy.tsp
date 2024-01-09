@@ -37,6 +37,7 @@ interface ImmutabilityPolicies_BlobContainers {
       `If-Match`?: string;
     }
   >;
+
   @doc("Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation.")
   createOrUpdateImmutabilityPolicy is ArmResourceCreateOrReplaceSync<
     ImmutabilityPolicy,
@@ -52,6 +53,7 @@ interface ImmutabilityPolicies_BlobContainers {
       `If-Match`?: string;
     }
   >;
+
   @doc("Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container.")
   deleteImmutabilityPolicy is ArmResourceDeleteSync<
     ImmutabilityPolicy,
@@ -67,6 +69,7 @@ interface ImmutabilityPolicies_BlobContainers {
       `If-Match`: string;
     }
   >;
+
   @doc("Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.")
   lockImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
@@ -80,6 +83,7 @@ interface ImmutabilityPolicies_BlobContainers {
       `If-Match`: string;
     }
   >;
+
   @doc("Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.")
   extendImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,

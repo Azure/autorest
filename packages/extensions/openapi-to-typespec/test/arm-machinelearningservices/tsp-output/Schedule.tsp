@@ -23,10 +23,13 @@ model Schedule is ProxyResource<ScheduleProperties> {
 interface Schedules {
   @doc("Get schedule.")
   get is ArmResourceRead<Schedule>;
+
   @doc("Create or update schedule.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Schedule>;
+
   @doc("Delete schedule.")
   delete is ArmResourceDeleteAsync<Schedule>;
+
   @doc("List schedules in specified workspace.")
   list is ArmResourceListByParent<
     Schedule,

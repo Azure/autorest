@@ -22,6 +22,7 @@ model RoleAssignmentScheduleInstance
 interface RoleAssignmentScheduleInstances {
   @doc("Gets the specified role assignment schedule instance.")
   get is ArmResourceRead<RoleAssignmentScheduleInstance>;
+
   @doc("Gets role assignment schedule instances of a role assignment schedule.")
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleInstance,

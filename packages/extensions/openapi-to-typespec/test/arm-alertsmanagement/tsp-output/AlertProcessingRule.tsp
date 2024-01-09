@@ -21,14 +21,19 @@ model AlertProcessingRule is TrackedResource<AlertProcessingRuleProperties> {
 interface AlertProcessingRules {
   @doc("Get an alert processing rule by name.")
   getByName is ArmResourceRead<AlertProcessingRule>;
+
   @doc("Create or update an alert processing rule.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
+
   @doc("Enable, disable, or update tags for an alert processing rule.")
   update is ArmCustomPatchSync<AlertProcessingRule, PatchObject>;
+
   @doc("Delete an alert processing rule.")
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
+
   @doc("List all alert processing rules in a resource group.")
   listByResourceGroup is ArmResourceListByParent<AlertProcessingRule>;
+
   @doc("List all alert processing rules in a subscription.")
   listBySubscription is ArmListBySubscription<AlertProcessingRule>;
 }

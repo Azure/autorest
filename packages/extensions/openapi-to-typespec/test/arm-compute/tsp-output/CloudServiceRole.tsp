@@ -25,6 +25,7 @@ model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {
 interface CloudServiceRoles {
   @doc("Gets a role from a cloud service.")
   get is ArmResourceRead<CloudServiceRole>;
+
   @doc("Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles.")
   list is ArmResourceListByParent<CloudServiceRole>;
 }

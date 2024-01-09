@@ -22,8 +22,10 @@ model RoleAssignmentScheduleRequest
 interface RoleAssignmentScheduleRequests {
   @doc("Get the specified role assignment schedule request.")
   get is ArmResourceRead<RoleAssignmentScheduleRequest>;
+
   @doc("Creates a role assignment schedule request.")
   create is ArmResourceCreateOrReplaceSync<RoleAssignmentScheduleRequest>;
+
   @doc("Gets role assignment schedule requests for a scope.")
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleRequest,
@@ -35,8 +37,10 @@ interface RoleAssignmentScheduleRequests {
       $filter?: string;
     }
   >;
+
   @doc("Cancels a pending role assignment schedule request.")
   cancel is ArmResourceActionSync<RoleAssignmentScheduleRequest, void, void>;
+
   @doc("Validates a new role assignment schedule request.")
   validate is ArmResourceActionSync<
     RoleAssignmentScheduleRequest,

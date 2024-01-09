@@ -27,6 +27,7 @@ model GatewayHostnameConfigurationContract
 interface GatewayHostnameConfigurationContracts_GatewayHostnameConfiguration {
   @doc("Get details of a hostname configuration")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
+
   @doc("Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface GatewayHostnameConfigurationContracts_GatewayHostnameConfiguration {
       BaseParameters<GatewayHostnameConfigurationContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates of updates hostname configuration for a Gateway.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
@@ -46,6 +48,7 @@ interface GatewayHostnameConfigurationContracts_GatewayHostnameConfiguration {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes the specified hostname configuration from the specified Gateway.")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
@@ -57,6 +60,7 @@ interface GatewayHostnameConfigurationContracts_GatewayHostnameConfiguration {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists the collection of hostname configurations for the specified gateway.")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,

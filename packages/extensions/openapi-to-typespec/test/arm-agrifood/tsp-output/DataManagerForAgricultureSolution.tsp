@@ -25,6 +25,7 @@ model DataManagerForAgricultureSolution
 interface DataManagerForAgricultureSolutions_SolutionsDiscoverability {
   @doc("Get Data Manager For Agriculture solution by id.")
   get is ArmResourceRead<DataManagerForAgricultureSolution>;
+
   @doc("Get list of Data Manager For Agriculture solutions.")
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,

@@ -28,6 +28,7 @@ model AuthorizationServerContract
 interface AuthorizationServerContracts_AuthorizationServer {
   @doc("Gets the details of the authorization server specified by its identifier.")
   get is ArmResourceRead<AuthorizationServerContract>;
+
   @doc("Gets the entity state (Etag) version of the authorizationServer specified by its identifier.")
   @head
   getEntityTag(
@@ -36,6 +37,7 @@ interface AuthorizationServerContracts_AuthorizationServer {
       BaseParameters<AuthorizationServerContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates new authorization server or updates an existing authorization server.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
@@ -47,6 +49,7 @@ interface AuthorizationServerContracts_AuthorizationServer {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the details of the authorization server specified by its identifier.")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
@@ -59,6 +62,7 @@ interface AuthorizationServerContracts_AuthorizationServer {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes specific authorization server instance.")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
@@ -70,6 +74,7 @@ interface AuthorizationServerContracts_AuthorizationServer {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of authorization servers defined within a service instance.")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
@@ -90,6 +95,7 @@ interface AuthorizationServerContracts_AuthorizationServer {
       $skip?: int32;
     }
   >;
+
   @doc("Gets the client secret details of the authorization server.")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,

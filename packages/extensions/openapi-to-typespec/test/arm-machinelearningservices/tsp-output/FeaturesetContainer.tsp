@@ -23,10 +23,13 @@ model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
 interface FeaturesetContainers {
   @doc("Get container.")
   getEntity is ArmResourceRead<FeaturesetContainer>;
+
   @doc("Create or update container.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetContainer>;
+
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<FeaturesetContainer>;
+
   @doc("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturesetContainer,

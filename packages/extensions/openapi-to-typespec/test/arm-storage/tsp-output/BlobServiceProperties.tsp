@@ -35,6 +35,7 @@ interface BlobServiceProperties_BlobServices {
       BlobServicesName: "default";
     }
   >;
+
   @doc("Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     BlobServiceProperties,
@@ -46,6 +47,7 @@ interface BlobServiceProperties_BlobServices {
       BlobServicesName: "default";
     }
   >;
+
   @doc("List blob services of storage account. It returns a collection of one object named default.")
   list is ArmResourceListByParent<BlobServiceProperties>;
 }

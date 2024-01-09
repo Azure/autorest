@@ -22,6 +22,7 @@ model Alert is ProxyResource<AlertProperties> {
 interface Alerts {
   @doc("Get information related to a specific alert")
   getById is ArmResourceRead<Alert>;
+
   @doc("List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ")
   getAll is ArmResourceListByParent<
     Alert,
@@ -97,6 +98,7 @@ interface Alerts {
       customTimeRange?: string;
     }
   >;
+
   @doc("Change the state of an alert.")
   changeState is ArmResourceActionSync<
     Alert,
@@ -110,6 +112,7 @@ interface Alerts {
       newState: AlertState;
     }
   >;
+
   @doc("Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).")
   // FIXME: Alerts_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history")

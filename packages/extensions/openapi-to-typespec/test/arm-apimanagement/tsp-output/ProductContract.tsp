@@ -26,6 +26,7 @@ model ProductContract is ProxyResource<ProductContractProperties> {
 interface ProductContracts_Product {
   @doc("Gets the details of the product specified by its identifier.")
   get is ArmResourceRead<ProductContract>;
+
   @doc("Gets the entity state (Etag) version of the product specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface ProductContracts_Product {
       BaseParameters<ProductContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates or Updates a product.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
@@ -45,6 +47,7 @@ interface ProductContracts_Product {
       `If-Match`?: string;
     }
   >;
+
   @doc("Update existing product details.")
   update is ArmCustomPatchSync<
     ProductContract,
@@ -57,6 +60,7 @@ interface ProductContracts_Product {
       `If-Match`: string;
     }
   >;
+
   @doc("Delete product.")
   delete is ArmResourceDeleteSync<
     ProductContract,
@@ -72,6 +76,7 @@ interface ProductContracts_Product {
       deleteSubscriptions?: boolean;
     }
   >;
+
   @doc("Lists a collection of products in the specified service instance.")
   listByService is ArmResourceListByParent<
     ProductContract,

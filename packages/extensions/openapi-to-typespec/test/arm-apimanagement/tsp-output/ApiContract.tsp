@@ -27,11 +27,13 @@ model ApiContract is ProxyResource<ApiContractProperties> {
 interface ApiContracts_Api {
   @doc("Gets the details of the API specified by its identifier.")
   get is ArmResourceRead<ApiContract>;
+
   @doc("Gets the entity state (Etag) version of the API specified by its identifier.")
   @head
   getEntityTag(
     ...ResourceInstanceParameters<ApiContract, BaseParameters<ApiContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates new or updates existing specified API of the API Management service instance.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApiContract,
@@ -43,6 +45,7 @@ interface ApiContracts_Api {
       `If-Match`?: string;
     }
   >;
+
   @doc("Updates the specified API of the API Management service instance.")
   update is ArmCustomPatchSync<
     ApiContract,
@@ -55,6 +58,7 @@ interface ApiContracts_Api {
       `If-Match`: string;
     }
   >;
+
   @doc("Deletes the specified API of the API Management service instance.")
   delete is ArmResourceDeleteSync<
     ApiContract,
@@ -70,6 +74,7 @@ interface ApiContracts_Api {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all APIs of the API Management service instance.")
   listByService is ArmResourceListByParent<
     ApiContract,

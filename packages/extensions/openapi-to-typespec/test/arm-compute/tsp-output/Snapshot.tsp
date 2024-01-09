@@ -27,18 +27,25 @@ model Snapshot is TrackedResource<SnapshotProperties> {
 interface Snapshots {
   @doc("Gets information about a snapshot.")
   get is ArmResourceRead<Snapshot>;
+
   @doc("Creates or updates a snapshot.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Snapshot>;
+
   @doc("Updates (patches) a snapshot.")
   update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
+
   @doc("Deletes a snapshot.")
   delete is ArmResourceDeleteAsync<Snapshot>;
+
   @doc("Lists snapshots under a resource group.")
   listByResourceGroup is ArmResourceListByParent<Snapshot>;
+
   @doc("Lists snapshots under a subscription.")
   list is ArmListBySubscription<Snapshot>;
+
   @doc("Grants access to a snapshot.")
   grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+
   @doc("Revokes access to a snapshot.")
   revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }

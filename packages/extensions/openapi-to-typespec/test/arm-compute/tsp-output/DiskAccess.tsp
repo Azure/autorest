@@ -24,16 +24,22 @@ model DiskAccess is TrackedResource<DiskAccessProperties> {
 interface DiskAccesses {
   @doc("Gets information about a disk access resource.")
   get is ArmResourceRead<DiskAccess>;
+
   @doc("Creates or updates a disk access resource")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskAccess>;
+
   @doc("Updates (patches) a disk access resource.")
   update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
+
   @doc("Deletes a disk access resource.")
   delete is ArmResourceDeleteAsync<DiskAccess>;
+
   @doc("Lists all the disk access resources under a resource group.")
   listByResourceGroup is ArmResourceListByParent<DiskAccess>;
+
   @doc("Lists all the disk access resources under a subscription.")
   list is ArmListBySubscription<DiskAccess>;
+
   @doc("Gets the private link resources possible under disk access resource")
   // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")

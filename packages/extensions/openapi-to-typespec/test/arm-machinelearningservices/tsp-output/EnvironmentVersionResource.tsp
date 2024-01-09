@@ -24,10 +24,13 @@ model EnvironmentVersionResource is ProxyResource<EnvironmentVersion> {
 interface EnvironmentVersionResources_RegistryEnvironmentVersions {
   @doc("Get version.")
   get is ArmResourceRead<EnvironmentVersionResource>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentVersionResource>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<EnvironmentVersionResource>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     EnvironmentVersionResource,

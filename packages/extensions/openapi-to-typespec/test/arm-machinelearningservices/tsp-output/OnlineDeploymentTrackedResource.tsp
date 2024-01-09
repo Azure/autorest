@@ -28,15 +28,19 @@ model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
 interface OnlineDeploymentTrackedResources_OnlineDeployments {
   @doc("Get Inference Deployment Deployment.")
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
+
   @doc("Create or update Inference Endpoint Deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineDeploymentTrackedResource>;
+
   @doc("Update Online Deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
     PartialMinimalTrackedResourceWithSku
   >;
+
   @doc("Delete Inference Endpoint Deployment (asynchronous).")
   delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
+
   @doc("List Inference Endpoint Deployments.")
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
@@ -56,12 +60,14 @@ interface OnlineDeploymentTrackedResources_OnlineDeployments {
       $skip?: string;
     }
   >;
+
   @doc("Polls an Endpoint operation.")
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     DeploymentLogsRequest,
     DeploymentLogs
   >;
+
   @summary("List Inference Endpoint Deployment Skus.")
   @doc("List Inference Endpoint Deployment Skus.")
   // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation

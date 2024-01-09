@@ -36,37 +36,46 @@ model ApiManagementServiceResource
 interface ApiManagementServiceResources_ApiManagementService {
   @doc("Gets an API Management service resource description.")
   get is ArmResourceRead<ApiManagementServiceResource>;
+
   @doc("Creates or updates an API Management service. This is long running operation and could take several minutes to complete.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiManagementServiceResource>;
+
   @doc("Updates an existing API Management service.")
   update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
     ApiManagementServiceUpdateParameters
   >;
+
   @doc("Deletes an existing API Management service.")
   delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;
+
   @doc("List all API Management services within a resource group.")
   listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
+
   @doc("Lists all API Management services within an Azure subscription.")
   list is ArmListBySubscription<ApiManagementServiceResource>;
+
   @doc("Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.")
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
     ApiManagementServiceResource
   >;
+
   @doc("Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.")
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
     ApiManagementServiceResource
   >;
+
   @doc("Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.")
   getSsoToken is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
     ApiManagementServiceGetSsoTokenResult
   >;
+
   @doc("Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
@@ -102,6 +111,7 @@ interface ApiManagementServiceResources_TenantConfiguration {
       configurationName: ConfigurationIdName;
     }
   >;
+
   @doc("This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.")
   save is ArmResourceActionAsync<
     ApiManagementServiceResource,
@@ -115,6 +125,7 @@ interface ApiManagementServiceResources_TenantConfiguration {
       configurationName: ConfigurationIdName;
     }
   >;
+
   @doc("This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.")
   validate is ArmResourceActionAsync<
     ApiManagementServiceResource,
@@ -128,6 +139,7 @@ interface ApiManagementServiceResources_TenantConfiguration {
       configurationName: ConfigurationIdName;
     }
   >;
+
   @doc("Gets the status of the most recent synchronization between the configuration database and the Git repository.")
   // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")

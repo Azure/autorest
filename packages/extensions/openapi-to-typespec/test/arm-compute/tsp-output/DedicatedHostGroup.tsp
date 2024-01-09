@@ -33,14 +33,19 @@ interface DedicatedHostGroups {
       $expand?: InstanceViewTypes;
     }
   >;
+
   @doc("Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DedicatedHostGroup>;
+
   @doc("Update an dedicated host group.")
   update is ArmCustomPatchSync<DedicatedHostGroup, DedicatedHostGroupUpdate>;
+
   @doc("Delete a dedicated host group.")
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
+
   @doc("Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.")
   listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
+
   @doc("Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.")
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }

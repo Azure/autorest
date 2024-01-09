@@ -26,6 +26,7 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
 interface GlobalSchemaContracts_GlobalSchema {
   @doc("Gets the details of the Schema specified by its identifier.")
   get is ArmResourceRead<GlobalSchemaContract>;
+
   @doc("Gets the entity state (Etag) version of the Schema specified by its identifier.")
   @head
   getEntityTag(
@@ -34,6 +35,7 @@ interface GlobalSchemaContracts_GlobalSchema {
       BaseParameters<GlobalSchemaContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates new or updates existing specified Schema of the API Management service instance.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     GlobalSchemaContract,
@@ -45,6 +47,7 @@ interface GlobalSchemaContracts_GlobalSchema {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes specific Schema.")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
@@ -56,6 +59,7 @@ interface GlobalSchemaContracts_GlobalSchema {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists a collection of schemas registered with service instance.")
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,

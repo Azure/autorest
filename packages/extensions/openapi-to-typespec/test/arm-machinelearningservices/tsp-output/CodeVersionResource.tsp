@@ -24,10 +24,13 @@ model CodeVersionResource is ProxyResource<CodeVersion> {
 interface CodeVersionResources_RegistryCodeVersions {
   @doc("Get version.")
   get is ArmResourceRead<CodeVersionResource>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CodeVersionResource>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<CodeVersionResource>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     CodeVersionResource,
@@ -47,6 +50,7 @@ interface CodeVersionResources_RegistryCodeVersions {
       $skip?: string;
     }
   >;
+
   @doc("Generate a storage location and credential for the client to upload a code asset to.")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     CodeVersionResource,

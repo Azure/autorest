@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace Azure.Keyvault;
 
@@ -290,14 +291,14 @@ enum SasTokenType {
   account,
   service,
 }
-@Azure.Core.fixed
+@fixed
 enum ActionType {
   EmailContacts,
   AutoRenew,
   rotate,
   notify,
 }
-@Azure.Core.fixed
+@fixed
 enum OperationStatus {
   Success,
   InProgress,

@@ -22,8 +22,10 @@ model RoleEligibilityScheduleRequest
 interface RoleEligibilityScheduleRequests {
   @doc("Get the specified role eligibility schedule request.")
   get is ArmResourceRead<RoleEligibilityScheduleRequest>;
+
   @doc("Creates a role eligibility schedule request.")
   create is ArmResourceCreateOrReplaceSync<RoleEligibilityScheduleRequest>;
+
   @doc("Gets role eligibility schedule requests for a scope.")
   listForScope is ArmResourceListByParent<
     RoleEligibilityScheduleRequest,
@@ -35,8 +37,10 @@ interface RoleEligibilityScheduleRequests {
       $filter?: string;
     }
   >;
+
   @doc("Cancels a pending role eligibility schedule request.")
   cancel is ArmResourceActionSync<RoleEligibilityScheduleRequest, void, void>;
+
   @doc("Validates a new role eligibility schedule request.")
   validate is ArmResourceActionSync<
     RoleEligibilityScheduleRequest,

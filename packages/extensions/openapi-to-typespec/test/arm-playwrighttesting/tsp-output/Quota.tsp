@@ -22,6 +22,7 @@ model Quota is ProxyResource<QuotaProperties> {
 interface Quotas {
   @doc("Get quota by name.")
   get is ArmResourceRead<Quota>;
+
   @doc("List quotas for a given subscription Id.")
   listBySubscription is ArmResourceListByParent<Quota>;
 }

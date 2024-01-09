@@ -26,37 +26,48 @@ model AnalysisServicesServer
 interface AnalysisServicesServers_Servers {
   @doc("Gets details about the specified Analysis Services server.")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
+
   @doc("Provisions the specified Analysis Services server based on the configuration specified in the request.")
   create is ArmResourceCreateOrUpdateAsync<AnalysisServicesServer>;
+
   @doc("Updates the current state of the specified Analysis Services server.")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
     AnalysisServicesServerUpdateParameters
   >;
+
   @doc("Deletes the specified Analysis Services server.")
   delete is ArmResourceDeleteAsync<AnalysisServicesServer>;
+
   @doc("Gets all the Analysis Services servers for the given resource group.")
   listByResourceGroup is ArmResourceListByParent<AnalysisServicesServer>;
+
   @doc("Lists all the Analysis Services servers for the given subscription.")
   list is ArmListBySubscription<AnalysisServicesServer>;
+
   @doc("Lists eligible SKUs for Analysis Services resource provider.")
   listSkusForNew is ArmListBySubscription<AnalysisServicesServer>;
+
   @doc("Suspends operation of the specified Analysis Services server instance.")
   suspend is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
+
   @doc("Resumes operation of the specified Analysis Services server instance.")
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
+
   @doc("Return the gateway status of the specified Analysis Services server instance.")
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
     GatewayListStatusLive
   >;
+
   @doc("Dissociates a Unified Gateway associated with the server.")
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
     void,
     void
   >;
+
   @doc("Lists eligible SKUs for an Analysis Services resource.")
   // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")

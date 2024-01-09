@@ -24,6 +24,7 @@ model DatastoreResource is ProxyResource<Datastore> {
 interface DatastoreResources_Datastores {
   @doc("Get datastore.")
   get is ArmResourceRead<DatastoreResource>;
+
   @doc("Create or update datastore.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
@@ -35,8 +36,10 @@ interface DatastoreResources_Datastores {
       skipValidation?: boolean;
     }
   >;
+
   @doc("Delete datastore.")
   delete is ArmResourceDeleteSync<DatastoreResource>;
+
   @doc("List datastores.")
   list is ArmResourceListByParent<
     DatastoreResource,
@@ -75,6 +78,7 @@ interface DatastoreResources_Datastores {
       orderByAsc?: boolean;
     }
   >;
+
   @doc("Get datastore secrets.")
   listSecrets is ArmResourceActionSync<
     DatastoreResource,

@@ -28,6 +28,7 @@ model TagDescriptionContract
 interface TagDescriptionContracts_ApiTagDescription {
   @doc("Get Tag description in scope of API")
   get is ArmResourceRead<TagDescriptionContract>;
+
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @head
   getEntityTag(
@@ -36,6 +37,7 @@ interface TagDescriptionContracts_ApiTagDescription {
       BaseParameters<TagDescriptionContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Create/Update tag description in scope of the Api.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
@@ -47,6 +49,7 @@ interface TagDescriptionContracts_ApiTagDescription {
       `If-Match`?: string;
     }
   >;
+
   @doc("Delete tag description for the Api.")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
@@ -58,6 +61,7 @@ interface TagDescriptionContracts_ApiTagDescription {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations")
   listByService is ArmResourceListByParent<
     TagDescriptionContract,

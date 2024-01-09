@@ -27,6 +27,7 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
 interface IssueCommentContracts_ApiIssueComment {
   @doc("Gets the details of the issue Comment for an API specified by its identifier.")
   get is ArmResourceRead<IssueCommentContract>;
+
   @doc("Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.")
   @head
   getEntityTag(
@@ -35,6 +36,7 @@ interface IssueCommentContracts_ApiIssueComment {
       BaseParameters<IssueCommentContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new Comment for the Issue in an API or updates an existing one.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
@@ -46,6 +48,7 @@ interface IssueCommentContracts_ApiIssueComment {
       `If-Match`?: string;
     }
   >;
+
   @doc("Deletes the specified comment from an Issue.")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
@@ -57,6 +60,7 @@ interface IssueCommentContracts_ApiIssueComment {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists all comments for the Issue associated with the specified API.")
   listByService is ArmResourceListByParent<
     IssueCommentContract,

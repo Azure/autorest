@@ -24,10 +24,13 @@ model ComponentVersionResource is ProxyResource<ComponentVersion> {
 interface ComponentVersionResources_RegistryComponentVersions {
   @doc("Get version.")
   get is ArmResourceRead<ComponentVersionResource>;
+
   @doc("Create or update version.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentVersionResource>;
+
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<ComponentVersionResource>;
+
   @doc("List versions.")
   list is ArmResourceListByParent<
     ComponentVersionResource,

@@ -27,6 +27,7 @@ model PortalRevisionContract
 interface PortalRevisionContracts_PortalRevision {
   @doc("Gets the developer portal's revision specified by its identifier.")
   get is ArmResourceRead<PortalRevisionContract>;
+
   @doc("Gets the developer portal revision specified by its identifier.")
   @head
   getEntityTag(
@@ -35,8 +36,10 @@ interface PortalRevisionContracts_PortalRevision {
       BaseParameters<PortalRevisionContract>
     >,
   ): OkResponse | ErrorResponse;
+
   @doc("Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PortalRevisionContract>;
+
   @doc("Updates the description of specified portal revision or makes it current.")
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
@@ -49,6 +52,7 @@ interface PortalRevisionContracts_PortalRevision {
       `If-Match`: string;
     }
   >;
+
   @doc("Lists developer portal's revisions.")
   listByService is ArmResourceListByParent<
     PortalRevisionContract,

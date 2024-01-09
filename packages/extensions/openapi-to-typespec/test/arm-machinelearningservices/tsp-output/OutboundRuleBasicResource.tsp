@@ -25,10 +25,13 @@ model OutboundRuleBasicResource is ProxyResource<OutboundRule> {
 interface OutboundRuleBasicResources_ManagedNetworkSettingsRule {
   @doc("Gets an outbound rule from the managed network of a machine learning workspace.")
   get is ArmResourceRead<OutboundRuleBasicResource>;
+
   @doc("Creates or updates an outbound rule in the managed network of a machine learning workspace.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OutboundRuleBasicResource>;
+
   @doc("Deletes an outbound rule from the managed network of a machine learning workspace.")
   delete is ArmResourceDeleteAsync<OutboundRuleBasicResource>;
+
   @doc("Lists the managed network outbound rules for a machine learning workspace.")
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }

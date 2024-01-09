@@ -36,6 +36,7 @@ interface DnsRecords_RecordSets {
       recordType: RecordType;
     }
   >;
+
   @doc("Creates or updates a record set within a DNS zone.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsRecord,
@@ -55,6 +56,7 @@ interface DnsRecords_RecordSets {
       IfNoneMatch?: string;
     }
   >;
+
   @doc("Updates a record set within a DNS zone.")
   update is ArmCustomPatchSync<
     DnsRecord,
@@ -71,6 +73,7 @@ interface DnsRecords_RecordSets {
       IfMatch?: string;
     }
   >;
+
   @doc("Deletes a record set from a DNS zone. This operation cannot be undone.")
   delete is ArmResourceDeleteSync<
     DnsRecord,
@@ -86,6 +89,7 @@ interface DnsRecords_RecordSets {
       IfMatch?: string;
     }
   >;
+
   @doc("Lists the record sets of a specified type in a DNS zone.")
   listByType is ArmResourceListByParent<
     DnsRecord,

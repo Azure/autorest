@@ -26,16 +26,22 @@ model Registry is TrackedResource<RegistryProperties> {
 interface Registries {
   @doc("Get registry")
   get is ArmResourceRead<Registry>;
+
   @doc("Create or update registry")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Registry>;
+
   @doc("Update tags")
   update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
+
   @doc("Delete registry")
   delete is ArmResourceDeleteAsync<Registry>;
+
   @doc("List registries")
   list is ArmResourceListByParent<Registry>;
+
   @doc("List registries by subscription")
   listBySubscription is ArmListBySubscription<Registry>;
+
   @doc("Remove regions from registry")
   removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }

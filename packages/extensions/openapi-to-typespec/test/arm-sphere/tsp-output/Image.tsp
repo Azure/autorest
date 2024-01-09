@@ -23,10 +23,13 @@ model Image is ProxyResource<ImageProperties> {
 interface Images {
   @doc("Get a Image")
   get is ArmResourceRead<Image>;
+
   @doc("Create a Image")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
+
   @doc("Delete a Image")
   delete is ArmResourceDeleteAsync<Image>;
+
   @doc("List Image resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Image,

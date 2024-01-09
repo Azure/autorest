@@ -25,10 +25,13 @@ model ComponentContainerResource is ProxyResource<ComponentContainer> {
 interface ComponentContainerResources_RegistryComponentContainers {
   @doc("Get container.")
   get is ArmResourceRead<ComponentContainerResource>;
+
   @doc("Create or update container.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentContainerResource>;
+
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<ComponentContainerResource>;
+
   @doc("List containers.")
   list is ArmResourceListByParent<
     ComponentContainerResource,

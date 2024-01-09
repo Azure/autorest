@@ -27,15 +27,19 @@ model TagContract is ProxyResource<TagContractProperties> {
 interface TagContracts_Tag {
   @doc("Get tag associated with the Operation.")
   getByOperation is ArmResourceRead<TagContract>;
+
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @head
   getEntityStateByOperation(
     ...ResourceInstanceParameters<TagContract, BaseParameters<TagContract>>,
   ): OkResponse | ErrorResponse;
+
   @doc("Assign tag to the Operation.")
   assignToOperation is ArmResourceCreateOrReplaceSync<TagContract>;
+
   @doc("Detach the tag from the Operation.")
   detachFromOperation is ArmResourceDeleteSync<TagContract>;
+
   @doc("Lists all Tags associated with the Operation.")
   listByOperation is ArmResourceListByParent<
     TagContract,

@@ -24,6 +24,7 @@ model NotificationContract is ProxyResource<NotificationContractProperties> {
 interface NotificationContracts_Notification {
   @doc("Gets the details of the Notification specified by its identifier.")
   get is ArmResourceRead<NotificationContract>;
+
   @doc("Create or Update API Management publisher notification.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
@@ -35,6 +36,7 @@ interface NotificationContracts_Notification {
       `If-Match`?: string;
     }
   >;
+
   @doc("Lists a collection of properties defined within a service instance.")
   listByService is ArmResourceListByParent<
     NotificationContract,

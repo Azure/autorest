@@ -43,7 +43,7 @@ enum FillNAMethod {
   Fixed,
   NotFill,
 }
-@Azure.Core.fixed
+@fixed
 enum TimeGranularity {
   yearly,
   monthly,
@@ -55,24 +55,24 @@ enum TimeGranularity {
   microsecond,
   none,
 }
-@Azure.Core.fixed
+@fixed
 enum DetectionStatus {
   CREATED,
   RUNNING,
   READY,
   FAILED,
 }
-@Azure.Core.fixed
+@fixed
 enum DataSchema {
   OneTable,
   MultiTable,
 }
-@Azure.Core.fixed
+@fixed
 enum AlignMode {
   Inner,
   Outer,
 }
-@Azure.Core.fixed
+@fixed
 enum ModelStatus {
   CREATED,
   RUNNING,
