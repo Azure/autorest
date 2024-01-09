@@ -676,7 +676,11 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
   parameter.decorators.push(
     {
       name: "key",
-      arguments: [schema.resourceMetadata.IsSingletonResource ? singular(schema.resourceMetadata.ResourceKeySegment) : schema.resourceMetadata.ResourceKey],
+      arguments: [
+        schema.resourceMetadata.IsSingletonResource
+          ? singular(schema.resourceMetadata.ResourceKeySegment)
+          : schema.resourceMetadata.ResourceKey,
+      ],
     },
     {
       name: "segment",
