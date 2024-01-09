@@ -1,10 +1,4 @@
-import {
-  Operation,
-  Parameter,
-  Response,
-  SchemaResponse,
-  SchemaType,
-} from "@autorest/codemodel";
+import { Operation, Parameter, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import { singular } from "pluralize";
 import { getSession } from "../autorest-session";

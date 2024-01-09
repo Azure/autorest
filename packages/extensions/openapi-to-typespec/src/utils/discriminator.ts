@@ -13,7 +13,7 @@ export function getDiscriminator(schema: ObjectSchema): TypespecObjectProperty |
   const discriminator = getDiscriminatorProperty(schema);
   if (!discriminator) {
     const logger = getLogger("getDiscriminator");
-    logger.warning(`No discriminator property found for ${schema.language.default.name}`)
+    logger.warning(`No discriminator property found for ${schema.language.default.name}`);
     return undefined;
   }
   const { serializedName: name, language } = discriminator;
