@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "recordType": "SOA",
+    "relativeRecordSetName": "@",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "@",
+        "type": "Microsoft.Network/dnsZones/SOA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
+        "properties": {
+          "SOARecord": {
+            "email": "hostmaster.contoso.com",
+            "expireTime": 2419200,
+            "host": "ns1.contoso.com",
+            "minimumTTL": 300,
+            "refreshTime": 3600,
+            "retryTime": 300,
+            "serialNumber": 1
+          },
+          "TTL": 3600,
+          "fqdn": "zone1",
+          "metadata": {
+            "key1": "value1"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Get",
+  "title": "Get SOA recordset"
+}

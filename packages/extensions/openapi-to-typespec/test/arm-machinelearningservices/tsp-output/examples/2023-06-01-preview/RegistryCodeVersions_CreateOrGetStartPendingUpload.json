@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "pendingUploadId": "string",
+      "pendingUploadType": "None"
+    },
+    "codeName": "string",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "blobReferenceForConsumption": {
+          "blobUri": "https://www.contoso.com/example",
+          "credential": {
+            "credentialType": "SAS",
+            "sasUri": "https://www.contoso.com/example"
+          },
+          "storageAccountArmId": "string"
+        },
+        "pendingUploadId": "string",
+        "pendingUploadType": "None"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryCodeVersions_CreateOrGetStartPendingUpload",
+  "title": "CreateOrGetStartPendingUpload Registry Code Version."
+}

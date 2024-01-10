@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "RegistryDataContainers_Delete",
+  "title": "Delete Registry Data Container."
+}

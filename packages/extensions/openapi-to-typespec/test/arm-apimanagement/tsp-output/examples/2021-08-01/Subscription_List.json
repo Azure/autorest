@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "5600b59475ff190048070001",
+            "type": "Microsoft.ApiManagement/service/subscriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/5600b59475ff190048070001",
+            "properties": {
+              "createdDate": "2015-09-22T01:57:40.3Z",
+              "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1",
+              "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060001",
+              "state": "active"
+            }
+          },
+          {
+            "name": "56eaed3dbaf08b06e46d27fe",
+            "type": "Microsoft.ApiManagement/service/subscriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/56eaed3dbaf08b06e46d27fe",
+            "properties": {
+              "createdDate": "2016-03-17T17:45:33.837Z",
+              "displayName": "Starter",
+              "expirationDate": "2016-04-01T00:00:00Z",
+              "notificationDate": "2016-03-20T00:00:00Z",
+              "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/56eaec62baf08b06e46d27fd",
+              "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060001",
+              "startDate": "2016-03-17T00:00:00Z",
+              "state": "active"
+            }
+          },
+          {
+            "name": "5931a769d8d14f0ad8ce13b8",
+            "type": "Microsoft.ApiManagement/service/subscriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/5931a769d8d14f0ad8ce13b8",
+            "properties": {
+              "createdDate": "2017-06-02T17:59:06.223Z",
+              "displayName": "Unlimited",
+              "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b",
+              "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002",
+              "state": "submitted"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Subscription_List",
+  "title": "ApiManagementListSubscriptions"
+}

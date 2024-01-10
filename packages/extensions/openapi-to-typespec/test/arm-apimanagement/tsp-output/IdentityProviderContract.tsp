@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Identity Provider details.")
@@ -15,19 +17,23 @@ namespace Azure.ResourceManager.ApiManagement;
 model IdentityProviderContract
   is ProxyResource<IdentityProviderContractProperties> {
   @doc("Identity Provider Type identifier.")
+  @path
   @key("identityProviderName")
   @segment("identityProviders")
   name: IdentityProviderType;
 }
 
 @armResourceOperations
-@projectedName("client", "IdentityProvider")
-interface IdentityProviderContracts_IdentityProvider {
+interface IdentityProviderContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the configuration details of the identity Provider configured in specified service instance.")
+  @operationId("IdentityProvider_Get")
   get is ArmResourceRead<IdentityProviderContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the identityProvider specified by its identifier.")
   @head
+  @operationId("IdentityProvider_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IdentityProviderContract,
@@ -35,7 +41,9 @@ interface IdentityProviderContracts_IdentityProvider {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates the IdentityProvider configuration.")
+  @operationId("IdentityProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     {
@@ -47,7 +55,9 @@ interface IdentityProviderContracts_IdentityProvider {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing IdentityProvider configuration.")
+  @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
     IdentityProviderUpdateParameters,
@@ -60,7 +70,9 @@ interface IdentityProviderContracts_IdentityProvider {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified identity provider configuration.")
+  @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     {
@@ -72,10 +84,14 @@ interface IdentityProviderContracts_IdentityProvider {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of Identity Provider configured in the specified service instance.")
+  @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<IdentityProviderContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the client secret details of the Identity Provider.")
+  @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
     void,

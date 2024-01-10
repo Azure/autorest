@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "sharingUpdate": {
+      "operationType": "Reset"
+    },
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationType": "Reset"
+      }
+    },
+    "202": {
+      "body": {
+        "operationType": "Reset"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2022-03-03"
+      }
+    }
+  },
+  "operationId": "GallerySharingProfile_Update",
+  "title": "reset sharing profile of a gallery."
+}

@@ -1,0 +1,229 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "overprovision": true,
+        "upgradePolicy": {
+          "automaticOSUpgradePolicy": {
+            "enableAutomaticOSUpgrade": true
+          },
+          "mode": "Automatic"
+        },
+        "virtualMachineProfile": {
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        }
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminPassword": "{your-password}",
+            "adminUsername": "{your-username}",
+            "computerNamePrefix": "{vmss-name}"
+          },
+          "securityPostureReference": {
+            "id": "/CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2022-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "osDisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage"
+            }
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_A1",
+        "capacity": 3,
+        "tier": "Standard"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "{vmss-name}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "eastus2euap",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Creating",
+          "singlePlacementGroup": true,
+          "uniqueId": "d12ccb3d-ab15-4794-9836-c4196392e9f2",
+          "upgradePolicy": {
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": true
+            },
+            "mode": "Automatic"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "securityPostureReference": {
+              "id": "/CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2022-Datacenter",
+                "version": "latest"
+              },
+              "osDisk": {
+                "name": "osDisk",
+                "caching": "ReadWrite",
+                "createOption": "FromImage"
+              }
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_A1",
+          "capacity": 3,
+          "tier": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "eastus2euap",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Creating",
+          "singlePlacementGroup": true,
+          "uniqueId": "d12ccb3d-ab15-4794-9836-c4196392e9f2",
+          "upgradePolicy": {
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": true
+            },
+            "mode": "Automatic"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "securityPostureReference": {
+              "id": "/CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2022-Datacenter",
+                "version": "latest"
+              },
+              "osDisk": {
+                "name": "osDisk",
+                "caching": "ReadWrite",
+                "createOption": "FromImage"
+              }
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_A1",
+          "capacity": 3,
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "title": "Create a scale set with Security Posture Reference"
+}

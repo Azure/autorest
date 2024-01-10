@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine.")
 model VirtualMachine is TrackedResource<VirtualMachineProperties> {
   @doc("The name of the virtual machine.")
+  @path
   @key("vmName")
   @segment("virtualMachines")
   name: string;
@@ -99,7 +102,9 @@ interface VirtualMachines {
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
-    VirtualMachineCaptureResult
+    VirtualMachineCaptureResult,
+    BaseParameters<VirtualMachine>,
+    ArmLroLocationHeader
   >;
 
   @doc("Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.")
@@ -179,21 +184,27 @@ interface VirtualMachines {
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    VirtualMachineAssessPatchesResult
+    VirtualMachineAssessPatchesResult,
+    BaseParameters<VirtualMachine>,
+    ArmLroLocationHeader
   >;
 
   @doc("Installs patches on the VM.")
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult
+    VirtualMachineInstallPatchesResult,
+    BaseParameters<VirtualMachine>,
+    ArmLroLocationHeader
   >;
 
   @doc("Run command on the VM.")
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    RunCommandResult
+    RunCommandResult,
+    BaseParameters<VirtualMachine>,
+    ArmLroLocationHeader
   >;
 
   @doc("Retrieves information about the run-time state of a virtual machine.")

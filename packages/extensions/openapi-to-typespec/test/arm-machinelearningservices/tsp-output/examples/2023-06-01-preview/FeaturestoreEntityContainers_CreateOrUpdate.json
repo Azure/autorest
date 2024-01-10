@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "isArchived": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "isArchived": false,
+          "latestVersion": "string",
+          "nextVersion": "string",
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:38",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:38",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "isArchived": false,
+          "latestVersion": "string",
+          "nextVersion": "string",
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:38",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:38",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturestoreEntityContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Featurestore Entity Container."
+}

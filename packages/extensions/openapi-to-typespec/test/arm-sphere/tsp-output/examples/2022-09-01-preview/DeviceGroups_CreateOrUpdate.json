@@ -1,0 +1,46 @@
+{
+  "operationId": "DeviceGroups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "deviceGroupName": "MyDeviceGroup1",
+    "productName": "MyProduct1",
+    "resource": {
+      "properties": {
+        "description": "Description for MyDeviceGroup1",
+        "osFeedType": "Retail",
+        "updatePolicy": "UpdateAll"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "DeviceGroups_CreateOrUpdate",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "type": "microsoft.AzureSphere/catalogs/products/devicegroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/devicegroups/MyDeviceGroup1",
+        "properties": {
+          "description": "Description of MyDeviceGroup1",
+          "osFeedType": "Retail",
+          "updatePolicy": "UpdateAll"
+        }
+      }
+    },
+    "201": {
+      "description": "ARM create operation completed successfully.",
+      "body": {
+        "name": "MyDeviceId1",
+        "type": "Microsoft.AzureSphere/catalogs/products/deviceGroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/myProduct1/deviceGroups/myDeviceGroup1",
+        "properties": {
+          "description": "Description of MyDeviceGroup1",
+          "osFeedType": "Retail",
+          "updatePolicy": "UpdateAll"
+        }
+      }
+    }
+  }
+}

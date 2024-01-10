@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}",
+    "username": "user1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sharedKey": "<REDACTED>",
+        "sshAuthorizedKeys": [
+          {
+            "description": "key name",
+            "key": "ssh-rsa keykeykeykeykew="
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LocalUsers_ListKeys",
+  "title": "ListLocalUserKeys"
+}

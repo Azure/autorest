@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "57127d485157a511ace86ae7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": "https://apimService1.portal.azure-api.net/signin-sso?token=57127d485157a511ace86ae7%26201706051624%267VY18MlwAom***********2bYr2bDQHg21OzQsNakExQ%3d%3d"
+      }
+    }
+  },
+  "operationId": "User_GenerateSsoUrl",
+  "title": "ApiManagementUserGenerateSsoUrl"
+}

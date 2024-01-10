@@ -22,13 +22,13 @@ param(
     $csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
     [string]
     # Specified the converter codegen, default to https://aka.ms/azsdk/openapi-to-typespec.
-    $converterCodegen = "https://aka.ms/azsdk/openapi-to-typespec"
+    $converterCodegen = "."
 )
 
 function GenerateMetadata ()
 {
     Write-Host "##Generating metadata with csharp codegen in $outputFolder with $csharpCodegen"
-    $cmd = "autorest --csharp --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
+    $cmd = "autorest --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
@@ -42,7 +42,7 @@ function GenerateMetadata ()
 function DoConvert ()
 {
     Write-Host "##Converting from swagger to tsp with in $outputFolder with $converterCodegen"
-    $cmd = "autorest --openapi-to-typespec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder --src-path=tsp-output $swaggerConfigFile"
+    $cmd = "autorest --openapi-to-typespec --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder --src-path=tsp-output $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }

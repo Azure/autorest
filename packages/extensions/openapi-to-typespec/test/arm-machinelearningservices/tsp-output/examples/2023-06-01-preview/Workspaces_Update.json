@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "new description",
+        "friendlyName": "New friendly name",
+        "publicNetworkAccess": "Disabled"
+      }
+    },
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testworkspace",
+        "type": "Microsoft.MachineLearningServices/workspaces",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444"
+        },
+        "location": "eastus2euap",
+        "properties": {
+          "description": "new description",
+          "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
+          "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
+          "discoveryUrl": "http://example.com",
+          "friendlyName": "New friendly name",
+          "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+          "publicNetworkAccess": "Disabled",
+          "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "Workspaces_Update",
+  "title": "Update Workspace"
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "productId": "5600b57e7e8880006a060002",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "5600b57e7e8880006a020001",
+            "type": "Microsoft.ApiManagement/service/products/groups",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b57e7e8880006a060002/groups/5600b57e7e8880006a020001",
+            "properties": {
+              "type": "system",
+              "description": "Administrators is a built-in group. Its membership is managed by the system. Microsoft Azure subscription administrators fall into this group.",
+              "builtIn": true,
+              "displayName": "Administrators"
+            }
+          },
+          {
+            "name": "5600b57e7e8880006a020002",
+            "type": "Microsoft.ApiManagement/service/products/groups",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b57e7e8880006a060002/groups/5600b57e7e8880006a020002",
+            "properties": {
+              "type": "system",
+              "description": "Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.",
+              "builtIn": true,
+              "displayName": "Developers"
+            }
+          },
+          {
+            "name": "5600b57e7e8880006a020003",
+            "type": "Microsoft.ApiManagement/service/products/groups",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b57e7e8880006a060002/groups/5600b57e7e8880006a020003",
+            "properties": {
+              "type": "system",
+              "description": "Guests is a built-in group. Its membership is managed by the system. Unauthenticated users visiting the developer portal fall into this group.",
+              "builtIn": true,
+              "displayName": "Guests"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProductGroup_ListByProduct",
+  "title": "ApiManagementListProductGroups"
+}

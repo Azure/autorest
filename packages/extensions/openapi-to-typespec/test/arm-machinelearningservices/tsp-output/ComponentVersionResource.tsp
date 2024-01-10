@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ComponentContainerResource.tsp";
@@ -8,30 +9,43 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(ComponentContainerResource)
 model ComponentVersionResource is ProxyResource<ComponentVersion> {
   @doc("Version identifier.")
+  @path
   @key("version")
   @segment("versions")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "RegistryComponentVersions")
-interface ComponentVersionResources_RegistryComponentVersions {
+interface ComponentVersionResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get version.")
+  @operationId("RegistryComponentVersions_Get")
   get is ArmResourceRead<ComponentVersionResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
+  @operationId("RegistryComponentVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentVersionResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")
-  delete is ArmResourceDeleteAsync<ComponentVersionResource>;
+  @operationId("RegistryComponentVersions_Delete")
+  delete is ArmResourceDeleteAsync<
+    ComponentVersionResource,
+    BaseParameters<ComponentVersionResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List versions.")
+  @operationId("RegistryComponentVersions_List")
   list is ArmResourceListByParent<
     ComponentVersionResource,
     {

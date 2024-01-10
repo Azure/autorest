@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./OnlineEndpointTrackedResource.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(OnlineEndpointTrackedResource)
 model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
   @doc("Inference Endpoint Deployment name.")
+  @path
   @key("deploymentName")
   @segment("deployments")
   name: string;
@@ -24,24 +27,37 @@ model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
 }
 
 @armResourceOperations
-@projectedName("client", "OnlineDeployments")
-interface OnlineDeploymentTrackedResources_OnlineDeployments {
+interface OnlineDeploymentTrackedResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Inference Deployment Deployment.")
+  @operationId("OnlineDeployments_Get")
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update Inference Endpoint Deployment (asynchronous).")
+  @operationId("OnlineDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineDeploymentTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Deployment (asynchronous).")
+  @operationId("OnlineDeployments_Update")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
     PartialMinimalTrackedResourceWithSku
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete Inference Endpoint Deployment (asynchronous).")
-  delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
+  @operationId("OnlineDeployments_Delete")
+  delete is ArmResourceDeleteAsync<
+    OnlineDeploymentTrackedResource,
+    BaseParameters<OnlineDeploymentTrackedResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Inference Endpoint Deployments.")
+  @operationId("OnlineDeployments_List")
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
     {
@@ -61,13 +77,17 @@ interface OnlineDeploymentTrackedResources_OnlineDeployments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Polls an Endpoint operation.")
+  @operationId("OnlineDeployments_GetLogs")
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
     DeploymentLogsRequest,
     DeploymentLogs
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OnlineDeployments_ListSkus")
   @summary("List Inference Endpoint Deployment Skus.")
   @doc("List Inference Endpoint Deployment Skus.")
   // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation

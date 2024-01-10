@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+            "osState": "Generalized",
+            "osType": "Linux",
+            "snapshot": {
+              "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+            }
+          },
+          "zoneResilient": false
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              }
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              }
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_CreateOrUpdate",
+  "title": "Create a virtual machine image from a snapshot."
+}

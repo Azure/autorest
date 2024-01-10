@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "operationId": "newoperations",
+    "api-version": "2021-08-01",
+    "apiId": "PetStoreTemplate2",
+    "parameters": {
+      "properties": {
+        "method": "POST",
+        "description": "This can only be done by the logged in user.",
+        "displayName": "createUser2",
+        "templateParameters": [],
+        "urlTemplate": "/user1",
+        "request": {
+          "description": "Created user object",
+          "headers": [],
+          "queryParameters": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "schemaId": "592f6c1d0af5840ca8897f0c",
+              "typeName": "User"
+            }
+          ]
+        },
+        "responses": [
+          {
+            "description": "successful operation",
+            "headers": [],
+            "representations": [
+              {
+                "contentType": "application/xml"
+              },
+              {
+                "contentType": "application/json"
+              }
+            ],
+            "statusCode": 200
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "newoperations",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/PetStoreTemplate2/operations/newoperations",
+        "properties": {
+          "method": "POST",
+          "description": "This can only be done by the logged in user.",
+          "displayName": "createUser2",
+          "templateParameters": [],
+          "urlTemplate": "/user1",
+          "request": {
+            "description": "Created user object",
+            "headers": [],
+            "queryParameters": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "592f6c1d0af5840ca8897f0c",
+                "typeName": "User"
+              }
+            ]
+          },
+          "responses": [
+            {
+              "description": "successful operation",
+              "headers": [],
+              "representations": [
+                {
+                  "contentType": "application/xml"
+                },
+                {
+                  "contentType": "application/json"
+                }
+              ],
+              "statusCode": 200
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "newoperations",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/PetStoreTemplate2/operations/newoperations",
+        "properties": {
+          "method": "POST",
+          "description": "This can only be done by the logged in user.",
+          "displayName": "createUser2",
+          "templateParameters": [],
+          "urlTemplate": "/user1",
+          "request": {
+            "description": "Created user object",
+            "headers": [],
+            "queryParameters": [],
+            "representations": [
+              {
+                "contentType": "application/json",
+                "schemaId": "592f6c1d0af5840ca8897f0c",
+                "typeName": "User"
+              }
+            ]
+          },
+          "responses": [
+            {
+              "description": "successful operation",
+              "headers": [],
+              "representations": [
+                {
+                  "contentType": "application/xml"
+                },
+                {
+                  "contentType": "application/json"
+                }
+              ],
+              "statusCode": 200
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ApiOperation_CreateOrUpdate",
+  "title": "ApiManagementCreateApiOperation"
+}

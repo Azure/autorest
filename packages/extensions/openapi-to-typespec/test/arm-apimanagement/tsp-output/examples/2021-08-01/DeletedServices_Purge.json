@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "location": "westus",
+    "serviceName": "apimService3",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "name": "apimService3",
+        "type": "Microsoft.ApiManagement/deletedservices",
+        "id": "/subscriptions/subid/providers/Microsoft.ApiManagement/locations/westus/deletedservices/apimService3",
+        "location": "West US",
+        "properties": {
+          "deletionDate": "2017-05-27T15:33:55.5426123Z",
+          "scheduledPurgeDate": "2017-05-27T15:33:55.5426123Z",
+          "serviceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService3"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/locations/westus/deletedservices/apimService3/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2021-08-01"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "DeletedServices_Purge",
+  "title": "ApiManagementDeletedServicesPurge"
+}

@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "type": "aa",
+    "api-version": "2023-07-01",
+    "location": "aaaaaaaaaaaaaa",
+    "publisherName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}",
+    "version": "aaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaa",
+        "location": "aaaaaaaaaaaaa"
+      }
+    }
+  },
+  "operationId": "VirtualMachineExtensionImages_Get",
+  "title": "VirtualMachineExtensionImage_Get_MinimumSet_Gen"
+}

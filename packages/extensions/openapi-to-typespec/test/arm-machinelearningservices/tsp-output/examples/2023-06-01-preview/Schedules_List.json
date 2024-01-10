@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "action": {
+                "actionType": "InvokeBatchEndpoint",
+                "endpointInvocationDefinition": {
+                  "00cd1396-a094-4d48-8d86-14c43a55a6af": null
+                }
+              },
+              "displayName": "string",
+              "isEnabled": false,
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Deleting",
+              "tags": {
+                "string": "string"
+              },
+              "trigger": {
+                "endTime": "string",
+                "expression": "string",
+                "startTime": "string",
+                "timeZone": "string",
+                "triggerType": "Cron"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "Key",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Schedules_List",
+  "title": "List Schedules."
+}

@@ -1,0 +1,47 @@
+{
+  "operationId": "Accounts_Update",
+  "parameters": {
+    "name": "myPlaywrightAccount",
+    "api-version": "2023-10-01-preview",
+    "properties": {
+      "properties": {
+        "regionalAffinity": "Enabled"
+      },
+      "tags": {
+        "Division": "LT",
+        "Team": "Dev Exp"
+      }
+    },
+    "resourceGroupName": "dummyrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Accounts_Update",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPlaywrightAccount",
+        "type": "Microsoft.AzurePlaywrightService/accounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.AzurePlaywrightService/accounts/myPlaywrightAccount",
+        "location": "westus",
+        "properties": {
+          "dashboardUri": "https://dashboard.00000000-0000-0000-0000-000000000000.domain.com",
+          "provisioningState": "Succeeded",
+          "regionalAffinity": "Enabled",
+          "reporting": "Enabled",
+          "scalableExecution": "Enabled"
+        },
+        "systemData": {
+          "createdAt": "2021-09-28T12:32:33Z",
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Team": "Dev Exp"
+        }
+      }
+    }
+  }
+}

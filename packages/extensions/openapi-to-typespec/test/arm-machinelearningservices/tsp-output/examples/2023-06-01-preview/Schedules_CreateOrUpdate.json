@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "action": {
+          "actionType": "InvokeBatchEndpoint",
+          "endpointInvocationDefinition": {
+            "9965593e-526f-4b89-bb36-761138cf2794": null
+          }
+        },
+        "displayName": "string",
+        "isEnabled": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        },
+        "trigger": {
+          "endTime": "string",
+          "expression": "string",
+          "startTime": "string",
+          "timeZone": "string",
+          "triggerType": "Cron"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "action": {
+            "actionType": "InvokeBatchEndpoint",
+            "endpointInvocationDefinition": {
+              "d77a9a9a-4bb5-4c0c-8a77-459be8b82b9f": null
+            }
+          },
+          "displayName": "string",
+          "isEnabled": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Succeeded",
+          "tags": {
+            "string": "string"
+          },
+          "trigger": {
+            "endTime": "string",
+            "expression": "string",
+            "startTime": "string",
+            "timeZone": "string",
+            "triggerType": "Cron"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "action": {
+            "actionType": "InvokeBatchEndpoint",
+            "endpointInvocationDefinition": {
+              "13ea51e0-ff28-49c3-a85d-9b5199eb14e5": null
+            }
+          },
+          "displayName": "string",
+          "isEnabled": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Failed",
+          "tags": {
+            "string": "string"
+          },
+          "trigger": {
+            "endTime": "string",
+            "expression": "string",
+            "startTime": "string",
+            "timeZone": "string",
+            "triggerType": "Cron"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Schedules_CreateOrUpdate",
+  "title": "CreateOrUpdate Schedule."
+}

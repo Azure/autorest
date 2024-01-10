@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01",
+    "location": "West US",
+    "serverParameters": {
+      "name": "azsdktest",
+      "type": "Microsoft.AnalysisServices/servers"
+    },
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": true
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Servers_CheckNameAvailability",
+  "title": "Get details of a server"
+}

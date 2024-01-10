@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "versionSetId": "a1"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "ApiVersionSet_Delete",
+  "title": "ApiManagementDeleteApiVersionSet"
+}

@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "schema1",
+            "type": "Microsoft.ApiManagement/service/schemas",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+            "properties": {
+              "description": "sample schema description",
+              "schemaType": "xml",
+              "value": "<xsd:schema xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\n           xmlns:tns=\"http://tempuri.org/PurchaseOrderSchema.xsd\"\r\n           targetNamespace=\"http://tempuri.org/PurchaseOrderSchema.xsd\"\r\n           elementFormDefault=\"qualified\">\r\n <xsd:element name=\"PurchaseOrder\" type=\"tns:PurchaseOrderType\"/>\r\n <xsd:complexType name=\"PurchaseOrderType\">\r\n  <xsd:sequence>\r\n   <xsd:element name=\"ShipTo\" type=\"tns:USAddress\" maxOccurs=\"2\"/>\r\n   <xsd:element name=\"BillTo\" type=\"tns:USAddress\"/>\r\n  </xsd:sequence>\r\n  <xsd:attribute name=\"OrderDate\" type=\"xsd:date\"/>\r\n </xsd:complexType>\r\n\r\n <xsd:complexType name=\"USAddress\">\r\n  <xsd:sequence>\r\n   <xsd:element name=\"name\"   type=\"xsd:string\"/>\r\n   <xsd:element name=\"street\" type=\"xsd:string\"/>\r\n   <xsd:element name=\"city\"   type=\"xsd:string\"/>\r\n   <xsd:element name=\"state\"  type=\"xsd:string\"/>\r\n   <xsd:element name=\"zip\"    type=\"xsd:integer\"/>\r\n  </xsd:sequence>\r\n  <xsd:attribute name=\"country\" type=\"xsd:NMTOKEN\" fixed=\"US\"/>\r\n </xsd:complexType>\r\n</xsd:schema>"
+            }
+          },
+          {
+            "name": "schema2",
+            "type": "Microsoft.ApiManagement/service/schemas",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema2",
+            "properties": {
+              "description": "sample schema description",
+              "document": {
+                "type": "object",
+                "$id": "https://example.com/person.schema.json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "properties": {
+                  "age": {
+                    "type": "integer",
+                    "description": "Age in years which must be equal to or greater than zero.",
+                    "minimum": 0
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "description": "The person's first name."
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "The person's last name."
+                  }
+                },
+                "title": "Person"
+              },
+              "schemaType": "json"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GlobalSchema_ListByService",
+  "title": "ApiManagementListSchemas"
+}

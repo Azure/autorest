@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "properties": {
+        "networkAccessPolicy": "AllowAll"
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "networkAccessPolicy": "AllowAll",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "networkAccessPolicy": "AllowAll",
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update managed disk to remove disk access resource association."
+}

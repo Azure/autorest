@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,33 +9,48 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(Workspace)
 model JobBaseResource is ProxyResource<JobBase> {
   @doc("The name and identifier for the Job. This is case-sensitive.")
+  @path
   @key("id")
   @segment("jobs")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "Jobs")
-interface JobBaseResources_Jobs {
+interface JobBaseResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a Job by name/id.")
+  @operationId("Jobs_Get")
   get is ArmResourceRead<JobBaseResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates and executes a Job.")
+  @operationId("Jobs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a Job.")
+  @operationId("Jobs_Update")
   update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes a Job (asynchronous).")
-  delete is ArmResourceDeleteAsync<JobBaseResource>;
+  @operationId("Jobs_Delete")
+  delete is ArmResourceDeleteAsync<
+    JobBaseResource,
+    BaseParameters<JobBaseResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists Jobs in the workspace.")
+  @operationId("Jobs_List")
   list is ArmResourceListByParent<
     JobBaseResource,
     {
@@ -70,6 +86,14 @@ interface JobBaseResources_Jobs {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Cancels a Job (asynchronous).")
-  cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
+  @operationId("Jobs_Cancel")
+  cancel is ArmResourceActionAsync<
+    JobBaseResource,
+    void,
+    void,
+    BaseParameters<JobBaseResource>,
+    ArmLroLocationHeader
+  >;
 }

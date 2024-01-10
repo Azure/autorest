@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "$top": 1,
+    "api-version": "2023-07-01",
+    "monitor": "true",
+    "parameters": {
+      "commandId": "RunPowerShellScript"
+    },
+    "resourceGroupName": "crptestar98131",
+    "subscriptionId": "24fb23e3-6ba3-41f0-9b6e-e41131d5d61e",
+    "vmName": "vm3036"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "code": "ComponentStatus/StdOut/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": "This is a sample script with parameters value1 value2"
+          },
+          {
+            "code": "ComponentStatus/StdErr/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": ""
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_RunCommand",
+  "title": "VirtualMachineRunCommand"
+}

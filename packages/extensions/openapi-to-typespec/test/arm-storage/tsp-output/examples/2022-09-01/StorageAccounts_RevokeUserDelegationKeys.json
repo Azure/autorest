@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "accountName": "sto3539",
+    "api-version": "2022-09-01",
+    "resourceGroupName": "res4167",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "StorageAccounts_RevokeUserDelegationKeys",
+  "title": "StorageAccountRevokeUserDelegationKeys"
+}

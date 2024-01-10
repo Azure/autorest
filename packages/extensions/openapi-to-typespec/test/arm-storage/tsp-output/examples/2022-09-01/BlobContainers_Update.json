@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "blobContainer": {
+      "properties": {
+        "metadata": {
+          "metadata": "true"
+        },
+        "publicAccess": "Container"
+      }
+    },
+    "containerName": "container6185",
+    "monitor": "true",
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "container6185",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185",
+        "properties": {
+          "hasImmutabilityPolicy": false,
+          "hasLegalHold": false,
+          "metadata": {
+            "metadata": "true"
+          },
+          "publicAccess": "Container"
+        }
+      }
+    }
+  },
+  "operationId": "BlobContainers_Update",
+  "title": "UpdateContainers"
+}

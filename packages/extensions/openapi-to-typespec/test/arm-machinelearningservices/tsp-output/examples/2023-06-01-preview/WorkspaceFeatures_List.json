@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "description": "Create, edit or delete AutoML experiments in the SDK",
+            "displayName": "Create edit experiments UI",
+            "id": "automatedml_createeditexperimentsui"
+          },
+          {
+            "description": "Upgrade workspace from Basic to enterprise from the UI",
+            "displayName": "Upgrade workspace UI",
+            "id": "workspace_upgradeworkspaceui"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkspaceFeatures_List",
+  "title": "List Workspace features"
+}

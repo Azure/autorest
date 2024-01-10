@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,24 +9,29 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(Workspace)
 model DatastoreResource is ProxyResource<Datastore> {
   @doc("Datastore name.")
+  @path
   @key("name")
   @segment("datastores")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "Datastores")
-interface DatastoreResources_Datastores {
+interface DatastoreResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get datastore.")
+  @operationId("Datastores_Get")
   get is ArmResourceRead<DatastoreResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update datastore.")
+  @operationId("Datastores_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
     {
@@ -37,10 +43,14 @@ interface DatastoreResources_Datastores {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete datastore.")
+  @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List datastores.")
+  @operationId("Datastores_List")
   list is ArmResourceListByParent<
     DatastoreResource,
     {
@@ -79,7 +89,9 @@ interface DatastoreResources_Datastores {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get datastore secrets.")
+  @operationId("Datastores_ListSecrets")
   listSecrets is ArmResourceActionSync<
     DatastoreResource,
     void,

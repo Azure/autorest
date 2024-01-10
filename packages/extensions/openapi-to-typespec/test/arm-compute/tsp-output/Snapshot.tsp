@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Snapshot resource.")
 model Snapshot is TrackedResource<SnapshotProperties> {
   @doc("The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.")
+  @path
   @key("snapshotName")
   @segment("snapshots")
   name: string;
@@ -44,8 +47,20 @@ interface Snapshots {
   list is ArmListBySubscription<Snapshot>;
 
   @doc("Grants access to a snapshot.")
-  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+  grantAccess is ArmResourceActionAsync<
+    Snapshot,
+    GrantAccessData,
+    AccessUri,
+    BaseParameters<Snapshot>,
+    ArmLroLocationHeader
+  >;
 
   @doc("Revokes access to a snapshot.")
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  revokeAccess is ArmResourceActionAsync<
+    Snapshot,
+    void,
+    void,
+    BaseParameters<Snapshot>,
+    ArmLroLocationHeader
+  >;
 }

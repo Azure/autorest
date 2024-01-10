@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "type": "aaaaaaaaaaaaaaaaaa",
+    "api-version": "2023-07-01",
+    "location": "aaaaaaaaaaaaa",
+    "publisherName": "aaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}",
+    "version": "aaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aaaaaaaaaaaaaaa",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaa",
+        "location": "aaaaaaaaaaaaa",
+        "properties": {
+          "computeRole": "aaaaaaaaaaaaaaaaa",
+          "handlerSchema": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "operatingSystem": "aaaaaaaaaaaaaaaaaa",
+          "supportsMultipleExtensions": true,
+          "vmScaleSetEnabled": true
+        },
+        "tags": {
+          "key9885": "aaaaaaaaa"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineExtensionImages_Get",
+  "title": "VirtualMachineExtensionImage_Get_MaximumSet_Gen"
+}

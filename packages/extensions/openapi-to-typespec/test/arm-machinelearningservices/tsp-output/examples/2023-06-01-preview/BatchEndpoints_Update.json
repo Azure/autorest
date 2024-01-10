@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "tags": {}
+    },
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "authMode": "AMLToken",
+          "defaults": {
+            "deploymentName": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "scoringUri": "https://www.contoso.com/example",
+          "swaggerUri": "https://www.contoso.com/example"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "BatchEndpoints_Update",
+  "title": "Update Workspace Batch Endpoint."
+}

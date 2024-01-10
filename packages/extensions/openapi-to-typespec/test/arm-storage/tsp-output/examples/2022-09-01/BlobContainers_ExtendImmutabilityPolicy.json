@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "If-Match": "\"8d59f830d0c3bf9\"",
+    "accountName": "sto232",
+    "api-version": "2022-09-01",
+    "containerName": "container5023",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "immutabilityPeriodSinceCreationInDays": 100
+      }
+    },
+    "resourceGroupName": "res6238",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies",
+        "etag": "\"8d57a8b2ff50332\"",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6238/providers/Microsoft.Storage/storageAccounts/sto232/blobServices/default/containers/container5023/immutabilityPolicies/default",
+        "properties": {
+          "immutabilityPeriodSinceCreationInDays": 100,
+          "state": "Locked"
+        }
+      }
+    }
+  },
+  "operationId": "BlobContainers_ExtendImmutabilityPolicy",
+  "title": "ExtendImmutabilityPolicy"
+}

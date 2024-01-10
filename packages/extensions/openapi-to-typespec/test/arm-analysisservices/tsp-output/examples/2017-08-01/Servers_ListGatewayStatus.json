@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01",
+    "resourceGroupName": "TestRG",
+    "serverName": "azsdktest",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": 0
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Servers_ListGatewayStatus",
+  "title": "Get details of a server"
+}

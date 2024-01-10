@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Contract details.")
@@ -16,24 +18,30 @@ model GroupContract is ProxyResource<GroupContractProperties> {
   @doc("Group identifier. Must be unique in the current API Management service instance.")
   @maxLength(256)
   @minLength(1)
+  @path
   @key("groupId")
   @segment("groups")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "Group")
-interface GroupContracts_Group {
+interface GroupContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the group specified by its identifier.")
+  @operationId("Group_Get")
   get is ArmResourceRead<GroupContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the group specified by its identifier.")
   @head
+  @operationId("Group_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<GroupContract, BaseParameters<GroupContract>>,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates a group.")
+  @operationId("Group_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     {
@@ -45,7 +53,9 @@ interface GroupContracts_Group {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the group specified by its identifier.")
+  @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
     GroupUpdateParameters,
@@ -58,7 +68,9 @@ interface GroupContracts_Group {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific group of the API Management service instance.")
+  @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     {
@@ -70,7 +82,9 @@ interface GroupContracts_Group {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of groups defined within a service instance.")
+  @operationId("Group_ListByService")
   listByService is ArmResourceListByParent<
     GroupContract,
     {
@@ -90,11 +104,9 @@ interface GroupContracts_Group {
       $skip?: int32;
     }
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "GroupUser")
-interface GroupContracts_GroupUser {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GroupUser_List")
   @doc("Lists a collection of user entities associated with the group.")
   // FIXME: GroupUser_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")

@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}",
+    "tableName": "table6185"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "Table_Delete",
+  "title": "TableOperationDelete"
+}

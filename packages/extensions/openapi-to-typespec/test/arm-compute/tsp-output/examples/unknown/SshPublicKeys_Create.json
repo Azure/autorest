@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "publicKey": "{ssh-rsa public key}"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "sshPublicKeyName": "mySshPublicKeyName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySshPublicKeyName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
+        "location": "westus",
+        "properties": {
+          "publicKey": "{ssh-rsa public key}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mySshPublicKeyName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
+        "location": "westus",
+        "properties": {
+          "publicKey": "{ssh-rsa public key}"
+        }
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_Create",
+  "title": "Create a new SSH public key resource."
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaaaaaaaaaaa",
+        "value": [
+          {
+            "capacity": {
+              "defaultCapacity": 20,
+              "maximum": 27,
+              "minimum": 22,
+              "scaleType": "Automatic"
+            },
+            "resourceType": "aaaaaaaaaaaaaaaaa",
+            "sku": {
+              "name": "DSv3-Type1",
+              "capacity": 7,
+              "tier": "aaa"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ListSkus",
+  "title": "VirtualMachineScaleSet_ListSkus_MaximumSet_Gen"
+}

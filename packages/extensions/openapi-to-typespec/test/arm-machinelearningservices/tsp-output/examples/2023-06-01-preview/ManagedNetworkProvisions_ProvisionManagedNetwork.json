@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "includeSpark": false
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sparkReady": true,
+        "status": "Active"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+  "title": "Provision ManagedNetwork"
+}

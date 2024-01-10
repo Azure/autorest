@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("Solution resource.")
@@ -15,6 +17,7 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 model Solution is ProxyResource<SolutionProperties> {
   @doc("SolutionId for Data Manager For Agriculture Resource.")
   @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
+  @path
   @key("solutionId")
   @segment("solutions")
   name: string;

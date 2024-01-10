@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mySnapshot",
+            "type": "Microsoft.Compute/snapshots",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "Copy",
+                "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "encryptionSettingsCollection": {
+                "enabled": true,
+                "encryptionSettings": [
+                  {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    },
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    }
+                  }
+                ]
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:41:35.9278721+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "Snapshots"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Snapshots_ListByResourceGroup",
+  "title": "List all snapshots in a resource group."
+}

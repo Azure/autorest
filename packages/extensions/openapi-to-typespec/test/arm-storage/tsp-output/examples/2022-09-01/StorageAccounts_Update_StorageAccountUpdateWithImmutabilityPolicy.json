@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "accountName": "sto8596",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "immutableStorageWithVersioning": {
+          "enabled": true,
+          "immutabilityPolicy": {
+            "allowProtectedAppendWrites": true,
+            "immutabilityPeriodSinceCreationInDays": 15,
+            "state": "Locked"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto8596",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
+        "kind": "Storage",
+        "location": "eastus2(stage)",
+        "properties": {
+          "immutableStorageWithVersioning": {
+            "enabled": true,
+            "immutabilityPolicy": {
+              "allowProtectedAppendWrites": true,
+              "immutabilityPeriodSinceCreationInDays": 15,
+              "state": "Locked"
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "StorageAccounts_Update",
+  "title": "StorageAccountUpdateWithImmutabilityPolicy"
+}

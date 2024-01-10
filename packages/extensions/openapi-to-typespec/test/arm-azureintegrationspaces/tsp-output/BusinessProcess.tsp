@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Application.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("A business process under application.")
@@ -15,6 +17,7 @@ namespace Microsoft.IntegrationSpaces;
 model BusinessProcess is ProxyResource<BusinessProcessProperties> {
   @doc("The name of the business process")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
+  @path
   @key("businessProcessName")
   @segment("businessProcesses")
   name: string;

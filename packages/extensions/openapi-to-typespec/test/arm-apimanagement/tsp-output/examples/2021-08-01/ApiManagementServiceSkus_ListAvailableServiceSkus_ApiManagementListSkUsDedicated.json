@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "none"
+            },
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Developer"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 2,
+              "minimum": 1,
+              "scaleType": "manual"
+            },
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Basic"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 4,
+              "minimum": 1,
+              "scaleType": "automatic"
+            },
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Standard"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 10,
+              "minimum": 1,
+              "scaleType": "automatic"
+            },
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Premium"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "automatic"
+            },
+            "resourceType": "Microsoft.ApiManagement/service",
+            "sku": {
+              "name": "Isolated"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
+  "title": "ApiManagementListSKUs-Dedicated"
+}

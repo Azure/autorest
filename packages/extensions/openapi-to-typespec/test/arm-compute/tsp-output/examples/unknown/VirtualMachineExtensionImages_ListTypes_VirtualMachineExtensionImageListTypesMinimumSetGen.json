@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "aaaa",
+    "publisherName": "aa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "name": "aaaaaaaaaaaaaaa",
+          "id": "aaaaaaaaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaa"
+        }
+      ]
+    }
+  },
+  "operationId": "VirtualMachineExtensionImages_ListTypes",
+  "title": "VirtualMachineExtensionImage_ListTypes_MinimumSet_Gen"
+}

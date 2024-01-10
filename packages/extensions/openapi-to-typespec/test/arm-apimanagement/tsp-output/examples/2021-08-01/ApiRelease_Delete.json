@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "5a5fcc09124a7fa9b89f2f1d",
+    "releaseId": "testrev",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "ApiRelease_Delete",
+  "title": "ApiManagementDeleteApiRelease"
+}

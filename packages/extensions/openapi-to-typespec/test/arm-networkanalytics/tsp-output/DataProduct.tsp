@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
 @doc("The data product resource.")
@@ -15,6 +17,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]*$")
+  @path
   @key("dataProductName")
   @segment("dataProducts")
   name: string;
@@ -28,13 +31,26 @@ interface DataProducts {
   get is ArmResourceRead<DataProduct>;
 
   @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+  create is ArmResourceCreateOrUpdateAsync<
+    DataProduct,
+    BaseParameters<DataProduct>,
+    ArmAsyncOperationHeader
+  >;
 
   @doc("Update data product resource.")
-  update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
+  update is ArmCustomPatchAsync<
+    DataProduct,
+    DataProductUpdate,
+    BaseParameters<DataProduct>,
+    ArmLroLocationHeader
+  >;
 
   @doc("Delete data product resource.")
-  delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DataProduct,
+    BaseParameters<DataProduct>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List data products by resource group.")
   listByResourceGroup is ArmResourceListByParent<DataProduct>;

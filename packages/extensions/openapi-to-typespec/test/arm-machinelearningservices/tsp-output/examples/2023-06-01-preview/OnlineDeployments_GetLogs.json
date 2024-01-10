@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "containerType": "StorageInitializer",
+      "tail": 0
+    },
+    "deploymentName": "testDeployment",
+    "endpointName": "testEndpoint",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "content": "string"
+      }
+    }
+  },
+  "operationId": "OnlineDeployments_GetLogs",
+  "title": "Get Online Deployment Logs."
+}

@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "componentSpec": {
+          "8ced901b-d826-477d-bfef-329da9672513": null
+        },
+        "isAnonymous": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "componentName": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "componentSpec": {
+            "2de2e74e-457d-4447-a581-933abc2b9d96": null
+          },
+          "isAnonymous": false,
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "componentSpec": {
+            "a6c1349d-5e45-48da-92c3-3ce176cb30e9": null
+          },
+          "isAnonymous": false,
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryComponentVersions_CreateOrUpdate",
+  "title": "CreateOrUpdate Registry Component Version."
+}

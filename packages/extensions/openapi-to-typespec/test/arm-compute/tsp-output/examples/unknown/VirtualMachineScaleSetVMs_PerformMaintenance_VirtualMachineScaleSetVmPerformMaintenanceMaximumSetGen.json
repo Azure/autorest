@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "aaaaaaaaaaaa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_PerformMaintenance",
+  "title": "VirtualMachineScaleSetVM_PerformMaintenance_MaximumSet_Gen"
+}

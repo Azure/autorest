@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "aaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Start",
+  "title": "VirtualMachine_Start_MaximumSet_Gen"
+}

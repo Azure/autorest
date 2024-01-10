@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "description": "some compute",
+        "computeType": "AKS",
+        "properties": {
+          "agentCount": 4
+        },
+        "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2"
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "description": "some compute",
+          "computeType": "AKS",
+          "properties": {
+            "agentCount": 4
+          },
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "description": "some compute",
+          "computeType": "AKS",
+          "provisioningState": "Updating",
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  },
+  "operationId": "Compute_CreateOrUpdate",
+  "title": "Update an AKS Compute"
+}

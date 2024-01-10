@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("The storage account.")
@@ -14,6 +16,7 @@ model StorageAccount is TrackedResource<StorageAccountProperties> {
   @doc("The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.")
   @maxLength(24)
   @minLength(3)
+  @path
   @key("accountName")
   @segment("storageAccounts")
   name: string;
@@ -76,14 +79,18 @@ interface StorageAccounts {
     StorageAccountListKeysResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List SAS credentials of a storage account.")
+  @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
     ListAccountSasResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List service SAS credentials of a specific resource.")
+  @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
@@ -101,7 +108,8 @@ interface StorageAccounts {
       @doc("The parameter is set to 'Planned' to indicate whether a Planned failover is requested.")
       @query("failoverType")
       failoverType?: "Planned";
-    }
+    },
+    ArmLroLocationHeader
   >;
 
   @doc("Live Migration of storage account to enable Hns")
@@ -115,30 +123,36 @@ interface StorageAccounts {
       @doc("Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.")
       @query("requestType")
       requestType: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
 
   @doc("Abort live Migration of storage account to enable Hns")
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void
+    void,
+    BaseParameters<StorageAccount>,
+    ArmLroLocationHeader
   >;
 
   @doc("Restore blobs in the specified blob ranges")
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
-    BlobRestoreStatus
+    BlobRestoreStatus,
+    BaseParameters<StorageAccount>,
+    ArmLroLocationHeader
   >;
 
   @doc("Revoke user delegation keys.")
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
-}
 
-@armResourceOperations
-@projectedName("client", "PrivateLinkResources")
-interface StorageAccounts_PrivateLinkResources {
+  @doc("Checks that the storage account name is valid and is not already in use.")
+  checkNameAvailability is checkGlobalNameAvailability;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateLinkResources_ListByStorageAccount")
   @doc("Gets the private link resources that need to be created for a storage account.")
   // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")

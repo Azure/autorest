@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Galleries_Get",
+  "title": "Get a gallery."
+}

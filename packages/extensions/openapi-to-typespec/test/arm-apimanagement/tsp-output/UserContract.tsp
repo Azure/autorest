@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("User details.")
@@ -16,24 +18,30 @@ model UserContract is ProxyResource<UserContractProperties> {
   @doc("User identifier. Must be unique in the current API Management service instance.")
   @maxLength(80)
   @minLength(1)
+  @path
   @key("userId")
   @segment("users")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "User")
-interface UserContracts_User {
+interface UserContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the user specified by its identifier.")
+  @operationId("User_Get")
   get is ArmResourceRead<UserContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the user specified by its identifier.")
   @head
+  @operationId("User_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<UserContract, BaseParameters<UserContract>>,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates a user.")
+  @operationId("User_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     UserContract,
     {
@@ -49,7 +57,9 @@ interface UserContracts_User {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the user specified by its identifier.")
+  @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,
     UserUpdateParameters,
@@ -62,7 +72,9 @@ interface UserContracts_User {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific user.")
+  @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
     {
@@ -86,7 +98,9 @@ interface UserContracts_User {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of registered users in the specified service instance.")
+  @operationId("User_ListByService")
   listByService is ArmResourceListByParent<
     UserContract,
     {
@@ -111,25 +125,27 @@ interface UserContracts_User {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.")
+  @operationId("User_GenerateSsoUrl")
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
     GenerateSsoUrlResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the Shared Access Authorization Token for the User.")
+  @operationId("User_GetSharedAccessToken")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
     UserTokenParameters,
     UserTokenResult
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "UserConfirmationPassword")
-interface UserContracts_UserConfirmationPassword {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Sends confirmation")
+  @operationId("UserConfirmationPassword_Send")
   send is ArmResourceActionNoContentSync<
     UserContract,
     void,
@@ -141,11 +157,9 @@ interface UserContracts_UserConfirmationPassword {
       appType?: AppType;
     }
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "UserGroup")
-interface UserContracts_UserGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("UserGroup_List")
   @doc("Lists all user groups.")
   // FIXME: UserGroup_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
@@ -188,11 +202,9 @@ interface UserContracts_UserGroup {
     },
     ResourceListResult<GroupContract>
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "UserIdentities")
-interface UserContracts_UserIdentities {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("UserIdentities_List")
   @doc("List of all user identities.")
   // FIXME: UserIdentities_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")

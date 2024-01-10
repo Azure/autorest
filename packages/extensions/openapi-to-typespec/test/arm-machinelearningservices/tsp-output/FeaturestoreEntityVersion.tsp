@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FeaturestoreEntityContainer.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
@@ -15,6 +17,7 @@ namespace Azure.ResourceManager.MachineLearning;
 model FeaturestoreEntityVersion
   is ProxyResource<FeaturestoreEntityVersionProperties> {
   @doc("Version identifier. This is case-sensitive.")
+  @path
   @key("version")
   @segment("versions")
   name: string;
@@ -29,7 +32,11 @@ interface FeaturestoreEntityVersions {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturestoreEntityVersion>;
 
   @doc("Delete version.")
-  delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
+  delete is ArmResourceDeleteAsync<
+    FeaturestoreEntityVersion,
+    BaseParameters<FeaturestoreEntityVersion>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List versions.")
   list is ArmResourceListByParent<

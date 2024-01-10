@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://asyncoperationstatusurl"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Zones_Delete",
+  "title": "Delete zone"
+}

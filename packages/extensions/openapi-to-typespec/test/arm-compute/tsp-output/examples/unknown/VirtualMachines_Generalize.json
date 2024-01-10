@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "VirtualMachines_Generalize",
+  "title": "Generalize a Virtual Machine."
+}

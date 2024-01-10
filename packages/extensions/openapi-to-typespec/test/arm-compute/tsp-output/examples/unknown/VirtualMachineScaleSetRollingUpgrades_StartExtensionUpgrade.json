@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "{vmss-name}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
+  "title": "Start an extension rolling upgrade."
+}

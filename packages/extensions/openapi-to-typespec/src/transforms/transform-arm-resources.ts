@@ -183,10 +183,11 @@ function convertResourceReadOperation(
       doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
       kind: "ArmResourceRead",
       name: getOperationName(operation.OperationID),
-      operationGroupName: getOperationGroupName(operation.OperationID),
+      operationId: operation.OperationID,
       templateParameters: baseParameters
         ? [resourceMetadata.SwaggerModelName, baseParameters]
         : [resourceMetadata.SwaggerModelName],
+      examples: swaggerOperation.extensions?.["x-ms-examples"],
     },
   ];
 }
@@ -199,16 +200,34 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
         name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
-        operationGroupName: getOperationGroupName(swaggerOperation.operationId),
+        operationId: swaggerOperation.operationId,
         parameters: [
           `...ResourceInstanceParameters<${resourceMetadata.SwaggerModelName}, BaseParameters<${resourceMetadata.SwaggerModelName}>>`,
         ],
         responses: ["OkResponse", "ErrorResponse"],
         decorators: [{ name: "head" }],
+        examples: swaggerOperation.extensions?.["x-ms-examples"],
       },
     ];
   }
   return [];
+}
+
+function getLROHeader(swaggerOperation: Operation): string | undefined {
+  if (!swaggerOperation.extensions?.["x-ms-long-running-operation"]) {
+    return undefined;
+  }
+  let lroHeader = undefined;
+  const finalStateVia = swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"];
+  if (finalStateVia === "azure-async-operation") {
+    lroHeader = "ArmAsyncOperationHeader";
+  } else if (finalStateVia === "location") {
+    lroHeader = "ArmLroLocationHeader";
+    // TODO: deal with final-state-schema
+  } else {
+    // TODO: not sure how to deal with original-uri and operation-location
+  }
+  return lroHeader;
 }
 
 function convertResourceCreateOrUpdateOperation(
@@ -219,16 +238,26 @@ function convertResourceCreateOrUpdateOperation(
     const operation = resourceMetadata.CreateOperations[0];
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+    const lroHeader = getLROHeader(swaggerOperation);
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
+    const templateParameters = [resourceMetadata.SwaggerModelName];
+    if (baseParameters) {
+      templateParameters.push(baseParameters);
+    }
+    if (lroHeader) {
+      if (!baseParameters) {
+        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
+      }
+      templateParameters.push(lroHeader);
+    }
     return [
       {
         doc: operation.Description,
         kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
         name: getOperationName(operation.OperationID),
-        operationGroupName: getOperationGroupName(operation.OperationID),
-        templateParameters: baseParameters
-          ? [resourceMetadata.SwaggerModelName, baseParameters]
-          : [resourceMetadata.SwaggerModelName],
+        operationId: operation.OperationID,
+        templateParameters: templateParameters,
+        examples: swaggerOperation.extensions?.["x-ms-examples"],
       },
     ];
   }
@@ -247,6 +276,7 @@ function convertResourceUpdateOperation(
     ) {
       const swaggerOperation = operations[operation.OperationID];
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+      const lroHeader = getLROHeader(swaggerOperation);
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const fixMe: string[] = [];
@@ -267,14 +297,21 @@ function convertResourceUpdateOperation(
       if (baseParameters) {
         templateParameters.push(baseParameters);
       }
+      if (lroHeader) {
+        if (!baseParameters) {
+          templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
+        }
+        templateParameters.push(lroHeader);
+      }
       return [
         {
           fixMe,
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          operationGroupName: getOperationGroupName(operation.OperationID),
+          operationId: operation.OperationID,
           templateParameters,
+          examples: swaggerOperation.extensions?.["x-ms-examples"],
         },
       ];
     }
@@ -290,9 +327,19 @@ function convertResourceDeleteOperation(
     const operation = resourceMetadata.DeleteOperations[0];
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+    const lroHeader = getLROHeader(swaggerOperation);
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
-
+    const templateParameters = [resourceMetadata.SwaggerModelName];
+    if (baseParameters) {
+      templateParameters.push(baseParameters);
+    }
+    if (lroHeader) {
+      if (!baseParameters) {
+        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
+      }
+      templateParameters.push(lroHeader);
+    }
     return [
       {
         doc: operation.Description,
@@ -302,10 +349,9 @@ function convertResourceDeleteOperation(
             : "ArmResourceDeleteWithoutOkAsync"
           : "ArmResourceDeleteSync",
         name: getOperationName(operation.OperationID),
-        operationGroupName: getOperationGroupName(operation.OperationID),
-        templateParameters: baseParameters
-          ? [resourceMetadata.SwaggerModelName, baseParameters]
-          : [resourceMetadata.SwaggerModelName],
+        operationId: operation.OperationID,
+        templateParameters,
+        examples: swaggerOperation.extensions?.["x-ms-examples"],
       },
     ];
   }
@@ -339,15 +385,15 @@ function convertResourceListOperations(
       doc: operation.Description,
       kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
-      operationGroupName: getOperationGroupName(operation.OperationID),
+      operationId: operation.OperationID,
       templateParameters: templateParameters,
+      examples: swaggerOperation.extensions?.["x-ms-examples"],
     });
   }
 
-  // operation under subscription
+  // list operation under subscription
   if (resourceMetadata.OperationsFromSubscriptionExtension.length) {
     for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
-      // TODO: handle other kinds of operations
       if (operation.PagingMetadata) {
         const swaggerOperation = operations[operation.OperationID];
         const okResponse = swaggerOperation?.responses?.filter(
@@ -372,16 +418,18 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
-            operationGroupName: getOperationGroupName(operation.OperationID),
+            operationId: operation.OperationID,
             templateParameters,
+            examples: swaggerOperation.extensions?.["x-ms-examples"],
           });
         } else {
           converted.push({
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
-            operationGroupName: getOperationGroupName(operation.OperationID),
+            operationId: operation.OperationID,
             templateParameters: [resourceMetadata.SwaggerModelName],
+            examples: swaggerOperation.extensions?.["x-ms-examples"],
           });
         }
       }
@@ -405,10 +453,11 @@ function convertResourceListOperations(
         name: swaggerOperation.operationId
           ? getOperationName(swaggerOperation.operationId)
           : `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        operationGroupName: getOperationGroupName(swaggerOperation.operationId),
+        operationId: swaggerOperation.operationId,
         templateParameters: baseParameters
           ? [resourceMetadata.SwaggerModelName, baseParameters]
           : [resourceMetadata.SwaggerModelName],
+        examples: swaggerOperation.extensions?.["x-ms-examples"],
       });
       (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
     }
@@ -428,6 +477,7 @@ function convertResourceActionOperations(
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
         const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+        const lroHeader = getLROHeader(swaggerOperation);
         const okResponse = swaggerOperation?.responses?.filter(
           (o) => o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
@@ -455,12 +505,45 @@ function convertResourceActionOperations(
         if (baseParameters) {
           templateParameters.push(baseParameters);
         }
+        if (lroHeader) {
+          if (!baseParameters) {
+            templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
+          }
+          templateParameters.push(lroHeader);
+        }
         converted.push({
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
-          operationGroupName: getOperationGroupName(operation.OperationID),
+          operationId: operation.OperationID,
           templateParameters,
+          examples: swaggerOperation.extensions?.["x-ms-examples"],
+        });
+      }
+    }
+  }
+
+  return converted;
+}
+
+function convertCheckNameAvailabilityOperations(
+  resourceMetadata: ArmResource,
+  operations: Record<string, Operation>,
+): TspArmResourceOperation[] {
+  const converted: TspArmResourceOperation[] = [];
+
+  // check name availability operation under subscription
+  if (resourceMetadata.OperationsFromSubscriptionExtension.length) {
+    for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
+      if (operation.Path.includes("/checkNameAvailability")) {
+        const swaggerOperation = operations[operation.OperationID];
+
+        converted.push({
+          doc: operation.Description,
+          kind: "checkGlobalNameAvailability",
+          name: getOperationName(operation.OperationID),
+          operationId: operation.OperationID,
+          examples: swaggerOperation.extensions?.["x-ms-examples"],
         });
       }
     }
@@ -482,10 +565,12 @@ function convertResourceOtherGetOperations(
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
           const op = transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model);
           op.operationGroupName = getOperationGroupName(operation.OperationID);
+          op.operationId = operation.OperationID;
           if (!op.fixMe) {
             op.fixMe = [];
           }
           op.fixMe.push(`// FIXME: ${operation.OperationID} could not be converted to a resource operation`);
+          op.examples = swaggerOperation.extensions?.["x-ms-examples"];
           converted.push(op);
         }
       }
@@ -523,6 +608,9 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
 
   // action operation
   tspOperations.push(...convertResourceActionOperations(resourceMetadata, operations));
+
+  // check name availability operation
+  tspOperations.push(...convertCheckNameAvailabilityOperations(resourceMetadata, operations));
 
   // other get operations
   normalOperations.push(...convertResourceOtherGetOperations(resourceMetadata, operations));
@@ -684,7 +772,8 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
   );
 
   // remove @path decorator for key parameter
-  parameter.decorators = parameter.decorators.filter((d) => d.name !== "path");
+  // TODO: still under discussion with TSP team about this behavior, in order to keep generated swagger good, comment out for now
+  // parameter.decorators = parameter.decorators.filter((d) => d.name !== "path");
 
   // by convention the property itself needs to be called "name"
   parameter.name = "name";

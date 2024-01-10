@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "aaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_ReimageAll",
+  "title": "VirtualMachineScaleSetVM_ReimageAll_MaximumSet_Gen"
+}

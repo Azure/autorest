@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "some_string",
+            "type": "some_string",
+            "id": "some_string",
+            "properties": {
+              "type": "FQDN",
+              "category": "Required",
+              "destination": "some_string",
+              "status": "Inactive"
+            }
+          },
+          {
+            "name": "some_string",
+            "type": "some_string",
+            "id": "some_string",
+            "properties": {
+              "type": "FQDN",
+              "category": "Required",
+              "destination": "some_string",
+              "status": "Inactive"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ManagedNetworkSettingsRule_List",
+  "title": "List ManagedNetworkSettingsRule"
+}

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "accessName": "gitAccess",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "gitAccess",
+        "type": "Microsoft.ApiManagement/service/tenant",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/gitAccess",
+        "properties": {
+          "enabled": true,
+          "principalId": "git"
+        }
+      }
+    }
+  },
+  "operationId": "TenantAccess_Get",
+  "title": "ApiManagementGetTenantGitAccess"
+}

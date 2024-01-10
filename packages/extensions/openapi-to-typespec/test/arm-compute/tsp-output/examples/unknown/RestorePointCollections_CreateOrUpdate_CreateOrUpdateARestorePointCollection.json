@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "norwayeast",
+      "properties": {
+        "source": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+        }
+      },
+      "tags": {
+        "myTag1": "tagValue1"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "myRpc",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRpc",
+        "type": "Microsoft.Compute/restorePointCollections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+        "location": "norwayeast",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "restorePointCollectionId": "638f052b-a7c2-450c-89e7-6a3b8f1d6a7c",
+          "source": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "location": "eastus"
+          }
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myRpc",
+        "type": "Microsoft.Compute/restorePointCollections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+        "location": "norwayeast",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "restorePointCollectionId": "638f052b-a7c2-450c-89e7-6a3b8f1d6a7c",
+          "source": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "location": "eastus"
+          }
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "RestorePointCollections_CreateOrUpdate",
+  "title": "Create or update a restore point collection."
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Space.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("An integration application under space.")
@@ -15,6 +17,7 @@ namespace Microsoft.IntegrationSpaces;
 model Application is TrackedResource<ApplicationProperties> {
   @doc("The name of the Application")
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
+  @path
   @key("applicationName")
   @segment("applications")
   name: string;

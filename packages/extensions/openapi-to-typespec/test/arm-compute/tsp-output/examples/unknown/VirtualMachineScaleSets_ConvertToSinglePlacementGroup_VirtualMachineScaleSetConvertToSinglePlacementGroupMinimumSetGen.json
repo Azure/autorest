@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
+  "title": "VirtualMachineScaleSet_ConvertToSinglePlacementGroup_MinimumSet_Gen"
+}

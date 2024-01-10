@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DnsZone.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Dns;
 @doc("Describes a DNS record set (a collection of DNS records with the same name and type).")
 @parentResource(DnsZone)
 model DnsRecord is ProxyResource<RecordSetProperties> {
   @doc("The name of the record set, relative to the name of the zone.")
+  @path
   @key("relativeRecordSetName")
   @segment("A")
   name: string;
@@ -23,9 +26,10 @@ model DnsRecord is ProxyResource<RecordSetProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "RecordSets")
-interface DnsRecords_RecordSets {
+interface DnsRecords {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a record set.")
+  @operationId("RecordSets_Get")
   get is ArmResourceRead<
     DnsRecord,
     {
@@ -37,7 +41,9 @@ interface DnsRecords_RecordSets {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates a record set within a DNS zone.")
+  @operationId("RecordSets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsRecord,
     {
@@ -57,7 +63,9 @@ interface DnsRecords_RecordSets {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a record set within a DNS zone.")
+  @operationId("RecordSets_Update")
   update is ArmCustomPatchSync<
     DnsRecord,
     DnsRecord,
@@ -74,7 +82,9 @@ interface DnsRecords_RecordSets {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes a record set from a DNS zone. This operation cannot be undone.")
+  @operationId("RecordSets_Delete")
   delete is ArmResourceDeleteSync<
     DnsRecord,
     {
@@ -90,7 +100,9 @@ interface DnsRecords_RecordSets {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the record sets of a specified type in a DNS zone.")
+  @operationId("RecordSets_ListByType")
   listByType is ArmResourceListByParent<
     DnsRecord,
     {

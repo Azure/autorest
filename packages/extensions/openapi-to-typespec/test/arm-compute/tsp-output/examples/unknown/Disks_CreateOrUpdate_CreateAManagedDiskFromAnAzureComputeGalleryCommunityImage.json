@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "FromImage",
+          "galleryImageReference": {
+            "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+          }
+        },
+        "osType": "Windows"
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "galleryImageReference": {
+              "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+            }
+          },
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "galleryImageReference": {
+              "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+            }
+          },
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk from an Azure Compute Gallery community image."
+}

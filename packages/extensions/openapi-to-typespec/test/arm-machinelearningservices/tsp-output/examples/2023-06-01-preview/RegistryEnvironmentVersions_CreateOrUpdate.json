@@ -1,0 +1,140 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "build": {
+          "contextUri": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
+          "dockerfilePath": "prod/Dockerfile"
+        },
+        "condaFile": "string",
+        "image": "docker.io/tensorflow/serving:latest",
+        "inferenceConfig": {
+          "livenessRoute": {
+            "path": "string",
+            "port": 1
+          },
+          "readinessRoute": {
+            "path": "string",
+            "port": 1
+          },
+          "scoringRoute": {
+            "path": "string",
+            "port": 1
+          }
+        },
+        "isAnonymous": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "environmentName": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "build": {
+            "contextUri": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
+            "dockerfilePath": "prod/Dockerfile"
+          },
+          "condaFile": "string",
+          "environmentType": "Curated",
+          "image": "docker.io/tensorflow/serving:latest",
+          "inferenceConfig": {
+            "livenessRoute": {
+              "path": "string",
+              "port": 1
+            },
+            "readinessRoute": {
+              "path": "string",
+              "port": 1
+            },
+            "scoringRoute": {
+              "path": "string",
+              "port": 1
+            }
+          },
+          "isAnonymous": false,
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "build": {
+            "contextUri": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
+            "dockerfilePath": "prod/Dockerfile"
+          },
+          "condaFile": "string",
+          "environmentType": "Curated",
+          "image": "docker.io/tensorflow/serving:latest",
+          "inferenceConfig": {
+            "livenessRoute": {
+              "path": "string",
+              "port": 1
+            },
+            "readinessRoute": {
+              "path": "string",
+              "port": 1
+            },
+            "scoringRoute": {
+              "path": "string",
+              "port": 1
+            }
+          },
+          "isAnonymous": false,
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryEnvironmentVersions_CreateOrUpdate",
+  "title": "CreateOrUpdate Registry Environment Version."
+}

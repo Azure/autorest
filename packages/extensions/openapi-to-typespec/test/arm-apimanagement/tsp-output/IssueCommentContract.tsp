@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./IssueContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Issue Comment Contract details.")
@@ -17,19 +19,23 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("commentId")
   @segment("comments")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "ApiIssueComment")
-interface IssueCommentContracts_ApiIssueComment {
+interface IssueCommentContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the issue Comment for an API specified by its identifier.")
+  @operationId("ApiIssueComment_Get")
   get is ArmResourceRead<IssueCommentContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.")
   @head
+  @operationId("ApiIssueComment_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IssueCommentContract,
@@ -37,7 +43,9 @@ interface IssueCommentContracts_ApiIssueComment {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Comment for the Issue in an API or updates an existing one.")
+  @operationId("ApiIssueComment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     {
@@ -49,7 +57,9 @@ interface IssueCommentContracts_ApiIssueComment {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified comment from an Issue.")
+  @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     {
@@ -61,7 +71,9 @@ interface IssueCommentContracts_ApiIssueComment {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all comments for the Issue associated with the specified API.")
+  @operationId("ApiIssueComment_ListByService")
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     {

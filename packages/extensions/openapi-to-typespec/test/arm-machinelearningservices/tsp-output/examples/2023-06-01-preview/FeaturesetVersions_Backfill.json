@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "description": "string",
+      "displayName": "string",
+      "featureWindow": {
+        "featureWindowEnd": "2020-01-01T12:34:56.999+00:51",
+        "featureWindowStart": "2020-01-01T12:34:56.999+00:51"
+      },
+      "resource": {
+        "instanceType": "string"
+      },
+      "sparkConfiguration": {
+        "string": "string"
+      },
+      "tags": {
+        "string": "string"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "string"
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "FeaturesetVersions_Backfill",
+  "title": "Backfill Workspace Featureset Version."
+}

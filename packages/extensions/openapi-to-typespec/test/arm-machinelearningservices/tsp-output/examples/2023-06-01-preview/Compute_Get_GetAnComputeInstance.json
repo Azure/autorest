@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus2",
+        "properties": {
+          "description": "some compute",
+          "computeType": "ComputeInstance",
+          "createdOn": "2021-04-01T22:00:00.0000000+00:00",
+          "modifiedOn": "2021-04-01T22:00:00.0000000+00:00",
+          "properties": {
+            "applicationSharingPolicy": "Shared",
+            "applications": [
+              {
+                "displayName": "Jupyter",
+                "endpointUri": "https://compute123.eastus2.azureml.net/jupyter"
+              }
+            ],
+            "computeInstanceAuthorizationType": "personal",
+            "connectivityEndpoints": {
+              "privateIpAddress": "10.0.0.1",
+              "publicIpAddress": "10.0.0.1"
+            },
+            "createdBy": {
+              "userId": "00000000-0000-0000-0000-000000000000",
+              "userName": "foobar@microsoft.com",
+              "userOrgId": "00000000-0000-0000-0000-000000000000"
+            },
+            "customServices": [
+              {
+                "name": "rstudio-workbench",
+                "docker": {
+                  "privileged": true
+                },
+                "endpoints": [
+                  {
+                    "name": "connect",
+                    "hostIp": null,
+                    "published": 4444,
+                    "target": 8787,
+                    "protocol": "http"
+                  }
+                ],
+                "environmentVariables": {
+                  "RSP_LICENSE": {
+                    "type": "local",
+                    "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                  }
+                },
+                "image": {
+                  "type": "docker",
+                  "reference": "ghcr.io/azure/rstudio-workbench:latest"
+                },
+                "volumes": [
+                  {
+                    "type": "bind",
+                    "bind": {
+                      "createHostPath": true,
+                      "propagation": "test",
+                      "selinux": "test"
+                    },
+                    "consistency": "test",
+                    "readOnly": true,
+                    "source": "/mnt/azureuser/",
+                    "target": "/home/testuser/",
+                    "tmpfs": {
+                      "size": 10
+                    },
+                    "volume": {
+                      "nocopy": true
+                    }
+                  }
+                ]
+              }
+            ],
+            "errors": null,
+            "osImageMetadata": {
+              "currentImageVersion": "22.06.14",
+              "isLatestOsImageVersion": false,
+              "latestImageVersion": "22.07.22"
+            },
+            "personalComputeInstanceSettings": {
+              "assignedUser": {
+                "objectId": "00000000-0000-0000-0000-000000000000",
+                "tenantId": "00000000-0000-0000-0000-000000000000"
+              }
+            },
+            "sshSettings": {
+              "adminUserName": "azureuser",
+              "sshPort": 22,
+              "sshPublicAccess": "Enabled"
+            },
+            "state": "Running",
+            "subnet": {
+              "id": "test-subnet-resource-id"
+            },
+            "vmSize": "STANDARD_NC6"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Compute_Get",
+  "title": "Get an ComputeInstance"
+}

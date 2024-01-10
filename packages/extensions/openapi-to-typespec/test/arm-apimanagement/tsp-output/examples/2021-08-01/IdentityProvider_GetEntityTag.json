@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "identityProviderName": "aadB2C",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "IdentityProvider_GetEntityTag",
+  "title": "ApiManagementHeadIdentityProvider"
+}

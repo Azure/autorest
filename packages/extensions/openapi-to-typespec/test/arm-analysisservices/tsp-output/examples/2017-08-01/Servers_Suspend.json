@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01",
+    "resourceGroupName": "TestRG",
+    "serverName": "azsdktest",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "description": "OK.",
+      "headers": {}
+    },
+    "202": {
+      "description": "Accepted.",
+      "headers": {}
+    }
+  },
+  "operationId": "Servers_Suspend",
+  "title": "Suspend a server."
+}

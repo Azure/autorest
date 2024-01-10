@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Sign-In settings for the Developer Portal.")
@@ -20,13 +22,17 @@ model PortalSigninSettings is ProxyResource<PortalSigninSettingProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "SignInSettings")
-interface PortalSigninSettings_SignInSettings {
+@projectedName("client", "PortalSigninSettings")
+interface PortalSigninSettingsOperationGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Sign In Settings for the Portal")
+  @operationId("SignInSettings_Get")
   get is ArmResourceRead<PortalSigninSettings>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the SignInSettings.")
   @head
+  @operationId("SignInSettings_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PortalSigninSettings,
@@ -34,7 +40,9 @@ interface PortalSigninSettings_SignInSettings {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or Update Sign-In settings.")
+  @operationId("SignInSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSigninSettings,
     {
@@ -46,7 +54,9 @@ interface PortalSigninSettings_SignInSettings {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Sign-In settings.")
+  @operationId("SignInSettings_Update")
   update is ArmCustomPatchSync<
     PortalSigninSettings,
     PortalSigninSettings,
@@ -58,11 +68,9 @@ interface PortalSigninSettings_SignInSettings {
       `If-Match`: string;
     }
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "PortalSettings")
-interface PortalSigninSettings_PortalSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of portalsettings defined within a service instance..")
+  @operationId("PortalSettings_ListByService")
   listByService is ArmResourceListByParent<PortalSigninSettings>;
 }

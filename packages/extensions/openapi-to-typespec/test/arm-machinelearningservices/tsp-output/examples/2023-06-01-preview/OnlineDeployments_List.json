@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$top": 1,
+    "api-version": "2023-06-01-preview",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444",
+              "userAssignedIdentities": {
+                "string": {
+                  "clientId": "00000000-1111-2222-3333-444444444444",
+                  "principalId": "00000000-1111-2222-3333-444444444444"
+                }
+              }
+            },
+            "kind": "string",
+            "location": "string",
+            "properties": {
+              "description": "string",
+              "appInsightsEnabled": false,
+              "codeConfiguration": {
+                "codeId": "string",
+                "scoringScript": "string"
+              },
+              "containerResourceRequirements": {
+                "containerResourceLimits": {
+                  "cpu": "\"1\"",
+                  "gpu": "\"1\"",
+                  "memory": "\"2Gi\""
+                },
+                "containerResourceRequests": {
+                  "cpu": "\"1\"",
+                  "gpu": "\"1\"",
+                  "memory": "\"2Gi\""
+                }
+              },
+              "endpointComputeType": "Kubernetes",
+              "environmentId": "string",
+              "environmentVariables": {
+                "string": "string"
+              },
+              "instanceType": "string",
+              "livenessProbe": {
+                "failureThreshold": 1,
+                "initialDelay": "PT5M",
+                "period": "PT5M",
+                "successThreshold": 1,
+                "timeout": "PT5M"
+              },
+              "model": "string",
+              "modelMountPath": "string",
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Creating",
+              "requestSettings": {
+                "maxConcurrentRequestsPerInstance": 1,
+                "maxQueueWait": "PT5M",
+                "requestTimeout": "PT5M"
+              },
+              "scaleSettings": {
+                "scaleType": "Default"
+              }
+            },
+            "sku": {
+              "name": "string",
+              "capacity": 1,
+              "family": "string",
+              "size": "string",
+              "tier": "Free"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "OnlineDeployments_List",
+  "title": "List Online Deployments."
+}

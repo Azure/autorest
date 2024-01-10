@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FileServiceProperties.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("Properties of the file share, including Id, resource name, resource type, Etag.")
@@ -16,6 +18,7 @@ model FileShare is ProxyResource<FileShareProperties> {
   @doc("The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
   @maxLength(63)
   @minLength(3)
+  @path
   @key("shareName")
   @segment("shares")
   name: string;

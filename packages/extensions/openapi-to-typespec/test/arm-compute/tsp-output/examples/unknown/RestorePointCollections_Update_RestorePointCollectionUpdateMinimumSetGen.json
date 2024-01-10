@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "restorePointCollectionName": "aaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "norwayeast"
+      }
+    }
+  },
+  "operationId": "RestorePointCollections_Update",
+  "title": "RestorePointCollection_Update_MinimumSet_Gen"
+}

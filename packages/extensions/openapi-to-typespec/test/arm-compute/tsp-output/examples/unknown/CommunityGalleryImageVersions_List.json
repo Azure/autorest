@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscription-Id}/providers/Microsoft.Compute/communityGalleries/publicGalleryName/images/myGalleryImageName/versions?$skiptoken={token}/communityGalleries/publicGalleryName/images/myGalleryImageName/versions/myGalleryImageVersionName",
+        "value": [
+          {
+            "name": "myGalleryImageVersionName",
+            "identifier": {
+              "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName/Versions/myGalleryImageVersionName"
+            },
+            "location": "myLocation",
+            "properties": {
+              "endOfLifeDate": "2022-03-20T09:12:28Z",
+              "excludeFromLatest": false,
+              "publishedDate": "2018-03-20T09:12:28Z",
+              "storageProfile": {
+                "osDiskImage": {
+                  "diskSizeGB": 29,
+                  "hostCaching": "None"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CommunityGalleryImageVersions_List",
+  "title": "List community gallery image versions."
+}

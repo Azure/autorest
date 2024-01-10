@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "location": "westus2",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "3",
+            "type": "Microsoft.Compute/locations/cloudServiceOsFamilies",
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus2/cloudServiceOSFamilies/3",
+            "location": "westus2",
+            "properties": {
+              "name": "3",
+              "label": "Windows Server 2012",
+              "versions": [
+                {
+                  "isActive": true,
+                  "isDefault": true,
+                  "label": "Windows Azure Guest OS 3.90 (Release 202010-02)",
+                  "version": "WA-GUEST-OS-3.90_202010-02"
+                }
+              ]
+            }
+          },
+          {
+            "name": "4",
+            "type": "Microsoft.Compute/locations/cloudServiceOsFamilies",
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus2/cloudServiceOSFamilies/4",
+            "location": "westus2",
+            "properties": {
+              "name": "4",
+              "label": "Windows Server 2012 R2",
+              "versions": [
+                {
+                  "isActive": true,
+                  "isDefault": true,
+                  "label": "Windows Azure Guest OS 4.83 (Release 202010-02)",
+                  "version": "WA-GUEST-OS-4.83_202010-02"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServiceOperatingSystems_ListOSFamilies",
+  "title": "List Cloud Service OS Families in a subscription"
+}

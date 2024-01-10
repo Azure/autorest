@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "tags": {
+        "additionalProp1": "string"
+      }
+    },
+    "proximityPlacementGroupName": "myProximityPlacementGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProximityPlacementGroup",
+        "type": "Microsoft.Compute/proximityPlacementGroups",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup",
+        "location": "westus",
+        "properties": {
+          "proximityPlacementGroupType": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "ProximityPlacementGroups_Update",
+  "title": "Update a proximity placement group."
+}

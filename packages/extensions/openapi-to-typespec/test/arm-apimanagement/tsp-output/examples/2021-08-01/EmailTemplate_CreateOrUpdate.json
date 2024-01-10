@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "subject": "Your request for $IssueName was successfully received."
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "templateName": "newIssueNotificationMessage"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "NewIssueNotificationMessage",
+        "type": "Microsoft.ApiManagement/service/templates",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/NewIssueNotificationMessage",
+        "properties": {
+          "description": "This email is sent to developers after they create a new topic on the Issues page of the developer portal.",
+          "body": "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you for contacting us. Our API team will review your issue and get back to you soon.</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Click this <a href=\"http://$DevPortalUrl/issues/$IssueId\">link</a> to view or edit your request.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>",
+          "isDefault": false,
+          "parameters": [
+            {
+              "name": "DevFirstName",
+              "title": "Developer first name"
+            },
+            {
+              "name": "DevLastName",
+              "title": "Developer last name"
+            },
+            {
+              "name": "IssueId",
+              "title": "Issue id"
+            },
+            {
+              "name": "IssueName",
+              "title": "Issue name"
+            },
+            {
+              "name": "OrganizationName",
+              "title": "Organization name"
+            },
+            {
+              "name": "DevPortalUrl",
+              "title": "Developer portal URL"
+            }
+          ],
+          "subject": "Your request for $IssueName was successfully received.",
+          "title": "New issue received"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "NewIssueNotificationMessage",
+        "type": "Microsoft.ApiManagement/service/templates",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/templates/NewIssueNotificationMessage",
+        "properties": {
+          "description": "This email is sent to developers after they create a new topic on the Issues page of the developer portal.",
+          "body": "<!DOCTYPE html >\r\n<html>\r\n  <head />\r\n  <body>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Dear $DevFirstName $DevLastName,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Thank you for contacting us. Our API team will review your issue and get back to you soon.</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">\r\n          Click this <a href=\"http://$DevPortalUrl/issues/$IssueId\">link</a> to view or edit your request.\r\n        </p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">Best,</p>\r\n    <p style=\"font-size:12pt;font-family:'Segoe UI'\">The $OrganizationName API Team</p>\r\n  </body>\r\n</html>",
+          "isDefault": false,
+          "parameters": [
+            {
+              "name": "DevFirstName",
+              "title": "Developer first name"
+            },
+            {
+              "name": "DevLastName",
+              "title": "Developer last name"
+            },
+            {
+              "name": "IssueId",
+              "title": "Issue id"
+            },
+            {
+              "name": "IssueName",
+              "title": "Issue name"
+            },
+            {
+              "name": "OrganizationName",
+              "title": "Organization name"
+            },
+            {
+              "name": "DevPortalUrl",
+              "title": "Developer portal URL"
+            }
+          ],
+          "subject": "Your request for $IssueName was successfully received.",
+          "title": "New issue received"
+        }
+      }
+    }
+  },
+  "operationId": "EmailTemplate_CreateOrUpdate",
+  "title": "ApiManagementCreateTemplate"
+}

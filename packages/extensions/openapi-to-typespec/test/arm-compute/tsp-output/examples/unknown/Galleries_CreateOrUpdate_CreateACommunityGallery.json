@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "gallery": {
+      "location": "West US",
+      "properties": {
+        "description": "This is the gallery description.",
+        "sharingProfile": {
+          "communityGalleryInfo": {
+            "eula": "eula",
+            "publicNamePrefix": "PirPublic",
+            "publisherContact": "pir@microsoft.com",
+            "publisherUri": "uri"
+          },
+          "permissions": "Community"
+        }
+      }
+    },
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating",
+          "sharingProfile": {
+            "communityGalleryInfo": {
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic",
+              "publisherContact": "pir@microsoft.com",
+              "publisherUri": "uri"
+            },
+            "permissions": "Community"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Creating",
+          "sharingProfile": {
+            "communityGalleryInfo": {
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic",
+              "publisherContact": "pir@microsoft.com",
+              "publisherUri": "uri"
+            },
+            "permissions": "Community"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Updating",
+          "sharingProfile": {
+            "communityGalleryInfo": {
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic",
+              "publisherContact": "pir@microsoft.com",
+              "publisherUri": "uri"
+            },
+            "permissions": "Community"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Galleries_CreateOrUpdate",
+  "title": "Create a community gallery."
+}

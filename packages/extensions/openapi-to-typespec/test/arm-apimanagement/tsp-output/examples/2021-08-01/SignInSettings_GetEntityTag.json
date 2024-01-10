@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "SignInSettings_GetEntityTag",
+  "title": "ApiManagementHeadSignInSettings"
+}

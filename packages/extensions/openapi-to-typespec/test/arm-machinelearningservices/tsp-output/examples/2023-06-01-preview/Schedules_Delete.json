@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/...pathToOperationResult..."
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Schedules_Delete",
+  "title": "Delete Schedule."
+}

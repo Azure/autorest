@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "properties": {
+        "tier": "P30"
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Succeeded",
+          "tier": "P30"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "propertyUpdatesInProgress": {
+            "targetTier": "P30"
+          },
+          "provisioningState": "Updating",
+          "tier": "P10"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update a managed disk to change tier."
+}

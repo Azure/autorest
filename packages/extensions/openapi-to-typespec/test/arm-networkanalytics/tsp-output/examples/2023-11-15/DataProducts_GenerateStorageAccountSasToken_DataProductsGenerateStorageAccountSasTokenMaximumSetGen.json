@@ -1,0 +1,22 @@
+{
+  "operationId": "DataProducts_GenerateStorageAccountSasToken",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "body": {
+      "expiryTimeStamp": "2023-08-24T05:34:58.151Z",
+      "ipAddress": "1.1.1.1",
+      "startTimeStamp": "2023-08-24T05:34:58.151Z"
+    },
+    "dataProductName": "dataproduct01",
+    "resourceGroupName": "aoiresourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "storageAccountSasToken": "storageAccountSasToken"
+      }
+    }
+  }
+}

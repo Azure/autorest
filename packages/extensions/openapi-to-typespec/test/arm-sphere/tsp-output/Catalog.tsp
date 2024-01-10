@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
   @pattern("^[A-Za-z0-9_-]{1,50}$")
+  @path
   @key("catalogName")
   @segment("catalogs")
   name: string;
@@ -24,13 +27,21 @@ interface Catalogs {
   get is ArmResourceRead<Catalog>;
 
   @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Catalog,
+    BaseParameters<Catalog>,
+    ArmAsyncOperationHeader
+  >;
 
   @doc("Update a Catalog")
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   @doc("Delete a Catalog")
-  delete is ArmResourceDeleteAsync<Catalog>;
+  delete is ArmResourceDeleteAsync<
+    Catalog,
+    BaseParameters<Catalog>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List Catalog resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Catalog>;

@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "action": "Break",
+      "breakPeriod": null,
+      "leaseDuration": null,
+      "leaseId": "8698f513-fa75-44a1-b8eb-30ba336af27d",
+      "proposedLeaseId": null
+    },
+    "resourceGroupName": "res3376",
+    "shareName": "share12",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "leaseTimeSeconds": "0"
+      }
+    }
+  },
+  "operationId": "FileShares_Lease",
+  "title": "Break a lease on a share"
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AlertsManagement;
 @doc("Alert processing rule object containing target scopes, conditions and scheduling logic.")
 model AlertProcessingRule is TrackedResource<AlertProcessingRuleProperties> {
   @doc("The name of the alert processing rule that needs to be fetched.")
+  @path
   @key("alertProcessingRuleName")
   @segment("actionRules")
   name: string;

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "listViewType": "ArchivedOnly",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tags": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "isArchived": false,
+              "latestVersion": "string",
+              "nextVersion": "string",
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Canceled",
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:46",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturesetContainers_List",
+  "title": "List Workspace Featureset Container."
+}

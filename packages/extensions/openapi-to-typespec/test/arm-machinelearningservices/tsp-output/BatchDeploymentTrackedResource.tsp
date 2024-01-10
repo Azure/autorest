@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BatchEndpointTrackedResource.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(BatchEndpointTrackedResource)
 model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
   @doc("The identifier for the Batch deployments.")
+  @path
   @key("deploymentName")
   @segment("deployments")
   name: string;
@@ -24,24 +27,37 @@ model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
 }
 
 @armResourceOperations
-@projectedName("client", "BatchDeployments")
-interface BatchDeploymentTrackedResources_BatchDeployments {
+interface BatchDeploymentTrackedResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a batch inference deployment by id.")
+  @operationId("BatchDeployments_Get")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates/updates a batch inference deployment (asynchronous).")
+  @operationId("BatchDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchDeploymentTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a batch inference deployment (asynchronous).")
+  @operationId("BatchDeployments_Update")
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,
     PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete Batch Inference deployment (asynchronous).")
-  delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;
+  @operationId("BatchDeployments_Delete")
+  delete is ArmResourceDeleteAsync<
+    BatchDeploymentTrackedResource,
+    BaseParameters<BatchDeploymentTrackedResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists Batch inference deployments in the workspace.")
+  @operationId("BatchDeployments_List")
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
     {

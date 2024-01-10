@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "sid": "testsub",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "Subscription_RegenerateSecondaryKey",
+  "title": "ApiManagementSubscriptionRegenerateSecondaryKey"
+}

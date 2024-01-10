@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus"
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachines_List",
+  "title": "VirtualMachine_List_MinimumSet_Gen"
+}

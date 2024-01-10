@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Issue Contract details.")
@@ -17,15 +19,17 @@ model IssueContract is ProxyResource<IssueContractProperties> {
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("issueId")
   @segment("issues")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "ApiIssue")
-interface IssueContracts_ApiIssue {
+interface IssueContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Issue for an API specified by its identifier.")
+  @operationId("ApiIssue_Get")
   get is ArmResourceRead<
     IssueContract,
     {
@@ -37,13 +41,17 @@ interface IssueContracts_ApiIssue {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Issue for an API specified by its identifier.")
   @head
+  @operationId("ApiIssue_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<IssueContract, BaseParameters<IssueContract>>,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Issue for an API or updates an existing one.")
+  @operationId("ApiIssue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueContract,
     {
@@ -55,7 +63,9 @@ interface IssueContracts_ApiIssue {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing issue for an API.")
+  @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,
     IssueUpdateContract,
@@ -68,7 +78,9 @@ interface IssueContracts_ApiIssue {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified Issue from an API.")
+  @operationId("ApiIssue_Delete")
   delete is ArmResourceDeleteSync<
     IssueContract,
     {
@@ -80,7 +92,9 @@ interface IssueContracts_ApiIssue {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all issues associated with the specified API.")
+  @operationId("ApiIssue_ListByService")
   listByService is ArmResourceListByParent<
     IssueContract,
     {

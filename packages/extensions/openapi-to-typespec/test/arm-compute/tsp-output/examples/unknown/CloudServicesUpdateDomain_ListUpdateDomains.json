@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "0",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/updateDomains/0"
+          },
+          {
+            "name": "1",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/updateDomains/1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServicesUpdateDomain_ListUpdateDomains",
+  "title": "List Update Domains in Cloud Service"
+}

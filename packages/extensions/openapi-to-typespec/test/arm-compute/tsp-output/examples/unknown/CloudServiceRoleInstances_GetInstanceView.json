@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "roleInstanceName": "{roleInstance-name}",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "platformFaultDomain": 0,
+        "platformUpdateDomain": 0,
+        "privateId": "3491bc0c-1f6c-444f-b1d0-ec0751a74e3e",
+        "statuses": [
+          {
+            "code": "RoleState/RoleStateStarted",
+            "displayStatus": "RoleStateStarted",
+            "level": "Info",
+            "message": ""
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServiceRoleInstances_GetInstanceView",
+  "title": "Get Instance View of Cloud Service Role Instance"
+}

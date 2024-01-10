@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryUniqueName": "galleryUniqueName",
+    "location": "myLocation",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageName",
+        "identifier": {
+          "uniqueId": "/SharedGalleries/galleryUniqueName/Images/myGalleryImageName"
+        },
+        "location": "myLocation",
+        "properties": {
+          "eula": "https://www.microsoft.com/en-us/",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "privacyStatementUri": "https://www.microsoft.com/en-us/"
+        }
+      }
+    }
+  },
+  "operationId": "SharedGalleryImages_Get",
+  "title": "Get a shared gallery image."
+}

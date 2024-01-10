@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "properties": {
+        "burstingEnabled": true,
+        "diskSizeGB": 1024
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "burstingEnabled": true,
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 1024,
+          "provisioningState": "Updating"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "Create or update a bursting enabled managed disk."
+}

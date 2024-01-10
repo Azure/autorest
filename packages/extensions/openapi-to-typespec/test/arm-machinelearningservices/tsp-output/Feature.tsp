@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FeaturesetVersion.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
@@ -15,6 +17,7 @@ namespace Azure.ResourceManager.MachineLearning;
 model Feature is ProxyResource<FeatureProperties> {
   @doc("Feature Name. This is case-sensitive.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+  @path
   @key("featureName")
   @segment("features")
   name: string;

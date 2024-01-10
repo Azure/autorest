@@ -1,0 +1,180 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D1_v2"
+        },
+        "networkProfile": {
+          "networkApiVersion": "2020-11-01",
+          "networkInterfaceConfigurations": [
+            {
+              "name": "{nic-config-name}",
+              "properties": {
+                "deleteOption": "Delete",
+                "ipConfigurations": [
+                  {
+                    "name": "{ip-config-name}",
+                    "properties": {
+                      "primary": true,
+                      "publicIPAddressConfiguration": {
+                        "name": "{publicIP-config-name}",
+                        "properties": {
+                          "deleteOption": "Detach",
+                          "dnsSettings": {
+                            "domainNameLabel": "aaaaa",
+                            "domainNameLabelScope": "TenantReuse"
+                          },
+                          "publicIPAllocationMethod": "Static"
+                        },
+                        "sku": {
+                          "name": "Basic",
+                          "tier": "Global"
+                        }
+                      }
+                    }
+                  }
+                ],
+                "primary": true
+              }
+            }
+          ]
+        },
+        "osProfile": {
+          "adminPassword": "{your-password}",
+          "adminUsername": "{your-username}",
+          "computerName": "myVM"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "offer": "WindowsServer",
+            "publisher": "MicrosoftWindowsServer",
+            "sku": "2016-Datacenter",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "myVMosdisk",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/toBeCreatedNetworkInterface",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/toBeCreatedNetworkInterface",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "Create a VM with network interface configuration with public ip address dns settings"
+}

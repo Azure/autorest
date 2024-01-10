@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "contoso@live.com",
+            "type": "Microsoft.ApiManagement/service/notifications/recipientEmails",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/notifications/RequestPublisherNotificationMessage/recipientEmails/contoso@live.com",
+            "properties": {
+              "email": "contoso@live.com"
+            }
+          },
+          {
+            "name": "foobar!live",
+            "type": "Microsoft.ApiManagement/service/notifications/recipientEmails",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar!live",
+            "properties": {
+              "email": "foobar!live"
+            }
+          },
+          {
+            "name": "foobar@live.com",
+            "type": "Microsoft.ApiManagement/service/notifications/recipientEmails",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar@live.com",
+            "properties": {
+              "email": "foobar@live.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NotificationRecipientEmail_ListByNotification",
+  "title": "ApiManagementListNotificationRecipientEmails"
+}

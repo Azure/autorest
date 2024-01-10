@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "operationId": "57d2ef278aa04f0ad01d6cdc",
+    "api-version": "2021-08-01",
+    "apiId": "57d2ef278aa04f0888cba3f3",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "57d2ef278aa04f0ad01d6cdc",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d2ef278aa04f0888cba3f3/operations/57d2ef278aa04f0ad01d6cdc",
+        "properties": {
+          "method": "POST",
+          "displayName": "CancelOrder",
+          "templateParameters": [],
+          "urlTemplate": "/?soapAction=http://tempuri.org/IFazioService/CancelOrder",
+          "request": {
+            "description": "IFazioService_CancelOrder_InputMessage",
+            "headers": [],
+            "queryParameters": [],
+            "representations": [
+              {
+                "contentType": "text/xml",
+                "schemaId": "6980a395-f08b-4a59-8295-1440cbd909b8",
+                "typeName": "CancelOrder"
+              }
+            ]
+          },
+          "responses": [
+            {
+              "description": "IFazioService_CancelOrder_OutputMessage",
+              "headers": [],
+              "representations": [
+                {
+                  "contentType": "text/xml",
+                  "schemaId": "6980a395-f08b-4a59-8295-1440cbd909b8",
+                  "typeName": "CancelOrderResponse"
+                }
+              ],
+              "statusCode": 200
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ApiOperation_Get",
+  "title": "ApiManagementGetApiOperation"
+}

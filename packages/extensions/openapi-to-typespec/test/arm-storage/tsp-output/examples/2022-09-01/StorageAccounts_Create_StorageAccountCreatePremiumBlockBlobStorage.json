@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "kind": "BlockBlobStorage",
+      "location": "eastus",
+      "properties": {
+        "allowSharedKeyAccess": true,
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "minimumTlsVersion": "TLS1_2"
+      },
+      "sku": {
+        "name": "Premium_LRS"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+        "properties": {
+          "accessTier": "Premium",
+          "allowBlobPublicAccess": false,
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "requireInfrastructureEncryption": false,
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            }
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus2euap",
+          "provisioningState": "Succeeded",
+          "statusOfPrimary": "available",
+          "statusOfSecondary": "available",
+          "supportsHttpsTrafficOnly": true
+        },
+        "sku": {
+          "name": "Premium_LRS",
+          "tier": "Premium"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreatePremiumBlockBlobStorage"
+}

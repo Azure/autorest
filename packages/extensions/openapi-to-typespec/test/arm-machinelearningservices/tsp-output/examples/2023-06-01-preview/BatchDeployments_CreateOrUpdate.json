@@ -1,0 +1,222 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "description": "string",
+        "codeConfiguration": {
+          "codeId": "string",
+          "scoringScript": "string"
+        },
+        "compute": "string",
+        "environmentId": "string",
+        "environmentVariables": {
+          "string": "string"
+        },
+        "errorThreshold": 1,
+        "loggingLevel": "Info",
+        "maxConcurrencyPerInstance": 1,
+        "miniBatchSize": 1,
+        "model": {
+          "assetId": "string",
+          "referenceType": "Id"
+        },
+        "outputAction": "SummaryOnly",
+        "outputFileName": "string",
+        "properties": {
+          "string": "string"
+        },
+        "resources": {
+          "instanceCount": 1,
+          "instanceType": "string",
+          "properties": {
+            "string": {
+              "cd3c37dc-2876-4ca4-8a54-21bd7619724a": null
+            }
+          }
+        },
+        "retrySettings": {
+          "maxRetries": 1,
+          "timeout": "PT5M"
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Free"
+      },
+      "tags": {}
+    },
+    "deploymentName": "testDeploymentName",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
+          },
+          "compute": "string",
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
+          "errorThreshold": 1,
+          "loggingLevel": "Info",
+          "maxConcurrencyPerInstance": 1,
+          "miniBatchSize": 1,
+          "model": {
+            "assetId": "string",
+            "referenceType": "Id"
+          },
+          "outputAction": "SummaryOnly",
+          "outputFileName": "string",
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "string",
+            "properties": {
+              "string": {
+                "4939850d-8eae-4343-8566-0826259a2ad1": null
+              }
+            }
+          },
+          "retrySettings": {
+            "maxRetries": 1,
+            "timeout": "PT5M"
+          }
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
+          },
+          "compute": "string",
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
+          "errorThreshold": 1,
+          "loggingLevel": "Info",
+          "maxConcurrencyPerInstance": 1,
+          "miniBatchSize": 1,
+          "model": {
+            "assetId": "string",
+            "referenceType": "Id"
+          },
+          "outputAction": "SummaryOnly",
+          "outputFileName": "string",
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "string",
+            "properties": {
+              "string": {
+                "b76755e4-16bf-45d4-b625-6634df7444cc": null
+              }
+            }
+          },
+          "retrySettings": {
+            "maxRetries": 1,
+            "timeout": "PT5M"
+          }
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "BatchDeployments_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Batch Deployment."
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "displayName": "testsub"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "sid": "testsub",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsub",
+        "type": "Microsoft.ApiManagement/service/subscriptions",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/subscriptions/testsub",
+        "properties": {
+          "createdDate": "2017-06-02T17:59:06.223Z",
+          "displayName": "testsub",
+          "ownerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b",
+          "scope": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/5600b59475ff190048060002",
+          "state": "submitted"
+        }
+      }
+    }
+  },
+  "operationId": "Subscription_Update",
+  "title": "ApiManagementUpdateSubscription"
+}

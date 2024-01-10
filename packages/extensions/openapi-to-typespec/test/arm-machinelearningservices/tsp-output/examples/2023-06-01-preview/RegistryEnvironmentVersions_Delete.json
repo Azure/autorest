@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "environmentName": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "RegistryEnvironmentVersions_Delete",
+  "title": "Delete Registry Environment Version."
+}

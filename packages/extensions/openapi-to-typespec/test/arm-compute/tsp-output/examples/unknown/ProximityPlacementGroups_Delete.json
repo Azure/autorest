@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "proximityPlacementGroupName": "myProximityPlacementGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "ProximityPlacementGroups_Delete",
+  "title": "Delete a proximity placement group."
+}

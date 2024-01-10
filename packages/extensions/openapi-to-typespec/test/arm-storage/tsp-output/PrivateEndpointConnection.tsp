@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./StorageAccount.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("The Private Endpoint Connection resource.")
@@ -15,6 +17,7 @@ namespace Microsoft.Storage;
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("The name of the private endpoint connection associated with the Azure resource")
+  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

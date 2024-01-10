@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "InstanceId",
+    "resourceGroupName": "ResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "VmScaleSetName"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "VirtualMachineScaleSetVMs_SimulateEviction",
+  "title": "Simulate Eviction a virtual machine."
+}

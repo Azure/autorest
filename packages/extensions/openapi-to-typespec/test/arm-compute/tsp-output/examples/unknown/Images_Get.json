@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "created",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+                "lun": 1,
+                "managedDisk": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2"
+                },
+                "snapshot": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                },
+                "storageAccountType": "Standard_LRS"
+              }
+            ],
+            "osDisk": {
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "diskSizeGB": 20,
+              "managedDisk": {
+                "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1"
+              },
+              "osState": "Generalized",
+              "osType": "Windows",
+              "snapshot": {
+                "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+              },
+              "storageAccountType": "Standard_LRS"
+            },
+            "zoneResilient": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_Get",
+  "title": "Get information about a virtual machine image."
+}

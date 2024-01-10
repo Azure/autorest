@@ -1,0 +1,50 @@
+{
+  "operationId": "DataTypes_Update",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "dataProductName": "dataproduct01",
+    "dataTypeName": "datatypename",
+    "properties": {
+      "properties": {
+        "databaseCacheRetention": 16,
+        "databaseRetention": 9,
+        "state": "STARTED",
+        "storageOutputRetention": 30
+      }
+    },
+    "resourceGroupName": "aoiresourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataTypes_Update_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "datatypename",
+        "type": "Microsoft.NetworkAnalytics/DataProducts/DataTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/dataProducts/dataproduct01/dataTypes/datatypename",
+        "properties": {
+          "databaseCacheRetention": 16,
+          "databaseRetention": 9,
+          "provisioningState": "Succeeded",
+          "state": "STARTED",
+          "stateReason": "State Reason",
+          "storageOutputRetention": 30,
+          "visualizationUrl": "visualizationUrl"
+        },
+        "systemData": {
+          "createdAt": "2023-09-04T08:26:27.1506343Z",
+          "createdBy": "abc@micros.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-09-04T08:26:27.1506343Z",
+          "lastModifiedBy": "abc@micros.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

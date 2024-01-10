@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "recordType": "A",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/A",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/A/record1",
+        "properties": {
+          "ARecords": [
+            {
+              "ipv4Address": "127.0.0.1"
+            }
+          ],
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key2": "value2"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "Patch A recordset"
+}

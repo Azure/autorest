@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "solutionId": "provider.solution",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "Microsoft.AgFoodPlatform/farmBeats/solutions",
+        "eTag": "19002383-0000-0700-0000-633572de0000",
+        "id": "/subscriptions/ff57165d-e71f-4a0e-8e9b-3cd461dc0f38/resourceGroups/bugbash-instances-westus2/providers/Microsoft.AgFoodPlatform/farmBeats/bb-df-wus2-1/solutions/string",
+        "properties": {
+          "marketplacePublisherId": "publisherId",
+          "offerId": "offerId",
+          "partnerId": "abc",
+          "planId": "planId",
+          "roleAssignmentId": "11111111-2222-3333-4444-555555555555",
+          "saasSubscriptionId": "123",
+          "saasSubscriptionName": "name",
+          "solutionId": "abc.intbugbashfour",
+          "termId": "termId"
+        },
+        "systemData": {
+          "createdAt": "2022-09-29T10:26:29Z",
+          "createdBy": "billtest486451@live.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-29T10:26:38Z",
+          "lastModifiedBy": "billtest486451@live.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Solutions_Get",
+  "title": "Solutions_Get"
+}

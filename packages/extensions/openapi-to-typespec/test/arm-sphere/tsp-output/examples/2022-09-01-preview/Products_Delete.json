@@ -1,0 +1,25 @@
+{
+  "operationId": "Products_Delete",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProductName1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Products_Delete",
+  "responses": {
+    "200": {
+      "description": "Resource deleted successfully."
+    },
+    "202": {
+      "description": "Resource deletion accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    },
+    "204": {
+      "description": "Resource deleted successfully."
+    }
+  }
+}

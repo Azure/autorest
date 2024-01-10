@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BusinessProcess.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("A business process version.")
 @parentResource(BusinessProcess)
 model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
   @doc("The version of the business process")
+  @path
   @key("businessProcessVersion")
   @segment("versions")
   name: string;

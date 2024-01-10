@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "extensionParameters": {
+      "properties": {
+        "type": "extType",
+        "autoUpgradeMinorVersion": true,
+        "publisher": "extPublisher",
+        "settings": {
+          "UserName": "xyz@microsoft.com"
+        },
+        "typeHandlerVersion": "1.2"
+      }
+    },
+    "instanceId": "0",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmExtensionName": "myVMExtension",
+    "vmScaleSetName": "myvmScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVMExtension",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
+        "properties": {
+          "type": "extType",
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "settings": {
+            "UserName": "xyz@microsoft.com"
+          },
+          "typeHandlerVersion": "1.2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myVMExtension",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
+        "properties": {
+          "type": "extType",
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "settings": {
+            "UserName": "xyz@microsoft.com"
+          },
+          "typeHandlerVersion": "1.2"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
+  "title": "Create VirtualMachineScaleSet VM extension."
+}

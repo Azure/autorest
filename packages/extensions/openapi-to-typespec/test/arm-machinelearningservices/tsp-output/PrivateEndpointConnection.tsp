@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("The Private Endpoint Connection resource.")
@@ -15,6 +17,7 @@ namespace Azure.ResourceManager.MachineLearning;
 model PrivateEndpointConnection
   is TrackedResource<PrivateEndpointConnectionProperties> {
   @doc("NRP Private Endpoint Connection Name")
+  @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;

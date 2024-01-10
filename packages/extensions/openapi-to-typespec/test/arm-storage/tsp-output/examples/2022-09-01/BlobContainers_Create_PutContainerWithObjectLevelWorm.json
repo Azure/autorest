@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "blobContainer": {
+      "properties": {
+        "immutableStorageWithVersioning": {
+          "enabled": true
+        }
+      }
+    },
+    "containerName": "container6185",
+    "monitor": "true",
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "container6185",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185",
+        "properties": {
+          "immutableStorageWithVersioning": {
+            "enabled": true
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "container6185",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/blobServices/default/containers/container6185",
+        "properties": {
+          "immutableStorageWithVersioning": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "BlobContainers_Create",
+  "title": "PutContainerWithObjectLevelWorm"
+}

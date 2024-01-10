@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("External OAuth authorization server settings.")
@@ -18,19 +20,23 @@ model AuthorizationServerContract
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("authsid")
   @segment("authorizationServers")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "AuthorizationServer")
-interface AuthorizationServerContracts_AuthorizationServer {
+interface AuthorizationServerContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the authorization server specified by its identifier.")
+  @operationId("AuthorizationServer_Get")
   get is ArmResourceRead<AuthorizationServerContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the authorizationServer specified by its identifier.")
   @head
+  @operationId("AuthorizationServer_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       AuthorizationServerContract,
@@ -38,7 +44,9 @@ interface AuthorizationServerContracts_AuthorizationServer {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates new authorization server or updates an existing authorization server.")
+  @operationId("AuthorizationServer_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     {
@@ -50,7 +58,9 @@ interface AuthorizationServerContracts_AuthorizationServer {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the authorization server specified by its identifier.")
+  @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
     AuthorizationServerUpdateContract,
@@ -63,7 +73,9 @@ interface AuthorizationServerContracts_AuthorizationServer {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific authorization server instance.")
+  @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     {
@@ -75,7 +87,9 @@ interface AuthorizationServerContracts_AuthorizationServer {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of authorization servers defined within a service instance.")
+  @operationId("AuthorizationServer_ListByService")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     {
@@ -96,7 +110,9 @@ interface AuthorizationServerContracts_AuthorizationServer {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the client secret details of the authorization server.")
+  @operationId("AuthorizationServer_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
     void,

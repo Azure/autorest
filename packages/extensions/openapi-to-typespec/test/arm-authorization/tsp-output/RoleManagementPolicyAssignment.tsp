@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 @doc("Role management policy")
 model RoleManagementPolicyAssignment
   is ExtensionResource<RoleManagementPolicyAssignmentProperties> {
   @doc("The name of format {guid_guid} the role management policy assignment to get.")
+  @path
   @key("roleManagementPolicyAssignmentName")
   @segment("roleManagementPolicyAssignments")
   name: string;

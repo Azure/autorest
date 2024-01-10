@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccessName": "myDiskAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myPrivateEndpointConnection",
+            "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnection",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-Approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiskAccesses_ListPrivateEndpointConnections",
+  "title": "Get information about a private endpoint connection under a disk access resource."
+}

@@ -1,0 +1,19 @@
+{
+  "operationId": "DataProductsCatalogs_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataProductsCatalogs_ListBySubscription_MinimumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs/default"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "restorePointCollection1",
+            "type": "Microsoft.Compute/restorePointCollections",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/restorePointCollection1",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "restorePointCollectionId": "59f04a5d-f783-4200-a1bd-d3f464e8c4b4",
+              "source": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/restorePointCollection1",
+                "location": "westus"
+              }
+            },
+            "tags": {
+              "myTag1": "tagValue1"
+            }
+          },
+          {
+            "name": "restorePointCollection2",
+            "type": "Microsoft.Compute/restorePointCollections",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/restorePointCollection2",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Deleting",
+              "restorePointCollectionId": "2875c590-e337-4102-9668-4f5b7e3f98a4",
+              "source": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/restorePointCollection2",
+                "location": "westus"
+              }
+            },
+            "tags": {
+              "myTag1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RestorePointCollections_List",
+  "title": "Gets the list of restore point collections in a resource group."
+}

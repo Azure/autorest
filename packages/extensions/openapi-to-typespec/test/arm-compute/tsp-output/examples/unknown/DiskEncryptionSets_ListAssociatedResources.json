@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources?$skiptoken={token}",
+        "value": [
+          "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
+          "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+        ]
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_ListAssociatedResources",
+  "title": "List all resources that are encrypted with this disk encryption set."
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "snapshot": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "CopyStart",
+          "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+        }
+      }
+    },
+    "snapshotName": "mySnapshot2",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySnapshot2",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "CopyStart",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "mySnapshot2",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "CopyStart",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "Create a snapshot from an existing snapshot in the same or a different subscription in a different region."
+}

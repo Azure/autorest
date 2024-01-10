@@ -1,0 +1,30 @@
+{
+  "operationId": "Catalogs_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Catalogs_ListByResourceGroup",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "name": "MyCatalog1",
+            "type": "Microsoft.AzureSphere/catalogs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1",
+            "location": "global"
+          },
+          {
+            "name": "MyCatalog2",
+            "type": "Microsoft.AzureSphere/catalogs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog2",
+            "location": "global"
+          }
+        ]
+      }
+    }
+  }
+}

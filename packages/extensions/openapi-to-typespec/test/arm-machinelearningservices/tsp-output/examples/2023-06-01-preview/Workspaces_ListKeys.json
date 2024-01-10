@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "appInsightsInstrumentationKey": null,
+        "containerRegistryCredentials": {
+          "location": null,
+          "passwords": [
+            {
+              "name": "password",
+              "value": "<value>"
+            },
+            {
+              "name": "password2",
+              "value": "0KARRQoQHSUq1yViPWg7YFernOS=Ic/t"
+            }
+          ],
+          "username": "testdemoworkjmjmeykp"
+        },
+        "notebookAccessKeys": {
+          "primaryAccessKey": null,
+          "secondaryAccessKey": null
+        },
+        "userStorageArmId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/ragargeastus2euap/providers/Microsoft.Storage/storageAccounts/testdemoworkazashomr",
+        "userStorageKey": null
+      }
+    }
+  },
+  "operationId": "Workspaces_ListKeys",
+  "title": "List Workspace Keys"
+}

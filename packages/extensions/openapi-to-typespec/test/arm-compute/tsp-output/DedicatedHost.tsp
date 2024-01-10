@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DedicatedHostGroup.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the Dedicated host.")
 @parentResource(DedicatedHostGroup)
 model DedicatedHost is TrackedResource<DedicatedHostProperties> {
   @doc("The name of the dedicated host.")
+  @path
   @key("hostName")
   @segment("hosts")
   name: string;

@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "portalRevisionId": "20201112101010",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "PortalRevision_GetEntityTag",
+  "title": "ApiManagementHeadPortalRevision"
+}

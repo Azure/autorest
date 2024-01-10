@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "fqdn": "testnotebook.notebooks.azure.com",
+        "notebookPreparationError": {
+          "errorMessage": "general error",
+          "statusCode": 500
+        },
+        "resourceId": "aabbccddee112233445566778899"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "Workspaces_PrepareNotebook",
+  "title": "Prepare Notebook"
+}

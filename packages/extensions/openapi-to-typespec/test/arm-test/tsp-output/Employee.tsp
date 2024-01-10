@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
 @doc("A Test resource")
 model Employee is TrackedResource<EmployeeProperties> {
   @doc("Name of employee")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @path
   @key("employeeName")
   @segment("employees")
   name: string;
@@ -24,7 +27,11 @@ interface Employees {
   get is ArmResourceRead<Employee>;
 
   @doc("Create a Employee")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Employee>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Employee,
+    BaseParameters<Employee>,
+    ArmAsyncOperationHeader
+  >;
 
   @doc("Update a Employee")
   update is ArmCustomPatchSync<Employee, EmployeeUpdate>;

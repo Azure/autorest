@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "opid": "templateOpenIdConnect3",
+    "parameters": {
+      "properties": {
+        "clientId": "oidprovidertemplate3",
+        "clientSecret": "x",
+        "displayName": "templateoidprovider3",
+        "metadataEndpoint": "https://oidprovider-template3.net"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "templateOpenIdConnect3",
+        "type": "Microsoft.ApiManagement/service/openidconnectproviders",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect3",
+        "properties": {
+          "clientId": "oidprovidertemplate3",
+          "displayName": "templateoidprovider3",
+          "metadataEndpoint": "https://oidprovider-template3.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "templateOpenIdConnect3",
+        "type": "Microsoft.ApiManagement/service/openidconnectproviders",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect3",
+        "properties": {
+          "clientId": "oidprovidertemplate3",
+          "displayName": "templateoidprovider3",
+          "metadataEndpoint": "https://oidprovider-template3.net"
+        }
+      }
+    }
+  },
+  "operationId": "OpenIdConnectProvider_CreateOrUpdate",
+  "title": "ApiManagementCreateOpenIdConnectProvider"
+}

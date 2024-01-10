@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaaaa",
+        "value": [
+          {
+            "name": "myDedicatedHost",
+            "type": "aaaaaaaaaaaaaaaaaaa",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+            "location": "westus",
+            "properties": {
+              "autoReplaceOnFailure": true,
+              "hostId": "{GUID}",
+              "instanceView": {
+                "assetId": "aaaaaaaaaaaaaaaa",
+                "availableCapacity": {
+                  "allocatableVMs": [
+                    {
+                      "count": 26,
+                      "vmSize": "aaaaaaaaaaaaaaaaaaaa"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                    "displayStatus": "aaaaaa",
+                    "level": "Info",
+                    "message": "a",
+                    "time": "2021-11-30T12:58:26.522Z"
+                  }
+                ]
+              },
+              "licenseType": "Windows_Server_Hybrid",
+              "platformFaultDomain": 1,
+              "provisioningState": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+              "provisioningTime": "2021-11-30T12:58:26.526Z",
+              "virtualMachines": [
+                {
+                  "id": "aaaa"
+                }
+              ]
+            },
+            "sku": {
+              "name": "DSv3-Type1",
+              "capacity": 7,
+              "tier": "aaa"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHosts_ListByHostGroup",
+  "title": "DedicatedHost_ListByHostGroup_MaximumSet_Gen"
+}

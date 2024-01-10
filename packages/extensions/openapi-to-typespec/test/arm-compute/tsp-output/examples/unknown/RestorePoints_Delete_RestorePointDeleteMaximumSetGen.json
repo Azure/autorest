@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "restorePointCollectionName": "aaaaaaaaaaaaaaaaaaaaaa",
+    "restorePointName": "a",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "RestorePoints_Delete",
+  "title": "RestorePoint_Delete_MaximumSet_Gen"
+}

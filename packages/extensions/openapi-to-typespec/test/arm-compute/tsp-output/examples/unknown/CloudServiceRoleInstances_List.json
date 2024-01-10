@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ContosoFrontend_IN_0",
+            "type": "Microsoft.Compute/cloudServices/roleInstances",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoFrontend_IN_0",
+            "location": "eastus2euap",
+            "properties": {
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoFrontend_IN_0/networkInterfaces/nic1"
+                  }
+                ]
+              }
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard"
+            }
+          },
+          {
+            "name": "ContosoFrontend_IN_1",
+            "type": "Microsoft.Compute/cloudServices/roleInstances",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoFrontend_IN_1",
+            "location": "eastus2euap",
+            "properties": {
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoFrontend_IN_1/networkInterfaces/nic1"
+                  }
+                ]
+              }
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard"
+            }
+          },
+          {
+            "name": "ContosoBackend_IN_0",
+            "type": "Microsoft.Compute/cloudServices/roleInstances",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoBackend_IN_0",
+            "location": "eastus2euap",
+            "properties": {
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoBackend_IN_0/networkInterfaces/nic1"
+                  }
+                ]
+              }
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard"
+            }
+          },
+          {
+            "name": "ContosoBackend_IN_1",
+            "type": "Microsoft.Compute/cloudServices/roleInstances",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoBackend_IN_1",
+            "location": "eastus2euap",
+            "properties": {
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/ContosoBackend_IN_1/networkInterfaces/nic1"
+                  }
+                ]
+              }
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServiceRoleInstances_List",
+  "title": "List Role Instances in a Cloud Service"
+}

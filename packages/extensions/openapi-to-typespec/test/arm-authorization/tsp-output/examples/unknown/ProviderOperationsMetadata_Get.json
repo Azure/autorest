@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "resourceProviderNamespace": "resourceProviderNamespace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "name",
+        "type": "type",
+        "displayName": "displayName",
+        "id": "id",
+        "resourceTypes": [
+          {
+            "name": "name",
+            "displayName": "name",
+            "operations": []
+          }
+        ],
+        "operations": []
+      }
+    }
+  },
+  "operationId": "ProviderOperationsMetadata_Get",
+  "title": "List provider operations metadata for resource provider"
+}

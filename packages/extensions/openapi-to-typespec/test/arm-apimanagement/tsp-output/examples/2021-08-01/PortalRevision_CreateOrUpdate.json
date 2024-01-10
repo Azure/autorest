@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "description": "portal revision 1",
+        "isCurrent": true
+      }
+    },
+    "portalRevisionId": "20201112101010",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "20201112101010",
+        "type": "Microsoft.ApiManagement/service/portalRevisions",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalRevisions/20201112101010",
+        "properties": {
+          "description": "portal revision 1",
+          "createdDateTime": "2020-11-13T22:28:43.657Z",
+          "isCurrent": true,
+          "status": "completed",
+          "statusDetails": null,
+          "updatedDateTime": "2020-11-13T22:29:22.68Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalRevisions/20201112101010?api-version=2021-08-01&asyncId=5faf089b1d9a026694220e0c&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "PortalRevision_CreateOrUpdate",
+  "title": "ApiManagementCreatePortalRevision"
+}

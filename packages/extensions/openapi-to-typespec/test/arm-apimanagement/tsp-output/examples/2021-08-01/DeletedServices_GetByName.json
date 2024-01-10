@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "location": "westus",
+    "serviceName": "apimService3",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService3",
+        "type": "Microsoft.ApiManagement/deletedservices",
+        "id": "/subscriptions/subid/providers/Microsoft.ApiManagement/locations/westus/deletedservices/apimService3",
+        "location": "West US",
+        "properties": {
+          "deletionDate": "2017-05-27T15:33:55.5426123Z",
+          "scheduledPurgeDate": "2017-05-27T15:33:55.5426123Z",
+          "serviceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService3"
+        }
+      }
+    }
+  },
+  "operationId": "DeletedServices_GetByName",
+  "title": "ApiManagementGetDeletedServiceByName"
+}

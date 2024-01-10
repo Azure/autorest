@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the Shared Image Gallery that you want to create or update.")
 model Gallery is TrackedResource<GalleryProperties> {
   @doc("The name of the Shared Image Gallery.")
+  @path
   @key("galleryName")
   @segment("galleries")
   name: string;
@@ -49,11 +52,9 @@ interface Galleries {
 
   @doc("List galleries under a subscription.")
   list is ArmListBySubscription<Gallery>;
-}
 
-@armResourceOperations
-@projectedName("client", "GallerySharingProfile")
-interface Galleries_GallerySharingProfile {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update sharing profile of a gallery.")
+  @operationId("GallerySharingProfile_Update")
   update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
 }

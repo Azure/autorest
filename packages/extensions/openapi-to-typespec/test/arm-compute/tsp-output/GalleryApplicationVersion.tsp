@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./GalleryApplication.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the gallery Application Version that you want to create or update.")
@@ -15,6 +17,7 @@ namespace Microsoft.Compute;
 model GalleryApplicationVersion
   is TrackedResource<GalleryApplicationVersionProperties> {
   @doc("The name of the gallery Application Version to be retrieved.")
+  @path
   @key("galleryApplicationVersionName")
   @segment("versions")
   name: string;

@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "recordType": "PTR",
+    "relativeRecordSetName": "1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "0.0.127.in-addr.arpa"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "RecordSets_Delete",
+  "title": "Delete PTR recordset"
+}

@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "activePlacementGroupId": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
+  "title": "VirtualMachineScaleSet_ConvertToSinglePlacementGroup_MaximumSet_Gen"
+}

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "blobRanges": [
+        {
+          "endRange": "container/blobpath2",
+          "startRange": "container/blobpath1"
+        },
+        {
+          "endRange": "",
+          "startRange": "container2/blobpath3"
+        }
+      ],
+      "timeToRestore": "2019-04-20T15:30:00.0000000Z"
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "parameters": {
+          "blobRanges": [
+            {
+              "endRange": "container/blobpath2",
+              "startRange": "container/blobpath1"
+            },
+            {
+              "endRange": "",
+              "startRange": "container2/blobpath3"
+            }
+          ],
+          "timeToRestore": "2019-04-20T15:30:00.0000000Z"
+        },
+        "restoreId": "{restore_id}",
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "body": {
+        "parameters": {
+          "blobRanges": [
+            {
+              "endRange": "container/blobpath2",
+              "startRange": "container/blobpath1"
+            },
+            {
+              "endRange": "",
+              "startRange": "container2/blobpath3"
+            }
+          ],
+          "timeToRestore": "2019-04-20T15:30:00.0000000Z"
+        },
+        "restoreId": "{restore_id}",
+        "status": "InProgress"
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-09-01"
+      }
+    }
+  },
+  "operationId": "StorageAccounts_RestoreBlobRanges",
+  "title": "BlobRangesRestore"
+}

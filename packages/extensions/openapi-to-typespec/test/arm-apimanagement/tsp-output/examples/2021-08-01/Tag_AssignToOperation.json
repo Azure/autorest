@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "operationId": "5931a75ae4bbd512a88c680a",
+    "api-version": "2021-08-01",
+    "apiId": "5931a75ae4bbd512a88c680b",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "tagId": "tagId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "tagId1",
+        "type": "Microsoft.ApiManagement/service/tags",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+        "properties": {
+          "displayName": "tag1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "tagId1",
+        "type": "Microsoft.ApiManagement/service/tags",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1",
+        "properties": {
+          "displayName": "tag1"
+        }
+      }
+    }
+  },
+  "operationId": "Tag_AssignToOperation",
+  "title": "ApiManagementCreateApiOperationTag"
+}

@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "signedIdentifiers": [
+          {
+            "accessPolicy": {
+              "expiryTime": "2022-03-20T08:49:37.0000000Z",
+              "permission": "raud",
+              "startTime": "2022-03-17T08:49:37.0000000Z"
+            },
+            "id": "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI"
+          },
+          {
+            "accessPolicy": {
+              "expiryTime": "2022-03-20T08:49:37.0000000Z",
+              "permission": "rad",
+              "startTime": "2022-03-17T08:49:37.0000000Z"
+            },
+            "id": "PTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODklMTI"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}",
+    "tableName": "table6185"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "table6185",
+        "type": "Microsoft.Storage/storageAccounts/tableServices/tables",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/tableServices/default/tables/table6185",
+        "properties": {
+          "signedIdentifiers": [
+            {
+              "accessPolicy": {
+                "expiryTime": "2022-03-20T08:49:37.0000000Z",
+                "permission": "raud",
+                "startTime": "2022-03-17T08:49:37.0000000Z"
+              },
+              "id": "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI"
+            },
+            {
+              "accessPolicy": {
+                "expiryTime": "2022-03-20T08:49:37.0000000Z",
+                "permission": "rad",
+                "startTime": "2022-03-17T08:49:37.0000000Z"
+              },
+              "id": "PTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODklMTI"
+            }
+          ],
+          "tableName": "table6185"
+        }
+      }
+    }
+  },
+  "operationId": "Table_Update",
+  "title": "TableOperationPutOrPatchAcls"
+}

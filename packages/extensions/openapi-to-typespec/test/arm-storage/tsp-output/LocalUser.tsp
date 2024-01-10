@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./StorageAccount.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("The local user associated with the storage accounts.")
@@ -16,6 +18,7 @@ model LocalUser is ProxyResource<LocalUserProperties> {
   @doc("The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.")
   @maxLength(64)
   @minLength(3)
+  @path
   @key("username")
   @segment("localUsers")
   name: string;

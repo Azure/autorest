@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "value": {
+        "applicationInsights": {},
+        "containerRegistry": {},
+        "dnsResolution": {},
+        "keyVault": {},
+        "nsg": {},
+        "others": {},
+        "resourceLock": {},
+        "storageAccount": {},
+        "udr": {}
+      }
+    },
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "applicationInsightsResults": [],
+          "containerRegistryResults": [],
+          "dnsResolutionResults": [
+            {
+              "code": "CustomDNSInUse",
+              "level": "Warning",
+              "message": "We have detected an on-premise dns server is configured. Please make sure conditional forwarding is configured correctly according to doc https://foo"
+            }
+          ],
+          "keyVaultResults": [],
+          "networkSecurityRuleResults": [],
+          "otherResults": [],
+          "resourceLockResults": [],
+          "storageAccountResults": [],
+          "userDefinedRouteResults": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "Workspaces_Diagnose",
+  "title": "Diagnose Workspace"
+}

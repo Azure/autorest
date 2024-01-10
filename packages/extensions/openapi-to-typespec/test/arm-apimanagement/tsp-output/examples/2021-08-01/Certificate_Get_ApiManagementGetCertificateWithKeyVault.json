@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "certificateId": "templateCertkv",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "templateCertkv",
+        "type": "Microsoft.ApiManagement/service/certificates",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCertkv",
+        "properties": {
+          "expirationDate": "2037-01-01T07:00:00Z",
+          "keyVault": {
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-22T00:24:53.3191468Z"
+            },
+            "secretIdentifier": "https://rpbvtkeyvaultintegration.vault-int.azure-int.net/secrets/msitestingCert"
+          },
+          "subject": "CN=*.msitesting.net",
+          "thumbprint": "EA**********************9AD690"
+        }
+      }
+    }
+  },
+  "operationId": "Certificate_Get",
+  "title": "ApiManagementGetCertificateWithKeyVault"
+}

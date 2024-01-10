@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "authType": "AccessKey",
+        "category": "ADLSGen2",
+        "credentials": {
+          "accessKeyId": "some_string",
+          "secretAccessKey": "some_string"
+        },
+        "expiryTime": "2020-01-01T00:00:00Z",
+        "metadata": {},
+        "target": "some_string"
+      }
+    },
+    "connectionName": "some_string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "some_string",
+        "type": "some_string",
+        "id": "some_string",
+        "properties": {
+          "authType": "AccessKey",
+          "category": "ADLSGen2",
+          "credentials": {
+            "accessKeyId": "some_string",
+            "secretAccessKey": "some_string"
+          },
+          "expiryTime": "2020-01-01T00:00:00Z",
+          "metadata": {},
+          "target": "some_string"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T00:00:00Z",
+          "createdBy": "some_string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T00:00:00Z",
+          "lastModifiedBy": "some_string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WorkspaceConnections_Update",
+  "title": "UpdateWorkspaceConnection"
+}

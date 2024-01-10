@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the proximity placement group.")
 model ProximityPlacementGroup
   is TrackedResource<ProximityPlacementGroupProperties> {
   @doc("The name of the proximity placement group.")
+  @path
   @key("proximityPlacementGroupName")
   @segment("proximityPlacementGroups")
   name: string;

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataProduct.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
 @doc("The data type resource.")
@@ -17,6 +19,7 @@ model DataType is ProxyResource<DataTypeProperties> {
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9-]*$")
+  @path
   @key("dataTypeName")
   @segment("dataTypes")
   name: string;
@@ -28,13 +31,26 @@ interface DataTypes {
   get is ArmResourceRead<DataType>;
 
   @doc("Create data type resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataType>;
+  create is ArmResourceCreateOrUpdateAsync<
+    DataType,
+    BaseParameters<DataType>,
+    ArmAsyncOperationHeader
+  >;
 
   @doc("Update data type resource.")
-  update is ArmCustomPatchAsync<DataType, DataTypeUpdate>;
+  update is ArmCustomPatchAsync<
+    DataType,
+    DataTypeUpdate,
+    BaseParameters<DataType>,
+    ArmLroLocationHeader
+  >;
 
   @doc("Delete data type resource.")
-  delete is ArmResourceDeleteWithoutOkAsync<DataType>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DataType,
+    BaseParameters<DataType>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List data type by parent resource.")
   listByDataProduct is ArmResourceListByParent<DataType>;
@@ -42,7 +58,9 @@ interface DataTypes {
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoResponseContentAsync<
     DataType,
-    Record<unknown>
+    Record<unknown>,
+    BaseParameters<DataType>,
+    ArmLroLocationHeader
   >;
 
   @doc("Generate sas token for storage container.")

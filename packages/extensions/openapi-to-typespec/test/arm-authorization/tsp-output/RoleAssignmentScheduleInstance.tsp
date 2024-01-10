@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 @doc("Information about current or upcoming role assignment schedule instance")
 model RoleAssignmentScheduleInstance
   is ExtensionResource<RoleAssignmentScheduleInstanceProperties> {
   @doc("The name (hash of schedule name + time) of the role assignment schedule to get.")
+  @path
   @key("roleAssignmentScheduleInstanceName")
   @segment("roleAssignmentScheduleInstances")
   name: string;

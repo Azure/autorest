@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "Workspaces_ResyncKeys",
+  "title": "Resync Workspace Keys"
+}

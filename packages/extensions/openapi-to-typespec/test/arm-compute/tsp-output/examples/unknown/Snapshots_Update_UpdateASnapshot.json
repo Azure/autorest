@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "snapshot": {
+      "properties": {
+        "diskSizeGB": 20
+      },
+      "tags": {
+        "department": "Development",
+        "project": "UpdateSnapshots"
+      }
+    },
+    "snapshotName": "mySnapshot",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySnapshot",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          },
+          "diskSizeGB": 20,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "UpdateSnapshots"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "mySnapshot",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          },
+          "diskSizeGB": 20,
+          "provisioningState": "Updating"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "UpdateSnapshots"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "Snapshots_Update",
+  "title": "Update a snapshot."
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataContainerResource.tsp";
@@ -8,30 +9,43 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(DataContainerResource)
 model DataVersionBaseResource is ProxyResource<DataVersionBase> {
   @doc("Version identifier.")
+  @path
   @key("version")
   @segment("versions")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "RegistryDataVersions")
-interface DataVersionBaseResources_RegistryDataVersions {
+interface DataVersionBaseResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get version.")
+  @operationId("RegistryDataVersions_Get")
   get is ArmResourceRead<DataVersionBaseResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
+  @operationId("RegistryDataVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataVersionBaseResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")
-  delete is ArmResourceDeleteAsync<DataVersionBaseResource>;
+  @operationId("RegistryDataVersions_Delete")
+  delete is ArmResourceDeleteAsync<
+    DataVersionBaseResource,
+    BaseParameters<DataVersionBaseResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List data versions in the data container")
+  @operationId("RegistryDataVersions_List")
   list is ArmResourceListByParent<
     DataVersionBaseResource,
     {
@@ -62,7 +76,9 @@ Top count of results, top count cannot be greater than the page size.
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Generate a storage location and credential for the client to upload a data asset to.")
+  @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     DataVersionBaseResource,
     PendingUploadRequestDto,

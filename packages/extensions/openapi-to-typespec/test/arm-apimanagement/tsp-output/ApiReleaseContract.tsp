@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("ApiRelease details.")
@@ -17,19 +19,23 @@ model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("releaseId")
   @segment("releases")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "ApiRelease")
-interface ApiReleaseContracts_ApiRelease {
+interface ApiReleaseContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Returns the details of an API release.")
+  @operationId("ApiRelease_Get")
   get is ArmResourceRead<ApiReleaseContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Returns the etag of an API release.")
   @head
+  @operationId("ApiRelease_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       ApiReleaseContract,
@@ -37,7 +43,9 @@ interface ApiReleaseContracts_ApiRelease {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Release for the API.")
+  @operationId("ApiRelease_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiReleaseContract,
     {
@@ -49,7 +57,9 @@ interface ApiReleaseContracts_ApiRelease {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the release of the API specified by its identifier.")
+  @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
     ApiReleaseContract,
@@ -62,7 +72,9 @@ interface ApiReleaseContracts_ApiRelease {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified release in the API.")
+  @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
     {
@@ -74,7 +86,9 @@ interface ApiReleaseContracts_ApiRelease {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.")
+  @operationId("ApiRelease_ListByService")
   listByService is ArmResourceListByParent<
     ApiReleaseContract,
     {

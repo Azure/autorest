@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "enabled": true,
+        "termsOfService": {
+          "consentRequired": true,
+          "enabled": true,
+          "text": "Terms of service text."
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "signup",
+        "type": "Microsoft.ApiManagement/service/portalsettings",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signup",
+        "properties": {
+          "enabled": true,
+          "termsOfService": {
+            "consentRequired": true,
+            "enabled": true,
+            "text": "Terms of service text."
+          }
+        }
+      }
+    }
+  },
+  "operationId": "SignUpSettings_CreateOrUpdate",
+  "title": "ApiManagementPortalSettingsUpdateSignUp"
+}

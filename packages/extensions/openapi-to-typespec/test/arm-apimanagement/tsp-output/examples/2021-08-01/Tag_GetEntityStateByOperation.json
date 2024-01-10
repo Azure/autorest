@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "operationId": "59d6bb8f1f7fab13dc67ec9a",
+    "api-version": "2021-08-01",
+    "apiId": "59d6bb8f1f7fab13dc67ec9b",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "tagId": "59306a29e4bbd510dc24e5f9"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Etag": "AAAAAAAACCI="
+      }
+    }
+  },
+  "operationId": "Tag_GetEntityStateByOperation",
+  "title": "ApiManagementHeadApiOperationTag"
+}

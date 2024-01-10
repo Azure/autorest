@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "recordType": "AAAA",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "RecordSets_Delete",
+  "title": "Delete AAAA recordset"
+}

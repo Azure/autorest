@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "subscriptions": {
+          "enabled": true
+        },
+        "url": "http://contoso.com/delegation",
+        "userRegistration": {
+          "enabled": true
+        },
+        "validationKey": "<validationKey>"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "DelegationSettings_Update",
+  "title": "ApiManagementPortalSettingsUpdateDelegation"
+}

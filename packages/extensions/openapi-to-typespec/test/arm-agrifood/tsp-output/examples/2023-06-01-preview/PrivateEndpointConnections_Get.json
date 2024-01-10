@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.AgFoodPlatform/farmBeats/privateEndpointConnections",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName/privateEndpointConnections/privateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "PrivateEndpointConnectionNotFound",
+          "message": "Private endpoint connection resource 'privateEndpointConnectionName' for subscriptionId '11111111-2222-3333-4444-555555555555', resource group name 'examples-rg', resource type 'farmBeats' and resource name 'examples-farmbeatsResourceName' not found."
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Get",
+  "title": "PrivateEndpointConnections_Get"
+}

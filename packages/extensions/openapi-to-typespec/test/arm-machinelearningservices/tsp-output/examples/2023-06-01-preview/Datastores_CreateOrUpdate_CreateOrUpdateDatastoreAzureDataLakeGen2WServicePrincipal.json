@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "accountName": "string",
+        "credentials": {
+          "authorityUrl": "string",
+          "clientId": "00000000-1111-2222-3333-444444444444",
+          "credentialsType": "ServicePrincipal",
+          "resourceUrl": "string",
+          "secrets": {
+            "clientSecret": "string",
+            "secretsType": "ServicePrincipal"
+          },
+          "tenantId": "00000000-1111-2222-3333-444444444444"
+        },
+        "datastoreType": "AzureDataLakeGen2",
+        "endpoint": "string",
+        "filesystem": "string",
+        "properties": null,
+        "tags": {
+          "string": "string"
+        },
+        "protocol": "string"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "skipValidation": false,
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "accountName": "string",
+          "credentials": {
+            "authorityUrl": "string",
+            "clientId": "00000000-1111-2222-3333-444444444444",
+            "credentialsType": "ServicePrincipal",
+            "resourceUrl": "string",
+            "secrets": {
+              "secretsType": "ServicePrincipal"
+            },
+            "tenantId": "00000000-1111-2222-3333-444444444444"
+          },
+          "datastoreType": "AzureDataLakeGen2",
+          "endpoint": "string",
+          "filesystem": "string",
+          "properties": null,
+          "tags": {
+            "string": "string"
+          },
+          "protocol": "string"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "accountName": "string",
+          "credentials": {
+            "authorityUrl": "string",
+            "clientId": "00000000-1111-2222-3333-444444444444",
+            "credentialsType": "ServicePrincipal",
+            "resourceUrl": "string",
+            "secrets": {
+              "secretsType": "ServicePrincipal"
+            },
+            "tenantId": "00000000-1111-2222-3333-444444444444"
+          },
+          "datastoreType": "AzureDataLakeGen2",
+          "endpoint": "string",
+          "filesystem": "string",
+          "properties": null,
+          "tags": {
+            "string": "string"
+          },
+          "protocol": "string"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Datastores_CreateOrUpdate",
+  "title": "CreateOrUpdate datastore (Azure Data Lake Gen2 w/ Service Principal)."
+}

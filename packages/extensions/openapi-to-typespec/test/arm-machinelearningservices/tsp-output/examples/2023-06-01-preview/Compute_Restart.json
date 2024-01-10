@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "Compute_Restart",
+  "title": "Restart ComputeInstance Compute"
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("DataConnector Model.")
@@ -16,6 +18,7 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
   @doc("Connector name.")
   @maxLength(63)
   @minLength(1)
+  @path
   @key("dataConnectorName")
   @segment("dataConnectors")
   name: string;

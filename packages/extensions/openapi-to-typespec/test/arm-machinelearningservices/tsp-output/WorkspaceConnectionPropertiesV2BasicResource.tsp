@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
@@ -16,30 +18,40 @@ model WorkspaceConnectionPropertiesV2BasicResource
   is ProxyResource<WorkspaceConnectionPropertiesV2> {
   @doc("Friendly name of the workspace connection")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+  @path
   @key("connectionName")
   @segment("connections")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "WorkspaceConnections")
-interface WorkspaceConnectionPropertiesV2BasicResources_WorkspaceConnections {
+interface WorkspaceConnectionPropertiesV2BasicResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists machine learning workspaces connections by name.")
+  @operationId("WorkspaceConnections_Get")
   get is ArmResourceRead<WorkspaceConnectionPropertiesV2BasicResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update machine learning workspaces connections under the specified workspace.")
+  @operationId("WorkspaceConnections_Create")
   create is ArmResourceCreateOrReplaceSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update machine learning workspaces connections under the specified workspace.")
+  @operationId("WorkspaceConnections_Update")
   update is ArmCustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,
     WorkspaceConnectionUpdateParameter
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete machine learning workspaces connections by name.")
+  @operationId("WorkspaceConnections_Delete")
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the available machine learning workspaces connections under the specified workspace.")
+  @operationId("WorkspaceConnections_List")
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
     {
@@ -55,7 +67,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources_WorkspaceConnections {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all the secrets of a machine learning workspaces connections.")
+  @operationId("WorkspaceConnections_ListSecrets")
   listSecrets is ArmResourceActionSync<
     WorkspaceConnectionPropertiesV2BasicResource,
     void,

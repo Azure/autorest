@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "recordType": "PTR",
+    "relativeRecordSetName": "1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "0.0.127.in-addr.arpa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1",
+        "type": "Microsoft.Network/dnsZones/PTR",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/0.0.127.in-addr.arpa/PTR/1",
+        "properties": {
+          "PTRRecords": [
+            {
+              "ptrdname": "localhost"
+            }
+          ],
+          "TTL": 3600,
+          "fqdn": "1.0.0.127.in-addr.arpa",
+          "metadata": {
+            "key2": "value2"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "Patch PTR recordset"
+}

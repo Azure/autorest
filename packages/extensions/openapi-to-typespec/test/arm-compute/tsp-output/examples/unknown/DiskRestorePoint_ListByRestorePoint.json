@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpc",
+    "subscriptionId": "{subscription-id}",
+    "vmRestorePointName": "vmrp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestDisk45ceb03433006d1baee0_b70cd924-3362-4a80-93c2-9415eaa12745",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpc/restorePoints/vmrp/diskRestorePoints/TestDisk45ceb03433006d1baee0_b70cd924-3362-4a80-93c2-9415eaa12745",
+            "properties": {
+              "familyId": "996bf3ce-b6ff-4e86-9db6-dc27ea06cea5",
+              "hyperVGeneration": "V1",
+              "networkAccessPolicy": "AllowAll",
+              "osType": "Windows",
+              "publicNetworkAccess": "Disabled",
+              "sourceResourceId": "/subscriptions/d2260d06-e00d-422f-8b63-93df551a59ae/resourceGroups/rg0680fb0c-89f1-41b4-96c0-35733a181558/providers/Microsoft.Compute/disks/TestDisk45ceb03433006d1baee0",
+              "sourceUniqueId": "48e058b1-7eea-4968-b532-10a8a1130c13",
+              "timeCreated": "2020-09-16T04:41:35.079872+00:00"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiskRestorePoint_ListByRestorePoint",
+  "title": "Get an incremental disk restorePoint resource."
+}

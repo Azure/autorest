@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "type": "Microsoft.Compute/diskEncryptionSets",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "westus",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            }
+          },
+          "autoKeyRotationError": {
+            "code": "ManagedServiceIdentityNotFound",
+            "message": "Auto-key rotation was disabled as managed service identity associated with DiskEncryptionSet 'myDiskEncryptionSet' was not found. Please update the resource with correct identity to re-enable auto-key rotation."
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": [],
+          "provisioningState": "Succeeded",
+          "rotationToLatestKeyVersionEnabled": true
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_Get",
+  "title": "Get information about a disk encryption set when auto-key rotation failed."
+}

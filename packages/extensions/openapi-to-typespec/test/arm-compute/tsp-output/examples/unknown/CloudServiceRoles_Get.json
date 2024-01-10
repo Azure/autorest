@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "roleName": "{role-name}",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{role-name}",
+        "type": "Microsoft.Compute/cloudServices/roles",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roles/{role-name}",
+        "location": "eastus2euap",
+        "properties": {
+          "uniqueId": "b03bc269-766b-4921-b91a-7dffaae4d03b:{role-name}"
+        },
+        "sku": {
+          "name": "Standard_D1_v2",
+          "capacity": 2,
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "CloudServiceRoles_Get",
+  "title": "Get Cloud Service Role"
+}

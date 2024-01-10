@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "$filter": "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
+    "api-version": "2021-08-01",
+    "interval": "PT15M",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "apiTimeAvg": 1337.46335,
+            "apiTimeMax": 1819.2173,
+            "apiTimeMin": 885.0839000000001,
+            "bandwidth": 3243,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 4,
+            "callCountTotal": 4,
+            "interval": "PT15M",
+            "serviceTimeAvg": 1255.917425,
+            "serviceTimeMax": 1697.3612,
+            "serviceTimeMin": 882.8264,
+            "timestamp": "2017-06-03T00:15:00Z"
+          },
+          {
+            "apiTimeAvg": 872.7818777777778,
+            "apiTimeMax": 1093.8407,
+            "apiTimeMin": 330.3206,
+            "bandwidth": 7776,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 1,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 9,
+            "callCountTotal": 10,
+            "interval": "PT15M",
+            "serviceTimeAvg": 824.2847111111112,
+            "serviceTimeMax": 973.2262000000001,
+            "serviceTimeMin": 215.24,
+            "timestamp": "2017-06-03T00:30:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Reports_ListByTime",
+  "title": "ApiManagementGetReportsByTime"
+}

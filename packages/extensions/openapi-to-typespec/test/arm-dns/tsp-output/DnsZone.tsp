@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Dns;
 @doc("Describes a DNS zone.")
 model DnsZone is TrackedResource<ZoneProperties> {
   @doc("The name of the DNS zone (without a terminating dot).")
+  @path
   @key("zoneName")
   @segment("dnsZones")
   name: string;
@@ -21,12 +24,15 @@ model DnsZone is TrackedResource<ZoneProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "Zones")
-interface DnsZones_Zones {
+interface DnsZones {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.")
+  @operationId("Zones_Get")
   get is ArmResourceRead<DnsZone>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates a DNS zone. Does not modify DNS records within the zone.")
+  @operationId("Zones_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsZone,
     {
@@ -42,7 +48,9 @@ interface DnsZones_Zones {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a DNS zone. Does not modify DNS records within the zone.")
+  @operationId("Zones_Update")
   update is ArmCustomPatchSync<
     DnsZone,
     ZoneUpdateOptions,
@@ -55,7 +63,9 @@ interface DnsZones_Zones {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.")
+  @operationId("Zones_Delete")
   delete is ArmResourceDeleteAsync<
     DnsZone,
     {
@@ -67,7 +77,9 @@ interface DnsZones_Zones {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the DNS zones within a resource group.")
+  @operationId("Zones_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DnsZone,
     {
@@ -79,13 +91,13 @@ interface DnsZones_Zones {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the DNS zones in all resource groups in a subscription.")
+  @operationId("Zones_List")
   list is ArmListBySubscription<DnsZone>;
-}
 
-@armResourceOperations
-@projectedName("client", "RecordSets")
-interface DnsZones_RecordSets {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("RecordSets_ListByDnsZone")
   @doc("Lists all record sets in a DNS zone.")
   // FIXME: RecordSets_ListByDnsZone could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets")

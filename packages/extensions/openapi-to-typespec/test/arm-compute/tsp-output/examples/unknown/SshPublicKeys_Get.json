@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "sshPublicKeyName": "mySshPublicKeyName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySshPublicKeyName",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName",
+        "location": "westus",
+        "properties": {
+          "publicKey": "{ssh-rsa public key}"
+        },
+        "tags": {
+          "{tagName}": "{tagValue}"
+        }
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_Get",
+  "title": "Get an ssh public key."
+}

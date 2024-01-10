@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "myRpc",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRpc",
+        "type": "Microsoft.Compute/restorePointCollections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "restorePointCollectionId": "59f04a5d-f783-4200-a1bd-d3f464e8c4b4",
+          "source": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+            "location": "eastus"
+          }
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "RestorePointCollections_Get",
+  "title": "Get a restore point collection (but not the restore points contained in the restore point collection)"
+}

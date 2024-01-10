@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "$expand": "instanceView",
+    "api-version": "2023-07-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myHost",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myHost",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myHost",
+        "location": "westus",
+        "properties": {
+          "autoReplaceOnFailure": true,
+          "hostId": "{GUID}",
+          "instanceView": {
+            "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
+            "availableCapacity": {
+              "allocatableVMs": [
+                {
+                  "count": 10,
+                  "vmSize": "Standard_A1"
+                }
+              ]
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info"
+              },
+              {
+                "code": "HealthState/available",
+                "displayStatus": "Host available",
+                "level": "Info"
+              }
+            ]
+          },
+          "platformFaultDomain": 1,
+          "provisioningState": "Succeeded",
+          "provisioningTime": "2019-06-27T01:02:38.3138469+00:00",
+          "timeCreated": "2019-06-27T01:02:38.3138469+00:00",
+          "virtualMachines": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1"
+            }
+          ]
+        },
+        "sku": {
+          "name": "DSv3-Type1"
+        },
+        "tags": {
+          "department": "HR"
+        }
+      }
+    }
+  },
+  "operationId": "DedicatedHosts_Get",
+  "title": "Get a dedicated host."
+}

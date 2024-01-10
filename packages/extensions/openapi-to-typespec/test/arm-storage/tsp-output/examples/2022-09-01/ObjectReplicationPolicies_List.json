@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "c6c23999-fd4e-433a-bcf9-1db69d27cd8a",
+            "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/objectReplicationPolicies/c6c23999-fd4e-433a-bcf9-1db69d27cd8a",
+            "properties": {
+              "destinationAccount": "destAccount1",
+              "sourceAccount": "sto2527"
+            }
+          },
+          {
+            "name": "141d23dc-8958-4b48-b6e6-5a40bf1af116",
+            "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto1590/objectReplicationPolicies/141d23dc-8958-4b48-b6e6-5a40bf1af116",
+            "properties": {
+              "destinationAccount": "destAccount2",
+              "sourceAccount": "sto2527"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ObjectReplicationPolicies_List",
+  "title": "StorageAccountListObjectReplicationPolicies"
+}

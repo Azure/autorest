@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "type": "FQDN",
+        "category": "UserDefined",
+        "destination": "some_string",
+        "status": "Active"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "ruleName": "some_string",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "some_string",
+        "type": "some_string",
+        "id": "some_string",
+        "properties": {
+          "type": "FQDN",
+          "category": "UserDefined",
+          "destination": "some_string",
+          "status": "Active"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
+  "title": "CreateOrUpdate ManagedNetworkSettingsRule"
+}

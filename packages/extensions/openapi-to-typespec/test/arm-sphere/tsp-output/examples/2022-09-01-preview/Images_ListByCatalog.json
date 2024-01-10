@@ -1,0 +1,27 @@
+{
+  "operationId": "Images_ListByCatalog",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Images_ListByCatalog",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "name": "MyImage1",
+            "id": "00000000-0000-0000-0000-000000000001"
+          },
+          {
+            "name": "MyImage2",
+            "id": "00000000-0000-0000-0000-000000000002"
+          }
+        ]
+      }
+    }
+  }
+}

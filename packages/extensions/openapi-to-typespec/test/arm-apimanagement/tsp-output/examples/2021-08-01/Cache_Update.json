@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "cacheId": "c1",
+    "parameters": {
+      "properties": {
+        "useFromLocation": "westindia"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "c1",
+        "type": "Microsoft.ApiManagement/service/caches",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/caches/c1",
+        "properties": {
+          "description": "Redis cache instances in West India",
+          "connectionString": "{{5f7fbca77a891a2200f3db38}}",
+          "resourceId": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redis/apimservice1",
+          "useFromLocation": "westindia"
+        }
+      }
+    }
+  },
+  "operationId": "Cache_Update",
+  "title": "ApiManagementUpdateCache"
+}

@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "operationId": "testoperation",
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "testapi",
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "ApiOperationPolicy_Delete",
+  "title": "ApiManagementDeleteApiOperationPolicy"
+}

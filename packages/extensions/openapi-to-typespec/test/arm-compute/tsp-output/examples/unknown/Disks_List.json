@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://disksvchost:99/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/Disks/myManagedDisk",
+        "value": [
+          {
+            "name": "myManagedDisk1",
+            "type": "Microsoft.Compute/disks",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "Copy",
+                "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1"
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "encryptionSettingsCollection": {
+                "enabled": true,
+                "encryptionSettings": [
+                  {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    },
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    }
+                  }
+                ]
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:41:35.9278721+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "ManagedDisks"
+            }
+          },
+          {
+            "name": "myManagedDisk2",
+            "type": "Microsoft.Compute/disks",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "Empty"
+              },
+              "diskSizeGB": 10,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:41:36.872242+00:00"
+            }
+          },
+          {
+            "name": "myManagedDisk3",
+            "type": "Microsoft.Compute/disks",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk3",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "FromImage",
+                "imageReference": {
+                  "id": "/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}"
+                }
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "encryptionSettingsCollection": {
+                "enabled": true,
+                "encryptionSettings": [
+                  {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    },
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    }
+                  }
+                ]
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:41:36.3973934+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "ManagedDisks"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Disks_List",
+  "title": "List all managed disks in a subscription."
+}

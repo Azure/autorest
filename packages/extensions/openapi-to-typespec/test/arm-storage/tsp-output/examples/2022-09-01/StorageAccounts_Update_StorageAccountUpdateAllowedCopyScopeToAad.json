@@ -1,0 +1,151 @@
+{
+  "parameters": {
+    "accountName": "sto8596",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "allowBlobPublicAccess": false,
+        "allowSharedKeyAccess": true,
+        "allowedCopyScope": "AAD",
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "minimumTlsVersion": "TLS1_2",
+        "networkAcls": {
+          "defaultAction": "Allow",
+          "resourceAccessRules": [
+            {
+              "resourceId": "/subscriptions/a7e99807-abbf-4642-bdec-2c809a96a8bc/resourceGroups/res9407/providers/Microsoft.Synapse/workspaces/testworkspace",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            }
+          ]
+        },
+        "routingPreference": {
+          "publishInternetEndpoints": true,
+          "publishMicrosoftEndpoints": true,
+          "routingChoice": "MicrosoftRouting"
+        },
+        "sasPolicy": {
+          "expirationAction": "Log",
+          "sasExpirationPeriod": "1.15:59:59"
+        }
+      }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto8596",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
+        "kind": "Storage",
+        "location": "eastus2(stage)",
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "allowSharedKeyAccess": true,
+          "allowedCopyScope": "AAD",
+          "creationTime": "2017-06-01T02:42:41.7633306Z",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            }
+          },
+          "isHnsEnabled": true,
+          "keyCreationTime": {
+            "key1": "2021-03-18T04:42:22.4322836Z",
+            "key2": "2021-03-18T04:42:22.4322836Z"
+          },
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Allow",
+            "ipRules": [],
+            "resourceAccessRules": [
+              {
+                "resourceId": "/subscriptions/a7e99807-abbf-4642-bdec-2c809a96a8bc/resourceGroups/res9407/providers/Microsoft.Synapse/workspaces/testworkspace",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+              }
+            ],
+            "virtualNetworkRules": []
+          },
+          "primaryEndpoints": {
+            "blob": "https://sto8596.blob.core.windows.net/",
+            "dfs": "https://sto8596.dfs.core.windows.net/",
+            "file": "https://sto8596.file.core.windows.net/",
+            "internetEndpoints": {
+              "blob": "https://sto8596-internetrouting.blob.core.windows.net/",
+              "dfs": "https://sto8596-internetrouting.dfs.core.windows.net/",
+              "file": "https://sto8596-internetrouting.file.core.windows.net/",
+              "web": "https://sto8596-internetrouting.web.core.windows.net/"
+            },
+            "microsoftEndpoints": {
+              "blob": "https://sto8596-microsoftrouting.blob.core.windows.net/",
+              "dfs": "https://sto8596-microsoftrouting.dfs.core.windows.net/",
+              "file": "https://sto8596-microsoftrouting.file.core.windows.net/",
+              "queue": "https://sto8596-microsoftrouting.queue.core.windows.net/",
+              "table": "https://sto8596-microsoftrouting.table.core.windows.net/",
+              "web": "https://sto8596-microsoftrouting.web.core.windows.net/"
+            },
+            "queue": "https://sto8596.queue.core.windows.net/",
+            "table": "https://sto8596.table.core.windows.net/",
+            "web": "https://sto8596.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus2(stage)",
+          "provisioningState": "Succeeded",
+          "routingPreference": {
+            "publishInternetEndpoints": true,
+            "publishMicrosoftEndpoints": true,
+            "routingChoice": "MicrosoftRouting"
+          },
+          "sasPolicy": {
+            "expirationAction": "Log",
+            "sasExpirationPeriod": "1.15:59:59"
+          },
+          "secondaryLocation": "northcentralus(stage)",
+          "statusOfPrimary": "available",
+          "statusOfSecondary": "available",
+          "supportsHttpsTrafficOnly": false
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "StorageAccounts_Update",
+  "title": "StorageAccountUpdateAllowedCopyScopeToAAD"
+}

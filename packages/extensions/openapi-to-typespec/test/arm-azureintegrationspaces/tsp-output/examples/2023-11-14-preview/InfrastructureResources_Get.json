@@ -1,0 +1,25 @@
+{
+  "operationId": "InfrastructureResources_Get",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "infrastructureResourceName": "InfrastructureResource1",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "GetInfrastructureResource",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "InfrastructureResource1",
+        "type": "Microsoft.IntegrationSpaces/spaces/infrastructureresources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1/infrastructureResources/InfrastructureResource1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ApiManagement/service/APIM1",
+          "resourceType": "Microsoft.ApiManagement/service"
+        }
+      }
+    }
+  }
+}

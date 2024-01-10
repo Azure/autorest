@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Gallery.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the gallery Application Definition that you want to create or update.")
 @parentResource(Gallery)
 model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
   @doc("The name of the gallery Application Definition to be retrieved.")
+  @path
   @key("galleryApplicationName")
   @segment("applications")
   name: string;

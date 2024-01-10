@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "loggerId": "loggerId",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "Logger_Delete",
+  "title": "ApiManagementDeleteLogger"
+}

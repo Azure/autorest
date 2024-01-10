@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "properties": {
+        "purchasePlan": {
+          "name": "myPurchasePlanName",
+          "product": "myPurchasePlanProduct",
+          "promotionCode": "myPurchasePlanPromotionCode",
+          "publisher": "myPurchasePlanPublisher"
+        }
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "purchasePlan": {
+            "name": "myPurchasePlanName",
+            "product": "myPurchasePlanProduct",
+            "promotionCode": "myPurchasePlanPromotionCode",
+            "publisher": "myPurchasePlanPublisher"
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "purchasePlan": {
+            "name": "myPurchasePlanName",
+            "product": "myPurchasePlanProduct",
+            "promotionCode": "myPurchasePlanPromotionCode",
+            "publisher": "myPurchasePlanPublisher"
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update a managed disk to add purchase plan."
+}

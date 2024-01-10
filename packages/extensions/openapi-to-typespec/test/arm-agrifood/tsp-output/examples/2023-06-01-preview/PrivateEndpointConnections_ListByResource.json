@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "privateEndpointConnectionName",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/privateEndpointConnections",
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName/privateEndpointConnections/privateEndpointConnectionName",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Approved by johndoe@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "privateEndpointConnectionName2",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/privateEndpointConnections",
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName/privateEndpointConnections/privateEndpointConnectionName2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Approved by johndoe@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByResource",
+  "title": "PrivateEndpointConnections_ListByResource"
+}

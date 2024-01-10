@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Product details.")
@@ -16,19 +18,23 @@ model ProductContract is ProxyResource<ProductContractProperties> {
   @doc("Product identifier. Must be unique in the current API Management service instance.")
   @maxLength(256)
   @minLength(1)
+  @path
   @key("productId")
   @segment("products")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "Product")
-interface ProductContracts_Product {
+interface ProductContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the product specified by its identifier.")
+  @operationId("Product_Get")
   get is ArmResourceRead<ProductContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the product specified by its identifier.")
   @head
+  @operationId("Product_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       ProductContract,
@@ -36,7 +42,9 @@ interface ProductContracts_Product {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates a product.")
+  @operationId("Product_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
     {
@@ -48,7 +56,9 @@ interface ProductContracts_Product {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update existing product details.")
+  @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
     ProductUpdateParameters,
@@ -61,7 +71,9 @@ interface ProductContracts_Product {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete product.")
+  @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
     {
@@ -77,7 +89,9 @@ interface ProductContracts_Product {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of products in the specified service instance.")
+  @operationId("Product_ListByService")
   listByService is ArmResourceListByParent<
     ProductContract,
     {
@@ -105,11 +119,9 @@ interface ProductContracts_Product {
       tags?: string;
     }
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "ProductApi")
-interface ProductContracts_ProductApi {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ProductApi_ListByProduct")
   @doc("Lists a collection of the APIs associated with a product.")
   // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
@@ -152,11 +164,9 @@ interface ProductContracts_ProductApi {
     },
     ApiManagementProductApiListResult
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "ProductGroup")
-interface ProductContracts_ProductGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ProductGroup_ListByProduct")
   @doc("Lists the collection of developer groups associated with the specified product.")
   // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
@@ -199,11 +209,9 @@ interface ProductContracts_ProductGroup {
     },
     ApiManagementProductGroupListResult
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "ProductSubscriptions")
-interface ProductContracts_ProductSubscriptions {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ProductSubscriptions_List")
   @doc("Lists the collection of subscriptions to the specified product.")
   // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")

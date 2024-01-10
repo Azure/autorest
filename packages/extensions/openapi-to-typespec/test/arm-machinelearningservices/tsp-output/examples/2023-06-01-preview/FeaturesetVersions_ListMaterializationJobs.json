@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "name": "string",
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "featureWindowEnd": "string",
+    "featureWindowStart": "string",
+    "filters": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "type": "RecurrentMaterialization",
+            "createdDate": "2020-01-01T12:34:56.999+00:53",
+            "displayName": "string",
+            "duration": "PT5M",
+            "experimentId": "string",
+            "featureWindow": {
+              "featureWindowEnd": "2020-01-01T12:34:56.999+00:53",
+              "featureWindowStart": "2020-01-01T12:34:56.999+00:53"
+            },
+            "jobId": "string",
+            "status": "CancelRequested",
+            "tags": {
+              "string": "string"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturesetVersions_ListMaterializationJobs",
+  "title": "ListMaterializationJobs Workspace Featureset Version."
+}

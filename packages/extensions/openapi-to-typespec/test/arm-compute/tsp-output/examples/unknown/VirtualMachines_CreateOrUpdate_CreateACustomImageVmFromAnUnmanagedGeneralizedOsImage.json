@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D1_v2"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "osProfile": {
+          "adminPassword": "{your-password}",
+          "adminUsername": "{your-username}",
+          "computerName": "myVM"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "name": "myVMosdisk",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "image": {
+              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/{existing-generalized-os-image-blob-name}.vhd"
+            },
+            "osType": "Windows",
+            "vhd": {
+              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd"
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "{vm-name}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "image": {
+                "uri": "https://{existing-storage-account-name}.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/{existing-generalized-os-image-blob-name}.vhd"
+              },
+              "osType": "Windows",
+              "vhd": {
+                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
+              }
+            }
+          },
+          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "image": {
+                "uri": "https://{existing-storage-account-name}.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/{existing-generalized-os-image-blob-name}.vhd"
+              },
+              "osType": "Windows",
+              "vhd": {
+                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
+              }
+            }
+          },
+          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "Create a custom-image vm from an unmanaged generalized os image."
+}

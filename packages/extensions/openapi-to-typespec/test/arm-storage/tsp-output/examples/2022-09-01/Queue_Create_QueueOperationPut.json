@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "queue": {},
+    "queueName": "queue6185",
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "queue6185",
+        "type": "Microsoft.Storage/storageAccounts/queueServices/queues",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/queueServices/default/queues/queue6185"
+      }
+    }
+  },
+  "operationId": "Queue_Create",
+  "title": "QueueOperationPut"
+}

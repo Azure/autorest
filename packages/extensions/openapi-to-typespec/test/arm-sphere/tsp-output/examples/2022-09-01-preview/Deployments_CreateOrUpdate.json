@@ -1,0 +1,47 @@
+{
+  "operationId": "Deployments_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "deploymentName": "MyDeployment1",
+    "deviceGroupName": "myDeviceGroup1",
+    "productName": "MyProduct1",
+    "resource": {},
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Deployments_CreateOrUpdate",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "name": "MyDeployment1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/deviceGroups/MyDeviceGroup1/deployments/MyDeployment1",
+        "properties": {
+          "deployedImages": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/images/MyImage1",
+              "properties": {
+                "image": "MyImage",
+                "imageId": "00000000-0000-0000-0000-000000000000",
+                "imageType": "InvalidImageType",
+                "provisioningState": "Succeeded",
+                "regionalDataBoundary": "None",
+                "uri": "imageUri"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "description": "ARM create operation completed successfully.",
+      "body": {
+        "name": "MyDeployment1",
+        "type": "Microsoft.AzureSphere/catalogs/products/deviceGroups/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/myProduct1/deviceGroups/myDeviceGroup1/deployments/MyDeployment1"
+      }
+    }
+  }
+}

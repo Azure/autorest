@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Tenant Settings.")
@@ -15,19 +17,23 @@ namespace Azure.ResourceManager.ApiManagement;
 model AccessInformationContract
   is ProxyResource<AccessInformationContractProperties> {
   @doc("The identifier of the Access configuration.")
+  @path
   @key("accessName")
   @segment("tenant")
   name: AccessIdName;
 }
 
 @armResourceOperations
-@projectedName("client", "TenantAccess")
-interface AccessInformationContracts_TenantAccess {
+interface AccessInformationContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get tenant access information details without secrets.")
+  @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Tenant access metadata")
   @head
+  @operationId("TenantAccess_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       AccessInformationContract,
@@ -35,7 +41,9 @@ interface AccessInformationContracts_TenantAccess {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update tenant access information details.")
+  @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     {
@@ -47,7 +55,9 @@ interface AccessInformationContracts_TenantAccess {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update tenant access information details.")
+  @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
     AccessInformationUpdateParameters,
@@ -60,7 +70,9 @@ interface AccessInformationContracts_TenantAccess {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Returns list of access infos - for Git and Management endpoints.")
+  @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     {
@@ -72,36 +84,42 @@ interface AccessInformationContracts_TenantAccess {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate primary access key")
+  @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate secondary access key")
+  @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get tenant access information details.")
+  @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
     AccessInformationSecretsContract
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "TenantAccessGit")
-interface AccessInformationContracts_TenantAccessGit {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate primary access key for GIT.")
+  @operationId("TenantAccessGit_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate secondary access key for GIT.")
+  @operationId("TenantAccessGit_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void

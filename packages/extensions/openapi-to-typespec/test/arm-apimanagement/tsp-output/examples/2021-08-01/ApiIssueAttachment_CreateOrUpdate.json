@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d1f7558aa04f15146d9d8a",
+    "attachmentId": "57d2ef278aa04f0888cba3f3",
+    "issueId": "57d2ef278aa04f0ad01d6cdc",
+    "parameters": {
+      "properties": {
+        "content": "IEJhc2U2NA==",
+        "contentFormat": "image/jpeg",
+        "title": "Issue attachment."
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "57d2ef278aa04f0888cba3f3",
+        "type": "Microsoft.ApiManagement/service/apis/issues/attachments",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d1f7558aa04f15146d9d8a/issues/57d2ef278aa04f0ad01d6cdc/attachments/57d2ef278aa04f0888cba3f3",
+        "properties": {
+          "content": "https://.../image.jpg",
+          "contentFormat": "link",
+          "title": "Issue attachment."
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "57d2ef278aa04f0888cba3f3",
+        "type": "Microsoft.ApiManagement/service/apis/issues/attachments",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d1f7558aa04f15146d9d8a/issues/57d2ef278aa04f0ad01d6cdc/attachments/57d2ef278aa04f0888cba3f3",
+        "properties": {
+          "content": "https://.../image.jpg",
+          "contentFormat": "link",
+          "title": "Issue attachment."
+        }
+      }
+    }
+  },
+  "operationId": "ApiIssueAttachment_CreateOrUpdate",
+  "title": "ApiManagementCreateApiIssueAttachment"
+}

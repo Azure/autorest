@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res9290",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://sto1590endpoint/subscriptions/{subscription-id}/resourceGroups/res9290/providers/Microsoft.Storage/storageAccounts/sto328/tableServices/default/tables?api-version=2022-09-01&NextTableName=1!40!bXl0YWJsZXNoYzU0OAEwMWQ2MTI5ZTJmYjVmODFh",
+        "value": [
+          {
+            "name": "table6185",
+            "type": "Microsoft.Storage/storageAccounts/tableServices/tables",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/tableServices/default/tables/table6185",
+            "properties": {
+              "tableName": "table6185"
+            }
+          },
+          {
+            "name": "table6186",
+            "type": "Microsoft.Storage/storageAccounts/tableServices/tables",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/tableServices/default/tables/table6186",
+            "properties": {
+              "tableName": "table6186"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Table_List",
+  "title": "TableOperationList"
+}

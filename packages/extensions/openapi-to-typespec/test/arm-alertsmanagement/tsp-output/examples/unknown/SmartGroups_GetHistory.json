@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "smartGroupId": "a808445e-bb38-4751-85c2-1b109ccc1059",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cpu alert",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/smartGroups/a808445e-bb38-4751-85c2-1b109ccc1059/history/default",
+        "properties": {
+          "modifications": [
+            {
+              "description": "New Smart Group is created",
+              "comments": "",
+              "modificationEvent": "SmartGroupCreated",
+              "modifiedAt": "2018-06-06T12:35:09Z",
+              "modifiedBy": "System",
+              "newValue": "",
+              "oldValue": ""
+            }
+          ],
+          "smartGroupId": "a808445e-bb38-4751-85c2-1b109ccc1059"
+        }
+      }
+    }
+  },
+  "operationId": "SmartGroups_GetHistory",
+  "title": "Resolve"
+}

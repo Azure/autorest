@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(Workspace)
 model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
   @doc("Online Endpoint name.")
+  @path
   @key("endpointName")
   @segment("onlineEndpoints")
   name: string;
@@ -24,24 +27,37 @@ model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
 }
 
 @armResourceOperations
-@projectedName("client", "OnlineEndpoints")
-interface OnlineEndpointTrackedResources_OnlineEndpoints {
+interface OnlineEndpointTrackedResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Online Endpoint.")
+  @operationId("OnlineEndpoints_Get")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update Online Endpoint (asynchronous).")
+  @operationId("OnlineEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineEndpointTrackedResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Endpoint (asynchronous).")
+  @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,
     PartialMinimalTrackedResourceWithIdentity
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete Online Endpoint (asynchronous).")
-  delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
+  @operationId("OnlineEndpoints_Delete")
+  delete is ArmResourceDeleteAsync<
+    OnlineEndpointTrackedResource,
+    BaseParameters<OnlineEndpointTrackedResource>,
+    ArmLroLocationHeader
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Online Endpoints.")
+  @operationId("OnlineEndpoints_List")
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
     {
@@ -77,21 +93,29 @@ interface OnlineEndpointTrackedResources_OnlineEndpoints {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
+  @operationId("OnlineEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,
     EndpointAuthKeys
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
+  @operationId("OnlineEndpoints_RegenerateKeys")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
-    void
+    void,
+    BaseParameters<OnlineEndpointTrackedResource>,
+    ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
+  @operationId("OnlineEndpoints_GetToken")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
     void,

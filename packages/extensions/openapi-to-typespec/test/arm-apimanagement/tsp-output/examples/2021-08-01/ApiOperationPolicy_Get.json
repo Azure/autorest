@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "operationId": "5600b53ac53f5b0062080006",
+    "api-version": "2021-08-01",
+    "apiId": "5600b539c53f5b0062040001",
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5600b539c53f5b0062040001/operations/5600b53ac53f5b0062080006/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n    <set-header name=\"X-My-Sample\" exists-action=\"override\">\r\n      <value>This is a sample</value>\r\n      <!-- for multiple headers with the same name add additional value elements -->\r\n    </set-header>\r\n    <jsonp callback-parameter-name=\"ProcessResponse\" />\r\n  </outbound>\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "ApiOperationPolicy_Get",
+  "title": "ApiManagementGetApiOperationPolicy"
+}

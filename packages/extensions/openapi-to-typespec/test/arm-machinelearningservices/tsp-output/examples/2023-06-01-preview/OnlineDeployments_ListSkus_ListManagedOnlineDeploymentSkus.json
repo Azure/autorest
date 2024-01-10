@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "count": 1,
+    "deploymentName": "testDeploymentName",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 1,
+              "minimum": 1,
+              "scaleType": "Automatic"
+            },
+            "resourceType": "Microsoft.MachineLearning.Services/endpoints/deployments",
+            "sku": {
+              "name": "string",
+              "tier": "Free"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "OnlineDeployments_ListSkus",
+  "title": "List Managed Online Deployment Skus."
+}

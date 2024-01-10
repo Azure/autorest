@@ -1,0 +1,465 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "category": "Azure SMTP",
+            "endpoints": [
+              {
+                "domainName": "smtpi-ch1.msn.com",
+                "endpointDetails": [
+                  {
+                    "port": 25028,
+                    "region": "West US"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure SQL",
+            "endpoints": [
+              {
+                "domainName": "xxxx1345234.database.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 1433,
+                    "region": "West US"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Storage",
+            "endpoints": [
+              {
+                "domainName": "xxxx32storagedgfbay.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx1362629927xt.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx1362629927xt.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx141483183xt.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx141483183xt.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx1949864718xt.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx1949864718xt.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx3292114122xt.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx3292114122xt.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx32tst4oto8t0mlesawmm.blob.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx32tst4oto8t0mlesawmm.file.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 445,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx32tst4oto8t0mlesawmm.queue.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx32tst4oto8t0mlesawmm.table.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Event Hub",
+            "endpoints": [
+              {
+                "domainName": "xxxx1362629927eh.servicebus.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5671,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5672,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx1949864718eh.servicebus.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5671,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5672,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx3292114122eh.servicebus.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5671,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5672,
+                    "region": "West US"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxxx141483183eh.servicebus.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5671,
+                    "region": "West US"
+                  },
+                  {
+                    "port": 5672,
+                    "region": "West US"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "SSL Certificate Verification",
+            "endpoints": [
+              {
+                "domainName": "ocsp.msocsp.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "mscrl.microsoft.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "crl.microsoft.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "crl3.digicert.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "ocsp.digicert.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "cacerts.digicert.com",
+                "endpointDetails": [
+                  {
+                    "port": 80,
+                    "region": "Global"
+                  },
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Monitor",
+            "endpoints": [
+              {
+                "domainName": "gcs.ppe.monitoring.core.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "global.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxx3.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 1886,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxx3-red.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 1886,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "xxx3-black.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 1886,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "gcs.ppe.warm.ingestion.monitoring.azure.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "metrichost23.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "metrichost23-red.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "metrichost23-black.prod.microsoftmetrics.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Portal Captcha",
+            "endpoints": [
+              {
+                "domainName": "client.xxx.live.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "partner.xxx.live.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Azure Active Directory",
+            "endpoints": [
+              {
+                "domainName": "login.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "graph.windows.net",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              },
+              {
+                "domainName": "login.microsoftonline.com",
+                "endpointDetails": [
+                  {
+                    "port": 443,
+                    "region": "Global"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "OutboundNetworkDependenciesEndpoints_ListByService",
+  "title": "ApiManagementServiceGetOutboundNetworkDependenciesEndpoints"
+}

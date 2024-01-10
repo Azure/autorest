@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaa",
+        "value": [
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "australiasoutheast",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "proximityPlacementGroup": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "statuses": [
+                {
+                  "code": "aaaaaaaaaaaaaaa",
+                  "displayStatus": "aaaaaaaaaaa",
+                  "level": "Info",
+                  "message": "aaaaaa",
+                  "time": "2021-11-30T13:39:56.427Z"
+                }
+              ],
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Classic",
+              "capacity": 22,
+              "tier": "aaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "tags": {
+              "key2039": "aaaaaaaaaaaaa"
+            }
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "australiasoutheast",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "proximityPlacementGroup": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "statuses": [
+                {
+                  "code": "aaaaaaaaaaaaaaa",
+                  "displayStatus": "aaaaaaaaaaa",
+                  "level": "Info",
+                  "message": "aaaaaa",
+                  "time": "2021-11-30T13:39:56.427Z"
+                }
+              ],
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Classic",
+              "capacity": 23,
+              "tier": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "tags": {
+              "key5849": "aaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "westcentralus",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "proximityPlacementGroup": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "statuses": [
+                {
+                  "code": "aaaaaaaaaaaaaaa",
+                  "displayStatus": "aaaaaaaaaaa",
+                  "level": "Info",
+                  "message": "aaaaaa",
+                  "time": "2021-11-30T13:39:56.427Z"
+                }
+              ],
+              "virtualMachines": []
+            },
+            "sku": {
+              "name": "Classic",
+              "capacity": 26,
+              "tier": "aaaaaaaaaaaaaaaaaaaaa"
+            },
+            "tags": {}
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "westcentralus",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "proximityPlacementGroup": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "statuses": [
+                {
+                  "code": "aaaaaaaaaaaaaaa",
+                  "displayStatus": "aaaaaaaaaaa",
+                  "level": "Info",
+                  "message": "aaaaaa",
+                  "time": "2021-11-30T13:39:56.427Z"
+                }
+              ],
+              "virtualMachines": []
+            },
+            "sku": {
+              "name": "Classic",
+              "capacity": 6,
+              "tier": "aaaaaaaaaaaaaaaaaa"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AvailabilitySets_List",
+  "title": "AvailabilitySet_List_MaximumSet_Gen"
+}

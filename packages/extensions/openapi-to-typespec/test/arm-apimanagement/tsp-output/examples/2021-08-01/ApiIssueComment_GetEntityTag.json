@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d2ef278aa04f0888cba3f3",
+    "commentId": "599e29ab193c3c0bd0b3e2fb",
+    "issueId": "57d2ef278aa04f0ad01d6cdc",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "ApiIssueComment_GetEntityTag",
+  "title": "ApiManagementHeadApiIssueComment"
+}

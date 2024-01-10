@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,25 +9,30 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Subscription details.")
 @parentResource(ApiManagementServiceResource)
 model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
   @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+  @path
   @key("subscriptionId")
   @segment("subscriptions")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "Subscription")
-interface SubscriptionContracts_Subscription {
+interface SubscriptionContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the specified Subscription entity.")
+  @operationId("Subscription_Get")
   get is ArmResourceRead<SubscriptionContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.")
   @head
+  @operationId("Subscription_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       SubscriptionContract,
@@ -34,7 +40,9 @@ interface SubscriptionContracts_Subscription {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates the subscription of specified user to the specified product.")
+  @operationId("Subscription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
     {
@@ -58,7 +66,9 @@ Notify change in Subscription State.
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of a subscription specified by its identifier.")
+  @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
     SubscriptionUpdateParameters,
@@ -83,7 +93,9 @@ Notify change in Subscription State.
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified subscription.")
+  @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
     {
@@ -95,7 +107,9 @@ Notify change in Subscription State.
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all subscriptions of the API Management service instance.")
+  @operationId("Subscription_List")
   list is ArmResourceListByParent<
     SubscriptionContract,
     {
@@ -116,19 +130,25 @@ Notify change in Subscription State.
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerates primary key of existing subscription of the API Management service instance.")
+  @operationId("Subscription_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerates secondary key of existing subscription of the API Management service instance.")
+  @operationId("Subscription_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the specified Subscription keys.")
+  @operationId("Subscription_ListSecrets")
   listSecrets is ArmResourceActionSync<
     SubscriptionContract,
     void,

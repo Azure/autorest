@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(Workspace)
 model LabelingJob is ProxyResource<LabelingJobProperties> {
   @doc("The name and identifier for the LabelingJob.")
+  @path
   @key("id")
   @segment("labelingJobs")
   name: string;
@@ -63,12 +66,20 @@ interface LabelingJobs {
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
-    ExportSummary
+    ExportSummary,
+    BaseParameters<LabelingJob>,
+    ArmLroLocationHeader
   >;
 
   @doc("Pause a labeling job.")
   pause is ArmResourceActionSync<LabelingJob, void, void>;
 
   @doc("Resume a labeling job (asynchronous).")
-  resume is ArmResourceActionAsync<LabelingJob, void, void>;
+  resume is ArmResourceActionAsync<
+    LabelingJob,
+    void,
+    void,
+    BaseParameters<LabelingJob>,
+    ArmLroLocationHeader
+  >;
 }

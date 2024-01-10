@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskName": "myDisk",
+    "grantAccessData": {
+      "access": "Read",
+      "durationInSeconds": 300,
+      "fileFormat": "VHD"
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessSAS": "https://md-gpvmcxzlzxgd.partition.blob.storage.azure.net/xx3cqcx53f0v/abcd?sv=2014-02-14&sr=b&sk=key1&sig=XXX&st=2021-05-24T18:02:34Z&se=2021-05-24T18:19:14Z&sp=r"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{operationId}&monitor=true&api-version=2023-04-02"
+      }
+    }
+  },
+  "operationId": "Disks_GrantAccess",
+  "title": "Get a sas on a managed disk."
+}

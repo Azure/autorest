@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "sto3539",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "regenerateKey": {
+      "keyName": "kerb1"
+    },
+    "resourceGroupName": "res4167",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "keys": [
+          {
+            "keyName": "key1",
+            "permissions": "Full",
+            "value": "<value>"
+          },
+          {
+            "keyName": "key2",
+            "permissions": "Full",
+            "value": "<value>"
+          },
+          {
+            "keyName": "kerb1",
+            "permissions": "Full",
+            "value": "<value>"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "StorageAccounts_RegenerateKey",
+  "title": "StorageAccountRegenerateKerbKey"
+}

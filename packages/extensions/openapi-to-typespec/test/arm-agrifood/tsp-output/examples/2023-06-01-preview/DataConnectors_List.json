@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataConnectorName": "WeatherIBM",
+    "dataManagerForAgricultureResourceName": "examples-dataManagerForAgricultureResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "SatelliteSentinelHub",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/dataConnectors",
+            "eTag": "7200b954-0000-0700-0000-603cbbc40000",
+            "id": "/subscriptions/ff57165d-e71f-4a0e-8e9b-3cd461dc0f38/resourceGroups/bugbash-instances-westus2/providers/Microsoft.AgFoodPlatform/farmBeats/bb-df-wus2-1/dataConnectors/SatelliteSentinelHub",
+            "properties": {
+              "credentials": {
+                "clientId": "string",
+                "clientSecret": {
+                  "keyName": "string",
+                  "keyVaultUri": "string",
+                  "keyVersion": "string"
+                },
+                "kind": "OAuthClientCredentials"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:02.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "WeatherIBM",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/dataConnectors",
+            "eTag": "7200b954-0000-0700-0000-603cbbc40000",
+            "id": "/subscriptions/ff57165d-e71f-4a0e-8e9b-3cd461dc0f38/resourceGroups/bugbash-instances-westus2/providers/Microsoft.AgFoodPlatform/farmBeats/bb-df-wus2-1/dataConnectors/WeatherIBM",
+            "properties": {
+              "credentials": {
+                "apiKey": {
+                  "keyName": "string",
+                  "keyVaultUri": "string",
+                  "keyVersion": "string"
+                },
+                "kind": "ApiKeyAuthCredentials"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:02.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DataConnectors_List",
+  "title": "DataConnectors_List"
+}

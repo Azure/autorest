@@ -1,0 +1,112 @@
+{
+  "operationId": "BusinessProcessVersions_ListByBusinessProcess",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "applicationName": "Application1",
+    "businessProcessName": "BusinessProcess1",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ListBusinessProcessVersionsByBusinessProcess",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "08585074782265427079",
+            "type": "Microsoft.IntegrationSpaces/spaces/applications/BusinessProcesses/versions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.IntegrationSpaces/spaces/Space1/applications/Application1/businessProcesses/BusinessProcess1/versions/08585074782265427079",
+            "properties": {
+              "description": "First Business Process",
+              "businessProcessMapping": {
+                "Completed": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "CompletedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                },
+                "Denied": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "DeniedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                },
+                "Processing": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "ApprovedPO",
+                  "operationType": "Action",
+                  "workflowName": "PurchaseOrder"
+                },
+                "Received": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "manual",
+                  "operationType": "Trigger",
+                  "workflowName": "PurchaseOrder"
+                },
+                "Shipped": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "ShippedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                }
+              },
+              "businessProcessStages": {
+                "Completed": {
+                  "description": "Completed",
+                  "stagesBefore": [
+                    "Shipped"
+                  ]
+                },
+                "Denied": {
+                  "description": "Denied",
+                  "stagesBefore": [
+                    "Processing"
+                  ]
+                },
+                "Processing": {
+                  "description": "Processing",
+                  "properties": {
+                    "ApprovalState": "String",
+                    "ApproverName": "String",
+                    "POAmount": "Integer"
+                  },
+                  "stagesBefore": [
+                    "Received"
+                  ]
+                },
+                "Received": {
+                  "description": "received",
+                  "properties": {
+                    "City": "String",
+                    "Product": "String",
+                    "Quantity": "Integer",
+                    "State": "String"
+                  }
+                },
+                "Shipped": {
+                  "description": "Shipped",
+                  "properties": {
+                    "ShipPriority": "Integer",
+                    "TrackingID": "Integer"
+                  },
+                  "stagesBefore": [
+                    "Denied"
+                  ]
+                }
+              },
+              "identifier": {
+                "propertyName": "businessIdentifier-1",
+                "propertyType": "String"
+              },
+              "provisioningState": "Succeeded",
+              "tableName": "table1",
+              "trackingDataStoreReferenceName": "trackingDataStoreReferenceName1",
+              "version": "08585074782265427079"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

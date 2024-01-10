@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryApplication": {
+      "properties": {
+        "description": "This is the gallery application description.",
+        "customActions": [
+          {
+            "name": "myCustomAction",
+            "description": "This is the custom action description.",
+            "parameters": [
+              {
+                "name": "myCustomActionParameter",
+                "type": "String",
+                "description": "This is the description of the parameter",
+                "defaultValue": "default value of parameter.",
+                "required": false
+              }
+            ],
+            "script": "myCustomActionScript"
+          }
+        ],
+        "eula": "This is the gallery application EULA.",
+        "privacyStatementUri": "myPrivacyStatementUri}",
+        "releaseNoteUri": "myReleaseNoteUri",
+        "supportedOSType": "Windows"
+      }
+    },
+    "galleryApplicationName": "myGalleryApplicationName",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryApplicationName",
+        "type": "Microsoft.Compute/galleries",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/applications/myGalleryApplicationName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery application description.",
+          "customActions": [
+            {
+              "name": "myCustomAction",
+              "description": "This is the custom action description.",
+              "parameters": [
+                {
+                  "name": "myCustomActionParameter",
+                  "type": "String",
+                  "description": "This is the description of the parameter",
+                  "defaultValue": "default value of parameter.",
+                  "required": false
+                }
+              ],
+              "script": "myCustomActionScript"
+            }
+          ],
+          "eula": "This is the gallery application EULA.",
+          "privacyStatementUri": "myPrivacyStatementUri}",
+          "releaseNoteUri": "myReleaseNoteUri",
+          "supportedOSType": "Windows"
+        }
+      }
+    }
+  },
+  "operationId": "GalleryApplications_Update",
+  "title": "Update a simple gallery Application."
+}

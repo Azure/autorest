@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "queueName": "queue6185",
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "Queue_Delete",
+  "title": "QueueOperationDelete"
+}

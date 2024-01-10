@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com:443/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alerts?api-version=2018-05-05-preview&timeRange=1d&ctoken=%2bRID%3aPlwOAPHEGwB9UwEAAAAgCw%3d%3d%23RT%3a2%23TRC%3a500%23RTD%3aqtQyMDE4LTA2LTEyVDE1OjEyOjE1",
+        "value": [
+          {
+            "name": "cpu alert",
+            "type": "Microsoft.AlertsManagement/alerts",
+            "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+            "properties": {
+              "context": {},
+              "egressConfig": {},
+              "essentials": {
+                "description": "description of the alert",
+                "actionStatus": {
+                  "isSuppressed": false
+                },
+                "alertRule": "https://servisdffsdf.portal.mms.microsoft.com/#Workspace/overview/settings/details/Edit Alert Rule/details/index?savedSearchId=&scheduleId=",
+                "alertState": "Acknowledged",
+                "lastModifiedDateTime": "2018-09-13T15:51:02Z",
+                "lastModifiedUserName": "System",
+                "monitorCondition": "Fired",
+                "monitorConditionResolvedDateTime": "2018-09-13T15:51:02Z",
+                "monitorService": "Application Insights",
+                "severity": "Sev3",
+                "signalType": "Log",
+                "smartGroupId": "23d6b2ce-8c54-468f-aff0-sd32aebb7e56",
+                "smartGroupingReason": "Occurred frequently with other alerts",
+                "sourceCreatedId": "6cd6b2ce-8c54-468f-aff0-9d12aebb7e49",
+                "startDateTime": "2018-09-13T15:51:02Z",
+                "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/servicedeskresourcegroup/providers/microsoft.insights/components/servicedeskappinsight",
+                "targetResourceGroup": "servicedeskresourcegroup",
+                "targetResourceName": "servicedeskappinsight",
+                "targetResourceType": "components"
+              }
+            }
+          },
+          {
+            "name": "cpu alert",
+            "type": "Microsoft.AlertsManagement/alerts",
+            "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+            "properties": {
+              "context": {},
+              "egressConfig": {},
+              "essentials": {
+                "description": "description of the alert",
+                "actionStatus": {
+                  "isSuppressed": false
+                },
+                "alertRule": "https://servicsdfsdf.portal.mms.microsoft.com/#Workspace/overview/settings/details/Edit Alert Rule/details/index?savedSearchId=&scheduleId=",
+                "alertState": "New",
+                "lastModifiedDateTime": "2018-09-13T15:51:02Z",
+                "lastModifiedUserName": "System",
+                "monitorCondition": "Fired",
+                "monitorConditionResolvedDateTime": "2018-09-13T15:51:02Z",
+                "monitorService": "Application Insights",
+                "severity": "Sev3",
+                "signalType": "Log",
+                "smartGroupId": "d1c49c89-ea95-4697-a299-c0f5ebac62f1",
+                "smartGroupingReason": "Alerts that frequently occur together have been grouped.",
+                "sourceCreatedId": "6cd6b2ce-8c54-468f-aff0-9d12aebb7e49",
+                "startDateTime": "2018-09-13T15:51:02Z",
+                "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/cind/providers/microsoft.operationalinsights/workspaces/servicedeskwcus",
+                "targetResourceGroup": "servicedeskresourcegroup",
+                "targetResourceName": "servicedeskwcus",
+                "targetResourceType": "components"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Alerts_GetAll",
+  "title": "ListAlerts"
+}

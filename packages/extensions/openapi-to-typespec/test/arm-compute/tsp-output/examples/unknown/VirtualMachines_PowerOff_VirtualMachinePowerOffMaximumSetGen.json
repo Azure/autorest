@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "skipShutdown": true,
+    "subscriptionId": "{subscription-id}",
+    "vmName": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_PowerOff",
+  "title": "VirtualMachine_PowerOff_MaximumSet_Gen"
+}

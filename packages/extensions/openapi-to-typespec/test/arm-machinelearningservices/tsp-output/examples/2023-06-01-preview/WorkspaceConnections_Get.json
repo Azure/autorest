@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "connectionName": "connection-1",
+    "resourceGroupName": "resourceGroup-1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connection-1",
+        "type": "Microsoft.MachineLearningServices/workspaces/connections",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-1",
+        "properties": {
+          "authType": "None",
+          "category": "ContainerRegistry",
+          "expiryTime": "2024-03-15T14:30:00Z",
+          "target": "www.facebook.com"
+        }
+      }
+    }
+  },
+  "operationId": "WorkspaceConnections_Get",
+  "title": "GetWorkspaceConnection"
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "accountName": "sto666",
+    "api-version": "2022-09-01",
+    "fileShare": {
+      "properties": {
+        "enabledProtocols": "NFS"
+      }
+    },
+    "monitor": "true",
+    "resourceGroupName": "res346",
+    "shareName": "share1235",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "share1235",
+        "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
+        "properties": {
+          "enabledProtocols": "NFS"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "share1235",
+        "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res346/providers/Microsoft.Storage/storageAccounts/sto666/fileServices/default/shares/share1235",
+        "properties": {
+          "enabledProtocols": "NFS"
+        }
+      }
+    }
+  },
+  "operationId": "FileShares_Create",
+  "title": "Create NFS Shares"
+}

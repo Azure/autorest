@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "groupId": "aadGroup",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "Group_Delete",
+  "title": "ApiManagementDeleteGroup"
+}

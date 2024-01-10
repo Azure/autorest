@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets?$skiptoken={token}",
+        "value": [
+          {
+            "name": "myDiskEncryptionSet",
+            "type": "Microsoft.Compute/diskEncryptionSets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "location": "westus",
+            "properties": {
+              "activeKey": {
+                "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                "sourceVault": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                }
+              },
+              "encryptionType": "EncryptionAtRestWithCustomerKey",
+              "previousKeys": [],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "Encryption"
+            }
+          },
+          {
+            "name": "myDiskEncryptionSet2",
+            "type": "Microsoft.Compute/diskEncryptionSets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet2",
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "location": "westus",
+            "properties": {
+              "activeKey": {
+                "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                "sourceVault": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault2"
+                }
+              },
+              "encryptionType": "EncryptionAtRestWithCustomerKey",
+              "previousKeys": [],
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "Encryption"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_ListByResourceGroup",
+  "title": "List all disk encryption sets in a resource group."
+}

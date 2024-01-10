@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "roleAssignmentScheduleRequestName": "fea7a502-9a96-4806-a26f-eee560e52045",
+    "scope": "providers/Microsoft.Subscription/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "RoleAssignmentScheduleRequests_Cancel",
+  "title": "CancelRoleAssignmentScheduleRequestByName"
+}

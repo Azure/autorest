@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mySnapshot1",
+            "type": "Microsoft.Compute/snapshots",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "Copy",
+                "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "encryptionSettingsCollection": {
+                "enabled": true,
+                "encryptionSettings": [
+                  {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    },
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    }
+                  }
+                ]
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:47:30.6630569+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "Snapshots"
+            }
+          },
+          {
+            "name": "mySnapshot2",
+            "type": "Microsoft.Compute/snapshots",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2",
+            "location": "westus",
+            "properties": {
+              "creationData": {
+                "createOption": "Import",
+                "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+                "storageAccountId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount"
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "encryptionSettingsCollection": {
+                "enabled": true,
+                "encryptionSettings": [
+                  {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    },
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                      "sourceVault": {
+                        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                      }
+                    }
+                  }
+                ]
+              },
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "timeCreated": "2016-12-28T04:47:30.3247198+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "Snapshots"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Snapshots_List",
+  "title": "List all snapshots in a subscription."
+}

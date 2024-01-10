@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "dd91de05-d791-4ceb-b6dc-988682dc7d72"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "cpu alert",
+            "type": "Microsoft.AlertsManagement/smartGroups",
+            "id": "/subscriptions/dd91de05-d791-4ceb-b6dc-988682dc7d72/providers/Microsoft.AlertsManagement/smartGroups/a808445e-bb38-4751-85c2-1b109ccc1059",
+            "properties": {
+              "alertSeverities": [
+                {
+                  "name": "Sev3",
+                  "count": 1942
+                }
+              ],
+              "alertStates": [
+                {
+                  "name": "New",
+                  "count": 1941
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 1
+                }
+              ],
+              "alertsCount": 1942,
+              "lastModifiedDateTime": "2018-06-13T06:30:09Z",
+              "lastModifiedUserName": "System",
+              "monitorConditions": [
+                {
+                  "name": "Fired",
+                  "count": 1942
+                }
+              ],
+              "monitorServices": [
+                {
+                  "name": "Application Insights",
+                  "count": 1942
+                }
+              ],
+              "resourceGroups": [
+                {
+                  "name": "alertscorrelationrg",
+                  "count": 1942
+                }
+              ],
+              "resourceTypes": [
+                {
+                  "name": "components",
+                  "count": 1942
+                }
+              ],
+              "resources": [
+                {
+                  "name": "/subscriptions/dd91de05-d791-4ceb-b6dc-988682dc7d72/resourcegroups/alertscorrelationrg/providers/microsoft.insights/components/alertscorrelationworkerrole_int",
+                  "count": 1942
+                }
+              ],
+              "severity": "Sev3",
+              "smartGroupState": "New",
+              "startDateTime": "2018-06-06T12:35:09Z"
+            }
+          },
+          {
+            "name": "CPU Alert",
+            "type": "Microsoft.AlertsManagement/smartGroups",
+            "id": "/subscriptions/dd91de05-d791-4ceb-b6dc-988682dc7d72/providers/Microsoft.AlertsManagement/smartGroups/01114c7c-769f-4fd4-b6fa-ab77693b83cd",
+            "properties": {
+              "alertSeverities": [
+                {
+                  "name": "Sev0",
+                  "count": 6984
+                },
+                {
+                  "name": "Sev1",
+                  "count": 6927
+                }
+              ],
+              "alertStates": [
+                {
+                  "name": "New",
+                  "count": 15358
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 12
+                },
+                {
+                  "name": "Closed",
+                  "count": 4
+                }
+              ],
+              "alertsCount": 15374,
+              "lastModifiedDateTime": "2018-06-13T06:29:01Z",
+              "lastModifiedUserName": "System",
+              "monitorConditions": [
+                {
+                  "name": "Fired",
+                  "count": 15374
+                }
+              ],
+              "monitorServices": [
+                {
+                  "name": "Log Analytics",
+                  "count": 13911
+                }
+              ],
+              "resourceGroups": [
+                {
+                  "name": "mms-eus",
+                  "count": 15374
+                }
+              ],
+              "resourceTypes": [
+                {
+                  "name": "microsoft.operationalinsights/workspaces",
+                  "count": 6912
+                },
+                {
+                  "name": "workspaces",
+                  "count": 8462
+                }
+              ],
+              "resources": [
+                {
+                  "name": "/subscriptions/dd91de05-d791-4ceb-b6dc-988682dc7d72/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/alertsint",
+                  "count": 15374
+                }
+              ],
+              "severity": "Sev0",
+              "smartGroupState": "Acknowledged",
+              "startDateTime": "2018-05-17T10:18:44.2020997Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SmartGroups_GetAll",
+  "title": "List"
+}

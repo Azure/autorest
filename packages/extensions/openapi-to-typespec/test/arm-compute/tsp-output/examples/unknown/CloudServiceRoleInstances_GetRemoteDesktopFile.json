@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "aaaa",
+    "resourceGroupName": "rgcloudService",
+    "roleInstanceName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  },
+  "operationId": "CloudServiceRoleInstances_GetRemoteDesktopFile",
+  "title": "Get Cloud Service Role"
+}

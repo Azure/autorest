@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "deletedShare": {
+      "deletedShareName": "share1249",
+      "deletedShareVersion": "1234567890"
+    },
+    "monitor": "true",
+    "resourceGroupName": "res3376",
+    "shareName": "share1249",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "FileShares_Restore",
+  "title": "RestoreShares"
+}

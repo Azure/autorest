@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Contract details.")
@@ -18,19 +20,23 @@ model TagDescriptionContract
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("tagDescriptionId")
   @segment("tagDescriptions")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "ApiTagDescription")
-interface TagDescriptionContracts_ApiTagDescription {
+interface TagDescriptionContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Tag description in scope of API")
+  @operationId("ApiTagDescription_Get")
   get is ArmResourceRead<TagDescriptionContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @head
+  @operationId("ApiTagDescription_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       TagDescriptionContract,
@@ -38,7 +44,9 @@ interface TagDescriptionContracts_ApiTagDescription {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create/Update tag description in scope of the Api.")
+  @operationId("ApiTagDescription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
     {
@@ -50,7 +58,9 @@ interface TagDescriptionContracts_ApiTagDescription {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete tag description for the Api.")
+  @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
     {
@@ -62,7 +72,9 @@ interface TagDescriptionContracts_ApiTagDescription {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations")
+  @operationId("ApiTagDescription_ListByService")
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
     {

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AlertsManagement;
 @doc("An alert created in alert management service.")
 @subscriptionResource
 model Alert is ProxyResource<AlertProperties> {
   @doc("Unique ID of an alert instance.")
+  @path
   @key("alertId")
   @segment("alerts")
   name: string;

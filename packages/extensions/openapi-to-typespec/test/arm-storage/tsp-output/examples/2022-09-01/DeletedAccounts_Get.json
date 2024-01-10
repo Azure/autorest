@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "deletedAccountName": "sto1125",
+    "location": "eastus",
+    "monitor": "true",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto1125",
+        "type": "Microsoft.Storage/deletedAccounts",
+        "id": "/subscriptions/{subscription-id}/providers/Microsoft.Storage/locations/eastus/deletedAccounts/sto1125",
+        "properties": {
+          "creationTime": "2020-08-17T03:35:37.4588848Z",
+          "deletionTime": "2020-08-17T04:41:37.3442475Z",
+          "location": "eastus",
+          "restoreReference": "sto1125|2020-08-17T03:35:37.4588848Z",
+          "storageAccountResourceId": "/subscriptions/{subscription-id}/resourceGroups/sto/providers/Microsoft.Storage/storageAccounts/sto1125"
+        }
+      }
+    }
+  },
+  "operationId": "DeletedAccounts_Get",
+  "title": "DeletedAccountGet"
+}

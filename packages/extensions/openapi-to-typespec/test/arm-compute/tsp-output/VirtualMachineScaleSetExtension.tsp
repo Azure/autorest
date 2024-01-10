@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine Scale Set Extension.")
@@ -15,6 +17,7 @@ namespace Microsoft.Compute;
 model VirtualMachineScaleSetExtension
   is ProxyResource<VirtualMachineScaleSetExtensionProperties> {
   @doc("The name of the VM scale set extension.")
+  @path
   @key("vmssExtensionName")
   @segment("extensions")
   name: string;

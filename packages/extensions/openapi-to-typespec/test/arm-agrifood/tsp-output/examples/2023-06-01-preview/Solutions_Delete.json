@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "solutionId": "provider.solution",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "Solutions_Delete",
+  "title": "Solutions_Delete"
+}

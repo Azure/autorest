@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "B1"
+          },
+          {
+            "name": "B2"
+          },
+          {
+            "name": "D1"
+          },
+          {
+            "name": "S0"
+          },
+          {
+            "name": "S1"
+          },
+          {
+            "name": "S2"
+          },
+          {
+            "name": "S3"
+          },
+          {
+            "name": "S4"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Servers_ListSkusForNew",
+  "title": "List eligible SKUs for a new server"
+}

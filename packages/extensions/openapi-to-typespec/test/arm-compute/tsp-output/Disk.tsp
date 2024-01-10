@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Disk resource.")
 model Disk is TrackedResource<DiskProperties> {
   @doc("The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.")
+  @path
   @key("diskName")
   @segment("disks")
   name: string;
@@ -51,8 +54,20 @@ interface Disks {
   list is ArmListBySubscription<Disk>;
 
   @doc("Grants access to a disk.")
-  grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
+  grantAccess is ArmResourceActionAsync<
+    Disk,
+    GrantAccessData,
+    AccessUri,
+    BaseParameters<Disk>,
+    ArmLroLocationHeader
+  >;
 
   @doc("Revokes access to a disk.")
-  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
+  revokeAccess is ArmResourceActionAsync<
+    Disk,
+    void,
+    void,
+    BaseParameters<Disk>,
+    ArmLroLocationHeader
+  >;
 }

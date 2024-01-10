@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "0",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myvmScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myVMExtension",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
+            "properties": {
+              "type": "extType",
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "extPublisher",
+              "settings": {
+                "UserName": "xyz@microsoft.com"
+              },
+              "typeHandlerVersion": "1.2"
+            }
+          },
+          {
+            "name": "myVMExtension1",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension1",
+            "properties": {
+              "type": "extType1",
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "extPublisher1",
+              "settings": {
+                "UserName": "xyz@microsoft.com"
+              },
+              "typeHandlerVersion": "1.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMExtensions_List",
+  "title": "List extensions in Vmss instance."
+}

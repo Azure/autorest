@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cpu alert",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+        "properties": {
+          "context": {},
+          "egressConfig": {},
+          "essentials": {
+            "description": "description of the alert",
+            "actionStatus": {
+              "isSuppressed": false
+            },
+            "alertRule": "https://sersdfsdfinsight.portal.mms.microsoft.com/#Workspace/overview/settings/details/Edit Alert Rule/details/index?savedSearchId=&scheduleId=",
+            "alertState": "Acknowledged",
+            "lastModifiedDateTime": "2018-09-13T15:51:02Z",
+            "lastModifiedUserName": "System",
+            "monitorCondition": "Fired",
+            "monitorConditionResolvedDateTime": "2018-09-13T15:51:02Z",
+            "monitorService": "Application Insights",
+            "severity": "Sev3",
+            "signalType": "Log",
+            "smartGroupId": "23d6b2ce-8c54-468f-aff0-sd32aebb7e56",
+            "smartGroupingReason": "Occurred frequently with other alerts",
+            "sourceCreatedId": "6cd6b2ce-8c54-468f-aff0-9d12aebb7e49",
+            "startDateTime": "2018-09-13T15:51:02Z",
+            "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/servicedeskresourcegroup/providers/microsoft.insights/components/servicedeskappinsight",
+            "targetResourceGroup": "servicedeskresourcegroup",
+            "targetResourceName": "servicedeskappinsight",
+            "targetResourceType": "components"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_GetById",
+  "title": "GetById"
+}

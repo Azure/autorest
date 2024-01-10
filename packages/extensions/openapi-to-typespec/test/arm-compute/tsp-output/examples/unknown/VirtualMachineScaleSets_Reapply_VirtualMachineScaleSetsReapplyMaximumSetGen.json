@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "VirtualMachineScaleSetReapplyTestRG",
+    "subscriptionId": "b4f1213b-cacc-4816-8bfb-f30f90643de8",
+    "vmScaleSetName": "VMSSReapply-Test-ScaleSet"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/b4f1213b-cacc-4816-8bfb-f30f90643de8/providers/Microsoft.Compute/locations/eastus/operationResults/c57dff56-0cd2-4e24-8d11-4e18d77f7e85?api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_Reapply",
+  "title": "VirtualMachineScaleSets_Reapply_MaximumSet_Gen"
+}

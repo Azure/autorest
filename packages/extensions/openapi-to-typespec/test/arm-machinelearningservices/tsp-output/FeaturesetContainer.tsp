@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(Workspace)
 model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
   @doc("Container name. This is case-sensitive.")
+  @path
   @key("name")
   @segment("featuresets")
   name: string;
@@ -28,7 +31,11 @@ interface FeaturesetContainers {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetContainer>;
 
   @doc("Delete container.")
-  delete is ArmResourceDeleteAsync<FeaturesetContainer>;
+  delete is ArmResourceDeleteAsync<
+    FeaturesetContainer,
+    BaseParameters<FeaturesetContainer>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List featurestore entity containers.")
   list is ArmResourceListByParent<

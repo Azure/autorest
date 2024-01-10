@@ -1,0 +1,21 @@
+{
+  "operationId": "Products_CountDevices",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "deviceGroupName": "MyDeviceGroup1",
+    "productGroupName": "MyProduct1",
+    "productName": "MyProduct1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Products_CountDevices",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": 3
+      }
+    }
+  }
+}

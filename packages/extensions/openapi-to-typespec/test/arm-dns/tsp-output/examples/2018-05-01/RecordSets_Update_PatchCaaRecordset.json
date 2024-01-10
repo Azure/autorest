@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "recordType": "CAA",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/CAA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/CAA/record1",
+        "properties": {
+          "TTL": 3600,
+          "caaRecords": [
+            {
+              "flags": 0,
+              "tag": "issue",
+              "value": "ca.contoso.com"
+            }
+          ],
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key2": "value2"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "Patch CAA recordset"
+}

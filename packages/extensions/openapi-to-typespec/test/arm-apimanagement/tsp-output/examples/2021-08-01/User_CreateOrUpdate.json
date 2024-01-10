@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "confirmation": "signup",
+        "email": "foobar@outlook.com",
+        "firstName": "foo",
+        "lastName": "bar"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "5931a75ae4bbd512288c680b",
+        "type": "Microsoft.ApiManagement/service/users",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512288c680b",
+        "properties": {
+          "email": "foobar@outlook.com",
+          "firstName": "foo",
+          "groups": [],
+          "identities": [
+            {
+              "id": "foobar@outlook.com",
+              "provider": "Basic"
+            }
+          ],
+          "lastName": "bar",
+          "registrationDate": "2018-01-07T21:21:29.16Z",
+          "state": "active"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "5931a75ae4bbd512288c680b",
+        "type": "Microsoft.ApiManagement/service/users",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512288c680b",
+        "properties": {
+          "email": "foobar@outlook.com",
+          "firstName": "foo",
+          "groups": [],
+          "identities": [
+            {
+              "id": "foobar@outlook.com",
+              "provider": "Basic"
+            }
+          ],
+          "lastName": "bar",
+          "registrationDate": "2018-01-07T21:21:29.16Z",
+          "state": "active"
+        }
+      }
+    }
+  },
+  "operationId": "User_CreateOrUpdate",
+  "title": "ApiManagementCreateUser"
+}

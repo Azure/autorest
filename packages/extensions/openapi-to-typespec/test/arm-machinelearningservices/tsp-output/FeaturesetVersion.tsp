@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FeaturesetContainer.tsp";
@@ -8,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 @doc("Azure Resource Manager resource envelope.")
 @parentResource(FeaturesetContainer)
 model FeaturesetVersion is ProxyResource<FeaturesetVersionProperties> {
   @doc("Version identifier. This is case-sensitive.")
+  @path
   @key("version")
   @segment("versions")
   name: string;
@@ -28,7 +31,11 @@ interface FeaturesetVersions {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetVersion>;
 
   @doc("Delete version.")
-  delete is ArmResourceDeleteAsync<FeaturesetVersion>;
+  delete is ArmResourceDeleteAsync<
+    FeaturesetVersion,
+    BaseParameters<FeaturesetVersion>,
+    ArmLroLocationHeader
+  >;
 
   @doc("List versions.")
   list is ArmResourceListByParent<
@@ -74,7 +81,9 @@ interface FeaturesetVersions {
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
-    FeaturesetJob
+    FeaturesetJob,
+    BaseParameters<FeaturesetVersion>,
+    ArmLroLocationHeader
   >;
 
   @doc("List materialization Jobs.")

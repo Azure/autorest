@@ -1,0 +1,40 @@
+{
+  "operationId": "Catalogs_ListDeviceInsights",
+  "parameters": {
+    "$top": 10,
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Catalogs_ListDeviceInsights",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "description": "eventDescription1",
+            "deviceId": "eventIdentifier1",
+            "endTimestampUtc": "2021-09-30T23:54:21.96Z",
+            "eventCategory": "eventCategory1",
+            "eventClass": "eventClass1",
+            "eventCount": 1,
+            "eventType": "eventType1",
+            "startTimestampUtc": "2021-09-30T21:51:39.26Z"
+          },
+          {
+            "description": "eventDescription2",
+            "deviceId": "eventIdentifier2",
+            "endTimestampUtc": "2022-12-07T17:34:12.50Z",
+            "eventCategory": "eventCategory2",
+            "eventClass": "eventClass2",
+            "eventCount": 1,
+            "eventType": "eventType2",
+            "startTimestampUtc": "2022-12-06T12:41:39.26Z"
+          }
+        ]
+      }
+    }
+  }
+}

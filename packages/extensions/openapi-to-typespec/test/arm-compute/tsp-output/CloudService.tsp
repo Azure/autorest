@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Describes the cloud service.")
 model CloudService is TrackedResource<CloudServiceProperties> {
   @doc("Name of the cloud service.")
+  @path
   @key("cloudServiceName")
   @segment("cloudServices")
   name: string;
@@ -78,11 +81,9 @@ interface CloudServices {
     },
     CloudServiceInstanceView
   >;
-}
 
-@armResourceOperations
-@projectedName("client", "CloudServicesUpdateDomain")
-interface CloudServices_CloudServicesUpdateDomain {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   @doc("Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.")
   // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
@@ -108,6 +109,8 @@ interface CloudServices_CloudServicesUpdateDomain {
     UpdateDomain
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   @doc("Gets a list of all update domains in a cloud service.")
   // FIXME: CloudServicesUpdateDomain_ListUpdateDomains could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")

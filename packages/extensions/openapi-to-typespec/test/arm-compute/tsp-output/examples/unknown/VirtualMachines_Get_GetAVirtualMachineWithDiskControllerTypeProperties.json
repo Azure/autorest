@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "$expand": "userData",
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "West US",
+        "properties": {
+          "applicationProfile": {
+            "galleryApplications": [
+              {
+                "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config",
+                "order": 1,
+                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                "tags": "myTag1"
+              },
+              {
+                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+              }
+            ]
+          },
+          "availabilitySet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/my-AvailabilitySet"
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "http://{myStorageAccount}.blob.core.windows.net"
+            }
+          },
+          "extensionsTimeBudget": "PT50M",
+          "hardwareProfile": {
+            "vmSize": "Standard_DS3_v2",
+            "vmSizeProperties": {
+              "vCPUsAvailable": 1,
+              "vCPUsPerCore": 1
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{myNIC}"
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "admin",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Succeeded",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "name": "myDataDisk0",
+                "caching": "ReadWrite",
+                "createOption": "Empty",
+                "diskSizeGB": 30,
+                "lun": 0,
+                "managedDisk": {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk0",
+                  "storageAccountType": "Premium_LRS"
+                }
+              },
+              {
+                "name": "myDataDisk1",
+                "caching": "ReadWrite",
+                "createOption": "Attach",
+                "diskSizeGB": 100,
+                "lun": 1,
+                "managedDisk": {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk1",
+                  "storageAccountType": "Premium_LRS"
+                }
+              }
+            ],
+            "diskControllerType": "NVMe",
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myOsDisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "diskSizeGB": 30,
+              "managedDisk": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
+                "storageAccountType": "Premium_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "userData": "RXhhbXBsZSBVc2VyRGF0YQ==",
+          "vmId": "0f47b100-583c-48e3-a4c0-aefc2c9bbcc1"
+        },
+        "resources": [
+          {
+            "name": "CustomScriptExtension-DSC",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/CustomScriptExtension-DSC",
+            "location": "west us",
+            "properties": {
+              "type": "CustomScriptExtension",
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "publisher": "Microsoft.Compute",
+              "settings": {},
+              "typeHandlerVersion": "1.9"
+            },
+            "tags": {
+              "displayName": "CustomScriptExtension-DSC"
+            }
+          }
+        ],
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Get",
+  "title": "Get a virtual machine with Disk Controller Type Properties"
+}

@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "kind": "BlockBlobStorage",
+      "location": "eastus",
+      "properties": {
+        "isHnsEnabled": true,
+        "isNfsV3Enabled": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Allow",
+          "ipRules": [],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
+            }
+          ]
+        },
+        "supportsHttpsTrafficOnly": false
+      },
+      "sku": {
+        "name": "Premium_LRS"
+      }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "BlockBlobStorage",
+        "location": "eastus",
+        "properties": {
+          "isHnsEnabled": true,
+          "isNfsV3Enabled": true,
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Allow",
+            "ipRules": [],
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
+              }
+            ]
+          },
+          "supportsHttpsTrafficOnly": false
+        },
+        "sku": {
+          "name": "Premium_LRS",
+          "tier": "Premium"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "NfsV3AccountCreate"
+}

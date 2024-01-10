@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BlobServiceProperties.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("Properties of the blob container, including Id, resource name, resource type, Etag.")
@@ -16,6 +18,7 @@ model BlobContainer is ProxyResource<ContainerProperties> {
   @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
   @maxLength(63)
   @minLength(3)
+  @path
   @key("containerName")
   @segment("containers")
   name: string;
@@ -69,5 +72,11 @@ interface BlobContainers {
   >;
 
   @doc("This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.")
-  objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
+  objectLevelWorm is ArmResourceActionAsync<
+    BlobContainer,
+    void,
+    void,
+    BaseParameters<BlobContainer>,
+    ArmLroLocationHeader
+  >;
 }

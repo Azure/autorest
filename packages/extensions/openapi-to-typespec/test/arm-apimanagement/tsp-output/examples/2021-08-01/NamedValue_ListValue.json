@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "namedValueId": "testarmTemplateproperties2",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": "propValue"
+      }
+    }
+  },
+  "operationId": "NamedValue_ListValue",
+  "title": "ApiManagementNamedValueListValue"
+}

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "loggerId": "loggerId",
+    "parameters": {
+      "properties": {
+        "description": "adding a new logger",
+        "credentials": {
+          "instrumentationKey": "11................a1"
+        },
+        "loggerType": "applicationInsights"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "properties": {
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false,
+          "loggerType": "applicationInsights"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "loggerId",
+        "type": "Microsoft.ApiManagement/service/loggers",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId",
+        "properties": {
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false,
+          "loggerType": "applicationInsights",
+          "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/microsoft.insights/components/airesource"
+        }
+      }
+    }
+  },
+  "operationId": "Logger_CreateOrUpdate",
+  "title": "ApiManagementCreateAILogger"
+}

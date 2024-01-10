@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Diagnostic details.")
@@ -17,19 +19,23 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
+  @path
   @key("diagnosticId")
   @segment("diagnostics")
   name: string;
 }
 
 @armResourceOperations
-@projectedName("client", "ApiDiagnostic")
-interface DiagnosticContracts_ApiDiagnostic {
+interface DiagnosticContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Diagnostic for an API specified by its identifier.")
+  @operationId("ApiDiagnostic_Get")
   get is ArmResourceRead<DiagnosticContract>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.")
   @head
+  @operationId("ApiDiagnostic_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       DiagnosticContract,
@@ -37,7 +43,9 @@ interface DiagnosticContracts_ApiDiagnostic {
     >,
   ): OkResponse | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Diagnostic for an API or updates an existing one.")
+  @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
     {
@@ -49,7 +57,9 @@ interface DiagnosticContracts_ApiDiagnostic {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the Diagnostic for an API specified by its identifier.")
+  @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
     DiagnosticContract,
@@ -62,7 +72,9 @@ interface DiagnosticContracts_ApiDiagnostic {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified Diagnostic from an API.")
+  @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
     {
@@ -74,7 +86,9 @@ interface DiagnosticContracts_ApiDiagnostic {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all diagnostics of an API.")
+  @operationId("ApiDiagnostic_ListByService")
   listByService is ArmResourceListByParent<
     DiagnosticContract,
     {

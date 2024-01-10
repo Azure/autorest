@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "sshPublicKeyName": "aaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "SshPublicKeys_Delete",
+  "title": "SshPublicKey_Delete_MaximumSet_Gen"
+}

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "aaaaaaaaa",
+    "hostName": "aaaaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "sku": {
+        "name": "DSv3-Type1"
+      }
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDedicatedHost",
+        "type": "aaaaaaaaaaaaaaaaaaa",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "location": "westus",
+        "properties": {
+          "autoReplaceOnFailure": true,
+          "hostId": "{GUID}",
+          "licenseType": "Windows_Server_Hybrid",
+          "platformFaultDomain": 1,
+          "provisioningState": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+          "provisioningTime": "2021-11-30T12:58:26.526Z",
+          "virtualMachines": [
+            {
+              "id": "aaaa"
+            }
+          ]
+        },
+        "sku": {
+          "name": "DSv3-Type1",
+          "capacity": 7,
+          "tier": "aaa"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "DedicatedHosts_Update",
+  "title": "DedicatedHost_Update_Resize"
+}

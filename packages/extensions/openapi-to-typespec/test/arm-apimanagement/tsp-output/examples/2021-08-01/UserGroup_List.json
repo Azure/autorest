@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "57681833a40f7eb6c49f6acf"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "5600b57e7e8880006a020002",
+            "type": "Microsoft.ApiManagement/service/users/groups",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/57681833a40f7eb6c49f6acf/groups/5600b57e7e8880006a020002",
+            "properties": {
+              "type": "system",
+              "description": "Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.",
+              "builtIn": true,
+              "displayName": "Developers"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "UserGroup_List",
+  "title": "ApiManagementListUserGroups"
+}

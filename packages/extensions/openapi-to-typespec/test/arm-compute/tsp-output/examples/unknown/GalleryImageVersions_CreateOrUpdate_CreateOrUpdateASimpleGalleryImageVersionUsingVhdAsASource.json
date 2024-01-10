@@ -1,0 +1,271 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersion": {
+      "location": "West US",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "encryption": {
+                "dataDiskImages": [
+                  {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                    "lun": 1
+                  }
+                ],
+                "osDiskImage": {
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                }
+              },
+              "excludeFromLatest": false,
+              "regionalReplicaCount": 1
+            },
+            {
+              "name": "East US",
+              "excludeFromLatest": false,
+              "regionalReplicaCount": 2,
+              "storageAccountType": "Standard_ZRS"
+            }
+          ]
+        },
+        "safetyProfile": {
+          "allowDeletionOfReplicatedLocations": false
+        },
+        "storageProfile": {
+          "dataDiskImages": [
+            {
+              "hostCaching": "None",
+              "lun": 1,
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              }
+            }
+          ],
+          "osDiskImage": {
+            "hostCaching": "ReadOnly",
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+              "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+            }
+          }
+        }
+      }
+    },
+    "galleryImageVersionName": "1.0.0",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1.0.0",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "publishingProfile": {
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "replicaCount": 1,
+            "storageAccountType": "Standard_LRS",
+            "targetRegions": [
+              {
+                "name": "West US",
+                "encryption": {
+                  "dataDiskImages": [
+                    {
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                      "lun": 1
+                    }
+                  ],
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  }
+                },
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ],
+            "reportedForPolicyViolation": true
+          },
+          "storageProfile": {
+            "dataDiskImages": [
+              {
+                "hostCaching": "None",
+                "lun": 1,
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                }
+              }
+            ],
+            "osDiskImage": {
+              "hostCaching": "ReadOnly",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "1.0.0",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Creating",
+          "publishingProfile": {
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "replicaCount": 1,
+            "storageAccountType": "Standard_LRS",
+            "targetRegions": [
+              {
+                "name": "West US",
+                "encryption": {
+                  "dataDiskImages": [
+                    {
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                      "lun": 1
+                    }
+                  ],
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  }
+                },
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ],
+            "reportedForPolicyViolation": true
+          },
+          "storageProfile": {
+            "dataDiskImages": [
+              {
+                "hostCaching": "None",
+                "lun": 1,
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                }
+              }
+            ],
+            "osDiskImage": {
+              "hostCaching": "ReadOnly",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              }
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "1.0.0",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "publishingProfile": {
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "replicaCount": 1,
+            "storageAccountType": "Standard_LRS",
+            "targetRegions": [
+              {
+                "name": "West US",
+                "encryption": {
+                  "dataDiskImages": [
+                    {
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet",
+                      "lun": 1
+                    }
+                  ],
+                  "osDiskImage": {
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                  }
+                },
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_ZRS"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false,
+            "policyViolations": [
+              {
+                "category": "ImageFlaggedUnsafe",
+                "details": "This is the policy violation details."
+              }
+            ],
+            "reportedForPolicyViolation": true
+          },
+          "storageProfile": {
+            "dataDiskImages": [
+              {
+                "hostCaching": "None",
+                "lun": 1,
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                  "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+                }
+              }
+            ],
+            "osDiskImage": {
+              "hostCaching": "ReadOnly",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/{storageAccount}",
+                "uri": "https://gallerysourcencus.blob.core.windows.net/myvhds/Windows-Server-2012-R2-20171216-en.us-128GB.vhd"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "GalleryImageVersions_CreateOrUpdate",
+  "title": "Create or update a simple Gallery Image Version using vhd as a source."
+}
