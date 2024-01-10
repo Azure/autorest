@@ -17,7 +17,9 @@
         "contentVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "id": "aaaaaaaaaaaaaaaaaaaaaaaa",
         "parameters": {},
-        "resources": [{}]
+        "resources": [
+          {}
+        ]
       }
     },
     "202": {

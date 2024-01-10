@@ -13,14 +13,19 @@
           {
             "field": "TargetResourceType",
             "operator": "Equals",
-            "values": ["microsoft.compute/virtualmachines"]
+            "values": [
+              "microsoft.compute/virtualmachines"
+            ]
           }
         ],
         "enabled": true,
         "schedule": {
           "recurrences": [
             {
-              "daysOfWeek": ["Saturday", "Sunday"],
+              "daysOfWeek": [
+                "Saturday",
+                "Sunday"
+              ],
               "endTime": "04:00:00",
               "recurrenceType": "Weekly",
               "startTime": "22:00:00"
@@ -28,7 +33,10 @@
           ],
           "timeZone": "India Standard Time"
         },
-        "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ]
       },
       "tags": {}
     },
@@ -55,14 +63,19 @@
             {
               "field": "TargetResourceType",
               "operator": "Equals",
-              "values": ["microsoft.compute/virtualmachines"]
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
             }
           ],
           "enabled": true,
           "schedule": {
             "recurrences": [
               {
-                "daysOfWeek": ["Saturday", "Sunday"],
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ],
                 "endTime": "04:00:00",
                 "recurrenceType": "Weekly",
                 "startTime": "22:00:00"
@@ -70,7 +83,10 @@
             ],
             "timeZone": "India Standard Time"
           },
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",
@@ -100,14 +116,19 @@
             {
               "field": "TargetResourceType",
               "operator": "Equals",
-              "values": ["microsoft.compute/virtualmachines"]
+              "values": [
+                "microsoft.compute/virtualmachines"
+              ]
             }
           ],
           "enabled": true,
           "schedule": {
             "recurrences": [
               {
-                "daysOfWeek": ["Saturday", "Sunday"],
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ],
                 "endTime": "04:00:00",
                 "recurrenceType": "Weekly",
                 "startTime": "22:00:00"
@@ -115,7 +136,10 @@
             ],
             "timeZone": "India Standard Time"
           },
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",

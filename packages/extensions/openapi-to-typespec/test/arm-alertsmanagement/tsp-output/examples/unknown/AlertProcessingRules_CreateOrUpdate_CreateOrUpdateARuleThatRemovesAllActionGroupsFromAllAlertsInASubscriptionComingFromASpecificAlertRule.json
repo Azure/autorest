@@ -19,7 +19,9 @@
           }
         ],
         "enabled": true,
-        "scopes": ["/subscriptions/subId1"]
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
       },
       "tags": {}
     },
@@ -52,7 +54,9 @@
             }
           ],
           "enabled": true,
-          "scopes": ["/subscriptions/subId1"]
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",
@@ -88,7 +92,9 @@
             }
           ],
           "enabled": true,
-          "scopes": ["/subscriptions/subId1"]
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",

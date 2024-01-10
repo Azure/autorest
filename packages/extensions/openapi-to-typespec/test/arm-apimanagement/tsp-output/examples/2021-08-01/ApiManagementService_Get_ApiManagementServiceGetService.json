@@ -31,7 +31,9 @@
               "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus2-01.regional.azure-api.net",
               "location": "East US 2",
               "platformVersion": "stv2",
-              "publicIPAddresses": ["40.70.24.106"],
+              "publicIPAddresses": [
+                "40.70.24.106"
+              ],
               "sku": {
                 "name": "Premium",
                 "capacity": 1
@@ -116,7 +118,9 @@
               "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointProxyName",
               "properties": {
-                "groupIds": ["Gateway"],
+                "groupIds": [
+                  "Gateway"
+                ],
                 "privateEndpoint": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
                 },
@@ -130,7 +134,9 @@
             }
           ],
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["13.92.130.49"],
+          "publicIPAddresses": [
+            "13.92.130.49"
+          ],
           "publicNetworkAccess": "Enabled",
           "publisherEmail": "string",
           "publisherName": "Test Premium",

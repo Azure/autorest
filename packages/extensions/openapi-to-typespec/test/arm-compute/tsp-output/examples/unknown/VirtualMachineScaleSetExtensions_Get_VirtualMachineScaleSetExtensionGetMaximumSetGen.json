@@ -19,7 +19,9 @@
           "enableAutomaticUpgrade": true,
           "forceUpdateTag": "aaaaaaaaa",
           "protectedSettings": {},
-          "provisionAfterExtensions": ["aa"],
+          "provisionAfterExtensions": [
+            "aa"
+          ],
           "provisioningState": "aaa",
           "publisher": "{extension-Publisher}",
           "settings": {},

@@ -25,7 +25,10 @@
           "TTL": 3600,
           "TXTRecords": [
             {
-              "value": ["string1", "string2"]
+              "value": [
+                "string1",
+                "string2"
+              ]
             }
           ],
           "fqdn": "record1.zone1",

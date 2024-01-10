@@ -9,7 +9,9 @@
         "enableAutomaticUpgrade": true,
         "forceUpdateTag": "aaaaaaaaa",
         "protectedSettings": {},
-        "provisionAfterExtensions": ["aa"],
+        "provisionAfterExtensions": [
+          "aa"
+        ],
         "publisher": "{extension-Publisher}",
         "settings": {},
         "suppressFailures": true,
@@ -33,7 +35,9 @@
           "enableAutomaticUpgrade": true,
           "forceUpdateTag": "aaaaaaaaa",
           "protectedSettings": {},
-          "provisionAfterExtensions": ["aa"],
+          "provisionAfterExtensions": [
+            "aa"
+          ],
           "provisioningState": "aaa",
           "publisher": "{extension-Publisher}",
           "settings": {},
@@ -53,7 +57,9 @@
           "enableAutomaticUpgrade": true,
           "forceUpdateTag": "aaaaaaaaa",
           "protectedSettings": {},
-          "provisionAfterExtensions": ["aa"],
+          "provisionAfterExtensions": [
+            "aa"
+          ],
           "provisioningState": "aaa",
           "publisher": "{extension-Publisher}",
           "settings": {},

@@ -31,8 +31,12 @@
                   }
                 },
                 "filters": {
-                  "blobTypes": ["blockBlob"],
-                  "prefixMatch": ["olcmtestcontainer1"]
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer1"
+                  ]
                 }
               },
               "enabled": true
@@ -67,8 +71,12 @@
                       "value": "val2"
                     }
                   ],
-                  "blobTypes": ["blockBlob"],
-                  "prefixMatch": ["olcmtestcontainer2"]
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer2"
+                  ]
                 }
               },
               "enabled": true
@@ -113,8 +121,12 @@
                     }
                   },
                   "filters": {
-                    "blobTypes": ["blockBlob"],
-                    "prefixMatch": ["olcmtestcontainer1"]
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer1"
+                    ]
                   }
                 },
                 "enabled": true
@@ -149,8 +161,12 @@
                         "value": "val2"
                       }
                     ],
-                    "blobTypes": ["blockBlob"],
-                    "prefixMatch": ["olcmtestcontainer2"]
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer2"
+                    ]
                   }
                 },
                 "enabled": true

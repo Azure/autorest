@@ -15,7 +15,10 @@
         "properties": {
           "displayName": "propName",
           "secret": false,
-          "tags": ["foo", "bar"],
+          "tags": [
+            "foo",
+            "bar"
+          ],
           "value": "propValue"
         }
       }

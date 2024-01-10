@@ -6,7 +6,10 @@
       "properties": {
         "displayName": "prop3name",
         "secret": false,
-        "tags": ["foo", "bar"],
+        "tags": [
+          "foo",
+          "bar"
+        ],
         "value": "propValue"
       }
     },
@@ -23,7 +26,10 @@
         "properties": {
           "displayName": "prop3name",
           "secret": false,
-          "tags": ["foo", "bar"],
+          "tags": [
+            "foo",
+            "bar"
+          ],
           "value": "propValue"
         }
       }
@@ -36,7 +42,10 @@
         "properties": {
           "displayName": "prop3name",
           "secret": false,
-          "tags": ["foo", "bar"],
+          "tags": [
+            "foo",
+            "bar"
+          ],
           "value": "propValue"
         }
       }

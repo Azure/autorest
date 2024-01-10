@@ -30,7 +30,9 @@
         },
         "scaleInPolicy": {
           "forceDeletion": true,
-          "rules": ["OldestVM"]
+          "rules": [
+            "OldestVM"
+          ]
         },
         "singlePlacementGroup": true,
         "upgradePolicy": {
@@ -71,7 +73,9 @@
                   "enableAutomaticUpgrade": true,
                   "forceUpdateTag": "aaaaaaaaa",
                   "protectedSettings": {},
-                  "provisionAfterExtensions": ["aa"],
+                  "provisionAfterExtensions": [
+                    "aa"
+                  ],
                   "publisher": "{extension-Publisher}",
                   "settings": {},
                   "suppressFailures": true,
@@ -261,7 +265,9 @@
                 },
                 "storageAccountType": "Standard_LRS"
               },
-              "vhdContainers": ["aa"],
+              "vhdContainers": [
+                "aa"
+              ],
               "writeAcceleratorEnabled": true
             }
           },
@@ -331,7 +337,9 @@
           },
           "scaleInPolicy": {
             "forceDeletion": true,
-            "rules": ["OldestVM"]
+            "rules": [
+              "OldestVM"
+            ]
           },
           "singlePlacementGroup": true,
           "spotRestorePolicy": {
@@ -394,7 +402,9 @@
                     "enableAutomaticUpgrade": true,
                     "forceUpdateTag": "aaaaaaaaa",
                     "protectedSettings": {},
-                    "provisionAfterExtensions": ["aa"],
+                    "provisionAfterExtensions": [
+                      "aa"
+                    ],
                     "provisioningState": "aaaaaaaaaaaaaa",
                     "publisher": "{extension-Publisher}",
                     "settings": {},
@@ -416,7 +426,9 @@
                   "properties": {
                     "deleteOption": "Delete",
                     "dnsSettings": {
-                      "dnsServers": ["aaaaaaaaaaaa"]
+                      "dnsServers": [
+                        "aaaaaaaaaaaa"
+                      ]
                     },
                     "enableAcceleratedNetworking": true,
                     "enableFpga": true,
@@ -610,7 +622,9 @@
                   "storageAccountType": "Standard_LRS"
                 },
                 "osType": "Windows",
-                "vhdContainers": ["aa"],
+                "vhdContainers": [
+                  "aa"
+                ],
                 "writeAcceleratorEnabled": true
               }
             },
@@ -626,7 +640,9 @@
         "tags": {
           "key8425": "aaa"
         },
-        "zones": ["aaaaaaaaaaaaaaaaaaaa"]
+        "zones": [
+          "aaaaaaaaaaaaaaaaaaaa"
+        ]
       }
     }
   },

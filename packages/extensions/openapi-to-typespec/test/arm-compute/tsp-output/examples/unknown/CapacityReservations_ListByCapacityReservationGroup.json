@@ -39,7 +39,9 @@
             "tags": {
               "department": "HR"
             },
-            "zones": ["1"]
+            "zones": [
+              "1"
+            ]
           },
           {
             "name": "{capacityReservationName}",
@@ -64,7 +66,9 @@
             "tags": {
               "department": "HR"
             },
-            "zones": ["1"]
+            "zones": [
+              "1"
+            ]
           }
         ]
       }

@@ -25,10 +25,17 @@
                     "definition": {
                       "format": "Csv",
                       "filters": {
-                        "blobTypes": ["blockBlob", "appendBlob", "pageBlob"],
+                        "blobTypes": [
+                          "blockBlob",
+                          "appendBlob",
+                          "pageBlob"
+                        ],
                         "includeBlobVersions": true,
                         "includeSnapshots": true,
-                        "prefixMatch": ["inventoryprefix1", "inventoryprefix2"]
+                        "prefixMatch": [
+                          "inventoryprefix1",
+                          "inventoryprefix2"
+                        ]
                       },
                       "objectType": "Blob",
                       "schedule": "Daily",

@@ -139,7 +139,9 @@
                 "status": "success"
               }
             ],
-            "dnsServers": ["10.82.98.10"]
+            "dnsServers": [
+              "10.82.98.10"
+            ]
           }
         }
       ]

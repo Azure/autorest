@@ -58,7 +58,9 @@
         "tags": {
           "department": "HR"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     }
   },

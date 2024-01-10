@@ -18,7 +18,9 @@
               "description": "A sample parameter that is required and has a default value of \"sample\".",
               "defaultValue": "sample",
               "required": true,
-              "values": ["sample"]
+              "values": [
+                "sample"
+              ]
             }
           ]
         },

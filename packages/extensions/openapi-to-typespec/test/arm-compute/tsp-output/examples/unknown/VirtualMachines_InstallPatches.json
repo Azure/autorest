@@ -5,7 +5,10 @@
       "maximumDuration": "PT4H",
       "rebootSetting": "IfRequired",
       "windowsParameters": {
-        "classificationsToInclude": ["Critical", "Security"],
+        "classificationsToInclude": [
+          "Critical",
+          "Security"
+        ],
         "maxPatchPublishDate": "2020-11-19T02:36:43.0539904+00:00"
       }
     },
@@ -26,7 +29,9 @@
         "patches": [
           {
             "name": "Definition Update for Windows Defender Antivirus - KB2267602 (Definition 1.279.1373.0)",
-            "classifications": ["Definition Updates"],
+            "classifications": [
+              "Definition Updates"
+            ],
             "installationState": "Installed",
             "kbId": "2267602",
             "patchId": "35428702-5784-4ba4-a6e0-5222258b5411",
@@ -34,7 +39,9 @@
           },
           {
             "name": "Windows Malicious Software Removal Tool x64 - October 2018 (KB890830)",
-            "classifications": ["Update Rollups"],
+            "classifications": [
+              "Update Rollups"
+            ],
             "installationState": "Pending",
             "kbId": "890830",
             "patchId": "39f9cdd1-795c-4d0e-8c0a-73ab3f31746d",

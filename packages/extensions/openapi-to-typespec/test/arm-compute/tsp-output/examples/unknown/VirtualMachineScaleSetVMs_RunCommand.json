@@ -4,7 +4,9 @@
     "instanceId": "0",
     "parameters": {
       "commandId": "RunPowerShellScript",
-      "script": ["Write-Host Hello World!"]
+      "script": [
+        "Write-Host Hello World!"
+      ]
     },
     "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscription-id}",

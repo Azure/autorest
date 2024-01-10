@@ -8,7 +8,9 @@
         "properties": {
           "serviceFabricCluster": {
             "clientCertificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
-            "managementEndpoints": ["https://somecluster.com"],
+            "managementEndpoints": [
+              "https://somecluster.com"
+            ],
             "maxPartitionResolutionRetries": 5,
             "serverX509Names": [
               {
@@ -37,7 +39,9 @@
           "properties": {
             "serviceFabricCluster": {
               "clientCertificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
-              "managementEndpoints": ["https://somecluster.com"],
+              "managementEndpoints": [
+                "https://somecluster.com"
+              ],
               "maxPartitionResolutionRetries": 5,
               "serverX509Names": [
                 {
@@ -62,7 +66,9 @@
           "properties": {
             "serviceFabricCluster": {
               "clientCertificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
-              "managementEndpoints": ["https://somecluster.com"],
+              "managementEndpoints": [
+                "https://somecluster.com"
+              ],
               "maxPartitionResolutionRetries": 5,
               "serverX509Names": [
                 {

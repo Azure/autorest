@@ -20,13 +20,19 @@
             "id": "string",
             "properties": {
               "description": "string",
-              "entities": ["string"],
+              "entities": [
+                "string"
+              ],
               "isAnonymous": false,
               "isArchived": false,
               "materializationSettings": {
                 "notification": {
-                  "emailOn": ["JobCompleted"],
-                  "emails": ["string"]
+                  "emailOn": [
+                    "JobCompleted"
+                  ],
+                  "emails": [
+                    "string"
+                  ]
                 },
                 "resource": {
                   "instanceType": "string"
@@ -36,10 +42,18 @@
                   "frequency": "Month",
                   "interval": 1,
                   "schedule": {
-                    "hours": [1],
-                    "minutes": [1],
-                    "monthDays": [1],
-                    "weekDays": ["Saturday"]
+                    "hours": [
+                      1
+                    ],
+                    "minutes": [
+                      1
+                    ],
+                    "monthDays": [
+                      1
+                    ],
+                    "weekDays": [
+                      "Saturday"
+                    ]
                   },
                   "startTime": "string",
                   "timeZone": "string",

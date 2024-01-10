@@ -21,7 +21,10 @@
         "tag2": "value2",
         "tag3": "value3"
       },
-      "zones": ["1", "2"]
+      "zones": [
+        "1",
+        "2"
+      ]
     },
     "resourceGroupName": "rg1",
     "serviceName": "apimService1",
@@ -64,7 +67,9 @@
           "platformVersion": "stv2",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["20.47.137.XXX"],
+          "publicIPAddresses": [
+            "20.47.137.XXX"
+          ],
           "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
@@ -92,7 +97,10 @@
           "tag2": "value2",
           "tag3": "value3"
         },
-        "zones": ["1", "2"]
+        "zones": [
+          "1",
+          "2"
+        ]
       }
     },
     "201": {
@@ -143,7 +151,10 @@
           "tag2": "value2",
           "tag3": "value3"
         },
-        "zones": ["1", "2"]
+        "zones": [
+          "1",
+          "2"
+        ]
       },
       "headers": {
         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2021-08-01"

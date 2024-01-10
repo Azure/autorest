@@ -48,7 +48,9 @@
         },
         "upgradeMode": "Auto"
       },
-      "zones": ["1"]
+      "zones": [
+        "1"
+      ]
     },
     "resourceGroupName": "ConstosoRG",
     "subscriptionId": "{subscription-id}"
@@ -113,7 +115,9 @@
           "createdAt": "2020-01-01T17:18:19.1234567Z",
           "lastModifiedAt": "2020-01-01T17:18:19.1234567Z"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     },
     "201": {
@@ -175,7 +179,9 @@
           "createdAt": "2020-01-01T17:18:19.1234567Z",
           "lastModifiedAt": "2020-01-01T17:18:19.1234567Z"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       },
       "headers": {
         "location": "https://foo.com/operationstatus"

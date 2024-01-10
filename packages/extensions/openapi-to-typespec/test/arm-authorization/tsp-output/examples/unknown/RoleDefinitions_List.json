@@ -14,11 +14,17 @@
             "properties": {
               "type": "roletype",
               "description": "Role description",
-              "assignableScopes": ["/subscriptions/subId"],
+              "assignableScopes": [
+                "/subscriptions/subId"
+              ],
               "permissions": [
                 {
-                  "actions": ["action"],
-                  "dataActions": ["dataAction"],
+                  "actions": [
+                    "action"
+                  ],
+                  "dataActions": [
+                    "dataAction"
+                  ],
                   "notActions": [],
                   "notDataActions": []
                 }

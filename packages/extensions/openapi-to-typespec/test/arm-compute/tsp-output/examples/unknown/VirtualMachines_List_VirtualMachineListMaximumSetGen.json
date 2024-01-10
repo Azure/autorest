@@ -93,7 +93,9 @@
                       "deleteOption": "Delete",
                       "disableTcpStateTracking": true,
                       "dnsSettings": {
-                        "dnsServers": ["aaaaaaaaaaaaaaaaaaaaaaaa"]
+                        "dnsServers": [
+                          "aaaaaaaaaaaaaaaaaaaaaaaa"
+                        ]
                       },
                       "dscpConfiguration": {
                         "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
@@ -364,7 +366,9 @@
               }
             ],
             "tags": {},
-            "zones": ["aaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+            "zones": [
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ]
           },
           {
             "name": "{virtualMachineName}",
@@ -642,7 +646,9 @@
                       "deleteOption": "Delete",
                       "disableTcpStateTracking": true,
                       "dnsSettings": {
-                        "dnsServers": ["aaaaaaaaaaaaaaaaaaaaaaaa"]
+                        "dnsServers": [
+                          "aaaaaaaaaaaaaaaaaaaaaaaa"
+                        ]
                       },
                       "dscpConfiguration": {
                         "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
@@ -913,7 +919,9 @@
               }
             ],
             "tags": {},
-            "zones": ["aaaaaa"]
+            "zones": [
+              "aaaaaa"
+            ]
           }
         ]
       }

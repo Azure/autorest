@@ -11,7 +11,10 @@
           {
             "destinationContainer": "dcont139",
             "filters": {
-              "prefixMatch": ["blobA", "blobB"]
+              "prefixMatch": [
+                "blobA",
+                "blobB"
+              ]
             },
             "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
             "sourceContainer": "scont139"
@@ -42,7 +45,10 @@
             {
               "destinationContainer": "destContainer1",
               "filters": {
-                "prefixMatch": ["blobA", "blobB"]
+                "prefixMatch": [
+                  "blobA",
+                  "blobB"
+                ]
               },
               "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
               "sourceContainer": "sourceContainer1"

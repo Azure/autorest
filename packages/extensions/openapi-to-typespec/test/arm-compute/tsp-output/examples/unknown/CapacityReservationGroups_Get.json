@@ -71,7 +71,10 @@
         "tags": {
           "{tagName}": "{tagValue}"
         },
-        "zones": ["3", "1"]
+        "zones": [
+          "3",
+          "1"
+        ]
       }
     }
   },

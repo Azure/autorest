@@ -21,14 +21,20 @@
             {
               "destinationContainer": "destContainer1",
               "filters": {
-                "prefixMatch": ["blobA", "blobB"]
+                "prefixMatch": [
+                  "blobA",
+                  "blobB"
+                ]
               },
               "sourceContainer": "sourceContainer1"
             },
             {
               "destinationContainer": "destContainer1",
               "filters": {
-                "prefixMatch": ["blobC", "blobD"]
+                "prefixMatch": [
+                  "blobC",
+                  "blobD"
+                ]
               },
               "sourceContainer": "sourceContainer1"
             }

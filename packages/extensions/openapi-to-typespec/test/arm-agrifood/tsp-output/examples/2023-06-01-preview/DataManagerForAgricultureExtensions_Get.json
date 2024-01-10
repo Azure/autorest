@@ -12,7 +12,15 @@
         "properties": {
           "detailedInformation": [
             {
-              "apiInputParameters": ["stationId", "lat", "lon", "days", "units", "precision", "sector"],
+              "apiInputParameters": [
+                "stationId",
+                "lat",
+                "lon",
+                "days",
+                "units",
+                "precision",
+                "sector"
+              ],
               "apiName": "GetDailyObservations",
               "customParameters": [
                 "stationId",
@@ -57,11 +65,22 @@
               ],
               "unitsSupported": {
                 "key": "units",
-                "values": ["us", "si"]
+                "values": [
+                  "us",
+                  "si"
+                ]
               }
             },
             {
-              "apiInputParameters": ["stationId", "lat", "lon", "hours", "units", "precision", "sector"],
+              "apiInputParameters": [
+                "stationId",
+                "lat",
+                "lon",
+                "hours",
+                "units",
+                "precision",
+                "sector"
+              ],
               "apiName": "GetHourlyObservations",
               "customParameters": [
                 "stationId",
@@ -92,11 +111,22 @@
               ],
               "unitsSupported": {
                 "key": "units",
-                "values": ["us", "si"]
+                "values": [
+                  "us",
+                  "si"
+                ]
               }
             },
             {
-              "apiInputParameters": ["stationId", "lat", "lon", "days", "units", "precision", "sector"],
+              "apiInputParameters": [
+                "stationId",
+                "lat",
+                "lon",
+                "days",
+                "units",
+                "precision",
+                "sector"
+              ],
               "apiName": "GetHourlyForecasts",
               "customParameters": [
                 "stationId",
@@ -127,11 +157,22 @@
               ],
               "unitsSupported": {
                 "key": "units",
-                "values": ["us", "si"]
+                "values": [
+                  "us",
+                  "si"
+                ]
               }
             },
             {
-              "apiInputParameters": ["stationId", "lat", "lon", "days", "units", "precision", "sector"],
+              "apiInputParameters": [
+                "stationId",
+                "lat",
+                "lon",
+                "days",
+                "units",
+                "precision",
+                "sector"
+              ],
               "apiName": "GetDailyForecasts",
               "customParameters": [
                 "stationId",
@@ -176,7 +217,10 @@
               ],
               "unitsSupported": {
                 "key": "units",
-                "values": ["us", "si"]
+                "values": [
+                  "us",
+                  "si"
+                ]
               }
             }
           ],

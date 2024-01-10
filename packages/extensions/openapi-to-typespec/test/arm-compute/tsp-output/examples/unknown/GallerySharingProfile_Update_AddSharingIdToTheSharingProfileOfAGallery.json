@@ -7,11 +7,16 @@
       "groups": [
         {
           "type": "Subscriptions",
-          "ids": ["34a4ab42-0d72-47d9-bd1a-aed207386dac", "380fd389-260b-41aa-bad9-0a83108c370b"]
+          "ids": [
+            "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+            "380fd389-260b-41aa-bad9-0a83108c370b"
+          ]
         },
         {
           "type": "AADTenants",
-          "ids": ["c24c76aa-8897-4027-9b03-8f7928b54ff6"]
+          "ids": [
+            "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+          ]
         }
       ],
       "operationType": "Add"
@@ -24,11 +29,16 @@
         "groups": [
           {
             "type": "Subscriptions",
-            "ids": ["34a4ab42-0d72-47d9-bd1a-aed207386dac", "380fd389-260b-41aa-bad9-0a83108c370b"]
+            "ids": [
+              "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+              "380fd389-260b-41aa-bad9-0a83108c370b"
+            ]
           },
           {
             "type": "AADTenants",
-            "ids": ["c24c76aa-8897-4027-9b03-8f7928b54ff6"]
+            "ids": [
+              "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+            ]
           }
         ],
         "operationType": "Add"
@@ -39,11 +49,16 @@
         "groups": [
           {
             "type": "Subscriptions",
-            "ids": ["34a4ab42-0d72-47d9-bd1a-aed207386dac", "380fd389-260b-41aa-bad9-0a83108c370b"]
+            "ids": [
+              "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+              "380fd389-260b-41aa-bad9-0a83108c370b"
+            ]
           },
           {
             "type": "AADTenants",
-            "ids": ["c24c76aa-8897-4027-9b03-8f7928b54ff6"]
+            "ids": [
+              "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+            ]
           }
         ],
         "operationType": "Add"

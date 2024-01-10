@@ -77,7 +77,9 @@
                   "autoUpgradeMinorVersion": false,
                   "provisioningState": "Creating",
                   "publisher": "Microsoft.Windows.Azure.Extensions",
-                  "rolesAppliedTo": ["*"],
+                  "rolesAppliedTo": [
+                    "*"
+                  ],
                   "settings": "<PublicConfig><UserName>UserAzure</UserName><Expiration>10/22/2021 15:05:45</Expiration></PublicConfig>",
                   "typeHandlerVersion": "1.2"
                 }
@@ -146,7 +148,9 @@
                   "autoUpgradeMinorVersion": false,
                   "provisioningState": "Creating",
                   "publisher": "Microsoft.Windows.Azure.Extensions",
-                  "rolesAppliedTo": ["*"],
+                  "rolesAppliedTo": [
+                    "*"
+                  ],
                   "settings": "<PublicConfig><UserName>UserAzure</UserName><Expiration>10/22/2021 15:05:45</Expiration></PublicConfig>",
                   "typeHandlerVersion": "1.2"
                 }

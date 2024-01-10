@@ -20,7 +20,10 @@
             }
           ],
           "intent": {
-            "vmSizes": ["Basic_A0", "Basic_A2"]
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
           },
           "proximityPlacementGroupType": "Standard",
           "virtualMachineScaleSets": [
@@ -34,7 +37,9 @@
             }
           ]
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     }
   },

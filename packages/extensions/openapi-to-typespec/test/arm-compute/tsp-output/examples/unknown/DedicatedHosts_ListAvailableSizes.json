@@ -9,7 +9,10 @@
   "responses": {
     "200": {
       "body": {
-        "value": ["Dsv3-Type1", "Esv3-Type1"]
+        "value": [
+          "Dsv3-Type1",
+          "Esv3-Type1"
+        ]
       }
     }
   },

@@ -12,7 +12,9 @@
       "tags": {
         "department": "HR"
       },
-      "zones": ["1"]
+      "zones": [
+        "1"
+      ]
     },
     "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscription-id}"
@@ -36,7 +38,9 @@
         "tags": {
           "department": "HR"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     },
     "201": {
@@ -57,7 +61,9 @@
         "tags": {
           "department": "HR"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     }
   },

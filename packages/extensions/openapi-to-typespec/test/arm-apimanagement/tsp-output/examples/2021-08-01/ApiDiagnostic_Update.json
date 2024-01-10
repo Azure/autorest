@@ -12,13 +12,17 @@
             "body": {
               "bytes": 512
             },
-            "headers": ["Content-type"]
+            "headers": [
+              "Content-type"
+            ]
           },
           "request": {
             "body": {
               "bytes": 512
             },
-            "headers": ["Content-type"]
+            "headers": [
+              "Content-type"
+            ]
           }
         },
         "frontend": {
@@ -26,13 +30,17 @@
             "body": {
               "bytes": 512
             },
-            "headers": ["Content-type"]
+            "headers": [
+              "Content-type"
+            ]
           },
           "request": {
             "body": {
               "bytes": 512
             },
-            "headers": ["Content-type"]
+            "headers": [
+              "Content-type"
+            ]
           }
         },
         "loggerId": "/loggers/applicationinsights",

@@ -8,7 +8,10 @@
         "path": "newapiPath",
         "description": "apidescription5200",
         "displayName": "apiname1463",
-        "protocols": ["wss", "ws"],
+        "protocols": [
+          "wss",
+          "ws"
+        ],
         "serviceUrl": "wss://echo.websocket.org"
       }
     },
@@ -31,7 +34,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["ws", "wss"],
+          "protocols": [
+            "ws",
+            "wss"
+          ],
           "serviceUrl": "wss://echo.websocket.org",
           "subscriptionKeyParameterNames": null
         }
@@ -51,7 +57,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["ws", "wss"],
+          "protocols": [
+            "ws",
+            "wss"
+          ],
           "serviceUrl": "wss://echo.websocket.org",
           "subscriptionKeyParameterNames": null
         }

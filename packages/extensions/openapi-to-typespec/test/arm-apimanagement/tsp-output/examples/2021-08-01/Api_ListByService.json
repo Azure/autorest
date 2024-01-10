@@ -21,7 +21,9 @@
               "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/c48f96c9-1385-4e2d-b410-5ab591ce0fc4",
               "displayName": "api1",
               "isCurrent": true,
-              "protocols": ["https"],
+              "protocols": [
+                "https"
+              ],
               "serviceUrl": "http://echoapi.cloudapp.net/api"
             }
           },
@@ -36,7 +38,9 @@
               "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/c48f96c9-1385-4e2d-b410-5ab591ce0fc4",
               "displayName": "api1",
               "isCurrent": true,
-              "protocols": ["https"],
+              "protocols": [
+                "https"
+              ],
               "serviceUrl": "http://echoapi.cloudapp.net/api"
             }
           },
@@ -49,7 +53,9 @@
               "apiRevision": "1",
               "displayName": "Echo API",
               "isCurrent": true,
-              "protocols": ["https"],
+              "protocols": [
+                "https"
+              ],
               "serviceUrl": "http://echoapi.cloudapp.net/api"
             }
           },
@@ -63,7 +69,9 @@
               "apiRevision": "1",
               "displayName": "Swagger Petstore Extensive",
               "isCurrent": true,
-              "protocols": ["https"],
+              "protocols": [
+                "https"
+              ],
               "serviceUrl": "http://petstore.swagger.wordnik.com/api"
             }
           }

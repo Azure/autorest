@@ -36,7 +36,10 @@
                 "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
               },
               "secret": true,
-              "tags": ["foo", "bar"]
+              "tags": [
+                "foo",
+                "bar"
+              ]
             }
           }
         ]

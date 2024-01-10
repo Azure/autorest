@@ -26,7 +26,9 @@
           "displayName": "Echo API New",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://echoapi.cloudapp.net/api2",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

@@ -8,7 +8,9 @@
   "responses": {
     "200": {
       "body": {
-        "privateIds": ["3491bc0c-1f6c-444f-b1d0-ec0751a74e3e"],
+        "privateIds": [
+          "3491bc0c-1f6c-444f-b1d0-ec0751a74e3e"
+        ],
         "roleInstance": {
           "statusesSummary": [
             {

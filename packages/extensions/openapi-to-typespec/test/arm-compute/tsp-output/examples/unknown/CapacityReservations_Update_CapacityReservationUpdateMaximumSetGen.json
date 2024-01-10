@@ -72,7 +72,9 @@
           "tier": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "tags": {},
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     },
     "202": {

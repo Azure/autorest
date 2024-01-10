@@ -10,7 +10,10 @@
         "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
         "displayName": "Echo API2",
         "isCurrent": true,
-        "protocols": ["http", "https"],
+        "protocols": [
+          "http",
+          "https"
+        ],
         "serviceUrl": "http://echoapi.cloudapp.net/api",
         "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoPath",
         "subscriptionRequired": true
@@ -39,7 +42,10 @@
           "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
           "displayName": "Echo API2",
           "isCurrent": true,
-          "protocols": ["http", "https"],
+          "protocols": [
+            "http",
+            "https"
+          ],
           "serviceUrl": "http://echoapi.cloudapp.net/api",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
@@ -67,7 +73,10 @@
           "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
           "displayName": "Echo API2",
           "isCurrent": true,
-          "protocols": ["http", "https"],
+          "protocols": [
+            "http",
+            "https"
+          ],
           "serviceUrl": "http://echoapi.cloudapp.net/api",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

@@ -5,7 +5,9 @@
     "resourceGroupName": "rgcompute",
     "subscriptionId": "{subscription-id}",
     "vmInstanceIDs": {
-      "instanceIds": ["aaaaaaaaaaaaaaaaa"]
+      "instanceIds": [
+        "aaaaaaaaaaaaaaaaa"
+      ]
     },
     "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },

@@ -1,7 +1,11 @@
 {
   "parameters": {
     "LegalHold": {
-      "tags": ["tag1", "tag2", "tag3"]
+      "tags": [
+        "tag1",
+        "tag2",
+        "tag3"
+      ]
     },
     "accountName": "sto7280",
     "api-version": "2022-09-01",
@@ -14,7 +18,11 @@
     "200": {
       "body": {
         "hasLegalHold": true,
-        "tags": ["tag1", "tag2", "tag3"]
+        "tags": [
+          "tag1",
+          "tag2",
+          "tag3"
+        ]
       }
     }
   },

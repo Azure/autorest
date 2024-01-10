@@ -5,7 +5,9 @@
     "skipShutdown": true,
     "subscriptionId": "{subscription-id}",
     "vmInstanceIDs": {
-      "instanceIds": ["aaaaaaaaaaaaaaaaa"]
+      "instanceIds": [
+        "aaaaaaaaaaaaaaaaa"
+      ]
     },
     "vmScaleSetName": "aaaaaaaaaaaaaaaaaa"
   },

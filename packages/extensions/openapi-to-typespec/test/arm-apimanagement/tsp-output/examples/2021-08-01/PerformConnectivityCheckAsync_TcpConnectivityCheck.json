@@ -26,7 +26,9 @@
             "address": "10.1.1.4",
             "id": "7dbbe7aa-60ba-4650-831e-63d775d38e9e",
             "issues": [],
-            "nextHopIds": ["75c8d819-b208-4584-a311-1aa45ce753f9"],
+            "nextHopIds": [
+              "75c8d819-b208-4584-a311-1aa45ce753f9"
+            ],
             "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1"
           },
           {

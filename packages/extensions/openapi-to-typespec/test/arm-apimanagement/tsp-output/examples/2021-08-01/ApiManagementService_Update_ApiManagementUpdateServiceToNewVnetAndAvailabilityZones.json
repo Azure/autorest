@@ -14,7 +14,11 @@
             "virtualNetworkConfiguration": {
               "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimaeavnet/subnets/default"
             },
-            "zones": ["1", "2", "3"]
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ]
           }
         ],
         "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/publicip-apim-japan-east",
@@ -27,7 +31,11 @@
         "name": "Premium",
         "capacity": 3
       },
-      "zones": ["1", "2", "3"]
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ]
     },
     "resourceGroupName": "rg1",
     "serviceName": "apimService1",
@@ -48,7 +56,9 @@
               "gatewayRegionalUrl": "https://apimService1-australiaeast-01.regional.azure-api.net",
               "location": "Australia East",
               "platformVersion": "stv2",
-              "publicIPAddresses": ["20.213.1.35"],
+              "publicIPAddresses": [
+                "20.213.1.35"
+              ],
               "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/apim-australia-east-publicip",
               "sku": {
                 "name": "Premium",
@@ -57,7 +67,11 @@
               "virtualNetworkConfiguration": {
                 "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimaeavnet/subnets/default"
               },
-              "zones": ["1", "2", "3"]
+              "zones": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "createdAtUtc": "2021-04-08T23:41:35.6447381Z",
@@ -108,7 +122,9 @@
           "platformVersion": "stv2",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["20.78.248.217"],
+          "publicIPAddresses": [
+            "20.78.248.217"
+          ],
           "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/publicip-apim-japan-east",
           "publicNetworkAccess": "Enabled",
           "publisherEmail": "contoso@microsoft.com",
@@ -129,7 +145,11 @@
           "lastModifiedBy": "contoso@microsoft.com",
           "lastModifiedByType": "User"
         },
-        "zones": ["1", "2", "3"]
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
       }
     },
     "202": {

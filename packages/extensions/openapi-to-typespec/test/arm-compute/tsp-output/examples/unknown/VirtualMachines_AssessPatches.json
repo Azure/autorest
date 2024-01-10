@@ -14,7 +14,9 @@
             "name": "Definition Update for Windows Defender Antivirus - KB2267602 (Definition 1.279.1373.0)",
             "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
             "assessmentState": "Available",
-            "classifications": ["Definition Updates"],
+            "classifications": [
+              "Definition Updates"
+            ],
             "kbId": "2267602",
             "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
             "patchId": "35428702-5784-4ba4-a6e0-5222258b5411",
@@ -26,7 +28,9 @@
             "name": "Windows Malicious Software Removal Tool x64 - October 2018 (KB890830)",
             "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
             "assessmentState": "Available",
-            "classifications": ["Update Rollups"],
+            "classifications": [
+              "Update Rollups"
+            ],
             "kbId": "890830",
             "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
             "patchId": "39f9cdd1-795c-4d0e-8c0a-73ab3f31746d",

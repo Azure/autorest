@@ -17,11 +17,17 @@
           {
             "field": "Severity",
             "operator": "Equals",
-            "values": ["sev0", "sev1"]
+            "values": [
+              "sev0",
+              "sev1"
+            ]
           }
         ],
         "enabled": true,
-        "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1",
+          "/subscriptions/subId1/resourceGroups/RGId2"
+        ]
       },
       "tags": {}
     },
@@ -52,11 +58,17 @@
             {
               "field": "Severity",
               "operator": "Equals",
-              "values": ["sev0", "sev1"]
+              "values": [
+                "sev0",
+                "sev1"
+              ]
             }
           ],
           "enabled": true,
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-12T22:05:09Z",
@@ -90,11 +102,17 @@
             {
               "field": "Severity",
               "operator": "Equals",
-              "values": ["sev0", "sev1"]
+              "values": [
+                "sev0",
+                "sev1"
+              ]
             }
           ],
           "enabled": true,
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1", "/subscriptions/subId1/resourceGroups/RGId2"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1",
+            "/subscriptions/subId1/resourceGroups/RGId2"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-12T22:05:09Z",

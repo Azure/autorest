@@ -19,7 +19,9 @@
           "displayName": "Service",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

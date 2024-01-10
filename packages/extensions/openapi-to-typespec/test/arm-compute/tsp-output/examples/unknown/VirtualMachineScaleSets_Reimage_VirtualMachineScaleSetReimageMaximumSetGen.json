@@ -5,7 +5,9 @@
     "subscriptionId": "{subscription-id}",
     "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
     "vmScaleSetReimageInput": {
-      "instanceIds": ["aaaaaaaaaa"],
+      "instanceIds": [
+        "aaaaaaaaaa"
+      ],
       "tempDisk": true
     }
   },

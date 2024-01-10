@@ -22,7 +22,9 @@
                 "inheritableSettings": null,
                 "level": "Eligibility",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -36,14 +38,18 @@
                 "inheritableSettings": null,
                 "level": "Eligibility",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Admin_Admin_Eligibility",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["admin_admin_eligible@test.com"],
+              "notificationRecipients": [
+                "admin_admin_eligible@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Admin",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -53,14 +59,18 @@
                 "inheritableSettings": null,
                 "level": "Eligibility",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Requestor_Admin_Eligibility",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["requestor_admin_eligible@test.com"],
+              "notificationRecipients": [
+                "requestor_admin_eligible@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Requestor",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -70,14 +80,18 @@
                 "inheritableSettings": null,
                 "level": "Eligibility",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Approver_Admin_Eligibility",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["approver_admin_eligible@test.com"],
+              "notificationRecipients": [
+                "approver_admin_eligible@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Approver",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -87,11 +101,16 @@
                 "inheritableSettings": null,
                 "level": "Eligibility",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
-              "enabledRules": ["MultiFactorAuthentication", "Justification"],
+              "enabledRules": [
+                "MultiFactorAuthentication",
+                "Justification"
+              ],
               "id": "Enablement_Admin_Assignment",
               "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
@@ -100,7 +119,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -114,14 +135,18 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Admin_Admin_Assignment",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["admin_admin_member@test.com"],
+              "notificationRecipients": [
+                "admin_admin_member@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Admin",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -131,14 +156,18 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Requestor_Admin_Assignment",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["requestor_admin_member@test.com"],
+              "notificationRecipients": [
+                "requestor_admin_member@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Requestor",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -148,14 +177,18 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Approver_Admin_Assignment",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["approver_admin_member@test.com"],
+              "notificationRecipients": [
+                "approver_admin_member@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Approver",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -165,7 +198,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -206,7 +241,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -220,11 +257,17 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
-              "enabledRules": ["MultiFactorAuthentication", "Justification", "Ticketing"],
+              "enabledRules": [
+                "MultiFactorAuthentication",
+                "Justification",
+                "Ticketing"
+              ],
               "id": "Enablement_EndUser_Assignment",
               "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
@@ -233,7 +276,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -247,14 +292,18 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Admin_EndUser_Assignment",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["admin_enduser_member@test.com"],
+              "notificationRecipients": [
+                "admin_enduser_member@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Admin",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -264,14 +313,18 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
               "id": "Notification_Requestor_EndUser_Assignment",
               "isDefaultRecipientsEnabled": false,
               "notificationLevel": "Critical",
-              "notificationRecipients": ["requestor_enduser_member@test.com"],
+              "notificationRecipients": [
+                "requestor_enduser_member@test.com"
+              ],
               "notificationType": "Email",
               "recipientType": "Requestor",
               "ruleType": "RoleManagementPolicyNotificationRule",
@@ -281,7 +334,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             },
             {
@@ -298,7 +353,9 @@
                 "inheritableSettings": null,
                 "level": "Assignment",
                 "targetObjects": null,
-                "operations": ["All"]
+                "operations": [
+                  "All"
+                ]
               }
             }
           ],

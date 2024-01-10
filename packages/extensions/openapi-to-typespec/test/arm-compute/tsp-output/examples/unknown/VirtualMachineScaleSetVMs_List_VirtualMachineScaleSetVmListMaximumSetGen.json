@@ -183,7 +183,9 @@
                     "properties": {
                       "deleteOption": "Delete",
                       "dnsSettings": {
-                        "dnsServers": ["aaaaaa"]
+                        "dnsServers": [
+                          "aaaaaa"
+                        ]
                       },
                       "dscpConfiguration": {
                         "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
@@ -533,7 +535,9 @@
               "tier": "aaaaaaaaaaaaaa"
             },
             "tags": {},
-            "zones": ["a"]
+            "zones": [
+              "a"
+            ]
           }
         ]
       }

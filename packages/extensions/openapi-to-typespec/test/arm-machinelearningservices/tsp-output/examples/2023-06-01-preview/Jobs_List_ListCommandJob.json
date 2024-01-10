@@ -58,8 +58,12 @@
                 "timeout": "PT5M"
               },
               "notificationSetting": {
-                "emailOn": ["JobCancelled"],
-                "emails": ["string"]
+                "emailOn": [
+                  "JobCancelled"
+                ],
+                "emails": [
+                  "string"
+                ]
               },
               "outputs": {
                 "string": {
@@ -85,7 +89,9 @@
                 "dockerArgs": "string",
                 "instanceCount": 1,
                 "instanceType": "string",
-                "locations": ["string"],
+                "locations": [
+                  "string"
+                ],
                 "properties": {
                   "string": {
                     "47f85ca1-a889-4417-a451-2ebca543e605": null

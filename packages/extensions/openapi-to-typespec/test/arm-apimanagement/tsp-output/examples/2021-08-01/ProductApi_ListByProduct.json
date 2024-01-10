@@ -22,7 +22,9 @@
               "apiRevision": "1",
               "displayName": "api_57681820a40f7eb6c49f6acb",
               "isCurrent": true,
-              "protocols": ["https"],
+              "protocols": [
+                "https"
+              ],
               "serviceUrl": "http://contoso/57681820a40f7eb6c49f6acd"
             }
           }

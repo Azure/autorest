@@ -15,7 +15,9 @@
           "effectiveUntil": "2021-04-15T20:00:00",
           "timeZone": "Pacific Standard Time"
         },
-        "scopes": ["/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"]
+        "scopes": [
+          "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+        ]
       },
       "tags": {}
     },
@@ -44,7 +46,9 @@
             "effectiveUntil": "2021-04-15T20:00:00",
             "timeZone": "Pacific Standard Time"
           },
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-12T20:13:29Z",
@@ -76,7 +80,9 @@
             "effectiveUntil": "2021-04-15T20:00:00",
             "timeZone": "Pacific Standard Time"
           },
-          "scopes": ["/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"]
+          "scopes": [
+            "/subscriptions/subId1/resourceGroups/RGId1/providers/Microsoft.Compute/virtualMachines/VMName"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-12T20:13:29Z",

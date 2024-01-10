@@ -28,7 +28,9 @@
           "apiRevision": "1",
           "displayName": "CurrencyConvertor",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://www.webservicex.net",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
@@ -47,7 +49,9 @@
           "apiRevision": "1",
           "displayName": "CurrencyConvertor",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://www.webservicex.net",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

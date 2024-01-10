@@ -26,7 +26,9 @@
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
             "properties": {
               "type": "aad",
-              "allowedTenants": ["samiraad.onmicrosoft.com"],
+              "allowedTenants": [
+                "samiraad.onmicrosoft.com"
+              ],
               "clientId": "aadapplicationid"
             }
           },
@@ -36,7 +38,9 @@
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
             "properties": {
               "type": "aadB2C",
-              "allowedTenants": ["samirtestbc.onmicrosoft.com"],
+              "allowedTenants": [
+                "samirtestbc.onmicrosoft.com"
+              ],
               "clientId": "aadb2clientId",
               "signinPolicyName": "B2C_1_Signin_Default",
               "signupPolicyName": "B2C_1_Signup_Default"

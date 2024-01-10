@@ -32,8 +32,12 @@
                   }
                 },
                 "filters": {
-                  "blobTypes": ["blockBlob"],
-                  "prefixMatch": ["olcmtestcontainer"]
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer"
+                  ]
                 }
               },
               "enabled": true
@@ -79,8 +83,12 @@
                     }
                   },
                   "filters": {
-                    "blobTypes": ["blockBlob"],
-                    "prefixMatch": ["olcmtestcontainer"]
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer"
+                    ]
                   }
                 },
                 "enabled": true

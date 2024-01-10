@@ -7,7 +7,10 @@
       "tags": {
         "department": "finance"
       },
-      "zones": ["1", "2"]
+      "zones": [
+        "1",
+        "2"
+      ]
     },
     "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscription-id}"
@@ -22,7 +25,10 @@
           "department": "finance",
           "owner": "myCompany"
         },
-        "zones": ["1", "2"]
+        "zones": [
+          "1",
+          "2"
+        ]
       }
     },
     "201": {
@@ -33,7 +39,10 @@
         "tags": {
           "department": "finance"
         },
-        "zones": ["1", "2"]
+        "zones": [
+          "1",
+          "2"
+        ]
       }
     }
   },

@@ -66,7 +66,9 @@
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["13.94.xxx.188"],
+          "publicIPAddresses": [
+            "13.94.xxx.188"
+          ],
           "publisherEmail": "foo@contoso.com",
           "publisherName": "Contoso",
           "scmUrl": "https://apimService1.scm.azure-api.net",

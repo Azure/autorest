@@ -6,7 +6,9 @@
     "deviceGroupName": "myDeviceGroup1",
     "deviceName": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     "generateDeviceCapabilityRequest": {
-      "capabilities": ["ApplicationDevelopment"]
+      "capabilities": [
+        "ApplicationDevelopment"
+      ]
     },
     "productName": "MyProduct1",
     "resourceGroupName": "MyResourceGroup1",

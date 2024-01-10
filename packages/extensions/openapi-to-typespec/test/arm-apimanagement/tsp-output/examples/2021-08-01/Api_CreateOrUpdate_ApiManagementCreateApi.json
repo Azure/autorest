@@ -13,7 +13,10 @@
           }
         },
         "displayName": "apiname1463",
-        "protocols": ["https", "http"],
+        "protocols": [
+          "https",
+          "http"
+        ],
         "serviceUrl": "http://newechoapi.cloudapp.net/api",
         "subscriptionKeyParameterNames": {
           "header": "header4520",
@@ -44,7 +47,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["http", "https"],
+          "protocols": [
+            "http",
+            "https"
+          ],
           "serviceUrl": "http://newechoapi.cloudapp.net/api",
           "subscriptionKeyParameterNames": {
             "header": "header4520",
@@ -71,7 +77,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["http", "https"],
+          "protocols": [
+            "http",
+            "https"
+          ],
           "serviceUrl": "http://newechoapi.cloudapp.net/api",
           "subscriptionKeyParameterNames": {
             "header": "header4520",

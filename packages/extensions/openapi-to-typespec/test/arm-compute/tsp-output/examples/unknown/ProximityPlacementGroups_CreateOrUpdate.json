@@ -5,11 +5,16 @@
       "location": "westus",
       "properties": {
         "intent": {
-          "vmSizes": ["Basic_A0", "Basic_A2"]
+          "vmSizes": [
+            "Basic_A0",
+            "Basic_A2"
+          ]
         },
         "proximityPlacementGroupType": "Standard"
       },
-      "zones": ["1"]
+      "zones": [
+        "1"
+      ]
     },
     "proximityPlacementGroupName": "myProximityPlacementGroup",
     "resourceGroupName": "myResourceGroup",
@@ -24,11 +29,16 @@
         "location": "westus",
         "properties": {
           "intent": {
-            "vmSizes": ["Basic_A0", "Basic_A2"]
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
           },
           "proximityPlacementGroupType": "Standard"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     },
     "201": {
@@ -39,11 +49,16 @@
         "location": "westus",
         "properties": {
           "intent": {
-            "vmSizes": ["Basic_A0", "Basic_A2"]
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
           },
           "proximityPlacementGroupType": "Standard"
         },
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     }
   },

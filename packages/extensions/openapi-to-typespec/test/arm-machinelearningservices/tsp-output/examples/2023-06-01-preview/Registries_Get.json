@@ -36,7 +36,9 @@
               "id": "string",
               "location": "string",
               "properties": {
-                "groupIds": ["string"],
+                "groupIds": [
+                  "string"
+                ],
                 "privateEndpoint": {
                   "id": "string",
                   "subnetArmId": "string"

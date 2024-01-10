@@ -5,13 +5,19 @@
     "body": {
       "properties": {
         "description": "string",
-        "entities": ["string"],
+        "entities": [
+          "string"
+        ],
         "isAnonymous": false,
         "isArchived": false,
         "materializationSettings": {
           "notification": {
-            "emailOn": ["JobFailed"],
-            "emails": ["string"]
+            "emailOn": [
+              "JobFailed"
+            ],
+            "emails": [
+              "string"
+            ]
           },
           "resource": {
             "instanceType": "string"
@@ -21,10 +27,18 @@
             "frequency": "Day",
             "interval": 1,
             "schedule": {
-              "hours": [1],
-              "minutes": [1],
-              "monthDays": [1],
-              "weekDays": ["Monday"]
+              "hours": [
+                1
+              ],
+              "minutes": [
+                1
+              ],
+              "monthDays": [
+                1
+              ],
+              "weekDays": [
+                "Monday"
+              ]
             },
             "startTime": "string",
             "timeZone": "string",
@@ -60,13 +74,19 @@
         "id": "string",
         "properties": {
           "description": "string",
-          "entities": ["string"],
+          "entities": [
+            "string"
+          ],
           "isAnonymous": false,
           "isArchived": false,
           "materializationSettings": {
             "notification": {
-              "emailOn": ["JobFailed"],
-              "emails": ["string"]
+              "emailOn": [
+                "JobFailed"
+              ],
+              "emails": [
+                "string"
+              ]
             },
             "resource": {
               "instanceType": "string"
@@ -76,10 +96,18 @@
               "frequency": "Day",
               "interval": 1,
               "schedule": {
-                "hours": [1],
-                "minutes": [1],
-                "monthDays": [1],
-                "weekDays": ["Wednesday"]
+                "hours": [
+                  1
+                ],
+                "minutes": [
+                  1
+                ],
+                "monthDays": [
+                  1
+                ],
+                "weekDays": [
+                  "Wednesday"
+                ]
               },
               "startTime": "string",
               "timeZone": "string",
@@ -120,13 +148,19 @@
         "id": "string",
         "properties": {
           "description": "string",
-          "entities": ["string"],
+          "entities": [
+            "string"
+          ],
           "isAnonymous": false,
           "isArchived": false,
           "materializationSettings": {
             "notification": {
-              "emailOn": ["JobCancelled"],
-              "emails": ["string"]
+              "emailOn": [
+                "JobCancelled"
+              ],
+              "emails": [
+                "string"
+              ]
             },
             "resource": {
               "instanceType": "string"
@@ -136,10 +170,18 @@
               "frequency": "Hour",
               "interval": 1,
               "schedule": {
-                "hours": [1],
-                "minutes": [1],
-                "monthDays": [1],
-                "weekDays": ["Wednesday"]
+                "hours": [
+                  1
+                ],
+                "minutes": [
+                  1
+                ],
+                "monthDays": [
+                  1
+                ],
+                "weekDays": [
+                  "Wednesday"
+                ]
               },
               "startTime": "string",
               "timeZone": "string",

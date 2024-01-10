@@ -52,7 +52,11 @@
                         "title": "Title"
                       }
                     },
-                    "required": ["title", "permalink", "documentId"]
+                    "required": [
+                      "title",
+                      "permalink",
+                      "documentId"
+                    ]
                   }
                 }
               },

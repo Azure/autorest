@@ -3,7 +3,10 @@
     "api-version": "2022-09-04",
     "cloudServiceName": "{cs-name}",
     "parameters": {
-      "roleInstances": ["ContosoFrontend_IN_0", "ContosoBackend_IN_1"]
+      "roleInstances": [
+        "ContosoFrontend_IN_0",
+        "ContosoBackend_IN_1"
+      ]
     },
     "resourceGroupName": "ConstosoRG",
     "subscriptionId": "{subscription-id}"

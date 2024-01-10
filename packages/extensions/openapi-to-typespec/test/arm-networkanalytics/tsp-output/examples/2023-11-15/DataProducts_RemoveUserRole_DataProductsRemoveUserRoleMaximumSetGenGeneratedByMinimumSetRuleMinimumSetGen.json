@@ -3,7 +3,9 @@
   "parameters": {
     "api-version": "2023-11-15",
     "body": {
-      "dataTypeScope": ["scope"],
+      "dataTypeScope": [
+        "scope"
+      ],
       "principalId": "00000000-0000-0000-0000-00000000000",
       "principalType": "User",
       "role": "Reader",

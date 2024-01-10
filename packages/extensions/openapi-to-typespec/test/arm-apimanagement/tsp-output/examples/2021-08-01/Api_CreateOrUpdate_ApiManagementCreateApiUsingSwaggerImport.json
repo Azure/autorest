@@ -25,7 +25,9 @@
           "apiRevision": "1",
           "displayName": "Swagger Petstore",
           "isCurrent": true,
-          "protocols": ["http"],
+          "protocols": [
+            "http"
+          ],
           "serviceUrl": "http://petstore.swagger.io/v2",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
@@ -45,7 +47,9 @@
           "apiRevision": "1",
           "displayName": "Swagger Petstore",
           "isCurrent": true,
-          "protocols": ["http"],
+          "protocols": [
+            "http"
+          ],
           "serviceUrl": "http://petstore.swagger.io/v2",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

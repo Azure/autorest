@@ -31,7 +31,9 @@
                   "disableGateway": false,
                   "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus2-01.regional.azure-api.net",
                   "location": "East US 2",
-                  "publicIPAddresses": ["40.70.24.106"],
+                  "publicIPAddresses": [
+                    "40.70.24.106"
+                  ],
                   "sku": {
                     "name": "Premium",
                     "capacity": 1
@@ -110,7 +112,9 @@
               "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
               "portalUrl": "https://ogf-z3-06162021-premium.portal.azure-api.net",
               "provisioningState": "Succeeded",
-              "publicIPAddresses": ["13.92.130.49"],
+              "publicIPAddresses": [
+                "13.92.130.49"
+              ],
               "publicNetworkAccess": "Enabled",
               "publisherEmail": "bar@contoso.com",
               "publisherName": "Test Premium",
@@ -229,7 +233,9 @@
               "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
               "portalUrl": "https://ogf-z3-06162021-standard.portal.azure-api.net",
               "provisioningState": "Succeeded",
-              "publicIPAddresses": ["13.82.208.32"],
+              "publicIPAddresses": [
+                "13.82.208.32"
+              ],
               "publicNetworkAccess": "Enabled",
               "publisherEmail": "bar@contoso.com",
               "publisherName": "Test Standard",
@@ -268,7 +274,9 @@
                   "disableGateway": false,
                   "gatewayRegionalUrl": "https://ogf-dev-060921-southcentralus-01.regional.azure-api.net",
                   "location": "South Central US",
-                  "publicIPAddresses": ["13.84.208.29"],
+                  "publicIPAddresses": [
+                    "13.84.208.29"
+                  ],
                   "sku": {
                     "name": "Premium",
                     "capacity": 9
@@ -317,7 +325,9 @@
               "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
               "portalUrl": "https://ogf-dev-060921.portal.azure-api.net",
               "provisioningState": "Succeeded",
-              "publicIPAddresses": ["168.62.39.172"],
+              "publicIPAddresses": [
+                "168.62.39.172"
+              ],
               "publicNetworkAccess": "Enabled",
               "publisherEmail": "v-ssaiprasan@microsoft.com",
               "publisherName": "TechM",

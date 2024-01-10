@@ -15,7 +15,10 @@
               "value": "Bearer myPreciousToken"
             }
           ],
-          "validStatusCodes": [200, 204]
+          "validStatusCodes": [
+            200,
+            204
+          ]
         }
       },
       "source": {
@@ -38,7 +41,9 @@
             "address": "20.82.216.48",
             "id": "c60e2296-5ebc-48cc-80e8-7e6d2981e7b2",
             "issues": [],
-            "nextHopIds": ["26aa44e7-04f1-462f-aa5d-5951957b5650"],
+            "nextHopIds": [
+              "26aa44e7-04f1-462f-aa5d-5951957b5650"
+            ],
             "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1"
           },
           {

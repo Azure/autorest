@@ -49,7 +49,9 @@
               "supportAutomaticPlacement": true
             },
             "tags": {},
-            "zones": ["1"]
+            "zones": [
+              "1"
+            ]
           }
         ]
       }

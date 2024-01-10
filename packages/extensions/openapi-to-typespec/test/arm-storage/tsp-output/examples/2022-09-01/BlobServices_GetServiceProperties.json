@@ -21,24 +21,60 @@
           "cors": {
             "corsRules": [
               {
-                "allowedHeaders": ["x-ms-meta-abc", "x-ms-meta-data*", "x-ms-meta-target*"],
-                "allowedMethods": ["GET", "HEAD", "POST", "OPTIONS", "MERGE", "PUT"],
-                "allowedOrigins": ["http://www.contoso.com", "http://www.fabrikam.com"],
-                "exposedHeaders": ["x-ms-meta-*"],
+                "allowedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x-ms-meta-target*"
+                ],
+                "allowedMethods": [
+                  "GET",
+                  "HEAD",
+                  "POST",
+                  "OPTIONS",
+                  "MERGE",
+                  "PUT"
+                ],
+                "allowedOrigins": [
+                  "http://www.contoso.com",
+                  "http://www.fabrikam.com"
+                ],
+                "exposedHeaders": [
+                  "x-ms-meta-*"
+                ],
                 "maxAgeInSeconds": 100
               },
               {
-                "allowedHeaders": ["*"],
-                "allowedMethods": ["GET"],
-                "allowedOrigins": ["*"],
-                "exposedHeaders": ["*"],
+                "allowedHeaders": [
+                  "*"
+                ],
+                "allowedMethods": [
+                  "GET"
+                ],
+                "allowedOrigins": [
+                  "*"
+                ],
+                "exposedHeaders": [
+                  "*"
+                ],
                 "maxAgeInSeconds": 2
               },
               {
-                "allowedHeaders": ["x-ms-meta-12345675754564*"],
-                "allowedMethods": ["GET", "PUT"],
-                "allowedOrigins": ["http://www.abc23.com", "https://www.fabrikam.com/*"],
-                "exposedHeaders": ["x-ms-meta-abc", "x-ms-meta-data*", "x -ms-meta-target*"],
+                "allowedHeaders": [
+                  "x-ms-meta-12345675754564*"
+                ],
+                "allowedMethods": [
+                  "GET",
+                  "PUT"
+                ],
+                "allowedOrigins": [
+                  "http://www.abc23.com",
+                  "https://www.fabrikam.com/*"
+                ],
+                "exposedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x -ms-meta-target*"
+                ],
                 "maxAgeInSeconds": 2000
               }
             ]

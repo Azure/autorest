@@ -4,7 +4,9 @@
     "api-version": "2023-06-01-preview",
     "count": 1,
     "isDefault": false,
-    "names": ["string"],
+    "names": [
+      "string"
+    ],
     "orderBy": "string",
     "orderByAsc": false,
     "resourceGroupName": "test-rg",

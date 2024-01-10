@@ -6,7 +6,10 @@
     "serverUpdateParameters": {
       "properties": {
         "asAdministrators": {
-          "members": ["azsdktest@microsoft.com", "azsdktest2@microsoft.com"]
+          "members": [
+            "azsdktest@microsoft.com",
+            "azsdktest2@microsoft.com"
+          ]
         }
       },
       "sku": {
@@ -28,7 +31,10 @@
         "location": "West US",
         "properties": {
           "asAdministrators": {
-            "members": ["azsdktest@microsoft.com", "azsdktest2@microsoft.com"]
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
           },
           "provisioningState": "Provisioning",
           "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",
@@ -52,7 +58,10 @@
         "location": "West US",
         "properties": {
           "asAdministrators": {
-            "members": ["azsdktest@microsoft.com", "azsdktest2@microsoft.com"]
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
           },
           "provisioningState": "Provisioning",
           "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",

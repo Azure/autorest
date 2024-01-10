@@ -31,7 +31,9 @@
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["40.86.176.232"],
+          "publicIPAddresses": [
+            "40.86.176.232"
+          ],
           "publisherEmail": "admin@live.com",
           "publisherName": "Contoso",
           "scmUrl": "https://apimService1.scm.azure-api.net",
@@ -69,7 +71,9 @@
         "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
         "portalUrl": "https://apimService1.portal.azure-api.net",
         "provisioningState": "Succeeded",
-        "publicIPAddresses": ["40.86.176.232"],
+        "publicIPAddresses": [
+          "40.86.176.232"
+        ],
         "publisherEmail": "admin@live.com",
         "publisherName": "Contoso",
         "scmUrl": "https://apimService1.scm.azure-api.net",

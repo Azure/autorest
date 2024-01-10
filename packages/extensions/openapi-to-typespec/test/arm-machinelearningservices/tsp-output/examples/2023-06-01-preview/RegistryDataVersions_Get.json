@@ -22,7 +22,9 @@
           "properties": {
             "string": "string"
           },
-          "referencedUris": ["string"],
+          "referencedUris": [
+            "string"
+          ],
           "tags": {
             "string": "string"
           }

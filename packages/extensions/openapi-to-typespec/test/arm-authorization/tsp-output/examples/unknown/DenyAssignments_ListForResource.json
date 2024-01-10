@@ -29,8 +29,12 @@
               "isSystemProtected": true,
               "permissions": [
                 {
-                  "actions": ["action"],
-                  "dataActions": ["action"],
+                  "actions": [
+                    "action"
+                  ],
+                  "dataActions": [
+                    "action"
+                  ],
                   "notActions": [],
                   "notDataActions": []
                 }

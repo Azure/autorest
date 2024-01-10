@@ -23,7 +23,9 @@
                       "autoUpgradeMinorVersion": false,
                       "provisioningState": "Succeeded",
                       "publisher": "Microsoft.Windows.Azure.Extensions",
-                      "rolesAppliedTo": ["*"],
+                      "rolesAppliedTo": [
+                        "*"
+                      ],
                       "settings": "<PublicConfig><UserName>userazure</UserName><Expiration>01/12/2022 16:29:02</Expiration></PublicConfig>",
                       "typeHandlerVersion": "1.2"
                     }

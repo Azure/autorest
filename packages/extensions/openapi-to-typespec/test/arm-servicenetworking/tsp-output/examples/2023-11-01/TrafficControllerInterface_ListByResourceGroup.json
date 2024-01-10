@@ -21,7 +21,9 @@
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/association/as1"
                 }
               ],
-              "configurationEndpoints": ["abc.trafficcontroller.azure.net"],
+              "configurationEndpoints": [
+                "abc.trafficcontroller.azure.net"
+              ],
               "frontends": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1"

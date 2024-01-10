@@ -64,7 +64,9 @@
           "platformVersion": "stv1",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["52.XXXX.160.66"],
+          "publicIPAddresses": [
+            "52.XXXX.160.66"
+          ],
           "publicNetworkAccess": "Enabled",
           "publisherEmail": "apimService1@corp.microsoft.com",
           "publisherName": "MS",

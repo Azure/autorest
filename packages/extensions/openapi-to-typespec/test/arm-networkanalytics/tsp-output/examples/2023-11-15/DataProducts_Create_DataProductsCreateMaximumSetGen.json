@@ -26,7 +26,9 @@
           "location": "eastus"
         },
         "networkacls": {
-          "allowedQueryIpRangeList": ["1.1.1.1"],
+          "allowedQueryIpRangeList": [
+            "1.1.1.1"
+          ],
           "defaultAction": "Allow",
           "ipRules": [
             {
@@ -42,7 +44,9 @@
             }
           ]
         },
-        "owners": ["abc@micros.com"],
+        "owners": [
+          "abc@micros.com"
+        ],
         "privateLinksEnabled": "Disabled",
         "product": "MCC",
         "provisioningState": "Succeeded",
@@ -79,7 +83,10 @@
         },
         "location": "eastus",
         "properties": {
-          "availableMinorVersions": ["1.0.1", "1.0.2"],
+          "availableMinorVersions": [
+            "1.0.1",
+            "1.0.2"
+          ],
           "consumptionEndpoints": {
             "fileAccessResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
             "fileAccessUrl": "https://operatorinsightsstorageResourceName.blob.core.windows.net",
@@ -103,7 +110,10 @@
             "location": "eastus"
           },
           "networkacls": {
-            "allowedQueryIpRangeList": ["1.1.1.1", "1.1.1.2"],
+            "allowedQueryIpRangeList": [
+              "1.1.1.1",
+              "1.1.1.2"
+            ],
             "defaultAction": "Allow",
             "ipRules": [
               {
@@ -119,7 +129,9 @@
               }
             ]
           },
-          "owners": ["abc@micros.com"],
+          "owners": [
+            "abc@micros.com"
+          ],
           "privateLinksEnabled": "Disabled",
           "product": "MCC",
           "provisioningState": "Succeeded",
@@ -161,7 +173,10 @@
         },
         "location": "eastus",
         "properties": {
-          "availableMinorVersions": ["1.0.1", "1.0.2"],
+          "availableMinorVersions": [
+            "1.0.1",
+            "1.0.2"
+          ],
           "consumptionEndpoints": {
             "fileAccessResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
             "fileAccessUrl": "https://operatorinsightsstorageResourceName.blob.core.windows.net",
@@ -185,7 +200,10 @@
             "location": "eastus"
           },
           "networkacls": {
-            "allowedQueryIpRangeList": ["1.1.1.1", "1.1.1.2"],
+            "allowedQueryIpRangeList": [
+              "1.1.1.1",
+              "1.1.1.2"
+            ],
             "defaultAction": "Allow",
             "ipRules": [
               {
@@ -201,7 +219,9 @@
               }
             ]
           },
-          "owners": ["abc@micros.com"],
+          "owners": [
+            "abc@micros.com"
+          ],
           "privateLinksEnabled": "Disabled",
           "product": "MCC",
           "provisioningState": "Succeeded",

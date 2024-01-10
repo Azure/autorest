@@ -129,7 +129,9 @@
                 "name": "osDisk",
                 "caching": "ReadWrite",
                 "createOption": "FromImage",
-                "vhdContainers": ["http://{existing-storage-account-name}.blob.core.windows.net/vhds"]
+                "vhdContainers": [
+                  "http://{existing-storage-account-name}.blob.core.windows.net/vhds"
+                ]
               }
             }
           }
@@ -202,7 +204,9 @@
                 "name": "osDisk",
                 "caching": "ReadWrite",
                 "createOption": "FromImage",
-                "vhdContainers": ["http://{existing-storage-account-name}.blob.core.windows.net/vhds"]
+                "vhdContainers": [
+                  "http://{existing-storage-account-name}.blob.core.windows.net/vhds"
+                ]
               }
             }
           }

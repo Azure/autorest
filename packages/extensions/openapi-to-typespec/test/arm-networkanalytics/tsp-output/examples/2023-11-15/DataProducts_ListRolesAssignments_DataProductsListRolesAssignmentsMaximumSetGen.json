@@ -14,7 +14,9 @@
         "count": 1,
         "roleAssignmentResponse": [
           {
-            "dataTypeScope": ["scope"],
+            "dataTypeScope": [
+              "scope"
+            ],
             "principalId": "00000000-0000-0000-0000-00000000000",
             "principalType": "User",
             "role": "Reader",

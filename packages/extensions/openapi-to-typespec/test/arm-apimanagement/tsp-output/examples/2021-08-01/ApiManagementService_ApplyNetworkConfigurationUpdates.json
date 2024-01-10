@@ -23,7 +23,9 @@
           "managementApiUrl": "https://apimService1.management.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["207.46.155.24"],
+          "publicIPAddresses": [
+            "207.46.155.24"
+          ],
           "publisherEmail": "admin@live.com",
           "publisherName": "Contoso",
           "scmUrl": "https://apimService1.scm.azure-api.net",

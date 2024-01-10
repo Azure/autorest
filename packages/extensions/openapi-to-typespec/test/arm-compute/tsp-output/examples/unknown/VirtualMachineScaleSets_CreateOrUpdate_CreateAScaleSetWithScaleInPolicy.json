@@ -7,7 +7,9 @@
         "overprovision": true,
         "scaleInPolicy": {
           "forceDeletion": true,
-          "rules": ["OldestVM"]
+          "rules": [
+            "OldestVM"
+          ]
         },
         "upgradePolicy": {
           "mode": "Manual"
@@ -78,7 +80,9 @@
           "provisioningState": "Creating",
           "scaleInPolicy": {
             "forceDeletion": true,
-            "rules": ["OldestVM"]
+            "rules": [
+              "OldestVM"
+            ]
           },
           "singlePlacementGroup": true,
           "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",
@@ -156,7 +160,9 @@
           "provisioningState": "Creating",
           "scaleInPolicy": {
             "forceDeletion": true,
-            "rules": ["OldestVM"]
+            "rules": [
+              "OldestVM"
+            ]
           },
           "singlePlacementGroup": true,
           "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",

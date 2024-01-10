@@ -8,7 +8,10 @@
         "path": "graphql-api",
         "description": "apidescription5200",
         "displayName": "apiname1463",
-        "protocols": ["http", "https"],
+        "protocols": [
+          "http",
+          "https"
+        ],
         "serviceUrl": "https://api.spacex.land/graphql"
       }
     },
@@ -31,7 +34,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["http", "https"],
+          "protocols": [
+            "http",
+            "https"
+          ],
           "serviceUrl": "https://api.spacex.land/graphql",
           "subscriptionKeyParameterNames": null
         }
@@ -51,7 +57,10 @@
           "displayName": "apiname1463",
           "isCurrent": true,
           "isOnline": true,
-          "protocols": ["https", "https"],
+          "protocols": [
+            "https",
+            "https"
+          ],
           "serviceUrl": "https://api.spacex.land/graphql",
           "subscriptionKeyParameterNames": null
         }

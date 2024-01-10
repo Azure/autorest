@@ -14,8 +14,12 @@
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateLinkResources/Gateway",
         "properties": {
           "groupId": "Gateway",
-          "requiredMembers": ["Gateway"],
-          "requiredZoneNames": ["privateLink.azure-api.net"]
+          "requiredMembers": [
+            "Gateway"
+          ],
+          "requiredZoneNames": [
+            "privateLink.azure-api.net"
+          ]
         }
       }
     }

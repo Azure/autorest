@@ -56,7 +56,9 @@
               },
               "scaleInPolicy": {
                 "forceDeletion": true,
-                "rules": ["Default"]
+                "rules": [
+                  "Default"
+                ]
               },
               "singlePlacementGroup": true,
               "spotRestorePolicy": {
@@ -120,7 +122,9 @@
                         "enableAutomaticUpgrade": true,
                         "forceUpdateTag": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
                         "protectedSettings": {},
-                        "provisionAfterExtensions": ["aaaaaaaaaaaaaa"],
+                        "provisionAfterExtensions": [
+                          "aaaaaaaaaaaaaa"
+                        ],
                         "provisioningState": "aaaaaaaaaaaaaa",
                         "publisher": "aaaaaaaaaaaaa",
                         "settings": {},
@@ -142,7 +146,9 @@
                       "properties": {
                         "deleteOption": "Delete",
                         "dnsSettings": {
-                          "dnsServers": ["aaaaaaaaaaaa"]
+                          "dnsServers": [
+                            "aaaaaaaaaaaa"
+                          ]
                         },
                         "enableAcceleratedNetworking": true,
                         "enableFpga": true,
@@ -334,7 +340,9 @@
                       "storageAccountType": "Standard_LRS"
                     },
                     "osType": "Windows",
-                    "vhdContainers": ["aaaaaaaaaaaaaaaaaaaaaaaaa"],
+                    "vhdContainers": [
+                      "aaaaaaaaaaaaaaaaaaaaaaaaa"
+                    ],
                     "writeAcceleratorEnabled": true
                   }
                 },
@@ -350,7 +358,9 @@
             "tags": {
               "key8425": "aaa"
             },
-            "zones": ["aaaaaaaaaaaaaaaaaaaa"]
+            "zones": [
+              "aaaaaaaaaaaaaaaaaaaa"
+            ]
           }
         ]
       }

@@ -33,7 +33,9 @@
       "tags": {
         "key9921": "aaaaaaaaaa"
       },
-      "zones": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]
+      "zones": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
     },
     "resourceGroupName": "rgcompute",
     "subscriptionId": "{subscription-id}"
@@ -80,7 +82,9 @@
           "supportAutomaticPlacement": true
         },
         "tags": {},
-        "zones": ["1"]
+        "zones": [
+          "1"
+        ]
       }
     }
   },

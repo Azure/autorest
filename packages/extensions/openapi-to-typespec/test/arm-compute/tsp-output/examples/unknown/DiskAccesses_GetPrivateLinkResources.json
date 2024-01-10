@@ -15,8 +15,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateLinkResources/disks",
             "properties": {
               "groupId": "disks",
-              "requiredMembers": ["diskAccess_1"],
-              "requiredZoneNames": ["privatelink.blob.core.windows.net"]
+              "requiredMembers": [
+                "diskAccess_1"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
             }
           }
         ]

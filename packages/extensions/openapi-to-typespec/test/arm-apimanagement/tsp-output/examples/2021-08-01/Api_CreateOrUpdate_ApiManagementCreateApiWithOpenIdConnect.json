@@ -8,12 +8,16 @@
         "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
         "authenticationSettings": {
           "openid": {
-            "bearerTokenSendingMethods": ["authorizationHeader"],
+            "bearerTokenSendingMethods": [
+              "authorizationHeader"
+            ],
             "openidProviderId": "testopenid"
           }
         },
         "displayName": "Swagger Petstore",
-        "protocols": ["https"],
+        "protocols": [
+          "https"
+        ],
         "serviceUrl": "http://petstore.swagger.io/v2",
         "subscriptionKeyParameterNames": {
           "header": "Ocp-Apim-Subscription-Key",
@@ -37,13 +41,17 @@
           "apiRevision": "1",
           "authenticationSettings": {
             "openid": {
-              "bearerTokenSendingMethods": ["authorizationHeader"],
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ],
               "openidProviderId": "testopenid"
             }
           },
           "displayName": "Swagger Petstore",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://petstore.swagger.io/v2",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
@@ -63,13 +71,17 @@
           "apiRevision": "1",
           "authenticationSettings": {
             "openid": {
-              "bearerTokenSendingMethods": ["authorizationHeader"],
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ],
               "openidProviderId": "testopenid"
             }
           },
           "displayName": "Swagger Petstore",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://petstore.swagger.io/v2",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

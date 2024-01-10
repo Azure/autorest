@@ -14,7 +14,9 @@
             "location": "West US",
             "properties": {
               "asAdministrators": {
-                "members": ["azsdktest@microsoft.com"]
+                "members": [
+                  "azsdktest@microsoft.com"
+                ]
               },
               "provisioningState": "Provisioning",
               "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",
@@ -35,7 +37,9 @@
             "location": "West US",
             "properties": {
               "asAdministrators": {
-                "members": ["azsdktest@microsoft.com"]
+                "members": [
+                  "azsdktest@microsoft.com"
+                ]
               },
               "provisioningState": "Provisioning",
               "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",

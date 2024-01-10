@@ -13,8 +13,12 @@
             "properties": {
               "accessFBApplicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
               "accessFBApplicationName": "solution provider 1",
-              "actionIds": ["actionId1"],
-              "dataAccessScopes": ["string"],
+              "actionIds": [
+                "actionId1"
+              ],
+              "dataAccessScopes": [
+                "string"
+              ],
               "marketplaceOfferDetails": {
                 "publisherId": "publisherId",
                 "saasOfferId": "saasOfferId"
@@ -217,7 +221,13 @@
                           "readOnly": true
                         }
                       },
-                      "required": ["boundaryId", "extensionApiInput", "extensionApiName", "extensionId", "farmerId"]
+                      "required": [
+                        "boundaryId",
+                        "extensionApiInput",
+                        "extensionApiName",
+                        "extensionId",
+                        "farmerId"
+                      ]
                     }
                   },
                   "externalDocs": {
@@ -247,8 +257,12 @@
                             "required": true
                           }
                         ],
-                        "produces": ["application/json"],
-                        "tags": ["Weather"],
+                        "produces": [
+                          "application/json"
+                        ],
+                        "tags": [
+                          "Weather"
+                        ],
                         "responses": {
                           "200": {
                             "schema": {
@@ -415,7 +429,9 @@
                       "put": {
                         "operationId": "Weather_CreateDataIngestionJob",
                         "description": "Create a weather data ingestion job.",
-                        "consumes": ["application/json"],
+                        "consumes": [
+                          "application/json"
+                        ],
                         "parameters": [
                           {
                             "name": "resourceId",
@@ -560,8 +576,12 @@
                             "in": "body"
                           }
                         ],
-                        "produces": ["application/json"],
-                        "tags": ["Weather"],
+                        "produces": [
+                          "application/json"
+                        ],
+                        "tags": [
+                          "Weather"
+                        ],
                         "x-ms-long-running-operation": true,
                         "x-ms-long-running-operation-options": {
                           "final-state-via": "location"
@@ -731,7 +751,9 @@
                       }
                     }
                   },
-                  "schemes": ["https"],
+                  "schemes": [
+                    "https"
+                  ],
                   "swagger": "2.0"
                 }
               },

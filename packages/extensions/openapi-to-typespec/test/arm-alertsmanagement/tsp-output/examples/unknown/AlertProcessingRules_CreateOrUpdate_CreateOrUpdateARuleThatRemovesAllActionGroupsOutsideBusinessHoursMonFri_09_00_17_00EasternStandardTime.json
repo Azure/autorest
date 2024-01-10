@@ -18,13 +18,18 @@
               "startTime": "17:00:00"
             },
             {
-              "daysOfWeek": ["Saturday", "Sunday"],
+              "daysOfWeek": [
+                "Saturday",
+                "Sunday"
+              ],
               "recurrenceType": "Weekly"
             }
           ],
           "timeZone": "Eastern Standard Time"
         },
-        "scopes": ["/subscriptions/subId1"]
+        "scopes": [
+          "/subscriptions/subId1"
+        ]
       },
       "tags": {}
     },
@@ -56,13 +61,18 @@
                 "startTime": "17:00:00"
               },
               {
-                "daysOfWeek": ["Saturday", "Sunday"],
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ],
                 "recurrenceType": "Weekly"
               }
             ],
             "timeZone": "Eastern Standard Time"
           },
-          "scopes": ["/subscriptions/subId1"]
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",
@@ -97,13 +107,18 @@
                 "startTime": "17:00:00"
               },
               {
-                "daysOfWeek": ["Saturday", "Sunday"],
+                "daysOfWeek": [
+                  "Saturday",
+                  "Sunday"
+                ],
                 "recurrenceType": "Weekly"
               }
             ],
             "timeZone": "Eastern Standard Time"
           },
-          "scopes": ["/subscriptions/subId1"]
+          "scopes": [
+            "/subscriptions/subId1"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-11T22:05:09Z",

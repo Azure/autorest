@@ -25,7 +25,9 @@
           "apiRevision": "1",
           "displayName": "http://localhost:8080/collector-northbound",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://localhost:8080/collector-northbound",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
@@ -45,7 +47,9 @@
           "apiRevision": "1",
           "displayName": "http://localhost:8080/collector-northbound",
           "isCurrent": true,
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "http://localhost:8080/collector-northbound",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

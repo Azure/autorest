@@ -39,8 +39,12 @@
           "timeout": "PT5M"
         },
         "notificationSetting": {
-          "emailOn": ["JobCompleted"],
-          "emails": ["string"]
+          "emailOn": [
+            "JobCompleted"
+          ],
+          "emails": [
+            "string"
+          ]
         },
         "outputs": {
           "string": {
@@ -63,7 +67,9 @@
           "dockerArgs": "string",
           "instanceCount": 1,
           "instanceType": "string",
-          "locations": ["string"],
+          "locations": [
+            "string"
+          ],
           "properties": {
             "string": {
               "5fc1f627-491e-45a0-a6a2-f5b4be884911": null
@@ -137,8 +143,12 @@
             "timeout": "PT5M"
           },
           "notificationSetting": {
-            "emailOn": ["JobCompleted"],
-            "emails": ["string"]
+            "emailOn": [
+              "JobCompleted"
+            ],
+            "emails": [
+              "string"
+            ]
           },
           "outputs": {
             "string": {
@@ -164,7 +174,9 @@
             "dockerArgs": "string",
             "instanceCount": 1,
             "instanceType": "string",
-            "locations": ["string"],
+            "locations": [
+              "string"
+            ],
             "properties": {
               "string": {
                 "b2de23ac-268c-459c-bbf3-0d8ece77d247": null
@@ -245,8 +257,12 @@
             "timeout": "PT5M"
           },
           "notificationSetting": {
-            "emailOn": ["JobFailed"],
-            "emails": ["string"]
+            "emailOn": [
+              "JobFailed"
+            ],
+            "emails": [
+              "string"
+            ]
           },
           "outputs": {
             "string": {
@@ -272,7 +288,9 @@
             "dockerArgs": "string",
             "instanceCount": 1,
             "instanceType": "string",
-            "locations": ["string"],
+            "locations": [
+              "string"
+            ],
             "properties": {
               "string": {
                 "64db9b4b-db26-4473-9eb8-49e5e5cbeb3f": null

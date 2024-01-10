@@ -32,17 +32,25 @@
             {
               "field": "Severity",
               "operator": "Equals",
-              "values": ["Sev0", "Sev2"]
+              "values": [
+                "Sev0",
+                "Sev2"
+              ]
             },
             {
               "field": "MonitorService",
               "operator": "Equals",
-              "values": ["Platform", "Application Insights"]
+              "values": [
+                "Platform",
+                "Application Insights"
+              ]
             },
             {
               "field": "TargetResourceType",
               "operator": "NotEquals",
-              "values": ["Microsoft.Compute/VirtualMachines"]
+              "values": [
+                "Microsoft.Compute/VirtualMachines"
+              ]
             }
           ],
           "enabled": false,
@@ -51,7 +59,10 @@
             "effectiveUntil": "2018-12-05T22:05:09",
             "recurrences": [
               {
-                "daysOfWeek": ["Tuesday", "Friday"],
+                "daysOfWeek": [
+                  "Tuesday",
+                  "Friday"
+                ],
                 "endTime": "14:00:00",
                 "recurrenceType": "Weekly",
                 "startTime": "06:00:00"
@@ -59,7 +70,9 @@
             ],
             "timeZone": "Pacific Standard Time"
           },
-          "scopes": ["/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"]
+          "scopes": [
+            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          ]
         },
         "systemData": {
           "createdAt": "2018-06-12T22:05:09Z",

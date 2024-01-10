@@ -58,8 +58,12 @@
                 "timeout": "PT5M"
               },
               "notificationSetting": {
-                "emailOn": ["JobFailed"],
-                "emails": ["string"]
+                "emailOn": [
+                  "JobFailed"
+                ],
+                "emails": [
+                  "string"
+                ]
               },
               "outputs": {
                 "string": {
@@ -85,7 +89,9 @@
                 "dockerArgs": "string",
                 "instanceCount": 1,
                 "instanceType": "string",
-                "locations": ["string"],
+                "locations": [
+                  "string"
+                ],
                 "properties": {
                   "string": {
                     "0a76565a-7e17-45ce-bdea-0548a617ce27": null

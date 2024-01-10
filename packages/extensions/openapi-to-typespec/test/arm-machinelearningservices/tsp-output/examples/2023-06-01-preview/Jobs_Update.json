@@ -61,8 +61,12 @@
             "timeout": "PT5M"
           },
           "notificationSetting": {
-            "emailOn": ["JobCompleted"],
-            "emails": ["string"],
+            "emailOn": [
+              "JobCompleted"
+            ],
+            "emails": [
+              "string"
+            ],
             "webhooks": {
               "string": {
                 "eventType": "string",
@@ -98,7 +102,9 @@
             "dockerArgs": "string",
             "instanceCount": 1,
             "instanceType": "string",
-            "locations": ["string"],
+            "locations": [
+              "string"
+            ],
             "maxInstanceCount": 1,
             "properties": {
               "string": {

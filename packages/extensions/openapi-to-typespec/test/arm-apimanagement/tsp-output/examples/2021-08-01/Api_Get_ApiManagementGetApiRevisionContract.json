@@ -17,7 +17,9 @@
           "apiRevision": "3",
           "apiRevisionDescription": "fixed bug in contract",
           "displayName": "Service",
-          "protocols": ["https"],
+          "protocols": [
+            "https"
+          ],
           "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",

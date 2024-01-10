@@ -77,7 +77,9 @@
           "platformVersion": "stv2",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["40.113.223.117"],
+          "publicIPAddresses": [
+            "40.113.223.117"
+          ],
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "scmUrl": "https://apimService1.scm.azure-api.net",

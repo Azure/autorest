@@ -16,8 +16,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/blob",
             "properties": {
               "groupId": "blob",
-              "requiredMembers": ["blob"],
-              "requiredZoneNames": ["privatelink.blob.core.windows.net"]
+              "requiredMembers": [
+                "blob"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
             }
           },
           {
@@ -26,8 +30,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/blob_secondary",
             "properties": {
               "groupId": "blob_secondary",
-              "requiredMembers": ["blob_secondary"],
-              "requiredZoneNames": ["privatelink.blob.core.windows.net"]
+              "requiredMembers": [
+                "blob_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
             }
           },
           {
@@ -36,8 +44,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/table",
             "properties": {
               "groupId": "table",
-              "requiredMembers": ["table"],
-              "requiredZoneNames": ["privatelink.table.core.windows.net"]
+              "requiredMembers": [
+                "table"
+              ],
+              "requiredZoneNames": [
+                "privatelink.table.core.windows.net"
+              ]
             }
           },
           {
@@ -46,8 +58,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/table_secondary",
             "properties": {
               "groupId": "table_secondary",
-              "requiredMembers": ["table_secondary"],
-              "requiredZoneNames": ["privatelink.table.core.windows.net"]
+              "requiredMembers": [
+                "table_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.table.core.windows.net"
+              ]
             }
           },
           {
@@ -56,8 +72,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/dfs",
             "properties": {
               "groupId": "dfs",
-              "requiredMembers": ["dfs"],
-              "requiredZoneNames": ["privatelink.dfs.core.windows.net"]
+              "requiredMembers": [
+                "dfs"
+              ],
+              "requiredZoneNames": [
+                "privatelink.dfs.core.windows.net"
+              ]
             }
           },
           {
@@ -66,8 +86,12 @@
             "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/dfs_secondary",
             "properties": {
               "groupId": "dfs_secondary",
-              "requiredMembers": ["dfs_secondary"],
-              "requiredZoneNames": ["privatelink.dfs.core.windows.net"]
+              "requiredMembers": [
+                "dfs_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.dfs.core.windows.net"
+              ]
             }
           }
         ]

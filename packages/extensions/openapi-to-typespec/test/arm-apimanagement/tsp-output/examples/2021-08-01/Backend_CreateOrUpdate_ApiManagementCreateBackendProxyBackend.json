@@ -11,10 +11,17 @@
             "scheme": "Basic"
           },
           "header": {
-            "x-my-1": ["val1", "val2"]
+            "x-my-1": [
+              "val1",
+              "val2"
+            ]
           },
           "query": {
-            "sv": ["xx", "bb", "cc"]
+            "sv": [
+              "xx",
+              "bb",
+              "cc"
+            ]
           }
         },
         "proxy": {
@@ -48,10 +55,17 @@
               "scheme": "Basic"
             },
             "header": {
-              "x-my-1": ["val1", "val2"]
+              "x-my-1": [
+                "val1",
+                "val2"
+              ]
             },
             "query": {
-              "sv": ["xx", "bb", "cc"]
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
             }
           },
           "proxy": {
@@ -81,10 +95,17 @@
               "scheme": "Basic"
             },
             "header": {
-              "x-my-1": ["val1", "val2"]
+              "x-my-1": [
+                "val1",
+                "val2"
+              ]
             },
             "query": {
-              "sv": ["xx", "bb", "cc"]
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
             }
           },
           "proxy": {

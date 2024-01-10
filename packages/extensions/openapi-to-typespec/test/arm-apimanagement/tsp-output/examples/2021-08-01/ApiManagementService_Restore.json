@@ -26,7 +26,9 @@
               "disableGateway": true,
               "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
               "location": "East US",
-              "publicIPAddresses": ["23.101.138.153"],
+              "publicIPAddresses": [
+                "23.101.138.153"
+              ],
               "sku": {
                 "name": "Premium",
                 "capacity": 1
@@ -96,7 +98,9 @@
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["13.91.32.113"],
+          "publicIPAddresses": [
+            "13.91.32.113"
+          ],
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "scmUrl": "https://apimService1.scm.azure-api.net",

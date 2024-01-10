@@ -23,10 +23,17 @@
                   "scheme": "Basic"
                 },
                 "header": {
-                  "x-my-1": ["val1", "val2"]
+                  "x-my-1": [
+                    "val1",
+                    "val2"
+                  ]
                 },
                 "query": {
-                  "sv": ["xx", "bb", "cc"]
+                  "sv": [
+                    "xx",
+                    "bb",
+                    "cc"
+                  ]
                 }
               },
               "proxy": {
@@ -51,7 +58,9 @@
               "properties": {
                 "serviceFabricCluster": {
                   "clientCertificateId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
-                  "managementEndpoints": ["https://somecluster.com"],
+                  "managementEndpoints": [
+                    "https://somecluster.com"
+                  ],
                   "maxPartitionResolutionRetries": 5,
                   "serverX509Names": [
                     {

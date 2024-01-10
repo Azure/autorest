@@ -19,8 +19,12 @@
               "disableGateway": false,
               "gatewayRegionalUrl": "https://apimservice1-westus2-01.regional.azure-api.net",
               "location": "West US 2",
-              "privateIPAddresses": ["10.0.X.6"],
-              "publicIPAddresses": ["40.XXX.79.187"],
+              "privateIPAddresses": [
+                "10.0.X.6"
+              ],
+              "publicIPAddresses": [
+                "40.XXX.79.187"
+              ],
               "sku": {
                 "name": "Premium",
                 "capacity": 1
@@ -69,9 +73,13 @@
           "managementApiUrl": "https://apimservice1.management.azure-api.net",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "portalUrl": "https://apimservice1.portal.azure-api.net",
-          "privateIPAddresses": ["172.XX.0.5"],
+          "privateIPAddresses": [
+            "172.XX.0.5"
+          ],
           "provisioningState": "Succeeded",
-          "publicIPAddresses": ["137.XXX.11.74"],
+          "publicIPAddresses": [
+            "137.XXX.11.74"
+          ],
           "publisherEmail": "abcs@contoso.com",
           "publisherName": "contoso publisher",
           "scmUrl": "https://apimservice1.scm.azure-api.net",

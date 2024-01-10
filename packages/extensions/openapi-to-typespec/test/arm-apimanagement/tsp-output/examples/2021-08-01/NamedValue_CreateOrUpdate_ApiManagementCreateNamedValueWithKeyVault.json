@@ -10,7 +10,10 @@
           "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
         },
         "secret": true,
-        "tags": ["foo", "bar"]
+        "tags": [
+          "foo",
+          "bar"
+        ]
       }
     },
     "resourceGroupName": "rg1",
@@ -34,7 +37,10 @@
             "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
           },
           "secret": true,
-          "tags": ["foo", "bar"]
+          "tags": [
+            "foo",
+            "bar"
+          ]
         }
       }
     },
@@ -54,7 +60,10 @@
             "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
           },
           "secret": true,
-          "tags": ["foo", "bar"]
+          "tags": [
+            "foo",
+            "bar"
+          ]
         }
       }
     },

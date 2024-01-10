@@ -15,11 +15,21 @@
               "definition": {
                 "format": "Csv",
                 "filters": {
-                  "blobTypes": ["blockBlob", "appendBlob", "pageBlob"],
-                  "excludePrefix": ["excludeprefix1", "excludeprefix2"],
+                  "blobTypes": [
+                    "blockBlob",
+                    "appendBlob",
+                    "pageBlob"
+                  ],
+                  "excludePrefix": [
+                    "excludeprefix1",
+                    "excludeprefix2"
+                  ],
                   "includeBlobVersions": true,
                   "includeSnapshots": true,
-                  "prefixMatch": ["inventoryprefix1", "inventoryprefix2"]
+                  "prefixMatch": [
+                    "inventoryprefix1",
+                    "inventoryprefix2"
+                  ]
                 },
                 "objectType": "Blob",
                 "schedule": "Daily",
@@ -86,11 +96,21 @@
                 "definition": {
                   "format": "Csv",
                   "filters": {
-                    "blobTypes": ["blockBlob", "appendBlob", "pageBlob"],
-                    "excludePrefix": ["excludeprefix1", "excludeprefix2"],
+                    "blobTypes": [
+                      "blockBlob",
+                      "appendBlob",
+                      "pageBlob"
+                    ],
+                    "excludePrefix": [
+                      "excludeprefix1",
+                      "excludeprefix2"
+                    ],
                     "includeBlobVersions": true,
                     "includeSnapshots": true,
-                    "prefixMatch": ["inventoryprefix1", "inventoryprefix2"]
+                    "prefixMatch": [
+                      "inventoryprefix1",
+                      "inventoryprefix2"
+                    ]
                   },
                   "objectType": "Blob",
                   "schedule": "Daily",
