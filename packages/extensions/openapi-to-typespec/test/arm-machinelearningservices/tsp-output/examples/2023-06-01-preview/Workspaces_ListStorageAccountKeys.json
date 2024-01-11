@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "userStorageKey": null
+      }
+    }
+  },
+  "operationId": "Workspaces_ListStorageAccountKeys",
+  "title": "List Workspace Keys"
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SharedGalleryImage.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the gallery image version that you want to create or update.")
@@ -25,6 +27,7 @@ model SharedGalleryImageVersion
 interface SharedGalleryImageVersions {
   @doc("Get a shared gallery image version by subscription id or tenant id.")
   get is ArmResourceRead<SharedGalleryImageVersion>;
+
   @doc("List shared gallery image versions by subscription id or tenant id.")
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,

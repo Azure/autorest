@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testworkspace",
+        "type": "Microsoft.MachineLearningServices/workspaces",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "location": "eastus2euap",
+        "properties": {
+          "description": "test description",
+          "allowPublicAccessWhenBehindVnet": false,
+          "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
+          "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
+          "discoveryUrl": "http://example.com",
+          "encryption": {
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai"
+            },
+            "keyVaultProperties": {
+              "identityClientId": "",
+              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
+              "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv"
+            },
+            "status": "Enabled"
+          },
+          "friendlyName": "HelloName",
+          "hbiWorkspace": false,
+          "imageBuildCompute": "testcompute",
+          "keyVault": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
+          "managedNetwork": {
+            "isolationMode": "AllowOnlyApprovedOutbound",
+            "networkId": "00000000-1111-2222-3333-444444444444",
+            "outboundRules": {
+              "some_string": {
+                "type": "FQDN",
+                "category": "Required",
+                "destination": "some_string",
+                "status": "Inactive"
+              }
+            },
+            "status": {
+              "sparkReady": false,
+              "status": "Active"
+            }
+          },
+          "privateEndpointConnections": [
+            {
+              "name": "testprivatelinkconnection",
+              "type": "Microsoft.MachineLearningServices/workspaces/privateEndpointConnections",
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateEndpointConnections/testprivatelinkconnection",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "privateLinkCount": 0,
+          "publicNetworkAccess": "Disabled",
+          "serviceProvisionedResourceGroup": "testworkspace_0000111122223333",
+          "sharedPrivateLinkResources": [
+            {
+              "name": "testcosmosdbresource",
+              "properties": {
+                "groupId": "Sql",
+                "privateLinkResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testcosmosdbresource/privateLinkResources/Sql",
+                "requestMessage": "Please approve",
+                "status": "Approved"
+              }
+            }
+          ],
+          "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+        }
+      }
+    }
+  },
+  "operationId": "Workspaces_Get",
+  "title": "Get Workspace"
+}

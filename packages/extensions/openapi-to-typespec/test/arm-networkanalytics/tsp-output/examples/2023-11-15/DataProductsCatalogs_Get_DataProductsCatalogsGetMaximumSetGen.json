@@ -1,0 +1,45 @@
+{
+  "operationId": "DataProductsCatalogs_Get",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "resourceGroupName": "aoiresourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataProductsCatalogs_Get_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.NetworkAnalytics/dataProductsCatalogs",
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs/default",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publishers": [
+            {
+              "dataProducts": [
+                {
+                  "description": "Official data product for Mobile Content Cloud.",
+                  "dataProductName": "MCC",
+                  "dataProductVersions": [
+                    {
+                      "version": "1.0.0"
+                    }
+                  ]
+                }
+              ],
+              "publisherName": "Microsoft"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2023-09-04T08:26:27.1506343Z",
+          "createdBy": "abc@micros.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-09-04T08:26:27.1506343Z",
+          "lastModifiedBy": "abc@micros.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

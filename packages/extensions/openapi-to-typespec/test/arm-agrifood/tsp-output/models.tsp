@@ -5,21 +5,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The reason why the given name is not available.")
 enum CheckNameAvailabilityReason {
   Invalid,
   AlreadyExists,
 }
 
+@doc("Enum for different types of AuthCredentials supported.")
 enum AuthCredentialsKind {
   OAuthClientCredentials,
   ApiKeyAuthCredentials,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -27,6 +31,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Data Manager For Agriculture instance provisioning state.")
 enum ProvisioningState {
   Creating,
   Updating,
@@ -36,17 +41,20 @@ enum ProvisioningState {
   Running,
 }
 
+@doc("Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.")
 enum PublicNetworkAccess {
   Enabled,
   Disabled,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
   Rejected,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -54,12 +62,14 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
@@ -94,6 +104,25 @@ model DataConnectorProperties {
 @doc("AuthCredentials abstract base class for Auth Purpose.")
 @discriminator("kind")
 model AuthCredentials {}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"")
+  @visibility("read")
+  id?: ResourceIdentifier;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+}
 
 @doc("DataManagerForAgricultureExtension properties.")
 model DataManagerForAgricultureExtensionProperties {
@@ -277,6 +306,30 @@ model PrivateLinkServiceConnectionState {
 
   @doc("A message indicating if changes on the service provider require any updates on the consumer.")
   actionsRequired?: string;
+}
+
+@doc("DataManagerForAgriculture update request.")
+model DataManagerForAgricultureUpdateRequestModel {
+  @doc("Geo-location where the resource lives.")
+  location?: string;
+
+  @doc("Identity for the resource.")
+  identity?: Identity;
+
+  @doc("Data Manager For Agriculture ARM Resource properties.")
+  properties?: DataManagerForAgricultureUpdateProperties;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Data Manager For Agriculture ARM Resource properties.")
+model DataManagerForAgricultureUpdateProperties {
+  @doc("Sensor integration request model.")
+  sensorIntegration?: SensorIntegration;
+
+  @doc("Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("""

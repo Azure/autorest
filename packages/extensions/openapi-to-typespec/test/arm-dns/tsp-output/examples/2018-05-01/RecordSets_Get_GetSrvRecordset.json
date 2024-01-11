@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "recordType": "SRV",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/SRV",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SRV/record1",
+        "properties": {
+          "SRVRecords": [
+            {
+              "port": 80,
+              "priority": 0,
+              "target": "contoso.com",
+              "weight": 10
+            }
+          ],
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key1": "value1"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Get",
+  "title": "Get SRV recordset"
+}

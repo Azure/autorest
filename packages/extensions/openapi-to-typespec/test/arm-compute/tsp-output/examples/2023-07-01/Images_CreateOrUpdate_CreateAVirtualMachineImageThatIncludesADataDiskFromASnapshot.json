@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "dataDisks": [
+            {
+              "lun": 1,
+              "snapshot": {
+                "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+              }
+            }
+          ],
+          "osDisk": {
+            "osState": "Generalized",
+            "osType": "Linux",
+            "snapshot": {
+              "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+            }
+          },
+          "zoneResilient": true
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "lun": 1,
+                "snapshot": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                }
+              }
+            ],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              }
+            },
+            "zoneResilient": true
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "lun": 1,
+                "snapshot": {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                }
+              }
+            ],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux",
+              "snapshot": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
+              }
+            },
+            "zoneResilient": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_CreateOrUpdate",
+  "title": "Create a virtual machine image that includes a data disk from a snapshot."
+}

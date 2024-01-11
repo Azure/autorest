@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./RestorePoint.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Properties of disk restore point")
@@ -21,8 +23,10 @@ model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
 }
 
 @armResourceOperations
-interface DiskRestorePoint {
+interface DiskRestorePoints {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get disk restorePoint resource")
+  @operationId("DiskRestorePoint_Get")
   get is ArmResourceRead<
     DiskRestorePoint,
     {
@@ -33,7 +37,10 @@ interface DiskRestorePoint {
       restorePointCollectionName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists diskRestorePoints under a vmRestorePoint.")
+  @operationId("DiskRestorePoint_ListByRestorePoint")
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     {
@@ -44,7 +51,10 @@ interface DiskRestorePoint {
       restorePointCollectionName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Grants access to a diskRestorePoint.")
+  @operationId("DiskRestorePoint_GrantAccess")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
     GrantAccessData,
@@ -55,9 +65,13 @@ interface DiskRestorePoint {
       @doc("The name of the restore point collection that the disk restore point belongs.")
       @path
       restorePointCollectionName: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Revokes access to a diskRestorePoint.")
+  @operationId("DiskRestorePoint_RevokeAccess")
   revokeAccess is ArmResourceActionAsync<
     DiskRestorePoint,
     void,
@@ -68,6 +82,7 @@ interface DiskRestorePoint {
       @doc("The name of the restore point collection that the disk restore point belongs.")
       @path
       restorePointCollectionName: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
 }

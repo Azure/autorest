@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "indexColumns": [
+          {
+            "columnName": "string",
+            "dataType": "Datetime"
+          }
+        ],
+        "isAnonymous": false,
+        "isArchived": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "indexColumns": [
+            {
+              "columnName": "string",
+              "dataType": "Integer"
+            }
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Succeeded",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:58",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:58",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "indexColumns": [
+            {
+              "columnName": "string",
+              "dataType": "Integer"
+            }
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Canceled",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:58",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:58",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturestoreEntityVersions_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Featurestore Entity Version."
+}

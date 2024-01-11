@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Space.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("An infrastructure resource under Space.")
@@ -26,15 +28,19 @@ model InfrastructureResource
 interface InfrastructureResources {
   @doc("Get a InfrastructureResource")
   get is ArmResourceRead<InfrastructureResource>;
+
   @doc("Create a InfrastructureResource")
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
+
   @doc("Update a InfrastructureResource")
-  patch is ArmResourcePatchSync<
+  patch is ArmCustomPatchSync<
     InfrastructureResource,
-    InfrastructureResourceProperties
+    InfrastructureResourceUpdate
   >;
+
   @doc("Delete a InfrastructureResource")
   delete is ArmResourceDeleteSync<InfrastructureResource>;
+
   @doc("List InfrastructureResource resources by Space")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,

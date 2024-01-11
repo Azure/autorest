@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [
+        "1",
+        "2"
+      ]
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "location": "westus",
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "location": "westus",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_CreateOrUpdate",
+  "title": "Create or update a capacity reservation group."
+}

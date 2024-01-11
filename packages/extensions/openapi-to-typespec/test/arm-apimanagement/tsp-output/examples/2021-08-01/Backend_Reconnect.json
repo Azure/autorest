@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "backendId": "proxybackend",
+    "parameters": {
+      "properties": {
+        "after": "PT3S"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "202": {}
+  },
+  "operationId": "Backend_Reconnect",
+  "title": "ApiManagementBackendReconnect"
+}

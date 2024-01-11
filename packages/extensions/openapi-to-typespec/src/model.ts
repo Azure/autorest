@@ -7,7 +7,7 @@ import { transformEnum } from "./transforms/transform-choices";
 import { getTypespecType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
-import { ArmResourceSchema, filterResourceRelatedObjects, isResourceSchema } from "./utils/resource-discovery";
+import { ArmResourceSchema, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
 
 const models: Map<CodeModel, TypespecProgram> = new Map();
@@ -36,7 +36,7 @@ export function transformDataType(schema: Schema, codeModel: CodeModel): Typespe
   return {
     name: getTypespecType(schema, codeModel),
     kind: "wildcard",
-    doc: schema.language.default.documentation,
+    doc: schema.language.default.description,
   };
 }
 
@@ -71,7 +71,7 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
     serviceInformation,
     models: {
       enums: caldEnums,
-      objects: isArm ? filterResourceRelatedObjects(typespecObjects) : typespecObjects,
+      objects: isArm ? filterArmModels(codeModel, typespecObjects) : typespecObjects,
       armResources,
     },
     operationGroups: typespecOperationGroups,

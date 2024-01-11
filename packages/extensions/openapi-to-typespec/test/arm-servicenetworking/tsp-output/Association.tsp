@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./TrafficController.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceNetworking;
 @doc("Association Subresource of Traffic Controller")
@@ -22,15 +24,37 @@ model Association is TrackedResource<AssociationProperties> {
 }
 
 @armResourceOperations
-interface AssociationsInterface {
+interface Associations {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get a Association")
+  @operationId("AssociationsInterface_Get")
   get is ArmResourceRead<Association>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create a Association")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Association>;
+  @operationId("AssociationsInterface_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Association,
+    BaseParameters<Association>,
+    ArmAsyncOperationHeader
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a Association")
-  update is ArmResourcePatchSync<Association, AssociationProperties>;
+  @operationId("AssociationsInterface_Update")
+  update is ArmCustomPatchSync<Association, AssociationUpdate>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete a Association")
-  delete is ArmResourceDeleteAsync<Association>;
+  @operationId("AssociationsInterface_Delete")
+  delete is ArmResourceDeleteAsync<
+    Association,
+    BaseParameters<Association>,
+    ArmLroLocationHeader
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Association resources by TrafficController")
+  @operationId("AssociationsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Association>;
 }

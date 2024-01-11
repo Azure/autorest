@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "availabilitySetName": "aaaaaaaaaaaaaaaaaaaa",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus"
+      }
+    }
+  },
+  "operationId": "AvailabilitySets_Update",
+  "title": "AvailabilitySet_Update_MinimumSet_Gen"
+}

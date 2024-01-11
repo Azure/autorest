@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("OpenId Connect Provider details.")
@@ -24,8 +26,10 @@ model OpenidConnectProviderContract
 }
 
 @armResourceOperations
-interface OpenIdConnectProvider {
+interface OpenidConnectProviderContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets specific OpenID Connect Provider without secrets.")
+  @operationId("OpenIdConnectProvider_Get")
   get is ArmResourceRead<
     OpenidConnectProviderContract,
     {
@@ -38,7 +42,10 @@ interface OpenIdConnectProvider {
       OpenId: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates the OpenID Connect Provider.")
+  @operationId("OpenIdConnectProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     {
@@ -55,10 +62,13 @@ interface OpenIdConnectProvider {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specific OpenID Connect Provider.")
-  update is ArmResourcePatchSync<
+  @operationId("OpenIdConnectProvider_Update")
+  update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
-    OpenidConnectProviderContractProperties,
+    OpenidConnectProviderUpdateContract,
     {
       ...BaseParameters<OpenidConnectProviderContract>;
 
@@ -73,7 +83,10 @@ interface OpenIdConnectProvider {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific OpenID Connect Provider of the API Management service instance.")
+  @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     {
@@ -90,7 +103,10 @@ interface OpenIdConnectProvider {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists of all the OpenId Connect Providers.")
+  @operationId("OpenIdConnectProvider_ListByService")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     {
@@ -110,7 +126,10 @@ interface OpenIdConnectProvider {
       $skip?: int32;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the client secret details of the OpenID Connect Provider.")
+  @operationId("OpenIdConnectProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,

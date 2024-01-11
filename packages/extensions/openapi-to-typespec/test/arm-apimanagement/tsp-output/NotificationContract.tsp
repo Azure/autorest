@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Notification details.")
@@ -21,10 +23,15 @@ model NotificationContract is ProxyResource<NotificationContractProperties> {
 }
 
 @armResourceOperations
-interface Notification {
+interface NotificationContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Notification specified by its identifier.")
+  @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or Update API Management publisher notification.")
+  @operationId("Notification_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
     {
@@ -35,7 +42,10 @@ interface Notification {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of properties defined within a service instance.")
+  @operationId("Notification_ListByService")
   listByService is ArmResourceListByParent<
     NotificationContract,
     {
@@ -51,11 +61,11 @@ interface Notification {
       $skip?: int32;
     }
   >;
-}
 
-@armResourceOperations
-interface NotificationRecipientUser {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NotificationRecipientUser_ListByNotification")
   @doc("Gets the list of the Notification Recipient User subscribed to the notification.")
+  // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
   ListByNotification is Azure.Core.Foundations.Operation<
@@ -81,11 +91,11 @@ interface NotificationRecipientUser {
     },
     RecipientUserListResult
   >;
-}
 
-@armResourceOperations
-interface NotificationRecipientEmail {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NotificationRecipientEmail_ListByNotification")
   @doc("Gets the list of the Notification Recipient Emails subscribed to a notification.")
+  // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
   ListByNotification is Azure.Core.Foundations.Operation<

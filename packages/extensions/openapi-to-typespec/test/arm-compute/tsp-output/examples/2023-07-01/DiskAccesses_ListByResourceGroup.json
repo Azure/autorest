@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskAccesses?$skiptoken={token}",
+        "value": [
+          {
+            "name": "myDiskAccess",
+            "type": "Microsoft.Compute/diskAccesses",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "PrivateEndpoints"
+            }
+          },
+          {
+            "name": "myDiskAccess2",
+            "type": "Microsoft.Compute/diskAccesses",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess2",
+            "location": "westus",
+            "properties": {
+              "privateEndpointConnections": [
+                {
+                  "name": "myDiskAccess.d4914cfa-6bc2-4049-a57c-3d1f622d8eef",
+                  "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess2/privateEndpoinConnections/myDiskAccess2.d4914cfa-6bc2-4049-a57c-3d1f622d8eef",
+                  "properties": {
+                    "privateEndpoint": {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint2"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "description": "Auto-Approved",
+                      "actionsRequired": "None",
+                      "status": "Approved"
+                    },
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+            },
+            "tags": {
+              "department": "Development",
+              "project": "PrivateEndpoints"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiskAccesses_ListByResourceGroup",
+  "title": "List all disk access resources in a resource group."
+}

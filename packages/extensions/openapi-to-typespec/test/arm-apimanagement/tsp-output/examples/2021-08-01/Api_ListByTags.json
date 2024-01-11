@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "api": {
+              "name": "Echo API",
+              "path": "echo",
+              "apiRevision": "1",
+              "id": "/apis/echo-api",
+              "isCurrent": true,
+              "serviceUrl": "http://echoapi.cloudapp.net/api"
+            },
+            "tag": {
+              "name": "awesomeTag",
+              "id": "/tags/apitag123"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Api_ListByTags",
+  "title": "ApiManagementListApisByTags"
+}

@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "West US",
+            "isDeleted": false,
+            "isMasterRegion": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Region_ListByService",
+  "title": "ApiManagementListRegions"
+}

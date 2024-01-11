@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
@@ -23,18 +25,33 @@ model Catalog is TrackedResource<CatalogProperties> {
 interface Catalogs {
   @doc("Get a Catalog")
   get is ArmResourceRead<Catalog>;
+
   @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Catalog,
+    BaseParameters<Catalog>,
+    ArmAsyncOperationHeader
+  >;
+
   @doc("Update a Catalog")
-  update is ArmTagsPatchSync<Catalog>;
+  update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
+
   @doc("Delete a Catalog")
-  delete is ArmResourceDeleteAsync<Catalog>;
+  delete is ArmResourceDeleteAsync<
+    Catalog,
+    BaseParameters<Catalog>,
+    ArmLroLocationHeader
+  >;
+
   @doc("List Catalog resources by resource group")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
+
   @doc("List Catalog resources by subscription ID")
   listBySubscription is ArmListBySubscription<Catalog>;
+
   @doc("Counts devices in catalog.")
   countDevices is ArmResourceActionSync<Catalog, void, CountDeviceResponse>;
+
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
     Catalog,
@@ -60,6 +77,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("List the device groups for the catalog.")
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
@@ -85,6 +103,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
@@ -110,6 +129,7 @@ interface Catalogs {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
     Catalog,

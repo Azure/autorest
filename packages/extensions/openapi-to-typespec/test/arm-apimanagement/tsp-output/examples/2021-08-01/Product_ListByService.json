@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "kjoshiarmtemplateCert1",
+            "type": "Microsoft.ApiManagement/service/products",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/kjoshiarmtemplateCert1",
+            "properties": {
+              "description": "Development Product",
+              "displayName": "Dev",
+              "state": "published",
+              "subscriptionRequired": false
+            }
+          },
+          {
+            "name": "starter",
+            "type": "Microsoft.ApiManagement/service/products",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/starter",
+            "properties": {
+              "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+              "approvalRequired": false,
+              "displayName": "Starter",
+              "state": "published",
+              "subscriptionRequired": true,
+              "subscriptionsLimit": 1,
+              "terms": ""
+            }
+          },
+          {
+            "name": "unlimited",
+            "type": "Microsoft.ApiManagement/service/products",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/unlimited",
+            "properties": {
+              "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+              "approvalRequired": true,
+              "displayName": "Unlimited",
+              "state": "published",
+              "subscriptionRequired": true,
+              "subscriptionsLimit": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Product_ListByService",
+  "title": "ApiManagementListProducts"
+}

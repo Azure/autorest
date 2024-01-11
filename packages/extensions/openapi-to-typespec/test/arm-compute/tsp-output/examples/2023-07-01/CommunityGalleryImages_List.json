@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscription-Id}/providers/Microsoft.Compute/communityGalleries/publicGalleryName/images?$skiptoken={token}/communityGalleries/publicGalleryName/images/myGalleryImageName",
+        "value": [
+          {
+            "name": "myGalleryImageName",
+            "identifier": {
+              "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName"
+            },
+            "location": "myLocation",
+            "properties": {
+              "hyperVGeneration": "V1",
+              "identifier": {
+                "offer": "myOfferName",
+                "publisher": "myPublisherName",
+                "sku": "mySkuName"
+              },
+              "osState": "Generalized",
+              "osType": "Windows"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CommunityGalleryImages_List",
+  "title": "List community gallery images."
+}

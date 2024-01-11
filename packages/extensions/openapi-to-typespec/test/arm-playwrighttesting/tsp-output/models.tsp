@@ -5,26 +5,31 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzurePlaywrightService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The enablement status of a feature.")
 enum EnablementStatus {
   @doc("The feature is Enabled.") Enabled,
   @doc("The feature is Disabled.") Disabled,
 }
 
+@doc("The status of the current operation.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
@@ -33,6 +38,7 @@ enum ProvisioningState {
   @doc("Change accepted for processing") Accepted,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -40,6 +46,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("The free-trial state.")
 enum FreeTrialState {
   @doc("The free-trial is Active.") Active,
   @doc("The free-trial is Expired.") Expired,
@@ -68,6 +75,25 @@ model AccountProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Quota properties")
@@ -112,4 +138,25 @@ model FreeTrialProperties {
   @doc("The free-trial state.")
   @visibility("read")
   state: FreeTrialState;
+}
+
+@doc("The type used for update operations of the Account.")
+model AccountUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Account.")
+  properties?: AccountUpdateProperties;
+}
+
+@doc("The updatable properties of the Account.")
+model AccountUpdateProperties {
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  regionalAffinity?: EnablementStatus;
+
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  scalableExecution?: EnablementStatus;
+
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  reporting?: EnablementStatus;
 }

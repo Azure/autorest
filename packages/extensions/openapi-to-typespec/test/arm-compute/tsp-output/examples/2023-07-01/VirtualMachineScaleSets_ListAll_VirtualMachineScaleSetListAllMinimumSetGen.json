@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ListAll",
+  "title": "VirtualMachineScaleSet_ListAll_MinimumSet_Gen"
+}

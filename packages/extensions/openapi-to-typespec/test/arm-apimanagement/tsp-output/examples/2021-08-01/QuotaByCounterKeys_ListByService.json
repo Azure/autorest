@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "quotaCounterKey": "ba",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "counterKey": "ba",
+            "periodEndTime": "2018-02-08T16:54:40Z",
+            "periodKey": "0_P3Y6M4DT12H30M5S",
+            "periodStartTime": "2014-08-04T04:24:35Z",
+            "value": {
+              "callsCount": 5,
+              "kbTransferred": 2.5830078125
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "QuotaByCounterKeys_ListByService",
+  "title": "ApiManagementGetQuotaCounterKeys"
+}

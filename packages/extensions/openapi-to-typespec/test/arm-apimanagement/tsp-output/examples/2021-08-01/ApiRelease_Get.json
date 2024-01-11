@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "a1",
+    "releaseId": "5a7cb545298324c53224a799",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "5a7cb545298324c53224a799",
+        "type": "Microsoft.ApiManagement/service/apis/releases",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/5a7cb545298324c53224a799",
+        "properties": {
+          "apiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1",
+          "createdDateTime": "2018-02-08T20:38:29.173Z",
+          "notes": "yahoo",
+          "updatedDateTime": "2018-02-08T20:38:29.173Z"
+        }
+      }
+    }
+  },
+  "operationId": "ApiRelease_Get",
+  "title": "ApiManagementGetApiRelease"
+}

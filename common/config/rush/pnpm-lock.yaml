@@ -197,6 +197,9 @@ dependencies:
   chalk:
     specifier: ^4.1.0
     version: 4.1.2
+  change-case-all:
+    specifier: ~2.1.0
+    version: 2.1.0
   cli-progress:
     specifier: ~3.10.0
     version: 3.10.0
@@ -2652,6 +2655,15 @@ packages:
       supports-color: 7.2.0
     dev: false
 
+  /change-case-all@2.1.0:
+    resolution: {integrity: sha512-v6b0WWWkZUMHVuYk82l+WROgkUm4qEN2w5hKRNWtEOYwWqUGoi8C6xH0l1RLF1EoWqDFK6MFclmN3od6ws3/uw==}
+    dependencies:
+      change-case: 5.4.0
+      sponge-case: 2.0.2
+      swap-case: 3.0.2
+      title-case: 3.0.3
+    dev: false
+
   /change-case@4.1.2:
     resolution: {integrity: sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==}
     dependencies:
@@ -2667,6 +2679,14 @@ packages:
       sentence-case: 3.0.4
       snake-case: 3.0.4
       tslib: 2.6.2
+    dev: false
+
+  /change-case@5.0.2:
+    resolution: {integrity: sha512-tH6YZXViaeC2/Mnt8m4gSmbZfNorC2rhwCX2bXw8SYZWr8ljCPB7iA+1TLG9t7yroWBFauc63LlOZ1gucMVCWw==}
+    dev: false
+
+  /change-case@5.4.0:
+    resolution: {integrity: sha512-11YRFf0f4pI+ROHUfq64WivyrcNSrZjdDt2qgVxvAObtj/Pwnu5uAKObHRbN9uAhaDFkvkqcKVEl8Dxnmx+N7w==}
     dev: false
 
   /char-regex@1.0.2:
@@ -7419,6 +7439,10 @@ packages:
       extend-shallow: 3.0.2
     dev: false
 
+  /sponge-case@2.0.2:
+    resolution: {integrity: sha512-LBnE+y0zs+ajPFa0Fn/wGhCqigua+AxYf4MZFO3l83e/rAEdtTxiXf/0u6+9VzLClVEHrow9Vpj5FycAtaHNcA==}
+    dev: false
+
   /sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: false
@@ -7619,6 +7643,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
+  /swap-case@3.0.2:
+    resolution: {integrity: sha512-1tJUDXK5JZTVg04yDTMQnz1c9KFoTGQQo4QZuNbj5olv0ahyQK0R+OIU0KsbjmUhul+wg5iJFGfVRtilC5/GtQ==}
+    dev: false
+
   /synckit@0.8.5:
     resolution: {integrity: sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -7738,6 +7766,12 @@ packages:
 
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+    dev: false
+
+  /title-case@3.0.3:
+    resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
+    dependencies:
+      tslib: 2.6.2
     dev: false
 
   /titleize@3.0.0:
@@ -9317,7 +9351,7 @@ packages:
     dev: false
 
   file:projects/openapi-to-typespec.tgz(jest@29.7.0):
-    resolution: {integrity: sha512-RqW7Hnn2Gm4Ytv2iUSt/wcaMZNUG15OZhayym0nAWp4BqpvjnV6UzruHlBu9pth0oZVC0uPK0dqIYZ/rDcLJ6g==, tarball: file:projects/openapi-to-typespec.tgz}
+    resolution: {integrity: sha512-zAj7zkO6vCcOuJPYLE8z93z4EqthmE0ByOjCnhOSutRmbgrMC357Rocf0KoOefoFJcA+IqIy3kIHBRPj/F7PVw==, tarball: file:projects/openapi-to-typespec.tgz}
     id: file:projects/openapi-to-typespec.tgz
     name: '@rush-temp/openapi-to-typespec'
     version: 0.0.0
@@ -9341,6 +9375,8 @@ packages:
       '@typespec/rest': 0.51.0(@typespec/compiler@0.51.0)(@typespec/http@0.51.0)
       '@typespec/versioning': 0.51.0(@typespec/compiler@0.51.0)
       chalk: 4.1.2
+      change-case: 5.0.2
+      change-case-all: 2.1.0
       eslint: 8.53.0
       eslint-plugin-import: 2.29.0(eslint@8.53.0)
       eslint-plugin-jest: 27.6.0(@typescript-eslint/eslint-plugin@6.11.0)(eslint@8.53.0)(jest@29.7.0)(typescript@5.2.2)

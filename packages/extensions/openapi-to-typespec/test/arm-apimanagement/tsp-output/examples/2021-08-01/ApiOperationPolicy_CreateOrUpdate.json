@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "operationId": "5600b57e7e8880006a080001",
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "5600b57e7e8880006a040001",
+    "parameters": {
+      "properties": {
+        "format": "xml",
+        "value": "<policies> <inbound /> <backend>    <forward-request />  </backend>  <outbound /></policies>"
+      }
+    },
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5600b57e7e8880006a040001/operations/5600b57e7e8880006a080001/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound />\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <outbound />\r\n</policies>"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5600b57e7e8880006a040001/operations/5600b57e7e8880006a080001/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound />\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <outbound />\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "ApiOperationPolicy_CreateOrUpdate",
+  "title": "ApiManagementCreateApiOperationPolicy"
+}

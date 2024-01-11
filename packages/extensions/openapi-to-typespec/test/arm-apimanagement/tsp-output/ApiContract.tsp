@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("API details.")
@@ -24,15 +26,23 @@ model ApiContract is ProxyResource<ApiContractProperties> {
 }
 
 @armResourceOperations
-interface Api {
+interface ApiContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the API specified by its identifier.")
+  @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the API specified by its identifier.")
   @head
+  @operationId("Api_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<ApiContract, BaseParameters<ApiContract>>,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates new or updates existing specified API of the API Management service instance.")
+  @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApiContract,
     {
@@ -41,12 +51,16 @@ interface Api {
       @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
       @header
       `If-Match`?: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specified API of the API Management service instance.")
-  update is ArmResourcePatchSync<
+  @operationId("Api_Update")
+  update is ArmCustomPatchSync<
     ApiContract,
-    ApiContractProperties,
+    ApiUpdateContract,
     {
       ...BaseParameters<ApiContract>;
 
@@ -55,7 +69,10 @@ interface Api {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified API of the API Management service instance.")
+  @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     {
@@ -70,7 +87,10 @@ interface Api {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all APIs of the API Management service instance.")
+  @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
     {
@@ -98,11 +118,11 @@ interface Api {
       expandApiVersionSet?: boolean;
     }
   >;
-}
 
-@armResourceOperations
-interface ApiRevision {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiRevision_ListByService")
   @doc("Lists all revisions of an API.")
+  // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -143,11 +163,11 @@ interface ApiRevision {
     },
     ApiRevisionListResult
   >;
-}
 
-@armResourceOperations
-interface ApiProduct {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiProduct_ListByApis")
   @doc("Lists all Products, which the API is part of.")
+  // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
   ListByApis is Azure.Core.Foundations.Operation<
@@ -186,13 +206,13 @@ interface ApiProduct {
       @path
       subscriptionId: string;
     },
-    ProductListResult
+    ResourceListResult<ProductContract>
   >;
-}
 
-@armResourceOperations
-interface Operation {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Operation_ListByTags")
   @doc("Lists a collection of operations associated with tags.")
+  // FIXME: Operation_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<

@@ -35,6 +35,7 @@ enum RegistrationEntryModelXmlnsM {
   `http://schemas.microsoft.com/ado/2007/08/dataservices/metadata`,
 }
 
+@doc("PNS Platform for the installation")
 enum PlatformType {
   apns,
   wns,
@@ -99,7 +100,9 @@ enum ApiVersionType {
   `2016-07`,
   `2020-06`,
 }
-@Azure.Core.fixed
+
+@doc("Content type for upload")
+@fixed
 enum ContentType {
   @doc("Content Type 'application/json;charset=utf-8'")
   `application/json;charset=utf-8`,

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("DataConnector Model.")
@@ -28,10 +30,13 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
 interface DataConnectors {
   @doc("Get specific Data Connector resource by DataConnectorName.")
   get is ArmResourceRead<DataConnector>;
+
   @doc("Create or update Data Connector For MADMA resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
+
   @doc("Delete a Data Connectors with given dataConnector name.")
   delete is ArmResourceDeleteSync<DataConnector>;
+
   @doc("Lists the Data Connector Credentials for MADMA instance.")
   list is ArmResourceListByParent<
     DataConnector,

@@ -27,5 +27,6 @@ namespace Azure.Language.QnAMaker;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2022-07-01-preview API version.")
   v2022_07_01_preview: "2022-07-01-preview",
 }

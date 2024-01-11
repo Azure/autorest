@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Logger details.")
@@ -23,18 +25,26 @@ model LoggerContract is ProxyResource<LoggerContractProperties> {
 }
 
 @armResourceOperations
-interface Logger {
+interface LoggerContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the logger specified by its identifier.")
+  @operationId("Logger_Get")
   get is ArmResourceRead<LoggerContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the logger specified by its identifier.")
   @head
+  @operationId("Logger_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       LoggerContract,
       BaseParameters<LoggerContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates a logger.")
+  @operationId("Logger_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
     {
@@ -45,10 +55,13 @@ interface Logger {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing logger.")
-  update is ArmResourcePatchSync<
+  @operationId("Logger_Update")
+  update is ArmCustomPatchSync<
     LoggerContract,
-    LoggerContractProperties,
+    LoggerUpdateContract,
     {
       ...BaseParameters<LoggerContract>;
 
@@ -57,7 +70,10 @@ interface Logger {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified logger.")
+  @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
     {
@@ -68,7 +84,10 @@ interface Logger {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of loggers in the specified service instance.")
+  @operationId("Logger_ListByService")
   listByService is ArmResourceListByParent<
     LoggerContract,
     {

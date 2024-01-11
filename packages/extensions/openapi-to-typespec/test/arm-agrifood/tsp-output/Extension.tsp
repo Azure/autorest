@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("Extension resource.")
@@ -26,10 +28,13 @@ model Extension is ProxyResource<ExtensionProperties> {
 interface Extensions {
   @doc("Get installed extension details by extension id.")
   get is ArmResourceRead<Extension>;
+
   @doc("Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Extension>;
+
   @doc("Uninstall extension.")
   delete is ArmResourceDeleteSync<Extension>;
+
   @doc("Get installed extensions details.")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,

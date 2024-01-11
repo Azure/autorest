@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./OperationContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Policy Contract details.")
@@ -21,8 +23,10 @@ model PolicyContract is ProxyResource<PolicyContractProperties> {
 }
 
 @armResourceOperations
-interface ApiOperationPolicy {
+interface PolicyContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the policy configuration at the API Operation level.")
+  @operationId("ApiOperationPolicy_Get")
   get is ArmResourceRead<
     PolicyContract,
     {
@@ -30,18 +34,24 @@ interface ApiOperationPolicy {
 
       @doc("Policy Export Format.")
       @query("format")
-      format?: PolicyExportFormat = "xml";
+      format?: PolicyExportFormat = PolicyExportFormat.xml;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the API operation policy specified by its identifier.")
   @head
+  @operationId("ApiOperationPolicy_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PolicyContract,
       BaseParameters<PolicyContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates policy configuration for the API Operation level.")
+  @operationId("ApiOperationPolicy_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PolicyContract,
     {
@@ -52,7 +62,10 @@ interface ApiOperationPolicy {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the policy configuration at the Api Operation.")
+  @operationId("ApiOperationPolicy_Delete")
   delete is ArmResourceDeleteSync<
     PolicyContract,
     {
@@ -63,6 +76,9 @@ interface ApiOperationPolicy {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the list of policy configuration at the API Operation level.")
+  @operationId("ApiOperationPolicy_ListByOperation")
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }

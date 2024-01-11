@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "assetName": "string",
+    "jobType": "string",
+    "listViewType": "All",
+    "resourceGroupName": "test-rg",
+    "scheduleId": "string",
+    "scheduled": false,
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tag": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "autologgerSettings": {
+                "mlflowAutologger": "Disabled"
+              },
+              "codeId": "string",
+              "command": "string",
+              "componentId": "string",
+              "computeId": "string",
+              "displayName": "string",
+              "distribution": {
+                "distributionType": "TensorFlow",
+                "parameterServerCount": 1,
+                "workerCount": 1
+              },
+              "environmentId": "string",
+              "environmentVariables": {
+                "string": "string"
+              },
+              "experimentName": "string",
+              "identity": {
+                "identityType": "AMLToken"
+              },
+              "inputs": {
+                "string": {
+                  "description": "string",
+                  "jobInputType": "literal",
+                  "value": "string"
+                }
+              },
+              "isArchived": false,
+              "jobType": "Command",
+              "limits": {
+                "jobLimitsType": "Command",
+                "timeout": "PT5M"
+              },
+              "notificationSetting": {
+                "emailOn": [
+                  "JobCompleted"
+                ],
+                "emails": [
+                  "string"
+                ]
+              },
+              "outputs": {
+                "string": {
+                  "description": "string",
+                  "assetName": "string",
+                  "assetVersion": "string",
+                  "jobOutputType": "uri_file",
+                  "mode": "ReadWriteMount",
+                  "uri": "string"
+                }
+              },
+              "parameters": {
+                "1a89709e-1af8-41de-99c1-0349bd20e005": null
+              },
+              "properties": {
+                "string": "string"
+              },
+              "queueSettings": {
+                "jobTier": "Spot",
+                "priority": 1
+              },
+              "resources": {
+                "dockerArgs": "string",
+                "instanceCount": 1,
+                "instanceType": "string",
+                "locations": [
+                  "string"
+                ],
+                "properties": {
+                  "string": {
+                    "4e53b3df-bd02-42d1-a3cd-ee4678c0b79f": null
+                  }
+                },
+                "shmSize": "2g"
+              },
+              "services": {
+                "string": {
+                  "endpoint": "string",
+                  "errorMessage": "string",
+                  "jobServiceType": "string",
+                  "nodes": {
+                    "nodesValueType": "All"
+                  },
+                  "port": 1,
+                  "properties": {
+                    "string": "string"
+                  },
+                  "status": "string"
+                }
+              },
+              "status": "Failed",
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:22",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Jobs_List",
+  "title": "List AutoML Job."
+}

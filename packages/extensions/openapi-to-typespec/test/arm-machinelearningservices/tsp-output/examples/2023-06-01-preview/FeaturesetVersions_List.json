@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "name": "string",
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "listViewType": "All",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tags": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "entities": [
+                "string"
+              ],
+              "isAnonymous": false,
+              "isArchived": false,
+              "materializationSettings": {
+                "notification": {
+                  "emailOn": [
+                    "JobCompleted"
+                  ],
+                  "emails": [
+                    "string"
+                  ]
+                },
+                "resource": {
+                  "instanceType": "string"
+                },
+                "schedule": {
+                  "endTime": "string",
+                  "frequency": "Month",
+                  "interval": 1,
+                  "schedule": {
+                    "hours": [
+                      1
+                    ],
+                    "minutes": [
+                      1
+                    ],
+                    "monthDays": [
+                      1
+                    ],
+                    "weekDays": [
+                      "Saturday"
+                    ]
+                  },
+                  "startTime": "string",
+                  "timeZone": "string",
+                  "triggerType": "Recurrence"
+                },
+                "sparkConfiguration": {
+                  "string": "string"
+                },
+                "storeType": "Offline"
+              },
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Canceled",
+              "specification": {
+                "path": "string"
+              },
+              "stage": "string",
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:49",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:49",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Key"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturesetVersions_List",
+  "title": "List Workspace Featureset Version."
+}

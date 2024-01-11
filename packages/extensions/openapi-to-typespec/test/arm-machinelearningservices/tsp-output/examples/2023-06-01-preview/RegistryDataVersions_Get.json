@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "dataType": "mltable",
+          "dataUri": "string",
+          "isAnonymous": false,
+          "isArchived": false,
+          "properties": {
+            "string": "string"
+          },
+          "referencedUris": [
+            "string"
+          ],
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:14",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:14",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryDataVersions_Get",
+  "title": "Get Registry Data Version Base."
+}

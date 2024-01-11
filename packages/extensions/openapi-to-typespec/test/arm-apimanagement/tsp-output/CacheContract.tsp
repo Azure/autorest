@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Cache details.")
@@ -24,15 +26,23 @@ model CacheContract is ProxyResource<CacheContractProperties> {
 }
 
 @armResourceOperations
-interface Cache {
+interface CacheContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Cache specified by its identifier.")
+  @operationId("Cache_Get")
   get is ArmResourceRead<CacheContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Cache specified by its identifier.")
   @head
+  @operationId("Cache_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<CacheContract, BaseParameters<CacheContract>>,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates an External Cache to be used in Api Management instance.")
+  @operationId("Cache_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     {
@@ -43,10 +53,13 @@ interface Cache {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the cache specified by its identifier.")
-  update is ArmResourcePatchSync<
+  @operationId("Cache_Update")
+  update is ArmCustomPatchSync<
     CacheContract,
-    CacheContractProperties,
+    CacheUpdateParameters,
     {
       ...BaseParameters<CacheContract>;
 
@@ -55,7 +68,10 @@ interface Cache {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific Cache.")
+  @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
     {
@@ -66,7 +82,10 @@ interface Cache {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of all external Caches in the specified service instance.")
+  @operationId("Cache_ListByService")
   listByService is ArmResourceListByParent<
     CacheContract,
     {

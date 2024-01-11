@@ -1,0 +1,221 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "entities": [
+          "string"
+        ],
+        "isAnonymous": false,
+        "isArchived": false,
+        "materializationSettings": {
+          "notification": {
+            "emailOn": [
+              "JobFailed"
+            ],
+            "emails": [
+              "string"
+            ]
+          },
+          "resource": {
+            "instanceType": "string"
+          },
+          "schedule": {
+            "endTime": "string",
+            "frequency": "Day",
+            "interval": 1,
+            "schedule": {
+              "hours": [
+                1
+              ],
+              "minutes": [
+                1
+              ],
+              "monthDays": [
+                1
+              ],
+              "weekDays": [
+                "Monday"
+              ]
+            },
+            "startTime": "string",
+            "timeZone": "string",
+            "triggerType": "Recurrence"
+          },
+          "sparkConfiguration": {
+            "string": "string"
+          },
+          "storeType": "Online"
+        },
+        "properties": {
+          "string": "string"
+        },
+        "specification": {
+          "path": "string"
+        },
+        "stage": "string",
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "entities": [
+            "string"
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
+          "materializationSettings": {
+            "notification": {
+              "emailOn": [
+                "JobFailed"
+              ],
+              "emails": [
+                "string"
+              ]
+            },
+            "resource": {
+              "instanceType": "string"
+            },
+            "schedule": {
+              "endTime": "string",
+              "frequency": "Day",
+              "interval": 1,
+              "schedule": {
+                "hours": [
+                  1
+                ],
+                "minutes": [
+                  1
+                ],
+                "monthDays": [
+                  1
+                ],
+                "weekDays": [
+                  "Wednesday"
+                ]
+              },
+              "startTime": "string",
+              "timeZone": "string",
+              "triggerType": "Recurrence"
+            },
+            "sparkConfiguration": {
+              "string": "string"
+            },
+            "storeType": "OnlineAndOffline"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Deleting",
+          "specification": {
+            "path": "string"
+          },
+          "stage": "string",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:52",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:52",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "entities": [
+            "string"
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
+          "materializationSettings": {
+            "notification": {
+              "emailOn": [
+                "JobCancelled"
+              ],
+              "emails": [
+                "string"
+              ]
+            },
+            "resource": {
+              "instanceType": "string"
+            },
+            "schedule": {
+              "endTime": "string",
+              "frequency": "Hour",
+              "interval": 1,
+              "schedule": {
+                "hours": [
+                  1
+                ],
+                "minutes": [
+                  1
+                ],
+                "monthDays": [
+                  1
+                ],
+                "weekDays": [
+                  "Wednesday"
+                ]
+              },
+              "startTime": "string",
+              "timeZone": "string",
+              "triggerType": "Recurrence"
+            },
+            "sparkConfiguration": {
+              "string": "string"
+            },
+            "storeType": "Offline"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Failed",
+          "specification": {
+            "path": "string"
+          },
+          "stage": "string",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:52",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:52",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturesetVersions_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Featureset Version."
+}

@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "myGalleryImageVersionName",
+    "galleryUniqueName": "galleryUniqueName",
+    "location": "myLocation",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageVersionName",
+        "identifier": {
+          "uniqueId": "/SharedGalleries/galleryUniqueName/Images/myGalleryImageName/Versions/myGalleryImageVersionName"
+        },
+        "location": "myLocation",
+        "properties": {
+          "endOfLifeDate": "2022-03-20T09:12:28Z",
+          "excludeFromLatest": false,
+          "publishedDate": "2018-03-20T09:12:28Z",
+          "storageProfile": {
+            "osDiskImage": {
+              "diskSizeGB": 29,
+              "hostCaching": "None"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "SharedGalleryImageVersions_Get",
+  "title": "Get a shared gallery image version."
+}

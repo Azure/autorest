@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "extensionParameters": {
+      "properties": {
+        "type": "{extension-Type}",
+        "autoUpgradeMinorVersion": true,
+        "enableAutomaticUpgrade": true,
+        "forceUpdateTag": "aaaaaaaaa",
+        "protectedSettings": {},
+        "provisionAfterExtensions": [
+          "aa"
+        ],
+        "publisher": "{extension-Publisher}",
+        "settings": {},
+        "suppressFailures": true,
+        "typeHandlerVersion": "{handler-version}"
+      }
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vmssExtensionName": "aaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{extension-name}",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaa",
+        "properties": {
+          "type": "{extension-Type}",
+          "autoUpgradeMinorVersion": true,
+          "enableAutomaticUpgrade": true,
+          "forceUpdateTag": "aaaaaaaaa",
+          "protectedSettings": {},
+          "provisionAfterExtensions": [
+            "aa"
+          ],
+          "provisioningState": "aaa",
+          "publisher": "{extension-Publisher}",
+          "settings": {},
+          "suppressFailures": true,
+          "typeHandlerVersion": "{handler-version}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{extension-name}",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaa",
+        "properties": {
+          "type": "{extension-Type}",
+          "autoUpgradeMinorVersion": true,
+          "enableAutomaticUpgrade": true,
+          "forceUpdateTag": "aaaaaaaaa",
+          "protectedSettings": {},
+          "provisionAfterExtensions": [
+            "aa"
+          ],
+          "provisioningState": "aaa",
+          "publisher": "{extension-Publisher}",
+          "settings": {},
+          "suppressFailures": true,
+          "typeHandlerVersion": "{handler-version}"
+        }
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetExtensions_Update",
+  "title": "VirtualMachineScaleSetExtension_Update_MaximumSet_Gen"
+}

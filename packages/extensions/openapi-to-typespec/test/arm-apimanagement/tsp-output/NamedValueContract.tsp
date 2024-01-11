@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("NamedValue details.")
@@ -23,18 +25,26 @@ model NamedValueContract is ProxyResource<NamedValueContractProperties> {
 }
 
 @armResourceOperations
-interface NamedValue {
+interface NamedValueContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the named value specified by its identifier.")
+  @operationId("NamedValue_Get")
   get is ArmResourceRead<NamedValueContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the named value specified by its identifier.")
   @head
+  @operationId("NamedValue_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       NamedValueContract,
       BaseParameters<NamedValueContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates named value.")
+  @operationId("NamedValue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NamedValueContract,
     {
@@ -43,21 +53,29 @@ interface NamedValue {
       @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
       @header
       `If-Match`?: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specific named value.")
-  update is ArmResourcePatchAsync<
+  @operationId("NamedValue_Update")
+  update is ArmCustomPatchAsync<
     NamedValueContract,
-    NamedValueContractProperties,
+    NamedValueUpdateParameters,
     {
       ...BaseParameters<NamedValueContract>;
 
       @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
       @header
       `If-Match`: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific named value from the API Management service instance.")
+  @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
     {
@@ -68,7 +86,10 @@ interface NamedValue {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of named values defined within a service instance.")
+  @operationId("NamedValue_ListByService")
   listByService is ArmResourceListByParent<
     NamedValueContract,
     {
@@ -92,16 +113,24 @@ interface NamedValue {
       isKeyVaultRefreshFailed?: boolean;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the secret of the named value specified by its identifier.")
+  @operationId("NamedValue_ListValue")
   listValue is ArmResourceActionSync<
     NamedValueContract,
     void,
     NamedValueSecretContract
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Refresh the secret of the named value specified by its identifier.")
+  @operationId("NamedValue_RefreshSecret")
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,
-    NamedValueContract
+    NamedValueContract,
+    BaseParameters<NamedValueContract>,
+    ArmLroLocationHeader
   >;
 }

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("A single API Management service resource in List or Get response.")
@@ -33,61 +35,96 @@ model ApiManagementServiceResource
 }
 
 @armResourceOperations
-interface ApiManagementService {
+interface ApiManagementServiceResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets an API Management service resource description.")
+  @operationId("ApiManagementService_Get")
   get is ArmResourceRead<ApiManagementServiceResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates an API Management service. This is long running operation and could take several minutes to complete.")
+  @operationId("ApiManagementService_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiManagementServiceResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing API Management service.")
-  update is ArmResourcePatchAsync<
+  @operationId("ApiManagementService_Update")
+  update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
-    ApiManagementServiceProperties
+    ApiManagementServiceUpdateParameters
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes an existing API Management service.")
+  @operationId("ApiManagementService_Delete")
   delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all API Management services within a resource group.")
+  @operationId("ApiManagementService_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all API Management services within an Azure subscription.")
+  @operationId("ApiManagementService_List")
   list is ArmListBySubscription<ApiManagementServiceResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.")
+  @operationId("PerformConnectivityCheckAsync")
+  performConnectivityCheckAsync is ArmResourceActionAsync<
+    ApiManagementServiceResource,
+    ConnectivityCheckRequest,
+    ConnectivityCheckResponse,
+    BaseParameters<ApiManagementServiceResource>,
+    ArmLroLocationHeader
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.")
+  @operationId("ApiManagementService_Restore")
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource
+    ApiManagementServiceResource,
+    BaseParameters<ApiManagementServiceResource>,
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.")
+  @operationId("ApiManagementService_Backup")
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource
+    ApiManagementServiceResource,
+    BaseParameters<ApiManagementServiceResource>,
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.")
+  @operationId("ApiManagementService_GetSsoToken")
   getSsoToken is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
     ApiManagementServiceGetSsoTokenResult
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.")
+  @operationId("ApiManagementService_ApplyNetworkConfigurationUpdates")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
-    ApiManagementServiceResource
-  >;
-}
-
-@armResourceOperations
-interface ApiManagementServices {
-  @doc("Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.")
-  performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
-    ConnectivityCheckRequest,
-    ConnectivityCheckResponse
+    BaseParameters<ApiManagementServiceResource>,
+    ArmLroLocationHeader
   >;
-}
 
-@armResourceOperations
-interface TenantConfiguration {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.")
+  @operationId("TenantConfiguration_Deploy")
   deploy is ArmResourceActionAsync<
     ApiManagementServiceResource,
     DeployConfigurationParameters,
@@ -98,9 +135,13 @@ interface TenantConfiguration {
       @doc("The identifier of the Git Configuration Operation.")
       @path
       configurationName: ConfigurationIdName;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.")
+  @operationId("TenantConfiguration_Save")
   save is ArmResourceActionAsync<
     ApiManagementServiceResource,
     SaveConfigurationParameter,
@@ -111,9 +152,13 @@ interface TenantConfiguration {
       @doc("The identifier of the Git Configuration Operation.")
       @path
       configurationName: ConfigurationIdName;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.")
+  @operationId("TenantConfiguration_Validate")
   validate is ArmResourceActionAsync<
     ApiManagementServiceResource,
     DeployConfigurationParameters,
@@ -124,39 +169,19 @@ interface TenantConfiguration {
       @doc("The identifier of the Git Configuration Operation.")
       @path
       configurationName: ConfigurationIdName;
-    }
-  >;
-  @doc("Gets the status of the most recent synchronization between the configuration database and the Git repository.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
-  @get
-  GetSyncState is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the API Management service.")
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
-
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-      @path
-      subscriptionId: string;
-
-      @doc("The identifier of the Git Configuration Operation.")
-      @path
-      configurationName: ConfigurationIdName;
     },
-    TenantConfigurationSyncStateContract
+    ArmLroLocationHeader
   >;
-}
 
-@armResourceOperations
-interface Api {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Checks availability and correctness of a name for an API Management service.")
+  @operationId("ApiManagementService_CheckNameAvailability")
+  checkNameAvailability is checkGlobalNameAvailability;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_ListByTags")
   @doc("Lists a collection of apis associated with tags.")
+  // FIXME: Api_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<
@@ -195,11 +220,11 @@ interface Api {
     },
     TagResourceListResult
   >;
-}
 
-@armResourceOperations
-interface ContentType {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentType_ListByService")
   @doc("Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.")
+  // FIXME: ContentType_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -222,7 +247,10 @@ interface ContentType {
     ContentTypeListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentType_Get")
   @doc("Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.")
+  // FIXME: ContentType_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}")
   @get
   Get is Azure.Core.Foundations.Operation<
@@ -250,11 +278,11 @@ interface ContentType {
     },
     ContentTypeContract
   >;
-}
 
-@armResourceOperations
-interface ContentItem {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentItem_ListByService")
   @doc("Lists developer portal's content items specified by the provided content type.")
+  // FIXME: ContentItem_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -283,7 +311,10 @@ interface ContentItem {
     ContentItemListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentItem_Get")
   @doc("Returns the developer portal's content item specified by its identifier.")
+  // FIXME: ContentItem_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}")
   @get
   Get is Azure.Core.Foundations.Operation<
@@ -317,12 +348,12 @@ interface ContentItem {
     },
     ContentItemContract
   >;
-}
 
-@armResourceOperations
-interface ApiManagementServiceSkus {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementServiceSkus_ListAvailableServiceSkus")
   @summary("Gets available SKUs for API Management service")
   @doc("Gets all available SKU for a given API Management service")
+  // FIXME: ApiManagementServiceSkus_ListAvailableServiceSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus")
   @get
   ListAvailableServiceSkus is Azure.Core.Foundations.Operation<
@@ -344,11 +375,11 @@ interface ApiManagementServiceSkus {
     },
     ResourceSkuResults
   >;
-}
 
-@armResourceOperations
-interface NetworkStatus {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NetworkStatus_ListByService")
   @doc("Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.")
+  // FIXME: NetworkStatus_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -371,7 +402,10 @@ interface NetworkStatus {
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NetworkStatus_ListByLocation")
   @doc("Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.")
+  // FIXME: NetworkStatus_ListByLocation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus")
   @get
   ListByLocation is Azure.Core.Foundations.Operation<
@@ -398,11 +432,11 @@ interface NetworkStatus {
     },
     NetworkStatusContract
   >;
-}
 
-@armResourceOperations
-interface OutboundNetworkDependenciesEndpoints {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OutboundNetworkDependenciesEndpoints_ListByService")
   @doc("Gets the network endpoints of all outbound dependencies of a ApiManagement service.")
+  // FIXME: OutboundNetworkDependenciesEndpoints_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/outboundNetworkDependenciesEndpoints")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -424,11 +458,11 @@ interface OutboundNetworkDependenciesEndpoints {
     },
     OutboundEnvironmentEndpointList
   >;
-}
 
-@armResourceOperations
-interface PolicyDescription {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PolicyDescription_ListByService")
   @doc("Lists all policy descriptions.")
+  // FIXME: PolicyDescription_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -454,11 +488,11 @@ interface PolicyDescription {
     },
     PolicyDescriptionListResult
   >;
-}
 
-@armResourceOperations
-interface PortalSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PortalSettings_ListByService")
   @doc("Lists a collection of portalsettings defined within a service instance..")
+  // FIXME: PortalSettings_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -478,13 +512,13 @@ interface PortalSettings {
       @path
       subscriptionId: string;
     },
-    PortalSettingsListResult
+    ResourceListResult<PortalSigninSettings>
   >;
-}
 
-@armResourceOperations
-interface Product {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Product_ListByTags")
   @doc("Lists a collection of products associated with tags.")
+  // FIXME: Product_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags")
   @get
   ListByTags is Azure.Core.Foundations.Operation<
@@ -523,11 +557,11 @@ interface Product {
     },
     TagResourceListResult
   >;
-}
 
-@armResourceOperations
-interface QuotaByCounterKeys {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("QuotaByCounterKeys_ListByService")
   @doc("Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.")
+  // FIXME: QuotaByCounterKeys_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -553,17 +587,17 @@ interface QuotaByCounterKeys {
     },
     QuotaCounterListResult
   >;
-}
 
-@armResourceOperations
-interface QuotaByPeriodKeys {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("QuotaByPeriodKeys_Get")
   @doc("Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.")
+  // FIXME: QuotaByPeriodKeys_Get could not be converted to a resource operation
   Get is Azure.Core.ResourceRead<QuotaCounterContract>;
-}
 
-@armResourceOperations
-interface Region {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Region_ListByService")
   @doc("Lists all azure regions in which the service exists.")
+  // FIXME: Region_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -585,11 +619,11 @@ interface Region {
     },
     RegionListResult
   >;
-}
 
-@armResourceOperations
-interface Reports {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByApi")
   @doc("Lists report records by API.")
+  // FIXME: Reports_ListByApi could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi")
   @get
   ListByApi is Azure.Core.Foundations.Operation<
@@ -629,7 +663,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByUser")
   @doc("Lists report records by User.")
+  // FIXME: Reports_ListByUser could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser")
   @get
   ListByUser is Azure.Core.Foundations.Operation<
@@ -669,7 +706,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByOperation")
   @doc("Lists report records by API Operations.")
+  // FIXME: Reports_ListByOperation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation")
   @get
   ListByOperation is Azure.Core.Foundations.Operation<
@@ -709,7 +749,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByProduct")
   @doc("Lists report records by Product.")
+  // FIXME: Reports_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct")
   @get
   ListByProduct is Azure.Core.Foundations.Operation<
@@ -749,7 +792,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByGeo")
   @doc("Lists report records by geography.")
+  // FIXME: Reports_ListByGeo could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo")
   @get
   ListByGeo is Azure.Core.Foundations.Operation<
@@ -785,7 +831,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListBySubscription")
   @doc("Lists report records by subscription.")
+  // FIXME: Reports_ListBySubscription could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription")
   @get
   ListBySubscription is Azure.Core.Foundations.Operation<
@@ -825,7 +874,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByTime")
   @doc("Lists report records by Time.")
+  // FIXME: Reports_ListByTime could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime")
   @get
   ListByTime is Azure.Core.Foundations.Operation<
@@ -869,7 +921,10 @@ interface Reports {
     ReportListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByRequest")
   @doc("Lists report records by Request.")
+  // FIXME: Reports_ListByRequest could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest")
   @get
   ListByRequest is Azure.Core.Foundations.Operation<
@@ -904,11 +959,11 @@ interface Reports {
     },
     RequestReportListResult
   >;
-}
 
-@armResourceOperations
-interface TagResource {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TagResource_ListByService")
   @doc("Lists a collection of resources associated with tags.")
+  // FIXME: TagResource_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources")
   @get
   ListByService is Azure.Core.Foundations.Operation<
@@ -942,5 +997,35 @@ interface TagResource {
       subscriptionId: string;
     },
     TagResourceListResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfiguration_GetSyncState")
+  @doc("Gets the status of the most recent synchronization between the configuration database and the Git repository.")
+  // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
+  @get
+  GetSyncState is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the API Management service.")
+      @maxLength(50)
+      @minLength(1)
+      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+      @path
+      serviceName: string;
+
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      @path
+      subscriptionId: string;
+
+      @doc("The identifier of the Git Configuration Operation.")
+      @path
+      configurationName: ConfigurationIdName;
+    },
+    TenantConfigurationSyncStateContract
   >;
 }

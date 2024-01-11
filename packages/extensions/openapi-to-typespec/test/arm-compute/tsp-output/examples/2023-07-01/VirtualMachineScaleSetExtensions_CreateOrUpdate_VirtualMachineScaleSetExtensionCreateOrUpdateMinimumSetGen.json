@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "extensionParameters": {},
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaa",
+    "vmssExtensionName": "aaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    },
+    "201": {
+      "body": {},
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
+  "title": "VirtualMachineScaleSetExtension_CreateOrUpdate_MinimumSet_Gen"
+}

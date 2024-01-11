@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "adminKubeConfig": "admin kube config...",
+        "computeType": "AKS",
+        "imagePullSecretName": "the image pull secret name",
+        "userKubeConfig": "user kube config..."
+      }
+    }
+  },
+  "operationId": "Compute_ListKeys",
+  "title": "List AKS Compute Keys"
+}

@@ -23,5 +23,6 @@ namespace AzureSchemaRegistry;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2021-10 API version.")
   v2021_10: "2021-10",
 }

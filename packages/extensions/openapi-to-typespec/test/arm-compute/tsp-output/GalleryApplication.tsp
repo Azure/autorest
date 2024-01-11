@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Gallery.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the gallery Application Definition that you want to create or update.")
@@ -24,15 +26,16 @@ model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
 interface GalleryApplications {
   @doc("Retrieves information about a gallery Application Definition.")
   get is ArmResourceRead<GalleryApplication>;
+
   @doc("Create or update a gallery Application Definition.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryApplication>;
+
   @doc("Update a gallery Application Definition.")
-  update is ArmResourcePatchAsync<
-    GalleryApplication,
-    GalleryApplicationProperties
-  >;
+  update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
+
   @doc("Delete a gallery Application.")
   delete is ArmResourceDeleteAsync<GalleryApplication>;
+
   @doc("List gallery Application Definitions in a gallery.")
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }

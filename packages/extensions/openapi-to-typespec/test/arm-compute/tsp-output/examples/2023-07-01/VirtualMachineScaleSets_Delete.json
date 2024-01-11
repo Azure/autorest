@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "forceDeletion": "true",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myvmScaleSet"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "VirtualMachineScaleSets_Delete",
+  "title": "Force Delete a VM scale set."
+}

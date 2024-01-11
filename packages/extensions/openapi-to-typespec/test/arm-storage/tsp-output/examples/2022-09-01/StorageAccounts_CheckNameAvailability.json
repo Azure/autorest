@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "accountName": {
+      "name": "sto3363",
+      "type": "Microsoft.Storage/storageAccounts"
+    },
+    "api-version": "2022-09-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": true
+      }
+    }
+  },
+  "operationId": "StorageAccounts_CheckNameAvailability",
+  "title": "StorageAccountCheckNameAvailability"
+}

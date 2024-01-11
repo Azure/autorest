@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "value": [
+          {
+            "name": "myDedicatedHostGroup",
+            "type": "aaaa",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+            "location": "westus",
+            "properties": {
+              "hosts": [
+                {
+                  "id": "aaaa"
+                }
+              ],
+              "instanceView": {
+                "hosts": [
+                  {
+                    "name": "aaaaaaaaaaaaaaaaaa",
+                    "assetId": "aaaa",
+                    "availableCapacity": {
+                      "allocatableVMs": [
+                        {
+                          "count": 26,
+                          "vmSize": "aaaaaaaaaaaaaaaaaaaa"
+                        }
+                      ]
+                    },
+                    "statuses": [
+                      {
+                        "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                        "displayStatus": "aaaaaa",
+                        "level": "Info",
+                        "message": "a",
+                        "time": "2021-11-30T12:58:26.522Z"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "platformFaultDomainCount": 3,
+              "supportAutomaticPlacement": true
+            },
+            "tags": {},
+            "zones": [
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHostGroups_ListBySubscription",
+  "title": "DedicatedHostGroup_ListBySubscription_MaximumSet_Gen"
+}

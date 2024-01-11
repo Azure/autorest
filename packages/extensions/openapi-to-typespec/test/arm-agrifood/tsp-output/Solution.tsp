@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("Solution resource.")
@@ -27,10 +29,13 @@ model Solution is ProxyResource<SolutionProperties> {
 interface Solutions {
   @doc("Get installed Solution details by Solution id.")
   get is ArmResourceRead<Solution>;
+
   @doc("Install Or Update Solution.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Solution>;
+
   @doc("Uninstall Solution.")
   delete is ArmResourceDeleteSync<Solution>;
+
   @doc("Get installed Solutions details.")
   list is ArmResourceListByParent<
     Solution,

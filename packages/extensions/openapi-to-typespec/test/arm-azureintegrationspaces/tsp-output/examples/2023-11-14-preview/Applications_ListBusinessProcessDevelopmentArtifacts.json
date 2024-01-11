@@ -1,0 +1,176 @@
+{
+  "operationId": "Applications_ListBusinessProcessDevelopmentArtifacts",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "applicationName": "Application1",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ListBusinessProcessDevelopmentArtifacts",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "BusinessProcess1",
+            "properties": {
+              "description": "First Business Process",
+              "businessProcessMapping": {
+                "Completed": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "CompletedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                },
+                "Denied": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "DeniedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                },
+                "Processing": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "ApprovedPO",
+                  "operationType": "Action",
+                  "workflowName": "PurchaseOrder"
+                },
+                "Received": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "manual",
+                  "operationType": "Trigger",
+                  "workflowName": "PurchaseOrder"
+                },
+                "Shipped": {
+                  "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+                  "operationName": "ShippedPO",
+                  "operationType": "Action",
+                  "workflowName": "Fulfillment"
+                }
+              },
+              "businessProcessStages": {
+                "Completed": {
+                  "description": "Completed",
+                  "stagesBefore": [
+                    "Shipped"
+                  ]
+                },
+                "Denied": {
+                  "description": "Denied",
+                  "stagesBefore": [
+                    "Processing"
+                  ]
+                },
+                "Processing": {
+                  "description": "Processing",
+                  "properties": {
+                    "ApprovalState": "String",
+                    "ApproverName": "String",
+                    "POAmount": "Integer"
+                  },
+                  "stagesBefore": [
+                    "Received"
+                  ]
+                },
+                "Received": {
+                  "description": "received",
+                  "properties": {
+                    "City": "String",
+                    "Product": "String",
+                    "Quantity": "Integer",
+                    "State": "String"
+                  }
+                },
+                "Shipped": {
+                  "description": "Shipped",
+                  "properties": {
+                    "ShipPriority": "Integer",
+                    "TrackingID": "Integer"
+                  },
+                  "stagesBefore": [
+                    "Denied"
+                  ]
+                }
+              },
+              "identifier": {
+                "propertyName": "businessIdentifier-1",
+                "propertyType": "String"
+              },
+              "trackingProfiles": {
+                "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1": {
+                  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2023-01-01/trackingdefinitionschema.json#",
+                  "businessProcess": {
+                    "name": "businessProcess1",
+                    "version": "d52c9c91-6e10-4a90-9c1f-08ee5d01c656"
+                  },
+                  "trackingDefinitions": {
+                    "Fulfillment": {
+                      "correlationContext": {
+                        "operationName": "manual",
+                        "operationType": "Trigger",
+                        "propertyName": "OrderNumber",
+                        "value": "@trigger().outputs.body.OrderNumber"
+                      },
+                      "events": {
+                        "Completed": {
+                          "operationName": "CompletedPO",
+                          "operationType": "Action",
+                          "properties": {}
+                        },
+                        "Denied": {
+                          "operationName": "DeniedPO",
+                          "operationType": "Action",
+                          "properties": {}
+                        },
+                        "Shipped": {
+                          "operationName": "ShippedPO",
+                          "operationType": "Action",
+                          "properties": {
+                            "ShipPriority": "@action().inputs.shipPriority",
+                            "TrackingID": "@action().inputs.trackingID"
+                          }
+                        }
+                      }
+                    },
+                    "PurchaseOrder": {
+                      "correlationContext": {
+                        "operationName": "manual",
+                        "operationType": "Trigger",
+                        "propertyName": "OrderNumber",
+                        "value": "@trigger().outputs.body.OrderNumber"
+                      },
+                      "events": {
+                        "Processing": {
+                          "operationName": "ApprovedPO",
+                          "operationType": "Action",
+                          "properties": {
+                            "ApprovalStatus": "@action().inputs.ApprovalStatus",
+                            "ApproverName": "@action().inputs.ApproverName",
+                            "POAmount": "@action().inputs.POamount"
+                          }
+                        },
+                        "Received": {
+                          "operationName": "manual",
+                          "operationType": "Trigger",
+                          "properties": {
+                            "City": "@trigger().outputs.body.Address.City",
+                            "Product": "@trigger().outputs.body.Product",
+                            "Quantity": "@trigger().outputs.body.Quantity",
+                            "State": "@trigger().outputs.body.Address.State"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "systemData": {
+              "lastModifiedAt": "2023-09-06T22:53:01.8497279Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

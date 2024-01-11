@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./BusinessProcess.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("A business process version.")
@@ -24,6 +26,7 @@ model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
 interface BusinessProcessVersions {
   @doc("Get a BusinessProcessVersion")
   get is ArmResourceRead<BusinessProcessVersion>;
+
   @doc("List BusinessProcessVersion resources by BusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,

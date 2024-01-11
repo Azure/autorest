@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "echoapiv3",
+    "parameters": {
+      "properties": {
+        "path": "echo2",
+        "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+        "apiVersion": "v4",
+        "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+        "displayName": "Echo API2",
+        "isCurrent": true,
+        "protocols": [
+          "http",
+          "https"
+        ],
+        "serviceUrl": "http://echoapi.cloudapp.net/api",
+        "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoPath",
+        "subscriptionRequired": true
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "echoapiv3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapiv3",
+        "properties": {
+          "path": "echo2",
+          "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+          "apiRevision": "1",
+          "apiVersion": "v4",
+          "apiVersionSet": {
+            "name": "Echo API2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+            "versioningScheme": "Segment"
+          },
+          "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+          "displayName": "Echo API2",
+          "isCurrent": true,
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "echoapiv3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapiv3",
+        "properties": {
+          "path": "echo2",
+          "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+          "apiRevision": "1",
+          "apiVersion": "v4",
+          "apiVersionSet": {
+            "name": "Echo API2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+            "versioningScheme": "Segment"
+          },
+          "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+          "displayName": "Echo API2",
+          "isCurrent": true,
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiNewVersionUsingExistingApi"
+}

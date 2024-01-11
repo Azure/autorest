@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "versionSetId": "vs1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vs1",
+        "type": "Microsoft.ApiManagement/service/api-version-sets",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/vs1",
+        "properties": {
+          "description": "Version configuration",
+          "displayName": "Version Set 1",
+          "versioningScheme": "Segment"
+        }
+      }
+    }
+  },
+  "operationId": "ApiVersionSet_Get",
+  "title": "ApiManagementGetApiVersionSet"
+}

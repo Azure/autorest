@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "sshPublicKeyName": "aaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus"
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_Update",
+  "title": "SshPublicKey_Update_MinimumSet_Gen"
+}

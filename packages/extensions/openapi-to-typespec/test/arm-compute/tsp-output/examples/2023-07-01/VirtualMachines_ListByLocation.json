@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "eastus",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{virtualMachineName}",
+            "type": "Microsoft.Compute/virtualMachines",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus",
+            "properties": {
+              "availabilitySet": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "hardwareProfile": {
+                "vmSize": "Standard_A0"
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+                  }
+                ]
+              },
+              "osProfile": {
+                "adminUsername": "Foo12",
+                "allowExtensionOperations": true,
+                "computerName": "Test",
+                "secrets": [],
+                "windowsConfiguration": {
+                  "enableAutomaticUpdates": true,
+                  "provisionVMAgent": true
+                }
+              },
+              "provisioningState": "Succeeded",
+              "storageProfile": {
+                "dataDisks": [],
+                "imageReference": {
+                  "offer": "WindowsServer",
+                  "publisher": "MicrosoftWindowsServer",
+                  "sku": "2012-R2-Datacenter",
+                  "version": "4.127.20170406"
+                },
+                "osDisk": {
+                  "name": "test",
+                  "caching": "None",
+                  "createOption": "FromImage",
+                  "diskSizeGB": 127,
+                  "osType": "Windows",
+                  "vhd": {
+                    "uri": "https://{storageAccountName}.blob.core.windows.net/{containerName}/{vhdName}.vhd"
+                  }
+                }
+              },
+              "vmId": "{vmId}"
+            },
+            "tags": {
+              "RG": "rg",
+              "testTag": "1"
+            }
+          },
+          {
+            "name": "{virtualMachineName}",
+            "type": "Microsoft.Compute/virtualMachines",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus",
+            "properties": {
+              "availabilitySet": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "hardwareProfile": {
+                "vmSize": "Standard_A0"
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+                  }
+                ]
+              },
+              "osProfile": {
+                "adminUsername": "Foo12",
+                "allowExtensionOperations": true,
+                "computerName": "Test",
+                "secrets": [],
+                "windowsConfiguration": {
+                  "enableAutomaticUpdates": true,
+                  "provisionVMAgent": true
+                }
+              },
+              "provisioningState": "Succeeded",
+              "storageProfile": {
+                "dataDisks": [],
+                "imageReference": {
+                  "offer": "WindowsServer",
+                  "publisher": "MicrosoftWindowsServer",
+                  "sku": "2012-R2-Datacenter",
+                  "version": "4.127.20170406"
+                },
+                "osDisk": {
+                  "name": "test",
+                  "caching": "None",
+                  "createOption": "FromImage",
+                  "diskSizeGB": 127,
+                  "osType": "Windows",
+                  "vhd": {
+                    "uri": "https://{storageAccountName}.blob.core.windows.net/{containerName}/{vhdName}.vhd"
+                  }
+                }
+              },
+              "vmId": "{vmId}"
+            },
+            "tags": {
+              "RG": "rg",
+              "testTag": "1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachines_ListByLocation",
+  "title": "Lists all the virtual machines under the specified subscription for the specified location."
+}

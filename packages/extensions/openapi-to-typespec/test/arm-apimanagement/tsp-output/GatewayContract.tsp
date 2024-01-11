@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Gateway details.")
@@ -23,18 +25,26 @@ model GatewayContract is ProxyResource<GatewayContractProperties> {
 }
 
 @armResourceOperations
-interface Gateway {
+interface GatewayContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Gateway specified by its identifier.")
+  @operationId("Gateway_Get")
   get is ArmResourceRead<GatewayContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Gateway specified by its identifier.")
   @head
+  @operationId("Gateway_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GatewayContract,
       BaseParameters<GatewayContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates a Gateway to be used in Api Management instance.")
+  @operationId("Gateway_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
     {
@@ -45,10 +55,13 @@ interface Gateway {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the gateway specified by its identifier.")
-  update is ArmResourcePatchSync<
+  @operationId("Gateway_Update")
+  update is ArmCustomPatchSync<
     GatewayContract,
-    GatewayContractProperties,
+    GatewayContract,
     {
       ...BaseParameters<GatewayContract>;
 
@@ -57,7 +70,10 @@ interface Gateway {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific Gateway.")
+  @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
     {
@@ -68,7 +84,10 @@ interface Gateway {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of gateways registered with service instance.")
+  @operationId("Gateway_ListByService")
   listByService is ArmResourceListByParent<
     GatewayContract,
     {
@@ -88,24 +107,33 @@ interface Gateway {
       $skip?: int32;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Retrieves gateway keys.")
+  @operationId("Gateway_ListKeys")
   listKeys is ArmResourceActionSync<GatewayContract, void, GatewayKeysContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerates specified gateway key invalidating any tokens created with it.")
+  @operationId("Gateway_RegenerateKey")
   regenerateKey is ArmResourceActionNoContentSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the Shared Access Authorization Token for the gateway.")
+  @operationId("Gateway_GenerateToken")
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
     GatewayTokenContract
   >;
-}
 
-@armResourceOperations
-interface GatewayApi {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayApi_ListByService")
   @doc("Lists a collection of the APIs associated with a gateway.")
+  // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
   ListByService is Azure.Core.Foundations.Operation<

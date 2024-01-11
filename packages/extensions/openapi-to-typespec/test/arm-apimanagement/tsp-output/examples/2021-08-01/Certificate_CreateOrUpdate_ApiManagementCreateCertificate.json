@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "certificateId": "tempcert",
+    "parameters": {
+      "properties": {
+        "data": "****************Base 64 Encoded Certificate *******************************",
+        "password": "****Certificate Password******"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "tempcert",
+        "type": "Microsoft.ApiManagement/service/certificates",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/tempcert",
+        "properties": {
+          "expirationDate": "2018-03-17T21:55:07+00:00",
+          "subject": "CN=contoso.com",
+          "thumbprint": "*******************3"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "tempcert",
+        "type": "Microsoft.ApiManagement/service/certificates",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/tempcert",
+        "properties": {
+          "expirationDate": "2018-03-17T21:55:07+00:00",
+          "subject": "CN=contoso.com",
+          "thumbprint": "*******************3"
+        }
+      }
+    }
+  },
+  "operationId": "Certificate_CreateOrUpdate",
+  "title": "ApiManagementCreateCertificate"
+}

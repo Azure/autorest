@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "$expand": "virtualMachines\\$ref",
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "australiasoutheast",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Classic"
+            }
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "australiasoutheast",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Classic"
+            }
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "westcentralus",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "virtualMachines": []
+            },
+            "sku": {
+              "name": "Classic"
+            },
+            "tags": {
+              "{tagName}": "{tagValue}"
+            }
+          },
+          {
+            "name": "{availabilitySetName}",
+            "type": "Microsoft.Compute/availabilitySets",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "location": "westcentralus",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "platformUpdateDomainCount": 5,
+              "virtualMachines": []
+            },
+            "sku": {
+              "name": "Classic"
+            },
+            "tags": {
+              "{tagName}": "{tagValue}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AvailabilitySets_ListBySubscription",
+  "title": "List availability sets in a subscription."
+}

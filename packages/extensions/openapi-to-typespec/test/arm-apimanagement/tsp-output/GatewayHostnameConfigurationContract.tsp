@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./GatewayContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Gateway hostname configuration details.")
@@ -24,18 +26,26 @@ model GatewayHostnameConfigurationContract
 }
 
 @armResourceOperations
-interface GatewayHostnameConfiguration {
+interface GatewayHostnameConfigurationContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get details of a hostname configuration")
+  @operationId("GatewayHostnameConfiguration_Get")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.")
   @head
+  @operationId("GatewayHostnameConfiguration_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GatewayHostnameConfigurationContract,
       BaseParameters<GatewayHostnameConfigurationContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates of updates hostname configuration for a Gateway.")
+  @operationId("GatewayHostnameConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     {
@@ -46,7 +56,10 @@ interface GatewayHostnameConfiguration {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified hostname configuration from the specified Gateway.")
+  @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     {
@@ -57,7 +70,10 @@ interface GatewayHostnameConfiguration {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the collection of hostname configurations for the specified gateway.")
+  @operationId("GatewayHostnameConfiguration_ListByService")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     {

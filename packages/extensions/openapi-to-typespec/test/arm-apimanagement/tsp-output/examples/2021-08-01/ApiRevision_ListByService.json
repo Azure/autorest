@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d2ef278aa04f0888cba3f3",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "apiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1;rev=1",
+            "apiRevision": "1",
+            "createdDateTime": "2018-02-01T22:21:20.467Z",
+            "isCurrent": true,
+            "isOnline": true,
+            "updatedDateTime": "2018-02-01T22:21:20.467Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiRevision_ListByService",
+  "title": "ApiManagementListApiRevisions"
+}

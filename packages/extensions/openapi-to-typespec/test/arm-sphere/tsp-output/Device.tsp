@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DeviceGroup.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 @doc("An device resource belonging to a device group resource.")
@@ -25,18 +27,38 @@ model Device is ProxyResource<DeviceProperties> {
 interface Devices {
   @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
   get is ArmResourceRead<Device>;
+
   @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Device,
+    BaseParameters<Device>,
+    ArmAsyncOperationHeader
+  >;
+
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
-  update is ArmResourcePatchAsync<Device, DeviceProperties>;
+  update is ArmCustomPatchAsync<
+    Device,
+    DeviceUpdate,
+    BaseParameters<Device>,
+    ArmLroLocationHeader
+  >;
+
   @doc("Delete a Device")
-  delete is ArmResourceDeleteAsync<Device>;
+  delete is ArmResourceDeleteAsync<
+    Device,
+    BaseParameters<Device>,
+    ArmLroLocationHeader
+  >;
+
   @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   listByDeviceGroup is ArmResourceListByParent<Device>;
+
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
     GenerateCapabilityImageRequest,
-    SignedCapabilityImageResponse
+    SignedCapabilityImageResponse,
+    BaseParameters<Device>,
+    ArmLroLocationHeader
   >;
 }

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Diagnostic details.")
@@ -24,18 +26,26 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
 }
 
 @armResourceOperations
-interface ApiDiagnostic {
+interface DiagnosticContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Diagnostic for an API specified by its identifier.")
+  @operationId("ApiDiagnostic_Get")
   get is ArmResourceRead<DiagnosticContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.")
   @head
+  @operationId("ApiDiagnostic_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       DiagnosticContract,
       BaseParameters<DiagnosticContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Diagnostic for an API or updates an existing one.")
+  @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
     {
@@ -46,10 +56,13 @@ interface ApiDiagnostic {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the Diagnostic for an API specified by its identifier.")
-  update is ArmResourcePatchSync<
+  @operationId("ApiDiagnostic_Update")
+  update is ArmCustomPatchSync<
     DiagnosticContract,
-    DiagnosticContractProperties,
+    DiagnosticContract,
     {
       ...BaseParameters<DiagnosticContract>;
 
@@ -58,7 +71,10 @@ interface ApiDiagnostic {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified Diagnostic from an API.")
+  @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
     {
@@ -69,7 +85,10 @@ interface ApiDiagnostic {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all diagnostics of an API.")
+  @operationId("ApiDiagnostic_ListByService")
   listByService is ArmResourceListByParent<
     DiagnosticContract,
     {

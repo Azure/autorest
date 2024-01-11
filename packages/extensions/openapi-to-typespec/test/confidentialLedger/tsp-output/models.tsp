@@ -8,16 +8,19 @@ using Azure.Core;
 
 namespace Azure.Language.Authoring;
 
+@doc("State of a ledger query.")
 enum ConfidentialLedgerQueryState {
   Loading,
   Ready,
 }
 
+@doc("Represents the state of the transaction.")
 enum TransactionState {
   Committed,
   Pending,
 }
 
+@doc("Represents an assignable role.")
 enum ConfidentialLedgerUserRoleName {
   Administrator,
   Contributor,

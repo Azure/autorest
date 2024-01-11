@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Email Template details.")
@@ -21,18 +23,26 @@ model EmailTemplateContract is ProxyResource<EmailTemplateContractProperties> {
 }
 
 @armResourceOperations
-interface EmailTemplate {
+interface EmailTemplateContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the email template specified by its identifier.")
+  @operationId("EmailTemplate_Get")
   get is ArmResourceRead<EmailTemplateContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the email template specified by its identifier.")
   @head
+  @operationId("EmailTemplate_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       EmailTemplateContract,
       BaseParameters<EmailTemplateContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an Email Template.")
+  @operationId("EmailTemplate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
     {
@@ -43,10 +53,13 @@ interface EmailTemplate {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates API Management email template")
-  update is ArmResourcePatchSync<
+  @operationId("EmailTemplate_Update")
+  update is ArmCustomPatchSync<
     EmailTemplateContract,
-    EmailTemplateContractProperties,
+    EmailTemplateUpdateParameters,
     {
       ...BaseParameters<EmailTemplateContract>;
 
@@ -55,7 +68,10 @@ interface EmailTemplate {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Reset the Email Template to default template provided by the API Management service instance.")
+  @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     {
@@ -66,7 +82,10 @@ interface EmailTemplate {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets all email templates")
+  @operationId("EmailTemplate_ListByService")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     {

@@ -23,5 +23,6 @@ namespace NotificationHubsClient;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2020-06-01 API version.")
   v2020_06_01: "2020-06-01",
 }

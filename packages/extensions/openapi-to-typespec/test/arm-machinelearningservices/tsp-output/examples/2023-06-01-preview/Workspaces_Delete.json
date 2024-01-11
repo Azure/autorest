@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Workspaces_Delete",
+  "title": "Delete Workspace"
+}

@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "connectivityCheckRequestParams": {
+      "destination": {
+        "address": "https://microsoft.com",
+        "port": 3306
+      },
+      "protocolConfiguration": {
+        "HTTPConfiguration": {
+          "method": "GET",
+          "headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer myPreciousToken"
+            }
+          ],
+          "validStatusCodes": [
+            200,
+            204
+          ]
+        }
+      },
+      "source": {
+        "region": "northeurope"
+      },
+      "protocol": "HTTPS"
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "avgLatencyInMs": 260,
+        "connectionStatus": "Reachable",
+        "hops": [
+          {
+            "type": "Source",
+            "address": "20.82.216.48",
+            "id": "c60e2296-5ebc-48cc-80e8-7e6d2981e7b2",
+            "issues": [],
+            "nextHopIds": [
+              "26aa44e7-04f1-462f-aa5d-5951957b5650"
+            ],
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1"
+          },
+          {
+            "type": "Internet",
+            "address": "40.113.200.201",
+            "id": "26aa44e7-04f1-462f-aa5d-5951957b5650",
+            "issues": [],
+            "nextHopIds": []
+          }
+        ],
+        "maxLatencyInMs": 281,
+        "minLatencyInMs": 250,
+        "probesFailed": 0,
+        "probesSent": 3
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/connectivityCheck/operationresults/bmljb2xhLW5ldHdvcmt3YXRjaGVyNF9Db25uZWN0aXRpdml0eUNoZWNrXzE2MmExNmZl?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "PerformConnectivityCheckAsync",
+  "title": "HTTP Connectivity Check"
+}

@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "templateName": "newIssueNotificationMessage"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "EmailTemplate_Delete",
+  "title": "ApiManagementDeleteTemplate"
+}

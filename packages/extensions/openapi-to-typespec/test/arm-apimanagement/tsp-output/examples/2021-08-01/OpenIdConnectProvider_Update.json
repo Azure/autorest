@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "opid": "templateOpenIdConnect2",
+    "parameters": {
+      "properties": {
+        "clientSecret": "updatedsecret"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "templateOpenIdConnect2",
+        "type": "Microsoft.ApiManagement/service/openidconnectproviders",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect2",
+        "properties": {
+          "description": "open id provider template2",
+          "clientId": "oidprovidertemplate2",
+          "displayName": "templateoidprovider2",
+          "metadataEndpoint": "https://oidprovider-template2.net"
+        }
+      }
+    }
+  },
+  "operationId": "OpenIdConnectProvider_Update",
+  "title": "ApiManagementUpdateOpenIdConnectProvider"
+}

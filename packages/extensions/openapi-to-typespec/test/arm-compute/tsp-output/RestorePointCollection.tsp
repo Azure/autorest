@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Create or update Restore Point collection parameters.")
@@ -36,6 +38,7 @@ interface RestorePointCollections {
       $expand?: RestorePointCollectionExpandOptions;
     }
   >;
+
   @doc("The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RestorePointCollection,
@@ -47,10 +50,11 @@ interface RestorePointCollections {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("The operation to update the restore point collection.")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     RestorePointCollection,
-    RestorePointCollectionProperties,
+    RestorePointCollectionUpdate,
     {
       ...BaseParameters<RestorePointCollection>;
 
@@ -59,6 +63,7 @@ interface RestorePointCollections {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("The operation to delete the restore point collection. This operation will also delete all the contained restore points.")
   delete is ArmResourceDeleteAsync<
     RestorePointCollection,
@@ -70,8 +75,10 @@ interface RestorePointCollections {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("Gets the list of restore point collections in a resource group.")
   list is ArmResourceListByParent<RestorePointCollection>;
+
   @doc("Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.")
   listAll is ArmListBySubscription<RestorePointCollection>;
 }

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./IssueContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Issue Attachment Contract details.")
@@ -25,18 +27,26 @@ model IssueAttachmentContract
 }
 
 @armResourceOperations
-interface ApiIssueAttachment {
+interface IssueAttachmentContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the issue Attachment for an API specified by its identifier.")
+  @operationId("ApiIssueAttachment_Get")
   get is ArmResourceRead<IssueAttachmentContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.")
   @head
+  @operationId("ApiIssueAttachment_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IssueAttachmentContract,
       BaseParameters<IssueAttachmentContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Attachment for the Issue in an API or updates an existing one.")
+  @operationId("ApiIssueAttachment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
     {
@@ -47,7 +57,10 @@ interface ApiIssueAttachment {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified comment from an Issue.")
+  @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
     {
@@ -58,7 +71,10 @@ interface ApiIssueAttachment {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all attachments for the Issue associated with the specified API.")
+  @operationId("ApiIssueAttachment_ListByService")
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,
     {

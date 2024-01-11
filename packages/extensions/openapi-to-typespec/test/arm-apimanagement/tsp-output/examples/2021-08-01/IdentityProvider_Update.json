@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "identityProviderName": "facebook",
+    "parameters": {
+      "properties": {
+        "clientId": "updatedfacebookid",
+        "clientSecret": "updatedfacebooksecret"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AadB2C",
+        "type": "Microsoft.ApiManagement/service/identityProviders",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
+        "properties": {
+          "type": "aadB2C",
+          "allowedTenants": [
+            "contosoaadb2c.onmicrosoft.com",
+            "contoso2aadb2c.onmicrosoft.com"
+          ],
+          "authority": "login.microsoftonline.com",
+          "clientId": "f02dafe2-b8b8-48ec-a38e-27e5c16c51e5",
+          "signinPolicyName": "B2C_1_policy-signin",
+          "signinTenant": "contosoaadb2c.onmicrosoft.com",
+          "signupPolicyName": "B2C_1_policy-signup"
+        }
+      }
+    }
+  },
+  "operationId": "IdentityProvider_Update",
+  "title": "ApiManagementUpdateIdentityProvider"
+}

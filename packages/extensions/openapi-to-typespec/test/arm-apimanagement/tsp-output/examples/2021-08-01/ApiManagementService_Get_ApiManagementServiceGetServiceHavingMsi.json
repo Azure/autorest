@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAENfI=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "ca1d33f7-xxxx-42ec-xxxx-d526a1ee953a",
+          "tenantId": "72f988bf-xxxx-41af-xxxx-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {
+              "clientId": "aaff9c7d-xxxx-4db2-xxxx-ab0e3e7806cf",
+              "principalId": "95194df2-9208-xxxx-xxxx-a10d2af9b5a3"
+            }
+          }
+        },
+        "location": "West Europe",
+        "properties": {
+          "createdAtUtc": "2016-04-12T00:20:15.6018952Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-westeurope-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2020-12-18T11:11:47+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "9833D531D7A45XXXXXA85908BD3692E0BD3F"
+              },
+              "certificateSource": "KeyVault",
+              "defaultSslBinding": true,
+              "hostName": "proxy.msitesting.net",
+              "keyVaultId": "https://samir-msi-keyvault.vault.azure.net/secrets/msicertificate",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "13.94.xxx.188"
+          ],
+          "publisherEmail": "foo@contoso.com",
+          "publisherName": "Contoso",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/dfVirtualNetwork/subnets/backendSubnet"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Get",
+  "title": "ApiManagementServiceGetServiceHavingMsi"
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImage": {
+      "properties": {
+        "hyperVGeneration": "V1",
+        "identifier": {
+          "offer": "myOfferName",
+          "publisher": "myPublisherName",
+          "sku": "mySkuName"
+        },
+        "osState": "Generalized",
+        "osType": "Windows"
+      }
+    },
+    "galleryImageName": "myGalleryImageName",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageName",
+        "location": "West US",
+        "properties": {
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "GalleryImages_Update",
+  "title": "Update a simple gallery image."
+}

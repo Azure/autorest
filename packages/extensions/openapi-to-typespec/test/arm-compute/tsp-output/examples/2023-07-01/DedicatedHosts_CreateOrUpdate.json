@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myDedicatedHost",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "platformFaultDomain": 1
+      },
+      "sku": {
+        "name": "DSv3-Type1"
+      },
+      "tags": {
+        "department": "HR"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDedicatedHost",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "location": "westus",
+        "properties": {
+          "autoReplaceOnFailure": false,
+          "hostId": "{GUID}",
+          "licenseType": "Windows_Server_Hybrid",
+          "platformFaultDomain": 1
+        },
+        "sku": {
+          "name": "DSv3-Type1"
+        },
+        "tags": {
+          "department": "HR"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myDedicatedHost",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "location": "westus",
+        "properties": {
+          "autoReplaceOnFailure": true,
+          "hostId": "{GUID}",
+          "platformFaultDomain": 1
+        },
+        "sku": {
+          "name": "DSv3-Type1"
+        },
+        "tags": {
+          "department": "HR"
+        }
+      }
+    }
+  },
+  "operationId": "DedicatedHosts_CreateOrUpdate",
+  "title": "Create or update a dedicated host ."
+}

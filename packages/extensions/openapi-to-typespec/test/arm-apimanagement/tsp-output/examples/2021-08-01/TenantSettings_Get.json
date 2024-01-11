@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "settingsType": "public",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "public",
+        "type": "Microsoft.ApiManagement/service/settings",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/settings/public",
+        "properties": {
+          "settings": {
+            "CustomPortalSettings.DelegatedSubscriptionEnabled": "False",
+            "CustomPortalSettings.DelegationEnabled": "False",
+            "CustomPortalSettings.DelegationUrl": "",
+            "CustomPortalSettings.UserRegistrationTerms": null,
+            "CustomPortalSettings.UserRegistrationTermsConsentRequired": "False",
+            "CustomPortalSettings.UserRegistrationTermsEnabled": "False"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "TenantSettings_Get",
+  "title": "ApiManagementGetTenantSettings"
+}

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "capacityReservationGroupName": "aaaaaaaaaa",
+    "capacityReservationName": "aaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "properties": {
+        "instanceView": {
+          "statuses": [
+            {
+              "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+              "displayStatus": "aaaaaa",
+              "level": "Info",
+              "message": "a",
+              "time": "2021-11-30T12:58:26.522Z"
+            }
+          ],
+          "utilizationInfo": {}
+        }
+      },
+      "sku": {
+        "name": "Standard_DS1_v2",
+        "capacity": 7,
+        "tier": "aaa"
+      },
+      "tags": {
+        "key4974": "aaaaaaaaaaaaaaaa"
+      }
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCapacityReservation",
+        "type": "aaaaaaaaaaaaaaa",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation",
+        "location": "westus",
+        "properties": {
+          "instanceView": {
+            "statuses": [
+              {
+                "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                "displayStatus": "aaaaaa",
+                "level": "Info",
+                "message": "a",
+                "time": "2021-11-30T12:58:26.522Z"
+              }
+            ],
+            "utilizationInfo": {
+              "virtualMachinesAllocated": [
+                {
+                  "id": "aaaa"
+                }
+              ]
+            }
+          },
+          "platformFaultDomainCount": 3,
+          "provisioningState": "Creating",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+          "reservationId": "{GUID}",
+          "virtualMachinesAssociated": [
+            {
+              "id": "aaaa"
+            }
+          ]
+        },
+        "sku": {
+          "name": "Standard_DS1_v2",
+          "capacity": 4,
+          "tier": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "tags": {},
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CapacityReservations_Update",
+  "title": "CapacityReservation_Update_MaximumSet_Gen"
+}

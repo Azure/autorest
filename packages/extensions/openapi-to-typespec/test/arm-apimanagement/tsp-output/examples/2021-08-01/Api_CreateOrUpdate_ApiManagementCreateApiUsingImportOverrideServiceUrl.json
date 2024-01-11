@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "apidocs",
+    "parameters": {
+      "properties": {
+        "format": "swagger-link",
+        "path": "petstoreapi123",
+        "serviceUrl": "http://petstore.swagger.wordnik.com/api",
+        "value": "http://apimpimportviaurl.azurewebsites.net/api/apidocs/"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apidocs",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs",
+        "properties": {
+          "path": "petstoreapi123",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.wordnik.com\">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters",
+          "apiRevision": "1",
+          "displayName": "Swagger Sample App",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://petstore.swagger.wordnik.com/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "apidocs",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs",
+        "properties": {
+          "path": "petstoreapi123",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger \n    at <a href=\"http://swagger.wordnik.com\">http://swagger.wordnik.com</a> or on irc.freenode.net, #swagger.  For this sample,\n    you can use the api key \"special-key\" to test the authorization filters",
+          "apiRevision": "1",
+          "displayName": "Swagger Sample App",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://petstore.swagger.wordnik.com/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apidocs?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiUsingImportOverrideServiceUrl"
+}

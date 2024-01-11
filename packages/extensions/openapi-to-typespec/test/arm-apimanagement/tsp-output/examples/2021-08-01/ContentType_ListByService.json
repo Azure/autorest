@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "page",
+            "type": "Microsoft.ApiManagement/service/contentTypes",
+            "id": "/contentTypes/page",
+            "properties": {
+              "name": "Page",
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "en_us": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "description": "Page description. This property gets included in SEO attributes.",
+                        "indexed": true,
+                        "title": "Description"
+                      },
+                      "documentId": {
+                        "type": "string",
+                        "description": "Reference to page content document.",
+                        "title": "Document ID"
+                      },
+                      "keywords": {
+                        "type": "string",
+                        "description": "Page keywords. This property gets included in SEO attributes.",
+                        "indexed": true,
+                        "title": "Keywords"
+                      },
+                      "permalink": {
+                        "type": "string",
+                        "description": "Page permalink, e.g. '/about'.",
+                        "indexed": true,
+                        "title": "Permalink"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Page title. This property gets included in SEO attributes.",
+                        "indexed": true,
+                        "title": "Title"
+                      }
+                    },
+                    "required": [
+                      "title",
+                      "permalink",
+                      "documentId"
+                    ]
+                  }
+                }
+              },
+              "description": "A regular page",
+              "version": "1.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContentType_ListByService",
+  "title": "ApiManagementListContentTypes"
+}

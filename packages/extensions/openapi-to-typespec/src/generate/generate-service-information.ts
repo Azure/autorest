@@ -3,6 +3,8 @@ import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespace } from "../utils/namespace";
 
+const VALID_VERSIONS = ["v3", "v4", "v5"];
+
 export function generateServiceInformation(program: TypespecProgram) {
   const { serviceInformation } = program;
   const definitions: string[] = [];
@@ -15,14 +17,23 @@ export function generateServiceInformation(program: TypespecProgram) {
     title: "${serviceInformation.name}"
   })`);
 
-  if (serviceInformation.version) {
+  if (serviceInformation.versions) {
     definitions.push(`@versioned(Versions)`);
   }
 
   if (isArm && serviceInformation.armCommonTypeVersion) {
-    definitions.push(
-      `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
-    );
+    if (VALID_VERSIONS.includes(serviceInformation.armCommonTypeVersion)) {
+      definitions.push(
+        `@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
+      );
+    } else {
+      definitions.push(
+        `// FIXME: Common type version ${serviceInformation.armCommonTypeVersion} is not supported for now.`,
+      );
+      definitions.push(
+        `// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.${serviceInformation.armCommonTypeVersion})`,
+      );
+    }
   }
 
   if (!isArm && serviceInformation.endpoint) {
@@ -52,15 +63,18 @@ export function generateServiceInformation(program: TypespecProgram) {
 
   definitions.push(getNamespace(program));
 
-  if (serviceInformation.version) {
+  if (serviceInformation.versions) {
     definitions.push("");
     definitions.push(`@doc("The available API versions.")`);
     definitions.push(`enum Versions {`);
-    if (isArm) {
-      definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
-      definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
+    for (const version of serviceInformation.versions) {
+      if (isArm) {
+        definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
+        definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
+      }
+      definitions.push(`@doc("The ${version} API version.")`);
+      definitions.push(`v${version.replaceAll("-", "_")}: "${version}",`);
     }
-    definitions.push(`v${serviceInformation.version.replaceAll("-", "_")}: "${serviceInformation.version}",`);
     definitions.push("}");
   }
 

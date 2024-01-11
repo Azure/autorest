@@ -5,21 +5,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The status of the current operation.")
 enum ProvisioningState {
   @doc("Represents a succeeded operation.") Succeeded,
   @doc("Represents a failed operation.") Failed,
@@ -30,16 +34,19 @@ enum ProvisioningState {
   @doc("Represents an accepted operation.") Accepted,
 }
 
+@doc("The data type state")
 enum ControlState {
   @doc("Field to enable a setting.") Enabled,
   @doc("Field to disable a setting.") Disabled,
 }
 
+@doc("Specifies the default action of allow or deny when no other rules match.")
 enum DefaultAction {
   @doc("Represents allow action.") Allow,
   @doc("Represents deny action.") Deny,
 }
 
+@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
 enum ManagedServiceIdentityType {
   None,
   SystemAssigned,
@@ -47,6 +54,7 @@ enum ManagedServiceIdentityType {
   `SystemAssigned, UserAssigned`,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -54,6 +62,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("The data type state")
 enum DataProductUserRole {
   @doc("Field to specify user of type Reader.") Reader,
   @doc("""
@@ -63,11 +72,13 @@ This user has privileged access to read sensitive data of a data product.
   SensitiveReader,
 }
 
+@doc("The data type state")
 enum DataTypeState {
   @doc("Field to specify stopped state.") Stopped,
   @doc("Field to specify running state.") Running,
 }
 
+@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
 enum Bypass {
   @doc("Represents no bypassing of traffic.") None,
   @doc("Represents bypassing logging traffic.") Logging,
@@ -254,15 +265,23 @@ model ConsumptionEndpointsProperties {
   ]>;
 }
 
-@doc("User assigned identity properties")
-model UserAssignedIdentity {
-  @doc("The principal ID of the assigned identity.")
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility("read")
-  principalId?: string;
+  id?: string;
 
-  @doc("The client ID of the assigned identity.")
+  @doc("The name of the resource")
   @visibility("read")
-  clientId?: string;
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Details for data catalog properties.")
@@ -300,6 +319,41 @@ model DataProductInformation {
 model DataProductVersion {
   @doc("Version of data product")
   version: string;
+}
+
+@doc("The type used for update operations of the DataProduct.")
+model DataProductUpdate {
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentity;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the DataProduct.")
+  properties?: DataProductUpdateProperties;
+}
+
+@doc("The updatable properties of the DataProduct.")
+model DataProductUpdateProperties {
+  @doc("List of name or email associated with data product resource deployment.")
+  @visibility("read", "create", "update")
+  owners?: string[];
+
+  @doc("Purview account url for data product to connect to.")
+  @visibility("read", "create", "update")
+  purviewAccount?: string;
+
+  @doc("Purview collection url for data product to connect to.")
+  @visibility("read", "create", "update")
+  purviewCollection?: string;
+
+  @doc("Flag to enable or disable private link for data product resource.")
+  @visibility("read", "create", "update")
+  privateLinksEnabled?: ControlState;
+
+  @doc("Current configured minor version of the data product resource.")
+  @visibility("read", "update")
+  currentMinorVersion?: string;
 }
 
 @doc("The details for role assignment common properties.")
@@ -376,6 +430,31 @@ model DataTypeProperties {
   @doc("Url for data visualization.")
   @visibility("read")
   visualizationUrl?: string;
+}
+
+@doc("The type used for update operations of the DataType.")
+model DataTypeUpdate {
+  @doc("The updatable properties of the DataType.")
+  properties?: DataTypeUpdateProperties;
+}
+
+@doc("The updatable properties of the DataType.")
+model DataTypeUpdateProperties {
+  @doc("State of data type.")
+  @visibility("read", "create", "update")
+  state?: DataTypeState;
+
+  @doc("Field for storage output retention in days.")
+  @visibility("read", "create", "update")
+  storageOutputRetention?: int32;
+
+  @doc("Field for database cache retention in days.")
+  @visibility("read", "create", "update")
+  databaseCacheRetention?: int32;
+
+  @doc("Field for database data retention in days.")
+  @visibility("read", "create", "update")
+  databaseRetention?: int32;
 }
 
 @doc("The details for container sas creation.")

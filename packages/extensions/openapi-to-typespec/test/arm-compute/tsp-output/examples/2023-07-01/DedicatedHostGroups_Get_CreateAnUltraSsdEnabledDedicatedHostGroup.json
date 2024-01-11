@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "expand": "instanceView",
+    "hostGroupName": "myDedicatedHostGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "location": "westus",
+        "properties": {
+          "additionalCapabilities": {
+            "ultraSSDEnabled": true
+          },
+          "hosts": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost"
+            }
+          ],
+          "instanceView": {
+            "hosts": [
+              {
+                "name": "myHost",
+                "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
+                "availableCapacity": {
+                  "allocatableVMs": [
+                    {
+                      "count": 10,
+                      "vmSize": "Standard_A1"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "displayStatus": "Provisioning succeeded",
+                    "level": "Info"
+                  },
+                  {
+                    "code": "HealthState/available",
+                    "displayStatus": "Host available",
+                    "level": "Info"
+                  }
+                ]
+              }
+            ]
+          },
+          "platformFaultDomainCount": 3,
+          "supportAutomaticPlacement": true
+        },
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "zones": [
+          "3"
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHostGroups_Get",
+  "title": "Create an ultraSSDEnabled dedicated host group."
+}

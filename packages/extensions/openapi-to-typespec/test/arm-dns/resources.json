@@ -1,0 +1,903 @@
+{
+  "Resources": {
+    "DnsARecord": {
+      "Name": "DnsARecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/A",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "A",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsAaaaRecord": {
+      "Name": "DnsAaaaRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/AAAA",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "AAAA",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsCaaRecord": {
+      "Name": "DnsCaaRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/CAA",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "CAA",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsCnameRecord": {
+      "Name": "DnsCnameRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/CNAME",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "CNAME",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsMXRecord": {
+      "Name": "DnsMXRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/MX",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "MX",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsNSRecord": {
+      "Name": "DnsNSRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/NS",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "NS",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsPtrRecord": {
+      "Name": "DnsPtrRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/PTR",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "PTR",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsSoaRecord": {
+      "Name": "DnsSoaRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/SOA",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "SOA",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsSrvRecord": {
+      "Name": "DnsSrvRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/SRV",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "SRV",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsTxtRecord": {
+      "Name": "DnsTxtRecord",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}",
+          "Method": "GET",
+          "OperationID": "RecordSets_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a record set."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}",
+          "Method": "PUT",
+          "OperationID": "RecordSets_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a record set within a DNS zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}",
+          "Method": "PATCH",
+          "OperationID": "RecordSets_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a record set within a DNS zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}",
+          "Method": "DELETE",
+          "OperationID": "RecordSets_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a record set from a DNS zone. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByType",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByType",
+            "NextPageMethod": "ListByTypeNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the record sets of a specified type in a DNS zone."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["DnsZone"],
+      "SwaggerModelName": "DnsRecord",
+      "ResourceType": "Microsoft.Network/dnsZones/TXT",
+      "ResourceKey": "relativeRecordSetName",
+      "ResourceKeySegment": "TXT",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DnsZone": {
+      "Name": "DnsZone",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}",
+          "Method": "GET",
+          "OperationID": "Zones_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}",
+          "Method": "PUT",
+          "OperationID": "Zones_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a DNS zone. Does not modify DNS records within the zone."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}",
+          "Method": "PATCH",
+          "OperationID": "Zones_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a DNS zone. Does not modify DNS records within the zone."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}",
+          "Method": "DELETE",
+          "OperationID": "Zones_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones",
+          "Method": "GET",
+          "OperationID": "Zones_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the DNS zones within a resource group."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetDnsZones",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones",
+          "Method": "GET",
+          "OperationID": "Zones_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the DNS zones in all resource groups in a subscription."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "GetAllRecordData",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets",
+          "Method": "GET",
+          "OperationID": "RecordSets_ListByDnsZone",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByDnsZone",
+            "NextPageMethod": "ListByDnsZoneNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all record sets in a DNS zone."
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "DnsZone",
+      "ResourceType": "Microsoft.Network/dnsZones",
+      "ResourceKey": "zoneName",
+      "ResourceKeySegment": "dnsZones",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Employee.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
 @doc("A Test resource")
@@ -25,6 +27,7 @@ model DictProperty is TrackedResource<Record<unknown>> {
 interface DictProperties {
   @doc("Get a Resource.")
   get is ArmResourceRead<DictProperty>;
+
   @doc("List resources by resource group")
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }

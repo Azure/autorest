@@ -1,0 +1,20 @@
+{
+  "operationId": "TrafficControllerInterface_Delete",
+  "parameters": {
+    "api-version": "2023-11-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "trafficControllerName": "tc1"
+  },
+  "title": "Delete Traffic Controller",
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Retry-After": 3,
+        "location": "https://blobLocation.com"
+      }
+    },
+    "204": {}
+  }
+}

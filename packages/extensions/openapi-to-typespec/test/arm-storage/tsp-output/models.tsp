@@ -7,11 +7,13 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Storage;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.")
 enum SkuName {
   Standard_LRS,
   Standard_GRS,
@@ -23,6 +25,7 @@ enum SkuName {
   Standard_RAGZRS,
 }
 
+@doc("Indicates the type of storage account.")
 enum Kind {
   Storage,
   StorageV2,
@@ -31,15 +34,18 @@ enum Kind {
   BlockBlobStorage,
 }
 
+@doc("The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC.")
 enum ReasonCode {
   QuotaId,
   NotAvailableForSubscription,
 }
 
+@doc("The type of extendedLocation.")
 enum ExtendedLocationTypes {
   EdgeZone,
 }
 
+@doc("The identity type.")
 enum IdentityType {
   None,
   SystemAssigned,
@@ -47,30 +53,36 @@ enum IdentityType {
   `SystemAssigned,UserAssigned`,
 }
 
+@doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
 enum AllowedCopyScope {
   PrivateLink,
   AAD,
 }
 
+@doc("Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
 enum PublicNetworkAccess {
   Enabled,
   Disabled,
 }
 
+@doc("The SAS expiration action. Can only be Log.")
 enum ExpirationAction {
   Log,
 }
 
+@doc("Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.")
 enum KeyType {
   Service,
   Account,
 }
 
+@doc("The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault")
 enum KeySource {
   `Microsoft.Storage`,
   `Microsoft.Keyvault`,
 }
 
+@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
 enum Bypass {
   None,
   Logging,
@@ -78,6 +90,7 @@ enum Bypass {
   AzureServices,
 }
 
+@doc("Gets the state of virtual network rule.")
 enum State {
   Provisioning,
   Deprovisioning,
@@ -86,6 +99,7 @@ enum State {
   NetworkSourceDeleted,
 }
 
+@doc("Indicates the directory service used. Note that this enum may be extended in the future.")
 enum DirectoryServiceOptions {
   None,
   AADDS,
@@ -93,11 +107,13 @@ enum DirectoryServiceOptions {
   AADKERB,
 }
 
+@doc("Specifies the Active Directory account type for Azure Storage.")
 enum AccountType {
   User,
   Computer,
 }
 
+@doc("Default share permission for users using Kerberos authentication if RBAC role is not assigned.")
 enum DefaultSharePermission {
   None,
   StorageFileDataSmbShareReader,
@@ -105,45 +121,53 @@ enum DefaultSharePermission {
   StorageFileDataSmbShareElevatedContributor,
 }
 
+@doc("Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.")
 enum LargeFileSharesState {
   Disabled,
   Enabled,
 }
 
+@doc("Routing Choice defines the kind of network routing opted by the user.")
 enum RoutingChoice {
   MicrosoftRouting,
   InternetRouting,
 }
 
+@doc("Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.")
 enum MinimumTlsVersion {
   TLS1_0,
   TLS1_1,
   TLS1_2,
 }
 
+@doc("The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.")
 enum AccountImmutabilityPolicyState {
   Unlocked,
   Locked,
   Disabled,
 }
 
+@doc("Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.")
 enum DnsEndpointType {
   Standard,
   AzureDnsZone,
 }
 
+@doc("The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.")
 enum GeoReplicationStatus {
   Live,
   Bootstrap,
   Unavailable,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
   Rejected,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -151,18 +175,21 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.")
 enum BlobRestoreProgressStatus {
   InProgress,
   Complete,
   Failed,
 }
 
+@doc("This property indicates the current sku conversion status.")
 enum SkuConversionStatus {
   InProgress,
   Succeeded,
   Failed,
 }
 
+@doc("The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).")
 enum Services {
   b,
   q,
@@ -170,12 +197,14 @@ enum Services {
   f,
 }
 
+@doc("The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.")
 enum SignedResourceTypes {
   s,
   c,
   o,
 }
 
+@doc("The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).")
 enum Permissions {
   r,
   d,
@@ -187,6 +216,7 @@ enum Permissions {
   p,
 }
 
+@doc("The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).")
 enum SignedResource {
   b,
   c,
@@ -198,6 +228,7 @@ enum ManagementPolicyName {
   default,
 }
 
+@doc("The valid value is Lifecycle")
 enum RuleType {
   Lifecycle,
 }
@@ -206,25 +237,30 @@ enum BlobInventoryPolicyName {
   default,
 }
 
+@doc("The valid value is Inventory")
 enum InventoryRuleType {
   Inventory,
 }
 
+@doc("This is a required field, it specifies the format for the inventory files.")
 enum Format {
   Csv,
   Parquet,
 }
 
+@doc("This is a required field. This field is used to schedule an inventory formation.")
 enum Schedule {
   Daily,
   Weekly,
 }
 
+@doc("This is a required field. This field specifies the scope of the inventory created either at the blob or container level.")
 enum ObjectType {
   Blob,
   Container,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -232,11 +268,13 @@ enum CreatedByType {
   Key,
 }
 
+@doc("The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.")
 enum EncryptionScopeSource {
   `Microsoft.Storage`,
   `Microsoft.KeyVault`,
 }
 
+@doc("The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled.")
 enum EncryptionScopeState {
   Enabled,
   Disabled,
@@ -259,6 +297,7 @@ enum AllowedMethods {
   PATCH,
 }
 
+@doc("Name of the policy. The valid value is AccessTimeTracking. This field is currently read only")
 enum Name {
   AccessTimeTracking,
 }
@@ -267,11 +306,13 @@ enum ListContainersInclude {
   deleted,
 }
 
+@doc("The lease status of the container.")
 enum LeaseStatus {
   Locked,
   Unlocked,
 }
 
+@doc("Lease state of the container.")
 enum LeaseState {
   Available,
   Leased,
@@ -280,27 +321,32 @@ enum LeaseState {
   Broken,
 }
 
+@doc("Specifies whether the lease on a container is of infinite or fixed duration, only when the container is leased.")
 enum LeaseDuration {
   Infinite,
   Fixed,
 }
 
+@doc("The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.")
 enum ImmutabilityPolicyState {
   Locked,
   Unlocked,
 }
 
+@doc("The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend.")
 enum ImmutabilityPolicyUpdateType {
   put,
   lock,
   extend,
 }
 
+@doc("This property denotes the container level immutability to object level immutability migration state.")
 enum MigrationState {
   InProgress,
   Completed,
 }
 
+@doc("Specifies the lease action. Can be one of the available actions.")
 enum LeaseContainerRequestAction {
   Acquire,
   Renew,
@@ -309,17 +355,20 @@ enum LeaseContainerRequestAction {
   Break,
 }
 
+@doc("The authentication protocol that is used for the file share. Can only be specified when creating a share.")
 enum EnabledProtocols {
   SMB,
   NFS,
 }
 
+@doc("The property is for NFS share only. The default is NoRootSquash.")
 enum RootSquashType {
   NoRootSquash,
   RootSquash,
   AllSquash,
 }
 
+@doc("Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.")
 enum ShareAccessTier {
   TransactionOptimized,
   Hot,
@@ -327,6 +376,7 @@ enum ShareAccessTier {
   Premium,
 }
 
+@doc("Specifies the lease action. Can be one of the available actions.")
 enum LeaseShareAction {
   Acquire,
   Renew,
@@ -334,49 +384,66 @@ enum LeaseShareAction {
   Release,
   Break,
 }
-@Azure.Core.fixed
+
+@doc("The SKU tier. This is based on the SKU name.")
+@fixed
 enum SkuTier {
   Standard,
   Premium,
 }
-@Azure.Core.fixed
+
+@doc("Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.")
+@fixed
 enum Reason {
   AccountNameInvalid,
   AlreadyExists,
 }
-@Azure.Core.fixed
+
+@doc("Specifies the default action of allow or deny when no other rules match.")
+@fixed
 enum DefaultAction {
   Allow,
   Deny,
 }
-@Azure.Core.fixed
+
+@doc("Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.")
+@fixed
 enum AccessTier {
   Hot,
   Cool,
   Premium,
 }
-@Azure.Core.fixed
+
+@doc("Gets the status of the storage account at the time the operation was called.")
+@fixed
 enum ProvisioningState {
   Creating,
   ResolvingDNS,
   Succeeded,
 }
-@Azure.Core.fixed
+
+@doc("Gets the status indicating whether the primary location of the storage account is available or unavailable.")
+@fixed
 enum AccountStatus {
   available,
   unavailable,
 }
-@Azure.Core.fixed
+
+@fixed
 enum StorageAccountExpand {
   geoReplicationStats,
   blobRestoreStatus,
 }
-@Azure.Core.fixed
+
+@doc("Permissions for the key -- read-only or full permissions.")
+@fixed
 enum KeyPermission {
   Read,
   Full,
 }
-@Azure.Core.fixed
+
+@doc("Gets the unit of measurement.")
+@fixed
 enum UsageUnit {
   Count,
   Bytes,
@@ -385,12 +452,16 @@ enum UsageUnit {
   CountsPerSecond,
   BytesPerSecond,
 }
-@Azure.Core.fixed
+
+@doc("The protocol permitted for a request made with the account SAS.")
+@fixed
 enum HttpProtocol {
   `https,http`,
   https,
 }
-@Azure.Core.fixed
+
+@doc("Specifies whether data in the container may be accessed publicly and the level of access.")
+@fixed
 enum PublicAccess {
   Container,
   Blob,
@@ -593,17 +664,6 @@ model Identity {
 
   @doc("Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.")
   userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-@doc("UserAssignedIdentity for the resource.")
-model UserAssignedIdentity {
-  @doc("The principal ID of the identity.")
-  @visibility("read")
-  principalId?: string;
-
-  @doc("The client ID of the identity.")
-  @visibility("read")
-  clientId?: string;
 }
 
 @doc("The parameters used to create the storage account.")
@@ -1203,6 +1263,21 @@ model PrivateLinkServiceConnectionState {
   actionRequired?: string;
 }
 
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+}
+
 @doc("Blob restore status.")
 model BlobRestoreStatus {
   @doc("The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.")
@@ -1260,6 +1335,94 @@ model StorageAccountSkuConversionStatus {
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
+}
+
+@doc("The parameters that can be provided when updating the storage account properties.")
+model StorageAccountUpdateParameters {
+  @doc("Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value.")
+  sku?: Sku;
+
+  @doc("Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.")
+  tags?: Record<string>;
+
+  @doc("The identity of the resource.")
+  identity?: Identity;
+
+  @doc("The parameters used when updating a storage account.")
+  properties?: StorageAccountPropertiesUpdateParameters;
+
+  @doc("Optional. Indicates the type of storage account. Currently only StorageV2 value supported by server.")
+  kind?: Kind;
+}
+
+@doc("The parameters used when updating a storage account.")
+model StorageAccountPropertiesUpdateParameters {
+  @doc("Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.")
+  customDomain?: CustomDomain;
+
+  @doc("Not applicable. Azure Storage encryption at rest is enabled by default for all storage accounts and cannot be disabled.")
+  encryption?: Encryption;
+
+  @doc("SasPolicy assigned to the storage account.")
+  sasPolicy?: SasPolicy;
+
+  @doc("KeyPolicy assigned to the storage account.")
+  keyPolicy?: KeyPolicy;
+
+  @doc("Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.")
+  accessTier?: AccessTier;
+
+  @doc("Provides the identity based authentication settings for Azure Files.")
+  azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
+
+  @doc("Allows https traffic only to storage service if sets to true.")
+  @projectedName("json", "supportsHttpsTrafficOnly")
+  enableHttpsTrafficOnly?: boolean;
+
+  @doc("Enables Secure File Transfer Protocol, if set to true")
+  @projectedName("json", "isSftpEnabled")
+  IsSftpEnabled?: boolean;
+
+  @doc("Enables local users feature, if set to true")
+  @projectedName("json", "isLocalUserEnabled")
+  IsLocalUserEnabled?: boolean;
+
+  @doc("Network rule set")
+  @projectedName("json", "networkAcls")
+  networkRuleSet?: NetworkRuleSet;
+
+  @doc("Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.")
+  largeFileSharesState?: LargeFileSharesState;
+
+  @doc("Maintains information about the network routing choice opted by the user for data transfer")
+  routingPreference?: RoutingPreference;
+
+  @doc("Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property.")
+  allowBlobPublicAccess?: boolean;
+
+  @doc("Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.")
+  minimumTlsVersion?: MinimumTlsVersion;
+
+  @doc("Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true.")
+  allowSharedKeyAccess?: boolean;
+
+  @doc("Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property.")
+  allowCrossTenantReplication?: boolean;
+
+  @doc("A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.")
+  defaultToOAuthAuthentication?: boolean;
+
+  @doc("Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  @doc("The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default.")
+  immutableStorageWithVersioning?: ImmutableStorageAccount;
+
+  @doc("Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.")
+  allowedCopyScope?: AllowedCopyScope;
+
+  @doc("Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.")
+  dnsEndpointType?: DnsEndpointType;
 }
 
 @doc("Attributes of a deleted storage account.")

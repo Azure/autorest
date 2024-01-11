@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "properties": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        }
+      }
+    },
+    "environmentName": "testEnvironment",
+    "registryName": "testregistry",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testEnvironment",
+        "type": "Microsoft.MachineLearningServices/registries/environments",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/testregistry/environments/testEnvironment",
+        "properties": {
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-04T03:39:11.300Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-04T03:39:11.300Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testEnvironment",
+        "type": "Microsoft.MachineLearningServices/registries/environments",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/testregistry/environments/testEnvironment",
+        "properties": {
+          "description": "string",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-04T03:39:11.301Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-04T03:39:11.301Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "RegistryEnvironmentContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Registry Environment Container."
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "a1",
+    "parameters": {
+      "properties": {
+        "apiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1",
+        "notes": "yahooagain"
+      }
+    },
+    "releaseId": "testrev",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testrev",
+        "type": "Microsoft.ApiManagement/service/apis/releases",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/testrev",
+        "properties": {
+          "apiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1",
+          "createdDateTime": "2018-02-08T20:52:00.65Z",
+          "notes": "yahooagain",
+          "updatedDateTime": "2018-02-08T20:52:00.65Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testrev",
+        "type": "Microsoft.ApiManagement/service/apis/releases",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/releases/testrev",
+        "properties": {
+          "apiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1",
+          "createdDateTime": "2018-02-08T20:52:00.65Z",
+          "notes": "yahooagain",
+          "updatedDateTime": "2018-02-08T20:52:00.65Z"
+        }
+      }
+    }
+  },
+  "operationId": "ApiRelease_CreateOrUpdate",
+  "title": "ApiManagementCreateApiRelease"
+}

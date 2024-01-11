@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "59d5b28d1f7fab116c282650",
+    "resourceGroupName": "rg1",
+    "schemaId": "59d5b28e1f7fab116402044e",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "ApiSchema_Delete",
+  "title": "ApiManagementDeleteApiSchema"
+}

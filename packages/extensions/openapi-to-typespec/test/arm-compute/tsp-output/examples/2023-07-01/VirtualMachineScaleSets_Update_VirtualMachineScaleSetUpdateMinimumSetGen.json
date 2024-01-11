@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_Update",
+  "title": "VirtualMachineScaleSet_Update_MinimumSet_Gen"
+}

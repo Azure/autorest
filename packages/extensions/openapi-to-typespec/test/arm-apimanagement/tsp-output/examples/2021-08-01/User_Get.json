@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512a88c680b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "5931a75ae4bbd512a88c680b",
+        "type": "Microsoft.ApiManagement/service/users",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b",
+        "properties": {
+          "email": "foobar@outlook.com",
+          "firstName": "foo",
+          "identities": [
+            {
+              "id": "*************",
+              "provider": "Microsoft"
+            }
+          ],
+          "lastName": "bar",
+          "registrationDate": "2017-06-02T17:58:50.357Z",
+          "state": "active"
+        }
+      }
+    }
+  },
+  "operationId": "User_Get",
+  "title": "ApiManagementGetUser"
+}

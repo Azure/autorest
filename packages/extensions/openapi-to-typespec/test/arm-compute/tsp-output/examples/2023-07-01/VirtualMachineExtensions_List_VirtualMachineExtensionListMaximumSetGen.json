@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "$expand": "aaaaaaaaaaaaaaaaa",
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "aaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myVMExtension",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
+            "location": "westus",
+            "properties": {
+              "type": "extType",
+              "autoUpgradeMinorVersion": true,
+              "enableAutomaticUpgrade": true,
+              "forceUpdateTag": "a",
+              "instanceView": {
+                "name": "aaaaaaaaaaaaaaaaa",
+                "type": "aaaaaaaaa",
+                "statuses": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                    "displayStatus": "aaaaaa",
+                    "level": "Info",
+                    "message": "a",
+                    "time": "2021-11-30T12:58:26.522Z"
+                  }
+                ],
+                "substatuses": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                    "displayStatus": "aaaaaa",
+                    "level": "Info",
+                    "message": "a",
+                    "time": "2021-11-30T12:58:26.522Z"
+                  }
+                ],
+                "typeHandlerVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "protectedSettings": {},
+              "provisioningState": "Creating",
+              "publisher": "extPublisher",
+              "settings": {},
+              "suppressFailures": true,
+              "typeHandlerVersion": "1.2"
+            },
+            "tags": {
+              "key9183": "aa"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineExtensions_List",
+  "title": "VirtualMachineExtension_List_MaximumSet_Gen"
+}

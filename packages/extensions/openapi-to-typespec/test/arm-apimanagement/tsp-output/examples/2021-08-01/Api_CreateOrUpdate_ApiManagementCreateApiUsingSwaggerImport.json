@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "petstore",
+    "parameters": {
+      "properties": {
+        "format": "swagger-link-json",
+        "path": "petstore",
+        "value": "http://petstore.swagger.io/v2/swagger.json"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "properties": {
+          "path": "petstore",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+          "apiRevision": "1",
+          "displayName": "Swagger Petstore",
+          "isCurrent": true,
+          "protocols": [
+            "http"
+          ],
+          "serviceUrl": "http://petstore.swagger.io/v2",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "properties": {
+          "path": "petstore",
+          "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+          "apiRevision": "1",
+          "displayName": "Swagger Petstore",
+          "isCurrent": true,
+          "protocols": [
+            "http"
+          ],
+          "serviceUrl": "http://petstore.swagger.io/v2",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiUsingSwaggerImport"
+}

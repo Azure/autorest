@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("API Schema Contract details.")
@@ -23,18 +25,26 @@ model SchemaContract is ProxyResource<SchemaContractProperties> {
 }
 
 @armResourceOperations
-interface ApiSchema {
+interface SchemaContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the schema configuration at the API level.")
+  @operationId("ApiSchema_Get")
   get is ArmResourceRead<SchemaContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the schema specified by its identifier.")
   @head
+  @operationId("ApiSchema_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       SchemaContract,
       BaseParameters<SchemaContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates schema configuration for the API.")
+  @operationId("ApiSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     SchemaContract,
     {
@@ -43,9 +53,13 @@ interface ApiSchema {
       @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
       @header
       `If-Match`?: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the schema configuration at the Api.")
+  @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
     {
@@ -60,7 +74,10 @@ interface ApiSchema {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the schema configuration at the API level.")
+  @operationId("ApiSchema_ListByApi")
   listByApi is ArmResourceListByParent<
     SchemaContract,
     {

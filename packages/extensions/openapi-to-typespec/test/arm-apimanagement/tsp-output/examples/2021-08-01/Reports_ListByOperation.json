@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "$filter": "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "get",
+            "operationId": "/apis/57a03a13e4bbd5119c8b19e9/operations/57a03a1dd8d14f0a780d7d14",
+            "apiId": "/apis/57a03a13e4bbd5119c8b19e9",
+            "apiTimeAvg": 1015.7607923076923,
+            "apiTimeMax": 1819.2173,
+            "apiTimeMin": 330.3206,
+            "bandwidth": 11019,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 1,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 13,
+            "callCountTotal": 14,
+            "serviceTimeAvg": 957.094776923077,
+            "serviceTimeMax": 1697.3612,
+            "serviceTimeMin": 215.24
+          },
+          {
+            "name": "GetWeatherInformation",
+            "operationId": "/apis/57c999d1e4bbd50c988cb2c3/operations/57c999d1e4bbd50df889c93e",
+            "apiId": "/apis/57c999d1e4bbd50c988cb2c3",
+            "apiTimeAvg": 0,
+            "apiTimeMax": 0,
+            "apiTimeMin": 0,
+            "bandwidth": 0,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 0,
+            "callCountTotal": 0,
+            "serviceTimeAvg": 0,
+            "serviceTimeMax": 0,
+            "serviceTimeMin": 0
+          },
+          {
+            "name": "GetCityForecastByZIP",
+            "operationId": "/apis/57c999d1e4bbd50c988cb2c3/operations/57c999d1e4bbd50df889c93f",
+            "apiId": "/apis/57c999d1e4bbd50c988cb2c3",
+            "apiTimeAvg": 0,
+            "apiTimeMax": 0,
+            "apiTimeMin": 0,
+            "bandwidth": 0,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 0,
+            "callCountTotal": 0,
+            "serviceTimeAvg": 0,
+            "serviceTimeMax": 0,
+            "serviceTimeMin": 0
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Reports_ListByOperation",
+  "title": "ApiManagementGetReportsByOperation"
+}

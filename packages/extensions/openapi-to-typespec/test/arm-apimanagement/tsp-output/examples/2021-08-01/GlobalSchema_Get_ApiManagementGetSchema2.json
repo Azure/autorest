@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "schemaId": "schema2",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "schema2",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema2",
+        "properties": {
+          "description": "sample schema description",
+          "document": {
+            "type": "object",
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "age": {
+                "type": "integer",
+                "description": "Age in years which must be equal to or greater than zero.",
+                "minimum": 0
+              },
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              }
+            },
+            "title": "Person"
+          },
+          "schemaType": "json"
+        }
+      }
+    }
+  },
+  "operationId": "GlobalSchema_Get",
+  "title": "ApiManagementGetSchema2"
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Global Schema Contract details.")
@@ -23,18 +25,26 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
 }
 
 @armResourceOperations
-interface GlobalSchema {
+interface GlobalSchemaContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Schema specified by its identifier.")
+  @operationId("GlobalSchema_Get")
   get is ArmResourceRead<GlobalSchemaContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Schema specified by its identifier.")
   @head
+  @operationId("GlobalSchema_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GlobalSchemaContract,
       BaseParameters<GlobalSchemaContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates new or updates existing specified Schema of the API Management service instance.")
+  @operationId("GlobalSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     GlobalSchemaContract,
     {
@@ -43,9 +53,13 @@ interface GlobalSchema {
       @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
       @header
       `If-Match`?: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific Schema.")
+  @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
     {
@@ -56,7 +70,10 @@ interface GlobalSchema {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of schemas registered with service instance.")
+  @operationId("GlobalSchema_ListByService")
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,
     {

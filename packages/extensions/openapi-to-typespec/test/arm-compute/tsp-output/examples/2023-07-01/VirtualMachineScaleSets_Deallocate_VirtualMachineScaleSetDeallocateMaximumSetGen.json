@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hibernate": true,
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmInstanceIDs": {
+      "instanceIds": [
+        "aaaaaaaaaaaaaaaaa"
+      ]
+    },
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_Deallocate",
+  "title": "VirtualMachineScaleSet_Deallocate_MaximumSet_Gen"
+}

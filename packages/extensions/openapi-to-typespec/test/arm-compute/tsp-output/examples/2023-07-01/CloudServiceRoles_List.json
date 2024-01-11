@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ContosoFrontend",
+            "type": "Microsoft.Compute/cloudServices/roles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roles/ContosoFrontend",
+            "location": "eastus2euap",
+            "properties": {
+              "uniqueId": "b03bc269-766b-4921-b91a-7dffaae4d03b:ContosoFrontend"
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "capacity": 2,
+              "tier": "Standard"
+            }
+          },
+          {
+            "name": "ContosoBackend",
+            "type": "Microsoft.Compute/cloudServices/roles",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roles/ContosoBackend",
+            "location": "eastus2euap",
+            "properties": {
+              "uniqueId": "b03bc269-766b-4921-b91a-7dffaae4d03b:ContosoBackend"
+            },
+            "sku": {
+              "name": "Standard_D1_v2",
+              "capacity": 2,
+              "tier": "Standard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServiceRoles_List",
+  "title": "List Roles in a Cloud Service"
+}

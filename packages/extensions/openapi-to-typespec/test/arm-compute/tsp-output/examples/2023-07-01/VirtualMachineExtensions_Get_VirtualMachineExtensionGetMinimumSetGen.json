@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmExtensionName": "myVMExtension",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
+        "location": "westus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineExtensions_Get",
+  "title": "VirtualMachineExtension_Get_MinimumSet_Gen"
+}

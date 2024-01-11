@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaa",
+        "value": [
+          {
+            "name": "mySshPublicKeyName",
+            "type": "aaaa",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
+            "location": "westus",
+            "properties": {
+              "publicKey": "{ssh-rsa public key}"
+            },
+            "tags": {
+              "key6396": "aaaaaaaaaaaaa",
+              "key8839": "aaa"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_ListByResourceGroup",
+  "title": "SshPublicKey_ListByResourceGroup_MaximumSet_Gen"
+}

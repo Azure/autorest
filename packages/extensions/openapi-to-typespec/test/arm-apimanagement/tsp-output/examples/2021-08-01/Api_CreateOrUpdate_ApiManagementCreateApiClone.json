@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "echo-api2",
+    "parameters": {
+      "properties": {
+        "path": "echo2",
+        "description": "Copy of Existing Echo Api including Operations.",
+        "displayName": "Echo API2",
+        "isCurrent": true,
+        "protocols": [
+          "http",
+          "https"
+        ],
+        "serviceUrl": "http://echoapi.cloudapp.net/api",
+        "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/58a4aeac497000007d040001",
+        "subscriptionRequired": true
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "echoapi2",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapi2",
+        "properties": {
+          "path": "echo2",
+          "description": "Copy of Existing Echo Api including Operations.",
+          "apiRevision": "1",
+          "displayName": "Echo API2",
+          "isCurrent": true,
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "echoapi2",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapi2",
+        "properties": {
+          "path": "echo2",
+          "description": "Copy of Existing Echo Api including Operations.",
+          "apiRevision": "1",
+          "displayName": "Echo API2",
+          "isCurrent": true,
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiClone"
+}

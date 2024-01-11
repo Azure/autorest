@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSet": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "West US",
+      "properties": {
+        "activeKey": {
+          "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey"
+      }
+    },
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        }
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_CreateOrUpdate",
+  "title": "Create a disk encryption set with key vault from a different subscription."
+}

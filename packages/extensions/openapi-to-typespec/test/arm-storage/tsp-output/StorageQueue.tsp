@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./QueueServiceProperties.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 
@@ -24,16 +26,30 @@ model StorageQueue is ProxyResource<QueueProperties> {
 }
 
 @armResourceOperations
-interface Queue {
+interface StorageQueues {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the queue with the specified queue name, under the specified account if it exists.")
+  @operationId("Queue_Get")
   get is ArmResourceRead<StorageQueue>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new queue with the specified queue name, under the specified account.")
+  @operationId("Queue_Create")
   create is ArmResourceCreateOrReplaceSync<StorageQueue>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new queue with the specified queue name, under the specified account.")
-  update is ArmResourcePatchSync<StorageQueue, QueueProperties>;
+  @operationId("Queue_Update")
+  update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the queue with the specified queue name, under the specified account if it exists.")
+  @operationId("Queue_Delete")
   delete is ArmResourceDeleteSync<StorageQueue>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of all the queues under the specified storage account")
+  @operationId("Queue_List")
   list is ArmResourceListByParent<
     StorageQueue,
     {

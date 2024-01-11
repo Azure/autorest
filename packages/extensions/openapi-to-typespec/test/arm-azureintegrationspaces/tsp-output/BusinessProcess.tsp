@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Application.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
 @doc("A business process under application.")
@@ -25,12 +27,16 @@ model BusinessProcess is ProxyResource<BusinessProcessProperties> {
 interface BusinessProcesses {
   @doc("Get a BusinessProcess")
   get is ArmResourceRead<BusinessProcess>;
+
   @doc("Create a BusinessProcess")
   createOrUpdate is ArmResourceCreateOrReplaceSync<BusinessProcess>;
+
   @doc("Update a BusinessProcess")
-  patch is ArmResourcePatchSync<BusinessProcess, BusinessProcessProperties>;
+  patch is ArmCustomPatchSync<BusinessProcess, BusinessProcessUpdate>;
+
   @doc("Delete a BusinessProcess")
   delete is ArmResourceDeleteSync<BusinessProcess>;
+
   @doc("List BusinessProcess resources by Application")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,

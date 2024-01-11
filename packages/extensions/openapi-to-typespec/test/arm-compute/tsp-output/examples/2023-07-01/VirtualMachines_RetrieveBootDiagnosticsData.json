@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "ResourceGroup",
+    "sasUriExpirationTimeInMinutes": 60,
+    "subscriptionId": "{subscription-id}",
+    "vmName": "VMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "consoleScreenshotBlobUri": "https://storageuri/vm.screenshot.bmp?{sasKey}",
+        "serialConsoleLogBlobUri": "https://storageuri/vm.serialconsole.log?{sasKey}"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_RetrieveBootDiagnosticsData",
+  "title": "RetrieveBootDiagnosticsData of a virtual machine."
+}

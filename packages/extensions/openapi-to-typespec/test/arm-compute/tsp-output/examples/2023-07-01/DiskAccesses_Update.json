@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccess": {
+      "tags": {
+        "department": "Development",
+        "project": "PrivateEndpoints"
+      }
+    },
+    "diskAccessName": "myDiskAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourcegroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "location": "West US",
+        "tags": {
+          "department": "Development",
+          "project": "PrivateEndpoints"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourcegroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "location": "West US",
+        "tags": {
+          "department": "Development",
+          "project": "PrivateEndpoints"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "DiskAccesses_Update",
+  "title": "Update a disk access resource."
+}

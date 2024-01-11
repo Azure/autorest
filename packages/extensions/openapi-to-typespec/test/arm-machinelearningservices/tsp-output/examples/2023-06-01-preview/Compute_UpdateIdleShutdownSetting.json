@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "idleTimeBeforeShutdown": "PT120M"
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "Compute_UpdateIdleShutdownSetting",
+  "title": "Update idle shutdown setting of ComputeInstance"
+}

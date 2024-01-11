@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "parameters": {
+      "roleInstances": [
+        "ContosoFrontend_IN_0",
+        "ContosoBackend_IN_1"
+      ]
+    },
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CloudServices_DeleteInstances",
+  "title": "Delete Cloud Service Role Instances in a Cloud Service"
+}

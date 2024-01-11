@@ -33,7 +33,8 @@ export function getModelsImports(program: TypespecProgram) {
 
   if (isArm) {
     modules.add(`import "@azure-tools/typespec-azure-resource-manager";`);
-    namespaces.add(`using Azure.ResourceManager;`);
+    namespaces.add("using Azure.ResourceManager;");
+    namespaces.add("using Azure.ResourceManager.Foundations;");
   }
 
   return {
@@ -47,6 +48,13 @@ export function getRoutesImports(_program: TypespecProgram) {
     modules: [`import "@azure-tools/typespec-azure-core";`, `import "@typespec/rest";`, `import "./models.tsp";`],
     namespaces: [`using TypeSpec.Rest;`, `using TypeSpec.Http;`],
   };
+
+  const { isArm } = getOptions();
+
+  if (isArm) {
+    imports.modules.push(`import "@azure-tools/typespec-azure-resource-manager";`);
+    imports.namespaces.push("using Azure.ResourceManager;");
+  }
 
   return imports;
 }

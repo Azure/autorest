@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "petstore",
+    "parameters": {
+      "properties": {
+        "format": "wadl-link-json",
+        "path": "collector",
+        "value": "https://developer.cisco.com/media/wae-release-6-2-api-reference/wae-collector-rest-api/application.wadl"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "properties": {
+          "path": "collector",
+          "description": "",
+          "apiRevision": "1",
+          "displayName": "http://localhost:8080/collector-northbound",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "properties": {
+          "path": "collector",
+          "description": "",
+          "apiRevision": "1",
+          "displayName": "http://localhost:8080/collector-northbound",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiUsingWadlImport"
+}

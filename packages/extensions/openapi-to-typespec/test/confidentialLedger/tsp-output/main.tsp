@@ -23,5 +23,6 @@ namespace Azure.Language.Authoring;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2022-05-13 API version.")
   v2022_05_13: "2022-05-13",
 }

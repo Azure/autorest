@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "PrivateEndpointConnection_Delete",
+  "title": "ApiManagementDeletePrivateEndpointConnection"
+}

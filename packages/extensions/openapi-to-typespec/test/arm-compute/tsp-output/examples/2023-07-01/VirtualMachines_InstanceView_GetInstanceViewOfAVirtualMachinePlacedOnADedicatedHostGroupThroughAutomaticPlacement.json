@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assignedHost": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup/hosts/myHost",
+        "computerName": "myVM",
+        "disks": [
+          {
+            "name": "myOsDisk",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info",
+                "time": "2023-07-01T21:29:47.477089+00:00"
+              }
+            ]
+          }
+        ],
+        "hyperVGeneration": "V1",
+        "osName": "Windows Server 2016 Datacenter",
+        "osVersion": "Microsoft Windows NT 10.0.14393.0",
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "time": "2023-07-01T21:30:12.8051917+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "displayStatus": "VM running",
+            "level": "Info"
+          }
+        ],
+        "vmAgent": {
+          "statuses": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "displayStatus": "Ready",
+              "level": "Info",
+              "message": "GuestAgent is running and accepting new configurations.",
+              "time": "2023-07-01T23:11:22+00:00"
+            }
+          ],
+          "vmAgentVersion": "2.7.41491.949"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_InstanceView",
+  "title": "Get instance view of a virtual machine placed on a dedicated host group through automatic placement."
+}

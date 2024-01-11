@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "description": "sample schema description",
+        "document": {
+          "type": "object",
+          "$id": "https://example.com/person.schema.json",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "age": {
+              "type": "integer",
+              "description": "Age in years which must be equal to or greater than zero.",
+              "minimum": 0
+            },
+            "firstName": {
+              "type": "string",
+              "description": "The person's first name."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "The person's last name."
+            }
+          },
+          "title": "Person"
+        },
+        "schemaType": "json"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "schemaId": "schema1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "properties": {
+          "description": "sample schema description",
+          "document": {
+            "type": "object",
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "age": {
+                "type": "integer",
+                "description": "Age in years which must be equal to or greater than zero.",
+                "minimum": 0
+              },
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              }
+            },
+            "title": "Person"
+          },
+          "schemaType": "json"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "schema1",
+        "type": "Microsoft.ApiManagement/service/schemas",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1",
+        "properties": {
+          "description": "sample schema description",
+          "document": {
+            "type": "object",
+            "$id": "https://example.com/person.schema.json",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "properties": {
+              "age": {
+                "type": "integer",
+                "description": "Age in years which must be equal to or greater than zero.",
+                "minimum": 0
+              },
+              "firstName": {
+                "type": "string",
+                "description": "The person's first name."
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The person's last name."
+              }
+            },
+            "title": "Person"
+          },
+          "schemaType": "json"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/schemas/schema1?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "GlobalSchema_CreateOrUpdate",
+  "title": "ApiManagementCreateSchema2"
+}

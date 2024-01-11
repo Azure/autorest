@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "operationId": "5600b53ac53f5b0062080006",
+    "api-version": "2021-08-01",
+    "apiId": "5600b539c53f5b0062040001",
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "ApiOperationPolicy_GetEntityTag",
+  "title": "ApiManagementHeadApiOperationPolicy"
+}

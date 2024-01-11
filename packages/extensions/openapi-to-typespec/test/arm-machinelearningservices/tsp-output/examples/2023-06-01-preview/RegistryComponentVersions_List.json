@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$top": 1,
+    "api-version": "2023-06-01-preview",
+    "componentName": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "componentSpec": {
+                "50acbce5-cccc-475a-8ac6-c4da402afbd8": null
+              },
+              "isAnonymous": false,
+              "properties": {
+                "string": "string"
+              },
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryComponentVersions_List",
+  "title": "List Registry Component Version."
+}

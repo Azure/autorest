@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("API Version Set Contract details.")
@@ -24,18 +26,26 @@ model ApiVersionSetContract is ProxyResource<ApiVersionSetContractProperties> {
 }
 
 @armResourceOperations
-interface ApiVersionSet {
+interface ApiVersionSetContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the Api Version Set specified by its identifier.")
+  @operationId("ApiVersionSet_Get")
   get is ArmResourceRead<ApiVersionSetContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the Api Version Set specified by its identifier.")
   @head
+  @operationId("ApiVersionSet_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       ApiVersionSetContract,
       BaseParameters<ApiVersionSetContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or Updates a Api Version Set.")
+  @operationId("ApiVersionSet_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
     {
@@ -46,10 +56,13 @@ interface ApiVersionSet {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the Api VersionSet specified by its identifier.")
-  update is ArmResourcePatchSync<
+  @operationId("ApiVersionSet_Update")
+  update is ArmCustomPatchSync<
     ApiVersionSetContract,
-    ApiVersionSetContractProperties,
+    ApiVersionSetUpdateParameters,
     {
       ...BaseParameters<ApiVersionSetContract>;
 
@@ -58,7 +71,10 @@ interface ApiVersionSet {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific Api Version Set.")
+  @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
     {
@@ -69,7 +85,10 @@ interface ApiVersionSet {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of API Version Sets in the specified service instance.")
+  @operationId("ApiVersionSet_ListByService")
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,
     {

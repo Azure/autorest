@@ -7,6 +7,7 @@ using TypeSpec.Http;
 
 namespace Azure.LoadTesting;
 
+@doc("The client metric on which the criteria should be applied.")
 enum PFMetrics {
   @doc("Pass fail criteria for response time metric") response_time_ms,
   @doc("Pass fail criteria for response time metric") latency,
@@ -15,6 +16,12 @@ enum PFMetrics {
   @doc("Pass fail criteria for request rate.") requests_per_sec,
 }
 
+@doc("""
+The aggregation function to be applied on the client metric. Allowed functions
+- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+‘count’ - for requests
+""")
 enum PFAgFunc {
   @doc("Criteria applies for count value") count,
   @doc("Criteria applies for given percentage value") percentage,
@@ -27,33 +34,39 @@ enum PFAgFunc {
   @doc("Criteria applies for maximum value") max,
 }
 
+@doc("Action taken after the threshold is met. Default is ‘continue’.")
 enum PFAction {
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed")
   continue,
   @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
 }
 
+@doc("Outcome of the test run.")
 enum PFResult {
   @doc("Given pass fail criteria metric has passed.") passed,
   @doc("Given pass fail criteria metric couldn't determine.") undetermined,
   @doc("Given pass fail criteria metric has failed.") failed,
 }
 
+@doc("Type of secret")
 enum SecretType {
   @doc("If the secret is stored in an Azure Key Vault") AKV_SECRET_URI,
   @doc("If the Plain text secret value provided") SECRET_VALUE,
 }
 
+@doc("Type of certificate")
 enum CertificateType {
   @doc("If the certificate is stored in an Azure Key Vault") AKV_CERT_URI,
 }
 
+@doc("File type")
 enum FileType {
   @doc("If file is jmx script") JMX_FILE,
   @doc("If file is user properties") USER_PROPERTIES,
   @doc("If file is not any of other supported type") ADDITIONAL_ARTIFACTS,
 }
 
+@doc("Validation status of the file")
 enum FileStatus {
   @doc("File is not validated.") NOT_VALIDATED,
   @doc("File is validated.") VALIDATION_SUCCESS,
@@ -62,12 +75,14 @@ enum FileStatus {
   @doc("Validation is not required.") VALIDATION_NOT_REQUIRED,
 }
 
+@doc("Test result for pass/Fail criteria used during the test run.")
 enum PFTestResult {
   @doc("Pass/fail criteria has passed.") PASSED,
   @doc("Pass/fail criteria is not applicable.") NOT_APPLICABLE,
   @doc("Pass/fail criteria has failed.") FAILED,
 }
 
+@doc("The test run status.")
 enum Status {
   @doc("Test run request is accepted") ACCEPTED,
   @doc("Test run is not yet started.") NOTSTARTED,
@@ -87,6 +102,7 @@ enum Status {
   @doc("Test run JMX file validation is failed") VALIDATION_FAILURE,
 }
 
+@doc("The primary aggregation type value defining how to use the values for display.")
 enum AggregationType {
   @doc("Average value") Average,
   @doc("Total count") Count,
@@ -97,6 +113,7 @@ enum AggregationType {
   @doc("99th percentile") Percentile99,
 }
 
+@doc("The unit of the metric.")
 enum MetricUnit {
   @doc("No unit specified") NotSpecified,
   @doc("Percentage") Percent,
@@ -108,6 +125,10 @@ enum MetricUnit {
   @doc("Count per second") CountPerSecond,
 }
 
+@doc("""
+The time grain specifies the aggregation interval for the metric. Expressed as
+a duration 'PT1M', 'PT1H', etc.
+""")
 enum TimeGrain {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,

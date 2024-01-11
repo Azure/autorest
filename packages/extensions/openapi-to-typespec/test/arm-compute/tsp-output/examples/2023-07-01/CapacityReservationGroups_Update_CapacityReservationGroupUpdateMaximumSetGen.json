@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "capacityReservationGroupName": "aaaaaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "properties": {
+        "instanceView": {}
+      },
+      "tags": {
+        "key5355": "aaa"
+      }
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCapacityReservationGroup",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "location": "westus",
+        "properties": {
+          "capacityReservations": [
+            {
+              "id": "aaaa"
+            }
+          ],
+          "instanceView": {
+            "capacityReservations": [
+              {
+                "name": "aaaaaaaaaaaaaaaa",
+                "statuses": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                    "displayStatus": "aaaaaa",
+                    "level": "Info",
+                    "message": "a",
+                    "time": "2021-11-30T12:58:26.522Z"
+                  }
+                ],
+                "utilizationInfo": {
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "aaaa"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "virtualMachinesAssociated": [
+            {
+              "id": "aaaa"
+            }
+          ]
+        },
+        "tags": {},
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_Update",
+  "title": "CapacityReservationGroup_Update_MaximumSet_Gen"
+}

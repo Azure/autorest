@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccess": {
+      "location": "West US"
+    },
+    "diskAccessName": "myDiskAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourcegroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourcegroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "location": "West US"
+      }
+    }
+  },
+  "operationId": "DiskAccesses_CreateOrUpdate",
+  "title": "Create a disk access resource."
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "name": "string",
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "listViewType": "ActiveOnly",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tags": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "indexColumns": [
+                {
+                  "columnName": "string",
+                  "dataType": "Datetime"
+                }
+              ],
+              "isAnonymous": false,
+              "isArchived": false,
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Creating",
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:55",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:55",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Key"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturestoreEntityVersions_List",
+  "title": "List Workspace Featurestore Entity Version."
+}

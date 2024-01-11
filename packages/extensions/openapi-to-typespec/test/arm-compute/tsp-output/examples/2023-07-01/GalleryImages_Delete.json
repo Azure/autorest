@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {},
+    "204": {}
+  },
+  "operationId": "GalleryImages_Delete",
+  "title": "Delete a gallery image."
+}

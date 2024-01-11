@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "echo-api;rev=3",
+    "parameters": {
+      "properties": {
+        "path": "echo",
+        "apiRevisionDescription": "Creating a Revision of an existing API",
+        "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+        "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "echo-api;rev=3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3",
+        "properties": {
+          "path": "echo",
+          "apiRevision": "3",
+          "apiRevisionDescription": "Creating a Revision of an existing API",
+          "displayName": "Echo API",
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "echo-api;rev=3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3",
+        "properties": {
+          "path": "echo",
+          "apiRevision": "3",
+          "apiRevisionDescription": "Creating a Revision of an existing API",
+          "displayName": "Echo API",
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/apiv3",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "subscriptionRequired": true
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiRevisionFromExistingApi"
+}

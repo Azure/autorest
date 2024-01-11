@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachine.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Describes a Virtual Machine run command.")
@@ -34,15 +36,19 @@ interface VirtualMachineRunCommands {
       $expand?: string;
     }
   >;
+
   @doc("The operation to create or update the run command.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
+
   @doc("The operation to update the run command.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
-    VirtualMachineRunCommandProperties
+    VirtualMachineRunCommandUpdate
   >;
+
   @doc("The operation to delete the run command.")
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
+
   @doc("The operation to get all run commands of a Virtual Machine.")
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
@@ -54,6 +60,7 @@ interface VirtualMachineRunCommands {
       $expand?: string;
     }
   >;
+
   @doc("Lists all available run commands for a subscription in a location.")
   list is ArmResourceListAtScope<
     VirtualMachineRunCommand,

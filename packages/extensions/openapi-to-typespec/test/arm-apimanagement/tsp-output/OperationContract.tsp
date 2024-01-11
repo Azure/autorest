@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("API Operation details.")
@@ -23,18 +25,26 @@ model OperationContract is ProxyResource<OperationContractProperties> {
 }
 
 @armResourceOperations
-interface ApiOperation {
+interface OperationContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the API Operation specified by its identifier.")
+  @operationId("ApiOperation_Get")
   get is ArmResourceRead<OperationContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the API operation specified by its identifier.")
   @head
+  @operationId("ApiOperation_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       OperationContract,
       BaseParameters<OperationContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new operation in the API or updates an existing one.")
+  @operationId("ApiOperation_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     {
@@ -45,10 +55,13 @@ interface ApiOperation {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the operation in the API specified by its identifier.")
-  update is ArmResourcePatchSync<
+  @operationId("ApiOperation_Update")
+  update is ArmCustomPatchSync<
     OperationContract,
-    OperationContractProperties,
+    OperationUpdateContract,
     {
       ...BaseParameters<OperationContract>;
 
@@ -57,7 +70,10 @@ interface ApiOperation {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified operation in the API.")
+  @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
     {
@@ -68,7 +84,10 @@ interface ApiOperation {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of the operations for the specified API.")
+  @operationId("ApiOperation_ListByApi")
   listByApi is ArmResourceListByParent<
     OperationContract,
     {

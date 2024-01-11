@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./RestorePointCollection.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Restore Point details.")
@@ -37,6 +39,7 @@ interface RestorePoints {
       $expand?: RestorePointExpandOptions;
     }
   >;
+
   @doc("The operation to create the restore point. Updating properties of an existing restore point is not allowed")
   create is ArmResourceCreateOrUpdateAsync<
     RestorePoint,
@@ -48,6 +51,7 @@ interface RestorePoints {
       restorePointCollectionName: string;
     }
   >;
+
   @doc("The operation to delete the restore point.")
   delete is ArmResourceDeleteAsync<
     RestorePoint,

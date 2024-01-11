@@ -10,7 +10,13 @@ export function getDiscriminator(schema: ObjectSchema): TypespecObjectProperty |
   if (!schema.discriminatorValue) {
     return undefined;
   }
-  const { serializedName: name, language } = getDiscriminatorProperty(schema);
+  const discriminator = getDiscriminatorProperty(schema);
+  if (!discriminator) {
+    const logger = getLogger("getDiscriminator");
+    logger.warning(`No discriminator property found for ${schema.language.default.name}`);
+    return undefined;
+  }
+  const { serializedName: name, language } = discriminator;
   const type = `"${schema.discriminatorValue}"`;
 
   return {
@@ -22,7 +28,7 @@ export function getDiscriminator(schema: ObjectSchema): TypespecObjectProperty |
   };
 }
 
-function getDiscriminatorProperty(schema: ObjectSchema): Property {
+function getDiscriminatorProperty(schema: ObjectSchema): Property | undefined {
   const logger = getLogger("getDiscriminatorProperty");
 
   logger.info(`Getting discriminator property for ${schema.language.default.name}`);
@@ -32,7 +38,7 @@ function getDiscriminatorProperty(schema: ObjectSchema): Property {
   }
 
   if (!schema.parents?.immediate || schema.parents.immediate.length === 0) {
-    throw new Error("No discriminator property found");
+    return;
   }
 
   for (const parent of schema.parents.immediate as ObjectSchema[]) {
@@ -42,6 +48,4 @@ function getDiscriminatorProperty(schema: ObjectSchema): Property {
       return discriminator;
     }
   }
-
-  throw new Error("No discriminator property found");
 }

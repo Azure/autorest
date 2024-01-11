@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "entities": [
+            "string"
+          ],
+          "isAnonymous": false,
+          "isArchived": false,
+          "materializationSettings": {
+            "notification": {
+              "emailOn": [
+                "JobFailed"
+              ],
+              "emails": [
+                "string"
+              ]
+            },
+            "resource": {
+              "instanceType": "string"
+            },
+            "schedule": {
+              "endTime": "string",
+              "frequency": "Minute",
+              "interval": 1,
+              "schedule": {
+                "hours": [
+                  1
+                ],
+                "minutes": [
+                  1
+                ],
+                "monthDays": [
+                  1
+                ],
+                "weekDays": [
+                  "Wednesday"
+                ]
+              },
+              "startTime": "string",
+              "timeZone": "string",
+              "triggerType": "Recurrence"
+            },
+            "sparkConfiguration": {
+              "string": "string"
+            },
+            "storeType": "None"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Succeeded",
+          "specification": {
+            "path": "string"
+          },
+          "stage": "string",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:52",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:52",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "FeaturesetVersions_Get",
+  "title": "Get Workspace Featureset Version."
+}

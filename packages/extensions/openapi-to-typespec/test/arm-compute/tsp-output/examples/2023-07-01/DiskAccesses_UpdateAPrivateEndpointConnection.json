@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccessName": "myDiskAccess",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approving myPrivateEndpointConnection",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "myPrivateEndpointConnection",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPrivateEndpointConnectionName",
+        "type": "Microsoft.Compute/diskAccesses/PrivateEndpointConnections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approving myPrivateEndpointConnection",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myPrivateEndpointConenction",
+        "type": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpoinConnections/myPrivateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approving myPrivateEndpointConnection",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "DiskAccesses_UpdateAPrivateEndpointConnection",
+  "title": "Approve a Private Endpoint Connection under a disk access resource."
+}

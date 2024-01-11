@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "location": "westus2",
+    "osVersionName": "WA-GUEST-OS-3.90_202010-02",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "WA-GUEST-OS-3.90_202010-02",
+        "type": "Microsoft.Compute/locations/cloudServiceOsVersions",
+        "id": "/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus2/cloudServiceOSVersions/WA-GUEST-OS-3.90_202010-02",
+        "location": "westus2",
+        "properties": {
+          "family": "3",
+          "familyLabel": "Windows Server 2012",
+          "isActive": true,
+          "isDefault": true,
+          "label": "Windows Azure Guest OS 3.90 (Release 202010-02)",
+          "version": "WA-GUEST-OS-3.90_202010-02"
+        }
+      }
+    }
+  },
+  "operationId": "CloudServiceOperatingSystems_GetOSVersion",
+  "title": "Get Cloud Service OS Version"
+}

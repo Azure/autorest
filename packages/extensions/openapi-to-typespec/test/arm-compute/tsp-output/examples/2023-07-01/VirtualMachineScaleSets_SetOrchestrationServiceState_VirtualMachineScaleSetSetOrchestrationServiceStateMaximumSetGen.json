@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "action": "Resume",
+      "serviceName": "AutomaticRepairs"
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_SetOrchestrationServiceState",
+  "title": "VirtualMachineScaleSet_SetOrchestrationServiceState_MaximumSet_Gen"
+}

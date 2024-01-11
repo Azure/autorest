@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskIOPSReadWrite": 125,
+        "diskMBpsReadWrite": 3000,
+        "diskSizeGB": 200
+      },
+      "sku": {
+        "name": "PremiumV2_LRS"
+      }
+    },
+    "diskName": "myPremiumV2Disk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPremiumV2Disk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "sku": {
+          "name": "PremiumV2_LRS",
+          "tier": "Premium"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myPremiumV2Disk",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "sku": {
+          "name": "PremiumV2_LRS",
+          "tier": "Premium"
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create a managed disk with premium v2 account type."
+}

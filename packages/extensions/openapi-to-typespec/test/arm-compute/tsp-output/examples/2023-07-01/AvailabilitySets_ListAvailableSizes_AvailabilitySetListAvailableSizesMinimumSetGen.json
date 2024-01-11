@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "availabilitySetName": "aa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  },
+  "operationId": "AvailabilitySets_ListAvailableSizes",
+  "title": "AvailabilitySet_ListAvailableSizes_MinimumSet_Gen"
+}

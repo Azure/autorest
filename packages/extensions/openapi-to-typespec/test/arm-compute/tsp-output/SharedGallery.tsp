@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 // FIXME: SharedGallery has no properties property
@@ -24,6 +26,7 @@ model SharedGallery is ProxyResource<{}> {
 interface SharedGalleries {
   @doc("Get a shared gallery by subscription id or tenant id.")
   get is ArmResourceRead<SharedGallery>;
+
   @doc("List shared galleries by subscription id or tenant id.")
   list is ArmResourceListByParent<
     SharedGallery,

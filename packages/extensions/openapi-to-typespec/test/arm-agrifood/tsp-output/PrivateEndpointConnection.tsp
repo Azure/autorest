@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./DataManagerForAgriculture.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("The private endpoint connection resource.")
@@ -25,10 +27,17 @@ model PrivateEndpointConnection
 interface PrivateEndpointConnections {
   @doc("Get Private endpoint connection object.")
   get is ArmResourceRead<PrivateEndpointConnection>;
+
   @doc("Approves or Rejects a Private endpoint connection request.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
+
   @doc("Delete Private endpoint connection request.")
-  delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteAsync<
+    PrivateEndpointConnection,
+    BaseParameters<PrivateEndpointConnection>,
+    ArmAsyncOperationHeader
+  >;
+
   @doc("Get list of Private endpoint connections.")
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }

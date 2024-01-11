@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "1",
+            "type": "Microsoft.ApiManagement/service/users",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1",
+            "properties": {
+              "email": "admin@live.com",
+              "firstName": "Administrator",
+              "identities": [
+                {
+                  "id": "admin@live.com",
+                  "provider": "Azure"
+                }
+              ],
+              "lastName": "",
+              "registrationDate": "2015-09-22T01:57:39.677Z",
+              "state": "active"
+            }
+          },
+          {
+            "name": "56eaec62baf08b06e46d27fd",
+            "type": "Microsoft.ApiManagement/service/users",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/56eaec62baf08b06e46d27fd",
+            "properties": {
+              "email": "foo.bar.83@gmail.com",
+              "firstName": "foo",
+              "identities": [
+                {
+                  "id": "foo.bar.83@gmail.com",
+                  "provider": "Basic"
+                }
+              ],
+              "lastName": "bar",
+              "registrationDate": "2016-03-17T17:41:56.327Z",
+              "state": "active"
+            }
+          },
+          {
+            "name": "5931a75ae4bbd512a88c680b",
+            "type": "Microsoft.ApiManagement/service/users",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/5931a75ae4bbd512a88c680b",
+            "properties": {
+              "email": "foobar@outlook.com",
+              "firstName": "foo",
+              "identities": [
+                {
+                  "id": "*************",
+                  "provider": "Microsoft"
+                }
+              ],
+              "lastName": "bar",
+              "registrationDate": "2017-06-02T17:58:50.357Z",
+              "state": "active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "User_ListByService",
+  "title": "ApiManagementListUsers"
+}

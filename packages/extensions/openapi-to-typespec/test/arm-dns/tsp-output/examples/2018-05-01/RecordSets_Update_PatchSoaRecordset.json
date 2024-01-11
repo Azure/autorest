@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "recordType": "SOA",
+    "relativeRecordSetName": "@",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "@",
+        "type": "Microsoft.Network/dnsZones/SOA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/SOA/@",
+        "properties": {
+          "SOARecord": {
+            "email": "hostmaster.contoso.com",
+            "expireTime": 2419200,
+            "host": "ns1.contoso.com",
+            "minimumTTL": 300,
+            "refreshTime": 3600,
+            "retryTime": 300,
+            "serialNumber": 1
+          },
+          "TTL": 3600,
+          "fqdn": "zone1",
+          "metadata": {
+            "key2": "value2"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "Patch SOA recordset"
+}

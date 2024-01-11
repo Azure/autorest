@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myRunCommand",
+            "type": "Microsoft.Compute/virtualMachines/runCommands",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
+            "location": "westus",
+            "properties": {
+              "asyncExecution": false,
+              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "parameters": [
+                {
+                  "name": "param1",
+                  "value": "value1"
+                },
+                {
+                  "name": "param2",
+                  "value": "value2"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "runAsUser": "user1",
+              "source": {
+                "script": "Write-Host Hello World!"
+              },
+              "timeoutInSeconds": 0,
+              "treatFailureAsDeploymentFailure": false
+            },
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineRunCommands_ListByVirtualMachine",
+  "title": "List run commands in a Virtual Machine."
+}

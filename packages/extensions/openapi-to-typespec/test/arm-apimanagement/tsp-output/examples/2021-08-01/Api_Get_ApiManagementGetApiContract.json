@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d1f7558aa04f15146d9d8a",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "57d1f7558aa04f15146d9d8a",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d1f7558aa04f15146d9d8a",
+        "properties": {
+          "type": "soap",
+          "path": "schulte",
+          "apiRevision": "1",
+          "displayName": "Service",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Api_Get",
+  "title": "ApiManagementGetApiContract"
+}

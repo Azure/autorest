@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Catalog.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 @doc("An certificate resource belonging to a catalog resource.")
@@ -24,6 +26,7 @@ model Certificate is ProxyResource<CertificateProperties> {
 interface Certificates {
   @doc("Get a Certificate")
   get is ArmResourceRead<Certificate>;
+
   @doc("List Certificate resources by Catalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
@@ -47,12 +50,14 @@ interface Certificates {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
     void,
     CertificateChainResponse
   >;
+
   @doc("Gets the proof of possession nonce.")
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,

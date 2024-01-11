@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Tenant Settings.")
@@ -22,18 +24,26 @@ model AccessInformationContract
 }
 
 @armResourceOperations
-interface TenantAccess {
+interface AccessInformationContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get tenant access information details without secrets.")
+  @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Tenant access metadata")
   @head
+  @operationId("TenantAccess_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       AccessInformationContract,
       BaseParameters<AccessInformationContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update tenant access information details.")
+  @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     {
@@ -44,10 +54,13 @@ interface TenantAccess {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update tenant access information details.")
-  update is ArmResourcePatchSync<
+  @operationId("TenantAccess_Update")
+  update is ArmCustomPatchSync<
     AccessInformationContract,
-    AccessInformationContractProperties,
+    AccessInformationUpdateParameters,
     {
       ...BaseParameters<AccessInformationContract>;
 
@@ -56,7 +69,10 @@ interface TenantAccess {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Returns list of access infos - for Git and Management endpoints.")
+  @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     {
@@ -67,32 +83,43 @@ interface TenantAccess {
       $filter?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate primary access key")
+  @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate secondary access key")
+  @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get tenant access information details.")
+  @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
     AccessInformationSecretsContract
   >;
-}
 
-@armResourceOperations
-interface TenantAccessGit {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate primary access key for GIT.")
+  @operationId("TenantAccessGit_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Regenerate secondary access key for GIT.")
+  @operationId("TenantAccessGit_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void

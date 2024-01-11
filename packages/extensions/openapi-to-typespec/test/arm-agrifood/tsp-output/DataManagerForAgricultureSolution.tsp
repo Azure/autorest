@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("DataManagerForAgriculture solution resource.")
@@ -22,10 +24,15 @@ model DataManagerForAgricultureSolution
 }
 
 @armResourceOperations
-interface SolutionsDiscoverability {
+interface DataManagerForAgricultureSolutions {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Data Manager For Agriculture solution by id.")
+  @operationId("SolutionsDiscoverability_Get")
   get is ArmResourceRead<DataManagerForAgricultureSolution>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get list of Data Manager For Agriculture solutions.")
+  @operationId("SolutionsDiscoverability_List")
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
     {

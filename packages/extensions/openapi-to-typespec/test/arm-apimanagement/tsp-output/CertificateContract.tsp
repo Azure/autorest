@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Certificate details.")
@@ -24,18 +26,26 @@ model CertificateContract is ProxyResource<CertificateContractProperties> {
 }
 
 @armResourceOperations
-interface Certificate {
+interface CertificateContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the details of the certificate specified by its identifier.")
+  @operationId("Certificate_Get")
   get is ArmResourceRead<CertificateContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the certificate specified by its identifier.")
   @head
+  @operationId("Certificate_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       CertificateContract,
       BaseParameters<CertificateContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates the certificate being used for authentication with the backend.")
+  @operationId("Certificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
     {
@@ -46,7 +56,10 @@ interface Certificate {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes specific certificate.")
+  @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
     {
@@ -57,7 +70,10 @@ interface Certificate {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of all certificates in the specified service instance.")
+  @operationId("Certificate_ListByService")
   listByService is ArmResourceListByParent<
     CertificateContract,
     {
@@ -81,7 +97,10 @@ interface Certificate {
       isKeyVaultRefreshFailed?: boolean;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("From KeyVault, Refresh the certificate being used for authentication with the backend.")
+  @operationId("Certificate_RefreshSecret")
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
     void,

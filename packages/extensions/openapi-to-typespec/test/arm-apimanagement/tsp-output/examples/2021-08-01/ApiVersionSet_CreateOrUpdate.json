@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "description": "Version configuration",
+        "displayName": "api set 1",
+        "versioningScheme": "Segment"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "versionSetId": "api1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "api1",
+        "type": "Microsoft.ApiManagement/service/api-version-sets",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/api1",
+        "properties": {
+          "description": "Version configuration",
+          "displayName": "api set 1",
+          "versioningScheme": "Segment"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "api1",
+        "type": "Microsoft.ApiManagement/service/api-version-sets",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/api1",
+        "properties": {
+          "description": "Version configuration",
+          "displayName": "api set 1",
+          "versioningScheme": "Segment"
+        }
+      }
+    }
+  },
+  "operationId": "ApiVersionSet_CreateOrUpdate",
+  "title": "ApiManagementCreateApiVersionSet"
+}

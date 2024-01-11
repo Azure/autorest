@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Snapshot resource.")
@@ -28,18 +30,37 @@ model Snapshot is TrackedResource<SnapshotProperties> {
 interface Snapshots {
   @doc("Gets information about a snapshot.")
   get is ArmResourceRead<Snapshot>;
+
   @doc("Creates or updates a snapshot.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Snapshot>;
+
   @doc("Updates (patches) a snapshot.")
-  update is ArmResourcePatchAsync<Snapshot, SnapshotProperties>;
+  update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
+
   @doc("Deletes a snapshot.")
   delete is ArmResourceDeleteAsync<Snapshot>;
+
   @doc("Lists snapshots under a resource group.")
   listByResourceGroup is ArmResourceListByParent<Snapshot>;
+
   @doc("Lists snapshots under a subscription.")
   list is ArmListBySubscription<Snapshot>;
+
   @doc("Grants access to a snapshot.")
-  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+  grantAccess is ArmResourceActionAsync<
+    Snapshot,
+    GrantAccessData,
+    AccessUri,
+    BaseParameters<Snapshot>,
+    ArmLroLocationHeader
+  >;
+
   @doc("Revokes access to a snapshot.")
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
+  revokeAccess is ArmResourceActionAsync<
+    Snapshot,
+    void,
+    void,
+    BaseParameters<Snapshot>,
+    ArmLroLocationHeader
+  >;
 }

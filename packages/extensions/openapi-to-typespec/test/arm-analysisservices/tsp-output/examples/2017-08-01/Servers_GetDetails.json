@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01",
+    "resourceGroupName": "TestRG",
+    "serverName": "azsdktest",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azsdktest",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.AnalysisServices/servers/azsdktest",
+        "location": "West US",
+        "properties": {
+          "asAdministrators": {
+            "members": [
+              "azsdktest@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Servers_GetDetails",
+  "title": "Get details of a server"
+}

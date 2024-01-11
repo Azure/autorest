@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "action": {
+            "actionType": "InvokeBatchEndpoint",
+            "endpointInvocationDefinition": {
+              "a108545b-def1-4c86-8e53-dbcb1de3a8bc": null
+            }
+          },
+          "displayName": "string",
+          "isEnabled": false,
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Creating",
+          "tags": {
+            "string": "string"
+          },
+          "trigger": {
+            "endTime": "string",
+            "expression": "string",
+            "startTime": "string",
+            "timeZone": "string",
+            "triggerType": "Cron"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Schedules_Get",
+  "title": "Get Schedule."
+}

@@ -23,5 +23,6 @@ namespace Azure.LoadTesting;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2022-11-01 API version.")
   v2022_11_01: "2022-11-01",
 }

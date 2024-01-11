@@ -1,0 +1,128 @@
+{
+  "parameters": {
+    "api-version": "2021-08-08",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com:443/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/actionRules?api-version=2021-08-08&ctoken=%2bRID%3aPlwOAPHEGwB9UwEAAAAgCw%3d%3d%23RT%3a2%23TRC%3a500%23RTD%3aqtQyMDE4LTA2LTEyVDE1OjEyOjE1",
+        "value": [
+          {
+            "name": "DailySuppression",
+            "type": "Microsoft.AlertsManagement/actionRules",
+            "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
+            "location": "Global",
+            "properties": {
+              "description": "Alert processing rule on resource group for daily suppression",
+              "actions": [
+                {
+                  "actionType": "RemoveAllActionGroups"
+                }
+              ],
+              "conditions": [
+                {
+                  "field": "Severity",
+                  "operator": "Equals",
+                  "values": [
+                    "Sev0",
+                    "Sev2"
+                  ]
+                },
+                {
+                  "field": "MonitorService",
+                  "operator": "Equals",
+                  "values": [
+                    "Platform",
+                    "Application Insights"
+                  ]
+                },
+                {
+                  "field": "TargetResourceType",
+                  "operator": "NotEquals",
+                  "values": [
+                    "Microsoft.Compute/VirtualMachines"
+                  ]
+                }
+              ],
+              "enabled": true,
+              "schedule": {
+                "effectiveFrom": "2018-01-10T22:05:09",
+                "effectiveUntil": "2018-12-10T22:05:09",
+                "recurrences": [
+                  {
+                    "endTime": "14:00:00",
+                    "recurrenceType": "Daily",
+                    "startTime": "06:00:00"
+                  }
+                ],
+                "timeZone": "Pacific Standard Time"
+              },
+              "scopes": [
+                "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+              ]
+            },
+            "systemData": {
+              "createdAt": "2018-06-12T22:05:09Z",
+              "createdBy": "abc@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2018-06-12T22:05:09Z",
+              "lastModifiedBy": "xyz@microsoft.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          },
+          {
+            "name": "WeeklySuppression",
+            "type": "Microsoft.AlertsManagement/actionRules",
+            "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+            "location": "Global",
+            "properties": {
+              "description": "Alert processing rule on resource group for adding action group",
+              "actions": [
+                {
+                  "actionGroupIds": [
+                    "actiongGroup1"
+                  ],
+                  "actionType": "AddActionGroups"
+                }
+              ],
+              "conditions": [
+                {
+                  "field": "MonitorCondition",
+                  "operator": "Equals",
+                  "values": [
+                    "Fired"
+                  ]
+                },
+                {
+                  "field": "Description",
+                  "operator": "Contains",
+                  "values": [
+                    "Percentage CPU greater than 80%",
+                    "Metric alert on resource foo"
+                  ]
+                }
+              ],
+              "enabled": true,
+              "scopes": [
+                "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.Compute/VirtualMachines/testResource"
+              ]
+            },
+            "systemData": {
+              "createdAt": "2018-06-12T22:05:09Z",
+              "createdBy": "abc@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2018-06-12T22:05:09Z",
+              "lastModifiedBy": "xyz@microsoft.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AlertProcessingRules_ListBySubscription",
+  "title": "GetAlertProcessingRulesSubscriptionWide"
+}

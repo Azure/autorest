@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSet": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "activeKey": {
+          "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey",
+        "rotationToLatestKeyVersionEnabled": true
+      }
+    },
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "type": "Microsoft.Compute/diskEncryptionSets",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/KeyVersion2"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "lastKeyRotationTimestamp": "2021-04-01T04:41:35.079872+00:00",
+          "provisioningState": "Succeeded",
+          "rotationToLatestKeyVersionEnabled": true
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "type": "Microsoft.Compute/diskEncryptionSets",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_Update",
+  "title": "Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Succeeded"
+}

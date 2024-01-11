@@ -17,6 +17,7 @@ enum MyKind {
   Kind1,
 }
 
+@doc("Colors possible")
 enum GoblinSharkColor {
   pink,
   gray,

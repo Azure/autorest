@@ -1,0 +1,160 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "configuration": "{ServiceConfiguration}",
+        "networkProfile": {
+          "loadBalancerConfigurations": [
+            {
+              "name": "myLoadBalancer",
+              "properties": {
+                "frontendIpConfigurations": [
+                  {
+                    "name": "myfe",
+                    "properties": {
+                      "publicIPAddress": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "packageUrl": "{PackageUrl}",
+        "roleProfile": {
+          "roles": [
+            {
+              "name": "ContosoFrontend",
+              "sku": {
+                "name": "Standard_D1_v2",
+                "capacity": 1,
+                "tier": "Standard"
+              }
+            }
+          ]
+        },
+        "upgradeMode": "Auto"
+      }
+    },
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "id": "/subscriptions/5393f919-a68a-43d0-9063-4b2bda6bffdf/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "myLoadBalancer",
+                "properties": {
+                  "frontendIpConfigurations": [
+                    {
+                      "name": "myfe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "packageUrl": "{PackageUrl}",
+          "provisioningState": "Updating",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "capacity": 1,
+                  "tier": "Standard"
+                }
+              }
+            ]
+          },
+          "uniqueId": "14d10b45-ced7-42ef-a406-50a3df2cea7d",
+          "upgradeMode": "Auto"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-01-01T17:18:19.1234567Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "id": "/subscriptions/5393f919-a68a-43d0-9063-4b2bda6bffdf/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "myLoadBalancer",
+                "properties": {
+                  "frontendIpConfigurations": [
+                    {
+                      "name": "myfe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": []
+          },
+          "packageUrl": "{PackageUrl}",
+          "provisioningState": "Creating",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "capacity": 1,
+                  "tier": "Standard"
+                }
+              }
+            ]
+          },
+          "uniqueId": "14d10b45-ced7-42ef-a406-50a3df2cea7d",
+          "upgradeMode": "Auto"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-01-01T17:18:19.1234567Z"
+        }
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CloudServices_CreateOrUpdate",
+  "title": "Create New Cloud Service with Single Role"
+}

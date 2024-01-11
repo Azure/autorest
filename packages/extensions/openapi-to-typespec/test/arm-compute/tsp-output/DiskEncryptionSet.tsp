@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("disk encryption set resource.")
@@ -24,16 +26,23 @@ model DiskEncryptionSet is TrackedResource<EncryptionSetProperties> {
 interface DiskEncryptionSets {
   @doc("Gets information about a disk encryption set.")
   get is ArmResourceRead<DiskEncryptionSet>;
+
   @doc("Creates or updates a disk encryption set")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskEncryptionSet>;
+
   @doc("Updates (patches) a disk encryption set.")
-  update is ArmResourcePatchAsync<DiskEncryptionSet, EncryptionSetProperties>;
+  update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
+
   @doc("Deletes a disk encryption set.")
   delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
+
   @doc("Lists all the disk encryption sets under a resource group.")
   listByResourceGroup is ArmResourceListByParent<DiskEncryptionSet>;
+
   @doc("Lists all the disk encryption sets under a subscription.")
   list is ArmListBySubscription<DiskEncryptionSet>;
+
   @doc("Lists all resources that are encrypted with this disk encryption set.")
+  // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
   ListAssociatedResources is Azure.Core.ResourceList<string>;
 }

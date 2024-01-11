@@ -21,5 +21,6 @@ namespace Azure.Keyvault;
 
 @doc("The available API versions.")
 enum Versions {
+@doc("The 7.4-preview.1 API version.")
 v7.4_preview.1: "7.4-preview.1",
 }

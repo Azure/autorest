@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImage": {
+      "location": "West US",
+      "properties": {
+        "hyperVGeneration": "V1",
+        "identifier": {
+          "offer": "myOfferName",
+          "publisher": "myPublisherName",
+          "sku": "mySkuName"
+        },
+        "osState": "Generalized",
+        "osType": "Windows"
+      }
+    },
+    "galleryImageName": "myGalleryImageName",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageName",
+        "location": "West US",
+        "properties": {
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myGalleryImageName",
+        "location": "West US",
+        "properties": {
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myGalleryImageName",
+        "location": "West US",
+        "properties": {
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "GalleryImages_CreateOrUpdate",
+  "title": "Create or update a simple gallery image."
+}

@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "tempgroup",
+    "parameters": {
+      "properties": {
+        "type": "websocket",
+        "path": "newapiPath",
+        "description": "apidescription5200",
+        "displayName": "apiname1463",
+        "protocols": [
+          "wss",
+          "ws"
+        ],
+        "serviceUrl": "wss://echo.websocket.org"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apiid9419",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apiid9419",
+        "properties": {
+          "type": "websocket",
+          "path": "newapiPath",
+          "description": "apidescription5200",
+          "apiRevision": "1",
+          "authenticationSettings": null,
+          "displayName": "apiname1463",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "ws",
+            "wss"
+          ],
+          "serviceUrl": "wss://echo.websocket.org",
+          "subscriptionKeyParameterNames": null
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "apiid9419",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apiid9419",
+        "properties": {
+          "type": "websocket",
+          "path": "newapiPath",
+          "description": "apidescription5200",
+          "apiRevision": "1",
+          "authenticationSettings": null,
+          "displayName": "apiname1463",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "ws",
+            "wss"
+          ],
+          "serviceUrl": "wss://echo.websocket.org",
+          "subscriptionKeyParameterNames": null
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateWebSocketApi"
+}

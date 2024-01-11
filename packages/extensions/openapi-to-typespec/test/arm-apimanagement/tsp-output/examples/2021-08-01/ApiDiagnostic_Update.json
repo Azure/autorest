@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "echo-api",
+    "diagnosticId": "applicationinsights",
+    "parameters": {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "backend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "frontend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "loggerId": "/loggers/applicationinsights",
+        "sampling": {
+          "percentage": 50,
+          "samplingType": "fixed"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "applicationinsights",
+        "type": "Microsoft.ApiManagement/service/apis/diagnostics",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api/diagnostics/applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "backend": {
+            "response": {
+              "body": {
+                "bytes": 100
+              },
+              "headers": []
+            },
+            "request": {
+              "body": {
+                "bytes": 100
+              },
+              "headers": []
+            }
+          },
+          "frontend": {
+            "response": {
+              "body": {
+                "bytes": 100
+              },
+              "headers": []
+            },
+            "request": {
+              "body": {
+                "bytes": 100
+              },
+              "headers": []
+            }
+          },
+          "httpCorrelationProtocol": "Legacy",
+          "logClientIp": true,
+          "loggerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/aisamplingtest",
+          "sampling": {
+            "percentage": 100,
+            "samplingType": "fixed"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ApiDiagnostic_Update",
+  "title": "ApiManagementUpdateApiDiagnostic"
+}

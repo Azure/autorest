@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "platformFaultDomainCount": 3,
+        "supportAutomaticPlacement": true
+      },
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "location": "westus",
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "supportAutomaticPlacement": true
+        },
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "location": "westus",
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "supportAutomaticPlacement": true
+        },
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHostGroups_CreateOrUpdate",
+  "title": "Create or update a dedicated host group."
+}

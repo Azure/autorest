@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Product.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 @doc("An device group resource belonging to a product resource.")
@@ -25,12 +27,29 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 interface DeviceGroups {
   @doc("Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   get is ArmResourceRead<DeviceGroup>;
+
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DeviceGroup,
+    BaseParameters<DeviceGroup>,
+    ArmAsyncOperationHeader
+  >;
+
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+  update is ArmCustomPatchAsync<
+    DeviceGroup,
+    DeviceGroupUpdate,
+    BaseParameters<DeviceGroup>,
+    ArmLroLocationHeader
+  >;
+
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  delete is ArmResourceDeleteAsync<DeviceGroup>;
+  delete is ArmResourceDeleteAsync<
+    DeviceGroup,
+    BaseParameters<DeviceGroup>,
+    ArmLroLocationHeader
+  >;
+
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
@@ -54,11 +73,15 @@ interface DeviceGroups {
       maxpagesize?: int32;
     }
   >;
+
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   claimDevices is ArmResourceActionNoResponseContentAsync<
     DeviceGroup,
-    ClaimDevicesRequest
+    ClaimDevicesRequest,
+    BaseParameters<DeviceGroup>,
+    ArmLroLocationHeader
   >;
+
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }

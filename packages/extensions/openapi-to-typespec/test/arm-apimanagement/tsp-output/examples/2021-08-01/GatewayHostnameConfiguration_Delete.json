@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "gatewayId": "gw1",
+    "hcId": "default",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "GatewayHostnameConfiguration_Delete",
+  "title": "ApiManagementDeleteGatewayHostnameConfiguration"
+}

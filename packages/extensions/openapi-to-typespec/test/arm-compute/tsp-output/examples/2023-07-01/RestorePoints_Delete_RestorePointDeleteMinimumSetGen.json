@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "restorePointCollectionName": "aaaaaaaaaaaaaaaaa",
+    "restorePointName": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "RestorePoints_Delete",
+  "title": "RestorePoint_Delete_MinimumSet_Gen"
+}

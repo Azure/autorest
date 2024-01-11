@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "resourceGroupName": "myResourceGroup",
+    "snapshotName": "mySnapshot",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySnapshot",
+        "type": "Microsoft.Compute/snapshots",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+            "sourceUniqueId": "d633885d-d102-4481-901e-5b2413d1a7be"
+          },
+          "diskSizeGB": 100,
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          },
+          "encryptionSettingsCollection": {
+            "enabled": true,
+            "encryptionSettings": [
+              {
+                "diskEncryptionKey": {
+                  "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  }
+                },
+                "keyEncryptionKey": {
+                  "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  }
+                }
+              }
+            ]
+          },
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "purchasePlan": {
+            "name": "test_sku",
+            "product": "marketplace_vm_test",
+            "publisher": "test_test_pmc2pc1"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "supportsHibernation": true,
+          "timeCreated": "2016-12-28T04:41:35.079872+00:00"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Snapshots"
+        }
+      }
+    }
+  },
+  "operationId": "Snapshots_Get",
+  "title": "Get information about a snapshot."
+}

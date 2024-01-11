@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "denyAssignmentId": "denyAssignmentId",
+    "scope": "subscriptions/subId/resourcegroups/rgname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "denyAssignmentId",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+        "properties": {
+          "description": "Deny assignment description",
+          "denyAssignmentName": "Deny assignment name",
+          "doNotApplyToChildScopes": false,
+          "excludePrincipals": [
+            {
+              "type": "principalType2",
+              "id": "principalId2"
+            }
+          ],
+          "isSystemProtected": true,
+          "permissions": [
+            {
+              "actions": [
+                "action"
+              ],
+              "dataActions": [],
+              "notActions": [],
+              "notDataActions": []
+            }
+          ],
+          "principals": [
+            {
+              "type": "principalType1",
+              "id": "principalId1"
+            }
+          ],
+          "scope": "/subscriptions/subId/resourcegroups/rgname"
+        }
+      }
+    }
+  },
+  "operationId": "DenyAssignments_Get",
+  "title": "Get deny assignment by name"
+}

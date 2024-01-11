@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "displayName": "Test Template ProductName 4"
+      }
+    },
+    "productId": "testproduct",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testproduct",
+        "type": "Microsoft.ApiManagement/service/products",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/testproduct",
+        "properties": {
+          "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
+          "approvalRequired": true,
+          "displayName": "Test Template ProductName 4",
+          "state": "published",
+          "subscriptionRequired": true,
+          "subscriptionsLimit": 1
+        }
+      }
+    }
+  },
+  "operationId": "Product_Update",
+  "title": "ApiManagementUpdateProduct"
+}

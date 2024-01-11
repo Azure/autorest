@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "$expand": "userData",
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myVirtualMachineScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVirtualMachineScaleSet",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet",
+        "location": "westus",
+        "properties": {
+          "doNotRunExtensionsOnOverprovisionedVMs": false,
+          "hostGroup": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup"
+          },
+          "overprovision": false,
+          "platformFaultDomainCount": 1,
+          "provisioningState": "succeeded",
+          "singlePlacementGroup": false,
+          "upgradePolicy": {
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": false
+            },
+            "mode": "Automatic"
+          },
+          "virtualMachineProfile": {
+            "applicationProfile": {
+              "galleryApplications": [
+                {
+                  "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config",
+                  "order": 1,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                  "tags": "myTag1"
+                },
+                {
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+                }
+              ]
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "myNic",
+                  "properties": {
+                    "ipConfigurations": [
+                      {
+                        "name": "myIPConfig",
+                        "properties": {
+                          "primary": true,
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "networkSecurityGroup": {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                    },
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "admin",
+              "computerNamePrefix": "myVirtualMachineScaleSet",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false
+              }
+            },
+            "storageProfile": {
+              "dataDisks": [],
+              "imageReference": {
+                "offer": "databricks",
+                "publisher": "azuredatabricks",
+                "sku": "databricksworker",
+                "version": "3.15.2"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "createOption": "FromImage",
+                "diskSizeGB": 30,
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                }
+              }
+            },
+            "userData": "RXhhbXBsZSBVc2VyRGF0YQ=="
+          }
+        },
+        "sku": {
+          "name": "Standard_D2s_v3",
+          "capacity": 4,
+          "tier": "Standard"
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_Get",
+  "title": "Get a virtual machine scale set with UserData"
+}

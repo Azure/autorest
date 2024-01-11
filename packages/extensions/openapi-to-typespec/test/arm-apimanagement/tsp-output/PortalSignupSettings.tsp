@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,30 +9,40 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Sign-Up settings for a developer portal.")
 @singleton("signup")
 @parentResource(ApiManagementServiceResource)
 model PortalSignupSettings is ProxyResource<PortalSignupSettingsProperties> {
-  @key("signup")
+  @key("portalsetting")
   @segment("portalsettings")
   name: string;
 }
 
 @armResourceOperations
-interface SignUpSettings {
+@projectedName("client", "PortalSignupSettings")
+interface PortalSignupSettingsOperationGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Sign Up Settings for the Portal")
+  @operationId("SignUpSettings_Get")
   get is ArmResourceRead<PortalSignupSettings>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the SignUpSettings.")
   @head
+  @operationId("SignUpSettings_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PortalSignupSettings,
       BaseParameters<PortalSignupSettings>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or Update Sign-Up settings.")
+  @operationId("SignUpSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
     {
@@ -42,10 +53,13 @@ interface SignUpSettings {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Sign-Up settings.")
-  update is ArmResourcePatchSync<
+  @operationId("SignUpSettings_Update")
+  update is ArmCustomPatchSync<
     PortalSignupSettings,
-    PortalSignupSettingsProperties,
+    PortalSignupSettings,
     {
       ...BaseParameters<PortalSignupSettings>;
 
@@ -54,10 +68,9 @@ interface SignUpSettings {
       `If-Match`: string;
     }
   >;
-}
 
-@armResourceOperations
-interface PortalSettings {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists a collection of portalsettings defined within a service instance..")
+  @operationId("PortalSettings_ListByService")
   listByService is ArmResourceListByParent<PortalSignupSettings>;
 }

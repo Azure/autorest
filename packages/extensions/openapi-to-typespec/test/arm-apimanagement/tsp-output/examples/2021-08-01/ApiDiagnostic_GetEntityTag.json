@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d1f7558aa04f15146d9d8a",
+    "diagnosticId": "applicationinsights",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "ApiDiagnostic_GetEntityTag",
+  "title": "ApiManagementHeadApiDiagnostic"
+}

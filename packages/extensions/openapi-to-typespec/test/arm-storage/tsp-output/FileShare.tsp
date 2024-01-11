@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FileServiceProperties.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 @doc("Properties of the file share, including Id, resource name, resource type, Etag.")
@@ -39,6 +41,7 @@ interface FileShares {
       `x-ms-snapshot`?: string;
     }
   >;
+
   @doc("Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. ")
   create is ArmResourceCreateOrReplaceSync<
     FileShare,
@@ -50,8 +53,10 @@ interface FileShares {
       $expand?: string;
     }
   >;
+
   @doc("Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ")
-  update is ArmResourcePatchSync<FileShare, FileShareProperties>;
+  update is ArmCustomPatchSync<FileShare, FileShare>;
+
   @doc("Deletes specified share under its account.")
   delete is ArmResourceDeleteSync<
     FileShare,
@@ -67,6 +72,7 @@ interface FileShares {
       $include?: string;
     }
   >;
+
   @doc("Lists all shares.")
   list is ArmResourceListByParent<
     FileShare,
@@ -86,8 +92,10 @@ interface FileShares {
       $expand?: string;
     }
   >;
+
   @doc("Restore a file share within a valid retention days if share soft delete is enabled")
   restore is ArmResourceActionSync<FileShare, DeletedShare, void>;
+
   @doc("The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.")
   lease is ArmResourceActionSync<
     FileShare,

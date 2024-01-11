@@ -6,21 +6,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.IntegrationSpaces;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The status of the current operation.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
@@ -31,6 +35,7 @@ enum ProvisioningState {
   Accepted,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -44,6 +49,40 @@ model SpaceResourceProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  @doc("The description of the resource.")
+  description?: string;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("The type used for update operations of the Space.")
+model SpaceUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Space.")
+  properties?: SpaceUpdateProperties;
+}
+
+@doc("The updatable properties of the Space.")
+model SpaceUpdateProperties {
   @doc("The description of the resource.")
   description?: string;
 }
@@ -74,6 +113,24 @@ model TrackingDataStore {
 
   @doc("The data store ingestion URI.")
   dataStoreIngestionUri: string;
+}
+
+@doc("The type used for update operations of the Application.")
+model ApplicationUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The updatable properties of the Application.")
+  properties?: ApplicationUpdateProperties;
+}
+
+@doc("The updatable properties of the Application.")
+model ApplicationUpdateProperties {
+  @doc("The description of the resource.")
+  description?: string;
+
+  @doc("The tracking data stores.")
+  trackingDataStores?: Record<TrackingDataStore>;
 }
 
 @doc("The properties of business process.")
@@ -139,6 +196,33 @@ model BusinessProcessMappingItem {
 
   @doc("The mapping item operation type of the business process.")
   operationType?: string;
+}
+
+@doc("The type used for update operations of the BusinessProcess.")
+model BusinessProcessUpdate {
+  @doc("The updatable properties of the BusinessProcess.")
+  properties?: BusinessProcessUpdateProperties;
+}
+
+@doc("The updatable properties of the BusinessProcess.")
+model BusinessProcessUpdateProperties {
+  @doc("The description of the business process.")
+  description?: string;
+
+  @doc("The table name of the business process.")
+  tableName?: string;
+
+  @doc("The tracking data store reference name.")
+  trackingDataStoreReferenceName?: string;
+
+  @doc("The business process identifier.")
+  identifier?: BusinessProcessIdentifier;
+
+  @doc("The business process stages.")
+  businessProcessStages?: Record<BusinessProcessStage>;
+
+  @doc("The business process mapping.")
+  businessProcessMapping?: Record<BusinessProcessMappingItem>;
 }
 
 @doc("The business process development artifact get or delete request.")
@@ -311,4 +395,19 @@ model InfrastructureResourceProperties {
 
   @doc("The id of the infrastructure resource.")
   resourceId: string;
+}
+
+@doc("The type used for update operations of the InfrastructureResource.")
+model InfrastructureResourceUpdate {
+  @doc("The updatable properties of the InfrastructureResource.")
+  properties?: InfrastructureResourceUpdateProperties;
+}
+
+@doc("The updatable properties of the InfrastructureResource.")
+model InfrastructureResourceUpdateProperties {
+  @doc("The type of the infrastructure resource.")
+  resourceType?: string;
+
+  @doc("The id of the infrastructure resource.")
+  resourceId?: string;
 }

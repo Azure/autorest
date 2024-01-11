@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "product": {
+              "name": "Starter",
+              "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+              "approvalRequired": false,
+              "id": "/products/starter",
+              "state": "published",
+              "subscriptionRequired": true,
+              "subscriptionsLimit": 1,
+              "terms": ""
+            },
+            "tag": {
+              "name": "awesomeTag",
+              "id": "/tags/apitag123"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Product_ListByTags",
+  "title": "ApiManagementListProductsByTags"
+}

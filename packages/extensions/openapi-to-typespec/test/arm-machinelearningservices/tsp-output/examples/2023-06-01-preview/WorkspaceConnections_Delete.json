@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "connectionName": "connection-1",
+    "resourceGroupName": "resourceGroup-1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "workspace-1"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "WorkspaceConnections_Delete",
+  "title": "DeleteWorkspaceConnection"
+}

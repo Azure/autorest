@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "a1",
+            "type": "Microsoft.ApiManagement/service/gateways",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1",
+            "properties": {
+              "description": "my gateway 1",
+              "locationData": {
+                "name": "my location 1"
+              }
+            }
+          },
+          {
+            "name": "5a73933b8f27f7cc82a2d533",
+            "type": "Microsoft.ApiManagement/service/gateways",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw2",
+            "properties": {
+              "description": "my gateway 2",
+              "locationData": {
+                "name": "my location 2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Gateway_ListByService",
+  "title": "ApiManagementListGateways"
+}

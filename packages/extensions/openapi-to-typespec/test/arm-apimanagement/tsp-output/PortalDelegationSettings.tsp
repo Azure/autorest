@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Delegation settings for a developer portal.")
@@ -15,24 +17,33 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 model PortalDelegationSettings
   is ProxyResource<PortalDelegationSettingsProperties> {
-  @key("delegation")
+  @key("portalsetting")
   @segment("portalsettings")
   name: string;
 }
 
 @armResourceOperations
-interface DelegationSettings {
+@projectedName("client", "PortalDelegationSettings")
+interface PortalDelegationSettingsOperationGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get Delegation Settings for the Portal.")
+  @operationId("DelegationSettings_Get")
   get is ArmResourceRead<PortalDelegationSettings>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the entity state (Etag) version of the DelegationSettings.")
   @head
+  @operationId("DelegationSettings_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PortalDelegationSettings,
       BaseParameters<PortalDelegationSettings>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or Update Delegation settings.")
+  @operationId("DelegationSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     {
@@ -43,10 +54,13 @@ interface DelegationSettings {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Delegation settings.")
-  update is ArmResourcePatchSync<
+  @operationId("DelegationSettings_Update")
+  update is ArmCustomPatchSync<
     PortalDelegationSettings,
-    PortalDelegationSettingsProperties,
+    PortalDelegationSettings,
     {
       ...BaseParameters<PortalDelegationSettings>;
 
@@ -55,16 +69,18 @@ interface DelegationSettings {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Lists a collection of portalsettings defined within a service instance..")
+  @operationId("PortalSettings_ListByService")
+  listByService is ArmResourceListByParent<PortalDelegationSettings>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the secret validation key of the DelegationSettings.")
+  @operationId("DelegationSettings_ListSecrets")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,
     PortalSettingValidationKeyContract
   >;
-}
-
-@armResourceOperations
-interface PortalSettings {
-  @doc("Lists a collection of portalsettings defined within a service instance..")
-  listByService is ArmResourceListByParent<PortalDelegationSettings>;
 }

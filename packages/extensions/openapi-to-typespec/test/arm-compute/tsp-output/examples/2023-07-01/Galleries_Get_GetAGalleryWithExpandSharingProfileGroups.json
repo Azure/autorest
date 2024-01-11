@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "$expand": "SharingProfile/Groups",
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "sharingProfile": {
+            "groups": [
+              {
+                "type": "Subscriptions",
+                "ids": [
+                  "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+                  "380fd389-260b-41aa-bad9-0a83108c370b"
+                ]
+              },
+              {
+                "type": "AADTenants",
+                "ids": [
+                  "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+                ]
+              }
+            ],
+            "permissions": "Groups"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Galleries_Get",
+  "title": "Get a gallery with expand sharingProfile groups."
+}

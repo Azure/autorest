@@ -39,6 +39,8 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   extensions: Extension[];
   resource?: TypespecResource;
   operationGroupName?: string;
+  operationId?: string;
+  examples?: Record<string, Record<string, unknown>>;
 }
 
 export type ResourceKind =
@@ -63,7 +65,7 @@ export interface TypespecResource {
 
 export interface ServiceInformation extends WithDoc {
   name: string;
-  version?: string;
+  versions?: string[];
   endpoint?: string;
   endpointParameters?: EndpointParameter[];
   produces?: string[];
@@ -173,7 +175,8 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   name: string;
   templateParameters?: string[];
   decorators?: TypespecDecorator[];
-  operationGroupName: string;
+  operationId?: string;
+  examples?: Record<string, Record<string, unknown>>;
 }
 
 export type TspArmResourceOperation =
@@ -198,7 +201,10 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
     | "ArmResourceActionSync"
     | "ArmResourceActionNoContentSync"
     | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync";
+    | "ArmResourceActionNoResponseContentAsync"
+    | "checkGlobalNameAvailability"
+    | "checkLocalNameAvailability"
+    | "checkNameAvailability";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {

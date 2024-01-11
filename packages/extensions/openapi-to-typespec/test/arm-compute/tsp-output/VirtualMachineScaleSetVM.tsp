@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Describes a virtual machine scale set virtual machine.")
@@ -38,8 +40,10 @@ model VirtualMachineScaleSetVM
 }
 
 @armResourceOperations
-interface VirtualMachineScaleSetVMs {
+interface VirtualMachineScaleSetVMS {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a virtual machine from a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Get")
   get is ArmResourceRead<
     VirtualMachineScaleSetVM,
     {
@@ -54,7 +58,10 @@ interface VirtualMachineScaleSetVMs {
       $expand?: InstanceViewTypes;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a virtual machine of a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Update")
   update is ArmResourceCreateOrUpdateAsync<
     VirtualMachineScaleSetVM,
     {
@@ -65,7 +72,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes a virtual machine from a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Delete")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVM,
     {
@@ -80,7 +90,10 @@ interface VirtualMachineScaleSetVMs {
       forceDeletion?: boolean;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of all virtual machines in a VM scale sets.")
+  @operationId("VirtualMachineScaleSetVMs_List")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVM,
     {
@@ -99,7 +112,10 @@ interface VirtualMachineScaleSetVMs {
       $expand?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     VirtualMachineScaleSetVMReimageParameters,
@@ -112,7 +128,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.")
+  @operationId("VirtualMachineScaleSetVMs_ReimageAll")
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -125,7 +144,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.")
+  @operationId("VirtualMachineScaleSetVMs_Deallocate")
   deallocate is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -138,7 +160,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.")
+  @operationId("VirtualMachineScaleSetVMs_PowerOff")
   powerOff is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -155,7 +180,10 @@ interface VirtualMachineScaleSetVMs {
       skipShutdown?: boolean;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Restarts a virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Restart")
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -168,7 +196,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Starts a virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_Start")
   start is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -181,7 +212,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.")
+  @operationId("VirtualMachineScaleSetVMs_Redeploy")
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -194,7 +228,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData")
   retrieveBootDiagnosticsData is ArmResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
@@ -211,7 +248,10 @@ interface VirtualMachineScaleSetVMs {
       sasUriExpirationTimeInMinutes?: int32;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Performs maintenance on a virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_PerformMaintenance")
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -224,7 +264,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to simulate the eviction of spot virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
   simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVM,
     void,
@@ -236,7 +279,10 @@ interface VirtualMachineScaleSetVMs {
       vmScaleSetName: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Run command on a virtual machine in a VM scale set.")
+  @operationId("VirtualMachineScaleSetVMs_RunCommand")
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,
@@ -247,9 +293,14 @@ interface VirtualMachineScaleSetVMs {
       @doc("The name of the VM scale set.")
       @path
       vmScaleSetName: string;
-    }
+    },
+    ArmLroLocationHeader
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   @doc("Gets the status of a virtual machine from a VM scale set.")
+  // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
   @get
   GetInstanceView is Azure.Core.Foundations.Operation<

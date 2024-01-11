@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the proximity placement group.")
@@ -35,18 +37,22 @@ interface ProximityPlacementGroups {
       includeColocationStatus?: string;
     }
   >;
+
   @doc("Create or update a proximity placement group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
-  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
+
   @doc("Update a proximity placement group.")
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
   >;
+
   @doc("Delete a proximity placement group.")
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
+
   @doc("Lists all proximity placement groups in a resource group.")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
+
   @doc("Lists all proximity placement groups in a subscription.")
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }

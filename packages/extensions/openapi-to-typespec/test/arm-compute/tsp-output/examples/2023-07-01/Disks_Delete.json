@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{operationId}&monitor=true&api-version=2023-04-02"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Disks_Delete",
+  "title": "Delete a managed disk."
+}

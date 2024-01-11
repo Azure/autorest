@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "configurationName": "configuration",
+    "parameters": {
+      "properties": {
+        "branch": "master"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "6074ec02093a9d0dac3d7345",
+        "type": "Microsoft.ApiManagement/service/tenant/operationResults",
+        "id": "6074ec02093a9d0dac3d7345",
+        "properties": {
+          "actionLog": [],
+          "resultInfo": "Validation is successfull",
+          "started": "2021-04-13T00:55:30.62Z",
+          "status": "Succeeded",
+          "updated": "2021-04-13T00:55:39.857Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5a1af64e2a6d2e0b688d751e?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "TenantConfiguration_Validate",
+  "title": "ApiManagementTenantConfigurationValidate"
+}

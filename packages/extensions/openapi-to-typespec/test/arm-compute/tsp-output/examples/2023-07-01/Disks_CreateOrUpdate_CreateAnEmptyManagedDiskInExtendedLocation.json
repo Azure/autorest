@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "extendedLocation": {
+        "name": "{edge-zone-id}",
+        "type": "EdgeZone"
+      },
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 200
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "extendedLocation": {
+          "name": "{edge-zone-id}",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "extendedLocation": {
+          "name": "{edge-zone-id}",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "location": "West US",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "Create an empty managed disk in extended location."
+}

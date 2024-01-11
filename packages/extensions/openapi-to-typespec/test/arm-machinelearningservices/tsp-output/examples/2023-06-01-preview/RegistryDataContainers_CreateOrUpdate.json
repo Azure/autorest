@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "dataType": "uri_folder",
+        "isArchived": false,
+        "properties": {
+          "string": "string"
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "dataType": "mltable",
+          "isArchived": false,
+          "latestVersion": "string",
+          "nextVersion": "string",
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "dataType": "uri_folder",
+          "isArchived": false,
+          "latestVersion": "string",
+          "nextVersion": "string",
+          "properties": {
+            "string": "string"
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryDataContainers_CreateOrUpdate",
+  "title": "CreateOrUpdate Registry Data Container."
+}

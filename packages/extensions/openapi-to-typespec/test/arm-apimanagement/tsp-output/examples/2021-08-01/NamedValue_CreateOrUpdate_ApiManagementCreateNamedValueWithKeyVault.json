@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "namedValueId": "testprop6",
+    "parameters": {
+      "properties": {
+        "displayName": "prop6namekv",
+        "keyVault": {
+          "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+          "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
+        },
+        "secret": true,
+        "tags": [
+          "foo",
+          "bar"
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testprop6",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            },
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
+          },
+          "secret": true,
+          "tags": [
+            "foo",
+            "bar"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testprop6",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            },
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
+          },
+          "secret": true,
+          "tags": [
+            "foo",
+            "bar"
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "NamedValue_CreateOrUpdate",
+  "title": "ApiManagementCreateNamedValueWithKeyVault"
+}

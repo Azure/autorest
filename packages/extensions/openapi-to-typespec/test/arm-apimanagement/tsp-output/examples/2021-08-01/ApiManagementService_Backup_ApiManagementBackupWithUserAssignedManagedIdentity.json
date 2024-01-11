@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "accessType": "UserAssignedManagedIdentity",
+      "backupName": "backup5",
+      "clientId": "XXXXX-a154-4830-XXXX-46a12da1a1e2",
+      "containerName": "apim-backups",
+      "storageAccount": "contosorpstorage"
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAQM8o=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "XXXXX-5fb4-4916-95d4-64b306f9d924",
+          "tenantId": "XXXXX-86f1-XXXXX-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/rg1UserIdentity": {
+              "clientId": "XXXXX-a154-4830-XXXX-46a12da1a1e2",
+              "principalId": "XXXXX-a100-4478-XXXX-d65d98118ba0"
+            },
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/vpnpremium": {
+              "clientId": "XXXX-6328-4db2-XXXX-ab0e3e7806cf",
+              "principalId": "XXXXX-9208-4128-af2d-a10d2af9b5a3"
+            }
+          }
+        },
+        "location": "Central US EUAP",
+        "properties": {
+          "createdAtUtc": "2020-04-23T16:26:47.8637967Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-centraluseuap-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": true,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "platformVersion": "stv1",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "52.XXXX.160.66"
+          ],
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "apimService1@corp.microsoft.com",
+          "publisherName": "MS",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkType": "None"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "systemData": {
+          "lastModifiedAt": "2021-06-30T06:24:57.0008037Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Owner": "apimService1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Backup",
+  "title": "ApiManagementBackupWithUserAssignedManagedIdentity"
+}

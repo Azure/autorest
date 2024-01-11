@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./GatewayContract.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
 @doc("Gateway certificate authority details.")
@@ -25,18 +27,26 @@ model GatewayCertificateAuthorityContract
 }
 
 @armResourceOperations
-interface GatewayCertificateAuthority {
+interface GatewayCertificateAuthorityContracts {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get assigned Gateway Certificate Authority details.")
+  @operationId("GatewayCertificateAuthority_Get")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.")
   @head
+  @operationId("GatewayCertificateAuthority_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GatewayCertificateAuthorityContract,
       BaseParameters<GatewayCertificateAuthorityContract>
     >,
   ): OkResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Assign Certificate entity to Gateway entity as Certificate Authority.")
+  @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     {
@@ -47,7 +57,10 @@ interface GatewayCertificateAuthority {
       `If-Match`?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Remove relationship between Certificate Authority and Gateway entity.")
+  @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     {
@@ -58,7 +71,10 @@ interface GatewayCertificateAuthority {
       `If-Match`: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the collection of Certificate Authorities for the specified Gateway entity.")
+  @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     {

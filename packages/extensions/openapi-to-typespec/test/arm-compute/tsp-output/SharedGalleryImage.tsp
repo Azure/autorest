@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./SharedGallery.tsp";
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 @doc("Specifies information about the gallery image definition that you want to create or update.")
@@ -24,6 +26,7 @@ model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
 interface SharedGalleryImages {
   @doc("Get a shared gallery image by subscription id or tenant id.")
   get is ArmResourceRead<SharedGalleryImage>;
+
   @doc("List shared gallery images by subscription id or tenant id.")
   list is ArmResourceListByParent<
     SharedGalleryImage,

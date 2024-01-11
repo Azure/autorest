@@ -6,21 +6,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("Provisioning state of the resource.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
@@ -31,6 +35,7 @@ enum ProvisioningState {
   @doc("The resource create request has been accepted") Accepted,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -38,6 +43,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Certificate status values.")
 enum CertificateStatus {
   @doc("Certificate is active") Active,
   @doc("Certificate is inactive") Inactive,
@@ -45,11 +51,13 @@ enum CertificateStatus {
   @doc("Certificate has been revoked") Revoked,
 }
 
+@doc("Regional data boundary values.")
 enum RegionalDataBoundary {
   @doc("No data boundary") None,
   @doc("EU data boundary") EU,
 }
 
+@doc("Image type values.")
 enum ImageType {
   @doc("Invalid image.") InvalidImageType,
   @doc("One Bl image type") OneBl,
@@ -77,21 +85,25 @@ enum ImageType {
   @doc("Other image type") Other,
 }
 
+@doc("OS feed type values.")
 enum OSFeedType {
   @doc("Retail OS feed type.") Retail,
   @doc("Retail evaluation OS feed type.") RetailEval,
 }
 
+@doc("Update policy values.")
 enum UpdatePolicy {
   @doc("Update all policy.") UpdateAll,
   @doc("No update for 3rd party app policy.") No3rdPartyAppUpdates,
 }
 
+@doc("Allow crash dumps values.")
 enum AllowCrashDumpCollection {
   @doc("Crash dump collection enabled") Enabled,
   @doc("Crash dump collection disabled") Disabled,
 }
 
+@doc("Capability image type")
 enum CapabilityType {
   @doc("Application development capability") ApplicationDevelopment,
   @doc("Field servicing capability") FieldServicing,
@@ -102,6 +114,31 @@ model CatalogProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("The type used for update operations of the Catalog.")
+model CatalogUpdate {
+  @doc("Resource tags.")
+  tags?: Record<string>;
 }
 
 @doc("The properties of certificate")
@@ -328,10 +365,58 @@ model ProductProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The type used for update operations of the Product.")
+model ProductUpdate {
+  @doc("The updatable properties of the Product.")
+  properties?: ProductUpdateProperties;
+}
+
+@doc("The updatable properties of the Product.")
+model ProductUpdateProperties {
+  @doc("Description of the product")
+  description?: string;
+}
+
+@doc("The type used for update operations of the DeviceGroup.")
+model DeviceGroupUpdate {
+  @doc("The updatable properties of the DeviceGroup.")
+  properties?: DeviceGroupUpdateProperties;
+}
+
+@doc("The updatable properties of the DeviceGroup.")
+model DeviceGroupUpdateProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+}
+
 @doc("Request to the action call to bulk claim devices.")
 model ClaimDevicesRequest {
   @doc("Device identifiers of the devices to be claimed.")
   deviceIdentifiers: string[];
+}
+
+@doc("The type used for update operations of the Device.")
+model DeviceUpdate {
+  @doc("The updatable properties of the Device.")
+  properties?: DeviceUpdateProperties;
+}
+
+@doc("The updatable properties of the Device.")
+model DeviceUpdateProperties {
+  @doc("Device group id")
+  deviceGroupId?: string;
 }
 
 @doc("Request of the action to create a signed device capability image")

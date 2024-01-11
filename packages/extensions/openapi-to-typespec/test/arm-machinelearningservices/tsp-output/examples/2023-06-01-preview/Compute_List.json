@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "nextLink",
+        "value": [
+          {
+            "name": "compute123",
+            "type": "Microsoft.MachineLearningServices/workspaces/computes",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+            "location": "eastus",
+            "properties": {
+              "description": "some compute",
+              "computeType": "AKS",
+              "createdOn": "2021-04-01T22:00:00.0000000+00:00",
+              "modifiedOn": "2021-04-01T22:00:00.0000000+00:00",
+              "provisioningState": "Succeeded",
+              "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2"
+            }
+          },
+          {
+            "name": "compute1234",
+            "type": "Microsoft.MachineLearningServices/workspaces/computes",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute1234",
+            "location": "eastus",
+            "properties": {
+              "description": "some compute",
+              "computeType": "AKS",
+              "createdOn": "2021-04-01T22:00:00.0000000+00:00",
+              "modifiedOn": "2021-04-01T22:00:00.0000000+00:00",
+              "provisioningState": "Succeeded",
+              "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute1234-56826-c9b00420020b2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Compute_List",
+  "title": "Get Computes"
+}

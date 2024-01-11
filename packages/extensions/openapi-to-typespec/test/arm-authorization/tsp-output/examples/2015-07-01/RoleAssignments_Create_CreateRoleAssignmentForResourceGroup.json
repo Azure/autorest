@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "parameters": {
+      "properties": {
+        "principalId": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+        "principalType": "User",
+        "roleDefinitionId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/providers/Microsoft.Authorization/roleDefinitions/0b5fe924-9a61-425c-96af-cfe6e287ca2d"
+      }
+    },
+    "roleAssignmentName": "05c5a614-a7d6-4502-b150-c2fb455033ff",
+    "scope": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "05c5a614-a7d6-4502-b150-c2fb455033ff",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Authorization/roleAssignments/05c5a614-a7d6-4502-b150-c2fb455033ff",
+        "properties": {
+          "principalId": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "principalType": "User",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/0b5fe924-9a61-425c-96af-cfe6e287ca2d",
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "05c5a614-a7d6-4502-b150-c2fb455033ff",
+        "type": "Microsoft.Authorization/roleAssignments",
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.Authorization/roleAssignments/05c5a614-a7d6-4502-b150-c2fb455033ff",
+        "properties": {
+          "principalId": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+          "principalType": "User",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/0b5fe924-9a61-425c-96af-cfe6e287ca2d",
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg"
+        }
+      }
+    }
+  },
+  "operationId": "RoleAssignments_Create",
+  "title": "Create role assignment for resource group"
+}

@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$top": 1,
+    "api-version": "2023-06-01-preview",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444",
+              "userAssignedIdentities": {
+                "string": {
+                  "clientId": "00000000-1111-2222-3333-444444444444",
+                  "principalId": "00000000-1111-2222-3333-444444444444"
+                }
+              }
+            },
+            "kind": "string",
+            "location": "string",
+            "properties": {
+              "description": "string",
+              "codeConfiguration": {
+                "codeId": "string",
+                "scoringScript": "string"
+              },
+              "compute": "string",
+              "environmentId": "string",
+              "environmentVariables": {
+                "string": "string"
+              },
+              "errorThreshold": 1,
+              "loggingLevel": "Info",
+              "maxConcurrencyPerInstance": 1,
+              "miniBatchSize": 1,
+              "model": {
+                "assetId": "string",
+                "referenceType": "Id"
+              },
+              "outputAction": "SummaryOnly",
+              "outputFileName": "string",
+              "properties": {
+                "string": "string"
+              },
+              "provisioningState": "Creating",
+              "resources": {
+                "instanceCount": 1,
+                "instanceType": "string",
+                "properties": {
+                  "string": {
+                    "a3c13e2e-a213-4cac-9f5a-b49966906ad6": null
+                  }
+                }
+              },
+              "retrySettings": {
+                "maxRetries": 1,
+                "timeout": "PT5M"
+              }
+            },
+            "sku": {
+              "name": "string",
+              "capacity": 1,
+              "family": "string",
+              "size": "string",
+              "tier": "Free"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "BatchDeployments_List",
+  "title": "List Workspace Batch Deployment."
+}
