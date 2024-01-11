@@ -25,5 +25,6 @@ namespace Microsoft.Test;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The 2023-10-12 API version.")
   v2023_10_12: "2023-10-12",
 }

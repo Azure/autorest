@@ -20,5 +20,6 @@ namespace AutoRestComplexTestService;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2016-02-29 API version.")
   v2016_02_29: "2016-02-29",
 }

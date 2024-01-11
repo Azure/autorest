@@ -20,5 +20,6 @@ namespace Azure.AI.OpenAI;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2022-06-01-preview API version.")
   v2022_06_01_preview: "2022-06-01-preview",
 }

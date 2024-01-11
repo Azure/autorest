@@ -30,5 +30,6 @@ namespace Microsoft.AzureSphere;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The 2022-09-01-preview API version.")
   v2022_09_01_preview: "2022-09-01-preview",
 }

@@ -18,5 +18,6 @@ namespace AutoRestPagingTestService;
 
 @doc("The available API versions.")
 enum Versions {
+@doc("The 1.0.0 API version.")
 v1.0.0: "1.0.0",
 }

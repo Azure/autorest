@@ -17,7 +17,7 @@ export function generateServiceInformation(program: TypespecProgram) {
     title: "${serviceInformation.name}"
   })`);
 
-  if (serviceInformation.version) {
+  if (serviceInformation.versions) {
     definitions.push(`@versioned(Versions)`);
   }
 
@@ -63,15 +63,18 @@ export function generateServiceInformation(program: TypespecProgram) {
 
   definitions.push(getNamespace(program));
 
-  if (serviceInformation.version) {
+  if (serviceInformation.versions) {
     definitions.push("");
     definitions.push(`@doc("The available API versions.")`);
     definitions.push(`enum Versions {`);
-    if (isArm) {
-      definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
-      definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
+    for (const version of serviceInformation.versions) {
+      if (isArm) {
+        definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
+        definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
+      }
+      definitions.push(`@doc("The ${version} API version.")`);
+      definitions.push(`v${version.replaceAll("-", "_")}: "${version}",`);
     }
-    definitions.push(`v${serviceInformation.version.replaceAll("-", "_")}: "${serviceInformation.version}",`);
     definitions.push("}");
   }
 

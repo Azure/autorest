@@ -27,5 +27,6 @@ namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("The 2023-04-01 API version.")
   v2023_04_01: "2023-04-01",
 }

@@ -12,7 +12,7 @@ export function transformServiceInformation(model: CodeModel): ServiceInformatio
     doc: model.info.description ?? "// FIXME: (miissing-service-description) Add service description",
     endpoint: getFirstEndpoint(model),
     endpointParameters: transformEndpointParameters(model),
-    version: getApiVersion(model),
+    versions: getApiVersions(model),
     armCommonTypeVersion: isArm ? getArmCommonTypeVersion() : undefined,
   };
 }
@@ -28,19 +28,17 @@ export function transformEndpointParameters(model: CodeModel): EndpointParameter
   }));
 }
 
-function getApiVersion(model: CodeModel): string | undefined {
+function getApiVersions(model: CodeModel): string[] | undefined {
   if (!model.globalParameters || !model.globalParameters.length) {
     return undefined;
   }
 
-  const apiVersionParam = model.globalParameters
-    .filter(
-      (gp) => gp.implementation === ImplementationLocation.Client && gp.protocol.http?.in === ParameterLocation.Query,
-    )
-    .find((param) => param.language.default.serializedName === "api-version");
+  const apiVersionParams = (model.schemas.constants ?? []).filter((c) =>
+    c.language.default.name.startsWith("ApiVersion"),
+  );
 
-  if (apiVersionParam && isConstantSchema(apiVersionParam.schema)) {
-    return apiVersionParam.schema.value.value.toString();
+  if (apiVersionParams.length) {
+    return apiVersionParams.map((c) => c.value.value);
   }
 
   return undefined;

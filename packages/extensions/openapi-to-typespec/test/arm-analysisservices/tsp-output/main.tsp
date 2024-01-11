@@ -23,5 +23,6 @@ namespace Azure.ResourceManager.Analysis;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The 2017-08-01 API version.")
   v2017_08_01: "2017-08-01",
 }

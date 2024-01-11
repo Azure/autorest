@@ -25,9 +25,9 @@ export async function emitArmResources(program: TypespecProgram, basePath: strin
     // generate examples for each operation
     const examples = generateArmResourceExamples(armResource);
     for (const [filename, content] of Object.entries(examples)) {
-      if (serviceInformation.version) {
+      if (serviceInformation.versions) {
         session.writeFile({
-          filename: join(basePath, "examples", serviceInformation.version, `${filename}.json`),
+          filename: join(basePath, "examples", serviceInformation.versions[0], `${filename}.json`),
           content,
         });
       } else {

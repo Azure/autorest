@@ -65,7 +65,7 @@ export interface TypespecResource {
 
 export interface ServiceInformation extends WithDoc {
   name: string;
-  version?: string;
+  versions?: string[];
   endpoint?: string;
   endpointParameters?: EndpointParameter[];
   produces?: string[];

@@ -138,5 +138,5 @@ function generateExamples(
 }
 
 function getGeneratedOperationId(operationGroupName: string, operationName: string): string {
-  return `${Case.pascal(operationGroupName)}_${Case.pascal(operationName)}`;
+  return `${operationGroupName}_${Case.pascal(operationName)}`;
 }
