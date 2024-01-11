@@ -25,7 +25,9 @@ model VirtualMachineScaleSetVMExtension
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMExtensions {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to get the VMSS VM extension.")
+  @operationId("VirtualMachineScaleSetVMExtensions_Get")
   get is ArmResourceRead<
     VirtualMachineScaleSetVMExtension,
     {
@@ -41,7 +43,9 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to create or update the VMSS VM extension.")
+  @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     VirtualMachineScaleSetVMExtension,
     {
@@ -53,7 +57,9 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to update the VMSS VM extension.")
+  @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate,
@@ -66,7 +72,9 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to delete the VMSS VM extension.")
+  @operationId("VirtualMachineScaleSetVMExtensions_Delete")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVMExtension,
     {
@@ -78,7 +86,9 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to get all extensions of an instance in Virtual Machine Scaleset.")
+  @operationId("VirtualMachineScaleSetVMExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVMExtension,
     {
