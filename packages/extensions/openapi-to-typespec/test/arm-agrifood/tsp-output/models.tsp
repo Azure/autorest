@@ -11,16 +11,19 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The reason why the given name is not available.")
 enum CheckNameAvailabilityReason {
   Invalid,
   AlreadyExists,
 }
 
+@doc("Enum for different types of AuthCredentials supported.")
 enum AuthCredentialsKind {
   OAuthClientCredentials,
   ApiKeyAuthCredentials,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -28,6 +31,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Data Manager For Agriculture instance provisioning state.")
 enum ProvisioningState {
   Creating,
   Updating,
@@ -37,17 +41,20 @@ enum ProvisioningState {
   Running,
 }
 
+@doc("Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.")
 enum PublicNetworkAccess {
   Enabled,
   Disabled,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
   Rejected,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -55,12 +62,14 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }

@@ -6,16 +6,19 @@ using TypeSpec.Http;
 
 namespace Azure.Language.QnAMaker;
 
+@doc("Type of ranker to be used.")
 enum RankerKind {
   @doc("Question only ranker.") QuestionOnly,
   @doc("Default ranker.") Default,
 }
 
+@doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
 enum LogicalOperationKind {
   AND,
   OR,
 }
 
+@doc("Human-readable error code.")
 enum ErrorCode {
   InvalidRequest,
   InvalidArgument,
@@ -37,6 +40,7 @@ enum ErrorCode {
   Warning,
 }
 
+@doc("Human-readable error code.")
 enum InnerErrorCode {
   InvalidRequest,
   InvalidParameterValue,
@@ -54,6 +58,11 @@ enum InnerErrorCode {
   InvalidCountryHint,
 }
 
+@doc("""
+Specifies the method used to interpret string offsets.  Defaults to Text
+Elements (Graphemes) according to Unicode v8.0.0. For additional information
+see https://aka.ms/text-analytics-offsets.
+""")
 enum StringIndexType {
   @doc("""
 Returned offset and length values will correspond to TextElements (Graphemes

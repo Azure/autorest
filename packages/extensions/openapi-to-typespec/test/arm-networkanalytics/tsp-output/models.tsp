@@ -11,16 +11,19 @@ namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The status of the current operation.")
 enum ProvisioningState {
   @doc("Represents a succeeded operation.") Succeeded,
   @doc("Represents a failed operation.") Failed,
@@ -31,16 +34,19 @@ enum ProvisioningState {
   @doc("Represents an accepted operation.") Accepted,
 }
 
+@doc("The data type state")
 enum ControlState {
   @doc("Field to enable a setting.") Enabled,
   @doc("Field to disable a setting.") Disabled,
 }
 
+@doc("Specifies the default action of allow or deny when no other rules match.")
 enum DefaultAction {
   @doc("Represents allow action.") Allow,
   @doc("Represents deny action.") Deny,
 }
 
+@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
 enum ManagedServiceIdentityType {
   None,
   SystemAssigned,
@@ -48,6 +54,7 @@ enum ManagedServiceIdentityType {
   `SystemAssigned, UserAssigned`,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -55,6 +62,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("The data type state")
 enum DataProductUserRole {
   @doc("Field to specify user of type Reader.") Reader,
   @doc("""
@@ -64,11 +72,13 @@ This user has privileged access to read sensitive data of a data product.
   SensitiveReader,
 }
 
+@doc("The data type state")
 enum DataTypeState {
   @doc("Field to specify stopped state.") Stopped,
   @doc("Field to specify running state.") Running,
 }
 
+@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
 enum Bypass {
   @doc("Represents no bypassing of traffic.") None,
   @doc("Represents bypassing logging traffic.") Logging,

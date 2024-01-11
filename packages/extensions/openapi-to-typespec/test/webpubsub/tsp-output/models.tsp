@@ -12,6 +12,8 @@ enum WebPubSubPermission {
   sendToGroup,
   joinLeaveGroup,
 }
+
+@doc("Content type for upload")
 @fixed
 enum ContentType {
   @doc("Content Type 'application/json'") `application/json`,

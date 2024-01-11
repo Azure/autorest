@@ -12,6 +12,7 @@ namespace Azure.ResourceManager.Authorization;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The principal type of the assigned principal ID.")
 enum PrincipalType {
   User,
   Group,
@@ -20,22 +21,26 @@ enum PrincipalType {
   Device,
 }
 
+@doc("The role type.")
 enum RoleType {
   BuiltInRole,
   CustomRole,
 }
 
+@doc("Assignment type of the role assignment schedule")
 enum AssignmentType {
   Activated,
   Assigned,
 }
 
+@doc("Membership type of the role assignment schedule")
 enum RoleManagementScheduleMemberType {
   Inherited,
   Direct,
   Group,
 }
 
+@doc("The status of the role assignment schedule.")
 enum RoleManagementScheduleStatus {
   Accepted,
   PendingEvaluation,
@@ -61,12 +66,14 @@ enum RoleManagementScheduleStatus {
   PendingExternalProvisioning,
 }
 
+@doc("Type of the scope.")
 enum ScopeType {
   subscription,
   managementgroup,
   resourcegroup,
 }
 
+@doc("The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc")
 enum RoleManagementScheduleRequestType {
   AdminAssign,
   AdminRemove,
@@ -79,12 +86,14 @@ enum RoleManagementScheduleRequestType {
   SelfRenew,
 }
 
+@doc("Type of the role assignment schedule expiration")
 enum RoleManagementScheduleExpirationType {
   AfterDuration,
   AfterDateTime,
   NoExpiration,
 }
 
+@doc("The type of rule")
 enum RoleManagementPolicyRuleType {
   RoleManagementPolicyApprovalRule,
   RoleManagementPolicyAuthenticationContextRule,
@@ -93,11 +102,13 @@ enum RoleManagementPolicyRuleType {
   RoleManagementPolicyNotificationRule,
 }
 
+@doc("The assignment level to which rule is applied.")
 enum RoleManagementAssignmentLevel {
   Assignment,
   Eligibility,
 }
 
+@doc("The type of rule")
 enum ApprovalMode {
   SingleStage,
   Serial,
@@ -105,27 +116,32 @@ enum ApprovalMode {
   NoApproval,
 }
 
+@doc("The type of user.")
 enum UserType {
   User,
   Group,
 }
 
+@doc("The type of enablement rule")
 enum EnablementRules {
   MultiFactorAuthentication,
   Justification,
   Ticketing,
 }
 
+@doc("The type of notification.")
 enum NotificationDeliveryMechanism {
   Email,
 }
 
+@doc("The notification level.")
 enum NotificationLevel {
   None,
   Critical,
   All,
 }
 
+@doc("The recipient type.")
 enum RecipientType {
   Requestor,
   Approver,

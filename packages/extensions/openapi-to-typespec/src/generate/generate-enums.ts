@@ -17,12 +17,12 @@ export function generateEnums(typespecEnum: TypespecEnum) {
   const enumDefinition = `
     enum ${typespecEnum.name} {
         ${typespecEnum.members
-          .map((m) => {
-            const kv = `"${m.name}"` !== m.value ? `"${m.name}": ${m.value}` : m.value;
-            return `${generateDocs(m)}${kv}`;
-          })
-          .join(", ")}
-    }\n`;
+      .map((m) => {
+        const kv = `"${m.name}"` !== m.value ? `"${m.name}": ${m.value}` : m.value;
+        return `${generateDocs(m)}${kv}`;
+      })
+      .join(", ")}
+    }\n\n`;
 
   definitions.push(enumDefinition);
 

@@ -7,6 +7,7 @@ using TypeSpec.Http;
 
 namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
+@doc("Human-readable error code.")
 enum ErrorCode {
   InvalidRequest,
   InvalidArgument,
@@ -28,6 +29,7 @@ enum ErrorCode {
   Warning,
 }
 
+@doc("Human-readable error code.")
 enum InnerErrorCode {
   InvalidRequest,
   InvalidParameterValue,
@@ -45,6 +47,7 @@ enum InnerErrorCode {
   InvalidCountryHint,
 }
 
+@doc("Job Status.")
 enum JobStatus {
   notStarted,
   running,
@@ -74,15 +77,18 @@ enum AssetKind {
   synonyms,
 }
 
+@doc("Supported source types.")
 enum SourceKind {
   file,
   url,
 }
 
+@doc("Content structure type for sources.")
 enum SourceContentStructureKind {
   unstructured,
 }
 
+@doc("Update operation type for assets.")
 enum UpdateOperationKind {
   add,
   delete,

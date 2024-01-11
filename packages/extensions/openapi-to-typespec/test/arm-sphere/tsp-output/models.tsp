@@ -12,16 +12,19 @@ namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("Provisioning state of the resource.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
@@ -32,6 +35,7 @@ enum ProvisioningState {
   @doc("The resource create request has been accepted") Accepted,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -39,6 +43,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Certificate status values.")
 enum CertificateStatus {
   @doc("Certificate is active") Active,
   @doc("Certificate is inactive") Inactive,
@@ -46,11 +51,13 @@ enum CertificateStatus {
   @doc("Certificate has been revoked") Revoked,
 }
 
+@doc("Regional data boundary values.")
 enum RegionalDataBoundary {
   @doc("No data boundary") None,
   @doc("EU data boundary") EU,
 }
 
+@doc("Image type values.")
 enum ImageType {
   @doc("Invalid image.") InvalidImageType,
   @doc("One Bl image type") OneBl,
@@ -78,21 +85,25 @@ enum ImageType {
   @doc("Other image type") Other,
 }
 
+@doc("OS feed type values.")
 enum OSFeedType {
   @doc("Retail OS feed type.") Retail,
   @doc("Retail evaluation OS feed type.") RetailEval,
 }
 
+@doc("Update policy values.")
 enum UpdatePolicy {
   @doc("Update all policy.") UpdateAll,
   @doc("No update for 3rd party app policy.") No3rdPartyAppUpdates,
 }
 
+@doc("Allow crash dumps values.")
 enum AllowCrashDumpCollection {
   @doc("Crash dump collection enabled") Enabled,
   @doc("Crash dump collection disabled") Disabled,
 }
 
+@doc("Capability image type")
 enum CapabilityType {
   @doc("Application development capability") ApplicationDevelopment,
   @doc("Field servicing capability") FieldServicing,

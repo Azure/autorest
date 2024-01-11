@@ -8,10 +8,15 @@ using Azure.Core;
 
 namespace AnomalyDetectorClient;
 
+@doc("Anomaly Detector API version (for example, v1.0).")
 enum ApiVersion {
   `v1.1-preview.1`,
 }
 
+@doc("""
+Define the impute method, can be one of auto, previous, linear, fixed, zero,
+notFill.
+""")
 enum ImputeMode {
   auto,
   previous,
@@ -21,6 +26,7 @@ enum ImputeMode {
   notFill,
 }
 
+@doc("The error code.")
 enum AnomalyDetectorErrorCodes {
   InvalidCustomInterval,
   BadArgument,
@@ -35,6 +41,11 @@ enum AnomalyDetectorErrorCodes {
   InvalidImputeFixedValue,
 }
 
+@doc("""
+An optional field, indicating how missing values will be filled. One of
+Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to
+NotFill, when the alignMode is Outer.
+""")
 enum FillNAMethod {
   Previous,
   Subsequent,
@@ -43,6 +54,13 @@ enum FillNAMethod {
   Fixed,
   NotFill,
 }
+
+@doc("""
+Optional argument, can be one of yearly, monthly, weekly, daily, hourly,
+minutely, secondly, microsecond or none. If granularity is not present, it will
+be none by default. If granularity is none, the timestamp property in time
+series point can be absent.
+""")
 @fixed
 enum TimeGranularity {
   yearly,
@@ -55,6 +73,8 @@ enum TimeGranularity {
   microsecond,
   none,
 }
+
+@doc("Status of detection results. One of CREATED, RUNNING, READY, and FAILED.")
 @fixed
 enum DetectionStatus {
   CREATED,
@@ -62,16 +82,24 @@ enum DetectionStatus {
   READY,
   FAILED,
 }
+
 @fixed
 enum DataSchema {
   OneTable,
   MultiTable,
 }
+
+@doc("""
+An optional field, indicating how we align different variables to the same
+time-range. Either Inner or Outer. 
+""")
 @fixed
 enum AlignMode {
   Inner,
   Outer,
 }
+
+@doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
 @fixed
 enum ModelStatus {
   CREATED,

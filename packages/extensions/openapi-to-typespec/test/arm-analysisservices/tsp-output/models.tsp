@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Analysis;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.")
 enum State {
   Deleting,
   Succeeded,
@@ -28,6 +29,7 @@ enum State {
   Scaling,
 }
 
+@doc("The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning.")
 enum ProvisioningState {
   Deleting,
   Succeeded,
@@ -43,21 +45,26 @@ enum ProvisioningState {
   Scaling,
 }
 
+@doc("The name of the Azure pricing tier to which the SKU applies.")
 enum SkuTier {
   Development,
   Basic,
   Standard,
 }
 
+@doc("The managed mode of the server (0 = not managed, 1 = managed).")
 enum ManagedMode {
   `0`: 0,
   `1`: 1,
 }
 
+@doc("The server monitor mode for AS server")
 enum ServerMonitorMode {
   `0`: 0,
   `1`: 1,
 }
+
+@doc("How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.")
 @fixed
 enum ConnectionMode {
   All,

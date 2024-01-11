@@ -6,11 +6,13 @@ using TypeSpec.Http;
 
 namespace QnAMakerRuntimeClient;
 
+@doc("Optional field. Set to OR for using OR as Operation for Strict Filters.")
 enum StrictFiltersCompoundOperationType {
   AND,
   OR,
 }
 
+@doc("Human readable error code.")
 enum ErrorCodeType {
   BadArgument,
   Forbidden,

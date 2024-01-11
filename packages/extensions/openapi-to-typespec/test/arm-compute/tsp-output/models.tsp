@@ -13,23 +13,27 @@ namespace Microsoft.Compute;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.")
 enum RepairAction {
   Replace,
   Restart,
   Reimage,
 }
 
+@doc("Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ")
 enum WindowsVMGuestPatchMode {
   Manual,
   AutomaticByOS,
   AutomaticByPlatform,
 }
 
+@doc("Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ")
 enum WindowsPatchAssessmentMode {
   ImageDefault,
   AutomaticByPlatform,
 }
 
+@doc("Specifies the reboot setting for all AutomaticByPlatform patch installation operations.")
 enum WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   Unknown,
   IfRequired,
@@ -37,16 +41,19 @@ enum WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   Always,
 }
 
+@doc("Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true")
 enum LinuxVMGuestPatchMode {
   ImageDefault,
   AutomaticByPlatform,
 }
 
+@doc("Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.")
 enum LinuxPatchAssessmentMode {
   ImageDefault,
   AutomaticByPlatform,
 }
 
+@doc("Specifies the reboot setting for all AutomaticByPlatform patch installation operations.")
 enum LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   Unknown,
   IfRequired,
@@ -54,21 +61,25 @@ enum LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   Always,
 }
 
+@doc("Specifies how the virtual machine should be created. Possible values are: **Attach.** This value is used when you are using a specialized disk to create the virtual machine. **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you also use the plan element previously described.")
 enum DiskCreateOptionTypes {
   FromImage,
   Empty,
   Attach,
 }
 
+@doc("Specifies the ephemeral disk option for operating system disk.")
 enum DiffDiskOptions {
   Local,
 }
 
+@doc("Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements")
 enum DiffDiskPlacement {
   CacheDisk,
   ResourceDisk,
 }
 
+@doc("Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/linux/disks-types")
 enum StorageAccountTypes {
   Standard_LRS,
   Premium_LRS,
@@ -79,16 +90,19 @@ enum StorageAccountTypes {
   PremiumV2_LRS,
 }
 
+@doc("Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. **Note:** It can be set for only Confidential VMs.")
 enum SecurityEncryptionTypes {
   VMGuestStateOnly,
   DiskWithVMGuestState,
 }
 
+@doc("Specifies the behavior of the managed disk when the VM gets deleted, for example whether the managed disk is deleted or detached. Supported values are: **Delete.** If this value is used, the managed disk is deleted when VM gets deleted. **Detach.** If this value is used, the managed disk is retained after VM gets deleted. Minimum api-version: 2021-03-01.")
 enum DiskDeleteOptionTypes {
   Delete,
   Detach,
 }
 
+@doc("The Domain name label scope.The concatenation of the hashed domain name label that generated according to the policy from domain name label scope and vm index will be the domain name labels of the PublicIPAddress resources that will be created")
 enum DomainNameLabelScopeTypes {
   TenantReuse,
   SubscriptionReuse,
@@ -96,32 +110,38 @@ enum DomainNameLabelScopeTypes {
   NoReuse,
 }
 
+@doc("Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.")
 enum IPVersion {
   IPv4,
   IPv6,
 }
 
+@doc("Specify what happens to the network interface when the VM is deleted")
 enum DeleteOptions {
   Delete,
   Detach,
 }
 
+@doc("Specify public IP sku name")
 enum PublicIPAddressSkuName {
   Basic,
   Standard,
 }
 
+@doc("Specify public IP sku tier")
 enum PublicIPAddressSkuTier {
   Regional,
   Global,
 }
 
+@doc("Specifies whether the Auxiliary mode is enabled for the Network Interface resource.")
 enum NetworkInterfaceAuxiliaryMode {
   None,
   AcceleratedConnections,
   Floating,
 }
 
+@doc("Specifies whether the Auxiliary sku is enabled for the Network Interface resource.")
 enum NetworkInterfaceAuxiliarySku {
   None,
   A1,
@@ -130,21 +150,25 @@ enum NetworkInterfaceAuxiliarySku {
   A8,
 }
 
+@doc("specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations")
 enum NetworkApiVersion {
   `2020-11-01`,
 }
 
+@doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.")
 enum SecurityTypes {
   TrustedLaunch,
   ConfidentialVM,
 }
 
+@doc("Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.")
 enum VirtualMachinePriorityTypes {
   Regular,
   Low,
   Spot,
 }
 
+@doc("Specifies the eviction policy for the Azure Spot VM/VMSS")
 enum VirtualMachineEvictionPolicyTypes {
   Deallocate,
   Delete,
@@ -156,11 +180,13 @@ enum VirtualMachineScaleSetScaleInRules {
   NewestVM,
 }
 
+@doc("Specifies the orchestration mode for the virtual machine scale set.")
 enum OrchestrationMode {
   Uniform,
   Flexible,
 }
 
+@doc("The type of extendedLocation.")
 enum ExtendedLocationTypes {
   EdgeZone,
 }
@@ -169,26 +195,31 @@ enum ExpandTypesForGetVMScaleSets {
   userData,
 }
 
+@doc("The name of the service.")
 enum OrchestrationServiceNames {
   AutomaticRepairs,
 }
 
+@doc("The current state of the service.")
 enum OrchestrationServiceState {
   NotRunning,
   Running,
   Suspended,
 }
 
+@doc("The action to be performed.")
 enum OrchestrationServiceStateAction {
   Resume,
   Suspend,
 }
 
+@doc("The hypervisor generation of the Virtual Machine. Applicable to OS disks only.")
 enum HyperVGeneration {
   V1,
   V2,
 }
 
+@doc("Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set.")
 enum VirtualMachineSizeTypes {
   Basic_A0,
   Basic_A1,
@@ -358,30 +389,36 @@ enum VirtualMachineSizeTypes {
   Standard_NV24,
 }
 
+@doc("Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values are: **ForceDetach.** detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. **This feature is still in preview** mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.")
 enum DiskDetachOptionTypes {
   ForceDetach,
 }
 
+@doc("Specifies the disk controller type configured for the VM and VirtualMachineScaleSet. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region contains V2 (https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes.")
 enum DiskControllerTypes {
   SCSI,
   NVMe,
 }
 
+@doc("Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.")
 enum IPVersions {
   IPv4,
   IPv6,
 }
 
+@doc("Specify the public IP allocation type")
 enum PublicIPAllocationMethod {
   Dynamic,
   Static,
 }
 
+@doc("Specifies the HyperVGeneration Type associated with a resource")
 enum HyperVGenerationType {
   V1,
   V2,
 }
 
+@doc("The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"")
 enum PatchOperationStatus {
   Unknown,
   InProgress,
@@ -398,6 +435,7 @@ enum ExpandTypesForListVMs {
   instanceView,
 }
 
+@doc("Describes the reboot requirements of the patch.")
 enum VMGuestPatchRebootBehavior {
   Unknown,
   NeverReboots,
@@ -405,11 +443,13 @@ enum VMGuestPatchRebootBehavior {
   CanRequestReboot,
 }
 
+@doc("Describes the availability of a given patch.")
 enum PatchAssessmentState {
   Unknown,
   Available,
 }
 
+@doc("Defines when it is acceptable to reboot a VM during a software update operation.")
 enum VMGuestPatchRebootSetting {
   IfRequired,
   Never,
@@ -433,6 +473,7 @@ enum VMGuestPatchClassificationLinux {
   Other,
 }
 
+@doc("The reboot state of the VM following completion of the operation.")
 enum VMGuestPatchRebootStatus {
   Unknown,
   NotNeeded,
@@ -442,6 +483,7 @@ enum VMGuestPatchRebootStatus {
   Completed,
 }
 
+@doc("The state of the patch after the installation operation completed.")
 enum PatchInstallationState {
   Unknown,
   Installed,
@@ -451,43 +493,51 @@ enum PatchInstallationState {
   Pending,
 }
 
+@doc("Specifies the HyperVGeneration Type")
 enum HyperVGenerationTypes {
   V1,
   V2,
 }
 
+@doc("VM disk types which are disallowed.")
 enum VmDiskTypes {
   None,
   Unmanaged,
 }
 
+@doc("Specifies the Architecture Type")
 enum ArchitectureTypes {
   x64,
   Arm64,
 }
 
+@doc("Describes the state of the image.")
 enum ImageState {
   Active,
   ScheduledForDeprecation,
   Deprecated,
 }
 
+@doc("Describes the type of the alternative option.")
 enum AlternativeType {
   None,
   Offer,
   Plan,
 }
 
+@doc("Specifies the type of the proximity placement group. Possible values are: **Standard** : Co-locate resources within an Azure region or Availability Zone. **Ultra** : For future use.")
 enum ProximityPlacementGroupType {
   Standard,
   Ultra,
 }
 
+@doc("Gets the Operating System type.")
 enum OperatingSystemType {
   Windows,
   Linux,
 }
 
+@doc("The type of key used to encrypt the data of the disk restore point.")
 enum RestorePointEncryptionType {
   @doc("Disk Restore Point is encrypted at rest with Platform managed key. ")
   EncryptionAtRestWithPlatformKey,
@@ -497,6 +547,7 @@ enum RestorePointEncryptionType {
   EncryptionAtRestWithPlatformAndCustomerKeys,
 }
 
+@doc("ConsistencyMode of the RestorePoint. Can be specified in the input while creating a restore point. For now, only CrashConsistent is accepted as a valid input. Please refer to https://aka.ms/RestorePoints for more details.")
 enum ConsistencyModeTypes {
   CrashConsistent,
   FileSystemConsistent,
@@ -524,6 +575,7 @@ enum CapacityReservationInstanceViewTypes {
   instanceView,
 }
 
+@doc("Script execution status.")
 enum ExecutionState {
   Unknown,
   Pending,
@@ -534,6 +586,7 @@ enum ExecutionState {
   Canceled,
 }
 
+@doc("The sku name.")
 enum DiskStorageAccountTypes {
   @doc("Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.")
   Standard_LRS,
@@ -551,11 +604,13 @@ enum DiskStorageAccountTypes {
   PremiumV2_LRS,
 }
 
+@doc("The architecture of the image. Applicable to OS disks only.")
 enum Architecture {
   x64,
   Arm64,
 }
 
+@doc("This enumerates the possible sources of a disk's creation.")
 enum DiskCreateOption {
   @doc("Create an empty data disk of a size given by diskSizeGB.") Empty,
   @doc("Disk will be attached to a VM.") Attach,
@@ -578,6 +633,7 @@ enum DiskCreateOption {
   CopyFromSanSnapshot,
 }
 
+@doc("This enumerates the possible state of the disk.")
 enum DiskState {
   @doc("The disk is not being used and can be attached to a VM.") Unattached,
   @doc("The disk is currently attached to a running VM.") Attached,
@@ -593,6 +649,7 @@ enum DiskState {
   ActiveUpload,
 }
 
+@doc("The type of key used to encrypt the data of the disk.")
 enum EncryptionType {
   @doc("Disk is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets.")
   EncryptionAtRestWithPlatformKey,
@@ -602,6 +659,7 @@ enum EncryptionType {
   EncryptionAtRestWithPlatformAndCustomerKeys,
 }
 
+@doc("Policy for accessing the disk via network.")
 enum NetworkAccessPolicy {
   @doc("The disk can be exported or uploaded to from any network.") AllowAll,
   @doc("The disk can be exported or uploaded to using a DiskAccess resource's private endpoints.")
@@ -609,6 +667,7 @@ enum NetworkAccessPolicy {
   @doc("The disk cannot be exported.") DenyAll,
 }
 
+@doc("Specifies the SecurityType of the VM. Applicable for OS disks only.")
 enum DiskSecurityTypes {
   @doc("Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)")
   TrustedLaunch,
@@ -620,6 +679,7 @@ enum DiskSecurityTypes {
   ConfidentialVM_DiskEncryptedWithCustomerKey,
 }
 
+@doc("Policy for controlling export on the disk.")
 enum PublicNetworkAccess {
   @doc("You can generate a SAS URI to access the underlying data of the disk publicly on the internet when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate.")
   Enabled,
@@ -627,6 +687,7 @@ enum PublicNetworkAccess {
   Disabled,
 }
 
+@doc("Additional authentication requirements when exporting or uploading to a disk or snapshot.")
 enum DataAccessAuthMode {
   @doc("When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth.")
   AzureActiveDirectory,
@@ -634,12 +695,14 @@ enum DataAccessAuthMode {
   None,
 }
 
+@doc("The Access Level, accepted values include None, Read, Write.")
 enum AccessLevel {
   None,
   Read,
   Write,
 }
 
+@doc("Used to specify the file format when making request for SAS on a VHDX file format snapshot")
 enum FileFormat {
   @doc("A VHD file is a disk image file in the Virtual Hard Disk file format.")
   VHD,
@@ -647,12 +710,14 @@ enum FileFormat {
   VHDX,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
   Rejected,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -660,6 +725,7 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported for new creations. Disk Encryption Sets can be updated with Identity type None during migration of subscription to a new Azure Active Directory tenant; it will cause the encrypted resources to lose access to the keys.")
 enum DiskEncryptionSetIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -667,6 +733,7 @@ enum DiskEncryptionSetIdentityType {
   None,
 }
 
+@doc("The type of key used to encrypt the data of the disk.")
 enum DiskEncryptionSetType {
   @doc("Resource using diskEncryptionSet would be encrypted at rest with Customer managed key that can be changed and revoked by a customer.")
   EncryptionAtRestWithCustomerKey,
@@ -676,21 +743,25 @@ enum DiskEncryptionSetType {
   ConfidentialVmEncryptedWithCustomerKey,
 }
 
+@doc("The sku name.")
 enum SnapshotStorageAccountTypes {
   @doc("Standard HDD locally redundant storage") Standard_LRS,
   @doc("Premium SSD locally redundant storage") Premium_LRS,
   @doc("Standard zone redundant storage") Standard_ZRS,
 }
 
+@doc("Indicates the error code if the background copy of a resource created via the CopyStart operation fails.")
 enum CopyCompletionErrorReason {
   @doc("Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress.")
   CopySourceNotFound,
 }
 
+@doc("The type of the extended location.")
 enum ExtendedLocationType {
   EdgeZone,
 }
 
+@doc("The provisioning state, which only appears in the response.")
 enum GalleryProvisioningState {
   Creating,
   Updating,
@@ -700,17 +771,20 @@ enum GalleryProvisioningState {
   Migrating,
 }
 
+@doc("This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups** <br><br> **Community**")
 enum GallerySharingPermissionTypes {
   Private,
   Groups,
   Community,
 }
 
+@doc("This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**")
 enum SharingProfileGroupTypes {
   Subscriptions,
   AADTenants,
 }
 
+@doc("The sharing state of the gallery, which only appears in the response.")
 enum SharingState {
   Succeeded,
   InProgress,
@@ -726,28 +800,33 @@ enum GalleryExpandParams {
   `SharingProfile/Groups`,
 }
 
+@doc("Specifies the storage account type to be used to store the image. This property is not updatable.")
 enum StorageAccountType {
   Standard_LRS,
   Standard_ZRS,
   Premium_LRS,
 }
 
+@doc("confidential VM encryption types")
 enum ConfidentialVMEncryptionType {
   EncryptedVMGuestStateOnlyWithPmk,
   EncryptedWithPmk,
   EncryptedWithCmk,
 }
 
+@doc("Optional parameter which specifies the mode to be used for replication. This property is not updatable.")
 enum ReplicationMode {
   Full,
   Shallow,
 }
 
+@doc("It is type of the extended location.")
 enum GalleryExtendedLocationType {
   EdgeZone,
   Unknown,
 }
 
+@doc("Specifies the storage account type to be used to store the image. This property is not updatable.")
 enum EdgeZoneStorageAccountType {
   Standard_LRS,
   Standard_ZRS,
@@ -755,6 +834,7 @@ enum EdgeZoneStorageAccountType {
   Premium_LRS,
 }
 
+@doc("Describes the nature of the policy violation.")
 enum PolicyViolationCategory {
   Other,
   ImageFlaggedUnsafe,
@@ -762,6 +842,7 @@ enum PolicyViolationCategory {
   IpTheft,
 }
 
+@doc("This is the aggregated replication status based on all the regional replication status flags.")
 enum AggregatedReplicationState {
   Unknown,
   InProgress,
@@ -769,6 +850,7 @@ enum AggregatedReplicationState {
   Failed,
 }
 
+@doc("This is the regional replication state.")
 enum ReplicationState {
   Unknown,
   Replicating,
@@ -780,6 +862,7 @@ enum ReplicationStatusTypes {
   ReplicationStatus,
 }
 
+@doc("This property allows you to specify the operation type of gallery sharing update. <br><br> Possible values are: <br><br> **Add** <br><br> **Remove** <br><br> **Reset**")
 enum SharingUpdateOperationTypes {
   Add,
   Remove,
@@ -791,23 +874,35 @@ enum SharedToValues {
   tenant,
 }
 
+@doc("The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'")
 enum SharedGalleryHostCaching {
   None,
   ReadOnly,
   ReadWrite,
 }
 
+@doc("""
+Update mode for the cloud service. Role instances are allocated to update domains when the service is deployed. Updates can be initiated manually in each update domain or initiated automatically in all update domains.
+Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
+If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
+""")
 enum CloudServiceUpgradeMode {
   Auto,
   Manual,
   Simultaneous,
 }
 
+@doc("""
+Slot type for the cloud service.
+Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
+If not specified, the default value is Production.
+""")
 enum CloudServiceSlotType {
   Production,
   Staging,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -815,43 +910,58 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.")
 enum AvailabilitySetSkuTypes {
   Classic,
   Aligned,
 }
+
+@doc("Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.")
 @fixed
 enum UpgradeMode {
   Automatic,
   Manual,
   Rolling,
 }
+
+@doc("Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.")
 @fixed
 enum SettingNames {
   AutoLogon,
   FirstLogonCommands,
 }
+
+@doc("Specifies the protocol of WinRM listener. Possible values are: **http,** **https.**")
 @fixed
 enum ProtocolTypes {
   Http,
   Https,
 }
+
+@doc("Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**")
 @fixed
 enum CachingTypes {
   None,
   ReadOnly,
   ReadWrite,
 }
+
+@doc("This property allows you to specify the supported type of the OS that application is built for. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**")
 @fixed
 enum OperatingSystemTypes {
   Windows,
   Linux,
 }
+
+@doc("The level code.")
 @fixed
 enum StatusLevelTypes {
   Info,
   Warning,
   Error,
 }
+
+@doc("The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.")
 @fixed
 enum ResourceIdentityType {
   SystemAssigned,
@@ -859,11 +969,15 @@ enum ResourceIdentityType {
   `SystemAssigned, UserAssigned`,
   None,
 }
+
+@doc("The scale type applicable to the sku.")
 @fixed
 enum VirtualMachineScaleSetSkuScaleType {
   Automatic,
   None,
 }
+
+@doc("Code indicating the current status of the upgrade.")
 @fixed
 enum UpgradeState {
   RollingForward,
@@ -871,12 +985,16 @@ enum UpgradeState {
   Completed,
   Faulted,
 }
+
+@doc("Invoker of the Upgrade Operation")
 @fixed
 enum UpgradeOperationInvoker {
   Unknown,
   User,
   Platform,
 }
+
+@doc("Code indicating the current status of the upgrade.")
 @fixed
 enum RollingUpgradeStatusCode {
   RollingForward,
@@ -884,11 +1002,15 @@ enum RollingUpgradeStatusCode {
   Completed,
   Faulted,
 }
+
+@doc("The last action performed on the rolling upgrade.")
 @fixed
 enum RollingUpgradeActionType {
   Start,
   Cancel,
 }
+
+@doc("The Last Maintenance Operation Result Code.")
 @fixed
 enum MaintenanceOperationResultCodeTypes {
   None,
@@ -896,22 +1018,29 @@ enum MaintenanceOperationResultCodeTypes {
   MaintenanceAborted,
   MaintenanceCompleted,
 }
+
 @fixed
 enum InstanceViewTypes {
   instanceView,
   userData,
 }
+
+@doc("Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual.** The default value is: **None.**")
 @fixed
 enum DedicatedHostLicenseTypes {
   None,
   Windows_Server_Hybrid,
   Windows_Server_Perpetual,
 }
+
+@doc("This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.")
 @fixed
 enum OperatingSystemStateTypes {
   Generalized,
   Specialized,
 }
+
+@doc("Interval value in minutes used to create LogAnalytics call rate logs.")
 @fixed
 enum IntervalInMins {
   ThreeMins,
@@ -919,28 +1048,38 @@ enum IntervalInMins {
   ThirtyMins,
   SixtyMins,
 }
+
+@doc("The scale type applicable to the sku.")
 @fixed
 enum ResourceSkuCapacityScaleType {
   Automatic,
   Manual,
   None,
 }
+
+@doc("The type of restrictions.")
 @fixed
 enum ResourceSkuRestrictionsType {
   Location,
   Zone,
 }
+
+@doc("The reason for restriction.")
 @fixed
 enum ResourceSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
 }
+
+@doc("The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'")
 @fixed
 enum HostCaching {
   None,
   ReadOnly,
   ReadWrite,
 }
+
+@doc("Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob")
 @fixed
 enum GalleryApplicationCustomActionParameterType {
   String,

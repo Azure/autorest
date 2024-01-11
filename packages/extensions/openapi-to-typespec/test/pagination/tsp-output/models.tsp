@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace AutoRestPagingTestService;
 
+@doc("The status of the request")
 enum OperationResultStatus {
   Succeeded,
   Failed,

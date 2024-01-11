@@ -13,33 +13,40 @@ namespace Azure.ResourceManager.MachineLearning;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("An enum describing the unit of usage measurement.")
 enum UsageUnit {
   Count,
 }
 
+@doc("Three lettered code specifying the currency of the VM price. Example: USD")
 enum BillingCurrency {
   USD,
 }
 
+@doc("The unit of time measurement for the specified VM price. Example: OneHour")
 enum UnitOfMeasure {
   OneHour,
 }
 
+@doc("Operating system type used by the VM.")
 enum VMPriceOSType {
   Linux,
   Windows,
 }
 
+@doc("The type of the VM.")
 enum VMTier {
   Standard,
   LowPriority,
   Spot,
 }
 
+@doc("An enum describing the unit of quota measurement.")
 enum QuotaUnit {
   Count,
 }
 
+@doc("Status of update workspace quota.")
 enum Status {
   Undefined,
   Success,
@@ -51,6 +58,7 @@ enum Status {
   OperationNotEnabledForRegion,
 }
 
+@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
 enum ManagedServiceIdentityType {
   None,
   SystemAssigned,
@@ -58,6 +66,7 @@ enum ManagedServiceIdentityType {
   `SystemAssigned,UserAssigned`,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -65,6 +74,7 @@ enum CreatedByType {
   Key,
 }
 
+@doc("The type of compute")
 enum ComputeType {
   AKS,
   Kubernetes,
@@ -78,6 +88,7 @@ enum ComputeType {
   SynapseSpark,
 }
 
+@doc("The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.")
 enum ProvisioningState {
   Unknown,
   Updating,
@@ -93,21 +104,25 @@ enum UnderlyingResourceAction {
   Detach,
 }
 
+@doc("Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images")
 enum ImageType {
   docker,
   azureml,
 }
 
+@doc("Type of the Environment Variable. Possible values are: local - For local variable")
 enum EnvironmentVariableType {
   local,
 }
 
+@doc("Protocol over which communication will happen over this endpoint")
 enum Protocol {
   tcp,
   udp,
   http,
 }
 
+@doc("Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe")
 enum VolumeDefinitionType {
   bind,
   volume,
@@ -115,6 +130,7 @@ enum VolumeDefinitionType {
   npipe,
 }
 
+@doc("State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.")
 enum NodeState {
   idle,
   running,
@@ -124,6 +140,7 @@ enum NodeState {
   preempted,
 }
 
+@doc("Provisioning state of registry asset.")
 enum AssetProvisioningState {
   Succeeded,
   Failed,
@@ -138,11 +155,13 @@ enum AutoDeleteCondition {
   LastAccessedGreaterThan,
 }
 
+@doc("Type of storage to use for the pending upload location")
 enum PendingUploadType {
   None,
   TemporaryBlobReference,
 }
 
+@doc("Enum to determine the PendingUpload credentials type.")
 enum PendingUploadCredentialType {
   SAS,
 }
@@ -153,36 +172,43 @@ enum ListViewType {
   All,
 }
 
+@doc("Enum to determine the type of data.")
 enum DataType {
   uri_file,
   uri_folder,
   mltable,
 }
 
+@doc("Protection level associated with the Intellectual Property.")
 enum ProtectionLevel {
   @doc("All means Intellectual Property is fully protected.") All,
   @doc("None means it is not an Intellectual Property.") None,
 }
 
+@doc("AutoRebuild setting for the derived image")
 enum AutoRebuildSetting {
   Disabled,
   OnBaseImageUpdate,
 }
 
+@doc("Environment type is either user created or curated by Azure ML service")
 enum EnvironmentType {
   Curated,
   UserCreated,
 }
 
+@doc("The type of operating system.")
 enum OperatingSystemType {
   Linux,
   Windows,
 }
 
+@doc("Base environment type.")
 enum BaseEnvironmentSourceType {
   EnvironmentAsset,
 }
 
+@doc("Inferencing server type for various targets.")
 enum InferencingServerType {
   AzureMLOnline,
   AzureMLBatch,
@@ -190,22 +216,26 @@ enum InferencingServerType {
   Custom,
 }
 
+@doc("Type of the inputs.")
 enum PackageInputType {
   UriFile,
   UriFolder,
 }
 
+@doc("Mounting type of the model or the inputs")
 enum PackageInputDeliveryMode {
   Copy,
   Download,
 }
 
+@doc("Input path type for package inputs.")
 enum InputPathType {
   Url,
   PathId,
   PathVersion,
 }
 
+@doc("Package build state returned in package response.")
 enum PackageBuildState {
   NotStarted,
   Running,
@@ -213,6 +243,7 @@ enum PackageBuildState {
   Failed,
 }
 
+@doc("State of endpoint provisioning.")
 enum EndpointProvisioningState {
   Creating,
   Deleting,
@@ -222,34 +253,44 @@ enum EndpointProvisioningState {
   Canceled,
 }
 
+@doc("Enum to determine endpoint authentication mode.")
 enum EndpointAuthMode {
   AMLToken,
   Key,
   AADToken,
 }
 
+@doc("The enumerated property types for batch deployments.")
 enum BatchDeploymentConfigurationType {
   Model,
   PipelineComponent,
 }
 
+@doc("""
+Log verbosity for batch inferencing.
+Increasing verbosity order for logging is : Warning, Info and Debug.
+The default value is Info.
+""")
 enum BatchLoggingLevel {
   Info,
   Warning,
   Debug,
 }
 
+@doc("Enum to determine which reference method to use for an asset.")
 enum ReferenceType {
   Id,
   DataPath,
   OutputPath,
 }
 
+@doc("Enum to determine how batch inferencing will handle output")
 enum BatchOutputAction {
   SummaryOnly,
   AppendRow,
 }
 
+@doc("Possible values for DeploymentProvisioningState.")
 enum DeploymentProvisioningState {
   Creating,
   Deleting,
@@ -260,6 +301,7 @@ enum DeploymentProvisioningState {
   Canceled,
 }
 
+@doc("Enum to determine the datastore credentials type.")
 enum CredentialsType {
   AccountKey,
   Certificate,
@@ -270,6 +312,7 @@ enum CredentialsType {
   KerberosPassword,
 }
 
+@doc("Enum to determine the datastore contents type.")
 enum DatastoreType {
   AzureBlob,
   AzureDataLakeGen1,
@@ -279,6 +322,7 @@ enum DatastoreType {
   OneLake,
 }
 
+@doc("Enum to determine the datastore secrets type.")
 enum SecretsType {
   AccountKey,
   Certificate,
@@ -299,16 +343,19 @@ enum FeatureDataType {
   Boolean,
 }
 
+@doc("Enum to determine the email notification type.")
 enum EmailNotificationEnableType {
   JobCompleted,
   JobFailed,
   JobCancelled,
 }
 
+@doc("Enum to determine the webhook callback service type.")
 enum WebhookType {
   AzureDevOps,
 }
 
+@doc("Enum to describe the frequency of a recurrence schedule")
 enum RecurrenceFrequency {
   @doc("Minute frequency") Minute,
   @doc("Hour frequency") Hour,
@@ -317,6 +364,7 @@ enum RecurrenceFrequency {
   @doc("Month frequency") Month,
 }
 
+@doc("Enum of weekday")
 enum WeekDay {
   @doc("Monday weekday") Monday,
   @doc("Tuesday weekday") Tuesday,
@@ -339,6 +387,7 @@ enum MaterializationStoreType {
   OnlineAndOffline,
 }
 
+@doc("The status of a job.")
 enum JobStatus {
   @doc("Run hasn't started yet.") NotStarted,
   @doc("Run has started. The user has a run ID.") Starting,
@@ -373,12 +422,14 @@ enum FeaturestoreJobType {
   BackfillMaterialization,
 }
 
+@doc("Enum to determine identity framework.")
 enum IdentityConfigurationType {
   Managed,
   AMLToken,
   UserIdentity,
 }
 
+@doc("Enum to determine the type of job.")
 enum JobType {
   AutoML,
   Command,
@@ -388,21 +439,25 @@ enum JobType {
   Spark,
 }
 
+@doc("The enumerated types for the nodes value")
 enum NodesValueType {
   All,
   Custom,
 }
 
+@doc("Whether IncrementalDataRefresh is enabled")
 enum IncrementalDataRefresh {
   Enabled,
   Disabled,
 }
 
+@doc("Whether multiSelect is enabled")
 enum MultiSelect {
   Enabled,
   Disabled,
 }
 
+@doc("Media type of data asset.")
 enum MediaType {
   Image,
   Text,
@@ -413,6 +468,7 @@ enum MLAssistConfigurationType {
   Disabled,
 }
 
+@doc("Enum to determine the job provisioning state.")
 enum JobProvisioningState {
   Succeeded,
   Failed,
@@ -426,12 +482,14 @@ enum StatusMessageLevel {
   Warning,
 }
 
+@doc("The format of exported labels.")
 enum ExportFormatType {
   Dataset,
   Coco,
   CSV,
 }
 
+@doc("Enum to determine endpoint compute type.")
 enum EndpointComputeType {
   Managed,
   Kubernetes,
@@ -445,6 +503,7 @@ enum OrderString {
   UpdatedAtAsc,
 }
 
+@doc("Enum to determine whether PublicNetworkAccess is Enabled or Disabled.")
 enum PublicNetworkAccessType {
   Enabled,
   Disabled,
@@ -463,6 +522,7 @@ enum RollingRateType {
   Minute,
 }
 
+@doc("Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.")
 enum EgressPublicNetworkAccessType {
   Enabled,
   Disabled,
@@ -473,6 +533,7 @@ enum ScaleType {
   TargetUtilization,
 }
 
+@doc("The type of container to retrieve logs from.")
 enum ContainerType {
   @doc("The container used to download models and score script.")
   StorageInitializer,
@@ -481,6 +542,7 @@ enum ContainerType {
   ModelDataCollector,
 }
 
+@doc("Node scaling setting for the compute sku.")
 enum SkuScaleType {
   @doc("Automatically scales node count.") Automatic,
   @doc("Node count scaled upon user request.") Manual,
@@ -514,6 +576,7 @@ enum ScheduleProvisioningStatus {
   Canceled,
 }
 
+@doc("Connection status of the service consumer with the service provider")
 enum EndpointServiceConnectionStatus {
   Approved,
   Pending,
@@ -522,39 +585,46 @@ enum EndpointServiceConnectionStatus {
   Timeout,
 }
 
+@doc("Indicates whether or not the encryption is enabled for the workspace.")
 enum EncryptionStatus {
   Enabled,
   Disabled,
 }
 
+@doc("Isolation mode for the managed network of a machine learning workspace.")
 enum IsolationMode {
   Disabled,
   AllowInternetOutbound,
   AllowOnlyApprovedOutbound,
 }
 
+@doc("Category of a managed network Outbound Rule of a machine learning workspace.")
 enum RuleCategory {
   Required,
   Recommended,
   UserDefined,
 }
 
+@doc("Type of a managed network Outbound Rule of a machine learning workspace.")
 enum RuleStatus {
   Inactive,
   Active,
 }
 
+@doc("Type of a managed network Outbound Rule of a machine learning workspace.")
 enum RuleType {
   FQDN,
   PrivateEndpoint,
   ServiceTag,
 }
 
+@doc("Status for the managed network of a machine learning workspace.")
 enum ManagedNetworkStatus {
   Inactive,
   Active,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -562,6 +632,7 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("Authentication type of the connection target")
 enum ConnectionAuthType {
   PAT,
   ManagedIdentity,
@@ -574,6 +645,7 @@ enum ConnectionAuthType {
   CustomKeys,
 }
 
+@doc("Category of the connection")
 enum ConnectionCategory {
   PythonFeed,
   ContainerRegistry,
@@ -593,65 +665,77 @@ enum ConnectionCategory {
   CustomKeys,
 }
 
+@doc("Level of workspace setup error")
 enum DiagnoseResultLevel {
   Warning,
   Error,
   Information,
 }
 
+@doc("Intended usage of the cluster")
 enum ClusterPurpose {
   FastProd,
   DenseProd,
   DevTest,
 }
 
+@doc("Enable or disable ssl for scoring")
 enum SslConfigStatus {
   Disabled,
   Enabled,
   Auto,
 }
 
+@doc("Load Balancer Type")
 enum LoadBalancerType {
   PublicIp,
   InternalLoadBalancer,
 }
 
+@doc("Compute OS Type")
 enum OsType {
   Linux,
   Windows,
 }
 
+@doc("Virtual Machine priority")
 enum VmPriority {
   Dedicated,
   LowPriority,
 }
 
+@doc("State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.")
 enum RemoteLoginPortPublicAccess {
   Enabled,
   Disabled,
   NotSpecified,
 }
 
+@doc("Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.")
 enum AllocationState {
   Steady,
   Resizing,
 }
 
+@doc("Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.")
 enum ApplicationSharingPolicy {
   Personal,
   Shared,
 }
 
+@doc("Indicates whether mlflow autologger is enabled for notebooks.")
 enum MlflowAutologger {
   Enabled,
   Disabled,
 }
 
+@doc("State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.")
 enum SshPublicAccess {
   Enabled,
   Disabled,
 }
 
+@doc("Current state of an ComputeInstance.")
 enum ComputeInstanceState {
   Creating,
   CreateFailed,
@@ -670,10 +754,12 @@ enum ComputeInstanceState {
   Unusable,
 }
 
+@doc("The Compute Instance Authorization type. Available values are personal (default).")
 enum ComputeInstanceAuthorizationType {
   personal,
 }
 
+@doc("Name of the last operation.")
 enum OperationName {
   Create,
   Start,
@@ -683,6 +769,7 @@ enum OperationName {
   Delete,
 }
 
+@doc("Operation status.")
 enum OperationStatus {
   InProgress,
   Succeeded,
@@ -694,67 +781,79 @@ enum OperationStatus {
   DeleteFailed,
 }
 
+@doc("Trigger of operation.")
 enum OperationTrigger {
   User,
   Schedule,
   IdleShutdown,
 }
 
+@doc("The current deployment state of schedule.")
 enum ProvisioningStatus {
   Completed,
   Provisioning,
   Failed,
 }
 
+@doc("Is the schedule enabled or disabled?")
 enum ScheduleStatus {
   Enabled,
   Disabled,
 }
 
+@doc("[Required] The compute power action.")
 enum ComputePowerAction {
   Start,
   Stop,
 }
 
+@doc("The current deployment state of schedule.")
 enum ScheduleProvisioningState {
   Completed,
   Provisioning,
   Failed,
 }
 
+@doc("Auto save settings.")
 enum Autosave {
   None,
   Local,
   Remote,
 }
 
+@doc("network of this container.")
 enum Network {
   Bridge,
   Host,
 }
 
+@doc("Caching type of Data Disk.")
 enum Caching {
   None,
   ReadOnly,
   ReadWrite,
 }
 
+@doc("type of this storage account.")
 enum StorageAccountType {
   Standard_LRS,
   Premium_LRS,
 }
 
+@doc("Data source type.")
 enum SourceType {
   Dataset,
   Datastore,
   URI,
 }
 
+@doc("Mount Action.")
 enum MountAction {
   Mount,
   Unmount,
 }
 
+@doc("Mount state.")
 enum MountState {
   MountRequested,
   Mounted,
@@ -771,12 +870,14 @@ enum MonitoringFeatureFilterType {
   @doc("Includes a user-defined subset of features.") FeatureSubset,
 }
 
+@doc("Monitor compute identity type enum.")
 enum MonitorComputeIdentityType {
   @doc("Authenticates through user's AML token.") AmlToken,
   @doc("Authenticates through a user-provided managed identity.")
   ManagedIdentity,
 }
 
+@doc("Enum to determine the input data delivery mode.")
 enum InputDeliveryMode {
   ReadOnlyMount,
   ReadWriteMount,
@@ -786,17 +887,20 @@ enum InputDeliveryMode {
   EvalDownload,
 }
 
+@doc("Output data delivery mode enums.")
 enum OutputDeliveryMode {
   ReadWriteMount,
   Upload,
   Direct,
 }
 
+@doc("Enum to determine forecast horizon selection mode.")
 enum ForecastHorizonMode {
   @doc("Forecast horizon to be determined automatically.") Auto,
   @doc("Use the custom forecast horizon.") Custom,
 }
 
+@doc("Enum to determine the Job Output Type.")
 enum JobOutputType {
   uri_file,
   uri_folder,
@@ -806,6 +910,7 @@ enum JobOutputType {
   triton_model,
 }
 
+@doc("Enum to determine the job tier.")
 enum JobTier {
   Null,
   Spot,
@@ -814,6 +919,7 @@ enum JobTier {
   Premium,
 }
 
+@doc("Enum for setting log verbosity.")
 enum LogVerbosity {
   @doc("No logs emitted.") NotSet,
   @doc("Debug and above log statements logged.") Debug,
@@ -823,6 +929,7 @@ enum LogVerbosity {
   @doc("Only critical statements logged.") Critical,
 }
 
+@doc("AutoMLJob Task type.")
 enum TaskType {
   @doc("""
 Classification in machine learning and statistics is a supervised learning approach in which
@@ -870,6 +977,7 @@ Named Entity Recognition (NER) is the ability to take free-form text and identif
   TextNER,
 }
 
+@doc("Enum to determine the Job Input Type.")
 enum JobInputType {
   literal,
   uri_file,
@@ -880,27 +988,32 @@ enum JobInputType {
   triton_model,
 }
 
+@doc("Determines how N-Cross validations value is determined.")
 enum NCrossValidationsMode {
   @doc("Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task.")
   Auto,
   @doc("Use custom N-Cross validations value.") Custom,
 }
 
+@doc("Forecasting seasonality mode.")
 enum SeasonalityMode {
   @doc("Seasonality to be determined automatically.") Auto,
   @doc("Use the custom seasonality value.") Custom,
 }
 
+@doc("Target lags selection modes.")
 enum TargetLagsMode {
   @doc("Target lags to be determined automatically.") Auto,
   @doc("Use the custom target lags.") Custom,
 }
 
+@doc("Target rolling windows size mode.")
 enum TargetRollingWindowSizeMode {
   @doc("Determine rolling windows size automatically.") Auto,
   @doc("Use the specified rolling window size.") Custom,
 }
 
+@doc("Enum to determine the state of mlflow autologger.")
 enum MLFlowAutologgerState {
   Enabled,
   Disabled,
@@ -954,6 +1067,7 @@ enum CategoricalPredictionDriftMetric {
   @doc("The Pearsons Chi Squared Test metric.") PearsonsChiSquaredTest,
 }
 
+@doc("Primary metrics for classification tasks.")
 enum ClassificationPrimaryMetrics {
   @doc("""
 AUC is the Area under the curve.
@@ -977,6 +1091,7 @@ the number of true instances in each class.
   PrecisionScoreWeighted,
 }
 
+@doc("Enum for all classification models supported by AutoML.")
 enum ClassificationModels {
   @doc("""
 Logistic regression is a fundamental classification technique.
@@ -1034,6 +1149,11 @@ The general idea of the bagging method is that a combination of learning models 
   XGBoostClassifier,
 }
 
+@doc("""
+The meta-learner is a model trained on the output of the individual heterogeneous models.
+Default meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).
+This parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression
+""")
 enum StackMetaLearnerType {
   None,
   @doc("Default meta-learners are LogisticRegression for classification tasks.")
@@ -1049,12 +1169,14 @@ enum StackMetaLearnerType {
   LinearRegression,
 }
 
+@doc("Training mode dictates whether to use distributed training or not")
 enum TrainingMode {
   @doc("Auto mode") Auto,
   @doc("Distributed training mode") Distributed,
   @doc("Non distributed training mode") NonDistributed,
 }
 
+@doc("Enum for all classification models supported by AutoML.")
 enum BlockedTransformers {
   @doc("Target encoding for text data.") TextTargetEncoder,
   @doc("Ohe hot encoding creates a binary feature transformation.")
@@ -1076,6 +1198,7 @@ enum BlockedTransformers {
   HashOneHotEncoder,
 }
 
+@doc("Featurization mode - determines data featurization mode.")
 enum FeaturizationMode {
   @doc("Auto mode, system performs featurization without any custom featurization inputs.")
   Auto,
@@ -1094,6 +1217,7 @@ enum MonitoringModelType {
   @doc("A model trained for regressions tasks.") Regression,
 }
 
+@doc("Enum to determine the job distribution type.")
 enum DistributionType {
   PyTorch,
   TensorFlow,
@@ -1106,10 +1230,12 @@ enum JobLimitsType {
   Sweep,
 }
 
+@doc("Monitor compute type enum.")
 enum MonitorComputeType {
   @doc("Serverless Spark compute.") ServerlessSpark,
 }
 
+@doc("Model task type enum.")
 enum ModelTaskType {
   Classification,
   Regression,
@@ -1139,6 +1265,7 @@ enum MonitoringSignalType {
   GenerationTokenStatistics,
 }
 
+@doc("Monitoring input data type enum.")
 enum MonitoringInputDataType {
   @doc("An input data with a fixed window size.") Static,
   @doc("An input data which trailing relatively to the monitor's current run.")
@@ -1147,6 +1274,7 @@ enum MonitoringInputDataType {
   Fixed,
 }
 
+@doc("Enum to determine the type of data.")
 enum DataImportSourceType {
   database,
   file_system,
@@ -1157,11 +1285,13 @@ enum FeatureAttributionMetric {
   NormalizedDiscountedCumulativeGain,
 }
 
+@doc("Flag for generating lags for the numeric features.")
 enum FeatureLags {
   @doc("No feature lags generated.") None,
   @doc("System auto-generates feature lags.") Auto,
 }
 
+@doc("The parameter defining how if AutoML should handle short time series.")
 enum ShortSeriesHandlingConfiguration {
   @doc("Represents no/null value.") None,
   @doc("Short series will be padded if there are no long series, otherwise short series will be dropped.")
@@ -1170,6 +1300,7 @@ enum ShortSeriesHandlingConfiguration {
   @doc("All the short series will be dropped.") Drop,
 }
 
+@doc("Target aggregate function.")
 enum TargetAggregationFunction {
   @doc("Represent no value set.") None,
   Sum,
@@ -1178,12 +1309,14 @@ enum TargetAggregationFunction {
   Mean,
 }
 
+@doc("Configure STL Decomposition of the time-series target column.")
 enum UseStl {
   @doc("No stl decomposition.") None,
   Season,
   SeasonTrend,
 }
 
+@doc("Primary metrics for Forecasting task.")
 enum ForecastingPrimaryMetrics {
   @doc("The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation.")
   SpearmanCorrelation,
@@ -1195,6 +1328,7 @@ enum ForecastingPrimaryMetrics {
   NormalizedMeanAbsoluteError,
 }
 
+@doc("Enum for all forecasting models supported by AutoML.")
 enum ForecastingModels {
   @doc("""
 Auto-Autoregressive Integrated Moving Average (ARIMA) model uses time-series data and statistical analysis to interpret the data and make future predictions.
@@ -1259,6 +1393,7 @@ The general idea of the bagging method is that a combination of learning models 
   XGBoostRegressor,
 }
 
+@doc("Generation safety quality metric enum.")
 enum GenerationSafetyQualityMetric {
   AcceptableGroundednessScorePerInstance,
   AggregatedGroundednessPassRate,
@@ -1272,17 +1407,20 @@ enum GenerationSafetyQualityMetric {
   AggregatedRelevancePassRate,
 }
 
+@doc("Generation token statistics metric enum.")
 enum GenerationTokenStatisticsMetric {
   TotalTokenCount,
   TotalTokenCountPerGroup,
 }
 
+@doc("Learning rate scheduler enum.")
 enum LearningRateScheduler {
   @doc("No learning rate scheduler selected.") None,
   @doc("Cosine Annealing With Warmup.") WarmupCosine,
   @doc("Step learning rate scheduler.") Step,
 }
 
+@doc("Stochastic optimizer for image models.")
 enum StochasticOptimizer {
   @doc("No optimizer selected.") None,
   @doc("Stochastic Gradient Descent optimizer.") Sgd,
@@ -1292,6 +1430,7 @@ enum StochasticOptimizer {
   Adamw,
 }
 
+@doc("Primary metrics for classification multilabel tasks.")
 enum ClassificationMultilabelPrimaryMetrics {
   @doc("""
 AUC is the Area under the curve.
@@ -1317,6 +1456,7 @@ the number of true instances in each class.
   IOU,
 }
 
+@doc("Primary metrics for InstanceSegmentation tasks.")
 enum InstanceSegmentationPrimaryMetrics {
   @doc("""
 Mean Average Precision (MAP) is the average of AP (Average Precision).
@@ -1335,6 +1475,7 @@ enum LogValidationLoss {
   @doc("Disable compute and log validation metrics.") Disable,
 }
 
+@doc("Image model size.")
 enum ModelSize {
   @doc("No value selected.") None,
   @doc("Small size.") Small,
@@ -1343,6 +1484,7 @@ enum ModelSize {
   @doc("Extra large size.") ExtraLarge,
 }
 
+@doc("Metric computation method to use for validation metrics in image tasks.")
 enum ValidationMetricType {
   @doc("No metric.") None,
   @doc("Coco metric.") Coco,
@@ -1350,6 +1492,7 @@ enum ValidationMetricType {
   @doc("CocoVoc metric.") CocoVoc,
 }
 
+@doc("Primary metrics for Image ObjectDetection task.")
 enum ObjectDetectionPrimaryMetrics {
   @doc("""
 Mean Average Precision (MAP) is the average of AP (Average Precision).
@@ -1358,21 +1501,25 @@ AP is calculated for each class and averaged to get the MAP.
   MeanAveragePrecision,
 }
 
+@doc("Annotation type of image data.")
 enum ImageAnnotationType {
   Classification,
   BoundingBox,
   InstanceSegmentation,
 }
 
+@doc("Annotation type of text data.")
 enum TextAnnotationType {
   Classification,
   NamedEntityRecognition,
 }
 
+@doc("Enum to determine OneLake artifact type.")
 enum OneLakeArtifactType {
   LakeHouse,
 }
 
+@doc("Enum of learning rate schedulers that aligns with those supported by HF")
 enum NlpLearningRateScheduler {
   @doc("No learning rate schedule.") None,
   @doc("Linear warmup and decay.") Linear,
@@ -1408,16 +1555,19 @@ enum NumericalPredictionDriftMetric {
   TwoSampleKolmogorovSmirnovTest,
 }
 
+@doc("Defines supported metric goals for hyperparameter tuning")
 enum Goal {
   Minimize,
   Maximize,
 }
 
+@doc("The specific type of random algorithm")
 enum RandomSamplingAlgorithmRule {
   Random,
   Sobol,
 }
 
+@doc("Primary metrics for Regression task.")
 enum RegressionPrimaryMetrics {
   @doc("The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation.")
   SpearmanCorrelation,
@@ -1429,6 +1579,7 @@ enum RegressionPrimaryMetrics {
   NormalizedMeanAbsoluteError,
 }
 
+@doc("Enum for all Regression models supported by AutoML.")
 enum RegressionModels {
   @doc("Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.")
   ElasticNet,
@@ -1477,10 +1628,13 @@ enum SparkJobEntryType {
   SparkJobScalaEntry,
 }
 
+@doc("The action enum for networking rule.")
 enum RuleAction {
   Allow,
   Deny,
 }
+
+@doc("This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.")
 @fixed
 enum SkuTier {
   Free,

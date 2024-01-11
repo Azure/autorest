@@ -28,6 +28,7 @@ own data.
   CustomEntityRecognition,
 }
 
+@doc("Human-readable error code.")
 enum ErrorCode {
   InvalidRequest,
   InvalidArgument,
@@ -49,6 +50,7 @@ enum ErrorCode {
   Warning,
 }
 
+@doc("Human-readable error code.")
 enum InnerErrorCode {
   InvalidRequest,
   InvalidParameterValue,

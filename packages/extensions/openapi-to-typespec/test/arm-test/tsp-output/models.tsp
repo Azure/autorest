@@ -11,16 +11,19 @@ namespace Microsoft.Test;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The provisioning state of a resource.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
@@ -31,6 +34,7 @@ enum ProvisioningState {
   @doc("The resource create request has been accepted") Accepted,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,

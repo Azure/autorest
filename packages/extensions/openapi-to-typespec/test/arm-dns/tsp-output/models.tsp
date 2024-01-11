@@ -26,6 +26,8 @@ enum RecordType {
   SRV,
   TXT,
 }
+
+@doc("The type of this DNS zone (Public or Private).")
 @fixed
 enum DnsZoneType {
   Public,

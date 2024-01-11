@@ -8,6 +8,12 @@ using Azure.Core;
 
 namespace Azure.Keyvault;
 
+@doc("""
+Reflects the deletion recovery level currently in effect for certificates in
+the current vault. If it contains 'Purgeable', the certificate can be
+permanently deleted by a privileged user; otherwise, only the system can purge
+the certificate, at the end of the retention interval.
+""")
 enum DeletionRecoveryLevel {
   @doc("""
 Denotes a vault state in which deletion is an irreversible operation, without
@@ -67,6 +73,10 @@ the subscription itself cannot be cancelled.
   `CustomizedRecoverable+ProtectedSubscription`,
 }
 
+@doc("""
+JsonWebKey Key Type (kty), as defined in
+https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.
+""")
 enum JsonWebKeyType {
   @doc("Elliptic Curve.") EC,
   @doc("Elliptic Curve with a private key which is stored in the HSM.")
@@ -84,6 +94,7 @@ is stored in the HSM.
   `OKP-HSM`,
 }
 
+@doc("Elliptic curve name. For valid values, see JsonWebKeyCurveName.")
 enum JsonWebKeyCurveName {
   @doc("The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.") `P-256`,
   @doc("The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.") `P-384`,
@@ -104,6 +115,7 @@ enum KeyUsageType {
   decipherOnly,
 }
 
+@doc("JSON web key operations. For more information, see JsonWebKeyOperation.")
 enum JsonWebKeyOperation {
   encrypt,
   decrypt,
@@ -115,6 +127,7 @@ enum JsonWebKeyOperation {
   export,
 }
 
+@doc("algorithm identifier")
 enum JsonWebKeyEncryptionAlgorithm {
   `RSA-OAEP`,
   `RSA-OAEP-256`,
@@ -133,6 +146,10 @@ enum JsonWebKeyEncryptionAlgorithm {
   A256CBCPAD,
 }
 
+@doc("""
+The signing/verification algorithm identifier. For more information on possible
+algorithm types, see JsonWebKeySignatureAlgorithm.
+""")
 enum JsonWebKeySignatureAlgorithm {
   @doc("""
 RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in
@@ -192,21 +209,25 @@ https://tools.ietf.org/html/rfc8032.
   EdDSA,
 }
 
+@doc("The encryption algorithm to use to protected the exported key material")
 enum KeyEncryptionAlgorithm {
   CKM_RSA_AES_KEY_WRAP,
   RSA_AES_KEY_WRAP_256,
   RSA_AES_KEY_WRAP_384,
 }
 
+@doc("The role definition type.")
 enum RoleDefinitionType {
   `Microsoft.Authorization/roleDefinitions`,
 }
 
+@doc("The role type.")
 enum RoleType {
   @doc("Built in role.") BuiltInRole: "AKVBuiltInRole",
   @doc("Custom role.") CustomRole,
 }
 
+@doc("Supported permissions for data actions.")
 enum DataAction {
   @doc("Read HSM key metadata.")
   ReadHsmKey: "Microsoft.KeyVault/managedHsm/keys/read/action",
@@ -278,19 +299,24 @@ enum DataAction {
   RandomNumbersGenerate: "Microsoft.KeyVault/managedHsm/rng/action",
 }
 
+@doc("The role scope.")
 enum RoleScope {
   @doc("Global scope") Global: "/",
   @doc("Keys scope") Keys: "/keys",
 }
 
+@doc("The type specifier of the value.")
 enum SettingTypeEnum {
   boolean,
 }
 
+@doc("The type of SAS token the SAS definition will create.")
 enum SasTokenType {
   account,
   service,
 }
+
+@doc("The type of the action.")
 @fixed
 enum ActionType {
   EmailContacts,
@@ -298,6 +324,8 @@ enum ActionType {
   rotate,
   notify,
 }
+
+@doc("operation status")
 @fixed
 enum OperationStatus {
   Success,

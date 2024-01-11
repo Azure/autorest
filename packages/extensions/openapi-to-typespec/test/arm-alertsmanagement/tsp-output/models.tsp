@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.AlertsManagement;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Field for a given condition.")
 enum Field {
   Severity,
   MonitorService,
@@ -27,6 +28,7 @@ enum Field {
   AlertContext,
 }
 
+@doc("Operator for a given condition.")
 enum Operator {
   Equals,
   NotEquals,
@@ -34,17 +36,20 @@ enum Operator {
   DoesNotContain,
 }
 
+@doc("Specifies when the recurrence should be applied.")
 enum RecurrenceType {
   Daily,
   Weekly,
   Monthly,
 }
 
+@doc("Action that should be applied.")
 enum ActionType {
   AddActionGroups,
   RemoveAllActionGroups,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -56,6 +61,7 @@ enum Identifier {
   MonitorServiceList,
 }
 
+@doc("Identification of the information to be retrieved by API call")
 enum MetadataIdentifier {
   MonitorServiceList,
 }
@@ -121,6 +127,7 @@ enum TimeRange {
   `30d`,
 }
 
+@doc("The type of signal the alert is based on, which could be metrics, logs or activity logs.")
 enum SignalType {
   Metric,
   Log,
@@ -144,12 +151,14 @@ enum SmartGroupsSortByFields {
   lastModifiedDateTime,
 }
 
+@doc("Smart group state")
 enum SmartGroupState {
   New,
   Acknowledged,
   Closed,
 }
 
+@doc("Days of week.")
 enum DaysOfWeek {
   Sunday,
   Monday,
@@ -159,6 +168,8 @@ enum DaysOfWeek {
   Friday,
   Saturday,
 }
+
+@doc("Reason for the modification")
 @fixed
 enum AlertModificationEvent {
   AlertCreated,
@@ -171,6 +182,8 @@ enum AlertModificationEvent {
   ActionsSuppressed,
   ActionsFailed,
 }
+
+@doc("Reason for the modification")
 @fixed
 enum SmartGroupModificationEvent {
   SmartGroupCreated,

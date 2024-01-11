@@ -20,6 +20,7 @@ enum Protocol {
   wss,
 }
 
+@doc("An value that determines where the API Version identifier will be located in a HTTP request.")
 enum VersioningScheme {
   Segment,
   Query,
@@ -31,6 +32,7 @@ enum BearerTokenSendingMethod {
   query,
 }
 
+@doc("Type of API.")
 enum ApiType {
   http,
   soap,
@@ -38,6 +40,7 @@ enum ApiType {
   graphql,
 }
 
+@doc("Format of the Content in which the API is getting imported.")
 enum ContentFormat {
   @doc("The contents are inline and Content type is a WADL document.")
   `wadl-xml`,
@@ -63,6 +66,13 @@ enum ContentFormat {
   `graphql-link`,
 }
 
+@doc("""
+Type of API to create. 
+ * `http` creates a REST API 
+ * `soap` creates a SOAP pass-through API  
+ * `websocket` creates websocket API 
+ * `graphql` creates GraphQL API.
+""")
 enum SoapApiType {
   @doc("Imports a SOAP API having a RESTful front end.") SoapToRest: "http",
   @doc("Imports the SOAP API having a SOAP front end.") SoapPassThrough: "soap",
@@ -70,6 +80,7 @@ enum SoapApiType {
   @doc("Imports the API having a GraphQL front end.") GraphQL: "graphql",
 }
 
+@doc("Format of the policyContent.")
 enum PolicyContentFormat {
   @doc("The contents are inline and Content type is an XML document.") xml,
   @doc("The policy XML document is hosted on a http endpoint accessible from the API Management service.")
@@ -90,20 +101,24 @@ enum PolicyExportFormat {
   rawxml,
 }
 
+@doc("Specifies for what type of messages sampling settings should not apply.")
 enum AlwaysLog {
   @doc("Always log all erroneous request regardless of sampling settings.")
   allErrors,
 }
 
+@doc("Sampling type.")
 enum SamplingType {
   @doc("Fixed-rate sampling.") fixed,
 }
 
+@doc("Data masking mode.")
 enum DataMaskingMode {
   @doc("Mask the value of an entity.") Mask,
   @doc("Hide the presence of an entity.") Hide,
 }
 
+@doc("Sets correlation protocol to use for Application Insights diagnostics.")
 enum HttpCorrelationProtocol {
   @doc("Do not read and inject correlation headers.") None,
   @doc("Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.")
@@ -112,6 +127,7 @@ enum HttpCorrelationProtocol {
   W3C,
 }
 
+@doc("The verbosity level applied to traces emitted by trace policies.")
 enum Verbosity {
   @doc("All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.")
   verbose,
@@ -121,11 +137,13 @@ enum Verbosity {
   error,
 }
 
+@doc("The format of the Operation Name for Application Insights telemetries. Default is Name.")
 enum OperationNameFormat {
   @doc("API_NAME;rev=API_REVISION - OPERATION_NAME") Name,
   @doc("HTTP_VERB URL") Url,
 }
 
+@doc("Status of the issue.")
 enum State {
   @doc("The issue is proposed.") proposed,
   @doc("The issue is opened.") open,
@@ -151,6 +169,7 @@ enum ExportApi {
   `true`,
 }
 
+@doc("Format in which the API Details are exported to the Storage Blob with Sas Key valid for 5 minutes.")
 enum ExportResultFormat {
   @doc("The API Definition is exported in OpenAPI Specification 2.0 format to the Storage Blob.")
   Swagger: "swagger-link-json",
@@ -178,37 +197,44 @@ enum ClientAuthenticationMethod {
   @doc("Body based Authentication method.") Body,
 }
 
+@doc("Backend communication protocol.")
 enum BackendProtocol {
   @doc("The Backend is a RESTful service.") http,
   @doc("The Backend is a SOAP service.") soap,
 }
 
+@doc("The IP version to be used. Only IPv4 is supported for now.")
 enum PreferredIPVersion {
   IPv4,
 }
 
+@doc("The request's protocol. Specific protocol configuration can be available based on this selection. The specified destination address must be coherent with this value.")
 enum ConnectivityCheckProtocol {
   TCP,
   HTTP,
   HTTPS,
 }
 
+@doc("The HTTP method to be used.")
 enum Method {
   GET,
   POST,
 }
 
+@doc("The origin of the issue.")
 enum Origin {
   Local,
   Inbound,
   Outbound,
 }
 
+@doc("The severity of the issue.")
 enum Severity {
   Error,
   Warning,
 }
 
+@doc("The type of issue.")
 enum IssueType {
   Unknown,
   AgentStopped,
@@ -221,6 +247,7 @@ enum IssueType {
   Platform,
 }
 
+@doc("The connection status.")
 enum ConnectionStatus {
   Unknown,
   Connected,
@@ -228,6 +255,7 @@ enum ConnectionStatus {
   Degraded,
 }
 
+@doc("Name of the Sku.")
 enum SkuType {
   @doc("Developer SKU of Api Management.") Developer,
   @doc("Standard SKU of Api Management.") Standard,
@@ -237,18 +265,21 @@ enum SkuType {
   @doc("Isolated SKU of Api Management.") Isolated,
 }
 
+@doc("The scale type applicable to the sku.")
 enum ResourceSkuCapacityScaleType {
   @doc("Supported scale type automatic.") automatic,
   @doc("Supported scale type manual.") manual,
   @doc("Scaling not supported.") none,
 }
 
+@doc("The type of access to be used for the storage account.")
 enum AccessType {
   @doc("Use access key.") AccessKey,
   @doc("Use system assigned managed identity.") SystemAssignedManagedIdentity,
   @doc("Use user assigned managed identity.") UserAssignedManagedIdentity,
 }
 
+@doc("Hostname type.")
 enum HostnameType {
   Proxy,
   Portal,
@@ -257,6 +288,7 @@ enum HostnameType {
   DeveloperPortal,
 }
 
+@doc("Certificate Source.")
 enum CertificateSource {
   Managed,
   KeyVault,
@@ -264,17 +296,20 @@ enum CertificateSource {
   BuiltIn,
 }
 
+@doc("Certificate Status.")
 enum CertificateStatus {
   Completed,
   Failed,
   InProgress,
 }
 
+@doc("Whether or not public endpoint access is allowed for this API Management service.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'")
 enum PublicNetworkAccess {
   Enabled,
   Disabled,
 }
 
+@doc("Compute Platform Version running the service.")
 enum PlatformVersion {
   @doc("Platform version cannot be determined, as compute platform is not deployed.")
   undetermined,
@@ -283,11 +318,13 @@ enum PlatformVersion {
   @doc("Platform running the service on Multi Tenant V1 platform.") mtv1,
 }
 
+@doc("The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only Root and CertificateAuthority are valid locations.")
 enum CertificateConfigurationStoreName {
   CertificateAuthority,
   Root,
 }
 
+@doc("The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.")
 enum VirtualNetworkType {
   @doc("The service is not part of any Virtual Network.") None,
   @doc("The service is part of Virtual Network and it is accessible from Internet.")
@@ -296,12 +333,14 @@ enum VirtualNetworkType {
   Internal,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
   Rejected,
 }
 
+@doc("The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.")
 enum ApimIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -309,6 +348,7 @@ enum ApimIdentityType {
   None,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -333,6 +373,7 @@ enum TemplateName {
   requestDeveloperNotificationMessage,
 }
 
+@doc("Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.")
 enum UserState {
   @doc("User state is active.") active,
   @doc("User is blocked. Blocked users cannot authenticate at developer portal or call API.")
@@ -352,12 +393,14 @@ enum IdentityProviderType {
   @doc("Azure Active Directory B2C as Identity provider.") aadB2C,
 }
 
+@doc("Logger type.")
 enum LoggerType {
   @doc("Azure Event Hub as log destination.") azureEventHub,
   @doc("Azure Application Insights as log destination.") applicationInsights,
   @doc("Azure Monitor") azureMonitor,
 }
 
+@doc("Resource Connectivity Status Type identifier.")
 enum ConnectivityStatusType {
   initializing,
   success,
@@ -381,6 +424,7 @@ enum NotificationName {
   QuotaLimitApproachingPublisherNotificationMessage,
 }
 
+@doc("Status of the portal's revision.")
 enum PortalRevisionStatus {
   @doc("Portal's revision has been queued.") pending,
   @doc("Portal's revision is being published.") publishing,
@@ -388,6 +432,7 @@ enum PortalRevisionStatus {
   @doc("Portal's revision publishing failed.") failed,
 }
 
+@doc("The current provisioning state.")
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -395,6 +440,7 @@ enum PrivateEndpointConnectionProvisioningState {
   Failed,
 }
 
+@doc("Schema Type. Immutable.")
 enum SchemaType {
   @doc("Xml schema type.") Xml: "xml",
   @doc("Json schema type.") Json: "json",
@@ -418,17 +464,21 @@ enum ConfigurationIdName {
   configuration,
 }
 
+@doc("Determines the type of confirmation e-mail that will be sent to the newly created user.")
 enum Confirmation {
   @doc("Send an e-mail to the user confirming they have successfully signed up.")
   signup,
   @doc("Send an e-mail inviting the user to sign-up and complete registration.")
   invite,
 }
+
+@doc("whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.")
 @fixed
 enum ProductState {
   notPublished,
   published,
 }
+
 @fixed
 enum AuthorizationMethod {
   HEAD,
@@ -440,28 +490,37 @@ enum AuthorizationMethod {
   PATCH,
   DELETE,
 }
+
+@doc("Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.")
 @fixed
 enum NameAvailabilityReason {
   Valid,
   Invalid,
   AlreadyExists,
 }
+
+@doc("The Key being regenerated.")
 @fixed
 enum GatewayRegenerateKeyType {
   primary,
   secondary,
 }
+
+@doc("The Key to be used to generate token for user.")
 @fixed
 enum KeyType {
   primary,
   secondary,
 }
+
+@doc("Group type.")
 @fixed
 enum GroupType {
   custom,
   system,
   external,
 }
+
 @fixed
 enum PolicyScopeContract {
   Tenant,
@@ -470,6 +529,8 @@ enum PolicyScopeContract {
   Operation,
   All,
 }
+
+@doc("Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.")
 @fixed
 enum SubscriptionState {
   suspended,
@@ -479,22 +540,30 @@ enum SubscriptionState {
   rejected,
   cancelled,
 }
+
+@doc("The scale type applicable to the sku.")
 @fixed
 enum ApiManagementSkuCapacityScaleType {
   Automatic,
   Manual,
   None,
 }
+
+@doc("The type of restrictions.")
 @fixed
 enum ApiManagementSkuRestrictionsType {
   Location,
   Zone,
 }
+
+@doc("The reason for restriction.")
 @fixed
 enum ApiManagementSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
 }
+
+@doc("Status of an async operation.")
 @fixed
 enum AsyncOperationStatus {
   Started,

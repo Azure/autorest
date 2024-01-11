@@ -12,7 +12,7 @@ export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeMod
   if (!typespecEnum) {
     typespecEnum = {
       decorators: getEnumDecorators(schema),
-      doc: schema.language.default.documentation,
+      doc: schema.language.default.description,
       kind: "enum",
       name: schema.language.default.name.replace(/-/g, "_"),
       members: schema.choices.map((choice) => transformChoiceMember(choice)),

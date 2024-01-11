@@ -36,7 +36,7 @@ export function transformDataType(schema: Schema, codeModel: CodeModel): Typespe
   return {
     name: getTypespecType(schema, codeModel),
     kind: "wildcard",
-    doc: schema.language.default.documentation,
+    doc: schema.language.default.description,
   };
 }
 
