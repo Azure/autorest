@@ -136,7 +136,7 @@ interface GatewayContracts {
   // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

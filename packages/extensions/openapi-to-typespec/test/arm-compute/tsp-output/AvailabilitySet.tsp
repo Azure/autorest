@@ -46,7 +46,7 @@ interface AvailabilitySets {
   // FIXME: AvailabilitySets_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")
   @get
-  ListAvailableSizes is Azure.Core.Foundations.Operation<
+  listAvailableSizes is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

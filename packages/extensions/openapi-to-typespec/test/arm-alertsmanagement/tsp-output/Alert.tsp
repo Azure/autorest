@@ -120,7 +120,7 @@ interface Alerts {
   // FIXME: Alerts_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history")
   @get
-  GetHistory is Azure.Core.Foundations.Operation<
+  getHistory is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

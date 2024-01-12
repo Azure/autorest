@@ -12,7 +12,7 @@ interface HealthApiOperations {
   @doc("Get service health status.")
   @route("/api/health")
   @head
-  GetServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
+  getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 }
 
 interface WebPubSubOperations {
@@ -20,7 +20,7 @@ interface WebPubSubOperations {
   @doc("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
-  AddConnectionsToGroups is Azure.Core.Foundations.Operation<
+  addConnectionsToGroups is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -41,7 +41,7 @@ alpha-numeric characters or underscore.
   @doc("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
-  CloseAllConnections is Azure.Core.Foundations.Operation<
+  closeAllConnections is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -69,7 +69,7 @@ alpha-numeric characters or underscore.
   @doc("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
-  GenerateClientToken is Azure.Core.Foundations.Operation<
+  generateClientToken is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -113,7 +113,7 @@ alpha-numeric characters or underscore.
   @doc("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
-  RemoveConnectionsFromGroups is Azure.Core.Foundations.Operation<
+  removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -134,7 +134,7 @@ alpha-numeric characters or underscore.
   @doc("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
-  SendToAll is Azure.Core.Foundations.Operation<
+  sendToAll is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -184,7 +184,7 @@ can help when the client's bandwidth is limited.
   @doc("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
-  CloseConnection is Azure.Core.Foundations.Operation<
+  closeConnection is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -210,7 +210,7 @@ alpha-numeric characters or underscore.
   @doc("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
-  ConnectionExists is Azure.Core.Foundations.Operation<
+  connectionExists is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -232,7 +232,7 @@ alpha-numeric characters or underscore.
   @doc("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
-  SendToConnection is Azure.Core.Foundations.Operation<
+  sendToConnection is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -273,7 +273,7 @@ can help when the client's bandwidth is limited.
   @doc("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
-  RemoveConnectionFromAllGroups is Azure.Core.Foundations.Operation<
+  removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -295,7 +295,7 @@ alpha-numeric characters or underscore.
   @doc("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
-  GroupExists is Azure.Core.Foundations.Operation<
+  groupExists is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -319,7 +319,7 @@ alpha-numeric characters or underscore.
   @doc("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
-  CloseGroupConnections is Azure.Core.Foundations.Operation<
+  closeGroupConnections is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -354,7 +354,7 @@ alpha-numeric characters or underscore.
   @doc("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
-  SendToGroup is Azure.Core.Foundations.Operation<
+  sendToGroup is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -411,7 +411,7 @@ can help when the client's bandwidth is limited.
   @doc("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
-  RemoveConnectionFromGroup is Azure.Core.Foundations.Operation<
+  removeConnectionFromGroup is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -440,7 +440,7 @@ alpha-numeric characters or underscore.
   @doc("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
-  AddConnectionToGroup is Azure.Core.Foundations.Operation<
+  addConnectionToGroup is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -469,7 +469,7 @@ alpha-numeric characters or underscore.
   @doc("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
-  RevokePermission is Azure.Core.Foundations.Operation<
+  revokePermission is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -503,7 +503,7 @@ the group name.
   @doc("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
-  CheckPermission is Azure.Core.Foundations.Operation<
+  checkPermission is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -537,7 +537,7 @@ the group name.
   @doc("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
-  GrantPermission is Azure.Core.Foundations.Operation<
+  grantPermission is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -571,7 +571,7 @@ the group name.
   @doc("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
-  UserExists is Azure.Core.Foundations.Operation<
+  userExists is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -593,7 +593,7 @@ alpha-numeric characters or underscore.
   @doc("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
-  CloseUserConnections is Azure.Core.Foundations.Operation<
+  closeUserConnections is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -626,7 +626,7 @@ alpha-numeric characters or underscore.
   @doc("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
-  SendToUser is Azure.Core.Foundations.Operation<
+  sendToUser is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -674,7 +674,7 @@ can help when the client's bandwidth is limited.
   @doc("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
-  RemoveUserFromAllGroups is Azure.Core.Foundations.Operation<
+  removeUserFromAllGroups is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -696,7 +696,7 @@ alpha-numeric characters or underscore.
   @doc("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
-  RemoveUserFromGroup is Azure.Core.Foundations.Operation<
+  removeUserFromGroup is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain
@@ -725,7 +725,7 @@ alpha-numeric characters or underscore.
   @doc("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
-  AddUserToGroup is Azure.Core.Foundations.Operation<
+  addUserToGroup is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Target hub name, which should start with alphabetic characters and only contain

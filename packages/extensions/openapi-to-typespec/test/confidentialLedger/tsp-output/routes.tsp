@@ -14,22 +14,22 @@ consortium members.
 """)
 @route("/app/governance/constitution")
 @get
-op GetConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
+op getConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
 
 @summary("Lists the consortium members.")
 @doc("Consortium members can manage the Confidential Ledger.")
-op ListConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
+op listConsortiumMembers is Azure.Core.ResourceList<ConsortiumMember>;
 
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
 @doc("""
 A quote is an SGX enclave measurement that can be used to verify the validity
 of a node and its enclave.
 """)
-op GetEnclaveQuotes is Azure.Core.ResourceRead<ConfidentialLedgerEnclaves>;
+op getEnclaveQuotes is Azure.Core.ResourceRead<ConfidentialLedgerEnclaves>;
 
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
 @doc("Collection ids are user-created collections of ledger entries")
-op ListCollections is Azure.Core.ResourceList<Collection>;
+op listCollections is Azure.Core.ResourceList<Collection>;
 
 @summary("Gets ledger entries from a collection corresponding to a range.")
 @doc("""
@@ -38,7 +38,7 @@ default) collection will be returned.
 """)
 @route("/app/transactions")
 @get
-op ListLedgerEntries is Azure.Core.Foundations.Operation<
+op listLedgerEntries is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
     @query("collectionId")
@@ -57,7 +57,7 @@ op ListLedgerEntries is Azure.Core.Foundations.Operation<
 
 @summary("Writes a ledger entry.")
 @doc("A collection id may optionally be specified.")
-op CreateLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
+op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
   LedgerWriteResult,
   {
     parameters: {
@@ -81,7 +81,7 @@ if the loading is still ongoing.
 """)
 @route("/app/transactions/{transactionId}")
 @get
-op GetLedgerEntry is Azure.Core.Foundations.Operation<
+op getLedgerEntry is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
     @query("collectionId")
@@ -96,17 +96,17 @@ op GetLedgerEntry is Azure.Core.Foundations.Operation<
 
 @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
 @doc("Gets a receipt certifying ledger contents at a particular transaction id.")
-op GetReceipt is Azure.Core.ResourceRead<TransactionReceipt>;
+op getReceipt is Azure.Core.ResourceRead<TransactionReceipt>;
 
 @summary("Gets the status of an entry identified by a transaction id.")
 @doc("Gets the status of an entry identified by a transaction id.")
-op GetTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
+op getTransactionStatus is Azure.Core.ResourceRead<TransactionStatus>;
 
 @summary("Gets the current value available in the ledger.")
 @doc("A collection id may optionally be specified.")
 @route("/app/transactions/current")
 @get
-op GetCurrentLedgerEntry is Azure.Core.Foundations.Operation<
+op getCurrentLedgerEntry is Azure.Core.Foundations.Operation<
   {
     @doc("The collection id.")
     @query("collectionId")
@@ -119,7 +119,7 @@ op GetCurrentLedgerEntry is Azure.Core.Foundations.Operation<
 @doc("Deletes a user from the Confidential Ledger.")
 @route("/app/users/{userId}")
 @delete
-op DeleteUser is Azure.Core.Foundations.Operation<
+op deleteUser is Azure.Core.Foundations.Operation<
   {
     @doc("The user id, either an AAD object ID or certificate fingerprint.")
     @path
@@ -132,7 +132,7 @@ op DeleteUser is Azure.Core.Foundations.Operation<
 @doc("Gets a user.")
 @route("/app/users/{userId}")
 @get
-op GetUser is Azure.Core.Foundations.Operation<
+op getUser is Azure.Core.Foundations.Operation<
   {
     @doc("The user id, either an AAD object ID or certificate fingerprint.")
     @path
@@ -145,7 +145,7 @@ op GetUser is Azure.Core.Foundations.Operation<
 @doc("A JSON merge patch is applied for existing users")
 @route("/app/users/{userId}")
 @patch
-op CreateOrUpdateUser is Azure.Core.Foundations.Operation<
+op createOrUpdateUser is Azure.Core.Foundations.Operation<
   {
     @doc("The user id, either an AAD object ID or certificate fingerprint.")
     @path

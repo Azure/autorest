@@ -12,7 +12,7 @@ interface SchemaGroupsOperations {
   @doc("Gets the list of schema groups user is authorized to access.")
   @route("/$schemaGroups")
   @get
-  List is Azure.Core.Foundations.Operation<{}, SchemaGroups>;
+  list is Azure.Core.Foundations.Operation<{}, SchemaGroups>;
 }
 
 interface SchemaOperations {
@@ -24,7 +24,7 @@ serialization of schema requested.
 """)
   @route("/$schemaGroups/$schemas/{id}")
   @get
-  GetById is Azure.Core.Foundations.Operation<
+  getById is Azure.Core.Foundations.Operation<
     {
       @doc("References specific schema in registry namespace.")
       @path
@@ -41,7 +41,7 @@ serialization of schema requested.
   @doc("Gets the list of all versions of one schema.")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
   @get
-  GetVersions is Azure.Core.Foundations.Operation<
+  getVersions is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Schema group under which schema is registered.  Group's serialization type
@@ -63,7 +63,7 @@ should match the serialization type specified in the request.
   @doc("Gets one specific version of one schema.")
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
   @get
-  GetSchemaVersion is Azure.Core.Foundations.Operation<
+  getSchemaVersion is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Schema group under which schema is registered.  Group's serialization type
@@ -92,7 +92,7 @@ as matched by schema content comparison.
 """)
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
   @post
-  QueryIdByContent is Azure.Core.Foundations.Operation<
+  queryIdByContent is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Schema group under which schema is registered.  Group's serialization type
@@ -123,7 +123,7 @@ already in specified group, schema is created at latest version + 1.
 """)
   @route("/$schemaGroups/{groupName}/schemas/{schemaName}")
   @put
-  Register is Azure.Core.Foundations.Operation<
+  register is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Schema group under which schema should be registered.  Group's serialization

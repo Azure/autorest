@@ -13,7 +13,7 @@ interface ApplicationResourcesOperations {
   @doc("List ApplicationResource resources by Application")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources")
   @get
-  ListByApplication is Azure.Core.Foundations.Operation<
+  listByApplication is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -79,7 +79,7 @@ interface ApplicationResourcesOperations {
   @doc("Get a ApplicationResource")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -113,7 +113,7 @@ interface ApplicationResourcesOperations {
   @doc("Create a ApplicationResource")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -151,7 +151,7 @@ interface ApplicationResourcesOperations {
   @doc("Update a ApplicationResource")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  patch is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -189,7 +189,7 @@ interface ApplicationResourcesOperations {
   @doc("Delete a ApplicationResource")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntegrationSpaces/spaces/{spaceName}/applications/{applicationName}/resources/{resourceName}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

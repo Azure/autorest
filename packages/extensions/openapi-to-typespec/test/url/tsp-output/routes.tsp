@@ -255,7 +255,7 @@ encoded
   @doc("Get '2012-01-01' as date")
   @route("/paths/date/2012-01-01/{datePath}")
   @get
-  DateValid is Azure.Core.Foundations.Operation<
+  dateValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01' as date")
       @path
@@ -270,7 +270,7 @@ depending on date representation
 """)
   @route("/paths/date/null/{datePath}")
   @get
-  DateNull is Azure.Core.Foundations.Operation<
+  dateNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date (should throw)")
       @path
@@ -282,7 +282,7 @@ depending on date representation
   @doc("Get '2012-01-01T01:01:01Z' as date-time")
   @route("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
   @get
-  DateTimeValid is Azure.Core.Foundations.Operation<
+  dateTimeValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01T01:01:01Z' as date-time")
       @path
@@ -297,7 +297,7 @@ representation of date-time
 """)
   @route("/paths/datetime/null/{dateTimePath}")
   @get
-  DateTimeNull is Azure.Core.Foundations.Operation<
+  dateTimeNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date-time")
       @path
@@ -324,7 +324,7 @@ using the csv-array format
 """)
   @route("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
   @get
-  ArrayCsvInPath is Azure.Core.Foundations.Operation<
+  arrayCsvInPath is Azure.Core.Foundations.Operation<
     {
       @doc("""
 an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
@@ -641,7 +641,7 @@ interface queriesOperations {
   @doc("Get '2012-01-01' as date")
   @route("/queries/date/2012-01-01")
   @get
-  DateValid is Azure.Core.Foundations.Operation<
+  dateValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01' as date")
       @query("dateQuery")
@@ -653,7 +653,7 @@ interface queriesOperations {
   @doc("Get null as date - this should result in no query parameters in uri")
   @route("/queries/date/null")
   @get
-  DateNull is Azure.Core.Foundations.Operation<
+  dateNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date (no query parameters in uri)")
       @query("dateQuery")
@@ -665,7 +665,7 @@ interface queriesOperations {
   @doc("Get '2012-01-01T01:01:01Z' as date-time")
   @route("/queries/datetime/2012-01-01T01%3A01%3A01Z")
   @get
-  DateTimeValid is Azure.Core.Foundations.Operation<
+  dateTimeValid is Azure.Core.Foundations.Operation<
     {
       @doc("'2012-01-01T01:01:01Z' as date-time")
       @query("dateTimeQuery")
@@ -677,7 +677,7 @@ interface queriesOperations {
   @doc("Get null as date-time, should result in no query parameters in uri")
   @route("/queries/datetime/null")
   @get
-  DateTimeNull is Azure.Core.Foundations.Operation<
+  dateTimeNull is Azure.Core.Foundations.Operation<
     {
       @doc("null as date-time (no query parameters)")
       @query("dateTimeQuery")
@@ -692,7 +692,7 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 """)
   @route("/queries/array/csv/string/valid")
   @get
-  ArrayStringCsvValid is Azure.Core.Foundations.Operation<
+  arrayStringCsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
@@ -710,7 +710,7 @@ using the csv-array format
   @doc("Get a null array of string using the csv-array format")
   @route("/queries/array/csv/string/null")
   @get
-  ArrayStringCsvNull is Azure.Core.Foundations.Operation<
+  arrayStringCsvNull is Azure.Core.Foundations.Operation<
     {
       @doc("a null array of string using the csv-array format")
       @query({
@@ -725,7 +725,7 @@ using the csv-array format
   @doc("Get an empty array [] of string using the csv-array format")
   @route("/queries/array/csv/string/empty")
   @get
-  ArrayStringCsvEmpty is Azure.Core.Foundations.Operation<
+  arrayStringCsvEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("an empty array [] of string using the csv-array format")
       @query({
@@ -743,7 +743,7 @@ Array query has no defined collection format, should default to csv. Pass in
 """)
   @route("/queries/array/none/string/empty")
   @get
-  ArrayStringNoCollectionFormatEmpty is Azure.Core.Foundations.Operation<
+  arrayStringNoCollectionFormatEmpty is Azure.Core.Foundations.Operation<
     {
       @doc("Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].")
       @query({
@@ -761,7 +761,7 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 """)
   @route("/queries/array/ssv/string/valid")
   @get
-  ArrayStringSsvValid is Azure.Core.Foundations.Operation<
+  arrayStringSsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
@@ -782,7 +782,7 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 """)
   @route("/queries/array/tsv/string/valid")
   @get
-  ArrayStringTsvValid is Azure.Core.Foundations.Operation<
+  arrayStringTsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
@@ -803,7 +803,7 @@ Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
 """)
   @route("/queries/array/pipes/string/valid")
   @get
-  ArrayStringPipesValid is Azure.Core.Foundations.Operation<
+  arrayStringPipesValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
 an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']

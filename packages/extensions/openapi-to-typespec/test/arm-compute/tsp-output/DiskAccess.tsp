@@ -47,7 +47,7 @@ interface DiskAccesses {
   // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
   @get
-  GetPrivateLinkResources is Azure.Core.Foundations.Operation<
+  getPrivateLinkResources is Azure.Core.Foundations.Operation<
     {
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path

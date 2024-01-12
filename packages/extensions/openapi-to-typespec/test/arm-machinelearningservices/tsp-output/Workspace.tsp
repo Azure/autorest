@@ -139,7 +139,7 @@ interface Workspaces {
   // FIXME: WorkspaceFeatures_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -165,7 +165,7 @@ interface Workspaces {
   // FIXME: Workspaces_ListOutboundNetworkDependenciesEndpoints could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints")
   @get
-  ListOutboundNetworkDependenciesEndpoints is Azure.Core.Foundations.Operation<
+  listOutboundNetworkDependenciesEndpoints is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -205,7 +205,7 @@ Defined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupI
   // FIXME: PrivateLinkResources_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

@@ -383,7 +383,7 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
   @get
-  GetInstanceView is Azure.Core.Foundations.Operation<
+  getInstanceView is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -404,7 +404,7 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
   @get
-  ListSkus is Azure.Core.Foundations.Operation<
+  listSkus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -427,7 +427,7 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get
-  GetOSUpgradeHistory is Azure.Core.Foundations.Operation<
+  getOSUpgradeHistory is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

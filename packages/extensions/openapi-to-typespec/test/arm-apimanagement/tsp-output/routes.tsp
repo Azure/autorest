@@ -13,7 +13,7 @@ interface TagOperations {
   @doc("Lists all Tags associated with the API.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags")
   @get
-  ListByApi is Azure.Core.Foundations.Operation<
+  listByApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -56,7 +56,7 @@ interface TagOperations {
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @head
-  GetEntityStateByApi is Azure.Core.Foundations.Operation<
+  getEntityStateByApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -93,7 +93,7 @@ interface TagOperations {
   @doc("Get tag associated with the API.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @get
-  GetByApi is Azure.Core.Foundations.Operation<
+  getByApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -130,7 +130,7 @@ interface TagOperations {
   @doc("Assign tag to the Api.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @put
-  AssignToApi is Azure.Core.Foundations.Operation<
+  assignToApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -167,7 +167,7 @@ interface TagOperations {
   @doc("Detach the tag from the Api.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @delete
-  DetachFromApi is Azure.Core.Foundations.Operation<
+  detachFromApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -204,7 +204,7 @@ interface TagOperations {
   @doc("Lists all Tags associated with the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags")
   @get
-  ListByProduct is Azure.Core.Foundations.Operation<
+  listByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -246,7 +246,7 @@ interface TagOperations {
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @head
-  GetEntityStateByProduct is Azure.Core.Foundations.Operation<
+  getEntityStateByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -282,7 +282,7 @@ interface TagOperations {
   @doc("Get tag associated with the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @get
-  GetByProduct is Azure.Core.Foundations.Operation<
+  getByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -318,7 +318,7 @@ interface TagOperations {
   @doc("Assign tag to the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @put
-  AssignToProduct is Azure.Core.Foundations.Operation<
+  assignToProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -354,7 +354,7 @@ interface TagOperations {
   @doc("Detach the tag from the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @delete
-  DetachFromProduct is Azure.Core.Foundations.Operation<
+  detachFromProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -390,7 +390,7 @@ interface TagOperations {
   @doc("Lists a collection of tags defined within a service instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -430,7 +430,7 @@ interface TagOperations {
   @doc("Gets the entity state version of the tag specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @head
-  GetEntityState is Azure.Core.Foundations.Operation<
+  getEntityState is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -460,7 +460,7 @@ interface TagOperations {
   @doc("Gets the details of the tag specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -490,7 +490,7 @@ interface TagOperations {
   @doc("Creates a tag.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -528,7 +528,7 @@ interface TagOperations {
   @doc("Updates the details of the tag specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @patch
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -566,7 +566,7 @@ interface TagOperations {
   @doc("Deletes specific tag of the API Management service instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -602,7 +602,7 @@ interface ApiPolicyOperations {
   @doc("Get the policy configuration at the API level.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies")
   @get
-  ListByApi is Azure.Core.Foundations.Operation<
+  listByApi is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -632,7 +632,7 @@ interface ApiPolicyOperations {
   @doc("Gets the entity state (Etag) version of the API policy specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @head
-  GetEntityTag is Azure.Core.Foundations.Operation<
+  getEntityTag is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -666,7 +666,7 @@ interface ApiPolicyOperations {
   @doc("Get the policy configuration at the API level.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -708,7 +708,7 @@ interface ApiPolicyOperations {
   @doc("Creates or updates policy configuration for the API.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -750,7 +750,7 @@ interface ApiPolicyOperations {
   @doc("Deletes the policy configuration at the Api.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -790,7 +790,7 @@ interface ApiExportOperations {
   @doc("Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -830,7 +830,7 @@ interface DiagnosticOperations {
   @doc("Lists all diagnostics of the API Management service instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -866,7 +866,7 @@ interface DiagnosticOperations {
   @doc("Gets the entity state (Etag) version of the Diagnostic specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @head
-  GetEntityTag is Azure.Core.Foundations.Operation<
+  getEntityTag is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -896,7 +896,7 @@ interface DiagnosticOperations {
   @doc("Gets the details of the Diagnostic specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -926,7 +926,7 @@ interface DiagnosticOperations {
   @doc("Creates a new Diagnostic or updates an existing one.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -964,7 +964,7 @@ interface DiagnosticOperations {
   @doc("Updates the details of the Diagnostic specified by its identifier.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @patch
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1002,7 +1002,7 @@ interface DiagnosticOperations {
   @doc("Deletes the specified Diagnostic.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1038,7 +1038,7 @@ interface IssueOperations {
   @doc("Lists a collection of issues in the specified service instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1074,7 +1074,7 @@ interface IssueOperations {
   @doc("Gets API Management issue details")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues/{issueId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1106,7 +1106,7 @@ interface PolicyOperations {
   @doc("Lists all the Global Policy definitions of the Api Management service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1129,7 +1129,7 @@ interface PolicyOperations {
   @doc("Gets the entity state (Etag) version of the Global policy definition in the Api Management service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @head
-  GetEntityTag is Azure.Core.Foundations.Operation<
+  getEntityTag is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1156,7 +1156,7 @@ interface PolicyOperations {
   @doc("Get the Global policy definition of the Api Management service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1187,7 +1187,7 @@ interface PolicyOperations {
   @doc("Creates or updates the global policy configuration of the Api Management service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1222,7 +1222,7 @@ interface PolicyOperations {
   @doc("Deletes the global policy configuration of the Api Management Service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1255,7 +1255,7 @@ interface ProductPolicyOperations {
   @doc("Get the policy configuration at the Product level.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies")
   @get
-  ListByProduct is Azure.Core.Foundations.Operation<
+  listByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1284,7 +1284,7 @@ interface ProductPolicyOperations {
   @doc("Get the ETag of the policy configuration at the Product level.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @head
-  GetEntityTag is Azure.Core.Foundations.Operation<
+  getEntityTag is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1317,7 +1317,7 @@ interface ProductPolicyOperations {
   @doc("Get the policy configuration at the Product level.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1354,7 +1354,7 @@ interface ProductPolicyOperations {
   @doc("Creates or updates policy configuration for the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1395,7 +1395,7 @@ interface ProductPolicyOperations {
   @doc("Deletes the policy configuration at the Product.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1434,7 +1434,7 @@ interface ApiManagementSkusOperations {
   @doc("Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/skus")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
@@ -1448,7 +1448,7 @@ interface UserSubscriptionOperations {
   @doc("Lists the collection of subscriptions of the specified user.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -1490,7 +1490,7 @@ interface UserSubscriptionOperations {
   @doc("Gets the specified Subscription entity associated with a particular user.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions/{sid}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

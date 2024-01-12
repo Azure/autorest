@@ -164,7 +164,7 @@ interface UserContracts {
   // FIXME: UserGroup_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -209,7 +209,7 @@ interface UserContracts {
   // FIXME: UserIdentities_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

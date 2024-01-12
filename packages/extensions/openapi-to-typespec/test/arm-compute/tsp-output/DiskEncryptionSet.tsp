@@ -44,5 +44,5 @@ interface DiskEncryptionSets {
 
   @doc("Lists all resources that are encrypted with this disk encryption set.")
   // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
-  ListAssociatedResources is Azure.Core.ResourceList<string>;
+  listAssociatedResources is Azure.Core.ResourceList<string>;
 }

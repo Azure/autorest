@@ -16,7 +16,7 @@ user an overall status of the time series.
 """)
 @route("/timeseries/entire/detect")
 @post
-op DetectEntireSeries is Azure.Core.Foundations.Operation<
+op detectEntireSeries is Azure.Core.Foundations.Operation<
   DetectRequest,
   EntireDetectResponse
 >;
@@ -30,7 +30,7 @@ real-time monitoring of business metrics.
 """)
 @route("/timeseries/last/detect")
 @post
-op DetectLastPoint is Azure.Core.Foundations.Operation<
+op detectLastPoint is Azure.Core.Foundations.Operation<
   DetectRequest,
   LastDetectResponse
 >;
@@ -39,7 +39,7 @@ op DetectLastPoint is Azure.Core.Foundations.Operation<
 @doc("Evaluate change point score of every series point")
 @route("/timeseries/changepoint/detect")
 @post
-op DetectChangePoint is Azure.Core.Foundations.Operation<
+op detectChangePoint is Azure.Core.Foundations.Operation<
   ChangePointDetectRequest,
   ChangePointDetectResponse
 >;
@@ -49,7 +49,7 @@ op DetectChangePoint is Azure.Core.Foundations.Operation<
 Get multivariate anomaly detection result based on resultId returned by the
 DetectAnomalyAsync api
 """)
-op GetDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
+op getDetectionResult is Azure.Core.ResourceRead<DetectionResult>;
 
 @summary("Train a Multivariate Anomaly Detection Model")
 @doc("""
@@ -62,11 +62,11 @@ column is value.
 """)
 @route("/multivariate/models")
 @post
-op TrainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
+op trainMultivariateModel is Azure.Core.Foundations.Operation<ModelInfo, void>;
 
 @summary("List Multivariate Models")
 @doc("List models of a subscription")
-op ListMultivariateModel is Azure.Core.ResourceList<
+op listMultivariateModel is Azure.Core.ResourceList<
   ModelSnapshot,
   {
     parameters: {
@@ -85,7 +85,7 @@ op ListMultivariateModel is Azure.Core.ResourceList<
 @doc("Delete an existing multivariate model according to the modelId")
 @route("/multivariate/models/{modelId}")
 @delete
-op DeleteMultivariateModel is Azure.Core.Foundations.Operation<
+op deleteMultivariateModel is Azure.Core.Foundations.Operation<
   {
     @doc("Model identifier")
     @path
@@ -99,7 +99,7 @@ op DeleteMultivariateModel is Azure.Core.Foundations.Operation<
 Get detailed information of multivariate model, including the training status
 and variables used in the model.
 """)
-op GetMultivariateModel is Azure.Core.ResourceRead<Model>;
+op getMultivariateModel is Azure.Core.ResourceRead<Model>;
 
 @summary("Detect Multivariate Anomaly")
 @doc("""
@@ -114,7 +114,7 @@ second column is value.
 """)
 @route("/multivariate/models/{modelId}/entire/detect")
 @post
-op DetectAnomaly is Azure.Core.Foundations.Operation<
+op detectAnomaly is Azure.Core.Foundations.Operation<
   {
     @doc("Model identifier")
     @path
@@ -131,7 +131,7 @@ op DetectAnomaly is Azure.Core.Foundations.Operation<
 @doc("Synchronized API for anomaly detection.")
 @route("/multivariate/models/{modelId}/last/detect")
 @post
-op LastDetectAnomaly is Azure.Core.Foundations.Operation<
+op lastDetectAnomaly is Azure.Core.Foundations.Operation<
   {
     @doc("Model identifier")
     @path

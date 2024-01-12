@@ -13,7 +13,7 @@ interface UsagesOperations {
   @doc("Gets the current usage information as well as limits for AML resources for given subscription and location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -33,7 +33,7 @@ interface VirtualMachineSizesOperations {
   @doc("Returns supported VM Sizes in a location")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -53,7 +53,7 @@ interface QuotasOperations {
   @doc("Update quota for each VM family in workspace.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas")
   @post
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The location for update quota is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -75,7 +75,7 @@ interface QuotasOperations {
   @doc("Gets the currently assigned Workspace Quotas based on VMFamily.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -96,7 +96,7 @@ interface CodeContainersOperations {
   @doc("List containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -125,7 +125,7 @@ interface CodeContainersOperations {
   @doc("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -154,7 +154,7 @@ interface CodeContainersOperations {
   @doc("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -183,7 +183,7 @@ interface CodeContainersOperations {
   @doc("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -219,7 +219,7 @@ interface CodeVersionsOperations {
   @doc("List versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -268,7 +268,7 @@ interface CodeVersionsOperations {
   @doc("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -301,7 +301,7 @@ interface CodeVersionsOperations {
   @doc("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -334,7 +334,7 @@ interface CodeVersionsOperations {
   @doc("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -372,7 +372,7 @@ interface CodeVersionsOperations {
   @doc("Generate a storage location and credential for the client to upload a code asset to.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload")
   @post
-  CreateOrGetStartPendingUpload is Azure.Core.Foundations.Operation<
+  createOrGetStartPendingUpload is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -411,7 +411,7 @@ interface ComponentContainersOperations {
   @doc("List component containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -444,7 +444,7 @@ interface ComponentContainersOperations {
   @doc("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -473,7 +473,7 @@ interface ComponentContainersOperations {
   @doc("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -502,7 +502,7 @@ interface ComponentContainersOperations {
   @doc("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -538,7 +538,7 @@ interface ComponentVersionsOperations {
   @doc("List component versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -587,7 +587,7 @@ interface ComponentVersionsOperations {
   @doc("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -620,7 +620,7 @@ interface ComponentVersionsOperations {
   @doc("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -653,7 +653,7 @@ interface ComponentVersionsOperations {
   @doc("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -693,7 +693,7 @@ interface DataContainersOperations {
   @doc("List data containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -726,7 +726,7 @@ interface DataContainersOperations {
   @doc("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -755,7 +755,7 @@ interface DataContainersOperations {
   @doc("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -784,7 +784,7 @@ interface DataContainersOperations {
   @doc("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -820,7 +820,7 @@ interface DataVersionsOperations {
   @doc("List data versions in the data container")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -876,7 +876,7 @@ Top count of results, top count cannot be greater than the page size.
   @doc("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -909,7 +909,7 @@ Top count of results, top count cannot be greater than the page size.
   @doc("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -942,7 +942,7 @@ Top count of results, top count cannot be greater than the page size.
   @doc("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -982,7 +982,7 @@ interface EnvironmentContainersOperations {
   @doc("List environment containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1015,7 +1015,7 @@ interface EnvironmentContainersOperations {
   @doc("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1044,7 +1044,7 @@ interface EnvironmentContainersOperations {
   @doc("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1073,7 +1073,7 @@ interface EnvironmentContainersOperations {
   @doc("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1109,7 +1109,7 @@ interface EnvironmentVersionsOperations {
   @doc("List versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1158,7 +1158,7 @@ interface EnvironmentVersionsOperations {
   @doc("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1191,7 +1191,7 @@ interface EnvironmentVersionsOperations {
   @doc("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1224,7 +1224,7 @@ interface EnvironmentVersionsOperations {
   @doc("Creates or updates an EnvironmentVersion.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1264,7 +1264,7 @@ interface ModelContainersOperations {
   @doc("List model containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1301,7 +1301,7 @@ interface ModelContainersOperations {
   @doc("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1330,7 +1330,7 @@ interface ModelContainersOperations {
   @doc("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1359,7 +1359,7 @@ interface ModelContainersOperations {
   @doc("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1395,7 +1395,7 @@ interface ModelVersionsOperations {
   @doc("List model versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1468,7 +1468,7 @@ interface ModelVersionsOperations {
   @doc("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1501,7 +1501,7 @@ interface ModelVersionsOperations {
   @doc("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1534,7 +1534,7 @@ interface ModelVersionsOperations {
   @doc("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -1572,7 +1572,7 @@ interface ModelVersionsOperations {
   @doc("Model Version Package operation.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/package")
   @post
-  Package is Azure.Core.Foundations.Operation<
+  package is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

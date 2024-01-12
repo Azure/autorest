@@ -13,7 +13,7 @@ container.
 """)
 @route("/backup")
 @post
-op FullBackup is Azure.Core.Foundations.Operation<
+op fullBackup is Azure.Core.Foundations.Operation<
   SASTokenParameter,
   FullBackupOperation
 >;
@@ -21,7 +21,7 @@ op FullBackup is Azure.Core.Foundations.Operation<
 @doc("Returns the status of full backup operation")
 @route("/backup/{jobId}/pending")
 @get
-op FullBackupStatus is Azure.Core.Foundations.Operation<
+op fullBackupStatus is Azure.Core.Foundations.Operation<
   {
     @doc("The id returned as part of the backup request")
     @path
@@ -36,7 +36,7 @@ Azure Blob storage backup folder
 """)
 @route("/restore")
 @put
-op FullRestoreOperation is Azure.Core.Foundations.Operation<
+op fullRestoreOperation is Azure.Core.Foundations.Operation<
   RestoreOperationParameters,
   RestoreOperation
 >;
@@ -44,7 +44,7 @@ op FullRestoreOperation is Azure.Core.Foundations.Operation<
 @doc("Returns the status of restore operation")
 @route("/restore/{jobId}/pending")
 @get
-op RestoreStatus is Azure.Core.Foundations.Operation<
+op restoreStatus is Azure.Core.Foundations.Operation<
   {
     @doc("The Job Id returned part of the restore operation")
     @path
@@ -57,11 +57,9 @@ op RestoreStatus is Azure.Core.Foundations.Operation<
 Restores all key versions of a given key using user supplied SAS token pointing
 to a previously stored Azure Blob storage backup folder
 """)
-// FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-// Problematic names: [SelectiveKeyRestoreOperation]
 @route("/keys/{keyName}/restore")
 @put
-op SelectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
+op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key to be restored from the user supplied backup")
     @path
@@ -84,7 +82,7 @@ specified key vault. This operation requires the certificates/list permission.
 """)
 @route("/certificates")
 @get
-op GetCertificates is Azure.Core.Foundations.Operation<
+op getCertificates is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -110,7 +108,7 @@ certificate object. This operation requires the certificates/delete permission.
 """)
 @route("/certificates/{certificate-name}")
 @delete
-op DeleteCertificate is Azure.Core.Foundations.Operation<
+op deleteCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -126,7 +124,7 @@ requires the certificates/managecontacts permission.
 """)
 @route("/certificates/contacts")
 @put
-op SetCertificateContacts is Azure.Core.Foundations.Operation<
+op setCertificateContacts is Azure.Core.Foundations.Operation<
   Contacts,
   Contacts
 >;
@@ -139,7 +137,7 @@ certificates/managecontacts permission.
 """)
 @route("/certificates/contacts")
 @get
-op GetCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
+op getCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
 
 @summary("Deletes the certificate contacts for a specified key vault.")
 @doc("""
@@ -148,7 +146,7 @@ operation requires the certificates/managecontacts permission.
 """)
 @route("/certificates/contacts")
 @delete
-op DeleteCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
+op deleteCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
 
 @summary("List certificate issuers for a specified key vault.")
 @doc("""
@@ -158,7 +156,7 @@ certificates/manageissuers/getissuers permission.
 """)
 @route("/certificates/issuers")
 @get
-op GetCertificateIssuers is Azure.Core.Foundations.Operation<
+op getCertificateIssuers is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -179,7 +177,7 @@ issuer. This operation requires the certificates/setissuers permission.
 """)
 @route("/certificates/issuers/{issuer-name}")
 @put
-op SetCertificateIssuer is Azure.Core.Foundations.Operation<
+op setCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of the issuer. The value you provide may be copied globally for the
@@ -204,7 +202,7 @@ permission.
 """)
 @route("/certificates/issuers/{issuer-name}")
 @patch
-op UpdateCertificateIssuer is Azure.Core.Foundations.Operation<
+op updateCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the issuer.")
     @path
@@ -225,7 +223,7 @@ certificates/manageissuers/getissuers permission.
 """)
 @route("/certificates/issuers/{issuer-name}")
 @get
-op GetCertificateIssuer is Azure.Core.Foundations.Operation<
+op getCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the issuer.")
     @path
@@ -242,7 +240,7 @@ certificates/manageissuers/deleteissuers permission.
 """)
 @route("/certificates/issuers/{issuer-name}")
 @delete
-op DeleteCertificateIssuer is Azure.Core.Foundations.Operation<
+op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the issuer.")
     @path
@@ -258,7 +256,7 @@ operation requires the certificates/create permission.
 """)
 @route("/certificates/{certificate-name}/create")
 @post
-op CreateCertificate is Azure.Core.Foundations.Operation<
+op createCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of the certificate. The value you provide may be copied globally for
@@ -286,7 +284,7 @@ certificates. Key Vault will only accept a key in PKCS#8 format.
 """)
 @route("/certificates/{certificate-name}/import")
 @post
-op ImportCertificate is Azure.Core.Foundations.Operation<
+op importCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of the certificate. The value you provide may be copied globally for
@@ -312,7 +310,7 @@ permission.
 """)
 @route("/certificates/{certificate-name}/versions")
 @get
-op GetCertificateVersions is Azure.Core.Foundations.Operation<
+op getCertificateVersions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -338,7 +336,7 @@ certificates/get permission.
 """)
 @route("/certificates/{certificate-name}/policy")
 @get
-op GetCertificatePolicy is Azure.Core.Foundations.Operation<
+op getCertificatePolicy is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate in a given key vault.")
     @path
@@ -354,7 +352,7 @@ operation requires the certificates/update permission.
 """)
 @route("/certificates/{certificate-name}/policy")
 @patch
-op UpdateCertificatePolicy is Azure.Core.Foundations.Operation<
+op updateCertificatePolicy is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate in the given vault.")
     @path
@@ -375,7 +373,7 @@ operation requires the certificates/update permission.
 """)
 @route("/certificates/{certificate-name}/{certificate-version}")
 @patch
-op UpdateCertificate is Azure.Core.Foundations.Operation<
+op updateCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate in the given key vault.")
     @path
@@ -399,7 +397,7 @@ certificates/get permission.
 """)
 @route("/certificates/{certificate-name}/{certificate-version}")
 @get
-op GetCertificate is Azure.Core.Foundations.Operation<
+op getCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate in the given vault.")
     @path
@@ -422,7 +420,7 @@ operation requires the certificates/update permission.
 """)
 @route("/certificates/{certificate-name}/pending")
 @patch
-op UpdateCertificateOperation is Azure.Core.Foundations.Operation<
+op updateCertificateOperation is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -442,7 +440,7 @@ operation requires the certificates/get permission.
 """)
 @route("/certificates/{certificate-name}/pending")
 @get
-op GetCertificateOperation is Azure.Core.Foundations.Operation<
+op getCertificateOperation is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -459,7 +457,7 @@ requires the certificates/update permission.
 """)
 @route("/certificates/{certificate-name}/pending")
 @delete
-op DeleteCertificateOperation is Azure.Core.Foundations.Operation<
+op deleteCertificateOperation is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -479,7 +477,7 @@ operation requires the certificates/create permission.
 """)
 @route("/certificates/{certificate-name}/pending/merge")
 @post
-op MergeCertificate is Azure.Core.Foundations.Operation<
+op mergeCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -500,7 +498,7 @@ requires the certificates/backup permission.
 """)
 @route("/certificates/{certificate-name}/backup")
 @post
-op BackupCertificate is Azure.Core.Foundations.Operation<
+op backupCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate.")
     @path
@@ -516,7 +514,7 @@ operation requires the certificates/restore permission.
 """)
 @route("/certificates/restore")
 @post
-op RestoreCertificate is Azure.Core.Foundations.Operation<
+op restoreCertificate is Azure.Core.Foundations.Operation<
   CertificateRestoreParameters,
   CertificateBundle
 >;
@@ -534,7 +532,7 @@ soft-delete enabled vaults.
 """)
 @route("/deletedcertificates")
 @get
-op GetDeletedCertificates is Azure.Core.Foundations.Operation<
+op getDeletedCertificates is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -561,7 +559,7 @@ requires the certificates/get permission.
 """)
 @route("/deletedcertificates/{certificate-name}")
 @get
-op GetDeletedCertificate is Azure.Core.Foundations.Operation<
+op getDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate")
     @path
@@ -579,7 +577,7 @@ requires the certificate/purge permission.
 """)
 @route("/deletedcertificates/{certificate-name}")
 @delete
-op PurgeDeletedCertificate is Azure.Core.Foundations.Operation<
+op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the certificate")
     @path
@@ -601,7 +599,7 @@ permission.
 """)
 @route("/deletedcertificates/{certificate-name}/recover")
 @post
-op RecoverDeletedCertificate is Azure.Core.Foundations.Operation<
+op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the deleted certificate")
     @path
@@ -621,7 +619,7 @@ key. It requires the keys/create permission.
 """)
 @route("/keys/{key-name}/create")
 @post
-op CreateKey is Azure.Core.Foundations.Operation<
+op createKey is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name for the new key. The system will generate the version name for the new
@@ -650,7 +648,7 @@ keys/rotate permission.
 """)
 @route("/keys/{key-name}/rotate")
 @post
-op RotateKey is Azure.Core.Foundations.Operation<
+op rotateKey is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of key to be rotated. The system will generate a new version in the
@@ -674,7 +672,7 @@ of the key. This operation requires the keys/import permission.
 """)
 @route("/keys/{key-name}")
 @put
-op ImportKey is Azure.Core.Foundations.Operation<
+op importKey is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Name for the imported key. The value you provide may be copied globally for the
@@ -701,7 +699,7 @@ Encrypt/Decrypt operations. This operation requires the keys/delete permission.
 """)
 @route("/keys/{key-name}")
 @delete
-op DeleteKey is Azure.Core.Foundations.Operation<
+op deleteKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key to delete.")
     @path
@@ -721,7 +719,7 @@ operation requires the keys/update permission.
 """)
 @route("/keys/{key-name}/{key-version}")
 @patch
-op UpdateKey is Azure.Core.Foundations.Operation<
+op updateKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of key to update.")
     @path
@@ -746,7 +744,7 @@ requires the keys/get permission.
 """)
 @route("/keys/{key-name}/{key-version}")
 @get
-op GetKey is Azure.Core.Foundations.Operation<
+op getKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key to get.")
     @path
@@ -770,7 +768,7 @@ This operation requires the keys/list permission.
 """)
 @route("/keys/{key-name}/versions")
 @get
-op GetKeyVersions is Azure.Core.Foundations.Operation<
+op getKeyVersions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key.")
     @path
@@ -798,7 +796,7 @@ response. This operation requires the keys/list permission.
 """)
 @route("/keys")
 @get
-op GetKeys is Azure.Core.Foundations.Operation<
+op getKeys is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -830,7 +828,7 @@ permission.
 """)
 @route("/keys/{key-name}/backup")
 @post
-op BackupKey is Azure.Core.Foundations.Operation<
+op backupKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key.")
     @path
@@ -856,7 +854,7 @@ Vault. This operation requires the keys/restore permission.
 """)
 @route("/keys/restore")
 @post
-op RestoreKey is Azure.Core.Foundations.Operation<
+op restoreKey is Azure.Core.Foundations.Operation<
   KeyRestoreParameters,
   KeyBundle
 >;
@@ -1075,7 +1073,7 @@ This operation requires the keys/list permission.
 """)
 @route("/deletedkeys")
 @get
-op GetDeletedKeys is Azure.Core.Foundations.Operation<
+op getDeletedKeys is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -1098,7 +1096,7 @@ keys/get permission.
 """)
 @route("/deletedkeys/{key-name}")
 @get
-op GetDeletedKey is Azure.Core.Foundations.Operation<
+op getDeletedKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key.")
     @path
@@ -1116,7 +1114,7 @@ keys/purge permission.
 """)
 @route("/deletedkeys/{key-name}")
 @delete
-op PurgeDeletedKey is Azure.Core.Foundations.Operation<
+op purgeDeletedKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key")
     @path
@@ -1135,7 +1133,7 @@ operation requires the keys/recover permission.
 """)
 @route("/deletedkeys/{key-name}/recover")
 @post
-op RecoverDeletedKey is Azure.Core.Foundations.Operation<
+op recoverDeletedKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the deleted key.")
     @path
@@ -1151,7 +1149,7 @@ in the specified key vault. This operation requires the keys/get permission.
 """)
 @route("/keys/{key-name}/rotationpolicy")
 @get
-op GetKeyRotationPolicy is Azure.Core.Foundations.Operation<
+op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key in a given key vault.")
     @path
@@ -1167,7 +1165,7 @@ operation requires the keys/update permission.
 """)
 @route("/keys/{key-name}/rotationpolicy")
 @put
-op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
+op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the key in the given vault.")
     @path
@@ -1184,7 +1182,7 @@ op UpdateKeyRotationPolicy is Azure.Core.Foundations.Operation<
 @doc("Get the requested number of bytes containing random values from a managed HSM.")
 @route("/rng")
 @post
-op GetRandomBytes is Azure.Core.Foundations.Operation<
+op getRandomBytes is Azure.Core.Foundations.Operation<
   GetRandomBytesRequest,
   RandomBytes
 >;
@@ -1197,7 +1195,7 @@ operation requires the secrets/set permission.
 """)
 @route("/secrets/{secret-name}")
 @put
-op SetSecret is Azure.Core.Foundations.Operation<
+op setSecret is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of the secret. The value you provide may be copied globally for the
@@ -1223,7 +1221,7 @@ the secrets/delete permission.
 """)
 @route("/secrets/{secret-name}")
 @delete
-op DeleteSecret is Azure.Core.Foundations.Operation<
+op deleteSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1241,7 +1239,7 @@ permission.
 """)
 @route("/secrets/{secret-name}/{secret-version}")
 @patch
-op UpdateSecret is Azure.Core.Foundations.Operation<
+op updateSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1265,7 +1263,7 @@ operation requires the secrets/get permission.
 """)
 @route("/secrets/{secret-name}/{secret-version}")
 @get
-op GetSecret is Azure.Core.Foundations.Operation<
+op getSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1290,7 +1288,7 @@ requires the secrets/list permission.
 """)
 @route("/secrets")
 @get
-op GetSecrets is Azure.Core.Foundations.Operation<
+op getSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified, the service
@@ -1312,7 +1310,7 @@ permission.
 """)
 @route("/secrets/{secret-name}/versions")
 @get
-op GetSecretVersions is Azure.Core.Foundations.Operation<
+op getSecretVersions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1338,7 +1336,7 @@ permission.
 """)
 @route("/deletedsecrets")
 @get
-op GetDeletedSecrets is Azure.Core.Foundations.Operation<
+op getDeletedSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -1359,7 +1357,7 @@ with its attributes. This operation requires the secrets/get permission.
 """)
 @route("/deletedsecrets/{secret-name}")
 @get
-op GetDeletedSecret is Azure.Core.Foundations.Operation<
+op getDeletedSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1376,7 +1374,7 @@ enabled vault. This operation requires the secrets/purge permission.
 """)
 @route("/deletedsecrets/{secret-name}")
 @delete
-op PurgeDeletedSecret is Azure.Core.Foundations.Operation<
+op purgeDeletedSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1393,7 +1391,7 @@ secrets/recover permission.
 """)
 @route("/deletedsecrets/{secret-name}/recover")
 @post
-op RecoverDeletedSecret is Azure.Core.Foundations.Operation<
+op recoverDeletedSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the deleted secret.")
     @path
@@ -1410,7 +1408,7 @@ secrets/backup permission.
 """)
 @route("/secrets/{secret-name}/backup")
 @post
-op BackupSecret is Azure.Core.Foundations.Operation<
+op backupSecret is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the secret.")
     @path
@@ -1426,7 +1424,7 @@ requires the secrets/restore permission.
 """)
 @route("/secrets/restore")
 @post
-op RestoreSecret is Azure.Core.Foundations.Operation<
+op restoreSecret is Azure.Core.Foundations.Operation<
   SecretRestoreParameters,
   SecretBundle
 >;
@@ -1438,7 +1436,7 @@ value to the client.
 @doc("Description of the pool setting to be updated")
 @route("/settings/{setting-name}")
 @patch
-op UpdateSettings is Azure.Core.Foundations.Operation<
+op updateSettings is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the account setting. Must be a valid settings option.")
     @path
@@ -1455,7 +1453,7 @@ op UpdateSettings is Azure.Core.Foundations.Operation<
 @doc("Retrieves the value of a specified, value account setting.")
 @route("/settings/{setting-name}")
 @get
-op GetSettingValue is Azure.Core.Foundations.Operation<
+op getSettingValue is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the account setting. Must be a valid settings option.")
     @path
@@ -1468,7 +1466,7 @@ op GetSettingValue is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of all the available account settings that can be configured.")
 @route("/settings")
 @get
-op GetSettings is Azure.Core.Foundations.Operation<{}, SettingsListResult>;
+op getSettings is Azure.Core.Foundations.Operation<{}, SettingsListResult>;
 
 @doc("""
 List storage accounts managed by the specified key vault. This operation
@@ -1476,7 +1474,7 @@ requires the storage/list permission.
 """)
 @route("/storage")
 @get
-op GetStorageAccounts is Azure.Core.Foundations.Operation<
+op getStorageAccounts is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -1498,7 +1496,7 @@ the storage/list permission.
 """)
 @route("/deletedstorage")
 @get
-op GetDeletedStorageAccounts is Azure.Core.Foundations.Operation<
+op getDeletedStorageAccounts is Azure.Core.Foundations.Operation<
   {
     @doc("""
 Maximum number of results to return in a page. If not specified the service
@@ -1520,7 +1518,7 @@ permission.
 """)
 @route("/deletedstorage/{storage-account-name}")
 @get
-op GetDeletedStorageAccount is Azure.Core.Foundations.Operation<
+op getDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1539,7 +1537,7 @@ permission.
 """)
 @route("/deletedstorage/{storage-account-name}")
 @delete
-op PurgeDeletedStorageAccount is Azure.Core.Foundations.Operation<
+op purgeDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1557,7 +1555,7 @@ storage/recover permission.
 """)
 @route("/deletedstorage/{storage-account-name}/recover")
 @post
-op RecoverDeletedStorageAccount is Azure.Core.Foundations.Operation<
+op recoverDeletedStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1574,7 +1572,7 @@ client. This operation requires the storage/backup permission.
 """)
 @route("/storage/{storage-account-name}/backup")
 @post
-op BackupStorageAccount is Azure.Core.Foundations.Operation<
+op backupStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @path
@@ -1590,7 +1588,7 @@ storage/restore permission.
 """)
 @route("/storage/restore")
 @post
-op RestoreStorageAccount is Azure.Core.Foundations.Operation<
+op restoreStorageAccount is Azure.Core.Foundations.Operation<
   StorageRestoreParameters,
   StorageBundle
 >;
@@ -1601,7 +1599,7 @@ permission.
 """)
 @route("/storage/{storage-account-name}")
 @delete
-op DeleteStorageAccount is Azure.Core.Foundations.Operation<
+op deleteStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1617,7 +1615,7 @@ storage/get permission.
 """)
 @route("/storage/{storage-account-name}")
 @get
-op GetStorageAccount is Azure.Core.Foundations.Operation<
+op getStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1633,7 +1631,7 @@ storage/set permission.
 """)
 @route("/storage/{storage-account-name}")
 @put
-op SetStorageAccount is Azure.Core.Foundations.Operation<
+op setStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("""
 The name of the storage account. The value you provide may be copied globally
@@ -1657,7 +1655,7 @@ This operation requires the storage/set/update permission.
 """)
 @route("/storage/{storage-account-name}")
 @patch
-op UpdateStorageAccount is Azure.Core.Foundations.Operation<
+op updateStorageAccount is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1677,7 +1675,7 @@ operation requires the storage/regeneratekey permission.
 """)
 @route("/storage/{storage-account-name}/regeneratekey")
 @post
-op RegenerateStorageAccountKey is Azure.Core.Foundations.Operation<
+op regenerateStorageAccountKey is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1697,7 +1695,7 @@ requires the storage/listsas permission.
 """)
 @route("/storage/{storage-account-name}/sas")
 @get
-op GetSasDefinitions is Azure.Core.Foundations.Operation<
+op getSasDefinitions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1724,7 +1722,7 @@ storage/listsas permission.
 """)
 @route("/deletedstorage/{storage-account-name}/sas")
 @get
-op GetDeletedSasDefinitions is Azure.Core.Foundations.Operation<
+op getDeletedSasDefinitions is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1751,7 +1749,7 @@ storage/getsas permission.
 """)
 @route("/deletedstorage/{storage-account-name}/sas/{sas-definition-name}")
 @get
-op GetDeletedSasDefinition is Azure.Core.Foundations.Operation<
+op getDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1774,7 +1772,7 @@ requires the storage/recover permission.
 """)
 @route("/deletedstorage/{storage-account-name}/sas/{sas-definition-name}/recover")
 @post
-op RecoverDeletedSasDefinition is Azure.Core.Foundations.Operation<
+op recoverDeletedSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1795,7 +1793,7 @@ requires the storage/deletesas permission.
 """)
 @route("/storage/{storage-account-name}/sas/{sas-definition-name}")
 @delete
-op DeleteSasDefinition is Azure.Core.Foundations.Operation<
+op deleteSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1816,7 +1814,7 @@ operation requires the storage/getsas permission.
 """)
 @route("/storage/{storage-account-name}/sas/{sas-definition-name}")
 @get
-op GetSasDefinition is Azure.Core.Foundations.Operation<
+op getSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1837,7 +1835,7 @@ operation requires the storage/setsas permission.
 """)
 @route("/storage/{storage-account-name}/sas/{sas-definition-name}")
 @put
-op SetSasDefinition is Azure.Core.Foundations.Operation<
+op setSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1866,7 +1864,7 @@ operation requires the storage/setsas permission.
 """)
 @route("/storage/{storage-account-name}/sas/{sas-definition-name}")
 @patch
-op UpdateSasDefinition is Azure.Core.Foundations.Operation<
+op updateSasDefinition is Azure.Core.Foundations.Operation<
   {
     @doc("The name of the storage account.")
     @pattern("^[0-9a-zA-Z]+$")
@@ -1889,7 +1887,7 @@ interface RoleDefinitionsOperations {
   @doc("Deletes a custom role definition.")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role definition to delete. Managed HSM only supports '/'.")
       @path
@@ -1905,7 +1903,7 @@ interface RoleDefinitionsOperations {
   @doc("Creates or updates a custom role definition.")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The scope of the role definition to create or update. Managed HSM only supports
@@ -1928,7 +1926,7 @@ The scope of the role definition to create or update. Managed HSM only supports
   @doc("Get the specified role definition.")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role definition to get. Managed HSM only supports '/'.")
       @path
@@ -1944,7 +1942,7 @@ The scope of the role definition to create or update. Managed HSM only supports
   @doc("Get all role definitions that are applicable at scope and above.")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role definition.")
       @path
@@ -1965,7 +1963,7 @@ interface RoleAssignmentsOperations {
   @doc("Deletes a role assignment.")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role assignment to delete.")
       @path
@@ -1981,7 +1979,7 @@ interface RoleAssignmentsOperations {
   @doc("Creates a role assignment.")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
-  Create is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role assignment to create.")
       @path
@@ -2001,7 +1999,7 @@ interface RoleAssignmentsOperations {
   @doc("Get the specified role assignment.")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role assignment.")
       @path
@@ -2017,7 +2015,7 @@ interface RoleAssignmentsOperations {
   @doc("Gets role assignments for a scope.")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
-  ListForScope is Azure.Core.Foundations.Operation<
+  listForScope is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role assignments.")
       @path
@@ -2039,7 +2037,7 @@ interface HSMSecurityDomainOperations {
   @doc("Retrieves the Security Domain download operation status")
   @route("/securitydomain/download/pending")
   @get
-  DownloadPending is Azure.Core.Foundations.Operation<
+  downloadPending is Azure.Core.Foundations.Operation<
     {},
     SecurityDomainOperationStatus
   >;
@@ -2050,22 +2048,20 @@ be used to activate a provisioned managed HSM resource.
 """)
   @route("/securitydomain/download")
   @post
-  Download is Azure.Core.Foundations.Operation<
+  download is Azure.Core.Foundations.Operation<
     CertificateInfoObject,
     SecurityDomainObject
   >;
 
   @doc("Retrieve Security Domain transfer key")
-  // FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-  // Problematic names: [TransferKey]
   @route("/securitydomain/upload")
   @get
-  TransferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
+  transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
 
   @doc("Restore the provided Security Domain.")
   @route("/securitydomain/upload")
   @post
-  Upload is Azure.Core.Foundations.Operation<
+  upload is Azure.Core.Foundations.Operation<
     SecurityDomainObject,
     SecurityDomainOperationStatus | void
   >;
@@ -2073,7 +2069,7 @@ be used to activate a provisioned managed HSM resource.
   @doc("Get Security Domain upload operation status")
   @route("/securitydomain/upload/pending")
   @get
-  UploadPending is Azure.Core.Foundations.Operation<
+  uploadPending is Azure.Core.Foundations.Operation<
     {},
     SecurityDomainOperationStatus
   >;

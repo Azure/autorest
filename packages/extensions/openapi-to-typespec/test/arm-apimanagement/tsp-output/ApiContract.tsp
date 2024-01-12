@@ -125,7 +125,7 @@ interface ApiContracts {
   // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -170,7 +170,7 @@ interface ApiContracts {
   // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
-  ListByApis is Azure.Core.Foundations.Operation<
+  listByApis is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -215,7 +215,7 @@ interface ApiContracts {
   // FIXME: Operation_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
-  ListByTags is Azure.Core.Foundations.Operation<
+  listByTags is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

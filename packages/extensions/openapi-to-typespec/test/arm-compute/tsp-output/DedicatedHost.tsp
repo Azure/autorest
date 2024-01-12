@@ -55,5 +55,5 @@ interface DedicatedHosts {
 
   @doc("Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.")
   // FIXME: DedicatedHosts_ListAvailableSizes could not be converted to a resource operation
-  ListAvailableSizes is Azure.Core.ResourceList<string>;
+  listAvailableSizes is Azure.Core.ResourceList<string>;
 }

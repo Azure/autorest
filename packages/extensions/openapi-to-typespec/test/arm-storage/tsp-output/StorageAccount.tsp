@@ -160,7 +160,7 @@ interface StorageAccounts {
   // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
-  ListByStorageAccount is Azure.Core.Foundations.Operation<
+  listByStorageAccount is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group within the user's subscription. The name is case insensitive.")
       @maxLength(90)

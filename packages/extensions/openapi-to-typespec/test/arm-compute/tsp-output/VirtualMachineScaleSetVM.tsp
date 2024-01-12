@@ -303,7 +303,7 @@ interface VirtualMachineScaleSetVMS {
   // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
   @get
-  GetInstanceView is Azure.Core.Foundations.Operation<
+  getInstanceView is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

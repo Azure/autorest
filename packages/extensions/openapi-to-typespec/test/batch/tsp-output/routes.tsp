@@ -16,7 +16,7 @@ administrator information about applications and versions that are not yet
 available to Compute Nodes, use the Azure portal or the Azure Resource Manager
 API.
 """)
-  List is Azure.Core.ResourceList<
+  list is Azure.Core.ResourceList<
     Application,
     {
       parameters: {
@@ -66,7 +66,7 @@ administrator information about Applications and versions that are not yet
 available to Compute Nodes, use the Azure portal or the Azure Resource Manager
 API.
 """)
-  Get is Azure.Core.ResourceRead<
+  get is Azure.Core.ResourceRead<
     Application,
     {
       parameters: {
@@ -113,7 +113,7 @@ including a startTime or endTime these filters default to the start and end
 times of the last aggregation interval currently available; that is, only the
 last aggregation interval is returned.
 """)
-  ListUsageMetrics is Azure.Core.ResourceList<
+  listUsageMetrics is Azure.Core.ResourceList<
     PoolUsageMetrics,
     {
       parameters: {
@@ -187,7 +187,7 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
 """)
   @route("/lifetimepoolstats")
   @get
-  GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
+  getAllLifetimeStatistics is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -226,7 +226,7 @@ to Microsoft Support engineers.
 """)
   @route("/pools")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  add is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -265,7 +265,7 @@ directly.
   @doc("Lists all of the Pools in the specified Account.")
   @route("/pools")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -337,7 +337,7 @@ error code PoolBeingDeleted.
 """)
   @route("/pools/{poolId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to delete.")
       @path
@@ -407,7 +407,7 @@ not been modified since the specified time.
   @doc("Gets basic properties of a Pool.")
   @route("/pools/{poolId}")
   @head
-  Exists is Azure.Core.Foundations.Operation<
+  exists is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to get.")
       @path
@@ -477,7 +477,7 @@ not been modified since the specified time.
   @doc("Gets information about the specified Pool.")
   @route("/pools/{poolId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to get.")
       @path
@@ -560,7 +560,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
 """)
   @route("/pools/{poolId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  patch is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to update.")
       @path
@@ -635,7 +635,7 @@ not been modified since the specified time.
   @doc("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
   @post
-  DisableAutoScale is Azure.Core.Foundations.Operation<
+  disableAutoScale is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool on which to disable automatic scaling.")
       @path
@@ -681,7 +681,7 @@ more than once every 30 seconds.
 """)
   @route("/pools/{poolId}/enableautoscale")
   @post
-  EnableAutoScale is Azure.Core.Foundations.Operation<
+  enableAutoScale is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool on which to enable automatic scaling.")
       @path
@@ -760,7 +760,7 @@ scaling enabled in order to evaluate a formula.
 """)
   @route("/pools/{poolId}/evaluateautoscale")
   @post
-  EvaluateAutoScale is Azure.Core.Foundations.Operation<
+  evaluateAutoScale is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
       @path
@@ -811,7 +811,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
 """)
   @route("/pools/{poolId}/resize")
   @post
-  Resize is Azure.Core.Foundations.Operation<
+  resize is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to resize.")
       @path
@@ -894,7 +894,7 @@ be used to halt the initial sizing of the Pool when it is created.
 """)
   @route("/pools/{poolId}/stopresize")
   @post
-  StopResize is Azure.Core.Foundations.Operation<
+  stopResize is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool whose resizing you want to stop.")
       @path
@@ -969,7 +969,7 @@ with this request, then the Batch service will remove the existing StartTask.
 """)
   @route("/pools/{poolId}/updateproperties")
   @post
-  UpdateProperties is Azure.Core.Foundations.Operation<
+  updateProperties is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool to update.")
       @path
@@ -1016,7 +1016,7 @@ Each request may remove up to 100 nodes.
 """)
   @route("/pools/{poolId}/removenodes")
   @post
-  RemoveNodes is Azure.Core.Foundations.Operation<
+  removeNodes is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool from which you want to remove Compute Nodes.")
       @path
@@ -1091,7 +1091,7 @@ not been modified since the specified time.
 interface AccountOperations {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
-  ListSupportedImages is Azure.Core.ResourceList<
+  listSupportedImages is Azure.Core.ResourceList<
     ImageInformation,
     {
       parameters: {
@@ -1145,7 +1145,7 @@ Gets the number of Compute Nodes in each state, grouped by Pool. Note that the
 numbers returned may not always be up to date. If you need exact node counts,
 use a list query.
 """)
-  ListPoolNodeCounts is Azure.Core.ResourceList<
+  listPoolNodeCounts is Azure.Core.ResourceList<
     PoolNodeCounts,
     {
       parameters: {
@@ -1202,7 +1202,7 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
 """)
   @route("/lifetimejobstats")
   @get
-  GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
+  getAllLifetimeStatistics is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -1246,7 +1246,7 @@ that the Job is being deleted.
 """)
   @route("/jobs/{jobId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to delete.")
       @path
@@ -1317,7 +1317,7 @@ not been modified since the specified time.
   @doc("Gets information about the specified Job.")
   @route("/jobs/{jobId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job.")
       @path
@@ -1400,7 +1400,7 @@ element, then the Job keeps the existing constraints.
 """)
   @route("/jobs/{jobId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  patch is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job whose properties you want to update.")
       @path
@@ -1479,7 +1479,7 @@ with this request, then the Batch service will remove the existing constraints.
 """)
   @route("/jobs/{jobId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job whose properties you want to update.")
       @path
@@ -1563,7 +1563,7 @@ the request fails with status code 409.
 """)
   @route("/jobs/{jobId}/disable")
   @post
-  Disable is Azure.Core.Foundations.Operation<
+  disable is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to disable.")
       @path
@@ -1645,7 +1645,7 @@ than 180 days ago, those Tasks will not run.
 """)
   @route("/jobs/{jobId}/enable")
   @post
-  Enable is Azure.Core.Foundations.Operation<
+  enable is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to enable.")
       @path
@@ -1723,7 +1723,7 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
 """)
   @route("/jobs/{jobId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  terminate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to terminate.")
       @path
@@ -1808,7 +1808,7 @@ engineers.
 """)
   @route("/jobs")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  add is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -1847,7 +1847,7 @@ directly.
   @doc("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -1906,7 +1906,7 @@ directly.
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
-  ListFromJobSchedule is Azure.Core.Foundations.Operation<
+  listFromJobSchedule is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
       @path
@@ -1979,7 +1979,7 @@ JobPreparationTaskNotSpecified.
 """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
-  ListPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
+  listPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job.")
       @path
@@ -2043,7 +2043,7 @@ up to date. If you need exact task counts, use a list query.
 """)
   @route("/jobs/{jobId}/taskcounts")
   @get
-  GetTaskCounts is Azure.Core.Foundations.Operation<
+  getTaskCounts is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job.")
       @path
@@ -2084,7 +2084,7 @@ interface CertificateOperations {
   @doc("Adds a Certificate to the specified Account.")
   @route("/certificates")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  add is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -2123,7 +2123,7 @@ directly.
   @doc("Lists all of the Certificates that have been added to the specified Account.")
   @route("/certificates")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -2186,7 +2186,7 @@ then you can try again to delete the Certificate.
 """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   @post
-  CancelDeletion is Azure.Core.Foundations.Operation<
+  cancelDeletion is Azure.Core.Foundations.Operation<
     {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -2239,7 +2239,7 @@ active if you decide that you want to continue using the Certificate.
 """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -2281,7 +2281,7 @@ directly.
   @doc("Gets information about the specified Certificate.")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -2330,7 +2330,7 @@ interface FileOperations {
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @delete
-  DeleteFromTask is Azure.Core.Foundations.Operation<
+  deleteFromTask is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -2385,7 +2385,7 @@ directly.
   @doc("Returns the content of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @get
-  GetFromTask is Azure.Core.Foundations.Operation<
+  getFromTask is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -2458,7 +2458,7 @@ not been modified since the specified time.
   @doc("Gets the properties of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
-  GetPropertiesFromTask is Azure.Core.Foundations.Operation<
+  getPropertiesFromTask is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -2521,7 +2521,7 @@ not been modified since the specified time.
   @doc("Deletes the specified file from the Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @delete
-  DeleteFromComputeNode is Azure.Core.Foundations.Operation<
+  deleteFromComputeNode is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2576,7 +2576,7 @@ directly.
   @doc("Returns the content of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
-  GetFromComputeNode is Azure.Core.Foundations.Operation<
+  getFromComputeNode is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2649,7 +2649,7 @@ not been modified since the specified time.
   @doc("Gets the properties of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
-  GetPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
+  getPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2712,7 +2712,7 @@ not been modified since the specified time.
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
   @get
-  ListFromTask is Azure.Core.Foundations.Operation<
+  listFromTask is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -2778,7 +2778,7 @@ directly.
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
   @get
-  ListFromComputeNode is Azure.Core.Foundations.Operation<
+  listFromComputeNode is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2843,7 +2843,7 @@ interface JobScheduleOperations {
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
   @head
-  Exists is Azure.Core.Foundations.Operation<
+  exists is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule which you want to check.")
       @path
@@ -2920,7 +2920,7 @@ though they are still counted towards Account lifetime statistics.
 """)
   @route("/jobschedules/{jobScheduleId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to delete.")
       @path
@@ -2990,7 +2990,7 @@ not been modified since the specified time.
   @doc("Gets information about the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to get.")
       @path
@@ -3075,7 +3075,7 @@ running Jobs are unaffected.
 """)
   @route("/jobschedules/{jobScheduleId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  patch is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to update.")
       @path
@@ -3156,7 +3156,7 @@ running Jobs are unaffected.
 """)
   @route("/jobschedules/{jobScheduleId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to update.")
       @path
@@ -3231,7 +3231,7 @@ not been modified since the specified time.
   @doc("No new Jobs will be created until the Job Schedule is enabled again.")
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
-  Disable is Azure.Core.Foundations.Operation<
+  disable is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to disable.")
       @path
@@ -3302,7 +3302,7 @@ not been modified since the specified time.
   @doc("Enables a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
-  Enable is Azure.Core.Foundations.Operation<
+  enable is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to enable.")
       @path
@@ -3373,7 +3373,7 @@ not been modified since the specified time.
   @doc("Terminates a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  terminate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job Schedule to terminates.")
       @path
@@ -3444,7 +3444,7 @@ not been modified since the specified time.
   @doc("Adds a Job Schedule to the specified Account.")
   @route("/jobschedules")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  add is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The maximum time that the server can spend processing the request, in seconds.
@@ -3483,7 +3483,7 @@ directly.
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -3548,7 +3548,7 @@ the Batch service and left in whatever state it was in at that time.
 """)
   @route("/jobs/{jobId}/tasks")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  add is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to which the Task is to be added.")
       @path
@@ -3595,7 +3595,7 @@ information about subtasks.
 """)
   @route("/jobs/{jobId}/tasks")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job.")
       @path
@@ -3673,7 +3673,7 @@ service and left in whatever state it was in at that time.
 """)
   @route("/jobs/{jobId}/addtaskcollection")
   @post
-  AddCollection is Azure.Core.Foundations.Operation<
+  addCollection is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job to which the Task collection is to be added.")
       @path
@@ -3722,7 +3722,7 @@ background.
 """)
   @route("/jobs/{jobId}/tasks/{taskId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job from which to delete the Task.")
       @path
@@ -3801,7 +3801,7 @@ information about subtasks.
 """)
   @route("/jobs/{jobId}/tasks/{taskId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -3883,7 +3883,7 @@ not been modified since the specified time.
   @doc("Updates the properties of the specified Task.")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job containing the Task.")
       @path
@@ -3965,7 +3965,7 @@ Task.
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
   @get
-  ListSubtasks is Azure.Core.Foundations.Operation<
+  listSubtasks is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job.")
       @path
@@ -4016,7 +4016,7 @@ primary task; subtasks are then terminated asynchronously in the background.
 """)
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  terminate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job containing the Task.")
       @path
@@ -4102,7 +4102,7 @@ will fail if the Job has completed (or is terminating or deleting).
 """)
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
-  Reactivate is Azure.Core.Foundations.Operation<
+  reactivate is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Job containing the Task.")
       @path
@@ -4182,7 +4182,7 @@ running state.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   @post
-  AddUser is Azure.Core.Foundations.Operation<
+  addUser is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4232,7 +4232,7 @@ running state.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @delete
-  DeleteUser is Azure.Core.Foundations.Operation<
+  deleteUser is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4287,7 +4287,7 @@ Account on a Compute Node only when it is in the idle or running state.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
-  UpdateUser is Azure.Core.Foundations.Operation<
+  updateUser is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4338,7 +4338,7 @@ directly.
   @doc("Gets information about the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4385,7 +4385,7 @@ directly.
   @doc("You can restart a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
-  Reboot is Azure.Core.Foundations.Operation<
+  reboot is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4436,7 +4436,7 @@ cloud service configuration property.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
   @post
-  Reimage is Azure.Core.Foundations.Operation<
+  reimage is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4486,7 +4486,7 @@ scheduling state is enabled.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
   @post
-  DisableScheduling is Azure.Core.Foundations.Operation<
+  disableScheduling is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4536,7 +4536,7 @@ state is disabled
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
   @post
-  EnableScheduling is Azure.Core.Foundations.Operation<
+  enableScheduling is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4585,7 +4585,7 @@ API.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @get
-  GetRemoteLoginSettings is Azure.Core.Foundations.Operation<
+  getRemoteLoginSettings is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4633,7 +4633,7 @@ configuration, see the GetRemoteLoginSettings API.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/rdp")
   @get
-  GetRemoteDesktop is Azure.Core.Foundations.Operation<
+  getRemoteDesktop is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4689,7 +4689,7 @@ from Compute Nodes if you are experiencing an error and wish to escalate to
 Azure support. The Azure Batch service log files should be shared with Azure
 support to aid in debugging issues with the Batch service.
 """)
-  UploadBatchServiceLogs is Azure.Core.ResourceCreateWithServiceProvidedName<
+  uploadBatchServiceLogs is Azure.Core.ResourceCreateWithServiceProvidedName<
     UploadBatchServiceLogsResult,
     {
       parameters: {
@@ -4726,7 +4726,7 @@ directly.
   @doc("Lists the Compute Nodes in the specified Pool.")
   @route("/pools/{poolId}/nodes")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool from which you want to list Compute Nodes.")
       @path
@@ -4787,7 +4787,7 @@ interface ComputeNodeExtensionOperations {
   @doc("Gets information about the specified Compute Node Extension.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -4841,7 +4841,7 @@ directly.
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the Pool that contains Compute Node.")
       @path

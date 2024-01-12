@@ -68,7 +68,7 @@ interface NotificationContracts {
   // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
-  ListByNotification is Azure.Core.Foundations.Operation<
+  listByNotification is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -98,7 +98,7 @@ interface NotificationContracts {
   // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
-  ListByNotification is Azure.Core.Foundations.Operation<
+  listByNotification is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

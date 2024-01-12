@@ -12,7 +12,7 @@ interface QuestionAnsweringOperations {
   @doc("Answers the specified question using your knowledge base.")
   @route("/:query-knowledgebases")
   @post
-  GetAnswers is Azure.Core.Foundations.Operation<
+  getAnswers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the project to use.")
       @query("projectName")
@@ -33,7 +33,7 @@ interface QuestionAnsweringOperations {
   @doc("Answers the specified question using the provided text in the body.")
   @route("/:query-text")
   @post
-  GetAnswersFromText is Azure.Core.Foundations.Operation<
+  getAnswersFromText is Azure.Core.Foundations.Operation<
     AnswersFromTextOptions,
     AnswersFromTextResult
   >;

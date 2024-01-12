@@ -65,7 +65,7 @@ interface CloudServices {
   // FIXME: CloudServices_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")
   @get
-  GetInstanceView is Azure.Core.Foundations.Operation<
+  getInstanceView is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the resource group.")
       @path
@@ -88,7 +88,7 @@ interface CloudServices {
   // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
-  GetUpdateDomain is Azure.Core.Foundations.Operation<
+  getUpdateDomain is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the resource group.")
       @path
@@ -115,7 +115,7 @@ interface CloudServices {
   // FIXME: CloudServicesUpdateDomain_ListUpdateDomains could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
   @get
-  ListUpdateDomains is Azure.Core.Foundations.Operation<
+  listUpdateDomains is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the resource group.")
       @path

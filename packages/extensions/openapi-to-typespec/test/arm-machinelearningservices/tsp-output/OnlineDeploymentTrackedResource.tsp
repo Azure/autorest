@@ -93,7 +93,7 @@ interface OnlineDeploymentTrackedResources {
   // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
   @get
-  ListSkus is Azure.Core.Foundations.Operation<
+  listSkus is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

@@ -96,7 +96,7 @@ interface SmartGroups {
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")
   @get
-  GetHistory is Azure.Core.Foundations.Operation<
+  getHistory is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)

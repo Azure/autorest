@@ -13,7 +13,7 @@ interface DnsResourceReferenceOperations {
   @doc("Returns the DNS records specified by the referencing targetResourceIds.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference")
   @post
-  GetByTargetResources is Azure.Core.Foundations.Operation<
+  getByTargetResources is Azure.Core.Foundations.Operation<
     {
       @doc("Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.")
       @path

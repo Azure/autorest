@@ -258,7 +258,7 @@ parameters grouped
   @doc("A long-running paging operation that includes a nextLink that has 10 pages")
   @route("/paging/multiple/lro")
   @post
-  GetMultiplePagesLRO is Azure.Core.Foundations.Operation<
+  getMultiplePagesLRO is Azure.Core.Foundations.Operation<
     {
       @header
       `client-request-id`?: string;

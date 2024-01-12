@@ -13,7 +13,7 @@ interface UsageOperations {
   @doc("Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The location for which resource usage is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -32,7 +32,7 @@ interface VirtualMachineSizesOperations {
   @doc("This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -51,7 +51,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a virtual machine image.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -83,7 +83,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -121,7 +121,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a list of virtual machine image offers for the specified location and publisher.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
-  ListOffers is Azure.Core.Foundations.Operation<
+  listOffers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -141,7 +141,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a list of virtual machine image publishers for the specified Azure location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
   @get
-  ListPublishers is Azure.Core.Foundations.Operation<
+  listPublishers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -157,7 +157,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
-  ListSkus is Azure.Core.Foundations.Operation<
+  listSkus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -181,7 +181,7 @@ interface VirtualMachineImagesOperations {
   @doc("Gets a list of all virtual machine image versions for the specified edge zone")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages")
   @get
-  ListByEdgeZone is Azure.Core.Foundations.Operation<
+  listByEdgeZone is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -203,7 +203,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @doc("Gets a virtual machine image in an edge zone.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -239,7 +239,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @doc("Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -283,7 +283,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @doc("Gets a list of virtual machine image offers for the specified location, edge zone and publisher.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
-  ListOffers is Azure.Core.Foundations.Operation<
+  listOffers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -307,7 +307,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @doc("Gets a list of virtual machine image publishers for the specified Azure location and edge zone.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
   @get
-  ListPublishers is Azure.Core.Foundations.Operation<
+  listPublishers is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -327,7 +327,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @doc("Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
-  ListSkus is Azure.Core.Foundations.Operation<
+  listSkus is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -357,7 +357,7 @@ interface VirtualMachineExtensionImagesOperations {
   @doc("Gets a list of virtual machine extension image versions.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   @get
-  ListVersions is Azure.Core.Foundations.Operation<
+  listVersions is Azure.Core.Foundations.Operation<
     {
       @doc("The name of a supported Azure region.")
       @path
@@ -391,7 +391,7 @@ interface LogAnalyticsOperations {
   @doc("Export logs that show Api requests made by this subscription in the given time window to show throttling activities.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval")
   @post
-  ExportRequestRateByInterval is Azure.Core.Foundations.Operation<
+  exportRequestRateByInterval is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -412,7 +412,7 @@ interface LogAnalyticsOperations {
   @doc("Export logs that show total throttled Api requests for this subscription in the given time window.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests")
   @post
-  ExportThrottledRequests is Azure.Core.Foundations.Operation<
+  exportThrottledRequests is Azure.Core.Foundations.Operation<
     {
       @doc("The location upon which virtual-machine-sizes is queried.")
       @pattern("^[-\\w\\._]+$")
@@ -435,7 +435,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   @doc("The operation to create or update the VMSS VM run command.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @put
-  CreateOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -471,7 +471,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   @doc("The operation to update the VMSS VM run command.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @patch
-  Update is Azure.Core.Foundations.Operation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -507,7 +507,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   @doc("The operation to delete the VMSS VM run command.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -539,7 +539,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   @doc("The operation to get the VMSS VM run command.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -575,7 +575,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   @doc("The operation to get all run commands of an instance in Virtual Machine Scaleset.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -609,7 +609,7 @@ interface ResourceSkusOperations {
   @doc("Gets the list of Microsoft.Compute SKUs available for your Subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path

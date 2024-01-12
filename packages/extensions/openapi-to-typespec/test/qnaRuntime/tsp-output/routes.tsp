@@ -12,7 +12,7 @@ interface RuntimeOperations {
   @doc("GenerateAnswer call to query the knowledgebase.")
   @route("/knowledgebases/{kbId}/generateAnswer")
   @post
-  GenerateAnswer is Azure.Core.Foundations.Operation<
+  generateAnswer is Azure.Core.Foundations.Operation<
     {
       @doc("Knowledgebase id.")
       @path
@@ -29,7 +29,7 @@ interface RuntimeOperations {
   @doc("Train call to add suggestions to the knowledgebase.")
   @route("/knowledgebases/{kbId}/train")
   @post
-  Train is Azure.Core.Foundations.Operation<
+  train is Azure.Core.Foundations.Operation<
     {
       @doc("Knowledgebase id.")
       @path

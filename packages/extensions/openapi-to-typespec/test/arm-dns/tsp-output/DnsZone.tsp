@@ -102,7 +102,7 @@ interface DnsZones {
   // FIXME: RecordSets_ListByDnsZone could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets")
   @get
-  ListByDnsZone is Azure.Core.Foundations.Operation<
+  listByDnsZone is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

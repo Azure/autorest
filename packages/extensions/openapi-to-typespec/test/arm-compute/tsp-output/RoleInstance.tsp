@@ -80,7 +80,7 @@ interface RoleInstances {
   // FIXME: CloudServiceRoleInstances_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
   @get
-  GetInstanceView is Azure.Core.Foundations.Operation<
+  getInstanceView is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the role instance.")
       @path
@@ -107,7 +107,7 @@ interface RoleInstances {
   // FIXME: CloudServiceRoleInstances_GetRemoteDesktopFile could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile")
   @get
-  GetRemoteDesktopFile is Azure.Core.Foundations.Operation<
+  getRemoteDesktopFile is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the role instance.")
       @path

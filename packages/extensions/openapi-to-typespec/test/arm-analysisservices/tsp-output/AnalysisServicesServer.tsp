@@ -106,7 +106,7 @@ interface AnalysisServicesServers {
   // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")
   @get
-  ListSkusForExisting is Azure.Core.Foundations.Operation<
+  listSkusForExisting is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90.")
       @maxLength(90)

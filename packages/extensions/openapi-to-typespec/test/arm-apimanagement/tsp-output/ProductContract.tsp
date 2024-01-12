@@ -126,7 +126,7 @@ interface ProductContracts {
   // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
   @get
-  ListByProduct is Azure.Core.Foundations.Operation<
+  listByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -171,7 +171,7 @@ interface ProductContracts {
   // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
   @get
-  ListByProduct is Azure.Core.Foundations.Operation<
+  listByProduct is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -216,7 +216,7 @@ interface ProductContracts {
   // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path

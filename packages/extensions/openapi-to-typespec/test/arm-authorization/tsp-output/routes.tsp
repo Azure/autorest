@@ -13,7 +13,7 @@ interface ClassicAdministratorsOperations {
   @doc("Gets service administrator, account administrator, and co-administrators for the subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -28,14 +28,14 @@ interface GlobalAdministratorOperations {
   @doc("Elevates access for a Global Administrator.")
   @route("/providers/Microsoft.Authorization/elevateAccess")
   @post
-  ElevateAccess is Azure.Core.Foundations.Operation<{}, void>;
+  elevateAccess is Azure.Core.Foundations.Operation<{}, void>;
 }
 
 interface AzurePermissionsForResourceGroupOperations {
   @doc("Gets all permissions the caller has for a resource group.")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
@@ -56,7 +56,7 @@ interface AzurePermissionsForResourceOperations {
   @doc("Gets all permissions the caller has for a resource.")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
@@ -93,7 +93,7 @@ interface EligibleChildResourcesOperations {
   @doc("Get the child resources of a resource on which user has eligible access")
   @route("/{scope}/providers/Microsoft.Authorization/eligibleChildResources")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The scope of the role management policy.")
       @path

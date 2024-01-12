@@ -211,7 +211,7 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
   @get
-  InstanceView is Azure.Core.Foundations.Operation<
+  instanceView is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
@@ -232,7 +232,7 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
   @get
-  ListAvailableSizes is Azure.Core.Foundations.Operation<
+  listAvailableSizes is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the resource group.")
       @path
