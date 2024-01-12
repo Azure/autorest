@@ -36,7 +36,7 @@ interface BatchEndpointTrackedResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a batch inference endpoint (asynchronous).")
   @operationId("BatchEndpoints_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchEndpointTrackedResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpointTrackedResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a batch inference endpoint (asynchronous).")

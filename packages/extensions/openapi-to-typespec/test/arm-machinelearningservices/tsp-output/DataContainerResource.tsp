@@ -32,7 +32,7 @@ interface DataContainerResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update container.")
   @operationId("RegistryDataContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainerResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete container.")

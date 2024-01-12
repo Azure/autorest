@@ -41,7 +41,7 @@ interface RestorePoints {
   >;
 
   @doc("The operation to create the restore point. Updating properties of an existing restore point is not allowed")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     RestorePoint,
     {
       ...BaseParameters<RestorePoint>;

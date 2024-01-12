@@ -42,7 +42,7 @@ interface VirtualMachineScaleSetExtensions {
   >;
 
   @doc("The operation to create or update an extension.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;

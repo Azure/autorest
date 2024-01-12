@@ -32,7 +32,7 @@ interface EnvironmentVersionResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentVersionResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EnvironmentVersionResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")

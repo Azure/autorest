@@ -39,7 +39,7 @@ interface Disks {
   get is ArmResourceRead<Disk>;
 
   @doc("Creates or updates a disk.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Disk>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Disk>;
 
   @doc("Updates (patches) a disk.")
   update is ArmCustomPatchAsync<Disk, DiskUpdate>;

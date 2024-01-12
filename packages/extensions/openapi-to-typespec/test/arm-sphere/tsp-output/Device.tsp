@@ -29,7 +29,7 @@ interface Devices {
   get is ArmResourceRead<Device>;
 
   @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Device,
     BaseParameters<Device>,
     ArmAsyncOperationHeader

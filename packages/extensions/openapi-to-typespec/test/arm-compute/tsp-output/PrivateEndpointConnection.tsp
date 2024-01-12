@@ -33,7 +33,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.")
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
-  updateAPrivateEndpointConnection is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
+  updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes a private endpoint connection under a disk access resource.")

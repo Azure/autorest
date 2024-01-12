@@ -36,7 +36,7 @@ interface OnlineEndpointTrackedResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update Online Endpoint (asynchronous).")
   @operationId("OnlineEndpoints_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineEndpointTrackedResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpointTrackedResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Endpoint (asynchronous).")

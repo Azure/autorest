@@ -36,7 +36,7 @@ interface OnlineDeploymentTrackedResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update Inference Endpoint Deployment (asynchronous).")
   @operationId("OnlineDeployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineDeploymentTrackedResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeploymentTrackedResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Deployment (asynchronous).")

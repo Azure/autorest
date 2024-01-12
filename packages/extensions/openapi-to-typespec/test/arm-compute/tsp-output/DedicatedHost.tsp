@@ -39,7 +39,7 @@ interface DedicatedHosts {
   >;
 
   @doc("Create or update a dedicated host .")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DedicatedHost>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DedicatedHost>;
 
   @doc("Update a dedicated host .")
   update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;

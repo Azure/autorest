@@ -41,7 +41,7 @@ get is ArmResourceRead<ComputeResource>
 @doc("Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.")
 @operationId("Compute_CreateOrUpdate")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-createOrUpdate is ArmResourceCreateOrUpdateAsync<ComputeResource>
+createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>
 
 @doc("Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.")
 @operationId("Compute_Update")

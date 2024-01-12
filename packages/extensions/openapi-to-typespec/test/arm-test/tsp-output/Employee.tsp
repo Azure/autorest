@@ -27,7 +27,7 @@ interface Employees {
   get is ArmResourceRead<Employee>;
 
   @doc("Create a Employee")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Employee,
     BaseParameters<Employee>,
     ArmAsyncOperationHeader

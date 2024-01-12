@@ -31,7 +31,7 @@ interface TrafficControllers {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create a TrafficController")
   @operationId("TrafficControllerInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     TrafficController,
     BaseParameters<TrafficController>,
     ArmAsyncOperationHeader

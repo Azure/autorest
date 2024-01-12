@@ -46,7 +46,7 @@ interface PortalRevisionContracts {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.")
   @operationId("PortalRevision_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
     BaseParameters<PortalRevisionContract>,
     ArmLroLocationHeader

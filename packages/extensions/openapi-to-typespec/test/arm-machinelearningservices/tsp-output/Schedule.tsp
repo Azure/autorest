@@ -28,7 +28,7 @@ interface Schedules {
   get is ArmResourceRead<Schedule>;
 
   @doc("Create or update schedule.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Schedule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Schedule>;
 
   @doc("Delete schedule.")
   delete is ArmResourceDeleteAsync<

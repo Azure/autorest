@@ -45,7 +45,7 @@ interface GlobalSchemaContracts {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates new or updates existing specified Schema of the API Management service instance.")
   @operationId("GlobalSchema_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,
     {
       ...BaseParameters<GlobalSchemaContract>;

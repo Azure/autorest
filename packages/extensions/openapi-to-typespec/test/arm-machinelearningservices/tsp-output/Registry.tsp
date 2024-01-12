@@ -31,7 +31,7 @@ interface Registries {
   get is ArmResourceRead<Registry>;
 
   @doc("Create or update registry")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Registry,
     BaseParameters<Registry>,
     ArmAsyncOperationHeader

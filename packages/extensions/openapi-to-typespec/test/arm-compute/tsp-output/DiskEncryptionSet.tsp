@@ -28,7 +28,7 @@ interface DiskEncryptionSets {
   get is ArmResourceRead<DiskEncryptionSet>;
 
   @doc("Creates or updates a disk encryption set")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskEncryptionSet>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskEncryptionSet>;
 
   @doc("Updates (patches) a disk encryption set.")
   update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;

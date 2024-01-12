@@ -50,7 +50,7 @@ interface VirtualMachineScaleSets {
   >;
 
   @doc("Create or update a VM scale set.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSet,
     {
       ...BaseParameters<VirtualMachineScaleSet>;

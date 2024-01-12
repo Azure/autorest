@@ -32,7 +32,7 @@ interface ModelVersionResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
   @operationId("RegistryModelVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ModelVersionResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ModelVersionResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")

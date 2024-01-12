@@ -33,7 +33,7 @@ interface Frontends {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create a Frontend")
   @operationId("FrontendsInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Frontend,
     BaseParameters<Frontend>,
     ArmAsyncOperationHeader

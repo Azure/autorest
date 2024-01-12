@@ -29,7 +29,7 @@ interface DiskAccesses {
   get is ArmResourceRead<DiskAccess>;
 
   @doc("Creates or updates a disk access resource")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiskAccess>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskAccess>;
 
   @doc("Updates (patches) a disk access resource.")
   update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;

@@ -33,7 +33,7 @@ interface ComponentContainerResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update container.")
   @operationId("RegistryComponentContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ComponentContainerResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete container.")

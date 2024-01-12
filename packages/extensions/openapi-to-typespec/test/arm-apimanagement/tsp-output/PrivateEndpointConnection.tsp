@@ -33,7 +33,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new Private Endpoint Connection or updates an existing one.")
   @operationId("PrivateEndpointConnection_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Deletes the specified Private Endpoint Connection.")

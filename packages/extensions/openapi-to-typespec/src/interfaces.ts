@@ -189,7 +189,7 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
   kind:
     | "ArmResourceRead"
     | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourceCreateOrReplaceAsync"
     | "ArmResourcePatchSync"
     | "ArmResourcePatchAsync"
     | "ArmTagsPatchSync"

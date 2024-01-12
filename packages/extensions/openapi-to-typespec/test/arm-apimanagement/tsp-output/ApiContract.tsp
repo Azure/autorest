@@ -43,7 +43,7 @@ interface ApiContracts {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates new or updates existing specified API of the API Management service instance.")
   @operationId("Api_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     {
       ...BaseParameters<ApiContract>;

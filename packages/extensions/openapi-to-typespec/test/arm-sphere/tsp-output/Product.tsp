@@ -29,7 +29,7 @@ interface Products {
   get is ArmResourceRead<Product>;
 
   @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Product,
     BaseParameters<Product>,
     ArmAsyncOperationHeader

@@ -38,7 +38,7 @@ interface Images {
   >;
 
   @doc("Create or update an image.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Image>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
   @doc("Update an image.")
   update is ArmCustomPatchAsync<Image, ImageUpdate>;

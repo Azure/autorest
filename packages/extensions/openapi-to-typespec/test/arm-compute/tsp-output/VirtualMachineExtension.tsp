@@ -38,7 +38,7 @@ interface VirtualMachineExtensions {
   >;
 
   @doc("The operation to create or update the extension.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineExtension>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineExtension>;
 
   @doc("The operation to update the extension.")
   update is ArmCustomPatchAsync<

@@ -31,7 +31,7 @@ interface Workspaces {
   get is ArmResourceRead<Workspace>;
 
   @doc("Creates or updates a workspace with the specified parameters.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     BaseParameters<Workspace>,
     ArmLroLocationHeader

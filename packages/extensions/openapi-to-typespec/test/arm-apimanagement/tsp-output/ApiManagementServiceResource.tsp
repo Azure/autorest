@@ -44,7 +44,7 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates an API Management service. This is long running operation and could take several minutes to complete.")
   @operationId("ApiManagementService_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiManagementServiceResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiManagementServiceResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing API Management service.")

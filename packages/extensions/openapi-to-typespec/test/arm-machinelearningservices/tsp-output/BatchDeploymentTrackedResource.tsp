@@ -36,7 +36,7 @@ interface BatchDeploymentTrackedResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates/updates a batch inference deployment (asynchronous).")
   @operationId("BatchDeployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BatchDeploymentTrackedResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a batch inference deployment (asynchronous).")

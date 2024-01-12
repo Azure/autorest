@@ -29,7 +29,7 @@ interface Accounts {
   get is ArmResourceRead<Account>;
 
   @doc("Create a Account")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Account,
     BaseParameters<Account>,
     ArmAsyncOperationHeader

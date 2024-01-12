@@ -28,7 +28,7 @@ interface Deployments {
   get is ArmResourceRead<Deployment>;
 
   @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Deployment,
     BaseParameters<Deployment>,
     ArmAsyncOperationHeader

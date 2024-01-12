@@ -28,7 +28,7 @@ interface GalleryApplications {
   get is ArmResourceRead<GalleryApplication>;
 
   @doc("Create or update a gallery Application Definition.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryApplication>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplication>;
 
   @doc("Update a gallery Application Definition.")
   update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;

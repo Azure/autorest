@@ -32,7 +32,7 @@ interface DataVersionBaseResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
   @operationId("RegistryDataVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataVersionBaseResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DataVersionBaseResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")

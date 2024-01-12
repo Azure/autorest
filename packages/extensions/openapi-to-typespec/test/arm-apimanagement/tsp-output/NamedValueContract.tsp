@@ -45,7 +45,7 @@ interface NamedValueContracts {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates named value.")
   @operationId("NamedValue_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NamedValueContract,
     {
       ...BaseParameters<NamedValueContract>;

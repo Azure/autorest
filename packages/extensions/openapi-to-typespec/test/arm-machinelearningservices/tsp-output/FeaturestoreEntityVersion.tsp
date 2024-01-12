@@ -29,7 +29,7 @@ interface FeaturestoreEntityVersions {
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
   @doc("Create or update version.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturestoreEntityVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
 
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<

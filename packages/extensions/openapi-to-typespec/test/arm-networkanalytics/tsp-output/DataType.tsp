@@ -31,7 +31,7 @@ interface DataTypes {
   get is ArmResourceRead<DataType>;
 
   @doc("Create data type resource.")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     DataType,
     BaseParameters<DataType>,
     ArmAsyncOperationHeader

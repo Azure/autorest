@@ -33,7 +33,7 @@ interface Associations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create a Association")
   @operationId("AssociationsInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Association,
     BaseParameters<Association>,
     ArmAsyncOperationHeader

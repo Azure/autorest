@@ -29,7 +29,7 @@ interface DeviceGroups {
   get is ArmResourceRead<DeviceGroup>;
 
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DeviceGroup,
     BaseParameters<DeviceGroup>,
     ArmAsyncOperationHeader

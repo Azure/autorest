@@ -48,7 +48,7 @@ interface VirtualMachines {
   >;
 
   @doc("The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachine>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachine>;
 
   @doc("The operation to update a virtual machine.")
   update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;

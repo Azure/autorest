@@ -33,7 +33,7 @@ interface CodeContainerResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update Code container.")
   @operationId("RegistryCodeContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CodeContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeContainerResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete Code container.")

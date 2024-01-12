@@ -29,7 +29,7 @@ interface CloudServices {
   get is ArmResourceRead<CloudService>;
 
   @doc("Create or update a cloud service. Please note some properties can be set only during cloud service creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudService>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudService>;
 
   @doc("Update a cloud service.")
   update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;

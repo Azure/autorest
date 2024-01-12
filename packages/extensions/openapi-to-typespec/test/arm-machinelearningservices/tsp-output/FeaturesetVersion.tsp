@@ -28,7 +28,7 @@ interface FeaturesetVersions {
   get is ArmResourceRead<FeaturesetVersion>;
 
   @doc("Create or update version.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetVersion>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetVersion>;
 
   @doc("Delete version.")
   delete is ArmResourceDeleteAsync<

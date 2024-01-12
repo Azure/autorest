@@ -39,7 +39,7 @@ interface Galleries {
   >;
 
   @doc("Create or update a Shared Image Gallery.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Gallery>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
 
   @doc("Update a Shared Image Gallery.")
   update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;

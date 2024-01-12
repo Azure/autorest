@@ -45,7 +45,7 @@ interface SchemaContracts {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates or updates schema configuration for the API.")
   @operationId("ApiSchema_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     {
       ...BaseParameters<SchemaContract>;

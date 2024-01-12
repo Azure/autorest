@@ -27,7 +27,7 @@ interface Catalogs {
   get is ArmResourceRead<Catalog>;
 
   @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Catalog,
     BaseParameters<Catalog>,
     ArmAsyncOperationHeader

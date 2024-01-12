@@ -32,7 +32,7 @@ interface CodeVersionResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
   @operationId("RegistryCodeVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CodeVersionResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeVersionResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")

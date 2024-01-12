@@ -32,7 +32,7 @@ interface ComponentVersionResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create or update version.")
   @operationId("RegistryComponentVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentVersionResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ComponentVersionResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete version.")

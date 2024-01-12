@@ -28,7 +28,7 @@ interface FeaturesetContainers {
   getEntity is ArmResourceRead<FeaturesetContainer>;
 
   @doc("Create or update container.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetContainer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetContainer>;
 
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<

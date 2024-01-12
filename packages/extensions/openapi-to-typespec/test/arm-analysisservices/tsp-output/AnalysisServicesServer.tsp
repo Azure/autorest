@@ -34,7 +34,7 @@ interface AnalysisServicesServers {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Provisions the specified Analysis Services server based on the configuration specified in the request.")
   @operationId("Servers_Create")
-  create is ArmResourceCreateOrUpdateAsync<AnalysisServicesServer>;
+  create is ArmResourceCreateOrReplaceAsync<AnalysisServicesServer>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the current state of the specified Analysis Services server.")

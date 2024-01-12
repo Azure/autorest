@@ -46,7 +46,7 @@ interface VirtualMachineScaleSetVMExtensions {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to create or update the VMSS VM extension.")
   @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVMExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetVMExtension>;

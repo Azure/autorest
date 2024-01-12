@@ -239,7 +239,7 @@ function getTSPOperationGroupName(resourceName: string): string {
   }
 }
 
-function convertResourceCreateOrUpdateOperation(
+function convertResourceCreateOrReplaceOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
 ): TspArmResourceOperation[] {
@@ -281,7 +281,7 @@ function convertResourceCreateOrUpdateOperation(
     return [
       {
         doc: operation.Description,
-        kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
+        kind: isLongRunning ? "ArmResourceCreateOrReplaceAsync" : "ArmResourceCreateOrReplaceSync",
         name: operationName,
         operationId: operation.OperationID,
         templateParameters: templateParameters,
@@ -682,7 +682,7 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
   tspOperations.push(...convertResourceExistsOperation(resourceMetadata));
 
   // create operation
-  tspOperations.push(...convertResourceCreateOrUpdateOperation(resourceMetadata, operations));
+  tspOperations.push(...convertResourceCreateOrReplaceOperation(resourceMetadata, operations));
 
   // patch update operation could either be patch for resource/tag or custom patch
   tspOperations.push(...convertResourceUpdateOperation(resourceMetadata, operations));

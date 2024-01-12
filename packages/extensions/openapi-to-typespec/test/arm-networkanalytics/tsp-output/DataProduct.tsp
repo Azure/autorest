@@ -31,7 +31,7 @@ interface DataProducts {
   get is ArmResourceRead<DataProduct>;
 
   @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     DataProduct,
     BaseParameters<DataProduct>,
     ArmAsyncOperationHeader

@@ -38,7 +38,7 @@ interface VirtualMachineRunCommands {
   >;
 
   @doc("The operation to create or update the run command.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineRunCommand>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
 
   @doc("The operation to update the run command.")
   update is ArmCustomPatchAsync<

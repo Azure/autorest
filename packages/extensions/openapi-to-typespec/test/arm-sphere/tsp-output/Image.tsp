@@ -28,7 +28,7 @@ interface Images {
   get is ArmResourceRead<Image>;
 
   @doc("Create a Image")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Image,
     BaseParameters<Image>,
     ArmAsyncOperationHeader

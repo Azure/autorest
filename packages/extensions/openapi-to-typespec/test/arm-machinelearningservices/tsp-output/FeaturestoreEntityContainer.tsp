@@ -29,7 +29,7 @@ interface FeaturestoreEntityContainers {
   getEntity is ArmResourceRead<FeaturestoreEntityContainer>;
 
   @doc("Create or update container.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturestoreEntityContainer>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityContainer>;
 
   @doc("Delete container.")
   delete is ArmResourceDeleteAsync<

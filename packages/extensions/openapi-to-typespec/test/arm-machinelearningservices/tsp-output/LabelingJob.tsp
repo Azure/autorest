@@ -41,7 +41,7 @@ interface LabelingJobs {
   >;
 
   @doc("Creates or updates a labeling job (asynchronous).")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LabelingJob>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LabelingJob>;
 
   @doc("Delete a labeling job.")
   delete is ArmResourceDeleteSync<LabelingJob>;

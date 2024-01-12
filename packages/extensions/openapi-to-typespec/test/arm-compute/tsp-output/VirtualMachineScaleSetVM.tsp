@@ -62,7 +62,7 @@ interface VirtualMachineScaleSetVMS {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a virtual machine of a VM scale set.")
   @operationId("VirtualMachineScaleSetVMs_Update")
-  update is ArmResourceCreateOrUpdateAsync<
+  update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
     {
       ...BaseParameters<VirtualMachineScaleSetVM>;

@@ -42,7 +42,7 @@ interface CapacityReservations {
   >;
 
   @doc("The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CapacityReservation>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CapacityReservation>;
 
   @doc("The operation to update a capacity reservation.")
   update is ArmCustomPatchAsync<CapacityReservation, CapacityReservationUpdate>;

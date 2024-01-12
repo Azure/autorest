@@ -32,7 +32,7 @@ interface Snapshots {
   get is ArmResourceRead<Snapshot>;
 
   @doc("Creates or updates a snapshot.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Snapshot>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Snapshot>;
 
   @doc("Updates (patches) a snapshot.")
   update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
