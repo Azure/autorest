@@ -104,3 +104,26 @@ interface VirtualMachineScaleSetVMExtensions {
     }
   >;
 }
+
+@@projectedName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Virtual Machine Extension operation."
+);
+@@projectedName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+  "Parameters supplied to the Update Virtual Machine Extension operation."
+);

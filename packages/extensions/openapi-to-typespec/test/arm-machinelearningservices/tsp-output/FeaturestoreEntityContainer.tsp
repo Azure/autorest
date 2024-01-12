@@ -70,3 +70,15 @@ interface FeaturestoreEntityContainers {
     }
   >;
 }
+
+@@projectedName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

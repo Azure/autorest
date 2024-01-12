@@ -57,3 +57,26 @@ interface EncryptionScopes {
     }
   >;
 }
+
+@@projectedName(EncryptionScopes.put::parameters.resource,
+  "json",
+  "encryptionScope"
+);
+@@extension(EncryptionScopes.put::parameters.resource,
+  "x-ms-client-name",
+  "encryptionScope"
+);
+@@doc(EncryptionScopes.put::parameters.resource,
+  "Encryption scope properties to be used for the create or update."
+);
+@@projectedName(EncryptionScopes.patch::parameters.properties,
+  "json",
+  "encryptionScope"
+);
+@@extension(EncryptionScopes.patch::parameters.properties,
+  "x-ms-client-name",
+  "encryptionScope"
+);
+@@doc(EncryptionScopes.patch::parameters.properties,
+  "Encryption scope properties to be used for the update."
+);

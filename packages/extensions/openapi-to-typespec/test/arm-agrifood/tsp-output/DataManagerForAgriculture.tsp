@@ -81,3 +81,26 @@ Minimum = 10, Maximum = 1000, Default value = 50.
   @operationId("DataManagerForAgricultureResources_ListBySubscription")
   listBySubscription is ArmListBySubscription<DataManagerForAgriculture>;
 }
+
+@@projectedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "json",
+  "request"
+);
+@@extension(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "request"
+);
+@@doc(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "Data Manager For Agriculture resource create or update request object."
+);
+@@projectedName(DataManagerForAgricultures.update::parameters.properties,
+  "json",
+  "request"
+);
+@@extension(DataManagerForAgricultures.update::parameters.properties,
+  "x-ms-client-name",
+  "request"
+);
+@@doc(DataManagerForAgricultures.update::parameters.properties,
+  "Request object."
+);

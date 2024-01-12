@@ -41,3 +41,15 @@ interface BlobServicePropertiesOperationGroup {
   @operationId("BlobServices_List")
   list is ArmResourceListByParent<BlobServiceProperties>;
 }
+
+@@projectedName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+);

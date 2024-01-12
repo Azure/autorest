@@ -106,3 +106,26 @@ interface EmailTemplateContracts {
     }
   >;
 }
+
+@@projectedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(EmailTemplateContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
+  "Email Template update parameters."
+);
+@@projectedName(EmailTemplateContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(EmailTemplateContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(EmailTemplateContracts.update::parameters.properties,
+  "Update parameters."
+);

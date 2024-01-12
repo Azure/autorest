@@ -97,3 +97,26 @@ interface ImmutabilityPolicies {
     }
   >;
 }
+
+@@projectedName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
+);
+@@projectedName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "The ImmutabilityPolicy Properties that will be extended for a blob container."
+);

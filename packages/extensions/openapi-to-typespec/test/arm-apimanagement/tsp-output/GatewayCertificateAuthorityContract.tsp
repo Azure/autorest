@@ -95,3 +95,15 @@ interface GatewayCertificateAuthorityContracts {
     }
   >;
 }
+
+@@projectedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  ""
+);

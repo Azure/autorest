@@ -53,3 +53,26 @@ interface CapacityReservations {
   @doc("Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.")
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
+
+@@projectedName(CapacityReservations.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(CapacityReservations.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CapacityReservations.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create capacity reservation."
+);
+@@projectedName(CapacityReservations.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(CapacityReservations.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CapacityReservations.update::parameters.properties,
+  "Parameters supplied to the Update capacity reservation operation."
+);

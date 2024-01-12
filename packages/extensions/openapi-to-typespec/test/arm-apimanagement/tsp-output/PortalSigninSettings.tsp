@@ -74,3 +74,26 @@ interface PortalSigninSettingsOperationGroup {
   @operationId("PortalSettings_ListByService")
   listByService is ArmResourceListByParent<PortalSigninSettings>;
 }
+
+@@projectedName(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(PortalSigninSettingsOperationGroup.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(PortalSigninSettingsOperationGroup.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalSigninSettingsOperationGroup.update::parameters.properties,
+  "Update Sign-In settings."
+);

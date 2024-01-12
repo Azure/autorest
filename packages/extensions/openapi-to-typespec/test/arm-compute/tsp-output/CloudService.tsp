@@ -132,3 +132,59 @@ interface CloudServices {
     UpdateDomainListResult
   >;
 }
+
+@@projectedName(CloudServices.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(CloudServices.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.createOrUpdate::parameters.resource,
+  "The cloud service object."
+);
+@@projectedName(CloudServices.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(CloudServices.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.update::parameters.properties, "The cloud service object.");
+@@projectedName(CloudServices.restart::parameters.body, "json", "parameters");
+@@extension(CloudServices.restart::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.restart::parameters.body,
+  "List of cloud service role instance names."
+);
+@@projectedName(CloudServices.reimage::parameters.body, "json", "parameters");
+@@extension(CloudServices.reimage::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.reimage::parameters.body,
+  "List of cloud service role instance names."
+);
+@@projectedName(CloudServices.rebuild::parameters.body, "json", "parameters");
+@@extension(CloudServices.rebuild::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.rebuild::parameters.body,
+  "List of cloud service role instance names."
+);
+@@projectedName(CloudServices.deleteInstances::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(CloudServices.deleteInstances::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CloudServices.deleteInstances::parameters.body,
+  "List of cloud service role instance names."
+);

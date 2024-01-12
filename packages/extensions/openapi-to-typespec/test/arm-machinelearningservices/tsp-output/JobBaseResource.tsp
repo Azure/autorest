@@ -97,3 +97,23 @@ interface JobBaseResources {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(JobBaseResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(JobBaseResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(JobBaseResources.createOrUpdate::parameters.resource,
+  "Job definition object."
+);
+@@projectedName(JobBaseResources.update::parameters.properties, "json", "body");
+@@extension(JobBaseResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(JobBaseResources.update::parameters.properties,
+  "Job definition to apply during the operation."
+);

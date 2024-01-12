@@ -39,6 +39,14 @@ export function generateArmResource(resource: TspArmResource): string {
 
   definitions.push(generateArmResourceOperation(resource));
 
+  definitions.push("\n");
+
+  for (const o of resource.resourceOperations) {
+    for (const d of o.augmentedDecorators ?? []) {
+      definitions.push(`${d}`);
+    }
+  }
+
   return definitions.join("\n");
 }
 

@@ -95,3 +95,15 @@ interface IssueAttachmentContracts {
     }
   >;
 }
+
+@@projectedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);

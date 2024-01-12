@@ -75,7 +75,7 @@ interface DataProducts {
   @doc("List user roles associated with the data product.")
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
-    Record<unknown>,
+    AnyObject,
     ListRoleAssignments
   >;
 

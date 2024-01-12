@@ -32,3 +32,15 @@ interface ManagementPolicies {
   @doc("Deletes the managementpolicy associated with the specified storage account.")
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
+
+@@projectedName(ManagementPolicies.createOrUpdate::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(ManagementPolicies.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(ManagementPolicies.createOrUpdate::parameters.resource,
+  "The ManagementPolicy set to a storage account."
+);

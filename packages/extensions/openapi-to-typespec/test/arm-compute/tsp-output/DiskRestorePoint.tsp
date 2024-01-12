@@ -86,3 +86,15 @@ interface DiskRestorePoints {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(DiskRestorePoints.grantAccess::parameters.body,
+  "json",
+  "grantAccessData"
+);
+@@extension(DiskRestorePoints.grantAccess::parameters.body,
+  "x-ms-client-name",
+  "grantAccessData"
+);
+@@doc(DiskRestorePoints.grantAccess::parameters.body,
+  "Access data object supplied in the body of the get disk access operation."
+);

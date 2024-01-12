@@ -61,3 +61,26 @@ interface VirtualMachineExtensions {
     }
   >;
 }
+
+@@projectedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Virtual Machine Extension operation."
+);
+@@projectedName(VirtualMachineExtensions.update::parameters.properties,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineExtensions.update::parameters.properties,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineExtensions.update::parameters.properties,
+  "Parameters supplied to the Update Virtual Machine Extension operation."
+);

@@ -56,3 +56,26 @@ interface ProximityPlacementGroups {
   @doc("Lists all proximity placement groups in a subscription.")
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
+
+@@projectedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Proximity Placement Group operation."
+);
+@@projectedName(ProximityPlacementGroups.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ProximityPlacementGroups.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ProximityPlacementGroups.update::parameters.properties,
+  "Parameters supplied to the Update Proximity Placement Group operation."
+);

@@ -71,3 +71,25 @@ interface Disks {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(Disks.createOrUpdate::parameters.resource, "json", "disk");
+@@extension(Disks.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "disk"
+);
+@@doc(Disks.createOrUpdate::parameters.resource,
+  "Disk object supplied in the body of the Put disk operation."
+);
+@@projectedName(Disks.update::parameters.properties, "json", "disk");
+@@extension(Disks.update::parameters.properties, "x-ms-client-name", "disk");
+@@doc(Disks.update::parameters.properties,
+  "Disk object supplied in the body of the Patch disk operation."
+);
+@@projectedName(Disks.grantAccess::parameters.body, "json", "grantAccessData");
+@@extension(Disks.grantAccess::parameters.body,
+  "x-ms-client-name",
+  "grantAccessData"
+);
+@@doc(Disks.grantAccess::parameters.body,
+  "Access data object supplied in the body of the get disk access operation."
+);

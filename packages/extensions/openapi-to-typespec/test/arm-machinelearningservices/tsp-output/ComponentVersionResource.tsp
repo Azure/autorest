@@ -69,3 +69,15 @@ interface ComponentVersionResources {
     }
   >;
 }
+
+@@projectedName(ComponentVersionResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(ComponentVersionResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(ComponentVersionResources.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);

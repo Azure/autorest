@@ -116,3 +116,35 @@ interface BackendContracts {
     BackendReconnectContract
   >;
 }
+
+@@projectedName(BackendContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(BackendContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BackendContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(BackendContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(BackendContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BackendContracts.update::parameters.properties, "Update parameters.");
+@@projectedName(BackendContracts.reconnect::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(BackendContracts.reconnect::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BackendContracts.reconnect::parameters.body,
+  "Reconnect request parameters."
+);

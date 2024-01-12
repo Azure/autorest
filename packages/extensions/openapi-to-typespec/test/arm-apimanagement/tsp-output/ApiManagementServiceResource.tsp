@@ -1032,3 +1032,103 @@ interface ApiManagementServiceResources {
     TenantConfigurationSyncStateContract
   >;
 }
+
+@@projectedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "Parameters supplied to the CreateOrUpdate API Management service operation."
+);
+@@projectedName(ApiManagementServiceResources.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.update::parameters.properties,
+  "Parameters supplied to the CreateOrUpdate API Management service operation."
+);
+@@projectedName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "json",
+  "connectivityCheckRequestParams"
+);
+@@extension(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "x-ms-client-name",
+  "connectivityCheckRequestParams"
+);
+@@doc(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "Connectivity Check request parameters."
+);
+@@projectedName(ApiManagementServiceResources.restore::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.restore::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.restore::parameters.body,
+  "Parameters supplied to the Restore API Management service from backup operation."
+);
+@@projectedName(ApiManagementServiceResources.backup::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.backup::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.backup::parameters.body,
+  "Parameters supplied to the ApiManagementService_Backup operation."
+);
+@@projectedName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
+);
+@@projectedName(ApiManagementServiceResources.deploy::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.deploy::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.deploy::parameters.body,
+  "Deploy Configuration parameters."
+);
+@@projectedName(ApiManagementServiceResources.save::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.save::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.save::parameters.body,
+  "Save Configuration parameters."
+);
+@@projectedName(ApiManagementServiceResources.validate::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.validate::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiManagementServiceResources.validate::parameters.body,
+  "Validate Configuration parameters."
+);

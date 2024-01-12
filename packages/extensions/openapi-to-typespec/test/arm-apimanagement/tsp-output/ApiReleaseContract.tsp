@@ -109,3 +109,26 @@ interface ApiReleaseContracts {
     }
   >;
 }
+
+@@projectedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(ApiReleaseContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ApiReleaseContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiReleaseContracts.update::parameters.properties,
+  "API Release Update parameters."
+);

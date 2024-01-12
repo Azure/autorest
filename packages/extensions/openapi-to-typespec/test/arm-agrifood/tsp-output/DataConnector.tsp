@@ -58,3 +58,15 @@ Minimum = 10, Maximum = 1000, Default value = 50.
     }
   >;
 }
+
+@@projectedName(DataConnectors.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DataConnectors.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DataConnectors.createOrUpdate::parameters.resource,
+  "Body must be valid DataConnector request."
+);

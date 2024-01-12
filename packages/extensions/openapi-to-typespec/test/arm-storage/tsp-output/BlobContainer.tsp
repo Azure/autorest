@@ -80,3 +80,54 @@ interface BlobContainers {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(BlobContainers.create::parameters.resource,
+  "json",
+  "blobContainer"
+);
+@@extension(BlobContainers.create::parameters.resource,
+  "x-ms-client-name",
+  "blobContainer"
+);
+@@doc(BlobContainers.create::parameters.resource,
+  "Properties of the blob container to create."
+);
+@@projectedName(BlobContainers.update::parameters.properties,
+  "json",
+  "blobContainer"
+);
+@@extension(BlobContainers.update::parameters.properties,
+  "x-ms-client-name",
+  "blobContainer"
+);
+@@doc(BlobContainers.update::parameters.properties,
+  "Properties to update for the blob container."
+);
+@@projectedName(BlobContainers.setLegalHold::parameters.body,
+  "json",
+  "LegalHold"
+);
+@@extension(BlobContainers.setLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
+@@doc(BlobContainers.setLegalHold::parameters.body,
+  "The LegalHold property that will be set to a blob container."
+);
+@@projectedName(BlobContainers.clearLegalHold::parameters.body,
+  "json",
+  "LegalHold"
+);
+@@extension(BlobContainers.clearLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
+@@doc(BlobContainers.clearLegalHold::parameters.body,
+  "The LegalHold property that will be clear from a blob container."
+);
+@@projectedName(BlobContainers.lease::parameters.body, "json", "parameters");
+@@extension(BlobContainers.lease::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

@@ -226,3 +226,26 @@ Defined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupI
     PrivateLinkResourceListResult
   >;
 }
+
+@@projectedName(Workspaces.createOrUpdate::parameters.resource, "json", "body");
+@@extension(Workspaces.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Workspaces.createOrUpdate::parameters.resource,
+  "The parameters for creating or updating a machine learning workspace."
+);
+@@projectedName(Workspaces.update::parameters.properties, "json", "body");
+@@extension(Workspaces.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Workspaces.update::parameters.properties,
+  "The parameters for updating a machine learning workspace."
+);
+@@doc(Workspaces.diagnose::parameters.body,
+  "The parameter of diagnosing workspace health"
+);
+@@doc(Workspaces.provisionManagedNetwork::parameters.body,
+  "Managed Network Provisioning Options for a machine learning workspace."
+);

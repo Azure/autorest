@@ -75,3 +75,26 @@ interface VirtualMachineRunCommands {
     }
   >;
 }
+
+@@projectedName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+  "json",
+  "runCommand"
+);
+@@extension(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "runCommand"
+);
+@@doc(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Virtual Machine RunCommand operation."
+);
+@@projectedName(VirtualMachineRunCommands.update::parameters.properties,
+  "json",
+  "runCommand"
+);
+@@extension(VirtualMachineRunCommands.update::parameters.properties,
+  "x-ms-client-name",
+  "runCommand"
+);
+@@doc(VirtualMachineRunCommands.update::parameters.properties,
+  "Parameters supplied to the Update Virtual Machine RunCommand operation."
+);

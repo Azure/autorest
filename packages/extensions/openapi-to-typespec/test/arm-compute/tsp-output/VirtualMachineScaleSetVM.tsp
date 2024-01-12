@@ -324,3 +324,37 @@ interface VirtualMachineScaleSetVMS {
     VirtualMachineScaleSetVMInstanceView
   >;
 }
+
+@@projectedName(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
+);
+@@projectedName(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "json",
+  "vmScaleSetVMReimageInput"
+);
+@@extension(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "x-ms-client-name",
+  "vmScaleSetVMReimageInput"
+);
+@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "Parameters for the Reimaging Virtual machine in ScaleSet."
+);
+@@projectedName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+  "Parameters supplied to the Run command operation."
+);

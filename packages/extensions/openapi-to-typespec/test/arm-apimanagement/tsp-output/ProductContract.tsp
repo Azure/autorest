@@ -255,3 +255,24 @@ interface ProductContracts {
     ResourceListResult<SubscriptionContract>
   >;
 }
+
+@@projectedName(ProductContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ProductContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ProductContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(ProductContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ProductContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ProductContracts.update::parameters.properties, "Update parameters.");

@@ -69,3 +69,15 @@ interface FeaturesetContainers {
     }
   >;
 }
+
+@@projectedName(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

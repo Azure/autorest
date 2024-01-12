@@ -84,3 +84,26 @@ interface PortalDelegationSettingsOperationGroup {
     PortalSettingValidationKeyContract
   >;
 }
+
+@@projectedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "Update Delegation settings."
+);

@@ -1,6 +1,6 @@
 import { Operation, Parameter, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
-import { singular } from "pluralize";
+import pluralize, { singular } from "pluralize";
 import { getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
@@ -230,6 +230,15 @@ function getLROHeader(swaggerOperation: Operation): string | undefined {
   return lroHeader;
 }
 
+function getTSPOperationGroupName(resourceName: string): string {
+  const operationGroupName = pluralize(resourceName);
+  if (operationGroupName === resourceName) {
+    return `${operationGroupName}OperationGroup`;
+  } else {
+    return operationGroupName;
+  }
+}
+
 function convertResourceCreateOrUpdateOperation(
   resourceMetadata: ArmResource,
   operations: Record<string, Operation>,
@@ -237,6 +246,7 @@ function convertResourceCreateOrUpdateOperation(
   if (resourceMetadata.CreateOperations.length) {
     const operation = resourceMetadata.CreateOperations[0];
     const swaggerOperation = operations[operation.OperationID];
+    const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
     const lroHeader = getLROHeader(swaggerOperation);
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
@@ -250,14 +260,33 @@ function convertResourceCreateOrUpdateOperation(
       }
       templateParameters.push(lroHeader);
     }
+    const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+    const operationName = getOperationName(operation.OperationID);
+    const augmentedDecorators = [];
+    if (bodyParam) {
+      if (bodyParam.language.default.name !== "resource") {
+        augmentedDecorators.push(
+          `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.resource, "json", "${bodyParam.language.default.name}");`,
+        );
+        augmentedDecorators.push(
+          `@@extension(${tspOperationGroupName}.${operationName}::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+        );
+      }
+      if (bodyParam.language.default.description !== "Resource create parameters.") {
+        augmentedDecorators.push(
+          `@@doc(${tspOperationGroupName}.${operationName}::parameters.resource, "${bodyParam.language.default.description}");`,
+        );
+      }
+    }
     return [
       {
         doc: operation.Description,
         kind: isLongRunning ? "ArmResourceCreateOrUpdateAsync" : "ArmResourceCreateOrReplaceSync",
-        name: getOperationName(operation.OperationID),
+        name: operationName,
         operationId: operation.OperationID,
         templateParameters: templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
+        augmentedDecorators,
       },
     ];
   }
@@ -287,9 +316,26 @@ function convertResourceUpdateOperation(
       }
       let kind;
       const templateParameters = [resourceMetadata.SwaggerModelName];
+      const augmentedDecorators = [];
       if (bodyParam) {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
+
+        const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+        const operationName = getOperationName(operation.OperationID);
+        if (bodyParam.language.default.name !== "properties") {
+          augmentedDecorators.push(
+            `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.properties, "json", "${bodyParam.language.default.name}");`,
+          );
+          augmentedDecorators.push(
+            `@@extension(${tspOperationGroupName}.${operationName}::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+          );
+        }
+        if (bodyParam.language.default.description !== "The resource properties to be updated.") {
+          augmentedDecorators.push(
+            `@@doc(${tspOperationGroupName}.${operationName}::parameters.properties, "${bodyParam.language.default.description}");`,
+          );
+        }
       } else {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push("{}");
@@ -312,6 +358,7 @@ function convertResourceUpdateOperation(
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
+          augmentedDecorators,
         },
       ];
     }
@@ -476,6 +523,7 @@ function convertResourceActionOperations(
     for (const operation of resourceMetadata.OtherOperations) {
       if (operation.Method === "POST") {
         const swaggerOperation = operations[operation.OperationID];
+        const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
         const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
         const lroHeader = getLROHeader(swaggerOperation);
         const okResponse = swaggerOperation?.responses?.filter(
@@ -489,7 +537,7 @@ function convertResourceActionOperations(
           }
         }
 
-        const request = buildOperationBodyRequest(swaggerOperation) ?? "void";
+        const request = bodyParam ? bodyParam.schema.language.default.name : "void";
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {
@@ -511,13 +559,33 @@ function convertResourceActionOperations(
           }
           templateParameters.push(lroHeader);
         }
+
+        const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+        const operationName = getOperationName(operation.OperationID);
+        const augmentedDecorators = [];
+        if (bodyParam) {
+          if (bodyParam.language.default.name !== "body") {
+            augmentedDecorators.push(
+              `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.body, "json", "${bodyParam.language.default.name}");`,
+            );
+            augmentedDecorators.push(
+              `@@extension(${tspOperationGroupName}.${operationName}::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+            );
+          }
+          if (bodyParam.language.default.description !== "The content of the action request") {
+            augmentedDecorators.push(
+              `@@doc(${tspOperationGroupName}.${operationName}::parameters.body, "${bodyParam.language.default.description}");`,
+            );
+          }
+        }
         converted.push({
           doc: operation.Description,
           kind: kind as any,
-          name: getOperationName(operation.OperationID),
+          name: operationName,
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
+          augmentedDecorators,
         });
       }
     }
@@ -537,10 +605,14 @@ function convertCheckNameAvailabilityOperations(
     for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
       if (operation.Path.includes("/checkNameAvailability")) {
         const swaggerOperation = operations[operation.OperationID];
-        const response = (swaggerOperation?.responses?.filter(
-          (o) => o.protocol.http?.statusCodes.includes("200"),
-        )?.[0] as SchemaResponse).schema?.language.default.name ?? "CheckNameAvailabilityResponse";
-        const request = buildOperationBodyRequest(swaggerOperation) ?? "CheckNameAvailabilityRequest";
+        const response =
+          (
+            swaggerOperation?.responses?.filter(
+              (o) => o.protocol.http?.statusCodes.includes("200"),
+            )?.[0] as SchemaResponse
+          ).schema?.language.default.name ?? "CheckNameAvailabilityResponse";
+        const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+        const request = bodyParam ? bodyParam.schema.language.default.name : "CheckNameAvailabilityRequest";
         if (operation.Path.includes("/locations/")) {
           converted.push({
             doc: operation.Description,
@@ -642,17 +714,6 @@ function getOperationGroupName(name: string | undefined): string {
     return _.first(name.split("_"))!;
   } else {
     return "";
-  }
-}
-
-function buildOperationBodyRequest(operation: Operation): string | undefined {
-  const codeModel = getSession().model;
-  const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
-    (p) => p.protocol.http?.in === "body",
-  );
-  if (bodyParam) {
-    const transformed = transformParameter(bodyParam, codeModel);
-    return transformed.type;
   }
 }
 

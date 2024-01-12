@@ -46,3 +46,26 @@ interface DiskEncryptionSets {
   // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
   listAssociatedResources is Azure.Core.ResourceList<string>;
 }
+
+@@projectedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
+  "json",
+  "diskEncryptionSet"
+);
+@@extension(DiskEncryptionSets.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "diskEncryptionSet"
+);
+@@doc(DiskEncryptionSets.createOrUpdate::parameters.resource,
+  "disk encryption set object supplied in the body of the Put disk encryption set operation."
+);
+@@projectedName(DiskEncryptionSets.update::parameters.properties,
+  "json",
+  "diskEncryptionSet"
+);
+@@extension(DiskEncryptionSets.update::parameters.properties,
+  "x-ms-client-name",
+  "diskEncryptionSet"
+);
+@@doc(DiskEncryptionSets.update::parameters.properties,
+  "disk encryption set object supplied in the body of the Patch disk encryption set operation."
+);

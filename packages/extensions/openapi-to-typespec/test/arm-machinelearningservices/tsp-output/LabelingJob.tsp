@@ -83,3 +83,16 @@ interface LabelingJobs {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(LabelingJobs.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(LabelingJobs.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(LabelingJobs.createOrUpdate::parameters.resource,
+  "LabelingJob definition object."
+);
+@@doc(LabelingJobs.exportLabels::parameters.body, "The export summary.");

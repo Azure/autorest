@@ -57,3 +57,26 @@ interface DedicatedHosts {
   // FIXME: DedicatedHosts_ListAvailableSizes could not be converted to a resource operation
   listAvailableSizes is Azure.Core.ResourceList<string>;
 }
+
+@@projectedName(DedicatedHosts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(DedicatedHosts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DedicatedHosts.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Dedicated Host."
+);
+@@projectedName(DedicatedHosts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(DedicatedHosts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DedicatedHosts.update::parameters.properties,
+  "Parameters supplied to the Update Dedicated Host operation."
+);

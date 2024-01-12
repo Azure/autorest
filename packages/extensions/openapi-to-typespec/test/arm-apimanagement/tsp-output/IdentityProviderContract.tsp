@@ -98,3 +98,26 @@ interface IdentityProviderContracts {
     ClientSecretContract
   >;
 }
+
+@@projectedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(IdentityProviderContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(IdentityProviderContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IdentityProviderContracts.update::parameters.properties,
+  "Update parameters."
+);

@@ -112,3 +112,18 @@ interface FeaturesetVersions {
     }
   >;
 }
+
+@@projectedName(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(FeaturesetVersions.backfill::parameters.body,
+  "Feature set version backfill request entity."
+);

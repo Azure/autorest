@@ -85,3 +85,18 @@ Top count of results, top count cannot be greater than the page size.
     PendingUploadResponseDto
   >;
 }
+
+@@projectedName(DataVersionBaseResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DataVersionBaseResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DataVersionBaseResources.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(DataVersionBaseResources.createOrGetStartPendingUpload::parameters.body,
+  "Pending upload request object"
+);

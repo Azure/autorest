@@ -107,3 +107,15 @@ interface CertificateContracts {
     CertificateContract
   >;
 }
+
+@@projectedName(CertificateContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(CertificateContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CertificateContracts.createOrUpdate::parameters.resource,
+  "Create or Update parameters."
+);

@@ -111,3 +111,15 @@ Minimum = 10, Maximum = 1000, Default value = 50.
     }
   >;
 }
+
+@@projectedName(Solutions.createOrUpdate::parameters.resource,
+  "json",
+  "requestBody"
+);
+@@extension(Solutions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "requestBody"
+);
+@@doc(Solutions.createOrUpdate::parameters.resource,
+  "Solution resource request body."
+);

@@ -108,3 +108,24 @@ interface LoggerContracts {
     }
   >;
 }
+
+@@projectedName(LoggerContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(LoggerContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(LoggerContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(LoggerContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(LoggerContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(LoggerContracts.update::parameters.properties, "Update parameters.");

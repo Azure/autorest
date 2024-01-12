@@ -65,3 +65,20 @@ interface StorageQueues {
     }
   >;
 }
+
+@@projectedName(StorageQueues.create::parameters.resource, "json", "queue");
+@@extension(StorageQueues.create::parameters.resource,
+  "x-ms-client-name",
+  "queue"
+);
+@@doc(StorageQueues.create::parameters.resource,
+  "Queue properties and metadata to be created with"
+);
+@@projectedName(StorageQueues.update::parameters.properties, "json", "queue");
+@@extension(StorageQueues.update::parameters.properties,
+  "x-ms-client-name",
+  "queue"
+);
+@@doc(StorageQueues.update::parameters.properties,
+  "Queue properties and metadata to be created with"
+);

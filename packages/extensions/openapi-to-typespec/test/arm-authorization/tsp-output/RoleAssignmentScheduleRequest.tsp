@@ -51,3 +51,26 @@ interface RoleAssignmentScheduleRequests {
     RoleAssignmentScheduleRequest
   >;
 }
+
+@@projectedName(RoleAssignmentScheduleRequests.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RoleAssignmentScheduleRequests.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleAssignmentScheduleRequests.create::parameters.resource,
+  "Parameters for the role assignment schedule request."
+);
+@@projectedName(RoleAssignmentScheduleRequests.validate::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(RoleAssignmentScheduleRequests.validate::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleAssignmentScheduleRequests.validate::parameters.body,
+  "Parameters for the role assignment schedule request."
+);

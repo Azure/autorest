@@ -175,3 +175,40 @@ interface GatewayContracts {
     ApiManagementGatewayApiListResult
   >;
 }
+
+@@projectedName(GatewayContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(GatewayContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayContracts.createOrUpdate::parameters.resource, "");
+@@projectedName(GatewayContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(GatewayContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayContracts.update::parameters.properties, "");
+@@projectedName(GatewayContracts.regenerateKey::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(GatewayContracts.regenerateKey::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayContracts.regenerateKey::parameters.body, "");
+@@projectedName(GatewayContracts.generateToken::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(GatewayContracts.generateToken::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayContracts.generateToken::parameters.body, "");

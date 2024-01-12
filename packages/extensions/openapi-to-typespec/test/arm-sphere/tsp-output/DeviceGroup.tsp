@@ -85,3 +85,15 @@ interface DeviceGroups {
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
+
+@@projectedName(DeviceGroups.claimDevices::parameters.body,
+  "json",
+  "claimDevicesRequest"
+);
+@@extension(DeviceGroups.claimDevices::parameters.body,
+  "x-ms-client-name",
+  "claimDevicesRequest"
+);
+@@doc(DeviceGroups.claimDevices::parameters.body,
+  "Bulk claim devices request body."
+);

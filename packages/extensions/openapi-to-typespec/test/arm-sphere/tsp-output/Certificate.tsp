@@ -65,3 +65,15 @@ interface Certificates {
     ProofOfPossessionNonceResponse
   >;
 }
+
+@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "json",
+  "proofOfPossessionNonceRequest"
+);
+@@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "x-ms-client-name",
+  "proofOfPossessionNonceRequest"
+);
+@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "Proof of possession nonce request body "
+);

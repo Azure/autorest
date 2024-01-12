@@ -64,3 +64,15 @@ interface RestorePoints {
     }
   >;
 }
+
+@@projectedName(RestorePoints.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RestorePoints.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RestorePoints.create::parameters.resource,
+  "Parameters supplied to the Create restore point operation."
+);

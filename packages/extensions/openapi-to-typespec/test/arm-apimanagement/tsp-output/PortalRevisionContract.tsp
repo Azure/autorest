@@ -99,3 +99,22 @@ interface PortalRevisionContracts {
     }
   >;
 }
+
+@@projectedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PortalRevisionContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalRevisionContracts.createOrUpdate::parameters.resource, "");
+@@projectedName(PortalRevisionContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(PortalRevisionContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalRevisionContracts.update::parameters.properties, "");

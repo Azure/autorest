@@ -35,3 +35,15 @@ interface BlobInventoryPolicies {
   @doc("Gets the blob inventory policy associated with the specified storage account.")
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }
+
+@@projectedName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+  "The blob inventory policy set to a storage account."
+);

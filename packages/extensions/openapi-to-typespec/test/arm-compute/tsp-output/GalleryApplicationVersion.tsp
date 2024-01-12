@@ -52,3 +52,26 @@ interface GalleryApplicationVersions {
   @doc("List gallery Application Versions in a gallery Application Definition.")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
+
+@@projectedName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+  "json",
+  "galleryApplicationVersion"
+);
+@@extension(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "galleryApplicationVersion"
+);
+@@doc(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update gallery Application Version operation."
+);
+@@projectedName(GalleryApplicationVersions.update::parameters.properties,
+  "json",
+  "galleryApplicationVersion"
+);
+@@extension(GalleryApplicationVersions.update::parameters.properties,
+  "x-ms-client-name",
+  "galleryApplicationVersion"
+);
+@@doc(GalleryApplicationVersions.update::parameters.properties,
+  "Parameters supplied to the update gallery Application Version operation."
+);

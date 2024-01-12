@@ -48,3 +48,26 @@ interface GalleryImageVersions {
   @doc("List gallery image versions in a gallery image definition.")
   listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
 }
+
+@@projectedName(GalleryImageVersions.createOrUpdate::parameters.resource,
+  "json",
+  "galleryImageVersion"
+);
+@@extension(GalleryImageVersions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "galleryImageVersion"
+);
+@@doc(GalleryImageVersions.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update gallery image version operation."
+);
+@@projectedName(GalleryImageVersions.update::parameters.properties,
+  "json",
+  "galleryImageVersion"
+);
+@@extension(GalleryImageVersions.update::parameters.properties,
+  "x-ms-client-name",
+  "galleryImageVersion"
+);
+@@doc(GalleryImageVersions.update::parameters.properties,
+  "Parameters supplied to the update gallery image version operation."
+);

@@ -52,3 +52,23 @@ interface Images {
   @doc("Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
   list is ArmListBySubscription<Image>;
 }
+
+@@projectedName(Images.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(Images.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Images.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Image operation."
+);
+@@projectedName(Images.update::parameters.properties, "json", "parameters");
+@@extension(Images.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Images.update::parameters.properties,
+  "Parameters supplied to the Update Image operation."
+);

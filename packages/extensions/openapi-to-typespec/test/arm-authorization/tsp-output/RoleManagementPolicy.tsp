@@ -32,3 +32,15 @@ interface RoleManagementPolicies {
   @doc("Gets role management policies for a resource scope.")
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }
+
+@@projectedName(RoleManagementPolicies.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(RoleManagementPolicies.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleManagementPolicies.update::parameters.properties,
+  "Parameters for the role management policy."
+);

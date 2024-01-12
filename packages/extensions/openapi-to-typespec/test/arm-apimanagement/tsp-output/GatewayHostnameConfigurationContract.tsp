@@ -94,3 +94,15 @@ interface GatewayHostnameConfigurationContracts {
     }
   >;
 }
+
+@@projectedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  ""
+);

@@ -101,3 +101,21 @@ interface ModelVersionResources {
     PendingUploadResponseDto
   >;
 }
+
+@@projectedName(ModelVersionResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(ModelVersionResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(ModelVersionResources.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(ModelVersionResources.package::parameters.body,
+  "Package operation request body."
+);
+@@doc(ModelVersionResources.createOrGetStartPendingUpload::parameters.body,
+  "Pending upload request object"
+);

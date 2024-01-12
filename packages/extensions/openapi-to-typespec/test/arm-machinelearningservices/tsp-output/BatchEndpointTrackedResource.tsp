@@ -82,3 +82,26 @@ interface BatchEndpointTrackedResources {
     EndpointAuthKeys
   >;
 }
+
+@@projectedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "Batch inference endpoint definition object."
+);
+@@projectedName(BatchEndpointTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(BatchEndpointTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchEndpointTrackedResources.update::parameters.properties,
+  "Mutable batch inference endpoint definition object."
+);

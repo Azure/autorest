@@ -74,3 +74,18 @@ interface CodeVersionResources {
     PendingUploadResponseDto
   >;
 }
+
+@@projectedName(CodeVersionResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(CodeVersionResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(CodeVersionResources.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(CodeVersionResources.createOrGetStartPendingUpload::parameters.body,
+  "Pending upload request object"
+);

@@ -70,3 +70,15 @@ Minimum = 10, Maximum = 1000, Default value = 50.
     }
   >;
 }
+
+@@projectedName(Extensions.createOrUpdate::parameters.resource,
+  "json",
+  "requestBody"
+);
+@@extension(Extensions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "requestBody"
+);
+@@doc(Extensions.createOrUpdate::parameters.resource,
+  "Extension resource request body."
+);

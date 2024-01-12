@@ -76,3 +76,26 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
     WorkspaceConnectionPropertiesV2BasicResource
   >;
 }
+
+@@projectedName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "The object for creating or updating a new workspace connection"
+);
+@@projectedName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+  "Parameters for workspace connection update."
+);

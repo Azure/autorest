@@ -119,3 +119,26 @@ interface AuthorizationServerContracts {
     AuthorizationServerSecretsContract
   >;
 }
+
+@@projectedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(AuthorizationServerContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(AuthorizationServerContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AuthorizationServerContracts.update::parameters.properties,
+  "OAuth2 Server settings Update parameters."
+);

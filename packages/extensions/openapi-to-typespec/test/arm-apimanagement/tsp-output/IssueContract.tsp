@@ -119,3 +119,22 @@ interface IssueContracts {
     }
   >;
 }
+
+@@projectedName(IssueContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(IssueContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IssueContracts.createOrUpdate::parameters.resource, "Create parameters.");
+@@projectedName(IssueContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(IssueContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IssueContracts.update::parameters.properties, "Update parameters.");

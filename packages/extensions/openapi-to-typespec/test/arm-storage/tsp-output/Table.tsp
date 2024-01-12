@@ -52,3 +52,20 @@ interface Tables {
   @operationId("Table_List")
   list is ArmResourceListByParent<Table>;
 }
+
+@@projectedName(Tables.create::parameters.resource, "json", "parameters");
+@@extension(Tables.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Tables.create::parameters.resource,
+  "The parameters to provide to create a table."
+);
+@@projectedName(Tables.update::parameters.properties, "json", "parameters");
+@@extension(Tables.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Tables.update::parameters.properties,
+  "The parameters to provide to create a table."
+);

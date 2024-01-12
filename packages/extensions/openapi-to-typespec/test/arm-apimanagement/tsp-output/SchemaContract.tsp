@@ -98,3 +98,15 @@ interface SchemaContracts {
     }
   >;
 }
+
+@@projectedName(SchemaContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(SchemaContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(SchemaContracts.createOrUpdate::parameters.resource,
+  "The schema contents to apply."
+);

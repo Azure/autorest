@@ -444,3 +444,158 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetListOSUpgradeHistory
   >;
 }
+
+@@projectedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+  "The scale set object."
+);
+@@projectedName(VirtualMachineScaleSets.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSets.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSets.update::parameters.properties,
+  "The scale set object."
+);
+@@projectedName(VirtualMachineScaleSets.deallocate::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.deallocate::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.deallocate::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.deleteInstances::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.powerOff::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.powerOff::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.powerOff::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.restart::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.restart::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.restart::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.start::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.start::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.start::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.redeploy::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.redeploy::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.redeploy::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.performMaintenance::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.updateInstances::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.reimage::parameters.body,
+  "json",
+  "vmScaleSetReimageInput"
+);
+@@extension(VirtualMachineScaleSets.reimage::parameters.body,
+  "x-ms-client-name",
+  "vmScaleSetReimageInput"
+);
+@@doc(VirtualMachineScaleSets.reimage::parameters.body,
+  "Parameters for Reimaging VM ScaleSet."
+);
+@@projectedName(VirtualMachineScaleSets.reimageAll::parameters.body,
+  "json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.reimageAll::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@projectedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "The input object for ConvertToSinglePlacementGroup API."
+);
+@@projectedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+  "The input object for SetOrchestrationServiceState API."
+);

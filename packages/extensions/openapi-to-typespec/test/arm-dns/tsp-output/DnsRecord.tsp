@@ -122,3 +122,23 @@ interface DnsRecords {
     }
   >;
 }
+
+@@projectedName(DnsRecords.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(DnsRecords.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DnsRecords.createOrUpdate::parameters.resource,
+  "Parameters supplied to the CreateOrUpdate operation."
+);
+@@projectedName(DnsRecords.update::parameters.properties, "json", "parameters");
+@@extension(DnsRecords.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DnsRecords.update::parameters.properties,
+  "Parameters supplied to the Update operation."
+);

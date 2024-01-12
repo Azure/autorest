@@ -64,3 +64,26 @@ interface SshPublicKeyResources {
     SshPublicKeyGenerateKeyPairResult
   >;
 }
+
+@@projectedName(SshPublicKeyResources.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(SshPublicKeyResources.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(SshPublicKeyResources.create::parameters.resource,
+  "Parameters supplied to create the SSH public key."
+);
+@@projectedName(SshPublicKeyResources.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(SshPublicKeyResources.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(SshPublicKeyResources.update::parameters.properties,
+  "Parameters supplied to update the SSH public key."
+);

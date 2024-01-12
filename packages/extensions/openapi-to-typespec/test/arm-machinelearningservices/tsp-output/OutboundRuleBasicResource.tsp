@@ -49,3 +49,15 @@ interface OutboundRuleBasicResources {
   @operationId("ManagedNetworkSettingsRule_List")
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
+
+@@projectedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+  "Outbound Rule to be created or updated in the managed network of a machine learning workspace."
+);

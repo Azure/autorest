@@ -64,3 +64,26 @@ interface DiskAccesses {
     PrivateLinkResourceListResult
   >;
 }
+
+@@projectedName(DiskAccesses.createOrUpdate::parameters.resource,
+  "json",
+  "diskAccess"
+);
+@@extension(DiskAccesses.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "diskAccess"
+);
+@@doc(DiskAccesses.createOrUpdate::parameters.resource,
+  "disk access object supplied in the body of the Put disk access operation."
+);
+@@projectedName(DiskAccesses.update::parameters.properties,
+  "json",
+  "diskAccess"
+);
+@@extension(DiskAccesses.update::parameters.properties,
+  "x-ms-client-name",
+  "diskAccess"
+);
+@@doc(DiskAccesses.update::parameters.properties,
+  "disk access object supplied in the body of the Patch disk access operation."
+);

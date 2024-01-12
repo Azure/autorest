@@ -43,3 +43,15 @@ interface RoleDefinitions {
     }
   >;
 }
+
+@@projectedName(RoleDefinitions.createOrUpdate::parameters.resource,
+  "json",
+  "roleDefinition"
+);
+@@extension(RoleDefinitions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "roleDefinition"
+);
+@@doc(RoleDefinitions.createOrUpdate::parameters.resource,
+  "The values for the role definition."
+);

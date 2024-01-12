@@ -110,3 +110,32 @@ interface FileShares {
     }
   >;
 }
+
+@@projectedName(FileShares.create::parameters.resource, "json", "fileShare");
+@@extension(FileShares.create::parameters.resource,
+  "x-ms-client-name",
+  "fileShare"
+);
+@@doc(FileShares.create::parameters.resource,
+  "Properties of the file share to create."
+);
+@@projectedName(FileShares.update::parameters.properties, "json", "fileShare");
+@@extension(FileShares.update::parameters.properties,
+  "x-ms-client-name",
+  "fileShare"
+);
+@@doc(FileShares.update::parameters.properties,
+  "Properties to update for the file share."
+);
+@@projectedName(FileShares.restore::parameters.body, "json", "deletedShare");
+@@extension(FileShares.restore::parameters.body,
+  "x-ms-client-name",
+  "deletedShare"
+);
+@@doc(FileShares.restore::parameters.body, "");
+@@projectedName(FileShares.lease::parameters.body, "json", "parameters");
+@@extension(FileShares.lease::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(FileShares.lease::parameters.body, "Lease Share request body.");

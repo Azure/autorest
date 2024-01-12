@@ -94,3 +94,15 @@ interface GlobalSchemaContracts {
     }
   >;
 }
+
+@@projectedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);

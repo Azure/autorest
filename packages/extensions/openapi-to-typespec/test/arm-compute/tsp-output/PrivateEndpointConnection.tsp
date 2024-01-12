@@ -45,3 +45,15 @@ interface PrivateEndpointConnections {
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+  "json",
+  "privateEndpointConnection"
+);
+@@extension(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+  "x-ms-client-name",
+  "privateEndpointConnection"
+);
+@@doc(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+  "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
+);

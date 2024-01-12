@@ -127,3 +127,23 @@ interface DnsZones {
     ResourceListResult<DnsRecord>
   >;
 }
+
+@@projectedName(DnsZones.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(DnsZones.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DnsZones.createOrUpdate::parameters.resource,
+  "Parameters supplied to the CreateOrUpdate operation."
+);
+@@projectedName(DnsZones.update::parameters.properties, "json", "parameters");
+@@extension(DnsZones.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DnsZones.update::parameters.properties,
+  "Parameters supplied to the Update operation."
+);

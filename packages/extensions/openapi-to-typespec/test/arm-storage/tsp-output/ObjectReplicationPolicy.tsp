@@ -38,3 +38,15 @@ interface ObjectReplicationPolicies {
   @doc("List the object replication policies associated with the storage account.")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
+
+@@projectedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "The object replication policy set to a storage account. A unique policy ID will be created if absent."
+);

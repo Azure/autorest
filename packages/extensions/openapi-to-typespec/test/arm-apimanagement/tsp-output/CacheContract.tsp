@@ -102,3 +102,24 @@ interface CacheContracts {
     }
   >;
 }
+
+@@projectedName(CacheContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(CacheContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CacheContracts.createOrUpdate::parameters.resource,
+  "Create or Update parameters."
+);
+@@projectedName(CacheContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(CacheContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(CacheContracts.update::parameters.properties, "Update parameters.");

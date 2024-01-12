@@ -112,3 +112,26 @@ interface OperationContracts {
     }
   >;
 }
+
+@@projectedName(OperationContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(OperationContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(OperationContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(OperationContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(OperationContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(OperationContracts.update::parameters.properties,
+  "API Operation Update parameters."
+);

@@ -122,3 +122,29 @@ interface OnlineEndpointTrackedResources {
     EndpointAuthToken
   >;
 }
+
+@@projectedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "Online Endpoint entity to apply during operation."
+);
+@@projectedName(OnlineEndpointTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(OnlineEndpointTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineEndpointTrackedResources.update::parameters.properties,
+  "Online Endpoint entity to apply during operation."
+);
+@@doc(OnlineEndpointTrackedResources.regenerateKeys::parameters.body,
+  "RegenerateKeys request ."
+);

@@ -129,3 +129,26 @@ interface AnalysisServicesServers {
     SkuEnumerationForExistingResourceResult
   >;
 }
+
+@@projectedName(AnalysisServicesServers.create::parameters.resource,
+  "json",
+  "serverParameters"
+);
+@@extension(AnalysisServicesServers.create::parameters.resource,
+  "x-ms-client-name",
+  "serverParameters"
+);
+@@doc(AnalysisServicesServers.create::parameters.resource,
+  "Contains the information used to provision the Analysis Services server."
+);
+@@projectedName(AnalysisServicesServers.update::parameters.properties,
+  "json",
+  "serverUpdateParameters"
+);
+@@extension(AnalysisServicesServers.update::parameters.properties,
+  "x-ms-client-name",
+  "serverUpdateParameters"
+);
+@@doc(AnalysisServicesServers.update::parameters.properties,
+  "Request object that contains the updated information for the server."
+);

@@ -73,3 +73,15 @@ interface EnvironmentVersionResources {
     }
   >;
 }
+
+@@projectedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);

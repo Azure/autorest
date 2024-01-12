@@ -145,3 +145,26 @@ interface OpenidConnectProviderContracts {
     }
   >;
 }
+
+@@projectedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(OpenidConnectProviderContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(OpenidConnectProviderContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(OpenidConnectProviderContracts.update::parameters.properties,
+  "Update parameters."
+);

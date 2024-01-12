@@ -98,3 +98,15 @@ interface DatastoreResources {
     DatastoreSecrets
   >;
 }
+
+@@projectedName(DatastoreResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DatastoreResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DatastoreResources.createOrUpdate::parameters.resource,
+  "Datastore entity to create or update."
+);

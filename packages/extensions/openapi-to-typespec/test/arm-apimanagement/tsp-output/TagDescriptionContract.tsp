@@ -95,3 +95,15 @@ interface TagDescriptionContracts {
     }
   >;
 }
+
+@@projectedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);

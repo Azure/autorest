@@ -53,3 +53,10 @@ interface Schedules {
     }
   >;
 }
+
+@@projectedName(Schedules.createOrUpdate::parameters.resource, "json", "body");
+@@extension(Schedules.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Schedules.createOrUpdate::parameters.resource, "Schedule definition.");

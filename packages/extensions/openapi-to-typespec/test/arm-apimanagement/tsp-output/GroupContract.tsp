@@ -150,3 +150,22 @@ interface GroupContracts {
     ApiManagementGroupUserListResult
   >;
 }
+
+@@projectedName(GroupContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(GroupContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GroupContracts.createOrUpdate::parameters.resource, "Create parameters.");
+@@projectedName(GroupContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(GroupContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(GroupContracts.update::parameters.properties, "Update parameters.");

@@ -249,3 +249,64 @@ interface VirtualMachines {
     VirtualMachineSizeListResult
   >;
 }
+
+@@projectedName(VirtualMachines.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachines.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Virtual Machine operation."
+);
+@@projectedName(VirtualMachines.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachines.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.update::parameters.properties,
+  "Parameters supplied to the Update Virtual Machine operation."
+);
+@@projectedName(VirtualMachines.capture::parameters.body, "json", "parameters");
+@@extension(VirtualMachines.capture::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.capture::parameters.body,
+  "Parameters supplied to the Capture Virtual Machine operation."
+);
+@@projectedName(VirtualMachines.reimage::parameters.body, "json", "parameters");
+@@extension(VirtualMachines.reimage::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.reimage::parameters.body,
+  "Parameters supplied to the Reimage Virtual Machine operation."
+);
+@@projectedName(VirtualMachines.installPatches::parameters.body,
+  "json",
+  "installPatchesInput"
+);
+@@extension(VirtualMachines.installPatches::parameters.body,
+  "x-ms-client-name",
+  "installPatchesInput"
+);
+@@doc(VirtualMachines.installPatches::parameters.body,
+  "Input for InstallPatches as directly received by the API"
+);
+@@projectedName(VirtualMachines.runCommand::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(VirtualMachines.runCommand::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.runCommand::parameters.body,
+  "Parameters supplied to the Run command operation."
+);

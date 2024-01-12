@@ -259,3 +259,26 @@ interface ApiContracts {
     TagResourceListResult
   >;
 }
+
+@@projectedName(ApiContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ApiContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(ApiContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ApiContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiContracts.update::parameters.properties,
+  "API Update Contract parameters."
+);

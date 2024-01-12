@@ -40,3 +40,15 @@ interface TableServicePropertiesOperationGroup {
   @operationId("TableServices_List")
   list is ArmResourceListByParent<TableServiceProperties>;
 }
+
+@@projectedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
+);

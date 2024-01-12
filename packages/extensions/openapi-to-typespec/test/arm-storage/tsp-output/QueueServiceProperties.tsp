@@ -40,3 +40,15 @@ interface QueueServicePropertiesOperationGroup {
   @operationId("QueueServices_List")
   list is ArmResourceListByParent<QueueServiceProperties>;
 }
+
+@@projectedName(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "The properties of a storage account’s Queue service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
+);

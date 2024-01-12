@@ -63,3 +63,26 @@ interface AvailabilitySets {
     VirtualMachineSizeListResult
   >;
 }
+
+@@projectedName(AvailabilitySets.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(AvailabilitySets.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AvailabilitySets.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Availability Set operation."
+);
+@@projectedName(AvailabilitySets.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(AvailabilitySets.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AvailabilitySets.update::parameters.properties,
+  "Parameters supplied to the Update Availability Set operation."
+);

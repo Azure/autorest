@@ -41,3 +41,15 @@ interface PrivateEndpointConnections {
   @doc("Get list of Private endpoint connections.")
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "json",
+  "request"
+);
+@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "request"
+);
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "Request object."
+);

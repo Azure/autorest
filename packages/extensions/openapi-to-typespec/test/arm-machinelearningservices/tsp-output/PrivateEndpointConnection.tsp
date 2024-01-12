@@ -43,3 +43,15 @@ This method must validate and forward the call to NRP.
   @doc("Called by end-users to get all PE connections.")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "PrivateEndpointConnection object"
+);

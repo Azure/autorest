@@ -41,3 +41,15 @@ interface FileServicePropertiesOperationGroup {
   @operationId("FileServices_List")
   list is ArmResourceListByParent<FileServiceProperties>;
 }
+
+@@projectedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules."
+);

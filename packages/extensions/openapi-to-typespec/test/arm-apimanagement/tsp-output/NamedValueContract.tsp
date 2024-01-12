@@ -134,3 +134,24 @@ interface NamedValueContracts {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(NamedValueContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(NamedValueContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(NamedValueContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(NamedValueContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(NamedValueContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(NamedValueContracts.update::parameters.properties, "Update parameters.");

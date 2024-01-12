@@ -94,3 +94,15 @@ interface IssueCommentContracts {
     }
   >;
 }
+
+@@projectedName(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);

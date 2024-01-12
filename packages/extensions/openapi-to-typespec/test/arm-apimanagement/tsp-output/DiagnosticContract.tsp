@@ -109,3 +109,26 @@ interface DiagnosticContracts {
     }
   >;
 }
+
+@@projectedName(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(DiagnosticContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(DiagnosticContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DiagnosticContracts.update::parameters.properties,
+  "Diagnostic Update parameters."
+);

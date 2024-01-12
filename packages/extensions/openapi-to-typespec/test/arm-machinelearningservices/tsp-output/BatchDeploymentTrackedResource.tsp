@@ -77,3 +77,26 @@ interface BatchDeploymentTrackedResources {
     }
   >;
 }
+
+@@projectedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "Batch inference deployment definition object."
+);
+@@projectedName(BatchDeploymentTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(BatchDeploymentTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchDeploymentTrackedResources.update::parameters.properties,
+  "Batch inference deployment definition object."
+);

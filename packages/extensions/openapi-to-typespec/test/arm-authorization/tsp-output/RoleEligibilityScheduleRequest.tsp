@@ -51,3 +51,26 @@ interface RoleEligibilityScheduleRequests {
     RoleEligibilityScheduleRequest
   >;
 }
+
+@@projectedName(RoleEligibilityScheduleRequests.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RoleEligibilityScheduleRequests.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleEligibilityScheduleRequests.create::parameters.resource,
+  "Parameters for the role eligibility schedule request."
+);
+@@projectedName(RoleEligibilityScheduleRequests.validate::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(RoleEligibilityScheduleRequests.validate::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleEligibilityScheduleRequests.validate::parameters.body,
+  "Parameters for the role eligibility schedule request."
+);

@@ -32,3 +32,15 @@ interface RoleManagementPolicyAssignments {
   @doc("Gets role management assignment policies for a resource scope.")
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }
+
+@@projectedName(RoleManagementPolicyAssignments.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RoleManagementPolicyAssignments.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleManagementPolicyAssignments.create::parameters.resource,
+  "Parameters for the role management policy assignment."
+);

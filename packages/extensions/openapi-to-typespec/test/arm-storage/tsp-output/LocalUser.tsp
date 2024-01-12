@@ -48,3 +48,15 @@ interface LocalUsers {
     LocalUserRegeneratePasswordResult
   >;
 }
+
+@@projectedName(LocalUsers.createOrUpdate::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(LocalUsers.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(LocalUsers.createOrUpdate::parameters.resource,
+  "The local user associated with a storage account."
+);

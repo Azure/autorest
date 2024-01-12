@@ -52,3 +52,26 @@ interface DedicatedHostGroups {
   @doc("Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.")
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
+
+@@projectedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(DedicatedHostGroups.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DedicatedHostGroups.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create Dedicated Host Group."
+);
+@@projectedName(DedicatedHostGroups.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(DedicatedHostGroups.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(DedicatedHostGroups.update::parameters.properties,
+  "Parameters supplied to the Update Dedicated Host Group operation."
+);

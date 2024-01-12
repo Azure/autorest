@@ -37,3 +37,15 @@ interface PrivateEndpointConnections {
   @doc("List all the private endpoint connections associated with the storage account.")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.put::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(PrivateEndpointConnections.put::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(PrivateEndpointConnections.put::parameters.resource,
+  "The private endpoint connection properties."
+);

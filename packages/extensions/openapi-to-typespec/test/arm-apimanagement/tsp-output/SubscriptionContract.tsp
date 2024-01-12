@@ -155,3 +155,26 @@ Notify change in Subscription State.
     SubscriptionKeysContract
   >;
 }
+
+@@projectedName(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "Create parameters."
+);
+@@projectedName(SubscriptionContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(SubscriptionContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(SubscriptionContracts.update::parameters.properties,
+  "Update parameters."
+);

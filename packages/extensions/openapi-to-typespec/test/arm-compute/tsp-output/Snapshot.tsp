@@ -64,3 +64,34 @@ interface Snapshots {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(Snapshots.createOrUpdate::parameters.resource,
+  "json",
+  "snapshot"
+);
+@@extension(Snapshots.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "snapshot"
+);
+@@doc(Snapshots.createOrUpdate::parameters.resource,
+  "Snapshot object supplied in the body of the Put disk operation."
+);
+@@projectedName(Snapshots.update::parameters.properties, "json", "snapshot");
+@@extension(Snapshots.update::parameters.properties,
+  "x-ms-client-name",
+  "snapshot"
+);
+@@doc(Snapshots.update::parameters.properties,
+  "Snapshot object supplied in the body of the Patch snapshot operation."
+);
+@@projectedName(Snapshots.grantAccess::parameters.body,
+  "json",
+  "grantAccessData"
+);
+@@extension(Snapshots.grantAccess::parameters.body,
+  "x-ms-client-name",
+  "grantAccessData"
+);
+@@doc(Snapshots.grantAccess::parameters.body,
+  "Access data object supplied in the body of the get snapshot access operation."
+);

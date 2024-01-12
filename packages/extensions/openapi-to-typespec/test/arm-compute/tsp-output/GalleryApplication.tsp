@@ -39,3 +39,26 @@ interface GalleryApplications {
   @doc("List gallery Application Definitions in a gallery.")
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
+
+@@projectedName(GalleryApplications.createOrUpdate::parameters.resource,
+  "json",
+  "galleryApplication"
+);
+@@extension(GalleryApplications.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "galleryApplication"
+);
+@@doc(GalleryApplications.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update gallery Application operation."
+);
+@@projectedName(GalleryApplications.update::parameters.properties,
+  "json",
+  "galleryApplication"
+);
+@@extension(GalleryApplications.update::parameters.properties,
+  "x-ms-client-name",
+  "galleryApplication"
+);
+@@doc(GalleryApplications.update::parameters.properties,
+  "Parameters supplied to the update gallery Application operation."
+);

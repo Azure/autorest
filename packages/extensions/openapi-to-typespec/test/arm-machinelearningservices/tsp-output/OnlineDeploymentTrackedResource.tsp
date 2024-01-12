@@ -130,3 +130,29 @@ interface OnlineDeploymentTrackedResources {
     SkuResourceArmPaginatedResult
   >;
 }
+
+@@projectedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "Inference Endpoint entity to apply during operation."
+);
+@@projectedName(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "Online Endpoint entity to apply during operation."
+);
+@@doc(OnlineDeploymentTrackedResources.getLogs::parameters.body,
+  "The request containing parameters for retrieving logs."
+);

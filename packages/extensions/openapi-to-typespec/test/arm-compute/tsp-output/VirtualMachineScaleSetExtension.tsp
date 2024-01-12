@@ -90,3 +90,26 @@ interface VirtualMachineScaleSetExtensions {
     }
   >;
 }
+
+@@projectedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create VM scale set Extension operation."
+);
+@@projectedName(VirtualMachineScaleSetExtensions.update::parameters.properties,
+  "json",
+  "extensionParameters"
+);
+@@extension(VirtualMachineScaleSetExtensions.update::parameters.properties,
+  "x-ms-client-name",
+  "extensionParameters"
+);
+@@doc(VirtualMachineScaleSetExtensions.update::parameters.properties,
+  "Parameters supplied to the Update VM scale set Extension operation."
+);

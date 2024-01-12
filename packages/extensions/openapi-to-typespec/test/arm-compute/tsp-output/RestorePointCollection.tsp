@@ -82,3 +82,26 @@ interface RestorePointCollections {
   @doc("Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.")
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
+
+@@projectedName(RestorePointCollections.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RestorePointCollections.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RestorePointCollections.createOrUpdate::parameters.resource,
+  "Parameters supplied to the Create or Update restore point collection operation."
+);
+@@projectedName(RestorePointCollections.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(RestorePointCollections.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RestorePointCollections.update::parameters.properties,
+  "Parameters supplied to the Update restore point collection operation."
+);

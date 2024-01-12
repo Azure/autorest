@@ -62,3 +62,23 @@ interface Registries {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(Registries.createOrUpdate::parameters.resource, "json", "body");
+@@extension(Registries.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Registries.createOrUpdate::parameters.resource,
+  "Details required to create the registry."
+);
+@@projectedName(Registries.update::parameters.properties, "json", "body");
+@@extension(Registries.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Registries.update::parameters.properties,
+  "Details required to create the registry."
+);
+@@doc(Registries.removeRegions::parameters.body,
+  "Details required to create the registry."
+);

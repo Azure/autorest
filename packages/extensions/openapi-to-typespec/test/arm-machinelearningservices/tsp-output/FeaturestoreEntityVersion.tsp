@@ -78,3 +78,15 @@ interface FeaturestoreEntityVersions {
     }
   >;
 }
+
+@@projectedName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);

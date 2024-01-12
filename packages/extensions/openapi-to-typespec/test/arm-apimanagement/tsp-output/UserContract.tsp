@@ -235,3 +235,35 @@ interface UserContracts {
     UserIdentityListResult
   >;
 }
+
+@@projectedName(UserContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(UserContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(UserContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(UserContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(UserContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(UserContracts.update::parameters.properties, "Update parameters.");
+@@projectedName(UserContracts.getSharedAccessToken::parameters.body,
+  "json",
+  "parameters"
+);
+@@extension(UserContracts.getSharedAccessToken::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(UserContracts.getSharedAccessToken::parameters.body,
+  "Create Authorization Token parameters."
+);

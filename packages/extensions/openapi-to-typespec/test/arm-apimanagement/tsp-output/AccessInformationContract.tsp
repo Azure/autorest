@@ -125,3 +125,26 @@ interface AccessInformationContracts {
     void
   >;
 }
+
+@@projectedName(AccessInformationContracts.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AccessInformationContracts.create::parameters.resource,
+  "Parameters supplied to retrieve the Tenant Access Information."
+);
+@@projectedName(AccessInformationContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AccessInformationContracts.update::parameters.properties,
+  "Parameters supplied to retrieve the Tenant Access Information."
+);

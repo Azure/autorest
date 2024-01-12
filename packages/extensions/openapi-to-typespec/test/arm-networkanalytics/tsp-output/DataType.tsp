@@ -58,7 +58,7 @@ interface DataTypes {
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoResponseContentAsync<
     DataType,
-    Record<unknown>,
+    AnyObject,
     BaseParameters<DataType>,
     ArmLroLocationHeader
   >;

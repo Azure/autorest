@@ -69,3 +69,15 @@ interface RoleAssignments {
     }
   >;
 }
+
+@@projectedName(RoleAssignments.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RoleAssignments.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleAssignments.create::parameters.resource,
+  "Parameters for the role assignment."
+);

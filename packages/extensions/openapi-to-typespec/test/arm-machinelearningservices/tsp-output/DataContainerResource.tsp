@@ -61,3 +61,15 @@ interface DataContainerResources {
     }
   >;
 }
+
+@@projectedName(DataContainerResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DataContainerResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DataContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

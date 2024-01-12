@@ -82,3 +82,15 @@ interface PolicyContracts {
   @operationId("ApiOperationPolicy_ListByOperation")
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }
+
+@@projectedName(PolicyContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PolicyContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PolicyContracts.createOrUpdate::parameters.resource,
+  "The policy contents to apply."
+);
