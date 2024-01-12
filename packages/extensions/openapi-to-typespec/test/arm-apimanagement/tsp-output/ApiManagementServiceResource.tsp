@@ -176,7 +176,10 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Checks availability and correctness of a name for an API Management service.")
   @operationId("ApiManagementService_CheckNameAvailability")
-  checkNameAvailability is checkGlobalNameAvailability;
+  checkNameAvailability is checkGlobalNameAvailability<
+    ApiManagementServiceCheckNameAvailabilityParameters,
+    ApiManagementServiceNameAvailabilityResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Api_ListByTags")

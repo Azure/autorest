@@ -149,7 +149,10 @@ interface StorageAccounts {
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
 
   @doc("Checks that the storage account name is valid and is not already in use.")
-  checkNameAvailability is checkGlobalNameAvailability;
+  checkNameAvailability is checkGlobalNameAvailability<
+    StorageAccountCheckNameAvailabilityParameters,
+    CheckNameAvailabilityResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PrivateLinkResources_ListByStorageAccount")

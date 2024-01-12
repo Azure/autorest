@@ -95,7 +95,10 @@ interface AnalysisServicesServers {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Check the name availability in the target location.")
   @operationId("Servers_CheckNameAvailability")
-  checkNameAvailability is checkGlobalNameAvailability;
+  checkNameAvailability is checkLocalNameAvailability<
+    CheckServerNameAvailabilityParameters,
+    CheckServerNameAvailabilityResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Servers_ListSkusForExisting")

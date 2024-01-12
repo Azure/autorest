@@ -260,14 +260,6 @@ enum ObjectType {
   Container,
 }
 
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
 @doc("The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.")
 enum EncryptionScopeSource {
   `Microsoft.Storage`,
@@ -383,13 +375,6 @@ enum LeaseShareAction {
   Change,
   Release,
   Break,
-}
-
-@doc("The SKU tier. This is based on the SKU name.")
-@fixed
-enum SkuTier {
-  Standard,
-  Premium,
 }
 
 @doc("Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.")

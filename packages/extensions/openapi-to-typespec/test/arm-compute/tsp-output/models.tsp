@@ -902,14 +902,6 @@ enum CloudServiceSlotType {
   Staging,
 }
 
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
 @doc("Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.")
 enum AvailabilitySetSkuTypes {
   Classic,

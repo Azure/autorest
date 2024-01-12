@@ -221,13 +221,6 @@ enum Method {
   POST,
 }
 
-@doc("The origin of the issue.")
-enum Origin {
-  Local,
-  Inbound,
-  Outbound,
-}
-
 @doc("The severity of the issue.")
 enum Severity {
   Error,
@@ -346,14 +339,6 @@ enum ApimIdentityType {
   UserAssigned,
   `SystemAssigned, UserAssigned`,
   None,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
 }
 
 enum TemplateName {

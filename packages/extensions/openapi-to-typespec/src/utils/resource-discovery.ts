@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getSession } from "../autorest-session";
-import { TypespecObject, TspArmResource } from "../interfaces";
+import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
 import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
 export interface _ArmResourceOperation {
   Name: string;
@@ -195,6 +195,21 @@ export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[])
     }
   }
   return objects.filter((o) => !filtered.includes(o.name) && !isGeneratedResourceObject(o.name));
+}
+
+const _ArmCoreEnums = [
+  "CreatedByType",
+  "Origin",
+  "ActionType",
+  "ManagedIdentityType",
+  "ManagedSystemIdentityType",
+  "SkuTier",
+  "CheckNameAvailabilityRequest",
+  "CheckNameAvailabilityReason",
+];
+
+export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
+  return enums.filter((e) => !_ArmCoreEnums.includes(e.name));
 }
 
 export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {

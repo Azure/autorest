@@ -11,18 +11,6 @@ namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
-enum ActionType {
-  Internal,
-}
-
 @doc("The status of the current operation.")
 enum ProvisioningState {
   @doc("Represents a succeeded operation.") Succeeded,
@@ -52,14 +40,6 @@ enum ManagedServiceIdentityType {
   SystemAssigned,
   UserAssigned,
   `SystemAssigned, UserAssigned`,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
 }
 
 @doc("The data type state")

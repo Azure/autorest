@@ -489,7 +489,7 @@ function convertResourceActionOperations(
           }
         }
 
-        const request = buildOperationBodyRequest(swaggerOperation, resourceMetadata) ?? "void";
+        const request = buildOperationBodyRequest(swaggerOperation) ?? "void";
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {
@@ -537,14 +537,29 @@ function convertCheckNameAvailabilityOperations(
     for (const operation of resourceMetadata.OperationsFromSubscriptionExtension) {
       if (operation.Path.includes("/checkNameAvailability")) {
         const swaggerOperation = operations[operation.OperationID];
-
-        converted.push({
-          doc: operation.Description,
-          kind: "checkGlobalNameAvailability",
-          name: getOperationName(operation.OperationID),
-          operationId: operation.OperationID,
-          examples: swaggerOperation.extensions?.["x-ms-examples"],
-        });
+        const response = (swaggerOperation?.responses?.filter(
+          (o) => o.protocol.http?.statusCodes.includes("200"),
+        )?.[0] as SchemaResponse).schema?.language.default.name ?? "CheckNameAvailabilityResponse";
+        const request = buildOperationBodyRequest(swaggerOperation) ?? "CheckNameAvailabilityRequest";
+        if (operation.Path.includes("/locations/")) {
+          converted.push({
+            doc: operation.Description,
+            kind: "checkLocalNameAvailability",
+            name: getOperationName(operation.OperationID),
+            operationId: operation.OperationID,
+            examples: swaggerOperation.extensions?.["x-ms-examples"],
+            templateParameters: [request, response],
+          });
+        } else {
+          converted.push({
+            doc: operation.Description,
+            kind: "checkGlobalNameAvailability",
+            name: getOperationName(operation.OperationID),
+            operationId: operation.OperationID,
+            examples: swaggerOperation.extensions?.["x-ms-examples"],
+            templateParameters: [request, response],
+          });
+        }
       }
     }
   }
@@ -630,7 +645,7 @@ function getOperationGroupName(name: string | undefined): string {
   }
 }
 
-function buildOperationBodyRequest(operation: Operation, resource: ArmResource): string | undefined {
+function buildOperationBodyRequest(operation: Operation): string | undefined {
   const codeModel = getSession().model;
   const bodyParam: Parameter | undefined = operation.requests?.[0].parameters?.find(
     (p) => p.protocol.http?.in === "body",

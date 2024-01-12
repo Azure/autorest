@@ -45,13 +45,6 @@ enum ProvisioningState {
   Scaling,
 }
 
-@doc("The name of the Azure pricing tier to which the SKU applies.")
-enum SkuTier {
-  Development,
-  Basic,
-  Standard,
-}
-
 @doc("The managed mode of the server (0 = not managed, 1 = managed).")
 enum ManagedMode {
   `0`: 0,

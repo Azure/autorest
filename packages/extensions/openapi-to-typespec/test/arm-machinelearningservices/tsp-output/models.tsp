@@ -66,14 +66,6 @@ enum ManagedServiceIdentityType {
   `SystemAssigned,UserAssigned`,
 }
 
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
 @doc("The type of compute")
 enum ComputeType {
   AKS,
@@ -1632,15 +1624,6 @@ enum SparkJobEntryType {
 enum RuleAction {
   Allow,
   Deny,
-}
-
-@doc("This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.")
-@fixed
-enum SkuTier {
-  Free,
-  Basic,
-  Standard,
-  Premium,
 }
 
 @doc("The List Usages operation response.")

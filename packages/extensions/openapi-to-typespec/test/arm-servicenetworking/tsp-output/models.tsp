@@ -11,18 +11,6 @@ namespace Microsoft.ServiceNetworking;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
-enum ActionType {
-  Internal,
-}
-
 enum ProvisioningState {
   Provisioning,
   Updating,
@@ -31,14 +19,6 @@ enum ProvisioningState {
   Succeeded,
   Failed,
   Canceled,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
 }
 
 enum AssociationType {

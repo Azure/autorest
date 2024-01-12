@@ -43,20 +43,6 @@ enum RecurrenceType {
   Monthly,
 }
 
-@doc("Action that should be applied.")
-enum ActionType {
-  AddActionGroups,
-  RemoveAllActionGroups,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
 enum Identifier {
   MonitorServiceList,
 }

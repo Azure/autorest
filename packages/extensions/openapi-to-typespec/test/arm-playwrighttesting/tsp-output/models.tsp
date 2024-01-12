@@ -11,18 +11,6 @@ namespace Microsoft.AzurePlaywrightService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
-enum ActionType {
-  Internal,
-}
-
 @doc("The enablement status of a feature.")
 enum EnablementStatus {
   @doc("The feature is Enabled.") Enabled,
@@ -36,14 +24,6 @@ enum ProvisioningState {
   @doc("Resource creation was canceled.") Canceled,
   @doc("Deletion in progress") Deleting,
   @doc("Change accepted for processing") Accepted,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
 }
 
 @doc("The free-trial state.")

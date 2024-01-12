@@ -125,13 +125,16 @@ function generateExamples(
 ) {
   const count = _.keys(examples).length;
   for (const [title, example] of _.entries(examples)) {
-    if (!example.operationId) {
-      example.operationId = operationId;
-      example.title = title;
-    }
+    example.operationId = operationId;
+    example.title = title;
     let filename = operationId;
     if (count > 1) {
-      filename = `${filename}_${Case.pascal(title)}`;
+      if (title.startsWith(filename)) {
+        filename = title;
+      } else {
+        const suffix = Case.train(title).replaceAll("-", "_");
+        filename = `${filename}_${suffix}`;
+      }
     }
     generatedExamples[filename] = JSON.stringify(example, null, 2);
   }

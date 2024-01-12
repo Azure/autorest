@@ -12,18 +12,6 @@ namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
-enum ActionType {
-  Internal,
-}
-
 @doc("Provisioning state of the resource.")
 enum ProvisioningState {
   @doc("Resource has been created.") Succeeded,
@@ -33,14 +21,6 @@ enum ProvisioningState {
   @doc("The resource is being updated") Updating,
   @doc("The resource is being deleted") Deleting,
   @doc("The resource create request has been accepted") Accepted,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
 }
 
 @doc("Certificate status values.")
