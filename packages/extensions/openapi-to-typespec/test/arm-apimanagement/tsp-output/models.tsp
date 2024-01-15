@@ -821,7 +821,7 @@ model ApiContractUpdateProperties extends ApiEntityBaseContract {
 @doc("Paged API Revision list representation.")
 model ApiRevisionListResult is Azure.Core.Page<ApiRevisionContract> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Summary of revision metadata.")
@@ -1143,7 +1143,7 @@ model SamplingSettings {
 
   @doc("Rate of sampling for fixed-rate sampling.")
   @maxValue(100)
-  percentage?: float32;
+  percentage?: float64;
 }
 
 @doc("Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.")
@@ -1291,7 +1291,7 @@ model TagDescriptionCreateParameters {
 @doc("Paged Tag list representation.")
 model TagResourceListResult is Azure.Core.Page<TagResourceContract> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("TagResource contract properties.")
@@ -1861,7 +1861,7 @@ model ConnectivityCheckRequestSource {
   region: string;
 
   @doc("The particular VMSS instance from which to fire the request.")
-  instance?: int32;
+  instance?: int64;
 }
 
 @doc("The connectivity check operation destination.")
@@ -1870,7 +1870,7 @@ model ConnectivityCheckRequestDestination {
   address: string;
 
   @doc("Destination port.")
-  port: int32;
+  port: int64;
 }
 
 @doc("Protocol-specific configuration.")
@@ -1886,7 +1886,7 @@ model ConnectivityCheckRequestProtocolConfigurationHttpConfiguration {
   method?: Method;
 
   @doc("List of HTTP status codes considered valid for the request response.")
-  validStatusCodes?: int32[];
+  validStatusCodes?: int64[];
 
   @doc("List of headers to be included in the request.")
   headers?: HttpHeader[];
@@ -1913,23 +1913,23 @@ model ConnectivityCheckResponse {
 
   @doc("Average latency in milliseconds.")
   @visibility("read")
-  avgLatencyInMs?: int32;
+  avgLatencyInMs?: int64;
 
   @doc("Minimum latency in milliseconds.")
   @visibility("read")
-  minLatencyInMs?: int32;
+  minLatencyInMs?: int64;
 
   @doc("Maximum latency in milliseconds.")
   @visibility("read")
-  maxLatencyInMs?: int32;
+  maxLatencyInMs?: int64;
 
   @doc("Total number of probes sent.")
   @visibility("read")
-  probesSent?: int32;
+  probesSent?: int64;
 
   @doc("Number of failed probes.")
   @visibility("read")
-  probesFailed?: int32;
+  probesFailed?: int64;
 }
 
 @doc("Information about a hop between the source and the destination.")
@@ -2649,7 +2649,7 @@ model GatewayHostnameConfigurationContractProperties {
 @doc("Paged API list representation.")
 model ApiManagementGatewayApiListResult is Azure.Core.Page<GatewayApiData> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 model GatewayApiData extends ApiContract {}
@@ -2744,7 +2744,7 @@ model GroupUpdateParametersProperties {
 model ApiManagementGroupUserListResult
   is Azure.Core.Page<ApiManagementGroupUserData> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 model ApiManagementGroupUserData extends UserContract {}
@@ -3086,7 +3086,7 @@ model RecipientUserListResult {
   value?: RecipientUserContract[];
 
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 
   @doc("Next page link if any.")
   nextLink?: string;
@@ -3110,7 +3110,7 @@ model RecipientEmailListResult {
   value?: RecipientEmailContract[];
 
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 
   @doc("Next page link if any.")
   nextLink?: string;
@@ -3217,7 +3217,7 @@ model PolicyDescriptionListResult {
   value?: PolicyDescriptionContract[];
 
   @doc("Total record count number.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Policy description details.")
@@ -3234,7 +3234,7 @@ model PolicyDescriptionContractProperties {
 
   @doc("Binary OR value of the Snippet scope.")
   @visibility("read")
-  scope?: int32;
+  scope?: int64;
 }
 
 model PortalRevisionContractProperties {
@@ -3420,7 +3420,7 @@ model ProductUpdateProperties extends ProductEntityBaseParameters {
 @doc("Paged API list representation.")
 model ApiManagementProductApiListResult is Azure.Core.Page<ProductApiData> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 model ProductApiData extends ApiContract {}
@@ -3428,7 +3428,7 @@ model ProductApiData extends ApiContract {}
 @doc("Paged Group list representation.")
 model ApiManagementProductGroupListResult is Azure.Core.Page<ProductGroupData> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 model ProductGroupData extends GroupContract {}
@@ -3507,7 +3507,7 @@ model QuotaCounterListResult {
   value?: QuotaCounterContract[];
 
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 
   @doc("Next page link if any.")
   nextLink?: string;
@@ -3550,7 +3550,7 @@ model QuotaCounterValueContractProperties {
   callsCount?: int32;
 
   @doc("Data Transferred in KiloBytes.")
-  kbTransferred?: float32;
+  kbTransferred?: float64;
 }
 
 @doc("Quota counter value details.")
@@ -3562,7 +3562,7 @@ model QuotaCounterValueUpdateContract {
 @doc("Lists Regions operation response details.")
 model RegionListResult is Azure.Core.Page<RegionContract> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Region profile.")
@@ -3581,7 +3581,7 @@ model RegionContract {
 @doc("Paged Report records list representation.")
 model ReportListResult is Azure.Core.Page<ReportRecordContract> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Report data.")
@@ -3644,7 +3644,7 @@ Start of aggregation period. The date conforms to the following format: `yyyy-MM
   callCountTotal?: int32;
 
   @doc("Bandwidth consumed.")
-  bandwidth?: int32;
+  bandwidth?: int64;
 
   @doc("Number of times when content was served from cache policy.")
   cacheHitCount?: int32;
@@ -3653,22 +3653,22 @@ Start of aggregation period. The date conforms to the following format: `yyyy-MM
   cacheMissCount?: int32;
 
   @doc("Average time it took to process request.")
-  apiTimeAvg?: float32;
+  apiTimeAvg?: float64;
 
   @doc("Minimum time it took to process request.")
-  apiTimeMin?: float32;
+  apiTimeMin?: float64;
 
   @doc("Maximum time it took to process request.")
-  apiTimeMax?: float32;
+  apiTimeMax?: float64;
 
   @doc("Average time it took to process request on backend.")
-  serviceTimeAvg?: float32;
+  serviceTimeAvg?: float64;
 
   @doc("Minimum time it took to process request on backend.")
-  serviceTimeMin?: float32;
+  serviceTimeMin?: float64;
 
   @doc("Maximum time it took to process request on backend.")
-  serviceTimeMax?: float32;
+  serviceTimeMax?: float64;
 }
 
 @doc("Paged Report records list representation.")
@@ -3679,7 +3679,7 @@ model RequestReportListResult {
   value?: RequestReportRecordContract[];
 
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Request Report data.")
@@ -3724,10 +3724,10 @@ model RequestReportRecordContract {
   cache?: string;
 
   @doc("The total time it took to process this request.")
-  apiTime?: float32;
+  apiTime?: float64;
 
   @doc("he time it took to forward this request to the backend and get the response back.")
-  serviceTime?: float32;
+  serviceTime?: float64;
 
   @doc("Azure region where the gateway that processed this request is located.")
   apiRegion?: string;
@@ -3884,7 +3884,7 @@ model ApiManagementSkuCosts {
 
   @doc("The multiplier is needed to extend the base metered cost.")
   @visibility("read")
-  quantity?: int32;
+  quantity?: int64;
 
   @doc("An invariant to show the extended unit.")
   @visibility("read")
@@ -4270,7 +4270,7 @@ model GenerateSsoUrlResult {
 @doc("List of Users Identity list representation.")
 model UserIdentityListResult is Azure.Core.Page<UserIdentityContract> {
   @doc("Total record count number across all pages.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("Get User Token parameters.")

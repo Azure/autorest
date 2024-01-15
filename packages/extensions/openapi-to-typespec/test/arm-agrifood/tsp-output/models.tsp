@@ -216,7 +216,7 @@ model Identity {
 model DataManagerForAgricultureProperties {
   @doc("Uri of the Data Manager For Agriculture instance.")
   @visibility("read")
-  instanceUri?: string;
+  instanceUri?: url;
 
   @doc("Data Manager For Agriculture instance provisioning state.")
   @visibility("read")

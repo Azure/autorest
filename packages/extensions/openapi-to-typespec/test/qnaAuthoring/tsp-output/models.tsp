@@ -442,7 +442,7 @@ the complete URL if it's a 'url' source.
   source: string;
 
   @doc("URI location for the file or url.")
-  sourceUri: string;
+  sourceUri: url;
 
   @doc("Supported source types.")
   sourceKind: SourceKind;

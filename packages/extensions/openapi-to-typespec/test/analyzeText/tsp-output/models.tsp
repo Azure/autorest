@@ -625,13 +625,13 @@ that was predicted.
 @doc("Represents the evaluation summary for an entity.")
 model EntityEvaluationSummary {
   @doc("Represents the model precision")
-  f1: float32;
+  f1: float64;
 
   @doc("Represents the model recall")
-  precision: float32;
+  precision: float64;
 
   @doc("Represents the model F1 score")
-  recall: float32;
+  recall: float64;
 
   @doc("Represents the count of true positive")
   truePositiveCount: int32;
@@ -714,13 +714,13 @@ project.
 """)
 model MultiLabelClassEvaluationSummary {
   @doc("Represents the model precision")
-  f1: float32;
+  f1: float64;
 
   @doc("Represents the model recall")
-  precision: float32;
+  precision: float64;
 
   @doc("Represents the model F1 score")
-  recall: float32;
+  recall: float64;
 
   @doc("Represents the count of true positive")
   truePositiveCount: int32;
@@ -813,13 +813,13 @@ project.
 """)
 model SingleLabelClassEvaluationSummary {
   @doc("Represents the model precision")
-  f1: float32;
+  f1: float64;
 
   @doc("Represents the model recall")
-  precision: float32;
+  precision: float64;
 
   @doc("Represents the model F1 score")
-  recall: float32;
+  recall: float64;
 
   @doc("Represents the count of true positive")
   truePositiveCount: int32;

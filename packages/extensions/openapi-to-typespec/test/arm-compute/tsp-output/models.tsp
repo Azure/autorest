@@ -1170,7 +1170,7 @@ model Usage {
   currentValue: int32;
 
   @doc("The maximum permitted usage of the resource.")
-  limit: int32;
+  limit: int64;
 
   @doc("The name of the type of usage.")
   name: UsageName;
@@ -1223,7 +1223,7 @@ model Sku {
   tier?: string;
 
   @doc("Specifies the number of virtual machines in the scale set.")
-  capacity?: int32;
+  capacity?: int64;
 }
 
 @doc("Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.")
@@ -1751,10 +1751,10 @@ model VirtualMachineScaleSetDataDisk {
 
   @doc("Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.")
   @projectedName("json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int32;
+  diskIopsReadWrite?: int64;
 
   @doc("Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.")
-  diskMBpsReadWrite?: int32;
+  diskMBpsReadWrite?: int64;
 
   @doc("Specifies whether data disk should be deleted or detached upon VMSS Flex deletion (This feature is available for VMSS with Flexible OrchestrationMode only).<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when the VMSS Flex VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VMSS Flex VM is deleted.<br><br> The default value is set to **Delete**.")
   deleteOption?: DiskDeleteOptionTypes;
@@ -2028,7 +2028,7 @@ model SubResourceReadOnly {
 @doc("Specifies the billing related details of a Azure Spot VM or VMSS. Minimum api-version: 2019-03-01.")
 model BillingProfile {
   @doc("Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. <br><br> The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: 0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01.")
-  maxPrice?: float32;
+  maxPrice?: float64;
 }
 
 model ScheduledEventsProfile {
@@ -2683,15 +2683,15 @@ model VirtualMachineScaleSetSku {
 model VirtualMachineScaleSetSkuCapacity {
   @doc("The minimum capacity.")
   @visibility("read")
-  minimum?: int32;
+  minimum?: int64;
 
   @doc("The maximum capacity that can be set.")
   @visibility("read")
-  maximum?: int32;
+  maximum?: int64;
 
   @doc("The default capacity.")
   @visibility("read")
-  defaultCapacity?: int32;
+  defaultCapacity?: int64;
 
   @doc("The scale type applicable to the sku.")
   @visibility("read")
@@ -3273,11 +3273,11 @@ model DataDisk {
   @doc("Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.")
   @visibility("read")
   @projectedName("json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int32;
+  diskIopsReadWrite?: int64;
 
   @doc("Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.")
   @visibility("read")
-  diskMBpsReadWrite?: int32;
+  diskMBpsReadWrite?: int64;
 
   @doc("Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach.** detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. **This feature is still in preview** mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.")
   detachOption?: DiskDetachOptionTypes;
@@ -4295,7 +4295,7 @@ model DedicatedHostAllocatableVM {
   vmSize?: string;
 
   @doc("Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.")
-  count?: float32;
+  count?: float64;
 }
 
 @doc("Enables or disables a capability on the dedicated host group. Minimum api-version: 2022-03-01.")
@@ -5046,7 +5046,7 @@ model DiskProperties {
 
   @doc("The size of the disk in bytes. This field is read only.")
   @visibility("read")
-  diskSizeBytes?: int32;
+  diskSizeBytes?: int64;
 
   @doc("Unique Guid identifying the resource.")
   @visibility("read")
@@ -5061,17 +5061,17 @@ model DiskProperties {
 
   @doc("The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.")
   @projectedName("json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int32;
+  diskIopsReadWrite?: int64;
 
   @doc("The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
-  diskMBpsReadWrite?: int32;
+  diskMBpsReadWrite?: int64;
 
   @doc("The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.")
   @projectedName("json", "diskIOPSReadOnly")
-  diskIopsReadOnly?: int32;
+  diskIopsReadOnly?: int64;
 
   @doc("The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
-  diskMBpsReadOnly?: int32;
+  diskMBpsReadOnly?: int64;
 
   @doc("The state of the disk.")
   @visibility("read")
@@ -5185,7 +5185,7 @@ model CreationData {
   sourceUniqueId?: string;
 
   @doc("If createOption is Upload, this is the size of the contents of the upload including the VHD footer. This value should be between 20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32 TiB + 512 bytes for the VHD footer).")
-  uploadSizeBytes?: int32;
+  uploadSizeBytes?: int64;
 
   @doc("Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default.")
   logicalSectorSize?: int32;
@@ -5315,17 +5315,17 @@ model DiskUpdateProperties {
 
   @doc("The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.")
   @projectedName("json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int32;
+  diskIopsReadWrite?: int64;
 
   @doc("The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
-  diskMBpsReadWrite?: int32;
+  diskMBpsReadWrite?: int64;
 
   @doc("The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.")
   @projectedName("json", "diskIOPSReadOnly")
-  diskIopsReadOnly?: int32;
+  diskIopsReadOnly?: int64;
 
   @doc("The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.")
-  diskMBpsReadOnly?: int32;
+  diskMBpsReadOnly?: int64;
 
   @doc("The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.")
   maxShares?: int32;
@@ -5688,7 +5688,7 @@ model SnapshotProperties {
 
   @doc("The size of the disk in bytes. This field is read only.")
   @visibility("read")
-  diskSizeBytes?: int32;
+  diskSizeBytes?: int64;
 
   @doc("The state of the snapshot.")
   @visibility("read")
@@ -5801,15 +5801,15 @@ model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
 model ResourceSkuCapacity {
   @doc("The minimum capacity.")
   @visibility("read")
-  minimum?: int32;
+  minimum?: int64;
 
   @doc("The maximum capacity that can be set.")
   @visibility("read")
-  maximum?: int32;
+  maximum?: int64;
 
   @doc("The default capacity.")
   @visibility("read")
-  default?: int32;
+  default?: int64;
 
   @doc("The scale type applicable to the sku.")
   @visibility("read")
@@ -5869,7 +5869,7 @@ model ResourceSkuCosts {
 
   @doc("The multiplier is needed to extend the base metered cost.")
   @visibility("read")
-  quantity?: int32;
+  quantity?: int64;
 
   @doc("An invariant to show the extended unit.")
   @visibility("read")
@@ -6826,7 +6826,7 @@ model CloudServiceRoleSku {
   tier?: string;
 
   @doc("Specifies the number of role instances in the cloud service.")
-  capacity?: int32;
+  capacity?: int64;
 }
 
 @doc("The cloud service role properties.")

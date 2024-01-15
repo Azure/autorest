@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("// FIXME: (miissing-service-description) Add service description")
+@doc("// FIXME: (missing-service-description) Add service description")
 namespace Microsoft.NetworkAnalytics;
 
 @doc("The available API versions.")

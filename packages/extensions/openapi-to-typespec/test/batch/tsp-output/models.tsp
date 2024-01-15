@@ -924,7 +924,7 @@ a VM size for Compute Nodes in an Azure Batch Pool
   vmSize: string;
 
   @doc("The total core hours used in the Pool during this aggregation interval.")
-  totalCoreHours: float32;
+  totalCoreHours: float64;
 }
 
 @doc("The result of listing the supported Virtual Machine Images.")
@@ -1158,49 +1158,49 @@ to the range between startTime and lastUpdateTime.
 The average CPU usage across all Compute Nodes in the Pool (percentage per
 node).
 """)
-  avgCPUPercentage: float32;
+  avgCPUPercentage: float64;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
-  avgMemoryGiB: float32;
+  avgMemoryGiB: float64;
 
   @doc("The peak memory usage in GiB across all Compute Nodes in the Pool.")
-  peakMemoryGiB: float32;
+  peakMemoryGiB: float64;
 
   @doc("The average used disk space in GiB across all Compute Nodes in the Pool.")
-  avgDiskGiB: float32;
+  avgDiskGiB: float64;
 
   @doc("The peak used disk space in GiB across all Compute Nodes in the Pool.")
-  peakDiskGiB: float32;
+  peakDiskGiB: float64;
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
-  diskReadIOps: int32;
+  diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
-  diskWriteIOps: int32;
+  diskWriteIOps: int64;
 
   @doc("""
 The total amount of data in GiB of disk reads across all Compute Nodes in the
 Pool.
 """)
-  diskReadGiB: float32;
+  diskReadGiB: float64;
 
   @doc("""
 The total amount of data in GiB of disk writes across all Compute Nodes in the
 Pool.
 """)
-  diskWriteGiB: float32;
+  diskWriteGiB: float64;
 
   @doc("""
 The total amount of data in GiB of network reads across all Compute Nodes in
 the Pool.
 """)
-  networkReadGiB: float32;
+  networkReadGiB: float64;
 
   @doc("""
 The total amount of data in GiB of network writes across all Compute Nodes in
 the Pool.
 """)
-  networkWriteGiB: float32;
+  networkWriteGiB: float64;
 }
 
 @doc("Resource usage statistics for a Job.")
@@ -1242,31 +1242,31 @@ includes the wall clock time of all the Task retries.
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in the Job.")
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
-  readIOGiB: float32;
+  readIOGiB: float64;
 
   @doc("The total amount of data in GiB written to disk by all Tasks in the Job.")
-  writeIOGiB: float32;
+  writeIOGiB: float64;
 
   @doc("A Task completes successfully if it returns exit code 0.")
-  numSucceededTasks: int32;
+  numSucceededTasks: int64;
 
   @doc("""
 A Task fails if it exhausts its maximum retry count without returning exit code
 0.
 """)
-  numFailedTasks: int32;
+  numFailedTasks: int64;
 
   @doc("""
 The total number of retries on all the Tasks in the Job during the given time
 range.
 """)
-  numTaskRetries: int32;
+  numTaskRetries: int64;
 
   @doc("""
 The wait time for a Task is defined as the elapsed time between the creation of
@@ -1423,7 +1423,7 @@ model FileProperties {
   lastModified: utcDateTime;
 
   @doc("The length of the file.")
-  contentLength: int32;
+  contentLength: int64;
 
   @doc("The content type of the file.")
   contentType?: string;
@@ -3340,45 +3340,45 @@ includes the wall clock time of all the Task retries.
 The total number of disk read operations made by all Tasks in all Jobs created
 under the schedule.
 """)
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("""
 The total number of disk write operations made by all Tasks in all Jobs created
 under the schedule.
 """)
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("""
 The total gibibytes read from disk by all Tasks in all Jobs created under the
 schedule.
 """)
-  readIOGiB: float32;
+  readIOGiB: float64;
 
   @doc("""
 The total gibibytes written to disk by all Tasks in all Jobs created under the
 schedule.
 """)
-  writeIOGiB: float32;
+  writeIOGiB: float64;
 
   @doc("""
 The total number of Tasks successfully completed during the given time range in
 Jobs created under the schedule. A Task completes successfully if it returns
 exit code 0.
 """)
-  numSucceededTasks: int32;
+  numSucceededTasks: int64;
 
   @doc("""
 The total number of Tasks that failed during the given time range in Jobs
 created under the schedule. A Task fails if it exhausts its maximum retry count
 without returning exit code 0.
 """)
-  numFailedTasks: int32;
+  numFailedTasks: int64;
 
   @doc("""
 The total number of retries during the given time range on all Tasks in all
 Jobs created under the schedule.
 """)
-  numTaskRetries: int32;
+  numTaskRetries: int64;
 
   @doc("""
 This value is only reported in the Account lifetime statistics; it is not
@@ -4898,16 +4898,16 @@ includes the wall clock time of all the Task retries.
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("The total number of disk write operations made by the Task.")
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("The total gibibytes read from disk by the Task.")
-  readIOGiB: float32;
+  readIOGiB: float64;
 
   @doc("The total gibibytes written to disk by the Task.")
-  writeIOGiB: float32;
+  writeIOGiB: float64;
 
   @doc("""
 The total wait time of the Task. The wait time for a Task is defined as the

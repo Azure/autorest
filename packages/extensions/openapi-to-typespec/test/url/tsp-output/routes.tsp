@@ -453,7 +453,7 @@ interface queriesOperations {
     {
       @doc("null 64 bit integer value")
       @query("longQuery")
-      longQuery?: int32;
+      longQuery?: int64;
     },
     void
   >;
@@ -525,7 +525,7 @@ interface queriesOperations {
     {
       @doc("null numeric value")
       @query("doubleQuery")
-      doubleQuery?: float32;
+      doubleQuery?: float64;
     },
     void
   >;

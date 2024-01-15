@@ -10,12 +10,12 @@ using TypeSpec.Http;
 @versioned(Versions)
 @server(
   "{endpoint}",
-  "// FIXME: (miissing-service-description) Add service description",
+  "// FIXME: (missing-service-description) Add service description",
   {
     endpoint: string,
   }
 )
-@doc("// FIXME: (miissing-service-description) Add service description")
+@doc("// FIXME: (missing-service-description) Add service description")
 namespace AzureWebPubSubServiceRESTAPI;
 
 @doc("The available API versions.")

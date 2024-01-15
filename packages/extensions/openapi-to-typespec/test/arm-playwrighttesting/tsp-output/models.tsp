@@ -41,7 +41,7 @@ enum QuotaNames {
 model AccountProperties {
   @doc("The Playwright testing dashboard URI for the account resource.")
   @visibility("read")
-  dashboardUri?: string;
+  dashboardUri?: url;
 
   @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
   regionalAffinity?: EnablementStatus;
@@ -113,7 +113,7 @@ model FreeTrialProperties {
   @doc("The free-trial percentage used.")
   @visibility("read")
   @maxValue(100)
-  percentageUsed: float32;
+  percentageUsed: decimal;
 
   @doc("The free-trial state.")
   @visibility("read")

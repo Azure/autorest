@@ -105,7 +105,7 @@ question.
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
   @maxValue(1)
   @projectedName("json", "confidenceScoreThreshold")
-  confidenceThreshold?: float32;
+  confidenceThreshold?: float64;
 
   @doc("Context object with previous QnA's information.")
   @projectedName("json", "context")
@@ -179,7 +179,7 @@ to 1.
 """)
   @maxValue(1)
   @projectedName("json", "confidenceScoreThreshold")
-  confidenceThreshold?: float32;
+  confidenceThreshold?: float64;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
   @maxValue(10)
@@ -205,7 +205,7 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @maxValue(1)
   @projectedName("json", "confidenceScore")
-  confidence?: float32;
+  confidence?: float64;
 
   @doc("ID of the QnA result.")
   @projectedName("json", "id")
@@ -262,7 +262,7 @@ model AnswerSpan {
   @doc("Predicted score of answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @projectedName("json", "confidenceScore")
-  confidence?: float32;
+  confidence?: float64;
 
   @doc("The answer span offset from the start of answer.")
   offset?: int32;
@@ -371,7 +371,7 @@ model TextAnswer {
   @doc("answer confidence score, value ranges from 0 to 1.")
   @maxValue(1)
   @projectedName("json", "confidenceScore")
-  confidence?: float32;
+  confidence?: float64;
 
   @doc("record ID.")
   id?: string;

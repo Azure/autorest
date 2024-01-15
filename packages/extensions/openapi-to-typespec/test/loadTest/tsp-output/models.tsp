@@ -252,14 +252,14 @@ The aggregation function to be applied on the client metric. Allowed functions
 The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
 """)
-  value?: float32;
+  value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
   action?: PFAction;
 
   @doc("The actual value of the client metric for the test run.")
   @visibility("read")
-  actualValue?: float32;
+  actualValue?: float64;
 
   @doc("Outcome of the test run.")
   @visibility("read")
@@ -615,7 +615,7 @@ SECRET_VALUE.
 
   @doc("Test run duration in milliseconds.")
   @visibility("read")
-  duration?: int32;
+  duration?: int64;
 
   @doc("Subnet ID on which the load test instances should run.")
   @visibility("read")
@@ -655,55 +655,55 @@ model TestRunStatistics {
 
   @doc("Sampler count.")
   @visibility("read")
-  sampleCount?: float32;
+  sampleCount?: float64;
 
   @doc("Error count.")
   @visibility("read")
-  errorCount?: float32;
+  errorCount?: float64;
 
   @doc("Error percentage.")
   @visibility("read")
-  errorPct?: float32;
+  errorPct?: float64;
 
   @doc("Mean response time.")
   @visibility("read")
-  meanResTime?: float32;
+  meanResTime?: float64;
 
   @doc("Median response time.")
   @visibility("read")
-  medianResTime?: float32;
+  medianResTime?: float64;
 
   @doc("Max response time.")
   @visibility("read")
-  maxResTime?: float32;
+  maxResTime?: float64;
 
   @doc("Minimum response time.")
   @visibility("read")
-  minResTime?: float32;
+  minResTime?: float64;
 
   @doc("90 percentile response time.")
   @visibility("read")
-  pct1ResTime?: float32;
+  pct1ResTime?: float64;
 
   @doc("95 percentile response time.")
   @visibility("read")
-  pct2ResTime?: float32;
+  pct2ResTime?: float64;
 
   @doc("99 percentile response time.")
   @visibility("read")
-  pct3ResTime?: float32;
+  pct3ResTime?: float64;
 
   @doc("Throughput.")
   @visibility("read")
-  throughput?: float32;
+  throughput?: float64;
 
   @doc("Received network bytes.")
   @visibility("read")
-  receivedKBytesPerSec?: float32;
+  receivedKBytesPerSec?: float64;
 
   @doc("Send network bytes.")
   @visibility("read")
-  sentKBytesPerSec?: float32;
+  sentKBytesPerSec?: float64;
 }
 
 @doc("Collection of test run artifacts")
@@ -854,7 +854,7 @@ model MetricValue {
   timestamp?: string;
 
   @doc("The metric value.")
-  value?: float32;
+  value?: float64;
 }
 
 @doc("Represents a metric dimension value.")

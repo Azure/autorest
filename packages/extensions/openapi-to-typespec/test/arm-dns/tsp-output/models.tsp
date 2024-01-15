@@ -41,7 +41,7 @@ model RecordSetProperties {
 
   @doc("The TTL (time-to-live) of the records in the record set.")
   @projectedName("json", "TTL")
-  ttlInSeconds?: int32;
+  ttlInSeconds?: int64;
 
   @doc("Fully qualified domain name of the record set.")
   @visibility("read")
@@ -170,23 +170,23 @@ model SoaRecord {
   email?: string;
 
   @doc("The serial number for this SOA record.")
-  serialNumber?: int32;
+  serialNumber?: int64;
 
   @doc("The refresh value for this SOA record.")
   @projectedName("json", "refreshTime")
-  refreshTimeInSeconds?: int32;
+  refreshTimeInSeconds?: int64;
 
   @doc("The retry time for this SOA record.")
   @projectedName("json", "retryTime")
-  retryTimeInSeconds?: int32;
+  retryTimeInSeconds?: int64;
 
   @doc("The expire time for this SOA record.")
   @projectedName("json", "expireTime")
-  expireTimeInSeconds?: int32;
+  expireTimeInSeconds?: int64;
 
   @doc("The minimum value for this SOA record. By convention this is used to determine the negative caching duration.")
   @projectedName("json", "minimumTTL")
-  minimumTtlInSeconds?: int32;
+  minimumTtlInSeconds?: int64;
 }
 
 @doc("A CAA record.")
@@ -228,17 +228,17 @@ model ZoneProperties {
   @doc("The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.")
   @visibility("read")
   @projectedName("json", "maxNumberOfRecordSets")
-  maxNumberOfRecords?: int32;
+  maxNumberOfRecords?: int64;
 
   @doc("The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.")
   @visibility("read")
   @projectedName("json", "maxNumberOfRecordsPerRecordSet")
-  maxNumberOfRecordsPerRecord?: int32;
+  maxNumberOfRecordsPerRecord?: int64;
 
   @doc("The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.")
   @visibility("read")
   @projectedName("json", "numberOfRecordSets")
-  numberOfRecords?: int32;
+  numberOfRecords?: int64;
 
   @doc("The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.")
   @visibility("read")

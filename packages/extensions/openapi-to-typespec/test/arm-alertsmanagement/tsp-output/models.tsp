@@ -483,10 +483,10 @@ model AlertsSummary extends Resource {
 @doc("Group the result set.")
 model AlertsSummaryGroup {
   @doc("Total count of the result set.")
-  total?: int32;
+  total?: int64;
 
   @doc("Total count of the smart groups.")
-  smartGroupsCount?: int32;
+  smartGroupsCount?: int64;
 
   @doc("Name of the field aggregated")
   groupedby?: string;
@@ -501,7 +501,7 @@ model AlertsSummaryGroupItem {
   name?: string;
 
   @doc("Count of the aggregated field")
-  count?: int32;
+  count?: int64;
 
   @doc("Name of the field aggregated")
   groupedby?: string;
@@ -513,7 +513,7 @@ model AlertsSummaryGroupItem {
 @doc("Properties of smart group.")
 model SmartGroupProperties {
   @doc("Total number of alerts in smart group")
-  alertsCount?: int32;
+  alertsCount?: int64;
 
   @doc("Smart group state")
   @visibility("read")
@@ -568,7 +568,7 @@ model SmartGroupAggregatedProperty {
   name?: string;
 
   @doc("Total number of items of type.")
-  count?: int32;
+  count?: int64;
 }
 
 @doc("An error response from the service.")

@@ -1649,11 +1649,11 @@ model Usage {
 
   @doc("The current usage of the resource.")
   @visibility("read")
-  currentValue?: int32;
+  currentValue?: int64;
 
   @doc("The maximum permitted usage of the resource.")
   @visibility("read")
-  limit?: int32;
+  limit?: int64;
 
   @doc("The name of the type of usage.")
   @visibility("read")
@@ -1705,7 +1705,7 @@ model VirtualMachineSize {
 
   @doc("The amount of memory, in GB, supported by the virtual machine size.")
   @visibility("read")
-  memoryGB?: float32;
+  memoryGB?: float64;
 
   @doc("Specifies if the virtual machine size supports low priority VMs.")
   @visibility("read")
@@ -1737,7 +1737,7 @@ model EstimatedVMPrices {
 @doc("The estimated price info for using a VM of a particular OS type, tier, etc.")
 model EstimatedVMPrice {
   @doc("The price charged for using the VM.")
-  retailPrice: float32;
+  retailPrice: float64;
 
   @doc("Operating system type used by the VM.")
   osType: VMPriceOSType;
@@ -1764,7 +1764,7 @@ model QuotaBaseProperties {
   type?: string;
 
   @doc("The maximum permitted quota of the resource.")
-  limit?: int32;
+  limit?: int64;
 
   @doc("An enum describing the unit of quota measurement.")
   unit?: QuotaUnit;
@@ -1792,7 +1792,7 @@ model UpdateWorkspaceQuotas {
   type?: string;
 
   @doc("The maximum permitted quota of the resource.")
-  limit?: int32;
+  limit?: int64;
 
   @doc("An enum describing the unit of quota measurement.")
   @visibility("read")
@@ -1825,7 +1825,7 @@ model ResourceQuota {
 
   @doc("The maximum permitted quota of the resource.")
   @visibility("read")
-  limit?: int32;
+  limit?: int64;
 
   @doc("An enum describing the unit of quota measurement.")
   @visibility("read")
@@ -2202,7 +2202,7 @@ model BlobReferenceForConsumptionDto {
 Blob URI path for client to upload data.
 Example: https://blob.windows.core.net/Container/Path
 """)
-  blobUri?: string;
+  blobUri?: url;
 
   @doc("Credential info to access storage account")
   credential?: PendingUploadCredentialDto;
@@ -2559,11 +2559,11 @@ This property will always be returned as null. AuthKey values must be retrieved 
 
   @doc("Endpoint URI.")
   @visibility("read")
-  scoringUri?: string;
+  scoringUri?: url;
 
   @doc("Endpoint Swagger URI.")
   @visibility("read")
-  swaggerUri?: string;
+  swaggerUri?: url;
 }
 
 @doc("Keys for endpoint authentication.")
@@ -2627,7 +2627,7 @@ Size of the mini-batch passed to each batch invocation.
 For FileDataset, this is the number of files per mini-batch.
 For TabularDataset, this is the size of the records in bytes, per mini-batch.
 """)
-  miniBatchSize?: int32;
+  miniBatchSize?: int64;
 
   @doc("Reference to the model asset for the endpoint deployment.")
   `model`?: AssetReferenceBase;
@@ -3221,7 +3221,7 @@ model MLAssistConfiguration {}
 model ProgressMetrics {
   @doc("The completed datapoint count.")
   @visibility("read")
-  completedDatapointCount?: int32;
+  completedDatapointCount?: int64;
 
   @doc("The time of last successful incremental data refresh in UTC.")
   @visibility("read")
@@ -3230,11 +3230,11 @@ model ProgressMetrics {
 
   @doc("The skipped datapoint count.")
   @visibility("read")
-  skippedDatapointCount?: int32;
+  skippedDatapointCount?: int64;
 
   @doc("The total datapoint count.")
   @visibility("read")
-  totalDatapointCount?: int32;
+  totalDatapointCount?: int64;
 }
 
 @doc("Active message associated with project")
@@ -3266,7 +3266,7 @@ model ExportSummary {
 
   @doc("The total number of labeled datapoints exported.")
   @visibility("read")
-  exportedRowCount?: int32;
+  exportedRowCount?: int64;
 
   @doc("Name and identifier of the job containing exported labels.")
   @visibility("read")
@@ -3373,7 +3373,7 @@ model Collection {
   dataId?: string;
 
   @doc("The sampling rate for collection. Sampling rate 1.0 means we collect 100% of data by default.")
-  samplingRate?: float32;
+  samplingRate?: float64;
 }
 
 model RequestLogging {
@@ -5739,7 +5739,7 @@ model DataDriftMetricThresholdBase {
 model MonitoringThreshold {
   @doc("The threshold value. If null, the set default is dependent on the metric type.")
   @visibility("read", "create")
-  value?: float32;
+  value?: float64;
 }
 
 model CategoricalDataQualityMetricThreshold
@@ -5878,7 +5878,7 @@ model StackEnsembleSettings {
   stackMetaLearnerKWargs?: Record<unknown>;
 
   @doc("Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2.")
-  stackMetaLearnerTrainPercentage?: float32;
+  stackMetaLearnerTrainPercentage?: float64;
 
   @doc("The meta-learner is a model trained on the output of the individual heterogeneous models.")
   stackMetaLearnerType?: StackMetaLearnerType;
@@ -5918,7 +5918,7 @@ The fraction of test dataset that needs to be set aside for validation purpose.
 Values between (0.0 , 1.0)
 Applied when validation dataset is not provided.
 """)
-  testDataSize?: float32;
+  testDataSize?: float64;
 
   @doc("Validation data inputs.")
   validationData?: MLTableJobInput;
@@ -5928,7 +5928,7 @@ The fraction of training dataset that needs to be set aside for validation purpo
 Values between (0.0 , 1.0)
 Applied when validation dataset is not provided.
 """)
-  validationDataSize?: float32;
+  validationDataSize?: float64;
 
   @doc("The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.")
   weightColumnName?: string;
@@ -5986,7 +5986,7 @@ model TableFixedParameters {
   growPolicy?: string;
 
   @doc("The learning rate for the training procedure.")
-  learningRate?: float32;
+  learningRate?: float64;
 
   @doc("Specify the Maximum number of discrete bins to bucket continuous features .")
   maxBin?: int32;
@@ -6001,7 +6001,7 @@ model TableFixedParameters {
   minDataInLeaf?: int32;
 
   @doc("Minimum loss reduction required to make a further partition on a leaf node of the tree.")
-  minSplitGain?: float32;
+  minSplitGain?: float64;
 
   @doc("The name of the model to train.")
   modelName?: string;
@@ -6016,16 +6016,16 @@ model TableFixedParameters {
   preprocessorName?: string;
 
   @doc("L1 regularization term on weights.")
-  regAlpha?: float32;
+  regAlpha?: float64;
 
   @doc("L2 regularization term on weights.")
-  regLambda?: float32;
+  regLambda?: float64;
 
   @doc("Subsample ratio of the training instance.")
-  subsample?: float32;
+  subsample?: float64;
 
   @doc("Frequency of subsample.")
-  subsampleFreq?: float32;
+  subsampleFreq?: float64;
 
   @doc("Specify the tree method.")
   treeMethod?: string;
@@ -6043,7 +6043,7 @@ model TableVerticalLimitSettings {
   enableEarlyTermination?: boolean;
 
   @doc("Exit score for the AutoML job.")
-  exitScore?: float32;
+  exitScore?: float64;
 
   @doc("Maximum Concurrent iterations.")
   maxConcurrentTrials?: int32;
@@ -6828,7 +6828,7 @@ model GenerationSafetyQualityMonitoringSignal extends MonitoringSignalBase {
 
   @doc("[Required] The sample rate of the target data, should be greater than 0 and at most 1.")
   @visibility("read", "create")
-  samplingRate: float32;
+  samplingRate: float64;
 
   @doc("Gets or sets the workspace connection ID used to connect to the content generation endpoint.")
   @visibility("read", "create")
@@ -6864,7 +6864,7 @@ model GenerationTokenStatisticsSignal extends MonitoringSignalBase {
 
   @doc("[Required] The sample rate of the target data, should be greater than 0 and at most 1.")
   @visibility("read", "create")
-  samplingRate: float32;
+  samplingRate: float64;
 
   @doc("[Required] Specifies the type of signal to monitor.")
   signalType: "GenerationTokenStatistics";
@@ -7240,7 +7240,7 @@ The fraction of training dataset that needs to be set aside for validation purpo
 Values between (0.0 , 1.0)
 Applied when validation dataset is not provided.
 """)
-  validationDataSize?: float32;
+  validationDataSize?: float64;
 }
 
 @doc("Limit settings for the AutoML job.")
@@ -8123,7 +8123,7 @@ model RegressionModelPerformanceMetricThreshold
 
 model SASCredentialDto extends PendingUploadCredentialDto {
   @doc("Full SAS Uri, including the storage, container/blob path and SAS token")
-  sasUri?: string;
+  sasUri?: url;
 
   @doc("[Required] Credential type used to authentication with storage.")
   credentialType: "SAS";

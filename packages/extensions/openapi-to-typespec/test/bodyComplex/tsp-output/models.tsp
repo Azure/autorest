@@ -51,8 +51,8 @@ model IntWrapper {
 }
 
 model LongWrapper {
-  field1?: int32;
-  field2?: int32;
+  field1?: int64;
+  field2?: int64;
 }
 
 model FloatWrapper {
@@ -61,13 +61,13 @@ model FloatWrapper {
 }
 
 model DoubleWrapper {
-  field1?: float32;
+  field1?: float64;
 
   @projectedName(
     "json",
     "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
   )
-  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float32;
+  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float64;
 }
 
 model BooleanWrapper {

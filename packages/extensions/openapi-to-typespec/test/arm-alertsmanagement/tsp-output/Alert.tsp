@@ -78,7 +78,7 @@ interface Alerts {
 
       @doc("Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25.")
       @query("pageCount")
-      pageCount?: int32;
+      pageCount?: int64;
 
       @doc("Sort the query results by input field,  Default value is 'lastModifiedDateTime'.")
       @query("sortBy")
