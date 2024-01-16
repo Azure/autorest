@@ -20,7 +20,7 @@ from the beginning of a new document. Maximum allowed size of string list is
 
   @doc("The maximum number of tokens to generate. Has minimum of 0.")
   @projectedName("json", "max_tokens")
-  maxTokens?: int32;
+  maxTokens?: int32 = 16;
 
   @doc("""
 What sampling temperature to use. Higher values means the model will take more
@@ -31,7 +31,7 @@ not both.
 Minimum of 0 and maximum of 2 allowed.
 
 """)
-  temperature?: float32;
+  temperature?: float32 = 1;
 
   @doc("""
 An alternative to sampling with temperature, called nucleus sampling, where the
@@ -44,7 +44,7 @@ Minimum of 0 and maximum of 1 allowed.
 
 """)
   @projectedName("json", "top_p")
-  topP?: float32;
+  topP?: float32 = 1;
 
   @doc("""
 Defaults to null. Modify the likelihood of specified tokens appearing in the
@@ -68,7 +68,7 @@ token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
 How many snippets to generate for each prompt. Minimum of 1 and maximum of 128
 allowed.
 """)
-  n?: int32;
+  n?: int32 = 1;
 
   @doc("""
 Whether to enable streaming for this endpoint. If set, tokens will be sent as
