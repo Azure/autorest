@@ -1594,7 +1594,7 @@ specified, the default value is -1, which means there's no limit to the number
 of tasks that can be run at once. You can update a job's maxParallelTasks after
 it has been created using the update job API.
 """)
-  maxParallelTasks?: int32;
+  maxParallelTasks?: int32 = -1;
 
   @doc("""
 The name need not be unique and can contain any Unicode characters up to a
@@ -3504,7 +3504,7 @@ specified, the default value is -1, which means there's no limit to the number
 of tasks that can be run at once. You can update a job's maxParallelTasks after
 it has been created using the update job API.
 """)
-  maxParallelTasks?: int32;
+  maxParallelTasks?: int32 = -1;
 
   @doc("The execution constraints for a Job.")
   constraints?: JobConstraints;

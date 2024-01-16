@@ -1068,7 +1068,7 @@ when creating the first version of an exportable key.
 @doc("The policy rules under which the key can be exported.")
 model KeyReleasePolicy {
   @doc("Content type and version of key release policy")
-  contentType?: string;
+  contentType?: string = "application/json; charset=utf-8";
 
   @doc("""
 Defines the mutability state of the policy. Once marked immutable, this flag
@@ -1755,7 +1755,7 @@ restore Security Domain
 """)
   @maxValue(10)
   @minValue(2)
-  required?: int32;
+  required?: int32 = 2;
 }
 
 model SecurityDomainJsonWebKey {
@@ -1806,7 +1806,7 @@ model SecurityDomainObject {
 model TransferKey {
   @doc("Specifies the format of the transfer key")
   @projectedName("json", "key_format")
-  keyFormat?: string;
+  keyFormat?: string = "jwk";
 
   @doc("Specifies the transfer key in JWK format")
   @projectedName("json", "transfer_key")

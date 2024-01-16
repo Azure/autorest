@@ -345,7 +345,7 @@ Specifies the method used to interpret string offsets.  Defaults to Text
 Elements (Graphemes) according to Unicode v8.0.0. For additional information
 see https://aka.ms/text-analytics-offsets.
 """)
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 @doc("Represent input text record to be queried.")

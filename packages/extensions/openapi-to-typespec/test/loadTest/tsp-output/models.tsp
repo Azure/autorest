@@ -255,7 +255,7 @@ The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction;
+  action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
   @visibility("read")

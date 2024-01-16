@@ -29,7 +29,7 @@ than uberX in Los Angeles.
   displayName?: string;
 
   @doc("Capacity of product. For example, 4 people.")
-  capacity?: string;
+  capacity?: string = "100";
 
   @doc("Image URL representing the product.")
   image?: string;

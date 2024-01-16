@@ -245,7 +245,7 @@ model ZoneProperties {
   nameServers?: string[];
 
   @doc("The type of this DNS zone (Public or Private).")
-  zoneType?: DnsZoneType;
+  zoneType?: DnsZoneType = DnsZoneType.Public;
 
   @doc("A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private.")
   registrationVirtualNetworks?: SubResource[];

@@ -98,7 +98,7 @@ model AnalysisServicesServerMutableProperties {
   ipV4FirewallSettings?: IPv4FirewallSettings;
 
   @doc("How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.")
-  querypoolConnectionMode?: ConnectionMode;
+  querypoolConnectionMode?: ConnectionMode = ConnectionMode.All;
 
   @doc("The managed mode of the server (0 = not managed, 1 = managed).")
   managedMode?: ManagedMode;
@@ -224,7 +224,7 @@ model CheckServerNameAvailabilityParameters {
   name?: string;
 
   @doc("The resource type of azure analysis services.")
-  type?: string;
+  type?: string = "Microsoft.AnalysisServices/servers";
 }
 
 @doc("The checking result of server name availability.")

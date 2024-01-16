@@ -1039,7 +1039,7 @@ model PolicyContractProperties {
   value: string;
 
   @doc("Format of the policyContent.")
-  format?: PolicyContentFormat;
+  format?: PolicyContentFormat = PolicyContentFormat.xml;
 }
 
 @doc("Tag contract Properties.")
@@ -1688,10 +1688,10 @@ model BackendProxyContract {
 @doc("Properties controlling TLS Certificate Validation.")
 model BackendTlsProperties {
   @doc("Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for this backend host.")
-  validateCertificateChain?: boolean;
+  validateCertificateChain?: boolean = true;
 
   @doc("Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.")
-  validateCertificateName?: boolean;
+  validateCertificateName?: boolean = true;
 }
 
 @doc("Backend update parameters.")
@@ -2075,7 +2075,7 @@ model ApiManagementServiceBackupRestoreParameters {
   backupName: string;
 
   @doc("The type of access to be used for the storage account.")
-  accessType?: AccessType;
+  accessType?: AccessType = AccessType.AccessKey;
 
   @doc("Storage account access key. Required only if `accessType` is set to `AccessKey`.")
   accessKey?: string;
@@ -2175,7 +2175,7 @@ model ApiManagementServiceBaseProperties {
   disableGateway?: boolean;
 
   @doc("The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.")
-  virtualNetworkType?: VirtualNetworkType;
+  virtualNetworkType?: VirtualNetworkType = VirtualNetworkType.None;
 
   @doc("Control Plane Apis version constraint for the API Management service.")
   apiVersionConstraint?: ApiVersionConstraint;
@@ -2775,7 +2775,7 @@ Date of user registration. The date conforms to the following format: `yyyy-MM-d
 @doc("User Entity Base Parameters set.")
 model UserEntityBaseParameters {
   @doc("Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.")
-  state?: UserState;
+  state?: UserState = UserState.active;
 
   @doc("Optional note about a user set by the administrator.")
   note?: string;

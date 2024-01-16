@@ -196,7 +196,7 @@ model AlertProcessingRuleProperties {
   description?: string;
 
   @doc("Indicates if the given alert processing rule is enabled or disabled.")
-  enabled?: boolean;
+  enabled?: boolean = true;
 }
 
 @doc("Condition to trigger an alert processing rule.")

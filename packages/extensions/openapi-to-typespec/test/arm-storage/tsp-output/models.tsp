@@ -735,7 +735,7 @@ model SasPolicy {
   sasExpirationPeriod: string;
 
   @doc("The SAS expiration action. Can only be Log.")
-  expirationAction: ExpirationAction;
+  expirationAction: ExpirationAction = ExpirationAction.Log;
 }
 
 @doc("KeyPolicy assigned to the storage account.")
@@ -759,7 +759,7 @@ model Encryption {
   services?: EncryptionServices;
 
   @doc("The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault")
-  keySource?: KeySource;
+  keySource?: KeySource = KeySource.Microsoft.Storage;
 
   @doc("A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest.")
   requireInfrastructureEncryption?: boolean;
@@ -846,7 +846,7 @@ model EncryptionIdentity {
 @doc("Network rule set")
 model NetworkRuleSet {
   @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
-  bypass?: Bypass;
+  bypass?: Bypass = Bypass.AzureServices;
 
   @doc("Sets the resource access rules")
   resourceAccessRules?: ResourceAccessRule[];
@@ -858,7 +858,7 @@ model NetworkRuleSet {
   ipRules?: IPRule[];
 
   @doc("Specifies the default action of allow or deny when no other rules match.")
-  defaultAction: DefaultAction;
+  defaultAction: DefaultAction = DefaultAction.Allow;
 }
 
 @doc("Resource Access Rule.")

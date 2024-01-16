@@ -142,6 +142,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     type: getTypespecType(propertySchema.schema, codeModel),
     decorators: getPropertyDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
+    defaultValue: getDefaultValue(propertySchema.schema),
   };
 }
 

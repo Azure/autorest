@@ -10,7 +10,7 @@ export function transformValue(value: string | number | boolean) {
 }
 
 export function transformDefaultValue(type: string, value: string | number | boolean) {
-  if (type === "string" || type === "int32" || type === "boolean") {
+  if (["string", "int32", "int64", "float32", "float64", "boolean"].includes(type)) {
     return transformValue(value);
   } else {
     return `${type}.${value}`;

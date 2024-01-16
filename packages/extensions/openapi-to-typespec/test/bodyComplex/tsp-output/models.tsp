@@ -218,7 +218,7 @@ model Goblinshark extends Shark {
   jawsize?: int32;
 
   @doc("Colors possible")
-  color?: GoblinSharkColor;
+  color?: GoblinSharkColor = GoblinSharkColor.gray;
 
   fishtype: "goblin";
 }
