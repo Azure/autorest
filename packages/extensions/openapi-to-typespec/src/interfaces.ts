@@ -63,6 +63,23 @@ export interface TypespecResource {
   response: TypespecDataType;
 }
 
+export interface AadOauth2AuthFlow {
+  kind: "AadOauth2Auth";
+  scopes: string[];
+}
+
+export interface AadTokenAuthFlow {
+  kind: "AadTokenAuthFlow";
+  scopes: string[];
+}
+
+export interface AzureApiKeyAuthentication {
+  kind: "AzureApiKeyAuthentication";
+}
+
+export type Auth = AzureApiKeyAuthentication | AadOauth2AuthFlow | AadTokenAuthFlow;
+
+
 export interface ServiceInformation extends WithDoc {
   name: string;
   versions?: string[];
@@ -70,6 +87,7 @@ export interface ServiceInformation extends WithDoc {
   endpointParameters?: EndpointParameter[];
   produces?: string[];
   consumes?: string[];
+  authentication?: Auth[];
   armCommonTypeVersion?: string;
 }
 

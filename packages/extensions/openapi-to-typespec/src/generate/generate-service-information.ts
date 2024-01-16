@@ -1,4 +1,4 @@
-import { TypespecProgram, EndpointParameter } from "../interfaces";
+import { TypespecProgram, EndpointParameter, Auth } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespace } from "../utils/namespace";
@@ -13,6 +13,7 @@ export function generateServiceInformation(program: TypespecProgram) {
     definitions.push(`@armProviderNamespace`);
   }
 
+  serviceInformation.authentication?.map((auth) => generateUseAuth(auth, definitions));
   definitions.push(`@service({
     title: "${serviceInformation.name}"
   })`);
@@ -90,4 +91,18 @@ function getEndpointParameters(endpoint: string) {
   }
 
   return params;
+}
+
+function generateUseAuth(auth: Auth | undefined, statements: string[]): void {
+  if(!auth) {
+    return;
+  }
+  if(auth.kind === "AadOauth2Auth") {
+    const scopes = `[${auth.scopes.map(s => `"${s}"`).join()}]`
+    statements.push(`@useAuth(AadOauth2Auth<${scopes}>)`);
+  }
+
+  // TODO: Add support for other AAD auth types
+
+  return;
 }

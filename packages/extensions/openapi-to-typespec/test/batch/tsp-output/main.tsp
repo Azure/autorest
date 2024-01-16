@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
     title: "Azure Batch Service"
   })

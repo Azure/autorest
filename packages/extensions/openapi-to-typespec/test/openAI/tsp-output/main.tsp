@@ -7,6 +7,7 @@ using TypeSpec.Http;
 /**
  * Azure OpenAI APIs for completions and search
  */
+@useAuth(AadOauth2Auth<["api.read"]>)
 @service({
   title: "OpenAI",
 })
