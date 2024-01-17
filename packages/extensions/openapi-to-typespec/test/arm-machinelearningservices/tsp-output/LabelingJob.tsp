@@ -46,7 +46,9 @@ interface LabelingJobs {
   @doc("Delete a labeling job.")
   delete is ArmResourceDeleteSync<LabelingJob>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists labeling jobs in the workspace.")
+  @operationId("LabelingJobs_List")
   list is ArmResourceListByParent<
     LabelingJob,
     {

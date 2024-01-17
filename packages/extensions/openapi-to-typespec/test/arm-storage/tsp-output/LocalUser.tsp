@@ -35,7 +35,9 @@ interface LocalUsers {
   @doc("Deletes the local user associated with the specified storage account.")
   delete is ArmResourceDeleteSync<LocalUser>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List the local users associated with the storage account.")
+  @operationId("LocalUsers_List")
   list is ArmResourceListByParent<LocalUser>;
 
   @doc("List SSH authorized keys and shared key of the local user.")

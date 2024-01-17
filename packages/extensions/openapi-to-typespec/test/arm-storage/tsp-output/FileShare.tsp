@@ -55,6 +55,7 @@ interface FileShares {
   >;
 
   @doc("Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<FileShare, FileShare>;
 
   @doc("Deletes specified share under its account.")
@@ -73,7 +74,9 @@ interface FileShares {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all shares.")
+  @operationId("FileShares_List")
   list is ArmResourceListByParent<
     FileShare,
     {

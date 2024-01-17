@@ -27,7 +27,9 @@ interface BusinessProcessVersions {
   @doc("Get a BusinessProcessVersion")
   get is ArmResourceRead<BusinessProcessVersion>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List BusinessProcessVersion resources by BusinessProcess")
+  @operationId("BusinessProcessVersions_ListByBusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     {

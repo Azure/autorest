@@ -41,7 +41,9 @@ interface Images {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Image resources by Catalog")
+  @operationId("Images_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Image,
     {

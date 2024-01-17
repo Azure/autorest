@@ -27,6 +27,8 @@ interface PrivateLinkResources {
   @doc("Get Private link resource object.")
   get is ArmResourceRead<PrivateLinkResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get list of Private link resources.")
+  @operationId("PrivateLinkResources_ListByResource")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }

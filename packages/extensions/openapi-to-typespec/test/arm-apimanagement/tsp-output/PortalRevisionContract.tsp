@@ -54,6 +54,7 @@ interface PortalRevisionContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the description of specified portal revision or makes it current.")
+  @parameterVisibility("read")
   @operationId("PortalRevision_Update")
   update is ArmCustomPatchAsync<
     PortalRevisionContract,

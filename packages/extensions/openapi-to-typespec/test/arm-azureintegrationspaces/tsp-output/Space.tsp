@@ -30,12 +30,15 @@ interface Spaces {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
 
   @doc("Update a Space")
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<Space, SpaceUpdate>;
 
   @doc("Delete a Space")
   delete is ArmResourceDeleteSync<Space>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Space resources by resource group")
+  @operationId("Spaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Space,
     {

@@ -31,12 +31,15 @@ interface GalleryApplications {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplication>;
 
   @doc("Update a gallery Application Definition.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
 
   @doc("Delete a gallery Application.")
   delete is ArmResourceDeleteAsync<GalleryApplication>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List gallery Application Definitions in a gallery.")
+  @operationId("GalleryApplications_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
 

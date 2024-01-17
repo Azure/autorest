@@ -38,6 +38,7 @@ interface DataProducts {
   >;
 
   @doc("Update data product resource.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     DataProduct,
     DataProductUpdate,
@@ -52,7 +53,9 @@ interface DataProducts {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List data products by resource group.")
+  @operationId("DataProducts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DataProduct>;
 
   @doc("List data products by subscription.")

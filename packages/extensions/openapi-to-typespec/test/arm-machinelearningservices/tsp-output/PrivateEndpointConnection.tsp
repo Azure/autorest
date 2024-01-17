@@ -40,7 +40,9 @@ This method must validate and forward the call to NRP.
   @doc("Called by end-users to delete a PE connection.")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Called by end-users to get all PE connections.")
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

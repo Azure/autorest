@@ -37,7 +37,9 @@ interface FeaturesetContainers {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List featurestore entity containers.")
+  @operationId("FeaturesetContainers_List")
   list is ArmResourceListByParent<
     FeaturesetContainer,
     {

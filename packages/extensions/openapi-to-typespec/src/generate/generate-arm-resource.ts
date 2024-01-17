@@ -71,7 +71,8 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     decorators && definitions.push(decorators);
     if (
       operation.operationId &&
-      operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
+      (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name) ||
+        operation.kind === "ArmResourceListByParent")
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
       definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);

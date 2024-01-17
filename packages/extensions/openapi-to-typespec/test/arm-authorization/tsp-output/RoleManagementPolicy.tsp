@@ -27,9 +27,12 @@ interface RoleManagementPolicies {
   get is ArmResourceRead<RoleManagementPolicy>;
 
   @doc("Update a role management policy")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<RoleManagementPolicy, RoleManagementPolicy>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role management policies for a resource scope.")
+  @operationId("RoleManagementPolicies_ListForScope")
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }
 

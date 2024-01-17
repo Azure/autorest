@@ -36,6 +36,7 @@ interface Devices {
   >;
 
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     Device,
     DeviceUpdate,
@@ -50,7 +51,9 @@ interface Devices {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @operationId("Devices_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<Device>;
 
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")

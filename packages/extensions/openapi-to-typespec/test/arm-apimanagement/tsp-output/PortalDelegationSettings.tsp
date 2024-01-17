@@ -57,6 +57,7 @@ interface PortalDelegationSettingsOperationGroup {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Delegation settings.")
+  @parameterVisibility("read")
   @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,

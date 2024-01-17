@@ -57,6 +57,7 @@ interface AccessInformationContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update tenant access information details.")
+  @parameterVisibility("read")
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,

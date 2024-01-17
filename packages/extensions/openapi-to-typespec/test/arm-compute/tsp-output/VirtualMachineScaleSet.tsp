@@ -62,6 +62,7 @@ interface VirtualMachineScaleSets {
   >;
 
   @doc("Update a VM scale set.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,
@@ -90,7 +91,9 @@ interface VirtualMachineScaleSets {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of all VM scale sets under a resource group.")
+  @operationId("VirtualMachineScaleSets_List")
   list is ArmResourceListByParent<VirtualMachineScaleSet>;
 
   @doc("Gets all the VM scale sets under the specified subscription for the specified location.")

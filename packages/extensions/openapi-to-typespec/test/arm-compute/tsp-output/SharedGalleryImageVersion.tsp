@@ -28,7 +28,9 @@ interface SharedGalleryImageVersions {
   @doc("Get a shared gallery image version by subscription id or tenant id.")
   get is ArmResourceRead<SharedGalleryImageVersion>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List shared gallery image versions by subscription id or tenant id.")
+  @operationId("SharedGalleryImageVersions_List")
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
     {

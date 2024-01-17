@@ -27,6 +27,8 @@ interface CommunityGalleryImages {
   @doc("Get a community gallery image.")
   get is ArmResourceRead<CommunityGalleryImage>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List community gallery images inside a gallery.")
+  @operationId("CommunityGalleryImages_List")
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }

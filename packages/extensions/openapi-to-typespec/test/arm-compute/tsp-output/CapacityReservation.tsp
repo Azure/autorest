@@ -45,12 +45,15 @@ interface CapacityReservations {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CapacityReservation>;
 
   @doc("The operation to update a capacity reservation.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<CapacityReservation, CapacityReservationUpdate>;
 
   @doc("The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.")
   delete is ArmResourceDeleteAsync<CapacityReservation>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.")
+  @operationId("CapacityReservations_ListByCapacityReservationGroup")
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 

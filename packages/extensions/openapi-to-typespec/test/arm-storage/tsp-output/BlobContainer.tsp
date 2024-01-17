@@ -33,12 +33,15 @@ interface BlobContainers {
   create is ArmResourceCreateOrReplaceSync<BlobContainer>;
 
   @doc("Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. ")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
 
   @doc("Deletes specified container under its account.")
   delete is ArmResourceDeleteSync<BlobContainer>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.")
+  @operationId("BlobContainers_List")
   list is ArmResourceListByParent<
     BlobContainer,
     {

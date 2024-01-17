@@ -59,6 +59,7 @@ interface DiagnosticContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the Diagnostic for an API specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,

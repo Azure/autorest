@@ -59,6 +59,7 @@ interface NamedValueContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specific named value.")
+  @parameterVisibility("read")
   @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,

@@ -37,7 +37,9 @@ interface Schedules {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List schedules in specified workspace.")
+  @operationId("Schedules_List")
   list is ArmResourceListByParent<
     Schedule,
     {

@@ -32,12 +32,15 @@ interface BusinessProcesses {
   createOrUpdate is ArmResourceCreateOrReplaceSync<BusinessProcess>;
 
   @doc("Update a BusinessProcess")
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<BusinessProcess, BusinessProcessUpdate>;
 
   @doc("Delete a BusinessProcess")
   delete is ArmResourceDeleteSync<BusinessProcess>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List BusinessProcess resources by Application")
+  @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {

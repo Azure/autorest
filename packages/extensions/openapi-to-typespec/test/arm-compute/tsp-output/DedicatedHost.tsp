@@ -42,12 +42,15 @@ interface DedicatedHosts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DedicatedHost>;
 
   @doc("Update a dedicated host .")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
 
   @doc("Delete a dedicated host.")
   delete is ArmResourceDeleteAsync<DedicatedHost>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.")
+  @operationId("DedicatedHosts_ListByHostGroup")
   listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
   @doc("Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.")

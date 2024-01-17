@@ -26,6 +26,8 @@ interface VirtualMachineExtensionImages {
   @doc("Gets a virtual machine extension image.")
   get is ArmResourceRead<VirtualMachineExtensionImage>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of virtual machine extension image types.")
+  @operationId("VirtualMachineExtensionImages_ListTypes")
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }

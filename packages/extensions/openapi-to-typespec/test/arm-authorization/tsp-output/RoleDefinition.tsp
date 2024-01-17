@@ -31,7 +31,9 @@ interface RoleDefinitions {
   @doc("Deletes a role definition.")
   delete is ArmResourceDeleteSync<RoleDefinition>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get all role definitions that are applicable at scope and above.")
+  @operationId("RoleDefinitions_List")
   list is ArmResourceListByParent<
     RoleDefinition,
     {

@@ -35,7 +35,9 @@ interface Extensions {
   @doc("Uninstall extension.")
   delete is ArmResourceDeleteSync<Extension>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get installed extensions details.")
+  @operationId("Extensions_ListByDataManagerForAgriculture")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     {

@@ -40,6 +40,7 @@ interface OnlineEndpointTrackedResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Endpoint (asynchronous).")
+  @parameterVisibility("read")
   @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,

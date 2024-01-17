@@ -40,6 +40,7 @@ interface BatchEndpointTrackedResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a batch inference endpoint (asynchronous).")
+  @parameterVisibility("read")
   @operationId("BatchEndpoints_Update")
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,

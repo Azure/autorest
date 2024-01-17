@@ -26,7 +26,9 @@ interface RoleAssignmentSchedules {
   @doc("Get the specified role assignment schedule for a resource scope")
   get is ArmResourceRead<RoleAssignmentSchedule>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role assignment schedules for a resource scope.")
+  @operationId("RoleAssignmentSchedules_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignmentSchedule,
     {

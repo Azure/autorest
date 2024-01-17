@@ -29,7 +29,9 @@ interface RoleEligibilityScheduleRequests {
   @doc("Creates a role eligibility schedule request.")
   create is ArmResourceCreateOrReplaceSync<RoleEligibilityScheduleRequest>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role eligibility schedule requests for a scope.")
+  @operationId("RoleEligibilityScheduleRequests_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleEligibilityScheduleRequest,
     {

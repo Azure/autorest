@@ -35,7 +35,9 @@ interface ObjectReplicationPolicies {
   @doc("Deletes the object replication policy associated with the specified storage account.")
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List the object replication policies associated with the storage account.")
+  @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
 

@@ -25,7 +25,9 @@ interface DenyAssignments {
   @doc("Get the specified deny assignment.")
   get is ArmResourceRead<DenyAssignment>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets deny assignments for a resource.")
+  @operationId("DenyAssignments_ListForResource")
   listForResource is ArmResourceListByParent<
     DenyAssignment,
     {

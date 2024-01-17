@@ -26,7 +26,9 @@ interface RoleEligibilitySchedules {
   @doc("Get the specified role eligibility schedule for a resource scope")
   get is ArmResourceRead<RoleEligibilitySchedule>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role eligibility schedules for a resource scope.")
+  @operationId("RoleEligibilitySchedules_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleEligibilitySchedule,
     {

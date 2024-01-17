@@ -31,12 +31,15 @@ interface AvailabilitySets {
   createOrUpdate is ArmResourceCreateOrReplaceSync<AvailabilitySet>;
 
   @doc("Update an availability set.")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
 
   @doc("Delete an availability set.")
   delete is ArmResourceDeleteSync<AvailabilitySet>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all availability sets in a resource group.")
+  @operationId("AvailabilitySets_List")
   list is ArmResourceListByParent<AvailabilitySet>;
 
   @doc("Lists all availability sets in a subscription.")

@@ -41,7 +41,9 @@ interface Deployments {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @operationId("Deployments_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {

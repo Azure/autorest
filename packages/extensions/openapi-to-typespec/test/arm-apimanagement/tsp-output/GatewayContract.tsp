@@ -58,6 +58,7 @@ interface GatewayContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the gateway specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("Gateway_Update")
   update is ArmCustomPatchSync<
     GatewayContract,

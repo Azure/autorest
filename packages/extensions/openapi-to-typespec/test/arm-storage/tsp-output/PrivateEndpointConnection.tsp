@@ -34,7 +34,9 @@ interface PrivateEndpointConnections {
   @doc("Deletes the specified private endpoint connection associated with the storage account.")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all the private endpoint connections associated with the storage account.")
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

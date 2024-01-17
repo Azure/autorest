@@ -36,6 +36,7 @@ interface JobBaseResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a Job.")
+  @parameterVisibility("read")
   @operationId("Jobs_Update")
   update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
 

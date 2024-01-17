@@ -65,6 +65,7 @@ interface IssueContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing issue for an API.")
+  @parameterVisibility("read")
   @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,

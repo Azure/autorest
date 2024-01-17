@@ -41,12 +41,15 @@ interface Images {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
   @doc("Update an image.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Image, ImageUpdate>;
 
   @doc("Deletes an Image.")
   delete is ArmResourceDeleteAsync<Image>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
+  @operationId("Images_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Image>;
 
   @doc("Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")

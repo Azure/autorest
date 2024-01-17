@@ -38,7 +38,9 @@ interface FeaturestoreEntityVersions {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List versions.")
+  @operationId("FeaturestoreEntityVersions_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     {

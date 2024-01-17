@@ -40,6 +40,7 @@ interface BatchDeploymentTrackedResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a batch inference deployment (asynchronous).")
+  @parameterVisibility("read")
   @operationId("BatchDeployments_Update")
   update is ArmCustomPatchAsync<
     BatchDeploymentTrackedResource,

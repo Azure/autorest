@@ -32,7 +32,9 @@ interface BlobInventoryPolicies {
   @doc("Deletes the blob inventory policy associated with the specified storage account.")
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the blob inventory policy associated with the specified storage account.")
+  @operationId("BlobInventoryPolicies_List")
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }
 

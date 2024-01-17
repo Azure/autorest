@@ -56,6 +56,7 @@ interface EmailTemplateContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates API Management email template")
+  @parameterVisibility("read")
   @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,

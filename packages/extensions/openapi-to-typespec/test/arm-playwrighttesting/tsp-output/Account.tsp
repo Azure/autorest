@@ -36,6 +36,7 @@ interface Accounts {
   >;
 
   @doc("Update a Account")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Account, AccountUpdate>;
 
   @doc("Delete a Account")
@@ -45,7 +46,9 @@ interface Accounts {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Account resources by resource group")
+  @operationId("Accounts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Account>;
 
   @doc("List Account resources by subscription ID")

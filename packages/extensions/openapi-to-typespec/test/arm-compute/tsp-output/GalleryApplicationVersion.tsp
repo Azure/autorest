@@ -41,6 +41,7 @@ interface GalleryApplicationVersions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplicationVersion>;
 
   @doc("Update a gallery Application Version.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     GalleryApplicationVersionUpdate
@@ -49,7 +50,9 @@ interface GalleryApplicationVersions {
   @doc("Delete a gallery Application Version.")
   delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List gallery Application Versions in a gallery Application Definition.")
+  @operationId("GalleryApplicationVersions_ListByGalleryApplication")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
 

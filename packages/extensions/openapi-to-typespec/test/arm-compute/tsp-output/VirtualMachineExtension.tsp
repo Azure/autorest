@@ -41,6 +41,7 @@ interface VirtualMachineExtensions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineExtension>;
 
   @doc("The operation to update the extension.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate
@@ -49,7 +50,9 @@ interface VirtualMachineExtensions {
   @doc("The operation to delete the extension.")
   delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to get all extensions of a Virtual Machine.")
+  @operationId("VirtualMachineExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineExtension,
     {

@@ -34,6 +34,7 @@ interface SshPublicKeyResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a new SSH public key resource.")
+  @parameterVisibility("read")
   @operationId("SshPublicKeys_Update")
   update is ArmCustomPatchSync<
     SshPublicKeyResource,

@@ -58,6 +58,7 @@ interface ProductContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update existing product details.")
+  @parameterVisibility("read")
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,

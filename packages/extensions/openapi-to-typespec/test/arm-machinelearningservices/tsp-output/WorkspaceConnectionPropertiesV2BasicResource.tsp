@@ -38,6 +38,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update machine learning workspaces connections under the specified workspace.")
+  @parameterVisibility("read")
   @operationId("WorkspaceConnections_Update")
   update is ArmCustomPatchSync<
     WorkspaceConnectionPropertiesV2BasicResource,

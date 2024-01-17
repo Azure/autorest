@@ -40,6 +40,7 @@ interface OnlineDeploymentTrackedResources {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Online Deployment (asynchronous).")
+  @parameterVisibility("read")
   @operationId("OnlineDeployments_Update")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,

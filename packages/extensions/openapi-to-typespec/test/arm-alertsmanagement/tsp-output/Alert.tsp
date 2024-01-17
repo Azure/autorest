@@ -26,7 +26,9 @@ interface Alerts {
   @doc("Get information related to a specific alert")
   getById is ArmResourceRead<Alert>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ")
+  @operationId("Alerts_GetAll")
   getAll is ArmResourceListByParent<
     Alert,
     {

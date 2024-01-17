@@ -54,6 +54,7 @@ interface VirtualMachineScaleSetExtensions {
   >;
 
   @doc("The operation to update an extension.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
@@ -78,7 +79,9 @@ interface VirtualMachineScaleSetExtensions {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of all extensions in a VM scale set.")
+  @operationId("VirtualMachineScaleSetExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetExtension,
     {

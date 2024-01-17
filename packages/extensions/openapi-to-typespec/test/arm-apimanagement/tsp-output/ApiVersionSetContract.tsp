@@ -59,6 +59,7 @@ interface ApiVersionSetContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the Api VersionSet specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,

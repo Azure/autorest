@@ -29,12 +29,15 @@ interface AlertProcessingRules {
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertProcessingRule>;
 
   @doc("Enable, disable, or update tags for an alert processing rule.")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<AlertProcessingRule, PatchObject>;
 
   @doc("Delete an alert processing rule.")
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all alert processing rules in a resource group.")
+  @operationId("AlertProcessingRules_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AlertProcessingRule>;
 
   @doc("List all alert processing rules in a subscription.")

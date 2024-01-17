@@ -26,6 +26,8 @@ interface Quotas {
   @doc("Get quota by name.")
   get is ArmResourceRead<Quota>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List quotas for a given subscription Id.")
+  @operationId("Quotas_ListBySubscription")
   listBySubscription is ArmResourceListByParent<Quota>;
 }

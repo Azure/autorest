@@ -38,7 +38,9 @@ interface PrivateEndpointConnections {
     ArmAsyncOperationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get list of Private endpoint connections.")
+  @operationId("PrivateEndpointConnections_ListByResource")
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

@@ -57,6 +57,7 @@ interface IdentityProviderContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing IdentityProvider configuration.")
+  @parameterVisibility("read")
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,

@@ -38,6 +38,7 @@ interface AnalysisServicesServers {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the current state of the specified Analysis Services server.")
+  @parameterVisibility("read")
   @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,

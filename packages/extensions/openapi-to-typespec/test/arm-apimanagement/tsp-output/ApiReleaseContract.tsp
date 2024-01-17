@@ -59,6 +59,7 @@ interface ApiReleaseContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the release of the API specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,

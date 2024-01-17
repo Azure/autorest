@@ -36,6 +36,7 @@ interface Products {
   >;
 
   @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     Product,
     ProductUpdate,
@@ -50,7 +51,9 @@ interface Products {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Product resources by Catalog")
+  @operationId("Products_ListByCatalog")
   listByCatalog is ArmResourceListByParent<Product>;
 
   @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")

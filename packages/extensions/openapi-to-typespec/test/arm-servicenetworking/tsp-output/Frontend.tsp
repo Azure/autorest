@@ -41,6 +41,7 @@ interface Frontends {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a Frontend")
+  @parameterVisibility("read")
   @operationId("FrontendsInterface_Update")
   update is ArmCustomPatchSync<Frontend, FrontendUpdate>;
 

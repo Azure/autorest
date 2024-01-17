@@ -39,6 +39,7 @@ interface TrafficControllers {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a TrafficController")
+  @parameterVisibility("read")
   @operationId("TrafficControllerInterface_Update")
   update is ArmCustomPatchSync<TrafficController, TrafficControllerUpdate>;
 

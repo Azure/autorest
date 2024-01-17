@@ -51,6 +51,7 @@ interface VirtualMachines {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachine>;
 
   @doc("The operation to update a virtual machine.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;
 
   @doc("The operation to delete a virtual machine.")
@@ -65,7 +66,9 @@ interface VirtualMachines {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.")
+  @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
     {

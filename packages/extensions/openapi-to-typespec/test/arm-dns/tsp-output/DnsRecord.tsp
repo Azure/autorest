@@ -65,6 +65,7 @@ interface DnsRecords {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a record set within a DNS zone.")
+  @parameterVisibility("read")
   @operationId("RecordSets_Update")
   update is ArmCustomPatchSync<
     DnsRecord,

@@ -28,6 +28,8 @@ interface CommunityGalleryImageVersions {
   @doc("Get a community gallery image version.")
   get is ArmResourceRead<CommunityGalleryImageVersion>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List community gallery image versions inside an image.")
+  @operationId("CommunityGalleryImageVersions_List")
   list is ArmResourceListByParent<CommunityGalleryImageVersion>;
 }

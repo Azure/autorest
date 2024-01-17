@@ -359,6 +359,8 @@ function convertResourceUpdateOperation(
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
           augmentedDecorators,
+          // To resolve auto-generate update model with proper visibility
+          decorators: [{ name: "parameterVisibility", arguments: ["read"] }],
         },
       ];
     }

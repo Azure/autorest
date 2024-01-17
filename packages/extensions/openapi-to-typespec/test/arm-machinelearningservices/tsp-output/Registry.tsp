@@ -38,6 +38,7 @@ interface Registries {
   >;
 
   @doc("Update tags")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
 
   @doc("Delete registry")
@@ -47,7 +48,9 @@ interface Registries {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List registries")
+  @operationId("Registries_List")
   list is ArmResourceListByParent<Registry>;
 
   @doc("List registries by subscription")

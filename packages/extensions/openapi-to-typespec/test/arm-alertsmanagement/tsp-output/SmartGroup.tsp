@@ -26,7 +26,9 @@ interface SmartGroups {
   @doc("Get information related to a specific Smart Group.")
   getById is ArmResourceRead<SmartGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all the Smart Groups within a specified subscription. ")
+  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
     {

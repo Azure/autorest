@@ -27,7 +27,9 @@ interface Certificates {
   @doc("Get a Certificate")
   get is ArmResourceRead<Certificate>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Certificate resources by Catalog")
+  @operationId("Certificates_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {

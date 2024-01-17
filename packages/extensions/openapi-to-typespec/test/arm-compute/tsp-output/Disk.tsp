@@ -42,12 +42,15 @@ interface Disks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Disk>;
 
   @doc("Updates (patches) a disk.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Disk, DiskUpdate>;
 
   @doc("Deletes a disk.")
   delete is ArmResourceDeleteAsync<Disk>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the disks under a resource group.")
+  @operationId("Disks_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Disk>;
 
   @doc("Lists all the disks under a subscription.")

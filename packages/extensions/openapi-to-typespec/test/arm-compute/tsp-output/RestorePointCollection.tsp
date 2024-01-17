@@ -52,6 +52,7 @@ interface RestorePointCollections {
   >;
 
   @doc("The operation to update the restore point collection.")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<
     RestorePointCollection,
     RestorePointCollectionUpdate,
@@ -76,7 +77,9 @@ interface RestorePointCollections {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets the list of restore point collections in a resource group.")
+  @operationId("RestorePointCollections_List")
   list is ArmResourceListByParent<RestorePointCollection>;
 
   @doc("Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.")

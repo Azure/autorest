@@ -39,6 +39,7 @@ interface StorageQueues {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new queue with the specified queue name, under the specified account.")
+  @parameterVisibility("read")
   @operationId("Queue_Update")
   update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
 

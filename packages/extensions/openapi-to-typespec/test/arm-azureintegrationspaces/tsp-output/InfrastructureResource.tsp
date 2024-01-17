@@ -33,6 +33,7 @@ interface InfrastructureResources {
   createOrUpdate is ArmResourceCreateOrReplaceSync<InfrastructureResource>;
 
   @doc("Update a InfrastructureResource")
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<
     InfrastructureResource,
     InfrastructureResourceUpdate
@@ -41,7 +42,9 @@ interface InfrastructureResources {
   @doc("Delete a InfrastructureResource")
   delete is ArmResourceDeleteSync<InfrastructureResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List InfrastructureResource resources by Space")
+  @operationId("InfrastructureResources_ListBySpace")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     {

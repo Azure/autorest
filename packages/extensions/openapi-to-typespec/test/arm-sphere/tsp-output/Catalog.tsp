@@ -34,6 +34,7 @@ interface Catalogs {
   >;
 
   @doc("Update a Catalog")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   @doc("Delete a Catalog")
@@ -43,7 +44,9 @@ interface Catalogs {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Catalog resources by resource group")
+  @operationId("Catalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
 
   @doc("List Catalog resources by subscription ID")

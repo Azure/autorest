@@ -59,6 +59,7 @@ interface UserContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the user specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,

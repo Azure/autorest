@@ -36,7 +36,9 @@ interface Solutions {
   @doc("Uninstall Solution.")
   delete is ArmResourceDeleteSync<Solution>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get installed Solutions details.")
+  @operationId("Solutions_List")
   list is ArmResourceListByParent<
     Solution,
     {

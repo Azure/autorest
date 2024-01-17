@@ -65,6 +65,7 @@ interface OpenidConnectProviderContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specific OpenID Connect Provider.")
+  @parameterVisibility("read")
   @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,

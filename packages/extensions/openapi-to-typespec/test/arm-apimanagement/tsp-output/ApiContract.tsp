@@ -57,6 +57,7 @@ interface ApiContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the specified API of the API Management service instance.")
+  @parameterVisibility("read")
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,

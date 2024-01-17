@@ -38,6 +38,7 @@ interface DataTypes {
   >;
 
   @doc("Update data type resource.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     DataType,
     DataTypeUpdate,
@@ -52,7 +53,9 @@ interface DataTypes {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List data type by parent resource.")
+  @operationId("DataTypes_ListByDataProduct")
   listByDataProduct is ArmResourceListByParent<DataType>;
 
   @doc("Delete data for data type.")

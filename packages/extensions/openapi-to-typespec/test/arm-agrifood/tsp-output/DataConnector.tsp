@@ -37,7 +37,9 @@ interface DataConnectors {
   @doc("Delete a Data Connectors with given dataConnector name.")
   delete is ArmResourceDeleteSync<DataConnector>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists the Data Connector Credentials for MADMA instance.")
+  @operationId("DataConnectors_List")
   list is ArmResourceListByParent<
     DataConnector,
     {

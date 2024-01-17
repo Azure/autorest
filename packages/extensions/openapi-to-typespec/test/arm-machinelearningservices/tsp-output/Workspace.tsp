@@ -38,6 +38,7 @@ interface Workspaces {
   >;
 
   @doc("Updates a machine learning workspace with the specified parameters.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Workspace, WorkspaceUpdateParameters>;
 
   @doc("Deletes a machine learning workspace.")
@@ -52,7 +53,9 @@ interface Workspaces {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the available machine learning workspaces under the specified resource group.")
+  @operationId("Workspaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     {

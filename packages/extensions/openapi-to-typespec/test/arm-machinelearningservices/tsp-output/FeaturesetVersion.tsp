@@ -37,7 +37,9 @@ interface FeaturesetVersions {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List versions.")
+  @operationId("FeaturesetVersions_List")
   list is ArmResourceListByParent<
     FeaturesetVersion,
     {

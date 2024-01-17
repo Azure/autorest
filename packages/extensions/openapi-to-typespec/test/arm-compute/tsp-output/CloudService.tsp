@@ -32,12 +32,15 @@ interface CloudServices {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CloudService>;
 
   @doc("Update a cloud service.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;
 
   @doc("Deletes a cloud service.")
   delete is ArmResourceDeleteAsync<CloudService>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")
+  @operationId("CloudServices_List")
   list is ArmResourceListByParent<CloudService>;
 
   @doc("Gets a list of all cloud services in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.")

@@ -27,6 +27,8 @@ interface DataProductsCatalogs {
   @doc("List data catalog by subscription.")
   listBySubscription is ArmListBySubscription<DataProductsCatalog>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List data catalog by resource group.")
+  @operationId("DataProductsCatalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 }

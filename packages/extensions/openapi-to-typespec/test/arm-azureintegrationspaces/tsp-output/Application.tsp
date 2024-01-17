@@ -32,12 +32,15 @@ interface Applications {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
 
   @doc("Update a Application")
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
 
   @doc("Delete a Application")
   delete is ArmResourceDeleteSync<Application>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Application resources by Space")
+  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
     {

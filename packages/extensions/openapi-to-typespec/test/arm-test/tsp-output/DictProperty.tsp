@@ -28,6 +28,8 @@ interface DictProperties {
   @doc("Get a Resource.")
   get is ArmResourceRead<DictProperty>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List resources by resource group")
+  @operationId("DictProperties_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }

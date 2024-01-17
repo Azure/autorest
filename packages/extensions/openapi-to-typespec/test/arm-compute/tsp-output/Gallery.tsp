@@ -42,12 +42,15 @@ interface Galleries {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
 
   @doc("Update a Shared Image Gallery.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;
 
   @doc("Delete a Shared Image Gallery.")
   delete is ArmResourceDeleteAsync<Gallery>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List galleries under a resource group.")
+  @operationId("Galleries_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Gallery>;
 
   @doc("List galleries under a subscription.")

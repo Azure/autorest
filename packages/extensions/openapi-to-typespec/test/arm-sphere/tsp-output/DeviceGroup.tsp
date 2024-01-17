@@ -36,6 +36,7 @@ interface DeviceGroups {
   >;
 
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     DeviceGroup,
     DeviceGroupUpdate,
@@ -50,7 +51,9 @@ interface DeviceGroups {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  @operationId("DeviceGroups_ListByProduct")
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {

@@ -58,6 +58,7 @@ interface BackendContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates an existing backend.")
+  @parameterVisibility("read")
   @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,

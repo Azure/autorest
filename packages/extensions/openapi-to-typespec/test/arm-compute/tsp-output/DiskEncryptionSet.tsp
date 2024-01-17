@@ -31,12 +31,15 @@ interface DiskEncryptionSets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskEncryptionSet>;
 
   @doc("Updates (patches) a disk encryption set.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
 
   @doc("Deletes a disk encryption set.")
   delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the disk encryption sets under a resource group.")
+  @operationId("DiskEncryptionSets_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskEncryptionSet>;
 
   @doc("Lists all the disk encryption sets under a subscription.")

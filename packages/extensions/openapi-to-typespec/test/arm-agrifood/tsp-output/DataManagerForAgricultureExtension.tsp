@@ -28,7 +28,9 @@ interface DataManagerForAgricultureExtensions {
   @doc("Get Data Manager For Agriculture extension.")
   get is ArmResourceRead<DataManagerForAgricultureExtension>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get list of Data Manager For Agriculture extension.")
+  @operationId("DataManagerForAgricultureExtensions_List")
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
     {

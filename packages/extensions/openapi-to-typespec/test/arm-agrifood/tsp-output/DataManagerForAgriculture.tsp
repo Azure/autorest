@@ -40,6 +40,7 @@ interface DataManagerForAgricultures {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a Data Manager For Agriculture resource.")
+  @parameterVisibility("read")
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,

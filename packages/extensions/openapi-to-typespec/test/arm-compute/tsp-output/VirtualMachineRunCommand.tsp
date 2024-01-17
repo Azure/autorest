@@ -41,6 +41,7 @@ interface VirtualMachineRunCommands {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
 
   @doc("The operation to update the run command.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate
@@ -49,7 +50,9 @@ interface VirtualMachineRunCommands {
   @doc("The operation to delete the run command.")
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to get all run commands of a Virtual Machine.")
+  @operationId("VirtualMachineRunCommands_ListByVirtualMachine")
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
     {

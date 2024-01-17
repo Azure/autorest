@@ -46,7 +46,9 @@ interface ProviderOperationsMetadataOperationGroup {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets provider operations metadata for all resource providers.")
+  @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     {

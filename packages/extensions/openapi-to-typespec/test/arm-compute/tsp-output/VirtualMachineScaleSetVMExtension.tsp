@@ -59,6 +59,7 @@ interface VirtualMachineScaleSetVMExtensions {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("The operation to update the VMSS VM extension.")
+  @parameterVisibility("read")
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,

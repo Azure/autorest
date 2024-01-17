@@ -44,6 +44,7 @@ get is ArmResourceRead<ComputeResource>
 createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>
 
 @doc("Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.")
+@parameterVisibility("read")
 @operationId("Compute_Update")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 update is ArmCustomPatchAsync<ComputeResource,ClusterUpdateParameters>

@@ -34,12 +34,15 @@ interface Employees {
   >;
 
   @doc("Update a Employee")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Employee, EmployeeUpdate>;
 
   @doc("Delete a Employee")
   delete is ArmResourceDeleteSync<Employee>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Employee resources by resource group")
+  @operationId("Employees_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Employee>;
 
   @doc("List Employee resources by subscription ID")

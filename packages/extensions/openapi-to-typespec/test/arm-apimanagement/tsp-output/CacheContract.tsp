@@ -56,6 +56,7 @@ interface CacheContracts {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates the details of the cache specified by its identifier.")
+  @parameterVisibility("read")
   @operationId("Cache_Update")
   update is ArmCustomPatchSync<
     CacheContract,

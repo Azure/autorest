@@ -41,6 +41,7 @@ interface Associations {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update a Association")
+  @parameterVisibility("read")
   @operationId("AssociationsInterface_Update")
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
 

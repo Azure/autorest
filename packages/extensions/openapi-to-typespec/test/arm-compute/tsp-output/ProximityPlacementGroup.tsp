@@ -42,6 +42,7 @@ interface ProximityPlacementGroups {
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
 
   @doc("Update a proximity placement group.")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
@@ -50,7 +51,9 @@ interface ProximityPlacementGroups {
   @doc("Delete a proximity placement group.")
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all proximity placement groups in a resource group.")
+  @operationId("ProximityPlacementGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
   @doc("Lists all proximity placement groups in a subscription.")

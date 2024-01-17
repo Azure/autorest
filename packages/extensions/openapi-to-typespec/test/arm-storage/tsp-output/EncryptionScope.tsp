@@ -33,9 +33,12 @@ interface EncryptionScopes {
   put is ArmResourceCreateOrReplaceSync<EncryptionScope>;
 
   @doc("Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.")
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<EncryptionScope, EncryptionScope>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the encryption scopes available under the specified storage account.")
+  @operationId("EncryptionScopes_List")
   list is ArmResourceListByParent<
     EncryptionScope,
     {

@@ -41,12 +41,15 @@ interface DedicatedHostGroups {
   createOrUpdate is ArmResourceCreateOrReplaceSync<DedicatedHostGroup>;
 
   @doc("Update an dedicated host group.")
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<DedicatedHostGroup, DedicatedHostGroupUpdate>;
 
   @doc("Delete a dedicated host group.")
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.")
+  @operationId("DedicatedHostGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
 
   @doc("Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.")

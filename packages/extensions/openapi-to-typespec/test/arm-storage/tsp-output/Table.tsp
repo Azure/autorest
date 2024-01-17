@@ -39,6 +39,7 @@ interface Tables {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Creates a new table with the specified table name, under the specified account.")
+  @parameterVisibility("read")
   @operationId("Table_Update")
   update is ArmCustomPatchSync<Table, Table>;
 

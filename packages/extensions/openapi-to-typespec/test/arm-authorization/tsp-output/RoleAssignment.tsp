@@ -49,7 +49,9 @@ interface RoleAssignments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all role assignments that apply to a scope.")
+  @operationId("RoleAssignments_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignment,
     {

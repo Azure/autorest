@@ -32,12 +32,15 @@ interface DiskAccesses {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskAccess>;
 
   @doc("Updates (patches) a disk access resource.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
 
   @doc("Deletes a disk access resource.")
   delete is ArmResourceDeleteAsync<DiskAccess>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all the disk access resources under a resource group.")
+  @operationId("DiskAccesses_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskAccess>;
 
   @doc("Lists all the disk access resources under a subscription.")

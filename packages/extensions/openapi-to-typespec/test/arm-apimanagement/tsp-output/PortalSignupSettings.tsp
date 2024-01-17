@@ -56,6 +56,7 @@ interface PortalSignupSettingsOperationGroup {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update Sign-Up settings.")
+  @parameterVisibility("read")
   @operationId("SignUpSettings_Update")
   update is ArmCustomPatchSync<
     PortalSignupSettings,

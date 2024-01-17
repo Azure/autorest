@@ -29,7 +29,9 @@ interface RoleAssignmentScheduleRequests {
   @doc("Creates a role assignment schedule request.")
   create is ArmResourceCreateOrReplaceSync<RoleAssignmentScheduleRequest>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role assignment schedule requests for a scope.")
+  @operationId("RoleAssignmentScheduleRequests_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleRequest,
     {

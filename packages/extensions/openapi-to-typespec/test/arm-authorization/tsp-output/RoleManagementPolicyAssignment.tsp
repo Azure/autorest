@@ -29,7 +29,9 @@ interface RoleManagementPolicyAssignments {
   @doc("Create a role management policy assignment")
   create is ArmResourceCreateOrReplaceSync<RoleManagementPolicyAssignment>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets role management assignment policies for a resource scope.")
+  @operationId("RoleManagementPolicyAssignments_ListForScope")
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }
 

@@ -28,7 +28,9 @@ interface Features {
   @doc("Get feature.")
   get is ArmResourceRead<Feature>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List Features.")
+  @operationId("Features_List")
   list is ArmResourceListByParent<
     Feature,
     {

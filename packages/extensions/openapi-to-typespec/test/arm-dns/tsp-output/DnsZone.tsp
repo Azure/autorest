@@ -50,6 +50,7 @@ interface DnsZones {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Updates a DNS zone. Does not modify DNS records within the zone.")
+  @parameterVisibility("read")
   @operationId("Zones_Update")
   update is ArmCustomPatchSync<
     DnsZone,

@@ -35,12 +35,15 @@ interface Snapshots {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Snapshot>;
 
   @doc("Updates (patches) a snapshot.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
 
   @doc("Deletes a snapshot.")
   delete is ArmResourceDeleteAsync<Snapshot>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists snapshots under a resource group.")
+  @operationId("Snapshots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Snapshot>;
 
   @doc("Lists snapshots under a subscription.")
