@@ -22,6 +22,7 @@ using TypeSpec.Http;
  * a set of time series. By using anomaly detector service, business customers can
  * discover incidents and establish a logic flow for root cause analysis.
  */
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @service({
   title: "Anomaly Detector Client",
 })

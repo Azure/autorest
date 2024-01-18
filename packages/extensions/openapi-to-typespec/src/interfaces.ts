@@ -73,12 +73,13 @@ export interface AadTokenAuthFlow {
   scopes: string[];
 }
 
-export interface AzureApiKeyAuthentication {
-  kind: "AzureApiKeyAuthentication";
+export interface ApiKeyAuthentication {
+  kind: "ApiKeyAuth";
+  location: "header" | "query" | "cookie";
+  name: string;
 }
 
-export type Auth = AzureApiKeyAuthentication | AadOauth2AuthFlow | AadTokenAuthFlow;
-
+export type Auth = ApiKeyAuthentication | AadOauth2AuthFlow | AadTokenAuthFlow;
 
 export interface ServiceInformation extends WithDoc {
   name: string;

@@ -12,6 +12,7 @@ using TypeSpec.Http;
  * documentation can be found in <a
  * href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.
  */
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
 })

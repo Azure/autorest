@@ -94,12 +94,16 @@ function getEndpointParameters(endpoint: string) {
 }
 
 function generateUseAuth(auth: Auth | undefined, statements: string[]): void {
-  if(!auth) {
+  if (!auth) {
     return;
   }
-  if(auth.kind === "AadOauth2Auth") {
-    const scopes = `[${auth.scopes.map(s => `"${s}"`).join()}]`
+  if (auth.kind === "AadOauth2Auth") {
+    const scopes = `[${auth.scopes.map((s) => `"${s}"`).join()}]`;
     statements.push(`@useAuth(AadOauth2Auth<${scopes}>)`);
+  }
+
+  if (auth.kind === "ApiKeyAuth") {
+    statements.push(`@useAuth(ApiKeyAuth<ApiKeyLocation.${auth.location}, "${auth.name}">)`);
   }
 
   // TODO: Add support for other AAD auth types
