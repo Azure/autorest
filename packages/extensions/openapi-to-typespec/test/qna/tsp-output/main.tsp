@@ -12,8 +12,12 @@ using TypeSpec.Http;
  * documentation can be found in <a
  * href="https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.
  */
-@useAuth(AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>)
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@useAuth(
+  AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]> | ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Ocp-Apim-Subscription-Key"
+  >
+)
 @service({
   title: "QnA Maker",
 })

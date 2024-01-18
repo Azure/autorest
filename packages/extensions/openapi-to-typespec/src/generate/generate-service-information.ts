@@ -13,7 +13,7 @@ export function generateServiceInformation(program: TypespecProgram) {
     definitions.push(`@armProviderNamespace`);
   }
 
-  serviceInformation.authentication?.map((auth) => generateUseAuth(auth, definitions));
+  generateUseAuth(serviceInformation.authentication, definitions);
   definitions.push(`@service({
     title: "${serviceInformation.name}"
   })`);
@@ -93,20 +93,29 @@ function getEndpointParameters(endpoint: string) {
   return params;
 }
 
-function generateUseAuth(auth: Auth | undefined, statements: string[]): void {
-  if (!auth) {
+function generateUseAuth(authDefinitions: Auth[] | undefined, statements: string[]): void {
+  if (!authDefinitions) {
     return;
   }
-  if (auth.kind === "AadOauth2Auth") {
-    const scopes = `[${auth.scopes.map((s) => `"${s}"`).join()}]`;
-    statements.push(`@useAuth(AadOauth2Auth<${scopes}>)`);
+
+  const authFlows: string[] = [];
+
+  for (const auth of authDefinitions) {
+    if (auth.kind === "AadOauth2Auth") {
+      const scopes = `[${auth.scopes.map((s) => `"${s}"`).join()}]`;
+      authFlows.push(`AadOauth2Auth<${scopes}>`);
+    }
+
+    if (auth.kind === "ApiKeyAuth") {
+      authFlows.push(`ApiKeyAuth<ApiKeyLocation.${auth.location}, "${auth.name}">`);
+    }
   }
 
-  if (auth.kind === "ApiKeyAuth") {
-    statements.push(`@useAuth(ApiKeyAuth<ApiKeyLocation.${auth.location}, "${auth.name}">)`);
+  if (!authFlows.length) {
+    return;
   }
 
-  // TODO: Add support for other AAD auth types
+  statements.push(`@useAuth(${authFlows.join(" | ")})`);
 
   return;
 }
