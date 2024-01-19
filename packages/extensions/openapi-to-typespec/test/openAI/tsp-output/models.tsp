@@ -219,7 +219,6 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
   `model`?: string;
 }
 
-
 /**
  * An input to embed, encoded as a string, a list of strings, or a list of token
  * lists
