@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image definition that you want to create or update.")
+/**
+ * Specifies information about the gallery image definition that you want to create or update.
+ */
 @parentResource(Gallery)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
-  @doc("The name of the gallery image definition to be retrieved.")
+  /**
+   * The name of the gallery image definition to be retrieved.
+   */
   @path
   @key("galleryImageName")
   @segment("images")
@@ -24,18 +28,54 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
 
 @armResourceOperations
 interface GalleryImages {
-  @doc("Retrieves information about a gallery image definition.")
+  /**
+   * Retrieves information about a gallery image definition.
+   */
   get is ArmResourceRead<GalleryImage>;
 
-  @doc("Create or update a gallery image definition.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<GalleryImage>;
+  /**
+   * Create or update a gallery image definition.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
-  @doc("Update a gallery image definition.")
+  /**
+   * Update a gallery image definition.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<GalleryImage, GalleryImageUpdate>;
 
-  @doc("Delete a gallery image.")
+  /**
+   * Delete a gallery image.
+   */
   delete is ArmResourceDeleteAsync<GalleryImage>;
 
-  @doc("List gallery image definitions in a gallery.")
+  /**
+   * List gallery image definitions in a gallery.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GalleryImages_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }
+
+@@projectedName(GalleryImages.createOrUpdate::parameters.resource,
+  "json",
+  "galleryImage"
+);
+@@extension(GalleryImages.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "galleryImage"
+);
+@@doc(GalleryImages.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update gallery image operation."
+);
+@@projectedName(GalleryImages.update::parameters.properties,
+  "json",
+  "galleryImage"
+);
+@@extension(GalleryImages.update::parameters.properties,
+  "x-ms-client-name",
+  "galleryImage"
+);
+@@doc(GalleryImages.update::parameters.properties,
+  "Parameters supplied to the update gallery image operation."
+);

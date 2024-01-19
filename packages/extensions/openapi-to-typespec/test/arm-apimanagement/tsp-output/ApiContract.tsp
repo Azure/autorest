@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("API details.")
+/**
+ * API details.
+ */
 @parentResource(ApiManagementServiceResource)
 model ApiContract is ProxyResource<ApiContractProperties> {
-  @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+  /**
+   * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+   */
   @maxLength(256)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
@@ -27,36 +31,47 @@ model ApiContract is ProxyResource<ApiContractProperties> {
 
 @armResourceOperations
 interface ApiContracts {
+  /**
+   * Gets the details of the API specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the details of the API specified by its identifier.")
   @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
 
+  /**
+   * Gets the entity state (Etag) version of the API specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the entity state (Etag) version of the API specified by its identifier.")
   @head
   @operationId("Api_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<ApiContract, BaseParameters<ApiContract>>,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Creates new or updates existing specified API of the API Management service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates new or updates existing specified API of the API Management service instance.")
   @operationId("Api_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     {
       ...BaseParameters<ApiContract>;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
     },
     ArmLroLocationHeader
   >;
 
+  /**
+   * Updates the specified API of the API Management service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates the specified API of the API Management service instance.")
+  @parameterVisibility("read")
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
@@ -64,198 +79,291 @@ interface ApiContracts {
     {
       ...BaseParameters<ApiContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Deletes the specified API of the API Management service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes the specified API of the API Management service instance.")
   @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     {
       ...BaseParameters<ApiContract>;
 
-      @doc("Delete all revisions of the Api.")
+      /**
+       * Delete all revisions of the Api.
+       */
       @query("deleteRevisions")
       deleteRevisions?: boolean;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Lists all APIs of the API Management service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all APIs of the API Management service instance.")
   @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
     {
       ...BaseParameters<ApiContract>;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq, ne |  |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq, ne |  |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Include tags in the response.")
+      /**
+       * Include tags in the response.
+       */
       @query("tags")
       tags?: string;
 
-      @doc("Include full ApiVersionSet resource in response")
+      /**
+       * Include full ApiVersionSet resource in response
+       */
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
     }
   >;
 
+  /**
+   * Lists all revisions of an API.
+   */
+  // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ApiRevision_ListByService")
-  @doc("Lists all revisions of an API.")
-  // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
-  ListByService is Azure.Core.Foundations.Operation<
+  listByService is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API identifier. Must be unique in the current API Management service instance.")
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @path
       apiId: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ApiRevisionListResult
   >;
 
+  /**
+   * Lists all Products, which the API is part of.
+   */
+  // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ApiProduct_ListByApis")
-  @doc("Lists all Products, which the API is part of.")
-  // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
-  ListByApis is Azure.Core.Foundations.Operation<
+  listByApis is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API identifier. Must be unique in the current API Management service instance.")
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @path
       apiId: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<ProductContract>
   >;
 
+  /**
+   * Lists a collection of operations associated with tags.
+   */
+  // FIXME: Operation_ListByTags could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Operation_ListByTags")
-  @doc("Lists a collection of operations associated with tags.")
-  // FIXME: Operation_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
-  ListByTags is Azure.Core.Foundations.Operation<
+  listByTags is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Include not tagged Operations.")
+      /**
+       * Include not tagged Operations.
+       */
       @query("includeNotTaggedOperations")
       includeNotTaggedOperations?: boolean;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagResourceListResult
   >;
 }
+
+@@projectedName(ApiContracts.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ApiContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiContracts.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(ApiContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ApiContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ApiContracts.update::parameters.properties,
+  "API Update Contract parameters."
+);

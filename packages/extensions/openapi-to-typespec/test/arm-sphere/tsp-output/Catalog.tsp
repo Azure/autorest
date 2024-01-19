@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An Azure Sphere catalog")
+/**
+ * An Azure Sphere catalog
+ */
 model Catalog is TrackedResource<CatalogProperties> {
-  @doc("Name of catalog")
+  /**
+   * Name of catalog
+   */
   @pattern("^[A-Za-z0-9_-]{1,50}$")
   @path
   @key("catalogName")
@@ -23,36 +27,55 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @armResourceOperations
 interface Catalogs {
-  @doc("Get a Catalog")
+  /**
+   * Get a Catalog
+   */
   get is ArmResourceRead<Catalog>;
 
-  @doc("Create a Catalog")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create a Catalog
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Catalog,
     BaseParameters<Catalog>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update a Catalog")
+  /**
+   * Update a Catalog
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
-  @doc("Delete a Catalog")
+  /**
+   * Delete a Catalog
+   */
   delete is ArmResourceDeleteAsync<
     Catalog,
     BaseParameters<Catalog>,
     ArmLroLocationHeader
   >;
 
-  @doc("List Catalog resources by resource group")
+  /**
+   * List Catalog resources by resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Catalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
 
-  @doc("List Catalog resources by subscription ID")
+  /**
+   * List Catalog resources by subscription ID
+   */
   listBySubscription is ArmListBySubscription<Catalog>;
 
-  @doc("Counts devices in catalog.")
+  /**
+   * Counts devices in catalog.
+   */
   countDevices is ArmResourceActionSync<Catalog, void, CountDeviceResponse>;
 
-  @doc("Lists deployments for catalog.")
+  /**
+   * Lists deployments for catalog.
+   */
   listDeployments is ArmResourceActionSync<
     Catalog,
     void,
@@ -60,25 +83,35 @@ interface Catalogs {
     {
       ...BaseParameters<Catalog>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 
-  @doc("List the device groups for the catalog.")
+  /**
+   * List the device groups for the catalog.
+   */
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
     ListDeviceGroupsRequest,
@@ -86,25 +119,35 @@ interface Catalogs {
     {
       ...BaseParameters<Catalog>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 
-  @doc("Lists device insights for catalog.")
+  /**
+   * Lists device insights for catalog.
+   */
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
     void,
@@ -112,25 +155,35 @@ interface Catalogs {
     {
       ...BaseParameters<Catalog>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 
-  @doc("Lists devices for catalog.")
+  /**
+   * Lists devices for catalog.
+   */
   listDevices is ArmResourceActionSync<
     Catalog,
     void,
@@ -138,21 +191,41 @@ interface Catalogs {
     {
       ...BaseParameters<Catalog>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 }
+
+@@projectedName(Catalogs.listDeviceGroups::parameters.body,
+  "json",
+  "listDeviceGroupsRequest"
+);
+@@extension(Catalogs.listDeviceGroups::parameters.body,
+  "x-ms-client-name",
+  "listDeviceGroupsRequest"
+);
+@@doc(Catalogs.listDeviceGroups::parameters.body,
+  "List device groups for catalog."
+);

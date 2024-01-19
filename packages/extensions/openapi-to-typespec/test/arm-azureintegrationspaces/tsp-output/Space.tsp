@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-@doc("An integration space.")
+/**
+ * An integration space.
+ */
 model Space is TrackedResource<SpaceResourceProperties> {
-  @doc("The name of the space")
+  /**
+   * The name of the space
+   */
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
   @path
   @key("spaceName")
@@ -23,55 +27,82 @@ model Space is TrackedResource<SpaceResourceProperties> {
 
 @armResourceOperations
 interface Spaces {
-  @doc("Get a Space")
+  /**
+   * Get a Space
+   */
   get is ArmResourceRead<Space>;
 
-  @doc("Create a Space")
+  /**
+   * Create a Space
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Space>;
 
-  @doc("Update a Space")
+  /**
+   * Update a Space
+   */
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<Space, SpaceUpdate>;
 
-  @doc("Delete a Space")
+  /**
+   * Delete a Space
+   */
   delete is ArmResourceDeleteSync<Space>;
 
-  @doc("List Space resources by resource group")
+  /**
+   * List Space resources by resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Spaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Space,
     {
       ...BaseParameters<Space>;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      @doc("Filter the result list using the given expression.")
+      /**
+       * Filter the result list using the given expression.
+       */
       @query("filter")
       filter?: string;
 
-      @doc("Select the specified fields to be included in the response.")
+      /**
+       * Select the specified fields to be included in the response.
+       */
       @query({
         name: "select",
         format: "multi",
       })
       select?: string[];
 
-      @doc("Expand the indicated resources into the response.")
+      /**
+       * Expand the indicated resources into the response.
+       */
       @query({
         name: "expand",
         format: "multi",
       })
       expand?: string[];
 
-      @doc("Expressions that specify the order of returned results.")
+      /**
+       * Expressions that specify the order of returned results.
+       */
       @query({
         name: "orderby",
         format: "multi",
@@ -80,6 +111,8 @@ interface Spaces {
     }
   >;
 
-  @doc("List Space resources by subscription ID")
+  /**
+   * List Space resources by subscription ID
+   */
   listBySubscription is ArmListBySubscription<Space>;
 }

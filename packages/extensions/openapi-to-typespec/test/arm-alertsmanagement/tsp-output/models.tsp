@@ -13,7 +13,9 @@ namespace Azure.ResourceManager.AlertsManagement;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Field for a given condition.")
+/**
+ * Field for a given condition.
+ */
 enum Field {
   Severity,
   MonitorService,
@@ -28,7 +30,9 @@ enum Field {
   AlertContext,
 }
 
-@doc("Operator for a given condition.")
+/**
+ * Operator for a given condition.
+ */
 enum Operator {
   Equals,
   NotEquals,
@@ -36,32 +40,22 @@ enum Operator {
   DoesNotContain,
 }
 
-@doc("Specifies when the recurrence should be applied.")
+/**
+ * Specifies when the recurrence should be applied.
+ */
 enum RecurrenceType {
   Daily,
   Weekly,
   Monthly,
 }
 
-@doc("Action that should be applied.")
-enum ActionType {
-  AddActionGroups,
-  RemoveAllActionGroups,
-}
-
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
 enum Identifier {
   MonitorServiceList,
 }
 
-@doc("Identification of the information to be retrieved by API call")
+/**
+ * Identification of the information to be retrieved by API call
+ */
 enum MetadataIdentifier {
   MonitorServiceList,
 }
@@ -127,7 +121,9 @@ enum TimeRange {
   `30d`,
 }
 
-@doc("The type of signal the alert is based on, which could be metrics, logs or activity logs.")
+/**
+ * The type of signal the alert is based on, which could be metrics, logs or activity logs.
+ */
 enum SignalType {
   Metric,
   Log,
@@ -151,14 +147,18 @@ enum SmartGroupsSortByFields {
   lastModifiedDateTime,
 }
 
-@doc("Smart group state")
+/**
+ * Smart group state
+ */
 enum SmartGroupState {
   New,
   Acknowledged,
   Closed,
 }
 
-@doc("Days of week.")
+/**
+ * Days of week.
+ */
 enum DaysOfWeek {
   Sunday,
   Monday,
@@ -169,7 +169,9 @@ enum DaysOfWeek {
   Saturday,
 }
 
-@doc("Reason for the modification")
+/**
+ * Reason for the modification
+ */
 @fixed
 enum AlertModificationEvent {
   AlertCreated,
@@ -183,7 +185,9 @@ enum AlertModificationEvent {
   ActionsFailed,
 }
 
-@doc("Reason for the modification")
+/**
+ * Reason for the modification
+ */
 @fixed
 enum SmartGroupModificationEvent {
   SmartGroupCreated,
@@ -192,517 +196,833 @@ enum SmartGroupModificationEvent {
   AlertRemoved,
 }
 
-@doc("Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.")
+/**
+ * Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.
+ */
 model AlertProcessingRuleProperties {
-  @doc("Scopes on which alert processing rule will apply.")
+  /**
+   * Scopes on which alert processing rule will apply.
+   */
   scopes: string[];
 
-  @doc("Conditions on which alerts will be filtered.")
+  /**
+   * Conditions on which alerts will be filtered.
+   */
   conditions?: Condition[];
 
-  @doc("Scheduling for alert processing rule.")
+  /**
+   * Scheduling for alert processing rule.
+   */
   schedule?: Schedule;
 
-  @doc("Actions to be applied.")
+  /**
+   * Actions to be applied.
+   */
   actions: Action[];
 
-  @doc("Description of alert processing rule.")
+  /**
+   * Description of alert processing rule.
+   */
   description?: string;
 
-  @doc("Indicates if the given alert processing rule is enabled or disabled.")
-  enabled?: boolean;
+  /**
+   * Indicates if the given alert processing rule is enabled or disabled.
+   */
+  enabled?: boolean = true;
 }
 
-@doc("Condition to trigger an alert processing rule.")
+/**
+ * Condition to trigger an alert processing rule.
+ */
 model Condition {
-  @doc("Field for a given condition.")
+  /**
+   * Field for a given condition.
+   */
   field?: Field;
 
-  @doc("Operator for a given condition.")
+  /**
+   * Operator for a given condition.
+   */
   operator?: Operator;
 
-  @doc("List of values to match for a given condition.")
+  /**
+   * List of values to match for a given condition.
+   */
   values?: string[];
 }
 
-@doc("Scheduling configuration for a given alert processing rule.")
+/**
+ * Scheduling configuration for a given alert processing rule.
+ */
 model Schedule {
-  @doc("Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix.")
+  /**
+   * Scheduling effective from time. Date-Time in ISO-8601 format without timezone suffix.
+   */
   @pattern("^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$")
   effectiveFrom?: string;
 
-  @doc("Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix.")
+  /**
+   * Scheduling effective until time. Date-Time in ISO-8601 format without timezone suffix.
+   */
   @pattern("^(?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?))$")
   effectiveUntil?: string;
 
-  @doc("Scheduling time zone.")
+  /**
+   * Scheduling time zone.
+   */
   timeZone?: string;
 
-  @doc("List of recurrences.")
+  /**
+   * List of recurrences.
+   */
   recurrences?: Recurrence[];
 }
 
-@doc("Recurrence object.")
+/**
+ * Recurrence object.
+ */
 @discriminator("recurrenceType")
 model Recurrence {
-  @doc("Start time for recurrence.")
+  /**
+   * Start time for recurrence.
+   */
   startTime?: plainTime;
 
-  @doc("End time for recurrence.")
+  /**
+   * End time for recurrence.
+   */
   endTime?: plainTime;
 }
 
-@doc("Action to be applied.")
+/**
+ * Action to be applied.
+ */
 @discriminator("actionType")
 model Action {}
 
-@doc("An azure managed resource object.")
+/**
+ * An azure managed resource object.
+ */
 model ManagedResource extends Resource {
-  @doc("Resource location")
+  /**
+   * Resource location
+   */
   @visibility("read", "create")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   location: string;
 
-  @doc("Resource tags")
+  /**
+   * Resource tags
+   */
   tags?: Record<string>;
 }
 
-@doc("An azure resource object")
+/**
+ * An azure resource object
+ */
 model Resource {
-  @doc("Azure resource Id")
+  /**
+   * Azure resource Id
+   */
   @visibility("read")
   id?: string;
 
-  @doc("Azure resource type")
+  /**
+   * Azure resource type
+   */
   @visibility("read")
   type?: string;
 
-  @doc("Azure resource name")
+  /**
+   * Azure resource name
+   */
   @visibility("read")
   name?: string;
 }
 
-@doc("An error response from the service.")
+/**
+ * An error response from the service.
+ */
 @error
 model AlertProcessingRuleErrorResponse {
-  @doc("Details of error response.")
+  /**
+   * Details of error response.
+   */
   error?: AlertProcessingRuleErrorResponseBody;
 }
 
-@doc("Details of error response.")
+/**
+ * Details of error response.
+ */
 model AlertProcessingRuleErrorResponseBody {
-  @doc("Error code, intended to be consumed programmatically.")
+  /**
+   * Error code, intended to be consumed programmatically.
+   */
   code?: string;
 
-  @doc("Description of the error, intended for display in user interface.")
+  /**
+   * Description of the error, intended for display in user interface.
+   */
   message?: string;
 
-  @doc("Target of the particular error, for example name of the property.")
+  /**
+   * Target of the particular error, for example name of the property.
+   */
   target?: string;
 
-  @doc("A list of additional details about the error.")
+  /**
+   * A list of additional details about the error.
+   */
   details?: AlertProcessingRuleErrorResponseBody[];
 }
 
-@doc("Data contract for patch.")
+/**
+ * Data contract for patch.
+ */
 model PatchObject {
-  @doc("Properties supported by patch operation.")
+  /**
+   * Properties supported by patch operation.
+   */
   properties?: PatchProperties;
 
-  @doc("Tags to be updated.")
+  /**
+   * Tags to be updated.
+   */
   tags?: Record<string>;
 }
 
-@doc("Alert processing rule properties supported by patch.")
+/**
+ * Alert processing rule properties supported by patch.
+ */
 model PatchProperties {
-  @doc("Indicates if the given alert processing rule is enabled or disabled.")
+  /**
+   * Indicates if the given alert processing rule is enabled or disabled.
+   */
   enabled?: boolean;
 }
 
-@doc("An error response from the service.")
+/**
+ * An error response from the service.
+ */
 @error
 model AlertsManagementErrorResponse {
-  @doc("Details of error response.")
+  /**
+   * Details of error response.
+   */
   error?: AlertsManagementErrorResponseBody;
 }
 
-@doc("Details of error response.")
+/**
+ * Details of error response.
+ */
 model AlertsManagementErrorResponseBody {
-  @doc("Error code, intended to be consumed programmatically.")
+  /**
+   * Error code, intended to be consumed programmatically.
+   */
   code?: string;
 
-  @doc("Description of the error, intended for display in user interface.")
+  /**
+   * Description of the error, intended for display in user interface.
+   */
   message?: string;
 
-  @doc("Target of the particular error, for example name of the property.")
+  /**
+   * Target of the particular error, for example name of the property.
+   */
   target?: string;
 
-  @doc("A list of additional details about the error.")
+  /**
+   * A list of additional details about the error.
+   */
   details?: AlertsManagementErrorResponseBody[];
 }
 
-@doc("alert meta data information.")
+/**
+ * alert meta data information.
+ */
 model AlertsMetaData {
-  @doc("alert meta data property bag")
+  /**
+   * alert meta data property bag
+   */
   properties?: AlertsMetaDataProperties;
 }
 
-@doc("alert meta data property bag")
+/**
+ * alert meta data property bag
+ */
 @discriminator("metadataIdentifier")
 model AlertsMetaDataProperties {}
 
-@doc("Alert property bag")
+/**
+ * Alert property bag
+ */
 model AlertProperties {
-  @doc("This object contains consistent fields across different monitor services.")
+  /**
+   * This object contains consistent fields across different monitor services.
+   */
   essentials?: Essentials;
 
-  @doc("Information specific to the monitor service that gives more contextual details about the alert.")
+  /**
+   * Information specific to the monitor service that gives more contextual details about the alert.
+   */
   @visibility("read")
   context?: Record<unknown>;
 
-  @doc("Config which would be used for displaying the data in portal.")
+  /**
+   * Config which would be used for displaying the data in portal.
+   */
   @visibility("read")
   egressConfig?: Record<unknown>;
 }
 
-@doc("This object contains consistent fields across different monitor services.")
+/**
+ * This object contains consistent fields across different monitor services.
+ */
 model Essentials {
-  @doc("Severity of alert Sev0 being highest and Sev4 being lowest.")
+  /**
+   * Severity of alert Sev0 being highest and Sev4 being lowest.
+   */
   @visibility("read")
   severity?: Severity;
 
-  @doc("The type of signal the alert is based on, which could be metrics, logs or activity logs.")
+  /**
+   * The type of signal the alert is based on, which could be metrics, logs or activity logs.
+   */
   @visibility("read")
   signalType?: SignalType;
 
-  @doc("Alert object state, which can be modified by the user.")
+  /**
+   * Alert object state, which can be modified by the user.
+   */
   @visibility("read")
   alertState?: AlertState;
 
-  @doc("Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.")
+  /**
+   * Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.
+   */
   @visibility("read")
   monitorCondition?: MonitorCondition;
 
-  @doc("Target ARM resource, on which alert got created.")
+  /**
+   * Target ARM resource, on which alert got created.
+   */
   targetResource?: string;
 
-  @doc("Name of the target ARM resource name, on which alert got created.")
+  /**
+   * Name of the target ARM resource name, on which alert got created.
+   */
   targetResourceName?: string;
 
-  @doc("Resource group of target ARM resource, on which alert got created.")
+  /**
+   * Resource group of target ARM resource, on which alert got created.
+   */
   targetResourceGroup?: string;
 
-  @doc("Resource type of target ARM resource, on which alert got created.")
+  /**
+   * Resource type of target ARM resource, on which alert got created.
+   */
   targetResourceType?: string;
 
-  @doc("Monitor service on which the rule(monitor) is set.")
+  /**
+   * Monitor service on which the rule(monitor) is set.
+   */
   @visibility("read")
   monitorService?: MonitorService;
 
-  @doc("Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.")
+  /**
+   * Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.
+   */
   @visibility("read")
   alertRule?: string;
 
-  @doc("Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc.")
+  /**
+   * Unique Id created by monitor service for each alert instance. This could be used to track the issue at the monitor service, in case of Nagios, Zabbix, SCOM etc.
+   */
   @visibility("read")
   sourceCreatedId?: string;
 
-  @doc("Unique Id of the smart group")
+  /**
+   * Unique Id of the smart group
+   */
   @visibility("read")
   smartGroupId?: string;
 
-  @doc("Verbose reason describing the reason why this alert instance is added to a smart group")
+  /**
+   * Verbose reason describing the reason why this alert instance is added to a smart group
+   */
   @visibility("read")
   smartGroupingReason?: string;
 
-  @doc("Creation time(ISO-8601 format) of alert instance.")
+  /**
+   * Creation time(ISO-8601 format) of alert instance.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  @doc("Last modification time(ISO-8601 format) of alert instance.")
+  /**
+   * Last modification time(ISO-8601 format) of alert instance.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.")
+  /**
+   * Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   monitorConditionResolvedDateTime?: utcDateTime;
 
-  @doc("User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.")
+  /**
+   * User who last modified the alert, in case of monitor service updates user would be 'system', otherwise name of the user.
+   */
   @visibility("read")
   lastModifiedUserName?: string;
 
-  @doc("Action status")
+  /**
+   * Action status
+   */
   actionStatus?: ActionStatus;
 
-  @doc("Alert description.")
+  /**
+   * Alert description.
+   */
   description?: string;
 }
 
-@doc("Action status")
+/**
+ * Action status
+ */
 model ActionStatus {
-  @doc("Value indicating whether alert is suppressed.")
+  /**
+   * Value indicating whether alert is suppressed.
+   */
   isSuppressed?: boolean;
 }
 
-@doc("Alert Modification details")
+/**
+ * Alert Modification details
+ */
 model AlertModification extends Resource {
-  @doc("Properties of the alert modification item.")
+  /**
+   * Properties of the alert modification item.
+   */
   properties?: AlertModificationProperties;
 }
 
-@doc("Properties of the alert modification item.")
+/**
+ * Properties of the alert modification item.
+ */
 model AlertModificationProperties {
-  @doc("Unique Id of the alert for which the history is being retrieved")
+  /**
+   * Unique Id of the alert for which the history is being retrieved
+   */
   @visibility("read")
   alertId?: string;
 
-  @doc("Modification details")
+  /**
+   * Modification details
+   */
   modifications?: AlertModificationItem[];
 }
 
-@doc("Alert modification item.")
+/**
+ * Alert modification item.
+ */
 model AlertModificationItem {
-  @doc("Reason for the modification")
+  /**
+   * Reason for the modification
+   */
   modificationEvent?: AlertModificationEvent;
 
-  @doc("Old value")
+  /**
+   * Old value
+   */
   oldValue?: string;
 
-  @doc("New value")
+  /**
+   * New value
+   */
   newValue?: string;
 
-  @doc("Modified date and time")
+  /**
+   * Modified date and time
+   */
   modifiedAt?: string;
 
-  @doc("Modified user details (Principal client name)")
+  /**
+   * Modified user details (Principal client name)
+   */
   modifiedBy?: string;
 
-  @doc("Modification comments")
+  /**
+   * Modification comments
+   */
   comments?: string;
 
-  @doc("Description of the modification")
+  /**
+   * Description of the modification
+   */
   description?: string;
 }
 
-@doc("Summary of alerts based on the input filters and 'groupby' parameters.")
+/**
+ * Summary of alerts based on the input filters and 'groupby' parameters.
+ */
 model AlertsSummary extends Resource {
-  @doc("Group the result set.")
+  /**
+   * Group the result set.
+   */
   properties?: AlertsSummaryGroup;
 }
 
-@doc("Group the result set.")
+/**
+ * Group the result set.
+ */
 model AlertsSummaryGroup {
-  @doc("Total count of the result set.")
-  total?: int32;
+  /**
+   * Total count of the result set.
+   */
+  total?: int64;
 
-  @doc("Total count of the smart groups.")
-  smartGroupsCount?: int32;
+  /**
+   * Total count of the smart groups.
+   */
+  smartGroupsCount?: int64;
 
-  @doc("Name of the field aggregated")
+  /**
+   * Name of the field aggregated
+   */
   groupedby?: string;
 
-  @doc("List of the items")
+  /**
+   * List of the items
+   */
   values?: AlertsSummaryGroupItem[];
 }
 
-@doc("Alerts summary group item")
+/**
+ * Alerts summary group item
+ */
 model AlertsSummaryGroupItem {
-  @doc("Value of the aggregated field")
+  /**
+   * Value of the aggregated field
+   */
   name?: string;
 
-  @doc("Count of the aggregated field")
-  count?: int32;
+  /**
+   * Count of the aggregated field
+   */
+  count?: int64;
 
-  @doc("Name of the field aggregated")
+  /**
+   * Name of the field aggregated
+   */
   groupedby?: string;
 
-  @doc("List of the items")
+  /**
+   * List of the items
+   */
   values?: AlertsSummaryGroupItem[];
 }
 
-@doc("Properties of smart group.")
+/**
+ * Properties of smart group.
+ */
 model SmartGroupProperties {
-  @doc("Total number of alerts in smart group")
-  alertsCount?: int32;
+  /**
+   * Total number of alerts in smart group
+   */
+  alertsCount?: int64;
 
-  @doc("Smart group state")
+  /**
+   * Smart group state
+   */
   @visibility("read")
   smartGroupState?: SmartGroupState;
 
-  @doc("Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.")
+  /**
+   * Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.
+   */
   @visibility("read")
   severity?: Severity;
 
-  @doc("Creation time of smart group. Date-Time in ISO-8601 format.")
+  /**
+   * Creation time of smart group. Date-Time in ISO-8601 format.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  @doc("Last updated time of smart group. Date-Time in ISO-8601 format.")
+  /**
+   * Last updated time of smart group. Date-Time in ISO-8601 format.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("Last modified by user name.")
+  /**
+   * Last modified by user name.
+   */
   @visibility("read")
   lastModifiedUserName?: string;
 
-  @doc("Summary of target resources in the smart group")
+  /**
+   * Summary of target resources in the smart group
+   */
   resources?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of target resource types in the smart group")
+  /**
+   * Summary of target resource types in the smart group
+   */
   resourceTypes?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of target resource groups in the smart group")
+  /**
+   * Summary of target resource groups in the smart group
+   */
   resourceGroups?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of monitorServices in the smart group")
+  /**
+   * Summary of monitorServices in the smart group
+   */
   monitorServices?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of monitorConditions in the smart group")
+  /**
+   * Summary of monitorConditions in the smart group
+   */
   monitorConditions?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of alertStates in the smart group")
+  /**
+   * Summary of alertStates in the smart group
+   */
   alertStates?: SmartGroupAggregatedProperty[];
 
-  @doc("Summary of alertSeverities in the smart group")
+  /**
+   * Summary of alertSeverities in the smart group
+   */
   alertSeverities?: SmartGroupAggregatedProperty[];
 
-  @doc("The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts.")
+  /**
+   * The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts.
+   */
   nextLink?: string;
 }
 
-@doc("Aggregated property of each type")
+/**
+ * Aggregated property of each type
+ */
 model SmartGroupAggregatedProperty {
-  @doc("Name of the type.")
+  /**
+   * Name of the type.
+   */
   name?: string;
 
-  @doc("Total number of items of type.")
-  count?: int32;
+  /**
+   * Total number of items of type.
+   */
+  count?: int64;
 }
 
-@doc("An error response from the service.")
+/**
+ * An error response from the service.
+ */
 @error
 model SmartGroupErrorResponse {
-  @doc("Details of error response.")
+  /**
+   * Details of error response.
+   */
   error?: SmartGroupErrorResponseBody;
 }
 
-@doc("Details of error response.")
+/**
+ * Details of error response.
+ */
 model SmartGroupErrorResponseBody {
-  @doc("Error code, intended to be consumed programmatically.")
+  /**
+   * Error code, intended to be consumed programmatically.
+   */
   code?: string;
 
-  @doc("Description of the error, intended for display in user interface.")
+  /**
+   * Description of the error, intended for display in user interface.
+   */
   message?: string;
 
-  @doc("Target of the particular error, for example name of the property.")
+  /**
+   * Target of the particular error, for example name of the property.
+   */
   target?: string;
 
-  @doc("A list of additional details about the error.")
+  /**
+   * A list of additional details about the error.
+   */
   details?: SmartGroupErrorResponseBody[];
 }
 
-@doc("Alert Modification details")
+/**
+ * Alert Modification details
+ */
 model SmartGroupModification extends Resource {
-  @doc("Properties of the smartGroup modification item.")
+  /**
+   * Properties of the smartGroup modification item.
+   */
   properties?: SmartGroupModificationProperties;
 }
 
-@doc("Properties of the smartGroup modification item.")
+/**
+ * Properties of the smartGroup modification item.
+ */
 model SmartGroupModificationProperties {
-  @doc("Unique Id of the smartGroup for which the history is being retrieved")
+  /**
+   * Unique Id of the smartGroup for which the history is being retrieved
+   */
   @visibility("read")
   smartGroupId?: string;
 
-  @doc("Modification details")
+  /**
+   * Modification details
+   */
   modifications?: SmartGroupModificationItem[];
 
-  @doc("URL to fetch the next set of results.")
+  /**
+   * URL to fetch the next set of results.
+   */
   nextLink?: string;
 }
 
-@doc("smartGroup modification item.")
+/**
+ * smartGroup modification item.
+ */
 model SmartGroupModificationItem {
-  @doc("Reason for the modification")
+  /**
+   * Reason for the modification
+   */
   modificationEvent?: SmartGroupModificationEvent;
 
-  @doc("Old value")
+  /**
+   * Old value
+   */
   oldValue?: string;
 
-  @doc("New value")
+  /**
+   * New value
+   */
   newValue?: string;
 
-  @doc("Modified date and time")
+  /**
+   * Modified date and time
+   */
   modifiedAt?: string;
 
-  @doc("Modified user details (Principal client name)")
+  /**
+   * Modified user details (Principal client name)
+   */
   modifiedBy?: string;
 
-  @doc("Modification comments")
+  /**
+   * Modification comments
+   */
   comments?: string;
 
-  @doc("Description of the modification")
+  /**
+   * Description of the modification
+   */
   description?: string;
 }
 
-@doc("Daily recurrence object.")
+/**
+ * Daily recurrence object.
+ */
 model DailyRecurrence extends Recurrence {
-  @doc("Specifies when the recurrence should be applied.")
+  /**
+   * Specifies when the recurrence should be applied.
+   */
   recurrenceType: "Daily";
 }
 
-@doc("Weekly recurrence object.")
+/**
+ * Weekly recurrence object.
+ */
 model WeeklyRecurrence extends Recurrence {
-  @doc("Specifies the values for weekly recurrence pattern.")
+  /**
+   * Specifies the values for weekly recurrence pattern.
+   */
   daysOfWeek: DaysOfWeek[];
 
-  @doc("Specifies when the recurrence should be applied.")
+  /**
+   * Specifies when the recurrence should be applied.
+   */
   recurrenceType: "Weekly";
 }
 
-@doc("Monthly recurrence object.")
+/**
+ * Monthly recurrence object.
+ */
 model MonthlyRecurrence extends Recurrence {
-  @doc("Specifies the values for monthly recurrence pattern.")
+  /**
+   * Specifies the values for monthly recurrence pattern.
+   */
   daysOfMonth: int32[];
 
-  @doc("Specifies when the recurrence should be applied.")
+  /**
+   * Specifies when the recurrence should be applied.
+   */
   recurrenceType: "Monthly";
 }
 
-@doc("Add action groups to alert processing rule.")
+/**
+ * Add action groups to alert processing rule.
+ */
 model AddActionGroups extends Action {
-  @doc("List of action group Ids to add to alert processing rule.")
+  /**
+   * List of action group Ids to add to alert processing rule.
+   */
   actionGroupIds: string[];
 
-  @doc("Action that should be applied.")
+  /**
+   * Action that should be applied.
+   */
   actionType: "AddActionGroups";
 }
 
-@doc("Indicates if all action groups should be removed.")
+/**
+ * Indicates if all action groups should be removed.
+ */
 model RemoveAllActionGroups extends Action {
-  @doc("Action that should be applied.")
+  /**
+   * Action that should be applied.
+   */
   actionType: "RemoveAllActionGroups";
 }
 
-@doc("Monitor service details")
+/**
+ * Monitor service details
+ */
 model MonitorServiceList extends AlertsMetaDataProperties {
-  @doc("Array of operations")
+  /**
+   * Array of operations
+   */
   data: MonitorServiceDetails[];
 
-  @doc("Identification of the information to be retrieved by API call")
+  /**
+   * Identification of the information to be retrieved by API call
+   */
   metadataIdentifier: "MonitorServiceList";
 }
 
-@doc("Details of a monitor service")
+/**
+ * Details of a monitor service
+ */
 model MonitorServiceDetails {
-  @doc("Monitor service name")
+  /**
+   * Monitor service name
+   */
   name?: string;
 
-  @doc("Monitor service display name")
+  /**
+   * Monitor service display name
+   */
   displayName?: string;
 }

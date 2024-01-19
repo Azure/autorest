@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(FeaturesetContainer)
 model FeaturesetVersion is ProxyResource<FeaturesetVersionProperties> {
-  @doc("Version identifier. This is case-sensitive.")
+  /**
+   * Version identifier. This is case-sensitive.
+   */
   @path
   @key("version")
   @segment("versions")
@@ -24,60 +28,88 @@ model FeaturesetVersion is ProxyResource<FeaturesetVersionProperties> {
 
 @armResourceOperations
 interface FeaturesetVersions {
-  @doc("Get version.")
+  /**
+   * Get version.
+   */
   get is ArmResourceRead<FeaturesetVersion>;
 
-  @doc("Create or update version.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetVersion>;
+  /**
+   * Create or update version.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetVersion>;
 
-  @doc("Delete version.")
+  /**
+   * Delete version.
+   */
   delete is ArmResourceDeleteAsync<
     FeaturesetVersion,
     BaseParameters<FeaturesetVersion>,
     ArmLroLocationHeader
   >;
 
-  @doc("List versions.")
+  /**
+   * List versions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FeaturesetVersions_List")
   list is ArmResourceListByParent<
     FeaturesetVersion,
     {
       ...BaseParameters<FeaturesetVersion>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("tags")
       tags?: string;
 
-      @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.")
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      @doc("page size")
+      /**
+       * page size
+       */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      @doc("name for the featureset version")
+      /**
+       * name for the featureset version
+       */
       @query("versionName")
       versionName?: string;
 
-      @doc("description for the feature set version")
+      /**
+       * description for the feature set version
+       */
       @query("description")
       description?: string;
 
-      @doc("createdBy user name")
+      /**
+       * createdBy user name
+       */
       @query("createdBy")
       createdBy?: string;
 
-      @doc("Specifies the featurestore stage")
+      /**
+       * Specifies the featurestore stage
+       */
       @query("stage")
       stage?: string;
     }
   >;
 
-  @doc("Backfill.")
+  /**
+   * Backfill.
+   */
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
@@ -86,7 +118,9 @@ interface FeaturesetVersions {
     ArmLroLocationHeader
   >;
 
-  @doc("List materialization Jobs.")
+  /**
+   * List materialization Jobs.
+   */
   listMaterializationJobs is ArmResourceActionSync<
     FeaturesetVersion,
     void,
@@ -94,21 +128,44 @@ interface FeaturesetVersions {
     {
       ...BaseParameters<FeaturesetVersion>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("filters")
       filters?: string;
 
-      @doc("Start time of the feature window to filter materialization jobs.")
+      /**
+       * Start time of the feature window to filter materialization jobs.
+       */
       @query("featureWindowStart")
       featureWindowStart?: string;
 
-      @doc("End time of the feature window to filter materialization jobs.")
+      /**
+       * End time of the feature window to filter materialization jobs.
+       */
       @query("featureWindowEnd")
       featureWindowEnd?: string;
     }
   >;
 }
+
+@@projectedName(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturesetVersions.createOrUpdate::parameters.resource,
+  "Version entity to create or update."
+);
+@@doc(FeaturesetVersions.backfill::parameters.body,
+  "Feature set version backfill request entity."
+);

@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image definition that you want to create or update.")
+/**
+ * Specifies information about the gallery image definition that you want to create or update.
+ */
 @parentResource(SharedGallery)
 model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
-  @doc("The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.")
+  /**
+   * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
+   */
   @path
   @key("galleryImageName")
   @segment("images")
@@ -24,16 +28,24 @@ model SharedGalleryImage is ProxyResource<SharedGalleryImageProperties> {
 
 @armResourceOperations
 interface SharedGalleryImages {
-  @doc("Get a shared gallery image by subscription id or tenant id.")
+  /**
+   * Get a shared gallery image by subscription id or tenant id.
+   */
   get is ArmResourceRead<SharedGalleryImage>;
 
-  @doc("List shared gallery images by subscription id or tenant id.")
+  /**
+   * List shared gallery images by subscription id or tenant id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("SharedGalleryImages_List")
   list is ArmResourceListByParent<
     SharedGalleryImage,
     {
       ...BaseParameters<SharedGalleryImage>;
 
-      @doc("The query parameter to decide what shared galleries to fetch when doing listing operations.")
+      /**
+       * The query parameter to decide what shared galleries to fetch when doing listing operations.
+       */
       @query("sharedTo")
       sharedTo?: SharedToValues;
     }

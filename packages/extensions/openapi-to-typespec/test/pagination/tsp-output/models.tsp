@@ -8,7 +8,9 @@ using Azure.Core;
 
 namespace AutoRestPagingTestService;
 
-@doc("The status of the request")
+/**
+ * The status of the request
+ */
 enum OperationResultStatus {
   Succeeded,
   Failed,
@@ -64,6 +66,8 @@ model ProductResultValueWithXMSClientName {
 }
 
 model OperationResult {
-  @doc("The status of the request")
+  /**
+   * The status of the request
+   */
   status?: OperationResultStatus;
 }

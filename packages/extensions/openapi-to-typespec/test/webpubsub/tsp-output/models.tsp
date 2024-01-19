@@ -13,59 +13,100 @@ enum WebPubSubPermission {
   joinLeaveGroup,
 }
 
-@doc("Content type for upload")
+/**
+ * Content type for upload
+ */
 @fixed
 enum ContentType {
-  @doc("Content Type 'application/json'") `application/json`,
-  @doc("Content Type 'application/octet-stream'") `application/octet-stream`,
-  @doc("Content Type 'text/plain'") `text/plain`,
+  /**
+   * Content Type 'application/json'
+   */
+  `application/json`,
+
+  /**
+   * Content Type 'application/octet-stream'
+   */
+  `application/octet-stream`,
+
+  /**
+   * Content Type 'text/plain'
+   */
+  `text/plain`,
 }
 
-@doc("The request object containing targets groups and a connection filter")
+/**
+ * The request object containing targets groups and a connection filter
+ */
 model AddToGroupsRequest {
-  @doc("A list of groups which target connections will be added into")
+  /**
+   * A list of groups which target connections will be added into
+   */
   groups?: string[];
 
-  @doc("An OData filter which target connections satisfy")
+  /**
+   * An OData filter which target connections satisfy
+   */
   filter?: string;
 }
 
-@doc("The error object.")
+/**
+ * The error object.
+ */
 @error
 model ErrorDetail {
-  @doc("One of a server-defined set of error codes.")
+  /**
+   * One of a server-defined set of error codes.
+   */
   code?: string;
 
-  @doc("A human-readable representation of the error.")
+  /**
+   * A human-readable representation of the error.
+   */
   message?: string;
 
-  @doc("The target of the error.")
+  /**
+   * The target of the error.
+   */
   target?: string;
 
-  @doc("An array of details about specific errors that led to this reported error.")
+  /**
+   * An array of details about specific errors that led to this reported error.
+   */
   details?: ErrorDetail[];
 
   inner?: InnerError;
 }
 
 model InnerError {
-  @doc("A more specific error code than was provided by the containing error.")
+  /**
+   * A more specific error code than was provided by the containing error.
+   */
   code?: string;
 
   inner?: InnerError;
 }
 
-@doc("The response object containing the token for the client")
+/**
+ * The response object containing the token for the client
+ */
 model ClientTokenResponse {
-  @doc("The token value for the WebSocket client to connect to the service")
+  /**
+   * The token value for the WebSocket client to connect to the service
+   */
   token: string;
 }
 
-@doc("The request object containing targets groups and a connection filter")
+/**
+ * The request object containing targets groups and a connection filter
+ */
 model RemoveFromGroupsRequest {
-  @doc("A list of groups which target connections will be removed from")
+  /**
+   * A list of groups which target connections will be removed from
+   */
   groups?: string[];
 
-  @doc("An OData filter which target connections satisfy")
+  /**
+   * An OData filter which target connections satisfy
+   */
   filter?: string;
 }

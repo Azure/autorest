@@ -11,152 +11,231 @@ namespace Microsoft.AzurePlaywrightService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
-enum ActionType {
-  Internal,
-}
-
-@doc("The enablement status of a feature.")
+/**
+ * The enablement status of a feature.
+ */
 enum EnablementStatus {
-  @doc("The feature is Enabled.") Enabled,
-  @doc("The feature is Disabled.") Disabled,
+  /**
+   * The feature is Enabled.
+   */
+  Enabled,
+
+  /**
+   * The feature is Disabled.
+   */
+  Disabled,
 }
 
-@doc("The status of the current operation.")
+/**
+ * The status of the current operation.
+ */
 enum ProvisioningState {
-  @doc("Resource has been created.") Succeeded,
-  @doc("Resource creation failed.") Failed,
-  @doc("Resource creation was canceled.") Canceled,
-  @doc("Deletion in progress") Deleting,
-  @doc("Change accepted for processing") Accepted,
+  /**
+   * Resource has been created.
+   */
+  Succeeded,
+
+  /**
+   * Resource creation failed.
+   */
+  Failed,
+
+  /**
+   * Resource creation was canceled.
+   */
+  Canceled,
+
+  /**
+   * Deletion in progress
+   */
+  Deleting,
+
+  /**
+   * Change accepted for processing
+   */
+  Accepted,
 }
 
-@doc("The type of identity that created the resource.")
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
-@doc("The free-trial state.")
+/**
+ * The free-trial state.
+ */
 enum FreeTrialState {
-  @doc("The free-trial is Active.") Active,
-  @doc("The free-trial is Expired.") Expired,
+  /**
+   * The free-trial is Active.
+   */
+  Active,
+
+  /**
+   * The free-trial is Expired.
+   */
+  Expired,
 }
 
 enum QuotaNames {
-  @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  /**
+   * The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.
+   */
   ScalableExecution,
 }
 
-@doc("Account properties")
+/**
+ * Account properties
+ */
 model AccountProperties {
-  @doc("The Playwright testing dashboard URI for the account resource.")
+  /**
+   * The Playwright testing dashboard URI for the account resource.
+   */
   @visibility("read")
-  dashboardUri?: string;
+  dashboardUri?: url;
 
-  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  /**
+   * This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.
+   */
   regionalAffinity?: EnablementStatus;
 
-  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  /**
+   * When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.
+   */
   scalableExecution?: EnablementStatus;
 
-  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  /**
+   * When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.
+   */
   reporting?: EnablementStatus;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
 model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
   @visibility("read")
   id?: string;
 
-  @doc("The name of the resource")
+  /**
+   * The name of the resource
+   */
   @visibility("read")
   name?: string;
 
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
   @visibility("read")
   type?: string;
 
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
   @visibility("read")
   systemData?: SystemData;
 }
 
-@doc("Quota properties")
+/**
+ * Quota properties
+ */
 model QuotaProperties {
-  @doc("The free-trial quota.")
+  /**
+   * The free-trial quota.
+   */
   freeTrial?: FreeTrialProperties;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("The free-trial properties")
+/**
+ * The free-trial properties
+ */
 model FreeTrialProperties {
-  @doc("The playwright account id.")
+  /**
+   * The playwright account id.
+   */
   @visibility("read")
   accountId: string;
 
-  @doc("The free-trial createdAt utcDateTime.")
+  /**
+   * The free-trial createdAt utcDateTime.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt: utcDateTime;
 
-  @doc("The free-trial expiryAt utcDateTime.")
+  /**
+   * The free-trial expiryAt utcDateTime.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryAt: utcDateTime;
 
-  @doc("The free-trial allocated limit value eg. allocated free minutes.")
+  /**
+   * The free-trial allocated limit value eg. allocated free minutes.
+   */
   @visibility("read")
   allocatedValue: int32;
 
-  @doc("The free-trial used value eg. used free minutes.")
+  /**
+   * The free-trial used value eg. used free minutes.
+   */
   @visibility("read")
   usedValue: int32;
 
-  @doc("The free-trial percentage used.")
+  /**
+   * The free-trial percentage used.
+   */
   @visibility("read")
   @maxValue(100)
-  percentageUsed: float32;
+  percentageUsed: decimal;
 
-  @doc("The free-trial state.")
+  /**
+   * The free-trial state.
+   */
   @visibility("read")
   state: FreeTrialState;
 }
 
-@doc("The type used for update operations of the Account.")
+/**
+ * The type used for update operations of the Account.
+ */
 model AccountUpdate {
-  @doc("Resource tags.")
+  /**
+   * Resource tags.
+   */
   tags?: Record<string>;
 
-  @doc("The updatable properties of the Account.")
+  /**
+   * The updatable properties of the Account.
+   */
   properties?: AccountUpdateProperties;
 }
 
-@doc("The updatable properties of the Account.")
+/**
+ * The updatable properties of the Account.
+ */
 model AccountUpdateProperties {
-  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  /**
+   * This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.
+   */
   regionalAffinity?: EnablementStatus;
 
-  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  /**
+   * When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.
+   */
   scalableExecution?: EnablementStatus;
 
-  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  /**
+   * When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.
+   */
   reporting?: EnablementStatus;
 }

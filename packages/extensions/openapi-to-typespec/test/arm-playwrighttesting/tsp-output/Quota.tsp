@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzurePlaywrightService;
-@doc("A quota resource")
+/**
+ * A quota resource
+ */
 @locationResource
 model Quota is ProxyResource<QuotaProperties> {
-  @doc("The quota name.")
+  /**
+   * The quota name.
+   */
   @path
   @key("name")
   @segment("quotas")
@@ -23,9 +27,15 @@ model Quota is ProxyResource<QuotaProperties> {
 
 @armResourceOperations
 interface Quotas {
-  @doc("Get quota by name.")
+  /**
+   * Get quota by name.
+   */
   get is ArmResourceRead<Quota>;
 
-  @doc("List quotas for a given subscription Id.")
+  /**
+   * List quotas for a given subscription Id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Quotas_ListBySubscription")
   listBySubscription is ArmResourceListByParent<Quota>;
 }

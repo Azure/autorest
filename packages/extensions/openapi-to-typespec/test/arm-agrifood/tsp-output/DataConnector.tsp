@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
-@doc("DataConnector Model.")
+/**
+ * DataConnector Model.
+ */
 @parentResource(DataManagerForAgriculture)
 model DataConnector is ProxyResource<DataConnectorProperties> {
-  @doc("Connector name.")
+  /**
+   * Connector name.
+   */
   @maxLength(63)
   @minLength(1)
   @path
@@ -28,33 +32,57 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
 
 @armResourceOperations
 interface DataConnectors {
-  @doc("Get specific Data Connector resource by DataConnectorName.")
+  /**
+   * Get specific Data Connector resource by DataConnectorName.
+   */
   get is ArmResourceRead<DataConnector>;
 
-  @doc("Create or update Data Connector For MADMA resource.")
+  /**
+   * Create or update Data Connector For MADMA resource.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataConnector>;
 
-  @doc("Delete a Data Connectors with given dataConnector name.")
+  /**
+   * Delete a Data Connectors with given dataConnector name.
+   */
   delete is ArmResourceDeleteSync<DataConnector>;
 
-  @doc("Lists the Data Connector Credentials for MADMA instance.")
+  /**
+   * Lists the Data Connector Credentials for MADMA instance.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DataConnectors_List")
   list is ArmResourceListByParent<
     DataConnector,
     {
       ...BaseParameters<DataConnector>;
 
-      @doc("""
-Maximum number of items needed (inclusive).
+      /**
+* Maximum number of items needed (inclusive).
 Minimum = 10, Maximum = 1000, Default value = 50.
-""")
+*/
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      @doc("Continuation token for getting next set of results.")
+      /**
+       * Continuation token for getting next set of results.
+       */
       @query("$skipToken")
       $skipToken?: string;
     }
   >;
 }
+
+@@projectedName(DataConnectors.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DataConnectors.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DataConnectors.createOrUpdate::parameters.resource,
+  "Body must be valid DataConnector request."
+);

@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
-@doc("The data product resource.")
+/**
+ * The data product resource.
+ */
 model DataProduct is TrackedResource<DataProductProperties> {
-  @doc("The data product resource name")
+  /**
+   * The data product resource name
+   */
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]*$")
@@ -27,17 +31,24 @@ model DataProduct is TrackedResource<DataProductProperties> {
 
 @armResourceOperations
 interface DataProducts {
-  @doc("Retrieve data product resource.")
+  /**
+   * Retrieve data product resource.
+   */
   get is ArmResourceRead<DataProduct>;
 
-  @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create data product resource.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
     DataProduct,
     BaseParameters<DataProduct>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update data product resource.")
+  /**
+   * Update data product resource.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     DataProduct,
     DataProductUpdate,
@@ -45,46 +56,64 @@ interface DataProducts {
     ArmLroLocationHeader
   >;
 
-  @doc("Delete data product resource.")
+  /**
+   * Delete data product resource.
+   */
   delete is ArmResourceDeleteWithoutOkAsync<
     DataProduct,
     BaseParameters<DataProduct>,
     ArmLroLocationHeader
   >;
 
-  @doc("List data products by resource group.")
+  /**
+   * List data products by resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DataProducts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DataProduct>;
 
-  @doc("List data products by subscription.")
+  /**
+   * List data products by subscription.
+   */
   listBySubscription is ArmListBySubscription<DataProduct>;
 
-  @doc("Assign role to the data product.")
+  /**
+   * Assign role to the data product.
+   */
   addUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentCommonProperties,
     RoleAssignmentDetail
   >;
 
-  @doc("Generate sas token for storage account.")
+  /**
+   * Generate sas token for storage account.
+   */
   generateStorageAccountSasToken is ArmResourceActionSync<
     DataProduct,
     AccountSas,
     AccountSasToken
   >;
 
-  @doc("List user roles associated with the data product.")
+  /**
+   * List user roles associated with the data product.
+   */
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
-    Record<unknown>,
+    AnyObject,
     ListRoleAssignments
   >;
 
-  @doc("Remove role from the data product.")
+  /**
+   * Remove role from the data product.
+   */
   removeUserRole is ArmResourceActionNoContentSync<
     DataProduct,
     RoleAssignmentDetail
   >;
 
-  @doc("Initiate key rotation on Data Product.")
+  /**
+   * Initiate key rotation on Data Product.
+   */
   rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
 }

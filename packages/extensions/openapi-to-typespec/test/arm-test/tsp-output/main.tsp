@@ -13,18 +13,24 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * For test.
+ */
 @armProviderNamespace
 @service({
   title: "Azure Test resource management API.",
 })
 @versioned(Versions)
-@doc("For test.")
 namespace Microsoft.Test;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-10-12 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-10-12 API version.")
   v2023_10_12: "2023-10-12",
 }

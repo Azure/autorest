@@ -7,7 +7,9 @@ using TypeSpec.Http;
 
 namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 
-@doc("Human-readable error code.")
+/**
+ * Human-readable error code.
+ */
 enum ErrorCode {
   InvalidRequest,
   InvalidArgument,
@@ -29,7 +31,9 @@ enum ErrorCode {
   Warning,
 }
 
-@doc("Human-readable error code.")
+/**
+ * Human-readable error code.
+ */
 enum InnerErrorCode {
   InvalidRequest,
   InvalidParameterValue,
@@ -47,7 +51,9 @@ enum InnerErrorCode {
   InvalidCountryHint,
 }
 
-@doc("Job Status.")
+/**
+ * Job Status.
+ */
 enum JobStatus {
   notStarted,
   running,
@@ -59,16 +65,21 @@ enum JobStatus {
 }
 
 enum Format {
-  @doc("Export or Import QnA assets in JSON format.") json,
-  @doc("""
-Export or Import knowledge base replica including all assets and metadata in
-Excel format.
-""")
+  /**
+   * Export or Import QnA assets in JSON format.
+   */
+  json,
+
+  /**
+   * Export or Import knowledge base replica including all assets and metadata in
+   * Excel format.
+   */
   tsv,
-  @doc("""
-Export or Import knowledge base replica including all assets and metadata in
-Tsv format.
-""")
+
+  /**
+   * Export or Import knowledge base replica including all assets and metadata in
+   * Tsv format.
+   */
   excel,
 }
 
@@ -77,149 +88,209 @@ enum AssetKind {
   synonyms,
 }
 
-@doc("Supported source types.")
+/**
+ * Supported source types.
+ */
 enum SourceKind {
   file,
   url,
 }
 
-@doc("Content structure type for sources.")
+/**
+ * Content structure type for sources.
+ */
 enum SourceContentStructureKind {
   unstructured,
 }
 
-@doc("Update operation type for assets.")
+/**
+ * Update operation type for assets.
+ */
 enum UpdateOperationKind {
   add,
   delete,
   replace,
 }
 
-@doc("Collection of projects metadata and global settings.")
+/**
+ * Collection of projects metadata and global settings.
+ */
 model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
 
-@doc("Represents the project.")
+/**
+ * Represents the project.
+ */
 model ProjectMetadata {
-  @doc("Name of the project.")
+  /**
+   * Name of the project.
+   */
   projectName?: string;
 
-  @doc("Description of the project.")
+  /**
+   * Description of the project.
+   */
   description?: string;
 
-  @doc("""
-Language of the text records. This is BCP-47 representation of a language. For
-example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\"
-for English as default.
-""")
+  /**
+   * Language of the text records. This is BCP-47 representation of a language. For
+   * example, use "en" for English; "es" for Spanish etc. If not set, use "en" for
+   * English as default.
+   */
   language?: string;
 
-  @doc("Resource enabled for multiple languages across projects or not.")
+  /**
+   * Resource enabled for multiple languages across projects or not.
+   */
   multilingualResource?: boolean;
 
-  @doc("Configurable settings of the Project.")
+  /**
+   * Configurable settings of the Project.
+   */
   settings?: ProjectSettings;
 
-  @doc("Project creation date-time.")
+  /**
+   * Project creation date-time.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("Represents the project last modified date-time.")
+  /**
+   * Represents the project last modified date-time.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("Represents the project last deployment date-time.")
+  /**
+   * Represents the project last deployment date-time.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
-@doc("Configurable settings of the Project.")
+/**
+ * Configurable settings of the Project.
+ */
 model ProjectSettings {
-  @doc("Default Answer response when no good match is found in the knowledge base.")
+  /**
+   * Default Answer response when no good match is found in the knowledge base.
+   */
   defaultAnswer?: string;
 }
 
-@doc("Error response.")
+/**
+ * Error response.
+ */
 @error
 model ErrorResponse {
-  @doc("The error object.")
+  /**
+   * The error object.
+   */
   error: Error;
 }
 
-@doc("The error object.")
+/**
+ * The error object.
+ */
 model Error extends Record<unknown> {
-  @doc("One of a server-defined set of error codes.")
+  /**
+   * One of a server-defined set of error codes.
+   */
   code: ErrorCode;
 
-  @doc("A human-readable representation of the error.")
+  /**
+   * A human-readable representation of the error.
+   */
   message: string;
 
-  @doc("The target of the error.")
+  /**
+   * The target of the error.
+   */
   target?: string;
 
-  @doc("An array of details about specific errors that led to this reported error.")
+  /**
+   * An array of details about specific errors that led to this reported error.
+   */
   details?: Error[];
 
-  @doc("""
-An object containing more specific information than the current object about
-the error.
-""")
+  /**
+   * An object containing more specific information than the current object about
+   * the error.
+   */
   innererror?: InnerErrorModel;
 }
 
-@doc("""
-An object containing more specific information about the error. As per
-Microsoft One API guidelines -
-https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
-""")
+/**
+ * An object containing more specific information about the error. As per
+ * Microsoft One API guidelines -
+ * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+ */
 model InnerErrorModel {
-  @doc("One of a server-defined set of error codes.")
+  /**
+   * One of a server-defined set of error codes.
+   */
   code: InnerErrorCode;
 
-  @doc("Error message.")
+  /**
+   * Error message.
+   */
   message: string;
 
-  @doc("Error details.")
+  /**
+   * Error details.
+   */
   details?: Record<string>;
 
-  @doc("Error target.")
+  /**
+   * Error target.
+   */
   target?: string;
 
-  @doc("""
-An object containing more specific information than the current object about
-the error.
-""")
+  /**
+   * An object containing more specific information than the current object about
+   * the error.
+   */
   innererror?: InnerErrorModel;
 }
 
-@doc("Parameters needed to create the project.")
+/**
+ * Parameters needed to create the project.
+ */
 model CreateProjectOptions {
-  @doc("Description of the project.")
+  /**
+   * Description of the project.
+   */
   description?: string;
 
-  @doc("""
-Language of the text records. This is BCP-47 representation of a language. For
-example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\"
-for English as default.
-""")
+  /**
+   * Language of the text records. This is BCP-47 representation of a language. For
+   * example, use "en" for English; "es" for Spanish etc. If not set, use "en" for
+   * English as default.
+   */
   language: string;
 
-  @doc("""
-Set to true to enable creating knowledgebases in different languages for the
-same resource.
-""")
+  /**
+   * Set to true to enable creating knowledgebases in different languages for the
+   * same resource.
+   */
   multilingualResource?: boolean;
 
-  @doc("Configurable settings of the Project.")
+  /**
+   * Configurable settings of the Project.
+   */
   settings?: ProjectSettings;
 }
 
-@doc("Job state represents the job metadata and any errors.")
+/**
+ * Job state represents the job metadata and any errors.
+ */
 model JobState {
   ...JobMetadata;
   ...Errors;
 }
 
-@doc("Represents the job metadata.")
+/**
+ * Represents the job metadata.
+ */
 model JobMetadata {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime: utcDateTime;
@@ -234,270 +305,400 @@ model JobMetadata {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime: utcDateTime;
 
-  @doc("Job Status.")
+  /**
+   * Job Status.
+   */
   status: JobStatus;
 }
 
-@doc("Collection of Error types.")
+/**
+ * Collection of Error types.
+ */
 model Errors {
   errors?: Error[];
 }
 
-@doc("Export job status, project metadata, and assets.")
+/**
+ * Export job status, project metadata, and assets.
+ */
 model ExportJobState {
   ...JobState;
   ...ExportJobResultUrl;
 }
 
-@doc("URL to download the result of the Export Job.")
+/**
+ * URL to download the result of the Export Job.
+ */
 model ExportJobResultUrl {
-  @doc("URL to download the result of the Export Job.")
+  /**
+   * URL to download the result of the Export Job.
+   */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   resultUrl: string;
 }
 
-@doc("Project assets the needs to be imported.")
+/**
+ * Project assets the needs to be imported.
+ */
 model ImportJobOptions {
-  @doc("Parameters needed to create the project.")
+  /**
+   * Parameters needed to create the project.
+   */
   metadata?: CreateProjectOptions;
 
-  @doc("All assets for this project.")
+  /**
+   * All assets for this project.
+   */
   assets?: Assets;
 
-  @doc("Import data File URI.")
+  /**
+   * Import data File URI.
+   */
   fileUri?: string;
 }
 
-@doc("All assets for this project.")
+/**
+ * All assets for this project.
+ */
 model Assets {
-  @doc("Collection of synonyms.")
+  /**
+   * Collection of synonyms.
+   */
   synonyms?: WordAlterations[];
 
-  @doc("List of QnA records to import.")
+  /**
+   * List of QnA records to import.
+   */
   qnas?: ImportQnaRecord[];
 }
 
-@doc("Collection of word alterations.")
+/**
+ * Collection of word alterations.
+ */
 model WordAlterations {
-  @doc("Collection of word alterations.")
+  /**
+   * Collection of word alterations.
+   */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   alterations: string[];
 }
 
-@doc("Import QnA Record.")
+/**
+ * Import QnA Record.
+ */
 model ImportQnaRecord {
   ...RetrieveQnaRecord;
   ...SourceDisplayNameParameter;
 }
 
-@doc("QnA Record with last updated date-time.")
+/**
+ * QnA Record with last updated date-time.
+ */
 model RetrieveQnaRecord {
   ...QnaRecord;
   ...LastUpdatedDateTimeParameter;
 }
 
-@doc("QnA record.")
+/**
+ * QnA record.
+ */
 model QnaRecord {
-  @doc("Unique ID for the QnA.")
+  /**
+   * Unique ID for the QnA.
+   */
   id?: int32;
 
-  @doc("Answer text.")
+  /**
+   * Answer text.
+   */
   @maxLength(25000)
   @minLength(1)
   answer?: string;
 
-  @doc("""
-Source from which QnA was indexed e.g.
-https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .
-""")
+  /**
+   * Source from which QnA was indexed e.g.
+   * https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs .
+   */
   @maxLength(300)
   source?: string;
 
-  @doc("List of questions associated with the answer.")
+  /**
+   * List of questions associated with the answer.
+   */
   questions?: string[];
 
-  @doc("""
-Metadata associated with the answer, useful to categorize or filter question
-answers.
-""")
+  /**
+   * Metadata associated with the answer, useful to categorize or filter question
+   * answers.
+   */
   metadata?: Record<string>;
 
-  @doc("Context of a QnA.")
+  /**
+   * Context of a QnA.
+   */
   dialog?: QnaDialog;
 
-  @doc("List of Active Learning suggestions for the QnA.")
+  /**
+   * List of Active Learning suggestions for the QnA.
+   */
   activeLearningSuggestions?: SuggestedQuestionsCluster[];
 }
 
-@doc("Dialog associated with QnA Record.")
+/**
+ * Dialog associated with QnA Record.
+ */
 model QnaDialog {
-  @doc("""
-To mark if a prompt is relevant only with a previous question or not. If true,
-do not include this QnA as answer for queries without context; otherwise,
-ignores context and includes this QnA in answers.
-""")
+  /**
+   * To mark if a prompt is relevant only with a previous question or not. If true,
+   * do not include this QnA as answer for queries without context; otherwise,
+   * ignores context and includes this QnA in answers.
+   */
   isContextOnly?: boolean;
 
-  @doc("List of prompts associated with the answer.")
+  /**
+   * List of prompts associated with the answer.
+   */
   prompts?: QnaPrompt[];
 }
 
-@doc("Prompt for an answer.")
+/**
+ * Prompt for an answer.
+ */
 model QnaPrompt {
-  @doc("Index of the prompt. It is used for ordering of the prompts.")
+  /**
+   * Index of the prompt. It is used for ordering of the prompts.
+   */
   displayOrder?: int32;
 
-  @doc("ID of the QnA corresponding to the prompt.")
+  /**
+   * ID of the QnA corresponding to the prompt.
+   */
   qnaId?: int32;
 
-  @doc("QnA record. Either QnAId or QnA record needs to be present in a Prompt.")
+  /**
+   * QnA record. Either QnAId or QnA record needs to be present in a Prompt.
+   */
   qna?: QnaRecord;
 
-  @doc("Text displayed to represent a follow up question prompt.")
+  /**
+   * Text displayed to represent a follow up question prompt.
+   */
   @maxLength(200)
   displayText?: string;
 }
 
-@doc("Active Learning suggested questions cluster details.")
+/**
+ * Active Learning suggested questions cluster details.
+ */
 model SuggestedQuestionsCluster {
-  @doc("""
-Question chosen as the head of suggested questions cluster by Active Learning
-clustering algorithm.
-""")
+  /**
+   * Question chosen as the head of suggested questions cluster by Active Learning
+   * clustering algorithm.
+   */
   clusterHead?: string;
 
-  @doc("List of all suggested questions for the QnA.")
+  /**
+   * List of all suggested questions for the QnA.
+   */
   suggestedQuestions?: SuggestedQuestion[];
 }
 
-@doc("Question suggested by the Active Learning feature.")
+/**
+ * Question suggested by the Active Learning feature.
+ */
 model SuggestedQuestion {
-  @doc("Question suggested by the Active Learning feature.")
+  /**
+   * Question suggested by the Active Learning feature.
+   */
   question?: string;
 
-  @doc("The number of times the question was suggested explicitly by the user.")
+  /**
+   * The number of times the question was suggested explicitly by the user.
+   */
   userSuggestedCount?: int32;
 
-  @doc("""
-The number of times the question was suggested automatically by the Active
-Learning algorithm.
-""")
+  /**
+   * The number of times the question was suggested automatically by the Active
+   * Learning algorithm.
+   */
   autoSuggestedCount?: int32;
 }
 
-@doc("Last updated date-time parameter.")
+/**
+ * Last updated date-time parameter.
+ */
 model LastUpdatedDateTimeParameter {
-  @doc("Date-time when the QnA was last updated.")
+  /**
+   * Date-time when the QnA was last updated.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateTime?: utcDateTime;
 }
 
 model SourceDisplayNameParameter {
-  @doc("Friendly name of the Source.")
+  /**
+   * Friendly name of the Source.
+   */
   @maxLength(200)
   @minLength(1)
   sourceDisplayName?: string;
 }
 
-@doc("All deployments of a project.")
+/**
+ * All deployments of a project.
+ */
 model ProjectDeployments is Azure.Core.Page<ProjectDeployment>;
 
-@doc("Project deployment details.")
+/**
+ * Project deployment details.
+ */
 model ProjectDeployment {
-  @doc("Name of the deployment.")
+  /**
+   * Name of the deployment.
+   */
   deploymentName?: string;
 
-  @doc("Represents the project last deployment date-time.")
+  /**
+   * Represents the project last deployment date-time.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastDeployedDateTime?: utcDateTime;
 }
 
-@doc("All synonym assets for this project.")
+/**
+ * All synonym assets for this project.
+ */
 model SynonymAssets is Azure.Core.Page<WordAlterations>;
 
-@doc("All QnA sources for the project.")
+/**
+ * All QnA sources for the project.
+ */
 model QnaSources is Azure.Core.Page<QnaSourceRecord>;
 
-@doc("Custom source record with last updated date-time.")
+/**
+ * Custom source record with last updated date-time.
+ */
 model QnaSourceRecord {
   ...QnaSourceMetadata;
   ...LastUpdatedDateTimeParameter;
 }
 
-@doc("Input source file or url details.")
+/**
+ * Input source file or url details.
+ */
 model QnaSourceMetadata {
-  @doc("Friendly name of the Source.")
+  /**
+   * Friendly name of the Source.
+   */
   @maxLength(200)
   @minLength(1)
   displayName?: string;
 
-  @doc("""
-Unique source identifier. Name of the file if it's a 'file' source; otherwise,
-the complete URL if it's a 'url' source.
-""")
+  /**
+   * Unique source identifier. Name of the file if it's a 'file' source; otherwise,
+   * the complete URL if it's a 'url' source.
+   */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   source: string;
 
-  @doc("URI location for the file or url.")
-  sourceUri: string;
+  /**
+   * URI location for the file or url.
+   */
+  sourceUri: url;
 
-  @doc("Supported source types.")
+  /**
+   * Supported source types.
+   */
   sourceKind: SourceKind;
 
-  @doc("Content structure type for sources.")
+  /**
+   * Content structure type for sources.
+   */
   contentStructureKind?: SourceContentStructureKind;
 }
 
-@doc("Source to be updated.")
+/**
+ * Source to be updated.
+ */
 model UpdateSourceRecord {
-  @doc("Update operation type for assets.")
+  /**
+   * Update operation type for assets.
+   */
   `op`: UpdateOperationKind;
 
-  @doc("Update source record.")
+  /**
+   * Update source record.
+   */
   value: UpdateQnaSourceRecord;
 }
 
-@doc("Update source record.")
+/**
+ * Update source record.
+ */
 model UpdateQnaSourceRecord {
   ...QnaSourceMetadata;
   ...RefreshSourceOptions;
 }
 
-@doc("Boolean flag used to refresh data from the Source.")
+/**
+ * Boolean flag used to refresh data from the Source.
+ */
 model RefreshSourceOptions {
-  @doc("Boolean flag used to refresh data from the Source.")
+  /**
+   * Boolean flag used to refresh data from the Source.
+   */
   refresh?: boolean;
 }
 
-@doc("All QnA assets for the project.")
+/**
+ * All QnA assets for the project.
+ */
 model QnaAssets is Azure.Core.Page<RetrieveQnaRecord>;
 
-@doc("QnA record to be updated.")
+/**
+ * QnA record to be updated.
+ */
 model UpdateQnaRecord {
-  @doc("Update operation type for assets.")
+  /**
+   * Update operation type for assets.
+   */
   `op`: UpdateOperationKind;
 
-  @doc("QnA record.")
+  /**
+   * QnA record.
+   */
   value: QnaRecord;
 }
 
-@doc("Feedback for Active Learning.")
+/**
+ * Feedback for Active Learning.
+ */
 model ActiveLearningFeedback {
-  @doc("A list of Feedback Records for Active Learning.")
+  /**
+   * A list of Feedback Records for Active Learning.
+   */
   records?: FeedbackRecord[];
 }
 
-@doc("Feedback Record for Active Learning.")
+/**
+ * Feedback Record for Active Learning.
+ */
 model FeedbackRecord {
-  @doc("Unique identifier of the user.")
+  /**
+   * Unique identifier of the user.
+   */
   userId?: string;
 
-  @doc("User suggested question for the QnA.")
+  /**
+   * User suggested question for the QnA.
+   */
   userQuestion?: string;
 
-  @doc("Unique ID of the QnA.")
+  /**
+   * Unique ID of the QnA.
+   */
   qnaId?: int32;
 }

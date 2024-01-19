@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An certificate resource belonging to a catalog resource.")
+/**
+ * An certificate resource belonging to a catalog resource.
+ */
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {
-  @doc("Serial number of the certificate. Use '.default' to get current active certificate.")
+  /**
+   * Serial number of the certificate. Use '.default' to get current active certificate.
+   */
   @path
   @key("serialNumber")
   @segment("certificates")
@@ -24,44 +28,74 @@ model Certificate is ProxyResource<CertificateProperties> {
 
 @armResourceOperations
 interface Certificates {
-  @doc("Get a Certificate")
+  /**
+   * Get a Certificate
+   */
   get is ArmResourceRead<Certificate>;
 
-  @doc("List Certificate resources by Catalog")
+  /**
+   * List Certificate resources by Catalog
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificates_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
       ...BaseParameters<Certificate>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }
   >;
 
-  @doc("Retrieves cert chain.")
+  /**
+   * Retrieves cert chain.
+   */
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
     void,
     CertificateChainResponse
   >;
 
-  @doc("Gets the proof of possession nonce.")
+  /**
+   * Gets the proof of possession nonce.
+   */
   retrieveProofOfPossessionNonce is ArmResourceActionSync<
     Certificate,
     ProofOfPossessionNonceRequest,
     ProofOfPossessionNonceResponse
   >;
 }
+
+@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "json",
+  "proofOfPossessionNonceRequest"
+);
+@@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "x-ms-client-name",
+  "proofOfPossessionNonceRequest"
+);
+@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "Proof of possession nonce request body "
+);

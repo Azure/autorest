@@ -1,7 +1,9 @@
 import {
   CodeModel,
   DictionarySchema,
+  isNumberSchema,
   isObjectSchema,
+  NumberSchema,
   ObjectSchema,
   Property,
   Schema,
@@ -28,18 +30,21 @@ import {
 } from "../utils/schemas";
 import { getDefaultValue, transformValue } from "../utils/values";
 
-const typespecTypes = new Map<SchemaType, string>([
+const typespecTypes = new Map<string, string>([
   [SchemaType.Date, "plainDate"],
   [SchemaType.DateTime, "utcDateTime"],
   [SchemaType.UnixTime, "plainTime"],
   [SchemaType.String, "string"],
   [SchemaType.Time, "plainTime"],
   [SchemaType.Uuid, "string"],
-  [SchemaType.Uri, "string"],
+  [SchemaType.Uri, "url"],
   [SchemaType.ByteArray, "bytes"],
   [SchemaType.Binary, "bytes"],
-  [SchemaType.Number, "float32"],
-  [SchemaType.Integer, "int32"],
+  [SchemaType.Number + "32", "float32"],
+  [SchemaType.Number + "64", "float64"],
+  [SchemaType.Number + "128", "decimal"],
+  [SchemaType.Integer + "32", "int32"],
+  [SchemaType.Integer + "64", "int64"],
   [SchemaType.Boolean, "boolean"],
   [SchemaType.Credential, "string"],
   [SchemaType.Duration, "duration"],
@@ -137,6 +142,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     type: getTypespecType(propertySchema.schema, codeModel),
     decorators: getPropertyDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
+    defaultValue: getDefaultValue(propertySchema.schema),
   };
 }
 
@@ -192,7 +198,7 @@ function getArmIdType(schema: Schema): string {
 }
 
 export function getTypespecType(schema: Schema, codeModel: CodeModel): string {
-  const schemaType = schema.type;
+  let schemaType = schema.type as string;
   const visited = getDataTypes(codeModel).get(schema);
 
   if (visited) {
@@ -230,6 +236,10 @@ export function getTypespecType(schema: Schema, codeModel: CodeModel): string {
 
   if (isArmIdSchema(schema) || (schema as StringSchema).extensions?.["x-ms-arm-id-details"]) {
     return getArmIdType(schema);
+  }
+
+  if (isNumberSchema(schema)) {
+    schemaType += `${(schema as NumberSchema).precision}`;
   }
 
   const typespecType = typespecTypes.get(schemaType);

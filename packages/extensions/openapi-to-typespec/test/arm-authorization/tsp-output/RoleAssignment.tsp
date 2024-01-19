@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-@doc("Role Assignments")
+/**
+ * Role Assignments
+ */
 model RoleAssignment is ExtensionResource<RoleAssignmentProperties> {
-  @doc("The name of the role assignment. It can be any valid GUID.")
+  /**
+   * The name of the role assignment. It can be any valid GUID.
+   */
   @path
   @key("roleAssignmentName")
   @segment("roleAssignments")
@@ -22,50 +26,82 @@ model RoleAssignment is ExtensionResource<RoleAssignmentProperties> {
 
 @armResourceOperations
 interface RoleAssignments {
-  @doc("Get a role assignment by scope and name.")
+  /**
+   * Get a role assignment by scope and name.
+   */
   get is ArmResourceRead<
     RoleAssignment,
     {
       ...BaseParameters<RoleAssignment>;
 
-      @doc("Tenant ID for cross-tenant request")
+      /**
+       * Tenant ID for cross-tenant request
+       */
       @query("tenantId")
       tenantId?: string;
     }
   >;
 
-  @doc("Create or update a role assignment by scope and name.")
+  /**
+   * Create or update a role assignment by scope and name.
+   */
   create is ArmResourceCreateOrReplaceSync<RoleAssignment>;
 
-  @doc("Delete a role assignment by scope and name.")
+  /**
+   * Delete a role assignment by scope and name.
+   */
   delete is ArmResourceDeleteSync<
     RoleAssignment,
     {
       ...BaseParameters<RoleAssignment>;
 
-      @doc("Tenant ID for cross-tenant request")
+      /**
+       * Tenant ID for cross-tenant request
+       */
       @query("tenantId")
       tenantId?: string;
     }
   >;
 
-  @doc("List all role assignments that apply to a scope.")
+  /**
+   * List all role assignments that apply to a scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("RoleAssignments_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignment,
     {
       ...BaseParameters<RoleAssignment>;
 
-      @doc("The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.")
+      /**
+       * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Tenant ID for cross-tenant request")
+      /**
+       * Tenant ID for cross-tenant request
+       */
       @query("tenantId")
       tenantId?: string;
 
-      @doc("The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.")
+      /**
+       * The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.
+       */
       @query("$skipToken")
       $skipToken?: string;
     }
   >;
 }
+
+@@projectedName(RoleAssignments.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(RoleAssignments.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(RoleAssignments.create::parameters.resource,
+  "Parameters for the role assignment."
+);

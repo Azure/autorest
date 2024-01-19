@@ -8,34 +8,46 @@ using TypeSpec.Http;
 namespace QnAMakerRuntimeClient;
 
 interface RuntimeOperations {
+  /**
+   * GenerateAnswer call to query the knowledgebase.
+   */
   @summary("GenerateAnswer call to query the knowledgebase.")
-  @doc("GenerateAnswer call to query the knowledgebase.")
   @route("/knowledgebases/{kbId}/generateAnswer")
   @post
-  GenerateAnswer is Azure.Core.Foundations.Operation<
+  generateAnswer is Azure.Core.Foundations.Operation<
     {
-      @doc("Knowledgebase id.")
+      /**
+       * Knowledgebase id.
+       */
       @path
       kbId: string;
 
-      @doc("Post body of the request.")
+      /**
+       * Post body of the request.
+       */
       @body
       generateAnswerPayload: QueryDTO;
     },
     QnASearchResultList
   >;
 
+  /**
+   * Train call to add suggestions to the knowledgebase.
+   */
   @summary("Train call to add suggestions to the knowledgebase.")
-  @doc("Train call to add suggestions to the knowledgebase.")
   @route("/knowledgebases/{kbId}/train")
   @post
-  Train is Azure.Core.Foundations.Operation<
+  train is Azure.Core.Foundations.Operation<
     {
-      @doc("Knowledgebase id.")
+      /**
+       * Knowledgebase id.
+       */
       @path
       kbId: string;
 
-      @doc("Post body of the request.")
+      /**
+       * Post body of the request.
+       */
       @body
       trainPayload: FeedbackRecordsDTO;
     },

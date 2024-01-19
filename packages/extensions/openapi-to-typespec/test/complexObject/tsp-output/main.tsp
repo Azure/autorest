@@ -4,6 +4,9 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * Some cool documentation.
+ */
 @service({
   title: "Complex Model Client",
 })
@@ -15,11 +18,14 @@ using TypeSpec.Http;
     $host: string,
   }
 )
-@doc("Some cool documentation.")
 namespace ComplexModelClient;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2014-04-01-preview API version.")
+  /**
+   * The 2014-04-01-preview API version.
+   */
   v2014_04_01_preview: "2014-04-01-preview",
 }

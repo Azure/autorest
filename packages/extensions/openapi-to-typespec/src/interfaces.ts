@@ -177,6 +177,7 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   decorators?: TypespecDecorator[];
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
+  augmentedDecorators?: string[];
 }
 
 export type TspArmResourceOperation =
@@ -188,7 +189,7 @@ export interface TspArmResourceNonListOperation extends TspArmResourceOperationB
   kind:
     | "ArmResourceRead"
     | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrUpdateAsync"
+    | "ArmResourceCreateOrReplaceAsync"
     | "ArmResourcePatchSync"
     | "ArmResourcePatchAsync"
     | "ArmTagsPatchSync"

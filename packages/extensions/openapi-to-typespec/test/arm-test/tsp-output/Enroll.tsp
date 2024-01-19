@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-@doc("A Test resource")
+/**
+ * A Test resource
+ */
 @singleton("default")
 @parentResource(Employee)
 model Enroll is TrackedResource<EnrollProperties> {
@@ -23,6 +25,8 @@ model Enroll is TrackedResource<EnrollProperties> {
 
 @armResourceOperations
 interface Enrolls {
-  @doc("Get a Enroll.")
+  /**
+   * Get a Enroll.
+   */
   get is ArmResourceRead<Enroll>;
 }

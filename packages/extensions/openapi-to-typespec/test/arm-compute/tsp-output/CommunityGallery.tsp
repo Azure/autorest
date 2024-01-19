@@ -12,10 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 // FIXME: CommunityGallery has no properties property
-@doc("Specifies information about the Community Gallery that you want to create or update.")
+/**
+ * Specifies information about the Community Gallery that you want to create or update.
+ */
 @locationResource
 model CommunityGallery is ProxyResource<{}> {
-  @doc("The public name of the community gallery.")
+  /**
+   * The public name of the community gallery.
+   */
   @path
   @key("publicGalleryName")
   @segment("communityGalleries")
@@ -24,6 +28,8 @@ model CommunityGallery is ProxyResource<{}> {
 
 @armResourceOperations
 interface CommunityGalleries {
-  @doc("Get a community gallery by gallery public name.")
+  /**
+   * Get a community gallery by gallery public name.
+   */
   get is ArmResourceRead<CommunityGallery>;
 }

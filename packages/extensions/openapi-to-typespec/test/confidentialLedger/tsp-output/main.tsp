@@ -4,6 +4,10 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * The ConfidentialLedgerClient writes and retrieves ledger entries against the
+ * Confidential Ledger service.
+ */
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
 })
@@ -15,14 +19,14 @@ using TypeSpec.Http;
     ledgerEndpoint: string,
   }
 )
-@doc("""
-The ConfidentialLedgerClient writes and retrieves ledger entries against the
-Confidential Ledger service.
-""")
 namespace Azure.Language.Authoring;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2022-05-13 API version.")
+  /**
+   * The 2022-05-13 API version.
+   */
   v2022_05_13: "2022-05-13",
 }

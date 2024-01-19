@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An image resource belonging to a catalog resource.")
+/**
+ * An image resource belonging to a catalog resource.
+ */
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name. Use .default for image creation.")
+  /**
+   * Image name. Use .default for image creation.
+   */
   @path
   @key("imageName")
   @segment("images")
@@ -24,42 +28,60 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images {
-  @doc("Get a Image")
+  /**
+   * Get a Image
+   */
   get is ArmResourceRead<Image>;
 
-  @doc("Create a Image")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create a Image
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Image,
     BaseParameters<Image>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Delete a Image")
+  /**
+   * Delete a Image
+   */
   delete is ArmResourceDeleteAsync<
     Image,
     BaseParameters<Image>,
     ArmLroLocationHeader
   >;
 
-  @doc("List Image resources by Catalog")
+  /**
+   * List Image resources by Catalog
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Images_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Image,
     {
       ...BaseParameters<Image>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }

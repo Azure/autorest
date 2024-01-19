@@ -12,10 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 // FIXME: SharedGallery has no properties property
-@doc("Specifies information about the Shared Gallery that you want to create or update.")
+/**
+ * Specifies information about the Shared Gallery that you want to create or update.
+ */
 @locationResource
 model SharedGallery is ProxyResource<{}> {
-  @doc("The unique name of the Shared Gallery.")
+  /**
+   * The unique name of the Shared Gallery.
+   */
   @path
   @key("galleryUniqueName")
   @segment("sharedGalleries")
@@ -24,16 +28,24 @@ model SharedGallery is ProxyResource<{}> {
 
 @armResourceOperations
 interface SharedGalleries {
-  @doc("Get a shared gallery by subscription id or tenant id.")
+  /**
+   * Get a shared gallery by subscription id or tenant id.
+   */
   get is ArmResourceRead<SharedGallery>;
 
-  @doc("List shared galleries by subscription id or tenant id.")
+  /**
+   * List shared galleries by subscription id or tenant id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("SharedGalleries_List")
   list is ArmResourceListByParent<
     SharedGallery,
     {
       ...BaseParameters<SharedGallery>;
 
-      @doc("The query parameter to decide what shared galleries to fetch when doing listing operations.")
+      /**
+       * The query parameter to decide what shared galleries to fetch when doing listing operations.
+       */
       @query("sharedTo")
       sharedTo?: SharedToValues;
     }

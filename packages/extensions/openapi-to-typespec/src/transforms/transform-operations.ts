@@ -9,6 +9,7 @@ import {
   Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
+import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
 import {
@@ -83,7 +84,7 @@ export function transformOperation(operation: Operation, codeModel: CodeModel): 
 
 export function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel): TypespecOperation {
   const { language, responses, requests } = operation;
-  const name = language.default.name;
+  const name = _.lowerFirst(language.default.name);
   const doc = language.default.description;
   const summary = language.default.summary;
   const { paging } = getLanguageMetadata(operation.language);

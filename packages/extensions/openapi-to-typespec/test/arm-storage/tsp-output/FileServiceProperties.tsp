@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("The properties of File services in storage account.")
+/**
+ * The properties of File services in storage account.
+ */
 @singleton("default")
 @parentResource(StorageAccount)
 model FileServiceProperties is ProxyResource<FileServicePropertiesProperties> {
@@ -26,18 +28,36 @@ model FileServiceProperties is ProxyResource<FileServicePropertiesProperties> {
 @armResourceOperations
 @projectedName("client", "FileServiceProperties")
 interface FileServicePropertiesOperationGroup {
+  /**
+   * Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.")
   @operationId("FileServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<FileServiceProperties>;
 
+  /**
+   * Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ")
   @operationId("FileServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<FileServiceProperties>;
 
+  /**
+   * List all file services in storage accounts
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List all file services in storage accounts")
   @operationId("FileServices_List")
   list is ArmResourceListByParent<FileServiceProperties>;
 }
+
+@@projectedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules."
+);

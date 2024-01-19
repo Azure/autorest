@@ -11,7 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Describes a Virtual Machine Extension Image.")
+/**
+ * Describes a Virtual Machine Extension Image.
+ */
 @locationResource
 model VirtualMachineExtensionImage
   is TrackedResource<VirtualMachineExtensionImageProperties> {
@@ -23,9 +25,15 @@ model VirtualMachineExtensionImage
 
 @armResourceOperations
 interface VirtualMachineExtensionImages {
-  @doc("Gets a virtual machine extension image.")
+  /**
+   * Gets a virtual machine extension image.
+   */
   get is ArmResourceRead<VirtualMachineExtensionImage>;
 
-  @doc("Gets a list of virtual machine extension image types.")
+  /**
+   * Gets a list of virtual machine extension image types.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineExtensionImages_ListTypes")
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }

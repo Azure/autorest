@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image version that you want to create or update.")
+/**
+ * Specifies information about the gallery image version that you want to create or update.
+ */
 @parentResource(CommunityGalleryImage)
 model CommunityGalleryImageVersion
   is ProxyResource<CommunityGalleryImageVersionProperties> {
-  @doc("The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
+  /**
+   * The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
+   */
   @path
   @key("galleryImageVersionName")
   @segment("versions")
@@ -25,9 +29,15 @@ model CommunityGalleryImageVersion
 
 @armResourceOperations
 interface CommunityGalleryImageVersions {
-  @doc("Get a community gallery image version.")
+  /**
+   * Get a community gallery image version.
+   */
   get is ArmResourceRead<CommunityGalleryImageVersion>;
 
-  @doc("List community gallery image versions inside an image.")
+  /**
+   * List community gallery image versions inside an image.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CommunityGalleryImageVersions_List")
   list is ArmResourceListByParent<CommunityGalleryImageVersion>;
 }

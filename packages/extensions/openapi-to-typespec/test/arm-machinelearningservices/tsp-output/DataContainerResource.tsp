@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Registry)
 model DataContainerResource is ProxyResource<DataContainer> {
-  @doc("Container name.")
+  /**
+   * Container name.
+   */
   @path
   @key("name")
   @segment("data")
@@ -24,18 +28,24 @@ model DataContainerResource is ProxyResource<DataContainer> {
 
 @armResourceOperations
 interface DataContainerResources {
+  /**
+   * Get container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get container.")
   @operationId("RegistryDataContainers_Get")
   get is ArmResourceRead<DataContainerResource>;
 
+  /**
+   * Create or update container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update container.")
   @operationId("RegistryDataContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainerResource>;
 
+  /**
+   * Delete container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete container.")
   @operationId("RegistryDataContainers_Delete")
   delete is ArmResourceDeleteAsync<
     DataContainerResource,
@@ -43,21 +53,39 @@ interface DataContainerResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Data containers.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Data containers.")
   @operationId("RegistryDataContainers_List")
   list is ArmResourceListByParent<
     DataContainerResource,
     {
       ...BaseParameters<DataContainerResource>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("View type for including/excluding (for example) archived entities.")
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
     }
   >;
 }
+
+@@projectedName(DataContainerResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(DataContainerResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(DataContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

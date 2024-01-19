@@ -7,928 +7,1597 @@ using TypeSpec.Http;
 
 namespace Azure.LoadTesting;
 
-@doc("The client metric on which the criteria should be applied.")
+/**
+ * The client metric on which the criteria should be applied.
+ */
 enum PFMetrics {
-  @doc("Pass fail criteria for response time metric") response_time_ms,
-  @doc("Pass fail criteria for response time metric") latency,
-  @doc("Pass fail criteria for error metric") error,
-  @doc("Pass fail criteria for total requests") requests,
-  @doc("Pass fail criteria for request rate.") requests_per_sec,
+  /**
+   * Pass fail criteria for response time metric
+   */
+  response_time_ms,
+
+  /**
+   * Pass fail criteria for response time metric
+   */
+  latency,
+
+  /**
+   * Pass fail criteria for error metric
+   */
+  error,
+
+  /**
+   * Pass fail criteria for total requests
+   */
+  requests,
+
+  /**
+   * Pass fail criteria for request rate.
+   */
+  requests_per_sec,
 }
 
-@doc("""
-The aggregation function to be applied on the client metric. Allowed functions
-- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
-‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-‘count’ - for requests
-""")
+/**
+ * The aggregation function to be applied on the client metric. Allowed functions
+ * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+ * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+ * ‘count’ - for requests
+ */
 enum PFAgFunc {
-  @doc("Criteria applies for count value") count,
-  @doc("Criteria applies for given percentage value") percentage,
-  @doc("Criteria applies for avg value") avg,
-  @doc("Criteria applies for 50th percentile value") p50,
-  @doc("Criteria applies for 90th percentile value") p90,
-  @doc("Criteria applies for 95th percentile value") p95,
-  @doc("Criteria applies for 99th percentile value") p99,
-  @doc("Criteria applies for minimum value") min,
-  @doc("Criteria applies for maximum value") max,
+  /**
+   * Criteria applies for count value
+   */
+  count,
+
+  /**
+   * Criteria applies for given percentage value
+   */
+  percentage,
+
+  /**
+   * Criteria applies for avg value
+   */
+  avg,
+
+  /**
+   * Criteria applies for 50th percentile value
+   */
+  p50,
+
+  /**
+   * Criteria applies for 90th percentile value
+   */
+  p90,
+
+  /**
+   * Criteria applies for 95th percentile value
+   */
+  p95,
+
+  /**
+   * Criteria applies for 99th percentile value
+   */
+  p99,
+
+  /**
+   * Criteria applies for minimum value
+   */
+  min,
+
+  /**
+   * Criteria applies for maximum value
+   */
+  max,
 }
 
-@doc("Action taken after the threshold is met. Default is ‘continue’.")
+/**
+ * Action taken after the threshold is met. Default is ‘continue’.
+ */
 enum PFAction {
-  @doc("Test will continue to run even if pass fail metric criteria metric gets failed")
+  /**
+   * Test will continue to run even if pass fail metric criteria metric gets failed
+   */
   continue,
-  @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
+
+  /**
+   * Test run will stop if pass fail criteria metric is not passed.
+   */
+  stop,
 }
 
-@doc("Outcome of the test run.")
+/**
+ * Outcome of the test run.
+ */
 enum PFResult {
-  @doc("Given pass fail criteria metric has passed.") passed,
-  @doc("Given pass fail criteria metric couldn't determine.") undetermined,
-  @doc("Given pass fail criteria metric has failed.") failed,
+  /**
+   * Given pass fail criteria metric has passed.
+   */
+  passed,
+
+  /**
+   * Given pass fail criteria metric couldn't determine.
+   */
+  undetermined,
+
+  /**
+   * Given pass fail criteria metric has failed.
+   */
+  failed,
 }
 
-@doc("Type of secret")
+/**
+ * Type of secret
+ */
 enum SecretType {
-  @doc("If the secret is stored in an Azure Key Vault") AKV_SECRET_URI,
-  @doc("If the Plain text secret value provided") SECRET_VALUE,
+  /**
+   * If the secret is stored in an Azure Key Vault
+   */
+  AKV_SECRET_URI,
+
+  /**
+   * If the Plain text secret value provided
+   */
+  SECRET_VALUE,
 }
 
-@doc("Type of certificate")
+/**
+ * Type of certificate
+ */
 enum CertificateType {
-  @doc("If the certificate is stored in an Azure Key Vault") AKV_CERT_URI,
+  /**
+   * If the certificate is stored in an Azure Key Vault
+   */
+  AKV_CERT_URI,
 }
 
-@doc("File type")
+/**
+ * File type
+ */
 enum FileType {
-  @doc("If file is jmx script") JMX_FILE,
-  @doc("If file is user properties") USER_PROPERTIES,
-  @doc("If file is not any of other supported type") ADDITIONAL_ARTIFACTS,
+  /**
+   * If file is jmx script
+   */
+  JMX_FILE,
+
+  /**
+   * If file is user properties
+   */
+  USER_PROPERTIES,
+
+  /**
+   * If file is not any of other supported type
+   */
+  ADDITIONAL_ARTIFACTS,
 }
 
-@doc("Validation status of the file")
+/**
+ * Validation status of the file
+ */
 enum FileStatus {
-  @doc("File is not validated.") NOT_VALIDATED,
-  @doc("File is validated.") VALIDATION_SUCCESS,
-  @doc("File validation is failed.") VALIDATION_FAILURE,
-  @doc("File validation is in progress.") VALIDATION_INITIATED,
-  @doc("Validation is not required.") VALIDATION_NOT_REQUIRED,
+  /**
+   * File is not validated.
+   */
+  NOT_VALIDATED,
+
+  /**
+   * File is validated.
+   */
+  VALIDATION_SUCCESS,
+
+  /**
+   * File validation is failed.
+   */
+  VALIDATION_FAILURE,
+
+  /**
+   * File validation is in progress.
+   */
+  VALIDATION_INITIATED,
+
+  /**
+   * Validation is not required.
+   */
+  VALIDATION_NOT_REQUIRED,
 }
 
-@doc("Test result for pass/Fail criteria used during the test run.")
+/**
+ * Test result for pass/Fail criteria used during the test run.
+ */
 enum PFTestResult {
-  @doc("Pass/fail criteria has passed.") PASSED,
-  @doc("Pass/fail criteria is not applicable.") NOT_APPLICABLE,
-  @doc("Pass/fail criteria has failed.") FAILED,
+  /**
+   * Pass/fail criteria has passed.
+   */
+  PASSED,
+
+  /**
+   * Pass/fail criteria is not applicable.
+   */
+  NOT_APPLICABLE,
+
+  /**
+   * Pass/fail criteria has failed.
+   */
+  FAILED,
 }
 
-@doc("The test run status.")
+/**
+ * The test run status.
+ */
 enum Status {
-  @doc("Test run request is accepted") ACCEPTED,
-  @doc("Test run is not yet started.") NOTSTARTED,
-  @doc("Test run is getting provision") PROVISIONING,
-  @doc("Test run is provisioned") PROVISIONED,
-  @doc("Test run is getting configure") CONFIGURING,
-  @doc("Test run configuration is done") CONFIGURED,
-  @doc("Test run has started executing") EXECUTING,
-  @doc("Test run has been executed") EXECUTED,
-  @doc("Test run is getting deprovision") DEPROVISIONING,
-  @doc("Test run request is deprovisioned") DEPROVISIONED,
-  @doc("Test run request is finished") DONE,
-  @doc("Test run request is getting cancelled") CANCELLING,
-  @doc("Test run request is cancelled") CANCELLED,
-  @doc("Test run request is failed") FAILED,
-  @doc("Test run JMX file is validated") VALIDATION_SUCCESS,
-  @doc("Test run JMX file validation is failed") VALIDATION_FAILURE,
+  /**
+   * Test run request is accepted
+   */
+  ACCEPTED,
+
+  /**
+   * Test run is not yet started.
+   */
+  NOTSTARTED,
+
+  /**
+   * Test run is getting provision
+   */
+  PROVISIONING,
+
+  /**
+   * Test run is provisioned
+   */
+  PROVISIONED,
+
+  /**
+   * Test run is getting configure
+   */
+  CONFIGURING,
+
+  /**
+   * Test run configuration is done
+   */
+  CONFIGURED,
+
+  /**
+   * Test run has started executing
+   */
+  EXECUTING,
+
+  /**
+   * Test run has been executed
+   */
+  EXECUTED,
+
+  /**
+   * Test run is getting deprovision
+   */
+  DEPROVISIONING,
+
+  /**
+   * Test run request is deprovisioned
+   */
+  DEPROVISIONED,
+
+  /**
+   * Test run request is finished
+   */
+  DONE,
+
+  /**
+   * Test run request is getting cancelled
+   */
+  CANCELLING,
+
+  /**
+   * Test run request is cancelled
+   */
+  CANCELLED,
+
+  /**
+   * Test run request is failed
+   */
+  FAILED,
+
+  /**
+   * Test run JMX file is validated
+   */
+  VALIDATION_SUCCESS,
+
+  /**
+   * Test run JMX file validation is failed
+   */
+  VALIDATION_FAILURE,
 }
 
-@doc("The primary aggregation type value defining how to use the values for display.")
+/**
+ * The primary aggregation type value defining how to use the values for display.
+ */
 enum AggregationType {
-  @doc("Average value") Average,
-  @doc("Total count") Count,
-  @doc("Aggregation will be average in this case") None,
-  @doc("Total sum") Total,
-  @doc("90th percentile") Percentile90,
-  @doc("95th percentile") Percentile95,
-  @doc("99th percentile") Percentile99,
+  /**
+   * Average value
+   */
+  Average,
+
+  /**
+   * Total count
+   */
+  Count,
+
+  /**
+   * Aggregation will be average in this case
+   */
+  None,
+
+  /**
+   * Total sum
+   */
+  Total,
+
+  /**
+   * 90th percentile
+   */
+  Percentile90,
+
+  /**
+   * 95th percentile
+   */
+  Percentile95,
+
+  /**
+   * 99th percentile
+   */
+  Percentile99,
 }
 
-@doc("The unit of the metric.")
+/**
+ * The unit of the metric.
+ */
 enum MetricUnit {
-  @doc("No unit specified") NotSpecified,
-  @doc("Percentage") Percent,
-  @doc("Value count") Count,
-  @doc("Seconds") Seconds,
-  @doc("Milliseconds") Milliseconds,
-  @doc("Bytes") Bytes,
-  @doc("Bytes per second") BytesPerSecond,
-  @doc("Count per second") CountPerSecond,
+  /**
+   * No unit specified
+   */
+  NotSpecified,
+
+  /**
+   * Percentage
+   */
+  Percent,
+
+  /**
+   * Value count
+   */
+  Count,
+
+  /**
+   * Seconds
+   */
+  Seconds,
+
+  /**
+   * Milliseconds
+   */
+  Milliseconds,
+
+  /**
+   * Bytes
+   */
+  Bytes,
+
+  /**
+   * Bytes per second
+   */
+  BytesPerSecond,
+
+  /**
+   * Count per second
+   */
+  CountPerSecond,
 }
 
-@doc("""
-The time grain specifies the aggregation interval for the metric. Expressed as
-a duration 'PT1M', 'PT1H', etc.
-""")
+/**
+ * The time grain specifies the aggregation interval for the metric. Expressed as
+ * a duration 'PT1M', 'PT1H', etc.
+ */
 enum TimeGrain {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes")
+  /**
+   * 5 seconds, available only if test run duration is less than 10 minutes
+   */
   PT5S,
-  @doc("10 seconds, available only if test run duration is less than 10 minutes")
+
+  /**
+   * 10 seconds, available only if test run duration is less than 10 minutes
+   */
   PT10S,
-  @doc("1 minute") PT1M,
-  @doc("5 minutes, available only if test run duration is greater than 1 minute")
+
+  /**
+   * 1 minute
+   */
+  PT1M,
+
+  /**
+   * 5 minutes, available only if test run duration is greater than 1 minute
+   */
   PT5M,
-  @doc("1 hour, available only if test run duration is greater than 1 minute")
+
+  /**
+   * 1 hour, available only if test run duration is greater than 1 minute
+   */
   PT1H,
 }
 
 enum Interval {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes")
+  /**
+   * 5 seconds, available only if test run duration is less than 10 minutes
+   */
   PT5S,
-  @doc("10 seconds, available only if test run duration is less than 10 minutes")
+
+  /**
+   * 10 seconds, available only if test run duration is less than 10 minutes
+   */
   PT10S,
-  @doc("1 minute") PT1M,
-  @doc("5 minutes, available only if test run duration is greater than 1 minute")
+
+  /**
+   * 1 minute
+   */
+  PT1M,
+
+  /**
+   * 5 minutes, available only if test run duration is greater than 1 minute
+   */
   PT5M,
-  @doc("1 hour, available only if test run duration is greater than 1 minute")
+
+  /**
+   * 1 hour, available only if test run duration is greater than 1 minute
+   */
   PT1H,
 }
 
-@doc("Load test model")
+/**
+ * Load test model
+ */
 model Test {
-  @doc("Pass fail criteria for a test.")
+  /**
+   * Pass fail criteria for a test.
+   */
   passFailCriteria?: PassFailCriteria;
 
-  @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+  /**
+   * Secrets can be stored in an Azure Key Vault or any other secret store. If the
+   * secret is stored in an Azure Key Vault, the value should be the secret
+   * identifier and the type should be AKV_SECRET_URI. If the secret is stored
+   * elsewhere, the secret value should be provided directly and the type should be
+   * SECRET_VALUE.
+   */
   secrets?: Record<Secret>;
 
-  @doc("Certificates metadata")
+  /**
+   * Certificates metadata
+   */
   certificate?: CertificateMetadata;
 
-  @doc("Environment variables which are defined as a set of <name,value> pairs.")
+  /**
+   * Environment variables which are defined as a set of <name,value> pairs.
+   */
   environmentVariables?: Record<string>;
 
-  @doc("The load test configuration.")
+  /**
+   * The load test configuration.
+   */
   loadTestConfiguration?: LoadTestConfiguration;
 
-  @doc("The input artifacts for the test.")
+  /**
+   * The input artifacts for the test.
+   */
   @visibility("read")
   inputArtifacts?: TestInputArtifacts;
 
-  @doc("Unique test name as identifier.")
+  /**
+   * Unique test name as identifier.
+   */
   @visibility("read")
   @maxLength(50)
   @minLength(2)
   testId?: string;
 
-  @doc("The test description.")
+  /**
+   * The test description.
+   */
   @maxLength(100)
   description?: string;
 
-  @doc("Display name of a test.")
+  /**
+   * Display name of a test.
+   */
   @maxLength(50)
   @minLength(2)
   displayName?: string;
 
-  @doc("Subnet ID on which the load test instances should run.")
+  /**
+   * Subnet ID on which the load test instances should run.
+   */
   subnetId?: string;
 
-  @doc("Type of the managed identity referencing the Key vault.")
+  /**
+   * Type of the managed identity referencing the Key vault.
+   */
   keyvaultReferenceIdentityType?: string;
 
-  @doc("Resource Id of the managed identity referencing the Key vault.")
+  /**
+   * Resource Id of the managed identity referencing the Key vault.
+   */
   keyvaultReferenceIdentityId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }
 
-@doc("Pass fail criteria for a test.")
+/**
+ * Pass fail criteria for a test.
+ */
 model PassFailCriteria {
-  @doc("Map of id and pass fail metrics { id  : pass fail metrics }.")
+  /**
+   * Map of id and pass fail metrics { id  : pass fail metrics }.
+   */
   passFailMetrics?: Record<PassFailMetric>;
 }
 
-@doc("Pass fail metric")
+/**
+ * Pass fail metric
+ */
 model PassFailMetric {
-  @doc("The client metric on which the criteria should be applied.")
+  /**
+   * The client metric on which the criteria should be applied.
+   */
   clientMetric?: PFMetrics;
 
-  @doc("""
-The aggregation function to be applied on the client metric. Allowed functions
-- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
-‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-‘count’ - for requests
-""")
+  /**
+   * The aggregation function to be applied on the client metric. Allowed functions
+   * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+   * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+   * ‘count’ - for requests
+   */
   aggregate?: PFAgFunc;
 
-  @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
+  /**
+   * The comparison operator. Supported types ‘>’, ‘<’
+   */
   condition?: string;
 
-  @doc("Request name for which the Pass fail criteria has to be applied ")
+  /**
+   * Request name for which the Pass fail criteria has to be applied
+   */
   requestName?: string;
 
-  @doc("""
-The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
-100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
-""")
-  value?: float32;
+  /**
+   * The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+   * 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
+   */
+  value?: float64;
 
-  @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction;
+  /**
+   * Action taken after the threshold is met. Default is ‘continue’.
+   */
+  action?: PFAction = PFAction.continue;
 
-  @doc("The actual value of the client metric for the test run.")
+  /**
+   * The actual value of the client metric for the test run.
+   */
   @visibility("read")
-  actualValue?: float32;
+  actualValue?: float64;
 
-  @doc("Outcome of the test run.")
+  /**
+   * Outcome of the test run.
+   */
   @visibility("read")
   result?: PFResult;
 }
 
-@doc("Secret")
+/**
+ * Secret
+ */
 model Secret {
-  @doc("The value of the secret for the respective type")
+  /**
+   * The value of the secret for the respective type
+   */
   value?: string;
 
-  @doc("Type of secret")
+  /**
+   * Type of secret
+   */
   type?: SecretType;
 }
 
-@doc("Certificates metadata")
+/**
+ * Certificates metadata
+ */
 model CertificateMetadata {
-  @doc("The value of the certificate for respective type")
+  /**
+   * The value of the certificate for respective type
+   */
   value?: string;
 
-  @doc("Type of certificate")
+  /**
+   * Type of certificate
+   */
   type?: CertificateType;
 
-  @doc("Name of the certificate.")
+  /**
+   * Name of the certificate.
+   */
   name?: string;
 }
 
-@doc("The load test configuration.")
+/**
+ * The load test configuration.
+ */
 model LoadTestConfiguration {
-  @doc("""
-The number of engine instances to execute load test. Supported values are in
-range of 1-45. Required for creating a new test.
-""")
+  /**
+   * The number of engine instances to execute load test. Supported values are in
+   * range of 1-45. Required for creating a new test.
+   */
   engineInstances?: int32;
 
-  @doc("""
-If false, Azure Load Testing copies and processes your input files unmodified
-across all test engine instances. If true, Azure Load Testing splits the CSV
-input data evenly across all engine instances. If you provide multiple CSV
-files, each file will be split evenly.
-""")
+  /**
+   * If false, Azure Load Testing copies and processes your input files unmodified
+   * across all test engine instances. If true, Azure Load Testing splits the CSV
+   * input data evenly across all engine instances. If you provide multiple CSV
+   * files, each file will be split evenly.
+   */
   splitAllCSVs?: boolean;
 
-  @doc("""
-If true, optionalLoadTestConfig is required and JMX script for the load test is
-not required to upload.
-""")
+  /**
+   * If true, optionalLoadTestConfig is required and JMX script for the load test is
+   * not required to upload.
+   */
   quickStartTest?: boolean;
 
-  @doc("Optional load test config")
+  /**
+   * Optional load test config
+   */
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 }
 
-@doc("Optional load test config")
+/**
+ * Optional load test config
+ */
 model OptionalLoadTestConfig {
-  @doc("""
-Test URL. Provide the complete HTTP URL. For example,
-http://contoso-app.azurewebsites.net/login
-""")
+  /**
+   * Test URL. Provide the complete HTTP URL. For example,
+   * http://contoso-app.azurewebsites.net/login
+   */
   endpointUrl?: string;
 
-  @doc("No of concurrent virtual users")
+  /**
+   * No of concurrent virtual users
+   */
   virtualUsers?: int32;
 
-  @doc("Ramp up time")
+  /**
+   * Ramp up time
+   */
   rampUpTime?: int32;
 
-  @doc("Test run duration")
+  /**
+   * Test run duration
+   */
   duration?: int32;
 }
 
-@doc("The input artifacts for the test.")
+/**
+ * The input artifacts for the test.
+ */
 model TestInputArtifacts {
-  @doc("File info")
+  /**
+   * File info
+   */
   configFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   testScriptFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   userPropFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   inputArtifactsZipFileInfo?: FileInfo;
 
-  @doc("Additional supported files for the test run")
+  /**
+   * Additional supported files for the test run
+   */
   @visibility("read")
   additionalFileInfo?: FileInfo[];
 }
 
-@doc("File info")
+/**
+ * File info
+ */
 model FileInfo {
-  @doc("File URL.")
+  /**
+   * File URL.
+   */
   url?: string;
 
-  @doc("Name of the file.")
+  /**
+   * Name of the file.
+   */
   fileName?: string;
 
-  @doc("File type")
+  /**
+   * File type
+   */
   fileType?: FileType;
 
-  @doc("Expiry time of the file (ISO 8601 literal format)")
+  /**
+   * Expiry time of the file (ISO 8601 literal format)
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expireDateTime?: utcDateTime;
 
-  @doc("Validation status of the file")
+  /**
+   * Validation status of the file
+   */
   validationStatus?: FileStatus;
 
-  @doc("Validation failure error details")
+  /**
+   * Validation failure error details
+   */
   validationFailureDetails?: string;
 }
 
-@doc("The definition of an error object.")
+/**
+ * The definition of an error object.
+ */
 @error
 model ErrorResponseBody {
-  @doc("Error from a REST request.")
+  /**
+   * Error from a REST request.
+   */
   error: Error;
 }
 
-@doc("Error from a REST request.")
+/**
+ * Error from a REST request.
+ */
 model Error {
-  @doc("The error code.")
+  /**
+   * The error code.
+   */
   code: string;
 
-  @doc("The error message.")
+  /**
+   * The error message.
+   */
   message: string;
 
-  @doc("The error target.")
+  /**
+   * The error target.
+   */
   target?: string;
 
-  @doc("Additional details and inner errors.")
+  /**
+   * Additional details and inner errors.
+   */
   details?: Error[];
 }
 
-@doc("Collection of tests")
+/**
+ * Collection of tests
+ */
 model TestsList is Azure.Core.Page<Test>;
 
-@doc("Collection of files.")
+/**
+ * Collection of files.
+ */
 model FileInfoList is Azure.Core.Page<FileInfo>;
 
-@doc("Test app component")
+/**
+ * Test app component
+ */
 model TestAppComponents {
-  @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+  /**
+   * Azure resource collection { resource id (fully qualified resource Id e.g
+   * subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+   * : resource object }
+   */
   components: Record<AppComponent>;
 
-  @doc("Test identifier")
+  /**
+   * Test identifier
+   */
   @visibility("read")
   testId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }
 
-@doc("""
-An Azure resource object (Refer azure generic resource model :
-https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
-""")
+/**
+ * An Azure resource object (Refer azure generic resource model :
+ * https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+ */
 model AppComponent {
-  @doc("""
-fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
-""")
+  /**
+   * fully qualified resource Id e.g
+   * subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+   */
   @visibility("read")
   resourceId?: string;
 
-  @doc("Azure resource name, required while creating the app component.")
+  /**
+   * Azure resource name, required while creating the app component.
+   */
   resourceName?: string;
 
-  @doc("Azure resource type, required while creating the app component.")
+  /**
+   * Azure resource type, required while creating the app component.
+   */
   resourceType?: string;
 
-  @doc("Azure resource display name")
+  /**
+   * Azure resource display name
+   */
   displayName?: string;
 
-  @doc("Resource group name of the Azure resource")
+  /**
+   * Resource group name of the Azure resource
+   */
   @visibility("read")
   resourceGroup?: string;
 
-  @doc("Subscription Id of the Azure resource")
+  /**
+   * Subscription Id of the Azure resource
+   */
   @visibility("read")
   subscriptionId?: string;
 
-  @doc("Kind of Azure resource type")
+  /**
+   * Kind of Azure resource type
+   */
   kind?: string;
 }
 
-@doc("Test server metrics configuration")
+/**
+ * Test server metrics configuration
+ */
 model TestServerMetricConfig {
-  @doc("Test identifier")
+  /**
+   * Test identifier
+   */
   @visibility("read")
   testId?: string;
 
-  @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+  /**
+   * Azure resource metrics collection {metric id : metrics object} (Refer :
+   * https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+   * for metric id).
+   */
   metrics?: Record<ResourceMetric>;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }
 
-@doc("""
-Associated metric definition for particular metrics of the azure resource (
-Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-""")
+/**
+ * Associated metric definition for particular metrics of the azure resource (
+ * Refer :
+ * https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+ */
 model ResourceMetric {
-  @doc("Unique name for metric.")
+  /**
+   * Unique name for metric.
+   */
   @visibility("read")
   id?: string;
 
-  @doc("Azure resource id.")
+  /**
+   * Azure resource id.
+   */
   resourceId: string;
 
-  @doc("Metric name space.")
+  /**
+   * Metric name space.
+   */
   metricNamespace: string;
 
-  @doc("Metric description.")
+  /**
+   * Metric description.
+   */
   displayDescription?: string;
 
-  @doc("The invariant value of metric name")
+  /**
+   * The invariant value of metric name
+   */
   name: string;
 
-  @doc("Metric aggregation.")
+  /**
+   * Metric aggregation.
+   */
   aggregation: string;
 
-  @doc("Metric unit.")
+  /**
+   * Metric unit.
+   */
   unit?: string;
 
-  @doc("Azure resource type.")
+  /**
+   * Azure resource type.
+   */
   resourceType: string;
 }
 
-@doc("Load test run model")
+/**
+ * Load test run model
+ */
 model TestRun {
-  @doc("Pass fail criteria for a test.")
+  /**
+   * Pass fail criteria for a test.
+   */
   passFailCriteria?: PassFailCriteria;
 
-  @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+  /**
+   * Secrets can be stored in an Azure Key Vault or any other secret store. If the
+   * secret is stored in an Azure Key Vault, the value should be the secret
+   * identifier and the type should be AKV_SECRET_URI. If the secret is stored
+   * elsewhere, the secret value should be provided directly and the type should be
+   * SECRET_VALUE.
+   */
   secrets?: Record<Secret>;
 
-  @doc("Certificates metadata")
+  /**
+   * Certificates metadata
+   */
   certificate?: CertificateMetadata;
 
-  @doc("Environment variables which are defined as a set of <name,value> pairs.")
+  /**
+   * Environment variables which are defined as a set of <name,value> pairs.
+   */
   environmentVariables?: Record<string>;
 
-  @doc("Error details if there is any failure in load test run")
+  /**
+   * Error details if there is any failure in load test run
+   */
   @visibility("read")
   errorDetails?: ErrorDetails[];
 
-  @doc("Test run statistics.")
+  /**
+   * Test run statistics.
+   */
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
 
-  @doc("The load test configuration.")
+  /**
+   * The load test configuration.
+   */
   loadTestConfiguration?: LoadTestConfiguration;
 
-  @doc("Collection of test run artifacts")
+  /**
+   * Collection of test run artifacts
+   */
   @visibility("read")
   testArtifacts?: TestRunArtifacts;
 
-  @doc("Test result for pass/Fail criteria used during the test run.")
+  /**
+   * Test result for pass/Fail criteria used during the test run.
+   */
   @visibility("read")
   testResult?: PFTestResult;
 
-  @doc("Number of virtual users, for which test has been run.")
+  /**
+   * Number of virtual users, for which test has been run.
+   */
   @visibility("read")
   virtualUsers?: int32;
 
-  @doc("Unique test run name as identifier")
+  /**
+   * Unique test run name as identifier
+   */
   @visibility("read")
   testRunId?: string;
 
-  @doc("Display name of a testRun.")
+  /**
+   * Display name of a testRun.
+   */
   @maxLength(50)
   @minLength(2)
   displayName?: string;
 
-  @doc("Associated test Id.")
+  /**
+   * Associated test Id.
+   */
   @maxLength(50)
   @minLength(2)
   testId?: string;
 
-  @doc("The test run description.")
+  /**
+   * The test run description.
+   */
   @maxLength(100)
   description?: string;
 
-  @doc("The test run status.")
+  /**
+   * The test run status.
+   */
   @visibility("read")
   status?: Status;
 
-  @doc("The test run start DateTime(ISO 8601 literal format).")
+  /**
+   * The test run start DateTime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDateTime?: utcDateTime;
 
-  @doc("The test run end DateTime(ISO 8601 literal format).")
+  /**
+   * The test run end DateTime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
-  @doc("Test run initiated time.")
+  /**
+   * Test run initiated time.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   executedDateTime?: utcDateTime;
 
-  @doc("Portal url.")
+  /**
+   * Portal url.
+   */
   @visibility("read")
   portalUrl?: string;
 
-  @doc("Test run duration in milliseconds.")
+  /**
+   * Test run duration in milliseconds.
+   */
   @visibility("read")
-  duration?: int32;
+  duration?: int64;
 
-  @doc("Subnet ID on which the load test instances should run.")
+  /**
+   * Subnet ID on which the load test instances should run.
+   */
   @visibility("read")
   subnetId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }
 
-@doc("Error details if there is any failure in load test run")
+/**
+ * Error details if there is any failure in load test run
+ */
 model ErrorDetails {
-  @doc("Error details in case test run was not successfully run.")
+  /**
+   * Error details in case test run was not successfully run.
+   */
   @visibility("read")
   message?: string;
 }
 
-@doc("Test run statistics.")
+/**
+ * Test run statistics.
+ */
 model TestRunStatistics {
-  @doc("Transaction name.")
+  /**
+   * Transaction name.
+   */
   @visibility("read")
   transaction?: string;
 
-  @doc("Sampler count.")
+  /**
+   * Sampler count.
+   */
   @visibility("read")
-  sampleCount?: float32;
+  sampleCount?: float64;
 
-  @doc("Error count.")
+  /**
+   * Error count.
+   */
   @visibility("read")
-  errorCount?: float32;
+  errorCount?: float64;
 
-  @doc("Error percentage.")
+  /**
+   * Error percentage.
+   */
   @visibility("read")
-  errorPct?: float32;
+  errorPct?: float64;
 
-  @doc("Mean response time.")
+  /**
+   * Mean response time.
+   */
   @visibility("read")
-  meanResTime?: float32;
+  meanResTime?: float64;
 
-  @doc("Median response time.")
+  /**
+   * Median response time.
+   */
   @visibility("read")
-  medianResTime?: float32;
+  medianResTime?: float64;
 
-  @doc("Max response time.")
+  /**
+   * Max response time.
+   */
   @visibility("read")
-  maxResTime?: float32;
+  maxResTime?: float64;
 
-  @doc("Minimum response time.")
+  /**
+   * Minimum response time.
+   */
   @visibility("read")
-  minResTime?: float32;
+  minResTime?: float64;
 
-  @doc("90 percentile response time.")
+  /**
+   * 90 percentile response time.
+   */
   @visibility("read")
-  pct1ResTime?: float32;
+  pct1ResTime?: float64;
 
-  @doc("95 percentile response time.")
+  /**
+   * 95 percentile response time.
+   */
   @visibility("read")
-  pct2ResTime?: float32;
+  pct2ResTime?: float64;
 
-  @doc("99 percentile response time.")
+  /**
+   * 99 percentile response time.
+   */
   @visibility("read")
-  pct3ResTime?: float32;
+  pct3ResTime?: float64;
 
-  @doc("Throughput.")
+  /**
+   * Throughput.
+   */
   @visibility("read")
-  throughput?: float32;
+  throughput?: float64;
 
-  @doc("Received network bytes.")
+  /**
+   * Received network bytes.
+   */
   @visibility("read")
-  receivedKBytesPerSec?: float32;
+  receivedKBytesPerSec?: float64;
 
-  @doc("Send network bytes.")
+  /**
+   * Send network bytes.
+   */
   @visibility("read")
-  sentKBytesPerSec?: float32;
+  sentKBytesPerSec?: float64;
 }
 
-@doc("Collection of test run artifacts")
+/**
+ * Collection of test run artifacts
+ */
 model TestRunArtifacts {
-  @doc("The input artifacts for the test run.")
+  /**
+   * The input artifacts for the test run.
+   */
   @visibility("read")
   inputArtifacts?: TestRunInputArtifacts;
 
-  @doc("The output artifacts for the test run.")
+  /**
+   * The output artifacts for the test run.
+   */
   outputArtifacts?: TestRunOutputArtifacts;
 }
 
-@doc("The input artifacts for the test run.")
+/**
+ * The input artifacts for the test run.
+ */
 model TestRunInputArtifacts {
-  @doc("File info")
+  /**
+   * File info
+   */
   configFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   testScriptFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   userPropFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   inputArtifactsZipFileInfo?: FileInfo;
 
-  @doc("Additional supported files for the test run")
+  /**
+   * Additional supported files for the test run
+   */
   @visibility("read")
   additionalFileInfo?: FileInfo[];
 }
 
-@doc("The output artifacts for the test run.")
+/**
+ * The output artifacts for the test run.
+ */
 model TestRunOutputArtifacts {
-  @doc("File info")
+  /**
+   * File info
+   */
   resultFileInfo?: FileInfo;
 
-  @doc("File info")
+  /**
+   * File info
+   */
   logsFileInfo?: FileInfo;
 }
 
-@doc("Collection of test runs")
+/**
+ * Collection of test runs
+ */
 model TestRunsList is Azure.Core.Page<TestRun>;
 
-@doc("Represents collection of metric namespaces.")
+/**
+ * Represents collection of metric namespaces.
+ */
 model MetricNamespaceCollection {
-  @doc("The values for the metric namespaces.")
+  /**
+   * The values for the metric namespaces.
+   */
   value: MetricNamespace[];
 }
 
-@doc("Metric namespace class specifies the metadata for a metric namespace.")
+/**
+ * Metric namespace class specifies the metadata for a metric namespace.
+ */
 model MetricNamespace {
-  @doc("The namespace description.")
+  /**
+   * The namespace description.
+   */
   description?: string;
 
-  @doc("The metric namespace name.")
+  /**
+   * The metric namespace name.
+   */
   name?: string;
 }
 
-@doc("Represents collection of metric definitions.")
+/**
+ * Represents collection of metric definitions.
+ */
 model MetricDefinitionCollection {
-  @doc("the values for the metric definitions.")
+  /**
+   * the values for the metric definitions.
+   */
   value: MetricDefinition[];
 }
 
-@doc("Metric definition")
+/**
+ * Metric definition
+ */
 model MetricDefinition {
-  @doc("List of dimensions")
+  /**
+   * List of dimensions
+   */
   dimensions?: NameAndDesc[];
 
-  @doc("The metric description")
+  /**
+   * The metric description
+   */
   description?: string;
 
-  @doc("The metric name")
+  /**
+   * The metric name
+   */
   name?: string;
 
-  @doc("The namespace the metric belongs to.")
+  /**
+   * The namespace the metric belongs to.
+   */
   `namespace`?: string;
 
-  @doc("The primary aggregation type value defining how to use the values for display.")
+  /**
+   * The primary aggregation type value defining how to use the values for display.
+   */
   primaryAggregationType?: AggregationType;
 
-  @doc("The collection of what all aggregation types are supported.")
+  /**
+   * The collection of what all aggregation types are supported.
+   */
   supportedAggregationTypes?: string[];
 
-  @doc("The unit of the metric.")
+  /**
+   * The unit of the metric.
+   */
   unit?: MetricUnit;
 
-  @doc("""
-Metric availability specifies the time grain (aggregation interval or
-frequency).
-""")
+  /**
+   * Metric availability specifies the time grain (aggregation interval or
+   * frequency).
+   */
   metricAvailabilities?: MetricAvailability[];
 }
 
-@doc("The name and description")
+/**
+ * The name and description
+ */
 model NameAndDesc {
-  @doc("The description")
+  /**
+   * The description
+   */
   description?: string;
 
-  @doc("The name")
+  /**
+   * The name
+   */
   name?: string;
 }
 
-@doc("Metric availability specifies the time grain (aggregation interval or frequency)")
+/**
+ * Metric availability specifies the time grain (aggregation interval or frequency)
+ */
 model MetricAvailability {
-  @doc("""
-The time grain specifies the aggregation interval for the metric. Expressed as
-a duration 'PT1M', 'PT1H', etc.
-""")
+  /**
+   * The time grain specifies the aggregation interval for the metric. Expressed as
+   * a duration 'PT1M', 'PT1H', etc.
+   */
   timeGrain?: TimeGrain;
 }
 
-@doc("Filters to fetch the set of metric")
+/**
+ * Filters to fetch the set of metric
+ */
 model MetricRequestPayload {
-  @doc("""
-Get metrics for specific dimension values. Example: Metric contains dimension
-like SamplerName, Error. To retrieve all the time series data where SamplerName
-is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
-{\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
-""")
+  /**
+   * Get metrics for specific dimension values. Example: Metric contains dimension
+   * like SamplerName, Error. To retrieve all the time series data where SamplerName
+   * is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
+   * {"SamplerName", ["HTTPRequest1", "HTTPRequest2"}
+   */
   filters?: DimensionFilter[];
 }
 
-@doc("Dimension name and values to filter")
+/**
+ * Dimension name and values to filter
+ */
 model DimensionFilter {
-  @doc("The dimension name")
+  /**
+   * The dimension name
+   */
   name?: string;
 
-  @doc("The dimension values. Maximum values can be 20.")
+  /**
+   * The dimension values. Maximum values can be 20.
+   */
   values?: string[];
 }
 
-@doc("The response to a metrics query.")
+/**
+ * The response to a metrics query.
+ */
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
-@doc("The time series returned when a data query is performed.")
+/**
+ * The time series returned when a data query is performed.
+ */
 model TimeSeriesElement {
-  @doc("An array of data points representing the metric values.")
+  /**
+   * An array of data points representing the metric values.
+   */
   data?: MetricValue[];
 
-  @doc("The dimension values ")
+  /**
+   * The dimension values
+   */
   dimensionValues?: DimensionValue[];
 }
 
-@doc("Represents a metric value.")
+/**
+ * Represents a metric value.
+ */
 model MetricValue {
-  @doc("The timestamp for the metric value in ISO 8601 format.")
+  /**
+   * The timestamp for the metric value in ISO 8601 format.
+   */
   timestamp?: string;
 
-  @doc("The metric value.")
-  value?: float32;
+  /**
+   * The metric value.
+   */
+  value?: float64;
 }
 
-@doc("Represents a metric dimension value.")
+/**
+ * Represents a metric dimension value.
+ */
 model DimensionValue {
-  @doc("The name of the dimension.")
+  /**
+   * The name of the dimension.
+   */
   name?: string;
 
-  @doc("The value of the dimension.")
+  /**
+   * The value of the dimension.
+   */
   value?: string;
 }
 
-@doc("Metrics dimension values.")
+/**
+ * Metrics dimension values.
+ */
 model DimensionValueList is Azure.Core.Page<string>;
 
-@doc("Test run app component")
+/**
+ * Test run app component
+ */
 model TestRunAppComponents {
-  @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+  /**
+   * Azure resource collection { resource id (fully qualified resource Id e.g
+   * subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+   * : resource object }
+   */
   components: Record<AppComponent>;
 
-  @doc("Test run identifier")
+  /**
+   * Test run identifier
+   */
   @visibility("read")
   testRunId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }
 
-@doc("Test run server metrics configuration")
+/**
+ * Test run server metrics configuration
+ */
 model TestRunServerMetricConfig {
-  @doc("Test run identifier")
+  /**
+   * Test run identifier
+   */
   @visibility("read")
   testRunId?: string;
 
-  @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+  /**
+   * Azure resource metrics collection {metric id : metrics object} (Refer :
+   * https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+   * for metric id).
+   */
   metrics?: Record<ResourceMetric>;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
+  /**
+   * The creation datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateTime?: utcDateTime;
 
-  @doc("The user that created.")
+  /**
+   * The user that created.
+   */
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  /**
+   * The last Modified datetime(ISO 8601 literal format).
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 
-  @doc("The user that last modified.")
+  /**
+   * The user that last modified.
+   */
   @visibility("read")
   lastModifiedBy?: string;
 }

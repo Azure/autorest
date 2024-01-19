@@ -60,6 +60,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * ApiManagement Client
+ */
 @armProviderNamespace
 @service({
   title: "ApiManagementClient",
@@ -67,13 +70,16 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now.
 // @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
-@doc("ApiManagement Client")
 namespace Azure.ResourceManager.ApiManagement;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2021-08-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2021-08-01 API version.")
   v2021_08_01: "2021-08-01",
 }

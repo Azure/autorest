@@ -24,7 +24,7 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op ${name} is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${responses.join(
+      `@${verb} op \`${name}\` is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${responses.join(
         " | ",
       )}>;\n\n\n`,
     );
@@ -39,7 +39,7 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     const parametersString = resourceParameters ? `, { parameters: ${resourceParameters}}` : "";
     statements.push(
       `${operationGroup?.name ? "" : "op "}`,
-      `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,
+      `\`${name}\` is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,
     );
   }
   return statements.join("\n");

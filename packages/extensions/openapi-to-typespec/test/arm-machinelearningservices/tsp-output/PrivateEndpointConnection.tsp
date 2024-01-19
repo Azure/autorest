@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("The Private Endpoint Connection resource.")
+/**
+ * The Private Endpoint Connection resource.
+ */
 @parentResource(Workspace)
 model PrivateEndpointConnection
   is TrackedResource<PrivateEndpointConnectionProperties> {
-  @doc("NRP Private Endpoint Connection Name")
+  /**
+   * NRP Private Endpoint Connection Name
+   */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
@@ -28,18 +32,38 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  @doc("Called by end-users to get a PE connection.")
+  /**
+   * Called by end-users to get a PE connection.
+   */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
-  @doc("""
-Called by end-users to approve or reject a PE connection.
+  /**
+* Called by end-users to approve or reject a PE connection.
 This method must validate and forward the call to NRP.
-""")
+*/
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
-  @doc("Called by end-users to delete a PE connection.")
+  /**
+   * Called by end-users to delete a PE connection.
+   */
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
-  @doc("Called by end-users to get all PE connections.")
+  /**
+   * Called by end-users to get all PE connections.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "PrivateEndpointConnection object"
+);

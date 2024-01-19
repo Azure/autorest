@@ -7,7 +7,7 @@ import { transformEnum } from "./transforms/transform-choices";
 import { getTypespecType, transformObject } from "./transforms/transform-object";
 import { transformOperationGroup } from "./transforms/transform-operations";
 import { transformServiceInformation } from "./transforms/transform-service-information";
-import { ArmResourceSchema, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
+import { ArmResourceSchema, filterArmEnums, filterArmModels, isResourceSchema } from "./utils/resource-discovery";
 import { isChoiceSchema } from "./utils/schemas";
 
 const models: Map<CodeModel, TypespecProgram> = new Map();
@@ -41,7 +41,7 @@ export function transformDataType(schema: Schema, codeModel: CodeModel): Typespe
 }
 
 function transformModel(codeModel: CodeModel): TypespecProgram {
-  const caldEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])]
+  const typespecEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])]
     .filter((c) => c.language.default.name !== "Versions")
     .map((c) => transformEnum(c, codeModel));
 
@@ -70,7 +70,7 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
   return {
     serviceInformation,
     models: {
-      enums: caldEnums,
+      enums: isArm ? filterArmEnums(typespecEnums) : typespecEnums,
       objects: isArm ? filterArmModels(codeModel, typespecObjects) : typespecObjects,
       armResources,
     },

@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
-@doc("Data Manager For Agriculture ARM Resource.")
+/**
+ * Data Manager For Agriculture ARM Resource.
+ */
 model DataManagerForAgriculture
   is TrackedResource<DataManagerForAgricultureProperties> {
-  @doc("DataManagerForAgriculture resource name.")
+  /**
+   * DataManagerForAgriculture resource name.
+   */
   @maxLength(63)
   @minLength(1)
   @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
@@ -28,18 +32,25 @@ model DataManagerForAgriculture
 
 @armResourceOperations
 interface DataManagerForAgricultures {
+  /**
+   * Get DataManagerForAgriculture resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get DataManagerForAgriculture resource.")
   @operationId("DataManagerForAgricultureResources_Get")
   get is ArmResourceRead<DataManagerForAgriculture>;
 
+  /**
+   * Create or update Data Manager For Agriculture resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update Data Manager For Agriculture resource.")
   @operationId("DataManagerForAgricultureResources_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<DataManagerForAgriculture>;
 
+  /**
+   * Update a Data Manager For Agriculture resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a Data Manager For Agriculture resource.")
+  @parameterVisibility("read")
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
@@ -48,36 +59,67 @@ interface DataManagerForAgricultures {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Delete a Data Manager For Agriculture resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a Data Manager For Agriculture resource.")
   @operationId("DataManagerForAgricultureResources_Delete")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
 
+  /**
+   * Lists the DataManagerForAgriculture instances for a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists the DataManagerForAgriculture instances for a resource group.")
   @operationId("DataManagerForAgricultureResources_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DataManagerForAgriculture,
     {
       ...BaseParameters<DataManagerForAgriculture>;
 
-      @doc("""
-Maximum number of items needed (inclusive).
+      /**
+* Maximum number of items needed (inclusive).
 Minimum = 10, Maximum = 1000, Default value = 50.
-""")
+*/
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      @doc("Continuation token for getting next set of results.")
+      /**
+       * Continuation token for getting next set of results.
+       */
       @query("$skipToken")
       $skipToken?: string;
     }
   >;
 
+  /**
+   * Lists the DataManagerForAgriculture instances for a subscription.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists the DataManagerForAgriculture instances for a subscription.")
   @operationId("DataManagerForAgricultureResources_ListBySubscription")
   listBySubscription is ArmListBySubscription<DataManagerForAgriculture>;
 }
+
+@@projectedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "json",
+  "request"
+);
+@@extension(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "request"
+);
+@@doc(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "Data Manager For Agriculture resource create or update request object."
+);
+@@projectedName(DataManagerForAgricultures.update::parameters.properties,
+  "json",
+  "request"
+);
+@@extension(DataManagerForAgricultures.update::parameters.properties,
+  "x-ms-client-name",
+  "request"
+);
+@@doc(DataManagerForAgricultures.update::parameters.properties,
+  "Request object."
+);

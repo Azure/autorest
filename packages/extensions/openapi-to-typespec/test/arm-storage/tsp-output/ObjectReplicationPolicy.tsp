@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("The replication policy between two storage accounts. Multiple rules can be defined in one policy.")
+/**
+ * The replication policy between two storage accounts. Multiple rules can be defined in one policy.
+ */
 @parentResource(StorageAccount)
 model ObjectReplicationPolicy
   is ProxyResource<ObjectReplicationPolicyProperties> {
-  @doc("For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.")
+  /**
+   * For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.
+   */
   @minLength(1)
   @path
   @key("objectReplicationPolicyId")
@@ -26,15 +30,37 @@ model ObjectReplicationPolicy
 
 @armResourceOperations
 interface ObjectReplicationPolicies {
-  @doc("Get the object replication policy of the storage account by policy ID.")
+  /**
+   * Get the object replication policy of the storage account by policy ID.
+   */
   get is ArmResourceRead<ObjectReplicationPolicy>;
 
-  @doc("Create or update the object replication policy of the storage account.")
+  /**
+   * Create or update the object replication policy of the storage account.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<ObjectReplicationPolicy>;
 
-  @doc("Deletes the object replication policy associated with the specified storage account.")
+  /**
+   * Deletes the object replication policy associated with the specified storage account.
+   */
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
-  @doc("List the object replication policies associated with the storage account.")
+  /**
+   * List the object replication policies associated with the storage account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
+
+@@projectedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "json",
+  "properties"
+);
+@@extension(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
+@@doc(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "The object replication policy set to a storage account. A unique policy ID will be created if absent."
+);

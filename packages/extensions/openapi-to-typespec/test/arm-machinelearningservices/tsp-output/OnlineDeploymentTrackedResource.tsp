@@ -15,7 +15,9 @@ namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(OnlineEndpointTrackedResource)
 model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
-  @doc("Inference Endpoint Deployment name.")
+  /**
+   * Inference Endpoint Deployment name.
+   */
   @path
   @key("deploymentName")
   @segment("deployments")
@@ -28,26 +30,35 @@ model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
 
 @armResourceOperations
 interface OnlineDeploymentTrackedResources {
+  /**
+   * Get Inference Deployment Deployment.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get Inference Deployment Deployment.")
   @operationId("OnlineDeployments_Get")
   get is ArmResourceRead<OnlineDeploymentTrackedResource>;
 
+  /**
+   * Create or update Inference Endpoint Deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update Inference Endpoint Deployment (asynchronous).")
   @operationId("OnlineDeployments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineDeploymentTrackedResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineDeploymentTrackedResource>;
 
+  /**
+   * Update Online Deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update Online Deployment (asynchronous).")
+  @parameterVisibility("read")
   @operationId("OnlineDeployments_Update")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
     PartialMinimalTrackedResourceWithSku
   >;
 
+  /**
+   * Delete Inference Endpoint Deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete Inference Endpoint Deployment (asynchronous).")
   @operationId("OnlineDeployments_Delete")
   delete is ArmResourceDeleteAsync<
     OnlineDeploymentTrackedResource,
@@ -55,30 +66,40 @@ interface OnlineDeploymentTrackedResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Inference Endpoint Deployments.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Inference Endpoint Deployments.")
   @operationId("OnlineDeployments_List")
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
     {
       ...BaseParameters<OnlineDeploymentTrackedResource>;
 
-      @doc("Ordering of list.")
+      /**
+       * Ordering of list.
+       */
       @query("$orderBy")
       $orderBy?: string;
 
-      @doc("Top of list.")
+      /**
+       * Top of list.
+       */
       @query("$top")
       $top?: int32;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
     }
   >;
 
+  /**
+   * Polls an Endpoint operation.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Polls an Endpoint operation.")
   @operationId("OnlineDeployments_GetLogs")
   getLogs is ArmResourceActionSync<
     OnlineDeploymentTrackedResource,
@@ -86,47 +107,89 @@ interface OnlineDeploymentTrackedResources {
     DeploymentLogs
   >;
 
+  /**
+   * List Inference Endpoint Deployment Skus.
+   */
+  // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OnlineDeployments_ListSkus")
   @summary("List Inference Endpoint Deployment Skus.")
-  @doc("List Inference Endpoint Deployment Skus.")
-  // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
   @get
-  ListSkus is Azure.Core.Foundations.Operation<
+  listSkus is Azure.Core.Foundations.Operation<
     {
-      @doc("The ID of the target subscription.")
+      /**
+       * The ID of the target subscription.
+       */
       @minLength(1)
       @path
       subscriptionId: string;
 
-      @doc("The name of the resource group. The name is case insensitive.")
+      /**
+       * The name of the resource group. The name is case insensitive.
+       */
       @maxLength(90)
       @minLength(1)
       @path
       resourceGroupName: string;
 
-      @doc("Name of Azure Machine Learning workspace.")
+      /**
+       * Name of Azure Machine Learning workspace.
+       */
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
       @path
       workspaceName: string;
 
-      @doc("Inference endpoint name.")
+      /**
+       * Inference endpoint name.
+       */
       @path
       endpointName: string;
 
-      @doc("Inference Endpoint Deployment name.")
+      /**
+       * Inference Endpoint Deployment name.
+       */
       @path
       deploymentName: string;
 
-      @doc("Number of Skus to be retrieved in a page of results.")
+      /**
+       * Number of Skus to be retrieved in a page of results.
+       */
       @query("count")
       count?: int32;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
     },
     SkuResourceArmPaginatedResult
   >;
 }
+
+@@projectedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "Inference Endpoint entity to apply during operation."
+);
+@@projectedName(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "Online Endpoint entity to apply during operation."
+);
+@@doc(OnlineDeploymentTrackedResources.getLogs::parameters.body,
+  "The request containing parameters for retrieving logs."
+);

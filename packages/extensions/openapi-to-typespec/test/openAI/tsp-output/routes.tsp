@@ -8,8 +8,10 @@ using TypeSpec.Http;
 namespace Azure.AI.OpenAI;
 
 interface completionsOperations {
+  /**
+   * Create a completion from a chosen model
+   */
   @summary("Create a completion from a chosen model")
-  @doc("Create a completion from a chosen model")
   @route("/deployments/{deployment-id}/completions")
   @post
   create is Azure.Core.Foundations.Operation<
@@ -25,13 +27,17 @@ interface completionsOperations {
 }
 
 interface embeddingsOperations {
+  /**
+   * Return the embeddings for a given prompt.
+   */
   @summary("Return the embeddings for a given prompt.")
-  @doc("Return the embeddings for a given prompt.")
   @route("/deployments/{deployment-id}/embeddings")
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      @doc("deployment id of the model which was deployed")
+      /**
+       * deployment id of the model which was deployed
+       */
       @path
       `deployment-id`: string;
 

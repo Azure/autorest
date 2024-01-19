@@ -19,19 +19,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * APIs documentation for Microsoft Azure Data Manager for Agriculture Service.
+ */
 @armProviderNamespace
 @service({
   title: "Azure AgFoodPlatform RP Service",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
-@doc("APIs documentation for Microsoft Azure Data Manager for Agriculture Service.")
 namespace Azure.ResourceManager.AgFoodPlatform;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-06-01-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-06-01-preview API version.")
   v2023_06_01_preview: "2023-06-01-preview",
 }

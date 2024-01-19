@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("A private link resource")
+/**
+ * A private link resource
+ */
 @parentResource(ApiManagementServiceResource)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
-  @doc("Name of the private link resource.")
+  /**
+   * Name of the private link resource.
+   */
   @path
   @key("privateLinkSubResourceName")
   @segment("privateLinkResources")
@@ -24,13 +28,17 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 
 @armResourceOperations
 interface PrivateLinkResources {
+  /**
+   * Gets the private link resources
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the private link resources")
   @operationId("PrivateEndpointConnection_GetPrivateLinkResource")
   getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
 
+  /**
+   * Gets the private link resources
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the private link resources")
   @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<PrivateLinkResource>;
 }

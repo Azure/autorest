@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzurePlaywrightService;
-@doc("An account resource")
+/**
+ * An account resource
+ */
 model Account is TrackedResource<AccountProperties> {
-  @doc("Name of account")
+  /**
+   * Name of account
+   */
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
@@ -25,29 +29,44 @@ model Account is TrackedResource<AccountProperties> {
 
 @armResourceOperations
 interface Accounts {
-  @doc("Get a Account")
+  /**
+   * Get a Account
+   */
   get is ArmResourceRead<Account>;
 
-  @doc("Create a Account")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create a Account
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Account,
     BaseParameters<Account>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update a Account")
+  /**
+   * Update a Account
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Account, AccountUpdate>;
 
-  @doc("Delete a Account")
+  /**
+   * Delete a Account
+   */
   delete is ArmResourceDeleteAsync<
     Account,
     BaseParameters<Account>,
     ArmLroLocationHeader
   >;
 
-  @doc("List Account resources by resource group")
+  /**
+   * List Account resources by resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Accounts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Account>;
 
-  @doc("List Account resources by subscription ID")
+  /**
+   * List Account resources by subscription ID
+   */
   listBySubscription is ArmListBySubscription<Account>;
 }

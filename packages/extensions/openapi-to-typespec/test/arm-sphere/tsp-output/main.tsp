@@ -17,19 +17,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * Azure Sphere resource management API.
+ */
 @armProviderNamespace
 @service({
   title: "Azure Sphere resource management API.",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("Azure Sphere resource management API.")
 namespace Microsoft.AzureSphere;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2022-09-01-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2022-09-01-preview API version.")
   v2022_09_01_preview: "2022-09-01-preview",
 }

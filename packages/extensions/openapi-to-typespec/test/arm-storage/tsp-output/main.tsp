@@ -28,6 +28,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * The Azure Storage Management API.
+ */
 @armProviderNamespace
 @service({
   title: "Azure Storage resource management API.",
@@ -35,13 +38,16 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now.
 // @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v1)
-@doc("The Azure Storage Management API.")
 namespace Microsoft.Storage;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2022-09-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2022-09-01 API version.")
   v2022_09_01: "2022-09-01",
 }

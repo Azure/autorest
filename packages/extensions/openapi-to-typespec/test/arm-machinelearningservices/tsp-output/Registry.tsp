@@ -13,7 +13,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.MachineLearning;
 
 model Registry is TrackedResource<RegistryProperties> {
-  @doc("Name of Azure Machine Learning registry. This is case-insensitive")
+  /**
+   * Name of Azure Machine Learning registry. This is case-insensitive
+   */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
   @path
   @key("registryName")
@@ -27,33 +29,50 @@ model Registry is TrackedResource<RegistryProperties> {
 
 @armResourceOperations
 interface Registries {
-  @doc("Get registry")
+  /**
+   * Get registry
+   */
   get is ArmResourceRead<Registry>;
 
-  @doc("Create or update registry")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create or update registry
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Registry,
     BaseParameters<Registry>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update tags")
+  /**
+   * Update tags
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
 
-  @doc("Delete registry")
+  /**
+   * Delete registry
+   */
   delete is ArmResourceDeleteAsync<
     Registry,
     BaseParameters<Registry>,
     ArmLroLocationHeader
   >;
 
-  @doc("List registries")
+  /**
+   * List registries
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Registries_List")
   list is ArmResourceListByParent<Registry>;
 
-  @doc("List registries by subscription")
+  /**
+   * List registries by subscription
+   */
   listBySubscription is ArmListBySubscription<Registry>;
 
-  @doc("Remove regions from registry")
+  /**
+   * Remove regions from registry
+   */
   removeRegions is ArmResourceActionAsync<
     Registry,
     Registry,
@@ -62,3 +81,23 @@ interface Registries {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(Registries.createOrUpdate::parameters.resource, "json", "body");
+@@extension(Registries.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Registries.createOrUpdate::parameters.resource,
+  "Details required to create the registry."
+);
+@@projectedName(Registries.update::parameters.properties, "json", "body");
+@@extension(Registries.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Registries.update::parameters.properties,
+  "Details required to create the registry."
+);
+@@doc(Registries.removeRegions::parameters.body,
+  "Details required to create the registry."
+);

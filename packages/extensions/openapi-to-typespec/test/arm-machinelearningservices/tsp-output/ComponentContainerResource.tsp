@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Registry)
 model ComponentContainerResource is ProxyResource<ComponentContainer> {
-  @doc("Container name.")
+  /**
+   * Container name.
+   */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
   @path
   @key("componentName")
@@ -25,18 +29,24 @@ model ComponentContainerResource is ProxyResource<ComponentContainer> {
 
 @armResourceOperations
 interface ComponentContainerResources {
+  /**
+   * Get container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get container.")
   @operationId("RegistryComponentContainers_Get")
   get is ArmResourceRead<ComponentContainerResource>;
 
+  /**
+   * Create or update container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update container.")
   @operationId("RegistryComponentContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ComponentContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ComponentContainerResource>;
 
+  /**
+   * Delete container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete container.")
   @operationId("RegistryComponentContainers_Delete")
   delete is ArmResourceDeleteAsync<
     ComponentContainerResource,
@@ -44,17 +54,33 @@ interface ComponentContainerResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List containers.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List containers.")
   @operationId("RegistryComponentContainers_List")
   list is ArmResourceListByParent<
     ComponentContainerResource,
     {
       ...BaseParameters<ComponentContainerResource>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
     }
   >;
 }
+
+@@projectedName(ComponentContainerResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(ComponentContainerResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(ComponentContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

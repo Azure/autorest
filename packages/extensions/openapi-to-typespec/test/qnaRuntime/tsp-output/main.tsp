@@ -4,6 +4,9 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * An API for QnAMaker runtime
+ */
 @service({
   title: "QnAMaker Runtime Client",
 })
@@ -14,5 +17,4 @@ using TypeSpec.Http;
     RuntimeEndpoint: string,
   }
 )
-@doc("An API for QnAMaker runtime")
 namespace QnAMakerRuntimeClient;

@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("Delegation settings for a developer portal.")
+/**
+ * Delegation settings for a developer portal.
+ */
 @singleton("delegation")
 @parentResource(ApiManagementServiceResource)
 model PortalDelegationSettings
@@ -25,13 +27,17 @@ model PortalDelegationSettings
 @armResourceOperations
 @projectedName("client", "PortalDelegationSettings")
 interface PortalDelegationSettingsOperationGroup {
+  /**
+   * Get Delegation Settings for the Portal.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get Delegation Settings for the Portal.")
   @operationId("DelegationSettings_Get")
   get is ArmResourceRead<PortalDelegationSettings>;
 
+  /**
+   * Gets the entity state (Etag) version of the DelegationSettings.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the entity state (Etag) version of the DelegationSettings.")
   @head
   @operationId("DelegationSettings_GetEntityTag")
   getEntityTag(
@@ -41,22 +47,29 @@ interface PortalDelegationSettingsOperationGroup {
     >,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Create or Update Delegation settings.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or Update Delegation settings.")
   @operationId("DelegationSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     {
       ...BaseParameters<PortalDelegationSettings>;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
     }
   >;
 
+  /**
+   * Update Delegation settings.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update Delegation settings.")
+  @parameterVisibility("read")
   @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
@@ -64,19 +77,25 @@ interface PortalDelegationSettingsOperationGroup {
     {
       ...BaseParameters<PortalDelegationSettings>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Lists a collection of portalsettings defined within a service instance..
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists a collection of portalsettings defined within a service instance..")
   @operationId("PortalSettings_ListByService")
   listByService is ArmResourceListByParent<PortalDelegationSettings>;
 
+  /**
+   * Gets the secret validation key of the DelegationSettings.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the secret validation key of the DelegationSettings.")
   @operationId("DelegationSettings_ListSecrets")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
@@ -84,3 +103,26 @@ interface PortalDelegationSettingsOperationGroup {
     PortalSettingValidationKeyContract
   >;
 }
+
+@@projectedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "Create or update parameters."
+);
+@@projectedName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "Update Delegation settings."
+);

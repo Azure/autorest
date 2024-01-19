@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Registry)
 model EnvironmentContainerResource is ProxyResource<EnvironmentContainer> {
-  @doc("Container name. This is case-sensitive.")
+  /**
+   * Container name. This is case-sensitive.
+   */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
   @path
   @key("environmentName")
@@ -25,18 +29,24 @@ model EnvironmentContainerResource is ProxyResource<EnvironmentContainer> {
 
 @armResourceOperations
 interface EnvironmentContainerResources {
+  /**
+   * Get container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get container.")
   @operationId("RegistryEnvironmentContainers_Get")
   get is ArmResourceRead<EnvironmentContainerResource>;
 
+  /**
+   * Create or update container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update container.")
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentContainerResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EnvironmentContainerResource>;
 
+  /**
+   * Delete container.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete container.")
   @operationId("RegistryEnvironmentContainers_Delete")
   delete is ArmResourceDeleteAsync<
     EnvironmentContainerResource,
@@ -44,21 +54,39 @@ interface EnvironmentContainerResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List environment containers.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List environment containers.")
   @operationId("RegistryEnvironmentContainers_List")
   list is ArmResourceListByParent<
     EnvironmentContainerResource,
     {
       ...BaseParameters<EnvironmentContainerResource>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("View type for including/excluding (for example) archived entities.")
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
     }
   >;
 }
+
+@@projectedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(EnvironmentContainerResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(EnvironmentContainerResources.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

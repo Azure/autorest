@@ -17,23 +17,35 @@ enum MyKind {
   Kind1,
 }
 
-@doc("Colors possible")
+/**
+ * Colors possible
+ */
 enum GoblinSharkColor {
   pink,
   gray,
   brown,
-  @doc("Uppercase RED") upperRed: "RED",
-  @doc("Lowercase RED") lowerRed: "red",
+
+  /**
+   * Uppercase RED
+   */
+  upperRed: "RED",
+
+  /**
+   * Lowercase RED
+   */
+  lowerRed: "red",
 }
 
 model Basic {
-  @doc("Basic Id")
+  /**
+   * Basic Id
+   */
   id?: int32;
 
-  @doc("""
-Name property with a very long description that does not fit on a single line
-and a line break.
-""")
+  /**
+   * Name property with a very long description that does not fit on a single line
+   * and a line break.
+   */
   name?: string;
 
   color?: CmykColors;
@@ -51,8 +63,8 @@ model IntWrapper {
 }
 
 model LongWrapper {
-  field1?: int32;
-  field2?: int32;
+  field1?: int64;
+  field2?: int64;
 }
 
 model FloatWrapper {
@@ -61,13 +73,13 @@ model FloatWrapper {
 }
 
 model DoubleWrapper {
-  field1?: float32;
+  field1?: float64;
 
   @projectedName(
     "json",
     "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
   )
-  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float32;
+  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float64;
 }
 
 model BooleanWrapper {
@@ -118,7 +130,9 @@ model ArrayWrapper {
 }
 
 model DictionaryWrapper {
-  @doc("Dictionary of <string>")
+  /**
+   * Dictionary of <string>
+   */
   defaultProgram?: Record<string>;
 }
 
@@ -217,8 +231,10 @@ model Sawshark extends Shark {
 model Goblinshark extends Shark {
   jawsize?: int32;
 
-  @doc("Colors possible")
-  color?: GoblinSharkColor;
+  /**
+   * Colors possible
+   */
+  color?: GoblinSharkColor = GoblinSharkColor.gray;
 
   fishtype: "goblin";
 }

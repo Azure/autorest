@@ -35,7 +35,9 @@ enum RegistrationEntryModelXmlnsM {
   `http://schemas.microsoft.com/ado/2007/08/dataservices/metadata`,
 }
 
-@doc("PNS Platform for the installation")
+/**
+ * PNS Platform for the installation
+ */
 enum PlatformType {
   apns,
   wns,
@@ -101,12 +103,19 @@ enum ApiVersionType {
   `2020-06`,
 }
 
-@doc("Content type for upload")
+/**
+ * Content type for upload
+ */
 @fixed
 enum ContentType {
-  @doc("Content Type 'application/json;charset=utf-8'")
+  /**
+   * Content Type 'application/json;charset=utf-8'
+   */
   `application/json;charset=utf-8`,
-  @doc("Content Type 'application/xml;charset=utf-8'")
+
+  /**
+   * Content Type 'application/xml;charset=utf-8'
+   */
   `application/xml;charset=utf-8`,
 }
 
@@ -193,73 +202,101 @@ model RegistrationEntryModel {
 
 @resource("{hubName}/installations/{installationId}")
 model InstallationModel {
-  @doc("Installation Unique Identifier")
+  /**
+   * Installation Unique Identifier
+   */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
   installationId: string;
 
-  @doc("The user ID for the installation")
+  /**
+   * The user ID for the installation
+   */
   userId?: string;
 
-  @doc("The date when the installation was made inactivate by the PNS.")
+  /**
+   * The date when the installation was made inactivate by the PNS.
+   */
   @visibility("read")
   lastActiveOn?: string;
 
-  @doc("Date in W3C format of last update to this installation.")
+  /**
+   * Date in W3C format of last update to this installation.
+   */
   @visibility("read")
   lastUpdate?: string;
 
-  @doc("PNS Platform for the installation")
+  /**
+   * PNS Platform for the installation
+   */
   platform: PlatformType;
 
-  @doc("The unique device handle for the PNS.")
+  /**
+   * The unique device handle for the PNS.
+   */
   pushChannel: string;
 
-  @doc("This is true if the PNS expired the channel.")
+  /**
+   * This is true if the PNS expired the channel.
+   */
   @visibility("read")
   expiredPushChannel?: boolean;
 
-  @doc("The tags for the installation for targeting")
+  /**
+   * The tags for the installation for targeting
+   */
   tags?: string[];
 
-  @doc("Set of named templates associated with the installation.")
+  /**
+   * Set of named templates associated with the installation.
+   */
   templates?: Record<InstallationTemplateModel>;
 
-  @doc("""
-Set of secondary tiles associated with the installation. Applies only to the
-'wns' platform.
-""")
+  /**
+   * Set of secondary tiles associated with the installation. Applies only to the
+   * 'wns' platform.
+   */
   secondaryTiles?: Record<InstallationSecondaryTileModel>;
 }
 
 model InstallationTemplateModel {
-  @doc("Template for the body of the notification.")
+  /**
+   * Template for the body of the notification.
+   */
   body: string;
 
-  @doc("""
-Set of named headers associated with the template. Header values can contain
-template parameters.
-""")
+  /**
+   * Set of named headers associated with the template. Header values can contain
+   * template parameters.
+   */
   headers?: Record<string>;
 
-  @doc("Template expression evaluating in W3D date format.")
+  /**
+   * Template expression evaluating in W3D date format.
+   */
   expiry?: string;
 
-  @doc("The tags for the installation for targeting")
+  /**
+   * The tags for the installation for targeting
+   */
   tags?: string[];
 }
 
 model InstallationSecondaryTileModel {
-  @doc("ChannelUri for the secondary tile. Applies only to the 'wns' platform.")
+  /**
+   * ChannelUri for the secondary tile. Applies only to the 'wns' platform.
+   */
   pushChannel: string;
 
-  @doc("The tags for the installation for targeting")
+  /**
+   * The tags for the installation for targeting
+   */
   tags?: string[];
 
-  @doc("""
-Set of named templates associated with the secondary tile. Applies only to the
-'wns' platform.
-""")
+  /**
+   * Set of named templates associated with the secondary tile. Applies only to the
+   * 'wns' platform.
+   */
   templates?: Record<InstallationTemplateModel>;
 }
 

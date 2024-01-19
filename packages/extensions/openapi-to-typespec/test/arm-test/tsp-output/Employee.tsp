@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-@doc("A Test resource")
+/**
+ * A Test resource
+ */
 model Employee is TrackedResource<EmployeeProperties> {
-  @doc("Name of employee")
+  /**
+   * Name of employee
+   */
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   @key("employeeName")
@@ -23,25 +27,40 @@ model Employee is TrackedResource<EmployeeProperties> {
 
 @armResourceOperations
 interface Employees {
-  @doc("Get a Employee")
+  /**
+   * Get a Employee
+   */
   get is ArmResourceRead<Employee>;
 
-  @doc("Create a Employee")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Create a Employee
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Employee,
     BaseParameters<Employee>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update a Employee")
+  /**
+   * Update a Employee
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Employee, EmployeeUpdate>;
 
-  @doc("Delete a Employee")
+  /**
+   * Delete a Employee
+   */
   delete is ArmResourceDeleteSync<Employee>;
 
-  @doc("List Employee resources by resource group")
+  /**
+   * List Employee resources by resource group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Employees_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Employee>;
 
-  @doc("List Employee resources by subscription ID")
+  /**
+   * List Employee resources by subscription ID
+   */
   listBySubscription is ArmListBySubscription<Employee>;
 }

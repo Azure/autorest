@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("Properties of the blob container, including Id, resource name, resource type, Etag.")
+/**
+ * Properties of the blob container, including Id, resource name, resource type, Etag.
+ */
 @parentResource(BlobServiceProperties)
 model BlobContainer is ProxyResource<ContainerProperties> {
-  @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
+  /**
+   * The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
+   */
   @maxLength(63)
   @minLength(3)
   @path
@@ -26,52 +30,79 @@ model BlobContainer is ProxyResource<ContainerProperties> {
 
 @armResourceOperations
 interface BlobContainers {
-  @doc("Gets properties of a specified container. ")
+  /**
+   * Gets properties of a specified container.
+   */
   get is ArmResourceRead<BlobContainer>;
 
-  @doc("Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ")
+  /**
+   * Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container.
+   */
   create is ArmResourceCreateOrReplaceSync<BlobContainer>;
 
-  @doc("Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. ")
+  /**
+   * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
 
-  @doc("Deletes specified container under its account.")
+  /**
+   * Deletes specified container under its account.
+   */
   delete is ArmResourceDeleteSync<BlobContainer>;
 
-  @doc("Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.")
+  /**
+   * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BlobContainers_List")
   list is ArmResourceListByParent<
     BlobContainer,
     {
       ...BaseParameters<BlobContainer>;
 
-      @doc("Optional. Specified maximum number of containers that can be included in the list.")
+      /**
+       * Optional. Specified maximum number of containers that can be included in the list.
+       */
       @query("$maxpagesize")
       $maxpagesize?: string;
 
-      @doc("Optional. When specified, only container names starting with the filter will be listed.")
+      /**
+       * Optional. When specified, only container names starting with the filter will be listed.
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Optional, used to include the properties for soft deleted blob containers.")
+      /**
+       * Optional, used to include the properties for soft deleted blob containers.
+       */
       @query("$include")
       $include?: ListContainersInclude;
     }
   >;
 
-  @doc("Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.")
+  /**
+   * Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
+   */
   setLegalHold is ArmResourceActionSync<BlobContainer, LegalHold, LegalHold>;
 
-  @doc("Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.")
+  /**
+   * Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request.
+   */
   clearLegalHold is ArmResourceActionSync<BlobContainer, LegalHold, LegalHold>;
 
-  @doc("The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.")
+  /**
+   * The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
+   */
   lease is ArmResourceActionSync<
     BlobContainer,
     LeaseContainerRequest,
     LeaseContainerResponse
   >;
 
-  @doc("This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.")
+  /**
+   * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
+   */
   objectLevelWorm is ArmResourceActionAsync<
     BlobContainer,
     void,
@@ -80,3 +111,54 @@ interface BlobContainers {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(BlobContainers.create::parameters.resource,
+  "json",
+  "blobContainer"
+);
+@@extension(BlobContainers.create::parameters.resource,
+  "x-ms-client-name",
+  "blobContainer"
+);
+@@doc(BlobContainers.create::parameters.resource,
+  "Properties of the blob container to create."
+);
+@@projectedName(BlobContainers.update::parameters.properties,
+  "json",
+  "blobContainer"
+);
+@@extension(BlobContainers.update::parameters.properties,
+  "x-ms-client-name",
+  "blobContainer"
+);
+@@doc(BlobContainers.update::parameters.properties,
+  "Properties to update for the blob container."
+);
+@@projectedName(BlobContainers.setLegalHold::parameters.body,
+  "json",
+  "LegalHold"
+);
+@@extension(BlobContainers.setLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
+@@doc(BlobContainers.setLegalHold::parameters.body,
+  "The LegalHold property that will be set to a blob container."
+);
+@@projectedName(BlobContainers.clearLegalHold::parameters.body,
+  "json",
+  "LegalHold"
+);
+@@extension(BlobContainers.clearLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
+@@doc(BlobContainers.clearLegalHold::parameters.body,
+  "The LegalHold property that will be clear from a blob container."
+);
+@@projectedName(BlobContainers.lease::parameters.body, "json", "parameters");
+@@extension(BlobContainers.lease::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

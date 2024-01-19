@@ -11,11 +11,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("Deleted API Management Service information.")
+/**
+ * Deleted API Management Service information.
+ */
 @locationResource
 model DeletedServiceContract
   is ProxyResource<DeletedServiceContractProperties> {
-  @doc("The name of the API Management service.")
+  /**
+   * The name of the API Management service.
+   */
   @maxLength(50)
   @minLength(1)
   @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
@@ -27,13 +31,17 @@ model DeletedServiceContract
 
 @armResourceOperations
 interface DeletedServiceContracts {
+  /**
+   * Get soft-deleted Api Management Service by name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get soft-deleted Api Management Service by name.")
   @operationId("DeletedServices_GetByName")
   getByName is ArmResourceRead<DeletedServiceContract>;
 
+  /**
+   * Purges Api Management Service (deletes it with no option to undelete).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Purges Api Management Service (deletes it with no option to undelete).")
   @operationId("DeletedServices_Purge")
   purge is ArmResourceDeleteAsync<
     DeletedServiceContract,
@@ -41,8 +49,10 @@ interface DeletedServiceContracts {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Lists all soft-deleted services available for undelete for the given subscription.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all soft-deleted services available for undelete for the given subscription.")
   @operationId("DeletedServices_ListBySubscription")
   listBySubscription is ArmListBySubscription<DeletedServiceContract>;
 }

@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Analysis;
-@doc("Represents an instance of an Analysis Services resource.")
+/**
+ * Represents an instance of an Analysis Services resource.
+ */
 model AnalysisServicesServer
   is TrackedResource<AnalysisServicesServerProperties> {
-  @doc("The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63.")
+  /**
+   * The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63.
+   */
   @maxLength(63)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]*$")
@@ -26,56 +30,77 @@ model AnalysisServicesServer
 
 @armResourceOperations
 interface AnalysisServicesServers {
+  /**
+   * Gets details about the specified Analysis Services server.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets details about the specified Analysis Services server.")
   @operationId("Servers_GetDetails")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
 
+  /**
+   * Provisions the specified Analysis Services server based on the configuration specified in the request.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Provisions the specified Analysis Services server based on the configuration specified in the request.")
   @operationId("Servers_Create")
-  create is ArmResourceCreateOrUpdateAsync<AnalysisServicesServer>;
+  create is ArmResourceCreateOrReplaceAsync<AnalysisServicesServer>;
 
+  /**
+   * Updates the current state of the specified Analysis Services server.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates the current state of the specified Analysis Services server.")
+  @parameterVisibility("read")
   @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
     AnalysisServicesServerUpdateParameters
   >;
 
+  /**
+   * Deletes the specified Analysis Services server.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes the specified Analysis Services server.")
   @operationId("Servers_Delete")
   delete is ArmResourceDeleteAsync<AnalysisServicesServer>;
 
+  /**
+   * Gets all the Analysis Services servers for the given resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets all the Analysis Services servers for the given resource group.")
   @operationId("Servers_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AnalysisServicesServer>;
 
+  /**
+   * Lists all the Analysis Services servers for the given subscription.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all the Analysis Services servers for the given subscription.")
   @operationId("Servers_List")
   list is ArmListBySubscription<AnalysisServicesServer>;
 
+  /**
+   * Lists eligible SKUs for Analysis Services resource provider.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists eligible SKUs for Analysis Services resource provider.")
   @operationId("Servers_ListSkusForNew")
   listSkusForNew is ArmListBySubscription<AnalysisServicesServer>;
 
+  /**
+   * Suspends operation of the specified Analysis Services server instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Suspends operation of the specified Analysis Services server instance.")
   @operationId("Servers_Suspend")
   suspend is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
 
+  /**
+   * Resumes operation of the specified Analysis Services server instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Resumes operation of the specified Analysis Services server instance.")
   @operationId("Servers_Resume")
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
 
+  /**
+   * Return the gateway status of the specified Analysis Services server instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Return the gateway status of the specified Analysis Services server instance.")
   @operationId("Servers_ListGatewayStatus")
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
@@ -83,8 +108,10 @@ interface AnalysisServicesServers {
     GatewayListStatusLive
   >;
 
+  /**
+   * Dissociates a Unified Gateway associated with the server.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Dissociates a Unified Gateway associated with the server.")
   @operationId("Servers_DissociateGateway")
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
@@ -92,37 +119,73 @@ interface AnalysisServicesServers {
     void
   >;
 
+  /**
+   * Check the name availability in the target location.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Check the name availability in the target location.")
   @operationId("Servers_CheckNameAvailability")
-  checkNameAvailability is checkGlobalNameAvailability;
+  checkNameAvailability is checkLocalNameAvailability<
+    CheckServerNameAvailabilityParameters,
+    CheckServerNameAvailabilityResult
+  >;
 
+  /**
+   * Lists eligible SKUs for an Analysis Services resource.
+   */
+  // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Servers_ListSkusForExisting")
-  @doc("Lists eligible SKUs for an Analysis Services resource.")
-  // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")
   @get
-  ListSkusForExisting is Azure.Core.Foundations.Operation<
+  listSkusForExisting is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90.")
+      /**
+       * The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.")
+      /**
+       * The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.
+       */
       @maxLength(63)
       @minLength(3)
       @pattern("^[a-z][a-z0-9]*$")
       @path
       serverName: string;
 
-      @doc("A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     SkuEnumerationForExistingResourceResult
   >;
 }
+
+@@projectedName(AnalysisServicesServers.create::parameters.resource,
+  "json",
+  "serverParameters"
+);
+@@extension(AnalysisServicesServers.create::parameters.resource,
+  "x-ms-client-name",
+  "serverParameters"
+);
+@@doc(AnalysisServicesServers.create::parameters.resource,
+  "Contains the information used to provision the Analysis Services server."
+);
+@@projectedName(AnalysisServicesServers.update::parameters.properties,
+  "json",
+  "serverUpdateParameters"
+);
+@@extension(AnalysisServicesServers.update::parameters.properties,
+  "x-ms-client-name",
+  "serverUpdateParameters"
+);
+@@doc(AnalysisServicesServers.update::parameters.properties,
+  "Request object that contains the updated information for the server."
+);

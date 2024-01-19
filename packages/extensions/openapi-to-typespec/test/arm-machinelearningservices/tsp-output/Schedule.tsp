@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Workspace)
 model Schedule is ProxyResource<ScheduleProperties> {
-  @doc("Schedule name.")
+  /**
+   * Schedule name.
+   */
   @path
   @key("name")
   @segment("schedules")
@@ -24,32 +28,53 @@ model Schedule is ProxyResource<ScheduleProperties> {
 
 @armResourceOperations
 interface Schedules {
-  @doc("Get schedule.")
+  /**
+   * Get schedule.
+   */
   get is ArmResourceRead<Schedule>;
 
-  @doc("Create or update schedule.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Schedule>;
+  /**
+   * Create or update schedule.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Schedule>;
 
-  @doc("Delete schedule.")
+  /**
+   * Delete schedule.
+   */
   delete is ArmResourceDeleteAsync<
     Schedule,
     BaseParameters<Schedule>,
     ArmLroLocationHeader
   >;
 
-  @doc("List schedules in specified workspace.")
+  /**
+   * List schedules in specified workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Schedules_List")
   list is ArmResourceListByParent<
     Schedule,
     {
       ...BaseParameters<Schedule>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Status filter for schedule.")
+      /**
+       * Status filter for schedule.
+       */
       @query("listViewType")
       listViewType?: ScheduleListViewType;
     }
   >;
 }
+
+@@projectedName(Schedules.createOrUpdate::parameters.resource, "json", "body");
+@@extension(Schedules.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(Schedules.createOrUpdate::parameters.resource, "Schedule definition.");

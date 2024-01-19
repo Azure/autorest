@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Workspace)
 model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
-  @doc("Container name. This is case-sensitive.")
+  /**
+   * Container name. This is case-sensitive.
+   */
   @path
   @key("name")
   @segment("featuresets")
@@ -24,48 +28,82 @@ model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
 
 @armResourceOperations
 interface FeaturesetContainers {
-  @doc("Get container.")
+  /**
+   * Get container.
+   */
   getEntity is ArmResourceRead<FeaturesetContainer>;
 
-  @doc("Create or update container.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FeaturesetContainer>;
+  /**
+   * Create or update container.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturesetContainer>;
 
-  @doc("Delete container.")
+  /**
+   * Delete container.
+   */
   delete is ArmResourceDeleteAsync<
     FeaturesetContainer,
     BaseParameters<FeaturesetContainer>,
     ArmLroLocationHeader
   >;
 
-  @doc("List featurestore entity containers.")
+  /**
+   * List featurestore entity containers.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FeaturesetContainers_List")
   list is ArmResourceListByParent<
     FeaturesetContainer,
     {
       ...BaseParameters<FeaturesetContainer>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("tags")
       tags?: string;
 
-      @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.")
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      @doc("page size")
+      /**
+       * page size
+       */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      @doc("description for the feature set")
+      /**
+       * description for the feature set
+       */
       @query("description")
       description?: string;
 
-      @doc("createdBy user name")
+      /**
+       * createdBy user name
+       */
       @query("createdBy")
       createdBy?: string;
     }
   >;
 }
+
+@@projectedName(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(FeaturesetContainers.createOrUpdate::parameters.resource,
+  "Container entity to create or update."
+);

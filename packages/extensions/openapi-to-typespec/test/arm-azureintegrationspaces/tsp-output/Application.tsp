@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-@doc("An integration application under space.")
+/**
+ * An integration application under space.
+ */
 @parentResource(Space)
 model Application is TrackedResource<ApplicationProperties> {
-  @doc("The name of the Application")
+  /**
+   * The name of the Application
+   */
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
   @path
   @key("applicationName")
@@ -25,55 +29,82 @@ model Application is TrackedResource<ApplicationProperties> {
 
 @armResourceOperations
 interface Applications {
-  @doc("Get a Application")
+  /**
+   * Get a Application
+   */
   get is ArmResourceRead<Application>;
 
-  @doc("Create a Application")
+  /**
+   * Create a Application
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
 
-  @doc("Update a Application")
+  /**
+   * Update a Application
+   */
+  @parameterVisibility("read")
   patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
 
-  @doc("Delete a Application")
+  /**
+   * Delete a Application
+   */
   delete is ArmResourceDeleteSync<Application>;
 
-  @doc("List Application resources by Space")
+  /**
+   * List Application resources by Space
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
     {
       ...BaseParameters<Application>;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      @doc("Filter the result list using the given expression.")
+      /**
+       * Filter the result list using the given expression.
+       */
       @query("filter")
       filter?: string;
 
-      @doc("Select the specified fields to be included in the response.")
+      /**
+       * Select the specified fields to be included in the response.
+       */
       @query({
         name: "select",
         format: "multi",
       })
       select?: string[];
 
-      @doc("Expand the indicated resources into the response.")
+      /**
+       * Expand the indicated resources into the response.
+       */
       @query({
         name: "expand",
         format: "multi",
       })
       expand?: string[];
 
-      @doc("Expressions that specify the order of returned results.")
+      /**
+       * Expressions that specify the order of returned results.
+       */
       @query({
         name: "orderby",
         format: "multi",
@@ -82,35 +113,45 @@ interface Applications {
     }
   >;
 
-  @doc("The delete business process development artifact action.")
+  /**
+   * The delete business process development artifact action.
+   */
   deleteBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     void
   >;
 
-  @doc("The get business process development artifact action.")
+  /**
+   * The get business process development artifact action.
+   */
   getBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     GetOrDeleteBusinessProcessDevelopmentArtifactRequest,
     SaveOrGetBusinessProcessDevelopmentArtifactResponse
   >;
 
-  @doc("The list business process development artifacts action.")
+  /**
+   * The list business process development artifacts action.
+   */
   listBusinessProcessDevelopmentArtifacts is ArmResourceActionSync<
     Application,
     void,
     ListBusinessProcessDevelopmentArtifactsResponse
   >;
 
-  @doc("The save business process development artifact action.")
+  /**
+   * The save business process development artifact action.
+   */
   saveBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,
     SaveOrGetBusinessProcessDevelopmentArtifactResponse
   >;
 
-  @doc("The validate business process development artifact action.")
+  /**
+   * The validate business process development artifact action.
+   */
   validateBusinessProcessDevelopmentArtifact is ArmResourceActionSync<
     Application,
     SaveOrValidateBusinessProcessDevelopmentArtifactRequest,

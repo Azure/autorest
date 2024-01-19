@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("Tenant Settings.")
+/**
+ * Tenant Settings.
+ */
 @parentResource(ApiManagementServiceResource)
 model AccessInformationContract
   is ProxyResource<AccessInformationContractProperties> {
-  @doc("The identifier of the Access configuration.")
+  /**
+   * The identifier of the Access configuration.
+   */
   @path
   @key("accessName")
   @segment("tenant")
@@ -25,13 +29,17 @@ model AccessInformationContract
 
 @armResourceOperations
 interface AccessInformationContracts {
+  /**
+   * Get tenant access information details without secrets.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get tenant access information details without secrets.")
   @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
 
+  /**
+   * Tenant access metadata
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Tenant access metadata")
   @head
   @operationId("TenantAccess_GetEntityTag")
   getEntityTag(
@@ -41,22 +49,29 @@ interface AccessInformationContracts {
     >,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Update tenant access information details.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update tenant access information details.")
   @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     {
       ...BaseParameters<AccessInformationContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Update tenant access information details.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update tenant access information details.")
+  @parameterVisibility("read")
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
@@ -64,44 +79,56 @@ interface AccessInformationContracts {
     {
       ...BaseParameters<AccessInformationContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Returns list of access infos - for Git and Management endpoints.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Returns list of access infos - for Git and Management endpoints.")
   @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     {
       ...BaseParameters<AccessInformationContract>;
 
-      @doc("Not used")
+      /**
+       * Not used
+       */
       @query("$filter")
       $filter?: string;
     }
   >;
 
+  /**
+   * Regenerate primary access key
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerate primary access key")
   @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  /**
+   * Regenerate secondary access key
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerate secondary access key")
   @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  /**
+   * Get tenant access information details.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get tenant access information details.")
   @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
@@ -109,19 +136,46 @@ interface AccessInformationContracts {
     AccessInformationSecretsContract
   >;
 
+  /**
+   * Regenerate primary access key for GIT.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerate primary access key for GIT.")
   @operationId("TenantAccessGit_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 
+  /**
+   * Regenerate secondary access key for GIT.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerate secondary access key for GIT.")
   @operationId("TenantAccessGit_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 }
+
+@@projectedName(AccessInformationContracts.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AccessInformationContracts.create::parameters.resource,
+  "Parameters supplied to retrieve the Tenant Access Information."
+);
+@@projectedName(AccessInformationContracts.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(AccessInformationContracts.update::parameters.properties,
+  "Parameters supplied to retrieve the Tenant Access Information."
+);
