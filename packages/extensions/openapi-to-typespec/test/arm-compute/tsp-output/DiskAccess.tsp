@@ -11,56 +11,82 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("disk access resource.")
+/**
+ * disk access resource.
+ */
 model DiskAccess is TrackedResource<DiskAccessProperties> {
-  @doc("The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.")
+  /**
+   * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+   */
   @path
   @key("diskAccessName")
   @segment("diskAccesses")
   name: string;
 
-  @doc("The extended location where the disk access will be created. Extended location cannot be changed.")
+  /**
+   * The extended location where the disk access will be created. Extended location cannot be changed.
+   */
   extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
 interface DiskAccesses {
-  @doc("Gets information about a disk access resource.")
+  /**
+   * Gets information about a disk access resource.
+   */
   get is ArmResourceRead<DiskAccess>;
 
-  @doc("Creates or updates a disk access resource")
+  /**
+   * Creates or updates a disk access resource
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskAccess>;
 
-  @doc("Updates (patches) a disk access resource.")
+  /**
+   * Updates (patches) a disk access resource.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
 
-  @doc("Deletes a disk access resource.")
+  /**
+   * Deletes a disk access resource.
+   */
   delete is ArmResourceDeleteAsync<DiskAccess>;
 
+  /**
+   * Lists all the disk access resources under a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all the disk access resources under a resource group.")
   @operationId("DiskAccesses_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskAccess>;
 
-  @doc("Lists all the disk access resources under a subscription.")
+  /**
+   * Lists all the disk access resources under a subscription.
+   */
   list is ArmListBySubscription<DiskAccess>;
 
-  @doc("Gets the private link resources possible under disk access resource")
+  /**
+   * Gets the private link resources possible under disk access resource
+   */
   // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
   @get
   getPrivateLinkResources is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.")
+      /**
+       * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+       */
       @path
       diskAccessName: string;
     },

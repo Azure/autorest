@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the Dedicated host.")
+/**
+ * Specifies information about the Dedicated host.
+ */
 @parentResource(DedicatedHostGroup)
 model DedicatedHost is TrackedResource<DedicatedHostProperties> {
-  @doc("The name of the dedicated host.")
+  /**
+   * The name of the dedicated host.
+   */
   @path
   @key("hostName")
   @segment("hosts")
@@ -26,37 +30,53 @@ model DedicatedHost is TrackedResource<DedicatedHostProperties> {
 
 @armResourceOperations
 interface DedicatedHosts {
-  @doc("Retrieves information about a dedicated host.")
+  /**
+   * Retrieves information about a dedicated host.
+   */
   get is ArmResourceRead<
     DedicatedHost,
     {
       ...BaseParameters<DedicatedHost>;
 
-      @doc("The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.")
+      /**
+       * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.
+       */
       @query("$expand")
       $expand?: InstanceViewTypes;
     }
   >;
 
-  @doc("Create or update a dedicated host .")
+  /**
+   * Create or update a dedicated host .
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DedicatedHost>;
 
-  @doc("Update a dedicated host .")
+  /**
+   * Update a dedicated host .
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
 
-  @doc("Delete a dedicated host.")
+  /**
+   * Delete a dedicated host.
+   */
   delete is ArmResourceDeleteAsync<DedicatedHost>;
 
+  /**
+   * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.")
   @operationId("DedicatedHosts_ListByHostGroup")
   listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
-  @doc("Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.")
+  /**
+   * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
+   */
   restart is ArmResourceActionAsync<DedicatedHost, void, void>;
 
-  @doc("Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.")
+  /**
+   * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
+   */
   // FIXME: DedicatedHosts_ListAvailableSizes could not be converted to a resource operation
   listAvailableSizes is Azure.Core.ResourceList<string>;
 }

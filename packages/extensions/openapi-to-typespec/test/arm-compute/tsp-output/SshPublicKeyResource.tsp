@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the SSH public key.")
+/**
+ * Specifies information about the SSH public key.
+ */
 model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
-  @doc("The name of the SSH public key.")
+  /**
+   * The name of the SSH public key.
+   */
   @path
   @key("sshPublicKeyName")
   @segment("sshPublicKeys")
@@ -22,18 +26,24 @@ model SshPublicKeyResource is TrackedResource<SshPublicKeyResourceProperties> {
 
 @armResourceOperations
 interface SshPublicKeyResources {
+  /**
+   * Retrieves information about an SSH public key.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Retrieves information about an SSH public key.")
   @operationId("SshPublicKeys_Get")
   get is ArmResourceRead<SshPublicKeyResource>;
 
+  /**
+   * Creates a new SSH public key resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new SSH public key resource.")
   @operationId("SshPublicKeys_Create")
   create is ArmResourceCreateOrReplaceSync<SshPublicKeyResource>;
 
+  /**
+   * Updates a new SSH public key resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates a new SSH public key resource.")
   @parameterVisibility("read")
   @operationId("SshPublicKeys_Update")
   update is ArmCustomPatchSync<
@@ -41,23 +51,31 @@ interface SshPublicKeyResources {
     SshPublicKeyUpdateResource
   >;
 
+  /**
+   * Delete an SSH public key.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete an SSH public key.")
   @operationId("SshPublicKeys_Delete")
   delete is ArmResourceDeleteSync<SshPublicKeyResource>;
 
+  /**
+   * Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.")
   @operationId("SshPublicKeys_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<SshPublicKeyResource>;
 
+  /**
+   * Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.")
   @operationId("SshPublicKeys_ListBySubscription")
   listBySubscription is ArmListBySubscription<SshPublicKeyResource>;
 
+  /**
+   * Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.")
   @operationId("SshPublicKeys_GenerateKeyPair")
   generateKeyPair is ArmResourceActionSync<
     SshPublicKeyResource,

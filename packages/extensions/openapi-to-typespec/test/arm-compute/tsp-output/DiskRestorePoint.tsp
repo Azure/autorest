@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Properties of disk restore point")
+/**
+ * Properties of disk restore point
+ */
 @parentResource(RestorePoint)
 model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
-  @doc("The name of the disk restore point created.")
+  /**
+   * The name of the disk restore point created.
+   */
   @path
   @key("diskRestorePointName")
   @segment("diskRestorePoints")
@@ -24,36 +28,46 @@ model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
 
 @armResourceOperations
 interface DiskRestorePoints {
+  /**
+   * Get disk restorePoint resource
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get disk restorePoint resource")
   @operationId("DiskRestorePoint_Get")
   get is ArmResourceRead<
     DiskRestorePoint,
     {
       ...BaseParameters<DiskRestorePoint>;
 
-      @doc("The name of the restore point collection that the disk restore point belongs.")
+      /**
+       * The name of the restore point collection that the disk restore point belongs.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
+  /**
+   * Lists diskRestorePoints under a vmRestorePoint.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists diskRestorePoints under a vmRestorePoint.")
   @operationId("DiskRestorePoint_ListByRestorePoint")
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     {
       ...BaseParameters<DiskRestorePoint>;
 
-      @doc("The name of the restore point collection that the disk restore point belongs.")
+      /**
+       * The name of the restore point collection that the disk restore point belongs.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
+  /**
+   * Grants access to a diskRestorePoint.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Grants access to a diskRestorePoint.")
   @operationId("DiskRestorePoint_GrantAccess")
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
@@ -62,15 +76,19 @@ interface DiskRestorePoints {
     {
       ...BaseParameters<DiskRestorePoint>;
 
-      @doc("The name of the restore point collection that the disk restore point belongs.")
+      /**
+       * The name of the restore point collection that the disk restore point belongs.
+       */
       @path
       restorePointCollectionName: string;
     },
     ArmLroLocationHeader
   >;
 
+  /**
+   * Revokes access to a diskRestorePoint.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Revokes access to a diskRestorePoint.")
   @operationId("DiskRestorePoint_RevokeAccess")
   revokeAccess is ArmResourceActionAsync<
     DiskRestorePoint,
@@ -79,7 +97,9 @@ interface DiskRestorePoints {
     {
       ...BaseParameters<DiskRestorePoint>;
 
-      @doc("The name of the restore point collection that the disk restore point belongs.")
+      /**
+       * The name of the restore point collection that the disk restore point belongs.
+       */
       @path
       restorePointCollectionName: string;
     },

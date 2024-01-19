@@ -15,10 +15,14 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 // FIXME: ComputeResource has no properties property
-@doc("Machine Learning compute object wrapped into ARM resource envelope.")
+/**
+* Machine Learning compute object wrapped into ARM resource envelope.
+*/
 @parentResource(Workspace)
 model ComputeResource is TrackedResource<{}> {
-@doc("Name of the Azure Machine Learning compute.")
+/**
+* Name of the Azure Machine Learning compute.
+*/
 @path
 @key("computeName")
 @segment("computes")
@@ -33,73 +37,101 @@ model ComputeResource is TrackedResource<{}> {
 
 @armResourceOperations
 interface ComputeResources {
-@doc("Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.")
+/**
+* Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.
+*/
 @operationId("Compute_Get")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 get is ArmResourceRead<ComputeResource>
 
-@doc("Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.")
+/**
+* Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
+*/
 @operationId("Compute_CreateOrUpdate")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>
 
-@doc("Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.")
+/**
+* Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
+*/
 @parameterVisibility("read")
 @operationId("Compute_Update")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 update is ArmCustomPatchAsync<ComputeResource,ClusterUpdateParameters>
 
-@doc("Deletes specified Machine Learning compute.")
+/**
+* Deletes specified Machine Learning compute.
+*/
 @operationId("Compute_Delete")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 delete is ArmResourceDeleteAsync<ComputeResource,{
     ...BaseParameters<ComputeResource>,
-    @doc("Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.")
+    /**
+* Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
+*/
 @query("underlyingResourceAction")
 "underlyingResourceAction": UnderlyingResourceAction
     }>
 
-@doc("Gets computes in specified workspace.")
+/**
+* Gets computes in specified workspace.
+*/
 @operationId("Compute_List")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 list is ArmResourceListByParent<ComputeResource,{
     ...BaseParameters<ComputeResource>,
-    @doc("Continuation token for pagination.")
+    /**
+* Continuation token for pagination.
+*/
 @query("$skip")
 "$skip"?: string
     }>
 
-@doc("Updates the custom services list. The list of custom services provided shall be overwritten")
+/**
+* Updates the custom services list. The list of custom services provided shall be overwritten
+*/
 @operationId("Compute_UpdateCustomServices")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 updateCustomServices is ArmResourceActionSync<ComputeResource,paths·7cv641·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-machinelearningservices-workspaces-workspacename-computes-computename-customservices·post·requestbody·content·application-json·schema,void>
 
-@doc("Get the details (e.g IP address, port etc) of all the compute nodes in the compute.")
+/**
+* Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
+*/
 @operationId("Compute_ListNodes")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 listNodes is ArmResourceActionSync<ComputeResource,void,AmlComputeNodesInformation>
 
-@doc("Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).")
+/**
+* Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
+*/
 @operationId("Compute_ListKeys")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 listKeys is ArmResourceActionSync<ComputeResource,void,ComputeSecrets>
 
-@doc("Posts a start action to a compute instance")
+/**
+* Posts a start action to a compute instance
+*/
 @operationId("Compute_Start")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 start is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
 
-@doc("Posts a stop action to a compute instance")
+/**
+* Posts a stop action to a compute instance
+*/
 @operationId("Compute_Stop")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 stop is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
 
-@doc("Posts a restart action to a compute instance")
+/**
+* Posts a restart action to a compute instance
+*/
 @operationId("Compute_Restart")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 restart is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
 
-@doc("Updates the idle shutdown setting of a compute instance.")
+/**
+* Updates the idle shutdown setting of a compute instance.
+*/
 @operationId("Compute_UpdateIdleShutdownSetting")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 updateIdleShutdownSetting is ArmResourceActionSync<ComputeResource,IdleShutdownSetting,void>

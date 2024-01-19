@@ -11,7 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
-@doc("The data catalog resource.")
+/**
+ * The data catalog resource.
+ */
 @singleton("default")
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
   @key("dataProductsCatalog")
@@ -21,14 +23,20 @@ model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
 
 @armResourceOperations
 interface DataProductsCatalogs {
-  @doc("Retrieve data type resource.")
+  /**
+   * Retrieve data type resource.
+   */
   get is ArmResourceRead<DataProductsCatalog>;
 
-  @doc("List data catalog by subscription.")
+  /**
+   * List data catalog by subscription.
+   */
   listBySubscription is ArmListBySubscription<DataProductsCatalog>;
 
+  /**
+   * List data catalog by resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List data catalog by resource group.")
   @operationId("DataProductsCatalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 }

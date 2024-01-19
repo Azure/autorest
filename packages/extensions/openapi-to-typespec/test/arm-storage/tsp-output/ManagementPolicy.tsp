@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("The Get Storage Account ManagementPolicies operation response.")
+/**
+ * The Get Storage Account ManagementPolicies operation response.
+ */
 @singleton("default")
 @parentResource(StorageAccount)
 model ManagementPolicy is ProxyResource<ManagementPolicyProperties> {
@@ -23,13 +25,19 @@ model ManagementPolicy is ProxyResource<ManagementPolicyProperties> {
 
 @armResourceOperations
 interface ManagementPolicies {
-  @doc("Gets the managementpolicy associated with the specified storage account.")
+  /**
+   * Gets the managementpolicy associated with the specified storage account.
+   */
   get is ArmResourceRead<ManagementPolicy>;
 
-  @doc("Sets the managementpolicy to the specified storage account.")
+  /**
+   * Sets the managementpolicy to the specified storage account.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<ManagementPolicy>;
 
-  @doc("Deletes the managementpolicy associated with the specified storage account.")
+  /**
+   * Deletes the managementpolicy associated with the specified storage account.
+   */
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 

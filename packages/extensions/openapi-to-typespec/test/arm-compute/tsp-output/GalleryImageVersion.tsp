@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image version that you want to create or update.")
+/**
+ * Specifies information about the gallery image version that you want to create or update.
+ */
 @parentResource(GalleryImage)
 model GalleryImageVersion is TrackedResource<GalleryImageVersionProperties> {
-  @doc("The name of the gallery image version to be retrieved.")
+  /**
+   * The name of the gallery image version to be retrieved.
+   */
   @path
   @key("galleryImageVersionName")
   @segment("versions")
@@ -24,30 +28,42 @@ model GalleryImageVersion is TrackedResource<GalleryImageVersionProperties> {
 
 @armResourceOperations
 interface GalleryImageVersions {
-  @doc("Retrieves information about a gallery image version.")
+  /**
+   * Retrieves information about a gallery image version.
+   */
   get is ArmResourceRead<
     GalleryImageVersion,
     {
       ...BaseParameters<GalleryImageVersion>;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: ReplicationStatusTypes;
     }
   >;
 
-  @doc("Create or update a gallery image version.")
+  /**
+   * Create or update a gallery image version.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImageVersion>;
 
-  @doc("Update a gallery image version.")
+  /**
+   * Update a gallery image version.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<GalleryImageVersion, GalleryImageVersionUpdate>;
 
-  @doc("Delete a gallery image version.")
+  /**
+   * Delete a gallery image version.
+   */
   delete is ArmResourceDeleteAsync<GalleryImageVersion>;
 
+  /**
+   * List gallery image versions in a gallery image definition.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List gallery image versions in a gallery image definition.")
   @operationId("GalleryImageVersions_ListByGalleryImage")
   listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
 }

@@ -11,30 +11,79 @@ namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The status of the current operation.")
+/**
+ * The status of the current operation.
+ */
 enum ProvisioningState {
-  @doc("Represents a succeeded operation.") Succeeded,
-  @doc("Represents a failed operation.") Failed,
-  @doc("Represents a canceled operation.") Canceled,
-  @doc("Represents a pending operation.") Provisioning,
-  @doc("Represents a pending operation.") Updating,
-  @doc("Represents an operation under deletion.") Deleting,
-  @doc("Represents an accepted operation.") Accepted,
+  /**
+   * Represents a succeeded operation.
+   */
+  Succeeded,
+
+  /**
+   * Represents a failed operation.
+   */
+  Failed,
+
+  /**
+   * Represents a canceled operation.
+   */
+  Canceled,
+
+  /**
+   * Represents a pending operation.
+   */
+  Provisioning,
+
+  /**
+   * Represents a pending operation.
+   */
+  Updating,
+
+  /**
+   * Represents an operation under deletion.
+   */
+  Deleting,
+
+  /**
+   * Represents an accepted operation.
+   */
+  Accepted,
 }
 
-@doc("The data type state")
+/**
+ * The data type state
+ */
 enum ControlState {
-  @doc("Field to enable a setting.") Enabled,
-  @doc("Field to disable a setting.") Disabled,
+  /**
+   * Field to enable a setting.
+   */
+  Enabled,
+
+  /**
+   * Field to disable a setting.
+   */
+  Disabled,
 }
 
-@doc("Specifies the default action of allow or deny when no other rules match.")
+/**
+ * Specifies the default action of allow or deny when no other rules match.
+ */
 enum DefaultAction {
-  @doc("Represents allow action.") Allow,
-  @doc("Represents deny action.") Deny,
+  /**
+   * Represents allow action.
+   */
+  Allow,
+
+  /**
+   * Represents deny action.
+   */
+  Deny,
 }
 
-@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
+/**
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ */
 enum ManagedServiceIdentityType {
   None,
   SystemAssigned,
@@ -42,177 +91,295 @@ enum ManagedServiceIdentityType {
   `SystemAssigned, UserAssigned`,
 }
 
-@doc("The data type state")
+/**
+ * The data type state
+ */
 enum DataProductUserRole {
-  @doc("Field to specify user of type Reader.") Reader,
-  @doc("""
-Field to specify user of type SensitiveReader.
+  /**
+   * Field to specify user of type Reader.
+   */
+  Reader,
+
+  /**
+* Field to specify user of type SensitiveReader.
 This user has privileged access to read sensitive data of a data product.
-""")
+*/
   SensitiveReader,
 }
 
-@doc("The data type state")
+/**
+ * The data type state
+ */
 enum DataTypeState {
-  @doc("Field to specify stopped state.") Stopped,
-  @doc("Field to specify running state.") Running,
+  /**
+   * Field to specify stopped state.
+   */
+  Stopped,
+
+  /**
+   * Field to specify running state.
+   */
+  Running,
 }
 
-@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
+/**
+ * Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, "Logging, Metrics"), or None to bypass none of those traffics.
+ */
 enum Bypass {
-  @doc("Represents no bypassing of traffic.") None,
-  @doc("Represents bypassing logging traffic.") Logging,
-  @doc("Represents bypassing metrics traffic.") Metrics,
-  @doc("Represents bypassing azure services traffic.") AzureServices,
+  /**
+   * Represents no bypassing of traffic.
+   */
+  None,
+
+  /**
+   * Represents bypassing logging traffic.
+   */
+  Logging,
+
+  /**
+   * Represents bypassing metrics traffic.
+   */
+  Metrics,
+
+  /**
+   * Represents bypassing azure services traffic.
+   */
+  AzureServices,
 }
 
-@doc("The data product properties.")
+/**
+ * The data product properties.
+ */
 model DataProductProperties {
-  @doc("The resource GUID property of the data product resource.")
+  /**
+   * The resource GUID property of the data product resource.
+   */
   @visibility("read")
   resourceGuid?: string;
 
-  @doc("Latest provisioning state  of data product.")
+  /**
+   * Latest provisioning state  of data product.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("Data product publisher name.")
+  /**
+   * Data product publisher name.
+   */
   @visibility("read", "create")
   publisher: string;
 
-  @doc("Product name of data product.")
+  /**
+   * Product name of data product.
+   */
   @visibility("read", "create")
   product: string;
 
-  @doc("Major version of data product.")
+  /**
+   * Major version of data product.
+   */
   @visibility("read", "create")
   majorVersion: string;
 
-  @doc("List of name or email associated with data product resource deployment.")
+  /**
+   * List of name or email associated with data product resource deployment.
+   */
   @visibility("read", "create", "update")
   owners?: string[];
 
-  @doc("Flag to enable or disable redundancy for data product.")
+  /**
+   * Flag to enable or disable redundancy for data product.
+   */
   @visibility("read", "create")
   redundancy?: ControlState;
 
-  @doc("Purview account url for data product to connect to.")
+  /**
+   * Purview account url for data product to connect to.
+   */
   @visibility("read", "create", "update")
   purviewAccount?: string;
 
-  @doc("Purview collection url for data product to connect to.")
+  /**
+   * Purview collection url for data product to connect to.
+   */
   @visibility("read", "create", "update")
   purviewCollection?: string;
 
-  @doc("Flag to enable or disable private link for data product resource.")
+  /**
+   * Flag to enable or disable private link for data product resource.
+   */
   @visibility("read", "create", "update")
   privateLinksEnabled?: ControlState;
 
-  @doc("Flag to enable or disable public access of data product resource.")
+  /**
+   * Flag to enable or disable public access of data product resource.
+   */
   @visibility("read", "create")
   publicNetworkAccess?: ControlState;
 
-  @doc("Flag to enable customer managed key encryption for data product.")
+  /**
+   * Flag to enable customer managed key encryption for data product.
+   */
   @visibility("read", "create")
   customerManagedKeyEncryptionEnabled?: ControlState;
 
-  @doc("Customer managed encryption key details for data product.")
+  /**
+   * Customer managed encryption key details for data product.
+   */
   @visibility("read", "create")
   customerEncryptionKey?: EncryptionKeyDetails;
 
-  @doc("Network rule set for data product.")
+  /**
+   * Network rule set for data product.
+   */
   @visibility("read", "create")
   networkacls?: DataProductNetworkAcls;
 
-  @doc("Managed resource group configuration.")
+  /**
+   * Managed resource group configuration.
+   */
   @visibility("create")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
-  @doc("List of available minor versions of the data product resource.")
+  /**
+   * List of available minor versions of the data product resource.
+   */
   @visibility("read")
   availableMinorVersions?: string[];
 
-  @doc("Current configured minor version of the data product resource.")
+  /**
+   * Current configured minor version of the data product resource.
+   */
   @visibility("read", "update")
   currentMinorVersion?: string;
 
-  @doc("Documentation link for the data product based on definition file.")
+  /**
+   * Documentation link for the data product based on definition file.
+   */
   @visibility("read")
   documentation?: string;
 
-  @doc("Resource links which exposed to the customer to query the data.")
+  /**
+   * Resource links which exposed to the customer to query the data.
+   */
   @visibility("read")
   consumptionEndpoints?: ConsumptionEndpointsProperties;
 
-  @doc("Key vault url.")
+  /**
+   * Key vault url.
+   */
   @visibility("read")
   keyVaultUrl?: string;
 }
 
-@doc("Encryption key details.")
+/**
+ * Encryption key details.
+ */
 model EncryptionKeyDetails {
-  @doc("The Uri of the key vault.")
+  /**
+   * The Uri of the key vault.
+   */
   keyVaultUri: string;
 
-  @doc("The name of the key vault key.")
+  /**
+   * The name of the key vault key.
+   */
   keyName: string;
 
-  @doc("The version of the key vault key.")
+  /**
+   * The version of the key vault key.
+   */
   keyVersion: string;
 }
 
-@doc("Data Product Network rule set")
+/**
+ * Data Product Network rule set
+ */
 model DataProductNetworkAcls {
-  @doc("Virtual Network Rule")
+  /**
+   * Virtual Network Rule
+   */
   virtualNetworkRule: VirtualNetworkRule[];
 
-  @doc("IP rule with specific IP or IP range in CIDR format.")
+  /**
+   * IP rule with specific IP or IP range in CIDR format.
+   */
   ipRules: IPRules[];
 
-  @doc("The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.")
+  /**
+   * The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.
+   */
   allowedQueryIpRangeList: string[];
 
-  @doc("Default Action")
+  /**
+   * Default Action
+   */
   defaultAction: DefaultAction;
 }
 
-@doc("Virtual Network Rule")
+/**
+ * Virtual Network Rule
+ */
 model VirtualNetworkRule {
-  @doc("Resource ID of a subnet")
+  /**
+   * Resource ID of a subnet
+   */
   id: string;
 
-  @doc("The action of virtual network rule.")
+  /**
+   * The action of virtual network rule.
+   */
   action?: string;
 
-  @doc("Gets the state of virtual network rule.")
+  /**
+   * Gets the state of virtual network rule.
+   */
   state?: string;
 }
 
-@doc("IP rule with specific IP or IP range in CIDR format.")
+/**
+ * IP rule with specific IP or IP range in CIDR format.
+ */
 model IPRules {
-  @doc("IP Rules Value")
+  /**
+   * IP Rules Value
+   */
   value?: string;
 
-  @doc("The action of virtual network rule.")
+  /**
+   * The action of virtual network rule.
+   */
   action: string;
 }
 
-@doc("ManagedResourceGroup related properties")
+/**
+ * ManagedResourceGroup related properties
+ */
 model ManagedResourceGroupConfiguration {
-  @doc("Name of managed resource group")
+  /**
+   * Name of managed resource group
+   */
   name: string;
 
-  @doc("Managed Resource Group location")
+  /**
+   * Managed Resource Group location
+   */
   location: string;
 }
 
-@doc("Details of Consumption Properties")
+/**
+ * Details of Consumption Properties
+ */
 model ConsumptionEndpointsProperties {
-  @doc("Ingestion url to upload the data.")
+  /**
+   * Ingestion url to upload the data.
+   */
   @visibility("read")
   ingestionUrl?: string;
 
-  @doc("Resource Id of ingestion endpoint.")
+  /**
+   * Resource Id of ingestion endpoint.
+   */
   @visibility("read")
   ingestionResourceId?: ResourceIdentifier<[
     {
@@ -220,11 +387,15 @@ model ConsumptionEndpointsProperties {
     }
   ]>;
 
-  @doc("Url to consume file type.")
+  /**
+   * Url to consume file type.
+   */
   @visibility("read")
   fileAccessUrl?: string;
 
-  @doc("Resource Id of file access endpoint.")
+  /**
+   * Resource Id of file access endpoint.
+   */
   @visibility("read")
   fileAccessResourceId?: ResourceIdentifier<[
     {
@@ -232,11 +403,15 @@ model ConsumptionEndpointsProperties {
     }
   ]>;
 
-  @doc("Url to consume the processed data.")
+  /**
+   * Url to consume the processed data.
+   */
   @visibility("read")
   queryUrl?: string;
 
-  @doc("Resource Id of query endpoint.")
+  /**
+   * Resource Id of query endpoint.
+   */
   @visibility("read")
   queryResourceId?: ResourceIdentifier<[
     {
@@ -245,260 +420,414 @@ model ConsumptionEndpointsProperties {
   ]>;
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
 model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
   @visibility("read")
   id?: string;
 
-  @doc("The name of the resource")
+  /**
+   * The name of the resource
+   */
   @visibility("read")
   name?: string;
 
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
   @visibility("read")
   type?: string;
 
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
   @visibility("read")
   systemData?: SystemData;
 }
 
-@doc("Details for data catalog properties.")
+/**
+ * Details for data catalog properties.
+ */
 model DataProductsCatalogProperties {
-  @doc("The data catalog provisioning state.")
+  /**
+   * The data catalog provisioning state.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("The data product publisher information.")
+  /**
+   * The data product publisher information.
+   */
   publishers: PublisherInformation[];
 }
 
-@doc("Details for Publisher Information.")
+/**
+ * Details for Publisher Information.
+ */
 model PublisherInformation {
-  @doc("Name of the publisher.")
+  /**
+   * Name of the publisher.
+   */
   publisherName: string;
 
-  @doc("Data product information.")
+  /**
+   * Data product information.
+   */
   dataProducts: DataProductInformation[];
 }
 
-@doc("Data Product Information")
+/**
+ * Data Product Information
+ */
 model DataProductInformation {
-  @doc("Name of data product.")
+  /**
+   * Name of data product.
+   */
   dataProductName: string;
 
-  @doc("Description about data product.")
+  /**
+   * Description about data product.
+   */
   description: string;
 
-  @doc("Version information of data product.")
+  /**
+   * Version information of data product.
+   */
   dataProductVersions: DataProductVersion[];
 }
 
-@doc("Data Product Version.")
+/**
+ * Data Product Version.
+ */
 model DataProductVersion {
-  @doc("Version of data product")
+  /**
+   * Version of data product
+   */
   version: string;
 }
 
-@doc("The type used for update operations of the DataProduct.")
+/**
+ * The type used for update operations of the DataProduct.
+ */
 model DataProductUpdate {
-  @doc("The managed service identities assigned to this resource.")
+  /**
+   * The managed service identities assigned to this resource.
+   */
   identity?: ManagedServiceIdentity;
 
-  @doc("Resource tags.")
+  /**
+   * Resource tags.
+   */
   tags?: Record<string>;
 
-  @doc("The updatable properties of the DataProduct.")
+  /**
+   * The updatable properties of the DataProduct.
+   */
   properties?: DataProductUpdateProperties;
 }
 
-@doc("The updatable properties of the DataProduct.")
+/**
+ * The updatable properties of the DataProduct.
+ */
 model DataProductUpdateProperties {
-  @doc("List of name or email associated with data product resource deployment.")
+  /**
+   * List of name or email associated with data product resource deployment.
+   */
   @visibility("read", "create", "update")
   owners?: string[];
 
-  @doc("Purview account url for data product to connect to.")
+  /**
+   * Purview account url for data product to connect to.
+   */
   @visibility("read", "create", "update")
   purviewAccount?: string;
 
-  @doc("Purview collection url for data product to connect to.")
+  /**
+   * Purview collection url for data product to connect to.
+   */
   @visibility("read", "create", "update")
   purviewCollection?: string;
 
-  @doc("Flag to enable or disable private link for data product resource.")
+  /**
+   * Flag to enable or disable private link for data product resource.
+   */
   @visibility("read", "create", "update")
   privateLinksEnabled?: ControlState;
 
-  @doc("Current configured minor version of the data product resource.")
+  /**
+   * Current configured minor version of the data product resource.
+   */
   @visibility("read", "update")
   currentMinorVersion?: string;
 }
 
-@doc("The details for role assignment common properties.")
+/**
+ * The details for role assignment common properties.
+ */
 model RoleAssignmentCommonProperties {
-  @doc("Role Id of the Built-In Role")
+  /**
+   * Role Id of the Built-In Role
+   */
   roleId: string;
 
-  @doc("Object ID of the AAD principal or security-group.")
+  /**
+   * Object ID of the AAD principal or security-group.
+   */
   principalId: string;
 
-  @doc("User name.")
+  /**
+   * User name.
+   */
   userName: string;
 
-  @doc("Data Type Scope at which the role assignment is created.")
+  /**
+   * Data Type Scope at which the role assignment is created.
+   */
   dataTypeScope: string[];
 
-  @doc("Type of the principal Id: User, Group or ServicePrincipal")
+  /**
+   * Type of the principal Id: User, Group or ServicePrincipal
+   */
   principalType: string;
 
-  @doc("Data Product role to be assigned to a user.")
+  /**
+   * Data Product role to be assigned to a user.
+   */
   role: DataProductUserRole;
 }
 
-@doc("The details for role assignment response.")
+/**
+ * The details for role assignment response.
+ */
 model RoleAssignmentDetail {
-  @doc("Role Id of the Built-In Role")
+  /**
+   * Role Id of the Built-In Role
+   */
   roleId: string;
 
-  @doc("Object ID of the AAD principal or security-group.")
+  /**
+   * Object ID of the AAD principal or security-group.
+   */
   principalId: string;
 
-  @doc("User name.")
+  /**
+   * User name.
+   */
   userName: string;
 
-  @doc("Data Type Scope at which the role assignment is created.")
+  /**
+   * Data Type Scope at which the role assignment is created.
+   */
   dataTypeScope: string[];
 
-  @doc("Type of the principal Id: User, Group or ServicePrincipal")
+  /**
+   * Type of the principal Id: User, Group or ServicePrincipal
+   */
   principalType: string;
 
-  @doc("Data Product role to be assigned to a user.")
+  /**
+   * Data Product role to be assigned to a user.
+   */
   role: DataProductUserRole;
 
-  @doc("Id of role assignment request")
+  /**
+   * Id of role assignment request
+   */
   roleAssignmentId: string;
 }
 
-@doc("The data type properties")
+/**
+ * The data type properties
+ */
 model DataTypeProperties {
-  @doc("Latest provisioning state  of data product.")
+  /**
+   * Latest provisioning state  of data product.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("State of data type.")
+  /**
+   * State of data type.
+   */
   @visibility("read", "create", "update")
   state?: DataTypeState;
 
-  @doc("Reason for the state of data type.")
+  /**
+   * Reason for the state of data type.
+   */
   @visibility("read")
   stateReason?: string;
 
-  @doc("Field for storage output retention in days.")
+  /**
+   * Field for storage output retention in days.
+   */
   @visibility("read", "create", "update")
   storageOutputRetention?: int32;
 
-  @doc("Field for database cache retention in days.")
+  /**
+   * Field for database cache retention in days.
+   */
   @visibility("read", "create", "update")
   databaseCacheRetention?: int32;
 
-  @doc("Field for database data retention in days.")
+  /**
+   * Field for database data retention in days.
+   */
   @visibility("read", "create", "update")
   databaseRetention?: int32;
 
-  @doc("Url for data visualization.")
+  /**
+   * Url for data visualization.
+   */
   @visibility("read")
   visualizationUrl?: string;
 }
 
-@doc("The type used for update operations of the DataType.")
+/**
+ * The type used for update operations of the DataType.
+ */
 model DataTypeUpdate {
-  @doc("The updatable properties of the DataType.")
+  /**
+   * The updatable properties of the DataType.
+   */
   properties?: DataTypeUpdateProperties;
 }
 
-@doc("The updatable properties of the DataType.")
+/**
+ * The updatable properties of the DataType.
+ */
 model DataTypeUpdateProperties {
-  @doc("State of data type.")
+  /**
+   * State of data type.
+   */
   @visibility("read", "create", "update")
   state?: DataTypeState;
 
-  @doc("Field for storage output retention in days.")
+  /**
+   * Field for storage output retention in days.
+   */
   @visibility("read", "create", "update")
   storageOutputRetention?: int32;
 
-  @doc("Field for database cache retention in days.")
+  /**
+   * Field for database cache retention in days.
+   */
   @visibility("read", "create", "update")
   databaseCacheRetention?: int32;
 
-  @doc("Field for database data retention in days.")
+  /**
+   * Field for database data retention in days.
+   */
   @visibility("read", "create", "update")
   databaseRetention?: int32;
 }
 
-@doc("The details for container sas creation.")
+/**
+ * The details for container sas creation.
+ */
 model ContainerSaS {
-  @doc("Sas token start timestamp.")
+  /**
+   * Sas token start timestamp.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTimeStamp: utcDateTime;
 
-  @doc("Sas token expiry timestamp.")
+  /**
+   * Sas token expiry timestamp.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTimeStamp: utcDateTime;
 
-  @doc("Ip Address")
+  /**
+   * Ip Address
+   */
   ipAddress: string;
 }
 
-@doc("Details of storage container account sas token .")
+/**
+ * Details of storage container account sas token .
+ */
 model ContainerSasToken {
-  @doc("Field to specify storage container sas token.")
+  /**
+   * Field to specify storage container sas token.
+   */
   @secret
   storageContainerSasToken: string;
 }
 
-@doc("The details for storage account sas creation.")
+/**
+ * The details for storage account sas creation.
+ */
 model AccountSas {
-  @doc("Sas token start timestamp.")
+  /**
+   * Sas token start timestamp.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTimeStamp: utcDateTime;
 
-  @doc("Sas token expiry timestamp.")
+  /**
+   * Sas token expiry timestamp.
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTimeStamp: utcDateTime;
 
-  @doc("Ip Address")
+  /**
+   * Ip Address
+   */
   ipAddress: string;
 }
 
-@doc("Details of storage account sas token .")
+/**
+ * Details of storage account sas token .
+ */
 model AccountSasToken {
-  @doc("Field to specify storage account sas token.")
+  /**
+   * Field to specify storage account sas token.
+   */
   @secret
   storageAccountSasToken: string;
 }
 
-@doc("list role assignments.")
+/**
+ * list role assignments.
+ */
 model ListRoleAssignments {
-  @doc("Count of role assignments.")
+  /**
+   * Count of role assignments.
+   */
   count: int32;
 
-  @doc("list of role assignments")
+  /**
+   * list of role assignments
+   */
   roleAssignmentResponse: RoleAssignmentDetail[];
 }
 
-@doc("Details for KeyVault.")
+/**
+ * Details for KeyVault.
+ */
 model KeyVaultInfo {
-  @doc("key vault url.")
+  /**
+   * key vault url.
+   */
   keyVaultUrl: string;
 }
 
-@doc("Resource Access Rules.")
+/**
+ * Resource Access Rules.
+ */
 model ResourceAccessRules {
-  @doc("The tenant ID of resource.")
+  /**
+   * The tenant ID of resource.
+   */
   tenantId: string;
 
-  @doc("Resource ID")
+  /**
+   * Resource ID
+   */
   resourceId: string;
 }

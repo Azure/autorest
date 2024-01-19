@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("Identity Provider details.")
+/**
+ * Identity Provider details.
+ */
 @parentResource(ApiManagementServiceResource)
 model IdentityProviderContract
   is ProxyResource<IdentityProviderContractProperties> {
-  @doc("Identity Provider Type identifier.")
+  /**
+   * Identity Provider Type identifier.
+   */
   @path
   @key("identityProviderName")
   @segment("identityProviders")
@@ -25,13 +29,17 @@ model IdentityProviderContract
 
 @armResourceOperations
 interface IdentityProviderContracts {
+  /**
+   * Gets the configuration details of the identity Provider configured in specified service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the configuration details of the identity Provider configured in specified service instance.")
   @operationId("IdentityProvider_Get")
   get is ArmResourceRead<IdentityProviderContract>;
 
+  /**
+   * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the entity state (Etag) version of the identityProvider specified by its identifier.")
   @head
   @operationId("IdentityProvider_GetEntityTag")
   getEntityTag(
@@ -41,22 +49,28 @@ interface IdentityProviderContracts {
     >,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Creates or Updates the IdentityProvider configuration.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or Updates the IdentityProvider configuration.")
   @operationId("IdentityProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     {
       ...BaseParameters<IdentityProviderContract>;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
     }
   >;
 
+  /**
+   * Updates an existing IdentityProvider configuration.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates an existing IdentityProvider configuration.")
   @parameterVisibility("read")
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
@@ -65,33 +79,43 @@ interface IdentityProviderContracts {
     {
       ...BaseParameters<IdentityProviderContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Deletes the specified identity provider configuration.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes the specified identity provider configuration.")
   @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     {
       ...BaseParameters<IdentityProviderContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Lists a collection of Identity Provider configured in the specified service instance.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists a collection of Identity Provider configured in the specified service instance.")
   @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<IdentityProviderContract>;
 
+  /**
+   * Gets the client secret details of the Identity Provider.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the client secret details of the Identity Provider.")
   @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,

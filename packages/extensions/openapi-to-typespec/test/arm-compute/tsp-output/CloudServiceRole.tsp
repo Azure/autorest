@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Describes a role of the cloud service.")
+/**
+ * Describes a role of the cloud service.
+ */
 @parentResource(CloudService)
 model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {
-  @doc("Name of the role.")
+  /**
+   * Name of the role.
+   */
   @path
   @key("roleName")
   @segment("roles")
@@ -26,11 +30,15 @@ model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {
 
 @armResourceOperations
 interface CloudServiceRoles {
-  @doc("Gets a role from a cloud service.")
+  /**
+   * Gets a role from a cloud service.
+   */
   get is ArmResourceRead<CloudServiceRole>;
 
+  /**
+   * Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles.")
   @operationId("CloudServiceRoles_List")
   list is ArmResourceListByParent<CloudServiceRole>;
 }

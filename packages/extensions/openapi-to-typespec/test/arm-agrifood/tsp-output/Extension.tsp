@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
-@doc("Extension resource.")
+/**
+ * Extension resource.
+ */
 @parentResource(DataManagerForAgriculture)
 model Extension is ProxyResource<ExtensionProperties> {
-  @doc("Id of extension resource.")
+  /**
+   * Id of extension resource.
+   */
   @path
   @key("extensionId")
   @segment("extensions")
@@ -26,47 +30,61 @@ model Extension is ProxyResource<ExtensionProperties> {
 
 @armResourceOperations
 interface Extensions {
-  @doc("Get installed extension details by extension id.")
+  /**
+   * Get installed extension details by extension id.
+   */
   get is ArmResourceRead<Extension>;
 
-  @doc("Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.")
+  /**
+   * Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Extension>;
 
-  @doc("Uninstall extension.")
+  /**
+   * Uninstall extension.
+   */
   delete is ArmResourceDeleteSync<Extension>;
 
+  /**
+   * Get installed extensions details.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get installed extensions details.")
   @operationId("Extensions_ListByDataManagerForAgriculture")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     {
       ...BaseParameters<Extension>;
 
-      @doc("Installed extension ids.")
+      /**
+       * Installed extension ids.
+       */
       @query({
         name: "extensionIds",
         format: "multi",
       })
       extensionIds?: string[];
 
-      @doc("Installed extension categories.")
+      /**
+       * Installed extension categories.
+       */
       @query({
         name: "extensionCategories",
         format: "multi",
       })
       extensionCategories?: string[];
 
-      @doc("""
-Maximum number of items needed (inclusive).
+      /**
+* Maximum number of items needed (inclusive).
 Minimum = 10, Maximum = 1000, Default value = 50.
-""")
+*/
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
 
-      @doc("Skip token for getting next set of results.")
+      /**
+       * Skip token for getting next set of results.
+       */
       @query("$skipToken")
       $skipToken?: string;
     }

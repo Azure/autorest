@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(FeaturestoreEntityContainer)
 model FeaturestoreEntityVersion
   is ProxyResource<FeaturestoreEntityVersionProperties> {
-  @doc("Version identifier. This is case-sensitive.")
+  /**
+   * Version identifier. This is case-sensitive.
+   */
   @path
   @key("version")
   @segment("versions")
@@ -25,56 +29,80 @@ model FeaturestoreEntityVersion
 
 @armResourceOperations
 interface FeaturestoreEntityVersions {
-  @doc("Get version.")
+  /**
+   * Get version.
+   */
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
-  @doc("Create or update version.")
+  /**
+   * Create or update version.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FeaturestoreEntityVersion>;
 
-  @doc("Delete version.")
+  /**
+   * Delete version.
+   */
   delete is ArmResourceDeleteAsync<
     FeaturestoreEntityVersion,
     BaseParameters<FeaturestoreEntityVersion>,
     ArmLroLocationHeader
   >;
 
+  /**
+   * List versions.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List versions.")
   @operationId("FeaturestoreEntityVersions_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     {
       ...BaseParameters<FeaturestoreEntityVersion>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("tags")
       tags?: string;
 
-      @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.")
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      @doc("page size")
+      /**
+       * page size
+       */
       @query("pageSize")
       pageSize?: int32 = 20;
 
-      @doc("name for the featurestore entity version")
+      /**
+       * name for the featurestore entity version
+       */
       @query("versionName")
       versionName?: string;
 
-      @doc("description for the feature entity version")
+      /**
+       * description for the feature entity version
+       */
       @query("description")
       description?: string;
 
-      @doc("createdBy user name")
+      /**
+       * createdBy user name
+       */
       @query("createdBy")
       createdBy?: string;
 
-      @doc("Specifies the featurestore stage")
+      /**
+       * Specifies the featurestore stage
+       */
       @query("stage")
       stage?: string;
     }

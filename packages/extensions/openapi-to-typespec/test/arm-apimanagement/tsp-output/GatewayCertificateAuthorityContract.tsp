@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("Gateway certificate authority details.")
+/**
+ * Gateway certificate authority details.
+ */
 @parentResource(GatewayContract)
 model GatewayCertificateAuthorityContract
   is ProxyResource<GatewayCertificateAuthorityContractProperties> {
-  @doc("Identifier of the certificate entity. Must be unique in the current API Management service instance.")
+  /**
+   * Identifier of the certificate entity. Must be unique in the current API Management service instance.
+   */
   @maxLength(80)
   @minLength(1)
   @pattern("^[^*#&+:<>?]+$")
@@ -28,13 +32,17 @@ model GatewayCertificateAuthorityContract
 
 @armResourceOperations
 interface GatewayCertificateAuthorityContracts {
+  /**
+   * Get assigned Gateway Certificate Authority details.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get assigned Gateway Certificate Authority details.")
   @operationId("GatewayCertificateAuthority_Get")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
 
+  /**
+   * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.")
   @head
   @operationId("GatewayCertificateAuthority_GetEntityTag")
   getEntityTag(
@@ -44,52 +52,68 @@ interface GatewayCertificateAuthorityContracts {
     >,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Assign Certificate entity to Gateway entity as Certificate Authority.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Assign Certificate entity to Gateway entity as Certificate Authority.")
   @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     {
       ...BaseParameters<GatewayCertificateAuthorityContract>;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
     }
   >;
 
+  /**
+   * Remove relationship between Certificate Authority and Gateway entity.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Remove relationship between Certificate Authority and Gateway entity.")
   @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     {
       ...BaseParameters<GatewayCertificateAuthorityContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Lists the collection of Certificate Authorities for the specified Gateway entity.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists the collection of Certificate Authorities for the specified Gateway entity.")
   @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     {
       ...BaseParameters<GatewayCertificateAuthorityContract>;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
     }

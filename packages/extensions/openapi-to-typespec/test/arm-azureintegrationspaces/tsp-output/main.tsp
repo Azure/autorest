@@ -16,19 +16,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * The azure integration spaces resource provider.
+ */
 @armProviderNamespace
 @service({
   title: "Azure Integration Spaces resource management API.",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("The azure integration spaces resource provider.")
 namespace Microsoft.IntegrationSpaces;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-11-14-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-11-14-preview API version.")
   v2023_11_14_preview: "2023-11-14-preview",
 }

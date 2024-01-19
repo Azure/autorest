@@ -13,7 +13,9 @@ using TypeSpec.OpenAPI;
 namespace Azure.ResourceManager.MachineLearning;
 
 model Registry is TrackedResource<RegistryProperties> {
-  @doc("Name of Azure Machine Learning registry. This is case-insensitive")
+  /**
+   * Name of Azure Machine Learning registry. This is case-insensitive
+   */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
   @path
   @key("registryName")
@@ -27,36 +29,50 @@ model Registry is TrackedResource<RegistryProperties> {
 
 @armResourceOperations
 interface Registries {
-  @doc("Get registry")
+  /**
+   * Get registry
+   */
   get is ArmResourceRead<Registry>;
 
-  @doc("Create or update registry")
+  /**
+   * Create or update registry
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Registry,
     BaseParameters<Registry>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update tags")
+  /**
+   * Update tags
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
 
-  @doc("Delete registry")
+  /**
+   * Delete registry
+   */
   delete is ArmResourceDeleteAsync<
     Registry,
     BaseParameters<Registry>,
     ArmLroLocationHeader
   >;
 
+  /**
+   * List registries
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List registries")
   @operationId("Registries_List")
   list is ArmResourceListByParent<Registry>;
 
-  @doc("List registries by subscription")
+  /**
+   * List registries by subscription
+   */
   listBySubscription is ArmListBySubscription<Registry>;
 
-  @doc("Remove regions from registry")
+  /**
+   * Remove regions from registry
+   */
   removeRegions is ArmResourceActionAsync<
     Registry,
     Registry,

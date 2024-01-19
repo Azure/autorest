@@ -11,48 +11,68 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.")
+/**
+ * The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.
+ */
 model Image is TrackedResource<ImageProperties> {
-  @doc("The name of the image.")
+  /**
+   * The name of the image.
+   */
   @path
   @key("imageName")
   @segment("images")
   name: string;
 
-  @doc("The extended location of the Image.")
+  /**
+   * The extended location of the Image.
+   */
   extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
 interface Images {
-  @doc("Gets an image.")
+  /**
+   * Gets an image.
+   */
   get is ArmResourceRead<
     Image,
     {
       ...BaseParameters<Image>;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  @doc("Create or update an image.")
+  /**
+   * Create or update an image.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
-  @doc("Update an image.")
+  /**
+   * Update an image.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<Image, ImageUpdate>;
 
-  @doc("Deletes an Image.")
+  /**
+   * Deletes an Image.
+   */
   delete is ArmResourceDeleteAsync<Image>;
 
+  /**
+   * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
   @operationId("Images_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Image>;
 
-  @doc("Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.")
+  /**
+   * Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
+   */
   list is ArmListBySubscription<Image>;
 }
 

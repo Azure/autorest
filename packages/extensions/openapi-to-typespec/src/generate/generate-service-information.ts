@@ -65,14 +65,14 @@ export function generateServiceInformation(program: TypespecProgram) {
 
   if (serviceInformation.versions) {
     definitions.push("");
-    definitions.push(`@doc("The available API versions.")`);
+    definitions.push(`/**\n* The available API versions.\n*/`);
     definitions.push(`enum Versions {`);
     for (const version of serviceInformation.versions) {
       if (isArm) {
         definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
         definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
       }
-      definitions.push(`@doc("The ${version} API version.")`);
+      definitions.push(`/**\n* The ${version} API version.\n*/`);
       definitions.push(`v${version.replaceAll("-", "_")}: "${version}",`);
     }
     definitions.push("}");

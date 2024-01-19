@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Restore Point details.")
+/**
+ * Restore Point details.
+ */
 @parentResource(RestorePointCollection)
 model RestorePoint is ProxyResource<RestorePointProperties> {
-  @doc("The name of the restore point.")
+  /**
+   * The name of the restore point.
+   */
   @path
   @key("restorePointName")
   @segment("restorePoints")
@@ -24,41 +28,55 @@ model RestorePoint is ProxyResource<RestorePointProperties> {
 
 @armResourceOperations
 interface RestorePoints {
-  @doc("The operation to get the restore point.")
+  /**
+   * The operation to get the restore point.
+   */
   get is ArmResourceRead<
     RestorePoint,
     {
       ...BaseParameters<RestorePoint>;
 
-      @doc("The name of the restore point collection.")
+      /**
+       * The name of the restore point collection.
+       */
       @path
       restorePointCollectionName: string;
 
-      @doc("The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.")
+      /**
+       * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
+       */
       @query("$expand")
       $expand?: RestorePointExpandOptions;
     }
   >;
 
-  @doc("The operation to create the restore point. Updating properties of an existing restore point is not allowed")
+  /**
+   * The operation to create the restore point. Updating properties of an existing restore point is not allowed
+   */
   create is ArmResourceCreateOrReplaceAsync<
     RestorePoint,
     {
       ...BaseParameters<RestorePoint>;
 
-      @doc("The name of the restore point collection.")
+      /**
+       * The name of the restore point collection.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
-  @doc("The operation to delete the restore point.")
+  /**
+   * The operation to delete the restore point.
+   */
   delete is ArmResourceDeleteAsync<
     RestorePoint,
     {
       ...BaseParameters<RestorePoint>;
 
-      @doc("The name of the Restore Point Collection.")
+      /**
+       * The name of the Restore Point Collection.
+       */
       @path
       restorePointCollectionName: string;
     }

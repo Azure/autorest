@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image version that you want to create or update.")
+/**
+ * Specifies information about the gallery image version that you want to create or update.
+ */
 @parentResource(SharedGalleryImage)
 model SharedGalleryImageVersion
   is ProxyResource<SharedGalleryImageVersionProperties> {
-  @doc("The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
+  /**
+   * The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
+   */
   @path
   @key("galleryImageVersionName")
   @segment("versions")
@@ -25,18 +29,24 @@ model SharedGalleryImageVersion
 
 @armResourceOperations
 interface SharedGalleryImageVersions {
-  @doc("Get a shared gallery image version by subscription id or tenant id.")
+  /**
+   * Get a shared gallery image version by subscription id or tenant id.
+   */
   get is ArmResourceRead<SharedGalleryImageVersion>;
 
+  /**
+   * List shared gallery image versions by subscription id or tenant id.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List shared gallery image versions by subscription id or tenant id.")
   @operationId("SharedGalleryImageVersions_List")
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
     {
       ...BaseParameters<SharedGalleryImageVersion>;
 
-      @doc("The query parameter to decide what shared galleries to fetch when doing listing operations.")
+      /**
+       * The query parameter to decide what shared galleries to fetch when doing listing operations.
+       */
       @query("sharedTo")
       sharedTo?: SharedToValues;
     }

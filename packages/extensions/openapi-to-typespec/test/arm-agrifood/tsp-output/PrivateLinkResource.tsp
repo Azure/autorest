@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
-@doc("A private link resource.")
+/**
+ * A private link resource.
+ */
 @parentResource(DataManagerForAgriculture)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
-  @doc("Sub resource name.")
+  /**
+   * Sub resource name.
+   */
   @path
   @key("subResourceName")
   @segment("privateLinkResources")
@@ -24,11 +28,15 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 
 @armResourceOperations
 interface PrivateLinkResources {
-  @doc("Get Private link resource object.")
+  /**
+   * Get Private link resource object.
+   */
   get is ArmResourceRead<PrivateLinkResource>;
 
+  /**
+   * Get list of Private link resources.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get list of Private link resources.")
   @operationId("PrivateLinkResources_ListByResource")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }

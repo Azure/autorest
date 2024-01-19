@@ -13,19 +13,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * Traffic Controller Provider management API.
+ */
 @armProviderNamespace
 @service({
   title: "Traffic Controller Provider management API.",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("Traffic Controller Provider management API.")
 namespace Microsoft.ServiceNetworking;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-11-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-11-01 API version.")
   v2023_11_01: "2023-11-01",
 }

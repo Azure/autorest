@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Describes a Virtual Machine Scale Set Extension.")
+/**
+ * Describes a Virtual Machine Scale Set Extension.
+ */
 @parentResource(VirtualMachineScaleSet)
 model VirtualMachineScaleSetExtension
   is ProxyResource<VirtualMachineScaleSetExtensionProperties> {
-  @doc("The name of the VM scale set extension.")
+  /**
+   * The name of the VM scale set extension.
+   */
   @path
   @key("vmssExtensionName")
   @segment("extensions")
@@ -25,35 +29,47 @@ model VirtualMachineScaleSetExtension
 
 @armResourceOperations
 interface VirtualMachineScaleSetExtensions {
-  @doc("The operation to get the extension.")
+  /**
+   * The operation to get the extension.
+   */
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 
-      @doc("The name of the VM scale set containing the extension.")
+      /**
+       * The name of the VM scale set containing the extension.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  @doc("The operation to create or update an extension.")
+  /**
+   * The operation to create or update an extension.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 
-      @doc("The name of the VM scale set where the extension should be create or updated.")
+      /**
+       * The name of the VM scale set where the extension should be create or updated.
+       */
       @path
       vmScaleSetName: string;
     }
   >;
 
-  @doc("The operation to update an extension.")
+  /**
+   * The operation to update an extension.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
@@ -61,33 +77,43 @@ interface VirtualMachineScaleSetExtensions {
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 
-      @doc("The name of the VM scale set where the extension should be updated.")
+      /**
+       * The name of the VM scale set where the extension should be updated.
+       */
       @path
       vmScaleSetName: string;
     }
   >;
 
-  @doc("The operation to delete the extension.")
+  /**
+   * The operation to delete the extension.
+   */
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 
-      @doc("The name of the VM scale set where the extension should be deleted.")
+      /**
+       * The name of the VM scale set where the extension should be deleted.
+       */
       @path
       vmScaleSetName: string;
     }
   >;
 
+  /**
+   * Gets a list of all extensions in a VM scale set.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a list of all extensions in a VM scale set.")
   @operationId("VirtualMachineScaleSetExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineScaleSetExtension,
     {
       ...BaseParameters<VirtualMachineScaleSetExtension>;
 
-      @doc("The name of the VM scale set containing the extension.")
+      /**
+       * The name of the VM scale set containing the extension.
+       */
       @path
       vmScaleSetName: string;
     }

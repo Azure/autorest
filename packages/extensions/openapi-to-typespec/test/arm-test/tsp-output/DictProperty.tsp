@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Test;
-@doc("A Test resource")
+/**
+ * A Test resource
+ */
 @parentResource(Employee)
 model DictProperty is TrackedResource<Record<unknown>> {
-  @doc("Name of resource")
+  /**
+   * Name of resource
+   */
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   @key("name")
@@ -25,11 +29,15 @@ model DictProperty is TrackedResource<Record<unknown>> {
 
 @armResourceOperations
 interface DictProperties {
-  @doc("Get a Resource.")
+  /**
+   * Get a Resource.
+   */
   get is ArmResourceRead<DictProperty>;
 
+  /**
+   * List resources by resource group
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List resources by resource group")
   @operationId("DictProperties_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }

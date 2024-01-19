@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("Properties of the table, including Id, resource name, resource type.")
+/**
+ * Properties of the table, including Id, resource name, resource type.
+ */
 @parentResource(TableServiceProperties)
 model Table is ProxyResource<TableProperties> {
-  @doc("A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.")
+  /**
+   * A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.
+   */
   @maxLength(63)
   @minLength(3)
   @pattern("^[A-Za-z][A-Za-z0-9]{2,62}$")
@@ -27,29 +31,39 @@ model Table is ProxyResource<TableProperties> {
 
 @armResourceOperations
 interface Tables {
+  /**
+   * Gets the table with the specified table name, under the specified account if it exists.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the table with the specified table name, under the specified account if it exists.")
   @operationId("Table_Get")
   get is ArmResourceRead<Table>;
 
+  /**
+   * Creates a new table with the specified table name, under the specified account.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new table with the specified table name, under the specified account.")
   @operationId("Table_Create")
   create is ArmResourceCreateOrReplaceSync<Table>;
 
+  /**
+   * Creates a new table with the specified table name, under the specified account.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new table with the specified table name, under the specified account.")
   @parameterVisibility("read")
   @operationId("Table_Update")
   update is ArmCustomPatchSync<Table, Table>;
 
+  /**
+   * Deletes the table with the specified table name, under the specified account if it exists.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes the table with the specified table name, under the specified account if it exists.")
   @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<Table>;
 
+  /**
+   * Gets a list of all the tables under the specified storage account
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a list of all the tables under the specified storage account")
   @operationId("Table_List")
   list is ArmResourceListByParent<Table>;
 }

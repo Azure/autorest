@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Workspace)
 model JobBaseResource is ProxyResource<JobBase> {
-  @doc("The name and identifier for the Job. This is case-sensitive.")
+  /**
+   * The name and identifier for the Job. This is case-sensitive.
+   */
   @path
   @key("id")
   @segment("jobs")
@@ -24,24 +28,32 @@ model JobBaseResource is ProxyResource<JobBase> {
 
 @armResourceOperations
 interface JobBaseResources {
+  /**
+   * Gets a Job by name/id.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a Job by name/id.")
   @operationId("Jobs_Get")
   get is ArmResourceRead<JobBaseResource>;
 
+  /**
+   * Creates and executes a Job.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates and executes a Job.")
   @operationId("Jobs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<JobBaseResource>;
 
+  /**
+   * Updates a Job.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates a Job.")
   @parameterVisibility("read")
   @operationId("Jobs_Update")
   update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
 
+  /**
+   * Deletes a Job (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes a Job (asynchronous).")
   @operationId("Jobs_Delete")
   delete is ArmResourceDeleteAsync<
     JobBaseResource,
@@ -49,46 +61,64 @@ interface JobBaseResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Lists Jobs in the workspace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists Jobs in the workspace.")
   @operationId("Jobs_List")
   list is ArmResourceListByParent<
     JobBaseResource,
     {
       ...BaseParameters<JobBaseResource>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Type of job to be returned.")
+      /**
+       * Type of job to be returned.
+       */
       @query("jobType")
       jobType?: string;
 
-      @doc("Jobs returned will have this tag key.")
+      /**
+       * Jobs returned will have this tag key.
+       */
       @query("tag")
       tag?: string;
 
-      @doc("View type for including/excluding (for example) archived entities.")
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
 
-      @doc("Asset name the job's named output is registered with")
+      /**
+       * Asset name the job's named output is registered with
+       */
       @query("assetName")
       assetName?: string;
 
-      @doc("Indicator whether the job is scheduled job.")
+      /**
+       * Indicator whether the job is scheduled job.
+       */
       @query("scheduled")
       scheduled?: boolean;
 
-      @doc("The scheduled id for listing the job triggered from")
+      /**
+       * The scheduled id for listing the job triggered from
+       */
       @query("scheduleId")
       scheduleId?: string;
     }
   >;
 
+  /**
+   * Cancels a Job (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Cancels a Job (asynchronous).")
   @operationId("Jobs_Cancel")
   cancel is ArmResourceActionAsync<
     JobBaseResource,

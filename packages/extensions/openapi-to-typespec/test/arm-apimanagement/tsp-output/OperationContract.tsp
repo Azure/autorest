@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.ApiManagement;
-@doc("API Operation details.")
+/**
+ * API Operation details.
+ */
 @parentResource(ApiContract)
 model OperationContract is ProxyResource<OperationContractProperties> {
-  @doc("Operation identifier within an API. Must be unique in the current API Management service instance.")
+  /**
+   * Operation identifier within an API. Must be unique in the current API Management service instance.
+   */
   @maxLength(80)
   @minLength(1)
   @path
@@ -26,13 +30,17 @@ model OperationContract is ProxyResource<OperationContractProperties> {
 
 @armResourceOperations
 interface OperationContracts {
+  /**
+   * Gets the details of the API Operation specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the details of the API Operation specified by its identifier.")
   @operationId("ApiOperation_Get")
   get is ArmResourceRead<OperationContract>;
 
+  /**
+   * Gets the entity state (Etag) version of the API operation specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the entity state (Etag) version of the API operation specified by its identifier.")
   @head
   @operationId("ApiOperation_GetEntityTag")
   getEntityTag(
@@ -42,22 +50,28 @@ interface OperationContracts {
     >,
   ): OkResponse | ErrorResponse;
 
+  /**
+   * Creates a new operation in the API or updates an existing one.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new operation in the API or updates an existing one.")
   @operationId("ApiOperation_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     {
       ...BaseParameters<OperationContract>;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
     }
   >;
 
+  /**
+   * Updates the details of the operation in the API specified by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates the details of the operation in the API specified by its identifier.")
   @parameterVisibility("read")
   @operationId("ApiOperation_Update")
   update is ArmCustomPatchSync<
@@ -66,48 +80,64 @@ interface OperationContracts {
     {
       ...BaseParameters<OperationContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Deletes the specified operation in the API.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes the specified operation in the API.")
   @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
     {
       ...BaseParameters<OperationContract>;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
     }
   >;
 
+  /**
+   * Lists a collection of the operations for the specified API.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists a collection of the operations for the specified API.")
   @operationId("ApiOperation_ListByApi")
   listByApi is ArmResourceListByParent<
     OperationContract,
     {
       ...BaseParameters<OperationContract>;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Include tags in the response.")
+      /**
+       * Include tags in the response.
+       */
       @query("tags")
       tags?: string;
     }

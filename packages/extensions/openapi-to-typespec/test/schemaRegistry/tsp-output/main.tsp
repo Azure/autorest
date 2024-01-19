@@ -4,6 +4,10 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * Azure Schema Registry is as a central schema repository, with support for
+ * versioning, management, compatibility checking, and RBAC.
+ */
 @service({
   title: "Azure Schema Registry",
 })
@@ -15,14 +19,14 @@ using TypeSpec.Http;
     endpoint: string,
   }
 )
-@doc("""
-Azure Schema Registry is as a central schema repository, with support for
-versioning, management, compatibility checking, and RBAC.
-""")
 namespace AzureSchemaRegistry;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2021-10 API version.")
+  /**
+   * The 2021-10 API version.
+   */
   v2021_10: "2021-10",
 }

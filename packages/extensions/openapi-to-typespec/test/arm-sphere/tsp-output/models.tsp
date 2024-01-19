@@ -12,414 +12,796 @@ namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Provisioning state of the resource.")
+/**
+ * Provisioning state of the resource.
+ */
 enum ProvisioningState {
-  @doc("Resource has been created.") Succeeded,
-  @doc("Resource creation failed.") Failed,
-  @doc("Resource creation was canceled.") Canceled,
-  @doc("The resource is being provisioned") Provisioning,
-  @doc("The resource is being updated") Updating,
-  @doc("The resource is being deleted") Deleting,
-  @doc("The resource create request has been accepted") Accepted,
+  /**
+   * Resource has been created.
+   */
+  Succeeded,
+
+  /**
+   * Resource creation failed.
+   */
+  Failed,
+
+  /**
+   * Resource creation was canceled.
+   */
+  Canceled,
+
+  /**
+   * The resource is being provisioned
+   */
+  Provisioning,
+
+  /**
+   * The resource is being updated
+   */
+  Updating,
+
+  /**
+   * The resource is being deleted
+   */
+  Deleting,
+
+  /**
+   * The resource create request has been accepted
+   */
+  Accepted,
 }
 
-@doc("Certificate status values.")
+/**
+ * Certificate status values.
+ */
 enum CertificateStatus {
-  @doc("Certificate is active") Active,
-  @doc("Certificate is inactive") Inactive,
-  @doc("Certificate has expired") Expired,
-  @doc("Certificate has been revoked") Revoked,
+  /**
+   * Certificate is active
+   */
+  Active,
+
+  /**
+   * Certificate is inactive
+   */
+  Inactive,
+
+  /**
+   * Certificate has expired
+   */
+  Expired,
+
+  /**
+   * Certificate has been revoked
+   */
+  Revoked,
 }
 
-@doc("Regional data boundary values.")
+/**
+ * Regional data boundary values.
+ */
 enum RegionalDataBoundary {
-  @doc("No data boundary") None,
-  @doc("EU data boundary") EU,
+  /**
+   * No data boundary
+   */
+  None,
+
+  /**
+   * EU data boundary
+   */
+  EU,
 }
 
-@doc("Image type values.")
+/**
+ * Image type values.
+ */
 enum ImageType {
-  @doc("Invalid image.") InvalidImageType,
-  @doc("One Bl image type") OneBl,
-  @doc("Pluton image type") PlutonRuntime,
-  @doc("Wifi firmware image type") WifiFirmware,
-  @doc("Security monitor image type") SecurityMonitor,
-  @doc("Normal world loader image type") NormalWorldLoader,
-  @doc("Normal world dtb image type") NormalWorldDtb,
-  @doc("Normal world kernel image type") NormalWorldKernel,
-  @doc("Root FS image type") RootFs,
-  @doc("Services image type") Services,
-  @doc("Applications image type") Applications,
-  @doc("FW config image type") FwConfig,
-  @doc("Boot manifest image type") BootManifest,
-  @doc("Nwfs image type") Nwfs,
-  @doc("Trusted key store image type") TrustedKeystore,
-  @doc("Policy image type") Policy,
-  @doc("Customer board config image type") CustomerBoardConfig,
-  @doc("Update certificate store image type") UpdateCertStore,
-  @doc("Base system update manifest image type") BaseSystemUpdateManifest,
-  @doc("Firmware update manifest image type") FirmwareUpdateManifest,
-  @doc("Customer update manifest image type") CustomerUpdateManifest,
-  @doc("Recovery manifest image type") RecoveryManifest,
-  @doc("manifest set image type") ManifestSet,
-  @doc("Other image type") Other,
+  /**
+   * Invalid image.
+   */
+  InvalidImageType,
+
+  /**
+   * One Bl image type
+   */
+  OneBl,
+
+  /**
+   * Pluton image type
+   */
+  PlutonRuntime,
+
+  /**
+   * Wifi firmware image type
+   */
+  WifiFirmware,
+
+  /**
+   * Security monitor image type
+   */
+  SecurityMonitor,
+
+  /**
+   * Normal world loader image type
+   */
+  NormalWorldLoader,
+
+  /**
+   * Normal world dtb image type
+   */
+  NormalWorldDtb,
+
+  /**
+   * Normal world kernel image type
+   */
+  NormalWorldKernel,
+
+  /**
+   * Root FS image type
+   */
+  RootFs,
+
+  /**
+   * Services image type
+   */
+  Services,
+
+  /**
+   * Applications image type
+   */
+  Applications,
+
+  /**
+   * FW config image type
+   */
+  FwConfig,
+
+  /**
+   * Boot manifest image type
+   */
+  BootManifest,
+
+  /**
+   * Nwfs image type
+   */
+  Nwfs,
+
+  /**
+   * Trusted key store image type
+   */
+  TrustedKeystore,
+
+  /**
+   * Policy image type
+   */
+  Policy,
+
+  /**
+   * Customer board config image type
+   */
+  CustomerBoardConfig,
+
+  /**
+   * Update certificate store image type
+   */
+  UpdateCertStore,
+
+  /**
+   * Base system update manifest image type
+   */
+  BaseSystemUpdateManifest,
+
+  /**
+   * Firmware update manifest image type
+   */
+  FirmwareUpdateManifest,
+
+  /**
+   * Customer update manifest image type
+   */
+  CustomerUpdateManifest,
+
+  /**
+   * Recovery manifest image type
+   */
+  RecoveryManifest,
+
+  /**
+   * manifest set image type
+   */
+  ManifestSet,
+
+  /**
+   * Other image type
+   */
+  Other,
 }
 
-@doc("OS feed type values.")
+/**
+ * OS feed type values.
+ */
 enum OSFeedType {
-  @doc("Retail OS feed type.") Retail,
-  @doc("Retail evaluation OS feed type.") RetailEval,
+  /**
+   * Retail OS feed type.
+   */
+  Retail,
+
+  /**
+   * Retail evaluation OS feed type.
+   */
+  RetailEval,
 }
 
-@doc("Update policy values.")
+/**
+ * Update policy values.
+ */
 enum UpdatePolicy {
-  @doc("Update all policy.") UpdateAll,
-  @doc("No update for 3rd party app policy.") No3rdPartyAppUpdates,
+  /**
+   * Update all policy.
+   */
+  UpdateAll,
+
+  /**
+   * No update for 3rd party app policy.
+   */
+  No3rdPartyAppUpdates,
 }
 
-@doc("Allow crash dumps values.")
+/**
+ * Allow crash dumps values.
+ */
 enum AllowCrashDumpCollection {
-  @doc("Crash dump collection enabled") Enabled,
-  @doc("Crash dump collection disabled") Disabled,
+  /**
+   * Crash dump collection enabled
+   */
+  Enabled,
+
+  /**
+   * Crash dump collection disabled
+   */
+  Disabled,
 }
 
-@doc("Capability image type")
+/**
+ * Capability image type
+ */
 enum CapabilityType {
-  @doc("Application development capability") ApplicationDevelopment,
-  @doc("Field servicing capability") FieldServicing,
+  /**
+   * Application development capability
+   */
+  ApplicationDevelopment,
+
+  /**
+   * Field servicing capability
+   */
+  FieldServicing,
 }
 
-@doc("Catalog properties")
+/**
+ * Catalog properties
+ */
 model CatalogProperties {
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
 model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
   @visibility("read")
   id?: string;
 
-  @doc("The name of the resource")
+  /**
+   * The name of the resource
+   */
   @visibility("read")
   name?: string;
 
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
   @visibility("read")
   type?: string;
 
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
   @visibility("read")
   systemData?: SystemData;
 }
 
-@doc("The type used for update operations of the Catalog.")
+/**
+ * The type used for update operations of the Catalog.
+ */
 model CatalogUpdate {
-  @doc("Resource tags.")
+  /**
+   * Resource tags.
+   */
   tags?: Record<string>;
 }
 
-@doc("The properties of certificate")
+/**
+ * The properties of certificate
+ */
 model CertificateProperties {
-  @doc("The certificate as a UTF-8 encoded base 64 string.")
+  /**
+   * The certificate as a UTF-8 encoded base 64 string.
+   */
   @visibility("read")
   certificate?: string;
 
-  @doc("The certificate status.")
+  /**
+   * The certificate status.
+   */
   @visibility("read")
   status?: CertificateStatus;
 
-  @doc("The certificate subject.")
+  /**
+   * The certificate subject.
+   */
   @visibility("read")
   subject?: string;
 
-  @doc("The certificate thumbprint.")
+  /**
+   * The certificate thumbprint.
+   */
   @visibility("read")
   thumbprint?: string;
 
-  @doc("The certificate expiry date.")
+  /**
+   * The certificate expiry date.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryUtc?: utcDateTime;
 
-  @doc("The certificate not before date.")
+  /**
+   * The certificate not before date.
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   notBeforeUtc?: utcDateTime;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("The certificate chain response.")
+/**
+ * The certificate chain response.
+ */
 model CertificateChainResponse {
-  @doc("The certificate chain.")
+  /**
+   * The certificate chain.
+   */
   @visibility("read")
   certificateChain?: string;
 }
 
-@doc("Request for the proof of possession nonce")
+/**
+ * Request for the proof of possession nonce
+ */
 model ProofOfPossessionNonceRequest {
-  @doc("The proof of possession nonce")
+  /**
+   * The proof of possession nonce
+   */
   proofOfPossessionNonce: string;
 }
 
-@doc("Result of the action to generate a proof of possession nonce")
+/**
+ * Result of the action to generate a proof of possession nonce
+ */
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
-@doc("Response to the action call for count devices in a catalog.")
+/**
+ * Response to the action call for count devices in a catalog.
+ */
 model CountDeviceResponse extends CountElementsResponse {}
 
-@doc("Response of the count for elements.")
+/**
+ * Response of the count for elements.
+ */
 model CountElementsResponse {
-  @doc("Number of children resources in parent resource.")
+  /**
+   * Number of children resources in parent resource.
+   */
   value: int32;
 }
 
-@doc("The properties of image")
+/**
+ * The properties of image
+ */
 model ImageProperties {
-  @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
+  /**
+   * Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.
+   */
   @visibility("read", "create")
   image?: string;
 
-  @doc("Image ID")
+  /**
+   * Image ID
+   */
   @visibility("read", "create")
   imageId?: string;
 
-  @doc("Image name")
+  /**
+   * Image name
+   */
   @visibility("read")
   imageName?: string;
 
-  @doc("Regional data boundary for an image")
+  /**
+   * Regional data boundary for an image
+   */
   @visibility("read", "create")
   regionalDataBoundary?: RegionalDataBoundary;
 
-  @doc("Location the image")
+  /**
+   * Location the image
+   */
   @visibility("read")
   uri?: string;
 
-  @doc("The image description.")
+  /**
+   * The image description.
+   */
   @visibility("read")
   description?: string;
 
-  @doc("The image component id.")
+  /**
+   * The image component id.
+   */
   @visibility("read")
   componentId?: string;
 
-  @doc("The image type.")
+  /**
+   * The image type.
+   */
   @visibility("read")
   imageType?: ImageType;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("The properties of deployment")
+/**
+ * The properties of deployment
+ */
 model DeploymentProperties {
-  @doc("Deployment ID")
+  /**
+   * Deployment ID
+   */
   @visibility("read", "create")
   deploymentId?: string;
 
-  @doc("Images deployed")
+  /**
+   * Images deployed
+   */
   @visibility("read", "create")
   deployedImages?: Image[];
 
-  @doc("Deployment date UTC")
+  /**
+   * Deployment date UTC
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deploymentDateUtc?: utcDateTime;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Request of the action to list device groups for a catalog.")
+/**
+ * Request of the action to list device groups for a catalog.
+ */
 model ListDeviceGroupsRequest {
-  @doc("Device Group name.")
+  /**
+   * Device Group name.
+   */
   deviceGroupName?: string;
 }
 
-@doc("The properties of deviceGroup")
+/**
+ * The properties of deviceGroup
+ */
 model DeviceGroupProperties {
-  @doc("Description of the device group.")
+  /**
+   * Description of the device group.
+   */
   description?: string;
 
-  @doc("Operating system feed type of the device group.")
+  /**
+   * Operating system feed type of the device group.
+   */
   osFeedType?: OSFeedType;
 
-  @doc("Update policy of the device group.")
+  /**
+   * Update policy of the device group.
+   */
   updatePolicy?: UpdatePolicy;
 
-  @doc("Flag to define if the user allows for crash dump collection.")
+  /**
+   * Flag to define if the user allows for crash dump collection.
+   */
   allowCrashDumpsCollection?: AllowCrashDumpCollection;
 
-  @doc("Regional data boundary for the device group.")
+  /**
+   * Regional data boundary for the device group.
+   */
   regionalDataBoundary?: RegionalDataBoundary;
 
-  @doc("Deployment status for the device group.")
+  /**
+   * Deployment status for the device group.
+   */
   @visibility("read")
   hasDeployment?: boolean;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Paged collection of DeviceInsight items")
+/**
+ * Paged collection of DeviceInsight items
+ */
 model PagedDeviceInsight is Azure.Core.Page<DeviceInsight>;
 
-@doc("Device insight report.")
+/**
+ * Device insight report.
+ */
 model DeviceInsight {
-  @doc("Device ID")
+  /**
+   * Device ID
+   */
   deviceId: string;
 
-  @doc("Event description")
+  /**
+   * Event description
+   */
   description: string;
 
-  @doc("Event start timestamp")
+  /**
+   * Event start timestamp
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTimestampUtc: utcDateTime;
 
-  @doc("Event end timestamp")
+  /**
+   * Event end timestamp
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTimestampUtc: utcDateTime;
 
-  @doc("Event category")
+  /**
+   * Event category
+   */
   eventCategory: string;
 
-  @doc("Event class")
+  /**
+   * Event class
+   */
   eventClass: string;
 
-  @doc("Event type")
+  /**
+   * Event type
+   */
   eventType: string;
 
-  @doc("Event count")
+  /**
+   * Event count
+   */
   eventCount: int32;
 }
 
-@doc("The properties of device")
+/**
+ * The properties of device
+ */
 model DeviceProperties {
-  @doc("Device ID")
+  /**
+   * Device ID
+   */
   @visibility("read", "create")
   deviceId?: string;
 
-  @doc("SKU of the chip")
+  /**
+   * SKU of the chip
+   */
   @visibility("read")
   chipSku?: string;
 
-  @doc("OS version available for installation when update requested")
+  /**
+   * OS version available for installation when update requested
+   */
   @visibility("read")
   lastAvailableOsVersion?: string;
 
-  @doc("OS version running on device when update requested")
+  /**
+   * OS version running on device when update requested
+   */
   @visibility("read")
   lastInstalledOsVersion?: string;
 
-  @doc("Time when update requested and new OS version available")
+  /**
+   * Time when update requested and new OS version available
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastOsUpdateUtc?: utcDateTime;
 
-  @doc("Time when update was last requested")
+  /**
+   * Time when update was last requested
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdateRequestUtc?: utcDateTime;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("The properties of product")
+/**
+ * The properties of product
+ */
 model ProductProperties {
-  @doc("Description of the product")
+  /**
+   * Description of the product
+   */
   description: string;
 
-  @doc("The status of the last operation.")
+  /**
+   * The status of the last operation.
+   */
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("The type used for update operations of the Product.")
+/**
+ * The type used for update operations of the Product.
+ */
 model ProductUpdate {
-  @doc("The updatable properties of the Product.")
+  /**
+   * The updatable properties of the Product.
+   */
   properties?: ProductUpdateProperties;
 }
 
-@doc("The updatable properties of the Product.")
+/**
+ * The updatable properties of the Product.
+ */
 model ProductUpdateProperties {
-  @doc("Description of the product")
+  /**
+   * Description of the product
+   */
   description?: string;
 }
 
-@doc("The type used for update operations of the DeviceGroup.")
+/**
+ * The type used for update operations of the DeviceGroup.
+ */
 model DeviceGroupUpdate {
-  @doc("The updatable properties of the DeviceGroup.")
+  /**
+   * The updatable properties of the DeviceGroup.
+   */
   properties?: DeviceGroupUpdateProperties;
 }
 
-@doc("The updatable properties of the DeviceGroup.")
+/**
+ * The updatable properties of the DeviceGroup.
+ */
 model DeviceGroupUpdateProperties {
-  @doc("Description of the device group.")
+  /**
+   * Description of the device group.
+   */
   description?: string;
 
-  @doc("Operating system feed type of the device group.")
+  /**
+   * Operating system feed type of the device group.
+   */
   osFeedType?: OSFeedType;
 
-  @doc("Update policy of the device group.")
+  /**
+   * Update policy of the device group.
+   */
   updatePolicy?: UpdatePolicy;
 
-  @doc("Flag to define if the user allows for crash dump collection.")
+  /**
+   * Flag to define if the user allows for crash dump collection.
+   */
   allowCrashDumpsCollection?: AllowCrashDumpCollection;
 
-  @doc("Regional data boundary for the device group.")
+  /**
+   * Regional data boundary for the device group.
+   */
   regionalDataBoundary?: RegionalDataBoundary;
 }
 
-@doc("Request to the action call to bulk claim devices.")
+/**
+ * Request to the action call to bulk claim devices.
+ */
 model ClaimDevicesRequest {
-  @doc("Device identifiers of the devices to be claimed.")
+  /**
+   * Device identifiers of the devices to be claimed.
+   */
   deviceIdentifiers: string[];
 }
 
-@doc("The type used for update operations of the Device.")
+/**
+ * The type used for update operations of the Device.
+ */
 model DeviceUpdate {
-  @doc("The updatable properties of the Device.")
+  /**
+   * The updatable properties of the Device.
+   */
   properties?: DeviceUpdateProperties;
 }
 
-@doc("The updatable properties of the Device.")
+/**
+ * The updatable properties of the Device.
+ */
 model DeviceUpdateProperties {
-  @doc("Device group id")
+  /**
+   * Device group id
+   */
   deviceGroupId?: string;
 }
 
-@doc("Request of the action to create a signed device capability image")
+/**
+ * Request of the action to create a signed device capability image
+ */
 model GenerateCapabilityImageRequest {
-  @doc("List of capabilities to create")
+  /**
+   * List of capabilities to create
+   */
   capabilities: CapabilityType[];
 }
 
-@doc("Signed device capability image response")
+/**
+ * Signed device capability image response
+ */
 model SignedCapabilityImageResponse {
-  @doc("The signed device capability image as a UTF-8 encoded base 64 string.")
+  /**
+   * The signed device capability image as a UTF-8 encoded base 64 string.
+   */
   @visibility("read")
   image?: string;
 }
 
-@doc("The properties of device patch")
+/**
+ * The properties of device patch
+ */
 model DevicePatchProperties {
-  @doc("Device group id")
+  /**
+   * Device group id
+   */
   deviceGroupId: string;
 }
 
-@doc("Image upload request body.")
+/**
+ * Image upload request body.
+ */
 model ImageUploadRequestBody {
-  @doc(".")
+  /**
+   * .
+   */
   images: string;
 }

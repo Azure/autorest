@@ -10,587 +10,791 @@ using Azure.ResourceManager;
 namespace Azure.ResourceManager.ApiManagement;
 
 interface TagOperations {
-  @doc("Lists all Tags associated with the API.")
+  /**
+   * Lists all Tags associated with the API.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags")
   @get
   listByApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<TagContract>
   >;
 
-  @doc("Gets the entity state version of the tag specified by its identifier.")
+  /**
+   * Gets the entity state version of the tag specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @head
   getEntityStateByApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Get tag associated with the API.")
+  /**
+   * Get tag associated with the API.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @get
   getByApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagContract
   >;
 
-  @doc("Assign tag to the Api.")
+  /**
+   * Assign tag to the Api.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @put
   assignToApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagContract
   >;
 
-  @doc("Detach the tag from the Api.")
+  /**
+   * Detach the tag from the Api.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}")
   @delete
   detachFromApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Lists all Tags associated with the Product.")
+  /**
+   * Lists all Tags associated with the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags")
   @get
   listByProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<TagContract>
   >;
 
-  @doc("Gets the entity state version of the tag specified by its identifier.")
+  /**
+   * Gets the entity state version of the tag specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @head
   getEntityStateByProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Get tag associated with the Product.")
+  /**
+   * Get tag associated with the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @get
   getByProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagContract
   >;
 
-  @doc("Assign tag to the Product.")
+  /**
+   * Assign tag to the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @put
   assignToProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagContract
   >;
 
-  @doc("Detach the tag from the Product.")
+  /**
+   * Detach the tag from the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}")
   @delete
   detachFromProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Lists a collection of tags defined within a service instance.")
+  /**
+   * Lists a collection of tags defined within a service instance.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags")
   @get
   listByService is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Scope like 'apis', 'products' or 'apis/{apiId}")
+      /**
+       * Scope like 'apis', 'products' or 'apis/{apiId}
+       */
       @query("scope")
       scope?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<TagContract>
   >;
 
-  @doc("Gets the entity state version of the tag specified by its identifier.")
+  /**
+   * Gets the entity state version of the tag specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @head
   getEntityState is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets the details of the tag specified by its identifier.")
+  /**
+   * Gets the details of the tag specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     TagContract
   >;
 
-  @doc("Creates a tag.")
+  /**
+   * Creates a tag.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Create parameters.")
+      /**
+       * Create parameters.
+       */
       @body
       parameters: TagCreateUpdateParameters;
     },
     TagContract
   >;
 
-  @doc("Updates the details of the tag specified by its identifier.")
+  /**
+   * Updates the details of the tag specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @patch
   update is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Update parameters.")
+      /**
+       * Update parameters.
+       */
       @body
       parameters: TagCreateUpdateParameters;
     },
     TagContract
   >;
 
-  @doc("Deletes specific tag of the API Management service instance.")
+  /**
+   * Deletes specific tag of the API Management service instance.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Tag identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Tag identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       tagId: string;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -599,186 +803,254 @@ interface TagOperations {
 }
 
 interface ApiPolicyOperations {
-  @doc("Get the policy configuration at the API level.")
+  /**
+   * Get the policy configuration at the API level.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies")
   @get
   listByApi is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<PolicyContract>
   >;
 
-  @doc("Gets the entity state (Etag) version of the API policy specified by its identifier.")
+  /**
+   * Gets the entity state (Etag) version of the API policy specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @head
   getEntityTag is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Get the policy configuration at the API level.")
+  /**
+   * Get the policy configuration at the API level.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Policy Export Format.")
+      /**
+       * Policy Export Format.
+       */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, application/vnd.ms-azure-apim.policy+xml, application/vnd.ms-azure-apim.policy.raw+xml";
     },
     PolicyContract
   >;
 
-  @doc("Creates or updates policy configuration for the API.")
+  /**
+   * Creates or updates policy configuration for the API.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The policy contents to apply.")
+      /**
+       * The policy contents to apply.
+       */
       @body
       parameters: PolicyContract;
     },
     PolicyContract
   >;
 
-  @doc("Deletes the policy configuration at the Api.")
+  /**
+   * Deletes the policy configuration at the Api.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -787,38 +1059,52 @@ interface ApiPolicyOperations {
 }
 
 interface ApiExportOperations {
-  @doc("Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.")
+  /**
+   * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.")
+      /**
+       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       apiId: string;
 
-      @doc("Format in which to export the Api Details to the Storage Blob with Sas Key valid for 5 minutes.")
+      /**
+       * Format in which to export the Api Details to the Storage Blob with Sas Key valid for 5 minutes.
+       */
       @query("format")
       format: ExportFormat;
 
-      @doc("Query parameter required to export the API details.")
+      /**
+       * Query parameter required to export the API details.
+       */
       @query("export")
       export: ExportApi;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -827,206 +1113,280 @@ interface ApiExportOperations {
 }
 
 interface DiagnosticOperations {
-  @doc("Lists all diagnostics of the API Management service instance.")
+  /**
+   * Lists all diagnostics of the API Management service instance.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics")
   @get
   listByService is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<DiagnosticContract>
   >;
 
-  @doc("Gets the entity state (Etag) version of the Diagnostic specified by its identifier.")
+  /**
+   * Gets the entity state (Etag) version of the Diagnostic specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @head
   getEntityTag is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Diagnostic identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Diagnostic identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       diagnosticId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets the details of the Diagnostic specified by its identifier.")
+  /**
+   * Gets the details of the Diagnostic specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Diagnostic identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Diagnostic identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       diagnosticId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     DiagnosticContract
   >;
 
-  @doc("Creates a new Diagnostic or updates an existing one.")
+  /**
+   * Creates a new Diagnostic or updates an existing one.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Diagnostic identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Diagnostic identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       diagnosticId: string;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Create parameters.")
+      /**
+       * Create parameters.
+       */
       @body
       parameters: DiagnosticContract;
     },
     DiagnosticContract
   >;
 
-  @doc("Updates the details of the Diagnostic specified by its identifier.")
+  /**
+   * Updates the details of the Diagnostic specified by its identifier.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @patch
   update is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Diagnostic identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Diagnostic identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       diagnosticId: string;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Diagnostic Update parameters.")
+      /**
+       * Diagnostic Update parameters.
+       */
       @body
       parameters: DiagnosticContract;
     },
     DiagnosticContract
   >;
 
-  @doc("Deletes the specified Diagnostic.")
+  /**
+   * Deletes the specified Diagnostic.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Diagnostic identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Diagnostic identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       diagnosticId: string;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -1035,66 +1395,90 @@ interface DiagnosticOperations {
 }
 
 interface IssueOperations {
-  @doc("Lists a collection of issues in the specified service instance.")
+  /**
+   * Lists a collection of issues in the specified service instance.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues")
   @get
   listByService is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| authorName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>")
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| authorName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<IssueContract>
   >;
 
-  @doc("Gets API Management issue details")
+  /**
+   * Gets API Management issue details
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues/{issueId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Issue identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Issue identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
       issueId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -1103,147 +1487,203 @@ interface IssueOperations {
 }
 
 interface PolicyOperations {
-  @doc("Lists all the Global Policy definitions of the Api Management service.")
+  /**
+   * Lists all the Global Policy definitions of the Api Management service.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies")
   @get
   listByService is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<PolicyContract>
   >;
 
-  @doc("Gets the entity state (Etag) version of the Global policy definition in the Api Management service.")
+  /**
+   * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @head
   getEntityTag is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Get the Global policy definition of the Api Management service.")
+  /**
+   * Get the Global policy definition of the Api Management service.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Policy Export Format.")
+      /**
+       * Policy Export Format.
+       */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     PolicyContract
   >;
 
-  @doc("Creates or updates the global policy configuration of the Api Management service.")
+  /**
+   * Creates or updates the global policy configuration of the Api Management service.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The policy contents to apply.")
+      /**
+       * The policy contents to apply.
+       */
       @body
       parameters: PolicyContract;
     },
     PolicyContract
   >;
 
-  @doc("Deletes the global policy configuration of the Api Management Service.")
+  /**
+   * Deletes the global policy configuration of the Api Management Service.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -1252,177 +1692,243 @@ interface PolicyOperations {
 }
 
 interface ProductPolicyOperations {
-  @doc("Get the policy configuration at the Product level.")
+  /**
+   * Get the policy configuration at the Product level.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies")
   @get
   listByProduct is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<PolicyContract>
   >;
 
-  @doc("Get the ETag of the policy configuration at the Product level.")
+  /**
+   * Get the ETag of the policy configuration at the Product level.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @head
   getEntityTag is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Get the policy configuration at the Product level.")
+  /**
+   * Get the policy configuration at the Product level.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("Policy Export Format.")
+      /**
+       * Policy Export Format.
+       */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     PolicyContract
   >;
 
-  @doc("Creates or updates policy configuration for the Product.")
+  /**
+   * Creates or updates policy configuration for the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. Not required when creating an entity, but required when updating an entity.")
+      /**
+       * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
+       */
       @header
       `If-Match`?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The policy contents to apply.")
+      /**
+       * The policy contents to apply.
+       */
       @body
       parameters: PolicyContract;
     },
     PolicyContract
   >;
 
-  @doc("Deletes the policy configuration at the Product.")
+  /**
+   * Deletes the policy configuration at the Product.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("Product identifier. Must be unique in the current API Management service instance.")
+      /**
+       * Product identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(256)
       @minLength(1)
       @path
       productId: string;
 
-      @doc("The identifier of the Policy.")
+      /**
+       * The identifier of the Policy.
+       */
       @path
       policyId: PolicyIdName;
 
-      @doc("ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.")
+      /**
+       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+       */
       @header
       `If-Match`: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -1431,12 +1937,16 @@ interface ProductPolicyOperations {
 }
 
 interface ApiManagementSkusOperations {
-  @doc("Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.")
+  /**
+   * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/skus")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -1445,77 +1955,105 @@ interface ApiManagementSkusOperations {
 }
 
 interface UserSubscriptionOperations {
-  @doc("Lists the collection of subscriptions of the specified user.")
+  /**
+   * Lists the collection of subscriptions of the specified user.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("User identifier. Must be unique in the current API Management service instance.")
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @path
       userId: string;
 
-      @doc("| Field     |     Usage     |     Supported operators    | Supported functions               |</br>|-------------|------------------------|-----------------------------------|</br>|name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>")
+      /**
+       * | Field     |     Usage     |     Supported operators    | Supported functions               |</br>|-------------|------------------------|-----------------------------------|</br>|name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>|productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("Number of records to return.")
+      /**
+       * Number of records to return.
+       */
       @minValue(1)
       @query("$top")
       $top?: int32;
 
-      @doc("Number of records to skip.")
+      /**
+       * Number of records to skip.
+       */
       @query("$skip")
       $skip?: int32;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     ResourceListResult<SubscriptionContract>
   >;
 
-  @doc("Gets the specified Subscription entity associated with a particular user.")
+  /**
+   * Gets the specified Subscription entity associated with a particular user.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions/{sid}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the API Management service.")
+      /**
+       * The name of the API Management service.
+       */
       @maxLength(50)
       @minLength(1)
       @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
       @path
       serviceName: string;
 
-      @doc("User identifier. Must be unique in the current API Management service instance.")
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
       @maxLength(80)
       @minLength(1)
       @path
       userId: string;
 
-      @doc("Subscription entity Identifier. The entity represents the association between a user and a product in API Management.")
+      /**
+       * Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+       */
       @maxLength(256)
       @pattern("^[^*#&+:<>?]+$")
       @path
       sid: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },

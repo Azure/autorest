@@ -4,6 +4,10 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * These APIs allow end users to create, view and run load tests using Azure Load
+ * Test Service.
+ */
 @service({
   title: "Load Testing Service",
 })
@@ -15,14 +19,14 @@ using TypeSpec.Http;
     Endpoint: string,
   }
 )
-@doc("""
-These APIs allow end users to create, view and run load tests using Azure Load
-Test Service.
-""")
 namespace Azure.LoadTesting;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2022-11-01 API version.")
+  /**
+   * The 2022-11-01 API version.
+   */
   v2022_11_01: "2022-11-01",
 }

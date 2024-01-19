@@ -10,13 +10,9 @@ export function generateDocs({ doc }: WithDocs): string {
     return ``;
   }
 
-  let docString = Array.isArray(doc) ? doc.join("\n") : doc;
-  docString = docString.replace(/\r\n/g, "\n");
-  docString = docString.replace(/\\/g, "\\\\");
-  docString = docString.replace(/"/g, '\\"');
-  docString = lineWrap(docString);
+  const wrapped = lineWrap(doc);
 
-  return `@doc(${docString})`;
+  return `/**\n* ${wrapped.join("\n* ")}\n*/`;
 }
 
 export function generateSummary({ summary }: WithSummary): string {
@@ -24,35 +20,43 @@ export function generateSummary({ summary }: WithSummary): string {
     return "";
   }
 
-  return `@summary(${lineWrap(summary)})`;
+  const wrapped = lineWrap(summary);
+
+  if (wrapped.length === 1) {
+    return `@summary("${summary}")`;
+  }
+  return `@summary("""\n${wrapped.join("\n")}\n""")`;
 }
 
-function lineWrap(doc: string) {
+function lineWrap(doc: string | string[]): string[] {
   const { isArm } = getOptions();
   const maxLength = isArm ? Number.POSITIVE_INFINITY : 80;
 
-  if (doc.length <= maxLength && !doc.includes("\n")) {
-    return `"${doc}"`;
+  let docString = Array.isArray(doc) ? doc.join("") : doc;
+  docString = docString.replace(/\r\n/g, "\n");
+  docString = docString.replace(/\r/g, "\n");
+
+  if (docString.length <= maxLength && !docString.includes("\n")) {
+    return [docString];
   }
 
-  const lines: string[] = [`"""`];
-  const words = doc.split(" ");
+  const lines: string[] = [];
+  const words = docString.split(" ");
   let line = ``;
   for (const word of words) {
-    if (word.length + 1 > maxLength - line.length) {
-      // Don't add the leading space
+    if (word === "\n") {
       lines.push(line.substring(0, line.length - 1));
-
-      // Start a new line
+      line = "";
+    } else if (word.length + 1 > maxLength - line.length) {
+      lines.push(line.substring(0, line.length - 1));
       line = `${word} `;
     } else {
       line = `${line}${word} `;
     }
   }
   lines.push(`${line.substring(0, line.length - 1)}`);
-  lines.push(`"""`);
 
-  return lines.join("\n");
+  return lines;
 }
 
 function isEmptyDoc(doc?: string | string[]): doc is undefined {

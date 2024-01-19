@@ -4,6 +4,10 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * The Notification Hubs client performs operations to register and query devices,
+ * and send notifications
+ */
 @service({
   title: "NotificationHubsClient",
 })
@@ -15,14 +19,14 @@ using TypeSpec.Http;
     namespaceBaseUrl: string,
   }
 )
-@doc("""
-The Notification Hubs client performs operations to register and query devices,
-and send notifications
-""")
 namespace NotificationHubsClient;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2020-06-01 API version.")
+  /**
+   * The 2020-06-01 API version.
+   */
   v2020_06_01: "2020-06-01",
 }

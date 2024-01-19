@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(Workspace)
 model LabelingJob is ProxyResource<LabelingJobProperties> {
-  @doc("The name and identifier for the LabelingJob.")
+  /**
+   * The name and identifier for the LabelingJob.
+   */
   @path
   @key("id")
   @segment("labelingJobs")
@@ -24,47 +28,65 @@ model LabelingJob is ProxyResource<LabelingJobProperties> {
 
 @armResourceOperations
 interface LabelingJobs {
-  @doc("Gets a labeling job by name/id.")
+  /**
+   * Gets a labeling job by name/id.
+   */
   get is ArmResourceRead<
     LabelingJob,
     {
       ...BaseParameters<LabelingJob>;
 
-      @doc("Boolean value to indicate whether to include JobInstructions in response.")
+      /**
+       * Boolean value to indicate whether to include JobInstructions in response.
+       */
       @query("includeJobInstructions")
       includeJobInstructions?: boolean;
 
-      @doc("Boolean value to indicate Whether to include LabelCategories in response.")
+      /**
+       * Boolean value to indicate Whether to include LabelCategories in response.
+       */
       @query("includeLabelCategories")
       includeLabelCategories?: boolean;
     }
   >;
 
-  @doc("Creates or updates a labeling job (asynchronous).")
+  /**
+   * Creates or updates a labeling job (asynchronous).
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LabelingJob>;
 
-  @doc("Delete a labeling job.")
+  /**
+   * Delete a labeling job.
+   */
   delete is ArmResourceDeleteSync<LabelingJob>;
 
+  /**
+   * Lists labeling jobs in the workspace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists labeling jobs in the workspace.")
   @operationId("LabelingJobs_List")
   list is ArmResourceListByParent<
     LabelingJob,
     {
       ...BaseParameters<LabelingJob>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Number of labeling jobs to return.")
+      /**
+       * Number of labeling jobs to return.
+       */
       @query("$top")
       $top?: int32;
     }
   >;
 
-  @doc("Export labels from a labeling job (asynchronous).")
+  /**
+   * Export labels from a labeling job (asynchronous).
+   */
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
@@ -73,10 +95,14 @@ interface LabelingJobs {
     ArmLroLocationHeader
   >;
 
-  @doc("Pause a labeling job.")
+  /**
+   * Pause a labeling job.
+   */
   pause is ArmResourceActionSync<LabelingJob, void, void>;
 
-  @doc("Resume a labeling job (asynchronous).")
+  /**
+   * Resume a labeling job (asynchronous).
+   */
   resume is ArmResourceActionAsync<
     LabelingJob,
     void,

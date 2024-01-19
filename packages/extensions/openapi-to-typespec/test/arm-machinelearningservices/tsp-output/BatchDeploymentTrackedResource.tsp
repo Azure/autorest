@@ -15,7 +15,9 @@ namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(BatchEndpointTrackedResource)
 model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
-  @doc("The identifier for the Batch deployments.")
+  /**
+   * The identifier for the Batch deployments.
+   */
   @path
   @key("deploymentName")
   @segment("deployments")
@@ -28,18 +30,24 @@ model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
 
 @armResourceOperations
 interface BatchDeploymentTrackedResources {
+  /**
+   * Gets a batch inference deployment by id.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a batch inference deployment by id.")
   @operationId("BatchDeployments_Get")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
 
+  /**
+   * Creates/updates a batch inference deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates/updates a batch inference deployment (asynchronous).")
   @operationId("BatchDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
 
+  /**
+   * Update a batch inference deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a batch inference deployment (asynchronous).")
   @parameterVisibility("read")
   @operationId("BatchDeployments_Update")
   update is ArmCustomPatchAsync<
@@ -47,8 +55,10 @@ interface BatchDeploymentTrackedResources {
     PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
   >;
 
+  /**
+   * Delete Batch Inference deployment (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete Batch Inference deployment (asynchronous).")
   @operationId("BatchDeployments_Delete")
   delete is ArmResourceDeleteAsync<
     BatchDeploymentTrackedResource,
@@ -56,23 +66,31 @@ interface BatchDeploymentTrackedResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Lists Batch inference deployments in the workspace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists Batch inference deployments in the workspace.")
   @operationId("BatchDeployments_List")
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
     {
       ...BaseParameters<BatchDeploymentTrackedResource>;
 
-      @doc("Ordering of list.")
+      /**
+       * Ordering of list.
+       */
       @query("$orderBy")
       $orderBy?: string;
 
-      @doc("Top of list.")
+      /**
+       * Top of list.
+       */
       @query("$top")
       $top?: int32;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
     }

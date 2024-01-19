@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("Deleted storage account")
+/**
+ * Deleted storage account
+ */
 @locationResource
 model DeletedAccount is ProxyResource<DeletedAccountProperties> {
-  @doc("Name of the deleted storage account.")
+  /**
+   * Name of the deleted storage account.
+   */
   @maxLength(24)
   @minLength(3)
   @path
@@ -25,9 +29,13 @@ model DeletedAccount is ProxyResource<DeletedAccountProperties> {
 
 @armResourceOperations
 interface DeletedAccounts {
-  @doc("Get properties of specified deleted account resource.")
+  /**
+   * Get properties of specified deleted account resource.
+   */
   get is ArmResourceRead<DeletedAccount>;
 
-  @doc("Lists deleted accounts under the subscription.")
+  /**
+   * Lists deleted accounts under the subscription.
+   */
   list is ArmListBySubscription<DeletedAccount>;
 }

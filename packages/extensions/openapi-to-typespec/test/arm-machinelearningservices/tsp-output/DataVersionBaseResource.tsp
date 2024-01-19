@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(DataContainerResource)
 model DataVersionBaseResource is ProxyResource<DataVersionBase> {
-  @doc("Version identifier.")
+  /**
+   * Version identifier.
+   */
   @path
   @key("version")
   @segment("versions")
@@ -24,18 +28,24 @@ model DataVersionBaseResource is ProxyResource<DataVersionBase> {
 
 @armResourceOperations
 interface DataVersionBaseResources {
+  /**
+   * Get version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get version.")
   @operationId("RegistryDataVersions_Get")
   get is ArmResourceRead<DataVersionBaseResource>;
 
+  /**
+   * Create or update version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update version.")
   @operationId("RegistryDataVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataVersionBaseResource>;
 
+  /**
+   * Delete version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete version.")
   @operationId("RegistryDataVersions_Delete")
   delete is ArmResourceDeleteAsync<
     DataVersionBaseResource,
@@ -43,41 +53,53 @@ interface DataVersionBaseResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List data versions in the data container
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List data versions in the data container")
   @operationId("RegistryDataVersions_List")
   list is ArmResourceListByParent<
     DataVersionBaseResource,
     {
       ...BaseParameters<DataVersionBaseResource>;
 
-      @doc("Please choose OrderBy value from ['createdtime', 'modifiedtime']")
+      /**
+       * Please choose OrderBy value from ['createdtime', 'modifiedtime']
+       */
       @query("$orderBy")
       $orderBy?: string;
 
-      @doc("""
-Top count of results, top count cannot be greater than the page size.
+      /**
+* Top count of results, top count cannot be greater than the page size.
                               If topCount > page size, results with be default page size count will be returned
-""")
+*/
       @query("$top")
       $top?: int32;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("$tags")
       $tags?: string;
 
-      @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.")
+      /**
+       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
     }
   >;
 
+  /**
+   * Generate a storage location and credential for the client to upload a data asset to.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Generate a storage location and credential for the client to upload a data asset to.")
   @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     DataVersionBaseResource,

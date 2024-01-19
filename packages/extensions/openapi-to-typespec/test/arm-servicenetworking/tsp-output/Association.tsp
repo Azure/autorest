@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceNetworking;
-@doc("Association Subresource of Traffic Controller")
+/**
+ * Association Subresource of Traffic Controller
+ */
 @parentResource(TrafficController)
 model Association is TrackedResource<AssociationProperties> {
-  @doc("Name of Association")
+  /**
+   * Name of Association
+   */
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   @path
   @key("associationName")
@@ -25,13 +29,17 @@ model Association is TrackedResource<AssociationProperties> {
 
 @armResourceOperations
 interface Associations {
+  /**
+   * Get a Association
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get a Association")
   @operationId("AssociationsInterface_Get")
   get is ArmResourceRead<Association>;
 
+  /**
+   * Create a Association
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create a Association")
   @operationId("AssociationsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Association,
@@ -39,14 +47,18 @@ interface Associations {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Update a Association
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a Association")
   @parameterVisibility("read")
   @operationId("AssociationsInterface_Update")
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
 
+  /**
+   * Delete a Association
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a Association")
   @operationId("AssociationsInterface_Delete")
   delete is ArmResourceDeleteAsync<
     Association,
@@ -54,8 +66,10 @@ interface Associations {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Association resources by TrafficController
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Association resources by TrafficController")
   @operationId("AssociationsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Association>;
 }

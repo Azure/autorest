@@ -17,23 +17,35 @@ enum MyKind {
   Kind1,
 }
 
-@doc("Colors possible")
+/**
+ * Colors possible
+ */
 enum GoblinSharkColor {
   pink,
   gray,
   brown,
-  @doc("Uppercase RED") upperRed: "RED",
-  @doc("Lowercase RED") lowerRed: "red",
+
+  /**
+   * Uppercase RED
+   */
+  upperRed: "RED",
+
+  /**
+   * Lowercase RED
+   */
+  lowerRed: "red",
 }
 
 model Basic {
-  @doc("Basic Id")
+  /**
+   * Basic Id
+   */
   id?: int32;
 
-  @doc("""
-Name property with a very long description that does not fit on a single line
-and a line break.
-""")
+  /**
+   * Name property with a very long description that does not fit on a single line
+   * and a line break.
+   */
   name?: string;
 
   color?: CmykColors;
@@ -118,7 +130,9 @@ model ArrayWrapper {
 }
 
 model DictionaryWrapper {
-  @doc("Dictionary of <string>")
+  /**
+   * Dictionary of <string>
+   */
   defaultProgram?: Record<string>;
 }
 
@@ -217,7 +231,9 @@ model Sawshark extends Shark {
 model Goblinshark extends Shark {
   jawsize?: int32;
 
-  @doc("Colors possible")
+  /**
+   * Colors possible
+   */
   color?: GoblinSharkColor = GoblinSharkColor.gray;
 
   fishtype: "goblin";

@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An product resource belonging to a catalog resource.")
+/**
+ * An product resource belonging to a catalog resource.
+ */
 @parentResource(Catalog)
 model Product is ProxyResource<ProductProperties> {
-  @doc("Name of product.")
+  /**
+   * Name of product.
+   */
   @pattern("^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$")
   @path
   @key("productName")
@@ -25,17 +29,23 @@ model Product is ProxyResource<ProductProperties> {
 
 @armResourceOperations
 interface Products {
-  @doc("Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  /**
+   * Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
   get is ArmResourceRead<Product>;
 
-  @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  /**
+   * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Product,
     BaseParameters<Product>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  /**
+   * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     Product,
@@ -44,22 +54,30 @@ interface Products {
     ArmLroLocationHeader
   >;
 
-  @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
+  /**
+   * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
+   */
   delete is ArmResourceDeleteAsync<
     Product,
     BaseParameters<Product>,
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Product resources by Catalog
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Product resources by Catalog")
   @operationId("Products_ListByCatalog")
   listByCatalog is ArmResourceListByParent<Product>;
 
-  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  /**
+   * Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
   countDevices is ArmResourceActionSync<Product, void, CountDeviceResponse>;
 
-  @doc("Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  /**
+   * Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     void,

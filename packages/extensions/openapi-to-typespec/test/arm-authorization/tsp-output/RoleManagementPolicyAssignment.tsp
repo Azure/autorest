@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
-@doc("Role management policy")
+/**
+ * Role management policy
+ */
 model RoleManagementPolicyAssignment
   is ExtensionResource<RoleManagementPolicyAssignmentProperties> {
-  @doc("The name of format {guid_guid} the role management policy assignment to get.")
+  /**
+   * The name of format {guid_guid} the role management policy assignment to get.
+   */
   @path
   @key("roleManagementPolicyAssignmentName")
   @segment("roleManagementPolicyAssignments")
@@ -23,14 +27,20 @@ model RoleManagementPolicyAssignment
 
 @armResourceOperations
 interface RoleManagementPolicyAssignments {
-  @doc("Get the specified role management policy assignment for a resource scope")
+  /**
+   * Get the specified role management policy assignment for a resource scope
+   */
   get is ArmResourceRead<RoleManagementPolicyAssignment>;
 
-  @doc("Create a role management policy assignment")
+  /**
+   * Create a role management policy assignment
+   */
   create is ArmResourceCreateOrReplaceSync<RoleManagementPolicyAssignment>;
 
+  /**
+   * Gets role management assignment policies for a resource scope.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets role management assignment policies for a resource scope.")
   @operationId("RoleManagementPolicyAssignments_ListForScope")
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }

@@ -4,6 +4,9 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * Test Infrastructure for AutoRest
+ */
 @service({
   title: "AutoRest Complex Test Service",
 })
@@ -15,11 +18,14 @@ using TypeSpec.Http;
     $host: string,
   }
 )
-@doc("Test Infrastructure for AutoRest")
 namespace AutoRestComplexTestService;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("The 2016-02-29 API version.")
+  /**
+   * The 2016-02-29 API version.
+   */
   v2016_02_29: "2016-02-29",
 }

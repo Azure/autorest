@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("disk encryption set resource.")
+/**
+ * disk encryption set resource.
+ */
 model DiskEncryptionSet is TrackedResource<EncryptionSetProperties> {
-  @doc("The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.")
+  /**
+   * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+   */
   @path
   @key("diskEncryptionSetName")
   @segment("diskEncryptionSets")
@@ -24,28 +28,42 @@ model DiskEncryptionSet is TrackedResource<EncryptionSetProperties> {
 
 @armResourceOperations
 interface DiskEncryptionSets {
-  @doc("Gets information about a disk encryption set.")
+  /**
+   * Gets information about a disk encryption set.
+   */
   get is ArmResourceRead<DiskEncryptionSet>;
 
-  @doc("Creates or updates a disk encryption set")
+  /**
+   * Creates or updates a disk encryption set
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskEncryptionSet>;
 
-  @doc("Updates (patches) a disk encryption set.")
+  /**
+   * Updates (patches) a disk encryption set.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
 
-  @doc("Deletes a disk encryption set.")
+  /**
+   * Deletes a disk encryption set.
+   */
   delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
 
+  /**
+   * Lists all the disk encryption sets under a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all the disk encryption sets under a resource group.")
   @operationId("DiskEncryptionSets_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskEncryptionSet>;
 
-  @doc("Lists all the disk encryption sets under a subscription.")
+  /**
+   * Lists all the disk encryption sets under a subscription.
+   */
   list is ArmListBySubscription<DiskEncryptionSet>;
 
-  @doc("Lists all resources that are encrypted with this disk encryption set.")
+  /**
+   * Lists all resources that are encrypted with this disk encryption set.
+   */
   // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
   listAssociatedResources is Azure.Core.ResourceList<string>;
 }

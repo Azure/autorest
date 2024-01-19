@@ -10,17 +10,23 @@ using Azure.ResourceManager;
 namespace Microsoft.Compute;
 
 interface UsageOperations {
-  @doc("Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.")
+  /**
+   * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The location for which resource usage is queried.")
+      /**
+       * The location for which resource usage is queried.
+       */
       @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -29,17 +35,23 @@ interface UsageOperations {
 }
 
 interface VirtualMachineSizesOperations {
-  @doc("This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)")
+  /**
+   * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The location upon which virtual-machine-sizes is queried.")
+      /**
+       * The location upon which virtual-machine-sizes is queried.
+       */
       @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -48,60 +60,86 @@ interface VirtualMachineSizesOperations {
 }
 
 interface VirtualMachineImagesOperations {
-  @doc("Gets a virtual machine image.")
+  /**
+   * Gets a virtual machine image.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("A valid image SKU.")
+      /**
+       * A valid image SKU.
+       */
       @path
       skus: string;
 
-      @doc("A valid image SKU version.")
+      /**
+       * A valid image SKU version.
+       */
       @path
       version: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     VirtualMachineImage
   >;
 
-  @doc("Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.")
+  /**
+   * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("A valid image SKU.")
+      /**
+       * A valid image SKU.
+       */
       @path
       skus: string;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
 
@@ -111,87 +149,121 @@ interface VirtualMachineImagesOperations {
       @query("$orderby")
       $orderby?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image offers for the specified location and publisher.")
+  /**
+   * Gets a list of virtual machine image offers for the specified location and publisher.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   listOffers is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image publishers for the specified Azure location.")
+  /**
+   * Gets a list of virtual machine image publishers for the specified Azure location.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
   @get
   listPublishers is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.")
+  /**
+   * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   listSkus is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of all virtual machine image versions for the specified edge zone")
+  /**
+   * Gets a list of all virtual machine image versions for the specified edge zone
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages")
   @get
   listByEdgeZone is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -200,152 +272,218 @@ interface VirtualMachineImagesOperations {
 }
 
 interface VirtualMachineImagesEdgeZoneOperations {
-  @doc("Gets a virtual machine image in an edge zone.")
+  /**
+   * Gets a virtual machine image in an edge zone.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("A valid image SKU.")
+      /**
+       * A valid image SKU.
+       */
       @path
       skus: string;
 
-      @doc("A valid image SKU version.")
+      /**
+       * A valid image SKU version.
+       */
       @path
       version: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     VirtualMachineImage
   >;
 
-  @doc("Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.")
+  /**
+   * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("A valid image SKU.")
+      /**
+       * A valid image SKU.
+       */
       @path
       skus: string;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
 
-      @doc("An integer value specifying the number of images to return that matches supplied values.")
+      /**
+       * An integer value specifying the number of images to return that matches supplied values.
+       */
       @query("$top")
       $top?: int32;
 
-      @doc("Specifies the order of the results returned. Formatted as an OData query.")
+      /**
+       * Specifies the order of the results returned. Formatted as an OData query.
+       */
       @query("$orderby")
       $orderby?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image offers for the specified location, edge zone and publisher.")
+  /**
+   * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   listOffers is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image publishers for the specified Azure location and edge zone.")
+  /**
+   * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
   @get
   listPublishers is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
     void
   >;
 
-  @doc("Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.")
+  /**
+   * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   listSkus is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
-      @doc("The name of the edge zone.")
+      /**
+       * The name of the edge zone.
+       */
       @path
       edgeZone: string;
 
-      @doc("A valid image publisher.")
+      /**
+       * A valid image publisher.
+       */
       @path
       publisherName: string;
 
-      @doc("A valid image publisher offer.")
+      /**
+       * A valid image publisher offer.
+       */
       @path
       offer: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -354,12 +492,16 @@ interface VirtualMachineImagesEdgeZoneOperations {
 }
 
 interface VirtualMachineExtensionImagesOperations {
-  @doc("Gets a list of virtual machine extension image versions.")
+  /**
+   * Gets a list of virtual machine extension image versions.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
   @get
   listVersions is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of a supported Azure region.")
+      /**
+       * The name of a supported Azure region.
+       */
       @path
       location: string;
 
@@ -369,7 +511,9 @@ interface VirtualMachineExtensionImagesOperations {
       @path
       type: string;
 
-      @doc("The filter to apply on the operation.")
+      /**
+       * The filter to apply on the operation.
+       */
       @query("$filter")
       $filter?: string;
 
@@ -379,7 +523,9 @@ interface VirtualMachineExtensionImagesOperations {
       @query("$orderby")
       $orderby?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
     },
@@ -388,42 +534,58 @@ interface VirtualMachineExtensionImagesOperations {
 }
 
 interface LogAnalyticsOperations {
-  @doc("Export logs that show Api requests made by this subscription in the given time window to show throttling activities.")
+  /**
+   * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval")
   @post
   exportRequestRateByInterval is Azure.Core.Foundations.Operation<
     {
-      @doc("The location upon which virtual-machine-sizes is queried.")
+      /**
+       * The location upon which virtual-machine-sizes is queried.
+       */
       @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Parameters supplied to the LogAnalytics getRequestRateByInterval Api.")
+      /**
+       * Parameters supplied to the LogAnalytics getRequestRateByInterval Api.
+       */
       @body
       parameters: RequestRateByIntervalInput;
     },
     LogAnalyticsOperationResult | void
   >;
 
-  @doc("Export logs that show total throttled Api requests for this subscription in the given time window.")
+  /**
+   * Export logs that show total throttled Api requests for this subscription in the given time window.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests")
   @post
   exportThrottledRequests is Azure.Core.Foundations.Operation<
     {
-      @doc("The location upon which virtual-machine-sizes is queried.")
+      /**
+       * The location upon which virtual-machine-sizes is queried.
+       */
       @pattern("^[-\\w\\._]+$")
       @path
       location: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Parameters supplied to the LogAnalytics getThrottledRequests Api.")
+      /**
+       * Parameters supplied to the LogAnalytics getThrottledRequests Api.
+       */
       @body
       parameters: ThrottledRequestsInput;
     },
@@ -432,172 +594,248 @@ interface LogAnalyticsOperations {
 }
 
 interface VirtualMachineScaleSetVMRunCommandsOperations {
-  @doc("The operation to create or update the VMSS VM run command.")
+  /**
+   * The operation to create or update the VMSS VM run command.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The instance ID of the virtual machine.")
+      /**
+       * The instance ID of the virtual machine.
+       */
       @path
       instanceId: string;
 
-      @doc("The name of the virtual machine run command.")
+      /**
+       * The name of the virtual machine run command.
+       */
       @path
       runCommandName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Parameters supplied to the Create Virtual Machine RunCommand operation.")
+      /**
+       * Parameters supplied to the Create Virtual Machine RunCommand operation.
+       */
       @body
       runCommand: VirtualMachineRunCommand;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
 
-  @doc("The operation to update the VMSS VM run command.")
+  /**
+   * The operation to update the VMSS VM run command.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @patch
   update is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The instance ID of the virtual machine.")
+      /**
+       * The instance ID of the virtual machine.
+       */
       @path
       instanceId: string;
 
-      @doc("The name of the virtual machine run command.")
+      /**
+       * The name of the virtual machine run command.
+       */
       @path
       runCommandName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Parameters supplied to the Update Virtual Machine RunCommand operation.")
+      /**
+       * Parameters supplied to the Update Virtual Machine RunCommand operation.
+       */
       @body
       runCommand: VirtualMachineRunCommandUpdate;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
 
-  @doc("The operation to delete the VMSS VM run command.")
+  /**
+   * The operation to delete the VMSS VM run command.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The instance ID of the virtual machine.")
+      /**
+       * The instance ID of the virtual machine.
+       */
       @path
       instanceId: string;
 
-      @doc("The name of the virtual machine run command.")
+      /**
+       * The name of the virtual machine run command.
+       */
       @path
       runCommandName: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, text/json";
     },
     void
   >;
 
-  @doc("The operation to get the VMSS VM run command.")
+  /**
+   * The operation to get the VMSS VM run command.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The instance ID of the virtual machine.")
+      /**
+       * The instance ID of the virtual machine.
+       */
       @path
       instanceId: string;
 
-      @doc("The name of the virtual machine run command.")
+      /**
+       * The name of the virtual machine run command.
+       */
       @path
       runCommandName: string;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, text/json";
     },
     VirtualMachineRunCommand
   >;
 
-  @doc("The operation to get all run commands of an instance in Virtual Machine Scaleset.")
+  /**
+   * The operation to get all run commands of an instance in Virtual Machine Scaleset.
+   */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The name of the resource group.")
+      /**
+       * The name of the resource group.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
 
-      @doc("The instance ID of the virtual machine.")
+      /**
+       * The instance ID of the virtual machine.
+       */
       @path
       instanceId: string;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
 
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Accept header")
+      /**
+       * Accept header
+       */
       @header
       accept: "application/json, text/json";
     },
@@ -606,20 +844,28 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
 }
 
 interface ResourceSkusOperations {
-  @doc("Gets the list of Microsoft.Compute SKUs available for your Subscription.")
+  /**
+   * Gets the list of Microsoft.Compute SKUs available for your Subscription.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The filter to apply on the operation. Only **location** filter is supported currently.")
+      /**
+       * The filter to apply on the operation. Only **location** filter is supported currently.
+       */
       @query("$filter")
       $filter?: string;
 
-      @doc("To Include Extended Locations information or not in the response.")
+      /**
+       * To Include Extended Locations information or not in the response.
+       */
       @query("includeExtendedLocations")
       includeExtendedLocations?: string;
     },

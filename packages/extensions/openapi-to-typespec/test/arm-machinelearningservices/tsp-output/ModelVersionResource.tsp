@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
-@doc("Azure Resource Manager resource envelope.")
+/**
+ * Azure Resource Manager resource envelope.
+ */
 @parentResource(ModelContainerResource)
 model ModelVersionResource is ProxyResource<ModelVersion> {
-  @doc("Version identifier. This is case-sensitive.")
+  /**
+   * Version identifier. This is case-sensitive.
+   */
   @path
   @key("version")
   @segment("versions")
@@ -24,18 +28,24 @@ model ModelVersionResource is ProxyResource<ModelVersion> {
 
 @armResourceOperations
 interface ModelVersionResources {
+  /**
+   * Get version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get version.")
   @operationId("RegistryModelVersions_Get")
   get is ArmResourceRead<ModelVersionResource>;
 
+  /**
+   * Create or update version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update version.")
   @operationId("RegistryModelVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ModelVersionResource>;
 
+  /**
+   * Delete version.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete version.")
   @operationId("RegistryModelVersions_Delete")
   delete is ArmResourceDeleteAsync<
     ModelVersionResource,
@@ -43,46 +53,64 @@ interface ModelVersionResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List versions.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List versions.")
   @operationId("RegistryModelVersions_List")
   list is ArmResourceListByParent<
     ModelVersionResource,
     {
       ...BaseParameters<ModelVersionResource>;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("Ordering of list.")
+      /**
+       * Ordering of list.
+       */
       @query("$orderBy")
       $orderBy?: string;
 
-      @doc("Maximum number of records to return.")
+      /**
+       * Maximum number of records to return.
+       */
       @query("$top")
       $top?: int32;
 
-      @doc("Model description.")
+      /**
+       * Model description.
+       */
       @query("description")
       description?: string;
 
-      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+      /**
+       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+       */
       @query("tags")
       tags?: string;
 
-      @doc("Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2")
+      /**
+       * Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
+       */
       @query("properties")
       properties?: string;
 
-      @doc("View type for including/excluding (for example) archived entities.")
+      /**
+       * View type for including/excluding (for example) archived entities.
+       */
       @query("listViewType")
       listViewType?: ListViewType;
     }
   >;
 
+  /**
+   * Model Version Package operation.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Model Version Package operation.")
   @operationId("RegistryModelVersions_Package")
   package is ArmResourceActionAsync<
     ModelVersionResource,
@@ -92,8 +120,10 @@ interface ModelVersionResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Generate a storage location and credential for the client to upload a model asset to.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Generate a storage location and credential for the client to upload a model asset to.")
   @operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     ModelVersionResource,

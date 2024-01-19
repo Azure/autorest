@@ -15,7 +15,9 @@ namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(Workspace)
 model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
-  @doc("Online Endpoint name.")
+  /**
+   * Online Endpoint name.
+   */
   @path
   @key("endpointName")
   @segment("onlineEndpoints")
@@ -28,18 +30,24 @@ model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
 
 @armResourceOperations
 interface OnlineEndpointTrackedResources {
+  /**
+   * Get Online Endpoint.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get Online Endpoint.")
   @operationId("OnlineEndpoints_Get")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
 
+  /**
+   * Create or update Online Endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update Online Endpoint (asynchronous).")
   @operationId("OnlineEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpointTrackedResource>;
 
+  /**
+   * Update Online Endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update Online Endpoint (asynchronous).")
   @parameterVisibility("read")
   @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
@@ -47,8 +55,10 @@ interface OnlineEndpointTrackedResources {
     PartialMinimalTrackedResourceWithIdentity
   >;
 
+  /**
+   * Delete Online Endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete Online Endpoint (asynchronous).")
   @operationId("OnlineEndpoints_Delete")
   delete is ArmResourceDeleteAsync<
     OnlineEndpointTrackedResource,
@@ -56,46 +66,64 @@ interface OnlineEndpointTrackedResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Online Endpoints.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Online Endpoints.")
   @operationId("OnlineEndpoints_List")
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
     {
       ...BaseParameters<OnlineEndpointTrackedResource>;
 
-      @doc("Name of the endpoint.")
+      /**
+       * Name of the endpoint.
+       */
       @query("name")
       name?: string;
 
-      @doc("Number of endpoints to be retrieved in a page of results.")
+      /**
+       * Number of endpoints to be retrieved in a page of results.
+       */
       @query("count")
       count?: int32;
 
-      @doc("EndpointComputeType to be filtered by.")
+      /**
+       * EndpointComputeType to be filtered by.
+       */
       @query("computeType")
       computeType?: EndpointComputeType;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
 
-      @doc("A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .")
+      /**
+       * A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .
+       */
       @query("tags")
       tags?: string;
 
-      @doc("A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .")
+      /**
+       * A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .
+       */
       @query("properties")
       properties?: string;
 
-      @doc("The option to order the response.")
+      /**
+       * The option to order the response.
+       */
       @query("orderBy")
       orderBy?: OrderString;
     }
   >;
 
+  /**
+   * List EndpointAuthKeys for an Endpoint using Key-based authentication.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
   @operationId("OnlineEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
@@ -103,8 +131,10 @@ interface OnlineEndpointTrackedResources {
     EndpointAuthKeys
   >;
 
+  /**
+   * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   @operationId("OnlineEndpoints_RegenerateKeys")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
@@ -114,8 +144,10 @@ interface OnlineEndpointTrackedResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
   @operationId("OnlineEndpoints_GetToken")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,

@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Create or update Restore Point collection parameters.")
+/**
+ * Create or update Restore Point collection parameters.
+ */
 model RestorePointCollection
   is TrackedResource<RestorePointCollectionProperties> {
-  @doc("The name of the restore point collection.")
+  /**
+   * The name of the restore point collection.
+   */
   @path
   @key("restorePointCollectionName")
   @segment("restorePointCollections")
@@ -23,35 +27,47 @@ model RestorePointCollection
 
 @armResourceOperations
 interface RestorePointCollections {
-  @doc("The operation to get the restore point collection.")
+  /**
+   * The operation to get the restore point collection.
+   */
   get is ArmResourceRead<
     RestorePointCollection,
     {
       ...BaseParameters<RestorePointCollection>;
 
-      @doc("The name of the restore point collection.")
+      /**
+       * The name of the restore point collection.
+       */
       @path
       restorePointCollectionName: string;
 
-      @doc("The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.")
+      /**
+       * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
+       */
       @query("$expand")
       $expand?: RestorePointCollectionExpandOptions;
     }
   >;
 
-  @doc("The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.")
+  /**
+   * The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RestorePointCollection,
     {
       ...BaseParameters<RestorePointCollection>;
 
-      @doc("The name of the restore point collection.")
+      /**
+       * The name of the restore point collection.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
-  @doc("The operation to update the restore point collection.")
+  /**
+   * The operation to update the restore point collection.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchSync<
     RestorePointCollection,
@@ -59,30 +75,40 @@ interface RestorePointCollections {
     {
       ...BaseParameters<RestorePointCollection>;
 
-      @doc("The name of the restore point collection.")
+      /**
+       * The name of the restore point collection.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
-  @doc("The operation to delete the restore point collection. This operation will also delete all the contained restore points.")
+  /**
+   * The operation to delete the restore point collection. This operation will also delete all the contained restore points.
+   */
   delete is ArmResourceDeleteAsync<
     RestorePointCollection,
     {
       ...BaseParameters<RestorePointCollection>;
 
-      @doc("The name of the Restore Point Collection.")
+      /**
+       * The name of the Restore Point Collection.
+       */
       @path
       restorePointCollectionName: string;
     }
   >;
 
+  /**
+   * Gets the list of restore point collections in a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the list of restore point collections in a resource group.")
   @operationId("RestorePointCollections_List")
   list is ArmResourceListByParent<RestorePointCollection>;
 
-  @doc("Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.")
+  /**
+   * Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.
+   */
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 

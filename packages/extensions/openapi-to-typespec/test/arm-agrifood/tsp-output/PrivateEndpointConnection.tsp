@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
-@doc("The private endpoint connection resource.")
+/**
+ * The private endpoint connection resource.
+ */
 @parentResource(DataManagerForAgriculture)
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
-  @doc("Private endpoint connection name.")
+  /**
+   * Private endpoint connection name.
+   */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
@@ -25,21 +29,29 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  @doc("Get Private endpoint connection object.")
+  /**
+   * Get Private endpoint connection object.
+   */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
-  @doc("Approves or Rejects a Private endpoint connection request.")
+  /**
+   * Approves or Rejects a Private endpoint connection request.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
-  @doc("Delete Private endpoint connection request.")
+  /**
+   * Delete Private endpoint connection request.
+   */
   delete is ArmResourceDeleteAsync<
     PrivateEndpointConnection,
     BaseParameters<PrivateEndpointConnection>,
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Get list of Private endpoint connections.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get list of Private endpoint connections.")
   @operationId("PrivateEndpointConnections_ListByResource")
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }

@@ -10,16 +10,22 @@ using Azure.ResourceManager;
 namespace Azure.ResourceManager.Dns;
 
 interface DnsResourceReferenceOperations {
-  @doc("Returns the DNS records specified by the referencing targetResourceIds.")
+  /**
+   * Returns the DNS records specified by the referencing targetResourceIds.
+   */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference")
   @post
   getByTargetResources is Azure.Core.Foundations.Operation<
     {
-      @doc("Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.")
+      /**
+       * Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Properties for dns resource reference request.")
+      /**
+       * Properties for dns resource reference request.
+       */
       @body
       parameters: DnsResourceReferenceRequest;
     },

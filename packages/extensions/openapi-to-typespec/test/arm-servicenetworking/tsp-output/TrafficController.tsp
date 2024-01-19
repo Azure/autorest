@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceNetworking;
-@doc("Concrete tracked resource types can be created by aliasing this type using a specific property type.")
+/**
+ * Concrete tracked resource types can be created by aliasing this type using a specific property type.
+ */
 model TrafficController is TrackedResource<TrafficControllerProperties> {
-  @doc("traffic controller name for path")
+  /**
+   * traffic controller name for path
+   */
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   @path
   @key("trafficControllerName")
@@ -23,13 +27,17 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 
 @armResourceOperations
 interface TrafficControllers {
+  /**
+   * Get a TrafficController
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get a TrafficController")
   @operationId("TrafficControllerInterface_Get")
   get is ArmResourceRead<TrafficController>;
 
+  /**
+   * Create a TrafficController
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create a TrafficController")
   @operationId("TrafficControllerInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     TrafficController,
@@ -37,14 +45,18 @@ interface TrafficControllers {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Update a TrafficController
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a TrafficController")
   @parameterVisibility("read")
   @operationId("TrafficControllerInterface_Update")
   update is ArmCustomPatchSync<TrafficController, TrafficControllerUpdate>;
 
+  /**
+   * Delete a TrafficController
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a TrafficController")
   @operationId("TrafficControllerInterface_Delete")
   delete is ArmResourceDeleteAsync<
     TrafficController,
@@ -52,13 +64,17 @@ interface TrafficControllers {
     ArmLroLocationHeader
   >;
 
+  /**
+   * List TrafficController resources by resource group
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List TrafficController resources by resource group")
   @operationId("TrafficControllerInterface_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
 
+  /**
+   * List TrafficController resources by subscription ID
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List TrafficController resources by subscription ID")
   @operationId("TrafficControllerInterface_ListBySubscription")
   listBySubscription is ArmListBySubscription<TrafficController>;
 }

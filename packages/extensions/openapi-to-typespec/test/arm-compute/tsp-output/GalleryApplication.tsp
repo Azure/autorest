@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery Application Definition that you want to create or update.")
+/**
+ * Specifies information about the gallery Application Definition that you want to create or update.
+ */
 @parentResource(Gallery)
 model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
-  @doc("The name of the gallery Application Definition to be retrieved.")
+  /**
+   * The name of the gallery Application Definition to be retrieved.
+   */
   @path
   @key("galleryApplicationName")
   @segment("applications")
@@ -24,21 +28,31 @@ model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
 
 @armResourceOperations
 interface GalleryApplications {
-  @doc("Retrieves information about a gallery Application Definition.")
+  /**
+   * Retrieves information about a gallery Application Definition.
+   */
   get is ArmResourceRead<GalleryApplication>;
 
-  @doc("Create or update a gallery Application Definition.")
+  /**
+   * Create or update a gallery Application Definition.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplication>;
 
-  @doc("Update a gallery Application Definition.")
+  /**
+   * Update a gallery Application Definition.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
 
-  @doc("Delete a gallery Application.")
+  /**
+   * Delete a gallery Application.
+   */
   delete is ArmResourceDeleteAsync<GalleryApplication>;
 
+  /**
+   * List gallery Application Definitions in a gallery.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List gallery Application Definitions in a gallery.")
   @operationId("GalleryApplications_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }

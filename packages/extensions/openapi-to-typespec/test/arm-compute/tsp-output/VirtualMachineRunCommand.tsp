@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Describes a Virtual Machine run command.")
+/**
+ * Describes a Virtual Machine run command.
+ */
 @parentResource(VirtualMachine)
 model VirtualMachineRunCommand
   is TrackedResource<VirtualMachineRunCommandProperties> {
-  @doc("The name of the virtual machine run command.")
+  /**
+   * The name of the virtual machine run command.
+   */
   @path
   @key("runCommandName")
   @segment("runCommands")
@@ -25,53 +29,71 @@ model VirtualMachineRunCommand
 
 @armResourceOperations
 interface VirtualMachineRunCommands {
-  @doc("The operation to get the run command.")
+  /**
+   * The operation to get the run command.
+   */
   getByVirtualMachine is ArmResourceRead<
     VirtualMachineRunCommand,
     {
       ...BaseParameters<VirtualMachineRunCommand>;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  @doc("The operation to create or update the run command.")
+  /**
+   * The operation to create or update the run command.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineRunCommand>;
 
-  @doc("The operation to update the run command.")
+  /**
+   * The operation to update the run command.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate
   >;
 
-  @doc("The operation to delete the run command.")
+  /**
+   * The operation to delete the run command.
+   */
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
 
+  /**
+   * The operation to get all run commands of a Virtual Machine.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("The operation to get all run commands of a Virtual Machine.")
   @operationId("VirtualMachineRunCommands_ListByVirtualMachine")
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
     {
       ...BaseParameters<VirtualMachineRunCommand>;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: string;
     }
   >;
 
-  @doc("Lists all available run commands for a subscription in a location.")
+  /**
+   * Lists all available run commands for a subscription in a location.
+   */
   list is ArmResourceListAtScope<
     VirtualMachineRunCommand,
     LocationScope<VirtualMachineRunCommand>,
     {
       ...BaseParameters<VirtualMachineRunCommand>;
 
-      @doc("The location upon which run commands is queried.")
+      /**
+       * The location upon which run commands is queried.
+       */
       @pattern("^[-\\w\\._]+$")
       @path
       location: string;

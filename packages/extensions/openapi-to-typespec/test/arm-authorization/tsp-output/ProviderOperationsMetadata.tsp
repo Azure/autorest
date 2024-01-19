@@ -12,49 +12,67 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 // FIXME: ProviderOperationsMetadata has no properties property
-@doc("Provider Operations metadata")
+/**
+ * Provider Operations metadata
+ */
 @tenantResource
 model ProviderOperationsMetadata is ProxyResource<{}> {
-  @doc("The namespace of the resource provider.")
+  /**
+   * The namespace of the resource provider.
+   */
   @path
   @key("resourceProviderNamespace")
   @segment("providerOperations")
   name: string;
 
-  @doc("The provider display name.")
+  /**
+   * The provider display name.
+   */
   displayName?: string;
 
-  @doc("The provider resource types")
+  /**
+   * The provider resource types
+   */
   resourceTypes?: AuthorizationProviderResourceType[];
 
-  @doc("The provider operations.")
+  /**
+   * The provider operations.
+   */
   operations?: ProviderOperation[];
 }
 
 @armResourceOperations
 @projectedName("client", "ProviderOperationsMetadata")
 interface ProviderOperationsMetadataOperationGroup {
-  @doc("Gets provider operations metadata for the specified resource provider.")
+  /**
+   * Gets provider operations metadata for the specified resource provider.
+   */
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     {
       ...BaseParameters<ProviderOperationsMetadata>;
 
-      @doc("Specifies whether to expand the values.")
+      /**
+       * Specifies whether to expand the values.
+       */
       @query("$expand")
       $expand?: string = "resourceTypes";
     }
   >;
 
+  /**
+   * Gets provider operations metadata for all resource providers.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets provider operations metadata for all resource providers.")
   @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     {
       ...BaseParameters<ProviderOperationsMetadata>;
 
-      @doc("Specifies whether to expand the values.")
+      /**
+       * Specifies whether to expand the values.
+       */
       @query("$expand")
       $expand?: string = "resourceTypes";
     }

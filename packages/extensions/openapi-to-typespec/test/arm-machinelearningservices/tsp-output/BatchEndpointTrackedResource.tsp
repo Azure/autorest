@@ -15,7 +15,9 @@ namespace Azure.ResourceManager.MachineLearning;
 
 @parentResource(Workspace)
 model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
-  @doc("Name for the Batch Endpoint.")
+  /**
+   * Name for the Batch Endpoint.
+   */
   @path
   @key("endpointName")
   @segment("batchEndpoints")
@@ -28,18 +30,24 @@ model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
 
 @armResourceOperations
 interface BatchEndpointTrackedResources {
+  /**
+   * Gets a batch inference endpoint by name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a batch inference endpoint by name.")
   @operationId("BatchEndpoints_Get")
   get is ArmResourceRead<BatchEndpointTrackedResource>;
 
+  /**
+   * Creates a batch inference endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a batch inference endpoint (asynchronous).")
   @operationId("BatchEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpointTrackedResource>;
 
+  /**
+   * Update a batch inference endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a batch inference endpoint (asynchronous).")
   @parameterVisibility("read")
   @operationId("BatchEndpoints_Update")
   update is ArmCustomPatchAsync<
@@ -47,8 +55,10 @@ interface BatchEndpointTrackedResources {
     PartialMinimalTrackedResourceWithIdentity
   >;
 
+  /**
+   * Delete Batch Inference Endpoint (asynchronous).
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete Batch Inference Endpoint (asynchronous).")
   @operationId("BatchEndpoints_Delete")
   delete is ArmResourceDeleteAsync<
     BatchEndpointTrackedResource,
@@ -56,26 +66,34 @@ interface BatchEndpointTrackedResources {
     ArmLroLocationHeader
   >;
 
+  /**
+   * Lists Batch inference endpoint in the workspace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists Batch inference endpoint in the workspace.")
   @operationId("BatchEndpoints_List")
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
     {
       ...BaseParameters<BatchEndpointTrackedResource>;
 
-      @doc("Number of endpoints to be retrieved in a page of results.")
+      /**
+       * Number of endpoints to be retrieved in a page of results.
+       */
       @query("count")
       count?: int32;
 
-      @doc("Continuation token for pagination.")
+      /**
+       * Continuation token for pagination.
+       */
       @query("$skip")
       $skip?: string;
     }
   >;
 
+  /**
+   * Lists batch Inference Endpoint keys.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists batch Inference Endpoint keys.")
   @operationId("BatchEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     BatchEndpointTrackedResource,

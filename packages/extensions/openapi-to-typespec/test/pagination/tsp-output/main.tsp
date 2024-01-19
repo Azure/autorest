@@ -13,11 +13,17 @@ using TypeSpec.Http;
 $host: string 
 }
 )
-@doc("Long-running Operation for AutoRest")
+/**
+* Long-running Operation for AutoRest
+*/
 namespace AutoRestPagingTestService;
 
-@doc("The available API versions.")
+/**
+* The available API versions.
+*/
 enum Versions {
-@doc("The 1.0.0 API version.")
+/**
+* The 1.0.0 API version.
+*/
 v1.0.0: "1.0.0",
 }

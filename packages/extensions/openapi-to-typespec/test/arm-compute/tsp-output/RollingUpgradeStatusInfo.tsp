@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("The status of the latest virtual machine scale set rolling upgrade.")
+/**
+ * The status of the latest virtual machine scale set rolling upgrade.
+ */
 @singleton("latest")
 @parentResource(VirtualMachineScaleSet)
 model RollingUpgradeStatusInfo
@@ -24,15 +26,19 @@ model RollingUpgradeStatusInfo
 
 @armResourceOperations
 interface RollingUpgradeStatusInfos {
+  /**
+   * Gets the status of the latest virtual machine scale set rolling upgrade.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the status of the latest virtual machine scale set rolling upgrade.")
   @operationId("VirtualMachineScaleSetRollingUpgrades_GetLatest")
   getLatest is ArmResourceRead<
     RollingUpgradeStatusInfo,
     {
       ...BaseParameters<RollingUpgradeStatusInfo>;
 
-      @doc("The name of the VM scale set.")
+      /**
+       * The name of the VM scale set.
+       */
       @path
       vmScaleSetName: string;
     }

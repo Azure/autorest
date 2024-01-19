@@ -11,52 +11,72 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the proximity placement group.")
+/**
+ * Specifies information about the proximity placement group.
+ */
 model ProximityPlacementGroup
   is TrackedResource<ProximityPlacementGroupProperties> {
-  @doc("The name of the proximity placement group.")
+  /**
+   * The name of the proximity placement group.
+   */
   @path
   @key("proximityPlacementGroupName")
   @segment("proximityPlacementGroups")
   name: string;
 
-  @doc("Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.")
+  /**
+   * Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.
+   */
   zones?: string[];
 }
 
 @armResourceOperations
 interface ProximityPlacementGroups {
-  @doc("Retrieves information about a proximity placement group .")
+  /**
+   * Retrieves information about a proximity placement group .
+   */
   get is ArmResourceRead<
     ProximityPlacementGroup,
     {
       ...BaseParameters<ProximityPlacementGroup>;
 
-      @doc("includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.")
+      /**
+       * includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.
+       */
       @query("includeColocationStatus")
       includeColocationStatus?: string;
     }
   >;
 
-  @doc("Create or update a proximity placement group.")
+  /**
+   * Create or update a proximity placement group.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<ProximityPlacementGroup>;
 
-  @doc("Update a proximity placement group.")
+  /**
+   * Update a proximity placement group.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
   >;
 
-  @doc("Delete a proximity placement group.")
+  /**
+   * Delete a proximity placement group.
+   */
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
 
+  /**
+   * Lists all proximity placement groups in a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all proximity placement groups in a resource group.")
   @operationId("ProximityPlacementGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
-  @doc("Lists all proximity placement groups in a subscription.")
+  /**
+   * Lists all proximity placement groups in a subscription.
+   */
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 

@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An device resource belonging to a device group resource.")
+/**
+ * An device resource belonging to a device group resource.
+ */
 @parentResource(DeviceGroup)
 model Device is ProxyResource<DeviceProperties> {
-  @doc("Device name")
+  /**
+   * Device name
+   */
   @pattern("^[a-zA-Z0-9-]{128}$")
   @path
   @key("deviceName")
@@ -25,17 +29,23 @@ model Device is ProxyResource<DeviceProperties> {
 
 @armResourceOperations
 interface Devices {
-  @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
+  /**
+   * Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.
+   */
   get is ArmResourceRead<Device>;
 
-  @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
+  /**
+   * Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Device,
     BaseParameters<Device>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
+  /**
+   * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     Device,
@@ -44,19 +54,25 @@ interface Devices {
     ArmLroLocationHeader
   >;
 
-  @doc("Delete a Device")
+  /**
+   * Delete a Device
+   */
   delete is ArmResourceDeleteAsync<
     Device,
     BaseParameters<Device>,
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @operationId("Devices_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<Device>;
 
-  @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
+  /**
+   * Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.
+   */
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
     GenerateCapabilityImageRequest,

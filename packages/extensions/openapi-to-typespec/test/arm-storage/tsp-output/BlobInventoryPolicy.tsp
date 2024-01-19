@@ -12,7 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("The storage account blob inventory policy.")
+/**
+ * The storage account blob inventory policy.
+ */
 @singleton("default")
 @parentResource(StorageAccount)
 model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
@@ -23,17 +25,25 @@ model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
 
 @armResourceOperations
 interface BlobInventoryPolicies {
-  @doc("Gets the blob inventory policy associated with the specified storage account.")
+  /**
+   * Gets the blob inventory policy associated with the specified storage account.
+   */
   get is ArmResourceRead<BlobInventoryPolicy>;
 
-  @doc("Sets the blob inventory policy to the specified storage account.")
+  /**
+   * Sets the blob inventory policy to the specified storage account.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<BlobInventoryPolicy>;
 
-  @doc("Deletes the blob inventory policy associated with the specified storage account.")
+  /**
+   * Deletes the blob inventory policy associated with the specified storage account.
+   */
   delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
 
+  /**
+   * Gets the blob inventory policy associated with the specified storage account.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the blob inventory policy associated with the specified storage account.")
   @operationId("BlobInventoryPolicies_List")
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }

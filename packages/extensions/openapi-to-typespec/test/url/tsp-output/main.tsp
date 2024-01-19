@@ -4,6 +4,9 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+/**
+ * Test Infrastructure for AutoRest
+ */
 @service({
   title: "AutoRest Url Test Service",
 })
@@ -14,5 +17,4 @@ using TypeSpec.Http;
     $host: string,
   }
 )
-@doc("Test Infrastructure for AutoRest")
 namespace AutoRestUrlTestService;

@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery image definition that you want to create or update.")
+/**
+ * Specifies information about the gallery image definition that you want to create or update.
+ */
 @parentResource(Gallery)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
-  @doc("The name of the gallery image definition to be retrieved.")
+  /**
+   * The name of the gallery image definition to be retrieved.
+   */
   @path
   @key("galleryImageName")
   @segment("images")
@@ -24,21 +28,31 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
 
 @armResourceOperations
 interface GalleryImages {
-  @doc("Retrieves information about a gallery image definition.")
+  /**
+   * Retrieves information about a gallery image definition.
+   */
   get is ArmResourceRead<GalleryImage>;
 
-  @doc("Create or update a gallery image definition.")
+  /**
+   * Create or update a gallery image definition.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
-  @doc("Update a gallery image definition.")
+  /**
+   * Update a gallery image definition.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<GalleryImage, GalleryImageUpdate>;
 
-  @doc("Delete a gallery image.")
+  /**
+   * Delete a gallery image.
+   */
   delete is ArmResourceDeleteAsync<GalleryImage>;
 
+  /**
+   * List gallery image definitions in a gallery.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List gallery image definitions in a gallery.")
   @operationId("GalleryImages_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }

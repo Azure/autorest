@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
-@doc("The local user associated with the storage accounts.")
+/**
+ * The local user associated with the storage accounts.
+ */
 @parentResource(StorageAccount)
 model LocalUser is ProxyResource<LocalUserProperties> {
-  @doc("The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.")
+  /**
+   * The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.
+   */
   @maxLength(64)
   @minLength(3)
   @path
@@ -26,24 +30,36 @@ model LocalUser is ProxyResource<LocalUserProperties> {
 
 @armResourceOperations
 interface LocalUsers {
-  @doc("Get the local user of the storage account by username.")
+  /**
+   * Get the local user of the storage account by username.
+   */
   get is ArmResourceRead<LocalUser>;
 
-  @doc("Create or update the properties of a local user associated with the storage account")
+  /**
+   * Create or update the properties of a local user associated with the storage account
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<LocalUser>;
 
-  @doc("Deletes the local user associated with the specified storage account.")
+  /**
+   * Deletes the local user associated with the specified storage account.
+   */
   delete is ArmResourceDeleteSync<LocalUser>;
 
+  /**
+   * List the local users associated with the storage account.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List the local users associated with the storage account.")
   @operationId("LocalUsers_List")
   list is ArmResourceListByParent<LocalUser>;
 
-  @doc("List SSH authorized keys and shared key of the local user.")
+  /**
+   * List SSH authorized keys and shared key of the local user.
+   */
   listKeys is ArmResourceActionSync<LocalUser, void, LocalUserKeys>;
 
-  @doc("Regenerate the local user SSH password.")
+  /**
+   * Regenerate the local user SSH password.
+   */
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
     void,

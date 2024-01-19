@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.IntegrationSpaces;
-@doc("A business process under application.")
+/**
+ * A business process under application.
+ */
 @parentResource(Application)
 model BusinessProcess is ProxyResource<BusinessProcessProperties> {
-  @doc("The name of the business process")
+  /**
+   * The name of the business process
+   */
   @pattern("[a-zA-Z0-9_.()-]{0,79}$")
   @path
   @key("businessProcessName")
@@ -25,58 +29,82 @@ model BusinessProcess is ProxyResource<BusinessProcessProperties> {
 
 @armResourceOperations
 interface BusinessProcesses {
-  @doc("Get a BusinessProcess")
+  /**
+   * Get a BusinessProcess
+   */
   get is ArmResourceRead<BusinessProcess>;
 
-  @doc("Create a BusinessProcess")
+  /**
+   * Create a BusinessProcess
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<BusinessProcess>;
 
-  @doc("Update a BusinessProcess")
+  /**
+   * Update a BusinessProcess
+   */
   @parameterVisibility("read")
   patch is ArmCustomPatchSync<BusinessProcess, BusinessProcessUpdate>;
 
-  @doc("Delete a BusinessProcess")
+  /**
+   * Delete a BusinessProcess
+   */
   delete is ArmResourceDeleteSync<BusinessProcess>;
 
+  /**
+   * List BusinessProcess resources by Application
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List BusinessProcess resources by Application")
   @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {
       ...BaseParameters<BusinessProcess>;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("maxpagesize")
       maxpagesize?: int32;
 
-      @doc("Filter the result list using the given expression.")
+      /**
+       * Filter the result list using the given expression.
+       */
       @query("filter")
       filter?: string;
 
-      @doc("Select the specified fields to be included in the response.")
+      /**
+       * Select the specified fields to be included in the response.
+       */
       @query({
         name: "select",
         format: "multi",
       })
       select?: string[];
 
-      @doc("Expand the indicated resources into the response.")
+      /**
+       * Expand the indicated resources into the response.
+       */
       @query({
         name: "expand",
         format: "multi",
       })
       expand?: string[];
 
-      @doc("Expressions that specify the order of returned results.")
+      /**
+       * Expressions that specify the order of returned results.
+       */
       @query({
         name: "orderby",
         format: "multi",

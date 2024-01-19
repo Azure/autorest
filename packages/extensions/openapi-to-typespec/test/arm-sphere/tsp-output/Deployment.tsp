@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-@doc("An deployment resource belonging to a device group resource.")
+/**
+ * An deployment resource belonging to a device group resource.
+ */
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
-  @doc("Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.")
+  /**
+   * Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.
+   */
   @path
   @key("deploymentName")
   @segment("deployments")
@@ -24,44 +28,60 @@ model Deployment is ProxyResource<DeploymentProperties> {
 
 @armResourceOperations
 interface Deployments {
-  @doc("Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  /**
+   * Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
   get is ArmResourceRead<Deployment>;
 
-  @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  /**
+   * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Deployment,
     BaseParameters<Deployment>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  /**
+   * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
   delete is ArmResourceDeleteAsync<
     Deployment,
     BaseParameters<Deployment>,
     ArmLroLocationHeader
   >;
 
+  /**
+   * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @operationId("Deployments_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {
       ...BaseParameters<Deployment>;
 
-      @doc("Filter the result list using the given expression")
+      /**
+       * Filter the result list using the given expression
+       */
       @query("$filter")
       filter?: string;
 
-      @doc("The number of result items to return.")
+      /**
+       * The number of result items to return.
+       */
       @query("$top")
       top?: int32;
 
-      @doc("The number of result items to skip.")
+      /**
+       * The number of result items to skip.
+       */
       @query("$skip")
       skip?: int32;
 
-      @doc("The maximum number of result items per page.")
+      /**
+       * The maximum number of result items per page.
+       */
       @query("$maxpagesize")
       maxpagesize?: int32;
     }

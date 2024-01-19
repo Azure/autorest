@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
-@doc("Specifies information about the gallery Application Version that you want to create or update.")
+/**
+ * Specifies information about the gallery Application Version that you want to create or update.
+ */
 @parentResource(GalleryApplication)
 model GalleryApplicationVersion
   is TrackedResource<GalleryApplicationVersionProperties> {
-  @doc("The name of the gallery Application Version to be retrieved.")
+  /**
+   * The name of the gallery Application Version to be retrieved.
+   */
   @path
   @key("galleryApplicationVersionName")
   @segment("versions")
@@ -25,33 +29,45 @@ model GalleryApplicationVersion
 
 @armResourceOperations
 interface GalleryApplicationVersions {
-  @doc("Retrieves information about a gallery Application Version.")
+  /**
+   * Retrieves information about a gallery Application Version.
+   */
   get is ArmResourceRead<
     GalleryApplicationVersion,
     {
       ...BaseParameters<GalleryApplicationVersion>;
 
-      @doc("The expand expression to apply on the operation.")
+      /**
+       * The expand expression to apply on the operation.
+       */
       @query("$expand")
       $expand?: ReplicationStatusTypes;
     }
   >;
 
-  @doc("Create or update a gallery Application Version.")
+  /**
+   * Create or update a gallery Application Version.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplicationVersion>;
 
-  @doc("Update a gallery Application Version.")
+  /**
+   * Update a gallery Application Version.
+   */
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     GalleryApplicationVersionUpdate
   >;
 
-  @doc("Delete a gallery Application Version.")
+  /**
+   * Delete a gallery Application Version.
+   */
   delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;
 
+  /**
+   * List gallery Application Versions in a gallery Application Definition.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List gallery Application Versions in a gallery Application Definition.")
   @operationId("GalleryApplicationVersions_ListByGalleryApplication")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }

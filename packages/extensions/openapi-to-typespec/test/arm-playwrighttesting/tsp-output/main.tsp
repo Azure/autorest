@@ -12,19 +12,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * Azure Playwright testing management service
+ */
 @armProviderNamespace
 @service({
   title: "Microsoft AzurePlaywrightService Management API",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("Azure Playwright testing management service")
 namespace Microsoft.AzurePlaywrightService;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-10-01-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-10-01-preview API version.")
   v2023_10_01_preview: "2023-10-01-preview",
 }

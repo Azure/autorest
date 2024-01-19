@@ -13,19 +13,25 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * // FIXME: (missing-service-description) Add service description
+ */
 @armProviderNamespace
 @service({
   title: "Azure Network Analytics resource management API.",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("// FIXME: (missing-service-description) Add service description")
 namespace Microsoft.NetworkAnalytics;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-11-15 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-11-15 API version.")
   v2023_11_15: "2023-11-15",
 }
