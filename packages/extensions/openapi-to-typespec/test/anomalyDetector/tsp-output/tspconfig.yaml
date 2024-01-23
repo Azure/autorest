@@ -1,5 +1,9 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/AnomalyDetectorClient.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true

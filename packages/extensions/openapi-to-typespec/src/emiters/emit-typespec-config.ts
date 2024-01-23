@@ -1,12 +1,20 @@
+import { pascalCase } from "@azure-tools/codegen";
+import { TypespecProgram } from "interfaces";
 import { getSession } from "../autorest-session";
 import { getOptions } from "../options";
 import { formatFile } from "../utils/format";
 
-export async function emitTypespecConfig(filePath: string): Promise<void> {
+export async function emitTypespecConfig(filePath: string, programDetails: TypespecProgram): Promise<void> {
   const session = getSession();
   const { isArm } = getOptions();
   let content = `emit:
-  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${pascalCase(
+      programDetails.serviceInformation.name,
+    )}.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true
