@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * Properties of the blob container, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BlobServiceProperties)
-model BlobContainer is ProxyResource<ContainerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ContainerProperties)
+@includeInapplicableMetadataInPayload(false)
+model BlobContainer extends ProxyResourceBase {
   /**
    * The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
    */
@@ -26,6 +30,12 @@ model BlobContainer is ProxyResource<ContainerProperties> {
   @key("containerName")
   @segment("containers")
   name: string;
+
+  /**
+   * Properties of the blob container.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContainerProperties;
 }
 
 @armResourceOperations

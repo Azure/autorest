@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * Properties of the file share, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FileServiceProperties)
-model FileShare is ProxyResource<FileShareProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FileShareProperties)
+@includeInapplicableMetadataInPayload(false)
+model FileShare extends ProxyResourceBase {
   /**
    * The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
    */
@@ -26,6 +30,12 @@ model FileShare is ProxyResource<FileShareProperties> {
   @key("shareName")
   @segment("shares")
   name: string;
+
+  /**
+   * Properties of the file share.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FileShareProperties;
 }
 
 @armResourceOperations

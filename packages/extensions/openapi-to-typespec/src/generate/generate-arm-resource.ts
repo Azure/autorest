@@ -25,9 +25,37 @@ export function generateArmResource(resource: TspArmResource): string {
     definitions.push(`@parentResource(${resource.resourceParent.name})`);
   }
 
-  definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
+  if (!resource.baseModelName && !resource.propertiesPropertyRequired &&
+    resource.propertiesPropertyVisibility.length === 2 &&
+    resource.propertiesPropertyVisibility.includes("read") &&
+    resource.propertiesPropertyVisibility.includes("create")) {
+    definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
 
-  definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+  } else {
+    definitions.push(`#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"`);
+    definitions.push(`#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`)
+    definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
+    definitions.push(`@includeInapplicableMetadataInPayload(false)`);
+
+    if (resource.baseModelName) {
+      definitions.push(`model ${resource.name} extends ${resource.baseModelName} {`);
+    } else {
+      definitions.push(`model ${resource.name} extends ${resource.resourceKind}Base {`);
+    }
+
+    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+
+    const propertyDoc = generateDocs({ doc: resource.propertiesPropertyDescription });
+    propertyDoc && definitions.push(propertyDoc);
+
+    definitions.push(`@extension("x-ms-client-flatten", true)`);
+    if (resource.propertiesPropertyVisibility.length > 0) {
+      definitions.push(`@visibility("${resource.propertiesPropertyVisibility.join(",")}")`);
+    }
+
+    definitions.push(`properties${resource.propertiesPropertyRequired ? "" : "?"}: ${resource.propertiesModelName}`);
+  }
 
   for (const p of resource.optionalStandardProperties) {
     definitions.push(`\n...${p}`);

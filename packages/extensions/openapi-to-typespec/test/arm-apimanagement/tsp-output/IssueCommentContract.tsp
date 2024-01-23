@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Comment Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
-model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IssueCommentContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IssueCommentContract extends ProxyResourceBase {
   /**
    * Comment identifier within an Issue. Must be unique in the current Issue.
    */
@@ -27,6 +33,12 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
   @key("commentId")
   @segment("comments")
   name: string;
+
+  /**
+   * Properties of the Issue Comment.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IssueCommentContractProperties;
 }
 
 @armResourceOperations

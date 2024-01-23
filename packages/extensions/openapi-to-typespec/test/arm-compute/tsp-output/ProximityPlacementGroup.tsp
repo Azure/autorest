@@ -14,8 +14,13 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the proximity placement group.
  */
-model ProximityPlacementGroup
-  is TrackedResource<ProximityPlacementGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProximityPlacementGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProximityPlacementGroup extends Resource {
   /**
    * The name of the proximity placement group.
    */
@@ -28,6 +33,12 @@ model ProximityPlacementGroup
    * Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.
    */
   zones?: string[];
+
+  /**
+   * Describes the properties of a Proximity Placement Group.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProximityPlacementGroupProperties;
 }
 
 @armResourceOperations

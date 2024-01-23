@@ -1,7 +1,7 @@
 import { Operation, Parameter, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
-import { getSession } from "../autorest-session";
+import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
   ArmResourceKind,
@@ -68,11 +68,19 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.language.default.name);
 
-  const propertiesModelSchema = schema.properties?.find((p) => p.serializedName === "properties")?.schema;
+  const propertiesModel = schema.properties?.find((p) => p.serializedName === "properties");
+  const propertiesModelSchema = propertiesModel?.schema;
   let propertiesModelName = propertiesModelSchema?.language.default.name;
+  let propertiesPropertyRequired = false;
+  let propertiesPropertyVisibility = ["read", "create"];
+  let propertiesPropertyDescription = "";
 
   if (propertiesModelSchema?.type === SchemaType.Dictionary) {
     propertiesModelName = "Record<unknown>";
+  } else if (propertiesModelSchema?.type === SchemaType.Object) {
+    propertiesPropertyRequired = propertiesModel?.required ?? false;
+    propertiesPropertyVisibility = propertiesModel?.extensions?.["x-ms-mutability"] ?? [];
+    propertiesPropertyDescription = propertiesModel?.language.default.description ?? "";
   }
 
   // TODO: deal with resources that has no properties property
@@ -83,24 +91,37 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   const operations = getTspOperations(schema);
 
+  let baseModelName = undefined;
+  if (!getArmCommonTypeVersion()) {
+    const immediateParents = schema.parents?.immediate ?? [];
+
+    baseModelName = immediateParents
+      .filter((p) => p.language.default.name !== schema.language.default.name)
+      .map((p) => p.language.default.name)[0];
+  }
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
-    properties: [buildKeyProperty(schema), ...getOtherProperties(schema)],
+    properties: [buildKeyProperty(schema), ...getOtherProperties(schema, !getArmCommonTypeVersion())],
     name: schema.resourceMetadata.SwaggerModelName,
     parents: [],
     resourceParent: getParentResource(schema),
     propertiesModelName,
+    propertiesPropertyRequired,
+    propertiesPropertyVisibility,
+    propertiesPropertyDescription,
     doc: schema.language.default.description,
     decorators: buildResourceDecorators(schema),
     resourceOperations: operations[0],
     normalOperations: operations[1],
-    optionalStandardProperties: getResourceOptionalStandardProperties(schema),
+    optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
+    baseModelName,
   };
 }
 
-function getOtherProperties(schema: ArmResourceSchema): TypespecObjectProperty[] {
+function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
   const knownProperties = [
     "properties",
     "id",
@@ -108,14 +129,16 @@ function getOtherProperties(schema: ArmResourceSchema): TypespecObjectProperty[]
     "type",
     "systemData",
     "location",
-    "tags",
-    "identity",
-    "sku",
-    "eTag",
-    "plan",
-    "kind",
-    "managedBy",
+    "tags"
   ];
+  if (!noCommonTypes) {
+    knownProperties.push(...[
+      "identity",
+      "sku",
+      "eTag",
+      "plan"
+    ])
+  }
   const otherProperties: TypespecObjectProperty[] = [];
   for (const property of schema.properties ?? []) {
     if (!knownProperties.includes(property.serializedName)) {
@@ -155,16 +178,6 @@ function getResourceOptionalStandardProperties(schema: ArmResourceSchema): strin
   if (schema.properties?.find((p) => p.serializedName === "plan")) {
     // TODO: handle non-standard property
     optionalStandardProperties.push("Azure.ResourceManager.ResourcePlan");
-  }
-
-  if (schema.properties?.find((p) => p.serializedName === "kind")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourceKind");
-  }
-
-  if (schema.properties?.find((p) => p.serializedName === "managedBy")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ManagedBy");
   }
 
   return optionalStandardProperties;
@@ -266,15 +279,15 @@ function convertResourceCreateOrReplaceOperation(
     if (bodyParam) {
       if (bodyParam.language.default.name !== "resource") {
         augmentedDecorators.push(
-          `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.resource, "json", "${bodyParam.language.default.name}");`,
+          `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "json", "${bodyParam.language.default.name}");`,
         );
         augmentedDecorators.push(
-          `@@extension(${tspOperationGroupName}.${operationName}::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+          `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
         );
       }
       if (bodyParam.language.default.description !== "Resource create parameters.") {
         augmentedDecorators.push(
-          `@@doc(${tspOperationGroupName}.${operationName}::parameters.resource, "${bodyParam.language.default.description}");`,
+          `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "${bodyParam.language.default.description}");`,
         );
       }
     }
@@ -325,15 +338,15 @@ function convertResourceUpdateOperation(
         const operationName = getOperationName(operation.OperationID);
         if (bodyParam.language.default.name !== "properties") {
           augmentedDecorators.push(
-            `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.properties, "json", "${bodyParam.language.default.name}");`,
+            `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "json", "${bodyParam.language.default.name}");`,
           );
           augmentedDecorators.push(
-            `@@extension(${tspOperationGroupName}.${operationName}::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+            `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
           );
         }
         if (bodyParam.language.default.description !== "The resource properties to be updated.") {
           augmentedDecorators.push(
-            `@@doc(${tspOperationGroupName}.${operationName}::parameters.properties, "${bodyParam.language.default.description}");`,
+            `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "${bodyParam.language.default.description}");`,
           );
         }
       } else {
@@ -568,15 +581,15 @@ function convertResourceActionOperations(
         if (bodyParam) {
           if (bodyParam.language.default.name !== "body") {
             augmentedDecorators.push(
-              `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.body, "json", "${bodyParam.language.default.name}");`,
+              `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "json", "${bodyParam.language.default.name}");`,
             );
             augmentedDecorators.push(
-              `@@extension(${tspOperationGroupName}.${operationName}::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+              `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
             );
           }
           if (bodyParam.language.default.description !== "The content of the action request") {
             augmentedDecorators.push(
-              `@@doc(${tspOperationGroupName}.${operationName}::parameters.body, "${bodyParam.language.default.description}");`,
+              `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "${bodyParam.language.default.description}");`,
             );
           }
         }
@@ -747,8 +760,8 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
       params.push(generateParameter(parameter));
     }
     return `{
-    ...BaseParameters<${resource.SwaggerModelName}>,
-    ${params.join("\n")}
+    ...BaseParameters<${resource.SwaggerModelName}>;
+    ${params.join(";\n")}
     }`;
   }
 }

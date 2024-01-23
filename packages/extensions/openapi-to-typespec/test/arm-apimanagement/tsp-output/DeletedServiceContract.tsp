@@ -14,9 +14,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Deleted API Management Service information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedServiceContract
-  is ProxyResource<DeletedServiceContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DeletedServiceContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DeletedServiceContract extends ProxyResourceBase {
   /**
    * The name of the API Management service.
    */
@@ -27,6 +32,12 @@ model DeletedServiceContract
   @key("serviceName")
   @segment("deletedservices")
   name: string;
+
+  /**
+   * Deleted API Management Service details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedServiceContractProperties;
 }
 
 @armResourceOperations

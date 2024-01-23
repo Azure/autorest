@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model Schedule is ProxyResource<ScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Schedule extends ProxyResourceBase {
   /**
    * Schedule name.
    */
@@ -24,6 +28,12 @@ model Schedule is ProxyResource<ScheduleProperties> {
   @key("name")
   @segment("schedules")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScheduleProperties;
 }
 
 @armResourceOperations

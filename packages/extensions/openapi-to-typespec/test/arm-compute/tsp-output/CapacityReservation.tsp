@@ -15,8 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the capacity reservation.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CapacityReservationGroup)
-model CapacityReservation is TrackedResource<CapacityReservationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  CapacityReservationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CapacityReservation extends Resource {
   /**
    * The name of the capacity reservation.
    */
@@ -26,11 +32,20 @@ model CapacityReservation is TrackedResource<CapacityReservationProperties> {
   name: string;
 
   /**
+   * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.
+   */
+  sku: Sku;
+
+  /**
    * Availability Zone to use for this capacity reservation. The zone has to be single value and also should be part for the list of zones specified during the capacity reservation group creation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone.
    */
   zones?: string[];
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Properties of the Capacity reservation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CapacityReservationProperties;
 }
 
 @armResourceOperations

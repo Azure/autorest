@@ -14,7 +14,11 @@ namespace Microsoft.Compute;
 /**
  * The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.
  */
-model Image is TrackedResource<ImageProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model Image extends Resource {
   /**
    * The name of the image.
    */
@@ -27,6 +31,12 @@ model Image is TrackedResource<ImageProperties> {
    * The extended location of the Image.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Describes the properties of an Image.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ImageProperties;
 }
 
 @armResourceOperations

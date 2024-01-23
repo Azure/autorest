@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model CodeContainerResource is ProxyResource<CodeContainer> {
+@Azure.ResourceManager.Private.armResourceInternal(CodeContainer)
+@includeInapplicableMetadataInPayload(false)
+model CodeContainerResource extends ProxyResourceBase {
   /**
    * Container name.
    */
@@ -25,6 +29,12 @@ model CodeContainerResource is ProxyResource<CodeContainer> {
   @key("codeName")
   @segment("codes")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CodeContainer;
 }
 
 @armResourceOperations

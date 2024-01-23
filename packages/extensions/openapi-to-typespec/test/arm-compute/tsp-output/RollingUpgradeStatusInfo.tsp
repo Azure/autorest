@@ -15,13 +15,24 @@ namespace Microsoft.Compute;
 /**
  * The status of the latest virtual machine scale set rolling upgrade.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("latest")
 @parentResource(VirtualMachineScaleSet)
-model RollingUpgradeStatusInfo
-  is TrackedResource<RollingUpgradeStatusInfoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RollingUpgradeStatusInfoProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RollingUpgradeStatusInfo extends Resource {
   @key("rollingUpgrade")
   @segment("rollingUpgrades")
   name: string;
+
+  /**
+   * The status of the latest virtual machine scale set rolling upgrade.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RollingUpgradeStatusInfoProperties;
 }
 
 @armResourceOperations

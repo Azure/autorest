@@ -141,6 +141,8 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     decorators.push({
       name: "extension",
       arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
     });
   }
 

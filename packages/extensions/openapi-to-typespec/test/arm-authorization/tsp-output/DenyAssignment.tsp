@@ -14,7 +14,11 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Deny Assignment
  */
-model DenyAssignment is ExtensionResource<DenyAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DenyAssignmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model DenyAssignment extends ExtensionResourceBase {
   /**
    * The ID of the deny assignment to get.
    */
@@ -22,6 +26,12 @@ model DenyAssignment is ExtensionResource<DenyAssignmentProperties> {
   @key("denyAssignmentId")
   @segment("denyAssignments")
   name: string;
+
+  /**
+   * Deny assignment properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DenyAssignmentProperties;
 }
 
 @armResourceOperations

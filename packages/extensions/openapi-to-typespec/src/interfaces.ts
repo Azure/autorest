@@ -221,8 +221,12 @@ export interface TspArmResourceExistsOperation extends TspArmResourceOperationBa
 export interface TspArmResource extends TypespecObject {
   resourceKind: ArmResourceKind;
   propertiesModelName: string;
+  propertiesPropertyRequired: boolean;
+  propertiesPropertyVisibility: string[];
+  propertiesPropertyDescription: string;
   resourceParent?: TspArmResource;
   resourceOperations: TspArmResourceOperation[];
   normalOperations: TypespecOperation[];
   optionalStandardProperties: string[];
+  baseModelName?: string;
 }

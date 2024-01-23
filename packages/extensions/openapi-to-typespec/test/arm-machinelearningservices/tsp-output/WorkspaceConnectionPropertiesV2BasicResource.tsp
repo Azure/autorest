@@ -13,9 +13,14 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model WorkspaceConnectionPropertiesV2BasicResource
-  is ProxyResource<WorkspaceConnectionPropertiesV2> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkspaceConnectionPropertiesV2
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkspaceConnectionPropertiesV2BasicResource extends ProxyResourceBase {
   /**
    * Friendly name of the workspace connection
    */
@@ -24,6 +29,9 @@ model WorkspaceConnectionPropertiesV2BasicResource
   @key("connectionName")
   @segment("connections")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties: WorkspaceConnectionPropertiesV2;
 }
 
 @armResourceOperations

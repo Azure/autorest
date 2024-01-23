@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * Extension resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-model Extension is ProxyResource<ExtensionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
+@includeInapplicableMetadataInPayload(false)
+model Extension extends ProxyResourceBase {
   /**
    * Id of extension resource.
    */
@@ -24,6 +28,12 @@ model Extension is ProxyResource<ExtensionProperties> {
   @key("extensionId")
   @segment("extensions")
   name: string;
+
+  /**
+   * Extension resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExtensionProperties;
 
   ...Azure.ResourceManager.EntityTag;
 }
@@ -74,9 +84,9 @@ interface Extensions {
       extensionCategories?: string[];
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

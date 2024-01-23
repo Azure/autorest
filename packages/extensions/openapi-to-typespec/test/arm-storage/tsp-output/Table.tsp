@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * Properties of the table, including Id, resource name, resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(TableServiceProperties)
-model Table is ProxyResource<TableProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TableProperties)
+@includeInapplicableMetadataInPayload(false)
+model Table extends ProxyResourceBase {
   /**
    * A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.
    */
@@ -27,6 +31,12 @@ model Table is ProxyResource<TableProperties> {
   @key("tableName")
   @segment("tables")
   name: string;
+
+  /**
+   * Table resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TableProperties;
 }
 
 @armResourceOperations

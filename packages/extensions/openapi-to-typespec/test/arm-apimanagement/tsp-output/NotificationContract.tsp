@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Notification details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model NotificationContract is ProxyResource<NotificationContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NotificationContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model NotificationContract extends ProxyResourceBase {
   /**
    * Notification Name Identifier.
    */
@@ -24,6 +30,12 @@ model NotificationContract is ProxyResource<NotificationContractProperties> {
   @key("notificationName")
   @segment("notifications")
   name: NotificationName;
+
+  /**
+   * Notification entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NotificationContractProperties;
 }
 
 @armResourceOperations

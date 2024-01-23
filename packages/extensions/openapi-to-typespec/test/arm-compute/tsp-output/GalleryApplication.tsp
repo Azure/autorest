@@ -15,8 +15,12 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery Application Definition that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Gallery)
-model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GalleryApplicationProperties)
+@includeInapplicableMetadataInPayload(false)
+model GalleryApplication extends Resource {
   /**
    * The name of the gallery Application Definition to be retrieved.
    */
@@ -24,6 +28,12 @@ model GalleryApplication is TrackedResource<GalleryApplicationProperties> {
   @key("galleryApplicationName")
   @segment("applications")
   name: string;
+
+  /**
+   * Describes the properties of a gallery Application Definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryApplicationProperties;
 }
 
 @armResourceOperations

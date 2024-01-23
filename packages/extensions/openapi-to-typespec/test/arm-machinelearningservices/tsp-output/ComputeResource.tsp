@@ -65,7 +65,7 @@ update is ArmCustomPatchAsync<ComputeResource,ClusterUpdateParameters>
 @operationId("Compute_Delete")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 delete is ArmResourceDeleteAsync<ComputeResource,{
-    ...BaseParameters<ComputeResource>,
+    ...BaseParameters<ComputeResource>;
     /**
 * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
 */
@@ -79,7 +79,7 @@ delete is ArmResourceDeleteAsync<ComputeResource,{
 @operationId("Compute_List")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 list is ArmResourceListByParent<ComputeResource,{
-    ...BaseParameters<ComputeResource>,
+    ...BaseParameters<ComputeResource>;
     /**
 * Continuation token for pagination.
 */
@@ -140,15 +140,15 @@ updateIdleShutdownSetting is ArmResourceActionSync<ComputeResource,IdleShutdownS
 
 
 
-@@projectedName(ComputeResources.createOrUpdate::parameters.resource, "json", "parameters");
-@@extension(ComputeResources.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.createOrUpdate::parameters.resource, "Payload with Machine Learning compute definition.");
-@@projectedName(ComputeResources.update::parameters.properties, "json", "parameters");
-@@extension(ComputeResources.update::parameters.properties, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.update::parameters.properties, "Additional parameters for cluster update.");
-@@projectedName(ComputeResources.updateCustomServices::parameters.body, "json", "customServices");
-@@extension(ComputeResources.updateCustomServices::parameters.body, "x-ms-client-name", "customServices");
-@@doc(ComputeResources.updateCustomServices::parameters.body, "New list of Custom Services.");
-@@projectedName(ComputeResources.updateIdleShutdownSetting::parameters.body, "json", "parameters");
-@@extension(ComputeResources.updateIdleShutdownSetting::parameters.body, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.updateIdleShutdownSetting::parameters.body, "The object for updating idle shutdown setting of specified ComputeInstance.");
+@@projectedName(ComputeResources.`createOrUpdate`::parameters.resource, "json", "parameters");
+@@extension(ComputeResources.`createOrUpdate`::parameters.resource, "x-ms-client-name", "parameters");
+@@doc(ComputeResources.`createOrUpdate`::parameters.resource, "Payload with Machine Learning compute definition.");
+@@projectedName(ComputeResources.`update`::parameters.properties, "json", "parameters");
+@@extension(ComputeResources.`update`::parameters.properties, "x-ms-client-name", "parameters");
+@@doc(ComputeResources.`update`::parameters.properties, "Additional parameters for cluster update.");
+@@projectedName(ComputeResources.`updateCustomServices`::parameters.body, "json", "customServices");
+@@extension(ComputeResources.`updateCustomServices`::parameters.body, "x-ms-client-name", "customServices");
+@@doc(ComputeResources.`updateCustomServices`::parameters.body, "New list of Custom Services.");
+@@projectedName(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "json", "parameters");
+@@extension(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "The object for updating idle shutdown setting of specified ComputeInstance.");

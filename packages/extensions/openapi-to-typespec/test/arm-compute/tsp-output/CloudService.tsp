@@ -14,7 +14,11 @@ namespace Microsoft.Compute;
 /**
  * Describes the cloud service.
  */
-model CloudService is TrackedResource<CloudServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(CloudServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model CloudService extends TrackedResourceBase {
   /**
    * Name of the cloud service.
    */
@@ -27,6 +31,12 @@ model CloudService is TrackedResource<CloudServiceProperties> {
    * List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.
    */
   zones?: string[];
+
+  /**
+   * Cloud service properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CloudServiceProperties;
 }
 
 @armResourceOperations

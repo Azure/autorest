@@ -14,8 +14,13 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine Scale Set.
  */
-model VirtualMachineScaleSet
-  is TrackedResource<VirtualMachineScaleSetProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineScaleSetProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineScaleSet extends Resource {
   /**
    * The name of the VM scale set.
    */
@@ -23,6 +28,21 @@ model VirtualMachineScaleSet
   @key("vmScaleSetName")
   @segment("virtualMachineScaleSets")
   name: string;
+
+  /**
+   * The virtual machine scale set sku.
+   */
+  sku?: Sku;
+
+  /**
+   * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+   */
+  plan?: Plan;
+
+  /**
+   * The identity of the virtual machine scale set, if configured.
+   */
+  identity?: VirtualMachineScaleSetIdentity;
 
   /**
    * The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set
@@ -34,9 +54,11 @@ model VirtualMachineScaleSet
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourcePlan;
+  /**
+   * Describes the properties of a Virtual Machine Scale Set.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineScaleSetProperties;
 }
 
 @armResourceOperations

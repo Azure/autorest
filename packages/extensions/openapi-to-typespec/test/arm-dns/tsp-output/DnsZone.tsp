@@ -14,7 +14,11 @@ namespace Azure.ResourceManager.Dns;
 /**
  * Describes a DNS zone.
  */
-model DnsZone is TrackedResource<ZoneProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ZoneProperties)
+@includeInapplicableMetadataInPayload(false)
+model DnsZone extends Resource {
   /**
    * The name of the DNS zone (without a terminating dot).
    */
@@ -27,6 +31,12 @@ model DnsZone is TrackedResource<ZoneProperties> {
    * The etag of the zone.
    */
   etag?: string;
+
+  /**
+   * The properties of the zone.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ZoneProperties;
 }
 
 @armResourceOperations

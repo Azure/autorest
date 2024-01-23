@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  FeaturesetContainerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model FeaturesetContainer extends ProxyResourceBase {
   /**
    * Container name. This is case-sensitive.
    */
@@ -24,6 +30,12 @@ model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
   @key("name")
   @segment("featuresets")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FeaturesetContainerProperties;
 }
 
 @armResourceOperations

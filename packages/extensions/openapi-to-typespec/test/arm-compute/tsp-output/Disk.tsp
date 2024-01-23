@@ -14,7 +14,11 @@ namespace Microsoft.Compute;
 /**
  * Disk resource.
  */
-model Disk is TrackedResource<DiskProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DiskProperties)
+@includeInapplicableMetadataInPayload(false)
+model Disk extends Resource {
   /**
    * The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
    */
@@ -24,10 +28,21 @@ model Disk is TrackedResource<DiskProperties> {
   name: string;
 
   /**
+   * A relative URI containing the ID of the VM that has the disk attached.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
    * List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs.
    */
   @visibility("read")
   managedByExtended?: string[];
+
+  /**
+   * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
+   */
+  sku?: DiskSku;
 
   /**
    * The Logical zone list for Disk.
@@ -39,8 +54,11 @@ model Disk is TrackedResource<DiskProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Disk resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiskProperties;
 }
 
 @armResourceOperations

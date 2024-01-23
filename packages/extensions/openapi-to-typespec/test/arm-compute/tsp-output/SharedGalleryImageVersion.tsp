@@ -15,9 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image version that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SharedGalleryImage)
-model SharedGalleryImageVersion
-  is ProxyResource<SharedGalleryImageVersionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SharedGalleryImageVersionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SharedGalleryImageVersion extends PirSharedGalleryResource {
   /**
    * The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
    */
@@ -25,6 +30,12 @@ model SharedGalleryImageVersion
   @key("galleryImageVersionName")
   @segment("versions")
   name: string;
+
+  /**
+   * Describes the properties of a gallery image version.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SharedGalleryImageVersionProperties;
 }
 
 @armResourceOperations

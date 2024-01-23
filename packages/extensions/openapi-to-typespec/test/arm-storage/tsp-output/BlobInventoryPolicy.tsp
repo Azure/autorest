@@ -15,12 +15,24 @@ namespace Microsoft.Storage;
 /**
  * The storage account blob inventory policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-model BlobInventoryPolicy is ProxyResource<BlobInventoryPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BlobInventoryPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model BlobInventoryPolicy extends ProxyResourceBase {
   @key("inventoryPolicy")
   @segment("inventoryPolicies")
   name: string;
+
+  /**
+   * Returns the storage account blob inventory policy rules.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BlobInventoryPolicyProperties;
 }
 
 @armResourceOperations

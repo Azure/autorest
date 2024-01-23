@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Subscription details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SubscriptionContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SubscriptionContract extends ProxyResourceBase {
   /**
    * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
    */
@@ -24,6 +30,12 @@ model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
   @key("subscriptionId")
   @segment("subscriptions")
   name: string;
+
+  /**
+   * Subscription contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SubscriptionContractProperties;
 }
 
 @armResourceOperations
@@ -60,8 +72,8 @@ interface SubscriptionContracts {
 
       /**
        * Notify change in Subscription State.
-       * - If false, do not send any email notification for change of state of subscription
-       * - If true, send email notification of change of state of subscription
+       *  - If false, do not send any email notification for change of state of subscription
+       *  - If true, send email notification of change of state of subscription
        */
       @query("notify")
       notify?: boolean;
@@ -94,8 +106,8 @@ interface SubscriptionContracts {
 
       /**
        * Notify change in Subscription State.
-       * - If false, do not send any email notification for change of state of subscription
-       * - If true, send email notification of change of state of subscription
+       *  - If false, do not send any email notification for change of state of subscription
+       *  - If true, send email notification of change of state of subscription
        */
       @query("notify")
       notify?: boolean;

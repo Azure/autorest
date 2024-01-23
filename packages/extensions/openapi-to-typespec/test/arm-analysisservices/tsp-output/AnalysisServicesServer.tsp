@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.Analysis;
 /**
  * Represents an instance of an Analysis Services resource.
  */
-model AnalysisServicesServer
-  is TrackedResource<AnalysisServicesServerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AnalysisServicesServerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AnalysisServicesServer extends Resource {
   /**
    * The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63.
    */
@@ -26,6 +31,12 @@ model AnalysisServicesServer
   @key("serverName")
   @segment("servers")
   name: string;
+
+  /**
+   * Properties of the provision operation request.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AnalysisServicesServerProperties;
 }
 
 @armResourceOperations

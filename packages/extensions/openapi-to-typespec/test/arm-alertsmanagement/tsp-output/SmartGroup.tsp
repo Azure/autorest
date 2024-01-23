@@ -14,8 +14,12 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * Set of related alerts grouped together smartly by AMS.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model SmartGroup is ProxyResource<SmartGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SmartGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model SmartGroup extends ProxyResourceBase {
   /**
    * Smart group unique id.
    */
@@ -23,6 +27,12 @@ model SmartGroup is ProxyResource<SmartGroupProperties> {
   @key("smartGroupId")
   @segment("smartGroups")
   name: string;
+
+  /**
+   * Properties of smart group.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SmartGroupProperties;
 }
 
 @armResourceOperations

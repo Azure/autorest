@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * ApiRelease details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApiReleaseContract extends ProxyResourceBase {
   /**
    * Release identifier within an API. Must be unique in the current API Management service instance.
    */
@@ -27,6 +31,12 @@ model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
   @key("releaseId")
   @segment("releases")
   name: string;
+
+  /**
+   * ApiRelease entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiReleaseContractProperties;
 }
 
 @armResourceOperations

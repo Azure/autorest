@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 
 namespace Azure.Keyvault;
 
@@ -2203,6 +2205,7 @@ model RoleDefinition {
   /**
    * Role definition properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RoleDefinitionProperties;
 }
 

@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Assignment schedule request
  */
-model RoleAssignmentScheduleRequest
-  is ExtensionResource<RoleAssignmentScheduleRequestProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  RoleAssignmentScheduleRequestProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RoleAssignmentScheduleRequest extends ExtensionResourceBase {
   /**
    * The name (guid) of the role assignment schedule request to get.
    */
@@ -23,6 +28,12 @@ model RoleAssignmentScheduleRequest
   @key("roleAssignmentScheduleRequestName")
   @segment("roleAssignmentScheduleRequests")
   name: string;
+
+  /**
+   * Role assignment schedule request properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleAssignmentScheduleRequestProperties;
 }
 
 @armResourceOperations

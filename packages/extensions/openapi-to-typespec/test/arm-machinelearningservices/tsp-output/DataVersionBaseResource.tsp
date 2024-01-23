@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataContainerResource)
-model DataVersionBaseResource is ProxyResource<DataVersionBase> {
+@Azure.ResourceManager.Private.armResourceInternal(DataVersionBase)
+@includeInapplicableMetadataInPayload(false)
+model DataVersionBaseResource extends ProxyResourceBase {
   /**
    * Version identifier.
    */
@@ -24,6 +28,12 @@ model DataVersionBaseResource is ProxyResource<DataVersionBase> {
   @key("version")
   @segment("versions")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DataVersionBase;
 }
 
 @armResourceOperations
@@ -70,9 +80,9 @@ interface DataVersionBaseResources {
       $orderBy?: string;
 
       /**
-* Top count of results, top count cannot be greater than the page size.
-                              If topCount > page size, results with be default page size count will be returned
-*/
+       * Top count of results, top count cannot be greater than the page size.
+       *                               If topCount > page size, results with be default page size count will be returned
+       */
       @query("$top")
       $top?: int32;
 

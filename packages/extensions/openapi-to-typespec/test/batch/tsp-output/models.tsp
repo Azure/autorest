@@ -3171,18 +3171,15 @@ model PoolSpecification {
  */
 model CloudServiceConfiguration {
   /**
-* Possible values are:
-2 - OS Family 2, equivalent to Windows Server 2008 R2
-* SP1.
-3 - OS Family 3, equivalent to Windows Server 2012.
-4 - OS Family 4,
-* equivalent to Windows Server 2012 R2.
-5 - OS Family 5, equivalent to Windows
-* Server 2016.
-6 - OS Family 6, equivalent to Windows Server 2019. For more
-* information, see Azure Guest OS Releases
-* (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).
-*/
+   * Possible values are:
+   * 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1.
+   * 3 - OS Family 3, equivalent to Windows Server 2012.
+   * 4 - OS Family 4, equivalent to Windows Server 2012 R2.
+   * 5 - OS Family 5, equivalent to Windows Server 2016.
+   * 6 - OS Family 6, equivalent to Windows Server 2019. For more information, see
+   * Azure Guest OS Releases
+   * (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).
+   */
   osFamily: string;
 
   /**
@@ -3236,16 +3233,15 @@ model VirtualMachineConfiguration {
   dataDisks?: DataDisk[];
 
   /**
-* This only applies to Images that contain the Windows operating system, and
-* should only be used when you hold valid on-premises licenses for the Compute
-* Nodes which will be deployed. If omitted, no on-premises licensing discount is
-* applied. Values are:
-
- Windows_Server - The on-premises license is for Windows
-* Server.
- Windows_Client - The on-premises license is for Windows Client.
-
-*/
+   * This only applies to Images that contain the Windows operating system, and
+   * should only be used when you hold valid on-premises licenses for the Compute
+   * Nodes which will be deployed. If omitted, no on-premises licensing discount is
+   * applied. Values are:
+   *
+   *  Windows_Server - The on-premises license is for Windows Server.
+   *  Windows_Client - The on-premises license is for Windows Client.
+   *
+   */
   licenseType?: string;
 
   /**

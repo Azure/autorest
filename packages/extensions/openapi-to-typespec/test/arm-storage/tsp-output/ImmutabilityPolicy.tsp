@@ -15,12 +15,22 @@ namespace Microsoft.Storage;
 /**
  * The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(BlobContainer)
-model ImmutabilityPolicy is ProxyResource<ImmutabilityPolicyProperty> {
+@Azure.ResourceManager.Private.armResourceInternal(ImmutabilityPolicyProperty)
+@includeInapplicableMetadataInPayload(false)
+model ImmutabilityPolicy extends ProxyResourceBase {
   @key("immutabilityPolicy")
   @segment("immutabilityPolicies")
   name: string;
+
+  /**
+   * The properties of an ImmutabilityPolicy of a blob container.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ImmutabilityPolicyProperty;
 }
 
 @armResourceOperations

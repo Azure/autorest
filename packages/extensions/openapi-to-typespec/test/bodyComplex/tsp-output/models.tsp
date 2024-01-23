@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace AutoRestComplexTestService;
 
@@ -199,6 +201,8 @@ model ReadonlyObj {
 @discriminator("kind")
 model MyBaseType {
   propB1?: string;
+
+  @extension("x-ms-client-flatten", true)
   helper?: MyBaseHelperType;
 }
 

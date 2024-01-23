@@ -14,9 +14,14 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * DataManagerForAgriculture extension resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model DataManagerForAgricultureExtension
-  is ProxyResource<DataManagerForAgricultureExtensionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataManagerForAgricultureExtensionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataManagerForAgricultureExtension extends ProxyResourceBase {
   /**
    * dataManagerForAgricultureExtensionId to be queried.
    */
@@ -25,6 +30,12 @@ model DataManagerForAgricultureExtension
   @key("dataManagerForAgricultureExtensionId")
   @segment("farmBeatsExtensionDefinitions")
   name: string;
+
+  /**
+   * DataManagerForAgricultureExtension properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataManagerForAgricultureExtensionProperties;
 }
 
 @armResourceOperations
@@ -81,9 +92,9 @@ interface DataManagerForAgricultureExtensions {
       publisherIds?: string[];
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

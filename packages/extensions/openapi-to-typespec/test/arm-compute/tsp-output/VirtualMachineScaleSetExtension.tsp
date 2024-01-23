@@ -15,9 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine Scale Set Extension.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachineScaleSet)
-model VirtualMachineScaleSetExtension
-  is ProxyResource<VirtualMachineScaleSetExtensionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineScaleSetExtensionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineScaleSetExtension extends SubResourceReadOnly {
   /**
    * The name of the VM scale set extension.
    */
@@ -25,6 +30,12 @@ model VirtualMachineScaleSetExtension
   @key("vmssExtensionName")
   @segment("extensions")
   name: string;
+
+  /**
+   * Describes the properties of a Virtual Machine Scale Set Extension.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
 @armResourceOperations

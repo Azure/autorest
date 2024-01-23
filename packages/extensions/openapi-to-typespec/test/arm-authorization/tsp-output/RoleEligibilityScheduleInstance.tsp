@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Information about current or upcoming role eligibility schedule instance
  */
-model RoleEligibilityScheduleInstance
-  is ExtensionResource<RoleEligibilityScheduleInstanceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  RoleEligibilityScheduleInstanceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RoleEligibilityScheduleInstance extends ExtensionResourceBase {
   /**
    * The name (hash of schedule name + time) of the role eligibility schedule to get.
    */
@@ -23,6 +28,12 @@ model RoleEligibilityScheduleInstance
   @key("roleEligibilityScheduleInstanceName")
   @segment("roleEligibilityScheduleInstances")
   name: string;
+
+  /**
+   * Role eligibility schedule instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleEligibilityScheduleInstanceProperties;
 }
 
 @armResourceOperations

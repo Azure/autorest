@@ -14,13 +14,24 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine Extension Image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model VirtualMachineExtensionImage
-  is TrackedResource<VirtualMachineExtensionImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineExtensionImageProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineExtensionImage extends Resource {
   @path
   @key("version")
   @segment("versions")
   name: string;
+
+  /**
+   * Describes the properties of a Virtual Machine Extension Image.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineExtensionImageProperties;
 }
 
 @armResourceOperations

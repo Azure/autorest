@@ -15,8 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CommunityGallery)
-model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  CommunityGalleryImageProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CommunityGalleryImage extends PirCommunityGalleryResource {
   /**
    * The name of the community gallery image definition.
    */
@@ -24,6 +30,12 @@ model CommunityGalleryImage is ProxyResource<CommunityGalleryImageProperties> {
   @key("galleryImageName")
   @segment("images")
   name: string;
+
+  /**
+   * Describes the properties of a gallery image definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CommunityGalleryImageProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model DatastoreResource is ProxyResource<Datastore> {
+@Azure.ResourceManager.Private.armResourceInternal(Datastore)
+@includeInapplicableMetadataInPayload(false)
+model DatastoreResource extends ProxyResourceBase {
   /**
    * Datastore name.
    */
@@ -24,6 +28,12 @@ model DatastoreResource is ProxyResource<Datastore> {
   @key("name")
   @segment("datastores")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: Datastore;
 }
 
 @armResourceOperations

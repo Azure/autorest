@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -47,6 +49,15 @@ enum ProvisioningState {
   Resuming,
   Preparing,
   Scaling,
+}
+
+/**
+ * The name of the Azure pricing tier to which the SKU applies.
+ */
+enum SkuTier {
+  Development,
+  Basic,
+  Standard,
 }
 
 /**
@@ -101,6 +112,28 @@ model AnalysisServicesServerProperties
    * The SKU of the Analysis Services resource.
    */
   sku?: ResourceSku;
+}
+
+/**
+ * Represents the SKU name and Azure pricing tier for Analysis Services resource.
+ */
+model ResourceSku {
+  /**
+   * Name of the SKU level.
+   */
+  name: string;
+
+  /**
+   * The name of the Azure pricing tier to which the SKU applies.
+   */
+  tier?: SkuTier;
+
+  /**
+   * The number of instances in the read only query pool.
+   */
+  @maxValue(8)
+  @minValue(1)
+  capacity?: int32 = 1;
 }
 
 /**
@@ -268,6 +301,7 @@ model AnalysisServicesServerUpdateParameters {
   /**
    * Properties of the provision operation request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AnalysisServicesServerMutableProperties;
 }
 

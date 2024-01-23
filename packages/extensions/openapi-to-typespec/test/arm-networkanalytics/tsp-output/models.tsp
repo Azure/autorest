@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -101,9 +103,9 @@ enum DataProductUserRole {
   Reader,
 
   /**
-* Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-*/
+   * Field to specify user of type SensitiveReader.
+   * This user has privileged access to read sensitive data of a data product.
+   */
   SensitiveReader,
 }
 
@@ -527,6 +529,7 @@ model DataProductUpdate {
   /**
    * The updatable properties of the DataProduct.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DataProductUpdateProperties;
 }
 
@@ -694,6 +697,7 @@ model DataTypeUpdate {
   /**
    * The updatable properties of the DataType.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DataTypeUpdateProperties;
 }
 

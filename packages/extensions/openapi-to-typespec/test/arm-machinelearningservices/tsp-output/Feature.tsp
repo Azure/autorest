@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FeaturesetVersion)
-model Feature is ProxyResource<FeatureProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FeatureProperties)
+@includeInapplicableMetadataInPayload(false)
+model Feature extends ProxyResourceBase {
   /**
    * Feature Name. This is case-sensitive.
    */
@@ -25,6 +29,12 @@ model Feature is ProxyResource<FeatureProperties> {
   @key("featureName")
   @segment("features")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FeatureProperties;
 }
 
 @armResourceOperations

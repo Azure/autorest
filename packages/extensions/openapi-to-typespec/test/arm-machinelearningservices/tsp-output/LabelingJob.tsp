@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model LabelingJob is ProxyResource<LabelingJobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LabelingJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model LabelingJob extends ProxyResourceBase {
   /**
    * The name and identifier for the LabelingJob.
    */
@@ -24,6 +28,12 @@ model LabelingJob is ProxyResource<LabelingJobProperties> {
   @key("id")
   @segment("labelingJobs")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabelingJobProperties;
 }
 
 @armResourceOperations

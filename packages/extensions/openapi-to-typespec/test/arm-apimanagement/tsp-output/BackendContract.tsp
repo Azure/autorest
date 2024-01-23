@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Backend details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model BackendContract is ProxyResource<BackendContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BackendContractProperties)
+@includeInapplicableMetadataInPayload(false)
+model BackendContract extends ProxyResourceBase {
   /**
    * Identifier of the Backend entity. Must be unique in the current API Management service instance.
    */
@@ -26,6 +30,12 @@ model BackendContract is ProxyResource<BackendContractProperties> {
   @key("backendId")
   @segment("backends")
   name: string;
+
+  /**
+   * Backend entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BackendContractProperties;
 }
 
 @armResourceOperations

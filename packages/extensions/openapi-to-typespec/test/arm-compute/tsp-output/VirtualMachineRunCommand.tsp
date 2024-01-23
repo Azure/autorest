@@ -15,9 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine run command.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachine)
-model VirtualMachineRunCommand
-  is TrackedResource<VirtualMachineRunCommandProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineRunCommandProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineRunCommand extends Resource {
   /**
    * The name of the virtual machine run command.
    */
@@ -25,6 +30,12 @@ model VirtualMachineRunCommand
   @key("runCommandName")
   @segment("runCommands")
   name: string;
+
+  /**
+   * Describes the properties of a Virtual Machine run command.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineRunCommandProperties;
 }
 
 @armResourceOperations

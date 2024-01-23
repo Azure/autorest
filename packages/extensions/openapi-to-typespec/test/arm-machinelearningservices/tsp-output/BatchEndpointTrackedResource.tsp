@@ -13,8 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
+@Azure.ResourceManager.Private.armResourceInternal(BatchEndpoint)
+@includeInapplicableMetadataInPayload(false)
+model BatchEndpointTrackedResource extends TrackedResourceBase {
   /**
    * Name for the Batch Endpoint.
    */
@@ -23,9 +27,19 @@ model BatchEndpointTrackedResource is TrackedResource<BatchEndpoint> {
   @segment("batchEndpoints")
   name: string;
 
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BatchEndpoint;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

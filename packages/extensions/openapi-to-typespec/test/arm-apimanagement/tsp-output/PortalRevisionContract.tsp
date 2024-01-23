@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Portal Revision's contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model PortalRevisionContract
-  is ProxyResource<PortalRevisionContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PortalRevisionContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PortalRevisionContract extends ProxyResourceBase {
   /**
    * Portal revision identifier. Must be unique in the current API Management service instance.
    */
@@ -27,6 +32,12 @@ model PortalRevisionContract
   @key("portalRevisionId")
   @segment("portalRevisions")
   name: string;
+
+  /**
+   * Properties of the portal revisions.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PortalRevisionContractProperties;
 }
 
 @armResourceOperations
@@ -94,14 +105,14 @@ interface PortalRevisionContracts {
       ...BaseParameters<PortalRevisionContract>;
 
       /**
-* | Field       | Supported operators    | Supported functions               |
-|-------------|------------------------|-----------------------------------|
-
-|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
-|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
-|isCurrent | eq, ne |    |
-
-*/
+       * | Field       | Supported operators    | Supported functions               |
+       * |-------------|------------------------|-----------------------------------|
+       *
+       * |name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
+       * |description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
+       * |isCurrent | eq, ne |    |
+       *
+       */
       @query("$filter")
       $filter?: string;
 

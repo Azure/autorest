@@ -32,7 +32,7 @@ function lineWrap(doc: string | string[]): string[] {
   const { isArm } = getOptions();
   const maxLength = isArm ? Number.POSITIVE_INFINITY : 80;
 
-  let docString = Array.isArray(doc) ? doc.join("") : doc;
+  let docString = Array.isArray(doc) ? doc.join("\n") : doc;
   docString = docString.replace(/\r\n/g, "\n");
   docString = docString.replace(/\r/g, "\n");
 
@@ -40,21 +40,21 @@ function lineWrap(doc: string | string[]): string[] {
     return [docString];
   }
 
+  const oriLines = docString.split("\n");
   const lines: string[] = [];
-  const words = docString.split(" ");
-  let line = ``;
-  for (const word of words) {
-    if (word === "\n") {
-      lines.push(line.substring(0, line.length - 1));
-      line = "";
-    } else if (word.length + 1 > maxLength - line.length) {
-      lines.push(line.substring(0, line.length - 1));
-      line = `${word} `;
-    } else {
-      line = `${line}${word} `;
+  for (const oriLine of oriLines) {
+    const words = oriLine.split(" ");
+    let line = ``;
+    for (const word of words) {
+      if (word.length + 1 > maxLength - line.length) {
+        lines.push(line.substring(0, line.length - 1));
+        line = `${word} `;
+      } else {
+        line = `${line}${word} `;
+      }
     }
+    lines.push(`${line.substring(0, line.length - 1)}`);
   }
-  lines.push(`${line.substring(0, line.length - 1)}`);
 
   return lines;
 }

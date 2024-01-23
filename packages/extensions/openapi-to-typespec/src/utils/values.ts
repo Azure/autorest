@@ -13,7 +13,7 @@ export function transformDefaultValue(type: string, value: string | number | boo
   if (["string", "int32", "int64", "float32", "float64", "boolean"].includes(type)) {
     return transformValue(value);
   } else {
-    return `${type}.${value}`;
+    return `${type}.\`${value}\``;
   }
 }
 

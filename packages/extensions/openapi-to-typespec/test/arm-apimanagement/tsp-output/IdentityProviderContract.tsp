@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Identity Provider details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model IdentityProviderContract
-  is ProxyResource<IdentityProviderContractProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IdentityProviderContractProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IdentityProviderContract extends ProxyResourceBase {
   /**
    * Identity Provider Type identifier.
    */
@@ -25,6 +30,12 @@ model IdentityProviderContract
   @key("identityProviderName")
   @segment("identityProviders")
   name: IdentityProviderType;
+
+  /**
+   * Identity Provider contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IdentityProviderContractProperties;
 }
 
 @armResourceOperations

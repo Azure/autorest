@@ -13,8 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
+@Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
+@includeInapplicableMetadataInPayload(false)
+model OnlineEndpointTrackedResource extends TrackedResourceBase {
   /**
    * Online Endpoint name.
    */
@@ -23,9 +27,19 @@ model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
   @segment("onlineEndpoints")
   name: string;
 
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OnlineEndpoint;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
