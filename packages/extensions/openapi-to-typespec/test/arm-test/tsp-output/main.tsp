@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * For test.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Test resource management API.",
 })

@@ -1,4 +1,4 @@
-import { TypespecProgram, EndpointParameter } from "../interfaces";
+import { TypespecProgram, EndpointParameter, Auth } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespace } from "../utils/namespace";
@@ -13,6 +13,7 @@ export function generateServiceInformation(program: TypespecProgram) {
     definitions.push(`@armProviderNamespace`);
   }
 
+  generateUseAuth(serviceInformation.authentication, definitions);
   definitions.push(`@service({
     title: "${serviceInformation.name}"
   })`);
@@ -90,4 +91,31 @@ function getEndpointParameters(endpoint: string) {
   }
 
   return params;
+}
+
+function generateUseAuth(authDefinitions: Auth[] | undefined, statements: string[]): void {
+  if (!authDefinitions) {
+    return;
+  }
+
+  const authFlows: string[] = [];
+
+  for (const auth of authDefinitions) {
+    if (auth.kind === "AadOauth2Auth") {
+      const scopes = `[${auth.scopes.map((s) => `"${s}"`).join()}]`;
+      authFlows.push(`AadOauth2Auth<${scopes}>`);
+    }
+
+    if (auth.kind === "ApiKeyAuth") {
+      authFlows.push(`ApiKeyAuth<ApiKeyLocation.${auth.location}, "${auth.name}">`);
+    }
+  }
+
+  if (!authFlows.length) {
+    return;
+  }
+
+  statements.push(`@useAuth(${authFlows.join(" | ")})`);
+
+  return;
 }

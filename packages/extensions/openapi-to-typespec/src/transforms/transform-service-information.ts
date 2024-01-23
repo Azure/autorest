@@ -1,6 +1,14 @@
-import { CodeModel, ImplementationLocation, ParameterLocation } from "@autorest/codemodel";
+import {
+  CodeModel,
+  ImplementationLocation,
+  KeySecurityScheme,
+  OAuth2SecurityScheme,
+  ParameterLocation,
+  SecurityScheme,
+  codeModelSchema,
+} from "@autorest/codemodel";
 import { getArmCommonTypeVersion } from "../autorest-session";
-import { EndpointParameter, ServiceInformation } from "../interfaces";
+import { AadOauth2AuthFlow, ApiKeyAuthentication, Auth, EndpointParameter, ServiceInformation } from "../interfaces";
 import { getOptions } from "../options";
 import { getFirstEndpoint } from "../utils/get-endpoint";
 import { isConstantSchema } from "../utils/schemas";
@@ -14,7 +22,52 @@ export function transformServiceInformation(model: CodeModel): ServiceInformatio
     endpointParameters: transformEndpointParameters(model),
     versions: getApiVersions(model),
     armCommonTypeVersion: isArm ? getArmCommonTypeVersion() : undefined,
+    authentication: getAuth(model),
   };
+}
+
+function getAuth(model: CodeModel): Auth[] | undefined {
+  if (!model.security.schemes?.length) {
+    return undefined;
+  }
+
+  const distinctSchemes = getDistinctAuthSchemes(model);
+  const auths: Auth[] = [];
+  for (const scheme of distinctSchemes) {
+    if (isAadOauth2Auth(scheme)) {
+      const aadOauth: AadOauth2AuthFlow = {
+        kind: "AadOauth2Auth",
+        scopes: scheme.scopes,
+      };
+
+      auths.push(aadOauth);
+    }
+
+    if (isKeyAuth(scheme)) {
+      const azureApiKeyAuthentication: ApiKeyAuthentication = {
+        kind: "ApiKeyAuth",
+        location: scheme.in,
+        name: scheme.name,
+      };
+
+      auths.push(azureApiKeyAuthentication);
+    }
+  }
+
+  return auths;
+}
+
+function getDistinctAuthSchemes(model: CodeModel): SecurityScheme[] {
+  const distinct = Array.from(new Set(model.security.schemes?.map((s) => JSON.stringify(s)) ?? []));
+  return distinct.map((s) => JSON.parse(s));
+}
+
+function isAadOauth2Auth(scheme: SecurityScheme): scheme is OAuth2SecurityScheme {
+  return scheme.type === "OAuth2";
+}
+
+function isKeyAuth(scheme: SecurityScheme): scheme is KeySecurityScheme {
+  return scheme.type === "Key";
 }
 
 export function transformEndpointParameters(model: CodeModel): EndpointParameter[] {
