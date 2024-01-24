@@ -16,7 +16,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * from the beginning of a new document. Maximum allowed size of string list is
    * 2048.
    */
-  prompt?: PostContentSchemaPrompt;
+  prompt?: unknown;
 
   /**
    * The maximum number of tokens to generate. Has minimum of 0.
@@ -25,26 +25,23 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
   maxTokens?: int32 = 16;
 
   /**
-* What sampling temperature to use. Higher values means the model will take more
-* risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones
-* with a well-defined answer.
-We generally recommend using this or `top_p` but
-* not both.
-Minimum of 0 and maximum of 2 allowed.
-
-*/
+   * What sampling temperature to use. Higher values means the model will take more
+   * risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones
+   * with a well-defined answer.
+   * We generally recommend using this or `top_p` but not both.
+   * Minimum of 0 and maximum of 2 allowed.
+   *
+   */
   temperature?: float32 = 1;
 
   /**
-* An alternative to sampling with temperature, called nucleus sampling, where the
-* model considers the results of the tokens with top_p probability mass. So 0.1
-* means only the tokens comprising the top 10% probability mass are
-* considered.
-We generally recommend using this or `temperature` but not
-* both.
-Minimum of 0 and maximum of 1 allowed.
-
-*/
+   * An alternative to sampling with temperature, called nucleus sampling, where the
+   * model considers the results of the tokens with top_p probability mass. So 0.1
+   * means only the tokens comprising the top 10% probability mass are considered.
+   * We generally recommend using this or `temperature` but not both.
+   * Minimum of 0 and maximum of 1 allowed.
+   *
+   */
   @projectedName("json", "top_p")
   topP?: float32 = 1;
 
@@ -101,7 +98,7 @@ Minimum of 0 and maximum of 1 allowed.
   /**
    * A sequence which indicates the end of the current document.
    */
-  stop?: PostContentSchemaStop;
+  stop?: unknown;
 
   @projectedName("json", "completion_config")
   completionConfig?: string;
@@ -135,22 +132,6 @@ Minimum of 0 and maximum of 1 allowed.
   @projectedName("json", "best_of")
   bestOf?: int32;
 }
-
-/**
- * An optional prompt to complete from, encoded as a string, a list of strings, or
- * a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
- * If you would like to provide multiple prompts, use the POST variant of this
- * method. Note that <|endoftext|> is the document separator that the model sees
- * during training, so if a prompt is not specified the model will generate as if
- * from the beginning of a new document. Maximum allowed size of string list is
- * 2048.
- */
-model PostContentSchemaPrompt {}
-
-/**
- * A sequence which indicates the end of the current document.
- */
-model PostContentSchemaStop {}
 
 model PathsMaorw9DeploymentsDeploymentIdCompletionsPostResponses200ContentApplicationJsonSchema {
   id?: string;
@@ -200,7 +181,7 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
    * An input to embed, encoded as a string, a list of strings, or a list of token
    * lists
    */
-  input: PostContentSchemaInput;
+  input: unknown;
 
   /**
    * The ID of the end-user, for use in tracking and rate-limiting.
@@ -218,9 +199,3 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
    */
   `model`?: string;
 }
-
-/**
- * An input to embed, encoded as a string, a list of strings, or a list of token
- * lists
- */
-model PostContentSchemaInput {}
