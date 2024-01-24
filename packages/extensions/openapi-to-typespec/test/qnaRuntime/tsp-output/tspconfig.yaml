@@ -6,7 +6,7 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/QnAMakerRuntimeClient.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true
