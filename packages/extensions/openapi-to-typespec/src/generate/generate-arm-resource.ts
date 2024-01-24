@@ -25,16 +25,23 @@ export function generateArmResource(resource: TspArmResource): string {
     definitions.push(`@parentResource(${resource.resourceParent.name})`);
   }
 
-  if (!resource.baseModelName && !resource.propertiesPropertyRequired &&
+  if (
+    !resource.baseModelName &&
+    !resource.propertiesPropertyRequired &&
     resource.propertiesPropertyVisibility.length === 2 &&
     resource.propertiesPropertyVisibility.includes("read") &&
-    resource.propertiesPropertyVisibility.includes("create")) {
+    resource.propertiesPropertyVisibility.includes("create")
+  ) {
     definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
 
     definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
   } else {
-    definitions.push(`#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"`);
-    definitions.push(`#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`)
+    definitions.push(
+      `#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"`,
+    );
+    definitions.push(
+      `#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`,
+    );
     definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
     definitions.push(`@includeInapplicableMetadataInPayload(false)`);
 

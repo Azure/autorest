@@ -48,8 +48,8 @@ export function getRoutesImports(_program: TypespecProgram) {
   const namespaces = new Set<string>();
 
   modules.add(`import "@azure-tools/typespec-azure-core";`);
-  modules.add(`import "@typespec/rest";`)
-  modules.add(`import "./models.tsp";`)
+  modules.add(`import "@typespec/rest";`);
+  modules.add(`import "./models.tsp";`);
 
   namespaces.add(`using TypeSpec.Rest;`);
   namespaces.add(`using TypeSpec.Http;`);

@@ -122,22 +122,9 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
-  const knownProperties = [
-    "properties",
-    "id",
-    "name",
-    "type",
-    "systemData",
-    "location",
-    "tags"
-  ];
+  const knownProperties = ["properties", "id", "name", "type", "systemData", "location", "tags"];
   if (!noCommonTypes) {
-    knownProperties.push(...[
-      "identity",
-      "sku",
-      "eTag",
-      "plan"
-    ])
+    knownProperties.push(...["identity", "sku", "eTag", "plan"]);
   }
   const otherProperties: TypespecObjectProperty[] = [];
   for (const property of schema.properties ?? []) {

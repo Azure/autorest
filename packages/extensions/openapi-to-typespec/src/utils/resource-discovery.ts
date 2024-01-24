@@ -209,11 +209,7 @@ const _ArmCoreEnums = [
   "CheckNameAvailabilityReason",
 ];
 
-const _ArmCoreCustomEnums = [
-  "ManagedIdentityType",
-  "ManagedSystemIdentityType",
-  "SkuTier",
-];
+const _ArmCoreCustomEnums = ["ManagedIdentityType", "ManagedSystemIdentityType", "SkuTier"];
 
 export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
   const filtered = [..._ArmCoreEnums];
