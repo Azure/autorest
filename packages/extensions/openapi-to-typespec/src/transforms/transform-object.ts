@@ -127,22 +127,24 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       isOptional: propertySchema.required !== true,
       type: visited.name,
       decorators: getPropertyDecorators(propertySchema),
-      defaultValue: getDefaultValue(propertySchema.schema),
+      defaultValue: getDefaultValue(visited.name, propertySchema.schema),
     };
   }
 
   const logger = getLogger("getDiscriminatorProperty");
 
   logger.info(`Transforming property ${propertySchema.language.default.name} of type ${propertySchema.schema.type}`);
+
+  const type = getTypespecType(propertySchema.schema, codeModel);
   return {
     kind: "property",
     doc,
     name,
     isOptional: propertySchema.required !== true,
-    type: getTypespecType(propertySchema.schema, codeModel),
+    type,
     decorators: getPropertyDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
-    defaultValue: getDefaultValue(propertySchema.schema),
+    defaultValue: getDefaultValue(type, propertySchema.schema),
   };
 }
 

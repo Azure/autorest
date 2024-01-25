@@ -101,7 +101,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   }
 
   const decorators = buildResourceDecorators(schema);
-  if(!getArmCommonTypeVersion() && schema.resourceMetadata.IsExtensionResource) {
+  if (!getArmCommonTypeVersion() && schema.resourceMetadata.IsExtensionResource) {
     decorators.push({ name: "extensionResource" });
   }
 
@@ -855,7 +855,7 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
     {
       name: "visibility",
       arguments: ["read"],
-    }
+    },
   );
 
   // remove @path decorator for key parameter

@@ -1,5 +1,5 @@
 import { Schema } from "@autorest/codemodel";
-import { isChoiceSchema } from "./schemas";
+import { isChoiceSchema, isSealedChoiceSchema } from "./schemas";
 
 export function transformValue(value: string | number | boolean) {
   if (typeof value === "string") {
@@ -9,25 +9,17 @@ export function transformValue(value: string | number | boolean) {
   return value;
 }
 
-export function transformDefaultValue(type: string, value: string | number | boolean) {
-  if (["string", "int32", "int64", "float32", "float64", "boolean"].includes(type)) {
-    return transformValue(value);
-  } else {
-    return `${type}.\`${value}\``;
-  }
-}
-
-export function getDefaultValue(schema: Schema) {
+export function getDefaultValue(type: string, schema: Schema) {
   if (schema.defaultValue === undefined) {
     return undefined;
   }
-  if (isChoiceSchema(schema)) {
+  if (isChoiceSchema(schema) || isSealedChoiceSchema(schema)) {
     for (const choice of schema.choices) {
       if (schema.defaultValue === choice.value.toString()) {
-        return choice.language.default.name;
+        return `${type}.\`${choice.language.default.name}\``;
       }
     }
   } else {
-    return schema.defaultValue;
+    return transformValue(schema.defaultValue);
   }
 }

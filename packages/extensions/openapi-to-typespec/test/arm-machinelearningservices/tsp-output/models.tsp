@@ -4203,7 +4203,7 @@ model BatchRetrySettings {
   /**
    * Invocation timeout for a mini-batch, in ISO 8601 format.
    */
-  timeout?: duration = duration.PT30S;
+  timeout?: duration = "PT30S";
 }
 
 /**
@@ -5249,7 +5249,7 @@ model ProbeSettings {
   /**
    * The length of time between probes in ISO 8601 format.
    */
-  period?: duration = duration.PT10S;
+  period?: duration = "PT10S";
 
   /**
    * The number of successful probes before returning a healthy status.
@@ -5259,7 +5259,7 @@ model ProbeSettings {
   /**
    * The probe timeout in ISO 8601 format.
    */
-  timeout?: duration = duration.PT2S;
+  timeout?: duration = "PT2S";
 }
 
 /**
@@ -5275,13 +5275,13 @@ model OnlineRequestSettings {
    * The maximum amount of time a request will stay in the queue in ISO 8601 format.
    * Defaults to 500ms.
    */
-  maxQueueWait?: duration = duration.`PT0.5S`;
+  maxQueueWait?: duration = "PT0.5S";
 
   /**
    * The scoring timeout in ISO 8601 format.
    * Defaults to 5000ms.
    */
-  requestTimeout?: duration = duration.PT5S;
+  requestTimeout?: duration = "PT5S";
 }
 
 /**
@@ -8988,7 +8988,7 @@ model TrainingSettings {
    * During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.
    * Configure this parameter with a higher value than 300 secs, if more time is needed.
    */
-  ensembleModelDownloadTimeout?: duration = duration.PT5M;
+  ensembleModelDownloadTimeout?: duration = "PT5M";
 
   /**
    * Stack ensemble settings for stack ensemble run.
@@ -9303,12 +9303,12 @@ model TableVerticalLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration = duration.PT6H;
+  timeout?: duration = "PT6H";
 
   /**
    * Iteration timeout.
    */
-  trialTimeout?: duration = duration.PT30M;
+  trialTimeout?: duration = "PT30M";
 }
 
 model TableParameterSubspace {
@@ -11003,7 +11003,7 @@ model ImageLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration = duration.P7D;
+  timeout?: duration = "P7D";
 }
 
 /**
@@ -11867,7 +11867,7 @@ model NlpVerticalLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration = duration.P7D;
+  timeout?: duration = "P7D";
 
   /**
    * Timeout for individual HD trials.
@@ -12656,7 +12656,7 @@ model TargetUtilizationScaleSettings extends OnlineScaleSettings {
   /**
    * The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.
    */
-  pollingInterval?: duration = duration.PT1S;
+  pollingInterval?: duration = "PT1S";
 
   /**
    * Target CPU usage for the autoscaler.
