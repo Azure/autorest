@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   GatewayHostnameConfigurationContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model GatewayHostnameConfigurationContract extends ProxyResourceBase {
   /**
    * Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.
@@ -31,6 +31,7 @@ model GatewayHostnameConfigurationContract extends ProxyResourceBase {
   @path
   @key("hcId")
   @segment("hostnameConfigurations")
+  @visibility("read")
   name: string;
 
   /**

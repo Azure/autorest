@@ -23,6 +23,7 @@ model ProviderOperationsMetadata is ProxyResource<{}> {
   @path
   @key("resourceProviderNamespace")
   @segment("providerOperations")
+  @visibility("read")
   name: string;
 
   /**

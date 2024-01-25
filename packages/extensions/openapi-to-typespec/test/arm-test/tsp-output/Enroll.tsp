@@ -20,6 +20,7 @@ namespace Microsoft.Test;
 model Enroll is TrackedResource<EnrollProperties> {
   @key("enroll")
   @segment("enrolls")
+  @visibility("read")
   name: string;
 }
 

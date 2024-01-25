@@ -19,11 +19,12 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-@Azure.ResourceManager.Private.armResourceInternal(ManagementPolicyProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ManagementPolicyProperties)
 model ManagementPolicy extends ProxyResourceBase {
   @key("managementPolicy")
   @segment("managementPolicies")
+  @visibility("read")
   name: string;
 
   /**

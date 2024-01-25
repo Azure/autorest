@@ -18,18 +18,28 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiskAccess)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateEndpointConnectionProperties
-)
 @includeInapplicableMetadataInPayload(false)
-model PrivateEndpointConnection extends ProxyResourceBase {
+model PrivateEndpointConnection {
   /**
    * The name of the private endpoint connection.
    */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * private endpoint connection Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * private endpoint connection type
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * Resource properties.

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@Azure.ResourceManager.Private.armResourceInternal(IssueContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IssueContractProperties)
 model IssueContract extends ProxyResourceBase {
   /**
    * Issue identifier. Must be unique in the current API Management service instance.
@@ -30,6 +30,7 @@ model IssueContract extends ProxyResourceBase {
   @path
   @key("issueId")
   @segment("issues")
+  @visibility("read")
   name: string;
 
   /**

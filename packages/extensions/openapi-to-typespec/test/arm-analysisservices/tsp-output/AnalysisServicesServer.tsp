@@ -16,9 +16,6 @@ namespace Azure.ResourceManager.Analysis;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  AnalysisServicesServerProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model AnalysisServicesServer extends Resource {
   /**
@@ -30,6 +27,7 @@ model AnalysisServicesServer extends Resource {
   @path
   @key("serverName")
   @segment("servers")
+  @visibility("read")
   name: string;
 
   /**

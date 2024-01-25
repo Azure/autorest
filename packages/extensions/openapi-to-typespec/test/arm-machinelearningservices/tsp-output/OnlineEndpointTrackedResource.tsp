@@ -16,8 +16,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
 model OnlineEndpointTrackedResource extends TrackedResourceBase {
   /**
    * Online Endpoint name.
@@ -25,6 +25,7 @@ model OnlineEndpointTrackedResource extends TrackedResourceBase {
   @path
   @key("endpointName")
   @segment("onlineEndpoints")
+  @visibility("read")
   name: string;
 
   /**

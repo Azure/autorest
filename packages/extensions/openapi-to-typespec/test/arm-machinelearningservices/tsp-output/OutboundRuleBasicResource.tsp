@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(OutboundRule)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OutboundRule)
 model OutboundRuleBasicResource extends ProxyResourceBase {
   /**
    * Name of the workspace managed network outbound rule
@@ -28,6 +28,7 @@ model OutboundRuleBasicResource extends ProxyResourceBase {
   @path
   @key("ruleName")
   @segment("outboundRules")
+  @visibility("read")
   name: string;
 
   /**

@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.AgFoodPlatform;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DataManagerForAgricultureProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DataManagerForAgriculture extends TrackedResourceBase {
   /**
    * DataManagerForAgriculture resource name.
@@ -30,6 +30,7 @@ model DataManagerForAgriculture extends TrackedResourceBase {
   @path
   @key("dataManagerForAgricultureResourceName")
   @segment("farmBeats")
+  @visibility("read")
   name: string;
 
   /**

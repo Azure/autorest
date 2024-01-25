@@ -22,6 +22,7 @@ model Employee is TrackedResource<EmployeeProperties> {
   @path
   @key("employeeName")
   @segment("employees")
+  @visibility("read")
   name: string;
 }
 

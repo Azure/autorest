@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   EmailTemplateContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model EmailTemplateContract extends ProxyResourceBase {
   /**
    * Email Template Name Identifier.
@@ -29,6 +29,7 @@ model EmailTemplateContract extends ProxyResourceBase {
   @path
   @key("templateName")
   @segment("templates")
+  @visibility("read")
   name: TemplateName;
 
   /**

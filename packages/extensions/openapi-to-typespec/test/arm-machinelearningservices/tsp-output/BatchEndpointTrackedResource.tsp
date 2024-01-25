@@ -16,8 +16,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(BatchEndpoint)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BatchEndpoint)
 model BatchEndpointTrackedResource extends TrackedResourceBase {
   /**
    * Name for the Batch Endpoint.
@@ -25,6 +25,7 @@ model BatchEndpointTrackedResource extends TrackedResourceBase {
   @path
   @key("endpointName")
   @segment("batchEndpoints")
+  @visibility("read")
   name: string;
 
   /**

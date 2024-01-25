@@ -24,6 +24,7 @@ model BusinessProcess is ProxyResource<BusinessProcessProperties> {
   @path
   @key("businessProcessName")
   @segment("businessProcesses")
+  @visibility("read")
   name: string;
 }
 

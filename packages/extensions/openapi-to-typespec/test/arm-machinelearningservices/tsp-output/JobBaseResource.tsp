@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@Azure.ResourceManager.Private.armResourceInternal(JobBase)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(JobBase)
 model JobBaseResource extends ProxyResourceBase {
   /**
    * The name and identifier for the Job. This is case-sensitive.
@@ -27,6 +27,7 @@ model JobBaseResource extends ProxyResourceBase {
   @path
   @key("id")
   @segment("jobs")
+  @visibility("read")
   name: string;
 
   /**

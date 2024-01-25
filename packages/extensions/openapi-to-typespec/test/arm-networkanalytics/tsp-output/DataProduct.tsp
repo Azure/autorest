@@ -24,6 +24,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @path
   @key("dataProductName")
   @segment("dataProducts")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;

@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalRevisionContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PortalRevisionContract extends ProxyResourceBase {
   /**
    * Portal revision identifier. Must be unique in the current API Management service instance.
@@ -31,6 +31,7 @@ model PortalRevisionContract extends ProxyResourceBase {
   @path
   @key("portalRevisionId")
   @segment("portalRevisions")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-@Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
 model DataConnector extends ProxyResourceBase {
   /**
    * Connector name.
@@ -29,6 +29,7 @@ model DataConnector extends ProxyResourceBase {
   @path
   @key("dataConnectorName")
   @segment("dataConnectors")
+  @visibility("read")
   name: string;
 
   /**

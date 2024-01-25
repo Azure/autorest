@@ -23,6 +23,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @path
   @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
 }
 

@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.Authorization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleAssignmentScheduleProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model RoleAssignmentSchedule extends ExtensionResourceBase {
   /**
    * The name (guid) of the role assignment schedule to get.
@@ -27,6 +27,7 @@ model RoleAssignmentSchedule extends ExtensionResourceBase {
   @path
   @key("roleAssignmentScheduleName")
   @segment("roleAssignmentSchedules")
+  @visibility("read")
   name: string;
 
   /**

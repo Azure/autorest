@@ -24,6 +24,7 @@ model Association is TrackedResource<AssociationProperties> {
   @path
   @key("associationName")
   @segment("associations")
+  @visibility("read")
   name: string;
 }
 

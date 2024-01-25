@@ -19,13 +19,14 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   TableServicePropertiesProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model TableServiceProperties extends ProxyResourceBase {
   @key("tableService")
   @segment("tableServices")
+  @visibility("read")
   name: string;
 
   /**

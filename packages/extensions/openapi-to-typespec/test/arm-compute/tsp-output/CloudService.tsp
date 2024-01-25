@@ -16,16 +16,44 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(CloudServiceProperties)
 @includeInapplicableMetadataInPayload(false)
-model CloudService extends TrackedResourceBase {
+model CloudService {
   /**
    * Name of the cloud service.
    */
   @path
   @key("cloudServiceName")
   @segment("cloudServices")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource Id.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  @visibility("read")
+  systemData?: SystemData;
 
   /**
    * List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.

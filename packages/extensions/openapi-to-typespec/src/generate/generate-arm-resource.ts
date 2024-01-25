@@ -2,6 +2,7 @@ import { Case } from "change-case-all";
 import { TypespecOperation, TspArmResource } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
+import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -26,7 +27,7 @@ export function generateArmResource(resource: TspArmResource): string {
   }
 
   if (
-    !resource.baseModelName &&
+    getArmCommonTypeVersion() &&
     !resource.propertiesPropertyRequired &&
     resource.propertiesPropertyVisibility.length === 2 &&
     resource.propertiesPropertyVisibility.includes("read") &&
@@ -42,12 +43,16 @@ export function generateArmResource(resource: TspArmResource): string {
     definitions.push(
       `#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`,
     );
-    definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
     definitions.push(`@includeInapplicableMetadataInPayload(false)`);
 
-    if (resource.baseModelName) {
-      definitions.push(`model ${resource.name} extends ${resource.baseModelName} {`);
+    if (!getArmCommonTypeVersion()) {
+      if (resource.baseModelName) {
+        definitions.push(`model ${resource.name} extends ${resource.baseModelName} {`);
+      } else {
+        definitions.push(`model ${resource.name} {`);
+      }
     } else {
+      definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
       definitions.push(`model ${resource.name} extends ${resource.resourceKind}Base {`);
     }
 

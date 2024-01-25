@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(CacheContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CacheContractProperties)
 model CacheContract extends ProxyResourceBase {
   /**
    * Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier).
@@ -30,6 +30,7 @@ model CacheContract extends ProxyResourceBase {
   @path
   @key("cacheId")
   @segment("caches")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,9 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachine)
-@Azure.ResourceManager.Private.armResourceInternal(
-  VirtualMachineRunCommandProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineRunCommand extends Resource {
   /**
@@ -29,6 +26,7 @@ model VirtualMachineRunCommand extends Resource {
   @path
   @key("runCommandName")
   @segment("runCommands")
+  @visibility("read")
   name: string;
 
   /**

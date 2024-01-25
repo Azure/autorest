@@ -18,9 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachineScaleSetVM)
-@Azure.ResourceManager.Private.armResourceInternal(
-  VirtualMachineExtensionProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
   /**
@@ -29,7 +26,20 @@ model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
   @path
   @key("vmExtensionName")
   @segment("extensions")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * The location of the extension.
+   */
+  @visibility("read", "create")
+  location?: string;
 
   /**
    * Describes the properties of a Virtual Machine Extension.

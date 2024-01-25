@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.AlertsManagement;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AlertProcessingRuleProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AlertProcessingRule extends TrackedResourceBase {
   /**
    * The name of the alert processing rule that needs to be fetched.
@@ -27,6 +27,7 @@ model AlertProcessingRule extends TrackedResourceBase {
   @path
   @key("alertProcessingRuleName")
   @segment("actionRules")
+  @visibility("read")
   name: string;
 
   /**

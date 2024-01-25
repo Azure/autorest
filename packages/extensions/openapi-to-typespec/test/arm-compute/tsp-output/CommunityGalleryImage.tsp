@@ -18,9 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CommunityGallery)
-@Azure.ResourceManager.Private.armResourceInternal(
-  CommunityGalleryImageProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGalleryImage extends PirCommunityGalleryResource {
   /**
@@ -29,6 +26,7 @@ model CommunityGalleryImage extends PirCommunityGalleryResource {
   @path
   @key("galleryImageName")
   @segment("images")
+  @visibility("read")
   name: string;
 
   /**

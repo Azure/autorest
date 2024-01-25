@@ -24,6 +24,7 @@ model Product is ProxyResource<ProductProperties> {
   @path
   @key("productName")
   @segment("products")
+  @visibility("read")
   name: string;
 }
 

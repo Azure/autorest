@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
 model ApiContract extends ProxyResourceBase {
   /**
    * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -30,6 +30,7 @@ model ApiContract extends ProxyResourceBase {
   @path
   @key("apiId")
   @segment("apis")
+  @visibility("read")
   name: string;
 
   /**

@@ -26,6 +26,7 @@ model ComputeResource is TrackedResource<{}> {
 @path
 @key("computeName")
 @segment("computes")
+@visibility("read")
 "name": string;
 
 ...Azure.ResourceManager.ManagedServiceIdentity

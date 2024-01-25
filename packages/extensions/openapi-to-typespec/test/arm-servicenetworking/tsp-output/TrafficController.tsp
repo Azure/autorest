@@ -22,6 +22,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
   @path
   @key("trafficControllerName")
   @segment("trafficControllers")
+  @visibility("read")
   name: string;
 }
 

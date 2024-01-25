@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource extends ProxyResourceBase {
   /**
    * Name of the private link resource.
@@ -29,6 +29,7 @@ model PrivateLinkResource extends ProxyResourceBase {
   @path
   @key("privateLinkSubResourceName")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
 
   /**

@@ -19,11 +19,12 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(BlobContainer)
-@Azure.ResourceManager.Private.armResourceInternal(ImmutabilityPolicyProperty)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ImmutabilityPolicyProperty)
 model ImmutabilityPolicy extends ProxyResourceBase {
   @key("immutabilityPolicy")
   @segment("immutabilityPolicies")
+  @visibility("read")
   name: string;
 
   /**

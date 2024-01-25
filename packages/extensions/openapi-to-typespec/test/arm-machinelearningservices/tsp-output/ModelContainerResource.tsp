@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@Azure.ResourceManager.Private.armResourceInternal(ModelContainer)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ModelContainer)
 model ModelContainerResource extends ProxyResourceBase {
   /**
    * Container name. This is case-sensitive.
@@ -28,6 +28,7 @@ model ModelContainerResource extends ProxyResourceBase {
   @path
   @key("modelName")
   @segment("models")
+  @visibility("read")
   name: string;
 
   /**

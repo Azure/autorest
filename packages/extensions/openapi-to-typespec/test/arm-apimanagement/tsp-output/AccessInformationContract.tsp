@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AccessInformationContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AccessInformationContract extends ProxyResourceBase {
   /**
    * The identifier of the Access configuration.
@@ -29,6 +29,7 @@ model AccessInformationContract extends ProxyResourceBase {
   @path
   @key("accessName")
   @segment("tenant")
+  @visibility("read")
   name: AccessIdName;
 
   /**

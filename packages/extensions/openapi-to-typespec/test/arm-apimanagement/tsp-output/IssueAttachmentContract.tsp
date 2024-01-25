@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueAttachmentContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model IssueAttachmentContract extends ProxyResourceBase {
   /**
    * Attachment identifier within an Issue. Must be unique in the current Issue.
@@ -32,6 +32,7 @@ model IssueAttachmentContract extends ProxyResourceBase {
   @path
   @key("attachmentId")
   @segment("attachments")
+  @visibility("read")
   name: string;
 
   /**

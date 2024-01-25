@@ -18,7 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RestorePoint)
-@Azure.ResourceManager.Private.armResourceInternal(DiskRestorePointProperties)
 @includeInapplicableMetadataInPayload(false)
 model DiskRestorePoint extends ProxyOnlyResource {
   /**
@@ -27,6 +26,7 @@ model DiskRestorePoint extends ProxyOnlyResource {
   @path
   @key("diskRestorePointName")
   @segment("diskRestorePoints")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
 model NamedValueContract extends ProxyResourceBase {
   /**
    * Identifier of the NamedValue.
@@ -29,6 +29,7 @@ model NamedValueContract extends ProxyResourceBase {
   @path
   @key("namedValueId")
   @segment("namedValues")
+  @visibility("read")
   name: string;
 
   /**

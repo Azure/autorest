@@ -24,6 +24,7 @@ model Account is TrackedResource<AccountProperties> {
   @path
   @key("name")
   @segment("accounts")
+  @visibility("read")
   name: string;
 }
 

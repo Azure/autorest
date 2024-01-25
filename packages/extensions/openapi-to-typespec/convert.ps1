@@ -42,7 +42,7 @@ function GenerateMetadata ()
 function DoConvert ()
 {
     Write-Host "##Converting from swagger to tsp with in $outputFolder with $converterCodegen"
-    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder --src-path=tsp-output $swaggerConfigFile"
+    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }

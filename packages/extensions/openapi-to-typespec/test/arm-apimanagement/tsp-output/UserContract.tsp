@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(UserContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(UserContractProperties)
 model UserContract extends ProxyResourceBase {
   /**
    * User identifier. Must be unique in the current API Management service instance.
@@ -29,6 +29,7 @@ model UserContract extends ProxyResourceBase {
   @path
   @key("userId")
   @segment("users")
+  @visibility("read")
   name: string;
 
   /**

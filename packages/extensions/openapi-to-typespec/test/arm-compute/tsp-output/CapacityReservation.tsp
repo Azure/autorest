@@ -18,9 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CapacityReservationGroup)
-@Azure.ResourceManager.Private.armResourceInternal(
-  CapacityReservationProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model CapacityReservation extends Resource {
   /**
@@ -29,6 +26,7 @@ model CapacityReservation extends Resource {
   @path
   @key("capacityReservationName")
   @segment("capacityReservations")
+  @visibility("read")
   name: string;
 
   /**

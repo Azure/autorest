@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
 model ApiReleaseContract extends ProxyResourceBase {
   /**
    * Release identifier within an API. Must be unique in the current API Management service instance.
@@ -30,6 +30,7 @@ model ApiReleaseContract extends ProxyResourceBase {
   @path
   @key("releaseId")
   @segment("releases")
+  @visibility("read")
   name: string;
 
   /**

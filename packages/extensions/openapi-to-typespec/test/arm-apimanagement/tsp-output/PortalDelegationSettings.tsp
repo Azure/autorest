@@ -19,13 +19,14 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("delegation")
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalDelegationSettingsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PortalDelegationSettings extends ProxyResourceBase {
   @key("portalsetting")
   @segment("portalsettings")
+  @visibility("read")
   name: string;
 
   /**

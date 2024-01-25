@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   WorkspaceConnectionPropertiesV2
 )
-@includeInapplicableMetadataInPayload(false)
 model WorkspaceConnectionPropertiesV2BasicResource extends ProxyResourceBase {
   /**
    * Friendly name of the workspace connection
@@ -28,6 +28,7 @@ model WorkspaceConnectionPropertiesV2BasicResource extends ProxyResourceBase {
   @path
   @key("connectionName")
   @segment("connections")
+  @visibility("read")
   name: string;
 
   @extension("x-ms-client-flatten", true)

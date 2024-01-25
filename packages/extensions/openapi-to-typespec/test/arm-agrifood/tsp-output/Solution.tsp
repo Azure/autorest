@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-@Azure.ResourceManager.Private.armResourceInternal(SolutionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SolutionProperties)
 model Solution extends ProxyResourceBase {
   /**
    * SolutionId for Data Manager For Agriculture Resource.
@@ -28,6 +28,7 @@ model Solution extends ProxyResourceBase {
   @path
   @key("solutionId")
   @segment("solutions")
+  @visibility("read")
   name: string;
 
   /**

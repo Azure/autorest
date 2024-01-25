@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   SubscriptionContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model SubscriptionContract extends ProxyResourceBase {
   /**
    * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -29,6 +29,7 @@ model SubscriptionContract extends ProxyResourceBase {
   @path
   @key("subscriptionId")
   @segment("subscriptions")
+  @visibility("read")
   name: string;
 
   /**

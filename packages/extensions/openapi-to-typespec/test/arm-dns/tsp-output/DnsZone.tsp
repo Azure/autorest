@@ -16,7 +16,6 @@ namespace Azure.ResourceManager.Dns;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(ZoneProperties)
 @includeInapplicableMetadataInPayload(false)
 model DnsZone extends Resource {
   /**
@@ -25,6 +24,7 @@ model DnsZone extends Resource {
   @path
   @key("zoneName")
   @segment("dnsZones")
+  @visibility("read")
   name: string;
 
   /**

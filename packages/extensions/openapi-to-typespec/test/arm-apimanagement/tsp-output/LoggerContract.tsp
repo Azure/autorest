@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@Azure.ResourceManager.Private.armResourceInternal(LoggerContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LoggerContractProperties)
 model LoggerContract extends ProxyResourceBase {
   /**
    * Logger identifier. Must be unique in the API Management service instance.
@@ -29,6 +29,7 @@ model LoggerContract extends ProxyResourceBase {
   @path
   @key("loggerId")
   @segment("loggers")
+  @visibility("read")
   name: string;
 
   /**

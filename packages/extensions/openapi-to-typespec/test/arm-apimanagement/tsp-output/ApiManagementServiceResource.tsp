@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.ApiManagement;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ApiManagementServiceProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ApiManagementServiceResource extends TrackedResourceBase {
   /**
    * The name of the API Management service.
@@ -30,6 +30,7 @@ model ApiManagementServiceResource extends TrackedResourceBase {
   @path
   @key("serviceName")
   @segment("service")
+  @visibility("read")
   name: string;
 
   /**

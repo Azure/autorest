@@ -18,10 +18,10 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ObjectReplicationPolicyProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model ObjectReplicationPolicy extends ProxyResourceBase {
   /**
    * For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.
@@ -30,6 +30,7 @@ model ObjectReplicationPolicy extends ProxyResourceBase {
   @path
   @key("objectReplicationPolicyId")
   @segment("objectReplicationPolicies")
+  @visibility("read")
   name: string;
 
   /**

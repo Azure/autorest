@@ -24,6 +24,7 @@ model Application is TrackedResource<ApplicationProperties> {
   @path
   @key("applicationName")
   @segment("applications")
+  @visibility("read")
   name: string;
 }
 

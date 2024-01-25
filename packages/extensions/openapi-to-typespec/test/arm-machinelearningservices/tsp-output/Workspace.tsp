@@ -16,8 +16,8 @@ namespace Azure.ResourceManager.MachineLearning;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
 model Workspace extends TrackedResourceBase {
   /**
    * Name of Azure Machine Learning workspace.
@@ -26,6 +26,7 @@ model Workspace extends TrackedResourceBase {
   @path
   @key("workspaceName")
   @segment("workspaces")
+  @visibility("read")
   name: string;
 
   kind?: string;

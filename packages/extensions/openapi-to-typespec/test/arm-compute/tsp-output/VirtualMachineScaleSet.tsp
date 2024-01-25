@@ -16,9 +16,6 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  VirtualMachineScaleSetProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSet extends Resource {
   /**
@@ -27,6 +24,7 @@ model VirtualMachineScaleSet extends Resource {
   @path
   @key("vmScaleSetName")
   @segment("virtualMachineScaleSets")
+  @visibility("read")
   name: string;
 
   /**

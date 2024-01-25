@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   TagDescriptionContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model TagDescriptionContract extends ProxyResourceBase {
   /**
    * Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names.
@@ -32,6 +32,7 @@ model TagDescriptionContract extends ProxyResourceBase {
   @path
   @key("tagDescriptionId")
   @segment("tagDescriptions")
+  @visibility("read")
   name: string;
 
   /**

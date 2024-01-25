@@ -17,10 +17,10 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   DataManagerForAgricultureExtensionProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model DataManagerForAgricultureExtension extends ProxyResourceBase {
   /**
    * dataManagerForAgricultureExtensionId to be queried.
@@ -29,6 +29,7 @@ model DataManagerForAgricultureExtension extends ProxyResourceBase {
   @path
   @key("dataManagerForAgricultureExtensionId")
   @segment("farmBeatsExtensionDefinitions")
+  @visibility("read")
   name: string;
 
   /**

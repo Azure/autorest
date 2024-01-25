@@ -19,13 +19,14 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("signup")
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalSignupSettingsProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model PortalSignupSettings extends ProxyResourceBase {
   @key("portalsetting")
   @segment("portalsettings")
+  @visibility("read")
   name: string;
 
   /**

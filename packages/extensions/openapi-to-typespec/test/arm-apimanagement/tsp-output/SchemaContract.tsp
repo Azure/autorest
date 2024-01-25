@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@Azure.ResourceManager.Private.armResourceInternal(SchemaContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SchemaContractProperties)
 model SchemaContract extends ProxyResourceBase {
   /**
    * Schema id identifier. Must be unique in the current API Management service instance.
@@ -29,6 +29,7 @@ model SchemaContract extends ProxyResourceBase {
   @path
   @key("schemaId")
   @segment("schemas")
+  @visibility("read")
   name: string;
 
   /**

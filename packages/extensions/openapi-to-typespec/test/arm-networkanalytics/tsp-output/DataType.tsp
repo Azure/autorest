@@ -26,6 +26,7 @@ model DataType is ProxyResource<DataTypeProperties> {
   @path
   @key("dataTypeName")
   @segment("dataTypes")
+  @visibility("read")
   name: string;
 }
 

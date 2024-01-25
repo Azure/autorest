@@ -24,6 +24,7 @@ model Frontend is TrackedResource<FrontendProperties> {
   @path
   @key("frontendName")
   @segment("frontends")
+  @visibility("read")
   name: string;
 }
 

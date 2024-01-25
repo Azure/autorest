@@ -16,8 +16,8 @@ namespace Azure.ResourceManager.Authorization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(DenyAssignmentProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DenyAssignmentProperties)
 model DenyAssignment extends ExtensionResourceBase {
   /**
    * The ID of the deny assignment to get.
@@ -25,6 +25,7 @@ model DenyAssignment extends ExtensionResourceBase {
   @path
   @key("denyAssignmentId")
   @segment("denyAssignments")
+  @visibility("read")
   name: string;
 
   /**

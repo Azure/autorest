@@ -18,16 +18,28 @@ namespace Azure.ResourceManager.Dns;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DnsZone)
-@Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
 @includeInapplicableMetadataInPayload(false)
-model DnsRecord extends ProxyResourceBase {
+model DnsRecord {
   /**
    * The name of the record set, relative to the name of the zone.
    */
   @path
   @key("relativeRecordSetName")
   @segment("A")
+  @visibility("read")
   name: string;
+
+  /**
+   * The ID of the record set.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The type of the record set.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The etag of the record set.

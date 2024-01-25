@@ -18,16 +18,40 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CloudService)
-@Azure.ResourceManager.Private.armResourceInternal(RoleInstanceProperties)
 @includeInapplicableMetadataInPayload(false)
-model RoleInstance extends ProxyResourceBase {
+model RoleInstance {
   /**
    * Name of the role instance.
    */
   @path
   @key("roleInstanceName")
   @segment("roleInstances")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource Type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource Location.
+   */
+  @visibility("read")
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  @visibility("read")
+  tags?: Record<string>;
 
   /**
    * The role instance SKU.

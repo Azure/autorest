@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   GatewayCertificateAuthorityContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model GatewayCertificateAuthorityContract extends ProxyResourceBase {
   /**
    * Identifier of the certificate entity. Must be unique in the current API Management service instance.
@@ -32,6 +32,7 @@ model GatewayCertificateAuthorityContract extends ProxyResourceBase {
   @path
   @key("certificateId")
   @segment("certificateAuthorities")
+  @visibility("read")
   name: string;
 
   /**

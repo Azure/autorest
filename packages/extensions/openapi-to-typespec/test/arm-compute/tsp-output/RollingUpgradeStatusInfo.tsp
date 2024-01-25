@@ -19,13 +19,11 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("latest")
 @parentResource(VirtualMachineScaleSet)
-@Azure.ResourceManager.Private.armResourceInternal(
-  RollingUpgradeStatusInfoProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model RollingUpgradeStatusInfo extends Resource {
   @key("rollingUpgrade")
   @segment("rollingUpgrades")
+  @visibility("read")
   name: string;
 
   /**

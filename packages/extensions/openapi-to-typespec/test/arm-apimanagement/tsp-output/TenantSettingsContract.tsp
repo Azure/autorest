@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   TenantSettingsContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model TenantSettingsContract extends ProxyResourceBase {
   /**
    * The identifier of the settings.
@@ -29,6 +29,7 @@ model TenantSettingsContract extends ProxyResourceBase {
   @path
   @key("settingsType")
   @segment("settings")
+  @visibility("read")
   name: SettingsTypeName;
 
   /**

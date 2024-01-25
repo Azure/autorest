@@ -16,8 +16,8 @@ namespace Azure.ResourceManager.Authorization;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
 model RoleDefinition extends ExtensionResourceBase {
   /**
    * The ID of the role definition.
@@ -25,6 +25,7 @@ model RoleDefinition extends ExtensionResourceBase {
   @path
   @key("roleDefinitionId")
   @segment("roleDefinitions")
+  @visibility("read")
   name: string;
 
   /**

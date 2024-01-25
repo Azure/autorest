@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   AuthorizationServerContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model AuthorizationServerContract extends ProxyResourceBase {
   /**
    * Identifier of the authorization server.
@@ -32,6 +32,7 @@ model AuthorizationServerContract extends ProxyResourceBase {
   @path
   @key("authsid")
   @segment("authorizationServers")
+  @visibility("read")
   name: string;
 
   /**

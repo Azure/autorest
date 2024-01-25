@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EnvironmentContainerResource)
-@Azure.ResourceManager.Private.armResourceInternal(EnvironmentVersion)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentVersion)
 model EnvironmentVersionResource extends ProxyResourceBase {
   /**
    * Version identifier. This is case-sensitive.
@@ -27,6 +27,7 @@ model EnvironmentVersionResource extends ProxyResourceBase {
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
 
   /**

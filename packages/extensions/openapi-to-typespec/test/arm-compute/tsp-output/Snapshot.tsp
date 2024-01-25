@@ -16,7 +16,6 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
 @includeInapplicableMetadataInPayload(false)
 model Snapshot extends Resource {
   /**
@@ -25,6 +24,7 @@ model Snapshot extends Resource {
   @path
   @key("snapshotName")
   @segment("snapshots")
+  @visibility("read")
   name: string;
 
   /**

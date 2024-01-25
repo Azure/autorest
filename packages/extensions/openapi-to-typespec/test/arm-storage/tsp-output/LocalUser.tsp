@@ -18,8 +18,8 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-@Azure.ResourceManager.Private.armResourceInternal(LocalUserProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LocalUserProperties)
 model LocalUser extends ProxyResourceBase {
   /**
    * The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.
@@ -29,6 +29,7 @@ model LocalUser extends ProxyResourceBase {
   @path
   @key("username")
   @segment("localUsers")
+  @visibility("read")
   name: string;
 
   /**

@@ -156,9 +156,6 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
 }
 
 const _ArmCoreTypes = [
-  "TrackedResource",
-  "ProxyResource",
-  "ExtensionResource",
   "ResourceProvisioningState",
   "OperationListResult",
   "Origin",
@@ -172,6 +169,9 @@ const _ArmCoreTypes = [
 ];
 
 const _ArmCoreCustomTypes = [
+  "TrackedResource",
+  "ProxyResource",
+  "ExtensionResource",
   "ManagedServiceIdentity",
   "ManagedIdentityProperties",
   "UserAssignedIdentity",

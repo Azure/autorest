@@ -16,8 +16,8 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(QueueServiceProperties)
-@Azure.ResourceManager.Private.armResourceInternal(QueueProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(QueueProperties)
 model StorageQueue extends ProxyResourceBase {
   /**
    * A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.
@@ -28,6 +28,7 @@ model StorageQueue extends ProxyResourceBase {
   @path
   @key("queueName")
   @segment("queues")
+  @visibility("read")
   name: string;
 
   /**

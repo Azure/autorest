@@ -17,8 +17,8 @@ namespace Azure.ResourceManager.AlertsManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
 model Alert extends ProxyResourceBase {
   /**
    * Unique ID of an alert instance.
@@ -26,6 +26,7 @@ model Alert extends ProxyResourceBase {
   @path
   @key("alertId")
   @segment("alerts")
+  @visibility("read")
   name: string;
 
   /**

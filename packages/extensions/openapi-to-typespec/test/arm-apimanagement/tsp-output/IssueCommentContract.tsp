@@ -18,10 +18,10 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
+@includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueCommentContractProperties
 )
-@includeInapplicableMetadataInPayload(false)
 model IssueCommentContract extends ProxyResourceBase {
   /**
    * Comment identifier within an Issue. Must be unique in the current Issue.
@@ -32,6 +32,7 @@ model IssueCommentContract extends ProxyResourceBase {
   @path
   @key("commentId")
   @segment("comments")
+  @visibility("read")
   name: string;
 
   /**

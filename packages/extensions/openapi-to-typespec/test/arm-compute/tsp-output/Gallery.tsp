@@ -16,7 +16,6 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(GalleryProperties)
 @includeInapplicableMetadataInPayload(false)
 model Gallery extends Resource {
   /**
@@ -25,6 +24,7 @@ model Gallery extends Resource {
   @path
   @key("galleryName")
   @segment("galleries")
+  @visibility("read")
   name: string;
 
   /**

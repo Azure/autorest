@@ -16,8 +16,8 @@ namespace Microsoft.Storage;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
 model StorageAccount extends TrackedResourceBase {
   /**
    * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
@@ -27,6 +27,7 @@ model StorageAccount extends TrackedResourceBase {
   @path
   @key("accountName")
   @segment("storageAccounts")
+  @visibility("read")
   name: string;
 
   /**

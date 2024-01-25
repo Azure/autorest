@@ -22,6 +22,7 @@ model Quota is ProxyResource<QuotaProperties> {
   @path
   @key("name")
   @segment("quotas")
+  @visibility("read")
   name: QuotaNames;
 }
 

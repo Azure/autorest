@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OperationContract)
-@Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
 model PolicyContract extends ProxyResourceBase {
   /**
    * The identifier of the Policy.
@@ -27,6 +27,7 @@ model PolicyContract extends ProxyResourceBase {
   @path
   @key("policyId")
   @segment("policies")
+  @visibility("read")
   name: PolicyIdName;
 
   /**

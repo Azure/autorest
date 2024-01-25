@@ -16,9 +16,6 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(
-  ProximityPlacementGroupProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model ProximityPlacementGroup extends Resource {
   /**
@@ -27,6 +24,7 @@ model ProximityPlacementGroup extends Resource {
   @path
   @key("proximityPlacementGroupName")
   @segment("proximityPlacementGroups")
+  @visibility("read")
   name: string;
 
   /**

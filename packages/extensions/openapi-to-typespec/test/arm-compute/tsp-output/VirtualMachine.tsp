@@ -16,7 +16,6 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachine extends Resource {
   /**
@@ -25,6 +24,7 @@ model VirtualMachine extends Resource {
   @path
   @key("vmName")
   @segment("virtualMachines")
+  @visibility("read")
   name: string;
 
   /**

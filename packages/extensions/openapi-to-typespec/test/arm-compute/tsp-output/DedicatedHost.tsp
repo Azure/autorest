@@ -18,7 +18,6 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DedicatedHostGroup)
-@Azure.ResourceManager.Private.armResourceInternal(DedicatedHostProperties)
 @includeInapplicableMetadataInPayload(false)
 model DedicatedHost extends Resource {
   /**
@@ -27,6 +26,7 @@ model DedicatedHost extends Resource {
   @path
   @key("hostName")
   @segment("hosts")
+  @visibility("read")
   name: string;
 
   /**

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@Azure.ResourceManager.Private.armResourceInternal(OperationContractProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OperationContractProperties)
 model OperationContract extends ProxyResourceBase {
   /**
    * Operation identifier within an API. Must be unique in the current API Management service instance.
@@ -29,6 +29,7 @@ model OperationContract extends ProxyResourceBase {
   @path
   @key("operationId")
   @segment("operations")
+  @visibility("read")
   name: string;
 
   /**

@@ -100,6 +100,11 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
       .map((p) => p.language.default.name)[0];
   }
 
+  const decorators = buildResourceDecorators(schema);
+  if(!getArmCommonTypeVersion() && schema.resourceMetadata.IsExtensionResource) {
+    decorators.push({ name: "extensionResource" });
+  }
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
@@ -113,7 +118,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     propertiesPropertyVisibility,
     propertiesPropertyDescription,
     doc: schema.language.default.description,
-    decorators: buildResourceDecorators(schema),
+    decorators,
     resourceOperations: operations[0],
     normalOperations: operations[1],
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
@@ -122,9 +127,9 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
-  const knownProperties = ["properties", "id", "name", "type", "systemData", "location", "tags"];
+  const knownProperties = ["properties", "name"];
   if (!noCommonTypes) {
-    knownProperties.push(...["identity", "sku", "eTag", "plan"]);
+    knownProperties.push(...["id", "type", "systemData", "location", "tags", "identity", "sku", "eTag", "plan"]);
   }
   const otherProperties: TypespecObjectProperty[] = [];
   for (const property of schema.properties ?? []) {
@@ -847,6 +852,10 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
       name: "segment",
       arguments: [schema.resourceMetadata.ResourceKeySegment],
     },
+    {
+      name: "visibility",
+      arguments: ["read"],
+    }
   );
 
   // remove @path decorator for key parameter

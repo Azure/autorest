@@ -14,8 +14,8 @@ namespace Azure.ResourceManager.MachineLearning;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
 @includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
 model Registry extends TrackedResourceBase {
   /**
    * Name of Azure Machine Learning registry. This is case-insensitive
@@ -24,6 +24,7 @@ model Registry extends TrackedResourceBase {
   @path
   @key("registryName")
   @segment("registries")
+  @visibility("read")
   name: string;
 
   /**

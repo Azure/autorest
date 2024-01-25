@@ -17,16 +17,34 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-@Azure.ResourceManager.Private.armResourceInternal(OSFamilyProperties)
 @includeInapplicableMetadataInPayload(false)
-model OSFamily extends ProxyResourceBase {
+model OSFamily {
   /**
    * Name of the OS family.
    */
   @path
   @key("osFamilyName")
   @segment("cloudServiceOsFamilies")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource Id.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  @visibility("read")
+  location?: string;
 
   /**
    * OS family properties.
