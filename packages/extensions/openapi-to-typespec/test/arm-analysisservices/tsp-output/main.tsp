@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AzureAnalysisServices",
 })

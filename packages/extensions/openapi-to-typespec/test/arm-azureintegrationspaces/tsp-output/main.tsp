@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * The azure integration spaces resource provider.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Integration Spaces resource management API.",
 })

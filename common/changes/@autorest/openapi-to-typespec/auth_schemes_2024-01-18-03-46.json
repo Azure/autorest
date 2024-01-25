@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Support Auth",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

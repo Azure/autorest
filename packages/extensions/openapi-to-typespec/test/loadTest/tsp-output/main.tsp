@@ -8,6 +8,7 @@ using TypeSpec.Http;
  * These APIs allow end users to create, view and run load tests using Azure Load
  * Test Service.
  */
+@useAuth(AadOauth2Auth<["https://cnt-prod.loadtesting.azure.com/.default"]>)
 @service({
   title: "Load Testing Service",
 })
