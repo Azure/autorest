@@ -1,24 +1,34 @@
+import { pascalCase } from "@azure-tools/codegen";
+import { TypespecProgram } from "interfaces";
 import { getSession } from "../autorest-session";
 import { getOptions } from "../options";
 import { formatFile } from "../utils/format";
 
-export async function emitTypespecConfig(filePath: string): Promise<void> {
+export async function emitTypespecConfig(filePath: string, programDetails: TypespecProgram): Promise<void> {
   const session = getSession();
   const { isArm } = getOptions();
-  let content = `emit:
-  - "@azure-tools/typespec-autorest"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  let content = `
+  emit:
+    - "@azure-tools/typespec-autorest"
+
+  options:
+    "@azure-tools/typespec-autorest":
+      azure-resource-provider-folder: "data-plane"
+      emitter-output-dir: "{project-root}/.."
+      examples-directory: "{project-root}/examples"
+      output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+    # "@azure-tools/typespec-python":
+    #   "basic-setup-py": true
+    #   "package-version":
+    #   "package-name":
+    #   "output-path":
+    # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
+    # "@azure-tools/typespec-java": true
+    # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+    # "@azure-tools/typespec-csharp": true
+    # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+    # "@azure-tools/typespec-ts": true
 `;
 
   if (isArm) {

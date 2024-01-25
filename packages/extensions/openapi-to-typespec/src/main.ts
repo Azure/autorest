@@ -35,7 +35,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   await emitRoutes(getFilePath(session, "routes.tsp"), programDetails);
   await emitMain(getFilePath(session, "main.tsp"), programDetails);
   await emitPackage(getFilePath(session, "package.json"), programDetails);
-  await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"));
+  await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {
