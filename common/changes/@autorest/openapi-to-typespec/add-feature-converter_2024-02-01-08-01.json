@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Add support for custom resource, enhance doc conversion and fix default value issue",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}
