@@ -25,6 +25,7 @@ model InfrastructureResource
   @path
   @key("infrastructureResourceName")
   @segment("infrastructureResources")
+  @visibility("read")
   name: string;
 }
 

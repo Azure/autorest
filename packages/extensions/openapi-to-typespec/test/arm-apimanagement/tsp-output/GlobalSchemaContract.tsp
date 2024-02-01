@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Global Schema Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  GlobalSchemaContractProperties
+)
+model GlobalSchemaContract extends ProxyResourceBase {
   /**
    * Schema id identifier. Must be unique in the current API Management service instance.
    */
@@ -25,7 +31,14 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
   @path
   @key("schemaId")
   @segment("schemas")
+  @visibility("read")
   name: string;
+
+  /**
+   * Properties of the Global Schema.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GlobalSchemaContractProperties;
 }
 
 @armResourceOperations
@@ -65,8 +78,7 @@ interface GlobalSchemaContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * Solution resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-model Solution is ProxyResource<SolutionProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SolutionProperties)
+model Solution extends ProxyResourceBase {
   /**
    * SolutionId for Data Manager For Agriculture Resource.
    */
@@ -24,7 +28,14 @@ model Solution is ProxyResource<SolutionProperties> {
   @path
   @key("solutionId")
   @segment("solutions")
+  @visibility("read")
   name: string;
+
+  /**
+   * Solution resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SolutionProperties;
 
   ...Azure.ResourceManager.EntityTag;
 }
@@ -84,9 +95,9 @@ interface Solutions {
       names?: string[];
 
       /**
-* Filters on key-value pairs within the Properties object.
-eg. "{testKey} eq {testValue}".
-*/
+       * Filters on key-value pairs within the Properties object.
+       * eg. "{testKey} eq {testValue}".
+       */
       @query({
         name: "propertyFilters",
         format: "multi",
@@ -127,9 +138,9 @@ eg. "{testKey} eq {testValue}".
       maxLastModifiedDateTime?: utcDateTime;
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

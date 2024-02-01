@@ -15,16 +15,28 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * The Private Endpoint Connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model PrivateEndpointConnection
-  is TrackedResource<PrivateEndpointConnectionProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+model PrivateEndpointConnection extends TrackedResourceBase {
   /**
    * NRP Private Endpoint Connection Name
    */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * Private endpoint connection properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
@@ -38,9 +50,9 @@ interface PrivateEndpointConnections {
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
-* Called by end-users to approve or reject a PE connection.
-This method must validate and forward the call to NRP.
-*/
+   * Called by end-users to approve or reject a PE connection.
+   * This method must validate and forward the call to NRP.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
   /**

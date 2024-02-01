@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model ComponentContainerResource is ProxyResource<ComponentContainer> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ComponentContainer)
+model ComponentContainerResource extends ProxyResourceBase {
   /**
    * Container name.
    */
@@ -24,7 +28,14 @@ model ComponentContainerResource is ProxyResource<ComponentContainer> {
   @path
   @key("componentName")
   @segment("components")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ComponentContainer;
 }
 
 @armResourceOperations
@@ -48,11 +59,7 @@ interface ComponentContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryComponentContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    ComponentContainerResource,
-    BaseParameters<ComponentContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<ComponentContainerResource>;
 
   /**
    * List containers.

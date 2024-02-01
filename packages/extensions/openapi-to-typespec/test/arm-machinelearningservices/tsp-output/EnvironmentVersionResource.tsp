@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EnvironmentContainerResource)
-model EnvironmentVersionResource is ProxyResource<EnvironmentVersion> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentVersion)
+model EnvironmentVersionResource extends ProxyResourceBase {
   /**
    * Version identifier. This is case-sensitive.
    */
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: EnvironmentVersion;
 }
 
 @armResourceOperations
@@ -47,11 +58,7 @@ interface EnvironmentVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryEnvironmentVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    EnvironmentVersionResource,
-    BaseParameters<EnvironmentVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<EnvironmentVersionResource>;
 
   /**
    * List versions.

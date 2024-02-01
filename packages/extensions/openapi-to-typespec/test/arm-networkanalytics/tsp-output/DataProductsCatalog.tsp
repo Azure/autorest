@@ -18,6 +18,7 @@ namespace Microsoft.NetworkAnalytics;
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
   @key("dataProductsCatalog")
   @segment("dataProductsCatalogs")
+  @visibility("read")
   name: string;
 }
 

@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model CodeContainerResource is ProxyResource<CodeContainer> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(CodeContainer)
+model CodeContainerResource extends ProxyResourceBase {
   /**
    * Container name.
    */
@@ -24,7 +28,14 @@ model CodeContainerResource is ProxyResource<CodeContainer> {
   @path
   @key("codeName")
   @segment("codes")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CodeContainer;
 }
 
 @armResourceOperations
@@ -48,11 +59,7 @@ interface CodeContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryCodeContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    CodeContainerResource,
-    BaseParameters<CodeContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<CodeContainerResource>;
 
   /**
    * List containers.

@@ -15,16 +15,28 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tenant Settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model TenantSettingsContract
-  is ProxyResource<TenantSettingsContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  TenantSettingsContractProperties
+)
+model TenantSettingsContract extends ProxyResourceBase {
   /**
    * The identifier of the settings.
    */
   @path
   @key("settingsType")
   @segment("settings")
+  @visibility("read")
   name: SettingsTypeName;
+
+  /**
+   * TenantSettings entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TenantSettingsContractProperties;
 }
 
 @armResourceOperations

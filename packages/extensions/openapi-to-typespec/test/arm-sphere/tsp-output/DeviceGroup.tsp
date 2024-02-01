@@ -24,6 +24,7 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
   @path
   @key("deviceGroupName")
   @segment("deviceGroups")
+  @visibility("read")
   name: string;
 }
 
@@ -37,31 +38,18 @@ interface DeviceGroups {
   /**
    * Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    DeviceGroup,
-    BaseParameters<DeviceGroup>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeviceGroup>;
 
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    DeviceGroup,
-    DeviceGroupUpdate,
-    BaseParameters<DeviceGroup>,
-    ArmLroLocationHeader
-  >;
+  update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
 
   /**
    * Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  delete is ArmResourceDeleteAsync<
-    DeviceGroup,
-    BaseParameters<DeviceGroup>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<DeviceGroup>;
 
   /**
    * List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
@@ -104,9 +92,7 @@ interface DeviceGroups {
    */
   claimDevices is ArmResourceActionNoResponseContentAsync<
     DeviceGroup,
-    ClaimDevicesRequest,
-    BaseParameters<DeviceGroup>,
-    ArmLroLocationHeader
+    ClaimDevicesRequest
   >;
 
   /**

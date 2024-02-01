@@ -15,13 +15,25 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Queue service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-model QueueServiceProperties
-  is ProxyResource<QueueServicePropertiesProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  QueueServicePropertiesProperties
+)
+model QueueServiceProperties extends ProxyResourceBase {
   @key("queueService")
   @segment("queueServices")
+  @visibility("read")
   name: string;
+
+  /**
+   * The properties of a storage account’s Queue service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: QueueServicePropertiesProperties;
 }
 
 @armResourceOperations

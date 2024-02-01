@@ -191,12 +191,10 @@ model QnASearchResultContext extends ContextDTO {}
  */
 model ContextDTO {
   /**
-* To mark if a prompt is relevant only with a previous question or not.
-true - Do
-* not include this QnA as search result for queries without context
-false -
-* ignores context and includes this QnA in search result
-*/
+   * To mark if a prompt is relevant only with a previous question or not.
+   * true - Do not include this QnA as search result for queries without context
+   * false - ignores context and includes this QnA in search result
+   */
   isContextOnly?: boolean;
 
   /**

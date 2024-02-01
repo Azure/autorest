@@ -15,15 +15,28 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model FeaturesetContainer is ProxyResource<FeaturesetContainerProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  FeaturesetContainerProperties
+)
+model FeaturesetContainer extends ProxyResourceBase {
   /**
    * Container name. This is case-sensitive.
    */
   @path
   @key("name")
   @segment("featuresets")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FeaturesetContainerProperties;
 }
 
 @armResourceOperations
@@ -41,11 +54,7 @@ interface FeaturesetContainers {
   /**
    * Delete container.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturesetContainer,
-    BaseParameters<FeaturesetContainer>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturesetContainer>;
 
   /**
    * List featurestore entity containers.

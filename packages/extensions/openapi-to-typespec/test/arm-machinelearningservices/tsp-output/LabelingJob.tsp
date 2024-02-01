@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model LabelingJob is ProxyResource<LabelingJobProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LabelingJobProperties)
+model LabelingJob extends ProxyResourceBase {
   /**
    * The name and identifier for the LabelingJob.
    */
   @path
   @key("id")
   @segment("labelingJobs")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabelingJobProperties;
 }
 
 @armResourceOperations
@@ -90,9 +101,7 @@ interface LabelingJobs {
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
-    ExportSummary,
-    BaseParameters<LabelingJob>,
-    ArmLroLocationHeader
+    ExportSummary
   >;
 
   /**
@@ -103,13 +112,7 @@ interface LabelingJobs {
   /**
    * Resume a labeling job (asynchronous).
    */
-  resume is ArmResourceActionAsync<
-    LabelingJob,
-    void,
-    void,
-    BaseParameters<LabelingJob>,
-    ArmLroLocationHeader
-  >;
+  resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
 @@projectedName(LabelingJobs.createOrUpdate::parameters.resource,

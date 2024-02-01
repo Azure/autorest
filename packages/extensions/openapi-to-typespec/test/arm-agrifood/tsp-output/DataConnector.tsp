@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * DataConnector Model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-model DataConnector is ProxyResource<DataConnectorProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
+model DataConnector extends ProxyResourceBase {
   /**
    * Connector name.
    */
@@ -25,7 +29,14 @@ model DataConnector is ProxyResource<DataConnectorProperties> {
   @path
   @key("dataConnectorName")
   @segment("dataConnectors")
+  @visibility("read")
   name: string;
+
+  /**
+   * DataConnector Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DataConnectorProperties;
 
   ...Azure.ResourceManager.EntityTag;
 }
@@ -58,9 +69,9 @@ interface DataConnectors {
       ...BaseParameters<DataConnector>;
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

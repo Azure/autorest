@@ -211,11 +211,11 @@ model DataManagerForAgricultureExtensionProperties {
   extensionApiDocsLink?: string;
 
   /**
-* Detailed information which shows summary of requested data.
-Used in descriptive get extension metadata call.
-Information for weather category per api included are apisSupported,
-customParameters, PlatformParameters and Units supported.
-*/
+   * Detailed information which shows summary of requested data.
+   * Used in descriptive get extension metadata call.
+   * Information for weather category per api included are apisSupported,
+   * customParameters, PlatformParameters and Units supported.
+   */
   @visibility("read")
   detailedInformation?: DetailedInformation[];
 }
@@ -457,9 +457,9 @@ model DataManagerForAgricultureUpdateProperties {
 }
 
 /**
-* Arm async operation class.
-Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
-*/
+ * Arm async operation class.
+ * Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
+ */
 model ArmAsyncOperation {
   /**
    * Status of the async operation.
@@ -467,16 +467,16 @@ model ArmAsyncOperation {
   status?: string;
 
   /**
-* Arm async operation error class.
-Ref: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.
-*/
+   * Arm async operation error class.
+   * Ref: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.
+   */
   error?: ArmAsyncOperationError;
 }
 
 /**
-* Arm async operation error class.
-Ref: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.
-*/
+ * Arm async operation error class.
+ * Ref: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.
+ */
 model ArmAsyncOperationError {
   /**
    * Status of the async operation.
@@ -651,9 +651,9 @@ model DataManagerForAgricultureSolutionProperties {
   partnerTenantId?: string;
 
   /**
-* Gets scope of the Data manager For Agriculture data access that's required for processing solution request to partner.
-Example: For gdd they might need weatherScope and satelliteScope.
-*/
+   * Gets scope of the Data manager For Agriculture data access that's required for processing solution request to partner.
+   * Example: For gdd they might need weatherScope and satelliteScope.
+   */
   @visibility("read")
   dataAccessScopes?: string[];
 

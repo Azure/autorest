@@ -15,20 +15,42 @@ namespace Azure.ResourceManager.Dns;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type).
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DnsZone)
-model DnsRecord is ProxyResource<RecordSetProperties> {
+@includeInapplicableMetadataInPayload(false)
+model DnsRecord {
   /**
    * The name of the record set, relative to the name of the zone.
    */
   @path
   @key("relativeRecordSetName")
   @segment("A")
+  @visibility("read")
   name: string;
+
+  /**
+   * The ID of the record set.
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * The type of the record set.
+   */
+  @visibility("read")
+  type?: string;
 
   /**
    * The etag of the record set.
    */
   etag?: string;
+
+  /**
+   * The properties of the record set.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RecordSetProperties;
 }
 
 @armResourceOperations

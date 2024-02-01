@@ -14,9 +14,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Deleted API Management Service information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedServiceContract
-  is ProxyResource<DeletedServiceContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  DeletedServiceContractProperties
+)
+model DeletedServiceContract extends ProxyResourceBase {
   /**
    * The name of the API Management service.
    */
@@ -26,7 +31,14 @@ model DeletedServiceContract
   @path
   @key("serviceName")
   @segment("deletedservices")
+  @visibility("read")
   name: string;
+
+  /**
+   * Deleted API Management Service details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedServiceContractProperties;
 }
 
 @armResourceOperations
@@ -43,11 +55,7 @@ interface DeletedServiceContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DeletedServices_Purge")
-  purge is ArmResourceDeleteAsync<
-    DeletedServiceContract,
-    BaseParameters<DeletedServiceContract>,
-    ArmLroLocationHeader
-  >;
+  purge is ArmResourceDeleteAsync<DeletedServiceContract>;
 
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.

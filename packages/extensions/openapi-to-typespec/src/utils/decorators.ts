@@ -137,6 +137,15 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     });
   }
 
+  if (element.extensions?.["x-ms-client-flatten"]) {
+    decorators.push({
+      name: "extension",
+      arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+    });
+  }
+
   return decorators;
 }
 

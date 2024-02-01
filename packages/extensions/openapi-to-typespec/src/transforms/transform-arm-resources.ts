@@ -1,7 +1,7 @@
 import { Operation, Parameter, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
-import { getSession } from "../autorest-session";
+import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { generateParameter } from "../generate/generate-parameter";
 import {
   ArmResourceKind,
@@ -68,11 +68,19 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   addGeneratedResourceObjectIfNotExits(schema.language.default.name, schema.language.default.name);
 
-  const propertiesModelSchema = schema.properties?.find((p) => p.serializedName === "properties")?.schema;
+  const propertiesModel = schema.properties?.find((p) => p.serializedName === "properties");
+  const propertiesModelSchema = propertiesModel?.schema;
   let propertiesModelName = propertiesModelSchema?.language.default.name;
+  let propertiesPropertyRequired = false;
+  let propertiesPropertyVisibility = ["read", "create"];
+  let propertiesPropertyDescription = "";
 
   if (propertiesModelSchema?.type === SchemaType.Dictionary) {
     propertiesModelName = "Record<unknown>";
+  } else if (propertiesModelSchema?.type === SchemaType.Object) {
+    propertiesPropertyRequired = propertiesModel?.required ?? false;
+    propertiesPropertyVisibility = propertiesModel?.extensions?.["x-ms-mutability"] ?? [];
+    propertiesPropertyDescription = propertiesModel?.language.default.description ?? "";
   }
 
   // TODO: deal with resources that has no properties property
@@ -83,39 +91,46 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
 
   const operations = getTspOperations(schema);
 
+  let baseModelName = undefined;
+  if (!getArmCommonTypeVersion()) {
+    const immediateParents = schema.parents?.immediate ?? [];
+
+    baseModelName = immediateParents
+      .filter((p) => p.language.default.name !== schema.language.default.name)
+      .map((p) => p.language.default.name)[0];
+  }
+
+  const decorators = buildResourceDecorators(schema);
+  if (!getArmCommonTypeVersion() && schema.resourceMetadata.IsExtensionResource) {
+    decorators.push({ name: "extensionResource" });
+  }
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
-    properties: [buildKeyProperty(schema), ...getOtherProperties(schema)],
+    properties: [buildKeyProperty(schema), ...getOtherProperties(schema, !getArmCommonTypeVersion())],
     name: schema.resourceMetadata.SwaggerModelName,
     parents: [],
     resourceParent: getParentResource(schema),
     propertiesModelName,
+    propertiesPropertyRequired,
+    propertiesPropertyVisibility,
+    propertiesPropertyDescription,
     doc: schema.language.default.description,
-    decorators: buildResourceDecorators(schema),
+    decorators,
     resourceOperations: operations[0],
     normalOperations: operations[1],
-    optionalStandardProperties: getResourceOptionalStandardProperties(schema),
+    optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
+    baseModelName,
   };
 }
 
-function getOtherProperties(schema: ArmResourceSchema): TypespecObjectProperty[] {
-  const knownProperties = [
-    "properties",
-    "id",
-    "name",
-    "type",
-    "systemData",
-    "location",
-    "tags",
-    "identity",
-    "sku",
-    "eTag",
-    "plan",
-    "kind",
-    "managedBy",
-  ];
+function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
+  const knownProperties = ["properties", "name"];
+  if (!noCommonTypes) {
+    knownProperties.push(...["id", "type", "systemData", "location", "tags", "identity", "sku", "eTag", "plan"]);
+  }
   const otherProperties: TypespecObjectProperty[] = [];
   for (const property of schema.properties ?? []) {
     if (!knownProperties.includes(property.serializedName)) {
@@ -155,16 +170,6 @@ function getResourceOptionalStandardProperties(schema: ArmResourceSchema): strin
   if (schema.properties?.find((p) => p.serializedName === "plan")) {
     // TODO: handle non-standard property
     optionalStandardProperties.push("Azure.ResourceManager.ResourcePlan");
-  }
-
-  if (schema.properties?.find((p) => p.serializedName === "kind")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourceKind");
-  }
-
-  if (schema.properties?.find((p) => p.serializedName === "managedBy")) {
-    // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ManagedBy");
   }
 
   return optionalStandardProperties;
@@ -213,23 +218,6 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
   return [];
 }
 
-function getLROHeader(swaggerOperation: Operation): string | undefined {
-  if (!swaggerOperation.extensions?.["x-ms-long-running-operation"]) {
-    return undefined;
-  }
-  let lroHeader = undefined;
-  const finalStateVia = swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"];
-  if (finalStateVia === "azure-async-operation") {
-    lroHeader = "ArmAsyncOperationHeader";
-  } else if (finalStateVia === "location") {
-    lroHeader = "ArmLroLocationHeader";
-    // TODO: deal with final-state-schema
-  } else {
-    // TODO: not sure how to deal with original-uri and operation-location
-  }
-  return lroHeader;
-}
-
 function getTSPOperationGroupName(resourceName: string): string {
   const operationGroupName = pluralize(resourceName);
   if (operationGroupName === resourceName) {
@@ -248,17 +236,10 @@ function convertResourceCreateOrReplaceOperation(
     const swaggerOperation = operations[operation.OperationID];
     const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const lroHeader = getLROHeader(swaggerOperation);
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     const templateParameters = [resourceMetadata.SwaggerModelName];
     if (baseParameters) {
       templateParameters.push(baseParameters);
-    }
-    if (lroHeader) {
-      if (!baseParameters) {
-        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-      }
-      templateParameters.push(lroHeader);
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
     const operationName = getOperationName(operation.OperationID);
@@ -266,15 +247,15 @@ function convertResourceCreateOrReplaceOperation(
     if (bodyParam) {
       if (bodyParam.language.default.name !== "resource") {
         augmentedDecorators.push(
-          `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.resource, "json", "${bodyParam.language.default.name}");`,
+          `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "json", "${bodyParam.language.default.name}");`,
         );
         augmentedDecorators.push(
-          `@@extension(${tspOperationGroupName}.${operationName}::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+          `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
         );
       }
       if (bodyParam.language.default.description !== "Resource create parameters.") {
         augmentedDecorators.push(
-          `@@doc(${tspOperationGroupName}.${operationName}::parameters.resource, "${bodyParam.language.default.description}");`,
+          `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "${bodyParam.language.default.description}");`,
         );
       }
     }
@@ -305,7 +286,6 @@ function convertResourceUpdateOperation(
     ) {
       const swaggerOperation = operations[operation.OperationID];
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-      const lroHeader = getLROHeader(swaggerOperation);
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const fixMe: string[] = [];
@@ -325,15 +305,15 @@ function convertResourceUpdateOperation(
         const operationName = getOperationName(operation.OperationID);
         if (bodyParam.language.default.name !== "properties") {
           augmentedDecorators.push(
-            `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.properties, "json", "${bodyParam.language.default.name}");`,
+            `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "json", "${bodyParam.language.default.name}");`,
           );
           augmentedDecorators.push(
-            `@@extension(${tspOperationGroupName}.${operationName}::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+            `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
           );
         }
         if (bodyParam.language.default.description !== "The resource properties to be updated.") {
           augmentedDecorators.push(
-            `@@doc(${tspOperationGroupName}.${operationName}::parameters.properties, "${bodyParam.language.default.description}");`,
+            `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "${bodyParam.language.default.description}");`,
           );
         }
       } else {
@@ -342,12 +322,6 @@ function convertResourceUpdateOperation(
       }
       if (baseParameters) {
         templateParameters.push(baseParameters);
-      }
-      if (lroHeader) {
-        if (!baseParameters) {
-          templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-        }
-        templateParameters.push(lroHeader);
       }
       return [
         {
@@ -376,18 +350,11 @@ function convertResourceDeleteOperation(
     const operation = resourceMetadata.DeleteOperations[0];
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const lroHeader = getLROHeader(swaggerOperation);
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     const templateParameters = [resourceMetadata.SwaggerModelName];
     if (baseParameters) {
       templateParameters.push(baseParameters);
-    }
-    if (lroHeader) {
-      if (!baseParameters) {
-        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-      }
-      templateParameters.push(lroHeader);
     }
     return [
       {
@@ -527,7 +494,6 @@ function convertResourceActionOperations(
         const swaggerOperation = operations[operation.OperationID];
         const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
         const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-        const lroHeader = getLROHeader(swaggerOperation);
         const okResponse = swaggerOperation?.responses?.filter(
           (o) => o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
@@ -555,12 +521,6 @@ function convertResourceActionOperations(
         if (baseParameters) {
           templateParameters.push(baseParameters);
         }
-        if (lroHeader) {
-          if (!baseParameters) {
-            templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-          }
-          templateParameters.push(lroHeader);
-        }
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
         const operationName = getOperationName(operation.OperationID);
@@ -568,15 +528,15 @@ function convertResourceActionOperations(
         if (bodyParam) {
           if (bodyParam.language.default.name !== "body") {
             augmentedDecorators.push(
-              `@@projectedName(${tspOperationGroupName}.${operationName}::parameters.body, "json", "${bodyParam.language.default.name}");`,
+              `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "json", "${bodyParam.language.default.name}");`,
             );
             augmentedDecorators.push(
-              `@@extension(${tspOperationGroupName}.${operationName}::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+              `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
             );
           }
           if (bodyParam.language.default.description !== "The content of the action request") {
             augmentedDecorators.push(
-              `@@doc(${tspOperationGroupName}.${operationName}::parameters.body, "${bodyParam.language.default.description}");`,
+              `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "${bodyParam.language.default.description}");`,
             );
           }
         }
@@ -747,8 +707,8 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
       params.push(generateParameter(parameter));
     }
     return `{
-    ...BaseParameters<${resource.SwaggerModelName}>,
-    ${params.join("\n")}
+    ...BaseParameters<${resource.SwaggerModelName}>;
+    ${params.join(";\n")}
     }`;
   }
 }
@@ -846,6 +806,10 @@ function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {
     {
       name: "segment",
       arguments: [schema.resourceMetadata.ResourceKeySegment],
+    },
+    {
+      name: "visibility",
+      arguments: ["read"],
     },
   );
 

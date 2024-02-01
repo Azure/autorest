@@ -14,7 +14,11 @@ namespace Microsoft.Storage;
 /**
  * The storage account.
  */
-model StorageAccount is TrackedResource<StorageAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
+model StorageAccount extends TrackedResourceBase {
   /**
    * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
    */
@@ -23,16 +27,28 @@ model StorageAccount is TrackedResource<StorageAccountProperties> {
   @path
   @key("accountName")
   @segment("storageAccounts")
+  @visibility("read")
   name: string;
+
+  /**
+   * Gets the Kind.
+   */
+  @visibility("read")
+  kind?: Kind;
 
   /**
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
 
+  /**
+   * Properties of the storage account.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageAccountProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -145,8 +161,7 @@ interface StorageAccounts {
        */
       @query("failoverType")
       failoverType?: "Planned";
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -164,8 +179,7 @@ interface StorageAccounts {
        */
       @query("requestType")
       requestType: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -174,9 +188,7 @@ interface StorageAccounts {
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void,
-    BaseParameters<StorageAccount>,
-    ArmLroLocationHeader
+    void
   >;
 
   /**
@@ -185,9 +197,7 @@ interface StorageAccounts {
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
-    BlobRestoreStatus,
-    BaseParameters<StorageAccount>,
-    ArmLroLocationHeader
+    BlobRestoreStatus
   >;
 
   /**

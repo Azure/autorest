@@ -178,7 +178,7 @@ export function transformParameter(parameter: Parameter, codeModel: CodeModel): 
     location: transformParameterLocation(parameter),
     decorators: getPropertyDecorators(parameter),
     serializedName: parameter.language.default.serializedName ?? parameter.language.default.name,
-    defaultValue: getDefaultValue(parameter.schema),
+    defaultValue: getDefaultValue(visited.name, parameter.schema),
   };
 }
 

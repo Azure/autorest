@@ -22,6 +22,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
   @path
   @key("trafficControllerName")
   @segment("trafficControllers")
+  @visibility("read")
   name: string;
 }
 
@@ -39,11 +40,7 @@ interface TrafficControllers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("TrafficControllerInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    TrafficController,
-    BaseParameters<TrafficController>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
 
   /**
    * Update a TrafficController
@@ -58,11 +55,7 @@ interface TrafficControllers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("TrafficControllerInterface_Delete")
-  delete is ArmResourceDeleteAsync<
-    TrafficController,
-    BaseParameters<TrafficController>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<TrafficController>;
 
   /**
    * List TrafficController resources by resource group

@@ -15,17 +15,30 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the Dedicated host.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DedicatedHostGroup)
-model DedicatedHost is TrackedResource<DedicatedHostProperties> {
+@includeInapplicableMetadataInPayload(false)
+model DedicatedHost extends Resource {
   /**
    * The name of the dedicated host.
    */
   @path
   @key("hostName")
   @segment("hosts")
+  @visibility("read")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
+   */
+  sku: Sku;
+
+  /**
+   * Properties of the dedicated host.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DedicatedHostProperties;
 }
 
 @armResourceOperations

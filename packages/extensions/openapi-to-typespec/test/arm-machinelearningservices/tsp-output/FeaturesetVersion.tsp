@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FeaturesetContainer)
-model FeaturesetVersion is ProxyResource<FeaturesetVersionProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FeaturesetVersionProperties)
+model FeaturesetVersion extends ProxyResourceBase {
   /**
    * Version identifier. This is case-sensitive.
    */
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FeaturesetVersionProperties;
 }
 
 @armResourceOperations
@@ -41,11 +52,7 @@ interface FeaturesetVersions {
   /**
    * Delete version.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturesetVersion,
-    BaseParameters<FeaturesetVersion>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturesetVersion>;
 
   /**
    * List versions.
@@ -113,9 +120,7 @@ interface FeaturesetVersions {
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
-    FeaturesetJob,
-    BaseParameters<FeaturesetVersion>,
-    ArmLroLocationHeader
+    FeaturesetJob
   >;
 
   /**

@@ -1145,9 +1145,9 @@ interface DataVersionsOperations {
       $orderBy?: string;
 
       /**
-* Top count of results, top count cannot be greater than the page size.
-                              If topCount > page size, results with be default page size count will be returned
-*/
+       * Top count of results, top count cannot be greater than the page size.
+       *                               If topCount > page size, results with be default page size count will be returned
+       */
       @query("$top")
       $top?: int32;
 

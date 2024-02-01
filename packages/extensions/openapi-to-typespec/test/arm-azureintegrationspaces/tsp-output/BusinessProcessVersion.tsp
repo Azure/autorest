@@ -23,6 +23,7 @@ model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
   @path
   @key("businessProcessVersion")
   @segment("versions")
+  @visibility("read")
   name: string;
 }
 

@@ -15,12 +15,25 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Sign-Up settings for a developer portal.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("signup")
 @parentResource(ApiManagementServiceResource)
-model PortalSignupSettings is ProxyResource<PortalSignupSettingsProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PortalSignupSettingsProperties
+)
+model PortalSignupSettings extends ProxyResourceBase {
   @key("portalsetting")
   @segment("portalsettings")
+  @visibility("read")
   name: string;
+
+  /**
+   * Sign-up settings contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PortalSignupSettingsProperties;
 }
 
 @armResourceOperations

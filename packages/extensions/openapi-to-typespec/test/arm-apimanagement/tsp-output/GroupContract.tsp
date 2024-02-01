@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model GroupContract is ProxyResource<GroupContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(GroupContractProperties)
+model GroupContract extends ProxyResourceBase {
   /**
    * Group identifier. Must be unique in the current API Management service instance.
    */
@@ -25,7 +29,14 @@ model GroupContract is ProxyResource<GroupContractProperties> {
   @path
   @key("groupId")
   @segment("groups")
+  @visibility("read")
   name: string;
+
+  /**
+   * Group entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GroupContractProperties;
 }
 
 @armResourceOperations

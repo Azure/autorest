@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -94,6 +96,7 @@ model SpaceUpdate {
   /**
    * The updatable properties of the Space.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SpaceUpdateProperties;
 }
 
@@ -165,6 +168,7 @@ model ApplicationUpdate {
   /**
    * The updatable properties of the Application.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationUpdateProperties;
 }
 
@@ -297,6 +301,7 @@ model BusinessProcessUpdate {
   /**
    * The updatable properties of the BusinessProcess.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BusinessProcessUpdateProperties;
 }
 
@@ -524,6 +529,7 @@ model ApplicationResource extends ProxyResource {
    * The resource-specific properties for this resource.
    */
   @visibility("read", "create")
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationResourceProperties;
 }
 
@@ -560,6 +566,7 @@ model ApplicationResourceUpdate {
   /**
    * The updatable properties of the ApplicationResource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationResourceUpdateProperties;
 }
 
@@ -626,6 +633,7 @@ model InfrastructureResourceUpdate {
   /**
    * The updatable properties of the InfrastructureResource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: InfrastructureResourceUpdateProperties;
 }
 

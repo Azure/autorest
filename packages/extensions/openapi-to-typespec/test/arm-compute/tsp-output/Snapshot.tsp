@@ -14,22 +14,40 @@ namespace Microsoft.Compute;
 /**
  * Snapshot resource.
  */
-model Snapshot is TrackedResource<SnapshotProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model Snapshot extends Resource {
   /**
    * The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.
    */
   @path
   @key("snapshotName")
   @segment("snapshots")
+  @visibility("read")
   name: string;
+
+  /**
+   * Unused. Always Null.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
+   * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot
+   */
+  sku?: SnapshotSku;
 
   /**
    * The extended location where the snapshot will be created. Extended location cannot be changed.
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Snapshot resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SnapshotProperties;
 }
 
 @armResourceOperations
@@ -70,24 +88,12 @@ interface Snapshots {
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ArmResourceActionAsync<
-    Snapshot,
-    GrantAccessData,
-    AccessUri,
-    BaseParameters<Snapshot>,
-    ArmLroLocationHeader
-  >;
+  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
 
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<
-    Snapshot,
-    void,
-    void,
-    BaseParameters<Snapshot>,
-    ArmLroLocationHeader
-  >;
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }
 
 @@projectedName(Snapshots.createOrUpdate::parameters.resource,

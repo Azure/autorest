@@ -24,6 +24,7 @@ model Frontend is TrackedResource<FrontendProperties> {
   @path
   @key("frontendName")
   @segment("frontends")
+  @visibility("read")
   name: string;
 }
 
@@ -41,11 +42,7 @@ interface Frontends {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("FrontendsInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Frontend,
-    BaseParameters<Frontend>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
 
   /**
    * Update a Frontend
@@ -60,11 +57,7 @@ interface Frontends {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("FrontendsInterface_Delete")
-  delete is ArmResourceDeleteAsync<
-    Frontend,
-    BaseParameters<Frontend>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Frontend>;
 
   /**
    * List Frontend resources by TrafficController

@@ -15,15 +15,25 @@ namespace Microsoft.Compute;
 /**
  * Properties of disk restore point
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RestorePoint)
-model DiskRestorePoint is ProxyResource<DiskRestorePointProperties> {
+@includeInapplicableMetadataInPayload(false)
+model DiskRestorePoint extends ProxyOnlyResource {
   /**
    * The name of the disk restore point created.
    */
   @path
   @key("diskRestorePointName")
   @segment("diskRestorePoints")
+  @visibility("read")
   name: string;
+
+  /**
+   * Properties of an incremental disk restore point
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiskRestorePointProperties;
 }
 
 @armResourceOperations
@@ -81,8 +91,7 @@ interface DiskRestorePoints {
        */
       @path
       restorePointCollectionName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -102,8 +111,7 @@ interface DiskRestorePoints {
        */
       @path
       restorePointCollectionName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 }
 

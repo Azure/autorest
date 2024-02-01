@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Outbound Rule Basic Resource for the managed network of a machine learning workspace.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model OutboundRuleBasicResource is ProxyResource<OutboundRule> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OutboundRule)
+model OutboundRuleBasicResource extends ProxyResourceBase {
   /**
    * Name of the workspace managed network outbound rule
    */
@@ -24,7 +28,14 @@ model OutboundRuleBasicResource is ProxyResource<OutboundRule> {
   @path
   @key("ruleName")
   @segment("outboundRules")
+  @visibility("read")
   name: string;
+
+  /**
+   * Outbound Rule for the managed network of a machine learning workspace.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OutboundRule;
 }
 
 @armResourceOperations
@@ -41,11 +52,7 @@ interface OutboundRuleBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    OutboundRuleBasicResource,
-    BaseParameters<OutboundRuleBasicResource>,
-    ArmLroLocationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OutboundRuleBasicResource>;
 
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.

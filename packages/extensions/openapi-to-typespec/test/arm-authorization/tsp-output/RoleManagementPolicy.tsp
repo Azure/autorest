@@ -14,15 +14,27 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role management policy
  */
-model RoleManagementPolicy
-  is ExtensionResource<RoleManagementPolicyProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  RoleManagementPolicyProperties
+)
+model RoleManagementPolicy extends ExtensionResourceBase {
   /**
    * The name (guid) of the role management policy to get.
    */
   @path
   @key("roleManagementPolicyName")
   @segment("roleManagementPolicies")
+  @visibility("read")
   name: string;
+
+  /**
+   * Role management policy properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleManagementPolicyProperties;
 }
 
 @armResourceOperations

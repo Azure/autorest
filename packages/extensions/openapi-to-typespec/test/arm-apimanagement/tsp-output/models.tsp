@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -106,10 +108,10 @@ enum ContentFormat {
 
 /**
  * Type of API to create.
- * * `http` creates a REST API
- * * `soap` creates a SOAP pass-through API
- * * `websocket` creates websocket API
- * * `graphql` creates GraphQL API.
+ *  * `http` creates a REST API
+ *  * `soap` creates a SOAP pass-through API
+ *  * `websocket` creates websocket API
+ *  * `graphql` creates GraphQL API.
  */
 enum SoapApiType {
   /**
@@ -1318,6 +1320,7 @@ model ApiCreateOrUpdateParameter {
   /**
    * API entity create of update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiCreateOrUpdateProperties;
 }
 
@@ -1342,10 +1345,10 @@ model ApiCreateOrUpdateProperties extends ApiContractProperties {
 
   /**
    * Type of API to create.
-   * * `http` creates a REST API
-   * * `soap` creates a SOAP pass-through API
-   * * `websocket` creates websocket API
-   * * `graphql` creates GraphQL API.
+   *  * `http` creates a REST API
+   *  * `soap` creates a SOAP pass-through API
+   *  * `websocket` creates websocket API
+   *  * `graphql` creates GraphQL API.
    */
   @projectedName("json", "apiType")
   soapApiType?: SoapApiType;
@@ -1373,6 +1376,7 @@ model ApiUpdateContract {
   /**
    * Properties of the API entity that can be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiContractUpdateProperties;
 }
 
@@ -1720,6 +1724,7 @@ model OperationUpdateContract {
   /**
    * Properties of the API Operation entity that can be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationUpdateContractProperties;
 }
 
@@ -1836,6 +1841,7 @@ model SchemaContractProperties {
   /**
    * Create or update Properties of the API Schema Document.
    */
+  @extension("x-ms-client-flatten", true)
   document?: SchemaDocumentProperties;
 }
 
@@ -2048,6 +2054,7 @@ model IssueUpdateContract {
   /**
    * Issue entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IssueUpdateContractProperties;
 }
 
@@ -2157,6 +2164,7 @@ model TagDescriptionCreateParameters {
   /**
    * Properties supplied to Create TagDescription operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TagDescriptionBaseProperties;
 }
 
@@ -2397,6 +2405,7 @@ model ApiVersionSetUpdateParameters {
   /**
    * Parameters to update or create an API Version Set Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiVersionSetUpdateParametersProperties;
 }
 
@@ -2534,6 +2543,7 @@ model AuthorizationServerUpdateContract extends Resource {
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AuthorizationServerUpdateContractProperties;
 }
 
@@ -2811,6 +2821,7 @@ model BackendUpdateParameters {
   /**
    * Backend entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackendUpdateParameterProperties;
 }
 
@@ -2838,6 +2849,7 @@ model BackendReconnectContract extends Resource {
   /**
    * Reconnect request properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackendReconnectProperties;
 }
 
@@ -2888,6 +2900,7 @@ model CacheUpdateParameters {
   /**
    * Cache update properties details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CacheUpdateProperties;
 }
 
@@ -2936,9 +2949,9 @@ model CertificateContractProperties {
   thumbprint: string;
 
   /**
-* Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDate: utcDateTime;
 
@@ -2973,9 +2986,9 @@ model KeyVaultLastAccessStatusContractProperties {
   message?: string;
 
   /**
-* Last time secret was accessed. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Last time secret was accessed. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeStampUtc?: utcDateTime;
 }
@@ -3002,6 +3015,7 @@ model CertificateCreateOrUpdateParameters {
   /**
    * Certificate create or update properties details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateCreateOrUpdateProperties;
 }
 
@@ -3260,6 +3274,7 @@ model ContentTypeContract extends Resource {
   /**
    * Properties of the content type.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ContentTypeContractProperties;
 }
 
@@ -3302,6 +3317,7 @@ model ContentItemContract extends Resource {
   /**
    * Properties of the content item.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 }
 
@@ -3818,6 +3834,7 @@ model RemotePrivateEndpointConnectionWrapper {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionWrapperProperties;
 }
 
@@ -3898,11 +3915,11 @@ model ApiManagementServiceIdentity {
   tenantId?: string;
 
   /**
-* The list of user identities associated with the resource. The user identity 
-dictionary key references will be ARM resource ids in the form: 
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
-    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-*/
+   * The list of user identities associated with the resource. The user identity
+   * dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
+   *     providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
@@ -3953,6 +3970,7 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
   /**
    * Properties of the API Management service.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiManagementServiceUpdateProperties;
 
   /**
@@ -4132,6 +4150,7 @@ model EmailTemplateUpdateParameters {
   /**
    * Email Template Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EmailTemplateUpdateParameterProperties;
 }
 
@@ -4248,9 +4267,9 @@ model GatewayTokenRequestContract {
   keyType: KeyType;
 
   /**
-* The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiry: utcDateTime;
 }
@@ -4319,6 +4338,7 @@ model AssociationContract extends Resource {
   /**
    * Association entity contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AssociationContractProperties;
 }
 
@@ -4383,6 +4403,7 @@ model GroupCreateParameters {
   /**
    * Properties supplied to Create Group operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GroupCreateParametersProperties;
 }
 
@@ -4420,6 +4441,7 @@ model GroupUpdateParameters {
   /**
    * Group entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GroupUpdateParametersProperties;
 }
 
@@ -4483,9 +4505,9 @@ model UserContractProperties extends UserEntityBaseParameters {
   email?: string;
 
   /**
-* Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   registrationDate?: utcDateTime;
 
@@ -4609,6 +4631,7 @@ model IdentityProviderCreateContract extends Resource {
   /**
    * Identity Provider contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IdentityProviderCreateContractProperties;
 }
 
@@ -4637,6 +4660,7 @@ model IdentityProviderUpdateParameters {
   /**
    * Identity Provider update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IdentityProviderUpdateProperties;
 }
 
@@ -4683,9 +4707,9 @@ model LoggerContractProperties {
   description?: string;
 
   /**
-* The name and SendRule connection string of the event hub for azureEventHub logger.
-Instrumentation key for applicationInsights logger.
-*/
+   * The name and SendRule connection string of the event hub for azureEventHub logger.
+   * Instrumentation key for applicationInsights logger.
+   */
   credentials?: Record<string>;
 
   /**
@@ -4706,6 +4730,7 @@ model LoggerUpdateContract {
   /**
    * Logger entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LoggerUpdateParameters;
 }
 
@@ -4781,6 +4806,7 @@ model NamedValueCreateContract extends Resource {
   /**
    * NamedValue entity contract properties for PUT operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NamedValueCreateContractProperties;
 }
 
@@ -4816,6 +4842,7 @@ model NamedValueUpdateParameters {
   /**
    * NamedValue entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NamedValueUpdateParameterProperties;
 }
 
@@ -4909,16 +4936,16 @@ model ConnectivityStatusContract {
   error?: string;
 
   /**
-* The date when the resource connectivity status was last updated. This status should be updated every 15 minutes. If this status has not been updated, then it means that the service has lost network connectivity to the resource, from inside the Virtual Network.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date when the resource connectivity status was last updated. This status should be updated every 15 minutes. If this status has not been updated, then it means that the service has lost network connectivity to the resource, from inside the Virtual Network.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated: utcDateTime;
 
   /**
-* The date when the resource connectivity status last Changed from success to failure or vice-versa. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date when the resource connectivity status last Changed from success to failure or vice-versa. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStatusChange: utcDateTime;
 
@@ -4997,6 +5024,7 @@ model RecipientUserContract extends Resource {
   /**
    * Recipient User entity contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RecipientUsersContractProperties;
 }
 
@@ -5037,6 +5065,7 @@ model RecipientEmailContract extends Resource {
   /**
    * Recipient Email contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RecipientEmailContractProperties;
 }
 
@@ -5088,6 +5117,7 @@ model OpenidConnectProviderUpdateContract {
   /**
    * OpenId Connect Provider Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OpenidConnectProviderUpdateContractProperties;
 }
 
@@ -5207,6 +5237,7 @@ model PolicyDescriptionContract extends Resource {
   /**
    * Policy description contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PolicyDescriptionContractProperties;
 }
 
@@ -5274,6 +5305,7 @@ model PortalSettingsContract extends Resource {
   /**
    * Portal Settings contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PortalSettingsContractProperties;
 }
 
@@ -5500,6 +5532,7 @@ model ProductUpdateParameters {
   /**
    * Product entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProductUpdateProperties;
 }
 
@@ -5565,38 +5598,38 @@ model SubscriptionContractProperties {
   state: SubscriptionState;
 
   /**
-* Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDate?: utcDateTime;
 
   /**
-* Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
-* Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationDate?: utcDateTime;
 
   /**
-* Date when subscription was cancelled or expired. The setting is for audit purposes only and the subscription is not automatically cancelled. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Date when subscription was cancelled or expired. The setting is for audit purposes only and the subscription is not automatically cancelled. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
-* Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   notificationDate?: utcDateTime;
 
@@ -5665,16 +5698,16 @@ model QuotaCounterContract {
   periodKey: string;
 
   /**
-* The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   periodStartTime: utcDateTime;
 
   /**
-* The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   periodEndTime: utcDateTime;
 
@@ -5706,6 +5739,7 @@ model QuotaCounterValueUpdateContract {
   /**
    * Quota counter value details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaCounterValueContractProperties;
 }
 
@@ -5760,9 +5794,9 @@ model ReportRecordContract {
   name?: string;
 
   /**
-* Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timestamp?: utcDateTime;
 
@@ -6026,6 +6060,7 @@ model GlobalSchemaContractProperties {
   /**
    * Global Schema document object for json-based schema formats(e.g. json schema).
    */
+  @extension("x-ms-client-flatten", true)
   document?: Record<unknown>;
 }
 
@@ -6283,6 +6318,7 @@ model SubscriptionCreateParameters {
   /**
    * Subscription contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionCreateParameterProperties;
 }
 
@@ -6339,6 +6375,7 @@ model SubscriptionUpdateParameters {
   /**
    * Subscription Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionUpdateParameterProperties;
 }
 
@@ -6423,6 +6460,7 @@ model TagCreateUpdateParameters {
   /**
    * Properties supplied to Create Tag operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TagContractProperties;
 }
 
@@ -6453,6 +6491,7 @@ model AccessInformationCreateParameters {
   /**
    * Tenant access information update parameter properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessInformationCreateParameterProperties;
 }
 
@@ -6488,6 +6527,7 @@ model AccessInformationUpdateParameters {
   /**
    * Tenant access information update parameter properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessInformationUpdateParameterProperties;
 }
 
@@ -6538,6 +6578,7 @@ model DeployConfigurationParameters {
   /**
    * Deploy Configuration Parameter contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeployConfigurationParameterProperties;
 }
 
@@ -6563,6 +6604,7 @@ model OperationResultContract extends Resource {
   /**
    * Properties of the Operation Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationResultContractProperties;
 }
 
@@ -6581,16 +6623,16 @@ model OperationResultContractProperties {
   status?: AsyncOperationStatus;
 
   /**
-* Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   started?: utcDateTime;
 
   /**
-* Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updated?: utcDateTime;
 
@@ -6638,6 +6680,7 @@ model SaveConfigurationParameter {
   /**
    * Properties of the Save Configuration Parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SaveConfigurationParameterProperties;
 }
 
@@ -6663,6 +6706,7 @@ model TenantConfigurationSyncStateContract extends Resource {
   /**
    * Properties returned Tenant Configuration Sync State check.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TenantConfigurationSyncStateContractProperties;
 }
 
@@ -6696,16 +6740,16 @@ model TenantConfigurationSyncStateContractProperties {
   isGitEnabled?: boolean;
 
   /**
-* The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   syncDate?: utcDateTime;
 
   /**
-* The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   configurationChangeDate?: utcDateTime;
 
@@ -6722,6 +6766,7 @@ model UserCreateParameters {
   /**
    * User entity create contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserCreateParameterProperties;
 }
 
@@ -6773,6 +6818,7 @@ model UserUpdateParameters {
   /**
    * User entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserUpdateParametersProperties;
 }
 
@@ -6834,6 +6880,7 @@ model UserTokenParameters {
   /**
    * User Token Parameter contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserTokenParameterProperties;
 }
 
@@ -6847,9 +6894,9 @@ model UserTokenParameterProperties {
   keyType: KeyType;
 
   /**
-* The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-
-*/
+   * The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   *
+   */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiry: utcDateTime;
 }
@@ -6898,5 +6945,6 @@ model QuotaCounterValueContract {
   /**
    * Quota counter Value Properties.
    */
+  @extension("x-ms-client-flatten", true)
   value?: QuotaCounterValueContractProperties;
 }

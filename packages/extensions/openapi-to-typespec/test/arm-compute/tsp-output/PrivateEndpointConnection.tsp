@@ -15,16 +15,37 @@ namespace Microsoft.Compute;
 /**
  * The Private Endpoint Connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiskAccess)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection {
   /**
    * The name of the private endpoint connection.
    */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * private endpoint connection Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * private endpoint connection type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

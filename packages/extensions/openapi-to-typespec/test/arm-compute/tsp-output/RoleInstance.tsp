@@ -15,17 +15,54 @@ namespace Microsoft.Compute;
 /**
  * Describes the cloud service role instance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CloudService)
-model RoleInstance is ProxyResource<RoleInstanceProperties> {
+@includeInapplicableMetadataInPayload(false)
+model RoleInstance {
   /**
    * Name of the role instance.
    */
   @path
   @key("roleInstanceName")
   @segment("roleInstances")
+  @visibility("read")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource Type.
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource Location.
+   */
+  @visibility("read")
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  @visibility("read")
+  tags?: Record<string>;
+
+  /**
+   * The role instance SKU.
+   */
+  sku?: InstanceSku;
+
+  /**
+   * Role instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleInstanceProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * NamedValue details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model NamedValueContract is ProxyResource<NamedValueContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
+model NamedValueContract extends ProxyResourceBase {
   /**
    * Identifier of the NamedValue.
    */
@@ -25,7 +29,14 @@ model NamedValueContract is ProxyResource<NamedValueContractProperties> {
   @path
   @key("namedValueId")
   @segment("namedValues")
+  @visibility("read")
   name: string;
+
+  /**
+   * NamedValue entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NamedValueContractProperties;
 }
 
 @armResourceOperations
@@ -65,8 +76,7 @@ interface NamedValueContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -86,8 +96,7 @@ interface NamedValueContracts {
        */
       @header
       `If-Match`: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -164,9 +173,7 @@ interface NamedValueContracts {
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,
-    NamedValueContract,
-    BaseParameters<NamedValueContract>,
-    ArmLroLocationHeader
+    NamedValueContract
   >;
 }
 

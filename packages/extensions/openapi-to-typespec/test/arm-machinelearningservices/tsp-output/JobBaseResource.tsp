@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model JobBaseResource is ProxyResource<JobBase> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(JobBase)
+model JobBaseResource extends ProxyResourceBase {
   /**
    * The name and identifier for the Job. This is case-sensitive.
    */
   @path
   @key("id")
   @segment("jobs")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: JobBase;
 }
 
 @armResourceOperations
@@ -55,11 +66,7 @@ interface JobBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Jobs_Delete")
-  delete is ArmResourceDeleteAsync<
-    JobBaseResource,
-    BaseParameters<JobBaseResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<JobBaseResource>;
 
   /**
    * Lists Jobs in the workspace.
@@ -120,13 +127,7 @@ interface JobBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Jobs_Cancel")
-  cancel is ArmResourceActionAsync<
-    JobBaseResource,
-    void,
-    void,
-    BaseParameters<JobBaseResource>,
-    ArmLroLocationHeader
-  >;
+  cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }
 
 @@projectedName(JobBaseResources.createOrUpdate::parameters.resource,

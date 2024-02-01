@@ -24,6 +24,7 @@ model Device is ProxyResource<DeviceProperties> {
   @path
   @key("deviceName")
   @segment("devices")
+  @visibility("read")
   name: string;
 }
 
@@ -37,31 +38,18 @@ interface Devices {
   /**
    * Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Device,
-    BaseParameters<Device>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Device>;
 
   /**
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    Device,
-    DeviceUpdate,
-    BaseParameters<Device>,
-    ArmLroLocationHeader
-  >;
+  update is ArmCustomPatchAsync<Device, DeviceUpdate>;
 
   /**
    * Delete a Device
    */
-  delete is ArmResourceDeleteAsync<
-    Device,
-    BaseParameters<Device>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Device>;
 
   /**
    * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
@@ -76,9 +64,7 @@ interface Devices {
   generateCapabilityImage is ArmResourceActionAsync<
     Device,
     GenerateCapabilityImageRequest,
-    SignedCapabilityImageResponse,
-    BaseParameters<Device>,
-    ArmLroLocationHeader
+    SignedCapabilityImageResponse
   >;
 }
 

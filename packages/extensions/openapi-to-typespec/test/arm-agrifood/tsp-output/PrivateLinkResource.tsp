@@ -15,15 +15,28 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * A private link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateLinkResourceProperties
+)
+model PrivateLinkResource extends ProxyResourceBase {
   /**
    * Sub resource name.
    */
   @path
   @key("subResourceName")
   @segment("privateLinkResources")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

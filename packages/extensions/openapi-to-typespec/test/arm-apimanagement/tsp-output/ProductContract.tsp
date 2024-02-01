@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Product details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model ProductContract is ProxyResource<ProductContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ProductContractProperties)
+model ProductContract extends ProxyResourceBase {
   /**
    * Product identifier. Must be unique in the current API Management service instance.
    */
@@ -25,7 +29,14 @@ model ProductContract is ProxyResource<ProductContractProperties> {
   @path
   @key("productId")
   @segment("products")
+  @visibility("read")
   name: string;
+
+  /**
+   * Product entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProductContractProperties;
 }
 
 @armResourceOperations

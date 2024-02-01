@@ -12,7 +12,11 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-model Registry is TrackedResource<RegistryProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
+model Registry extends TrackedResourceBase {
   /**
    * Name of Azure Machine Learning registry. This is case-insensitive
    */
@@ -20,11 +24,22 @@ model Registry is TrackedResource<RegistryProperties> {
   @path
   @key("registryName")
   @segment("registries")
+  @visibility("read")
   name: string;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RegistryProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -37,11 +52,7 @@ interface Registries {
   /**
    * Create or update registry
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Registry,
-    BaseParameters<Registry>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Registry>;
 
   /**
    * Update tags
@@ -52,11 +63,7 @@ interface Registries {
   /**
    * Delete registry
    */
-  delete is ArmResourceDeleteAsync<
-    Registry,
-    BaseParameters<Registry>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Registry>;
 
   /**
    * List registries
@@ -73,13 +80,7 @@ interface Registries {
   /**
    * Remove regions from registry
    */
-  removeRegions is ArmResourceActionAsync<
-    Registry,
-    Registry,
-    Registry,
-    BaseParameters<Registry>,
-    ArmLroLocationHeader
-  >;
+  removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }
 
 @@projectedName(Registries.createOrUpdate::parameters.resource, "json", "body");

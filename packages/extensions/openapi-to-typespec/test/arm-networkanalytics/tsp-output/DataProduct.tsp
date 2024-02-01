@@ -24,6 +24,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @path
   @key("dataProductName")
   @segment("dataProducts")
+  @visibility("read")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
@@ -39,31 +40,18 @@ interface DataProducts {
   /**
    * Create data product resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    DataProduct,
-    BaseParameters<DataProduct>,
-    ArmAsyncOperationHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<DataProduct>;
 
   /**
    * Update data product resource.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    DataProduct,
-    DataProductUpdate,
-    BaseParameters<DataProduct>,
-    ArmLroLocationHeader
-  >;
+  update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
 
   /**
    * Delete data product resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DataProduct,
-    BaseParameters<DataProduct>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
 
   /**
    * List data products by resource group.

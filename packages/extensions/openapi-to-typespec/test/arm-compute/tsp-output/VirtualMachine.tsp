@@ -14,20 +14,34 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine.
  */
-model VirtualMachine is TrackedResource<VirtualMachineProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachine extends Resource {
   /**
    * The name of the virtual machine.
    */
   @path
   @key("vmName")
   @segment("virtualMachines")
+  @visibility("read")
   name: string;
+
+  /**
+   * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+   */
+  plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
   @visibility("read")
   resources?: VirtualMachineExtension[];
+
+  /**
+   * The identity of the virtual machine, if configured.
+   */
+  identity?: VirtualMachineIdentity;
 
   /**
    * The virtual machine zones.
@@ -39,8 +53,11 @@ model VirtualMachine is TrackedResource<VirtualMachineProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourcePlan;
+  /**
+   * Describes the properties of a Virtual Machine.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineProperties;
 }
 
 @armResourceOperations
@@ -141,9 +158,7 @@ interface VirtualMachines {
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
-    VirtualMachineCaptureResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineCaptureResult
   >;
 
   /**
@@ -255,9 +270,7 @@ interface VirtualMachines {
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    VirtualMachineAssessPatchesResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineAssessPatchesResult
   >;
 
   /**
@@ -266,9 +279,7 @@ interface VirtualMachines {
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineInstallPatchesResult
   >;
 
   /**
@@ -277,9 +288,7 @@ interface VirtualMachines {
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    RunCommandResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    RunCommandResult
   >;
 
   /**

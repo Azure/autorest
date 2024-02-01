@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * Properties of the blob container, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BlobServiceProperties)
-model BlobContainer is ProxyResource<ContainerProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ContainerProperties)
+model BlobContainer extends ProxyResourceBase {
   /**
    * The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
    */
@@ -25,7 +29,14 @@ model BlobContainer is ProxyResource<ContainerProperties> {
   @path
   @key("containerName")
   @segment("containers")
+  @visibility("read")
   name: string;
+
+  /**
+   * Properties of the blob container.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContainerProperties;
 }
 
 @armResourceOperations
@@ -103,13 +114,7 @@ interface BlobContainers {
   /**
    * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
    */
-  objectLevelWorm is ArmResourceActionAsync<
-    BlobContainer,
-    void,
-    void,
-    BaseParameters<BlobContainer>,
-    ArmLroLocationHeader
-  >;
+  objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
 }
 
 @@projectedName(BlobContainers.create::parameters.resource,

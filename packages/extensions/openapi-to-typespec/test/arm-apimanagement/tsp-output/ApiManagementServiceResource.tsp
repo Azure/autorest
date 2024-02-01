@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * A single API Management service resource in List or Get response.
  */
-model ApiManagementServiceResource
-  is TrackedResource<ApiManagementServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  ApiManagementServiceProperties
+)
+model ApiManagementServiceResource extends TrackedResourceBase {
   /**
    * The name of the API Management service.
    */
@@ -25,6 +30,7 @@ model ApiManagementServiceResource
   @path
   @key("serviceName")
   @segment("service")
+  @visibility("read")
   name: string;
 
   /**
@@ -37,6 +43,12 @@ model ApiManagementServiceResource
    * A list of availability zones denoting where the resource needs to come from.
    */
   zones?: string[];
+
+  /**
+   * Properties of the API Management service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ApiManagementServiceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
@@ -98,9 +110,7 @@ interface ApiManagementServiceResources {
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
-    ConnectivityCheckResponse,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ConnectivityCheckResponse
   >;
 
   /**
@@ -111,9 +121,7 @@ interface ApiManagementServiceResources {
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -124,9 +132,7 @@ interface ApiManagementServiceResources {
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -148,9 +154,7 @@ interface ApiManagementServiceResources {
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -170,8 +174,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -191,8 +194,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -212,8 +214,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

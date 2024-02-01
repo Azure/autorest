@@ -15,16 +15,28 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FeaturestoreEntityContainer)
-model FeaturestoreEntityVersion
-  is ProxyResource<FeaturestoreEntityVersionProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  FeaturestoreEntityVersionProperties
+)
+model FeaturestoreEntityVersion extends ProxyResourceBase {
   /**
    * Version identifier. This is case-sensitive.
    */
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FeaturestoreEntityVersionProperties;
 }
 
 @armResourceOperations
@@ -42,11 +54,7 @@ interface FeaturestoreEntityVersions {
   /**
    * Delete version.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturestoreEntityVersion,
-    BaseParameters<FeaturestoreEntityVersion>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
 
   /**
    * List versions.

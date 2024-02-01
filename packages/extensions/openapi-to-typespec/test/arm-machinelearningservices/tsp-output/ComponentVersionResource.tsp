@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ComponentContainerResource)
-model ComponentVersionResource is ProxyResource<ComponentVersion> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ComponentVersion)
+model ComponentVersionResource extends ProxyResourceBase {
   /**
    * Version identifier.
    */
   @path
   @key("version")
   @segment("versions")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ComponentVersion;
 }
 
 @armResourceOperations
@@ -47,11 +58,7 @@ interface ComponentVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryComponentVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    ComponentVersionResource,
-    BaseParameters<ComponentVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<ComponentVersionResource>;
 
   /**
    * List versions.

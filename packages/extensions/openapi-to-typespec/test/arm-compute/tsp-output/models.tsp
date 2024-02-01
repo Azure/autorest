@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1205,10 +1207,10 @@ enum SharedGalleryHostCaching {
 }
 
 /**
-* Update mode for the cloud service. Role instances are allocated to update domains when the service is deployed. Updates can be initiated manually in each update domain or initiated automatically in all update domains.
-Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
-If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
-*/
+ * Update mode for the cloud service. Role instances are allocated to update domains when the service is deployed. Updates can be initiated manually in each update domain or initiated automatically in all update domains.
+ * Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
+ * If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
+ */
 enum CloudServiceUpgradeMode {
   Auto,
   Manual,
@@ -1216,10 +1218,10 @@ enum CloudServiceUpgradeMode {
 }
 
 /**
-* Slot type for the cloud service.
-Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
-If not specified, the default value is Production.
-*/
+ * Slot type for the cloud service.
+ * Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
+ * If not specified, the default value is Production.
+ */
 enum CloudServiceSlotType {
   Production,
   Staging,
@@ -1465,6 +1467,7 @@ model ComputeOperationValue {
   /**
    * Describes the properties of a Compute Operation Value Display.
    */
+  @extension("x-ms-client-flatten", true)
   display?: ComputeOperationValueDisplay;
 }
 
@@ -2607,6 +2610,7 @@ model VirtualMachineScaleSetNetworkConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
 }
 
@@ -2692,6 +2696,7 @@ model VirtualMachineScaleSetIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetIPConfigurationProperties;
 }
 
@@ -2752,6 +2757,7 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetPublicIPAddressConfigurationProperties;
 
   /**
@@ -3487,6 +3493,7 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Scale Set.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateProperties;
 
   /**
@@ -3734,6 +3741,7 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   /**
    * Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
 }
 
@@ -3809,6 +3817,7 @@ model VirtualMachineScaleSetUpdateIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateIPConfigurationProperties;
 }
 
@@ -3869,6 +3878,7 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
 }
 
@@ -4036,6 +4046,7 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
@@ -4414,6 +4425,7 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -5114,6 +5126,7 @@ model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkInterfaceReferenceProperties;
 }
 
@@ -5144,6 +5157,7 @@ model VirtualMachineNetworkInterfaceConfiguration {
   /**
    * Describes a virtual machine network profile's IP configuration.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
 }
 
@@ -5231,6 +5245,7 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
   /**
    * Describes a virtual machine network interface IP configuration properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineNetworkInterfaceIPConfigurationProperties;
 }
 
@@ -5286,6 +5301,7 @@ model VirtualMachinePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines IP Configuration's PublicIPAddress configuration
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachinePublicIPAddressConfigurationProperties;
 
   /**
@@ -5440,6 +5456,7 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -5881,6 +5898,7 @@ model VirtualMachineUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineProperties;
 
   /**
@@ -6222,6 +6240,7 @@ model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineImageProperties;
 }
 
@@ -6492,6 +6511,7 @@ model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AvailabilitySetProperties;
 
   /**
@@ -6674,6 +6694,7 @@ model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DedicatedHostGroupProperties;
 
   /**
@@ -6747,6 +6768,7 @@ model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DedicatedHostProperties;
 
   /**
@@ -6784,6 +6806,7 @@ model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SshPublicKeyResourceProperties;
 }
 
@@ -6925,6 +6948,7 @@ model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ImageProperties;
 }
 
@@ -7267,12 +7291,36 @@ model DiskRestorePointReplicationStatus {
 }
 
 /**
+ * The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location
+ */
+model ProxyResource {
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+}
+
+/**
  * Update Restore Point collection parameters.
  */
 model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RestorePointCollectionProperties;
 }
 
@@ -7358,6 +7406,7 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CapacityReservationGroupProperties;
 }
 
@@ -7417,6 +7466,7 @@ model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CapacityReservationProperties;
 
   /**
@@ -7793,6 +7843,7 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineRunCommandProperties;
 }
 
@@ -8258,6 +8309,7 @@ model DiskUpdate {
   /**
    * Disk resource update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DiskUpdateProperties;
 
   /**
@@ -8522,6 +8574,7 @@ model PrivateLinkResource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -8661,6 +8714,7 @@ model DiskEncryptionSetUpdate {
   /**
    * disk encryption set resource update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DiskEncryptionSetUpdateProperties;
 
   /**
@@ -8991,6 +9045,7 @@ model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SnapshotUpdateProperties;
 
   /**
@@ -9063,6 +9118,89 @@ model SnapshotUpdateProperties {
  * The List Resource Skus operation response.
  */
 model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
+
+/**
+ * Describes an available Compute SKU.
+ */
+model ResourceSku {
+  /**
+   * The type of resource the SKU applies to.
+   */
+  @visibility("read")
+  resourceType?: string;
+
+  /**
+   * The name of SKU.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
+   */
+  @visibility("read")
+  tier?: string;
+
+  /**
+   * The Size of the SKU.
+   */
+  @visibility("read")
+  size?: string;
+
+  /**
+   * The Family of this particular SKU.
+   */
+  @visibility("read")
+  family?: string;
+
+  /**
+   * The Kind of resources that are supported in this SKU.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Specifies the number of virtual machines in the scale set.
+   */
+  @visibility("read")
+  capacity?: ResourceSkuCapacity;
+
+  /**
+   * The set of locations that the SKU is available.
+   */
+  @visibility("read")
+  locations?: string[];
+
+  /**
+   * A list of locations and availability zones in those locations where the SKU is available.
+   */
+  @visibility("read")
+  locationInfo?: ResourceSkuLocationInfo[];
+
+  /**
+   * The api versions that support this SKU.
+   */
+  @visibility("read")
+  apiVersions?: string[];
+
+  /**
+   * Metadata for retrieving price info.
+   */
+  @visibility("read")
+  costs?: ResourceSkuCosts[];
+
+  /**
+   * A name value pair to describe the capability.
+   */
+  @visibility("read")
+  capabilities?: ResourceSkuCapabilities[];
+
+  /**
+   * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
+   */
+  @visibility("read")
+  restrictions?: ResourceSkuRestrictions[];
+}
 
 /**
  * Describes scaling information of a SKU.
@@ -9406,6 +9544,7 @@ model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryProperties;
 }
 
@@ -9621,6 +9760,7 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryImageProperties;
 }
 
@@ -10026,6 +10166,7 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryImageVersionProperties;
 }
 
@@ -10132,6 +10273,7 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryApplicationProperties;
 }
 
@@ -10255,6 +10397,7 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryApplicationVersionProperties;
 }
 
@@ -10280,6 +10423,7 @@ model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
    */
+  @extension("x-ms-client-flatten", true)
   identifier?: SharedGalleryIdentifier;
 }
 
@@ -10474,6 +10618,7 @@ model PirCommunityGalleryResource {
   /**
    * The identifier information of community gallery.
    */
+  @extension("x-ms-client-flatten", true)
   identifier?: CommunityGalleryIdentifier;
 }
 
@@ -10740,9 +10885,9 @@ model CloudServiceRoleProperties {
  */
 model CloudServiceProperties {
   /**
-* Specifies a URL that refers to the location of the service package in the Blob service. The service package URL can be Shared Access Signature (SAS) URI from any storage account.
-This is a write-only property and is not returned in GET calls.
-*/
+   * Specifies a URL that refers to the location of the service package in the Blob service. The service package URL can be Shared Access Signature (SAS) URI from any storage account.
+   * This is a write-only property and is not returned in GET calls.
+   */
   packageUrl?: string;
 
   /**
@@ -10751,28 +10896,28 @@ This is a write-only property and is not returned in GET calls.
   configuration?: string;
 
   /**
-* Specifies a URL that refers to the location of the service configuration in the Blob service. The service package URL  can be Shared Access Signature (SAS) URI from any storage account.
-This is a write-only property and is not returned in GET calls.
-*/
+   * Specifies a URL that refers to the location of the service configuration in the Blob service. The service package URL  can be Shared Access Signature (SAS) URI from any storage account.
+   * This is a write-only property and is not returned in GET calls.
+   */
   configurationUrl?: string;
 
   /**
-* (Optional) Indicates whether to start the cloud service immediately after it is created. The default value is `true`.
-If false, the service model is still deployed, but the code is not run immediately. Instead, the service is PoweredOff until you call Start, at which time the service will be started. A deployed service still incurs charges, even if it is poweredoff.
-*/
+   * (Optional) Indicates whether to start the cloud service immediately after it is created. The default value is `true`.
+   * If false, the service model is still deployed, but the code is not run immediately. Instead, the service is PoweredOff until you call Start, at which time the service will be started. A deployed service still incurs charges, even if it is poweredoff.
+   */
   startCloudService?: boolean;
 
   /**
-* (Optional) Indicates whether the role sku properties (roleProfile.roles.sku) specified in the model/template should override the role instance count and vm size specified in the .cscfg and .csdef respectively.
-The default value is `false`.
-*/
+   * (Optional) Indicates whether the role sku properties (roleProfile.roles.sku) specified in the model/template should override the role instance count and vm size specified in the .cscfg and .csdef respectively.
+   * The default value is `false`.
+   */
   allowModelOverride?: boolean;
 
   /**
-* Update mode for the cloud service. Role instances are allocated to update domains when the service is deployed. Updates can be initiated manually in each update domain or initiated automatically in all update domains.
-Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
-If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
-*/
+   * Update mode for the cloud service. Role instances are allocated to update domains when the service is deployed. Updates can be initiated manually in each update domain or initiated automatically in all update domains.
+   * Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
+   * If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
+   */
   upgradeMode?: CloudServiceUpgradeMode;
 
   /**
@@ -10878,10 +11023,10 @@ model CloudServiceNetworkProfile {
   loadBalancerConfigurations?: LoadBalancerConfiguration[];
 
   /**
-* Slot type for the cloud service.
-Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
-If not specified, the default value is Production.
-*/
+   * Slot type for the cloud service.
+   * Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
+   * If not specified, the default value is Production.
+   */
   slotType?: CloudServiceSlotType;
 
   /**
@@ -10907,6 +11052,7 @@ model LoadBalancerConfiguration {
   /**
    * Properties of the load balancer configuration.
    */
+  @extension("x-ms-client-flatten", true)
   properties: LoadBalancerConfigurationProperties;
 }
 
@@ -10932,6 +11078,7 @@ model LoadBalancerFrontendIpConfiguration {
   /**
    * Properties of load balancer frontend ip configuration.
    */
+  @extension("x-ms-client-flatten", true)
   properties: LoadBalancerFrontendIpConfigurationProperties;
 }
 
@@ -10977,6 +11124,7 @@ model Extension {
   /**
    * Extension Properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CloudServiceExtensionProperties;
 }
 
@@ -11020,12 +11168,12 @@ model CloudServiceExtensionProperties {
   protectedSettingsFromKeyVault?: CloudServiceVaultAndSecretReference;
 
   /**
-* Tag to force apply the provided public and protected settings.
-Changing the tag value allows for re-running the extension without changing any of the public or protected settings.
-If forceUpdateTag is not changed, updates to public or protected settings would still be applied by the handler.
-If neither forceUpdateTag nor any of public or protected settings change, extension would flow to the role instance with the same sequence-number, and
-it is up to handler implementation whether to re-run it or not
-*/
+   * Tag to force apply the provided public and protected settings.
+   * Changing the tag value allows for re-running the extension without changing any of the public or protected settings.
+   * If forceUpdateTag is not changed, updates to public or protected settings would still be applied by the handler.
+   * If neither forceUpdateTag nor any of public or protected settings change, extension would flow to the role instance with the same sequence-number, and
+   * it is up to handler implementation whether to re-run it or not
+   */
   forceUpdateTag?: string;
 
   /**

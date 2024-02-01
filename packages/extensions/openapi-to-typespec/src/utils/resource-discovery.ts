@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { getSession } from "../autorest-session";
+import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
 import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
 export interface _ArmResourceOperation {
@@ -156,17 +156,7 @@ export function isResourceSchema(schema: ObjectSchema): schema is ArmResourceSch
 }
 
 const _ArmCoreTypes = [
-  "TrackedResource",
-  "ProxyResource",
-  "ExtensionResource",
   "ResourceProvisioningState",
-  "ManagedServiceIdentity",
-  "ManagedSystemAssignedIdentity",
-  "EntityTag",
-  "ResourceKind",
-  "ResourcePlan",
-  "ResourceSku",
-  "ManagedBy",
   "OperationListResult",
   "Origin",
   "OperationDisplay",
@@ -174,15 +164,29 @@ const _ArmCoreTypes = [
   "ErrorDetail",
   "ErrorAdditionalInfo",
   "SystemData",
-  "ManagedIdentityProperties",
-  "ManagedSystemIdentityProperties",
-  "UserAssignedIdentity",
   "Operation",
   "ErrorResponse",
 ];
 
+const _ArmCoreCustomTypes = [
+  "TrackedResource",
+  "ProxyResource",
+  "ExtensionResource",
+  "ManagedServiceIdentity",
+  "ManagedIdentityProperties",
+  "UserAssignedIdentity",
+  "ManagedSystemAssignedIdentity",
+  "ManagedSystemIdentityProperties",
+  "EntityTag",
+  "ResourcePlan",
+  "ResourceSku",
+];
+
 export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[]): TypespecObject[] {
   const filtered = [..._ArmCoreTypes];
+  if (getArmCommonTypeVersion()) {
+    filtered.push(..._ArmCoreCustomTypes);
+  }
   for (const operationGroup of codeModel.operationGroups) {
     for (const operation of operationGroup.operations) {
       if (operation.requests?.[0].protocol?.http?.path.match(/^\/providers\/[^/]+\/operations$/)) {
@@ -201,15 +205,18 @@ const _ArmCoreEnums = [
   "CreatedByType",
   "Origin",
   "ActionType",
-  "ManagedIdentityType",
-  "ManagedSystemIdentityType",
-  "SkuTier",
   "CheckNameAvailabilityRequest",
   "CheckNameAvailabilityReason",
 ];
 
+const _ArmCoreCustomEnums = ["ManagedIdentityType", "ManagedSystemIdentityType", "SkuTier"];
+
 export function filterArmEnums(enums: TypespecEnum[]): TypespecEnum[] {
-  return enums.filter((e) => !_ArmCoreEnums.includes(e.name));
+  const filtered = [..._ArmCoreEnums];
+  if (getArmCommonTypeVersion()) {
+    filtered.push(..._ArmCoreCustomEnums);
+  }
+  return enums.filter((e) => !filtered.includes(e.name));
 }
 
 export function isTspArmResource(schema: TypespecObject): schema is TspArmResource {

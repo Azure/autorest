@@ -14,19 +14,26 @@ namespace Microsoft.Compute;
 /**
  * disk access resource.
  */
-model DiskAccess is TrackedResource<DiskAccessProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model DiskAccess extends Resource {
   /**
    * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
    */
   @path
   @key("diskAccessName")
   @segment("diskAccesses")
+  @visibility("read")
   name: string;
 
   /**
    * The extended location where the disk access will be created. Extended location cannot be changed.
    */
   extendedLocation?: ExtendedLocation;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: DiskAccessProperties;
 }
 
 @armResourceOperations

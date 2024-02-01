@@ -14,20 +14,29 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the capacity reservation group that the capacity reservations should be assigned to. Currently, a capacity reservation can only be added to a capacity reservation group at creation time. An existing capacity reservation cannot be added or moved to another capacity reservation group.
  */
-model CapacityReservationGroup
-  is TrackedResource<CapacityReservationGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model CapacityReservationGroup extends Resource {
   /**
    * The name of the capacity reservation group.
    */
   @path
   @key("capacityReservationGroupName")
   @segment("capacityReservationGroups")
+  @visibility("read")
   name: string;
 
   /**
    * Availability Zones to use for this capacity reservation group. The zones can be assigned only during creation. If not provided, the group supports only regional resources in the region. If provided, enforces each capacity reservation in the group to be in one of the zones.
    */
   zones?: string[];
+
+  /**
+   * capacity reservation group Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CapacityReservationGroupProperties;
 }
 
 @armResourceOperations

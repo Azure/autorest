@@ -63,7 +63,7 @@ export async function processDetector(host: AutorestExtensionHost) {
     for (const v of Object.values(session.model.components.schemas)) {
       if (v["x-ms-metadata"]?.originalLocations) {
         for (const p of v["x-ms-metadata"].originalLocations) {
-          const result = p.match(/\/specification\/common-types\/resource-management\/(v\d)\//);
+          const result = p.match(/\/common-types\/resource-management\/(v\d)\//);
           if (result) {
             setArmCommonTypeVersion(result[1]);
             return;

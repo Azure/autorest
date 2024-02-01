@@ -23,9 +23,9 @@ tsproject.yaml - Contains configuration for the TypeSpec compiler
 package.json - Configuration of the TypeSpec project
 
 ```yaml
-version: 3.6.6
+version: 3.10.1
 use-extension:
-  "@autorest/modelerfour": "^4.23.5"
+  "@autorest/modelerfour": "^4.27.0"
 
 modelerfour:
   # this runs a pre-namer step to clean up names

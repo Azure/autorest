@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * The Encryption Scope resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EncryptionScopeProperties)
+model EncryptionScope extends ProxyResourceBase {
   /**
    * The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
    */
@@ -25,7 +29,14 @@ model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
   @path
   @key("encryptionScopeName")
   @segment("encryptionScopes")
+  @visibility("read")
   name: string;
+
+  /**
+   * Properties of the encryption scope.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EncryptionScopeProperties;
 }
 
 @armResourceOperations

@@ -14,14 +14,25 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role definition.
  */
-model RoleDefinition is ExtensionResource<RoleDefinitionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
+model RoleDefinition extends ExtensionResourceBase {
   /**
    * The ID of the role definition.
    */
   @path
   @key("roleDefinitionId")
   @segment("roleDefinitions")
+  @visibility("read")
   name: string;
+
+  /**
+   * Role definition properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleDefinitionProperties;
 }
 
 @armResourceOperations

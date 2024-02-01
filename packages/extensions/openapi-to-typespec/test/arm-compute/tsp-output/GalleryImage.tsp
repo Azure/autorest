@@ -15,15 +15,25 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Gallery)
-model GalleryImage is TrackedResource<GalleryImageProperties> {
+@includeInapplicableMetadataInPayload(false)
+model GalleryImage extends Resource {
   /**
    * The name of the gallery image definition to be retrieved.
    */
   @path
   @key("galleryImageName")
   @segment("images")
+  @visibility("read")
   name: string;
+
+  /**
+   * Describes the properties of a gallery image definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryImageProperties;
 }
 
 @armResourceOperations

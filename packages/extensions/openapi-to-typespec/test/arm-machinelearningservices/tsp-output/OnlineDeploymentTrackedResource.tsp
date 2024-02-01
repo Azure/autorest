@@ -13,19 +13,34 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OnlineEndpointTrackedResource)
-model OnlineDeploymentTrackedResource is TrackedResource<OnlineDeployment> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OnlineDeployment)
+model OnlineDeploymentTrackedResource extends TrackedResourceBase {
   /**
    * Inference Endpoint Deployment name.
    */
   @path
   @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OnlineDeployment;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -60,11 +75,7 @@ interface OnlineDeploymentTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OnlineDeployments_Delete")
-  delete is ArmResourceDeleteAsync<
-    OnlineDeploymentTrackedResource,
-    BaseParameters<OnlineDeploymentTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
 
   /**
    * List Inference Endpoint Deployments.

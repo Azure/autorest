@@ -22,6 +22,7 @@ model Space is TrackedResource<SpaceResourceProperties> {
   @path
   @key("spaceName")
   @segment("spaces")
+  @visibility("read")
   name: string;
 }
 

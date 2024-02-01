@@ -15,15 +15,26 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model DataContainerResource is ProxyResource<DataContainer> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DataContainer)
+model DataContainerResource extends ProxyResourceBase {
   /**
    * Container name.
    */
   @path
   @key("name")
   @segment("data")
+  @visibility("read")
   name: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DataContainer;
 }
 
 @armResourceOperations
@@ -47,11 +58,7 @@ interface DataContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryDataContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    DataContainerResource,
-    BaseParameters<DataContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<DataContainerResource>;
 
   /**
    * List Data containers.

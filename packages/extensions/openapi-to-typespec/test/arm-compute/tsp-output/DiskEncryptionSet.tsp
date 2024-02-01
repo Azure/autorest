@@ -14,16 +14,26 @@ namespace Microsoft.Compute;
 /**
  * disk encryption set resource.
  */
-model DiskEncryptionSet is TrackedResource<EncryptionSetProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model DiskEncryptionSet extends Resource {
   /**
    * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
    */
   @path
   @key("diskEncryptionSetName")
   @segment("diskEncryptionSets")
+  @visibility("read")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
+   */
+  identity?: EncryptionSetIdentity;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: EncryptionSetProperties;
 }
 
 @armResourceOperations

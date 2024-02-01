@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -682,6 +684,7 @@ model ProductUpdate {
   /**
    * The updatable properties of the Product.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProductUpdateProperties;
 }
 
@@ -702,6 +705,7 @@ model DeviceGroupUpdate {
   /**
    * The updatable properties of the DeviceGroup.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -752,6 +756,7 @@ model DeviceUpdate {
   /**
    * The updatable properties of the Device.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeviceUpdateProperties;
 }
 

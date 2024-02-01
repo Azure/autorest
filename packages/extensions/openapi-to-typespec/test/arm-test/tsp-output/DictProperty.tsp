@@ -24,6 +24,7 @@ model DictProperty is TrackedResource<Record<unknown>> {
   @path
   @key("name")
   @segment("dictproperties")
+  @visibility("read")
   name: string;
 }
 

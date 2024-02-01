@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Portal Revision's contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model PortalRevisionContract
-  is ProxyResource<PortalRevisionContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PortalRevisionContractProperties
+)
+model PortalRevisionContract extends ProxyResourceBase {
   /**
    * Portal revision identifier. Must be unique in the current API Management service instance.
    */
@@ -26,7 +31,14 @@ model PortalRevisionContract
   @path
   @key("portalRevisionId")
   @segment("portalRevisions")
+  @visibility("read")
   name: string;
+
+  /**
+   * Properties of the portal revisions.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PortalRevisionContractProperties;
 }
 
 @armResourceOperations
@@ -56,11 +68,7 @@ interface PortalRevisionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PortalRevision_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PortalRevisionContract,
-    BaseParameters<PortalRevisionContract>,
-    ArmLroLocationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PortalRevisionContract>;
 
   /**
    * Updates the description of specified portal revision or makes it current.
@@ -79,8 +87,7 @@ interface PortalRevisionContracts {
        */
       @header
       `If-Match`: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -94,14 +101,14 @@ interface PortalRevisionContracts {
       ...BaseParameters<PortalRevisionContract>;
 
       /**
-* | Field       | Supported operators    | Supported functions               |
-|-------------|------------------------|-----------------------------------|
-
-|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
-|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
-|isCurrent | eq, ne |    |
-
-*/
+       * | Field       | Supported operators    | Supported functions               |
+       * |-------------|------------------------|-----------------------------------|
+       *
+       * |name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
+       * |description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|
+       * |isCurrent | eq, ne |    |
+       *
+       */
       @query("$filter")
       $filter?: string;
 

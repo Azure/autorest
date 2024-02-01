@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
   title: "Azure Test resource management API.",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Test;
 
 /**

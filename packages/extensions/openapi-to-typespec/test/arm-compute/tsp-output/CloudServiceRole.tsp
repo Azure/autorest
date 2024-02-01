@@ -15,17 +15,48 @@ namespace Microsoft.Compute;
 /**
  * Describes a role of the cloud service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CloudService)
-model CloudServiceRole is ProxyResource<CloudServiceRoleProperties> {
+@includeInapplicableMetadataInPayload(false)
+model CloudServiceRole {
   /**
    * Name of the role.
    */
   @path
   @key("roleName")
   @segment("roles")
+  @visibility("read")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Resource id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location
+   */
+  @visibility("read")
+  location?: string;
+
+  /**
+   * Describes the cloud service role sku.
+   */
+  sku?: CloudServiceRoleSku;
+
+  /**
+   * The cloud service role properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CloudServiceRoleProperties;
 }
 
 @armResourceOperations

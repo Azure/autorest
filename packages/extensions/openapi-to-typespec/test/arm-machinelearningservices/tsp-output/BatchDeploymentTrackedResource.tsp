@@ -13,19 +13,34 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchEndpointTrackedResource)
-model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(BatchDeployment)
+model BatchDeploymentTrackedResource extends TrackedResourceBase {
   /**
    * The identifier for the Batch deployments.
    */
   @path
   @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BatchDeployment;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -60,11 +75,7 @@ interface BatchDeploymentTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("BatchDeployments_Delete")
-  delete is ArmResourceDeleteAsync<
-    BatchDeploymentTrackedResource,
-    BaseParameters<BatchDeploymentTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;
 
   /**
    * Lists Batch inference deployments in the workspace.

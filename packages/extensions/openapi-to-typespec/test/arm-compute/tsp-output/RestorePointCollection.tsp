@@ -14,15 +14,24 @@ namespace Microsoft.Compute;
 /**
  * Create or update Restore Point collection parameters.
  */
-model RestorePointCollection
-  is TrackedResource<RestorePointCollectionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+model RestorePointCollection extends Resource {
   /**
    * The name of the restore point collection.
    */
   @path
   @key("restorePointCollectionName")
   @segment("restorePointCollections")
+  @visibility("read")
   name: string;
+
+  /**
+   * The restore point collection properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RestorePointCollectionProperties;
 }
 
 @armResourceOperations

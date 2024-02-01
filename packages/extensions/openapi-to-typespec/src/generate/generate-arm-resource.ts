@@ -2,6 +2,7 @@ import { Case } from "change-case-all";
 import { TypespecOperation, TspArmResource } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
+import { getArmCommonTypeVersion } from "../autorest-session";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -9,6 +10,26 @@ import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateOperation } from "./generate-operations";
 
 export function generateArmResource(resource: TspArmResource): string {
+  const definitions: string[] = [];
+
+  definitions.push(generateArmResourceModel(resource));
+
+  definitions.push("\n");
+
+  definitions.push(generateArmResourceOperation(resource));
+
+  definitions.push("\n");
+
+  for (const o of resource.resourceOperations) {
+    for (const d of o.augmentedDecorators ?? []) {
+      definitions.push(`${d}`);
+    }
+  }
+
+  return definitions.join("\n");
+}
+
+function generateArmResourceModel(resource: TspArmResource): string {
   let definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
@@ -25,28 +46,54 @@ export function generateArmResource(resource: TspArmResource): string {
     definitions.push(`@parentResource(${resource.resourceParent.name})`);
   }
 
-  definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
+  if (
+    getArmCommonTypeVersion() &&
+    !resource.propertiesPropertyRequired &&
+    resource.propertiesPropertyVisibility.length === 2 &&
+    resource.propertiesPropertyVisibility.includes("read") &&
+    resource.propertiesPropertyVisibility.includes("create")
+  ) {
+    definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
 
-  definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+  } else {
+    definitions.push(
+      `#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"`,
+    );
+    definitions.push(
+      `#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`,
+    );
+    definitions.push(`@includeInapplicableMetadataInPayload(false)`);
+
+    if (!getArmCommonTypeVersion()) {
+      if (resource.baseModelName) {
+        definitions.push(`model ${resource.name} extends ${resource.baseModelName} {`);
+      } else {
+        definitions.push(`model ${resource.name} {`);
+      }
+    } else {
+      definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
+      definitions.push(`model ${resource.name} extends ${resource.resourceKind}Base {`);
+    }
+
+    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
+
+    const propertyDoc = generateDocs({ doc: resource.propertiesPropertyDescription });
+    propertyDoc && definitions.push(propertyDoc);
+
+    definitions.push(`@extension("x-ms-client-flatten", true)`);
+    if (resource.propertiesPropertyVisibility.length > 0) {
+      definitions.push(`@visibility("${resource.propertiesPropertyVisibility.join(",")}")`);
+    }
+
+    definitions.push(`properties${resource.propertiesPropertyRequired ? "" : "?"}: ${resource.propertiesModelName}`);
+  }
 
   for (const p of resource.optionalStandardProperties) {
     definitions.push(`\n...${p}`);
   }
 
   definitions.push("}\n");
-
-  definitions.push("\n");
-
-  definitions.push(generateArmResourceOperation(resource));
-
-  definitions.push("\n");
-
-  for (const o of resource.resourceOperations) {
-    for (const d of o.augmentedDecorators ?? []) {
-      definitions.push(`${d}`);
-    }
-  }
-
   return definitions.join("\n");
 }
 

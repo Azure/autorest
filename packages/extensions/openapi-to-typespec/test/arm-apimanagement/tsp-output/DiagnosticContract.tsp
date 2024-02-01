@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Diagnostic details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticContractProperties)
+model DiagnosticContract extends ProxyResourceBase {
   /**
    * Diagnostic identifier. Must be unique in the current API Management service instance.
    */
@@ -26,7 +30,14 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
   @path
   @key("diagnosticId")
   @segment("diagnostics")
+  @visibility("read")
   name: string;
+
+  /**
+   * Diagnostic entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiagnosticContractProperties;
 }
 
 @armResourceOperations

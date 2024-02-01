@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * Data Manager For Agriculture ARM Resource.
  */
-model DataManagerForAgriculture
-  is TrackedResource<DataManagerForAgricultureProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataManagerForAgricultureProperties
+)
+model DataManagerForAgriculture extends TrackedResourceBase {
   /**
    * DataManagerForAgriculture resource name.
    */
@@ -25,7 +30,14 @@ model DataManagerForAgriculture
   @path
   @key("dataManagerForAgricultureResourceName")
   @segment("farmBeats")
+  @visibility("read")
   name: string;
+
+  /**
+   * Data Manager For Agriculture ARM Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataManagerForAgricultureProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
@@ -54,9 +66,7 @@ interface DataManagerForAgricultures {
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
-    DataManagerForAgricultureUpdateRequestModel,
-    BaseParameters<DataManagerForAgriculture>,
-    ArmLroLocationHeader
+    DataManagerForAgricultureUpdateRequestModel
   >;
 
   /**
@@ -77,9 +87,9 @@ interface DataManagerForAgricultures {
       ...BaseParameters<DataManagerForAgriculture>;
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

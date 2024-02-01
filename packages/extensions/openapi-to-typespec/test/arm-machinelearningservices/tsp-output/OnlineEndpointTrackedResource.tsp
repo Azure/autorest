@@ -13,19 +13,34 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model OnlineEndpointTrackedResource is TrackedResource<OnlineEndpoint> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
+model OnlineEndpointTrackedResource extends TrackedResourceBase {
   /**
    * Online Endpoint name.
    */
   @path
   @key("endpointName")
   @segment("onlineEndpoints")
+  @visibility("read")
   name: string;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
+   */
+  kind?: string;
+
+  /**
+   * [Required] Additional attributes of the entity.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OnlineEndpoint;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -60,11 +75,7 @@ interface OnlineEndpointTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OnlineEndpoints_Delete")
-  delete is ArmResourceDeleteAsync<
-    OnlineEndpointTrackedResource,
-    BaseParameters<OnlineEndpointTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
 
   /**
    * List Online Endpoints.
@@ -139,9 +150,7 @@ interface OnlineEndpointTrackedResources {
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
-    void,
-    BaseParameters<OnlineEndpointTrackedResource>,
-    ArmLroLocationHeader
+    void
   >;
 
   /**

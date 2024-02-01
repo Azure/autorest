@@ -15,16 +15,28 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * The private endpoint connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+model PrivateEndpointConnection extends ProxyResourceBase {
   /**
    * Private endpoint connection name.
    */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
+  @visibility("read")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations
@@ -42,11 +54,7 @@ interface PrivateEndpointConnections {
   /**
    * Delete Private endpoint connection request.
    */
-  delete is ArmResourceDeleteAsync<
-    PrivateEndpointConnection,
-    BaseParameters<PrivateEndpointConnection>,
-    ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
   /**
    * Get list of Private endpoint connections.

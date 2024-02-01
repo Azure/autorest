@@ -14,15 +14,26 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * An alert created in alert management service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model Alert is ProxyResource<AlertProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
+model Alert extends ProxyResourceBase {
   /**
    * Unique ID of an alert instance.
    */
   @path
   @key("alertId")
   @segment("alerts")
+  @visibility("read")
   name: string;
+
+  /**
+   * Alert property bag
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertProperties;
 }
 
 @armResourceOperations

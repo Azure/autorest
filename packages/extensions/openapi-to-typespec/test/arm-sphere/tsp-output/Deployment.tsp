@@ -23,6 +23,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @path
   @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
 }
 
@@ -36,20 +37,12 @@ interface Deployments {
   /**
    * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Deployment,
-    BaseParameters<Deployment>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
 
   /**
    * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  delete is ArmResourceDeleteAsync<
-    Deployment,
-    BaseParameters<Deployment>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Deployment>;
 
   /**
    * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
