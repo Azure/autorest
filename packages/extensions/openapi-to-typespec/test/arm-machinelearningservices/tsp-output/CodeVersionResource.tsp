@@ -58,11 +58,7 @@ interface CodeVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryCodeVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    CodeVersionResource,
-    BaseParameters<CodeVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<CodeVersionResource>;
 
   /**
    * List versions.

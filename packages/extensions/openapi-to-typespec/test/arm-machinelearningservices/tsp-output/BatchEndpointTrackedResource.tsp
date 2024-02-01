@@ -75,11 +75,7 @@ interface BatchEndpointTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("BatchEndpoints_Delete")
-  delete is ArmResourceDeleteAsync<
-    BatchEndpointTrackedResource,
-    BaseParameters<BatchEndpointTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<BatchEndpointTrackedResource>;
 
   /**
    * Lists Batch inference endpoint in the workspace.

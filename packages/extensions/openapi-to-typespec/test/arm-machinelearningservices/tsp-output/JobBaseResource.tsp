@@ -66,11 +66,7 @@ interface JobBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Jobs_Delete")
-  delete is ArmResourceDeleteAsync<
-    JobBaseResource,
-    BaseParameters<JobBaseResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<JobBaseResource>;
 
   /**
    * Lists Jobs in the workspace.
@@ -131,13 +127,7 @@ interface JobBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Jobs_Cancel")
-  cancel is ArmResourceActionAsync<
-    JobBaseResource,
-    void,
-    void,
-    BaseParameters<JobBaseResource>,
-    ArmLroLocationHeader
-  >;
+  cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }
 
 @@projectedName(JobBaseResources.createOrUpdate::parameters.resource,

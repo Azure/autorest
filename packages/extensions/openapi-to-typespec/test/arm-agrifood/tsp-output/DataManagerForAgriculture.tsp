@@ -66,9 +66,7 @@ interface DataManagerForAgricultures {
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
-    DataManagerForAgricultureUpdateRequestModel,
-    BaseParameters<DataManagerForAgriculture>,
-    ArmLroLocationHeader
+    DataManagerForAgricultureUpdateRequestModel
   >;
 
   /**

@@ -36,11 +36,7 @@ interface Catalogs {
   /**
    * Create a Catalog
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Catalog,
-    BaseParameters<Catalog>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Catalog>;
 
   /**
    * Update a Catalog
@@ -51,11 +47,7 @@ interface Catalogs {
   /**
    * Delete a Catalog
    */
-  delete is ArmResourceDeleteAsync<
-    Catalog,
-    BaseParameters<Catalog>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Catalog>;
 
   /**
    * List Catalog resources by resource group

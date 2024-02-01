@@ -396,8 +396,7 @@ interface VirtualMachineScaleSetVMS {
        */
       @path
       vmScaleSetName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

@@ -40,31 +40,18 @@ interface DataTypes {
   /**
    * Create data type resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    DataType,
-    BaseParameters<DataType>,
-    ArmAsyncOperationHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<DataType>;
 
   /**
    * Update data type resource.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    DataType,
-    DataTypeUpdate,
-    BaseParameters<DataType>,
-    ArmLroLocationHeader
-  >;
+  update is ArmCustomPatchAsync<DataType, DataTypeUpdate>;
 
   /**
    * Delete data type resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    DataType,
-    BaseParameters<DataType>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
   /**
    * List data type by parent resource.
@@ -76,12 +63,7 @@ interface DataTypes {
   /**
    * Delete data for data type.
    */
-  deleteData is ArmResourceActionNoResponseContentAsync<
-    DataType,
-    AnyObject,
-    BaseParameters<DataType>,
-    ArmLroLocationHeader
-  >;
+  deleteData is ArmResourceActionNoResponseContentAsync<DataType, AnyObject>;
 
   /**
    * Generate sas token for storage container.

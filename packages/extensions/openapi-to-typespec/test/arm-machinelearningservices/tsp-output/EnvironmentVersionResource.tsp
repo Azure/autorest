@@ -58,11 +58,7 @@ interface EnvironmentVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryEnvironmentVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    EnvironmentVersionResource,
-    BaseParameters<EnvironmentVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<EnvironmentVersionResource>;
 
   /**
    * List versions.

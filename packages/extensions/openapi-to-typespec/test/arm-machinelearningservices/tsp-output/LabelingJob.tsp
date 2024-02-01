@@ -101,9 +101,7 @@ interface LabelingJobs {
   exportLabels is ArmResourceActionAsync<
     LabelingJob,
     ExportSummary,
-    ExportSummary,
-    BaseParameters<LabelingJob>,
-    ArmLroLocationHeader
+    ExportSummary
   >;
 
   /**
@@ -114,13 +112,7 @@ interface LabelingJobs {
   /**
    * Resume a labeling job (asynchronous).
    */
-  resume is ArmResourceActionAsync<
-    LabelingJob,
-    void,
-    void,
-    BaseParameters<LabelingJob>,
-    ArmLroLocationHeader
-  >;
+  resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
 @@projectedName(LabelingJobs.createOrUpdate::parameters.resource,

@@ -76,8 +76,7 @@ interface SchemaContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

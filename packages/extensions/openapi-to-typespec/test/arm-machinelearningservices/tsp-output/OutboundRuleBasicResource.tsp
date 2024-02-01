@@ -52,11 +52,7 @@ interface OutboundRuleBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    OutboundRuleBasicResource,
-    BaseParameters<OutboundRuleBasicResource>,
-    ArmLroLocationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OutboundRuleBasicResource>;
 
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.

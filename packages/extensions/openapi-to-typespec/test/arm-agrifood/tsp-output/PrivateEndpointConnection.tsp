@@ -54,11 +54,7 @@ interface PrivateEndpointConnections {
   /**
    * Delete Private endpoint connection request.
    */
-  delete is ArmResourceDeleteAsync<
-    PrivateEndpointConnection,
-    BaseParameters<PrivateEndpointConnection>,
-    ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
   /**
    * Get list of Private endpoint connections.

@@ -68,11 +68,7 @@ interface PortalRevisionContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PortalRevision_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PortalRevisionContract,
-    BaseParameters<PortalRevisionContract>,
-    ArmLroLocationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PortalRevisionContract>;
 
   /**
    * Updates the description of specified portal revision or makes it current.
@@ -91,8 +87,7 @@ interface PortalRevisionContracts {
        */
       @header
       `If-Match`: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

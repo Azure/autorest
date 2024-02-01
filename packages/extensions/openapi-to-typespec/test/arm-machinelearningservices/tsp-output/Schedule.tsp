@@ -52,11 +52,7 @@ interface Schedules {
   /**
    * Delete schedule.
    */
-  delete is ArmResourceDeleteAsync<
-    Schedule,
-    BaseParameters<Schedule>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Schedule>;
 
   /**
    * List schedules in specified workspace.

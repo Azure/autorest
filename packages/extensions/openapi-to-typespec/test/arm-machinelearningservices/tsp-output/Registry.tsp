@@ -52,11 +52,7 @@ interface Registries {
   /**
    * Create or update registry
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Registry,
-    BaseParameters<Registry>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Registry>;
 
   /**
    * Update tags
@@ -67,11 +63,7 @@ interface Registries {
   /**
    * Delete registry
    */
-  delete is ArmResourceDeleteAsync<
-    Registry,
-    BaseParameters<Registry>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Registry>;
 
   /**
    * List registries
@@ -88,13 +80,7 @@ interface Registries {
   /**
    * Remove regions from registry
    */
-  removeRegions is ArmResourceActionAsync<
-    Registry,
-    Registry,
-    Registry,
-    BaseParameters<Registry>,
-    ArmLroLocationHeader
-  >;
+  removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }
 
 @@projectedName(Registries.createOrUpdate::parameters.resource, "json", "body");

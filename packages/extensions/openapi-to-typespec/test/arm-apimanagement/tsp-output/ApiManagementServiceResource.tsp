@@ -110,9 +110,7 @@ interface ApiManagementServiceResources {
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
-    ConnectivityCheckResponse,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ConnectivityCheckResponse
   >;
 
   /**
@@ -123,9 +121,7 @@ interface ApiManagementServiceResources {
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -136,9 +132,7 @@ interface ApiManagementServiceResources {
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -160,9 +154,7 @@ interface ApiManagementServiceResources {
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
-    ApiManagementServiceResource,
-    BaseParameters<ApiManagementServiceResource>,
-    ArmLroLocationHeader
+    ApiManagementServiceResource
   >;
 
   /**
@@ -182,8 +174,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -203,8 +194,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -224,8 +214,7 @@ interface ApiManagementServiceResources {
        */
       @path
       configurationName: ConfigurationIdName;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

@@ -75,11 +75,7 @@ interface OnlineDeploymentTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OnlineDeployments_Delete")
-  delete is ArmResourceDeleteAsync<
-    OnlineDeploymentTrackedResource,
-    BaseParameters<OnlineDeploymentTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
 
   /**
    * List Inference Endpoint Deployments.

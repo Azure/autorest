@@ -59,11 +59,7 @@ interface EnvironmentContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryEnvironmentContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    EnvironmentContainerResource,
-    BaseParameters<EnvironmentContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<EnvironmentContainerResource>;
 
   /**
    * List environment containers.

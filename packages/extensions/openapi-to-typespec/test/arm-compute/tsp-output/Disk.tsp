@@ -99,24 +99,12 @@ interface Disks {
   /**
    * Grants access to a disk.
    */
-  grantAccess is ArmResourceActionAsync<
-    Disk,
-    GrantAccessData,
-    AccessUri,
-    BaseParameters<Disk>,
-    ArmLroLocationHeader
-  >;
+  grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
 
   /**
    * Revokes access to a disk.
    */
-  revokeAccess is ArmResourceActionAsync<
-    Disk,
-    void,
-    void,
-    BaseParameters<Disk>,
-    ArmLroLocationHeader
-  >;
+  revokeAccess is ArmResourceActionAsync<Disk, void, void>;
 }
 
 @@projectedName(Disks.createOrUpdate::parameters.resource, "json", "disk");

@@ -38,31 +38,18 @@ interface Products {
   /**
    * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Product,
-    BaseParameters<Product>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Product>;
 
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    Product,
-    ProductUpdate,
-    BaseParameters<Product>,
-    ArmLroLocationHeader
-  >;
+  update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
   /**
    * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
    */
-  delete is ArmResourceDeleteAsync<
-    Product,
-    BaseParameters<Product>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Product>;
 
   /**
    * List Product resources by Catalog

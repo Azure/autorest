@@ -59,11 +59,7 @@ interface ModelContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryModelContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    ModelContainerResource,
-    BaseParameters<ModelContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<ModelContainerResource>;
 
   /**
    * List model containers.

@@ -88,24 +88,12 @@ interface Snapshots {
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ArmResourceActionAsync<
-    Snapshot,
-    GrantAccessData,
-    AccessUri,
-    BaseParameters<Snapshot>,
-    ArmLroLocationHeader
-  >;
+  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
 
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<
-    Snapshot,
-    void,
-    void,
-    BaseParameters<Snapshot>,
-    ArmLroLocationHeader
-  >;
+  revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }
 
 @@projectedName(Snapshots.createOrUpdate::parameters.resource,

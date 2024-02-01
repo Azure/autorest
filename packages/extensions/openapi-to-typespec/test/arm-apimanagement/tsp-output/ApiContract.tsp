@@ -74,8 +74,7 @@ interface ApiContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

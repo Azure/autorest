@@ -78,8 +78,7 @@ interface GlobalSchemaContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

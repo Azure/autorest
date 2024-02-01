@@ -38,11 +38,7 @@ interface Accounts {
   /**
    * Create a Account
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Account,
-    BaseParameters<Account>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Account>;
 
   /**
    * Update a Account
@@ -53,11 +49,7 @@ interface Accounts {
   /**
    * Delete a Account
    */
-  delete is ArmResourceDeleteAsync<
-    Account,
-    BaseParameters<Account>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Account>;
 
   /**
    * List Account resources by resource group

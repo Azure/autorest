@@ -2,7 +2,7 @@ import { Case } from "change-case-all";
 import { TypespecOperation, TspArmResource } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
-import { getArmCommonTypeVersion, getSession } from "../autorest-session";
+import { getArmCommonTypeVersion } from "../autorest-session";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -10,6 +10,26 @@ import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateOperation } from "./generate-operations";
 
 export function generateArmResource(resource: TspArmResource): string {
+  const definitions: string[] = [];
+
+  definitions.push(generateArmResourceModel(resource));
+
+  definitions.push("\n");
+
+  definitions.push(generateArmResourceOperation(resource));
+
+  definitions.push("\n");
+
+  for (const o of resource.resourceOperations) {
+    for (const d of o.augmentedDecorators ?? []) {
+      definitions.push(`${d}`);
+    }
+  }
+
+  return definitions.join("\n");
+}
+
+function generateArmResourceModel(resource: TspArmResource): string {
   let definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
@@ -74,19 +94,6 @@ export function generateArmResource(resource: TspArmResource): string {
   }
 
   definitions.push("}\n");
-
-  definitions.push("\n");
-
-  definitions.push(generateArmResourceOperation(resource));
-
-  definitions.push("\n");
-
-  for (const o of resource.resourceOperations) {
-    for (const d of o.augmentedDecorators ?? []) {
-      definitions.push(`${d}`);
-    }
-  }
-
   return definitions.join("\n");
 }
 

@@ -58,11 +58,7 @@ interface DataContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryDataContainers_Delete")
-  delete is ArmResourceDeleteAsync<
-    DataContainerResource,
-    BaseParameters<DataContainerResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<DataContainerResource>;
 
   /**
    * List Data containers.

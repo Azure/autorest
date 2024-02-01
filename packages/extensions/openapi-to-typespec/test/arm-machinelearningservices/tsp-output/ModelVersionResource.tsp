@@ -58,11 +58,7 @@ interface ModelVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryModelVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    ModelVersionResource,
-    BaseParameters<ModelVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<ModelVersionResource>;
 
   /**
    * List versions.
@@ -126,9 +122,7 @@ interface ModelVersionResources {
   package is ArmResourceActionAsync<
     ModelVersionResource,
     PackageRequest,
-    PackageResponse,
-    BaseParameters<ModelVersionResource>,
-    ArmLroLocationHeader
+    PackageResponse
   >;
 
   /**

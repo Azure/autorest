@@ -36,11 +36,7 @@ interface Employees {
   /**
    * Create a Employee
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Employee,
-    BaseParameters<Employee>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
 
   /**
    * Update a Employee

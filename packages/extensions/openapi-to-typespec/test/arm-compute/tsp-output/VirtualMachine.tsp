@@ -158,9 +158,7 @@ interface VirtualMachines {
   capture is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineCaptureParameters,
-    VirtualMachineCaptureResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineCaptureResult
   >;
 
   /**
@@ -272,9 +270,7 @@ interface VirtualMachines {
   assessPatches is ArmResourceActionAsync<
     VirtualMachine,
     void,
-    VirtualMachineAssessPatchesResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineAssessPatchesResult
   >;
 
   /**
@@ -283,9 +279,7 @@ interface VirtualMachines {
   installPatches is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    VirtualMachineInstallPatchesResult
   >;
 
   /**
@@ -294,9 +288,7 @@ interface VirtualMachines {
   runCommand is ArmResourceActionAsync<
     VirtualMachine,
     RunCommandInput,
-    RunCommandResult,
-    BaseParameters<VirtualMachine>,
-    ArmLroLocationHeader
+    RunCommandResult
   >;
 
   /**

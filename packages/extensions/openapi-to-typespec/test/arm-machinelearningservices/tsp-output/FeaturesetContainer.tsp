@@ -54,11 +54,7 @@ interface FeaturesetContainers {
   /**
    * Delete container.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturesetContainer,
-    BaseParameters<FeaturesetContainer>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturesetContainer>;
 
   /**
    * List featurestore entity containers.

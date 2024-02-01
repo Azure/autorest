@@ -218,23 +218,6 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
   return [];
 }
 
-function getLROHeader(swaggerOperation: Operation): string | undefined {
-  if (!swaggerOperation.extensions?.["x-ms-long-running-operation"]) {
-    return undefined;
-  }
-  let lroHeader = undefined;
-  const finalStateVia = swaggerOperation.extensions?.["x-ms-long-running-operation-options"]?.["final-state-via"];
-  if (finalStateVia === "azure-async-operation") {
-    lroHeader = "ArmAsyncOperationHeader";
-  } else if (finalStateVia === "location") {
-    lroHeader = "ArmLroLocationHeader";
-    // TODO: deal with final-state-schema
-  } else {
-    // TODO: not sure how to deal with original-uri and operation-location
-  }
-  return lroHeader;
-}
-
 function getTSPOperationGroupName(resourceName: string): string {
   const operationGroupName = pluralize(resourceName);
   if (operationGroupName === resourceName) {
@@ -253,17 +236,10 @@ function convertResourceCreateOrReplaceOperation(
     const swaggerOperation = operations[operation.OperationID];
     const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const lroHeader = getLROHeader(swaggerOperation);
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     const templateParameters = [resourceMetadata.SwaggerModelName];
     if (baseParameters) {
       templateParameters.push(baseParameters);
-    }
-    if (lroHeader) {
-      if (!baseParameters) {
-        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-      }
-      templateParameters.push(lroHeader);
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
     const operationName = getOperationName(operation.OperationID);
@@ -310,7 +286,6 @@ function convertResourceUpdateOperation(
     ) {
       const swaggerOperation = operations[operation.OperationID];
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-      const lroHeader = getLROHeader(swaggerOperation);
       const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const fixMe: string[] = [];
@@ -348,12 +323,6 @@ function convertResourceUpdateOperation(
       if (baseParameters) {
         templateParameters.push(baseParameters);
       }
-      if (lroHeader) {
-        if (!baseParameters) {
-          templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-        }
-        templateParameters.push(lroHeader);
-      }
       return [
         {
           fixMe,
@@ -381,18 +350,11 @@ function convertResourceDeleteOperation(
     const operation = resourceMetadata.DeleteOperations[0];
     const swaggerOperation = operations[operation.OperationID];
     const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-    const lroHeader = getLROHeader(swaggerOperation);
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     const templateParameters = [resourceMetadata.SwaggerModelName];
     if (baseParameters) {
       templateParameters.push(baseParameters);
-    }
-    if (lroHeader) {
-      if (!baseParameters) {
-        templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-      }
-      templateParameters.push(lroHeader);
     }
     return [
       {
@@ -532,7 +494,6 @@ function convertResourceActionOperations(
         const swaggerOperation = operations[operation.OperationID];
         const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
         const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-        const lroHeader = getLROHeader(swaggerOperation);
         const okResponse = swaggerOperation?.responses?.filter(
           (o) => o.protocol.http?.statusCodes.includes("200"),
         )?.[0];
@@ -559,12 +520,6 @@ function convertResourceActionOperations(
         }
         if (baseParameters) {
           templateParameters.push(baseParameters);
-        }
-        if (lroHeader) {
-          if (!baseParameters) {
-            templateParameters.push(`BaseParameters<${resourceMetadata.SwaggerModelName}>`);
-          }
-          templateParameters.push(lroHeader);
         }
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);

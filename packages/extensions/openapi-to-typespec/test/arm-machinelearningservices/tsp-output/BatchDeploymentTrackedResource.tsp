@@ -75,11 +75,7 @@ interface BatchDeploymentTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("BatchDeployments_Delete")
-  delete is ArmResourceDeleteAsync<
-    BatchDeploymentTrackedResource,
-    BaseParameters<BatchDeploymentTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<BatchDeploymentTrackedResource>;
 
   /**
    * Lists Batch inference deployments in the workspace.

@@ -55,11 +55,7 @@ interface DeletedServiceContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DeletedServices_Purge")
-  purge is ArmResourceDeleteAsync<
-    DeletedServiceContract,
-    BaseParameters<DeletedServiceContract>,
-    ArmLroLocationHeader
-  >;
+  purge is ArmResourceDeleteAsync<DeletedServiceContract>;
 
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.

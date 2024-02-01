@@ -91,8 +91,7 @@ interface DiskRestorePoints {
        */
       @path
       restorePointCollectionName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -112,8 +111,7 @@ interface DiskRestorePoints {
        */
       @path
       restorePointCollectionName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 }
 

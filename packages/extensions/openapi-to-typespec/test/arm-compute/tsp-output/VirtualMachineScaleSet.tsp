@@ -292,8 +292,7 @@ interface VirtualMachineScaleSets {
        */
       @path
       vmScaleSetName: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**

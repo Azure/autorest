@@ -52,11 +52,7 @@ interface FeaturesetVersions {
   /**
    * Delete version.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturesetVersion,
-    BaseParameters<FeaturesetVersion>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturesetVersion>;
 
   /**
    * List versions.
@@ -124,9 +120,7 @@ interface FeaturesetVersions {
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,
-    FeaturesetJob,
-    BaseParameters<FeaturesetVersion>,
-    ArmLroLocationHeader
+    FeaturesetJob
   >;
 
   /**

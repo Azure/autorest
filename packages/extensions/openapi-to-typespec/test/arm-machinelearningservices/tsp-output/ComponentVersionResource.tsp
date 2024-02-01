@@ -58,11 +58,7 @@ interface ComponentVersionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryComponentVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    ComponentVersionResource,
-    BaseParameters<ComponentVersionResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<ComponentVersionResource>;
 
   /**
    * List versions.

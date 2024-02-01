@@ -42,11 +42,7 @@ interface Associations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("AssociationsInterface_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Association,
-    BaseParameters<Association>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
 
   /**
    * Update a Association
@@ -61,11 +57,7 @@ interface Associations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("AssociationsInterface_Delete")
-  delete is ArmResourceDeleteAsync<
-    Association,
-    BaseParameters<Association>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Association>;
 
   /**
    * List Association resources by TrafficController

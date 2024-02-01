@@ -58,11 +58,7 @@ interface DataVersionBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("RegistryDataVersions_Delete")
-  delete is ArmResourceDeleteAsync<
-    DataVersionBaseResource,
-    BaseParameters<DataVersionBaseResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<DataVersionBaseResource>;
 
   /**
    * List data versions in the data container

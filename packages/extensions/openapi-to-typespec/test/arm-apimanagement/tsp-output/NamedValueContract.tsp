@@ -76,8 +76,7 @@ interface NamedValueContracts {
        */
       @header
       `If-Match`?: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -97,8 +96,7 @@ interface NamedValueContracts {
        */
       @header
       `If-Match`: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -175,9 +173,7 @@ interface NamedValueContracts {
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,
-    NamedValueContract,
-    BaseParameters<NamedValueContract>,
-    ArmLroLocationHeader
+    NamedValueContract
   >;
 }
 

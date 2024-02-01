@@ -54,11 +54,7 @@ interface FeaturestoreEntityVersions {
   /**
    * Delete version.
    */
-  delete is ArmResourceDeleteAsync<
-    FeaturestoreEntityVersion,
-    BaseParameters<FeaturestoreEntityVersion>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
 
   /**
    * List versions.

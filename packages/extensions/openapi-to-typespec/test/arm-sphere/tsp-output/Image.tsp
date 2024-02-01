@@ -37,20 +37,12 @@ interface Images {
   /**
    * Create a Image
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Image,
-    BaseParameters<Image>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
   /**
    * Delete a Image
    */
-  delete is ArmResourceDeleteAsync<
-    Image,
-    BaseParameters<Image>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<Image>;
 
   /**
    * List Image resources by Catalog

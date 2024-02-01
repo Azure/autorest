@@ -51,11 +51,7 @@ interface Workspaces {
   /**
    * Creates or updates a workspace with the specified parameters.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Workspace,
-    BaseParameters<Workspace>,
-    ArmLroLocationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
 
   /**
    * Updates a machine learning workspace with the specified parameters.
@@ -114,9 +110,7 @@ interface Workspaces {
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
-    DiagnoseResponseResult,
-    BaseParameters<Workspace>,
-    ArmLroLocationHeader
+    DiagnoseResponseResult
   >;
 
   /**
@@ -157,21 +151,13 @@ interface Workspaces {
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
-    NotebookResourceInfo,
-    BaseParameters<Workspace>,
-    ArmLroLocationHeader
+    NotebookResourceInfo
   >;
 
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
-  resyncKeys is ArmResourceActionAsync<
-    Workspace,
-    void,
-    void,
-    BaseParameters<Workspace>,
-    ArmLroLocationHeader
-  >;
+  resyncKeys is ArmResourceActionAsync<Workspace, void, void>;
 
   /**
    * Provisions the managed network of a machine learning workspace.
@@ -181,9 +167,7 @@ interface Workspaces {
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,
-    ManagedNetworkProvisionStatus,
-    BaseParameters<Workspace>,
-    ArmLroLocationHeader
+    ManagedNetworkProvisionStatus
   >;
 
   /**

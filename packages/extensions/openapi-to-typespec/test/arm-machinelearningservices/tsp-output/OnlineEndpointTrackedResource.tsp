@@ -75,11 +75,7 @@ interface OnlineEndpointTrackedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OnlineEndpoints_Delete")
-  delete is ArmResourceDeleteAsync<
-    OnlineEndpointTrackedResource,
-    BaseParameters<OnlineEndpointTrackedResource>,
-    ArmLroLocationHeader
-  >;
+  delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
 
   /**
    * List Online Endpoints.
@@ -154,9 +150,7 @@ interface OnlineEndpointTrackedResources {
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
     RegenerateEndpointKeysRequest,
-    void,
-    BaseParameters<OnlineEndpointTrackedResource>,
-    ArmLroLocationHeader
+    void
   >;
 
   /**

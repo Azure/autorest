@@ -161,8 +161,7 @@ interface StorageAccounts {
        */
       @query("failoverType")
       failoverType?: "Planned";
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -180,8 +179,7 @@ interface StorageAccounts {
        */
       @query("requestType")
       requestType: string;
-    },
-    ArmLroLocationHeader
+    }
   >;
 
   /**
@@ -190,9 +188,7 @@ interface StorageAccounts {
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    void,
-    BaseParameters<StorageAccount>,
-    ArmLroLocationHeader
+    void
   >;
 
   /**
@@ -201,9 +197,7 @@ interface StorageAccounts {
   restoreBlobRanges is ArmResourceActionAsync<
     StorageAccount,
     BlobRestoreParameters,
-    BlobRestoreStatus,
-    BaseParameters<StorageAccount>,
-    ArmLroLocationHeader
+    BlobRestoreStatus
   >;
 
   /**
