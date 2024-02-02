@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -826,7 +824,6 @@ model StorageAccountCreateParameters {
   /**
    * The parameters used to create the storage account.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: StorageAccountPropertiesCreateParameters;
 }
 
@@ -1965,7 +1962,6 @@ model StorageAccountUpdateParameters {
   /**
    * The parameters used when updating a storage account.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: StorageAccountPropertiesUpdateParameters;
 
   /**
@@ -2892,7 +2888,6 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -3456,7 +3451,6 @@ model ImmutabilityPolicyProperties {
   /**
    * The properties of an ImmutabilityPolicy of a blob container.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ImmutabilityPolicyProperty;
 
   /**
@@ -4089,7 +4083,6 @@ model ListContainerItem extends AzureEntityResource {
   /**
    * The blob container properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ContainerProperties;
 }
 
@@ -4100,7 +4093,6 @@ model FileShareItem extends AzureEntityResource {
   /**
    * The file share properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: FileShareProperties;
 }
 
@@ -4109,7 +4101,6 @@ model ListQueue extends Resource {
    * List Queue resource properties.
    */
   @projectedName("json", "properties")
-  @extension("x-ms-client-flatten", true)
   queueProperties?: ListQueueProperties;
 }
 

@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.38.0
     version: 0.38.0(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/rest@0.52.0)
   '@azure-tools/typespec-azure-resource-manager':
-    specifier: ^0.38.0
-    version: 0.38.0(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
+    specifier: ^0.39.0-dev.1
+    version: 0.39.0-dev.1(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
   '@azure-tools/uri':
     specifier: ~3.1.1
     version: 3.1.1
@@ -425,17 +425,17 @@ packages:
       '@typespec/rest': 0.52.0(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)
     dev: false
 
-  /@azure-tools/typespec-azure-resource-manager@0.38.0(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0):
-    resolution: {integrity: sha512-jWMwIzT5WCokIW0IOTi/yqc5UsO47Mw+k9CGBwSmggYug/hmDELz+AfNyL/0T+rM2eF+5R/IrMKFI4Hq/OE9vQ==}
+  /@azure-tools/typespec-azure-resource-manager@0.39.0-dev.1(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0):
+    resolution: {integrity: sha512-VCNjJCu/dTLwgD5c8NG5lSljVcdz+r3JODm6WE8uGDRhHDSTCLx390ceNpidXiQyVm9RmINuNrOkDlWAyw4rgA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@azure-tools/typespec-autorest': ~0.38.0
-      '@azure-tools/typespec-azure-core': ~0.38.0
-      '@typespec/compiler': ~0.52.0
-      '@typespec/http': ~0.52.0
-      '@typespec/openapi': ~0.52.0
-      '@typespec/rest': ~0.52.0
-      '@typespec/versioning': ~0.52.0
+      '@azure-tools/typespec-autorest': ~0.38.1 || >=0.39.0-dev <0.39.0
+      '@azure-tools/typespec-azure-core': ~0.38.0 || >=0.39.0-dev <0.39.0
+      '@typespec/compiler': ~0.52.0 || >=0.53.0-dev <0.53.0
+      '@typespec/http': ~0.52.0 || >=0.53.0-dev <0.53.0
+      '@typespec/openapi': ~0.52.0 || >=0.53.0-dev <0.53.0
+      '@typespec/rest': ~0.52.0 || >=0.53.0-dev <0.53.0
+      '@typespec/versioning': ~0.52.0 || >=0.53.0-dev <0.53.0
     dependencies:
       '@azure-tools/typespec-autorest': 0.38.0(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
       '@azure-tools/typespec-azure-core': 0.38.0(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/rest@0.52.0)
@@ -9410,14 +9410,14 @@ packages:
     dev: false
 
   file:projects/openapi-to-typespec.tgz(jest@29.7.0):
-    resolution: {integrity: sha512-KvfNMg+QS2PURPUPNr32nxEeDtcKBbiOIitXRN55kRdADozPRn83lfm8IBi6OTDajBw5nfv6UOWT163f0jfqcw==, tarball: file:projects/openapi-to-typespec.tgz}
+    resolution: {integrity: sha512-UXyXTBrgM+0JwncgtQKuz+XBW7hWWqs9aQWF+1AZiM6Z5pTqCAVWkAq+IQia2/2So8+0vU8o8I/NROk/TUIQwQ==, tarball: file:projects/openapi-to-typespec.tgz}
     id: file:projects/openapi-to-typespec.tgz
     name: '@rush-temp/openapi-to-typespec'
     version: 0.0.0
     dependencies:
       '@azure-tools/typespec-autorest': 0.38.0(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
       '@azure-tools/typespec-azure-core': 0.38.0(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/rest@0.52.0)
-      '@azure-tools/typespec-azure-resource-manager': 0.38.0(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
+      '@azure-tools/typespec-azure-resource-manager': 0.39.0-dev.1(@azure-tools/typespec-autorest@0.38.0)(@azure-tools/typespec-azure-core@0.38.0)(@typespec/compiler@0.52.0)(@typespec/http@0.52.0)(@typespec/openapi@0.52.0)(@typespec/rest@0.52.0)(@typespec/versioning@0.52.0)
       '@types/fs-extra': 9.0.13
       '@types/lodash': 4.14.201
       '@types/node': 20.9.0

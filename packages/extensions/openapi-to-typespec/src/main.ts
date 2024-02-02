@@ -13,6 +13,7 @@ import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { emitTypespecConfig } from "./emiters/emit-typespec-config";
+import { emitClient } from "./emiters/emit-client";
 import { getModel } from "./model";
 import { pretransformArmResources } from "./pretransforms/arm-pretransform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
@@ -36,6 +37,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   await emitMain(getFilePath(session, "main.tsp"), programDetails);
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
+  await emitClient(getFilePath(session, "client.tsp"), programDetails);
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {

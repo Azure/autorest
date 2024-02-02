@@ -1,10 +1,12 @@
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 
+export function getNamespaceStatement(program: TypespecProgram) {
+  return `namespace ${getNamespace(program)};`;
+}
+
 export function getNamespace(program: TypespecProgram) {
-  let { namespace } = getOptions();
+  const { namespace } = getOptions();
 
-  namespace = namespace ?? program.serviceInformation.name.replace(/ /g, "").replace(/-/g, "");
-
-  return `namespace ${namespace};`;
+  return namespace ?? program.serviceInformation.name.replace(/ /g, "").replace(/-/g, "");
 }

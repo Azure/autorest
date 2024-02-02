@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1467,7 +1465,6 @@ model ComputeOperationValue {
   /**
    * Describes the properties of a Compute Operation Value Display.
    */
-  @extension("x-ms-client-flatten", true)
   display?: ComputeOperationValueDisplay;
 }
 
@@ -2610,7 +2607,6 @@ model VirtualMachineScaleSetNetworkConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
 }
 
@@ -2696,7 +2692,6 @@ model VirtualMachineScaleSetIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetIPConfigurationProperties;
 }
 
@@ -2757,7 +2752,6 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetPublicIPAddressConfigurationProperties;
 
   /**
@@ -3493,7 +3487,6 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Scale Set.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateProperties;
 
   /**
@@ -3741,7 +3734,6 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   /**
    * Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
 }
 
@@ -3817,7 +3809,6 @@ model VirtualMachineScaleSetUpdateIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdateIPConfigurationProperties;
 }
 
@@ -3878,7 +3869,6 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
 }
 
@@ -4046,7 +4036,6 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
@@ -4425,7 +4414,6 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -5126,7 +5114,6 @@ model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: NetworkInterfaceReferenceProperties;
 }
 
@@ -5157,7 +5144,6 @@ model VirtualMachineNetworkInterfaceConfiguration {
   /**
    * Describes a virtual machine network profile's IP configuration.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
 }
 
@@ -5245,7 +5231,6 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
   /**
    * Describes a virtual machine network interface IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineNetworkInterfaceIPConfigurationProperties;
 }
 
@@ -5301,7 +5286,6 @@ model VirtualMachinePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachinePublicIPAddressConfigurationProperties;
 
   /**
@@ -5456,7 +5440,6 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -5898,7 +5881,6 @@ model VirtualMachineUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineProperties;
 
   /**
@@ -6240,7 +6222,6 @@ model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineImageProperties;
 }
 
@@ -6511,7 +6492,6 @@ model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: AvailabilitySetProperties;
 
   /**
@@ -6694,7 +6674,6 @@ model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DedicatedHostGroupProperties;
 
   /**
@@ -6768,7 +6747,6 @@ model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DedicatedHostProperties;
 
   /**
@@ -6806,7 +6784,6 @@ model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: SshPublicKeyResourceProperties;
 }
 
@@ -6948,7 +6925,6 @@ model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ImageProperties;
 }
 
@@ -7320,7 +7296,6 @@ model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: RestorePointCollectionProperties;
 }
 
@@ -7406,7 +7381,6 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: CapacityReservationGroupProperties;
 }
 
@@ -7466,7 +7440,6 @@ model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: CapacityReservationProperties;
 
   /**
@@ -7843,7 +7816,6 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineRunCommandProperties;
 }
 
@@ -8309,7 +8281,6 @@ model DiskUpdate {
   /**
    * Disk resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DiskUpdateProperties;
 
   /**
@@ -8574,7 +8545,6 @@ model PrivateLinkResource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -8714,7 +8684,6 @@ model DiskEncryptionSetUpdate {
   /**
    * disk encryption set resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DiskEncryptionSetUpdateProperties;
 
   /**
@@ -9045,7 +9014,6 @@ model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: SnapshotUpdateProperties;
 
   /**
@@ -9544,7 +9512,6 @@ model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: GalleryProperties;
 }
 
@@ -9760,7 +9727,6 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: GalleryImageProperties;
 }
 
@@ -10166,7 +10132,6 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: GalleryImageVersionProperties;
 }
 
@@ -10273,7 +10238,6 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: GalleryApplicationProperties;
 }
 
@@ -10397,7 +10361,6 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: GalleryApplicationVersionProperties;
 }
 
@@ -10423,7 +10386,6 @@ model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
    */
-  @extension("x-ms-client-flatten", true)
   identifier?: SharedGalleryIdentifier;
 }
 
@@ -10618,7 +10580,6 @@ model PirCommunityGalleryResource {
   /**
    * The identifier information of community gallery.
    */
-  @extension("x-ms-client-flatten", true)
   identifier?: CommunityGalleryIdentifier;
 }
 
@@ -11052,7 +11013,6 @@ model LoadBalancerConfiguration {
   /**
    * Properties of the load balancer configuration.
    */
-  @extension("x-ms-client-flatten", true)
   properties: LoadBalancerConfigurationProperties;
 }
 
@@ -11078,7 +11038,6 @@ model LoadBalancerFrontendIpConfiguration {
   /**
    * Properties of load balancer frontend ip configuration.
    */
-  @extension("x-ms-client-flatten", true)
   properties: LoadBalancerFrontendIpConfigurationProperties;
 }
 
@@ -11124,7 +11083,6 @@ model Extension {
   /**
    * Extension Properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: CloudServiceExtensionProperties;
 }
 

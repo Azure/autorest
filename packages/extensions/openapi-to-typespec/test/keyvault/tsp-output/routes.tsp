@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.Keyvault;
 
@@ -207,7 +205,6 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
      * Certificate issuer set parameter.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameter: CertificateIssuerSetParameters;
   },
   IssuerBundle
@@ -233,7 +230,6 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
      * Certificate issuer update parameter.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameter: CertificateIssuerUpdateParameters;
   },
   IssuerBundle
@@ -299,7 +295,6 @@ op createCertificate is Azure.Core.Foundations.Operation<
      * The parameters to create a certificate.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: CertificateCreateParameters;
   },
   CertificateOperation
@@ -330,7 +325,6 @@ op importCertificate is Azure.Core.Foundations.Operation<
      * The parameters to import the certificate.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: CertificateImportParameters;
   },
   CertificateBundle
@@ -433,7 +427,6 @@ op updateCertificate is Azure.Core.Foundations.Operation<
      * The parameters for certificate update.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -483,7 +476,6 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
      * The certificate operation response.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     certificateOperation: CertificateOperationUpdateParameter;
   },
   CertificateOperation
@@ -549,7 +541,6 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
      * The parameters to merge certificate.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: CertificateMergeParameters;
   },
   CertificateBundle
@@ -710,7 +701,6 @@ op createKey is Azure.Core.Foundations.Operation<
      * The parameters to create a key.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyCreateParameters;
   },
   KeyBundle
@@ -765,7 +755,6 @@ op importKey is Azure.Core.Foundations.Operation<
      * The parameters to import a key.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyImportParameters;
   },
   KeyBundle
@@ -820,7 +809,6 @@ op updateKey is Azure.Core.Foundations.Operation<
      * The parameters of the key to update.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyUpdateParameters;
   },
   KeyBundle
@@ -990,7 +978,6 @@ op encrypt is Azure.Core.Foundations.Operation<
      * The parameters for the encryption operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1030,7 +1017,6 @@ op decrypt is Azure.Core.Foundations.Operation<
      * The parameters for the decryption operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1062,7 +1048,6 @@ op sign is Azure.Core.Foundations.Operation<
      * The parameters for the signing operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeySignParameters;
   },
   KeyOperationResult
@@ -1097,7 +1082,6 @@ op verify is Azure.Core.Foundations.Operation<
      * The parameters for verify operations.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -1133,7 +1117,6 @@ op wrapKey is Azure.Core.Foundations.Operation<
      * The parameters for wrap operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1170,7 +1153,6 @@ op unwrapKey is Azure.Core.Foundations.Operation<
      * The parameters for the key operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1201,7 +1183,6 @@ op release is Azure.Core.Foundations.Operation<
      * The parameters for the key release operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -1369,7 +1350,6 @@ op setSecret is Azure.Core.Foundations.Operation<
      * The parameters for setting the secret.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: SecretSetParameters;
   },
   SecretBundle
@@ -1421,7 +1401,6 @@ op updateSecret is Azure.Core.Foundations.Operation<
      * The parameters for update secret operation.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -1633,7 +1612,6 @@ op updateSettings is Azure.Core.Foundations.Operation<
      * The parameters to update an account setting.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: UpdateSettingsRequest;
   },
   Setting
@@ -1854,7 +1832,6 @@ op setStorageAccount is Azure.Core.Foundations.Operation<
      * The parameters to create a storage account.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: StorageAccountCreateParameters;
   },
   StorageBundle
@@ -1879,7 +1856,6 @@ op updateStorageAccount is Azure.Core.Foundations.Operation<
      * The parameters to update a storage account.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: StorageAccountUpdateParameters;
   },
   StorageBundle
@@ -1904,7 +1880,6 @@ op regenerateStorageAccountKey is Azure.Core.Foundations.Operation<
      * The parameters to regenerate storage account key.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: StorageAccountRegenerteKeyParameters;
   },
   StorageBundle
@@ -2098,7 +2073,6 @@ op setSasDefinition is Azure.Core.Foundations.Operation<
      * The parameters to create a SAS definition.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: SasDefinitionCreateParameters;
   },
   SasDefinitionBundle
@@ -2130,7 +2104,6 @@ op updateSasDefinition is Azure.Core.Foundations.Operation<
      * The parameters to update a SAS definition.
      */
     @body
-    @extension("x-ms-client-flatten", true)
     parameters: SasDefinitionUpdateParameters;
   },
   SasDefinitionBundle

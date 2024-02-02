@@ -1,7 +1,7 @@
 import { TypespecProgram, EndpointParameter, Auth } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
-import { getNamespace } from "../utils/namespace";
+import { getNamespaceStatement } from "../utils/namespace";
 
 const VALID_VERSIONS = ["v3", "v4", "v5"];
 
@@ -62,7 +62,7 @@ export function generateServiceInformation(program: TypespecProgram) {
   const serviceDoc = generateDocs(serviceInformation);
   serviceDoc && definitions.push(serviceDoc);
 
-  definitions.push(getNamespace(program));
+  definitions.push(getNamespaceStatement(program));
 
   if (serviceInformation.versions) {
     definitions.push("");

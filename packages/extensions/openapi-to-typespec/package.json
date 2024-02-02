@@ -48,7 +48,7 @@
     "@typespec/prettier-plugin-typespec": "^0.52.0",
     "@azure-tools/typespec-azure-core": "^0.38.0",
     "@azure-tools/typespec-autorest": "^0.38.0",
-    "@azure-tools/typespec-azure-resource-manager": "^0.38.0",
+    "@azure-tools/typespec-azure-resource-manager": "^0.39.0-dev.1",
     "@typespec/openapi": "^0.52.0",
     "@typespec/openapi3": "^0.52.0",
     "prettier": "~3.1.0",
