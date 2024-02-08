@@ -254,4 +254,5 @@ export interface TspArmResource extends TypespecObject {
   normalOperations: TypespecOperation[];
   optionalStandardProperties: string[];
   baseModelName?: string;
+  locationParent?: string;
 }
