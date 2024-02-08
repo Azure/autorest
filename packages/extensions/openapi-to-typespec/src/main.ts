@@ -7,13 +7,13 @@ import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from 
 import { OpenAPI3Document } from "@azure-tools/openapi";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
+import { emitClient } from "./emiters/emit-client";
 import { emitMain } from "./emiters/emit-main";
 
 import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { emitTypespecConfig } from "./emiters/emit-typespec-config";
-import { emitClient } from "./emiters/emit-client";
 import { getModel } from "./model";
 import { pretransformArmResources } from "./pretransforms/arm-pretransform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
