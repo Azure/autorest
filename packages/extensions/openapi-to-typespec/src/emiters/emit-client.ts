@@ -17,15 +17,7 @@ function generateClient(program: TypespecProgram) {
   const { modules, namespaces: namespacesSet } = getClientImports(program);
   const imports = [...new Set<string>([`import "./main.tsp";`, ...modules])].join("\n");
 
-  const namespaces = [...new Set<string>([...namespacesSet, `using ${getNamespace(program)};`])].join(
-    "\n",
-  );
+  const namespaces = [...new Set<string>([...namespacesSet, `using ${getNamespace(program)};`])].join("\n");
   const objects = models.objects.map(generateObjectClientDecorator).join("\n\n");
-  return [
-    imports,
-    "\n",
-    namespaces,
-    "\n",
-    objects,
-  ].join("\n");
+  return [imports, "\n", namespaces, "\n", objects].join("\n");
 }

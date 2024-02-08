@@ -12,7 +12,7 @@ export function generateDocs({ doc }: WithDocs): string {
 
   const wrapped = lineWrap(doc);
 
-  for(let i = 0; i < wrapped.length; i++) {
+  for (let i = 0; i < wrapped.length; i++) {
     if (wrapped[i].includes("@") || wrapped[i].includes("*/")) {
       if (wrapped.length === 1) {
         return `@doc("${wrapped[0].replace(/\\/g, "\\\\").replace(/"/g, '\\"')}")`;

@@ -269,7 +269,9 @@ export function generateAugmentedDecorators(keyName: string, decorators: Typespe
       definitions.push(`#suppress "${decorator.suppressionCode}" "${decorator.suppressionMessage}"`);
     }
     if (decorator.arguments) {
-      definitions.push(`@@${decorator.name}(${keyName}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`);
+      definitions.push(
+        `@@${decorator.name}(${keyName}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`,
+      );
     } else {
       definitions.push(`@@${decorator.name}(${keyName})`);
     }
