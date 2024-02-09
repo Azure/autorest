@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -16,7 +14,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The provisioning state of a resource.
  */
-enum ProvisioningState {
+enum ProvisioningStateTest {
   /**
    * Resource has been created.
    */
@@ -76,7 +74,7 @@ model EmployeeProperties {
    * The status of the last operation.
    */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateTest;
 }
 
 /**
@@ -120,7 +118,6 @@ model EmployeeUpdate {
   /**
    * The updatable properties of the Employee.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: EmployeeUpdateProperties;
 }
 

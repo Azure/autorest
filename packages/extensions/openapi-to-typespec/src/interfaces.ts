@@ -125,6 +125,11 @@ export interface WithFixMe {
   fixMe?: string[];
 }
 
+export interface WithSuppressDirective {
+  suppressionCode?: string;
+  suppressionMessage?: string;
+}
+
 export type TypespecParameterLocation = "path" | "query" | "header" | "body";
 export interface TypespecParameter extends TypespecDataType {
   kind: "parameter";
@@ -141,10 +146,11 @@ export interface TypespecObjectProperty extends TypespecDataType {
   isOptional: boolean;
   type: string;
   decorators?: TypespecDecorator[];
+  augmentedDecorators?: TypespecDecorator[];
   defaultValue?: any;
 }
 
-export interface TypespecDecorator extends WithFixMe {
+export interface TypespecDecorator extends WithFixMe, WithSuppressDirective {
   name: string;
   arguments?: (string | number)[] | DecoratorArgument[];
   module?: string;
@@ -248,4 +254,5 @@ export interface TspArmResource extends TypespecObject {
   normalOperations: TypespecOperation[];
   optionalStandardProperties: string[];
   baseModelName?: string;
+  locationParent?: string;
 }

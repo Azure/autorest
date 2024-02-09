@@ -123,6 +123,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     normalOperations: operations[1],
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
     baseModelName,
+    locationParent: getLocationParent(schema),
   };
 }
 
@@ -838,16 +839,9 @@ function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[]
       name: "tenantResource",
     });
   } else if (schema.resourceMetadata.IsSubscriptionResource) {
-    // TODO: need to change after TSP support location resource for other resource types
-    if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
-      resourceModelDecorators.push({
-        name: "locationResource",
-      });
-    } else {
-      resourceModelDecorators.push({
-        name: "subscriptionResource",
-      });
-    }
+    resourceModelDecorators.push({
+      name: "subscriptionResource",
+    });
   }
 
   return resourceModelDecorators;
@@ -865,4 +859,16 @@ function getSingletonName(schema: ArmResourceSchema): string {
     }
   }
   return key;
+}
+
+function getLocationParent(schema: ArmResourceSchema): string | undefined {
+  if (schema.resourceMetadata.GetOperations[0].Path.includes("/locations/")) {
+    if (schema.resourceMetadata.IsTenantResource) {
+      return "TenantLocationResource";
+    } else if (schema.resourceMetadata.IsSubscriptionResource) {
+      return "SubscriptionLocationResource";
+    } else if (schema.resourceMetadata.Parents?.[0] === "ResourceGroupResource") {
+      return "ResourceGroupLocationResource";
+    }
+  }
 }

@@ -46,6 +46,10 @@ function generateArmResourceModel(resource: TspArmResource): string {
     definitions.push(`@parentResource(${resource.resourceParent.name})`);
   }
 
+  if (resource.locationParent) {
+    definitions.push(`@parentResource("${resource.locationParent}")`);
+  }
+
   if (
     getArmCommonTypeVersion() &&
     !resource.propertiesPropertyRequired &&

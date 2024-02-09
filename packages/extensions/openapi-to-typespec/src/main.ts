@@ -7,6 +7,7 @@ import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from 
 import { OpenAPI3Document } from "@azure-tools/openapi";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
+import { emitClient } from "./emiters/emit-client";
 import { emitMain } from "./emiters/emit-main";
 
 import { emitModels } from "./emiters/emit-models";
@@ -36,6 +37,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   await emitMain(getFilePath(session, "main.tsp"), programDetails);
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
+  await emitClient(getFilePath(session, "client.tsp"), programDetails);
 }
 
 function getOutuptDirectory(session: Session<CodeModel>) {

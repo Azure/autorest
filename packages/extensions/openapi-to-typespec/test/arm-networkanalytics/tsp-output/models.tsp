@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -529,7 +527,6 @@ model DataProductUpdate {
   /**
    * The updatable properties of the DataProduct.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DataProductUpdateProperties;
 }
 
@@ -697,7 +694,6 @@ model DataTypeUpdate {
   /**
    * The updatable properties of the DataType.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: DataTypeUpdateProperties;
 }
 

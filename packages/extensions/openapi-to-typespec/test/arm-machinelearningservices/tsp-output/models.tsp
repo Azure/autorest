@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -3078,7 +3076,6 @@ model ClusterUpdateParameters {
   /**
    * The properties of the amlCompute.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ClusterUpdateProperties;
 }
 
@@ -5564,7 +5561,6 @@ model RegistryPrivateEndpointConnection {
   /**
    * Properties of the Private Endpoint Connection
    */
-  @extension("x-ms-client-flatten", true)
   properties?: RegistryPrivateEndpointConnectionProperties;
 }
 
@@ -6223,7 +6219,6 @@ model SharedPrivateLinkResource {
   /**
    * Properties of a shared private link resource.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: SharedPrivateLinkResourceProperty;
 }
 
@@ -6272,7 +6267,6 @@ model WorkspaceUpdateParameters {
   /**
    * The properties that the machine learning workspace will be updated with.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: WorkspacePropertiesUpdateParameters;
 
   /**
@@ -6631,7 +6625,6 @@ model PrivateLinkResource extends Resource {
   /**
    * Properties of a private link resource.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 
   /**

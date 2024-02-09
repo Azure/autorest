@@ -5,7 +5,7 @@ import { TypespecEnum, TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
 import { getModelsImports } from "../utils/imports";
-import { getNamespace } from "../utils/namespace";
+import { getNamespaceStatement } from "../utils/namespace";
 
 export async function emitModels(filePath: string, program: TypespecProgram): Promise<void> {
   const content = generateModels(program);
@@ -32,7 +32,7 @@ function generateModels(program: TypespecProgram) {
     "\n",
     namespaces,
     "\n",
-    getNamespace(program),
+    getNamespaceStatement(program),
     isArm ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n" : "\n",
     enums,
     "\n",

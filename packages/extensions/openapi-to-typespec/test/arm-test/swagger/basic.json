@@ -424,7 +424,7 @@
       "description": "The provisioning state of a resource.",
       "enum": ["Succeeded", "Failed", "Canceled", "Provisioning", "Updating", "Deleting", "Accepted"],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ProvisioningStateTest",
         "modelAsString": true,
         "values": [
           {

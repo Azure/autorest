@@ -3,7 +3,7 @@ import { getSession } from "../autorest-session";
 import { generateArmResource, generateArmResourceExamples } from "../generate/generate-arm-resource";
 import { TypespecProgram, TspArmResource } from "../interfaces";
 import { formatTypespecFile } from "../utils/format";
-import { getNamespace } from "../utils/namespace";
+import { getNamespaceStatement } from "../utils/namespace";
 
 export async function emitArmResources(program: TypespecProgram, basePath: string) {
   // Create a file per resource
@@ -18,7 +18,7 @@ export async function emitArmResources(program: TypespecProgram, basePath: strin
       "\n",
       namespaces.join("\n"),
       "\n",
-      getNamespace(program),
+      getNamespaceStatement(program),
       generatedResource,
     ].join("\n");
     session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });

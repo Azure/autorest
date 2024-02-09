@@ -14,7 +14,7 @@ import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { TypespecObject, TypespecObjectProperty } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
-import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
+import { getModelDecorators, getPropertyAugmentedDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {
@@ -127,6 +127,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
       isOptional: propertySchema.required !== true,
       type: visited.name,
       decorators: getPropertyDecorators(propertySchema),
+      augmentedDecorators: getPropertyAugmentedDecorators(propertySchema),
       defaultValue: getDefaultValue(visited.name, propertySchema.schema),
     };
   }
@@ -143,6 +144,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     isOptional: propertySchema.required !== true,
     type,
     decorators: getPropertyDecorators(propertySchema),
+    augmentedDecorators: getPropertyAugmentedDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
     defaultValue: getDefaultValue(type, propertySchema.schema),
   };

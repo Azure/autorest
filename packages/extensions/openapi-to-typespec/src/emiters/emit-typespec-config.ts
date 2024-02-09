@@ -39,6 +39,7 @@ export async function emitTypespecConfig(filePath: string, programDetails: Types
 options:
   '@azure-tools/typespec-autorest':
     use-read-only-status-schema: true
+    omit-unreachable-types: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"

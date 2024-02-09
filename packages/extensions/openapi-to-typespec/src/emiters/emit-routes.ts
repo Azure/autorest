@@ -3,7 +3,7 @@ import { generateOperationGroup } from "../generate/generate-operations";
 import { TypespecProgram } from "../interfaces";
 import { formatTypespecFile } from "../utils/format";
 import { getRoutesImports } from "../utils/imports";
-import { getNamespace } from "../utils/namespace";
+import { getNamespaceStatement } from "../utils/namespace";
 
 export async function emitRoutes(filePath: string, program: TypespecProgram): Promise<void> {
   if (program.operationGroups.length === 0) {
@@ -19,5 +19,5 @@ function generateRoutes(program: TypespecProgram) {
   const { modules, namespaces } = getRoutesImports(program);
   const content = operationGroups.map(generateOperationGroup);
 
-  return [...modules, "\n", ...namespaces, "\n", getNamespace(program), "\n", ...content].join("\n");
+  return [...modules, "\n", ...namespaces, "\n", getNamespaceStatement(program), "\n", ...content].join("\n");
 }

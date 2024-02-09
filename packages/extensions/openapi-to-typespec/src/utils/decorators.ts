@@ -137,12 +137,19 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     });
   }
 
+  return decorators;
+}
+
+export function getPropertyAugmentedDecorators(element: Property | Parameter): TypespecDecorator[] {
+  const decorators: TypespecDecorator[] = [];
+
   if (element.extensions?.["x-ms-client-flatten"]) {
     decorators.push({
-      name: "extension",
-      arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
-      module: "@typespec/openapi",
-      namespace: "TypeSpec.OpenAPI",
+      name: "flattenProperty",
+      module: "@typespec/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      suppressionCode: "deprecated",
+      suppressionMessage: "@flattenProperty decorator is not recommended to use.",
     });
   }
 
@@ -239,10 +246,34 @@ export function generateDecorators(decorators: TypespecDecorator[] = []): string
     if (decorator.fixMe) {
       definitions.push(decorator.fixMe.join(`\n`));
     }
+    if (decorator.suppressionCode) {
+      definitions.push(`#suppress "${decorator.suppressionCode}" "${decorator.suppressionMessage}"`);
+    }
     if (decorator.arguments) {
       definitions.push(`@${decorator.name}(${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`);
     } else {
       definitions.push(`@${decorator.name}`);
+    }
+  }
+
+  return definitions.join("\n");
+}
+
+export function generateAugmentedDecorators(keyName: string, decorators: TypespecDecorator[] = []): string {
+  const definitions: string[] = [];
+  for (const decorator of decorators ?? []) {
+    if (decorator.fixMe) {
+      definitions.push(decorator.fixMe.join(`\n`));
+    }
+    if (decorator.suppressionCode) {
+      definitions.push(`#suppress "${decorator.suppressionCode}" "${decorator.suppressionMessage}"`);
+    }
+    if (decorator.arguments) {
+      definitions.push(
+        `@@${decorator.name}(${keyName}, ${decorator.arguments.map((a) => getArgumentValue(a)).join(", ")})`,
+      );
+    } else {
+      definitions.push(`@@${decorator.name}(${keyName})`);
     }
   }
 

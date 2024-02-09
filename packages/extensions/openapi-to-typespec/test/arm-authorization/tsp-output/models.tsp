@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -209,7 +207,6 @@ model ClassicAdministrator {
   /**
    * Properties for the classic administrator.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ClassicAdministratorProperties;
 }
 
@@ -381,7 +378,6 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 
   /**
@@ -420,9 +416,7 @@ model RoleAssignmentProperties {
    */
   description?: string;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -469,7 +463,6 @@ model RoleAssignmentCreateParameters {
   /**
    * Role assignment properties.
    */
-  @extension("x-ms-client-flatten", true)
   properties: RoleAssignmentProperties;
 }
 
@@ -650,9 +643,7 @@ model RoleAssignmentScheduleProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -682,19 +673,16 @@ model ExpandedProperties {
   /**
    * Details of the resource scope
    */
-  @extension("x-ms-client-flatten", true)
   scope?: ExpandedPropertiesScope;
 
   /**
    * Details of role definition
    */
-  @extension("x-ms-client-flatten", true)
   roleDefinition?: ExpandedPropertiesRoleDefinition;
 
   /**
    * Details of the principal
    */
-  @extension("x-ms-client-flatten", true)
   principal?: ExpandedPropertiesPrincipal;
 }
 
@@ -843,9 +831,7 @@ model RoleAssignmentScheduleInstanceProperties {
    */
   memberType?: RoleManagementScheduleMemberType;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -921,7 +907,6 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * Schedule info of the role assignment schedule
    */
-  @extension("x-ms-client-flatten", true)
   scheduleInfo?: RoleAssignmentScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -939,9 +924,7 @@ model RoleAssignmentScheduleRequestProperties {
    */
   ticketInfo?: RoleAssignmentScheduleRequestPropertiesTicketInfo;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -982,7 +965,6 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role assignment schedule
    */
-  @extension("x-ms-client-flatten", true)
   expiration?: RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1074,9 +1056,7 @@ model RoleEligibilityScheduleProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDateTime?: utcDateTime;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -1153,9 +1133,7 @@ model RoleEligibilityScheduleInstanceProperties {
    */
   memberType?: RoleManagementScheduleMemberType;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -1221,7 +1199,6 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * Schedule info of the role eligibility schedule
    */
-  @extension("x-ms-client-flatten", true)
   scheduleInfo?: RoleEligibilityScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1244,9 +1221,7 @@ model RoleEligibilityScheduleRequestProperties {
    */
   ticketInfo?: RoleEligibilityScheduleRequestPropertiesTicketInfo;
 
-  /**
-   * The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'
-   */
+  @doc("The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
 
   /**
@@ -1287,7 +1262,6 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role eligibility schedule
    */
-  @extension("x-ms-client-flatten", true)
   expiration?: RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1442,7 +1416,6 @@ model PolicyProperties {
    * Details of the resource scope
    */
   @visibility("read")
-  @extension("x-ms-client-flatten", true)
   scope?: PolicyPropertiesScope;
 }
 
@@ -1508,19 +1481,16 @@ model PolicyAssignmentProperties {
   /**
    * Details of the resource scope
    */
-  @extension("x-ms-client-flatten", true)
   scope?: PolicyAssignmentPropertiesScope;
 
   /**
    * Details of role definition
    */
-  @extension("x-ms-client-flatten", true)
   roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
 
   /**
    * Details of the policy
    */
-  @extension("x-ms-client-flatten", true)
   policy?: PolicyAssignmentPropertiesPolicy;
 }
 
