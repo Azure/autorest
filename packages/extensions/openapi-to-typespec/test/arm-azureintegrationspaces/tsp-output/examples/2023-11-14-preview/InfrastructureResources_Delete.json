@@ -1,0 +1,15 @@
+{
+  "operationId": "InfrastructureResources_Delete",
+  "parameters": {
+    "api-version": "2023-11-14-preview",
+    "infrastructureResourceName": "InfrastructureResource1",
+    "resourceGroupName": "testrg",
+    "spaceName": "Space1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "DeleteInfrastructureResource",
+  "responses": {
+    "200": {},
+    "204": {}
+  }
+}

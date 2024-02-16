@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus"
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "location": "eastus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachines_ListAll",
+  "title": "VirtualMachine_ListAll_MinimumSet_Gen"
+}

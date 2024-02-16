@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "publicGalleryName",
+        "type": "Microsoft.Compute/Locations/CommunityGallery",
+        "identifier": {
+          "uniqueId": "/CommunityGalleries/publicGalleryName"
+        },
+        "location": "myLocation"
+      }
+    }
+  },
+  "operationId": "CommunityGalleries_Get",
+  "title": "Get a community gallery."
+}

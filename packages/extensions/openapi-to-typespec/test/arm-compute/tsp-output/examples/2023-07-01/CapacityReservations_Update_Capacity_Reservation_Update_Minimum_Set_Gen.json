@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "capacityReservationGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capacityReservationName": "aaa",
+    "parameters": {},
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "sku": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CapacityReservations_Update",
+  "title": "CapacityReservation_Update_MinimumSet_Gen"
+}

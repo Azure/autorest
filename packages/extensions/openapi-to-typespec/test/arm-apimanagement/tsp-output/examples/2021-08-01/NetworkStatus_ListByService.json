@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "location": "West US",
+          "networkStatus": {
+            "connectivityStatus": [
+              {
+                "name": "apimgmtst6xxxxxxxxxxx.blob.core.windows.net",
+                "error": "",
+                "isOptional": false,
+                "lastStatusChange": "2020-11-20T07:54:55.9365931Z",
+                "lastUpdated": "2020-11-24T22:55:14.7035899Z",
+                "resourceType": "BlobStorage",
+                "status": "success"
+              },
+              {
+                "name": "apimgmtst6xxxxxxxxxxx.file.core.windows.net",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:55.9265938Z",
+                "lastUpdated": "2020-11-24T22:55:41.5322463Z",
+                "resourceType": "FileStorage",
+                "status": "success"
+              },
+              {
+                "name": "apimgmtst6xxxxxxxxxxx.queue.core.windows.net",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:55.8410477Z",
+                "lastUpdated": "2020-11-24T22:55:30.645994Z",
+                "resourceType": "Queue",
+                "status": "success"
+              },
+              {
+                "name": "apimgmtst6xxxxxxxxxxx.table.core.windows.net",
+                "error": "",
+                "isOptional": false,
+                "lastStatusChange": "2020-11-20T07:54:55.9365931Z",
+                "lastUpdated": "2020-11-24T22:55:23.8789171Z",
+                "resourceType": "TableStorage",
+                "status": "success"
+              },
+              {
+                "name": "gcs.prod.monitoring.core.windows.net",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T08:07:37.5486932Z",
+                "lastUpdated": "2020-11-24T22:57:34.8666833Z",
+                "resourceType": "Monitoring",
+                "status": "success"
+              },
+              {
+                "name": "https://gcs.ppe.warm.ingestion.monitoring.azure.com",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:56.1060523Z",
+                "lastUpdated": "2020-11-24T22:56:26.1870188Z",
+                "resourceType": "Monitoring",
+                "status": "success"
+              },
+              {
+                "name": "https://global.metrics.nsatc.net/",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:56.0510519Z",
+                "lastUpdated": "2020-11-24T22:56:35.9620612Z",
+                "resourceType": "Monitoring",
+                "status": "success"
+              },
+              {
+                "name": "https://login.windows.net",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:56.1060523Z",
+                "lastUpdated": "2020-11-24T22:56:30.8047708Z",
+                "resourceType": "AzureActiveDirectory",
+                "status": "success"
+              },
+              {
+                "name": "https://prod2.metrics.nsatc.net:1886/RecoveryService",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:56.2796235Z",
+                "lastUpdated": "2020-11-24T22:56:45.2095302Z",
+                "resourceType": "Metrics",
+                "status": "success"
+              },
+              {
+                "name": "LocalGatewayRedis",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:55.9365931Z",
+                "lastUpdated": "2020-11-24T22:55:15.1345836Z",
+                "resourceType": "InternalCache",
+                "status": "success"
+              },
+              {
+                "name": "prod.warmpath.msftcloudes.com",
+                "error": "",
+                "isOptional": false,
+                "lastStatusChange": "2020-11-20T07:54:55.8410477Z",
+                "lastUpdated": "2020-11-24T22:55:57.8992141Z",
+                "resourceType": "Monitoring",
+                "status": "success"
+              },
+              {
+                "name": "Scm",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2019-07-20T02:25:48.7066996Z",
+                "lastUpdated": "2020-11-24T23:01:24.0553684Z",
+                "resourceType": "SourceControl",
+                "status": "success"
+              },
+              {
+                "name": "smtpi-ch1.msn.com:25028",
+                "error": "",
+                "isOptional": true,
+                "lastStatusChange": "2020-11-20T07:54:56.3510577Z",
+                "lastUpdated": "2020-11-24T22:58:22.2430074Z",
+                "resourceType": "Email",
+                "status": "success"
+              },
+              {
+                "name": "zwcvuxxxx.database.windows.net",
+                "error": "",
+                "isOptional": false,
+                "lastStatusChange": "2020-11-20T07:54:56.0410467Z",
+                "lastUpdated": "2020-11-24T22:55:44.3582171Z",
+                "resourceType": "SQLDatabase",
+                "status": "success"
+              }
+            ],
+            "dnsServers": [
+              "10.82.98.10"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "operationId": "NetworkStatus_ListByService",
+  "title": "ApiManagementServiceGetNetworkStatus"
+}

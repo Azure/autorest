@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "roleInstanceName": "{roleInstance-name}",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CloudServiceRoleInstances_Reimage",
+  "title": "Reimage Cloud Service Role Instance"
+}

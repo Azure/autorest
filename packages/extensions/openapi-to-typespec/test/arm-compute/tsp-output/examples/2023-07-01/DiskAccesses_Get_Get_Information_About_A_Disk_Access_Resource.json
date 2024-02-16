@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccessName": "myDiskAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "PrivateEndpoints"
+        }
+      }
+    }
+  },
+  "operationId": "DiskAccesses_Get",
+  "title": "Get information about a disk access resource."
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "$expand": "virtualMachines/$ref",
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{capacityReservationGroupName}",
+            "type": "Microsoft.Compute/CapacityReservationGroups",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+            "location": "West US",
+            "properties": {
+              "capacityReservations": [
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation1"
+                },
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation2"
+                }
+              ],
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            }
+          },
+          {
+            "name": "{capacityReservationGroupName}",
+            "type": "Microsoft.Compute/CapacityReservationGroups",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+            "location": "West US",
+            "properties": {
+              "capacityReservations": [
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation3"
+                },
+                {
+                  "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation4"
+                }
+              ],
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_ListBySubscription",
+  "title": "List capacity reservation groups in subscription."
+}

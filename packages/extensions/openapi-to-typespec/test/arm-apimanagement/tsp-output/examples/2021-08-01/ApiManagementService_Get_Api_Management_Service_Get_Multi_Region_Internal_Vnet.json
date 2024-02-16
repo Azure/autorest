@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimservice1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAADqC0c=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimservice1",
+        "location": "West US",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": false,
+              "gatewayRegionalUrl": "https://apimservice1-westus2-01.regional.azure-api.net",
+              "location": "West US 2",
+              "privateIPAddresses": [
+                "10.0.X.6"
+              ],
+              "publicIPAddresses": [
+                "40.XXX.79.187"
+              ],
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/APIMVNet/subnets/apim-internal-sub"
+              }
+            }
+          ],
+          "apiVersionConstraint": {},
+          "createdAtUtc": "2019-12-02T01:42:09.1268424Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimservice1-westus-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimservice1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2019-08-16T16:51:34+00:00",
+                "subject": "CN=*.preview.net",
+                "thumbprint": "B4330123DBAXXXXXXXXX1F35E84493476"
+              },
+              "certificateSource": "Custom",
+              "defaultSslBinding": true,
+              "hostName": "apimgatewaytest.preview.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimservice1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "portalUrl": "https://apimservice1.portal.azure-api.net",
+          "privateIPAddresses": [
+            "172.XX.0.5"
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "137.XXX.11.74"
+          ],
+          "publisherEmail": "abcs@contoso.com",
+          "publisherName": "contoso publisher",
+          "scmUrl": "https://apimservice1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apim-appGateway-vnet/subnets/apim-subnet"
+          },
+          "virtualNetworkType": "Internal"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Get",
+  "title": "ApiManagementServiceGetMultiRegionInternalVnet"
+}

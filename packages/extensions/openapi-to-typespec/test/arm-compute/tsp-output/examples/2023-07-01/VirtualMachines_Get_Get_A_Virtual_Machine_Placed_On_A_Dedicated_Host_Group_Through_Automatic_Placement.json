@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "West US",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
+          },
+          "hostGroup": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{myNIC}"
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "admin",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Succeeded",
+          "storageProfile": {
+            "dataDisks": [],
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myOsDisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "diskSizeGB": 30,
+              "managedDisk": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
+                "storageAccountType": "Premium_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "vmId": "0f47b100-583c-48e3-a4c0-aefc2c9bbcc1"
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Get",
+  "title": "Get a virtual machine placed on a dedicated host group through automatic placement"
+}

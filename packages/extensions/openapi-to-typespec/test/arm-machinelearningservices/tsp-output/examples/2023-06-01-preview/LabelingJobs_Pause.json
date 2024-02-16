@@ -1,0 +1,14 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "id": "testLabelingJob",
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "LabelingJobs_Pause",
+  "title": "Pause Labeling Job."
+}

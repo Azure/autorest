@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskName": "myManagedDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myManagedDisk",
+        "type": "Microsoft.Compute/disks",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
+        "location": "westus",
+        "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
+        "properties": {
+          "LastOwnershipUpdateTime": "2016-12-28T04:41:35.079872+00:00",
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 10,
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          },
+          "encryptionSettingsCollection": {
+            "enabled": true,
+            "encryptionSettings": [
+              {
+                "diskEncryptionKey": {
+                  "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}",
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  }
+                },
+                "keyEncryptionKey": {
+                  "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}",
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  }
+                }
+              }
+            ]
+          },
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "purchasePlan": {
+            "name": "test_sku",
+            "product": "marketplace_vm_test",
+            "publisher": "test_test_pmc2pc1"
+          },
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "supportsHibernation": true,
+          "timeCreated": "2016-12-28T04:41:35.079872+00:00"
+        },
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "tags": {
+          "department": "Development",
+          "project": "ManagedDisks"
+        }
+      }
+    }
+  },
+  "operationId": "Disks_Get",
+  "title": "Get information about a managed disk."
+}

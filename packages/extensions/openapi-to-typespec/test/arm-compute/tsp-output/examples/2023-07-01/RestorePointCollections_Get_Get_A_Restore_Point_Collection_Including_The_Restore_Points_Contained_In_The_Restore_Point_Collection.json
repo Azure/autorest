@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "expand": "restorePoints",
+    "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpcName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rpcName",
+        "type": "Microsoft.Compute/restorePointCollections",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "restorePointCollectionId": "59f04a5d-f783-4200-a1bd-d3f464e8c4b4",
+          "restorePoints": [
+            {
+              "name": "restorePointName",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName",
+              "properties": {
+                "consistencyMode": "ApplicationConsistent",
+                "excludeDisks": [
+                  {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm8768_disk2_fe6ffde4f69b491ca33fb984d5bcd89f"
+                  }
+                ],
+                "provisioningState": "Succeeded",
+                "sourceMetadata": {
+                  "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                      "enabled": true
+                    }
+                  },
+                  "hardwareProfile": {
+                    "vmSize": "Standard_B1s"
+                  },
+                  "location": "westus",
+                  "osProfile": {
+                    "adminUsername": "admin",
+                    "allowExtensionOperations": true,
+                    "computerName": "computerName",
+                    "requireGuestProvisionSignal": true,
+                    "secrets": [],
+                    "windowsConfiguration": {
+                      "enableAutomaticUpdates": true,
+                      "provisionVMAgent": true
+                    }
+                  },
+                  "storageProfile": {
+                    "dataDisks": [
+                      {
+                        "name": "testingexcludedisk_DataDisk_1",
+                        "caching": "None",
+                        "diskRestorePoint": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5"
+                        },
+                        "lun": 1,
+                        "managedDisk": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_DataDisk_1",
+                          "storageAccountType": "Standard_LRS"
+                        }
+                      }
+                    ],
+                    "osDisk": {
+                      "name": "testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f",
+                      "caching": "ReadWrite",
+                      "diskRestorePoint": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/rpcName/restorePoints/restorePointName/diskRestorePoints/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f_22b4bdfe-6c54-4f72-84d8-85d8860f0c57"
+                      },
+                      "managedDisk": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/testingexcludedisk_OsDisk_1_74cdaedcea50483d9833c96adefa100f",
+                        "storageAccountType": "Standard_LRS"
+                      },
+                      "osType": "Windows"
+                    }
+                  },
+                  "vmId": "76d6541e-80bd-4dc1-932b-3cae4cfb80e7"
+                },
+                "timeCreated": "2021-01-27T20:35:05.8401519+00:00"
+              }
+            }
+          ],
+          "source": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "location": "eastus"
+          }
+        },
+        "tags": {
+          "myTag1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "RestorePointCollections_Get",
+  "title": "Get a restore point collection, including the restore points contained in the restore point collection"
+}

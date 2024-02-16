@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "virtualMachineScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_List",
+  "title": "VirtualMachineScaleSetVM_List_MinimumSet_Gen"
+}

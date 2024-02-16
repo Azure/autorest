@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myHost",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "description": "OK"
+    }
+  },
+  "operationId": "DedicatedHosts_Restart",
+  "title": "Restart Dedicated Host."
+}

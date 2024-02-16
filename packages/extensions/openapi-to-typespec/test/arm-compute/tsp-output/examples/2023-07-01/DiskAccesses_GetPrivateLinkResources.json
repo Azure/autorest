@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskAccessName": "myDiskAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "disks",
+            "type": "Microsoft.Compute/diskAccesses/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateLinkResources/disks",
+            "properties": {
+              "groupId": "disks",
+              "requiredMembers": [
+                "diskAccess_1"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiskAccesses_GetPrivateLinkResources",
+  "title": "List all possible private link resources under disk access resource."
+}

@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {}
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ListSkus",
+  "title": "VirtualMachineScaleSet_ListSkus_MinimumSet_Gen"
+}

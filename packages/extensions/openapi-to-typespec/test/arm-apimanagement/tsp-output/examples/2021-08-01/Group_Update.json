@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "groupId": "tempgroup",
+    "parameters": {
+      "properties": {
+        "displayName": "temp group"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "tempgroup",
+        "type": "Microsoft.ApiManagement/service/groups",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/tempgroup",
+        "properties": {
+          "type": "external",
+          "description": "awesome group of people",
+          "builtIn": false,
+          "displayName": "tempgroup",
+          "externalId": "aad://samiraad.onmicrosoft.com/groups/3773adf4-032e-4d25-9988-eaff9ca72eca"
+        }
+      }
+    }
+  },
+  "operationId": "Group_Update",
+  "title": "ApiManagementUpdateGroup"
+}

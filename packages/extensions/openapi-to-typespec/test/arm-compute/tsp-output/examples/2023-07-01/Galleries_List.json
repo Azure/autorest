@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/providers/Microsoft.Compute/galleries?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName",
+        "value": [
+          {
+            "name": "myGalleryName",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
+            "location": "West US",
+            "properties": {
+              "description": "This is the gallery description.",
+              "identifier": {
+                "uniqueName": "{subscription-id}-MYGALLERYNAME"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Galleries_List",
+  "title": "List galleries in a subscription."
+}

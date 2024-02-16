@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+            "managedDisk": {
+              "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
+            },
+            "osState": "Generalized",
+            "osType": "Linux"
+          },
+          "zoneResilient": true
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
+              },
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": true
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
+              },
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": true
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_CreateOrUpdate",
+  "title": "Create a virtual machine image from a managed disk."
+}

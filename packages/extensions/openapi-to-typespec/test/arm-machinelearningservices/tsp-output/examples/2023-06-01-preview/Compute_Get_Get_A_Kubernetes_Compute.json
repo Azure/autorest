@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "description": "some compute",
+          "computeType": "Kubernetes",
+          "createdOn": "2021-04-01T22:00:00.0000000+00:00",
+          "isAttachedCompute": true,
+          "modifiedOn": "2021-04-01T22:00:00.0000000+00:00",
+          "properties": {
+            "defaultInstanceType": "defaultInstanceType",
+            "extensionInstanceReleaseTrain": "stable",
+            "extensionPrincipalId": null,
+            "instanceTypes": {
+              "defaultInstanceType": {
+                "nodeSelector": null,
+                "resources": {
+                  "limits": {
+                    "cpu": "1",
+                    "memory": "4Gi",
+                    "nvidia.com/gpu": null
+                  },
+                  "requests": {
+                    "cpu": "1",
+                    "memory": "4Gi",
+                    "nvidia.com/gpu": null
+                  }
+                }
+              }
+            },
+            "namespace": "default",
+            "relayConnectionString": null,
+            "serviceBusConnectionString": null,
+            "vcName": null
+          },
+          "provisioningState": "Succeeded",
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2"
+        }
+      }
+    }
+  },
+  "operationId": "Compute_Get",
+  "title": "Get a Kubernetes Compute"
+}

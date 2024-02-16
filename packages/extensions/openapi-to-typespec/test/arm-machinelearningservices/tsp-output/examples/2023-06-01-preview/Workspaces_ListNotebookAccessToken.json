@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "expiresIn": 28800,
+        "hostName": "Host product name",
+        "notebookResourceId": "94350843095843059",
+        "publicDns": "resource.notebooks.azure.net",
+        "scope": "aznb_identity",
+        "tokenType": "Bearer"
+      }
+    }
+  },
+  "operationId": "Workspaces_ListNotebookAccessToken",
+  "title": "List Workspace Keys"
+}

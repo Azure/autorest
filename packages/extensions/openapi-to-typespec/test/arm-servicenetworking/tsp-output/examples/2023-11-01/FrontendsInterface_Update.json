@@ -1,0 +1,26 @@
+{
+  "operationId": "FrontendsInterface_Update",
+  "parameters": {
+    "api-version": "2023-11-01",
+    "frontendName": "fe1",
+    "properties": {},
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "trafficControllerName": "tc1"
+  },
+  "title": "Update Frontend",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fe1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1",
+        "location": "NorthCentralUS",
+        "properties": {
+          "fqdn": "test.net",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

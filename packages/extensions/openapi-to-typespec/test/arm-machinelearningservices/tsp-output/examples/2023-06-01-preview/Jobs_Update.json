@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "notificationSetting": {
+          "webhooks": {
+            "string": {
+              "eventType": "string",
+              "webhookType": "AzureDevOps"
+            }
+          }
+        }
+      }
+    },
+    "id": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "autologgerSettings": {
+            "mlflowAutologger": "Enabled"
+          },
+          "codeId": "string",
+          "command": "string",
+          "componentId": "string",
+          "computeId": "string",
+          "displayName": "string",
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "parameterServerCount": 1,
+            "workerCount": 1
+          },
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
+          "experimentName": "string",
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
+            }
+          },
+          "isArchived": false,
+          "jobType": "Command",
+          "limits": {
+            "jobLimitsType": "Command",
+            "timeout": "PT5M"
+          },
+          "notificationSetting": {
+            "emailOn": [
+              "JobCompleted"
+            ],
+            "emails": [
+              "string"
+            ],
+            "webhooks": {
+              "string": {
+                "eventType": "string",
+                "webhookType": "AzureDevOps"
+              }
+            }
+          },
+          "outputs": {
+            "string": {
+              "description": "string",
+              "assetName": "string",
+              "assetVersion": "string",
+              "autoDeleteSetting": {
+                "condition": "CreatedGreaterThan",
+                "value": "string"
+              },
+              "jobOutputType": "uri_file",
+              "mode": "Upload",
+              "uri": "string"
+            }
+          },
+          "parameters": {
+            "6f851dd9-5a2d-4bd7-8a67-3b0e6a075bdb": null
+          },
+          "properties": {
+            "string": "string"
+          },
+          "queueSettings": {
+            "jobTier": "Premium",
+            "priority": 1
+          },
+          "resources": {
+            "dockerArgs": "string",
+            "instanceCount": 1,
+            "instanceType": "string",
+            "locations": [
+              "string"
+            ],
+            "maxInstanceCount": 1,
+            "properties": {
+              "string": {
+                "00cac5bf-6a80-4db4-9c7f-1feebe8c21c8": null
+              }
+            },
+            "shmSize": "2g"
+          },
+          "secretsConfiguration": {
+            "string": {
+              "uri": null,
+              "workspaceSecretName": "string"
+            }
+          },
+          "services": {
+            "string": {
+              "endpoint": "string",
+              "errorMessage": "string",
+              "jobServiceType": "string",
+              "nodes": {
+                "nodesValueType": "All"
+              },
+              "port": 1,
+              "properties": {
+                "string": "string"
+              },
+              "status": "string"
+            }
+          },
+          "status": "Canceled",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:44",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:44",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Jobs_Update",
+  "title": "Update Job."
+}

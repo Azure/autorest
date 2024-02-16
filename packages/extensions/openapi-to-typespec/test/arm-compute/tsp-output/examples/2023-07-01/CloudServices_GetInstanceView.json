@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "privateIds": [
+          "3491bc0c-1f6c-444f-b1d0-ec0751a74e3e"
+        ],
+        "roleInstance": {
+          "statusesSummary": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "count": 4
+            },
+            {
+              "code": "PowerState/started",
+              "count": 4
+            },
+            {
+              "code": "RoleState/RoleStateStarted",
+              "count": 4
+            }
+          ]
+        },
+        "sdkVersion": "2.9.6496.3",
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "time": "2021-01-12T16:50:07.0953535+05:30"
+          },
+          {
+            "code": "PowerState/started",
+            "displayStatus": "Started",
+            "level": "Info",
+            "time": "2021-01-12T16:50:07.0953535+05:30"
+          },
+          {
+            "code": "CurrentUpgradeDomain/-1",
+            "displayStatus": "Current Upgrade Domain of cloud service is -1.",
+            "level": "Info"
+          },
+          {
+            "code": "MaxUpgradeDomain/1",
+            "displayStatus": "Max Upgrade Domain of cloud service is 1.",
+            "level": "Info"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServices_GetInstanceView",
+  "title": "Get Cloud Service Instance View with Multiple Roles"
+}

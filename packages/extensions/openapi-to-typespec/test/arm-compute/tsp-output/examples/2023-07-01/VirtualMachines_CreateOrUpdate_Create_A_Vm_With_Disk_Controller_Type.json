@@ -1,0 +1,177 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": true,
+            "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net"
+          }
+        },
+        "hardwareProfile": {
+          "vmSize": "Standard_D4_v3"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "osProfile": {
+          "adminPassword": "{your-password}",
+          "adminUsername": "{your-username}",
+          "computerName": "myVM"
+        },
+        "storageProfile": {
+          "diskControllerType": "NVMe",
+          "imageReference": {
+            "offer": "WindowsServer",
+            "publisher": "MicrosoftWindowsServer",
+            "sku": "2016-Datacenter",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "myVMosdisk",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            }
+          }
+        },
+        "userData": "U29tZSBDdXN0b20gRGF0YQ=="
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+            }
+          },
+          "hardwareProfile": {
+            "vmSize": "Standard_D4_v3"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Updating",
+          "storageProfile": {
+            "dataDisks": [],
+            "diskControllerType": "NVMe",
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus",
+        "properties": {
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+            }
+          },
+          "hardwareProfile": {
+            "vmSize": "Standard_D4_v3"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "computerName": "myVM",
+            "secrets": [],
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": true,
+              "provisionVMAgent": true
+            }
+          },
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [],
+            "diskControllerType": "NVMe",
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "name": "myVMosdisk",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "osType": "Windows"
+            }
+          },
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "Create a VM with Disk Controller Type"
+}

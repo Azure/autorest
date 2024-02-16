@@ -1,0 +1,140 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "bootDiagnostics": {
+          "consoleScreenshotBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.screenshot.bmp",
+          "serialConsoleLogBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.serialconsole.log"
+        },
+        "computerName": "myVM",
+        "disks": [
+          {
+            "name": "myOsDisk",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info",
+                "time": "2019-10-14T21:29:47.477089+00:00"
+              }
+            ]
+          },
+          {
+            "name": "myDataDisk0",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info",
+                "time": "2019-10-14T21:29:47.461517+00:00"
+              }
+            ]
+          }
+        ],
+        "hyperVGeneration": "V1",
+        "osName": "Windows Server 2016 Datacenter",
+        "osVersion": "Microsoft Windows NT 10.0.14393.0",
+        "patchStatus": {
+          "availablePatchSummary": {
+            "assessmentActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+            "criticalAndSecurityPatchCount": 1,
+            "error": null,
+            "lastModifiedTime": "2020-04-24T21:02:04.2556154Z",
+            "otherPatchCount": 2,
+            "rebootPending": true,
+            "startTime": "2020-04-24T21:02:04.2556154Z",
+            "status": "Succeeded"
+          },
+          "configurationStatuses": [
+            {
+              "code": "PatchModeConfigurationState/Ready",
+              "displayStatus": "Status_PatchModeConfigurationState_Ready",
+              "level": "Info",
+              "time": "2020-04-24T21:02:04.2556154Z"
+            },
+            {
+              "code": "AssessmentModeConfigurationState/Pending",
+              "displayStatus": "Status_AssessmentModeConfigurationState_Pending",
+              "level": "Info",
+              "time": "2020-04-24T21:02:04.2556154Z"
+            }
+          ],
+          "lastPatchInstallationSummary": {
+            "error": null,
+            "excludedPatchCount": 1,
+            "failedPatchCount": 1,
+            "installationActivityId": "68f8b292-dfc2-4646-9981-33cc88631968",
+            "installedPatchCount": 1,
+            "lastModifiedTime": "2020-04-24T21:02:04.2556154Z",
+            "maintenanceWindowExceeded": false,
+            "notSelectedPatchCount": 1,
+            "pendingPatchCount": 1,
+            "startTime": "2020-04-24T21:02:04.2556154Z",
+            "status": "Succeeded"
+          }
+        },
+        "platformFaultDomain": 1,
+        "platformUpdateDomain": 1,
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "time": "2019-10-14T21:30:12.8051917+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "displayStatus": "VM running",
+            "level": "Info"
+          }
+        ],
+        "vmAgent": {
+          "extensionHandlers": [
+            {
+              "type": "Microsoft.Azure.Security.IaaSAntimalware",
+              "status": {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Ready",
+                "level": "Info"
+              },
+              "typeHandlerVersion": "1.5.5.9"
+            }
+          ],
+          "statuses": [
+            {
+              "code": "ProvisioningState/succeeded",
+              "displayStatus": "Ready",
+              "level": "Info",
+              "message": "GuestAgent is running and accepting new configurations.",
+              "time": "2019-10-14T23:11:22+00:00"
+            }
+          ],
+          "vmAgentVersion": "2.7.41491.949"
+        },
+        "extensions": [
+          {
+            "name": "IaaSAntiMalware-ext0",
+            "type": "Microsoft.Azure.Security.IaaSAntimalware",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info",
+                "message": "Microsoft Antimalware enabled"
+              }
+            ],
+            "typeHandlerVersion": "1.5.5.9"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachines_InstanceView",
+  "title": "Get Virtual Machine Instance View."
+}

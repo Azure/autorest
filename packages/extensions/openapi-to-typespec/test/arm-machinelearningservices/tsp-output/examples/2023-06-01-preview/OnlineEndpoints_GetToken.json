@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "endpointName": "testEndpointName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "accessToken": "string",
+        "expiryTimeUtc": 1,
+        "refreshAfterTimeUtc": 1,
+        "tokenType": "string"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "OnlineEndpoints_GetToken",
+  "title": "GetToken Workspace Online Endpoint."
+}

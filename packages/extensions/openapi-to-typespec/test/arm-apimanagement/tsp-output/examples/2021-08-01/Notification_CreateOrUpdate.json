@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "RequestPublisherNotificationMessage",
+        "type": "Microsoft.ApiManagement/service/notifications",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/notifications/RequestPublisherNotificationMessage",
+        "properties": {
+          "description": "The following email recipients and users will receive email notifications about subscription requests for API products requiring approval.",
+          "recipients": {
+            "emails": [
+              "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/recipientEmails/contoso@live.com",
+              "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/recipientEmails/foobar!live",
+              "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/recipientEmails/foobar@live.com"
+            ],
+            "users": [
+              "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/576823d0a40f7e74ec07d642"
+            ]
+          },
+          "title": "Subscription requests (requiring approval)"
+        }
+      }
+    }
+  },
+  "operationId": "Notification_CreateOrUpdate",
+  "title": "ApiManagementCreateNotification"
+}

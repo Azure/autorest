@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CPU Alert",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100/history/default",
+        "properties": {
+          "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
+          "modifications": [
+            {
+              "description": "State changed from 'New' to 'Acknowledged'",
+              "comments": "Acknowledging alert",
+              "modificationEvent": "StateChange",
+              "modifiedAt": "2018-06-13T06:14:15.7378737Z",
+              "modifiedBy": "vikramm@microsoft.com",
+              "newValue": "Acknowledged",
+              "oldValue": "New"
+            },
+            {
+              "description": "New Alert Object is created",
+              "comments": "",
+              "modificationEvent": "AlertCreated",
+              "modifiedAt": "2018-06-13T06:09:01Z",
+              "modifiedBy": "System",
+              "newValue": "",
+              "oldValue": ""
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_GetHistory",
+  "title": "Resolve"
+}

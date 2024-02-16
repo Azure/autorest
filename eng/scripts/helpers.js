@@ -53,7 +53,7 @@ function runPrettier(...args) {
       ".prettierrc.yml",
       "--ignore-path",
       ".prettierignore",
-      "**/*.{ts,js,cjs,mjs,json,yml,yaml,cadl,md}",
+      "**/*.{ts,js,cjs,mjs,json,yml,yaml,cadl,tsp,md}",
     ],
     {
       cwd: repoRoot,

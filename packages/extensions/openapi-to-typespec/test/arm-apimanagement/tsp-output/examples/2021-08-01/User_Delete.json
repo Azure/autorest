@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "User_Delete",
+  "title": "ApiManagementDeleteUser"
+}

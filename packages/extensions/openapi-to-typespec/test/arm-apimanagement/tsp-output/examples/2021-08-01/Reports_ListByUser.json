@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "$filter": "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "Administrator",
+            "apiTimeAvg": 1015.7607923076923,
+            "apiTimeMax": 1819.2173,
+            "apiTimeMin": 330.3206,
+            "bandwidth": 11019,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 1,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 13,
+            "callCountTotal": 14,
+            "serviceTimeAvg": 957.094776923077,
+            "serviceTimeMax": 1697.3612,
+            "serviceTimeMin": 215.24,
+            "userId": "/users/1"
+          },
+          {
+            "name": "Samir Solanki",
+            "apiTimeAvg": 0,
+            "apiTimeMax": 0,
+            "apiTimeMin": 0,
+            "bandwidth": 0,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 0,
+            "callCountTotal": 0,
+            "serviceTimeAvg": 0,
+            "serviceTimeMax": 0,
+            "serviceTimeMin": 0,
+            "userId": "/users/56eaec62baf08b06e46d27fd"
+          },
+          {
+            "name": "Anonymous",
+            "apiTimeAvg": 0,
+            "apiTimeMax": 0,
+            "apiTimeMin": 0,
+            "bandwidth": 0,
+            "cacheHitCount": 0,
+            "cacheMissCount": 0,
+            "callCountBlocked": 0,
+            "callCountFailed": 0,
+            "callCountOther": 0,
+            "callCountSuccess": 0,
+            "callCountTotal": 0,
+            "serviceTimeAvg": 0,
+            "serviceTimeMax": 0,
+            "serviceTimeMin": 0,
+            "userId": "/users/54c800b332965a0035030000"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Reports_ListByUser",
+  "title": "ApiManagementGetReportsByUser"
+}

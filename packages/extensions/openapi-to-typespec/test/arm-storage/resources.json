@@ -1,0 +1,1316 @@
+{
+  "Resources": {
+    "StorageAccount": {
+      "Name": "StorageAccount",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
+          "Method": "GET",
+          "OperationID": "StorageAccounts_GetProperties",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
+          "Method": "PUT",
+          "OperationID": "StorageAccounts_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
+          "Method": "PATCH",
+          "OperationID": "StorageAccounts_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
+          "Method": "DELETE",
+          "OperationID": "StorageAccounts_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a storage account in Microsoft Azure."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts",
+          "Method": "GET",
+          "OperationID": "StorageAccounts_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "CheckNameAvailabilityStorageAccount",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_CheckNameAvailability",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Checks that the storage account name is valid and is not already in use."
+        },
+        {
+          "Name": "GetStorageAccounts",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts",
+          "Method": "GET",
+          "OperationID": "StorageAccounts_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "GetKeys",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_ListKeys",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListKeys",
+            "NextPageMethod": null,
+            "ItemName": "keys",
+            "NextLinkName": null
+          },
+          "Description": "Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account."
+        },
+        {
+          "Name": "RegenerateKey",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_RegenerateKey",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "RegenerateKey",
+            "NextPageMethod": null,
+            "ItemName": "keys",
+            "NextLinkName": null
+          },
+          "Description": "Regenerates one of the access keys or Kerberos keys for the specified storage account."
+        },
+        {
+          "Name": "GetAccountSas",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_ListAccountSAS",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "List SAS credentials of a storage account."
+        },
+        {
+          "Name": "GetServiceSas",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_ListServiceSAS",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "List service SAS credentials of a specific resource."
+        },
+        {
+          "Name": "Failover",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_Failover",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "A failover request can be triggered for a storage account in the event a primary endpoint becomes unavailable for any reason. The failover occurs from the storage account\u0027s primary cluster to the secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover and the account is converted to LRS. In the case of a Planned Failover, the primary and secondary clusters are swapped after failover and the account remains geo-replicated. Failover should continue to be used in the event of availability issues as Planned failover is only available while the primary and secondary endpoints are available. The primary use case of a Planned Failover is disaster recovery testing drills. This type of failover is invoked by setting FailoverType parameter to \u0027Planned\u0027. Learn more about the failover options here- https://learn.microsoft.com/en-us/azure/storage/common/storage-disaster-recovery-guidance"
+        },
+        {
+          "Name": "HierarchicalNamespaceMigration",
+          "Path": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_HierarchicalNamespaceMigration",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Live Migration of storage account to enable Hns"
+        },
+        {
+          "Name": "AbortHierarchicalNamespaceMigration",
+          "Path": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_AbortHierarchicalNamespaceMigration",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Abort live Migration of storage account to enable Hns"
+        },
+        {
+          "Name": "RestoreBlobRanges",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_RestoreBlobRanges",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Restore blobs in the specified blob ranges"
+        },
+        {
+          "Name": "RevokeUserDelegationKeys",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys",
+          "Method": "POST",
+          "OperationID": "StorageAccounts_RevokeUserDelegationKeys",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Revoke user delegation keys."
+        },
+        {
+          "Name": "GetPrivateLinkResources",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources",
+          "Method": "GET",
+          "OperationID": "PrivateLinkResources_ListByStorageAccount",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByStorageAccount",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "Gets the private link resources that need to be created for a storage account."
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "StorageAccount",
+      "ResourceType": "Microsoft.Storage/storageAccounts",
+      "ResourceKey": "accountName",
+      "ResourceKeySegment": "storageAccounts",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DeletedAccount": {
+      "Name": "DeletedAccount",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
+          "Method": "GET",
+          "OperationID": "DeletedAccounts_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get properties of specified deleted account resource."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetDeletedAccounts",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts",
+          "Method": "GET",
+          "OperationID": "DeletedAccounts_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists deleted accounts under the subscription."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["SubscriptionResource"],
+      "SwaggerModelName": "DeletedAccount",
+      "ResourceType": "Microsoft.Storage/locations/deletedAccounts",
+      "ResourceKey": "deletedAccountName",
+      "ResourceKeySegment": "deletedAccounts",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": true,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "ManagementPolicy": {
+      "Name": "ManagementPolicy",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}",
+          "Method": "GET",
+          "OperationID": "ManagementPolicies_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the managementpolicy associated with the specified storage account."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}",
+          "Method": "PUT",
+          "OperationID": "ManagementPolicies_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the managementpolicy to the specified storage account."
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}",
+          "Method": "DELETE",
+          "OperationID": "ManagementPolicies_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the managementpolicy associated with the specified storage account."
+        }
+      ],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "ManagementPolicy",
+      "ResourceType": "Microsoft.Storage/storageAccounts/managementPolicies",
+      "ResourceKey": "managementPolicyName",
+      "ResourceKeySegment": "managementPolicies",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "BlobInventoryPolicy": {
+      "Name": "BlobInventoryPolicy",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}",
+          "Method": "GET",
+          "OperationID": "BlobInventoryPolicies_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the blob inventory policy associated with the specified storage account."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}",
+          "Method": "PUT",
+          "OperationID": "BlobInventoryPolicies_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the blob inventory policy to the specified storage account."
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}",
+          "Method": "DELETE",
+          "OperationID": "BlobInventoryPolicies_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the blob inventory policy associated with the specified storage account."
+        }
+      ],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "BlobInventoryPolicy",
+      "ResourceType": "Microsoft.Storage/storageAccounts/inventoryPolicies",
+      "ResourceKey": "blobInventoryPolicyName",
+      "ResourceKeySegment": "inventoryPolicies",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "StoragePrivateEndpointConnection": {
+      "Name": "StoragePrivateEndpointConnection",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "GET",
+          "OperationID": "PrivateEndpointConnections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the specified private endpoint connection associated with the storage account."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_Put",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update the state of specified private endpoint connection associated with the storage account."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_Put",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update the state of specified private endpoint connection associated with the storage account."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "DELETE",
+          "OperationID": "PrivateEndpointConnections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the specified private endpoint connection associated with the storage account."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections",
+          "Method": "GET",
+          "OperationID": "PrivateEndpointConnections_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "List all the private endpoint connections associated with the storage account."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "PrivateEndpointConnection",
+      "ResourceType": "Microsoft.Storage/storageAccounts/privateEndpointConnections",
+      "ResourceKey": "privateEndpointConnectionName",
+      "ResourceKeySegment": "privateEndpointConnections",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "ObjectReplicationPolicy": {
+      "Name": "ObjectReplicationPolicy",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}",
+          "Method": "GET",
+          "OperationID": "ObjectReplicationPolicies_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the object replication policy of the storage account by policy ID."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}",
+          "Method": "PUT",
+          "OperationID": "ObjectReplicationPolicies_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update the object replication policy of the storage account."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}",
+          "Method": "PUT",
+          "OperationID": "ObjectReplicationPolicies_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update the object replication policy of the storage account."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}",
+          "Method": "DELETE",
+          "OperationID": "ObjectReplicationPolicies_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the object replication policy associated with the specified storage account."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies",
+          "Method": "GET",
+          "OperationID": "ObjectReplicationPolicies_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "List the object replication policies associated with the storage account."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "ObjectReplicationPolicy",
+      "ResourceType": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+      "ResourceKey": "objectReplicationPolicyId",
+      "ResourceKeySegment": "objectReplicationPolicies",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "LocalUser": {
+      "Name": "LocalUser",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}",
+          "Method": "GET",
+          "OperationID": "LocalUsers_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the local user of the storage account by username."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}",
+          "Method": "PUT",
+          "OperationID": "LocalUsers_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update the properties of a local user associated with the storage account"
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}",
+          "Method": "PUT",
+          "OperationID": "LocalUsers_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update the properties of a local user associated with the storage account"
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}",
+          "Method": "DELETE",
+          "OperationID": "LocalUsers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the local user associated with the specified storage account."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers",
+          "Method": "GET",
+          "OperationID": "LocalUsers_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "List the local users associated with the storage account."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "GetKeys",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}/listKeys",
+          "Method": "POST",
+          "OperationID": "LocalUsers_ListKeys",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "List SSH authorized keys and shared key of the local user."
+        },
+        {
+          "Name": "RegeneratePassword",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers/{username}/regeneratePassword",
+          "Method": "POST",
+          "OperationID": "LocalUsers_RegeneratePassword",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Regenerate the local user SSH password."
+        }
+      ],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "LocalUser",
+      "ResourceType": "Microsoft.Storage/storageAccounts/localUsers",
+      "ResourceKey": "username",
+      "ResourceKeySegment": "localUsers",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "EncryptionScope": {
+      "Name": "EncryptionScope",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}",
+          "Method": "GET",
+          "OperationID": "EncryptionScopes_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Returns the properties for the specified encryption scope."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}",
+          "Method": "PUT",
+          "OperationID": "EncryptionScopes_Put",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}",
+          "Method": "PATCH",
+          "OperationID": "EncryptionScopes_Patch",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist."
+        }
+      ],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes",
+          "Method": "GET",
+          "OperationID": "EncryptionScopes_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all the encryption scopes available under the specified storage account."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "EncryptionScope",
+      "ResourceType": "Microsoft.Storage/storageAccounts/encryptionScopes",
+      "ResourceKey": "encryptionScopeName",
+      "ResourceKeySegment": "encryptionScopes",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "BlobServiceProperty": {
+      "Name": "BlobServiceProperty",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default",
+          "Method": "GET",
+          "OperationID": "BlobServices_GetServiceProperties",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the properties of a storage account\u2019s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default",
+          "Method": "PUT",
+          "OperationID": "BlobServices_SetServiceProperties",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the properties of a storage account\u2019s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. "
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "BlobServiceProperties",
+      "ResourceType": "Microsoft.Storage/storageAccounts/blobServices",
+      "ResourceKey": "BlobServicesName",
+      "ResourceKeySegment": "blobServices",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "BlobContainer": {
+      "Name": "BlobContainer",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}",
+          "Method": "GET",
+          "OperationID": "BlobContainers_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets properties of a specified container. "
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}",
+          "Method": "PUT",
+          "OperationID": "BlobContainers_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. "
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}",
+          "Method": "PATCH",
+          "OperationID": "BlobContainers_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn\u0027t already exist. "
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}",
+          "Method": "DELETE",
+          "OperationID": "BlobContainers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes specified container under its account."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers",
+          "Method": "GET",
+          "OperationID": "BlobContainers_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "SetLegalHold",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold",
+          "Method": "POST",
+          "OperationID": "BlobContainers_SetLegalHold",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request."
+        },
+        {
+          "Name": "ClearLegalHold",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold",
+          "Method": "POST",
+          "OperationID": "BlobContainers_ClearLegalHold",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request."
+        },
+        {
+          "Name": "Lease",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease",
+          "Method": "POST",
+          "OperationID": "BlobContainers_Lease",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite."
+        },
+        {
+          "Name": "ObjectLevelWorm",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate",
+          "Method": "POST",
+          "OperationID": "BlobContainers_ObjectLevelWorm",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container."
+        }
+      ],
+      "Parents": ["BlobServiceProperty"],
+      "SwaggerModelName": "BlobContainer",
+      "ResourceType": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "ResourceKey": "containerName",
+      "ResourceKeySegment": "containers",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "ImmutabilityPolicy": {
+      "Name": "ImmutabilityPolicy",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default",
+          "Method": "GET",
+          "OperationID": "BlobContainers_GetImmutabilityPolicy",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the existing immutability policy along with the corresponding ETag in response headers and body."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default",
+          "Method": "PUT",
+          "OperationID": "BlobContainers_CreateOrUpdateImmutabilityPolicy",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation."
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default",
+          "Method": "DELETE",
+          "OperationID": "BlobContainers_DeleteImmutabilityPolicy",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container."
+        }
+      ],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "LockImmutabilityPolicy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock",
+          "Method": "POST",
+          "OperationID": "BlobContainers_LockImmutabilityPolicy",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation."
+        },
+        {
+          "Name": "ExtendImmutabilityPolicy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend",
+          "Method": "POST",
+          "OperationID": "BlobContainers_ExtendImmutabilityPolicy",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation."
+        }
+      ],
+      "Parents": ["BlobContainer"],
+      "SwaggerModelName": "ImmutabilityPolicy",
+      "ResourceType": "Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies",
+      "ResourceKey": "immutabilityPolicyName",
+      "ResourceKeySegment": "immutabilityPolicies",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "FileServiceProperty": {
+      "Name": "FileServiceProperty",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default",
+          "Method": "GET",
+          "OperationID": "FileServices_GetServiceProperties",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default",
+          "Method": "PUT",
+          "OperationID": "FileServices_SetServiceProperties",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. "
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "FileServiceProperties",
+      "ResourceType": "Microsoft.Storage/storageAccounts/fileServices",
+      "ResourceKey": "FileServicesName",
+      "ResourceKeySegment": "fileServices",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "FileShare": {
+      "Name": "FileShare",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}",
+          "Method": "GET",
+          "OperationID": "FileShares_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets properties of a specified share."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}",
+          "Method": "PUT",
+          "OperationID": "FileShares_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. "
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}",
+          "Method": "PATCH",
+          "OperationID": "FileShares_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. "
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}",
+          "Method": "DELETE",
+          "OperationID": "FileShares_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes specified share under its account."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares",
+          "Method": "GET",
+          "OperationID": "FileShares_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists all shares."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "Restore",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore",
+          "Method": "POST",
+          "OperationID": "FileShares_Restore",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Restore a file share within a valid retention days if share soft delete is enabled"
+        },
+        {
+          "Name": "Lease",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease",
+          "Method": "POST",
+          "OperationID": "FileShares_Lease",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite."
+        }
+      ],
+      "Parents": ["FileServiceProperty"],
+      "SwaggerModelName": "FileShare",
+      "ResourceType": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "ResourceKey": "shareName",
+      "ResourceKeySegment": "shares",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "QueueServiceProperty": {
+      "Name": "QueueServiceProperty",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default",
+          "Method": "GET",
+          "OperationID": "QueueServices_GetServiceProperties",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the properties of a storage account\u2019s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default",
+          "Method": "PUT",
+          "OperationID": "QueueServices_SetServiceProperties",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the properties of a storage account\u2019s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. "
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "QueueServiceProperties",
+      "ResourceType": "Microsoft.Storage/storageAccounts/queueServices",
+      "ResourceKey": "queueServiceName",
+      "ResourceKeySegment": "queueServices",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "StorageQueue": {
+      "Name": "StorageQueue",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}",
+          "Method": "GET",
+          "OperationID": "Queue_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the queue with the specified queue name, under the specified account if it exists."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}",
+          "Method": "PUT",
+          "OperationID": "Queue_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new queue with the specified queue name, under the specified account."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}",
+          "Method": "PATCH",
+          "OperationID": "Queue_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Creates a new queue with the specified queue name, under the specified account."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}",
+          "Method": "DELETE",
+          "OperationID": "Queue_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the queue with the specified queue name, under the specified account if it exists."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues",
+          "Method": "GET",
+          "OperationID": "Queue_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Gets a list of all the queues under the specified storage account"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["QueueServiceProperty"],
+      "SwaggerModelName": "StorageQueue",
+      "ResourceType": "Microsoft.Storage/storageAccounts/queueServices/queues",
+      "ResourceKey": "queueName",
+      "ResourceKeySegment": "queues",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "TableServiceProperty": {
+      "Name": "TableServiceProperty",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default",
+          "Method": "GET",
+          "OperationID": "TableServices_GetServiceProperties",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the properties of a storage account\u2019s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default",
+          "Method": "PUT",
+          "OperationID": "TableServices_SetServiceProperties",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Sets the properties of a storage account\u2019s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. "
+        }
+      ],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["StorageAccount"],
+      "SwaggerModelName": "TableServiceProperties",
+      "ResourceType": "Microsoft.Storage/storageAccounts/tableServices",
+      "ResourceKey": "tableServiceName",
+      "ResourceKeySegment": "tableServices",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": true
+    },
+    "Table": {
+      "Name": "Table",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}",
+          "Method": "GET",
+          "OperationID": "Table_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the table with the specified table name, under the specified account if it exists."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}",
+          "Method": "PUT",
+          "OperationID": "Table_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new table with the specified table name, under the specified account."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}",
+          "Method": "PATCH",
+          "OperationID": "Table_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Creates a new table with the specified table name, under the specified account."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}",
+          "Method": "DELETE",
+          "OperationID": "Table_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the table with the specified table name, under the specified account if it exists."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables",
+          "Method": "GET",
+          "OperationID": "Table_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": "ListNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Gets a list of all the tables under the specified storage account"
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["TableServiceProperty"],
+      "SwaggerModelName": "Table",
+      "ResourceType": "Microsoft.Storage/storageAccounts/tableServices/tables",
+      "ResourceKey": "tableName",
+      "ResourceKeySegment": "tables",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}

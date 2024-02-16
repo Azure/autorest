@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "enabled": true
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "SignInSettings_Update",
+  "title": "ApiManagementPortalSettingsUpdateSignIn"
+}

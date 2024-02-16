@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "configurationName": "configuration",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "syncState",
+        "type": "Microsoft.ApiManagement/service/tenant/syncState",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/configuration/syncState",
+        "properties": {
+          "branch": "master",
+          "commitId": "de891c2342c7058dde45e5e624eae7e558c94683",
+          "configurationChangeDate": "2021-04-13T00:11:43.862781Z",
+          "isExport": true,
+          "isGitEnabled": true,
+          "isSynced": true,
+          "lastOperationId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/configuration/operationResults/6074f0bd093a9d0dac3d7347",
+          "syncDate": "2021-04-13T01:15:53.9824995Z"
+        }
+      }
+    }
+  },
+  "operationId": "TenantConfiguration_GetSyncState",
+  "title": "ApiManagementTenantAccessSyncState"
+}

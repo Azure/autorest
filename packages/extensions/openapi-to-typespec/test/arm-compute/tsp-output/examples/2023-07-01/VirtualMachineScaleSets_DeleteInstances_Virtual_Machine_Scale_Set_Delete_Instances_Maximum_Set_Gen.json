@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "forceDeletion": true,
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmInstanceIDs": {
+      "instanceIds": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    },
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_DeleteInstances",
+  "title": "VirtualMachineScaleSet_DeleteInstances_MaximumSet_Gen"
+}

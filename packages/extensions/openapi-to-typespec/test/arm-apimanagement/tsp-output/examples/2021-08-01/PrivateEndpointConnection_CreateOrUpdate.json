@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "privateEndpointConnectionRequest": {
+      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/connectionName",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "The Private Endpoint Connection is approved.",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "The request has been approved.",
+            "status": "Succeeded"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnection_CreateOrUpdate",
+  "title": "ApiManagementApproveOrRejectPrivateEndpointConnection"
+}

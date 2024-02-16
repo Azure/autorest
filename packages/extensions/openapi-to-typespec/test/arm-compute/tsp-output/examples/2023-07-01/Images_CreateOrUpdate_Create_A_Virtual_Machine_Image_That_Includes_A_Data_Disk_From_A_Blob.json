@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "storageProfile": {
+          "dataDisks": [
+            {
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+              "lun": 1
+            }
+          ],
+          "osDisk": {
+            "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+            "osState": "Generalized",
+            "osType": "Linux"
+          },
+          "zoneResilient": false
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+                "lun": 1
+              }
+            ],
+            "osDisk": {
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+                "lun": 1
+              }
+            ],
+            "osDisk": {
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "caching": "ReadWrite",
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_CreateOrUpdate",
+  "title": "Create a virtual machine image that includes a data disk from a blob."
+}

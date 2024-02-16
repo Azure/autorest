@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "id": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "computeId": "string",
+          "displayName": "string",
+          "experimentName": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
+            }
+          },
+          "jobType": "Pipeline",
+          "outputs": {
+            "string": {
+              "description": "string",
+              "jobOutputType": "uri_file",
+              "mode": "Upload",
+              "uri": "string"
+            }
+          },
+          "properties": {
+            "string": "string"
+          },
+          "services": {
+            "string": {
+              "endpoint": "string",
+              "errorMessage": "string",
+              "jobServiceType": "string",
+              "port": 1,
+              "properties": {
+                "string": "string"
+              },
+              "status": "string"
+            }
+          },
+          "settings": {},
+          "status": "NotStarted",
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Jobs_Get",
+  "title": "Get Pipeline Job."
+}

@@ -1,0 +1,286 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "centralus",
+      "properties": {
+        "overprovision": true,
+        "upgradePolicy": {
+          "mode": "Automatic"
+        },
+        "virtualMachineProfile": {
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        }
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminPassword": "{your-password}",
+            "adminUsername": "{your-username}",
+            "computerNamePrefix": "{vmss-name}"
+          },
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "createOption": "Empty",
+                "diskSizeGB": 1023,
+                "lun": 0
+              },
+              {
+                "createOption": "Empty",
+                "diskSizeGB": 1023,
+                "lun": 1
+              }
+            ],
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "diskSizeGB": 512,
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_A1_v2",
+        "capacity": 2,
+        "tier": "Standard"
+      },
+      "zones": [
+        "1",
+        "3"
+      ]
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "{vmss-name}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "centralus",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Succeeded",
+          "singlePlacementGroup": false,
+          "uniqueId": "8042c376-4690-4c47-9fa2-fbdad70e32fa",
+          "upgradePolicy": {
+            "mode": "Automatic"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "storageProfile": {
+              "dataDisks": [
+                {
+                  "caching": "None",
+                  "createOption": "Empty",
+                  "diskSizeGB": 1023,
+                  "lun": 0,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                },
+                {
+                  "caching": "None",
+                  "createOption": "Empty",
+                  "diskSizeGB": 1023,
+                  "lun": 1,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                }
+              ],
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "createOption": "FromImage",
+                "diskSizeGB": 512,
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            }
+          },
+          "zoneBalance": false
+        },
+        "sku": {
+          "name": "Standard_A1_v2",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "zones": [
+          "1",
+          "3"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "centralus",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Creating",
+          "singlePlacementGroup": false,
+          "uniqueId": "8042c376-4690-4c47-9fa2-fbdad70e32fa",
+          "upgradePolicy": {
+            "mode": "Automatic"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "storageProfile": {
+              "dataDisks": [
+                {
+                  "caching": "None",
+                  "createOption": "Empty",
+                  "diskSizeGB": 1023,
+                  "lun": 0,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                },
+                {
+                  "caching": "None",
+                  "createOption": "Empty",
+                  "diskSizeGB": 1023,
+                  "lun": 1,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
+                }
+              ],
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "createOption": "FromImage",
+                "diskSizeGB": 512,
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            }
+          },
+          "zoneBalance": false
+        },
+        "sku": {
+          "name": "Standard_A1_v2",
+          "capacity": 2,
+          "tier": "Standard"
+        },
+        "zones": [
+          "1",
+          "3"
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "title": "Create a scale set with virtual machines in different zones."
+}

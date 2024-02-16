@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "aaaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "location": "westus"
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "location": "westus"
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
+        "location": "westus"
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_Update",
+  "title": "VirtualMachineScaleSetVM_Update_MinimumSet_Gen"
+}

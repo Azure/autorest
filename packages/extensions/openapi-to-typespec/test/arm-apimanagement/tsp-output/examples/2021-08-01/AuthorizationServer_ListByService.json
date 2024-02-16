@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "newauthServer",
+            "type": "Microsoft.ApiManagement/service/authorizationServers",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer",
+            "properties": {
+              "description": "test server",
+              "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
+              "authorizationMethods": [
+                "GET"
+              ],
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ],
+              "clientId": "1",
+              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+              "defaultScope": "read write",
+              "displayName": "test2",
+              "grantTypes": [
+                "authorizationCode",
+                "implicit"
+              ],
+              "resourceOwnerPassword": "pwd",
+              "resourceOwnerUsername": "un",
+              "supportState": true,
+              "tokenEndpoint": "https://www.contoso.com/oauth2/token"
+            }
+          },
+          {
+            "name": "newauthServer2",
+            "type": "Microsoft.ApiManagement/service/authorizationServers",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2",
+            "properties": {
+              "description": "test server",
+              "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
+              "authorizationMethods": [
+                "GET"
+              ],
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ],
+              "clientAuthenticationMethod": [
+                "Basic"
+              ],
+              "clientId": "1",
+              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+              "defaultScope": "read write",
+              "displayName": "test3",
+              "grantTypes": [
+                "authorizationCode",
+                "implicit"
+              ],
+              "resourceOwnerPassword": "pwd",
+              "resourceOwnerUsername": "un",
+              "supportState": true,
+              "tokenEndpoint": "https://www.contoso.com/oauth2/token"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AuthorizationServer_ListByService",
+  "title": "ApiManagementListAuthorizationServers"
+}

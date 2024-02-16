@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "extendedLocation": {
+        "name": "losangeles001",
+        "type": "EdgeZone"
+      },
+      "kind": "Storage",
+      "location": "eastus",
+      "properties": {
+        "immutableStorageWithVersioning": {
+          "enabled": true,
+          "immutabilityPolicy": {
+            "allowProtectedAppendWrites": true,
+            "immutabilityPeriodSinceCreationInDays": 15,
+            "state": "Unlocked"
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_GRS"
+      }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "extendedLocation": {
+          "name": "losangeles001",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+        "properties": {
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "immutableStorageWithVersioning": {
+            "enabled": true,
+            "immutabilityPolicy": {
+              "allowProtectedAppendWrites": true,
+              "immutabilityPeriodSinceCreationInDays": 15,
+              "state": "Unlocked"
+            }
+          },
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "file": "https://sto4445.file.core.windows.net/",
+            "queue": "https://sto4445.queue.core.windows.net/",
+            "table": "https://sto4445.table.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus2euap",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateWithImmutabilityPolicy"
+}

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "operationId": "loginUser",
+    "api-version": "2021-08-01",
+    "apiId": "swagger-petstore",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "loginUser",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore/operations/loginUser",
+        "properties": {
+          "method": "GET",
+          "description": "",
+          "displayName": "Logs user into the system",
+          "templateParameters": [
+            {
+              "name": "username",
+              "type": "string",
+              "description": "The user name for login",
+              "required": true,
+              "values": []
+            },
+            {
+              "name": "password",
+              "type": "string",
+              "description": "The password for login in clear text",
+              "required": true,
+              "values": []
+            }
+          ],
+          "urlTemplate": "/user/login?username={username}&password={password}",
+          "request": {
+            "headers": [],
+            "queryParameters": [],
+            "representations": []
+          },
+          "responses": [
+            {
+              "description": "successful operation",
+              "headers": [
+                {
+                  "name": "X-Rate-Limit",
+                  "type": "integer",
+                  "description": "calls per hour allowed by the user",
+                  "values": []
+                },
+                {
+                  "name": "X-Expires-After",
+                  "type": "string",
+                  "description": "date in UTC when token expires",
+                  "values": []
+                }
+              ],
+              "representations": [
+                {
+                  "contentType": "application/xml",
+                  "schemaId": "5ba91a35f373b513a0bf31c6",
+                  "typeName": "UserLoginGet200ApplicationXmlResponse"
+                },
+                {
+                  "contentType": "application/json",
+                  "schemaId": "5ba91a35f373b513a0bf31c6",
+                  "typeName": "UserLoginGet200ApplicationJsonResponse"
+                }
+              ],
+              "statusCode": 200
+            },
+            {
+              "description": "Invalid username/password supplied",
+              "headers": [],
+              "representations": [
+                {
+                  "contentType": "application/xml"
+                },
+                {
+                  "contentType": "application/json"
+                }
+              ],
+              "statusCode": 400
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ApiOperation_Get",
+  "title": "ApiManagementGetApiOperationPetStore"
+}

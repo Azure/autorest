@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myHost",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          "Dsv3-Type1",
+          "Esv3-Type1"
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHosts_ListAvailableSizes",
+  "title": "Get Available Dedicated Host Sizes."
+}

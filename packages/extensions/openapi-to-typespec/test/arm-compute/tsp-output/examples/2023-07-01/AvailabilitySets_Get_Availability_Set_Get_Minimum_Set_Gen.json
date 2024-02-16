@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "availabilitySetName": "aaaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/availabilitySets/myAvailabilitySet",
+        "location": "westus"
+      }
+    }
+  },
+  "operationId": "AvailabilitySets_Get",
+  "title": "AvailabilitySet_Get_MinimumSet_Gen"
+}

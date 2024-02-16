@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "name": "string",
+    "$orderBy": "string",
+    "$skipToken": "string",
+    "$tags": "string",
+    "$top": 1,
+    "api-version": "2023-06-01-preview",
+    "listViewType": "ArchivedOnly",
+    "registryName": "registryName",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "dataType": "mltable",
+              "dataUri": "string",
+              "isAnonymous": false,
+              "isArchived": false,
+              "properties": {
+                "string": "string"
+              },
+              "referencedUris": [
+                "string"
+              ],
+              "tags": {
+                "string": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999+00:48",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:48",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RegistryDataVersions_List",
+  "title": "RegistryList Registry Data Version Base."
+}

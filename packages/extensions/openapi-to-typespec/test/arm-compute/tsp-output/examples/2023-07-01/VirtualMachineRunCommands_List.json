@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "location": "SoutheastAsia",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "description": "Configure the machine to enable remote PowerShell.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "EnableRemotePS",
+            "label": "Enable remote PowerShell",
+            "osType": "Windows"
+          },
+          {
+            "description": "Shows detailed information for the IP address, subnet mask and default gateway for each adapter bound to TCP/IP.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "IPConfig",
+            "label": "List IP configuration",
+            "osType": "Windows"
+          },
+          {
+            "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "RunPowerShellScript",
+            "label": "Executes a PowerShell script",
+            "osType": "Windows"
+          },
+          {
+            "description": "Custom multiline shell script should be defined in script property. Optional parameters can be set in parameters property.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "RunShellScript",
+            "label": "Executes a Linux shell script",
+            "osType": "Linux"
+          },
+          {
+            "description": "Get the configuration of all network interfaces.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "ifconfig",
+            "label": "List network configuration",
+            "osType": "Linux"
+          },
+          {
+            "description": "Checks if the local Administrator account is disabled, and if so enables it.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "EnableAdminAccount",
+            "label": "Enable administrator account",
+            "osType": "Windows"
+          },
+          {
+            "description": "Reset built-in Administrator account password.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "ResetAccountPassword",
+            "label": "Reset built-in Administrator account password",
+            "osType": "Windows"
+          },
+          {
+            "description": "Checks registry settings and domain policy settings. Suggests policy actions if machine is part of a domain or modifies the settings to default values.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "RDPSettings",
+            "label": "Verify RDP Listener Settings",
+            "osType": "Windows"
+          },
+          {
+            "description": "Sets the default or user specified port number for Remote Desktop connections. Enables firewall rule for inbound access to the port.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "SetRDPPort",
+            "label": "Set Remote Desktop port",
+            "osType": "Windows"
+          },
+          {
+            "description": "Removes the SSL certificate tied to the RDP listener and restores the RDP listerner security to default. Use this script if you see any issues with the certificate.",
+            "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+            "id": "ResetRDPCert",
+            "label": "Restore RDP Authentication mode to defaults",
+            "osType": "Windows"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineRunCommands_List",
+  "title": "VirtualMachineRunCommandList"
+}

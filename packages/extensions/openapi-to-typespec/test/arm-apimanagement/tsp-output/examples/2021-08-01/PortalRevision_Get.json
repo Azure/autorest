@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "portalRevisionId": "20201112101010",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "20201112101010",
+        "type": "Microsoft.ApiManagement/service/portalRevisions",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalRevisions/20201112101010",
+        "properties": {
+          "description": "portal revision 1",
+          "createdDateTime": "2020-11-12T22:51:36.47Z",
+          "isCurrent": true,
+          "status": "completed",
+          "statusDetails": null,
+          "updatedDateTime": "2020-11-12T22:52:00.097Z"
+        }
+      }
+    }
+  },
+  "operationId": "PortalRevision_Get",
+  "title": "ApiManagementGetPortalRevision"
+}

@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "$expand": "virtualMachines/$ref",
+    "api-version": "2023-07-01",
+    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "location": "West US",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "provisioningState": "Succeeded",
+              "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+              "reservationId": "{GUID}",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Standard_DS1_v2",
+              "capacity": 4
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "zones": [
+              "1"
+            ]
+          },
+          {
+            "name": "{capacityReservationName}",
+            "type": "Microsoft.Compute/CapacityReservations",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/CapacityReservation/{capacityReservationName}",
+            "location": "West US",
+            "properties": {
+              "platformFaultDomainCount": 3,
+              "provisioningState": "Succeeded",
+              "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+              "reservationId": "{GUID}",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                }
+              ]
+            },
+            "sku": {
+              "name": "Standard_A1_v2",
+              "capacity": 4
+            },
+            "tags": {
+              "department": "HR"
+            },
+            "zones": [
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservations_ListByCapacityReservationGroup",
+  "title": "List capacity reservations in reservation group."
+}

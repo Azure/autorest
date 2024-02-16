@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "orchestrationServices": [
+          {
+            "serviceName": "AutomaticRepairs",
+            "serviceState": "NotRunning"
+          }
+        ],
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": "aaaaaaaaaaaaaaaaaaaaaaa",
+            "time": "2021-11-30T12:58:26.526Z"
+          }
+        ],
+        "virtualMachine": {
+          "statusesSummary": [
+            {
+              "code": "aa",
+              "count": 21
+            }
+          ]
+        },
+        "extensions": [
+          {
+            "name": "aaaaaaaaaaa",
+            "statusesSummary": [
+              {
+                "code": "aa",
+                "count": 21
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_GetInstanceView",
+  "title": "VirtualMachineScaleSet_GetInstanceView_MaximumSet_Gen"
+}

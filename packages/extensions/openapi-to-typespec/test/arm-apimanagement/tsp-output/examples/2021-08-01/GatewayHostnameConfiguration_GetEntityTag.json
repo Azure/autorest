@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "gatewayId": "gw1",
+    "hcId": "default",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "etag": "AAAAAAAAAAa="
+      }
+    }
+  },
+  "operationId": "GatewayHostnameConfiguration_GetEntityTag",
+  "title": "ApiManagementHeadGatewayHostnameConfiguration"
+}

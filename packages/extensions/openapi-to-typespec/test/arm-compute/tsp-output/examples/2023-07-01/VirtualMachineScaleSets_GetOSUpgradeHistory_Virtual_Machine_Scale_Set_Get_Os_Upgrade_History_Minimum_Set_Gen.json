@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {}
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_GetOSUpgradeHistory",
+  "title": "VirtualMachineScaleSet_GetOSUpgradeHistory_MinimumSet_Gen"
+}

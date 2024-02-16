@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "a1",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "value": [
+          {
+            "operation": {
+              "name": "Create resource",
+              "method": "POST",
+              "description": "A demonstration of a POST call based on the echo backend above. The request body is expected to contain JSON-formatted data (see example below). A policy is used to automatically transform any request sent in JSON directly to XML. In a real-world scenario this could be used to enable modern clients to speak to a legacy backend.",
+              "apiName": "Echo API",
+              "apiRevision": "1",
+              "id": "/apis/echo-api/operations/create-resource",
+              "urlTemplate": "/resource"
+            },
+            "tag": {
+              "name": "awesomeTag",
+              "id": "/tags/apitag123"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operation_ListByTags",
+  "title": "ApiManagementListApiOperationsByTags"
+}

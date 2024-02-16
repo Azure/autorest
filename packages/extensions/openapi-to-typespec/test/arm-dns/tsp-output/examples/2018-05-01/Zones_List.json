@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://servicehost/subscriptions/subid/providers/Microsoft.Network/dnsZones?api-version=2018-05-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "zone1",
+            "type": "Microsoft.Network/dnsZones",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1",
+            "location": "global",
+            "properties": {
+              "maxNumberOfRecordSets": 5000,
+              "nameServers": [
+                "ns1-01.azure-dns.com",
+                "ns2-01.azure-dns.net",
+                "ns3-01.azure-dns.org",
+                "ns4-01.azure-dns.info"
+              ],
+              "numberOfRecordSets": 2
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          },
+          {
+            "name": "zone2",
+            "type": "Microsoft.Network/dnsZones",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/dnsZones/zone2",
+            "location": "global",
+            "properties": {
+              "maxNumberOfRecordSets": 5000,
+              "nameServers": [
+                "ns1-02.azure-dns.com",
+                "ns2-02.azure-dns.net",
+                "ns3-02.azure-dns.org",
+                "ns4-02.azure-dns.info"
+              ],
+              "numberOfRecordSets": 300
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Zones_List",
+  "title": "List zones by subscription"
+}

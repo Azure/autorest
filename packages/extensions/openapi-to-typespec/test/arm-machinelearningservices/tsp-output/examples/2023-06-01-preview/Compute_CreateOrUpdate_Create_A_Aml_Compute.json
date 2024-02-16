@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "computeType": "AmlCompute",
+        "properties": {
+          "enableNodePublicIp": true,
+          "isolatedNetwork": false,
+          "osType": "Windows",
+          "remoteLoginPortPublicAccess": "NotSpecified",
+          "scaleSettings": {
+            "maxNodeCount": 1,
+            "minNodeCount": 0,
+            "nodeIdleTimeBeforeScaleDown": "PT5M"
+          },
+          "virtualMachineImage": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myImageGallery/images/myImageDefinition/versions/0.0.1"
+          },
+          "vmPriority": "Dedicated",
+          "vmSize": "STANDARD_NC6"
+        }
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "AmlCompute",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "AmlCompute",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  },
+  "operationId": "Compute_CreateOrUpdate",
+  "title": "Create a AML Compute"
+}

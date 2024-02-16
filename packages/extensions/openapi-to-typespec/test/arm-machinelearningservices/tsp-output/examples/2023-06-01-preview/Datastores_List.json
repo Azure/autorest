@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "$skipToken": "string",
+    "api-version": "2023-06-01-preview",
+    "count": 1,
+    "isDefault": false,
+    "names": [
+      "string"
+    ],
+    "orderBy": "string",
+    "orderByAsc": false,
+    "resourceGroupName": "test-rg",
+    "searchText": "string",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "accountName": "string",
+              "containerName": "string",
+              "credentials": {
+                "credentialsType": "AccountKey",
+                "secrets": {
+                  "secretsType": "AccountKey"
+                }
+              },
+              "datastoreType": "AzureBlob",
+              "endpoint": "core.windows.net",
+              "isDefault": false,
+              "properties": null,
+              "tags": {
+                "string": "string"
+              },
+              "protocol": "https"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Datastores_List",
+  "title": "List datastores."
+}

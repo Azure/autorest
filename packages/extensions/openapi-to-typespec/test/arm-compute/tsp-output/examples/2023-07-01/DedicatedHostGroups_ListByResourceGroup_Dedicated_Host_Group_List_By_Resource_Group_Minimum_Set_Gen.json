@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DedicatedHostGroups_ListByResourceGroup",
+  "title": "DedicatedHostGroup_ListByResourceGroup_MinimumSet_Gen"
+}

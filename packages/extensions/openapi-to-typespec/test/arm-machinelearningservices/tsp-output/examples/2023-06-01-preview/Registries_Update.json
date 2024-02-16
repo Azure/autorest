@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Basic"
+      },
+      "tags": {}
+    },
+    "registryName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "discoveryUrl": "string",
+          "intellectualPropertyPublisher": "string",
+          "managedResourceGroup": {
+            "resourceId": "string"
+          },
+          "mlFlowRegistryUri": "string",
+          "privateEndpointConnections": [
+            {
+              "id": "string",
+              "location": "string",
+              "properties": {
+                "groupIds": [
+                  "string"
+                ],
+                "privateEndpoint": {
+                  "id": "string",
+                  "subnetArmId": "string"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "string",
+                  "actionsRequired": "string",
+                  "status": "Approved"
+                },
+                "provisioningState": "string"
+              }
+            }
+          ],
+          "publicNetworkAccess": "string",
+          "regionDetails": [
+            {
+              "acrDetails": [
+                {
+                  "systemCreatedAcrAccount": {
+                    "acrAccountName": "string",
+                    "acrAccountSku": "string",
+                    "armResourceId": {
+                      "resourceId": "string"
+                    }
+                  }
+                }
+              ],
+              "location": "string",
+              "storageAccountDetails": [
+                {
+                  "systemCreatedStorageAccount": {
+                    "allowBlobPublicAccess": false,
+                    "armResourceId": {
+                      "resourceId": "string"
+                    },
+                    "storageAccountHnsEnabled": false,
+                    "storageAccountName": "string",
+                    "storageAccountType": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:02",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:02",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Registries_Update",
+  "title": "Update Registry with system created accounts."
+}

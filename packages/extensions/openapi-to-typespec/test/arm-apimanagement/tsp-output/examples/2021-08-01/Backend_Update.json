@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "backendId": "proxybackend",
+    "parameters": {
+      "properties": {
+        "description": "description5308",
+        "tls": {
+          "validateCertificateChain": false,
+          "validateCertificateName": true
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "proxybackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+        "properties": {
+          "description": "description5308",
+          "credentials": {
+            "authorization": {
+              "parameter": "opensesma",
+              "scheme": "Basic"
+            },
+            "header": {
+              "x-my-1": [
+                "val1",
+                "val2"
+              ]
+            },
+            "query": {
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
+            }
+          },
+          "proxy": {
+            "password": "<password>",
+            "url": "http://192.168.1.1:8080",
+            "username": "Contoso\\admin"
+          },
+          "tls": {
+            "validateCertificateChain": false,
+            "validateCertificateName": true
+          },
+          "url": "https://backendname2644/",
+          "protocol": "http"
+        }
+      }
+    }
+  },
+  "operationId": "Backend_Update",
+  "title": "ApiManagementUpdateBackend"
+}

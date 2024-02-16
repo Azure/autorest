@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "platformUpdateDomain": 30,
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextPlatformUpdateDomain": 7,
+        "walkPerformed": true
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk",
+  "title": "VirtualMachineScaleSet_ForceRecoveryServiceFabricPlatformUpdateDomainWalk_MaximumSet_Gen"
+}

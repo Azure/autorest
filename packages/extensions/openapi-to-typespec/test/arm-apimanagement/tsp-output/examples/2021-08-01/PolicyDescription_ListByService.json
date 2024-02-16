@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "scope": "Api",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "value": [
+          {
+            "name": "authentication-basic",
+            "type": "Microsoft.ApiManagement/service/policyDescriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyDescriptions/authentication-basic",
+            "properties": {
+              "description": "Authenticate with the backend service using Basic authentication. Use in the inbound section at API scope.",
+              "scope": 268435471
+            }
+          },
+          {
+            "name": "authentication-certificate",
+            "type": "Microsoft.ApiManagement/service/policyDescriptions",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyDescriptions/authentication-certificate",
+            "properties": {
+              "description": "Authenticate with the backend service using a client certificate. Use in the inbound section at API scope.",
+              "scope": 268435471
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyDescription_ListByService",
+  "title": "ApiManagementListPolicyDescriptions"
+}

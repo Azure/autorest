@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aaaaaaaaa",
+        "value": [
+          {
+            "type": "aaaaaaaaaaaaaaaaaaa",
+            "location": "aaaaaaaaaaaaa",
+            "properties": {
+              "error": {
+                "code": "aaaaaaa",
+                "innererror": {
+                  "errordetail": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                  "exceptiontype": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                },
+                "message": "aaaaaaaaa",
+                "target": "aaaaaaa",
+                "details": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                    "message": "aa",
+                    "target": "aaaa"
+                  }
+                ]
+              },
+              "progress": {
+                "failedInstanceCount": 25,
+                "inProgressInstanceCount": 20,
+                "pendingInstanceCount": 27,
+                "successfulInstanceCount": 6
+              },
+              "rollbackInfo": {
+                "failedRolledbackInstanceCount": 2,
+                "rollbackError": {
+                  "code": "aaaaaaa",
+                  "innererror": {
+                    "errordetail": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                    "exceptiontype": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                  },
+                  "message": "aaaaaaaaa",
+                  "target": "aaaaaaa",
+                  "details": [
+                    {
+                      "code": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                      "message": "aa",
+                      "target": "aaaa"
+                    }
+                  ]
+                },
+                "successfullyRolledbackInstanceCount": 12
+              },
+              "runningStatus": {
+                "code": "RollingForward",
+                "endTime": "2021-11-30T13:05:40.443Z",
+                "startTime": "2021-11-30T13:05:40.442Z"
+              },
+              "startedBy": "Unknown",
+              "targetImageReference": {
+                "exactVersion": "aaaaaaa",
+                "id": "aaaaaaaaaaaaaaaaaaa",
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sharedGalleryImageId": "aaaaaa",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_GetOSUpgradeHistory",
+  "title": "VirtualMachineScaleSet_GetOSUpgradeHistory_MaximumSet_Gen"
+}

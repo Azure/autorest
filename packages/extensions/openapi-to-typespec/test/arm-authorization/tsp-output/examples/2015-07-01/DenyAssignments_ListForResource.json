@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "parentResourcePath": "parentResourcePath",
+    "resourceGroupName": "rgname",
+    "resourceName": "resourceName",
+    "resourceProviderNamespace": "resourceProviderNamespace",
+    "resourceType": "resourceType",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "denyAssignmentId",
+            "type": "Microsoft.Authorization/denyAssignments",
+            "id": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+            "properties": {
+              "description": "Deny assignment description",
+              "denyAssignmentName": "Deny assignment name",
+              "doNotApplyToChildScopes": false,
+              "excludePrincipals": [
+                {
+                  "type": "principalType2",
+                  "id": "principalId2"
+                }
+              ],
+              "isSystemProtected": true,
+              "permissions": [
+                {
+                  "actions": [
+                    "action"
+                  ],
+                  "dataActions": [
+                    "action"
+                  ],
+                  "notActions": [],
+                  "notDataActions": []
+                }
+              ],
+              "principals": [
+                {
+                  "type": "principalType1",
+                  "id": "principalId1"
+                }
+              ],
+              "scope": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DenyAssignments_ListForResource",
+  "title": "List deny assignments for resource"
+}

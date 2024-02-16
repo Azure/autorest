@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "computeType": "AKS"
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "AKS",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "AKS",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  },
+  "operationId": "Compute_CreateOrUpdate",
+  "title": "Create an AKS Compute"
+}

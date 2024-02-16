@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "petstore",
+    "parameters": {
+      "properties": {
+        "format": "openapi-link",
+        "path": "petstore",
+        "value": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "properties": {
+          "path": "petstore",
+          "apiRevision": "1",
+          "displayName": "Swagger Petstore",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://petstore.swagger.io/v1",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "properties": {
+          "path": "petstore",
+          "apiRevision": "1",
+          "displayName": "Swagger Petstore",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://petstore.swagger.io/v1",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateApiUsingOai3Import"
+}

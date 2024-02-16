@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {},
+    "proximityPlacementGroupName": "myProximityPlacementGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProximityPlacementGroup",
+        "type": "Microsoft.Compute/proximityPlacementGroups",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup",
+        "location": "westus",
+        "properties": {
+          "availabilitySets": [
+            {
+              "id": "string"
+            }
+          ],
+          "intent": {
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
+          },
+          "proximityPlacementGroupType": "Standard",
+          "virtualMachineScaleSets": [
+            {
+              "id": "string"
+            }
+          ],
+          "virtualMachines": [
+            {
+              "id": "string"
+            }
+          ]
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "ProximityPlacementGroups_Get",
+  "title": "Get proximity placement groups."
+}

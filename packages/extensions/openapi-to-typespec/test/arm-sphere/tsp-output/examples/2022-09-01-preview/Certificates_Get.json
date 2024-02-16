@@ -1,0 +1,17 @@
+{
+  "operationId": "Certificates_Get",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "resourceGroupName": "MyResourceGroup1",
+    "serialNumber": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Certificates_Get",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {}
+    }
+  }
+}

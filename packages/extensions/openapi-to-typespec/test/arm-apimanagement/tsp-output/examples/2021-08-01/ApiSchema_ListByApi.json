@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "59d5b28d1f7fab116c282650",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "59d5b28e1f7fab116402044e",
+            "type": "Microsoft.ApiManagement/service/apis/schemas",
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/59d5b28d1f7fab116c282650/schemas/59d5b28e1f7fab116402044e",
+            "properties": {
+              "contentType": "application/vnd.ms-azure-apim.swagger.definitions+json"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiSchema_ListByApi",
+  "title": "ApiManagementListApiSchemas"
+}

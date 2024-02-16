@@ -1,0 +1,172 @@
+{
+  "Resources": {
+    "AnalysisServer": {
+      "Name": "AnalysisServer",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "GET",
+          "OperationID": "Servers_GetDetails",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets details about the specified Analysis Services server."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "PUT",
+          "OperationID": "Servers_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Provisions the specified Analysis Services server based on the configuration specified in the request."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "PATCH",
+          "OperationID": "Servers_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates the current state of the specified Analysis Services server."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}",
+          "Method": "DELETE",
+          "OperationID": "Servers_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the specified Analysis Services server."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers",
+          "Method": "GET",
+          "OperationID": "Servers_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "Gets all the Analysis Services servers for the given resource group."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetAnalysisServers",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers",
+          "Method": "GET",
+          "OperationID": "Servers_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "Lists all the Analysis Services servers for the given subscription."
+        },
+        {
+          "Name": "GetEligibleSkus",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus",
+          "Method": "GET",
+          "OperationID": "Servers_ListSkusForNew",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListSkusForNew",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "Lists eligible SKUs for Analysis Services resource provider."
+        },
+        {
+          "Name": "CheckAnalysisServerNameAvailability",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/checkNameAvailability",
+          "Method": "POST",
+          "OperationID": "Servers_CheckNameAvailability",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Check the name availability in the target location."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "Suspend",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend",
+          "Method": "POST",
+          "OperationID": "Servers_Suspend",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Suspends operation of the specified Analysis Services server instance."
+        },
+        {
+          "Name": "Resume",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume",
+          "Method": "POST",
+          "OperationID": "Servers_Resume",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Resumes operation of the specified Analysis Services server instance."
+        },
+        {
+          "Name": "GetExistingSkus",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus",
+          "Method": "GET",
+          "OperationID": "Servers_ListSkusForExisting",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListSkusForExisting",
+            "NextPageMethod": null,
+            "ItemName": "value",
+            "NextLinkName": null
+          },
+          "Description": "Lists eligible SKUs for an Analysis Services resource."
+        },
+        {
+          "Name": "GetGatewayStatus",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus",
+          "Method": "POST",
+          "OperationID": "Servers_ListGatewayStatus",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Return the gateway status of the specified Analysis Services server instance."
+        },
+        {
+          "Name": "DissociateGateway",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/dissociateGateway",
+          "Method": "POST",
+          "OperationID": "Servers_DissociateGateway",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Dissociates a Unified Gateway associated with the server."
+        }
+      ],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "AnalysisServicesServer",
+      "ResourceType": "Microsoft.AnalysisServices/servers",
+      "ResourceKey": "serverName",
+      "ResourceKeySegment": "servers",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
+            "location": "westus"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_ListBySubscription",
+  "title": "SshPublicKey_ListBySubscription_MinimumSet_Gen"
+}

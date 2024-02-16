@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2018-05-01",
+    "recordType": "AAAA",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://servicehost/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/AAAA?api-version=2018-05-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "record1",
+            "type": "Microsoft.Network/dnsZones/AAAA",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/AAAA/record1",
+            "properties": {
+              "AAAARecords": [
+                {
+                  "ipv6Address": "::1"
+                }
+              ],
+              "TTL": 3600,
+              "fqdn": "record1.zone1",
+              "metadata": {
+                "key1": "value1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "List AAAA recordsets"
+}

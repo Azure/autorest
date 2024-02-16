@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "myImage",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "sourceVirtualMachine": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "sourceVirtualMachine": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          },
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022"
+              },
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myImage",
+        "type": "Microsoft.Compute/images",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "sourceVirtualMachine": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
+          },
+          "storageProfile": {
+            "dataDisks": [],
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022"
+              },
+              "osState": "Generalized",
+              "osType": "Linux"
+            },
+            "zoneResilient": false
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Images_CreateOrUpdate",
+  "title": "Create a virtual machine image from an existing virtual machine."
+}

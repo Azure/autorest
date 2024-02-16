@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "0",
+    "parameters": {
+      "commandId": "RunPowerShellScript",
+      "script": [
+        "Write-Host Hello World!"
+      ]
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myVirtualMachineScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "code": "ComponentStatus/StdOut/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": "Hello World!"
+          },
+          {
+            "code": "ComponentStatus/StdErr/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": ""
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_RunCommand",
+  "title": "VirtualMachineScaleSetVMs_RunCommand"
+}

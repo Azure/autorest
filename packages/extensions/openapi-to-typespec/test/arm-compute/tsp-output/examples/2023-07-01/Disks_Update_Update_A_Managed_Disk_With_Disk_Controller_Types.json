@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "disk": {
+      "properties": {
+        "supportedCapabilities": {
+          "diskControllerTypes": "SCSI"
+        }
+      }
+    },
+    "diskName": "myDisk",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/marketplacetestfirstparty/ArtifactTypes/VMImage/Offers/nvme_test_062/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "supportedCapabilities": {
+            "diskControllerTypes": "SCSI"
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "properties": {
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/marketplacetestfirstparty/ArtifactTypes/VMImage/Offers/nvme_test_062/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "hyperVGeneration": "V1",
+          "osType": "Windows",
+          "provisioningState": "Updating",
+          "supportedCapabilities": {
+            "diskControllerTypes": "SCSI"
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2023-04-02"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "Update a managed disk with diskControllerTypes."
+}

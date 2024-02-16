@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aaaaaaaaaaaaaaaaaaa",
+        "type": "aaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaa",
+        "location": "aaaaaa",
+        "properties": {
+          "error": {
+            "code": "aaaaaaa",
+            "innererror": {
+              "errordetail": "aaaaaaaaaaaaaaaaaaaaaaaa",
+              "exceptiontype": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "message": "aaaaaaaaa",
+            "target": "aaaaaaa",
+            "details": [
+              {
+                "code": "aaaaaaaaaaaaaaaaaaaaaaaa",
+                "message": "aa",
+                "target": "aaaa"
+              }
+            ]
+          },
+          "policy": {
+            "enableCrossZoneUpgrade": true,
+            "maxBatchInstancePercent": 49,
+            "maxSurge": true,
+            "maxUnhealthyInstancePercent": 81,
+            "maxUnhealthyUpgradedInstancePercent": 98,
+            "pauseTimeBetweenBatches": "aaaaaaaaaaaaaaa",
+            "prioritizeUnhealthyInstances": true,
+            "rollbackFailedInstancesOnPolicyBreach": true
+          },
+          "progress": {
+            "failedInstanceCount": 25,
+            "inProgressInstanceCount": 20,
+            "pendingInstanceCount": 27,
+            "successfulInstanceCount": 6
+          },
+          "runningStatus": {
+            "code": "RollingForward",
+            "lastAction": "Start",
+            "lastActionTime": "2021-11-30T13:06:23.362Z",
+            "startTime": "2021-11-30T13:06:23.362Z"
+          }
+        },
+        "tags": {
+          "key8533": "aaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
+  "title": "VirtualMachineScaleSetRollingUpgrade_GetLatest_MaximumSet_Gen"
+}

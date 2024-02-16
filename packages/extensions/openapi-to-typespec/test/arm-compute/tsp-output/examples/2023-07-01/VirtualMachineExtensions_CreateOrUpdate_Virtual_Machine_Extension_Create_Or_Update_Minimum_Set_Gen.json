@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "extensionParameters": {
+      "location": "westus"
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmExtensionName": "myVMExtension",
+    "vmName": "myVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
+        "location": "westus"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
+        "location": "westus"
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineExtensions_CreateOrUpdate",
+  "title": "VirtualMachineExtension_CreateOrUpdate_MinimumSet_Gen"
+}

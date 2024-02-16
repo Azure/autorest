@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "aa",
+        "value": [
+          {
+            "name": "{extension-name}",
+            "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
+            "id": "aaaaaaaa",
+            "properties": {
+              "type": "{extension-Type}",
+              "autoUpgradeMinorVersion": true,
+              "enableAutomaticUpgrade": true,
+              "forceUpdateTag": "aaaaaaaaa",
+              "protectedSettings": {},
+              "provisionAfterExtensions": [
+                "aa"
+              ],
+              "provisioningState": "aaa",
+              "publisher": "{extension-Publisher}",
+              "settings": {},
+              "suppressFailures": true,
+              "typeHandlerVersion": "{handler-version}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetExtensions_List",
+  "title": "VirtualMachineScaleSetExtension_List_MaximumSet_Gen"
+}

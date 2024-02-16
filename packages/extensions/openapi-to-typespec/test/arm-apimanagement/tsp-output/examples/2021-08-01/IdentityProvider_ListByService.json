@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "Google",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google",
+            "properties": {
+              "type": "google",
+              "clientId": "googleId"
+            }
+          },
+          {
+            "name": "Aad",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
+            "properties": {
+              "type": "aad",
+              "allowedTenants": [
+                "samiraad.onmicrosoft.com"
+              ],
+              "clientId": "aadapplicationid"
+            }
+          },
+          {
+            "name": "AadB2C",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
+            "properties": {
+              "type": "aadB2C",
+              "allowedTenants": [
+                "samirtestbc.onmicrosoft.com"
+              ],
+              "clientId": "aadb2clientId",
+              "signinPolicyName": "B2C_1_Signin_Default",
+              "signupPolicyName": "B2C_1_Signup_Default"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IdentityProvider_ListByService",
+  "title": "ApiManagementListIdentityProviders"
+}

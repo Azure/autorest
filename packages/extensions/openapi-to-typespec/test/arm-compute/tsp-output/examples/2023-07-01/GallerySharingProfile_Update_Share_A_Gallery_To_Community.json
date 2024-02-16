@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "sharingUpdate": {
+      "operationType": "EnableCommunity"
+    },
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationType": "EnableCommunity"
+      }
+    },
+    "202": {
+      "body": {
+        "operationType": "EnableCommunity"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2022-03-03"
+      }
+    }
+  },
+  "operationId": "GallerySharingProfile_Update",
+  "title": "share a gallery to community."
+}

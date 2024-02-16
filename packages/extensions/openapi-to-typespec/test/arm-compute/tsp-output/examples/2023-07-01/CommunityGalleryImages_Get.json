@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageName",
+        "type": "Microsoft.Compute/Locations/CommunityGalleryImage",
+        "identifier": {
+          "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName"
+        },
+        "location": "myLocation",
+        "properties": {
+          "eula": "https://www.microsoft.com/en-us/",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osState": "Generalized",
+          "osType": "Windows",
+          "privacyStatementUri": "https://www.microsoft.com/en-us/"
+        }
+      }
+    }
+  },
+  "operationId": "CommunityGalleryImages_Get",
+  "title": "Get a community gallery image."
+}

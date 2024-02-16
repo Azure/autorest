@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "configurationName": "configuration",
+    "parameters": {
+      "properties": {
+        "branch": "master"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "6074e652093a9d0dac3d733c",
+        "type": "Microsoft.ApiManagement/service/tenant/operationResults",
+        "id": "6074e652093a9d0dac3d733c",
+        "properties": {
+          "error": {
+            "code": "ValidationError",
+            "message": "File not found: 'api-management/configuration.json'"
+          },
+          "started": "2017-11-26T17:06:54.303Z",
+          "status": "Failed",
+          "updated": "2017-11-26T17:07:21.777Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5a1af4ae2a6d2e0b688d7517?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "TenantConfiguration_Deploy",
+  "title": "ApiManagementTenantConfigurationDeploy"
+}

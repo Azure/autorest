@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSet": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}": {}
+        }
+      },
+      "location": "West US",
+      "properties": {
+        "activeKey": {
+          "keyUrl": "https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}"
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey",
+        "federatedClientId": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "federatedClientId": "00000000-0000-0000-0000-000000000000",
+          "previousKeys": []
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}": {}
+          }
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}"
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "federatedClientId": "00000000-0000-0000-0000-000000000000",
+          "previousKeys": []
+        }
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_CreateOrUpdate",
+  "title": "Create a disk encryption set with key vault from a different tenant."
+}

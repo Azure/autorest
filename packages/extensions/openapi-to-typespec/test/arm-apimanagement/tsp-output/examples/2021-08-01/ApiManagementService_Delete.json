@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAFfhHY=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "West US",
+        "properties": {
+          "createdAtUtc": "2016-12-20T19:41:21.5823069Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True"
+          },
+          "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "40.XX.XXX.168"
+          ],
+          "publisherEmail": "contoso@live.com",
+          "publisherName": "Microsoft",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "Deleting",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/BlockVNETSamir/subnets/default"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Developer",
+          "capacity": 1
+        },
+        "tags": {}
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2021-08-01"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ApiManagementService_Delete",
+  "title": "ApiManagementServiceDeleteService"
+}

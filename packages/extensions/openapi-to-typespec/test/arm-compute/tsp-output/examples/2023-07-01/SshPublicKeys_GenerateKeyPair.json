@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "sshPublicKeyName": "mySshPublicKeyName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName",
+        "privateKey": "{ssh private key}",
+        "publicKey": "{ssh-rsa public key}"
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_GenerateKeyPair",
+  "title": "Generate an SSH key pair."
+}

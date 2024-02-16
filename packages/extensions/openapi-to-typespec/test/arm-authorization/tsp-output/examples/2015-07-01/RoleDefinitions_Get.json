@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "roleDefinitionId": "roleDefinitionId",
+    "scope": "scope"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "roleDefinitionId",
+        "type": "Microsoft.Authorization/roleDefinitions",
+        "id": "/subscriptions/subID/providers/Microsoft.Authorization/roleDefinitions/roleDefinitionId",
+        "properties": {
+          "type": "roletype",
+          "description": "Role description",
+          "assignableScopes": [
+            "/subscriptions/subId"
+          ],
+          "permissions": [
+            {
+              "actions": [
+                "action"
+              ],
+              "dataActions": [
+                "dataAction"
+              ],
+              "notActions": [],
+              "notDataActions": []
+            }
+          ],
+          "roleName": "Role name"
+        }
+      }
+    }
+  },
+  "operationId": "RoleDefinitions_Get",
+  "title": "Get role definition by name"
+}

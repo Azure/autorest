@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmBeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-farmBeatsResourceName",
+        "type": "Microsoft.AgFoodPlatform/farmBeats",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
+        "location": "eastus2",
+        "properties": {
+          "instanceUri": "https://examples-farmbeatsResourceName.eastus2.farmbeats.azure.net",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "DataManagerForAgricultureResources_Get",
+  "title": "DataManagerForAgricultureResources_Get"
+}

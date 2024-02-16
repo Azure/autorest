@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "OGF-Z3-06162021-Premium",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAWN/4=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/OGF-Z3-06162021-Premium",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "306205e7-b21a-41bf-92e2-3e28af30041e",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ogf-identity": {
+              "clientId": "8d9791f2-0cdf-41f4-9e66-cdc39b496789",
+              "principalId": "713784d2-ee37-412a-95f0-3768f397f82d"
+            }
+          }
+        },
+        "location": "East US",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": false,
+              "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus2-01.regional.azure-api.net",
+              "location": "East US 2",
+              "platformVersion": "stv2",
+              "publicIPAddresses": [
+                "40.70.24.106"
+              ],
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "zones": []
+            }
+          ],
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-12-01"
+          },
+          "certificates": [],
+          "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "false"
+          },
+          "developerPortalUrl": "https://ogf-z3-06162021-premium.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://ogf-z3-06162021-premium-eastus-01.regional.azure-api.net",
+          "gatewayUrl": "https://ogf-z3-06162021-premium.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": false,
+              "hostName": "ogf-z3-06162021-premium.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51"
+              },
+              "certificateSource": "Custom",
+              "defaultSslBinding": true,
+              "hostName": "gateway.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
+              "negotiateClientCertificate": true
+            },
+            {
+              "type": "DeveloperPortal",
+              "certificate": {
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51"
+              },
+              "certificateSource": "Custom",
+              "defaultSslBinding": false,
+              "hostName": "developer.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Management",
+              "certificate": {
+                "expiry": "2022-01-08T22:32:32+00:00",
+                "subject": "CN=*.current.int-azure-api.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US",
+                "thumbprint": "BA0C286XXXXXXXX58A4A507E3DBD51"
+              },
+              "certificateSource": "Custom",
+              "defaultSslBinding": false,
+              "hostName": "mgmt.current.int-azure-api.net",
+              "keyVaultId": "https://ogf-testing.vault.azure.net/secrets/current-ssl",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://ogf-z3-06162021-premium.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "platformVersion": "stv2",
+          "portalUrl": "https://ogf-z3-06162021-premium.portal.azure-api.net",
+          "privateEndpointConnections": [
+            {
+              "name": "privateEndpointProxyName",
+              "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointProxyName",
+              "properties": {
+                "groupIds": [
+                  "Gateway"
+                ],
+                "privateEndpoint": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Please approve my request, thanks",
+                  "actionsRequired": "None",
+                  "status": "Pending"
+                },
+                "provisioningState": "Pending"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "13.92.130.49"
+          ],
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "string",
+          "publisherName": "Test Premium",
+          "scmUrl": "https://ogf-z3-06162021-premium.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkType": "None"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdAt": "2021-06-16T09:40:00.7106733Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-06-20T06:33:09.6159006Z",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "ReleaseName": "Z3",
+          "owner": "v-aswmoh"
+        }
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Get",
+  "title": "ApiManagementServiceGetService"
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "$filter": "timestamp ge datetime'2017-06-01T00:00:00' and timestamp le datetime'2017-06-04T00:00:00'",
+    "api-version": "2021-08-01",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "value": [
+          {
+            "operationId": "/apis/5931a75ae4bbd512a88c680b/operations/-",
+            "method": "GET",
+            "apiId": "/apis/5931a75ae4bbd512a88c680b",
+            "apiRegion": "East Asia",
+            "apiTime": 221.1544,
+            "cache": "none",
+            "ipAddress": "207.xx.155.xx",
+            "productId": "/products/-",
+            "requestId": "63e7119c-26aa-433c-96d7-f6f3267ff52f",
+            "requestSize": 0,
+            "responseCode": 404,
+            "responseSize": 405,
+            "serviceTime": 0,
+            "subscriptionId": "/subscriptions/5600b59475ff190048070002",
+            "timestamp": "2017-06-03T00:17:00.1649134Z",
+            "url": "https://apimService1.azure-api.net/echo/resource?param1=sample",
+            "userId": "/users/1"
+          },
+          {
+            "operationId": "/apis/5931a75ae4bbd512a88c680b/operations/-",
+            "method": "POST",
+            "apiId": "/apis/5931a75ae4bbd512a88c680b",
+            "apiRegion": "East Asia",
+            "apiTime": 6.675400000000001,
+            "cache": "none",
+            "ipAddress": "207.xx.155.xx",
+            "productId": "/products/-",
+            "requestId": "e581b7f7-c9ec-4fc6-8ab9-3855d9b00b04",
+            "requestSize": 0,
+            "responseCode": 404,
+            "responseSize": 403,
+            "serviceTime": 0,
+            "subscriptionId": "/subscriptions/5600b59475ff190048070002",
+            "timestamp": "2017-06-03T00:17:20.5255131Z",
+            "url": "https://apimService1.azure-api.net/echo/resource",
+            "userId": "/users/1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Reports_ListByRequest",
+  "title": "ApiManagementGetReportsByRequest"
+}

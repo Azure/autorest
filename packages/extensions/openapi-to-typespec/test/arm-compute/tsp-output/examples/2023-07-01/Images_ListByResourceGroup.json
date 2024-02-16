@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/UserVMImages/myImageName",
+        "value": [
+          {
+            "name": "myImage",
+            "type": "Microsoft.Compute/images",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage",
+            "location": "West US",
+            "properties": {
+              "provisioningState": "created",
+              "storageProfile": {
+                "dataDisks": [
+                  {
+                    "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+                    "lun": 1,
+                    "managedDisk": {
+                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2"
+                    },
+                    "snapshot": {
+                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                    },
+                    "storageAccountType": "Standard_LRS"
+                  }
+                ],
+                "osDisk": {
+                  "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+                  "managedDisk": {
+                    "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1"
+                  },
+                  "osState": "Generalized",
+                  "osType": "Windows",
+                  "snapshot": {
+                    "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+                  },
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Images_ListByResourceGroup",
+  "title": "List all virtual machine images in a resource group."
+}

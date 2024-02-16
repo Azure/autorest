@@ -1,0 +1,162 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "57d1f7558aa04f15146d9d8a",
+    "diagnosticId": "applicationinsights",
+    "parameters": {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "backend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "frontend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "loggerId": "/loggers/applicationinsights",
+        "sampling": {
+          "percentage": 50,
+          "samplingType": "fixed"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "applicationinsights",
+        "type": "Microsoft.ApiManagement/service/apis/diagnostics",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d1f7558aa04f15146d9d8a/diagnostics/applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "backend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "frontend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "loggerId": "/loggers/applicationinsights",
+          "sampling": {
+            "percentage": 50,
+            "samplingType": "fixed"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "applicationinsights",
+        "type": "Microsoft.ApiManagement/service/apis/diagnostics",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/57d1f7558aa04f15146d9d8a/diagnostics/applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "backend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "frontend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "loggerId": "/loggers/applicationinsights",
+          "sampling": {
+            "percentage": 50,
+            "samplingType": "fixed"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ApiDiagnostic_CreateOrUpdate",
+  "title": "ApiManagementCreateApiDiagnostic"
+}

@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2023-04-02",
+    "diskEncryptionSet": {
+      "properties": {
+        "activeKey": {
+          "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion",
+          "sourceVault": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+          }
+        },
+        "encryptionType": "EncryptionAtRestWithCustomerKey"
+      },
+      "tags": {
+        "department": "Development",
+        "project": "Encryption"
+      }
+    },
+    "diskEncryptionSetName": "myDiskEncryptionSet",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion",
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            }
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "lastKeyRotationTimestamp": "2021-04-01T04:41:35.079872+00:00",
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myDiskEncryptionSet",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "West US",
+        "properties": {
+          "activeKey": {
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion",
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+            }
+          },
+          "encryptionType": "EncryptionAtRestWithCustomerKey",
+          "previousKeys": []
+        },
+        "tags": {
+          "department": "Development",
+          "project": "Encryption"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/myDiskEncryptionSet?api-version=2021-04-01"
+      }
+    }
+  },
+  "operationId": "DiskEncryptionSets_Update",
+  "title": "Update a disk encryption set."
+}

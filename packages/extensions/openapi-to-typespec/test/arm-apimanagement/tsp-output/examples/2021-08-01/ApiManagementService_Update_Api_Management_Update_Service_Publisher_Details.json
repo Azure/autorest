@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "publisherEmail": "foobar@live.com",
+        "publisherName": "Contoso Vnext"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAYRPs=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "West US",
+        "properties": {
+          "createdAtUtc": "2017-06-29T17:50:42.3191122Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False"
+          },
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "40.86.176.232"
+          ],
+          "publisherEmail": "foobar@live.com",
+          "publisherName": "Contoso Vnext",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkType": "None"
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        },
+        "tags": {
+          "Owner": "sasolank",
+          "Pool": "Manual",
+          "Reserved": "",
+          "TestExpiration": "Thu, 29 Jun 2017 18:50:40 GMT",
+          "TestSuiteExpiration": "Thu, 29 Jun 2017 18:51:46 GMT",
+          "UID": "4f5025fe-0669-4e2e-8320-5199466e5eb3"
+        }
+      }
+    },
+    "202": {
+      "name": "apimService1",
+      "type": "Microsoft.ApiManagement/service",
+      "etag": "AAAAAAAYRPs=",
+      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+      "location": "West US",
+      "properties": {
+        "createdAtUtc": "2017-06-29T17:50:42.3191122Z",
+        "customProperties": {
+          "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False"
+        },
+        "gatewayUrl": "https://apimService1.azure-api.net",
+        "hostnameConfigurations": [],
+        "managementApiUrl": "https://apimService1.management.azure-api.net",
+        "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+        "portalUrl": "https://apimService1.portal.azure-api.net",
+        "provisioningState": "Succeeded",
+        "publicIPAddresses": [
+          "40.86.176.232"
+        ],
+        "publisherEmail": "admin@live.com",
+        "publisherName": "Contoso",
+        "scmUrl": "https://apimService1.scm.azure-api.net",
+        "targetProvisioningState": "",
+        "virtualNetworkType": "None"
+      },
+      "sku": {
+        "name": "Standard",
+        "capacity": 1
+      },
+      "tags": {
+        "TestExpiration": "Thu, 29 Jun 2017 18:50:40 GMT"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Update",
+  "title": "ApiManagementUpdateServicePublisherDetails"
+}

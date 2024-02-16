@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "destinationContainerName": "aaaaaaa",
+      "overwriteVhds": true,
+      "vhdPrefix": "aaaaaaaaa"
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "aaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "$schema": "aaaaa",
+        "contentVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameters": {},
+        "resources": [
+          {}
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Capture",
+  "title": "VirtualMachine_Capture_MaximumSet_Gen"
+}

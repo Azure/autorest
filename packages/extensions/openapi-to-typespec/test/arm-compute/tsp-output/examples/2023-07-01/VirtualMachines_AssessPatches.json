@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assessmentActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "availablePatches": [
+          {
+            "name": "Definition Update for Windows Defender Antivirus - KB2267602 (Definition 1.279.1373.0)",
+            "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+            "assessmentState": "Available",
+            "classifications": [
+              "Definition Updates"
+            ],
+            "kbId": "2267602",
+            "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
+            "patchId": "35428702-5784-4ba4-a6e0-5222258b5411",
+            "publishedDate": "2018-11-07T00:00:00Z",
+            "rebootBehavior": "NeverReboots",
+            "version": ""
+          },
+          {
+            "name": "Windows Malicious Software Removal Tool x64 - October 2018 (KB890830)",
+            "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+            "assessmentState": "Available",
+            "classifications": [
+              "Update Rollups"
+            ],
+            "kbId": "890830",
+            "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
+            "patchId": "39f9cdd1-795c-4d0e-8c0a-73ab3f31746d",
+            "publishedDate": "2018-11-07T00:00:00Z",
+            "rebootBehavior": "CanRequestReboot",
+            "version": ""
+          }
+        ],
+        "criticalAndSecurityPatchCount": 1,
+        "error": null,
+        "otherPatchCount": 2,
+        "rebootPending": true,
+        "startDateTime": "2020-04-24T21:02:04.2556154Z",
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/westus/operations/{operationId}&monitor=true&api-version=2023-07-01"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_AssessPatches",
+  "title": "Assess patch state of a virtual machine."
+}

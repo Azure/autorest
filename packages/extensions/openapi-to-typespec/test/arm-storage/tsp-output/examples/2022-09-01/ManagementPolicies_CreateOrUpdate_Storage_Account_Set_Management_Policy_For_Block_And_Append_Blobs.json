@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "accountName": "sto9699",
+    "api-version": "2022-09-01",
+    "managementPolicyName": "default",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "policy": {
+          "rules": [
+            {
+              "name": "olcmtest1",
+              "type": "Lifecycle",
+              "definition": {
+                "actions": {
+                  "baseBlob": {
+                    "delete": {
+                      "daysAfterModificationGreaterThan": 90
+                    }
+                  },
+                  "snapshot": {
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 90
+                    }
+                  },
+                  "version": {
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 90
+                    }
+                  }
+                },
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob",
+                    "appendBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer1"
+                  ]
+                }
+              },
+              "enabled": true
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DefaultManagementPolicy",
+        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
+        "properties": {
+          "lastModifiedTime": "2018-06-08T02:53:39.0932539Z",
+          "policy": {
+            "rules": [
+              {
+                "name": "olcmtest1",
+                "type": "Lifecycle",
+                "definition": {
+                  "actions": {
+                    "baseBlob": {
+                      "delete": {
+                        "daysAfterModificationGreaterThan": 90
+                      }
+                    },
+                    "snapshot": {
+                      "delete": {
+                        "daysAfterCreationGreaterThan": 90
+                      }
+                    },
+                    "version": {
+                      "delete": {
+                        "daysAfterCreationGreaterThan": 90
+                      }
+                    }
+                  },
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob",
+                      "appendBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer1"
+                    ]
+                  }
+                },
+                "enabled": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagementPolicies_CreateOrUpdate",
+  "title": "StorageAccountSetManagementPolicyForBlockAndAppendBlobs"
+}

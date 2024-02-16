@@ -1,0 +1,36 @@
+{
+  "operationId": "Devices_Update",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "deviceGroupName": "MyDeviceGroup1",
+    "deviceName": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "productName": "MyProduct1",
+    "properties": {},
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Devices_Update",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "type": "Microsoft.AzureSphere/catalogs/products/devicegroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/devicegroups/MyDeviceGroup1/device/00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "properties": {
+          "chipSku": "MyChipSku1",
+          "lastAvailableOsVersion": "AvailableOsVersion1",
+          "lastInstalledOsVersion": "InstalledOsVersion1",
+          "lastOsUpdateUtc": "2022-10-30T23:54:21.96Z",
+          "lastUpdateRequestUtc": "2022-10-01T23:54:21.96Z"
+        }
+      }
+    },
+    "202": {
+      "description": "The device update started successfully.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

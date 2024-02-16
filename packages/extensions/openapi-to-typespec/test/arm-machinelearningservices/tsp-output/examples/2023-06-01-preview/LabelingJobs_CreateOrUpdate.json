@@ -1,0 +1,244 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "properties": {
+        "description": "string",
+        "jobInstructions": {
+          "uri": "link/to/instructions"
+        },
+        "jobType": "Labeling",
+        "labelCategories": {
+          "myCategory1": {
+            "classes": {
+              "myLabelClass1": {
+                "displayName": "myLabelClass1",
+                "subclasses": {}
+              },
+              "myLabelClass2": {
+                "displayName": "myLabelClass2",
+                "subclasses": {}
+              }
+            },
+            "displayName": "myCategory1Title",
+            "multiSelect": "Disabled"
+          },
+          "myCategory2": {
+            "classes": {
+              "myLabelClass1": {
+                "displayName": "myLabelClass1",
+                "subclasses": {}
+              },
+              "myLabelClass2": {
+                "displayName": "myLabelClass2",
+                "subclasses": {}
+              }
+            },
+            "displayName": "myCategory2Title",
+            "multiSelect": "Disabled"
+          }
+        },
+        "labelingJobMediaProperties": {
+          "mediaType": "Image"
+        },
+        "mlAssistConfiguration": {
+          "inferencingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/myscoringcompute",
+          "mlAssist": "Enabled",
+          "trainingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mytrainingompute"
+        },
+        "properties": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        }
+      }
+    },
+    "id": "testLabelingJob",
+    "resourceGroupName": "workspace-1234",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "testworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testLabelingJob",
+        "type": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/labelingJobs/testLabelingJob",
+        "properties": {
+          "description": "string",
+          "createdDateTime": "2020-12-08T01:23:37.234Z",
+          "jobInstructions": {
+            "uri": "link/to/instructions"
+          },
+          "jobType": "Labeling",
+          "labelCategories": {
+            "myCategory1": {
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              },
+              "displayName": "myCategory1Title",
+              "multiSelect": "Disabled"
+            },
+            "myCategory2": {
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              },
+              "displayName": "myCategory2Title",
+              "multiSelect": "Disabled"
+            }
+          },
+          "labelingJobMediaProperties": {
+            "mediaType": "Image"
+          },
+          "mlAssistConfiguration": {
+            "inferencingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/myscoringcompute",
+            "mlAssist": "Enabled",
+            "trainingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mytrainingompute"
+          },
+          "progressMetrics": {
+            "completedDatapointCount": 0,
+            "incrementalDataLastRefreshDateTime": "2020-12-08T01:23:37.234Z",
+            "skippedDatapointCount": 0,
+            "totalDatapointCount": 0
+          },
+          "projectId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "status": "NotStarted",
+          "statusMessages": [
+            {
+              "code": "string",
+              "createdDateTime": "2020-12-08T01:23:37.234Z",
+              "level": "Error",
+              "message": "string"
+            }
+          ],
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-08T01:23:37.235Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-08T01:23:37.235Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testLabelingJob",
+        "type": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/labelingJobs/testLabelingJob",
+        "properties": {
+          "description": "string",
+          "createdDateTime": "2020-12-08T01:23:37.234Z",
+          "jobInstructions": {
+            "uri": "link/to/instructions"
+          },
+          "jobType": "Labeling",
+          "labelCategories": {
+            "myCategory1": {
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              },
+              "displayName": "myCategory1Title",
+              "multiSelect": "Disabled"
+            },
+            "myCategory2": {
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              },
+              "displayName": "myCategory2Title",
+              "multiSelect": "Disabled"
+            }
+          },
+          "labelingJobMediaProperties": {
+            "mediaType": "Image"
+          },
+          "mlAssistConfiguration": {
+            "inferencingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/myscoringcompute",
+            "mlAssist": "Enabled",
+            "trainingComputeBinding": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mytrainingompute"
+          },
+          "progressMetrics": {
+            "completedDatapointCount": 0,
+            "incrementalDataLastRefreshDateTime": "2020-12-08T01:23:37.234Z",
+            "skippedDatapointCount": 0,
+            "totalDatapointCount": 0
+          },
+          "projectId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "status": "NotStarted",
+          "statusMessages": [
+            {
+              "code": "string",
+              "createdDateTime": "2020-12-08T01:23:37.234Z",
+              "level": "Error",
+              "message": "string"
+            }
+          ],
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-08T01:23:37.235Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-08T01:23:37.235Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "LabelingJobs_CreateOrUpdate",
+  "title": "CreateOrUpdate Labeling Job."
+}

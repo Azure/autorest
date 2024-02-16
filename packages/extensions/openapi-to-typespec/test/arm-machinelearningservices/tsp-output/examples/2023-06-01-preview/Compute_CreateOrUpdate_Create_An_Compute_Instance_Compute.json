@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "computeType": "ComputeInstance",
+        "properties": {
+          "applicationSharingPolicy": "Personal",
+          "autologgerSettings": {
+            "mlflowAutologger": "Enabled"
+          },
+          "computeInstanceAuthorizationType": "personal",
+          "customServices": [
+            {
+              "name": "rstudio-workbench",
+              "docker": {
+                "privileged": true
+              },
+              "endpoints": [
+                {
+                  "name": "connect",
+                  "hostIp": null,
+                  "published": 4444,
+                  "target": 8787,
+                  "protocol": "http"
+                }
+              ],
+              "environmentVariables": {
+                "RSP_LICENSE": {
+                  "type": "local",
+                  "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                }
+              },
+              "image": {
+                "type": "docker",
+                "reference": "ghcr.io/azure/rstudio-workbench:latest"
+              },
+              "volumes": [
+                {
+                  "type": "bind",
+                  "readOnly": true,
+                  "source": "/mnt/azureuser/",
+                  "target": "/home/testuser/"
+                }
+              ]
+            }
+          ],
+          "personalComputeInstanceSettings": {
+            "assignedUser": {
+              "objectId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            }
+          },
+          "sshSettings": {
+            "sshPublicAccess": "Disabled"
+          },
+          "subnet": {
+            "id": "test-subnet-resource-id"
+          },
+          "vmSize": "STANDARD_NC6"
+        }
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "ComputeInstance",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "ComputeInstance",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  },
+  "operationId": "Compute_CreateOrUpdate",
+  "title": "Create an ComputeInstance Compute"
+}

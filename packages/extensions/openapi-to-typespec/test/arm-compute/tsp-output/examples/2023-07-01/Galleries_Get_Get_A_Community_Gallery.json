@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "location": "West US",
+        "properties": {
+          "description": "This is the gallery description.",
+          "identifier": {
+            "uniqueName": "{subscription-id}-MYGALLERYNAME"
+          },
+          "provisioningState": "Succeeded",
+          "sharingProfile": {
+            "communityGalleryInfo": {
+              "communityGalleryEnabled": true,
+              "eula": "eula",
+              "publicNames": [
+                "GalelryPublicName"
+              ],
+              "publisherContact": "pir@microsoft.com",
+              "publisherUri": "uri"
+            },
+            "permissions": "Community"
+          },
+          "sharingStatus": {
+            "aggregatedState": "Succeeded",
+            "summary": [
+              {
+                "region": "westus",
+                "state": "Succeeded",
+                "details": ""
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Galleries_Get",
+  "title": "Get a community gallery."
+}

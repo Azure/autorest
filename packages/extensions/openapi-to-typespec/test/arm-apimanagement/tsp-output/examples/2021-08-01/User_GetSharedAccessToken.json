@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "expiry": "2019-04-21T00:44:24.2845269Z",
+        "keyType": "primary"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "userId1718"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": "userId1718&201904210044&9A1GR1f5WIhFvFmzQG+xxxxxxxxxxx/kBeu87DWad3tkasUXuvPL+MgzlwUHyg=="
+      }
+    }
+  },
+  "operationId": "User_GetSharedAccessToken",
+  "title": "ApiManagementUserToken"
+}

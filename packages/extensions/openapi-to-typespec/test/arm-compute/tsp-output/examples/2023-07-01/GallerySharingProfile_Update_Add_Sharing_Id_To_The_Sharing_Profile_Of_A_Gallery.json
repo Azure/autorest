@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "sharingUpdate": {
+      "groups": [
+        {
+          "type": "Subscriptions",
+          "ids": [
+            "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+            "380fd389-260b-41aa-bad9-0a83108c370b"
+          ]
+        },
+        {
+          "type": "AADTenants",
+          "ids": [
+            "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+          ]
+        }
+      ],
+      "operationType": "Add"
+    },
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "groups": [
+          {
+            "type": "Subscriptions",
+            "ids": [
+              "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+              "380fd389-260b-41aa-bad9-0a83108c370b"
+            ]
+          },
+          {
+            "type": "AADTenants",
+            "ids": [
+              "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+            ]
+          }
+        ],
+        "operationType": "Add"
+      }
+    },
+    "202": {
+      "body": {
+        "groups": [
+          {
+            "type": "Subscriptions",
+            "ids": [
+              "34a4ab42-0d72-47d9-bd1a-aed207386dac",
+              "380fd389-260b-41aa-bad9-0a83108c370b"
+            ]
+          },
+          {
+            "type": "AADTenants",
+            "ids": [
+              "c24c76aa-8897-4027-9b03-8f7928b54ff6"
+            ]
+          }
+        ],
+        "operationType": "Add"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2022-03-03"
+      }
+    }
+  },
+  "operationId": "GallerySharingProfile_Update",
+  "title": "Add sharing id to the sharing profile of a gallery."
+}

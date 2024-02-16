@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryApplicationName": "myGalleryApplicationName",
+    "galleryApplicationVersion": {
+      "properties": {
+        "publishingProfile": {
+          "endOfLifeDate": "2019-07-01T07:00:00Z",
+          "manageActions": {
+            "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
+            "remove": "del C:\\package "
+          },
+          "replicaCount": 1,
+          "source": {
+            "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+          },
+          "storageAccountType": "Standard_LRS",
+          "targetRegions": [
+            {
+              "name": "West US",
+              "excludeFromLatest": false,
+              "regionalReplicaCount": 1,
+              "storageAccountType": "Standard_LRS"
+            }
+          ]
+        },
+        "safetyProfile": {
+          "allowDeletionOfReplicatedLocations": false
+        }
+      }
+    },
+    "galleryApplicationVersionName": "1.0.0",
+    "galleryName": "myGalleryName",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1.0.0",
+        "type": "Microsoft.Compute/galleries/applications/versions",
+        "id": "/subscriptions/01523d7c-60da-455e-adef-521b547922c4/resourceGroups/galleryPsTestRg98/providers/Microsoft.Compute/galleries/galleryPsTestGallery6165/applications/galleryPsTestGalleryApplication7825/versions/1.0.0",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "publishingProfile": {
+            "enableHealthCheck": false,
+            "endOfLifeDate": "2019-07-01T07:00:00+00:00",
+            "excludeFromLatest": false,
+            "manageActions": {
+              "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
+              "remove": "del C:\\package "
+            },
+            "publishedDate": "2019-06-21T17:13:57.5972568+00:00",
+            "replicaCount": 1,
+            "source": {
+              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+            },
+            "storageAccountType": "Standard_LRS",
+            "targetRegions": [
+              {
+                "name": "West US",
+                "excludeFromLatest": false,
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              }
+            ]
+          },
+          "safetyProfile": {
+            "allowDeletionOfReplicatedLocations": false
+          }
+        }
+      }
+    }
+  },
+  "operationId": "GalleryApplicationVersions_Update",
+  "title": "Update a simple gallery Application Version."
+}

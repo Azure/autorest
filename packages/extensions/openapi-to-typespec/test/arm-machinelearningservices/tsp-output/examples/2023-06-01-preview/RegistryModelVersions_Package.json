@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "baseEnvironmentSource": {
+        "baseEnvironmentSourceType": "EnvironmentAsset",
+        "resourceId": "string"
+      },
+      "environmentVariables": {
+        "string": "string"
+      },
+      "inferencingServer": {
+        "codeConfiguration": {
+          "codeId": "string",
+          "scoringScript": "string"
+        },
+        "serverType": "AzureMLBatch"
+      },
+      "inputs": [
+        {
+          "path": {
+            "inputPathType": "Url",
+            "url": "string"
+          },
+          "inputType": "UriFile",
+          "mode": "Download",
+          "mountPath": "string"
+        }
+      ],
+      "modelConfiguration": {
+        "mode": "ReadOnlyMount",
+        "mountPath": "string"
+      },
+      "tags": {
+        "string": "string"
+      },
+      "targetEnvironmentId": "string"
+    },
+    "modelName": "string",
+    "registryName": "my-aml-registry",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "version": "string"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "baseEnvironmentSource": {
+          "baseEnvironmentSourceType": "EnvironmentAsset",
+          "resourceId": "string"
+        },
+        "buildId": "string",
+        "buildState": "NotStarted",
+        "environmentVariables": {
+          "string": "string"
+        },
+        "inferencingServer": {
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
+          },
+          "serverType": "AzureMLBatch"
+        },
+        "inputs": [
+          {
+            "path": {
+              "inputPathType": "Url",
+              "url": "string"
+            },
+            "inputType": "UriFile",
+            "mode": "Download",
+            "mountPath": "string"
+          }
+        ],
+        "logUrl": "string",
+        "modelConfiguration": {
+          "mode": "ReadOnlyMount",
+          "mountPath": "string"
+        },
+        "tags": {
+          "string": "string"
+        },
+        "targetEnvironmentId": "string"
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "RegistryModelVersions_Package",
+  "title": "Package Registry Model Version."
+}

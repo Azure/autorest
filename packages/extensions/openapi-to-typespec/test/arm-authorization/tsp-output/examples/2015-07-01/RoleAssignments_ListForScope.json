@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "scope": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "b0f43c54-e787-4862-89b1-a653fa9cf747",
+            "type": "Microsoft.Authorization/roleAssignments",
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/providers/Microsoft.Authorization/roleAssignments/b0f43c54-e787-4862-89b1-a653fa9cf747",
+            "properties": {
+              "principalId": "ce2ce14e-85d7-4629-bdbc-454d0519d987",
+              "principalType": "User",
+              "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/0b5fe924-9a61-425c-96af-cfe6e287ca2d",
+              "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RoleAssignments_ListForScope",
+  "title": "List role assignments for scope"
+}

@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "computeName": "compute123",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "computeType": "ComputeInstance",
+        "properties": {
+          "applicationSharingPolicy": "Personal",
+          "computeInstanceAuthorizationType": "personal",
+          "personalComputeInstanceSettings": {
+            "assignedUser": {
+              "objectId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            }
+          },
+          "schedules": {
+            "computeStartStop": [
+              {
+                "action": "Stop",
+                "cron": {
+                  "expression": "0 18 * * *",
+                  "startTime": "2021-04-23T01:30:00",
+                  "timeZone": "Pacific Standard Time"
+                },
+                "status": "Enabled",
+                "triggerType": "Cron"
+              }
+            ]
+          },
+          "sshSettings": {
+            "sshPublicAccess": "Disabled"
+          },
+          "vmSize": "STANDARD_NC6"
+        }
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workspaceName": "workspaces123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "ComputeInstance",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compute123",
+        "type": "Microsoft.MachineLearningServices/workspaces/computes",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "location": "eastus",
+        "properties": {
+          "computeType": "ComputeInstance",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  },
+  "operationId": "Compute_CreateOrUpdate",
+  "title": "Create an ComputeInstance Compute with Schedules"
+}

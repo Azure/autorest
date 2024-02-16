@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "authsid": "newauthServer",
+    "parameters": {
+      "properties": {
+        "clientId": "update",
+        "clientSecret": "updated"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "newauthServer",
+        "type": "Microsoft.ApiManagement/service/authorizationServers",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer",
+        "properties": {
+          "description": "test server",
+          "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
+          "authorizationMethods": [
+            "GET"
+          ],
+          "bearerTokenSendingMethods": [
+            "authorizationHeader"
+          ],
+          "clientAuthenticationMethod": [
+            "Basic"
+          ],
+          "clientId": "updated",
+          "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+          "defaultScope": "read write",
+          "displayName": "test3",
+          "grantTypes": [
+            "authorizationCode",
+            "implicit"
+          ],
+          "resourceOwnerPassword": "pwd",
+          "resourceOwnerUsername": "un",
+          "supportState": true,
+          "tokenEndpoint": "https://www.contoso.com/oauth2/token"
+        }
+      }
+    }
+  },
+  "operationId": "AuthorizationServer_Update",
+  "title": "ApiManagementUpdateAuthorizationServer"
+}

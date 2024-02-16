@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "apiId": "soapApi",
+    "parameters": {
+      "properties": {
+        "format": "wsdl-link",
+        "path": "currency",
+        "value": "http://www.webservicex.net/CurrencyConvertor.asmx?WSDL",
+        "wsdlSelector": {
+          "wsdlEndpointName": "CurrencyConvertorSoap",
+          "wsdlServiceName": "CurrencyConvertor"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "soapApi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/soapApi",
+        "properties": {
+          "path": "currency",
+          "apiRevision": "1",
+          "displayName": "CurrencyConvertor",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://www.webservicex.net",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "soapApi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/soapApi",
+        "properties": {
+          "path": "currency",
+          "apiRevision": "1",
+          "displayName": "CurrencyConvertor",
+          "isCurrent": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://www.webservicex.net",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-08-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateSoapToRestApiUsingWsdlImport"
+}

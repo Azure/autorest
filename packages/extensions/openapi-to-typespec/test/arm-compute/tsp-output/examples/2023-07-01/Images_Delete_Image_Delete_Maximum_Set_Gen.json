@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "imageName": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Images_Delete",
+  "title": "Image_Delete_MaximumSet_Gen"
+}

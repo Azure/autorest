@@ -1,0 +1,247 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "overprovision": true,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        }
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminPassword": "{your-password}",
+            "adminUsername": "{your-username}",
+            "computerNamePrefix": "{vmss-name}"
+          },
+          "securityProfile": {
+            "securityType": "ConfidentialVM",
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            }
+          },
+          "storageProfile": {
+            "imageReference": {
+              "offer": "2019-datacenter-cvm",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "windows-cvm",
+              "version": "17763.2183.2109130127"
+            },
+            "osDisk": {
+              "caching": "ReadOnly",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "securityProfile": {
+                  "securityEncryptionType": "VMGuestStateOnly"
+                },
+                "storageAccountType": "StandardSSD_LRS"
+              }
+            }
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_DC2as_v5",
+        "capacity": 3,
+        "tier": "Standard"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "{vmss-name}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "westus",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Creating",
+          "singlePlacementGroup": true,
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "securityProfile": {
+              "securityType": "ConfidentialVM",
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              }
+            },
+            "storageProfile": {
+              "imageReference": {
+                "offer": "2019-datacenter-cvm",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "windows-cvm",
+                "version": "17763.2183.2109130127"
+              },
+              "osDisk": {
+                "caching": "ReadOnly",
+                "createOption": "FromImage",
+                "managedDisk": {
+                  "securityProfile": {
+                    "securityEncryptionType": "VMGuestStateOnly"
+                  },
+                  "storageAccountType": "StandardSSD_LRS"
+                }
+              }
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_DC2as_v5",
+          "capacity": 3,
+          "tier": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "location": "westus",
+        "properties": {
+          "overprovision": true,
+          "provisioningState": "Creating",
+          "singlePlacementGroup": true,
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "virtualMachineProfile": {
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "enableAcceleratedNetworking": false,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "privateIPAddressVersion": "IPv4",
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "primary": true
+                  }
+                }
+              ]
+            },
+            "osProfile": {
+              "adminUsername": "{your-username}",
+              "computerNamePrefix": "{vmss-name}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": true,
+                "provisionVMAgent": true
+              }
+            },
+            "securityProfile": {
+              "securityType": "ConfidentialVM",
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              }
+            },
+            "storageProfile": {
+              "imageReference": {
+                "offer": "2019-datacenter-cvm",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "windows-cvm",
+                "version": "17763.2183.2109130127"
+              },
+              "osDisk": {
+                "caching": "ReadOnly",
+                "createOption": "FromImage",
+                "managedDisk": {
+                  "securityProfile": {
+                    "securityEncryptionType": "VMGuestStateOnly"
+                  },
+                  "storageAccountType": "StandardSSD_LRS"
+                }
+              }
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_DC2as_v5",
+          "capacity": 3,
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "title": "Create a scale set with SecurityType as ConfidentialVM"
+}

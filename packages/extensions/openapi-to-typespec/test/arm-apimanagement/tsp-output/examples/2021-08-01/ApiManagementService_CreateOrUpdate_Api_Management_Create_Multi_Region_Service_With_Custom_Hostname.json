@@ -1,0 +1,258 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "additionalLocations": [
+          {
+            "disableGateway": true,
+            "location": "East US",
+            "sku": {
+              "name": "Premium",
+              "capacity": 1
+            }
+          }
+        ],
+        "apiVersionConstraint": {
+          "minApiVersion": "2019-01-01"
+        },
+        "hostnameConfigurations": [
+          {
+            "type": "Proxy",
+            "certificatePassword": "Password",
+            "defaultSslBinding": true,
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "hostName": "gateway1.msitesting.net"
+          },
+          {
+            "type": "Management",
+            "certificatePassword": "Password",
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "hostName": "mgmt.msitesting.net"
+          },
+          {
+            "type": "Portal",
+            "certificatePassword": "Password",
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "hostName": "portal1.msitesting.net"
+          }
+        ],
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk",
+        "virtualNetworkType": "None"
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 1
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAACXok=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "West US",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": true,
+              "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
+              "location": "East US",
+              "publicIPAddresses": [
+                "23.101.138.153"
+              ],
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              }
+            }
+          ],
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          },
+          "createdAtUtc": "2019-12-18T06:26:20.3348609Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": true,
+              "hostName": "gateway1.msitesting.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Management",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": false,
+              "hostName": "mgmt.msitesting.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Portal",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": false,
+              "hostName": "portal1.msitesting.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "13.91.32.113"
+          ],
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkType": "None"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAACXoo=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "West US",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": true,
+              "location": "East US",
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              }
+            }
+          ],
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          },
+          "createdAtUtc": "2019-12-18T08:04:26.9492661Z",
+          "disableGateway": false,
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": true,
+              "hostName": "gateway1.msitesting.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Management",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": false,
+              "hostName": "mgmt.msitesting.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Portal",
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2"
+              },
+              "defaultSslBinding": false,
+              "hostName": "portal1.msitesting.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Created",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "targetProvisioningState": "Activating",
+          "virtualNetworkType": "None"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2021-08-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_CreateOrUpdate",
+  "title": "ApiManagementCreateMultiRegionServiceWithCustomHostname"
+}

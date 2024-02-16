@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2021-08-01",
+    "apiId": "echo-api",
+    "parameters": {
+      "properties": {
+        "path": "newecho",
+        "displayName": "Echo API New",
+        "serviceUrl": "http://echoapi.cloudapp.net/api2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "echo-api",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api",
+        "properties": {
+          "path": "newecho",
+          "apiRevision": "1",
+          "displayName": "Echo API New",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "https"
+          ],
+          "serviceUrl": "http://echoapi.cloudapp.net/api2",
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Api_Update",
+  "title": "ApiManagementUpdateApi"
+}

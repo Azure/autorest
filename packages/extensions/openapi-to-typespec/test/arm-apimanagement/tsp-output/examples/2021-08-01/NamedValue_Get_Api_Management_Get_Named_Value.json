@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "namedValueId": "testarmTemplateproperties2",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testarmTemplateproperties2",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testarmTemplateproperties2",
+        "properties": {
+          "displayName": "propName",
+          "secret": false,
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "value": "propValue"
+        }
+      }
+    }
+  },
+  "operationId": "NamedValue_Get",
+  "title": "ApiManagementGetNamedValue"
+}

@@ -1,0 +1,253 @@
+{
+  "Resources": {
+    "AlertProcessingRule": {
+      "Name": "AlertProcessingRule",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "GET",
+          "OperationID": "AlertProcessingRules_GetByName",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get an alert processing rule by name."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "PUT",
+          "OperationID": "AlertProcessingRules_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Create or update an alert processing rule."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "PATCH",
+          "OperationID": "AlertProcessingRules_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Enable, disable, or update tags for an alert processing rule."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+          "Method": "DELETE",
+          "OperationID": "AlertProcessingRules_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete an alert processing rule."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules",
+          "Method": "GET",
+          "OperationID": "AlertProcessingRules_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "NextPageMethod": "ListByResourceGroupNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List all alert processing rules in a resource group."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetAlertProcessingRules",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules",
+          "Method": "GET",
+          "OperationID": "AlertProcessingRules_ListBySubscription",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListBySubscription",
+            "NextPageMethod": "ListBySubscriptionNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List all alert processing rules in a subscription."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": ["ResourceGroupResource"],
+      "SwaggerModelName": "AlertProcessingRule",
+      "ResourceType": "Microsoft.AlertsManagement/actionRules",
+      "ResourceKey": "alertProcessingRuleName",
+      "ResourceKeySegment": "actionRules",
+      "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "ServiceAlert": {
+      "Name": "ServiceAlert",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}",
+          "Method": "GET",
+          "OperationID": "Alerts_GetById",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information related to a specific alert"
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts",
+          "Method": "GET",
+          "OperationID": "Alerts_GetAll",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "GetAll",
+            "NextPageMethod": "GetAllNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. "
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [
+        {
+          "Name": "GetServiceAlertSummary",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertsSummary",
+          "Method": "GET",
+          "OperationID": "Alerts_GetSummary",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by \u0027Severity\u0027 returns the count of alerts for each severity)."
+        },
+        {
+          "Name": "GetServiceAlertMetadata",
+          "Path": "/providers/Microsoft.AlertsManagement/alertsMetaData",
+          "Method": "GET",
+          "OperationID": "Alerts_MetaData",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "List alerts meta data information based on value of identifier parameter."
+        }
+      ],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "ChangeState",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate",
+          "Method": "POST",
+          "OperationID": "Alerts_ChangeState",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Change the state of an alert."
+        },
+        {
+          "Name": "GetHistory",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history",
+          "Method": "GET",
+          "OperationID": "Alerts_GetHistory",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed)."
+        }
+      ],
+      "Parents": ["SubscriptionResource"],
+      "SwaggerModelName": "Alert",
+      "ResourceType": "Microsoft.AlertsManagement/alerts",
+      "ResourceKey": "alertId",
+      "ResourceKeySegment": "alerts",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": true,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "SmartGroup": {
+      "Name": "SmartGroup",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}",
+          "Method": "GET",
+          "OperationID": "SmartGroups_GetById",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get information related to a specific Smart Group."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups",
+          "Method": "GET",
+          "OperationID": "SmartGroups_GetAll",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "GetAll",
+            "NextPageMethod": "GetAllNextPage",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List all the Smart Groups within a specified subscription. "
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [
+        {
+          "Name": "ChangeState",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState",
+          "Method": "POST",
+          "OperationID": "SmartGroups_ChangeState",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Change the state of a Smart Group."
+        },
+        {
+          "Name": "GetHistory",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history",
+          "Method": "GET",
+          "OperationID": "SmartGroups_GetHistory",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) ."
+        }
+      ],
+      "Parents": ["SubscriptionResource"],
+      "SwaggerModelName": "SmartGroup",
+      "ResourceType": "Microsoft.AlertsManagement/smartGroups",
+      "ResourceKey": "smartGroupId",
+      "ResourceKeySegment": "smartGroups",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": true,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    }
+  }
+}

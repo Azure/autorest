@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "accountName": "sto131918",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {}
+        }
+      },
+      "kind": "Storage",
+      "location": "eastus",
+      "properties": {
+        "encryption": {
+          "identity": {
+            "federatedIdentityClientId": "f83c6b1b-4d34-47e4-bb34-9d83df58b540",
+            "userAssignedIdentity": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+          },
+          "keySource": "Microsoft.Keyvault",
+          "keyvaultproperties": {
+            "keyname": "wrappingKey",
+            "keyvaulturi": "https://myvault8569.vault.azure.net",
+            "keyversion": ""
+          },
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_LRS"
+      }
+    },
+    "resourceGroupName": "res131918",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {
+              "clientId": "fbaa6278-1ecc-415c-819f-6e2058d3acb5",
+              "principalId": "8d823284-1060-42a5-9ec4-ed3d831e24d7"
+            }
+          }
+        },
+        "kind": "StorageV2",
+        "location": "eastus",
+        "properties": {
+          "accessTier": "Hot",
+          "creationTime": "2020-12-15T00:43:14.0839093Z",
+          "encryption": {
+            "identity": {
+              "federatedIdentityClientId": "f83c6b1b-4d34-47e4-bb34-9d83df58b540",
+              "userAssignedIdentity": "/subscriptions/{subscription-id}/resourcegroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+            },
+            "keySource": "Microsoft.Keyvault",
+            "keyvaultproperties": {
+              "currentVersionedKeyIdentifier": "https://myvault8569.vault.azure.net/keys/wrappingKey/0682afdd9c104f4285df20107e956cad",
+              "keyname": "wrappingKey",
+              "keyvaulturi": "https://myvault8569.vault.azure.net",
+              "keyversion": "",
+              "lastKeyRotationTimestamp": "2019-12-13T20:36:23.7023290Z"
+            },
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
+              }
+            }
+          },
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Allow",
+            "ipRules": [],
+            "virtualNetworkRules": []
+          },
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "file": "https://sto4445.file.core.windows.net/",
+            "queue": "https://sto4445.queue.core.windows.net/",
+            "table": "https://sto4445.table.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "statusOfPrimary": "available",
+          "supportsHttpsTrafficOnly": true
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "tags": {}
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId."
+}

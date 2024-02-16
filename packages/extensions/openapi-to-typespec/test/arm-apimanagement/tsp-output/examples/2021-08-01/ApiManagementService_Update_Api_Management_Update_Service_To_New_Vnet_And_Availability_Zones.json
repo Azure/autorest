@@ -1,0 +1,163 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "parameters": {
+      "properties": {
+        "additionalLocations": [
+          {
+            "location": "Australia East",
+            "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/apim-australia-east-publicip",
+            "sku": {
+              "name": "Premium",
+              "capacity": 3
+            },
+            "virtualNetworkConfiguration": {
+              "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimaeavnet/subnets/default"
+            },
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ]
+          }
+        ],
+        "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/publicip-apim-japan-east",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet-apim-japaneast/subnets/apim2"
+        },
+        "virtualNetworkType": "External"
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 3
+      },
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAAWBIU=",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "location": "Japan East",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": false,
+              "gatewayRegionalUrl": "https://apimService1-australiaeast-01.regional.azure-api.net",
+              "location": "Australia East",
+              "platformVersion": "stv2",
+              "publicIPAddresses": [
+                "20.213.1.35"
+              ],
+              "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/apim-australia-east-publicip",
+              "sku": {
+                "name": "Premium",
+                "capacity": 3
+              },
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimaeavnet/subnets/default"
+              },
+              "zones": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          ],
+          "createdAtUtc": "2021-04-08T23:41:35.6447381Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_CBC_SHA": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_CBC_SHA256": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_GCM_SHA256": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_256_CBC_SHA": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_256_CBC_SHA256": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "false",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "false"
+          },
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-japaneast-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2022-06-09T23:59:59+00:00",
+                "subject": "CN=mycustomdomain.int-azure-api.net",
+                "thumbprint": "2994B5FFB8F76B3C687D324A8DEE0432C1ED18CD"
+              },
+              "certificateSource": "Managed",
+              "defaultSslBinding": true,
+              "hostName": "mycustomdomain.int-azure-api.net",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "platformVersion": "stv2",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "20.78.248.217"
+          ],
+          "publicIpAddressId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/publicip-apim-japan-east",
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "contoso@microsoft.com",
+          "publisherName": "apimPublisher",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "targetProvisioningState": "",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet-apim-japaneast/subnets/apim2"
+          },
+          "virtualNetworkType": "Internal"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 3
+        },
+        "systemData": {
+          "lastModifiedAt": "2022-01-21T20:04:21.6108974Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2021-08-01"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_Update",
+  "title": "ApiManagementUpdateServiceToNewVnetAndAvailabilityZones"
+}

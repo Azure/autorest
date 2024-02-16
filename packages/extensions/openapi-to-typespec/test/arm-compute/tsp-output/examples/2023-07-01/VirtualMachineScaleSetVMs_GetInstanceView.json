@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "instanceId": "0",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "myVirtualMachineScaleSet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assignedHost": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup/hosts/myHost",
+        "bootDiagnostics": null,
+        "disks": [
+          {
+            "name": "myOSDisk",
+            "encryptionSettings": null,
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "displayStatus": "Provisioning succeeded",
+                "level": "Info",
+                "message": null,
+                "time": "2023-07-01T04:58:58.0882815+00:00"
+              }
+            ]
+          }
+        ],
+        "platformFaultDomain": 0,
+        "platformUpdateDomain": 0,
+        "rdpThumbPrint": null,
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "displayStatus": "Provisioning succeeded",
+            "level": "Info",
+            "message": null,
+            "time": "2020-06-05T04:59:58.1852966+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "displayStatus": "VM running",
+            "level": "Info",
+            "message": null,
+            "time": null
+          }
+        ],
+        "vmAgent": {
+          "extensionHandlers": null,
+          "statuses": [
+            {
+              "code": "ProvisioningState/Unavailable",
+              "displayStatus": "Not Ready",
+              "level": "Warning",
+              "message": "VM status blob is found but not yet populated.",
+              "time": "2023-07-01T05:00:32+00:00"
+            }
+          ],
+          "vmAgentVersion": "Unknown"
+        },
+        "extensions": null
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
+  "title": "Get instance view of a virtual machine from a VM scale set placed on a dedicated host group through automatic placement."
+}

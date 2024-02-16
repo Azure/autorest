@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "intent": {
+          "vmSizes": [
+            "Basic_A0",
+            "Basic_A2"
+          ]
+        },
+        "proximityPlacementGroupType": "Standard"
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "proximityPlacementGroupName": "myProximityPlacementGroup",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProximityPlacementGroup",
+        "type": "Microsoft.Compute/proximityPlacementGroups",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup",
+        "location": "westus",
+        "properties": {
+          "intent": {
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
+          },
+          "proximityPlacementGroupType": "Standard"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myProximityPlacementGroup",
+        "type": "Microsoft.Compute/proximityPlacementGroups",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup",
+        "location": "westus",
+        "properties": {
+          "intent": {
+            "vmSizes": [
+              "Basic_A0",
+              "Basic_A2"
+            ]
+          },
+          "proximityPlacementGroupType": "Standard"
+        },
+        "zones": [
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "ProximityPlacementGroups_CreateOrUpdate",
+  "title": "Create or Update a proximity placement group."
+}

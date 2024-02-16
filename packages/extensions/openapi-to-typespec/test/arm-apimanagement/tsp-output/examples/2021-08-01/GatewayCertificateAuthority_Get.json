@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "certificateId": "cert1",
+    "gatewayId": "gw1",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cert1",
+        "type": "Microsoft.ApiManagement/service/gateways/certificateAuthorities",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/gateways/gw1/certificateAuthorities/cert1",
+        "properties": {
+          "isTrusted": true
+        }
+      }
+    }
+  },
+  "operationId": "GatewayCertificateAuthority_Get",
+  "title": "ApiManagementGetGatewayCertificateAuthority"
+}

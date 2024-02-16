@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{cs-name}",
+            "type": "Microsoft.Compute/cloudServices",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+            "location": "eastus2euap",
+            "properties": {
+              "configuration": "{ServiceConfiguration}",
+              "extensionProfile": {
+                "extensions": [
+                  {
+                    "name": "RDPExtension",
+                    "properties": {
+                      "type": "RDP",
+                      "autoUpgradeMinorVersion": false,
+                      "provisioningState": "Succeeded",
+                      "publisher": "Microsoft.Windows.Azure.Extensions",
+                      "rolesAppliedTo": [
+                        "*"
+                      ],
+                      "settings": "<PublicConfig><UserName>userazure</UserName><Expiration>01/12/2022 16:29:02</Expiration></PublicConfig>",
+                      "typeHandlerVersion": "1.2"
+                    }
+                  }
+                ]
+              },
+              "networkProfile": {
+                "loadBalancerConfigurations": [
+                  {
+                    "name": "contosolb",
+                    "properties": {
+                      "frontendIpConfigurations": [
+                        {
+                          "name": "contosofe",
+                          "properties": {
+                            "publicIPAddress": {
+                              "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "osProfile": {
+                "secrets": []
+              },
+              "provisioningState": "Succeeded",
+              "roleProfile": {
+                "roles": [
+                  {
+                    "name": "ContosoFrontend",
+                    "sku": {
+                      "name": "Standard_D1_v2",
+                      "capacity": 2,
+                      "tier": "Standard"
+                    }
+                  },
+                  {
+                    "name": "ContosoBackend",
+                    "sku": {
+                      "name": "Standard_D1_v2",
+                      "capacity": 2,
+                      "tier": "Standard"
+                    }
+                  }
+                ]
+              },
+              "uniqueId": "4ccb4323-4740-4545-bb81-780b27375947",
+              "upgradeMode": "Auto"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CloudServices_ListAll",
+  "title": "List Cloud Services in a Subscription"
+}

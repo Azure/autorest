@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "groupId": "57d2ef278aa04f0888cba3f3",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "armTemplateUser1",
+            "type": "Microsoft.ApiManagement/service/groups/users",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/kjoshiarmTemplateUser1",
+            "properties": {
+              "email": "user1@live.com",
+              "firstName": "user1",
+              "identities": [
+                {
+                  "id": "user1@live.com",
+                  "provider": "Basic"
+                }
+              ],
+              "lastName": "lastname1",
+              "note": "note for user 1",
+              "registrationDate": "2017-05-31T18:54:41.447Z",
+              "state": "active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "GroupUser_List",
+  "title": "ApiManagementListGroupUsers"
+}
