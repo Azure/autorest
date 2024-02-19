@@ -37,7 +37,6 @@ model PortalDelegationSettings extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@clientName("PortalDelegationSettings")
 interface PortalDelegationSettingsOperationGroup {
   /**
    * Get Delegation Settings for the Portal.

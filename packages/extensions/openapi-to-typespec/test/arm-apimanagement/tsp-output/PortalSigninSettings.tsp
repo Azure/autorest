@@ -37,7 +37,6 @@ model PortalSigninSettings extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@clientName("PortalSigninSettings")
 interface PortalSigninSettingsOperationGroup {
   /**
    * Get Sign In Settings for the Portal
