@@ -107,7 +107,6 @@ function generateArmResourceOperation(resource: TspArmResource): string {
 
   definitions.push("@armResourceOperations");
   if (resource.name === formalOperationGroupName) {
-    definitions.push(`@clientName("${formalOperationGroupName}")`);
     definitions.push(`interface ${formalOperationGroupName}OperationGroup {`);
   } else {
     definitions.push(`interface ${formalOperationGroupName} {`);

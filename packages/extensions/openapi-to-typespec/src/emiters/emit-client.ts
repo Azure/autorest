@@ -1,5 +1,5 @@
 import { getSession } from "../autorest-session";
-import { generateObjectClientDecorator } from "../generate/generate-client";
+import { generateArmResourceClientDecorator, generateObjectClientDecorator } from "../generate/generate-client";
 import { TypespecProgram } from "../interfaces";
 import { formatTypespecFile } from "../utils/format";
 import { getClientImports } from "../utils/imports";
@@ -19,5 +19,6 @@ function generateClient(program: TypespecProgram) {
 
   const namespaces = [...new Set<string>([...namespacesSet, `using ${getNamespace(program)};`])].join("\n");
   const objects = models.objects.map(generateObjectClientDecorator).join("\n\n");
-  return [imports, "\n", namespaces, "\n", objects].join("\n");
+  const armResources = models.armResources.map(generateArmResourceClientDecorator).join("\n\n");
+  return [imports, "\n", namespaces, "\n", objects, armResources].join("\n");
 }
