@@ -37,7 +37,7 @@ model QueueServiceProperties extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "QueueServiceProperties")
+@clientName("QueueServiceProperties")
 interface QueueServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -61,8 +61,8 @@ interface QueueServicePropertiesOperationGroup {
   list is ArmResourceListByParent<QueueServiceProperties>;
 }
 
-@@projectedName(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "json",
+@@encodedName(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,

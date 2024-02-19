@@ -163,8 +163,8 @@ interface AuthorizationServerContracts {
   >;
 }
 
-@@projectedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(AuthorizationServerContracts.createOrUpdate::parameters.resource,
@@ -174,8 +174,8 @@ interface AuthorizationServerContracts {
 @@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(AuthorizationServerContracts.update::parameters.properties,
-  "json",
+@@encodedName(AuthorizationServerContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(AuthorizationServerContracts.update::parameters.properties,

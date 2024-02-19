@@ -131,8 +131,8 @@ interface GatewayHostnameConfigurationContracts {
   >;
 }
 
-@@projectedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,

@@ -97,8 +97,8 @@ interface ComponentVersionResources {
   >;
 }
 
-@@projectedName(ComponentVersionResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ComponentVersionResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(ComponentVersionResources.createOrUpdate::parameters.resource,

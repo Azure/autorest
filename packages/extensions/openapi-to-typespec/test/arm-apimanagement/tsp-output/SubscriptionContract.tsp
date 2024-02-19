@@ -208,8 +208,8 @@ interface SubscriptionContracts {
   >;
 }
 
-@@projectedName(SubscriptionContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(SubscriptionContracts.createOrUpdate::parameters.resource,
@@ -219,8 +219,8 @@ interface SubscriptionContracts {
 @@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(SubscriptionContracts.update::parameters.properties,
-  "json",
+@@encodedName(SubscriptionContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(SubscriptionContracts.update::parameters.properties,

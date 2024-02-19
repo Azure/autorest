@@ -149,8 +149,8 @@ interface CertificateContracts {
   >;
 }
 
-@@projectedName(CertificateContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(CertificateContracts.createOrUpdate::parameters.resource,

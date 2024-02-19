@@ -37,7 +37,7 @@ model PortalSignupSettings extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "PortalSignupSettings")
+@clientName("PortalSignupSettings")
 interface PortalSignupSettingsOperationGroup {
   /**
    * Get Sign Up Settings for the Portal
@@ -105,8 +105,8 @@ interface PortalSignupSettingsOperationGroup {
   listByService is ArmResourceListByParent<PortalSignupSettings>;
 }
 
-@@projectedName(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
@@ -116,8 +116,8 @@ interface PortalSignupSettingsOperationGroup {
 @@doc(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(PortalSignupSettingsOperationGroup.update::parameters.properties,
-  "json",
+@@encodedName(PortalSignupSettingsOperationGroup.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(PortalSignupSettingsOperationGroup.update::parameters.properties,

@@ -244,18 +244,18 @@ function convertResourceCreateOrReplaceOperation(
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
     const operationName = getOperationName(operation.OperationID);
-    const augmentedDecorators = [];
+    const customizations = [];
     if (bodyParam) {
       if (bodyParam.language.default.name !== "resource") {
-        augmentedDecorators.push(
-          `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "json", "${bodyParam.language.default.name}");`,
+        customizations.push(
+          `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "application/json", "${bodyParam.language.default.name}");`,
         );
-        augmentedDecorators.push(
+        customizations.push(
           `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
         );
       }
       if (bodyParam.language.default.description !== "Resource create parameters.") {
-        augmentedDecorators.push(
+        customizations.push(
           `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "${bodyParam.language.default.description}");`,
         );
       }
@@ -268,7 +268,7 @@ function convertResourceCreateOrReplaceOperation(
         operationId: operation.OperationID,
         templateParameters: templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
-        augmentedDecorators,
+        customizations,
       },
     ];
   }
@@ -297,7 +297,7 @@ function convertResourceUpdateOperation(
       }
       let kind;
       const templateParameters = [resourceMetadata.SwaggerModelName];
-      const augmentedDecorators = [];
+      const customizations = [];
       if (bodyParam) {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
@@ -305,15 +305,15 @@ function convertResourceUpdateOperation(
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
         const operationName = getOperationName(operation.OperationID);
         if (bodyParam.language.default.name !== "properties") {
-          augmentedDecorators.push(
-            `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "json", "${bodyParam.language.default.name}");`,
+          customizations.push(
+            `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "application/json", "${bodyParam.language.default.name}");`,
           );
-          augmentedDecorators.push(
+          customizations.push(
             `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
           );
         }
         if (bodyParam.language.default.description !== "The resource properties to be updated.") {
-          augmentedDecorators.push(
+          customizations.push(
             `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "${bodyParam.language.default.description}");`,
           );
         }
@@ -333,7 +333,7 @@ function convertResourceUpdateOperation(
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
-          augmentedDecorators,
+          customizations,
           // To resolve auto-generate update model with proper visibility
           decorators: [{ name: "parameterVisibility", arguments: ["read"] }],
         },
@@ -525,18 +525,18 @@ function convertResourceActionOperations(
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
         const operationName = getOperationName(operation.OperationID);
-        const augmentedDecorators = [];
+        const customizations = [];
         if (bodyParam) {
           if (bodyParam.language.default.name !== "body") {
-            augmentedDecorators.push(
-              `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "json", "${bodyParam.language.default.name}");`,
+            customizations.push(
+              `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "application/json", "${bodyParam.language.default.name}");`,
             );
-            augmentedDecorators.push(
+            customizations.push(
               `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
             );
           }
           if (bodyParam.language.default.description !== "The content of the action request") {
-            augmentedDecorators.push(
+            customizations.push(
               `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "${bodyParam.language.default.description}");`,
             );
           }
@@ -548,7 +548,7 @@ function convertResourceActionOperations(
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
-          augmentedDecorators,
+          customizations,
         });
       }
     }

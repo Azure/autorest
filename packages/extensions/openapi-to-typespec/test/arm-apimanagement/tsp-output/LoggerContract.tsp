@@ -149,8 +149,8 @@ interface LoggerContracts {
   >;
 }
 
-@@projectedName(LoggerContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(LoggerContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(LoggerContracts.createOrUpdate::parameters.resource,
@@ -160,8 +160,8 @@ interface LoggerContracts {
 @@doc(LoggerContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(LoggerContracts.update::parameters.properties,
-  "json",
+@@encodedName(LoggerContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(LoggerContracts.update::parameters.properties,

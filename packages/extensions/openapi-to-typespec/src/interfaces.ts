@@ -146,7 +146,7 @@ export interface TypespecObjectProperty extends TypespecDataType {
   isOptional: boolean;
   type: string;
   decorators?: TypespecDecorator[];
-  augmentedDecorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   defaultValue?: any;
 }
 
@@ -202,7 +202,7 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   decorators?: TypespecDecorator[];
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
-  augmentedDecorators?: string[];
+  customizations?: string[];
 }
 
 export type TspArmResourceOperation =
@@ -212,25 +212,25 @@ export type TspArmResourceOperation =
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrReplaceAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync"
-    | "checkGlobalNameAvailability"
-    | "checkLocalNameAvailability"
-    | "checkNameAvailability";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrReplaceAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync"
+  | "checkGlobalNameAvailability"
+  | "checkLocalNameAvailability"
+  | "checkNameAvailability";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {

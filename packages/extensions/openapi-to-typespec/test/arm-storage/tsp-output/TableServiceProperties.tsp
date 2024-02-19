@@ -37,7 +37,7 @@ model TableServiceProperties extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "TableServiceProperties")
+@clientName("TableServiceProperties")
 interface TableServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -61,8 +61,8 @@ interface TableServicePropertiesOperationGroup {
   list is ArmResourceListByParent<TableServiceProperties>;
 }
 
-@@projectedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "json",
+@@encodedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,

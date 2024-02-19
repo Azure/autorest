@@ -132,15 +132,15 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   if (!isParameter(element) && element.serializedName !== element.language.default.name) {
     decorators.push({
-      name: "projectedName",
-      arguments: ["json", (element as Property).serializedName],
+      name: "encodedName",
+      arguments: ["application/json", (element as Property).serializedName],
     });
   }
 
   return decorators;
 }
 
-export function getPropertyAugmentedDecorators(element: Property | Parameter): TypespecDecorator[] {
+export function getPropertyClientDecorators(element: Property | Parameter): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
 
   if (element.extensions?.["x-ms-client-flatten"]) {

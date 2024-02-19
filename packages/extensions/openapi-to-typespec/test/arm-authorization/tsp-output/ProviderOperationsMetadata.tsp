@@ -43,7 +43,7 @@ model ProviderOperationsMetadata is ProxyResource<{}> {
 }
 
 @armResourceOperations
-@projectedName("client", "ProviderOperationsMetadata")
+@clientName("ProviderOperationsMetadata")
 interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for the specified resource provider.

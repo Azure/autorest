@@ -131,8 +131,8 @@ interface GlobalSchemaContracts {
   >;
 }
 
-@@projectedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(GlobalSchemaContracts.createOrUpdate::parameters.resource,

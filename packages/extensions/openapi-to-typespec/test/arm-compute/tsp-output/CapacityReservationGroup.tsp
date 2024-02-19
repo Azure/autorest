@@ -100,8 +100,8 @@ interface CapacityReservationGroups {
   listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
 }
 
-@@projectedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.createOrUpdate::parameters.resource,
@@ -111,8 +111,8 @@ interface CapacityReservationGroups {
 @@doc(CapacityReservationGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation Group."
 );
-@@projectedName(CapacityReservationGroups.update::parameters.properties,
-  "json",
+@@encodedName(CapacityReservationGroups.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.update::parameters.properties,

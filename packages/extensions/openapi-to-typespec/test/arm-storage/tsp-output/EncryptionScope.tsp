@@ -90,8 +90,8 @@ interface EncryptionScopes {
   >;
 }
 
-@@projectedName(EncryptionScopes.put::parameters.resource,
-  "json",
+@@encodedName(EncryptionScopes.put::parameters.resource,
+  "application/json",
   "encryptionScope"
 );
 @@extension(EncryptionScopes.put::parameters.resource,
@@ -101,8 +101,8 @@ interface EncryptionScopes {
 @@doc(EncryptionScopes.put::parameters.resource,
   "Encryption scope properties to be used for the create or update."
 );
-@@projectedName(EncryptionScopes.patch::parameters.properties,
-  "json",
+@@encodedName(EncryptionScopes.patch::parameters.properties,
+  "application/json",
   "encryptionScope"
 );
 @@extension(EncryptionScopes.patch::parameters.properties,

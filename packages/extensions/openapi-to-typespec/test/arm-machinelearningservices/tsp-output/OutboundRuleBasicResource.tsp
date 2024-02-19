@@ -69,8 +69,8 @@ interface OutboundRuleBasicResources {
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 
-@@projectedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(OutboundRuleBasicResources.createOrUpdate::parameters.resource,

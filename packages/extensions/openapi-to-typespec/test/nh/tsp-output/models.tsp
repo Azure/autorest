@@ -126,77 +126,77 @@ model NotificationHubEntryModel {
 model NotificationHubContentModel {
   type?: NotificationHubContentModelType;
 
-  @projectedName("json", "NotificationHubDescription")
+  @encodedName("application/json", "NotificationHubDescription")
   notificationHubDescription?: NotificationHubDescriptionModel;
 }
 
 model NotificationHubDescriptionModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: NotificationHubDescriptionModelXmlnsI;
 
-  @projectedName("json", "RegistrationTtl")
+  @encodedName("application/json", "RegistrationTtl")
   registrationTtl?: string;
 
-  @projectedName("json", "Location")
+  @encodedName("application/json", "Location")
   location?: string;
 
-  @projectedName("json", "ApnsCredential")
+  @encodedName("application/json", "ApnsCredential")
   apnsCredential?: PropertyBagModelItem[];
 
-  @projectedName("json", "GcmCredential")
+  @encodedName("application/json", "GcmCredential")
   gcmCredential?: PropertyBagModelItem[];
 
-  @projectedName("json", "WnsCredential")
+  @encodedName("application/json", "WnsCredential")
   wnsCredential?: PropertyBagModelItem[];
 
-  @projectedName("json", "AuthorizationRules")
+  @encodedName("application/json", "AuthorizationRules")
   authorizationRules?: NotificationHubDescriptionModelAuthorizationRulesItem[];
 }
 
 model PropertyBagModelItem {
-  @projectedName("json", "Name")
+  @encodedName("application/json", "Name")
   name?: string;
 
-  @projectedName("json", "Value")
+  @encodedName("application/json", "Value")
   value?: string;
 }
 
 model NotificationHubDescriptionModelAuthorizationRulesItem {
-  @projectedName("json", "i:type")
+  @encodedName("application/json", "i:type")
   iType?: NotificationHubDescriptionModelAuthorizationRulesItemIType;
 
-  @projectedName("json", "ClaimType")
+  @encodedName("application/json", "ClaimType")
   claimType?: NotificationHubDescriptionModelAuthorizationRulesItemClaimType;
 
-  @projectedName("json", "ClaimValue")
+  @encodedName("application/json", "ClaimValue")
   claimValue?: string;
 
-  @projectedName("json", "Rights")
+  @encodedName("application/json", "Rights")
   rights?: string[];
 
-  @projectedName("json", "CreatedTime")
+  @encodedName("application/json", "CreatedTime")
   createdTime?: string;
 
-  @projectedName("json", "ModifiedTime")
+  @encodedName("application/json", "ModifiedTime")
   modifiedTime?: string;
 
-  @projectedName("json", "KeyName")
+  @encodedName("application/json", "KeyName")
   keyName?: string;
 
-  @projectedName("json", "PrimaryKey")
+  @encodedName("application/json", "PrimaryKey")
   primaryKey?: string;
 
-  @projectedName("json", "SecondaryKey")
+  @encodedName("application/json", "SecondaryKey")
   secondaryKey?: string;
 }
 
 model RegistrationEntryModel {
   content?: NotificationHubContentModel;
 
-  @projectedName("json", "xmlns:m")
+  @encodedName("application/json", "xmlns:m")
   xmlnsM?: RegistrationEntryModelXmlnsM;
 
-  @projectedName("json", "m:etag")
+  @encodedName("application/json", "m:etag")
   mEtag?: string;
 }
 
@@ -309,147 +309,147 @@ model InstallationPatchModelItem {
 model RegistrationContentModel {
   type?: RegistrationContentModelType;
 
-  @projectedName("json", "AppleRegistrationDescription")
+  @encodedName("application/json", "AppleRegistrationDescription")
   appleRegistrationDescription?: AppleRegistrationContentModel;
 
-  @projectedName("json", "AppleTemplateRegistrationDescription")
+  @encodedName("application/json", "AppleTemplateRegistrationDescription")
   appleTemplateRegistrationDescription?: AppleTemplateRegistrationContentModel;
 
-  @projectedName("json", "BaiduRegistrationDescription")
+  @encodedName("application/json", "BaiduRegistrationDescription")
   baiduRegistrationDescription?: BaiduRegistrationContentModel;
 
-  @projectedName("json", "BaiduTemplateRegistrationDescription")
+  @encodedName("application/json", "BaiduTemplateRegistrationDescription")
   baiduTemplateRegistrationDescription?: BaiduTemplateRegistrationContentModel;
 
-  @projectedName("json", "GcmRegistrationDescription")
+  @encodedName("application/json", "GcmRegistrationDescription")
   gcmRegistrationDescription?: GcmRegistrationContentModel;
 
-  @projectedName("json", "GcmTemplateRegistrationDescription")
+  @encodedName("application/json", "GcmTemplateRegistrationDescription")
   gcmTemplateRegistrationDescription?: GcmTemplateRegistrationContentModel;
 
-  @projectedName("json", "WindowsRegistrationDescription")
+  @encodedName("application/json", "WindowsRegistrationDescription")
   windowsRegistrationDescription?: WindowsRegistrationContentModel;
 
-  @projectedName("json", "WindowsTemplateRegistrationDescription")
+  @encodedName("application/json", "WindowsTemplateRegistrationDescription")
   windowsTemplateRegistrationDescription?: WindowsTemplateRegistrationContentModel;
 }
 
 model AppleRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: AppleRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "DeviceToken")
+  @encodedName("application/json", "DeviceToken")
   deviceToken: string;
 }
 
 model AppleTemplateRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: AppleTemplateRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "DeviceToken")
+  @encodedName("application/json", "DeviceToken")
   deviceToken: string;
 
-  @projectedName("json", "BodyTemplate")
+  @encodedName("application/json", "BodyTemplate")
   bodyTemplate: string;
 
-  @projectedName("json", "Expiry")
+  @encodedName("application/json", "Expiry")
   expiry?: string;
 }
 
 model BaiduRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: BaiduRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "BaiduUserId")
+  @encodedName("application/json", "BaiduUserId")
   baiduUserId: string;
 
-  @projectedName("json", "BaiduChannelId")
+  @encodedName("application/json", "BaiduChannelId")
   baiduChannelId: string;
 }
 
 model BaiduTemplateRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: BaiduTemplateRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "BaiduUserId")
+  @encodedName("application/json", "BaiduUserId")
   baiduUserId: string;
 
-  @projectedName("json", "BaiduChannelId")
+  @encodedName("application/json", "BaiduChannelId")
   baiduChannelId: string;
 
-  @projectedName("json", "BodyTemplate")
+  @encodedName("application/json", "BodyTemplate")
   bodyTemplate: string;
 }
 
 model GcmRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: GcmRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "GcmRegistrationId")
+  @encodedName("application/json", "GcmRegistrationId")
   gcmRegistrationId?: string;
 }
 
 model GcmTemplateRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: GcmTemplateRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "GcmRegistrationId")
+  @encodedName("application/json", "GcmRegistrationId")
   gcmRegistrationId: string;
 
-  @projectedName("json", "BodyTemplate")
+  @encodedName("application/json", "BodyTemplate")
   bodyTemplate: string;
 }
 
 model WindowsRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: WindowsRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "ChannelUri")
+  @encodedName("application/json", "ChannelUri")
   channelUri: string;
 }
 
 model WindowsTemplateRegistrationContentModel {
-  @projectedName("json", "xmlns:i")
+  @encodedName("application/json", "xmlns:i")
   xmlnsI?: WindowsTemplateRegistrationContentModelXmlnsI;
 
-  @projectedName("json", "Tags")
+  @encodedName("application/json", "Tags")
   tags?: string;
 
-  @projectedName("json", "ChannelUri")
+  @encodedName("application/json", "ChannelUri")
   channelUri: string;
 
-  @projectedName("json", "BodyTemplate")
+  @encodedName("application/json", "BodyTemplate")
   bodyTemplate: string;
 
-  @projectedName("json", "WnsHeaders")
+  @encodedName("application/json", "WnsHeaders")
   wnsHeaders?: WindowsTemplateRegistrationContentModelWnsHeadersItem[];
 }
 
 model WindowsTemplateRegistrationContentModelWnsHeadersItem {
-  @projectedName("json", "Header")
+  @encodedName("application/json", "Header")
   header?: string;
 
-  @projectedName("json", "Value")
+  @encodedName("application/json", "Value")
   value?: string;
 }

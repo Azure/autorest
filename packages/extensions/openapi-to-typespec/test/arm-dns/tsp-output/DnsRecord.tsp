@@ -184,8 +184,8 @@ interface DnsRecords {
   >;
 }
 
-@@projectedName(DnsRecords.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DnsRecords.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(DnsRecords.createOrUpdate::parameters.resource,
@@ -195,7 +195,10 @@ interface DnsRecords {
 @@doc(DnsRecords.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@projectedName(DnsRecords.update::parameters.properties, "json", "parameters");
+@@encodedName(DnsRecords.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
 @@extension(DnsRecords.update::parameters.properties,
   "x-ms-client-name",
   "parameters"

@@ -7,7 +7,7 @@ export function generateObjectClientDecorator(typespecObject: TypespecObject) {
   for (const property of typespecObject.properties) {
     const decorators = generateAugmentedDecorators(
       `${typespecObject.name}.${property.name}`,
-      property.augmentedDecorators,
+      property.clientDecorators,
     );
     decorators && definitions.push(decorators);
   }

@@ -136,8 +136,8 @@ interface IdentityProviderContracts {
   >;
 }
 
-@@projectedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(IdentityProviderContracts.createOrUpdate::parameters.resource,
@@ -147,8 +147,8 @@ interface IdentityProviderContracts {
 @@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(IdentityProviderContracts.update::parameters.properties,
-  "json",
+@@encodedName(IdentityProviderContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(IdentityProviderContracts.update::parameters.properties,

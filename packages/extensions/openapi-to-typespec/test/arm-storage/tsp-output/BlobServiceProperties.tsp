@@ -39,7 +39,7 @@ model BlobServiceProperties extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "BlobServiceProperties")
+@clientName("BlobServiceProperties")
 interface BlobServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -63,8 +63,8 @@ interface BlobServicePropertiesOperationGroup {
   list is ArmResourceListByParent<BlobServiceProperties>;
 }
 
-@@projectedName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "json",
+@@encodedName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
