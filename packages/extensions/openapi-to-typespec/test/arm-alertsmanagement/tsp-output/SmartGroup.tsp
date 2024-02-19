@@ -145,21 +145,14 @@ interface SmartGroups {
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")
   @get
-  getHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  getHistory(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Smart group unique id.
-       */
-      @path
-      smartGroupId: string;
-    },
-    SmartGroupModification
-  >;
+    /**
+     * Smart group unique id.
+     */
+    @path
+    smartGroupId: string,
+  ): ArmResponse<SmartGroupModification> | ErrorResponse;
 }

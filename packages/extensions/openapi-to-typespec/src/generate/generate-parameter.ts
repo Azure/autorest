@@ -1,8 +1,19 @@
 import { TypespecParameter } from "../interfaces";
+import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 
+const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
+  subscriptionId: "...SubscriptionIdParameter",
+  location: "...LocationResourceParameter",
+  resourceGroupName: "...ResourceGroupParameter",
+};
+
 export function generateParameter(parameter: TypespecParameter): string {
+  const { isArm } = getOptions();
+  if (isArm && _ARM_PARAM_REPLACEMENTS[parameter.name] !== undefined) {
+    return _ARM_PARAM_REPLACEMENTS[parameter.name];
+  }
   const definitions: string[] = [];
   const doc = generateDocs(parameter);
   definitions.push(doc);

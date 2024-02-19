@@ -127,56 +127,42 @@ interface OnlineDeploymentTrackedResources {
   @summary("List Inference Endpoint Deployment Skus.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
   @get
-  listSkus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  listSkus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Inference endpoint name.
+     */
+    @path
+    endpointName: string,
 
-      /**
-       * Inference endpoint name.
-       */
-      @path
-      endpointName: string;
+    /**
+     * Inference Endpoint Deployment name.
+     */
+    @path
+    deploymentName: string,
 
-      /**
-       * Inference Endpoint Deployment name.
-       */
-      @path
-      deploymentName: string;
+    /**
+     * Number of Skus to be retrieved in a page of results.
+     */
+    @query("count")
+    count?: int32,
 
-      /**
-       * Number of Skus to be retrieved in a page of results.
-       */
-      @query("count")
-      count?: int32;
-
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-    },
-    SkuResourceArmPaginatedResult
-  >;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
+  ): ArmResponse<SkuResourceArmPaginatedResult> | ErrorResponse;
 }
 
 @@projectedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,

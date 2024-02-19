@@ -184,58 +184,48 @@ interface GatewayContracts {
   @operationId("GatewayApi_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      gatewayId: string;
+    /**
+     * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    gatewayId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ApiManagementGatewayApiListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
 }
 
 @@projectedName(GatewayContracts.createOrUpdate::parameters.resource,

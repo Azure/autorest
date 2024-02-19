@@ -181,23 +181,16 @@ interface Alerts {
   // FIXME: Alerts_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history")
   @get
-  getHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  getHistory(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Unique ID of an alert instance.
-       */
-      @path
-      alertId: string;
-    },
-    AlertModification
-  >;
+    /**
+     * Unique ID of an alert instance.
+     */
+    @path
+    alertId: string,
+  ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
 @@projectedName(Alerts.changeState::parameters.body, "json", "comment");

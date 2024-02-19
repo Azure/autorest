@@ -1,9 +1,11 @@
 import { TypespecOperation, TypespecOperationGroup, TypespecParameter } from "../interfaces";
+import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
+  const { isArm } = getOptions();
   const doc = generateDocs(operation);
   const summary = generateSummary(operation);
   const { verb, name, route, parameters } = operation;
@@ -18,7 +20,15 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     statements.push(fixme);
   }
 
-  if (!operation.resource) {
+  if (isArm) {
+    statements.push(`@route("${route}")`);
+    statements.push(
+      `@${verb} op \`${name}\`(
+        ...ApiVersionParameter,
+        ${params}
+        ): ArmResponse<${responses.join(" | ")}> | ErrorResponse;\n\n\n`,
+    );
+  } else if (!operation.resource) {
     const names = [name, ...responses, ...parameters.map((p) => p.name)];
     const duplicateNames = findDuplicates(names);
     generateNameCollisionWarning(duplicateNames, statements);
@@ -70,6 +80,7 @@ function generateMultiResponseWarning(responses: string[], statements: string[])
 }
 
 export function generateParameters(parameters: TypespecParameter[]) {
+  const { isArm } = getOptions();
   if (parameters.length === 0) {
     return "";
   }
@@ -83,6 +94,9 @@ export function generateParameters(parameters: TypespecParameter[]) {
   const params: string[] = [];
   for (const parameter of parameters) {
     params.push(generateParameter(parameter));
+  }
+  if (isArm) {
+    return `${params.join(",\n")}`;
   }
   return `{${params.join("\n")}}`;
 }

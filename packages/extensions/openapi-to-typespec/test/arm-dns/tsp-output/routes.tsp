@@ -1,3 +1,5 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -15,20 +17,14 @@ interface DnsResourceReferenceOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference")
   @post
-  getByTargetResources is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.
-       */
-      @path
-      subscriptionId: string;
+  getByTargetResources(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Properties for dns resource reference request.
-       */
-      @body
-      parameters: DnsResourceReferenceRequest;
-    },
-    DnsResourceReferenceResult
-  >;
+    /**
+     * Properties for dns resource reference request.
+     */
+    @body
+    parameters: DnsResourceReferenceRequest,
+  ): ArmResponse<DnsResourceReferenceResult> | ErrorResponse;
 }

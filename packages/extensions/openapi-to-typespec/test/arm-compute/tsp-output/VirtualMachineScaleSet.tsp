@@ -154,13 +154,7 @@ interface VirtualMachineScaleSets {
     LocationScope<VirtualMachineScaleSet>,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The location for which VM scale sets under the subscription are queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 
@@ -523,28 +517,18 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
   @get
-  getInstanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getInstanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetInstanceView> | ErrorResponse;
 
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
@@ -552,28 +536,18 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
   @get
-  listSkus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listSkus(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetListSkusResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetListSkusResult> | ErrorResponse;
 
   /**
    * Gets list of OS upgrades on a VM scale set instance.
@@ -583,28 +557,18 @@ interface VirtualMachineScaleSets {
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get
-  getOSUpgradeHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getOSUpgradeHistory(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetListOSUpgradeHistory
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
 }
 
 @@projectedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,

@@ -99,13 +99,7 @@ interface VirtualMachineRunCommands {
     LocationScope<VirtualMachineRunCommand>,
     {
       ...BaseParameters<VirtualMachineRunCommand>;
-
-      /**
-       * The location upon which run commands is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 }

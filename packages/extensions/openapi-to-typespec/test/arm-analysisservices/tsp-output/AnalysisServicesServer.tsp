@@ -146,34 +146,21 @@ interface AnalysisServicesServers {
   @operationId("Servers_ListSkusForExisting")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")
   @get
-  listSkusForExisting is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[-\\w\\._\\(\\)]+$")
-      @path
-      resourceGroupName: string;
+  listSkusForExisting(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.
-       */
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-z][a-z0-9]*$")
-      @path
-      serverName: string;
+    /**
+     * The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.
+     */
+    @maxLength(63)
+    @minLength(3)
+    @pattern("^[a-z][a-z0-9]*$")
+    @path
+    serverName: string,
 
-      /**
-       * A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    SkuEnumerationForExistingResourceResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<SkuEnumerationForExistingResourceResult> | ErrorResponse;
 }
 
 @@projectedName(AnalysisServicesServers.create::parameters.resource,
