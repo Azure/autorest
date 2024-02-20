@@ -23,10 +23,12 @@ export function getDefaultValue(type: string, schema: Schema) {
     // TODO: need to add back default value when TypeSpec supports
     return undefined;
   } else if (isArraySchema(schema)) {
-    return `[${schema.defaultValue.map((v: any) => {
-      schema.elementType.defaultValue = v;
-      return getDefaultValue(schema.elementType.type, schema.elementType);
-    }).join(", ")}]`;
+    return `[${schema.defaultValue
+      .map((v: any) => {
+        schema.elementType.defaultValue = v;
+        return getDefaultValue(schema.elementType.type, schema.elementType);
+      })
+      .join(", ")}]`;
   } else {
     return transformValue(schema.defaultValue);
   }
