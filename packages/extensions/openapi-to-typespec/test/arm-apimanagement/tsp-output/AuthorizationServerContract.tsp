@@ -15,14 +15,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * External OAuth authorization server settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  AuthorizationServerContractProperties
-)
-model AuthorizationServerContract extends ProxyResourceBase {
+model AuthorizationServerContract
+  is ProxyResource<AuthorizationServerContractProperties> {
   /**
    * Identifier of the authorization server.
    */
@@ -34,12 +29,6 @@ model AuthorizationServerContract extends ProxyResourceBase {
   @segment("authorizationServers")
   @visibility("read")
   name: string;
-
-  /**
-   * Properties of the External OAuth authorization server Contract.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AuthorizationServerContractProperties;
 }
 
 @armResourceOperations
@@ -47,16 +36,12 @@ interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AuthorizationServer_Get")
   get is ArmResourceRead<AuthorizationServerContract>;
 
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("AuthorizationServer_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       AuthorizationServerContract,
@@ -67,8 +52,6 @@ interface AuthorizationServerContracts {
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AuthorizationServer_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     {
@@ -85,9 +68,7 @@ interface AuthorizationServerContracts {
   /**
    * Updates the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
     AuthorizationServerUpdateContract,
@@ -105,8 +86,6 @@ interface AuthorizationServerContracts {
   /**
    * Deletes specific authorization server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     {
@@ -123,8 +102,6 @@ interface AuthorizationServerContracts {
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AuthorizationServer_ListByService")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     {
@@ -154,8 +131,6 @@ interface AuthorizationServerContracts {
   /**
    * Gets the client secret details of the authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AuthorizationServer_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
     void,
@@ -163,24 +138,8 @@ interface AuthorizationServerContracts {
   >;
 }
 
-@@projectedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(AuthorizationServerContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@projectedName(AuthorizationServerContracts.update::parameters.properties,
-  "json",
-  "parameters"
-);
-@@extension(AuthorizationServerContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AuthorizationServerContracts.update::parameters.properties,
   "OAuth2 Server settings Update parameters."

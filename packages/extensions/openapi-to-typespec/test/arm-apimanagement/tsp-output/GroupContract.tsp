@@ -15,12 +15,8 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(GroupContractProperties)
-model GroupContract extends ProxyResourceBase {
+model GroupContract is ProxyResource<GroupContractProperties> {
   /**
    * Group identifier. Must be unique in the current API Management service instance.
    */
@@ -31,12 +27,6 @@ model GroupContract extends ProxyResourceBase {
   @segment("groups")
   @visibility("read")
   name: string;
-
-  /**
-   * Group entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GroupContractProperties;
 }
 
 @armResourceOperations
@@ -44,16 +34,12 @@ interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_Get")
   get is ArmResourceRead<GroupContract>;
 
   /**
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("Group_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<GroupContract, BaseParameters<GroupContract>>,
   ): OkResponse | ErrorResponse;
@@ -61,8 +47,6 @@ interface GroupContracts {
   /**
    * Creates or Updates a group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     {
@@ -79,9 +63,7 @@ interface GroupContracts {
   /**
    * Updates the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
     GroupUpdateParameters,
@@ -99,8 +81,6 @@ interface GroupContracts {
   /**
    * Deletes specific group of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     {
@@ -117,8 +97,6 @@ interface GroupContracts {
   /**
    * Lists a collection of groups defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_ListByService")
   listByService is ArmResourceListByParent<
     GroupContract,
     {
@@ -149,8 +127,6 @@ interface GroupContracts {
    * Lists a collection of user entities associated with the group.
    */
   // FIXME: GroupUser_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GroupUser_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -207,21 +183,5 @@ interface GroupContracts {
   >;
 }
 
-@@projectedName(GroupContracts.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(GroupContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(GroupContracts.createOrUpdate::parameters.resource, "Create parameters.");
-@@projectedName(GroupContracts.update::parameters.properties,
-  "json",
-  "parameters"
-);
-@@extension(GroupContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(GroupContracts.update::parameters.properties, "Update parameters.");

@@ -13,7 +13,7 @@ import {
   TspArmResourceOperation,
   isFirstLevelResource,
 } from "../interfaces";
-import { updateOptions } from "../options";
+import { getOptions, updateOptions } from "../options";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -244,22 +244,13 @@ function convertResourceCreateOrReplaceOperation(
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
     const operationName = getOperationName(operation.OperationID);
-    const augmentedDecorators = [];
-    if (bodyParam) {
-      if (bodyParam.language.default.name !== "resource") {
-        augmentedDecorators.push(
-          `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "json", "${bodyParam.language.default.name}");`,
-        );
-        augmentedDecorators.push(
-          `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "x-ms-client-name", "${bodyParam.language.default.name}");`,
-        );
-      }
-      if (bodyParam.language.default.description !== "Resource create parameters.") {
-        augmentedDecorators.push(
-          `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.resource, "${bodyParam.language.default.description}");`,
-        );
-      }
-    }
+    const augmentedDecorators = getAugmentedDecorators(
+      bodyParam,
+      tspOperationGroupName,
+      operationName,
+      "resource",
+      "Resource create parameters.",
+    );
     return [
       {
         doc: operation.Description,
@@ -273,6 +264,34 @@ function convertResourceCreateOrReplaceOperation(
     ];
   }
   return [];
+}
+
+function getAugmentedDecorators(
+  bodyParam: Parameter | undefined,
+  tspOperationGroupName: string,
+  operationName: string,
+  templateName: string,
+  templateDoc: string,
+) {
+  const { isFullCompatible } = getOptions();
+
+  const augmentedDecorators = [];
+  if (bodyParam) {
+    if (bodyParam.language.default.name !== templateName && isFullCompatible) {
+      augmentedDecorators.push(
+        `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "json", "${bodyParam.language.default.name}");`,
+      );
+      augmentedDecorators.push(
+        `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "x-ms-client-name", "${bodyParam.language.default.name}");`,
+      );
+    }
+    if (bodyParam.language.default.description !== templateDoc) {
+      augmentedDecorators.push(
+        `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "${bodyParam.language.default.description}");`,
+      );
+    }
+  }
+  return augmentedDecorators;
 }
 
 function convertResourceUpdateOperation(
@@ -295,28 +314,22 @@ function convertResourceUpdateOperation(
           "// FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property",
         );
       }
+
+      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+      const operationName = getOperationName(operation.OperationID);
+      const augmentedDecorators = getAugmentedDecorators(
+        bodyParam,
+        tspOperationGroupName,
+        operationName,
+        "properties",
+        "The resource properties to be updated.",
+      );
+
       let kind;
       const templateParameters = [resourceMetadata.SwaggerModelName];
-      const augmentedDecorators = [];
       if (bodyParam) {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push(bodyParam.schema.language.default.name);
-
-        const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-        const operationName = getOperationName(operation.OperationID);
-        if (bodyParam.language.default.name !== "properties") {
-          augmentedDecorators.push(
-            `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "json", "${bodyParam.language.default.name}");`,
-          );
-          augmentedDecorators.push(
-            `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "x-ms-client-name", "${bodyParam.language.default.name}");`,
-          );
-        }
-        if (bodyParam.language.default.description !== "The resource properties to be updated.") {
-          augmentedDecorators.push(
-            `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.properties, "${bodyParam.language.default.description}");`,
-          );
-        }
       } else {
         kind = isLongRunning ? "ArmCustomPatchAsync" : "ArmCustomPatchSync";
         templateParameters.push("{}");
@@ -525,22 +538,13 @@ function convertResourceActionOperations(
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
         const operationName = getOperationName(operation.OperationID);
-        const augmentedDecorators = [];
-        if (bodyParam) {
-          if (bodyParam.language.default.name !== "body") {
-            augmentedDecorators.push(
-              `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "json", "${bodyParam.language.default.name}");`,
-            );
-            augmentedDecorators.push(
-              `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "x-ms-client-name", "${bodyParam.language.default.name}");`,
-            );
-          }
-          if (bodyParam.language.default.description !== "The content of the action request") {
-            augmentedDecorators.push(
-              `@@doc(${tspOperationGroupName}.\`${operationName}\`::parameters.body, "${bodyParam.language.default.description}");`,
-            );
-          }
-        }
+        const augmentedDecorators = getAugmentedDecorators(
+          bodyParam,
+          tspOperationGroupName,
+          operationName,
+          "body",
+          "The content of the action request",
+        );
         converted.push({
           doc: operation.Description,
           kind: kind as any,

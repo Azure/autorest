@@ -52,8 +52,6 @@ interface Spaces {
   /**
    * List Space resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Spaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Space,
     {

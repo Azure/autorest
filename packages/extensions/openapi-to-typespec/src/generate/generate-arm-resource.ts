@@ -8,6 +8,7 @@ import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateOperation } from "./generate-operations";
+import { getOptions } from "../options";
 
 export function generateArmResource(resource: TspArmResource): string {
   const definitions: string[] = [];
@@ -30,6 +31,8 @@ export function generateArmResource(resource: TspArmResource): string {
 }
 
 function generateArmResourceModel(resource: TspArmResource): string {
+  const { isFullCompatible } = getOptions();
+
   let definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
@@ -51,11 +54,12 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   if (
-    getArmCommonTypeVersion() &&
-    !resource.propertiesPropertyRequired &&
-    resource.propertiesPropertyVisibility.length === 2 &&
-    resource.propertiesPropertyVisibility.includes("read") &&
-    resource.propertiesPropertyVisibility.includes("create")
+    !isFullCompatible ||
+    (getArmCommonTypeVersion() &&
+      !resource.propertiesPropertyRequired &&
+      resource.propertiesPropertyVisibility.length === 2 &&
+      resource.propertiesPropertyVisibility.includes("read") &&
+      resource.propertiesPropertyVisibility.includes("create"))
   ) {
     definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
 
@@ -102,6 +106,8 @@ function generateArmResourceModel(resource: TspArmResource): string {
 }
 
 function generateArmResourceOperation(resource: TspArmResource): string {
+  const { isFullCompatible } = getOptions();
+
   const formalOperationGroupName = pluralize(resource.name);
   const definitions: string[] = [];
 
@@ -121,6 +127,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     const decorators = generateDecorators(operation.decorators);
     decorators && definitions.push(decorators);
     if (
+      isFullCompatible &&
       operation.operationId &&
       (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name) ||
         operation.kind === "ArmResourceListByParent")
@@ -143,6 +150,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   }
   for (const operation of resource.normalOperations) {
     if (
+      isFullCompatible &&
       operation.operationId &&
       operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {

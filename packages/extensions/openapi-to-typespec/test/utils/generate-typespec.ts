@@ -4,7 +4,7 @@ import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
 
-export async function generateTypespec(repoRoot: string, folder: string, debug = false) {
+export async function generateTypespec(repoRoot: string, folder: string, debug = false, isFullCompatible = false) {
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder);
   const dir = await readdir(path);
@@ -21,10 +21,10 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
   }
 
   const swaggerPath = join(path, firstSwagger);
-  generate(repoRoot, swaggerPath, debug);
+  generate(repoRoot, swaggerPath, debug, isFullCompatible);
 }
 
-function generate(root: string, path: string, debug = false) {
+function generate(root: string, path: string, debug = false, isFullCompatible = false) {
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
 
@@ -42,6 +42,7 @@ function generate(root: string, path: string, debug = false) {
     `--output-folder=${dirname(path)}`,
     "--src-path=tsp-output",
     ...(debug ? ["--openapi-to-typespec.debugger"] : []),
+    ...(isFullCompatible ? ["--openapi-to-typespec.isFullCompatible"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
   ];
   const spawn = spawnSync("node", args, { stdio: "inherit" });
@@ -62,9 +63,10 @@ async function main() {
     ? [folder as string]
     : (await readdir(join(root, "test"))).filter((d) => d !== "utils");
 
-  for (const folder of folders) {
+  for (let i = 0; i < folders.length; i++) {
+    const folder = folders[i];
     try {
-      await generateTypespec(repoRoot, folder, debug);
+      await generateTypespec(repoRoot, folder, debug, i % 2 === 0);
     } catch (e) {
       throw new Error(`Failed to generate ${folder}, error:\n${e}`);
     }

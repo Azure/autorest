@@ -15,25 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Delegation settings for a developer portal.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("delegation")
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PortalDelegationSettingsProperties
-)
-model PortalDelegationSettings extends ProxyResourceBase {
+model PortalDelegationSettings
+  is ProxyResource<PortalDelegationSettingsProperties> {
   @key("portalsetting")
   @segment("portalsettings")
   @visibility("read")
   name: string;
-
-  /**
-   * Delegation settings contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PortalDelegationSettingsProperties;
 }
 
 @armResourceOperations
@@ -42,16 +31,12 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Get Delegation Settings for the Portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DelegationSettings_Get")
   get is ArmResourceRead<PortalDelegationSettings>;
 
   /**
    * Gets the entity state (Etag) version of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("DelegationSettings_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PortalDelegationSettings,
@@ -62,8 +47,6 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Create or Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DelegationSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     {
@@ -80,9 +63,7 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Update Delegation settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
     PortalDelegationSettings,
@@ -100,15 +81,11 @@ interface PortalDelegationSettingsOperationGroup {
   /**
    * Lists a collection of portalsettings defined within a service instance..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalSettings_ListByService")
   listByService is ArmResourceListByParent<PortalDelegationSettings>;
 
   /**
    * Gets the secret validation key of the DelegationSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DelegationSettings_ListSecrets")
   listSecrets is ArmResourceActionSync<
     PortalDelegationSettings,
     void,
@@ -116,24 +93,8 @@ interface PortalDelegationSettingsOperationGroup {
   >;
 }
 
-@@projectedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@projectedName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
-  "json",
-  "parameters"
-);
-@@extension(PortalDelegationSettingsOperationGroup.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(PortalDelegationSettingsOperationGroup.update::parameters.properties,
   "Update Delegation settings."

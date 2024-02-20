@@ -33,36 +33,26 @@ interface Frontends {
   /**
    * Get a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FrontendsInterface_Get")
   get is ArmResourceRead<Frontend>;
 
   /**
    * Create a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FrontendsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
 
   /**
    * Update a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("FrontendsInterface_Update")
   update is ArmCustomPatchSync<Frontend, FrontendUpdate>;
 
   /**
    * Delete a Frontend
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FrontendsInterface_Delete")
   delete is ArmResourceDeleteAsync<Frontend>;
 
   /**
    * List Frontend resources by TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FrontendsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Frontend>;
 }

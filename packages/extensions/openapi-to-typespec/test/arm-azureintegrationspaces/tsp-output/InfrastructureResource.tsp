@@ -58,8 +58,6 @@ interface InfrastructureResources {
   /**
    * List InfrastructureResource resources by Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("InfrastructureResources_ListBySpace")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     {
