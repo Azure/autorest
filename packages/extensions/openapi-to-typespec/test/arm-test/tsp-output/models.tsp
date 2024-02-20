@@ -155,3 +155,13 @@ model EnrollProperties {
    */
   city?: string;
 }
+
+/**
+ * Resource properties
+ */
+model ArrayDefaultProperties extends Record<unknown> {
+  /**
+   * Array of strings
+   */
+  array?: string[] = ["911", "933"];
+}

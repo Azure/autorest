@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./Employee.tsp";
 import "./Enroll.tsp";
 import "./DictProperty.tsp";
+import "./ArrayDefault.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
