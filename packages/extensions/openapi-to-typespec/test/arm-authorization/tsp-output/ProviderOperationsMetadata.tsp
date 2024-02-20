@@ -51,7 +51,7 @@ interface ProviderOperationsMetadataOperationGroup {
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     {
-      ...BaseParameters<ProviderOperationsMetadata>;
+      ...TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.
@@ -69,7 +69,7 @@ interface ProviderOperationsMetadataOperationGroup {
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     {
-      ...BaseParameters<ProviderOperationsMetadata>;
+      ...TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.

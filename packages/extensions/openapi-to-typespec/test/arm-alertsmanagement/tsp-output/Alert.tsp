@@ -51,7 +51,7 @@ interface Alerts {
   getAll is ArmResourceListByParent<
     Alert,
     {
-      ...BaseParameters<Alert>;
+      ...SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -165,7 +165,7 @@ interface Alerts {
     string,
     Alert,
     {
-      ...BaseParameters<Alert>;
+      ...SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
