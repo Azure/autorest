@@ -51,3 +51,7 @@ export function isAnyObjectSchema(schema: Schema): schema is AnySchema {
 export function isArmIdSchema(schema: Schema): boolean {
   return schema.type === SchemaType.ArmId;
 }
+
+export function isDurationSchema(schema: Schema): boolean {
+  return schema.type === SchemaType.Duration;
+}
