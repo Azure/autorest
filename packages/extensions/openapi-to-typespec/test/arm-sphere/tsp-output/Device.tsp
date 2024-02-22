@@ -68,8 +68,8 @@ interface Devices {
   >;
 }
 
-@@projectedName(Devices.generateCapabilityImage::parameters.body,
-  "json",
+@@encodedName(Devices.generateCapabilityImage::parameters.body,
+  "application/json",
   "generateDeviceCapabilityRequest"
 );
 @@extension(Devices.generateCapabilityImage::parameters.body,

@@ -79,7 +79,10 @@ interface Schedules {
   >;
 }
 
-@@projectedName(Schedules.createOrUpdate::parameters.resource, "json", "body");
+@@encodedName(Schedules.createOrUpdate::parameters.resource,
+  "application/json",
+  "body"
+);
 @@extension(Schedules.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "body"

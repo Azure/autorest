@@ -89,8 +89,8 @@ interface Certificates {
   >;
 }
 
-@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "json",
+@@encodedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "application/json",
   "proofOfPossessionNonceRequest"
 );
 @@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,

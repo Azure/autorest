@@ -93,8 +93,8 @@ interface RestorePoints {
   >;
 }
 
-@@projectedName(RestorePoints.create::parameters.resource,
-  "json",
+@@encodedName(RestorePoints.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(RestorePoints.create::parameters.resource,

@@ -79,7 +79,10 @@ interface Tables {
   list is ArmResourceListByParent<Table>;
 }
 
-@@projectedName(Tables.create::parameters.resource, "json", "parameters");
+@@encodedName(Tables.create::parameters.resource,
+  "application/json",
+  "parameters"
+);
 @@extension(Tables.create::parameters.resource,
   "x-ms-client-name",
   "parameters"
@@ -87,7 +90,10 @@ interface Tables {
 @@doc(Tables.create::parameters.resource,
   "The parameters to provide to create a table."
 );
-@@projectedName(Tables.update::parameters.properties, "json", "parameters");
+@@encodedName(Tables.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
 @@extension(Tables.update::parameters.properties,
   "x-ms-client-name",
   "parameters"

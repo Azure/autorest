@@ -320,8 +320,8 @@ interface ProductContracts {
   ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
 }
 
-@@projectedName(ProductContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ProductContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ProductContracts.createOrUpdate::parameters.resource,
@@ -331,8 +331,8 @@ interface ProductContracts {
 @@doc(ProductContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(ProductContracts.update::parameters.properties,
-  "json",
+@@encodedName(ProductContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ProductContracts.update::parameters.properties,

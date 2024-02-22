@@ -94,7 +94,10 @@ interface StorageQueues {
   >;
 }
 
-@@projectedName(StorageQueues.create::parameters.resource, "json", "queue");
+@@encodedName(StorageQueues.create::parameters.resource,
+  "application/json",
+  "queue"
+);
 @@extension(StorageQueues.create::parameters.resource,
   "x-ms-client-name",
   "queue"
@@ -102,7 +105,10 @@ interface StorageQueues {
 @@doc(StorageQueues.create::parameters.resource,
   "Queue properties and metadata to be created with"
 );
-@@projectedName(StorageQueues.update::parameters.properties, "json", "queue");
+@@encodedName(StorageQueues.update::parameters.properties,
+  "application/json",
+  "queue"
+);
 @@extension(StorageQueues.update::parameters.properties,
   "x-ms-client-name",
   "queue"

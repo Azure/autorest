@@ -132,8 +132,8 @@ interface IssueCommentContracts {
   >;
 }
 
-@@projectedName(IssueCommentContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(IssueCommentContracts.createOrUpdate::parameters.resource,

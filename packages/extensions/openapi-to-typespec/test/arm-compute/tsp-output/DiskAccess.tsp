@@ -90,8 +90,8 @@ interface DiskAccesses {
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
-@@projectedName(DiskAccesses.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DiskAccesses.createOrUpdate::parameters.resource,
+  "application/json",
   "diskAccess"
 );
 @@extension(DiskAccesses.createOrUpdate::parameters.resource,
@@ -101,8 +101,8 @@ interface DiskAccesses {
 @@doc(DiskAccesses.createOrUpdate::parameters.resource,
   "disk access object supplied in the body of the Put disk access operation."
 );
-@@projectedName(DiskAccesses.update::parameters.properties,
-  "json",
+@@encodedName(DiskAccesses.update::parameters.properties,
+  "application/json",
   "diskAccess"
 );
 @@extension(DiskAccesses.update::parameters.properties,

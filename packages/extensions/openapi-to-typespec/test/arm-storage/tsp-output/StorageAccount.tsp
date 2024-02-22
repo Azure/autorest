@@ -237,8 +237,8 @@ interface StorageAccounts {
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
-@@projectedName(StorageAccounts.create::parameters.resource,
-  "json",
+@@encodedName(StorageAccounts.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(StorageAccounts.create::parameters.resource,
@@ -248,8 +248,8 @@ interface StorageAccounts {
 @@doc(StorageAccounts.create::parameters.resource,
   "The parameters to provide for the created account."
 );
-@@projectedName(StorageAccounts.update::parameters.properties,
-  "json",
+@@encodedName(StorageAccounts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(StorageAccounts.update::parameters.properties,
@@ -259,8 +259,8 @@ interface StorageAccounts {
 @@doc(StorageAccounts.update::parameters.properties,
   "The parameters to provide for the updated account."
 );
-@@projectedName(StorageAccounts.regenerateKey::parameters.body,
-  "json",
+@@encodedName(StorageAccounts.regenerateKey::parameters.body,
+  "application/json",
   "regenerateKey"
 );
 @@extension(StorageAccounts.regenerateKey::parameters.body,
@@ -270,8 +270,8 @@ interface StorageAccounts {
 @@doc(StorageAccounts.regenerateKey::parameters.body,
   "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
 );
-@@projectedName(StorageAccounts.listAccountSAS::parameters.body,
-  "json",
+@@encodedName(StorageAccounts.listAccountSAS::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(StorageAccounts.listAccountSAS::parameters.body,
@@ -281,8 +281,8 @@ interface StorageAccounts {
 @@doc(StorageAccounts.listAccountSAS::parameters.body,
   "The parameters to provide to list SAS credentials for the storage account."
 );
-@@projectedName(StorageAccounts.listServiceSAS::parameters.body,
-  "json",
+@@encodedName(StorageAccounts.listServiceSAS::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(StorageAccounts.listServiceSAS::parameters.body,
@@ -292,8 +292,8 @@ interface StorageAccounts {
 @@doc(StorageAccounts.listServiceSAS::parameters.body,
   "The parameters to provide to list service SAS credentials."
 );
-@@projectedName(StorageAccounts.restoreBlobRanges::parameters.body,
-  "json",
+@@encodedName(StorageAccounts.restoreBlobRanges::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(StorageAccounts.restoreBlobRanges::parameters.body,

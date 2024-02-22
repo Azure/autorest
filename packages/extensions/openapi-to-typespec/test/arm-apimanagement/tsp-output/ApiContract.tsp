@@ -325,8 +325,8 @@ interface ApiContracts {
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
 }
 
-@@projectedName(ApiContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ApiContracts.createOrUpdate::parameters.resource,
@@ -336,8 +336,8 @@ interface ApiContracts {
 @@doc(ApiContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(ApiContracts.update::parameters.properties,
-  "json",
+@@encodedName(ApiContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ApiContracts.update::parameters.properties,

@@ -82,8 +82,8 @@ interface RoleAssignmentScheduleRequests {
   >;
 }
 
-@@projectedName(RoleAssignmentScheduleRequests.create::parameters.resource,
-  "json",
+@@encodedName(RoleAssignmentScheduleRequests.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(RoleAssignmentScheduleRequests.create::parameters.resource,
@@ -93,8 +93,8 @@ interface RoleAssignmentScheduleRequests {
 @@doc(RoleAssignmentScheduleRequests.create::parameters.resource,
   "Parameters for the role assignment schedule request."
 );
-@@projectedName(RoleAssignmentScheduleRequests.validate::parameters.body,
-  "json",
+@@encodedName(RoleAssignmentScheduleRequests.validate::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(RoleAssignmentScheduleRequests.validate::parameters.body,

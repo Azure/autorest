@@ -57,8 +57,8 @@ interface RoleManagementPolicyAssignments {
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }
 
-@@projectedName(RoleManagementPolicyAssignments.create::parameters.resource,
-  "json",
+@@encodedName(RoleManagementPolicyAssignments.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(RoleManagementPolicyAssignments.create::parameters.resource,

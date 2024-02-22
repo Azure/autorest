@@ -300,8 +300,8 @@ interface UserContracts {
   ): ArmResponse<UserIdentityListResult> | ErrorResponse;
 }
 
-@@projectedName(UserContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(UserContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(UserContracts.createOrUpdate::parameters.resource,
@@ -311,8 +311,8 @@ interface UserContracts {
 @@doc(UserContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(UserContracts.update::parameters.properties,
-  "json",
+@@encodedName(UserContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(UserContracts.update::parameters.properties,
@@ -320,8 +320,8 @@ interface UserContracts {
   "parameters"
 );
 @@doc(UserContracts.update::parameters.properties, "Update parameters.");
-@@projectedName(UserContracts.getSharedAccessToken::parameters.body,
-  "json",
+@@encodedName(UserContracts.getSharedAccessToken::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(UserContracts.getSharedAccessToken::parameters.body,

@@ -51,14 +51,14 @@ model OdataProductResult {
   values?: Product[];
 
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
 @pagedResult
 model ProductResultValueWithXMSClientName {
   @items
-  @projectedName("json", "values")
+  @encodedName("application/json", "values")
   indexes?: Product[];
 
   @nextLink

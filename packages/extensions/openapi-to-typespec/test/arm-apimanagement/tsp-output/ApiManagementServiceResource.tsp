@@ -1154,8 +1154,8 @@ interface ApiManagementServiceResources {
   ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
 }
 
-@@projectedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.createOrUpdate::parameters.resource,
@@ -1165,8 +1165,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@projectedName(ApiManagementServiceResources.update::parameters.properties,
-  "json",
+@@encodedName(ApiManagementServiceResources.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.update::parameters.properties,
@@ -1176,8 +1176,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.update::parameters.properties,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@projectedName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "application/json",
   "connectivityCheckRequestParams"
 );
 @@extension(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
@@ -1187,8 +1187,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "Connectivity Check request parameters."
 );
-@@projectedName(ApiManagementServiceResources.restore::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.restore::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.restore::parameters.body,
@@ -1198,8 +1198,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.restore::parameters.body,
   "Parameters supplied to the Restore API Management service from backup operation."
 );
-@@projectedName(ApiManagementServiceResources.backup::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.backup::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.backup::parameters.body,
@@ -1209,8 +1209,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.backup::parameters.body,
   "Parameters supplied to the ApiManagementService_Backup operation."
 );
-@@projectedName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
@@ -1220,8 +1220,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
-@@projectedName(ApiManagementServiceResources.deploy::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.deploy::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.deploy::parameters.body,
@@ -1231,8 +1231,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.deploy::parameters.body,
   "Deploy Configuration parameters."
 );
-@@projectedName(ApiManagementServiceResources.save::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.save::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.save::parameters.body,
@@ -1242,8 +1242,8 @@ interface ApiManagementServiceResources {
 @@doc(ApiManagementServiceResources.save::parameters.body,
   "Save Configuration parameters."
 );
-@@projectedName(ApiManagementServiceResources.validate::parameters.body,
-  "json",
+@@encodedName(ApiManagementServiceResources.validate::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ApiManagementServiceResources.validate::parameters.body,

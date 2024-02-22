@@ -152,8 +152,8 @@ interface ApiVersionSetContracts {
   >;
 }
 
-@@projectedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ApiVersionSetContracts.createOrUpdate::parameters.resource,
@@ -163,8 +163,8 @@ interface ApiVersionSetContracts {
 @@doc(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(ApiVersionSetContracts.update::parameters.properties,
-  "json",
+@@encodedName(ApiVersionSetContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ApiVersionSetContracts.update::parameters.properties,

@@ -197,8 +197,8 @@ interface GroupContracts {
   ): ArmResponse<ApiManagementGroupUserListResult> | ErrorResponse;
 }
 
-@@projectedName(GroupContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GroupContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(GroupContracts.createOrUpdate::parameters.resource,
@@ -206,8 +206,8 @@ interface GroupContracts {
   "parameters"
 );
 @@doc(GroupContracts.createOrUpdate::parameters.resource, "Create parameters.");
-@@projectedName(GroupContracts.update::parameters.properties,
-  "json",
+@@encodedName(GroupContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(GroupContracts.update::parameters.properties,

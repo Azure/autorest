@@ -64,8 +64,8 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@projectedName(PrivateEndpointConnections.put::parameters.resource,
-  "json",
+@@encodedName(PrivateEndpointConnections.put::parameters.resource,
+  "application/json",
   "properties"
 );
 @@extension(PrivateEndpointConnections.put::parameters.resource,

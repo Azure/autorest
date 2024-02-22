@@ -150,8 +150,8 @@ interface ApiReleaseContracts {
   >;
 }
 
-@@projectedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ApiReleaseContracts.createOrUpdate::parameters.resource,
@@ -161,8 +161,8 @@ interface ApiReleaseContracts {
 @@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(ApiReleaseContracts.update::parameters.properties,
-  "json",
+@@encodedName(ApiReleaseContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ApiReleaseContracts.update::parameters.properties,

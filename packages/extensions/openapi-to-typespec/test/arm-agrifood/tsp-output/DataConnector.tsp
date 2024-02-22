@@ -86,8 +86,8 @@ interface DataConnectors {
   >;
 }
 
-@@projectedName(DataConnectors.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DataConnectors.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(DataConnectors.createOrUpdate::parameters.resource,

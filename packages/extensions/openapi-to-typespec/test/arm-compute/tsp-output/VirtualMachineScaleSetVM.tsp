@@ -427,8 +427,8 @@ interface VirtualMachineScaleSetVMS {
   ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
 }
 
-@@projectedName(VirtualMachineScaleSetVMS.update::parameters.resource,
-  "json",
+@@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSetVMS.update::parameters.resource,
@@ -438,8 +438,8 @@ interface VirtualMachineScaleSetVMS {
 @@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
 );
-@@projectedName(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "json",
+@@encodedName(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "application/json",
   "vmScaleSetVMReimageInput"
 );
 @@extension(VirtualMachineScaleSetVMS.reimage::parameters.body,
@@ -449,8 +449,8 @@ interface VirtualMachineScaleSetVMS {
 @@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
-@@projectedName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
-  "json",
+@@encodedName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSetVMS.runCommand::parameters.body,

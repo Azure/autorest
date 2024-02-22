@@ -75,18 +75,18 @@ model FloatWrapper {
 model DoubleWrapper {
   field1?: float64;
 
-  @projectedName(
-    "json",
+  @encodedName(
+    "application/json",
     "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"
   )
   field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: float64;
 }
 
 model BooleanWrapper {
-  @projectedName("json", "field_true")
+  @encodedName("application/json", "field_true")
   fieldTrue?: boolean;
 
-  @projectedName("json", "field_false")
+  @encodedName("application/json", "field_false")
   fieldFalse?: boolean;
 }
 
@@ -209,7 +209,7 @@ model MyBaseHelperType {
 model SmartSalmon extends Salmon {
   ...Record<unknown>;
 
-  @projectedName("json", "college_degree")
+  @encodedName("application/json", "college_degree")
   collegeDegree?: string;
 
   fishtype: "smart_salmon";

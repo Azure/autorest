@@ -24,3 +24,11 @@ using Microsoft.Storage;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ListQueue.queueProperties);
+
+@@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
+
+@@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
+
+@@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
+
+@@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");

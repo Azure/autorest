@@ -159,8 +159,8 @@ interface BackendContracts {
   >;
 }
 
-@@projectedName(BackendContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(BackendContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(BackendContracts.createOrUpdate::parameters.resource,
@@ -170,8 +170,8 @@ interface BackendContracts {
 @@doc(BackendContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(BackendContracts.update::parameters.properties,
-  "json",
+@@encodedName(BackendContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(BackendContracts.update::parameters.properties,
@@ -179,8 +179,8 @@ interface BackendContracts {
   "parameters"
 );
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
-@@projectedName(BackendContracts.reconnect::parameters.body,
-  "json",
+@@encodedName(BackendContracts.reconnect::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(BackendContracts.reconnect::parameters.body,

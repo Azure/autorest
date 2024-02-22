@@ -131,8 +131,8 @@ interface ImmutabilityPolicies {
   >;
 }
 
-@@projectedName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
-  "json",
+@@encodedName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
@@ -142,8 +142,8 @@ interface ImmutabilityPolicies {
 @@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
 );
-@@projectedName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
-  "json",
+@@encodedName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,

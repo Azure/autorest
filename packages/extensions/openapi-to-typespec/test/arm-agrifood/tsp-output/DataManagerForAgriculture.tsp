@@ -111,8 +111,8 @@ interface DataManagerForAgricultures {
   listBySubscription is ArmListBySubscription<DataManagerForAgriculture>;
 }
 
-@@projectedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
+  "application/json",
   "request"
 );
 @@extension(DataManagerForAgricultures.createOrUpdate::parameters.resource,
@@ -122,8 +122,8 @@ interface DataManagerForAgricultures {
 @@doc(DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "Data Manager For Agriculture resource create or update request object."
 );
-@@projectedName(DataManagerForAgricultures.update::parameters.properties,
-  "json",
+@@encodedName(DataManagerForAgricultures.update::parameters.properties,
+  "application/json",
   "request"
 );
 @@extension(DataManagerForAgricultures.update::parameters.properties,

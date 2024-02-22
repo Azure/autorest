@@ -37,7 +37,6 @@ model PortalDelegationSettings extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "PortalDelegationSettings")
 interface PortalDelegationSettingsOperationGroup {
   /**
    * Get Delegation Settings for the Portal.
@@ -116,8 +115,8 @@ interface PortalDelegationSettingsOperationGroup {
   >;
 }
 
-@@projectedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
@@ -127,8 +126,8 @@ interface PortalDelegationSettingsOperationGroup {
 @@doc(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@projectedName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
-  "json",
+@@encodedName(PortalDelegationSettingsOperationGroup.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(PortalDelegationSettingsOperationGroup.update::parameters.properties,

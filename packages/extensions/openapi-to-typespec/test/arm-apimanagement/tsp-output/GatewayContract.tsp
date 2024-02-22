@@ -228,8 +228,8 @@ interface GatewayContracts {
   ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
 }
 
-@@projectedName(GatewayContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GatewayContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayContracts.createOrUpdate::parameters.resource,
@@ -237,8 +237,8 @@ interface GatewayContracts {
   "parameters"
 );
 @@doc(GatewayContracts.createOrUpdate::parameters.resource, "");
-@@projectedName(GatewayContracts.update::parameters.properties,
-  "json",
+@@encodedName(GatewayContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayContracts.update::parameters.properties,
@@ -246,8 +246,8 @@ interface GatewayContracts {
   "parameters"
 );
 @@doc(GatewayContracts.update::parameters.properties, "");
-@@projectedName(GatewayContracts.regenerateKey::parameters.body,
-  "json",
+@@encodedName(GatewayContracts.regenerateKey::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayContracts.regenerateKey::parameters.body,
@@ -255,8 +255,8 @@ interface GatewayContracts {
   "parameters"
 );
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
-@@projectedName(GatewayContracts.generateToken::parameters.body,
-  "json",
+@@encodedName(GatewayContracts.generateToken::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayContracts.generateToken::parameters.body,
