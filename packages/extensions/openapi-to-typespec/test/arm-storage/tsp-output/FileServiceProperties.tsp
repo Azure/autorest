@@ -39,7 +39,6 @@ model FileServiceProperties extends ProxyResourceBase {
 }
 
 @armResourceOperations
-@projectedName("client", "FileServiceProperties")
 interface FileServicePropertiesOperationGroup {
   /**
    * Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
@@ -63,8 +62,8 @@ interface FileServicePropertiesOperationGroup {
   list is ArmResourceListByParent<FileServiceProperties>;
 }
 
-@@projectedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "json",
+@@encodedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,

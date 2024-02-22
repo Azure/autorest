@@ -92,8 +92,8 @@ interface VirtualMachineExtensions {
   >;
 }
 
-@@projectedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.createOrUpdate::parameters.resource,
@@ -103,8 +103,8 @@ interface VirtualMachineExtensions {
 @@doc(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
-@@projectedName(VirtualMachineExtensions.update::parameters.properties,
-  "json",
+@@encodedName(VirtualMachineExtensions.update::parameters.properties,
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.update::parameters.properties,

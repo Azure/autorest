@@ -149,8 +149,8 @@ interface EmailTemplateContracts {
   >;
 }
 
-@@projectedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(EmailTemplateContracts.createOrUpdate::parameters.resource,
@@ -160,8 +160,8 @@ interface EmailTemplateContracts {
 @@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
   "Email Template update parameters."
 );
-@@projectedName(EmailTemplateContracts.update::parameters.properties,
-  "json",
+@@encodedName(EmailTemplateContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(EmailTemplateContracts.update::parameters.properties,

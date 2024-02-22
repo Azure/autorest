@@ -609,7 +609,7 @@ model Error {
    * The key vault server error.
    */
   @visibility("read")
-  @projectedName("json", "innererror")
+  @encodedName("application/json", "innererror")
   innerError?: Error;
 }
 
@@ -740,7 +740,7 @@ model CertificateItem {
   /**
    * Thumbprint of the certificate.
    */
-  @projectedName("json", "x5t")
+  @encodedName("application/json", "x5t")
   x509Thumbprint?: bytes;
 }
 
@@ -777,13 +777,13 @@ model Attributes {
   /**
    * Not before date in UTC.
    */
-  @projectedName("json", "nbf")
+  @encodedName("application/json", "nbf")
   notBefore?: plainTime;
 
   /**
    * Expiry date in UTC.
    */
-  @projectedName("json", "exp")
+  @encodedName("application/json", "exp")
   expires?: plainTime;
 
   /**
@@ -849,7 +849,7 @@ model CertificateBundle {
    * Thumbprint of the certificate.
    */
   @visibility("read")
-  @projectedName("json", "x5t")
+  @encodedName("application/json", "x5t")
   x509Thumbprint?: bytes;
 
   /**
@@ -893,31 +893,31 @@ model CertificatePolicy {
   /**
    * Properties of the key backing a certificate.
    */
-  @projectedName("json", "key_props")
+  @encodedName("application/json", "key_props")
   keyProperties?: KeyProperties;
 
   /**
    * Properties of the secret backing a certificate.
    */
-  @projectedName("json", "secret_props")
+  @encodedName("application/json", "secret_props")
   secretProperties?: SecretProperties;
 
   /**
    * Properties of the X509 component of a certificate.
    */
-  @projectedName("json", "x509_props")
+  @encodedName("application/json", "x509_props")
   x509CertificateProperties?: X509CertificateProperties;
 
   /**
    * Actions that will be performed by Key Vault over the lifetime of a certificate.
    */
-  @projectedName("json", "lifetime_actions")
+  @encodedName("application/json", "lifetime_actions")
   lifetimeActions?: LifetimeAction[];
 
   /**
    * Parameters for the issuer of the X509 component of a certificate.
    */
-  @projectedName("json", "issuer")
+  @encodedName("application/json", "issuer")
   issuerParameters?: IssuerParameters;
 
   /**
@@ -939,25 +939,25 @@ model KeyProperties {
   /**
    * The type of key pair to be used for the certificate.
    */
-  @projectedName("json", "kty")
+  @encodedName("application/json", "kty")
   keyType?: JsonWebKeyType;
 
   /**
    * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
    */
-  @projectedName("json", "key_size")
+  @encodedName("application/json", "key_size")
   keySize?: int32;
 
   /**
    * Indicates if the same key pair will be used on certificate renewal.
    */
-  @projectedName("json", "reuse_key")
+  @encodedName("application/json", "reuse_key")
   reuseKey?: boolean;
 
   /**
    * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
    */
-  @projectedName("json", "crv")
+  @encodedName("application/json", "crv")
   curve?: JsonWebKeyCurveName;
 }
 
@@ -988,19 +988,19 @@ model X509CertificateProperties {
   /**
    * The subject alternative names.
    */
-  @projectedName("json", "sans")
+  @encodedName("application/json", "sans")
   subjectAlternativeNames?: SubjectAlternativeNames;
 
   /**
    * Defines how the certificate's key may be used.
    */
-  @projectedName("json", "key_usage")
+  @encodedName("application/json", "key_usage")
   keyUsage?: KeyUsageType[];
 
   /**
    * The duration that the certificate is valid in months.
    */
-  @projectedName("json", "validity_months")
+  @encodedName("application/json", "validity_months")
   validityInMonths?: int32;
 }
 
@@ -1016,7 +1016,7 @@ model SubjectAlternativeNames {
   /**
    * Domain names.
    */
-  @projectedName("json", "dns_names")
+  @encodedName("application/json", "dns_names")
   dnsNames?: string[];
 
   /**
@@ -1050,7 +1050,7 @@ model Trigger {
    */
   @maxValue(99)
   @minValue(1)
-  @projectedName("json", "lifetime_percentage")
+  @encodedName("application/json", "lifetime_percentage")
   lifetimePercentage?: int32;
 
   /**
@@ -1058,7 +1058,7 @@ model Trigger {
    * validity_in_months multiplied by 27. If validity_in_months is 36, then value
    * should be between 1 and 972 (36 * 27).
    */
-  @projectedName("json", "days_before_expiry")
+  @encodedName("application/json", "days_before_expiry")
   daysBeforeExpiry?: int32;
 }
 
@@ -1069,7 +1069,7 @@ model Action {
   /**
    * The type of the action.
    */
-  @projectedName("json", "action_type")
+  @encodedName("application/json", "action_type")
   actionType?: ActionType;
 }
 
@@ -1087,14 +1087,14 @@ model IssuerParameters {
    * Certificate type as supported by the provider (optional); for example 'OV-SSL',
    * 'EV-SSL'
    */
-  @projectedName("json", "cty")
+  @encodedName("application/json", "cty")
   certificateType?: string;
 
   /**
    * Indicates if the certificates generated under this policy should be published
    * to certificate transparency logs.
    */
-  @projectedName("json", "cert_transparency")
+  @encodedName("application/json", "cert_transparency")
   certificateTransparency?: boolean;
 }
 
@@ -1111,7 +1111,7 @@ model Contacts {
   /**
    * The contact list for the vault certificates.
    */
-  @projectedName("json", "contacts")
+  @encodedName("application/json", "contacts")
   contactList?: Contact[];
 }
 
@@ -1122,7 +1122,7 @@ model Contact {
   /**
    * Email address.
    */
-  @projectedName("json", "email")
+  @encodedName("application/json", "email")
   emailAddress?: string;
 
   /**
@@ -1173,7 +1173,7 @@ model CertificateIssuerSetParameters {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @projectedName("json", "org_details")
+  @encodedName("application/json", "org_details")
   organizationDetails?: OrganizationDetails;
 
   /**
@@ -1189,13 +1189,13 @@ model IssuerCredentials {
   /**
    * The user name/account name/account id.
    */
-  @projectedName("json", "account_id")
+  @encodedName("application/json", "account_id")
   accountId?: string;
 
   /**
    * The password/secret/account key.
    */
-  @projectedName("json", "pwd")
+  @encodedName("application/json", "pwd")
   password?: string;
 }
 
@@ -1211,7 +1211,7 @@ model OrganizationDetails {
   /**
    * Details of the organization administrator.
    */
-  @projectedName("json", "admin_details")
+  @encodedName("application/json", "admin_details")
   adminDetails?: AdministratorDetails[];
 }
 
@@ -1222,19 +1222,19 @@ model AdministratorDetails {
   /**
    * First name.
    */
-  @projectedName("json", "first_name")
+  @encodedName("application/json", "first_name")
   firstName?: string;
 
   /**
    * Last name.
    */
-  @projectedName("json", "last_name")
+  @encodedName("application/json", "last_name")
   lastName?: string;
 
   /**
    * Email address.
    */
-  @projectedName("json", "email")
+  @encodedName("application/json", "email")
   emailAddress?: string;
 
   /**
@@ -1288,7 +1288,7 @@ model IssuerBundle {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @projectedName("json", "org_details")
+  @encodedName("application/json", "org_details")
   organizationDetails?: OrganizationDetails;
 
   /**
@@ -1314,7 +1314,7 @@ model CertificateIssuerUpdateParameters {
   /**
    * Details of the organization as provided to the issuer.
    */
-  @projectedName("json", "org_details")
+  @encodedName("application/json", "org_details")
   organizationDetails?: OrganizationDetails;
 
   /**
@@ -1330,13 +1330,13 @@ model CertificateCreateParameters {
   /**
    * The management policy for the certificate.
    */
-  @projectedName("json", "policy")
+  @encodedName("application/json", "policy")
   certificatePolicy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   certificateAttributes?: CertificateAttributes;
 
   /**
@@ -1358,7 +1358,7 @@ model CertificateOperation {
   /**
    * Parameters for the issuer of the X509 component of a certificate.
    */
-  @projectedName("json", "issuer")
+  @encodedName("application/json", "issuer")
   issuerParameters?: IssuerParameters;
 
   /**
@@ -1370,7 +1370,7 @@ model CertificateOperation {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @projectedName("json", "cancellation_requested")
+  @encodedName("application/json", "cancellation_requested")
   cancellationRequested?: boolean;
 
   /**
@@ -1381,7 +1381,7 @@ model CertificateOperation {
   /**
    * The status details of the certificate operation.
    */
-  @projectedName("json", "status_details")
+  @encodedName("application/json", "status_details")
   statusDetails?: string;
 
   /**
@@ -1397,7 +1397,7 @@ model CertificateOperation {
   /**
    * Identifier for the certificate operation.
    */
-  @projectedName("json", "request_id")
+  @encodedName("application/json", "request_id")
   requestId?: string;
 }
 
@@ -1409,26 +1409,26 @@ model CertificateImportParameters {
    * Base64 encoded representation of the certificate object to import. This
    * certificate needs to contain the private key.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   base64EncodedCertificate: string;
 
   /**
    * If the private key in base64EncodedCertificate is encrypted, the password used
    * for encryption.
    */
-  @projectedName("json", "pwd")
+  @encodedName("application/json", "pwd")
   password?: string;
 
   /**
    * The management policy for the certificate.
    */
-  @projectedName("json", "policy")
+  @encodedName("application/json", "policy")
   certificatePolicy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   certificateAttributes?: CertificateAttributes;
 
   /**
@@ -1444,13 +1444,13 @@ model CertificateUpdateParameters {
   /**
    * The management policy for the certificate.
    */
-  @projectedName("json", "policy")
+  @encodedName("application/json", "policy")
   certificatePolicy?: CertificatePolicy;
 
   /**
    * The attributes of the certificate (optional).
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   certificateAttributes?: CertificateAttributes;
 
   /**
@@ -1466,7 +1466,7 @@ model CertificateOperationUpdateParameter {
   /**
    * Indicates if cancellation was requested on the certificate operation.
    */
-  @projectedName("json", "cancellation_requested")
+  @encodedName("application/json", "cancellation_requested")
   cancellationRequested: boolean;
 }
 
@@ -1477,13 +1477,13 @@ model CertificateMergeParameters {
   /**
    * The certificate or the certificate chain to merge.
    */
-  @projectedName("json", "x5c")
+  @encodedName("application/json", "x5c")
   x509Certificates: bytes[];
 
   /**
    * The attributes of the certificate (optional).
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   certificateAttributes?: CertificateAttributes;
 
   /**
@@ -1510,7 +1510,7 @@ model CertificateRestoreParameters {
   /**
    * The backup blob associated with a certificate bundle.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   certificateBundleBackup: bytes;
 }
 
@@ -1554,22 +1554,22 @@ model KeyCreateParameters {
   /**
    * The key size in bits. For example: 2048, 3072, or 4096 for RSA.
    */
-  @projectedName("json", "key_size")
+  @encodedName("application/json", "key_size")
   keySize?: int32;
 
   /**
    * The public exponent for a RSA key.
    */
-  @projectedName("json", "public_exponent")
+  @encodedName("application/json", "public_exponent")
   publicExponent?: int32;
 
-  @projectedName("json", "key_ops")
+  @encodedName("application/json", "key_ops")
   keyOps?: JsonWebKeyOperation[];
 
   /**
    * The attributes of a key managed by the key vault service.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   keyAttributes?: KeyAttributes;
 
   /**
@@ -1580,13 +1580,13 @@ model KeyCreateParameters {
   /**
    * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
    */
-  @projectedName("json", "crv")
+  @encodedName("application/json", "crv")
   curve?: JsonWebKeyCurveName;
 
   /**
    * The policy rules under which the key can be exported.
    */
-  @projectedName("json", "release_policy")
+  @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
 }
 
@@ -1636,7 +1636,7 @@ model KeyReleasePolicy {
    * Blob encoding the policy rules under which the key can be released. Blob must
    * be base64 URL encoded.
    */
-  @projectedName("json", "data")
+  @encodedName("application/json", "data")
   encodedPolicy?: bytes;
 }
 
@@ -1669,7 +1669,7 @@ model KeyBundle {
   /**
    * The policy rules under which the key can be exported.
    */
-  @projectedName("json", "release_policy")
+  @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
 }
 
@@ -1688,7 +1688,7 @@ model JsonWebKey {
    */
   kty?: JsonWebKeyType;
 
-  @projectedName("json", "key_ops")
+  @encodedName("application/json", "key_ops")
   keyOps?: string[];
 
   /**
@@ -1709,19 +1709,19 @@ model JsonWebKey {
   /**
    * RSA private key parameter.
    */
-  @projectedName("json", "dp")
+  @encodedName("application/json", "dp")
   DP?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @projectedName("json", "dq")
+  @encodedName("application/json", "dq")
   DQ?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @projectedName("json", "qi")
+  @encodedName("application/json", "qi")
   QI?: bytes;
 
   /**
@@ -1742,7 +1742,7 @@ model JsonWebKey {
   /**
    * Protected Key, used with 'Bring Your Own Key'.
    */
-  @projectedName("json", "key_hsm")
+  @encodedName("application/json", "key_hsm")
   t?: bytes;
 
   /**
@@ -1768,7 +1768,7 @@ model KeyImportParameters {
   /**
    * Whether to import as a hardware key (HSM) or software key.
    */
-  @projectedName("json", "Hsm")
+  @encodedName("application/json", "Hsm")
   hsm?: boolean;
 
   /**
@@ -1779,7 +1779,7 @@ model KeyImportParameters {
   /**
    * The key management attributes.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   keyAttributes?: KeyAttributes;
 
   /**
@@ -1790,7 +1790,7 @@ model KeyImportParameters {
   /**
    * The policy rules under which the key can be exported.
    */
-  @projectedName("json", "release_policy")
+  @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
 }
 
@@ -1824,13 +1824,13 @@ model KeyUpdateParameters {
    * Json web key operations. For more information on possible key operations, see
    * JsonWebKeyOperation.
    */
-  @projectedName("json", "key_ops")
+  @encodedName("application/json", "key_ops")
   keyOps?: JsonWebKeyOperation[];
 
   /**
    * The attributes of a key managed by the key vault service.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   keyAttributes?: KeyAttributes;
 
   /**
@@ -1841,7 +1841,7 @@ model KeyUpdateParameters {
   /**
    * The policy rules under which the key can be exported.
    */
-  @projectedName("json", "release_policy")
+  @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
 }
 
@@ -1895,7 +1895,7 @@ model KeyRestoreParameters {
   /**
    * The backup blob associated with a key bundle.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   keyBundleBackup: bytes;
 }
 
@@ -1906,7 +1906,7 @@ model KeyOperationsParameters {
   /**
    * algorithm identifier
    */
-  @projectedName("json", "alg")
+  @encodedName("application/json", "alg")
   algorithm: JsonWebKeyEncryptionAlgorithm;
 
   value: bytes;
@@ -1941,18 +1941,18 @@ model KeyOperationResult {
   kid?: string;
 
   @visibility("read")
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   result?: bytes;
 
   @visibility("read")
   iv?: bytes;
 
   @visibility("read")
-  @projectedName("json", "tag")
+  @encodedName("application/json", "tag")
   authenticationTag?: bytes;
 
   @visibility("read")
-  @projectedName("json", "aad")
+  @encodedName("application/json", "aad")
   additionalAuthenticatedData?: bytes;
 }
 
@@ -1964,7 +1964,7 @@ model KeySignParameters {
    * The signing/verification algorithm identifier. For more information on possible
    * algorithm types, see JsonWebKeySignatureAlgorithm.
    */
-  @projectedName("json", "alg")
+  @encodedName("application/json", "alg")
   algorithm: JsonWebKeySignatureAlgorithm;
 
   value: bytes;
@@ -1978,7 +1978,7 @@ model KeyVerifyParameters {
    * The signing/verification algorithm. For more information on possible algorithm
    * types, see JsonWebKeySignatureAlgorithm.
    */
-  @projectedName("json", "alg")
+  @encodedName("application/json", "alg")
   algorithm: JsonWebKeySignatureAlgorithm;
 
   /**
@@ -1989,7 +1989,7 @@ model KeyVerifyParameters {
   /**
    * The signature to be verified.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   signature: bytes;
 }
 
@@ -2012,7 +2012,7 @@ model KeyReleaseParameters {
    * The attestation assertion for the target of the key release.
    */
   @minLength(1)
-  @projectedName("json", "target")
+  @encodedName("application/json", "target")
   targetAttestationToken: string;
 
   /**
@@ -2223,7 +2223,7 @@ model RoleDefinitionProperties {
   /**
    * The role type.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   roleType?: RoleType;
 
   /**
@@ -2380,7 +2380,7 @@ model SecretSetParameters {
   /**
    * The secret management attributes.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   secretAttributes?: SecretAttributes;
 }
 
@@ -2484,7 +2484,7 @@ model SecretUpdateParameters {
   /**
    * The secret management attributes.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   secretAttributes?: SecretAttributes;
 
   /**
@@ -2575,7 +2575,7 @@ model SecretRestoreParameters {
   /**
    * The backup blob associated with a secret bundle.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   secretBundleBackup: bytes;
 }
 
@@ -2585,7 +2585,7 @@ model SecurityDomainOperationStatus {
    */
   status?: OperationStatus;
 
-  @projectedName("json", "status_details")
+  @encodedName("application/json", "status_details")
   statusDetails?: string;
 }
 
@@ -2617,7 +2617,7 @@ model SecurityDomainJsonWebKey {
    */
   kty: string;
 
-  @projectedName("json", "key_ops")
+  @encodedName("application/json", "key_ops")
   keyOps: string[];
 
   /**
@@ -2633,7 +2633,7 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate chain parameter
    */
-  @projectedName("json", "x5c")
+  @encodedName("application/json", "x5c")
   x5C: string[];
 
   /**
@@ -2644,13 +2644,13 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate SHA1 thumbprint. This is optional.
    */
-  @projectedName("json", "x5t")
+  @encodedName("application/json", "x5t")
   x5T?: string;
 
   /**
    * X509 certificate SHA256 thumbprint.
    */
-  @projectedName("json", "x5t#S256")
+  @encodedName("application/json", "x5t#S256")
   x5TS256: string;
 
   /**
@@ -2673,13 +2673,13 @@ model TransferKey {
   /**
    * Specifies the format of the transfer key
    */
-  @projectedName("json", "key_format")
+  @encodedName("application/json", "key_format")
   keyFormat?: string = "jwk";
 
   /**
    * Specifies the transfer key in JWK format
    */
-  @projectedName("json", "transfer_key")
+  @encodedName("application/json", "transfer_key")
   transferKey: SecurityDomainJsonWebKey;
 }
 
@@ -2913,7 +2913,7 @@ model StorageRestoreParameters {
   /**
    * The backup blob associated with a storage account.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   storageBundleBackup: bytes;
 }
 
@@ -2944,7 +2944,7 @@ model StorageAccountCreateParameters {
   /**
    * The attributes of the storage account.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   storageAccountAttributes?: StorageAccountAttributes;
 
   /**
@@ -2975,7 +2975,7 @@ model StorageAccountUpdateParameters {
   /**
    * The attributes of the storage account.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   storageAccountAttributes?: StorageAccountAttributes;
 
   /**
@@ -3013,7 +3013,7 @@ model SasDefinitionItem {
    * The storage account SAS definition secret id.
    */
   @visibility("read")
-  @projectedName("json", "sid")
+  @encodedName("application/json", "sid")
   secretId?: string;
 
   /**
@@ -3136,7 +3136,7 @@ model SasDefinitionBundle {
    * Storage account SAS definition secret id.
    */
   @visibility("read")
-  @projectedName("json", "sid")
+  @encodedName("application/json", "sid")
   secretId?: string;
 
   /**
@@ -3194,7 +3194,7 @@ model SasDefinitionCreateParameters {
   /**
    * The attributes of the SAS definition.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   sasDefinitionAttributes?: SasDefinitionAttributes;
 
   /**
@@ -3226,7 +3226,7 @@ model SasDefinitionUpdateParameters {
   /**
    * The attributes of the SAS definition.
    */
-  @projectedName("json", "attributes")
+  @encodedName("application/json", "attributes")
   sasDefinitionAttributes?: SasDefinitionAttributes;
 
   /**

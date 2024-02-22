@@ -132,8 +132,8 @@ interface IssueAttachmentContracts {
   >;
 }
 
-@@projectedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(IssueAttachmentContracts.createOrUpdate::parameters.resource,

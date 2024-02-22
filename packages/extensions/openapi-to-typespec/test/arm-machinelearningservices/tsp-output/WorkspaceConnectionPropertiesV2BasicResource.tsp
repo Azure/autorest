@@ -105,8 +105,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   >;
 }
 
-@@projectedName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  "json",
+@@encodedName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
@@ -116,8 +116,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 @@doc(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "The object for creating or updating a new workspace connection"
 );
-@@projectedName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
-  "json",
+@@encodedName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+  "application/json",
   "body"
 );
 @@extension(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,

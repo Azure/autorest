@@ -65,8 +65,8 @@ interface ObjectReplicationPolicies {
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
 
-@@projectedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "application/json",
   "properties"
 );
 @@extension(ObjectReplicationPolicies.createOrUpdate::parameters.resource,

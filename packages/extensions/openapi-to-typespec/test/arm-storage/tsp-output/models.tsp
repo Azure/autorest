@@ -922,7 +922,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Network rule set
    */
-  @projectedName("json", "networkAcls")
+  @encodedName("application/json", "networkAcls")
   networkRuleSet?: NetworkRuleSet;
 
   /**
@@ -938,25 +938,25 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01.
    */
-  @projectedName("json", "supportsHttpsTrafficOnly")
+  @encodedName("application/json", "supportsHttpsTrafficOnly")
   enableHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @projectedName("json", "isSftpEnabled")
+  @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @projectedName("json", "isLocalUserEnabled")
+  @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
-  @projectedName("json", "isHnsEnabled")
+  @encodedName("application/json", "isHnsEnabled")
   IsHnsEnabled?: boolean;
 
   /**
@@ -987,7 +987,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
-  @projectedName("json", "isNfsV3Enabled")
+  @encodedName("application/json", "isNfsV3Enabled")
   enableNfsV3?: boolean;
 
   /**
@@ -1073,13 +1073,13 @@ model Encryption {
   /**
    * Properties provided by key vault.
    */
-  @projectedName("json", "keyvaultproperties")
+  @encodedName("application/json", "keyvaultproperties")
   keyVaultProperties?: KeyVaultProperties;
 
   /**
    * The identity to be used with service-side encryption at rest.
    */
-  @projectedName("json", "identity")
+  @encodedName("application/json", "identity")
   encryptionIdentity?: EncryptionIdentity;
 }
 
@@ -1138,19 +1138,19 @@ model KeyVaultProperties {
   /**
    * The name of KeyVault key.
    */
-  @projectedName("json", "keyname")
+  @encodedName("application/json", "keyname")
   keyName?: string;
 
   /**
    * The version of KeyVault key.
    */
-  @projectedName("json", "keyversion")
+  @encodedName("application/json", "keyversion")
   keyVersion?: string;
 
   /**
    * The Uri of KeyVault.
    */
-  @projectedName("json", "keyvaulturi")
+  @encodedName("application/json", "keyvaulturi")
   keyVaultUri?: string;
 
   /**
@@ -1181,13 +1181,13 @@ model EncryptionIdentity {
   /**
    * Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.
    */
-  @projectedName("json", "userAssignedIdentity")
+  @encodedName("application/json", "userAssignedIdentity")
   encryptionUserAssignedIdentity?: string;
 
   /**
    * ClientId of the multi-tenant application to be used in conjunction with the user-assigned identity for cross-tenant customer-managed-keys server-side encryption on the storage account.
    */
-  @projectedName("json", "federatedIdentityClientId")
+  @encodedName("application/json", "federatedIdentityClientId")
   encryptionFederatedIdentityClientId?: string;
 }
 
@@ -1243,7 +1243,7 @@ model VirtualNetworkRule {
   /**
    * Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   virtualNetworkResourceId: string;
 
   /**
@@ -1264,7 +1264,7 @@ model IPRule {
   /**
    * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   IPAddressOrRange: string;
 
   /**
@@ -1499,32 +1499,32 @@ model StorageAccountProperties {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
-  @projectedName("json", "supportsHttpsTrafficOnly")
+  @encodedName("application/json", "supportsHttpsTrafficOnly")
   enableHttpsTrafficOnly?: boolean;
 
   /**
    * Network rule set
    */
   @visibility("read")
-  @projectedName("json", "networkAcls")
+  @encodedName("application/json", "networkAcls")
   networkRuleSet?: NetworkRuleSet;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @projectedName("json", "isSftpEnabled")
+  @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @projectedName("json", "isLocalUserEnabled")
+  @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
   /**
    * Account HierarchicalNamespace enabled if sets to true.
    */
-  @projectedName("json", "isHnsEnabled")
+  @encodedName("application/json", "isHnsEnabled")
   IsHnsEnabled?: boolean;
 
   /**
@@ -1579,7 +1579,7 @@ model StorageAccountProperties {
   /**
    * NFS 3.0 protocol support enabled if set to true.
    */
-  @projectedName("json", "isNfsV3Enabled")
+  @encodedName("application/json", "isNfsV3Enabled")
   enableNfsV3?: boolean;
 
   /**
@@ -1885,7 +1885,7 @@ model BlobRestoreParameters {
   /**
    * Restore blob to the specified time.
    */
-  @projectedName("json", "timetoRestore")
+  @encodedName("application/json", "timetoRestore")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeToRestore: utcDateTime;
 
@@ -2007,25 +2007,25 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * Allows https traffic only to storage service if sets to true.
    */
-  @projectedName("json", "supportsHttpsTrafficOnly")
+  @encodedName("application/json", "supportsHttpsTrafficOnly")
   enableHttpsTrafficOnly?: boolean;
 
   /**
    * Enables Secure File Transfer Protocol, if set to true
    */
-  @projectedName("json", "isSftpEnabled")
+  @encodedName("application/json", "isSftpEnabled")
   IsSftpEnabled?: boolean;
 
   /**
    * Enables local users feature, if set to true
    */
-  @projectedName("json", "isLocalUserEnabled")
+  @encodedName("application/json", "isLocalUserEnabled")
   IsLocalUserEnabled?: boolean;
 
   /**
    * Network rule set
    */
-  @projectedName("json", "networkAcls")
+  @encodedName("application/json", "networkAcls")
   networkRuleSet?: NetworkRuleSet;
 
   /**
@@ -2254,44 +2254,44 @@ model AccountSasParameters {
   /**
    * The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).
    */
-  @projectedName("json", "signedServices")
+  @encodedName("application/json", "signedServices")
   services: Services;
 
   /**
    * The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.
    */
-  @projectedName("json", "signedResourceTypes")
+  @encodedName("application/json", "signedResourceTypes")
   resourceTypes: SignedResourceTypes;
 
   /**
    * The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).
    */
-  @projectedName("json", "signedPermission")
+  @encodedName("application/json", "signedPermission")
   permissions: Permissions;
 
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
-  @projectedName("json", "signedIp")
+  @encodedName("application/json", "signedIp")
   IPAddressOrRange?: string;
 
   /**
    * The protocol permitted for a request made with the account SAS.
    */
-  @projectedName("json", "signedProtocol")
+  @encodedName("application/json", "signedProtocol")
   protocols?: HttpProtocol;
 
   /**
    * The time at which the SAS becomes valid.
    */
-  @projectedName("json", "signedStart")
+  @encodedName("application/json", "signedStart")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sharedAccessStartTime?: utcDateTime;
 
   /**
    * The time at which the shared access signature becomes invalid.
    */
-  @projectedName("json", "signedExpiry")
+  @encodedName("application/json", "signedExpiry")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sharedAccessExpiryTime: utcDateTime;
 
@@ -2324,38 +2324,38 @@ model ServiceSasParameters {
   /**
    * The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).
    */
-  @projectedName("json", "signedResource")
+  @encodedName("application/json", "signedResource")
   resource?: SignedResource;
 
   /**
    * The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).
    */
-  @projectedName("json", "signedPermission")
+  @encodedName("application/json", "signedPermission")
   permissions?: Permissions;
 
   /**
    * An IP address or a range of IP addresses from which to accept requests.
    */
-  @projectedName("json", "signedIp")
+  @encodedName("application/json", "signedIp")
   IPAddressOrRange?: string;
 
   /**
    * The protocol permitted for a request made with the account SAS.
    */
-  @projectedName("json", "signedProtocol")
+  @encodedName("application/json", "signedProtocol")
   protocols?: HttpProtocol;
 
   /**
    * The time at which the SAS becomes valid.
    */
-  @projectedName("json", "signedStart")
+  @encodedName("application/json", "signedStart")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sharedAccessStartTime?: utcDateTime;
 
   /**
    * The time at which the shared access signature becomes invalid.
    */
-  @projectedName("json", "signedExpiry")
+  @encodedName("application/json", "signedExpiry")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sharedAccessExpiryTime?: utcDateTime;
 
@@ -2363,31 +2363,31 @@ model ServiceSasParameters {
    * A unique value up to 64 characters in length that correlates to an access policy specified for the container, queue, or table.
    */
   @maxLength(64)
-  @projectedName("json", "signedIdentifier")
+  @encodedName("application/json", "signedIdentifier")
   identifier?: string;
 
   /**
    * The start of partition key.
    */
-  @projectedName("json", "startPk")
+  @encodedName("application/json", "startPk")
   partitionKeyStart?: string;
 
   /**
    * The end of partition key.
    */
-  @projectedName("json", "endPk")
+  @encodedName("application/json", "endPk")
   partitionKeyEnd?: string;
 
   /**
    * The start of row key.
    */
-  @projectedName("json", "startRk")
+  @encodedName("application/json", "startRk")
   rowKeyStart?: string;
 
   /**
    * The end of row key.
    */
-  @projectedName("json", "endRk")
+  @encodedName("application/json", "endRk")
   rowKeyEnd?: string;
 
   /**
@@ -2398,31 +2398,31 @@ model ServiceSasParameters {
   /**
    * The response header override for cache control.
    */
-  @projectedName("json", "rscc")
+  @encodedName("application/json", "rscc")
   cacheControl?: string;
 
   /**
    * The response header override for content disposition.
    */
-  @projectedName("json", "rscd")
+  @encodedName("application/json", "rscd")
   contentDisposition?: string;
 
   /**
    * The response header override for content encoding.
    */
-  @projectedName("json", "rsce")
+  @encodedName("application/json", "rsce")
   contentEncoding?: string;
 
   /**
    * The response header override for content language.
    */
-  @projectedName("json", "rscl")
+  @encodedName("application/json", "rscl")
   contentLanguage?: string;
 
   /**
    * The response header override for content type.
    */
-  @projectedName("json", "rsct")
+  @encodedName("application/json", "rsct")
   contentType?: string;
 }
 
@@ -4100,7 +4100,7 @@ model ListQueue extends Resource {
   /**
    * List Queue resource properties.
    */
-  @projectedName("json", "properties")
+  @encodedName("application/json", "properties")
   queueProperties?: ListQueueProperties;
 }
 

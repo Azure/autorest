@@ -132,8 +132,8 @@ interface GatewayCertificateAuthorityContracts {
   >;
 }
 
-@@projectedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,

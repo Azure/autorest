@@ -161,7 +161,10 @@ interface FileShares {
   >;
 }
 
-@@projectedName(FileShares.create::parameters.resource, "json", "fileShare");
+@@encodedName(FileShares.create::parameters.resource,
+  "application/json",
+  "fileShare"
+);
 @@extension(FileShares.create::parameters.resource,
   "x-ms-client-name",
   "fileShare"
@@ -169,7 +172,10 @@ interface FileShares {
 @@doc(FileShares.create::parameters.resource,
   "Properties of the file share to create."
 );
-@@projectedName(FileShares.update::parameters.properties, "json", "fileShare");
+@@encodedName(FileShares.update::parameters.properties,
+  "application/json",
+  "fileShare"
+);
 @@extension(FileShares.update::parameters.properties,
   "x-ms-client-name",
   "fileShare"
@@ -177,13 +183,19 @@ interface FileShares {
 @@doc(FileShares.update::parameters.properties,
   "Properties to update for the file share."
 );
-@@projectedName(FileShares.restore::parameters.body, "json", "deletedShare");
+@@encodedName(FileShares.restore::parameters.body,
+  "application/json",
+  "deletedShare"
+);
 @@extension(FileShares.restore::parameters.body,
   "x-ms-client-name",
   "deletedShare"
 );
 @@doc(FileShares.restore::parameters.body, "");
-@@projectedName(FileShares.lease::parameters.body, "json", "parameters");
+@@encodedName(FileShares.lease::parameters.body,
+  "application/json",
+  "parameters"
+);
 @@extension(FileShares.lease::parameters.body,
   "x-ms-client-name",
   "parameters"

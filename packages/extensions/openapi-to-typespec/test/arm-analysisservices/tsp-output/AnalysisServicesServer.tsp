@@ -176,8 +176,8 @@ interface AnalysisServicesServers {
   >;
 }
 
-@@projectedName(AnalysisServicesServers.create::parameters.resource,
-  "json",
+@@encodedName(AnalysisServicesServers.create::parameters.resource,
+  "application/json",
   "serverParameters"
 );
 @@extension(AnalysisServicesServers.create::parameters.resource,
@@ -187,8 +187,8 @@ interface AnalysisServicesServers {
 @@doc(AnalysisServicesServers.create::parameters.resource,
   "Contains the information used to provision the Analysis Services server."
 );
-@@projectedName(AnalysisServicesServers.update::parameters.properties,
-  "json",
+@@encodedName(AnalysisServicesServers.update::parameters.properties,
+  "application/json",
   "serverUpdateParameters"
 );
 @@extension(AnalysisServicesServers.update::parameters.properties,

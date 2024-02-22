@@ -102,8 +102,8 @@ interface CodeVersionResources {
   >;
 }
 
-@@projectedName(CodeVersionResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(CodeVersionResources.createOrUpdate::parameters.resource,

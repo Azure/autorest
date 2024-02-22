@@ -179,8 +179,8 @@ interface DnsZones {
   >;
 }
 
-@@projectedName(DnsZones.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DnsZones.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(DnsZones.createOrUpdate::parameters.resource,
@@ -190,7 +190,10 @@ interface DnsZones {
 @@doc(DnsZones.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@projectedName(DnsZones.update::parameters.properties, "json", "parameters");
+@@encodedName(DnsZones.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
 @@extension(DnsZones.update::parameters.properties,
   "x-ms-client-name",
   "parameters"

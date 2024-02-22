@@ -150,8 +150,8 @@ interface DiagnosticContracts {
   >;
 }
 
-@@projectedName(DiagnosticContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(DiagnosticContracts.createOrUpdate::parameters.resource,
@@ -161,8 +161,8 @@ interface DiagnosticContracts {
 @@doc(DiagnosticContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(DiagnosticContracts.update::parameters.properties,
-  "json",
+@@encodedName(DiagnosticContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(DiagnosticContracts.update::parameters.properties,

@@ -117,8 +117,8 @@ interface BlobContainers {
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
 }
 
-@@projectedName(BlobContainers.create::parameters.resource,
-  "json",
+@@encodedName(BlobContainers.create::parameters.resource,
+  "application/json",
   "blobContainer"
 );
 @@extension(BlobContainers.create::parameters.resource,
@@ -128,8 +128,8 @@ interface BlobContainers {
 @@doc(BlobContainers.create::parameters.resource,
   "Properties of the blob container to create."
 );
-@@projectedName(BlobContainers.update::parameters.properties,
-  "json",
+@@encodedName(BlobContainers.update::parameters.properties,
+  "application/json",
   "blobContainer"
 );
 @@extension(BlobContainers.update::parameters.properties,
@@ -139,8 +139,8 @@ interface BlobContainers {
 @@doc(BlobContainers.update::parameters.properties,
   "Properties to update for the blob container."
 );
-@@projectedName(BlobContainers.setLegalHold::parameters.body,
-  "json",
+@@encodedName(BlobContainers.setLegalHold::parameters.body,
+  "application/json",
   "LegalHold"
 );
 @@extension(BlobContainers.setLegalHold::parameters.body,
@@ -150,8 +150,8 @@ interface BlobContainers {
 @@doc(BlobContainers.setLegalHold::parameters.body,
   "The LegalHold property that will be set to a blob container."
 );
-@@projectedName(BlobContainers.clearLegalHold::parameters.body,
-  "json",
+@@encodedName(BlobContainers.clearLegalHold::parameters.body,
+  "application/json",
   "LegalHold"
 );
 @@extension(BlobContainers.clearLegalHold::parameters.body,
@@ -161,7 +161,10 @@ interface BlobContainers {
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
 );
-@@projectedName(BlobContainers.lease::parameters.body, "json", "parameters");
+@@encodedName(BlobContainers.lease::parameters.body,
+  "application/json",
+  "parameters"
+);
 @@extension(BlobContainers.lease::parameters.body,
   "x-ms-client-name",
   "parameters"

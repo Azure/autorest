@@ -89,8 +89,8 @@ interface ProximityPlacementGroups {
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
-@@projectedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.createOrUpdate::parameters.resource,
@@ -100,8 +100,8 @@ interface ProximityPlacementGroups {
 @@doc(ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Proximity Placement Group operation."
 );
-@@projectedName(ProximityPlacementGroups.update::parameters.properties,
-  "json",
+@@encodedName(ProximityPlacementGroups.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.update::parameters.properties,

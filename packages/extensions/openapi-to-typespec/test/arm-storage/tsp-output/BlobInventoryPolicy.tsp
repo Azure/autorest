@@ -61,8 +61,8 @@ interface BlobInventoryPolicies {
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }
 
-@@projectedName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+  "application/json",
   "properties"
 );
 @@extension(BlobInventoryPolicies.createOrUpdate::parameters.resource,

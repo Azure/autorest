@@ -179,8 +179,8 @@ interface OnlineDeploymentTrackedResources {
   >;
 }
 
-@@projectedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
@@ -190,8 +190,8 @@ interface OnlineDeploymentTrackedResources {
 @@doc(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "Inference Endpoint entity to apply during operation."
 );
-@@projectedName(OnlineDeploymentTrackedResources.update::parameters.properties,
-  "json",
+@@encodedName(OnlineDeploymentTrackedResources.update::parameters.properties,
+  "application/json",
   "body"
 );
 @@extension(OnlineDeploymentTrackedResources.update::parameters.properties,

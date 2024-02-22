@@ -322,7 +322,7 @@ model Principal {
   /**
    * Type of the principal.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   principalType?: PrincipalType;
 
   /**
@@ -513,7 +513,7 @@ model RoleDefinitionProperties {
   /**
    * The role type.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   roleType?: RoleType;
 
   /**
@@ -693,19 +693,19 @@ model ExpandedPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   scopeId?: string;
 
   /**
    * Display name of the resource
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   scopeDisplayName?: string;
 
   /**
    * Type of the scope.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   scopeType?: ScopeType;
 }
 
@@ -716,19 +716,19 @@ model ExpandedPropertiesRoleDefinition {
   /**
    * Id of the role definition
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   roleDefinitionId?: string;
 
   /**
    * Display name of the role definition
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   roleDefinitionDisplayName?: string;
 
   /**
    * The role type.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   roleType?: RoleType;
 }
 
@@ -739,13 +739,13 @@ model ExpandedPropertiesPrincipal {
   /**
    * Id of the principal
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   principalId?: string;
 
   /**
    * Display name of the principal
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   principalDisplayName?: string;
 
   /**
@@ -756,7 +756,7 @@ model ExpandedPropertiesPrincipal {
   /**
    * Type of the principal.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   principalType?: PrincipalType;
 }
 
@@ -975,7 +975,7 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration {
   /**
    * Type of the role assignment schedule expiration
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   expirationType?: RoleManagementScheduleExpirationType;
 
   /**
@@ -1272,7 +1272,7 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration {
   /**
    * Type of the role eligibility schedule expiration
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   expirationType?: RoleManagementScheduleExpirationType;
 
   /**
@@ -1426,19 +1426,19 @@ model PolicyPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   scopeId?: string;
 
   /**
    * Display name of the resource
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   scopeDisplayName?: string;
 
   /**
    * Type of the scope.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   scopeType?: ScopeType;
 }
 
@@ -1501,19 +1501,19 @@ model PolicyAssignmentPropertiesScope {
   /**
    * Scope id of the resource
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   scopeId?: string;
 
   /**
    * Display name of the resource
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   scopeDisplayName?: string;
 
   /**
    * Type of the scope.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   scopeType?: ScopeType;
 }
 
@@ -1524,19 +1524,19 @@ model PolicyAssignmentPropertiesRoleDefinition {
   /**
    * Id of the role definition
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   roleDefinitionId?: string;
 
   /**
    * Display name of the role definition
    */
-  @projectedName("json", "displayName")
+  @encodedName("application/json", "displayName")
   roleDefinitionDisplayName?: string;
 
   /**
    * The role type.
    */
-  @projectedName("json", "type")
+  @encodedName("application/json", "type")
   roleType?: RoleType;
 }
 
@@ -1547,7 +1547,7 @@ model PolicyAssignmentPropertiesPolicy {
   /**
    * Id of the policy
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   policyId?: string;
 
   /**

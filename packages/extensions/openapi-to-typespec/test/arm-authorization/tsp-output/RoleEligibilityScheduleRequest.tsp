@@ -82,8 +82,8 @@ interface RoleEligibilityScheduleRequests {
   >;
 }
 
-@@projectedName(RoleEligibilityScheduleRequests.create::parameters.resource,
-  "json",
+@@encodedName(RoleEligibilityScheduleRequests.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.create::parameters.resource,
@@ -93,8 +93,8 @@ interface RoleEligibilityScheduleRequests {
 @@doc(RoleEligibilityScheduleRequests.create::parameters.resource,
   "Parameters for the role eligibility schedule request."
 );
-@@projectedName(RoleEligibilityScheduleRequests.validate::parameters.body,
-  "json",
+@@encodedName(RoleEligibilityScheduleRequests.validate::parameters.body,
+  "application/json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.validate::parameters.body,

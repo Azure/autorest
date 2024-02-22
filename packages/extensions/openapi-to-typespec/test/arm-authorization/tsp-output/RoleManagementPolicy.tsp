@@ -58,8 +58,8 @@ interface RoleManagementPolicies {
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }
 
-@@projectedName(RoleManagementPolicies.update::parameters.properties,
-  "json",
+@@encodedName(RoleManagementPolicies.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(RoleManagementPolicies.update::parameters.properties,

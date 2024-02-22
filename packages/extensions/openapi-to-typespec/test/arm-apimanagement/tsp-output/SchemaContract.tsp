@@ -135,8 +135,8 @@ interface SchemaContracts {
   >;
 }
 
-@@projectedName(SchemaContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(SchemaContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(SchemaContracts.createOrUpdate::parameters.resource,

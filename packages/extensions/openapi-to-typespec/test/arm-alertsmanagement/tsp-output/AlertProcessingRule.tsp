@@ -73,8 +73,8 @@ interface AlertProcessingRules {
   listBySubscription is ArmListBySubscription<AlertProcessingRule>;
 }
 
-@@projectedName(AlertProcessingRules.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(AlertProcessingRules.createOrUpdate::parameters.resource,
+  "application/json",
   "alertProcessingRule"
 );
 @@extension(AlertProcessingRules.createOrUpdate::parameters.resource,
@@ -84,8 +84,8 @@ interface AlertProcessingRules {
 @@doc(AlertProcessingRules.createOrUpdate::parameters.resource,
   "Alert processing rule to be created/updated."
 );
-@@projectedName(AlertProcessingRules.update::parameters.properties,
-  "json",
+@@encodedName(AlertProcessingRules.update::parameters.properties,
+  "application/json",
   "alertProcessingRulePatch"
 );
 @@extension(AlertProcessingRules.update::parameters.properties,

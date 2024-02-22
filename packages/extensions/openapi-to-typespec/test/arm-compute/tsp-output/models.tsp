@@ -2549,7 +2549,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
    */
-  @projectedName("json", "diskIOPSReadWrite")
+  @encodedName("application/json", "diskIOPSReadWrite")
   diskIopsReadWrite?: int64;
 
   /**
@@ -5013,7 +5013,7 @@ model DataDisk {
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
   @visibility("read")
-  @projectedName("json", "diskIOPSReadWrite")
+  @encodedName("application/json", "diskIOPSReadWrite")
   diskIopsReadWrite?: int64;
 
   /**
@@ -5841,7 +5841,7 @@ model VirtualMachineCaptureResult extends SubResource {
    * the schema of the captured virtual machine
    */
   @visibility("read")
-  @projectedName("json", "$schema")
+  @encodedName("application/json", "$schema")
   schema?: string;
 
   /**
@@ -7085,7 +7085,7 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
-  @projectedName("json", "dataDisks")
+  @encodedName("application/json", "dataDisks")
   dataDiskList?: RestorePointSourceVMDataDisk[];
 }
 
@@ -7533,7 +7533,7 @@ model RunCommandDocumentBase {
   /**
    * The VM run command schema.
    */
-  @projectedName("json", "$schema")
+  @encodedName("application/json", "$schema")
   schema: string;
 
   /**
@@ -7896,7 +7896,7 @@ model DiskProperties {
   /**
    * The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.
    */
-  @projectedName("json", "diskIOPSReadWrite")
+  @encodedName("application/json", "diskIOPSReadWrite")
   diskIopsReadWrite?: int64;
 
   /**
@@ -7907,7 +7907,7 @@ model DiskProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
-  @projectedName("json", "diskIOPSReadOnly")
+  @encodedName("application/json", "diskIOPSReadOnly")
   diskIopsReadOnly?: int64;
 
   /**
@@ -8004,7 +8004,7 @@ model DiskProperties {
    * The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started.
    */
   @visibility("read")
-  @projectedName("json", "LastOwnershipUpdateTime")
+  @encodedName("application/json", "LastOwnershipUpdateTime")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastOwnershipUpdateTime?: utcDateTime;
 }
@@ -8310,7 +8310,7 @@ model DiskUpdateProperties {
   /**
    * The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes.
    */
-  @projectedName("json", "diskIOPSReadWrite")
+  @encodedName("application/json", "diskIOPSReadWrite")
   diskIopsReadWrite?: int64;
 
   /**
@@ -8321,7 +8321,7 @@ model DiskUpdateProperties {
   /**
    * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
    */
-  @projectedName("json", "diskIOPSReadOnly")
+  @encodedName("application/json", "diskIOPSReadOnly")
   diskIopsReadOnly?: int64;
 
   /**

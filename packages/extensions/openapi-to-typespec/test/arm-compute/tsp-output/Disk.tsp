@@ -107,7 +107,10 @@ interface Disks {
   revokeAccess is ArmResourceActionAsync<Disk, void, void>;
 }
 
-@@projectedName(Disks.createOrUpdate::parameters.resource, "json", "disk");
+@@encodedName(Disks.createOrUpdate::parameters.resource,
+  "application/json",
+  "disk"
+);
 @@extension(Disks.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "disk"
@@ -115,12 +118,15 @@ interface Disks {
 @@doc(Disks.createOrUpdate::parameters.resource,
   "Disk object supplied in the body of the Put disk operation."
 );
-@@projectedName(Disks.update::parameters.properties, "json", "disk");
+@@encodedName(Disks.update::parameters.properties, "application/json", "disk");
 @@extension(Disks.update::parameters.properties, "x-ms-client-name", "disk");
 @@doc(Disks.update::parameters.properties,
   "Disk object supplied in the body of the Patch disk operation."
 );
-@@projectedName(Disks.grantAccess::parameters.body, "json", "grantAccessData");
+@@encodedName(Disks.grantAccess::parameters.body,
+  "application/json",
+  "grantAccessData"
+);
 @@extension(Disks.grantAccess::parameters.body,
   "x-ms-client-name",
   "grantAccessData"

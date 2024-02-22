@@ -43,3 +43,7 @@ using Azure.ResourceManager.Authorization;
 @@flattenProperty(PolicyAssignmentProperties.roleDefinition);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyAssignmentProperties.policy);
+
+@@clientName(ProviderOperationsMetadataOperationGroup,
+  "ProviderOperationsMetadata"
+);

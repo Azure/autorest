@@ -164,8 +164,8 @@ interface IssueContracts {
   >;
 }
 
-@@projectedName(IssueContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(IssueContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(IssueContracts.createOrUpdate::parameters.resource,
@@ -173,8 +173,8 @@ interface IssueContracts {
   "parameters"
 );
 @@doc(IssueContracts.createOrUpdate::parameters.resource, "Create parameters.");
-@@projectedName(IssueContracts.update::parameters.properties,
-  "json",
+@@encodedName(IssueContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(IssueContracts.update::parameters.properties,

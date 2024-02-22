@@ -412,7 +412,7 @@ model TrackingProfileDefinition {
   /**
    * The tracking definition schema uri.
    */
-  @projectedName("json", "$schema")
+  @encodedName("application/json", "$schema")
   schema?: string;
 
   /**

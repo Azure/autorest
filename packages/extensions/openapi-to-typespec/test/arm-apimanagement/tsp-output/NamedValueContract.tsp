@@ -177,8 +177,8 @@ interface NamedValueContracts {
   >;
 }
 
-@@projectedName(NamedValueContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(NamedValueContracts.createOrUpdate::parameters.resource,
@@ -188,8 +188,8 @@ interface NamedValueContracts {
 @@doc(NamedValueContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(NamedValueContracts.update::parameters.properties,
-  "json",
+@@encodedName(NamedValueContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(NamedValueContracts.update::parameters.properties,
