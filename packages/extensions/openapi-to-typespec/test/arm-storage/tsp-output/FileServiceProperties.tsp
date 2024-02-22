@@ -27,7 +27,6 @@ model FileServiceProperties is ProxyResource<FileServicePropertiesProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "FileServiceProperties")
 interface FileServicePropertiesOperationGroup {
   /**
    * Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.

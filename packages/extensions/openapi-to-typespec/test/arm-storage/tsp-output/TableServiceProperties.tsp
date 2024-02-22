@@ -26,7 +26,6 @@ model TableServiceProperties
 }
 
 @armResourceOperations
-@projectedName("client", "TableServiceProperties")
 interface TableServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.

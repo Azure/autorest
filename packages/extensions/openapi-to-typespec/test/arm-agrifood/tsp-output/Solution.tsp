@@ -155,8 +155,8 @@ interface Solutions {
   >;
 }
 
-@@projectedName(Solutions.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Solutions.createOrUpdate::parameters.resource,
+  "application/json",
   "requestBody"
 );
 @@extension(Solutions.createOrUpdate::parameters.resource,

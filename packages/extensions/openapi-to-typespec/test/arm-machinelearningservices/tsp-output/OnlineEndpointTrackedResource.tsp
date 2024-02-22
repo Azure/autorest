@@ -165,8 +165,8 @@ interface OnlineEndpointTrackedResources {
   >;
 }
 
-@@projectedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
@@ -176,8 +176,8 @@ interface OnlineEndpointTrackedResources {
 @@doc(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Online Endpoint entity to apply during operation."
 );
-@@projectedName(OnlineEndpointTrackedResources.update::parameters.properties,
-  "json",
+@@encodedName(OnlineEndpointTrackedResources.update::parameters.properties,
+  "application/json",
   "body"
 );
 @@extension(OnlineEndpointTrackedResources.update::parameters.properties,

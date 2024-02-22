@@ -244,7 +244,7 @@ function convertResourceCreateOrReplaceOperation(
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
     const operationName = getOperationName(operation.OperationID);
-    const augmentedDecorators = getAugmentedDecorators(
+    const customizations = getCustomizations(
       bodyParam,
       tspOperationGroupName,
       operationName,
@@ -259,14 +259,14 @@ function convertResourceCreateOrReplaceOperation(
         operationId: operation.OperationID,
         templateParameters: templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
-        augmentedDecorators,
+        customizations,
       },
     ];
   }
   return [];
 }
 
-function getAugmentedDecorators(
+function getCustomizations(
   bodyParam: Parameter | undefined,
   tspOperationGroupName: string,
   operationName: string,
@@ -279,7 +279,7 @@ function getAugmentedDecorators(
   if (bodyParam) {
     if (bodyParam.language.default.name !== templateName && isFullCompatible) {
       augmentedDecorators.push(
-        `@@projectedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "json", "${bodyParam.language.default.name}");`,
+        `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "json", "${bodyParam.language.default.name}");`,
       );
       augmentedDecorators.push(
         `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "x-ms-client-name", "${bodyParam.language.default.name}");`,
@@ -317,7 +317,7 @@ function convertResourceUpdateOperation(
 
       const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
       const operationName = getOperationName(operation.OperationID);
-      const augmentedDecorators = getAugmentedDecorators(
+      const customizations = getCustomizations(
         bodyParam,
         tspOperationGroupName,
         operationName,
@@ -346,7 +346,7 @@ function convertResourceUpdateOperation(
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
-          augmentedDecorators,
+          customizations,
           // To resolve auto-generate update model with proper visibility
           decorators: [{ name: "parameterVisibility", arguments: ["read"] }],
         },
@@ -538,7 +538,7 @@ function convertResourceActionOperations(
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
         const operationName = getOperationName(operation.OperationID);
-        const augmentedDecorators = getAugmentedDecorators(
+        const customizations = getCustomizations(
           bodyParam,
           tspOperationGroupName,
           operationName,
@@ -552,7 +552,7 @@ function convertResourceActionOperations(
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
-          augmentedDecorators,
+          customizations,
         });
       }
     }

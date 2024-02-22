@@ -147,7 +147,7 @@ export interface TypespecObjectProperty extends TypespecDataType {
   isOptional: boolean;
   type: string;
   decorators?: TypespecDecorator[];
-  augmentedDecorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   defaultValue?: any;
 }
 
@@ -203,7 +203,7 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   decorators?: TypespecDecorator[];
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
-  augmentedDecorators?: string[];
+  customizations?: string[];
 }
 
 export type TspArmResourceOperation =

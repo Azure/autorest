@@ -80,8 +80,8 @@ interface CodeContainerResources {
   >;
 }
 
-@@projectedName(CodeContainerResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CodeContainerResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(CodeContainerResources.createOrUpdate::parameters.resource,

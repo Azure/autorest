@@ -211,8 +211,8 @@ interface Catalogs {
   >;
 }
 
-@@projectedName(Catalogs.listDeviceGroups::parameters.body,
-  "json",
+@@encodedName(Catalogs.listDeviceGroups::parameters.body,
+  "application/json",
   "listDeviceGroupsRequest"
 );
 @@extension(Catalogs.listDeviceGroups::parameters.body,

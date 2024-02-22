@@ -104,8 +104,8 @@ interface AvailabilitySets {
   >;
 }
 
-@@projectedName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(AvailabilitySets.createOrUpdate::parameters.resource,
@@ -115,8 +115,8 @@ interface AvailabilitySets {
 @@doc(AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
 );
-@@projectedName(AvailabilitySets.update::parameters.properties,
-  "json",
+@@encodedName(AvailabilitySets.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(AvailabilitySets.update::parameters.properties,

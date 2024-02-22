@@ -96,8 +96,8 @@ interface Snapshots {
   revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }
 
-@@projectedName(Snapshots.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Snapshots.createOrUpdate::parameters.resource,
+  "application/json",
   "snapshot"
 );
 @@extension(Snapshots.createOrUpdate::parameters.resource,
@@ -107,7 +107,10 @@ interface Snapshots {
 @@doc(Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@projectedName(Snapshots.update::parameters.properties, "json", "snapshot");
+@@encodedName(Snapshots.update::parameters.properties,
+  "application/json",
+  "snapshot"
+);
 @@extension(Snapshots.update::parameters.properties,
   "x-ms-client-name",
   "snapshot"
@@ -115,8 +118,8 @@ interface Snapshots {
 @@doc(Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@projectedName(Snapshots.grantAccess::parameters.body,
-  "json",
+@@encodedName(Snapshots.grantAccess::parameters.body,
+  "application/json",
   "grantAccessData"
 );
 @@extension(Snapshots.grantAccess::parameters.body,

@@ -26,7 +26,6 @@ model QueueServiceProperties
 }
 
 @armResourceOperations
-@projectedName("client", "QueueServiceProperties")
 interface QueueServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.

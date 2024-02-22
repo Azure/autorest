@@ -115,8 +115,8 @@ interface LabelingJobs {
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
-@@projectedName(LabelingJobs.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(LabelingJobs.createOrUpdate::parameters.resource,

@@ -48,7 +48,7 @@ model RecordSetProperties {
   /**
    * The TTL (time-to-live) of the records in the record set.
    */
-  @projectedName("json", "TTL")
+  @encodedName("application/json", "TTL")
   ttlInSeconds?: int64;
 
   /**
@@ -71,13 +71,13 @@ model RecordSetProperties {
   /**
    * The list of A records in the record set.
    */
-  @projectedName("json", "ARecords")
+  @encodedName("application/json", "ARecords")
   aRecords?: ARecord[];
 
   /**
    * The list of AAAA records in the record set.
    */
-  @projectedName("json", "AAAARecords")
+  @encodedName("application/json", "AAAARecords")
   aaaaRecords?: AaaaRecord[];
 
   /**
@@ -93,31 +93,31 @@ model RecordSetProperties {
   /**
    * The list of PTR records in the record set.
    */
-  @projectedName("json", "PTRRecords")
+  @encodedName("application/json", "PTRRecords")
   ptrRecords?: PtrRecord[];
 
   /**
    * The list of SRV records in the record set.
    */
-  @projectedName("json", "SRVRecords")
+  @encodedName("application/json", "SRVRecords")
   srvRecords?: SrvRecord[];
 
   /**
    * The list of TXT records in the record set.
    */
-  @projectedName("json", "TXTRecords")
+  @encodedName("application/json", "TXTRecords")
   txtRecords?: TxtRecord[];
 
   /**
    * The CNAME record in the  record set.
    */
-  @projectedName("json", "CNAMERecord")
+  @encodedName("application/json", "CNAMERecord")
   cnameRecord?: CnameRecord;
 
   /**
    * The SOA record in the record set.
    */
-  @projectedName("json", "SOARecord")
+  @encodedName("application/json", "SOARecord")
   soaRecord?: SoaRecord;
 
   /**
@@ -178,7 +178,7 @@ model NsRecord {
   /**
    * The name server name for this NS record.
    */
-  @projectedName("json", "nsdname")
+  @encodedName("application/json", "nsdname")
   dnsNSDomainName?: string;
 }
 
@@ -189,7 +189,7 @@ model PtrRecord {
   /**
    * The PTR target domain name for this PTR record.
    */
-  @projectedName("json", "ptrdname")
+  @encodedName("application/json", "ptrdname")
   dnsPtrDomainName?: string;
 }
 
@@ -225,7 +225,7 @@ model TxtRecord {
   /**
    * The text value of this TXT record.
    */
-  @projectedName("json", "value")
+  @encodedName("application/json", "value")
   values?: string[];
 }
 
@@ -261,25 +261,25 @@ model SoaRecord {
   /**
    * The refresh value for this SOA record.
    */
-  @projectedName("json", "refreshTime")
+  @encodedName("application/json", "refreshTime")
   refreshTimeInSeconds?: int64;
 
   /**
    * The retry time for this SOA record.
    */
-  @projectedName("json", "retryTime")
+  @encodedName("application/json", "retryTime")
   retryTimeInSeconds?: int64;
 
   /**
    * The expire time for this SOA record.
    */
-  @projectedName("json", "expireTime")
+  @encodedName("application/json", "expireTime")
   expireTimeInSeconds?: int64;
 
   /**
    * The minimum value for this SOA record. By convention this is used to determine the negative caching duration.
    */
-  @projectedName("json", "minimumTTL")
+  @encodedName("application/json", "minimumTTL")
   minimumTtlInSeconds?: int64;
 }
 
@@ -347,21 +347,21 @@ model ZoneProperties {
    * The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility("read")
-  @projectedName("json", "maxNumberOfRecordSets")
+  @encodedName("application/json", "maxNumberOfRecordSets")
   maxNumberOfRecords?: int64;
 
   /**
    * The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility("read")
-  @projectedName("json", "maxNumberOfRecordsPerRecordSet")
+  @encodedName("application/json", "maxNumberOfRecordsPerRecordSet")
   maxNumberOfRecordsPerRecord?: int64;
 
   /**
    * The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility("read")
-  @projectedName("json", "numberOfRecordSets")
+  @encodedName("application/json", "numberOfRecordSets")
   numberOfRecords?: int64;
 
   /**
@@ -494,6 +494,6 @@ model RecordSetUpdateParameters {
   /**
    * Specifies information about the record set being updated.
    */
-  @projectedName("json", "RecordSet")
+  @encodedName("application/json", "RecordSet")
   recordSet?: DnsRecord;
 }

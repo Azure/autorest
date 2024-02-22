@@ -25,7 +25,6 @@ model PortalSigninSettings is ProxyResource<PortalSigninSettingProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "PortalSigninSettings")
 interface PortalSigninSettingsOperationGroup {
   /**
    * Get Sign In Settings for the Portal

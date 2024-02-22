@@ -22,7 +22,7 @@ export function generateArmResource(resource: TspArmResource): string {
   definitions.push("\n");
 
   for (const o of resource.resourceOperations) {
-    for (const d of o.augmentedDecorators ?? []) {
+    for (const d of o.customizations ?? []) {
       definitions.push(`${d}`);
     }
   }
@@ -113,7 +113,6 @@ function generateArmResourceOperation(resource: TspArmResource): string {
 
   definitions.push("@armResourceOperations");
   if (resource.name === formalOperationGroupName) {
-    definitions.push(`@projectedName("client", "${formalOperationGroupName}")`);
     definitions.push(`interface ${formalOperationGroupName}OperationGroup {`);
   } else {
     definitions.push(`interface ${formalOperationGroupName} {`);

@@ -26,7 +26,6 @@ model PortalDelegationSettings
 }
 
 @armResourceOperations
-@projectedName("client", "PortalDelegationSettings")
 interface PortalDelegationSettingsOperationGroup {
   /**
    * Get Delegation Settings for the Portal.

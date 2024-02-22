@@ -103,8 +103,8 @@ interface EnvironmentVersionResources {
   >;
 }
 
-@@projectedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
+  "application/json",
   "body"
 );
 @@extension(EnvironmentVersionResources.createOrUpdate::parameters.resource,

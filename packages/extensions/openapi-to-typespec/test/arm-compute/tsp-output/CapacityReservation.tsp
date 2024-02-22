@@ -88,8 +88,8 @@ interface CapacityReservations {
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 
-@@projectedName(CapacityReservations.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservations.createOrUpdate::parameters.resource,
@@ -99,8 +99,8 @@ interface CapacityReservations {
 @@doc(CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
 );
-@@projectedName(CapacityReservations.update::parameters.properties,
-  "json",
+@@encodedName(CapacityReservations.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservations.update::parameters.properties,

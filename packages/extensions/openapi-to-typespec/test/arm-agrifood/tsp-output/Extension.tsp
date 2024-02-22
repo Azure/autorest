@@ -102,8 +102,8 @@ interface Extensions {
   >;
 }
 
-@@projectedName(Extensions.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Extensions.createOrUpdate::parameters.resource,
+  "application/json",
   "requestBody"
 );
 @@extension(Extensions.createOrUpdate::parameters.resource,
