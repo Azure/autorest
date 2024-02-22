@@ -132,8 +132,8 @@ interface TagDescriptionContracts {
   >;
 }
 
-@@projectedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(TagDescriptionContracts.createOrUpdate::parameters.resource,

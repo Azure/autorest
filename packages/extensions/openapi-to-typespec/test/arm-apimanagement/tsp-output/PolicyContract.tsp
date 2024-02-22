@@ -114,8 +114,8 @@ interface PolicyContracts {
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }
 
-@@projectedName(PolicyContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PolicyContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(PolicyContracts.createOrUpdate::parameters.resource,

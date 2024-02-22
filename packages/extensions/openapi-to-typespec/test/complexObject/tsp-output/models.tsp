@@ -22,7 +22,7 @@ model Product {
    * longitude. For example, uberX in San Francisco will have a different product_id
    * than uberX in Los Angeles.
    */
-  @projectedName("json", "product_id")
+  @encodedName("application/json", "product_id")
   productId?: string;
 
   /**
@@ -33,7 +33,7 @@ model Product {
   /**
    * Display name of product.
    */
-  @projectedName("json", "display_name")
+  @encodedName("application/json", "display_name")
   displayName?: string;
 
   /**

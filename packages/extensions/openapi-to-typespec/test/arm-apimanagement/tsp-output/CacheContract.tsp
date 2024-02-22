@@ -141,8 +141,8 @@ interface CacheContracts {
   >;
 }
 
-@@projectedName(CacheContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CacheContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(CacheContracts.createOrUpdate::parameters.resource,
@@ -152,8 +152,8 @@ interface CacheContracts {
 @@doc(CacheContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );
-@@projectedName(CacheContracts.update::parameters.properties,
-  "json",
+@@encodedName(CacheContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(CacheContracts.update::parameters.properties,

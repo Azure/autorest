@@ -52,8 +52,8 @@ interface ManagementPolicies {
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 
-@@projectedName(ManagementPolicies.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ManagementPolicies.createOrUpdate::parameters.resource,
+  "application/json",
   "properties"
 );
 @@extension(ManagementPolicies.createOrUpdate::parameters.resource,

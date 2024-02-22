@@ -1110,7 +1110,7 @@ model ApplicationListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -1204,7 +1204,7 @@ model PoolListUsageMetricsResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -1260,7 +1260,7 @@ model AccountListSupportedImagesResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -1372,7 +1372,7 @@ model PoolNodeCountsListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -1837,7 +1837,7 @@ model CertificateListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -1857,7 +1857,7 @@ model NodeFileListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -2423,7 +2423,7 @@ model ContainerRegistry {
   /**
    * The user name to log into the registry server.
    */
-  @projectedName("json", "username")
+  @encodedName("application/json", "username")
   userName?: string;
 
   /**
@@ -2677,7 +2677,7 @@ model UserIdentity {
    * The userName and autoUser properties are mutually exclusive; you must specify
    * one but not both.
    */
-  @projectedName("json", "username")
+  @encodedName("application/json", "username")
   userName?: string;
 
   /**
@@ -4159,7 +4159,7 @@ model BatchJobScheduleListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -4534,7 +4534,7 @@ model BatchJobListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -4554,7 +4554,7 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -5256,7 +5256,7 @@ model BatchPoolListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -5998,7 +5998,7 @@ model BatchTaskListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -6546,7 +6546,7 @@ model InboundEndpoint {
   /**
    * The public fully qualified domain name for the Compute Node.
    */
-  @projectedName("json", "publicFQDN")
+  @encodedName("application/json", "publicFQDN")
   publicFqdn: string;
 
   /**
@@ -6710,7 +6710,7 @@ model ComputeNodeListResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
 
@@ -6799,6 +6799,6 @@ model NodeVMExtensionList {
    * The URL to get the next set of results.
    */
   @nextLink
-  @projectedName("json", "odata.nextLink")
+  @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }

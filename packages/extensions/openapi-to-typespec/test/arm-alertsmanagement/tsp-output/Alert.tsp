@@ -200,6 +200,9 @@ interface Alerts {
   >;
 }
 
-@@projectedName(Alerts.changeState::parameters.body, "json", "comment");
+@@encodedName(Alerts.changeState::parameters.body,
+  "application/json",
+  "comment"
+);
 @@extension(Alerts.changeState::parameters.body, "x-ms-client-name", "comment");
 @@doc(Alerts.changeState::parameters.body, "reason of change alert state");

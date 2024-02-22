@@ -94,8 +94,8 @@ interface DedicatedHosts {
   listAvailableSizes is Azure.Core.ResourceList<string>;
 }
 
-@@projectedName(DedicatedHosts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(DedicatedHosts.createOrUpdate::parameters.resource,
@@ -105,8 +105,8 @@ interface DedicatedHosts {
 @@doc(DedicatedHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host."
 );
-@@projectedName(DedicatedHosts.update::parameters.properties,
-  "json",
+@@encodedName(DedicatedHosts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(DedicatedHosts.update::parameters.properties,

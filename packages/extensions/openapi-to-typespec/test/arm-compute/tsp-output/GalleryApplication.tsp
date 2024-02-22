@@ -67,8 +67,8 @@ interface GalleryApplications {
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
 
-@@projectedName(GalleryApplications.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GalleryApplications.createOrUpdate::parameters.resource,
+  "application/json",
   "galleryApplication"
 );
 @@extension(GalleryApplications.createOrUpdate::parameters.resource,
@@ -78,8 +78,8 @@ interface GalleryApplications {
 @@doc(GalleryApplications.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application operation."
 );
-@@projectedName(GalleryApplications.update::parameters.properties,
-  "json",
+@@encodedName(GalleryApplications.update::parameters.properties,
+  "application/json",
   "galleryApplication"
 );
 @@extension(GalleryApplications.update::parameters.properties,

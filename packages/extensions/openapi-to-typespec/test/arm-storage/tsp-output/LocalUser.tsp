@@ -78,8 +78,8 @@ interface LocalUsers {
   >;
 }
 
-@@projectedName(LocalUsers.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(LocalUsers.createOrUpdate::parameters.resource,
+  "application/json",
   "properties"
 );
 @@extension(LocalUsers.createOrUpdate::parameters.resource,

@@ -197,8 +197,8 @@ interface OpenidConnectProviderContracts {
   >;
 }
 
-@@projectedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
@@ -208,8 +208,8 @@ interface OpenidConnectProviderContracts {
 @@doc(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(OpenidConnectProviderContracts.update::parameters.properties,
-  "json",
+@@encodedName(OpenidConnectProviderContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(OpenidConnectProviderContracts.update::parameters.properties,

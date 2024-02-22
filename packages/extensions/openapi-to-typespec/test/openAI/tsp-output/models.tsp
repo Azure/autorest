@@ -21,7 +21,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
   /**
    * The maximum number of tokens to generate. Has minimum of 0.
    */
-  @projectedName("json", "max_tokens")
+  @encodedName("application/json", "max_tokens")
   maxTokens?: int32 = 16;
 
   /**
@@ -42,7 +42,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * Minimum of 0 and maximum of 1 allowed.
    *
    */
-  @projectedName("json", "top_p")
+  @encodedName("application/json", "top_p")
   topP?: float32 = 1;
 
   /**
@@ -57,7 +57,7 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * token. As an example, you can pass {"50256" &#58; -100} to prevent the
    * <|endoftext|> token from being generated.
    */
-  @projectedName("json", "logit_bias")
+  @encodedName("application/json", "logit_bias")
   logitBias?: Record<unknown>;
 
   /**
@@ -100,14 +100,14 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    */
   stop?: unknown;
 
-  @projectedName("json", "completion_config")
+  @encodedName("application/json", "completion_config")
   completionConfig?: string;
 
   /**
    * can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
    * enabled, 2=full cache
    */
-  @projectedName("json", "cache_level")
+  @encodedName("application/json", "cache_level")
   cacheLevel?: int32;
 
   /**
@@ -115,21 +115,21 @@ model Paths1Vtxb06DeploymentsDeploymentIdCompletionsPostRequestbodyContentApplic
    * so far. Decreases the model's likelihood to repeat the same line verbatim. Has
    * minimum of -2 and maximum of 2.
    */
-  @projectedName("json", "presence_penalty")
+  @encodedName("application/json", "presence_penalty")
   presencePenalty?: float32;
 
   /**
    * How much to penalize new tokens based on whether they appear in the text so
    * far. Increases the model's likelihood to talk about new topics.
    */
-  @projectedName("json", "frequency_penalty")
+  @encodedName("application/json", "frequency_penalty")
   frequencyPenalty?: float32;
 
   /**
    * How many generations to create server side, and display only the best. Will not
    * stream intermediate progress if best_of > 1. Has maximum value of 128.
    */
-  @projectedName("json", "best_of")
+  @encodedName("application/json", "best_of")
   bestOf?: int32;
 }
 
@@ -146,20 +146,20 @@ model Post200ApplicationJsonPropertiesItemsItem {
   index?: int32;
   logprobs?: PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs;
 
-  @projectedName("json", "finish_reason")
+  @encodedName("application/json", "finish_reason")
   finishReason?: string;
 }
 
 model PostResponses200ContentApplicationJsonSchemaChoicesItemLogprobs {
   tokens?: string[];
 
-  @projectedName("json", "token_logprobs")
+  @encodedName("application/json", "token_logprobs")
   tokenLogprobs?: float32[];
 
-  @projectedName("json", "top_logprobs")
+  @encodedName("application/json", "top_logprobs")
   topLogprobs?: Record<float32>[];
 
-  @projectedName("json", "text_offset")
+  @encodedName("application/json", "text_offset")
   textOffset?: int32[];
 }
 
@@ -191,7 +191,7 @@ model Paths13PiqocDeploymentsDeploymentIdEmbeddingsPostRequestbodyContentApplica
   /**
    * input type of embedding search to use
    */
-  @projectedName("json", "input_type")
+  @encodedName("application/json", "input_type")
   inputType?: string;
 
   /**

@@ -131,19 +131,19 @@ model AnswersOptions {
    * Minimum threshold score for answers, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @projectedName("json", "confidenceScoreThreshold")
+  @encodedName("application/json", "confidenceScoreThreshold")
   confidenceThreshold?: float64;
 
   /**
    * Context object with previous QnA's information.
    */
-  @projectedName("json", "context")
+  @encodedName("application/json", "context")
   answerContext?: KnowledgeBaseAnswerContext;
 
   /**
    * Type of ranker to be used.
    */
-  @projectedName("json", "rankerType")
+  @encodedName("application/json", "rankerType")
   rankerKind?: RankerKind;
 
   /**
@@ -154,7 +154,7 @@ model AnswersOptions {
   /**
    * To configure Answer span prediction feature.
    */
-  @projectedName("json", "answerSpanRequest")
+  @encodedName("application/json", "answerSpanRequest")
   shortAnswerOptions?: ShortAnswerOptions;
 
   /**
@@ -175,7 +175,7 @@ model KnowledgeBaseAnswerContext {
   /**
    * Previous user query.
    */
-  @projectedName("json", "previousUserQuery")
+  @encodedName("application/json", "previousUserQuery")
   previousQuestion?: string;
 }
 
@@ -241,7 +241,7 @@ model ShortAnswerOptions {
    * to 1.
    */
   @maxValue(1)
-  @projectedName("json", "confidenceScoreThreshold")
+  @encodedName("application/json", "confidenceScoreThreshold")
   confidenceThreshold?: float64;
 
   /**
@@ -249,7 +249,7 @@ model ShortAnswerOptions {
    */
   @maxValue(10)
   @minValue(1)
-  @projectedName("json", "topAnswersWithSpan")
+  @encodedName("application/json", "topAnswersWithSpan")
   top?: int32;
 }
 
@@ -281,13 +281,13 @@ model KnowledgeBaseAnswer {
    * Answer confidence score, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @projectedName("json", "confidenceScore")
+  @encodedName("application/json", "confidenceScore")
   confidence?: float64;
 
   /**
    * ID of the QnA result.
    */
-  @projectedName("json", "id")
+  @encodedName("application/json", "id")
   qnaId?: int32;
 
   /**
@@ -309,7 +309,7 @@ model KnowledgeBaseAnswer {
   /**
    * Answer span object of QnA with respect to user's question.
    */
-  @projectedName("json", "answerSpan")
+  @encodedName("application/json", "answerSpan")
   shortAnswer?: AnswerSpan;
 }
 
@@ -364,7 +364,7 @@ model AnswerSpan {
    * Predicted score of answer span, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @projectedName("json", "confidenceScore")
+  @encodedName("application/json", "confidenceScore")
   confidence?: float64;
 
   /**
@@ -465,7 +465,7 @@ model AnswersFromTextOptions {
   /**
    * Text records to be searched for given question.
    */
-  @projectedName("json", "records")
+  @encodedName("application/json", "records")
   textDocuments: TextDocument[];
 
   /**
@@ -521,7 +521,7 @@ model TextAnswer {
    * answer confidence score, value ranges from 0 to 1.
    */
   @maxValue(1)
-  @projectedName("json", "confidenceScore")
+  @encodedName("application/json", "confidenceScore")
   confidence?: float64;
 
   /**
@@ -532,7 +532,7 @@ model TextAnswer {
   /**
    * Answer span object with respect to user's question.
    */
-  @projectedName("json", "answerSpan")
+  @encodedName("application/json", "answerSpan")
   shortAnswer?: AnswerSpan;
 
   /**

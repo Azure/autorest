@@ -128,8 +128,8 @@ interface PortalRevisionContracts {
   >;
 }
 
-@@projectedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(PortalRevisionContracts.createOrUpdate::parameters.resource,
@@ -137,8 +137,8 @@ interface PortalRevisionContracts {
   "parameters"
 );
 @@doc(PortalRevisionContracts.createOrUpdate::parameters.resource, "");
-@@projectedName(PortalRevisionContracts.update::parameters.properties,
-  "json",
+@@encodedName(PortalRevisionContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(PortalRevisionContracts.update::parameters.properties,

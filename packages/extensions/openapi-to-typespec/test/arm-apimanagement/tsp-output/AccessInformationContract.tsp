@@ -169,8 +169,8 @@ interface AccessInformationContracts {
   >;
 }
 
-@@projectedName(AccessInformationContracts.create::parameters.resource,
-  "json",
+@@encodedName(AccessInformationContracts.create::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(AccessInformationContracts.create::parameters.resource,
@@ -180,8 +180,8 @@ interface AccessInformationContracts {
 @@doc(AccessInformationContracts.create::parameters.resource,
   "Parameters supplied to retrieve the Tenant Access Information."
 );
-@@projectedName(AccessInformationContracts.update::parameters.properties,
-  "json",
+@@encodedName(AccessInformationContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(AccessInformationContracts.update::parameters.properties,

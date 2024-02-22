@@ -70,8 +70,8 @@ interface PrivateEndpointConnections {
   listByService is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@projectedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "application/json",
   "privateEndpointConnectionRequest"
 );
 @@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,

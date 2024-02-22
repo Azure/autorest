@@ -155,8 +155,8 @@ interface OperationContracts {
   >;
 }
 
-@@projectedName(OperationContracts.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(OperationContracts.createOrUpdate::parameters.resource,
+  "application/json",
   "parameters"
 );
 @@extension(OperationContracts.createOrUpdate::parameters.resource,
@@ -166,8 +166,8 @@ interface OperationContracts {
 @@doc(OperationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@projectedName(OperationContracts.update::parameters.properties,
-  "json",
+@@encodedName(OperationContracts.update::parameters.properties,
+  "application/json",
   "parameters"
 );
 @@extension(OperationContracts.update::parameters.properties,

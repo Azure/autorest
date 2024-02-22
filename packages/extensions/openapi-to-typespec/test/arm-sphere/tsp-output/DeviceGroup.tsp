@@ -101,8 +101,8 @@ interface DeviceGroups {
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
 
-@@projectedName(DeviceGroups.claimDevices::parameters.body,
-  "json",
+@@encodedName(DeviceGroups.claimDevices::parameters.body,
+  "application/json",
   "claimDevicesRequest"
 );
 @@extension(DeviceGroups.claimDevices::parameters.body,
