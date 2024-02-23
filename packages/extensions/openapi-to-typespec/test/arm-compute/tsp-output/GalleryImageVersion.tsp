@@ -79,7 +79,7 @@ interface GalleryImageVersions {
 }
 
 @@encodedName(GalleryImageVersions.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "galleryImageVersion"
 );
 @@extension(GalleryImageVersions.createOrUpdate::parameters.resource,
@@ -90,7 +90,7 @@ interface GalleryImageVersions {
   "Parameters supplied to the create or update gallery image version operation."
 );
 @@encodedName(GalleryImageVersions.update::parameters.properties,
-  "application/json",
+  "json",
   "galleryImageVersion"
 );
 @@extension(GalleryImageVersions.update::parameters.properties,

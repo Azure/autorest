@@ -83,7 +83,7 @@ interface RoleAssignmentScheduleRequests {
 }
 
 @@encodedName(RoleAssignmentScheduleRequests.create::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleAssignmentScheduleRequests.create::parameters.resource,
@@ -94,7 +94,7 @@ interface RoleAssignmentScheduleRequests {
   "Parameters for the role assignment schedule request."
 );
 @@encodedName(RoleAssignmentScheduleRequests.validate::parameters.body,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleAssignmentScheduleRequests.validate::parameters.body,

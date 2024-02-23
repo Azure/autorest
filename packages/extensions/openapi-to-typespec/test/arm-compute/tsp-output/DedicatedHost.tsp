@@ -116,7 +116,7 @@ interface DedicatedHosts {
 }
 
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(DedicatedHosts.createOrUpdate::parameters.resource,
@@ -127,7 +127,7 @@ interface DedicatedHosts {
   "Parameters supplied to the Create Dedicated Host."
 );
 @@encodedName(DedicatedHosts.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(DedicatedHosts.update::parameters.properties,

@@ -69,7 +69,7 @@ interface Devices {
 }
 
 @@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "application/json",
+  "json",
   "generateDeviceCapabilityRequest"
 );
 @@extension(Devices.generateCapabilityImage::parameters.body,

@@ -91,7 +91,7 @@ interface DiskAccesses {
 }
 
 @@encodedName(DiskAccesses.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "diskAccess"
 );
 @@extension(DiskAccesses.createOrUpdate::parameters.resource,
@@ -101,10 +101,7 @@ interface DiskAccesses {
 @@doc(DiskAccesses.createOrUpdate::parameters.resource,
   "disk access object supplied in the body of the Put disk access operation."
 );
-@@encodedName(DiskAccesses.update::parameters.properties,
-  "application/json",
-  "diskAccess"
-);
+@@encodedName(DiskAccesses.update::parameters.properties, "json", "diskAccess");
 @@extension(DiskAccesses.update::parameters.properties,
   "x-ms-client-name",
   "diskAccess"

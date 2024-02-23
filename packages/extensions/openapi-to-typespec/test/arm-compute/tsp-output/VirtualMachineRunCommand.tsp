@@ -105,7 +105,7 @@ interface VirtualMachineRunCommands {
 }
 
 @@encodedName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "runCommand"
 );
 @@extension(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
@@ -116,7 +116,7 @@ interface VirtualMachineRunCommands {
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
 @@encodedName(VirtualMachineRunCommands.update::parameters.properties,
-  "application/json",
+  "json",
   "runCommand"
 );
 @@extension(VirtualMachineRunCommands.update::parameters.properties,

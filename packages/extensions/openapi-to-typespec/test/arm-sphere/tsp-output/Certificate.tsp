@@ -90,7 +90,7 @@ interface Certificates {
 }
 
 @@encodedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "application/json",
+  "json",
   "proofOfPossessionNonceRequest"
 );
 @@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,

@@ -201,7 +201,7 @@ interface CloudServices {
 }
 
 @@encodedName(CloudServices.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(CloudServices.createOrUpdate::parameters.resource,
@@ -212,7 +212,7 @@ interface CloudServices {
   "The cloud service object."
 );
 @@encodedName(CloudServices.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(CloudServices.update::parameters.properties,
@@ -220,10 +220,7 @@ interface CloudServices {
   "parameters"
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@encodedName(CloudServices.restart::parameters.body,
-  "application/json",
-  "parameters"
-);
+@@encodedName(CloudServices.restart::parameters.body, "json", "parameters");
 @@extension(CloudServices.restart::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -231,10 +228,7 @@ interface CloudServices {
 @@doc(CloudServices.restart::parameters.body,
   "List of cloud service role instance names."
 );
-@@encodedName(CloudServices.reimage::parameters.body,
-  "application/json",
-  "parameters"
-);
+@@encodedName(CloudServices.reimage::parameters.body, "json", "parameters");
 @@extension(CloudServices.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -242,10 +236,7 @@ interface CloudServices {
 @@doc(CloudServices.reimage::parameters.body,
   "List of cloud service role instance names."
 );
-@@encodedName(CloudServices.rebuild::parameters.body,
-  "application/json",
-  "parameters"
-);
+@@encodedName(CloudServices.rebuild::parameters.body, "json", "parameters");
 @@extension(CloudServices.rebuild::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -254,7 +245,7 @@ interface CloudServices {
   "List of cloud service role instance names."
 );
 @@encodedName(CloudServices.deleteInstances::parameters.body,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(CloudServices.deleteInstances::parameters.body,

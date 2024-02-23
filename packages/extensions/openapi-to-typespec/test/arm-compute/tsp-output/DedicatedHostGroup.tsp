@@ -87,7 +87,7 @@ interface DedicatedHostGroups {
 }
 
 @@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(DedicatedHostGroups.createOrUpdate::parameters.resource,
@@ -98,7 +98,7 @@ interface DedicatedHostGroups {
   "Parameters supplied to the Create Dedicated Host Group."
 );
 @@encodedName(DedicatedHostGroups.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(DedicatedHostGroups.update::parameters.properties,

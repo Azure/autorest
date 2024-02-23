@@ -573,8 +573,6 @@ interface ApiManagementServiceResources {
    * Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
    */
   // FIXME: QuotaByPeriodKeys_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("QuotaByPeriodKeys_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
   @get
   get(

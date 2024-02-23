@@ -91,7 +91,7 @@ interface DiskEncryptionSets {
 }
 
 @@encodedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "diskEncryptionSet"
 );
 @@extension(DiskEncryptionSets.createOrUpdate::parameters.resource,
@@ -102,7 +102,7 @@ interface DiskEncryptionSets {
   "disk encryption set object supplied in the body of the Put disk encryption set operation."
 );
 @@encodedName(DiskEncryptionSets.update::parameters.properties,
-  "application/json",
+  "json",
   "diskEncryptionSet"
 );
 @@extension(DiskEncryptionSets.update::parameters.properties,

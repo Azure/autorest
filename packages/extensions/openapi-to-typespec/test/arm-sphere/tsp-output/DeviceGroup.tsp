@@ -102,7 +102,7 @@ interface DeviceGroups {
 }
 
 @@encodedName(DeviceGroups.claimDevices::parameters.body,
-  "application/json",
+  "json",
   "claimDevicesRequest"
 );
 @@extension(DeviceGroups.claimDevices::parameters.body,

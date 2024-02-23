@@ -115,10 +115,7 @@ interface LabelingJobs {
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
-@@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
+@@encodedName(LabelingJobs.createOrUpdate::parameters.resource, "json", "body");
 @@extension(LabelingJobs.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "body"

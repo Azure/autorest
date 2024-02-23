@@ -325,7 +325,7 @@ interface VirtualMachines {
 }
 
 @@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(VirtualMachines.createOrUpdate::parameters.resource,
@@ -336,7 +336,7 @@ interface VirtualMachines {
   "Parameters supplied to the Create Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(VirtualMachines.update::parameters.properties,
@@ -346,10 +346,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.capture::parameters.body,
-  "application/json",
-  "parameters"
-);
+@@encodedName(VirtualMachines.capture::parameters.body, "json", "parameters");
 @@extension(VirtualMachines.capture::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -357,10 +354,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.reimage::parameters.body,
-  "application/json",
-  "parameters"
-);
+@@encodedName(VirtualMachines.reimage::parameters.body, "json", "parameters");
 @@extension(VirtualMachines.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -369,7 +363,7 @@ interface VirtualMachines {
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.installPatches::parameters.body,
-  "application/json",
+  "json",
   "installPatchesInput"
 );
 @@extension(VirtualMachines.installPatches::parameters.body,
@@ -380,7 +374,7 @@ interface VirtualMachines {
   "Input for InstallPatches as directly received by the API"
 );
 @@encodedName(VirtualMachines.runCommand::parameters.body,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(VirtualMachines.runCommand::parameters.body,

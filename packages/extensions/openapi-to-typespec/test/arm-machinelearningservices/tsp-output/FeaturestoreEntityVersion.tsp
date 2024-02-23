@@ -118,7 +118,7 @@ interface FeaturestoreEntityVersions {
 }
 
 @@encodedName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,

@@ -58,7 +58,7 @@ interface RoleManagementPolicyAssignments {
 }
 
 @@encodedName(RoleManagementPolicyAssignments.create::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleManagementPolicyAssignments.create::parameters.resource,

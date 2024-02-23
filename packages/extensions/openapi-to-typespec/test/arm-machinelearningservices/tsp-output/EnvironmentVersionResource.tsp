@@ -104,7 +104,7 @@ interface EnvironmentVersionResources {
 }
 
 @@encodedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(EnvironmentVersionResources.createOrUpdate::parameters.resource,

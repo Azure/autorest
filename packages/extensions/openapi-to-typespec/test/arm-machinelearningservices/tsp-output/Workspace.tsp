@@ -244,10 +244,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
-@@encodedName(Workspaces.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
+@@encodedName(Workspaces.createOrUpdate::parameters.resource, "json", "body");
 @@extension(Workspaces.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "body"
@@ -255,10 +252,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 @@doc(Workspaces.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a machine learning workspace."
 );
-@@encodedName(Workspaces.update::parameters.properties,
-  "application/json",
-  "body"
-);
+@@encodedName(Workspaces.update::parameters.properties, "json", "body");
 @@extension(Workspaces.update::parameters.properties,
   "x-ms-client-name",
   "body"
