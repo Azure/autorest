@@ -79,37 +79,27 @@ interface NotificationContracts {
   // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
-  listByNotification is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByNotification(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Notification Name Identifier.
-       */
-      @path
-      notificationName: NotificationName;
+    /**
+     * Notification Name Identifier.
+     */
+    @path
+    notificationName: NotificationName,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    RecipientUserListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<RecipientUserListResult> | ErrorResponse;
 
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
@@ -117,35 +107,25 @@ interface NotificationContracts {
   // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
-  listByNotification is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByNotification(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Notification Name Identifier.
-       */
-      @path
-      notificationName: NotificationName;
+    /**
+     * Notification Name Identifier.
+     */
+    @path
+    notificationName: NotificationName,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    RecipientEmailListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<RecipientEmailListResult> | ErrorResponse;
 }

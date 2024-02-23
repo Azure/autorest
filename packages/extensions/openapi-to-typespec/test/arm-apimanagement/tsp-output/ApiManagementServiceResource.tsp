@@ -192,56 +192,46 @@ interface ApiManagementServiceResources {
   // FIXME: Api_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags")
   @get
-  listByTags is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByTags(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq |     |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq |     |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Include not tagged APIs.
-       */
-      @query("includeNotTaggedApis")
-      includeNotTaggedApis?: boolean;
+    /**
+     * Include not tagged APIs.
+     */
+    @query("includeNotTaggedApis")
+    includeNotTaggedApis?: boolean,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    TagResourceListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<TagResourceListResult> | ErrorResponse;
 
   /**
    * Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.
@@ -249,31 +239,21 @@ interface ApiManagementServiceResources {
   // FIXME: ContentType_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ContentTypeListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ContentTypeListResult> | ErrorResponse;
 
   /**
    * Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.
@@ -281,39 +261,29 @@ interface ApiManagementServiceResources {
   // FIXME: ContentType_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  get(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Content type identifier.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      contentTypeId: string;
+    /**
+     * Content type identifier.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    contentTypeId: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ContentTypeContract
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ContentTypeContract> | ErrorResponse;
 
   /**
    * Lists developer portal's content items specified by the provided content type.
@@ -321,39 +291,29 @@ interface ApiManagementServiceResources {
   // FIXME: ContentItem_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Content type identifier.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      contentTypeId: string;
+    /**
+     * Content type identifier.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    contentTypeId: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ContentItemListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ContentItemListResult> | ErrorResponse;
 
   /**
    * Returns the developer portal's content item specified by its identifier.
@@ -361,47 +321,37 @@ interface ApiManagementServiceResources {
   // FIXME: ContentItem_Get could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  get(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Content type identifier.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      contentTypeId: string;
+    /**
+     * Content type identifier.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    contentTypeId: string,
 
-      /**
-       * Content item identifier.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      contentItemId: string;
+    /**
+     * Content item identifier.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    contentItemId: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ContentItemContract
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ContentItemContract> | ErrorResponse;
 
   /**
    * Gets all available SKU for a given API Management service
@@ -410,31 +360,21 @@ interface ApiManagementServiceResources {
   @summary("Gets available SKUs for API Management service")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus")
   @get
-  listAvailableServiceSkus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listAvailableServiceSkus(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ResourceSkuResults
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceSkuResults> | ErrorResponse;
 
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
@@ -442,31 +382,20 @@ interface ApiManagementServiceResources {
   // FIXME: NetworkStatus_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
-    },
-    void
-  >;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
@@ -474,38 +403,27 @@ interface ApiManagementServiceResources {
   // FIXME: NetworkStatus_ListByLocation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus")
   @get
-  listByLocation is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+  listByLocation(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
-
-      /**
-       * Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.
-       */
-      @minLength(1)
-      @path
-      locationName: string;
-    },
-    NetworkStatusContract
-  >;
+    /**
+     * Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.
+     */
+    @minLength(1)
+    @path
+    locationName: string,
+  ): ArmResponse<NetworkStatusContract> | ErrorResponse;
 
   /**
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
@@ -513,31 +431,20 @@ interface ApiManagementServiceResources {
   // FIXME: OutboundNetworkDependenciesEndpoints_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/outboundNetworkDependenciesEndpoints")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
-    },
-    OutboundEnvironmentEndpointList
-  >;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
+  ): ArmResponse<OutboundEnvironmentEndpointList> | ErrorResponse;
 
   /**
    * Lists all policy descriptions.
@@ -545,37 +452,27 @@ interface ApiManagementServiceResources {
   // FIXME: PolicyDescription_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Policy scope.
-       */
-      @query("scope")
-      scope?: PolicyScopeContract;
+    /**
+     * Policy scope.
+     */
+    @query("scope")
+    scope?: PolicyScopeContract,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    PolicyDescriptionListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<PolicyDescriptionListResult> | ErrorResponse;
 
   /**
    * Lists a collection of portalsettings defined within a service instance..
@@ -583,31 +480,21 @@ interface ApiManagementServiceResources {
   // FIXME: PortalSettings_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ResourceListResult<PortalSigninSettings>
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<PortalSigninSettings>> | ErrorResponse;
 
   /**
    * Lists a collection of products associated with tags.
@@ -615,56 +502,46 @@ interface ApiManagementServiceResources {
   // FIXME: Product_ListByTags could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags")
   @get
-  listByTags is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByTags(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq | substringof, contains, startswith, endswith |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq | substringof, contains, startswith, endswith |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Include not tagged Products.
-       */
-      @query("includeNotTaggedProducts")
-      includeNotTaggedProducts?: boolean;
+    /**
+     * Include not tagged Products.
+     */
+    @query("includeNotTaggedProducts")
+    includeNotTaggedProducts?: boolean,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    TagResourceListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<TagResourceListResult> | ErrorResponse;
 
   /**
    * Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
@@ -672,41 +549,59 @@ interface ApiManagementServiceResources {
   // FIXME: QuotaByCounterKeys_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
-      @path
-      quotaCounterKey: string;
+    @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
+    @path
+    quotaCounterKey: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    QuotaCounterListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<QuotaCounterListResult> | ErrorResponse;
 
   /**
    * Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
    */
   // FIXME: QuotaByPeriodKeys_Get could not be converted to a resource operation
-  get is Azure.Core.ResourceRead<QuotaCounterContract>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("QuotaByPeriodKeys_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
+
+    @doc("Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key")
+    @path
+    quotaCounterKey: string,
+
+    /**
+     * Quota period key identifier.
+     */
+    @path
+    quotaPeriodKey: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<QuotaCounterContract> | ErrorResponse;
 
   /**
    * Lists all azure regions in which the service exists.
@@ -714,31 +609,21 @@ interface ApiManagementServiceResources {
   // FIXME: Region_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    RegionListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<RegionListResult> | ErrorResponse;
 
   /**
    * Lists report records by API.
@@ -746,56 +631,46 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByApi could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi")
   @get
-  listByApi is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByApi(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * The filter to apply on the operation.
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * The filter to apply on the operation.
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by User.
@@ -803,56 +678,46 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByUser could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser")
   @get
-  listByUser is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByUser(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| userId | select, filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| userId | select, filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by API Operations.
@@ -860,56 +725,46 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByOperation could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation")
   @get
-  listByOperation is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByOperation(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by Product.
@@ -917,56 +772,46 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct")
   @get
-  listByProduct is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByProduct(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by geography.
@@ -974,50 +819,40 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByGeo could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo")
   @get
-  listByGeo is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByGeo(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| country | select |     |     | </br>| region | select |     |     | </br>| zip | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| country | select |     |     | </br>| region | select |     |     | </br>| zip | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by subscription.
@@ -1025,56 +860,46 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListBySubscription could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription")
   @get
-  listBySubscription is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listBySubscription(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | select, filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| displayName | select, orderBy |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | select, filter | eq |     | </br>| productId | select, filter | eq |     | </br>| subscriptionId | select, filter | eq |     | </br>| callCountSuccess | select, orderBy |     |     | </br>| callCountBlocked | select, orderBy |     |     | </br>| callCountFailed | select, orderBy |     |     | </br>| callCountOther | select, orderBy |     |     | </br>| callCountTotal | select, orderBy |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select, orderBy |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by Time.
@@ -1082,62 +907,52 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByTime could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime")
   @get
-  listByTime is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByTime(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter, select | ge, le |     | </br>| interval | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter, select | ge, le |     | </br>| interval | select |     |     | </br>| apiRegion | filter | eq |     | </br>| userId | filter | eq |     | </br>| productId | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| callCountSuccess | select |     |     | </br>| callCountBlocked | select |     |     | </br>| callCountFailed | select |     |     | </br>| callCountOther | select |     |     | </br>| bandwidth | select, orderBy |     |     | </br>| cacheHitsCount | select |     |     | </br>| cacheMissCount | select |     |     | </br>| apiTimeAvg | select |     |     | </br>| apiTimeMin | select |     |     | </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * OData order by query option.
-       */
-      @query("$orderby")
-      orderBy?: string;
+    /**
+     * OData order by query option.
+     */
+    @query("$orderby")
+    orderBy?: string,
 
-      /**
-       * By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds)).
-       */
-      @query("interval")
-      interval: duration;
+    /**
+     * By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds)).
+     */
+    @query("interval")
+    interval: duration,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ReportListResult> | ErrorResponse;
 
   /**
    * Lists report records by Request.
@@ -1145,50 +960,40 @@ interface ApiManagementServiceResources {
   // FIXME: Reports_ListByRequest could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest")
   @get
-  listByRequest is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByRequest(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| productId | filter | eq |     | </br>| userId | filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>
-       */
-      @query("$filter")
-      $filter: string;
+    /**
+     * |   Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| timestamp | filter | ge, le |     | </br>| apiId | filter | eq |     | </br>| operationId | filter | eq |     | </br>| productId | filter | eq |     | </br>| userId | filter | eq |     | </br>| apiRegion | filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>
+     */
+    @query("$filter")
+    $filter: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    RequestReportListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<RequestReportListResult> | ErrorResponse;
 
   /**
    * Lists a collection of resources associated with tags.
@@ -1196,50 +1001,40 @@ interface ApiManagementServiceResources {
   // FIXME: TagResource_ListByService could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources")
   @get
-  listByService is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByService(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| aid | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| isCurrent | filter | eq |     |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| aid | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| isCurrent | filter | eq |     |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    TagResourceListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<TagResourceListResult> | ErrorResponse;
 
   /**
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
@@ -1247,37 +1042,27 @@ interface ApiManagementServiceResources {
   // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
-  getSyncState is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getSyncState(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+    ...SubscriptionIdParameter,
 
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
-      @path
-      configurationName: ConfigurationIdName;
-    },
-    TenantConfigurationSyncStateContract
-  >;
+    /**
+     * The identifier of the Git Configuration Operation.
+     */
+    @path
+    configurationName: ConfigurationIdName,
+  ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
 }
 
 @@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,

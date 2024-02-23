@@ -120,40 +120,30 @@ interface DnsZones {
   // FIXME: RecordSets_ListByDnsZone could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets")
   @get
-  listByDnsZone is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByDnsZone(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the DNS zone (without a terminating dot).
-       */
-      @path
-      zoneName: string;
+    /**
+     * The name of the DNS zone (without a terminating dot).
+     */
+    @path
+    zoneName: string,
 
-      /**
-       * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>
-       */
-      @query("$recordsetnamesuffix")
-      $recordsetnamesuffix?: string;
+    /**
+     * The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>
+     */
+    @query("$recordsetnamesuffix")
+    $recordsetnamesuffix?: string,
 
-      /**
-       * Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ResourceListResult<DnsRecord>
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<DnsRecord>> | ErrorResponse;
 }
 
 @@doc(DnsZones.createOrUpdate::parameters.resource,

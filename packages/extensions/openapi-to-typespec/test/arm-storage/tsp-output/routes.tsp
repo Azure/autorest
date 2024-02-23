@@ -1,3 +1,5 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -15,17 +17,10 @@ interface SkusOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-    },
-    StorageSkuListResult
-  >;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<StorageSkuListResult> | ErrorResponse;
 }
 
 interface UsagesOperations {
@@ -34,21 +29,9 @@ interface UsagesOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages")
   @get
-  listByLocation is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * The location of the Azure Storage resource.
-       */
-      @path
-      location: string;
-    },
-    UsageListResult
-  >;
+  listByLocation(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+  ): ArmResponse<UsageListResult> | ErrorResponse;
 }

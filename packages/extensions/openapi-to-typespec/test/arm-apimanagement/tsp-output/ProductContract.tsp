@@ -150,58 +150,48 @@ interface ProductContracts {
   // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
   @get
-  listByProduct is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByProduct(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Product identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      productId: string;
+    /**
+     * Product identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(256)
+    @minLength(1)
+    @path
+    productId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ApiManagementProductApiListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ApiManagementProductApiListResult> | ErrorResponse;
 
   /**
    * Lists the collection of developer groups associated with the specified product.
@@ -209,58 +199,48 @@ interface ProductContracts {
   // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
   @get
-  listByProduct is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listByProduct(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Product identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      productId: string;
+    /**
+     * Product identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(256)
+    @minLength(1)
+    @path
+    productId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt |     |</br>| displayName | filter | eq, ne |     |</br>| description | filter | eq, ne |     |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ApiManagementProductGroupListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ApiManagementProductGroupListResult> | ErrorResponse;
 
   /**
    * Lists the collection of subscriptions to the specified product.
@@ -268,58 +248,48 @@ interface ProductContracts {
   // FIXME: ProductSubscriptions_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Product identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      productId: string;
+    /**
+     * Product identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(256)
+    @minLength(1)
+    @path
+    productId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ResourceListResult<SubscriptionContract>
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
 }
 
 @@doc(ProductContracts.createOrUpdate::parameters.resource,

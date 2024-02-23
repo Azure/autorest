@@ -51,21 +51,8 @@ interface DenyAssignments {
     DenyAssignment,
     {
       ...BaseParameters<DenyAssignment>;
-
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
 
       /**
        * The namespace of the resource provider.

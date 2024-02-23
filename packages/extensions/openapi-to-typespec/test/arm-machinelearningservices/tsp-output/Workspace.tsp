@@ -178,32 +178,18 @@ interface Workspaces {
   @operationId("WorkspaceFeatures_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-    },
-    ListAmlUserFeatureResult
-  >;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
+  ): ArmResponse<ListAmlUserFeatureResult> | ErrorResponse;
 
   /**
    * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
@@ -212,32 +198,18 @@ interface Workspaces {
   @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints")
   @get
-  listOutboundNetworkDependenciesEndpoints is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  listOutboundNetworkDependenciesEndpoints(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-    },
-    ExternalFqdnResponse
-  >;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
+  ): ArmResponse<ExternalFqdnResponse> | ErrorResponse;
 
   /**
    * Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
@@ -258,32 +230,18 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 """)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-    },
-    PrivateLinkResourceListResult
-  >;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
+  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,

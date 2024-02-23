@@ -139,34 +139,25 @@ interface RoleInstances {
   @operationId("CloudServiceRoleInstances_GetInstanceView")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
   @get
-  getInstanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Name of the role instance.
-       */
-      @path
-      roleInstanceName: string;
+  getInstanceView(
+    ...ApiVersionParameter,
 
-      /**
-       * Name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of the role instance.
+     */
+    @path
+    roleInstanceName: string,
 
-      /**
-       * Name of the cloud service.
-       */
-      @path
-      cloudServiceName: string;
+    ...ResourceGroupParameter,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    RoleInstanceInstanceView
-  >;
+    /**
+     * Name of the cloud service.
+     */
+    @path
+    cloudServiceName: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<RoleInstanceInstanceView> | ErrorResponse;
 
   /**
    * Gets a remote desktop file for a role instance in a cloud service.
@@ -176,38 +167,29 @@ interface RoleInstances {
   @operationId("CloudServiceRoleInstances_GetRemoteDesktopFile")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile")
   @get
-  getRemoteDesktopFile is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Name of the role instance.
-       */
-      @path
-      roleInstanceName: string;
+  getRemoteDesktopFile(
+    ...ApiVersionParameter,
 
-      /**
-       * Name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of the role instance.
+     */
+    @path
+    roleInstanceName: string,
 
-      /**
-       * Name of the cloud service.
-       */
-      @path
-      cloudServiceName: string;
+    ...ResourceGroupParameter,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+    /**
+     * Name of the cloud service.
+     */
+    @path
+    cloudServiceName: string,
 
-      /**
-       * Accept header
-       */
-      @header
-      accept: "application/x-rdp";
-    },
-    void
-  >;
+    ...SubscriptionIdParameter,
+
+    /**
+     * Accept header
+     */
+    @header
+    accept: "application/x-rdp",
+  ): ArmResponse<void> | ErrorResponse;
 }

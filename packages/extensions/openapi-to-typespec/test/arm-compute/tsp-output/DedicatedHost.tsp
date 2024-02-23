@@ -91,7 +91,28 @@ interface DedicatedHosts {
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
   // FIXME: DedicatedHosts_ListAvailableSizes could not be converted to a resource operation
-  listAvailableSizes is Azure.Core.ResourceList<string>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/hostSizes")
+  @get
+  listAvailableSizes(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the dedicated host group.
+     */
+    @pattern("^[-\\w\\._]+$")
+    @path
+    hostGroupName: string,
+
+    /**
+     * The name of the dedicated host.
+     */
+    @pattern("^[-\\w\\._]+$")
+    @path
+    hostName: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<DedicatedHostSizeListResult> | ErrorResponse;
 }
 
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,

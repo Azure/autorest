@@ -407,34 +407,24 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
   @get
-  getInstanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getInstanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * The instance ID of the virtual machine.
-       */
-      @path
-      instanceId: string;
+    /**
+     * The instance ID of the virtual machine.
+     */
+    @path
+    instanceId: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetVMInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
 }
 
 @@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,

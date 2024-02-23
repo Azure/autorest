@@ -194,58 +194,48 @@ interface UserContracts {
   // FIXME: UserGroup_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
+    /**
+     * User identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    userId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ResourceListResult<GroupContract>
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<GroupContract>> | ErrorResponse;
 
   /**
    * List of all user identities.
@@ -253,39 +243,29 @@ interface UserContracts {
   // FIXME: UserIdentities_List could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
+    /**
+     * User identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(80)
+    @minLength(1)
+    @path
+    userId: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    UserIdentityListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<UserIdentityListResult> | ErrorResponse;
 }
 
 @@doc(UserContracts.createOrUpdate::parameters.resource,

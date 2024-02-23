@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "fix default value of array and remove default value of duration temporarily",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}
