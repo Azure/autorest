@@ -56,8 +56,6 @@ interface DataTypes {
   /**
    * List data type by parent resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DataTypes_ListByDataProduct")
   listByDataProduct is ArmResourceListByParent<DataType>;
 
   /**

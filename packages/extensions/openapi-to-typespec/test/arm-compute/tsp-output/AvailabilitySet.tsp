@@ -95,7 +95,7 @@ interface AvailabilitySets {
 }
 
 @@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(AvailabilitySets.createOrUpdate::parameters.resource,
@@ -106,7 +106,7 @@ interface AvailabilitySets {
   "Parameters supplied to the Create Availability Set operation."
 );
 @@encodedName(AvailabilitySets.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(AvailabilitySets.update::parameters.properties,

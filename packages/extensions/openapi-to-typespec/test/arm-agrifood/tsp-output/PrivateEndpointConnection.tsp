@@ -65,7 +65,7 @@ interface PrivateEndpointConnections {
 }
 
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "request"
 );
 @@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,

@@ -138,7 +138,7 @@ interface ModelVersionResources {
 }
 
 @@encodedName(ModelVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(ModelVersionResources.createOrUpdate::parameters.resource,

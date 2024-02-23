@@ -106,7 +106,7 @@ interface FeaturesetContainers {
 }
 
 @@encodedName(FeaturesetContainers.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(FeaturesetContainers.createOrUpdate::parameters.resource,

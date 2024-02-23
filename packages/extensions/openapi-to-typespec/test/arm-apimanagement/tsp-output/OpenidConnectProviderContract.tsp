@@ -15,14 +15,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * OpenId Connect Provider details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  OpenidConnectProviderContractProperties
-)
-model OpenidConnectProviderContract extends ProxyResourceBase {
+model OpenidConnectProviderContract
+  is ProxyResource<OpenidConnectProviderContractProperties> {
   /**
    * Identifier of the OpenID Connect Provider.
    */
@@ -33,12 +28,6 @@ model OpenidConnectProviderContract extends ProxyResourceBase {
   @segment("openidConnectProviders")
   @visibility("read")
   name: string;
-
-  /**
-   * OpenId Connect Provider contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OpenidConnectProviderContractProperties;
 }
 
 @armResourceOperations
@@ -46,8 +35,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets specific OpenID Connect Provider without secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("OpenIdConnectProvider_Get")
   get is ArmResourceRead<
     OpenidConnectProviderContract,
     {
@@ -66,8 +53,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Creates or updates the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("OpenIdConnectProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     {
@@ -92,9 +77,7 @@ interface OpenidConnectProviderContracts {
   /**
    * Updates the specific OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
     OpenidConnectProviderUpdateContract,
@@ -120,8 +103,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     {
@@ -146,8 +127,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Lists of all the OpenId Connect Providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("OpenIdConnectProvider_ListByService")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     {
@@ -177,8 +156,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the client secret details of the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("OpenIdConnectProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,
@@ -197,24 +174,8 @@ interface OpenidConnectProviderContracts {
   >;
 }
 
-@@encodedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(OpenidConnectProviderContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(OpenidConnectProviderContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(OpenidConnectProviderContracts.update::parameters.properties,
   "Update parameters."

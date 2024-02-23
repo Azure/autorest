@@ -15,12 +15,8 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Backend details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(BackendContractProperties)
-model BackendContract extends ProxyResourceBase {
+model BackendContract is ProxyResource<BackendContractProperties> {
   /**
    * Identifier of the Backend entity. Must be unique in the current API Management service instance.
    */
@@ -31,12 +27,6 @@ model BackendContract extends ProxyResourceBase {
   @segment("backends")
   @visibility("read")
   name: string;
-
-  /**
-   * Backend entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: BackendContractProperties;
 }
 
 @armResourceOperations
@@ -44,16 +34,12 @@ interface BackendContracts {
   /**
    * Gets the details of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Backend_Get")
   get is ArmResourceRead<BackendContract>;
 
   /**
    * Gets the entity state (Etag) version of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("Backend_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       BackendContract,
@@ -64,8 +50,6 @@ interface BackendContracts {
   /**
    * Creates or Updates a backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Backend_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
     {
@@ -82,9 +66,7 @@ interface BackendContracts {
   /**
    * Updates an existing backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,
     BackendUpdateParameters,
@@ -102,8 +84,6 @@ interface BackendContracts {
   /**
    * Deletes the specified backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
     {
@@ -120,8 +100,6 @@ interface BackendContracts {
   /**
    * Lists a collection of backends in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Backend_ListByService")
   listByService is ArmResourceListByParent<
     BackendContract,
     {
@@ -151,42 +129,16 @@ interface BackendContracts {
   /**
    * Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Backend_Reconnect")
   reconnect is ArmResourceActionNoContentSync<
     BackendContract,
     BackendReconnectContract
   >;
 }
 
-@@encodedName(BackendContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@encodedName(BackendContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
-@@encodedName(BackendContracts.reconnect::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.reconnect::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.reconnect::parameters.body,
   "Reconnect request parameters."
 );

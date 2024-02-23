@@ -15,14 +15,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Portal Revision's contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PortalRevisionContractProperties
-)
-model PortalRevisionContract extends ProxyResourceBase {
+model PortalRevisionContract
+  is ProxyResource<PortalRevisionContractProperties> {
   /**
    * Portal revision identifier. Must be unique in the current API Management service instance.
    */
@@ -33,12 +28,6 @@ model PortalRevisionContract extends ProxyResourceBase {
   @segment("portalRevisions")
   @visibility("read")
   name: string;
-
-  /**
-   * Properties of the portal revisions.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PortalRevisionContractProperties;
 }
 
 @armResourceOperations
@@ -46,16 +35,12 @@ interface PortalRevisionContracts {
   /**
    * Gets the developer portal's revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalRevision_Get")
   get is ArmResourceRead<PortalRevisionContract>;
 
   /**
    * Gets the developer portal revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("PortalRevision_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       PortalRevisionContract,
@@ -66,16 +51,12 @@ interface PortalRevisionContracts {
   /**
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalRevision_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PortalRevisionContract>;
 
   /**
    * Updates the description of specified portal revision or makes it current.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("PortalRevision_Update")
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
     PortalRevisionContract,
@@ -93,8 +74,6 @@ interface PortalRevisionContracts {
   /**
    * Lists developer portal's revisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalRevision_ListByService")
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     {
@@ -128,21 +107,5 @@ interface PortalRevisionContracts {
   >;
 }
 
-@@encodedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(PortalRevisionContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(PortalRevisionContracts.createOrUpdate::parameters.resource, "");
-@@encodedName(PortalRevisionContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(PortalRevisionContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(PortalRevisionContracts.update::parameters.properties, "");

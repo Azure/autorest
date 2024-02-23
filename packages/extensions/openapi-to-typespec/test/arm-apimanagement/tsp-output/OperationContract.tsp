@@ -15,12 +15,8 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API Operation details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(OperationContractProperties)
-model OperationContract extends ProxyResourceBase {
+model OperationContract is ProxyResource<OperationContractProperties> {
   /**
    * Operation identifier within an API. Must be unique in the current API Management service instance.
    */
@@ -31,12 +27,6 @@ model OperationContract extends ProxyResourceBase {
   @segment("operations")
   @visibility("read")
   name: string;
-
-  /**
-   * Properties of the Operation Contract.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OperationContractProperties;
 }
 
 @armResourceOperations
@@ -44,16 +34,12 @@ interface OperationContracts {
   /**
    * Gets the details of the API Operation specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiOperation_Get")
   get is ArmResourceRead<OperationContract>;
 
   /**
    * Gets the entity state (Etag) version of the API operation specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("ApiOperation_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       OperationContract,
@@ -64,8 +50,6 @@ interface OperationContracts {
   /**
    * Creates a new operation in the API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiOperation_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     {
@@ -82,9 +66,7 @@ interface OperationContracts {
   /**
    * Updates the details of the operation in the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("ApiOperation_Update")
   update is ArmCustomPatchSync<
     OperationContract,
     OperationUpdateContract,
@@ -102,8 +84,6 @@ interface OperationContracts {
   /**
    * Deletes the specified operation in the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
     {
@@ -120,8 +100,6 @@ interface OperationContracts {
   /**
    * Lists a collection of the operations for the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiOperation_ListByApi")
   listByApi is ArmResourceListByParent<
     OperationContract,
     {
@@ -155,24 +133,8 @@ interface OperationContracts {
   >;
 }
 
-@@encodedName(OperationContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(OperationContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(OperationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(OperationContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(OperationContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(OperationContracts.update::parameters.properties,
   "API Operation Update parameters."

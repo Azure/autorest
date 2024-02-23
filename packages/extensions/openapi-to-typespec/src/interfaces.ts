@@ -9,6 +9,7 @@ export interface TypespecOptions {
   namespace?: string;
   guessResourceKey: boolean;
   isArm: boolean;
+  isFullCompatible: boolean;
 }
 
 export interface TypespecChoiceValue extends WithDoc {

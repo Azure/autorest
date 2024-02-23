@@ -106,7 +106,7 @@ interface RoleAssignments {
 }
 
 @@encodedName(RoleAssignments.create::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleAssignments.create::parameters.resource,

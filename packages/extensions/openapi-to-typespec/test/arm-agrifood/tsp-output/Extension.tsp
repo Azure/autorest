@@ -103,7 +103,7 @@ interface Extensions {
 }
 
 @@encodedName(Extensions.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "requestBody"
 );
 @@extension(Extensions.createOrUpdate::parameters.resource,

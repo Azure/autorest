@@ -37,7 +37,5 @@ interface DataProductsCatalogs {
   /**
    * List data catalog by resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DataProductsCatalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 }

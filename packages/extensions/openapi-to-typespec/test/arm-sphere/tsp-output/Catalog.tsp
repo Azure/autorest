@@ -212,7 +212,7 @@ interface Catalogs {
 }
 
 @@encodedName(Catalogs.listDeviceGroups::parameters.body,
-  "application/json",
+  "json",
   "listDeviceGroupsRequest"
 );
 @@extension(Catalogs.listDeviceGroups::parameters.body,

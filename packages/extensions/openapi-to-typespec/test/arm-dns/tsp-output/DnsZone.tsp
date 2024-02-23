@@ -14,10 +14,7 @@ namespace Azure.ResourceManager.Dns;
 /**
  * Describes a DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model DnsZone extends Resource {
+model DnsZone is TrackedResource<ZoneProperties> {
   /**
    * The name of the DNS zone (without a terminating dot).
    */
@@ -31,12 +28,6 @@ model DnsZone extends Resource {
    * The etag of the zone.
    */
   etag?: string;
-
-  /**
-   * The properties of the zone.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ZoneProperties;
 }
 
 @armResourceOperations
@@ -44,15 +35,11 @@ interface DnsZones {
   /**
    * Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Zones_Get")
   get is ArmResourceRead<DnsZone>;
 
   /**
    * Creates or updates a DNS zone. Does not modify DNS records within the zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Zones_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsZone,
     {
@@ -75,9 +62,7 @@ interface DnsZones {
   /**
    * Updates a DNS zone. Does not modify DNS records within the zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("Zones_Update")
   update is ArmCustomPatchSync<
     DnsZone,
     ZoneUpdateOptions,
@@ -95,8 +80,6 @@ interface DnsZones {
   /**
    * Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Zones_Delete")
   delete is ArmResourceDeleteAsync<
     DnsZone,
     {
@@ -113,8 +96,6 @@ interface DnsZones {
   /**
    * Lists the DNS zones within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Zones_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DnsZone,
     {
@@ -131,16 +112,12 @@ interface DnsZones {
   /**
    * Lists the DNS zones in all resource groups in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Zones_List")
   list is ArmListBySubscription<DnsZone>;
 
   /**
    * Lists all record sets in a DNS zone.
    */
   // FIXME: RecordSets_ListByDnsZone could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RecordSets_ListByDnsZone")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets")
   @get
   listByDnsZone(
@@ -169,24 +146,8 @@ interface DnsZones {
   ): ArmResponse<ResourceListResult<DnsRecord>> | ErrorResponse;
 }
 
-@@encodedName(DnsZones.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(DnsZones.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(DnsZones.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
-);
-@@encodedName(DnsZones.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(DnsZones.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(DnsZones.update::parameters.properties,
   "Parameters supplied to the Update operation."

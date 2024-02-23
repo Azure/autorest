@@ -59,7 +59,7 @@ interface RoleManagementPolicies {
 }
 
 @@encodedName(RoleManagementPolicies.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleManagementPolicies.update::parameters.properties,

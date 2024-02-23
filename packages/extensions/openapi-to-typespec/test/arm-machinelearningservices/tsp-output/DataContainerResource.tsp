@@ -86,7 +86,7 @@ interface DataContainerResources {
 }
 
 @@encodedName(DataContainerResources.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(DataContainerResources.createOrUpdate::parameters.resource,

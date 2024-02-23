@@ -83,7 +83,7 @@ interface RoleEligibilityScheduleRequests {
 }
 
 @@encodedName(RoleEligibilityScheduleRequests.create::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.create::parameters.resource,
@@ -94,7 +94,7 @@ interface RoleEligibilityScheduleRequests {
   "Parameters for the role eligibility schedule request."
 );
 @@encodedName(RoleEligibilityScheduleRequests.validate::parameters.body,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.validate::parameters.body,

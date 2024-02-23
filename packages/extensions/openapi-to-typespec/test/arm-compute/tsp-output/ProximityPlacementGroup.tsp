@@ -90,7 +90,7 @@ interface ProximityPlacementGroups {
 }
 
 @@encodedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.createOrUpdate::parameters.resource,
@@ -101,7 +101,7 @@ interface ProximityPlacementGroups {
   "Parameters supplied to the Create Proximity Placement Group operation."
 );
 @@encodedName(ProximityPlacementGroups.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.update::parameters.properties,

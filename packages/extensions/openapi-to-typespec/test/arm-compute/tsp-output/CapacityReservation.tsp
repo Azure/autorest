@@ -89,7 +89,7 @@ interface CapacityReservations {
 }
 
 @@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(CapacityReservations.createOrUpdate::parameters.resource,
@@ -100,7 +100,7 @@ interface CapacityReservations {
   "Parameters supplied to the Create capacity reservation."
 );
 @@encodedName(CapacityReservations.update::parameters.properties,
-  "application/json",
+  "json",
   "parameters"
 );
 @@extension(CapacityReservations.update::parameters.properties,

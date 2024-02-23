@@ -15,14 +15,8 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Email Template details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  EmailTemplateContractProperties
-)
-model EmailTemplateContract extends ProxyResourceBase {
+model EmailTemplateContract is ProxyResource<EmailTemplateContractProperties> {
   /**
    * Email Template Name Identifier.
    */
@@ -31,12 +25,6 @@ model EmailTemplateContract extends ProxyResourceBase {
   @segment("templates")
   @visibility("read")
   name: TemplateName;
-
-  /**
-   * Email Template entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: EmailTemplateContractProperties;
 }
 
 @armResourceOperations
@@ -44,16 +32,12 @@ interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("EmailTemplate_Get")
   get is ArmResourceRead<EmailTemplateContract>;
 
   /**
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("EmailTemplate_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       EmailTemplateContract,
@@ -64,8 +48,6 @@ interface EmailTemplateContracts {
   /**
    * Updates an Email Template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("EmailTemplate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
     {
@@ -82,9 +64,7 @@ interface EmailTemplateContracts {
   /**
    * Updates API Management email template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
     EmailTemplateUpdateParameters,
@@ -102,8 +82,6 @@ interface EmailTemplateContracts {
   /**
    * Reset the Email Template to default template provided by the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     {
@@ -120,8 +98,6 @@ interface EmailTemplateContracts {
   /**
    * Gets all email templates
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("EmailTemplate_ListByService")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     {
@@ -149,24 +125,8 @@ interface EmailTemplateContracts {
   >;
 }
 
-@@encodedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(EmailTemplateContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
   "Email Template update parameters."
-);
-@@encodedName(EmailTemplateContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(EmailTemplateContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(EmailTemplateContracts.update::parameters.properties,
   "Update parameters."

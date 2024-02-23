@@ -161,7 +161,7 @@ interface FeaturesetVersions {
 }
 
 @@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
-  "application/json",
+  "json",
   "body"
 );
 @@extension(FeaturesetVersions.createOrUpdate::parameters.resource,

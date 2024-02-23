@@ -15,11 +15,8 @@ namespace Azure.ResourceManager.Dns;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type).
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DnsZone)
-@includeInapplicableMetadataInPayload(false)
-model DnsRecord {
+model DnsRecord is ProxyResource<RecordSetProperties> {
   /**
    * The name of the record set, relative to the name of the zone.
    */
@@ -45,12 +42,6 @@ model DnsRecord {
    * The etag of the record set.
    */
   etag?: string;
-
-  /**
-   * The properties of the record set.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RecordSetProperties;
 }
 
 @armResourceOperations
@@ -58,8 +49,6 @@ interface DnsRecords {
   /**
    * Gets a record set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RecordSets_Get")
   get is ArmResourceRead<
     DnsRecord,
     {
@@ -76,8 +65,6 @@ interface DnsRecords {
   /**
    * Creates or updates a record set within a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RecordSets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsRecord,
     {
@@ -106,9 +93,7 @@ interface DnsRecords {
   /**
    * Updates a record set within a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("RecordSets_Update")
   update is ArmCustomPatchSync<
     DnsRecord,
     DnsRecord,
@@ -132,8 +117,6 @@ interface DnsRecords {
   /**
    * Deletes a record set from a DNS zone. This operation cannot be undone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RecordSets_Delete")
   delete is ArmResourceDeleteSync<
     DnsRecord,
     {
@@ -156,8 +139,6 @@ interface DnsRecords {
   /**
    * Lists the record sets of a specified type in a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RecordSets_ListByType")
   listByType is ArmResourceListByParent<
     DnsRecord,
     {
@@ -184,24 +165,8 @@ interface DnsRecords {
   >;
 }
 
-@@encodedName(DnsRecords.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(DnsRecords.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(DnsRecords.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
-);
-@@encodedName(DnsRecords.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(DnsRecords.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(DnsRecords.update::parameters.properties,
   "Parameters supplied to the Update operation."
