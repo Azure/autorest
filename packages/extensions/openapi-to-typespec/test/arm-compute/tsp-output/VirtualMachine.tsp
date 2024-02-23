@@ -137,13 +137,7 @@ interface VirtualMachines {
     LocationScope<VirtualMachine>,
     {
       ...BaseParameters<VirtualMachine>;
-
-      /**
-       * The location for which virtual machines under the subscription are queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 
@@ -297,28 +291,18 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
   @get
-  instanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  instanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the virtual machine.
-       */
-      @path
-      vmName: string;
+    /**
+     * The name of the virtual machine.
+     */
+    @path
+    vmName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineInstanceView> | ErrorResponse;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
@@ -326,28 +310,18 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
   @get
-  listAvailableSizes is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listAvailableSizes(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the virtual machine.
-       */
-      @path
-      vmName: string;
+    /**
+     * The name of the virtual machine.
+     */
+    @path
+    vmName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineSizeListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
 @@encodedName(VirtualMachines.createOrUpdate::parameters.resource,

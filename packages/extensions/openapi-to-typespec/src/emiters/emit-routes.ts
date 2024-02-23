@@ -1,6 +1,7 @@
 import { getSession } from "../autorest-session";
 import { generateOperationGroup } from "../generate/generate-operations";
 import { TypespecProgram } from "../interfaces";
+import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
 import { getRoutesImports } from "../utils/imports";
 import { getNamespaceStatement } from "../utils/namespace";
@@ -15,9 +16,18 @@ export async function emitRoutes(filePath: string, program: TypespecProgram): Pr
 }
 
 function generateRoutes(program: TypespecProgram) {
+  const { isArm } = getOptions();
   const { operationGroups } = program;
   const { modules, namespaces } = getRoutesImports(program);
   const content = operationGroups.map(generateOperationGroup);
 
-  return [...modules, "\n", ...namespaces, "\n", getNamespaceStatement(program), "\n", ...content].join("\n");
+  const result = [...modules, "\n", ...namespaces, "\n", getNamespaceStatement(program), "\n", ...content].join("\n");
+  if (isArm) {
+    return (
+      "// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually\n\n" +
+      result
+    );
+  }
+
+  return result;
 }

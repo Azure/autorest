@@ -221,34 +221,20 @@ interface StorageAccounts {
   @operationId("PrivateLinkResources_ListByStorageAccount")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
-  listByStorageAccount is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group within the user's subscription. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[-\\w\\._\\(\\)]+$")
-      @path
-      resourceGroupName: string;
+  listByStorageAccount(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-       */
-      @maxLength(24)
-      @minLength(3)
-      @path
-      accountName: string;
+    /**
+     * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     */
+    @maxLength(24)
+    @minLength(3)
+    @path
+    accountName: string,
 
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-    },
-    PrivateLinkResourceListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
 @@encodedName(StorageAccounts.create::parameters.resource,
