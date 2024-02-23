@@ -3,12 +3,12 @@ import { TypespecOperation, TspArmResource } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
 import { getArmCommonTypeVersion } from "../autorest-session";
+import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateOperation } from "./generate-operations";
-import { getOptions } from "../options";
 
 export function generateArmResource(resource: TspArmResource): string {
   const definitions: string[] = [];
