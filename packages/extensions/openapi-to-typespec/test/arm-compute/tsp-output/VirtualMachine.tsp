@@ -137,13 +137,7 @@ interface VirtualMachines {
     LocationScope<VirtualMachine>,
     {
       ...BaseParameters<VirtualMachine>;
-
-      /**
-       * The location for which virtual machines under the subscription are queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 
@@ -297,28 +291,18 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_InstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView")
   @get
-  instanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  instanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the virtual machine.
-       */
-      @path
-      vmName: string;
+    /**
+     * The name of the virtual machine.
+     */
+    @path
+    vmName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineInstanceView> | ErrorResponse;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
@@ -326,31 +310,21 @@ interface VirtualMachines {
   // FIXME: VirtualMachines_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes")
   @get
-  listAvailableSizes is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listAvailableSizes(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the virtual machine.
-       */
-      @path
-      vmName: string;
+    /**
+     * The name of the virtual machine.
+     */
+    @path
+    vmName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineSizeListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
-@@projectedName(VirtualMachines.createOrUpdate::parameters.resource,
+@@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -361,7 +335,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine operation."
 );
-@@projectedName(VirtualMachines.update::parameters.properties,
+@@encodedName(VirtualMachines.update::parameters.properties,
   "json",
   "parameters"
 );
@@ -372,7 +346,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@projectedName(VirtualMachines.capture::parameters.body, "json", "parameters");
+@@encodedName(VirtualMachines.capture::parameters.body, "json", "parameters");
 @@extension(VirtualMachines.capture::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -380,7 +354,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@projectedName(VirtualMachines.reimage::parameters.body, "json", "parameters");
+@@encodedName(VirtualMachines.reimage::parameters.body, "json", "parameters");
 @@extension(VirtualMachines.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -388,7 +362,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.reimage::parameters.body,
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
-@@projectedName(VirtualMachines.installPatches::parameters.body,
+@@encodedName(VirtualMachines.installPatches::parameters.body,
   "json",
   "installPatchesInput"
 );
@@ -399,7 +373,7 @@ interface VirtualMachines {
 @@doc(VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@projectedName(VirtualMachines.runCommand::parameters.body,
+@@encodedName(VirtualMachines.runCommand::parameters.body,
   "json",
   "parameters"
 );

@@ -154,13 +154,7 @@ interface VirtualMachineScaleSets {
     LocationScope<VirtualMachineScaleSet>,
     {
       ...BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The location for which VM scale sets under the subscription are queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 
@@ -523,28 +517,18 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView")
   @get
-  getInstanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getInstanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetInstanceView> | ErrorResponse;
 
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
@@ -552,28 +536,18 @@ interface VirtualMachineScaleSets {
   // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
   @get
-  listSkus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listSkus(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetListSkusResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetListSkusResult> | ErrorResponse;
 
   /**
    * Gets list of OS upgrades on a VM scale set instance.
@@ -583,31 +557,21 @@ interface VirtualMachineScaleSets {
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get
-  getOSUpgradeHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getOSUpgradeHistory(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineScaleSetListOSUpgradeHistory
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
 }
 
-@@projectedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+@@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -618,7 +582,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "The scale set object."
 );
-@@projectedName(VirtualMachineScaleSets.update::parameters.properties,
+@@encodedName(VirtualMachineScaleSets.update::parameters.properties,
   "json",
   "parameters"
 );
@@ -629,7 +593,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
-@@projectedName(VirtualMachineScaleSets.deallocate::parameters.body,
+@@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -640,7 +604,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.deallocate::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
+@@encodedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -651,7 +615,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.powerOff::parameters.body,
+@@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -662,7 +626,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.powerOff::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.restart::parameters.body,
+@@encodedName(VirtualMachineScaleSets.restart::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -673,7 +637,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.restart::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.start::parameters.body,
+@@encodedName(VirtualMachineScaleSets.start::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -684,7 +648,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.redeploy::parameters.body,
+@@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -695,7 +659,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.redeploy::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
+@@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -706,7 +670,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -717,7 +681,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.reimage::parameters.body,
+@@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
   "json",
   "vmScaleSetReimageInput"
 );
@@ -728,7 +692,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.reimage::parameters.body,
   "Parameters for Reimaging VM ScaleSet."
 );
-@@projectedName(VirtualMachineScaleSets.reimageAll::parameters.body,
+@@encodedName(VirtualMachineScaleSets.reimageAll::parameters.body,
   "json",
   "vmInstanceIDs"
 );
@@ -739,7 +703,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@projectedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+@@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "json",
   "parameters"
 );
@@ -750,7 +714,7 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "The input object for ConvertToSinglePlacementGroup API."
 );
-@@projectedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+@@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "json",
   "parameters"
 );

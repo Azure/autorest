@@ -83,7 +83,7 @@ interface Registries {
   removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }
 
-@@projectedName(Registries.createOrUpdate::parameters.resource, "json", "body");
+@@encodedName(Registries.createOrUpdate::parameters.resource, "json", "body");
 @@extension(Registries.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "body"
@@ -91,7 +91,7 @@ interface Registries {
 @@doc(Registries.createOrUpdate::parameters.resource,
   "Details required to create the registry."
 );
-@@projectedName(Registries.update::parameters.properties, "json", "body");
+@@encodedName(Registries.update::parameters.properties, "json", "body");
 @@extension(Registries.update::parameters.properties,
   "x-ms-client-name",
   "body"

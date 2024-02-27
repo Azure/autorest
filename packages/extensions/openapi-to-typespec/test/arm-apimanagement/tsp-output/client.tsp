@@ -141,3 +141,11 @@ using Azure.ResourceManager.ApiManagement;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(QuotaCounterValueContract.value);
+
+@@clientName(PortalSigninSettingsOperationGroup, "PortalSigninSettings");
+
+@@clientName(PortalSignupSettingsOperationGroup, "PortalSignupSettings");
+
+@@clientName(PortalDelegationSettingsOperationGroup,
+  "PortalDelegationSettings"
+);

@@ -130,7 +130,7 @@ interface JobBaseResources {
   cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }
 
-@@projectedName(JobBaseResources.createOrUpdate::parameters.resource,
+@@encodedName(JobBaseResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );
@@ -141,7 +141,7 @@ interface JobBaseResources {
 @@doc(JobBaseResources.createOrUpdate::parameters.resource,
   "Job definition object."
 );
-@@projectedName(JobBaseResources.update::parameters.properties, "json", "body");
+@@encodedName(JobBaseResources.update::parameters.properties, "json", "body");
 @@extension(JobBaseResources.update::parameters.properties,
   "x-ms-client-name",
   "body"

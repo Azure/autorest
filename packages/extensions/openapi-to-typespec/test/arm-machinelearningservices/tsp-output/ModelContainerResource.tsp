@@ -86,7 +86,7 @@ interface ModelContainerResources {
   >;
 }
 
-@@projectedName(ModelContainerResources.createOrUpdate::parameters.resource,
+@@encodedName(ModelContainerResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

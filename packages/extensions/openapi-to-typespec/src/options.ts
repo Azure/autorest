@@ -20,6 +20,7 @@ export function updateOptions() {
     namespace: getNamespace(session),
     guessResourceKey: getGuessResourceKey(session),
     isArm: getIsArm(session),
+    isFullCompatible: getIsFullCompatible(session),
   };
 }
 
@@ -39,4 +40,9 @@ export function getIsAzureSpec(session: Session<CodeModel>) {
 
 export function getNamespace(session: Session<CodeModel>) {
   return session.configuration["namespace"];
+}
+
+export function getIsFullCompatible(session: Session<CodeModel>) {
+  const isFullCompatible = session.configuration["isFullCompatible"] ?? false;
+  return isFullCompatible !== false;
 }

@@ -138,28 +138,18 @@ interface CloudServices {
   // FIXME: CloudServices_GetInstanceView could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")
   @get
-  getInstanceView is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getInstanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * Name of the cloud service.
-       */
-      @path
-      cloudServiceName: string;
+    /**
+     * Name of the cloud service.
+     */
+    @path
+    cloudServiceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    CloudServiceInstanceView
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<CloudServiceInstanceView> | ErrorResponse;
 
   /**
    * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
@@ -169,34 +159,24 @@ interface CloudServices {
   @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
-  getUpdateDomain is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  getUpdateDomain(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * Name of the cloud service.
-       */
-      @path
-      cloudServiceName: string;
+    /**
+     * Name of the cloud service.
+     */
+    @path
+    cloudServiceName: string,
 
-      /**
-       * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
-       */
-      @path
-      updateDomain: int32;
+    /**
+     * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
+     */
+    @path
+    updateDomain: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    UpdateDomain
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<UpdateDomain> | ErrorResponse;
 
   /**
    * Gets a list of all update domains in a cloud service.
@@ -206,31 +186,21 @@ interface CloudServices {
   @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
   @get
-  listUpdateDomains is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listUpdateDomains(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * Name of the cloud service.
-       */
-      @path
-      cloudServiceName: string;
+    /**
+     * Name of the cloud service.
+     */
+    @path
+    cloudServiceName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    UpdateDomainListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<UpdateDomainListResult> | ErrorResponse;
 }
 
-@@projectedName(CloudServices.createOrUpdate::parameters.resource,
+@@encodedName(CloudServices.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -241,7 +211,7 @@ interface CloudServices {
 @@doc(CloudServices.createOrUpdate::parameters.resource,
   "The cloud service object."
 );
-@@projectedName(CloudServices.update::parameters.properties,
+@@encodedName(CloudServices.update::parameters.properties,
   "json",
   "parameters"
 );
@@ -250,7 +220,7 @@ interface CloudServices {
   "parameters"
 );
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@projectedName(CloudServices.restart::parameters.body, "json", "parameters");
+@@encodedName(CloudServices.restart::parameters.body, "json", "parameters");
 @@extension(CloudServices.restart::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -258,7 +228,7 @@ interface CloudServices {
 @@doc(CloudServices.restart::parameters.body,
   "List of cloud service role instance names."
 );
-@@projectedName(CloudServices.reimage::parameters.body, "json", "parameters");
+@@encodedName(CloudServices.reimage::parameters.body, "json", "parameters");
 @@extension(CloudServices.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -266,7 +236,7 @@ interface CloudServices {
 @@doc(CloudServices.reimage::parameters.body,
   "List of cloud service role instance names."
 );
-@@projectedName(CloudServices.rebuild::parameters.body, "json", "parameters");
+@@encodedName(CloudServices.rebuild::parameters.body, "json", "parameters");
 @@extension(CloudServices.rebuild::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -274,7 +244,7 @@ interface CloudServices {
 @@doc(CloudServices.rebuild::parameters.body,
   "List of cloud service role instance names."
 );
-@@projectedName(CloudServices.deleteInstances::parameters.body,
+@@encodedName(CloudServices.deleteInstances::parameters.body,
   "json",
   "parameters"
 );

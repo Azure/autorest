@@ -86,7 +86,7 @@ interface EnvironmentContainerResources {
   >;
 }
 
-@@projectedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
+@@encodedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

@@ -160,7 +160,7 @@ interface FeaturesetVersions {
   >;
 }
 
-@@projectedName(FeaturesetVersions.createOrUpdate::parameters.resource,
+@@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

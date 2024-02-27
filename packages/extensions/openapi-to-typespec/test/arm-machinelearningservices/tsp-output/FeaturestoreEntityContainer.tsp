@@ -105,7 +105,7 @@ interface FeaturestoreEntityContainers {
   >;
 }
 
-@@projectedName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+@@encodedName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

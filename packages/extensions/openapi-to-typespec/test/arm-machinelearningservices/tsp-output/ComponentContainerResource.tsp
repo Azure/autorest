@@ -80,7 +80,7 @@ interface ComponentContainerResources {
   >;
 }
 
-@@projectedName(ComponentContainerResources.createOrUpdate::parameters.resource,
+@@encodedName(ComponentContainerResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

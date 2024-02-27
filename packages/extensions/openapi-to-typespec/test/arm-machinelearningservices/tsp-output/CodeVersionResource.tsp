@@ -102,7 +102,7 @@ interface CodeVersionResources {
   >;
 }
 
-@@projectedName(CodeVersionResources.createOrUpdate::parameters.resource,
+@@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

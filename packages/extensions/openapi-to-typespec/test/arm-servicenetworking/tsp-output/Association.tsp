@@ -33,36 +33,26 @@ interface Associations {
   /**
    * Get a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AssociationsInterface_Get")
   get is ArmResourceRead<Association>;
 
   /**
    * Create a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AssociationsInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
 
   /**
    * Update a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("AssociationsInterface_Update")
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
 
   /**
    * Delete a Association
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AssociationsInterface_Delete")
   delete is ArmResourceDeleteAsync<Association>;
 
   /**
    * List Association resources by TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AssociationsInterface_ListByTrafficController")
   listByTrafficController is ArmResourceListByParent<Association>;
 }

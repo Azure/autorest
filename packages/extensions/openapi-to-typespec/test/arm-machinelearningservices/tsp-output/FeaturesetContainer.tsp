@@ -105,7 +105,7 @@ interface FeaturesetContainers {
   >;
 }
 
-@@projectedName(FeaturesetContainers.createOrUpdate::parameters.resource,
+@@encodedName(FeaturesetContainers.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

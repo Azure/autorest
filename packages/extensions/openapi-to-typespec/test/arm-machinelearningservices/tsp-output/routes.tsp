@@ -1,3 +1,5 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -15,24 +17,11 @@ interface UsagesOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * The location for which resource usage is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
-    },
-    ListUsagesResult
-  >;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+  ): ArmResponse<ListUsagesResult> | ErrorResponse;
 }
 
 interface VirtualMachineSizesOperations {
@@ -41,24 +30,11 @@ interface VirtualMachineSizesOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The location upon which virtual-machine-sizes is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
-
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineSizeListResult
-  >;
+  list(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
 interface QuotasOperations {
@@ -67,54 +43,28 @@ interface QuotasOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas")
   @post
-  update is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The location for update quota is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+  update(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * Quota update parameters.
-       */
-      @body
-      parameters: QuotaUpdateParameters;
-    },
-    UpdateWorkspaceQuotasResult
-  >;
+    /**
+     * Quota update parameters.
+     */
+    @body
+    parameters: QuotaUpdateParameters,
+  ): ArmResponse<UpdateWorkspaceQuotasResult> | ErrorResponse;
 
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * The location for which resource usage is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
-    },
-    ListWorkspaceQuotas
-  >;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+  ): ArmResponse<ListWorkspaceQuotas> | ErrorResponse;
 }
 
 interface CodeContainersOperations {
@@ -124,38 +74,24 @@ interface CodeContainersOperations {
   @summary("List containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-    },
-    ResourceListResult<CodeContainerResource>
-  >;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
+  ): ArmResponse<ResourceListResult<CodeContainerResource>> | ErrorResponse;
 
   /**
    * Delete container.
@@ -163,38 +99,24 @@ interface CodeContainersOperations {
   @summary("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    void
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get container.
@@ -202,38 +124,24 @@ interface CodeContainersOperations {
   @summary("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    CodeContainerResource
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<CodeContainerResource> | ErrorResponse;
 
   /**
    * Create or update container.
@@ -241,45 +149,31 @@ interface CodeContainersOperations {
   @summary("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
-
-      /**
-       * Container entity to create or update.
-       */
-      @body
-      body: CodeContainerResource;
-    },
-    CodeContainerResource
-  >;
+    /**
+     * Container entity to create or update.
+     */
+    @body
+    body: CodeContainerResource,
+  ): ArmResponse<CodeContainerResource> | ErrorResponse;
 }
 
 interface CodeVersionsOperations {
@@ -289,68 +183,54 @@ interface CodeVersionsOperations {
   @summary("List versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
+    /**
+     * Ordering of list.
+     */
+    @query("$orderBy")
+    $orderBy?: string,
 
-      /**
-       * Ordering of list.
-       */
-      @query("$orderBy")
-      $orderBy?: string;
+    /**
+     * Maximum number of records to return.
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Maximum number of records to return.
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * If specified, return CodeVersion assets with specified content hash value, regardless of name
+     */
+    @query("hash")
+    hash?: string,
 
-      /**
-       * If specified, return CodeVersion assets with specified content hash value, regardless of name
-       */
-      @query("hash")
-      hash?: string;
-
-      /**
-       * Hash algorithm version when listing by hash
-       */
-      @query("hashVersion")
-      hashVersion?: string;
-    },
-    ResourceListResult<CodeVersionResource>
-  >;
+    /**
+     * Hash algorithm version when listing by hash
+     */
+    @query("hashVersion")
+    hashVersion?: string,
+  ): ArmResponse<ResourceListResult<CodeVersionResource>> | ErrorResponse;
 
   /**
    * Delete version.
@@ -358,44 +238,30 @@ interface CodeVersionsOperations {
   @summary("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    void
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get version.
@@ -403,44 +269,30 @@ interface CodeVersionsOperations {
   @summary("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    CodeVersionResource
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<CodeVersionResource> | ErrorResponse;
 
   /**
    * Create or update version.
@@ -448,51 +300,37 @@ interface CodeVersionsOperations {
   @summary("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-
-      /**
-       * Version entity to create or update.
-       */
-      @body
-      body: CodeVersionResource;
-    },
-    CodeVersionResource
-  >;
+    /**
+     * Version entity to create or update.
+     */
+    @body
+    body: CodeVersionResource,
+  ): ArmResponse<CodeVersionResource> | ErrorResponse;
 
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
@@ -500,50 +338,36 @@ interface CodeVersionsOperations {
   @summary("Generate a storage location and credential for the client to upload a code asset to.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload")
   @post
-  createOrGetStartPendingUpload is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrGetStartPendingUpload(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-
-      /**
-       * Pending upload request object
-       */
-      @body
-      body: PendingUploadRequestDto;
-    },
-    PendingUploadResponseDto
-  >;
+    /**
+     * Pending upload request object
+     */
+    @body
+    body: PendingUploadRequestDto,
+  ): ArmResponse<PendingUploadResponseDto> | ErrorResponse;
 }
 
 interface ComponentContainersOperations {
@@ -553,44 +377,30 @@ interface ComponentContainersOperations {
   @summary("List component containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-    },
-    ResourceListResult<ComponentContainerResource>
-  >;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): ArmResponse<ResourceListResult<ComponentContainerResource>> | ErrorResponse;
 
   /**
    * Delete container.
@@ -598,38 +408,24 @@ interface ComponentContainersOperations {
   @summary("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-    },
-    void
-  >;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get container.
@@ -637,38 +433,24 @@ interface ComponentContainersOperations {
   @summary("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-    },
-    ComponentContainerResource
-  >;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
+  ): ArmResponse<ComponentContainerResource> | ErrorResponse;
 
   /**
    * Create or update container.
@@ -676,45 +458,31 @@ interface ComponentContainersOperations {
   @summary("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
-
-      /**
-       * Container entity to create or update.
-       */
-      @body
-      body: ComponentContainerResource;
-    },
-    ComponentContainerResource
-  >;
+    /**
+     * Container entity to create or update.
+     */
+    @body
+    body: ComponentContainerResource,
+  ): ArmResponse<ComponentContainerResource> | ErrorResponse;
 }
 
 interface ComponentVersionsOperations {
@@ -724,68 +492,54 @@ interface ComponentVersionsOperations {
   @summary("List component versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Component name.
+     */
+    @path
+    name: string,
 
-      /**
-       * Component name.
-       */
-      @path
-      name: string;
+    /**
+     * Ordering of list.
+     */
+    @query("$orderBy")
+    $orderBy?: string,
 
-      /**
-       * Ordering of list.
-       */
-      @query("$orderBy")
-      $orderBy?: string;
+    /**
+     * Maximum number of records to return.
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Maximum number of records to return.
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-
-      /**
-       * Component stage.
-       */
-      @query("stage")
-      stage?: string;
-    },
-    ResourceListResult<ComponentVersionResource>
-  >;
+    /**
+     * Component stage.
+     */
+    @query("stage")
+    stage?: string,
+  ): ArmResponse<ResourceListResult<ComponentVersionResource>> | ErrorResponse;
 
   /**
    * Delete version.
@@ -793,44 +547,30 @@ interface ComponentVersionsOperations {
   @summary("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-    },
-    void
-  >;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get version.
@@ -838,44 +578,30 @@ interface ComponentVersionsOperations {
   @summary("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-    },
-    ComponentVersionResource
-  >;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
+  ): ArmResponse<ComponentVersionResource> | ErrorResponse;
 
   /**
    * Create or update version.
@@ -883,51 +609,37 @@ interface ComponentVersionsOperations {
   @summary("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-
-      /**
-       * Version entity to create or update.
-       */
-      @body
-      body: ComponentVersionResource;
-    },
-    ComponentVersionResource
-  >;
+    /**
+     * Version entity to create or update.
+     */
+    @body
+    body: ComponentVersionResource,
+  ): ArmResponse<ComponentVersionResource> | ErrorResponse;
 }
 
 interface DataContainersOperations {
@@ -937,44 +649,30 @@ interface DataContainersOperations {
   @summary("List data containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-    },
-    ResourceListResult<DataContainerResource>
-  >;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): ArmResponse<ResourceListResult<DataContainerResource>> | ErrorResponse;
 
   /**
    * Delete container.
@@ -982,38 +680,24 @@ interface DataContainersOperations {
   @summary("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-    },
-    void
-  >;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get container.
@@ -1021,38 +705,24 @@ interface DataContainersOperations {
   @summary("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-    },
-    DataContainerResource
-  >;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
+  ): ArmResponse<DataContainerResource> | ErrorResponse;
 
   /**
    * Create or update container.
@@ -1060,45 +730,31 @@ interface DataContainersOperations {
   @summary("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
-
-      /**
-       * Container entity to create or update.
-       */
-      @body
-      body: DataContainerResource;
-    },
-    DataContainerResource
-  >;
+    /**
+     * Container entity to create or update.
+     */
+    @body
+    body: DataContainerResource,
+  ): ArmResponse<DataContainerResource> | ErrorResponse;
 }
 
 interface DataVersionsOperations {
@@ -1108,75 +764,61 @@ interface DataVersionsOperations {
   @summary("List data versions in the data container")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Data container's name
+     */
+    @path
+    name: string,
 
-      /**
-       * Data container's name
-       */
-      @path
-      name: string;
+    /**
+     * Please choose OrderBy value from ['createdtime', 'modifiedtime']
+     */
+    @query("$orderBy")
+    $orderBy?: string,
 
-      /**
-       * Please choose OrderBy value from ['createdtime', 'modifiedtime']
-       */
-      @query("$orderBy")
-      $orderBy?: string;
+    /**
+     * Top count of results, top count cannot be greater than the page size.
+     *                               If topCount > page size, results with be default page size count will be returned
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Top count of results, top count cannot be greater than the page size.
-       *                               If topCount > page size, results with be default page size count will be returned
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+     */
+    @query("$tags")
+    $tags?: string,
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
-      @query("$tags")
-      $tags?: string;
+    /**
+     * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
 
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-
-      /**
-       * data stage
-       */
-      @query("stage")
-      stage?: string;
-    },
-    ResourceListResult<DataVersionBaseResource>
-  >;
+    /**
+     * data stage
+     */
+    @query("stage")
+    stage?: string,
+  ): ArmResponse<ResourceListResult<DataVersionBaseResource>> | ErrorResponse;
 
   /**
    * Delete version.
@@ -1184,44 +826,30 @@ interface DataVersionsOperations {
   @summary("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-    },
-    void
-  >;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get version.
@@ -1229,44 +857,30 @@ interface DataVersionsOperations {
   @summary("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-    },
-    DataVersionBaseResource
-  >;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
+  ): ArmResponse<DataVersionBaseResource> | ErrorResponse;
 
   /**
    * Create or update version.
@@ -1274,51 +888,37 @@ interface DataVersionsOperations {
   @summary("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version identifier.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier.
-       */
-      @path
-      version: string;
-
-      /**
-       * Version entity to create or update.
-       */
-      @body
-      body: DataVersionBaseResource;
-    },
-    DataVersionBaseResource
-  >;
+    /**
+     * Version entity to create or update.
+     */
+    @body
+    body: DataVersionBaseResource,
+  ): ArmResponse<DataVersionBaseResource> | ErrorResponse;
 }
 
 interface EnvironmentContainersOperations {
@@ -1328,44 +928,30 @@ interface EnvironmentContainersOperations {
   @summary("List environment containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-    },
-    ResourceListResult<EnvironmentContainerResource>
-  >;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): ArmResponse<ResourceListResult<EnvironmentContainerResource>> | ErrorResponse;
 
   /**
    * Delete container.
@@ -1373,38 +959,24 @@ interface EnvironmentContainersOperations {
   @summary("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    void
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get container.
@@ -1412,38 +984,24 @@ interface EnvironmentContainersOperations {
   @summary("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    EnvironmentContainerResource
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<EnvironmentContainerResource> | ErrorResponse;
 
   /**
    * Create or update container.
@@ -1451,45 +1009,31 @@ interface EnvironmentContainersOperations {
   @summary("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
-
-      /**
-       * Container entity to create or update.
-       */
-      @body
-      body: EnvironmentContainerResource;
-    },
-    EnvironmentContainerResource
-  >;
+    /**
+     * Container entity to create or update.
+     */
+    @body
+    body: EnvironmentContainerResource,
+  ): ArmResponse<EnvironmentContainerResource> | ErrorResponse;
 }
 
 interface EnvironmentVersionsOperations {
@@ -1499,68 +1043,54 @@ interface EnvironmentVersionsOperations {
   @summary("List versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
+    /**
+     * Ordering of list.
+     */
+    @query("$orderBy")
+    $orderBy?: string,
 
-      /**
-       * Ordering of list.
-       */
-      @query("$orderBy")
-      $orderBy?: string;
+    /**
+     * Maximum number of records to return.
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Maximum number of records to return.
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-
-      /**
-       * Stage for including/excluding (for example) archived entities. Takes priority over listViewType
-       */
-      @query("stage")
-      stage?: string;
-    },
-    ResourceListResult<EnvironmentVersionResource>
-  >;
+    /**
+     * Stage for including/excluding (for example) archived entities. Takes priority over listViewType
+     */
+    @query("stage")
+    stage?: string,
+  ): ArmResponse<ResourceListResult<EnvironmentVersionResource>> | ErrorResponse;
 
   /**
    * Delete version.
@@ -1568,44 +1098,30 @@ interface EnvironmentVersionsOperations {
   @summary("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    void
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get version.
@@ -1613,44 +1129,30 @@ interface EnvironmentVersionsOperations {
   @summary("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    EnvironmentVersionResource
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<EnvironmentVersionResource> | ErrorResponse;
 
   /**
    * Creates or updates an EnvironmentVersion.
@@ -1658,51 +1160,37 @@ interface EnvironmentVersionsOperations {
   @summary("Creates or updates an EnvironmentVersion.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Name of EnvironmentVersion. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Name of EnvironmentVersion. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version of EnvironmentVersion.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version of EnvironmentVersion.
-       */
-      @path
-      version: string;
-
-      /**
-       * Definition of EnvironmentVersion.
-       */
-      @body
-      body: EnvironmentVersionResource;
-    },
-    EnvironmentVersionResource
-  >;
+    /**
+     * Definition of EnvironmentVersion.
+     */
+    @body
+    body: EnvironmentVersionResource,
+  ): ArmResponse<EnvironmentVersionResource> | ErrorResponse;
 }
 
 interface ModelContainersOperations {
@@ -1712,50 +1200,36 @@ interface ModelContainersOperations {
   @summary("List model containers.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * Maximum number of results to return.
+     */
+    @query("count")
+    count?: int32,
 
-      /**
-       * Maximum number of results to return.
-       */
-      @query("count")
-      count?: int32;
-
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-    },
-    ResourceListResult<ModelContainerResource>
-  >;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
+  ): ArmResponse<ResourceListResult<ModelContainerResource>> | ErrorResponse;
 
   /**
    * Delete container.
@@ -1763,38 +1237,24 @@ interface ModelContainersOperations {
   @summary("Delete container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    void
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get container.
@@ -1802,38 +1262,24 @@ interface ModelContainersOperations {
   @summary("Get container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
-
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-    },
-    ModelContainerResource
-  >;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
+  ): ArmResponse<ModelContainerResource> | ErrorResponse;
 
   /**
    * Create or update container.
@@ -1841,45 +1287,31 @@ interface ModelContainersOperations {
   @summary("Create or update container.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
-
-      /**
-       * Container entity to create or update.
-       */
-      @body
-      body: ModelContainerResource;
-    },
-    ModelContainerResource
-  >;
+    /**
+     * Container entity to create or update.
+     */
+    @body
+    body: ModelContainerResource,
+  ): ArmResponse<ModelContainerResource> | ErrorResponse;
 }
 
 interface ModelVersionsOperations {
@@ -1889,104 +1321,90 @@ interface ModelVersionsOperations {
   @summary("List model versions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Model name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Model name. This is case-sensitive.
-       */
-      @path
-      name: string;
+    /**
+     * Continuation token for pagination.
+     */
+    @query("$skip")
+    $skip?: string,
 
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
+    /**
+     * Ordering of list.
+     */
+    @query("$orderBy")
+    $orderBy?: string,
 
-      /**
-       * Ordering of list.
-       */
-      @query("$orderBy")
-      $orderBy?: string;
+    /**
+     * Maximum number of records to return.
+     */
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Maximum number of records to return.
-       */
-      @query("$top")
-      $top?: int32;
+    /**
+     * Model version.
+     */
+    @query("version")
+    version?: string,
 
-      /**
-       * Model version.
-       */
-      @query("version")
-      version?: string;
+    /**
+     * Model description.
+     */
+    @query("description")
+    description?: string,
 
-      /**
-       * Model description.
-       */
-      @query("description")
-      description?: string;
+    /**
+     * Number of initial results to skip.
+     */
+    @query("offset")
+    offset?: int32,
 
-      /**
-       * Number of initial results to skip.
-       */
-      @query("offset")
-      offset?: int32;
+    /**
+     * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+     */
+    @query("tags")
+    tags?: string,
 
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
-      @query("tags")
-      tags?: string;
+    /**
+     * Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
+     */
+    @query("properties")
+    properties?: string,
 
-      /**
-       * Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2
-       */
-      @query("properties")
-      properties?: string;
+    /**
+     * Name of the feed.
+     */
+    @query("feed")
+    feed?: string,
 
-      /**
-       * Name of the feed.
-       */
-      @query("feed")
-      feed?: string;
+    /**
+     * View type for including/excluding (for example) archived entities.
+     */
+    @query("listViewType")
+    listViewType?: ListViewType,
 
-      /**
-       * View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType;
-
-      /**
-       * Model stage
-       */
-      @query("stage")
-      stage?: string;
-    },
-    ResourceListResult<ModelVersionResource>
-  >;
+    /**
+     * Model stage
+     */
+    @query("stage")
+    stage?: string,
+  ): ArmResponse<ResourceListResult<ModelVersionResource>> | ErrorResponse;
 
   /**
    * Delete version.
@@ -1994,44 +1412,30 @@ interface ModelVersionsOperations {
   @summary("Delete version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  delete(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    void
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<void> | ErrorResponse;
 
   /**
    * Get version.
@@ -2039,44 +1443,30 @@ interface ModelVersionsOperations {
   @summary("Get version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @path
-      name: string;
-
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-    },
-    ModelVersionResource
-  >;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
+  ): ArmResponse<ModelVersionResource> | ErrorResponse;
 
   /**
    * Create or update version.
@@ -2084,51 +1474,37 @@ interface ModelVersionsOperations {
   @summary("Create or update version.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  createOrUpdate(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-
-      /**
-       * Version entity to create or update.
-       */
-      @body
-      body: ModelVersionResource;
-    },
-    ModelVersionResource
-  >;
+    /**
+     * Version entity to create or update.
+     */
+    @body
+    body: ModelVersionResource,
+  ): ArmResponse<ModelVersionResource> | ErrorResponse;
 
   /**
    * Model Version Package operation.
@@ -2136,49 +1512,35 @@ interface ModelVersionsOperations {
   @summary("Model Version Package operation.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/package")
   @post
-  package is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  package(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+    /**
+     * Name of Azure Machine Learning workspace.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
+    @path
+    workspaceName: string,
 
-      /**
-       * Name of Azure Machine Learning workspace.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-      @path
-      workspaceName: string;
+    /**
+     * Container name. This is case-sensitive.
+     */
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
 
-      /**
-       * Container name. This is case-sensitive.
-       */
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-      @path
-      name: string;
+    /**
+     * Version identifier. This is case-sensitive.
+     */
+    @path
+    version: string,
 
-      /**
-       * Version identifier. This is case-sensitive.
-       */
-      @path
-      version: string;
-
-      /**
-       * Package operation request body.
-       */
-      @body
-      body: PackageRequest;
-    },
-    PackageResponse | void
-  >;
+    /**
+     * Package operation request body.
+     */
+    @body
+    body: PackageRequest,
+  ): ArmResponse<PackageResponse | void> | ErrorResponse;
 }

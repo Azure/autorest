@@ -50,22 +50,9 @@ interface DenyAssignments {
   listForResource is ArmResourceListByParent<
     DenyAssignment,
     {
-      ...ExtensionBaseParameters;
-
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
+      ...BaseParameters<DenyAssignment>;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
 
       /**
        * The namespace of the resource provider.

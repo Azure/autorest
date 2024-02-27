@@ -78,7 +78,7 @@ interface GalleryImageVersions {
   listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
 }
 
-@@projectedName(GalleryImageVersions.createOrUpdate::parameters.resource,
+@@encodedName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "json",
   "galleryImageVersion"
 );
@@ -89,7 +89,7 @@ interface GalleryImageVersions {
 @@doc(GalleryImageVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery image version operation."
 );
-@@projectedName(GalleryImageVersions.update::parameters.properties,
+@@encodedName(GalleryImageVersions.update::parameters.properties,
   "json",
   "galleryImageVersion"
 );

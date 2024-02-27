@@ -3,6 +3,7 @@ import { TypespecOperation, TspArmResource } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
 import { getArmCommonTypeVersion } from "../autorest-session";
+import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
@@ -21,7 +22,7 @@ export function generateArmResource(resource: TspArmResource): string {
   definitions.push("\n");
 
   for (const o of resource.resourceOperations) {
-    for (const d of o.augmentedDecorators ?? []) {
+    for (const d of o.customizations ?? []) {
       definitions.push(`${d}`);
     }
   }
@@ -30,6 +31,8 @@ export function generateArmResource(resource: TspArmResource): string {
 }
 
 function generateArmResourceModel(resource: TspArmResource): string {
+  const { isFullCompatible } = getOptions();
+
   let definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
@@ -51,11 +54,12 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   if (
-    getArmCommonTypeVersion() &&
-    !resource.propertiesPropertyRequired &&
-    resource.propertiesPropertyVisibility.length === 2 &&
-    resource.propertiesPropertyVisibility.includes("read") &&
-    resource.propertiesPropertyVisibility.includes("create")
+    !isFullCompatible ||
+    (getArmCommonTypeVersion() &&
+      !resource.propertiesPropertyRequired &&
+      resource.propertiesPropertyVisibility.length === 2 &&
+      resource.propertiesPropertyVisibility.includes("read") &&
+      resource.propertiesPropertyVisibility.includes("create"))
   ) {
     definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
 
@@ -102,12 +106,13 @@ function generateArmResourceModel(resource: TspArmResource): string {
 }
 
 function generateArmResourceOperation(resource: TspArmResource): string {
+  const { isFullCompatible } = getOptions();
+
   const formalOperationGroupName = pluralize(resource.name);
   const definitions: string[] = [];
 
   definitions.push("@armResourceOperations");
   if (resource.name === formalOperationGroupName) {
-    definitions.push(`@projectedName("client", "${formalOperationGroupName}")`);
     definitions.push(`interface ${formalOperationGroupName}OperationGroup {`);
   } else {
     definitions.push(`interface ${formalOperationGroupName} {`);
@@ -121,6 +126,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     const decorators = generateDecorators(operation.decorators);
     decorators && definitions.push(decorators);
     if (
+      isFullCompatible &&
       operation.operationId &&
       (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name) ||
         operation.kind === "ArmResourceListByParent")
@@ -143,6 +149,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
   }
   for (const operation of resource.normalOperations) {
     if (
+      isFullCompatible &&
       operation.operationId &&
       operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {

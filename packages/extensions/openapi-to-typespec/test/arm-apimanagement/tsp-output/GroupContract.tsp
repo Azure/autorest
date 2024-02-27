@@ -15,12 +15,8 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(GroupContractProperties)
-model GroupContract extends ProxyResourceBase {
+model GroupContract is ProxyResource<GroupContractProperties> {
   /**
    * Group identifier. Must be unique in the current API Management service instance.
    */
@@ -31,12 +27,6 @@ model GroupContract extends ProxyResourceBase {
   @segment("groups")
   @visibility("read")
   name: string;
-
-  /**
-   * Group entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GroupContractProperties;
 }
 
 @armResourceOperations
@@ -44,16 +34,12 @@ interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_Get")
   get is ArmResourceRead<GroupContract>;
 
   /**
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("Group_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<GroupContract, BaseParameters<GroupContract>>,
   ): OkResponse | ErrorResponse;
@@ -61,8 +47,6 @@ interface GroupContracts {
   /**
    * Creates or Updates a group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     {
@@ -79,9 +63,7 @@ interface GroupContracts {
   /**
    * Updates the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
     GroupUpdateParameters,
@@ -99,8 +81,6 @@ interface GroupContracts {
   /**
    * Deletes specific group of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     {
@@ -117,8 +97,6 @@ interface GroupContracts {
   /**
    * Lists a collection of groups defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Group_ListByService")
   listByService is ArmResourceListByParent<
     GroupContract,
     {
@@ -149,79 +127,51 @@ interface GroupContracts {
    * Lists a collection of user entities associated with the group.
    */
   // FIXME: GroupUser_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GroupUser_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the API Management service.
-       */
-      @maxLength(50)
-      @minLength(1)
-      @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-      @path
-      serviceName: string;
+    /**
+     * The name of the API Management service.
+     */
+    @maxLength(50)
+    @minLength(1)
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @path
+    serviceName: string,
 
-      /**
-       * Group identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      groupId: string;
+    /**
+     * Group identifier. Must be unique in the current API Management service instance.
+     */
+    @maxLength(256)
+    @minLength(1)
+    @path
+    groupId: string,
 
-      /**
-       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+     */
+    @query("$filter")
+    $filter?: string,
 
-      /**
-       * Number of records to return.
-       */
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
+    /**
+     * Number of records to return.
+     */
+    @minValue(1)
+    @query("$top")
+    $top?: int32,
 
-      /**
-       * Number of records to skip.
-       */
-      @query("$skip")
-      $skip?: int32;
+    /**
+     * Number of records to skip.
+     */
+    @query("$skip")
+    $skip?: int32,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    ApiManagementGroupUserListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ApiManagementGroupUserListResult> | ErrorResponse;
 }
 
-@@projectedName(GroupContracts.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(GroupContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(GroupContracts.createOrUpdate::parameters.resource, "Create parameters.");
-@@projectedName(GroupContracts.update::parameters.properties,
-  "json",
-  "parameters"
-);
-@@extension(GroupContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(GroupContracts.update::parameters.properties, "Update parameters.");

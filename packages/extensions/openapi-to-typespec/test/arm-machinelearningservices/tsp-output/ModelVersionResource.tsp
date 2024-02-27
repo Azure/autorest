@@ -137,7 +137,7 @@ interface ModelVersionResources {
   >;
 }
 
-@@projectedName(ModelVersionResources.createOrUpdate::parameters.resource,
+@@encodedName(ModelVersionResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

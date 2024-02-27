@@ -113,7 +113,7 @@ interface BatchEndpointTrackedResources {
   >;
 }
 
-@@projectedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
+@@encodedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );
@@ -124,7 +124,7 @@ interface BatchEndpointTrackedResources {
 @@doc(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference endpoint definition object."
 );
-@@projectedName(BatchEndpointTrackedResources.update::parameters.properties,
+@@encodedName(BatchEndpointTrackedResources.update::parameters.properties,
   "json",
   "body"
 );

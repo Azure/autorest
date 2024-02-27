@@ -15,14 +15,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Attachment Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  IssueAttachmentContractProperties
-)
-model IssueAttachmentContract extends ProxyResourceBase {
+model IssueAttachmentContract
+  is ProxyResource<IssueAttachmentContractProperties> {
   /**
    * Attachment identifier within an Issue. Must be unique in the current Issue.
    */
@@ -34,12 +29,6 @@ model IssueAttachmentContract extends ProxyResourceBase {
   @segment("attachments")
   @visibility("read")
   name: string;
-
-  /**
-   * Properties of the Issue Attachment.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: IssueAttachmentContractProperties;
 }
 
 @armResourceOperations
@@ -47,16 +36,12 @@ interface IssueAttachmentContracts {
   /**
    * Gets the details of the issue Attachment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiIssueAttachment_Get")
   get is ArmResourceRead<IssueAttachmentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
-  @operationId("ApiIssueAttachment_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IssueAttachmentContract,
@@ -67,8 +52,6 @@ interface IssueAttachmentContracts {
   /**
    * Creates a new Attachment for the Issue in an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiIssueAttachment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
     {
@@ -85,8 +68,6 @@ interface IssueAttachmentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
     {
@@ -103,8 +84,6 @@ interface IssueAttachmentContracts {
   /**
    * Lists all attachments for the Issue associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiIssueAttachment_ListByService")
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,
     {
@@ -132,14 +111,6 @@ interface IssueAttachmentContracts {
   >;
 }
 
-@@projectedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(IssueAttachmentContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

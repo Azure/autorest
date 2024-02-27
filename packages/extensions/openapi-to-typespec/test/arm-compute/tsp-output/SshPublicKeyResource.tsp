@@ -94,7 +94,7 @@ interface SshPublicKeyResources {
   >;
 }
 
-@@projectedName(SshPublicKeyResources.create::parameters.resource,
+@@encodedName(SshPublicKeyResources.create::parameters.resource,
   "json",
   "parameters"
 );
@@ -105,7 +105,7 @@ interface SshPublicKeyResources {
 @@doc(SshPublicKeyResources.create::parameters.resource,
   "Parameters supplied to create the SSH public key."
 );
-@@projectedName(SshPublicKeyResources.update::parameters.properties,
+@@encodedName(SshPublicKeyResources.update::parameters.properties,
   "json",
   "parameters"
 );

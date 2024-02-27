@@ -140,7 +140,7 @@ interface DatastoreResources {
   >;
 }
 
-@@projectedName(DatastoreResources.createOrUpdate::parameters.resource,
+@@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

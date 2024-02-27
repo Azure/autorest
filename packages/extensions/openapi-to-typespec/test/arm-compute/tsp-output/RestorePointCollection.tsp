@@ -121,7 +121,7 @@ interface RestorePointCollections {
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 
-@@projectedName(RestorePointCollections.createOrUpdate::parameters.resource,
+@@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -132,7 +132,7 @@ interface RestorePointCollections {
 @@doc(RestorePointCollections.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create or Update restore point collection operation."
 );
-@@projectedName(RestorePointCollections.update::parameters.properties,
+@@encodedName(RestorePointCollections.update::parameters.properties,
   "json",
   "parameters"
 );

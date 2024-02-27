@@ -77,31 +77,20 @@ interface DiskAccesses {
   // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
   @get
-  getPrivateLinkResources is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
+  getPrivateLinkResources(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
-
-      /**
-       * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-       */
-      @path
-      diskAccessName: string;
-    },
-    PrivateLinkResourceListResult
-  >;
+    /**
+     * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+     */
+    @path
+    diskAccessName: string,
+  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
-@@projectedName(DiskAccesses.createOrUpdate::parameters.resource,
+@@encodedName(DiskAccesses.createOrUpdate::parameters.resource,
   "json",
   "diskAccess"
 );
@@ -112,10 +101,7 @@ interface DiskAccesses {
 @@doc(DiskAccesses.createOrUpdate::parameters.resource,
   "disk access object supplied in the body of the Put disk access operation."
 );
-@@projectedName(DiskAccesses.update::parameters.properties,
-  "json",
-  "diskAccess"
-);
+@@encodedName(DiskAccesses.update::parameters.properties, "json", "diskAccess");
 @@extension(DiskAccesses.update::parameters.properties,
   "x-ms-client-name",
   "diskAccess"

@@ -141,15 +141,15 @@ updateIdleShutdownSetting is ArmResourceActionSync<ComputeResource,IdleShutdownS
 
 
 
-@@projectedName(ComputeResources.`createOrUpdate`::parameters.resource, "json", "parameters");
+@@encodedName(ComputeResources.`createOrUpdate`::parameters.resource, "json", "parameters");
 @@extension(ComputeResources.`createOrUpdate`::parameters.resource, "x-ms-client-name", "parameters");
 @@doc(ComputeResources.`createOrUpdate`::parameters.resource, "Payload with Machine Learning compute definition.");
-@@projectedName(ComputeResources.`update`::parameters.properties, "json", "parameters");
+@@encodedName(ComputeResources.`update`::parameters.properties, "json", "parameters");
 @@extension(ComputeResources.`update`::parameters.properties, "x-ms-client-name", "parameters");
 @@doc(ComputeResources.`update`::parameters.properties, "Additional parameters for cluster update.");
-@@projectedName(ComputeResources.`updateCustomServices`::parameters.body, "json", "customServices");
+@@encodedName(ComputeResources.`updateCustomServices`::parameters.body, "json", "customServices");
 @@extension(ComputeResources.`updateCustomServices`::parameters.body, "x-ms-client-name", "customServices");
 @@doc(ComputeResources.`updateCustomServices`::parameters.body, "New list of Custom Services.");
-@@projectedName(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "json", "parameters");
+@@encodedName(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "json", "parameters");
 @@extension(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "x-ms-client-name", "parameters");
 @@doc(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "The object for updating idle shutdown setting of specified ComputeInstance.");

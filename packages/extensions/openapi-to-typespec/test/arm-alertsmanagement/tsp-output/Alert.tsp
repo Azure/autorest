@@ -14,12 +14,8 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * An alert created in alert management service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
-model Alert extends ProxyResourceBase {
+model Alert is ProxyResource<AlertProperties> {
   /**
    * Unique ID of an alert instance.
    */
@@ -28,12 +24,6 @@ model Alert extends ProxyResourceBase {
   @segment("alerts")
   @visibility("read")
   name: string;
-
-  /**
-   * Alert property bag
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AlertProperties;
 }
 
 @armResourceOperations
@@ -46,8 +36,6 @@ interface Alerts {
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Alerts_GetAll")
   getAll is ArmResourceListByParent<
     Alert,
     {
@@ -181,25 +169,16 @@ interface Alerts {
   // FIXME: Alerts_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history")
   @get
-  getHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  getHistory(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Unique ID of an alert instance.
-       */
-      @path
-      alertId: string;
-    },
-    AlertModification
-  >;
+    /**
+     * Unique ID of an alert instance.
+     */
+    @path
+    alertId: string,
+  ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
-@@projectedName(Alerts.changeState::parameters.body, "json", "comment");
-@@extension(Alerts.changeState::parameters.body, "x-ms-client-name", "comment");
 @@doc(Alerts.changeState::parameters.body, "reason of change alert state");

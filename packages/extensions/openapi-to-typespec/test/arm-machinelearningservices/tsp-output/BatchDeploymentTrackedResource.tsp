@@ -108,7 +108,7 @@ interface BatchDeploymentTrackedResources {
   >;
 }
 
-@@projectedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+@@encodedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "json",
   "body"
 );
@@ -119,7 +119,7 @@ interface BatchDeploymentTrackedResources {
 @@doc(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference deployment definition object."
 );
-@@projectedName(BatchDeploymentTrackedResources.update::parameters.properties,
+@@encodedName(BatchDeploymentTrackedResources.update::parameters.properties,
   "json",
   "body"
 );

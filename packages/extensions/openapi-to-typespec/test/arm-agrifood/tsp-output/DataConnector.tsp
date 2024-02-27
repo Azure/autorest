@@ -86,7 +86,7 @@ interface DataConnectors {
   >;
 }
 
-@@projectedName(DataConnectors.createOrUpdate::parameters.resource,
+@@encodedName(DataConnectors.createOrUpdate::parameters.resource,
   "json",
   "body"
 );

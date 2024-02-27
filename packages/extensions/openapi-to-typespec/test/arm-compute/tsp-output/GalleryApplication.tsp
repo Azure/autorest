@@ -67,7 +67,7 @@ interface GalleryApplications {
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
 
-@@projectedName(GalleryApplications.createOrUpdate::parameters.resource,
+@@encodedName(GalleryApplications.createOrUpdate::parameters.resource,
   "json",
   "galleryApplication"
 );
@@ -78,7 +78,7 @@ interface GalleryApplications {
 @@doc(GalleryApplications.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application operation."
 );
-@@projectedName(GalleryApplications.update::parameters.properties,
+@@encodedName(GalleryApplications.update::parameters.properties,
   "json",
   "galleryApplication"
 );

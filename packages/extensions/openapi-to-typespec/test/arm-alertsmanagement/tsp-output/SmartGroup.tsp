@@ -14,12 +14,8 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * Set of related alerts grouped together smartly by AMS.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(SmartGroupProperties)
-model SmartGroup extends ProxyResourceBase {
+model SmartGroup is ProxyResource<SmartGroupProperties> {
   /**
    * Smart group unique id.
    */
@@ -28,12 +24,6 @@ model SmartGroup extends ProxyResourceBase {
   @segment("smartGroups")
   @visibility("read")
   name: string;
-
-  /**
-   * Properties of smart group.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SmartGroupProperties;
 }
 
 @armResourceOperations
@@ -46,8 +36,6 @@ interface SmartGroups {
   /**
    * List all the Smart Groups within a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
     {
@@ -145,21 +133,14 @@ interface SmartGroups {
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")
   @get
-  getHistory is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription.
-       */
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  getHistory(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Smart group unique id.
-       */
-      @path
-      smartGroupId: string;
-    },
-    SmartGroupModification
-  >;
+    /**
+     * Smart group unique id.
+     */
+    @path
+    smartGroupId: string,
+  ): ArmResponse<SmartGroupModification> | ErrorResponse;
 }

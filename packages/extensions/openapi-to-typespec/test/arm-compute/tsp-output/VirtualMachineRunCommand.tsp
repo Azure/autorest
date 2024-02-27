@@ -99,18 +99,12 @@ interface VirtualMachineRunCommands {
     LocationScope<VirtualMachineRunCommand>,
     {
       ...BaseParameters<VirtualMachineRunCommand>;
-
-      /**
-       * The location upon which run commands is queried.
-       */
-      @pattern("^[-\\w\\._]+$")
-      @path
-      location: string;
+      ...LocationResourceParameter;
     }
   >;
 }
 
-@@projectedName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
+@@encodedName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "json",
   "runCommand"
 );
@@ -121,7 +115,7 @@ interface VirtualMachineRunCommands {
 @@doc(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
-@@projectedName(VirtualMachineRunCommands.update::parameters.properties,
+@@encodedName(VirtualMachineRunCommands.update::parameters.properties,
   "json",
   "runCommand"
 );

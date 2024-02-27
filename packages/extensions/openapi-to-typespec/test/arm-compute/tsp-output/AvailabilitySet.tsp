@@ -80,31 +80,21 @@ interface AvailabilitySets {
   // FIXME: AvailabilitySets_ListAvailableSizes could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")
   @get
-  listAvailableSizes is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the resource group.
-       */
-      @path
-      resourceGroupName: string;
+  listAvailableSizes(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
 
-      /**
-       * The name of the availability set.
-       */
-      @path
-      availabilitySetName: string;
+    /**
+     * The name of the availability set.
+     */
+    @path
+    availabilitySetName: string,
 
-      /**
-       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-       */
-      @path
-      subscriptionId: string;
-    },
-    VirtualMachineSizeListResult
-  >;
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
-@@projectedName(AvailabilitySets.createOrUpdate::parameters.resource,
+@@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -115,7 +105,7 @@ interface AvailabilitySets {
 @@doc(AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
 );
-@@projectedName(AvailabilitySets.update::parameters.properties,
+@@encodedName(AvailabilitySets.update::parameters.properties,
   "json",
   "parameters"
 );

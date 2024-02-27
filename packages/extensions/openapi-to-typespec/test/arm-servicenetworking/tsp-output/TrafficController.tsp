@@ -31,43 +31,31 @@ interface TrafficControllers {
   /**
    * Get a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TrafficControllerInterface_Get")
   get is ArmResourceRead<TrafficController>;
 
   /**
    * Create a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TrafficControllerInterface_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
 
   /**
    * Update a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("TrafficControllerInterface_Update")
   update is ArmCustomPatchSync<TrafficController, TrafficControllerUpdate>;
 
   /**
    * Delete a TrafficController
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TrafficControllerInterface_Delete")
   delete is ArmResourceDeleteAsync<TrafficController>;
 
   /**
    * List TrafficController resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TrafficControllerInterface_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
 
   /**
    * List TrafficController resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TrafficControllerInterface_ListBySubscription")
   listBySubscription is ArmListBySubscription<TrafficController>;
 }

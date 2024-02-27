@@ -68,7 +68,7 @@ interface Devices {
   >;
 }
 
-@@projectedName(Devices.generateCapabilityImage::parameters.body,
+@@encodedName(Devices.generateCapabilityImage::parameters.body,
   "json",
   "generateDeviceCapabilityRequest"
 );

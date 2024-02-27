@@ -75,10 +75,22 @@ interface DiskEncryptionSets {
    * Lists all resources that are encrypted with this disk encryption set.
    */
   // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
-  listAssociatedResources is Azure.Core.ResourceList<string>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources")
+  @get
+  listAssociatedResources(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
+     */
+    @path
+    diskEncryptionSetName: string,
+  ): ArmResponse<ResourceUriList> | ErrorResponse;
 }
 
-@@projectedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
+@@encodedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "json",
   "diskEncryptionSet"
 );
@@ -89,7 +101,7 @@ interface DiskEncryptionSets {
 @@doc(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "disk encryption set object supplied in the body of the Put disk encryption set operation."
 );
-@@projectedName(DiskEncryptionSets.update::parameters.properties,
+@@encodedName(DiskEncryptionSets.update::parameters.properties,
   "json",
   "diskEncryptionSet"
 );

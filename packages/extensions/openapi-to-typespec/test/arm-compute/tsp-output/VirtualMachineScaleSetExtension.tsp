@@ -135,7 +135,7 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
-@@projectedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+@@encodedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "json",
   "extensionParameters"
 );
@@ -146,7 +146,7 @@ interface VirtualMachineScaleSetExtensions {
 @@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."
 );
-@@projectedName(VirtualMachineScaleSetExtensions.update::parameters.properties,
+@@encodedName(VirtualMachineScaleSetExtensions.update::parameters.properties,
   "json",
   "extensionParameters"
 );

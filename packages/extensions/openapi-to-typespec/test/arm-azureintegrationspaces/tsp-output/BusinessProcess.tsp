@@ -54,8 +54,6 @@ interface BusinessProcesses {
   /**
    * List BusinessProcess resources by Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {

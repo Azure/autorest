@@ -86,7 +86,7 @@ interface DedicatedHostGroups {
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 
-@@projectedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
+@@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "json",
   "parameters"
 );
@@ -97,7 +97,7 @@ interface DedicatedHostGroups {
 @@doc(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host Group."
 );
-@@projectedName(DedicatedHostGroups.update::parameters.properties,
+@@encodedName(DedicatedHostGroups.update::parameters.properties,
   "json",
   "parameters"
 );

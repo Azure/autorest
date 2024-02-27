@@ -115,7 +115,7 @@ interface DiskRestorePoints {
   >;
 }
 
-@@projectedName(DiskRestorePoints.grantAccess::parameters.body,
+@@encodedName(DiskRestorePoints.grantAccess::parameters.body,
   "json",
   "grantAccessData"
 );

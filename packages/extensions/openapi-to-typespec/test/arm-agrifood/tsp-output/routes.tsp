@@ -1,3 +1,5 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -15,22 +17,16 @@ interface CheckNameAvailabilityOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability")
   @post
-  checkNameAvailability is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  checkNameAvailability(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * NameAvailabilityRequest object.
-       */
-      @body
-      nameAvailabilityRequest: CheckNameAvailabilityRequest;
-    },
-    CheckNameAvailabilityResponse
-  >;
+    /**
+     * NameAvailabilityRequest object.
+     */
+    @body
+    nameAvailabilityRequest: CheckNameAvailabilityRequest,
+  ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
 }
 
 interface OperationResultsOperations {
@@ -39,26 +35,20 @@ interface OperationResultsOperations {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
-      @path
-      subscriptionId: string;
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      /**
-       * Location.
-       */
-      @path
-      locations: string;
+    /**
+     * Location.
+     */
+    @path
+    locations: string,
 
-      /**
-       * operationResultsId for a specific location.
-       */
-      @path
-      operationResultsId: string;
-    },
-    ArmAsyncOperation
-  >;
+    /**
+     * operationResultsId for a specific location.
+     */
+    @path
+    operationResultsId: string,
+  ): ArmResponse<ArmAsyncOperation> | ErrorResponse;
 }
