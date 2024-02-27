@@ -50,7 +50,7 @@ interface DenyAssignments {
   listForResource is ArmResourceListByParent<
     DenyAssignment,
     {
-      ...BaseParameters<DenyAssignment>;
+      ...ExtensionBaseParameters;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
 
