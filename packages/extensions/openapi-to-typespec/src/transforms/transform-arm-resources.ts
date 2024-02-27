@@ -706,13 +706,22 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
     }
   }
 
+  let parameterTemplate = `BaseParameters<${resource.SwaggerModelName}>`;
+  if (resource.IsExtensionResource) {
+    parameterTemplate = "ExtensionBaseParameters";
+  } else if (resource.IsTenantResource) {
+    parameterTemplate = "TenantBaseParameters";
+  } else if (resource.IsSubscriptionResource) {
+    parameterTemplate = "SubscriptionBaseParameters";
+  }
+
   if (otherParameters.length) {
     const params: string[] = [];
     for (const parameter of otherParameters) {
       params.push(generateParameter(parameter));
     }
     return `{
-    ...BaseParameters<${resource.SwaggerModelName}>;
+    ...${parameterTemplate};
     ${params.join(";\n")}
     }`;
   }

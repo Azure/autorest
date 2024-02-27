@@ -39,7 +39,7 @@ interface SmartGroups {
   getAll is ArmResourceListByParent<
     SmartGroup,
     {
-      ...BaseParameters<SmartGroup>;
+      ...SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -117,7 +117,7 @@ interface SmartGroups {
     void,
     SmartGroup,
     {
-      ...BaseParameters<SmartGroup>;
+      ...SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
