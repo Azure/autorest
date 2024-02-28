@@ -1,0 +1,15 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: Crash when deduplication paths",
+      "type": "patch"
+    },
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: Crash reporting zero exit code when a plugin report a crash but send invalid exception",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}

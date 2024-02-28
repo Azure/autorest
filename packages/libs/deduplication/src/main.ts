@@ -192,8 +192,7 @@ export class Deduplicator {
         let filename = path[xMsMetadata].filename;
         let originalLocations = path[xMsMetadata].originalLocations;
         const pathFromMetadata = path[xMsMetadata].path;
-        let profiles = path[xMsMetadata].profiles;
-
+        let profiles = path[xMsMetadata].profiles ?? {};
         // extract path properties excluding metadata
         const { "x-ms-metadata": metadataCurrent, ...filteredPath } = path;
 
@@ -218,7 +217,7 @@ export class Deduplicator {
               originalLocations = originalLocations.concat(anotherPath[xMsMetadata].originalLocations);
               profiles = getMergedProfilesMetadata(
                 profiles,
-                anotherPath[xMsMetadata].profiles,
+                anotherPath[xMsMetadata].profiles ?? {},
                 path[xMsMetadata].path,
                 originalLocations,
               );
