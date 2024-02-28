@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: Crash when deduplication paths",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
