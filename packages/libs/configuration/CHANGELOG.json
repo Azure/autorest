@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.12.1",
+      "tag": "@autorest/configuration_v1.12.1",
+      "date": "Wed, 28 Feb 2024 18:02:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rename openapi-to-cadl to openapi-to-typespec"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.12.0",
       "tag": "@autorest/configuration_v1.12.0",
       "date": "Thu, 16 Nov 2023 16:00:04 GMT",
