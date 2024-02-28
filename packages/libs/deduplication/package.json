@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/deduplication",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Deduplication of elements in OpenAPI 3 documents",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
