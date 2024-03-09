@@ -51,8 +51,8 @@ function getArmResourceImports(program: TypespecProgram): string[] {
   const resourceMetadata = getArmResourcesMetadata();
   const imports: string[] = [];
 
-  for (const resource in resourceMetadata) {
-    imports.push(`import "./${resourceMetadata[resource].SwaggerModelName}.tsp";`);
+  for (const resource in resourceMetadata.Resources) {
+    imports.push(`import "./${resourceMetadata.Resources[resource].SwaggerModelName}.tsp";`);
   }
 
   if (program.operationGroups.length > 0) {

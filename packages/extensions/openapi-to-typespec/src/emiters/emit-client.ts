@@ -1,5 +1,5 @@
 import { getSession } from "../autorest-session";
-import { generateArmResourceClientDecorator, generateObjectClientDecorator } from "../generate/generate-client";
+import { generateArmResourceClientDecorator, generateEnumClientDecorator, generateObjectClientDecorator } from "../generate/generate-client";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
@@ -34,8 +34,14 @@ function generateClient(program: TypespecProgram) {
         .filter((r) => r !== "")
         .join("\n\n")
     : "";
+
+  const enums = models.enums
+    .map(generateEnumClientDecorator)
+    .filter((r) => r !== "")
+    .join("\n\n");
+
   if (objects === "" && armResources === "") {
     return "";
   }
-  return [imports, "\n", namespaces, "\n", objects, "\n", armResources].join("\n");
+  return [imports, "\n", namespaces, "\n", objects, "\n", armResources, "\n", enums].join("\n");
 }

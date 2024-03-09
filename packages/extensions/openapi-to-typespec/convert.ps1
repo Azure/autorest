@@ -14,6 +14,10 @@ param(
     [string]
     # Specifies the swagger config file, not the swagger json, but the readme config.
     $swaggerConfigFile,
+	[Parameter(Mandatory)]
+    [string]
+    # Specifies the corresponding autorest.md file used by autorest.csharp codegen.
+    $csharpAutorestFile,
     [string]
     # Specified the output folder, deafult to current folder.
     $outputFolder,
@@ -28,7 +32,7 @@ param(
 function GenerateMetadata ()
 {
     Write-Host "##Generating metadata with csharp codegen in $outputFolder with $csharpCodegen"
-    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
+    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $csharpAutorestFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }

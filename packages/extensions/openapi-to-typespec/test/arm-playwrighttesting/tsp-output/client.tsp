@@ -1,5 +1,5 @@
 import "./main.tsp";
-import "@typespec/typespec-client-generator-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.AzurePlaywrightService;

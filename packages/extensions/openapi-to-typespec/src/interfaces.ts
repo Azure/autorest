@@ -15,6 +15,7 @@ export interface TypespecOptions {
 export interface TypespecChoiceValue extends WithDoc {
   name: string;
   value: string | number | boolean;
+  clientDecorators?: TypespecDecorator[];
 }
 
 export interface WithDoc {
@@ -42,6 +43,7 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   operationGroupName?: string;
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
+  clientDecorators?: TypespecDecorator[];
 }
 
 export type ResourceKind =
@@ -120,6 +122,7 @@ export interface TypespecEnum extends TypespecDataType {
   members: TypespecChoiceValue[];
   isExtensible: boolean;
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
 }
 
 export interface WithFixMe {
@@ -137,6 +140,7 @@ export interface TypespecParameter extends TypespecDataType {
   isOptional: boolean;
   type: string;
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   location: TypespecParameterLocation;
   serializedName: string;
   defaultValue?: any;
@@ -171,6 +175,7 @@ export interface TypespecObject extends TypespecDataType {
   extendedParents?: string[];
   spreadParents?: string[];
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   alias?: TypespecAlias;
 }
 
@@ -201,6 +206,7 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
   name: string;
   templateParameters?: string[];
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
   customizations?: string[];

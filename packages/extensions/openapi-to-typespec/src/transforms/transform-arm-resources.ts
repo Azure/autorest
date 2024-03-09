@@ -27,6 +27,8 @@ import {
 import { isResponseSchema } from "../utils/schemas";
 import { transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
+import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
+import { getOperationClientDecorators } from "../utils/decorators";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -105,6 +107,11 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     decorators.push({ name: "extensionResource" });
   }
 
+  const armResourceOperations = operations[0];
+  const otherOperations = operations[1];
+
+  const clientDecorators = buildResourceClientDecorators(schema, armResourceOperations, otherOperations);
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
@@ -119,8 +126,9 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     propertiesPropertyDescription,
     doc: schema.language.default.description,
     decorators,
-    resourceOperations: operations[0],
-    normalOperations: operations[1],
+    clientDecorators,
+    resourceOperations: armResourceOperations,
+    normalOperations: otherOperations,
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
     baseModelName,
     locationParent: getLocationParent(schema),
@@ -190,6 +198,7 @@ function convertResourceReadOperation(
       kind: "ArmResourceRead",
       name: getOperationName(operation.OperationID),
       operationId: operation.OperationID,
+      clientDecorators: getOperationClientDecorators(swaggerOperation),
       templateParameters: baseParameters
         ? [resourceMetadata.SwaggerModelName, baseParameters]
         : [resourceMetadata.SwaggerModelName],
@@ -206,6 +215,7 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
         name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
+        clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: swaggerOperation.operationId,
         parameters: [
           `...ResourceInstanceParameters<${resourceMetadata.SwaggerModelName}, BaseParameters<${resourceMetadata.SwaggerModelName}>>`,
@@ -256,6 +266,7 @@ function convertResourceCreateOrReplaceOperation(
         doc: operation.Description,
         kind: isLongRunning ? "ArmResourceCreateOrReplaceAsync" : "ArmResourceCreateOrReplaceSync",
         name: operationName,
+        clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: operation.OperationID,
         templateParameters: templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -343,6 +354,7 @@ function convertResourceUpdateOperation(
           doc: operation.Description,
           kind: kind as any,
           name: getOperationName(operation.OperationID),
+          clientDecorators: getOperationClientDecorators(swaggerOperation),
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -379,6 +391,7 @@ function convertResourceDeleteOperation(
             : "ArmResourceDeleteWithoutOkAsync"
           : "ArmResourceDeleteSync",
         name: getOperationName(operation.OperationID),
+        clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: operation.OperationID,
         templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -415,6 +428,7 @@ function convertResourceListOperations(
       doc: operation.Description,
       kind: "ArmResourceListByParent",
       name: getOperationName(operation.OperationID),
+      clientDecorators: getOperationClientDecorators(swaggerOperation),
       operationId: operation.OperationID,
       templateParameters: templateParameters,
       examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -448,6 +462,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
             name: getOperationName(operation.OperationID),
+            clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             templateParameters,
             examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -457,6 +472,7 @@ function convertResourceListOperations(
             doc: operation.Description,
             kind: "ArmListBySubscription",
             name: getOperationName(operation.OperationID),
+            clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             templateParameters: [resourceMetadata.SwaggerModelName],
             examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -483,6 +499,7 @@ function convertResourceListOperations(
         name: swaggerOperation.operationId
           ? getOperationName(swaggerOperation.operationId)
           : `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
+        clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: swaggerOperation.operationId,
         templateParameters: baseParameters
           ? [resourceMetadata.SwaggerModelName, baseParameters]
@@ -549,6 +566,7 @@ function convertResourceActionOperations(
           doc: operation.Description,
           kind: kind as any,
           name: operationName,
+          clientDecorators: getOperationClientDecorators(swaggerOperation),
           operationId: operation.OperationID,
           templateParameters,
           examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -585,6 +603,7 @@ function convertCheckNameAvailabilityOperations(
             doc: operation.Description,
             kind: "checkLocalNameAvailability",
             name: getOperationName(operation.OperationID),
+            clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             examples: swaggerOperation.extensions?.["x-ms-examples"],
             templateParameters: [request, response],
@@ -594,6 +613,7 @@ function convertCheckNameAvailabilityOperations(
             doc: operation.Description,
             kind: "checkGlobalNameAvailability",
             name: getOperationName(operation.OperationID),
+            clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             examples: swaggerOperation.extensions?.["x-ms-examples"],
             templateParameters: [request, response],
@@ -858,6 +878,15 @@ function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[]
   }
 
   return resourceModelDecorators;
+}
+
+function buildResourceClientDecorators(schema: ArmResourceSchema, armResourceOperations:TspArmResourceOperation[], normalOperations:TypespecOperation[]): TypespecDecorator[] {
+  const clientDecorator: TypespecDecorator[] = [];
+  if (schema.language.csharp?.name) {
+    clientDecorator.push(createCSharpNameDecorator(schema));
+  }
+
+  return clientDecorator;
 }
 
 function getSingletonName(schema: ArmResourceSchema): string {

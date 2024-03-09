@@ -20,6 +20,7 @@ import { pretransformNames } from "./pretransforms/name-pretransform";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
+import { pretransformRename } from "./pretransforms/rename-pretransform";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
@@ -27,6 +28,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   const codeModel = session.model;
   pretransformNames(codeModel);
   pretransformArmResources(codeModel);
+  pretransformRename(codeModel);
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);
