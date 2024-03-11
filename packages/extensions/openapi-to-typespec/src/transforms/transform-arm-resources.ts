@@ -14,6 +14,8 @@ import {
   isFirstLevelResource,
 } from "../interfaces";
 import { getOptions, updateOptions } from "../options";
+import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
+import { getOperationClientDecorators } from "../utils/decorators";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -27,8 +29,6 @@ import {
 import { isResponseSchema } from "../utils/schemas";
 import { transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
-import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
-import { getOperationClientDecorators } from "../utils/decorators";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 

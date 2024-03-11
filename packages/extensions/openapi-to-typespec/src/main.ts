@@ -17,10 +17,10 @@ import { emitTypespecConfig } from "./emiters/emit-typespec-config";
 import { getModel } from "./model";
 import { pretransformArmResources } from "./pretransforms/arm-pretransform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
+import { pretransformRename } from "./pretransforms/rename-pretransform";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
-import { pretransformRename } from "./pretransforms/rename-pretransform";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);

@@ -1,8 +1,8 @@
 import { ChoiceSchema, CodeModel, ObjectSchema, SealedChoiceSchema, Schema, ChoiceValue, Property, Parameter, SchemaType, Operation } from "@autorest/codemodel";
-import { getOptions } from "../options";
-import { Metadata, getArmResourcesMetadata } from "../utils/resource-discovery";
 import { TypespecDecorator } from "../interfaces";
+import { getOptions } from "../options";
 import { getLogger } from "../utils/logger";
+import { Metadata, getArmResourcesMetadata } from "../utils/resource-discovery";
 
 type RenamableSchema = Schema | Property | Parameter | ChoiceValue | Operation
 
@@ -122,10 +122,10 @@ function transformObject(keys: string[], value: string, target: ObjectSchema) {
     const lowerPropName = keys.pop()?.toLowerCase();
     let cur = target;
     for (let i = 1; i < keys.length && cur; i++) {
-      var foundProp = cur.properties?.find(p => p.language.default.name.toLowerCase() === keys[i].toLowerCase());
+      const foundProp = cur.properties?.find(p => p.language.default.name.toLowerCase() === keys[i].toLowerCase());
       cur = foundProp?.schema as ObjectSchema;
     }
-    var foundProp = cur?.properties?.find(p => p.language.default.name.toLowerCase() === lowerPropName);
+    const foundProp = cur?.properties?.find(p => p.language.default.name.toLowerCase() === lowerPropName);
     if (foundProp)
       parseNewCSharpNameAndSetToSchema(foundProp, value);
     else {

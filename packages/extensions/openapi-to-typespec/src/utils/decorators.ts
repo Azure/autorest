@@ -12,9 +12,9 @@ import {
   isNumberSchema,
 } from "@autorest/codemodel";
 import { TypespecDecorator, DecoratorArgument } from "../interfaces";
+import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";
-import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
