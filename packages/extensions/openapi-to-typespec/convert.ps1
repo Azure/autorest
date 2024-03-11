@@ -14,7 +14,7 @@ param(
     [string]
     # Specifies the swagger config file, not the swagger json, but the readme config.
     $swaggerConfigFile,
-	[Parameter(Mandatory)]
+    [Parameter(Mandatory)]
     [string]
     # Specifies the corresponding autorest.md file in azure-sdk-for-net repo used by autorest.csharp codegen.
     $csharpAutorestFile,
