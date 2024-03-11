@@ -51,7 +51,7 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
 
   if (resource.name === formalOperationGroupName) {
     targetName = `${formalOperationGroupName}OperationGroup}`;
-    definitions.push(`@@$clientName(${formalOperationGroupName}OperationGroup, "${formalOperationGroupName}")`);
+    definitions.push(`@@clientName(${formalOperationGroupName}OperationGroup, "${formalOperationGroupName}")`);
   }
 
   if(resource.clientDecorators && resource.clientDecorators.length > 0)
