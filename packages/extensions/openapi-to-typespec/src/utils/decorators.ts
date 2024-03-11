@@ -146,7 +146,7 @@ export function getPropertyClientDecorators(element: Property | Parameter): Type
   if (element.extensions?.["x-ms-client-flatten"]) {
     decorators.push({
       name: "flattenProperty",
-      module: "@typespec/typespec-client-generator-core",
+      module: "@azure-tools/typespec-client-generator-core",
       namespace: "Azure.ClientGenerator.Core",
       suppressionCode: "deprecated",
       suppressionMessage: "@flattenProperty decorator is not recommended to use.",
