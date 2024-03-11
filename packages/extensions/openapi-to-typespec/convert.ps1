@@ -16,7 +16,7 @@ param(
     $swaggerConfigFile,
 	[Parameter(Mandatory)]
     [string]
-    # Specifies the corresponding autorest.md file used by autorest.csharp codegen.
+    # Specifies the corresponding autorest.md file in azure-sdk-for-net repo used by autorest.csharp codegen.
     $csharpAutorestFile,
     [string]
     # Specified the output folder, deafult to current folder.

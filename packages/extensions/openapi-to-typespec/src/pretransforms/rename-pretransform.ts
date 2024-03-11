@@ -55,7 +55,7 @@ function applyOverrideOperationName(metadata: Metadata, codeModel: CodeModel) {
     if (found)
       parseNewCSharpNameAndSetToSchema(found, metadata.OverrideOperationName[opId]);
     else
-      logger.warning(`Can't find operation to rename for OverrideOperationName rule: ${opId}->${metadata.OverrideOperationName[opId]}`)
+      logger().warning(`Can't find operation to rename for OverrideOperationName rule: ${opId}->${metadata.OverrideOperationName[opId]}`)
   }
 }
 
@@ -74,7 +74,7 @@ function applyRenameMapping(metadata: Metadata, codeModel: CodeModel) {
       .find((o: Schema) => o.language.default.name.toLowerCase() === lowerFirstSubKey);
 
     if (!found) {
-      logger.warning(`Can't find object or enum for RenameMapping rule: ${key} -> ${value}`)
+      logger().warning(`Can't find object or enum for RenameMapping rule: ${key} -> ${value}`)
       continue;
     }
 
@@ -85,7 +85,7 @@ function applyRenameMapping(metadata: Metadata, codeModel: CodeModel) {
       transformObject(subKeys, value, found as ObjectSchema);
     }
     else {
-      logger.error(`Unexpected schema type '${found.type}' found with key ${key}`)
+      logger().error(`Unexpected schema type '${found.type}' found with key ${key}`)
     }
   }
 }
@@ -99,10 +99,10 @@ function transformEnum(keys: string[], value: string, target: ChoiceSchema | Sea
     if (found)
       parseNewCSharpNameAndSetToSchema(found, value);
     else
-      logger.warning(`Can't find enum member for RenameMapping rule: ${keys.join('.')} -> ${value}`);
+      logger().warning(`Can't find enum member for RenameMapping rule: ${keys.join('.')} -> ${value}`);
   }
   else {
-    logger.error(`Unexpected keys for enum RenameMapping: ${keys.join('.')}`);
+    logger().error(`Unexpected keys for enum RenameMapping: ${keys.join('.')}`);
   }
 }
 
@@ -115,7 +115,7 @@ function transformObject(keys: string[], value: string, target: ObjectSchema) {
     if (found)
       parseNewCSharpNameAndSetToSchema(found, value);
     else
-      logger.warning(`Can't find object property for RenameMapping rule: ${keys.join('.')} -> ${value}`);
+      logger().warning(`Can't find object property for RenameMapping rule: ${keys.join('.')} -> ${value}`);
   }
   else if (keys.length > 2) {
     // handle flatten scenario
@@ -129,10 +129,10 @@ function transformObject(keys: string[], value: string, target: ObjectSchema) {
     if (foundProp)
       parseNewCSharpNameAndSetToSchema(foundProp, value);
     else {
-      logger.warning(`Can't find object property for RenameMapping rule: ${keys.join('.')} -> ${value}`);
+      logger().warning(`Can't find object property for RenameMapping rule: ${keys.join('.')} -> ${value}`);
     }
   }
   else {
-    logger.error(`Unexpected keys for object property RenameMapping: ${keys.join('.')}`);
+    logger().error(`Unexpected keys for object property RenameMapping: ${keys.join('.')}`);
   }
 }
