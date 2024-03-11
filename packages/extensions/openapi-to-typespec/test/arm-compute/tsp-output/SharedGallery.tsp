@@ -50,7 +50,7 @@ interface SharedGalleries {
   list is ArmResourceListByParent<
     SharedGallery,
     {
-      ...BaseParameters<SharedGallery>;
+      ...SubscriptionBaseParameters;
 
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.

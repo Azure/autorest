@@ -43,7 +43,7 @@ interface RoleAssignments {
   get is ArmResourceRead<
     RoleAssignment,
     {
-      ...BaseParameters<RoleAssignment>;
+      ...ExtensionBaseParameters;
 
       /**
        * Tenant ID for cross-tenant request
@@ -64,7 +64,7 @@ interface RoleAssignments {
   delete is ArmResourceDeleteSync<
     RoleAssignment,
     {
-      ...BaseParameters<RoleAssignment>;
+      ...ExtensionBaseParameters;
 
       /**
        * Tenant ID for cross-tenant request
@@ -82,7 +82,7 @@ interface RoleAssignments {
   listForScope is ArmResourceListByParent<
     RoleAssignment,
     {
-      ...BaseParameters<RoleAssignment>;
+      ...ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.

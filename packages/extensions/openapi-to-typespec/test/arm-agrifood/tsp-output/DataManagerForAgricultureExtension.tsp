@@ -54,7 +54,7 @@ interface DataManagerForAgricultureExtensions {
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
     {
-      ...BaseParameters<DataManagerForAgricultureExtension>;
+      ...TenantBaseParameters;
 
       /**
        * DataManagerForAgricultureExtension ids.

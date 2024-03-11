@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 28 Nov 2023 19:02:52 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Feb 2024 18:02:21 GMT and should not be manually modified.
+
+## 3.10.2
+Wed, 28 Feb 2024 18:02:21 GMT
+
+### Patches
+
+- Fix: Crash when deduplication paths
+- Fix: Crash reporting zero exit code when a plugin report a crash but send invalid exception
 
 ## 3.10.1
 Tue, 28 Nov 2023 19:02:52 GMT

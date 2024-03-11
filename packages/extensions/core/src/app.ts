@@ -351,7 +351,9 @@ async function main() {
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
     if (e instanceof Exception) {
       logger.log({ level: "error", message: e.message });
-      exitCode = e.exitCode;
+      if (e.exitCode) {
+        exitCode = e.exitCode;
+      }
     }
     if (e !== false) {
       logger.log({ level: "error", message: `!${e}` });

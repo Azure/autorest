@@ -56,7 +56,7 @@ interface DataManagerForAgricultureSolutions {
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
     {
-      ...BaseParameters<DataManagerForAgricultureSolution>;
+      ...TenantBaseParameters;
 
       /**
        * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.
