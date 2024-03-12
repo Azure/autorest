@@ -2,6 +2,29 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.10.2",
+      "tag": "@autorest/core_v3.10.2",
+      "date": "Wed, 28 Feb 2024 18:02:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix: Crash when deduplication paths"
+          },
+          {
+            "comment": "Fix: Crash reporting zero exit code when a plugin report a crash but send invalid exception"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.12.0` to `~1.12.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/deduplication\" from `~3.2.0` to `~3.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.10.1",
       "tag": "@autorest/core_v3.10.1",
       "date": "Tue, 28 Nov 2023 19:02:52 GMT",
