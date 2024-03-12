@@ -51,7 +51,7 @@ export function getClientImports(program: TypespecProgram) {
       dec.module && modules.add(`import "${dec.module}";`);
       dec.namespace && namespaces.add(`using ${dec.namespace};`);
     }
-  }
+  };
   for (const model of program.models.objects) {
     addImports(model.clientDecorators);
     for (const property of model.properties) {

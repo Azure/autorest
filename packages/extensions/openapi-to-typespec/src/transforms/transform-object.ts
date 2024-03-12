@@ -14,7 +14,12 @@ import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { TypespecObject, TypespecObjectProperty } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
-import { getModelClientDecorators, getModelDecorators, getPropertyClientDecorators, getPropertyDecorators } from "../utils/decorators";
+import {
+  getModelClientDecorators,
+  getModelDecorators,
+  getPropertyClientDecorators,
+  getPropertyDecorators,
+} from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
 import {

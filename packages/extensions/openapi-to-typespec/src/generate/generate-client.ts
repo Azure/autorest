@@ -24,10 +24,7 @@ export function generateEnumClientDecorator(typespecEnum: TypespecEnum) {
   definitions.push(generateAugmentedDecorators(typespecEnum.name, typespecEnum.clientDecorators));
 
   for (const choice of typespecEnum.members) {
-    const decorators = generateAugmentedDecorators(
-      `${typespecEnum.name}.${choice.name}`,
-      choice.clientDecorators,
-    );
+    const decorators = generateAugmentedDecorators(`${typespecEnum.name}.${choice.name}`, choice.clientDecorators);
     decorators && definitions.push(decorators);
   }
 
@@ -42,7 +39,6 @@ export function generateOperationClientDecorator(operation: TypespecOperation) {
   return definitions.join("\n");
 }
 
-
 export function generateArmResourceClientDecorator(resource: TspArmResource): string {
   const definitions: string[] = [];
 
@@ -54,22 +50,18 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
     definitions.push(`@@clientName(${formalOperationGroupName}OperationGroup, "${formalOperationGroupName}")`);
   }
 
-  if(resource.clientDecorators && resource.clientDecorators.length > 0)
+  if (resource.clientDecorators && resource.clientDecorators.length > 0)
     definitions.push(generateAugmentedDecorators(resource.name, resource.clientDecorators));
 
   for (const op of resource.resourceOperations) {
-    if(op.clientDecorators && op.clientDecorators.length > 0)
+    if (op.clientDecorators && op.clientDecorators.length > 0)
       definitions.push(generateAugmentedDecorators(`${targetName}.${op.name}`, op.clientDecorators));
   }
 
   for (const property of resource.properties) {
-    const decorators = generateAugmentedDecorators(
-      `${targetName}.${property.name}`,
-      property.clientDecorators,
-    );
+    const decorators = generateAugmentedDecorators(`${targetName}.${property.name}`, property.clientDecorators);
     decorators && definitions.push(decorators);
   }
-
 
   return definitions.join("\n");
 }

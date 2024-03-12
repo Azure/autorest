@@ -22,9 +22,9 @@ export interface _ArmPagingMetadata {
 }
 
 export interface Metadata {
-  Resources: Record<string, ArmResource>,
-  RenameMapping: Record<string, string>,
-  OverrideOperationName: Record<string, string>,
+  Resources: Record<string, ArmResource>;
+  RenameMapping: Record<string, string>;
+  OverrideOperationName: Record<string, string>;
 }
 
 export interface ArmResource {

@@ -267,8 +267,7 @@ export function getEnumClientDecorators(enumeration: SealedChoiceSchema | Choice
   return decorators;
 }
 
-export function getEnumChoiceClientDecorators(enumChoice: ChoiceValue): TypespecDecorator[]{
-
+export function getEnumChoiceClientDecorators(enumChoice: ChoiceValue): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
 
   if (enumChoice.language.csharp?.name) {
@@ -278,7 +277,6 @@ export function getEnumChoiceClientDecorators(enumChoice: ChoiceValue): Typespec
 }
 
 export function getOperationClientDecorators(operation: Operation): TypespecDecorator[] {
-
   const decorators: TypespecDecorator[] = [];
 
   if (operation.language.csharp?.name) {

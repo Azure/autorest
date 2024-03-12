@@ -1,5 +1,9 @@
 import { getSession } from "../autorest-session";
-import { generateArmResourceClientDecorator, generateEnumClientDecorator, generateObjectClientDecorator } from "../generate/generate-client";
+import {
+  generateArmResourceClientDecorator,
+  generateEnumClientDecorator,
+  generateObjectClientDecorator,
+} from "../generate/generate-client";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";

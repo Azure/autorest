@@ -880,7 +880,11 @@ function buildResourceDecorators(schema: ArmResourceSchema): TypespecDecorator[]
   return resourceModelDecorators;
 }
 
-function buildResourceClientDecorators(schema: ArmResourceSchema, armResourceOperations:TspArmResourceOperation[], normalOperations:TypespecOperation[]): TypespecDecorator[] {
+function buildResourceClientDecorators(
+  schema: ArmResourceSchema,
+  armResourceOperations: TspArmResourceOperation[],
+  normalOperations: TypespecOperation[],
+): TypespecDecorator[] {
   const clientDecorator: TypespecDecorator[] = [];
   if (schema.language.csharp?.name) {
     clientDecorator.push(createCSharpNameDecorator(schema));

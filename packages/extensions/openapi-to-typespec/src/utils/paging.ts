@@ -74,7 +74,7 @@ export function markPagination(codeModel: CodeModel) {
       if (!isPageableOperation(operation)) {
         continue;
       }
-      const itemName = paginationExtension.itemName as string || "value";
+      const itemName = (paginationExtension.itemName as string) || "value";
       let nextLinkName: string | null = "nextLink";
 
       if (typeof paginationExtension.nextLinkName === "string") {
