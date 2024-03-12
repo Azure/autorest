@@ -74,7 +74,7 @@ export function markPagination(codeModel: CodeModel) {
       if (!isPageableOperation(operation)) {
         continue;
       }
-      const itemName = paginationExtension.itemName || "value";
+      const itemName = paginationExtension.itemName as string || "value";
       let nextLinkName: string | null = "nextLink";
 
       if (typeof paginationExtension.nextLinkName === "string") {
@@ -98,14 +98,14 @@ export function markPagination(codeModel: CodeModel) {
         };
 
         for (const property of response.schema.properties ?? []) {
-          if (property.serializedName === nextLinkName) {
+          if (property.serializedName.toLowerCase() === nextLinkName?.toLowerCase()) {
             property.language.default.paging = {
               ...property.language.default.paging,
               isNextLink: true,
             };
           }
 
-          if (property.serializedName === itemName) {
+          if (property.serializedName.toLowerCase() === itemName.toLowerCase()) {
             property.language.default.paging = {
               ...property.language.default.paging,
               isValue: true,

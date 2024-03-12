@@ -5,18 +5,19 @@ import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 /**
- * Azure Schema Registry is as a central schema repository, with support for
- * versioning, management, compatibility checking, and RBAC.
+ * SchemaRegistryClient is a client for registering and retrieving schemas from
+ * the Azure Schema Registry service.
  */
+@useAuth(AadOauth2Auth<["https://eventhubs.azure.net/.default"]>)
 @service({
   title: "Azure Schema Registry",
 })
 @versioned(Versions)
 @server(
-  "https://{endpoint}",
-  "Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.",
+  "https://{fullyQualifiedNamespace}",
+  "SchemaRegistryClient is a client for registering and retrieving schemas from the Azure Schema Registry service.",
   {
-    endpoint: string,
+    fullyQualifiedNamespace: string,
   }
 )
 namespace AzureSchemaRegistry;
