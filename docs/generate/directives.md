@@ -266,6 +266,7 @@ As you can see from the swagger:
                         {
                             "value": "Azure_VM"
                             "name": "AzureVM"
+                            "description": "A virtual machine hosted in the Azure cloud"
                             ...
                         },
                         ...
