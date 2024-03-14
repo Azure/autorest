@@ -7,141 +7,165 @@ using TypeSpec.Http;
 
 namespace AzureSchemaRegistry;
 
-/**
- * Gets the list of schema groups user is authorized to access.
- */
-@summary("Get list of schema groups.")
-op listSchemaGroups is Azure.Core.ResourceList<string>;
+interface SchemaGroupsOperations {
+  /**
+   * Gets the list of schema groups user is authorized to access.
+   */
+  @summary("Get list of schema groups.")
+  @route("/$schemaGroups")
+  @get
+  list is Azure.Core.Foundations.Operation<{}, SchemaGroups>;
+}
 
-/**
- * Gets the properties referencing an existing schema within the specified schema
- * group, as matched by schema content comparison.
- */
-@summary("Get properties for existing schema.")
-@route("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-@post
-op getSchemaPropertiesByContent is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Name of schema group.
-     */
-    @path
-    groupName: string;
+interface SchemaOperations {
+  /**
+   * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees
+   * that ID is unique within a namespace. Operation response type is based on
+   * serialization of schema requested.
+   */
+  @summary("Get a registered schema by its unique ID reference.")
+  @route("/$schemaGroups/$schemas/{id}")
+  @get
+  getById is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * References specific schema in registry namespace.
+       */
+      @path
+      id: string;
 
-    /**
-     * Name of schema.
-     */
-    @maxLength(50)
-    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
-    @path
-    schemaName: string;
+      /**
+       * Accept header
+       */
+      @header
+      accept: "application/json; serialization=Avro";
+    },
+    void
+  >;
 
-    /**
-     * String representation (UTF-8) of the schema.
-     */
-    @body
-    schemaContent: bytes;
-  },
-  void
->;
+  /**
+   * Gets the list of all versions of one schema.
+   */
+  @summary("Get list schema versions.")
+  @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
+  @get
+  getVersions is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Schema group under which schema is registered.  Group's serialization type
+       * should match the serialization type specified in the request.
+       */
+      @path
+      groupName: string;
 
-/**
- * Register new schema. If schema of specified name does not exist in specified
- * group, schema is created at version 1. If schema of specified name exists
- * already in specified group, schema is created at latest version + 1.
- */
-@summary("Register new schema")
-@route("/$schemaGroups/{groupName}/schemas/{schemaName}")
-@put
-op registerSchema is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Name of schema group.
-     */
-    @path
-    groupName: string;
+      /**
+       * Name of schema.
+       */
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
+      @path
+      schemaName: string;
+    },
+    SchemaVersions
+  >;
 
-    /**
-     * Name of schema.
-     */
-    @maxLength(50)
-    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
-    @path
-    schemaName: string;
+  /**
+   * Gets one specific version of one schema.
+   */
+  @summary("Get specific schema versions.")
+  @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
+  @get
+  getSchemaVersion is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Schema group under which schema is registered.  Group's serialization type
+       * should match the serialization type specified in the request.
+       */
+      @path
+      groupName: string;
 
-    /**
-     * String representation (UTF-8) of the schema.
-     */
-    @body
-    schemaContent: bytes;
-  },
-  void
->;
+      /**
+       * Name of schema.
+       */
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
+      @path
+      schemaName: string;
 
-/**
- * Gets the list of all versions of one schema.
- */
-@summary("List schema versions.")
-op listSchemaVersions is Azure.Core.ResourceList<int32>;
+      /**
+       * Version number of specific schema.
+       */
+      @path
+      schemaVersion: int32;
+    },
+    void
+  >;
 
-/**
- * Gets one specific version of one schema.
- */
-@summary("Get specific schema versions.")
-@route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
-@get
-op getSchemaByVersion is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Name of schema group.
-     */
-    @path
-    groupName: string;
+  /**
+   * Gets the ID referencing an existing schema within the specified schema group,
+   * as matched by schema content comparison.
+   */
+  @summary("Get ID for existing schema.")
+  @route("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
+  @post
+  queryIdByContent is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Schema group under which schema is registered.  Group's serialization type
+       * should match the serialization type specified in the request.
+       */
+      @path
+      groupName: string;
 
-    /**
-     * Name of schema.
-     */
-    @maxLength(50)
-    @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
-    @path
-    schemaName: string;
+      /**
+       * Name of schema.
+       */
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
+      @path
+      schemaName: string;
 
-    /**
-     * Version number of specific schema.
-     */
-    @path
-    schemaVersion: int32;
+      /**
+       * String representation (UTF-8) of the registered schema.
+       */
+      @body
+      schemaContent: bytes;
+    },
+    void
+  >;
 
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/json; serialization=Avro, application/json";
-  },
-  void
->;
+  /**
+   * Register new schema. If schema of specified name does not exist in specified
+   * group, schema is created at version 1. If schema of specified name exists
+   * already in specified group, schema is created at latest version + 1.
+   *
+   */
+  @summary("Register new schema")
+  @route("/$schemaGroups/{groupName}/schemas/{schemaName}")
+  @put
+  register is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Schema group under which schema should be registered.  Group's serialization
+       * type should match the serialization type specified in the request.
+       */
+      @path
+      groupName: string;
 
-/**
- * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees
- * that ID is unique within a namespace. Operation response type is based on
- * serialization of schema requested.
- */
-@summary("Get a registered schema by its unique ID reference.")
-@route("/$schemaGroups/$schemas/{id}")
-@get
-op getSchemaById is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Schema ID that uniquely identifies a schema in the registry namespace.
-     */
-    @path
-    id: string;
+      /**
+       * Name of schema.
+       */
+      @maxLength(50)
+      @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
+      @path
+      schemaName: string;
 
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/json; serialization=Avro, application/json";
-  },
-  void
->;
+      /**
+       * String representation (UTF-8) of the schema being registered.
+       */
+      @body
+      schemaContent: bytes;
+    },
+    void
+  >;
+}

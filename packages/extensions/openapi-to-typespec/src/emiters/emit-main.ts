@@ -33,7 +33,6 @@ function getArmServiceInformation(program: TypespecProgram) {
     `import "@azure-tools/typespec-azure-core";`,
     `import "@azure-tools/typespec-azure-resource-manager";`,
     `import "./models.tsp";`,
-    `import "./client.tsp";`,
     ...getArmResourceImports(program),
     ``,
     `using TypeSpec.Rest;`,

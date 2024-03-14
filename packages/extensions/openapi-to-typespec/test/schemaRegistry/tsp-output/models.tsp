@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -8,124 +7,63 @@ using TypeSpec.Http;
 namespace AzureSchemaRegistry;
 
 /**
- * Represents the Schema Registry API version to use for requests.
+ * Array received from the registry containing the list of schema groups.
  */
-enum ServiceVersion {
+model SchemaGroups {
   /**
-   * Azure Schema Registry 2021-10 Version
+   * Array of schema groups.
    */
-  V2021_10: "2021-10",
-
-  /**
-   * Azure Schema Registry 2022-10 Version
-   */
-  V2022_10: "2022-10",
-
-  /**
-   * Azure Schema Registry 2023-07-01 Version. This is the default version.
-   */
-  V2023_07_01: "2023-07-01",
+  schemaGroups?: string[];
 }
 
 /**
- * The list of schema group names with server paging support.
- */
-model SchemaGroups is Azure.Core.Page<string>;
-
-/**
- * A response containing error details.
+ * An error response returned from Azure Schema Registry service.
  */
 @error
-model AzureCoreFoundationsErrorResponse {
+model Error {
   /**
-   * The error object.
+   * Error response returned from Azure Schema Registry service.
    */
-  error: AzureCoreFoundationsError;
+  error: ErrorDetail;
 }
 
 /**
- * The error object.
+ * Error response returned from Azure Schema Registry service.
  */
-model AzureCoreFoundationsError {
+model ErrorDetail {
   /**
-   * One of a server-defined set of error codes.
+   * Type of error.
    */
   code: string;
 
   /**
-   * A human-readable representation of the error.
+   * Brief description of error.
    */
   message: string;
 
   /**
-   * The target of the error.
+   * Error message details to help user understand/debug failure.
    */
-  target?: string;
-
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
-  details?: AzureCoreFoundationsError[];
-
-  /**
-   * An object containing more specific information than the current object about
-   * the error.
-   */
-  innererror?: AzureCoreFoundationsInnerError;
+  details?: ErrorDetail[];
 }
 
 /**
- * An object containing more specific information about the error. As per
- * Microsoft One API guidelines -
- * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+ * Array received from the registry containing the list of versions for specific
+ * schema.
  */
-model AzureCoreFoundationsInnerError {
+model SchemaVersions {
   /**
-   * One of a server-defined set of error codes.
+   * Array of schema groups.
    */
-  code?: string;
-
-  /**
-   * Inner error.
-   */
-  innererror?: AzureCoreFoundationsInnerError;
+  schemaVersions?: int32[];
 }
 
 /**
- * The list of schema versions with server paging support.
+ * Object received from the registry containing schema identifiers.
  */
-model SchemaVersions is Azure.Core.Page<int32>;
-
-/**
- * The schema, including its metadata and content.
- */
-model Schema {
+model SchemaId {
   /**
-   * String representation (UTF-8) of the schema.
+   * Schema ID that uniquely identifies a schema in the registry namespace.
    */
-  schemaContent: bytes;
-}
-
-/**
- * Schema Group resource.
- */
-model SchemaGroup {
-  /**
-   * Name of schema group.
-   */
-  @visibility("read")
-  groupName: string;
-}
-
-/**
- * Schemas resource.
- */
-model SchemasName {
-  /**
-   * Name of schema.
-   */
-  @visibility("read")
-  @maxLength(50)
-  @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
-  schemaName: string;
+  id?: string;
 }

@@ -44,7 +44,7 @@ function generateClient(program: TypespecProgram) {
     .filter((r) => r !== "")
     .join("\n\n");
 
-  if (objects === "" && armResources === "") {
+  if (objects === "" && armResources === "" && enums === "") {
     return "";
   }
   return [imports, "\n", namespaces, "\n", objects, "\n", armResources, "\n", enums].join("\n");
