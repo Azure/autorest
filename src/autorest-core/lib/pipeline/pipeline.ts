@@ -322,7 +322,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   (configView.Raw as any).__status = new Proxy<any>({}, {
     get(_, key) {
       if (key === "__info") return false;
-      const expr = new Buffer(key.toString(), "base64").toString("ascii");
+      const expr = Buffer.from(key.toString(), "base64").toString("ascii");
       try {
         return FastStringify(safeEval(expr, {
           pipeline: pipeline.pipeline,
