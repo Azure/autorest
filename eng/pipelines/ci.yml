@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+    - mharder/v2
+
+pr:
+  branches:
+    include:
+    - mharder/v2
+
+jobs:
+- job:
+
+  strategy:
+    matrix:
+      Linux:
+        Pool: azsdk-pool-mms-ubuntu-2204-general
+        OsVmImage: ubuntu-22.04
+      Windows:
+        Pool: azsdk-pool-mms-win-2022-general
+        OsVmImage: windows-2022
+
+  pool:
+    name: $(Pool)
+    vmImage: $(OSVmImage)
+
+  steps:
+  - template: /eng/pipelines/templates/steps/npm-install.yml
+    parameters:
+      NodeVersion: 10.x
