@@ -28,3 +28,9 @@ jobs:
   - template: /eng/pipelines/templates/steps/npm-install.yml
     parameters:
       NodeVersion: 10.x
+
+  - script: npm run build
+    displayName: npm run build
+
+  - script: npm run testci
+    displayName: npm run testci
