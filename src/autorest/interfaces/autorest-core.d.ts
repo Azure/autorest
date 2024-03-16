@@ -128,14 +128,14 @@ export class Lazy<T> {
     private factory;
     private promise;
     constructor(factory: () => T);
-    readonly Value: T;
+    get Value(): T;
 }
 export class LazyPromise<T> implements PromiseLike<T> {
     private factory;
     private promise;
     constructor(factory: () => Promise<T>);
-    private readonly Value;
-    readonly hasValue: boolean;
+    private get Value();
+    get hasValue(): boolean;
     then<TResult1, TResult2>(onfulfilled: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected: (reason: any) => TResult2 | PromiseLike<TResult2>): PromiseLike<TResult1 | TResult2>;
 }
 
@@ -266,11 +266,11 @@ export enum DocumentFormat {
     Unknown
 }
 export const DocumentExtension: {
-    "yaml": DocumentFormat;
-    "yml": DocumentFormat;
-    "json": DocumentFormat;
-    "md": DocumentFormat;
-    "markdown": DocumentFormat;
+    yaml: DocumentFormat;
+    yml: DocumentFormat;
+    json: DocumentFormat;
+    md: DocumentFormat;
+    markdown: DocumentFormat;
 };
 export const DocumentPatterns: {
     yaml: string[];
@@ -344,7 +344,7 @@ export class AutoRest extends EventEmitter {
     Message: IEvent<AutoRest, Message>;
     private _configurations;
     private _view;
-    readonly view: Promise<ConfigurationView>;
+    get view(): Promise<ConfigurationView>;
     RegenerateView(includeDefault?: boolean): Promise<ConfigurationView>;
     Invalidate(): void;
     AddConfiguration(configuration: any): void;
@@ -487,12 +487,12 @@ export interface Directive {
 export class DirectiveView {
     private directive;
     constructor(directive: Directive);
-    readonly from: Iterable<string>;
-    readonly where: Iterable<string>;
-    readonly reason: string | null;
-    readonly suppress: Iterable<string>;
-    readonly transform: Iterable<string>;
-    readonly test: Iterable<string>;
+    get from(): Iterable<string>;
+    get where(): Iterable<string>;
+    get reason(): string | null;
+    get suppress(): Iterable<string>;
+    get transform(): Iterable<string>;
+    get test(): Iterable<string>;
 }
 export class MessageEmitter extends EventEmitter {
     /**
@@ -513,28 +513,28 @@ export class MessageEmitter extends EventEmitter {
 export class ConfigurationView {
     [name: string]: any;
     private suppressor;
-    readonly Keys: Array<string>;
+    get Keys(): Array<string>;
     Dump(title?: string): void;
     private config;
     private rawConfig;
     private ResolveAsFolder;
     private ResolveAsPath;
-    private readonly BaseFolderUri;
-    readonly UseExtensions: Array<{
+    private get BaseFolderUri();
+    get UseExtensions(): Array<{
         name: string;
         source: string;
         fullyQualified: string;
     }>;
     IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<string[]>;
-    readonly Directives: DirectiveView[];
-    readonly InputFileUris: string[];
-    readonly OutputFolderUri: string;
+    get Directives(): DirectiveView[];
+    get InputFileUris(): string[];
+    get OutputFolderUri(): string;
     IsOutputArtifactRequested(artifact: string): boolean;
     GetEntry(key: keyof AutoRestConfigurationImpl): any;
-    readonly Raw: AutoRestConfigurationImpl;
-    readonly DebugMode: boolean;
-    readonly VerboseMode: boolean;
-    readonly HelpRequested: boolean;
+    get Raw(): AutoRestConfigurationImpl;
+    get DebugMode(): boolean;
+    get VerboseMode(): boolean;
+    get HelpRequested(): boolean;
     GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView>;
     GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView;
     Message(m: Message): void;
