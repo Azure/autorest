@@ -26,10 +26,6 @@ param(
 function GenerateMetadata ()
 {
     Write-Host "##Generating metadata with csharp codegen in $outputFolder with $csharpCodegen"
-    if($csharpAutorestFile -eq "")
-    {
-        $csharpAutorestFile = $swaggerConfigFile
-    }
     $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $ConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
