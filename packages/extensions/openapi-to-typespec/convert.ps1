@@ -12,8 +12,8 @@
 param(
     [Parameter(Mandatory)]
     [string]
-    # Specifies the swagger config file, not the swagger json, but the readme config.
-    $swaggerConfigFile,
+    # Specifies the swagger config file (not the swagger json, but the readme config) or autorest.md file in the azure-sdk-for-net repo if .net related configuration is expected to be included.
+    configFile,
     [string]
     # Specified the output folder, deafult to current folder.
     $outputFolder,
@@ -22,10 +22,7 @@ param(
     $csharpCodegen = "https://aka.ms/azsdk/openapi-to-typespec-csharp",
     [string]
     # Specified the converter codegen, default to https://aka.ms/azsdk/openapi-to-typespec.
-    $converterCodegen = ".",
-    [string]
-    # Specifies the corresponding autorest.md file in the azure-sdk-for-net repo so that the convert will load it instead of the swagger config file when generating metadata which would include more csharp configurations (i.e. rename rules)
-    $csharpAutorestFile = "")
+    $converterCodegen = ".")
 
 function GenerateMetadata ()
 {
@@ -34,7 +31,7 @@ function GenerateMetadata ()
     {
         $csharpAutorestFile = $swaggerConfigFile
     }
-    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $csharpAutorestFile"
+    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $configFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
@@ -48,7 +45,7 @@ function GenerateMetadata ()
 function DoConvert ()
 {
     Write-Host "##Converting from swagger to tsp with in $outputFolder with $converterCodegen"
-    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder $swaggerConfigFile"
+    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --csharp=false --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder $configFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
