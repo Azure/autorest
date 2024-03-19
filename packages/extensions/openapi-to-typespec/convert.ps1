@@ -12,7 +12,7 @@
 param(
     [Parameter(Mandatory = $true, HelpMessage = "Specifies the swagger config file (not the swagger json, but the readme config) or autorest.md file in the azure-sdk-for-net repo if .net related configuration is expected to be included.")]
     [string] 
-    $ConfigFile,
+    $swaggerConfigFile,
     [Parameter(Mandatory = $false, HelpMessage = "Specified the output folder, deafult to current folder.")]
     [string]
     $outputFolder,
@@ -26,7 +26,7 @@ param(
 function GenerateMetadata ()
 {
     Write-Host "##Generating metadata with csharp codegen in $outputFolder with $csharpCodegen"
-    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $ConfigFile"
+    $cmd = "autorest --version=3.10.1 --csharp --isAzureSpec --isArm --max-memory-size=8192 --use=`"$csharpCodegen`" --output-folder=$outputFolder --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
@@ -40,7 +40,7 @@ function GenerateMetadata ()
 function DoConvert ()
 {
     Write-Host "##Converting from swagger to tsp with in $outputFolder with $converterCodegen"
-    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --csharp=false --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder $ConfigFile"
+    $cmd = "autorest --version=3.10.1 --openapi-to-typespec --csharp=false --isAzureSpec --isArm --use=`"$converterCodegen`" --output-folder=$outputFolder $swaggerConfigFile"
     Write-Host "$cmd"
     Invoke-Expression  $cmd
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
