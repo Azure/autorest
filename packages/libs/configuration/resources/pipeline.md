@@ -9,7 +9,7 @@ for Multi-API version generators (ie, based using `imodeler2` ).
 Avoiding conflicts is done thru additional metadata specified in the
 `x-ms-metadata` extension node.
 
-```yaml
+```yaml !$(no-default-pipeline)
 pipeline:
   openapi-document/multi-api-merger:
     input: tree-shaker
@@ -40,7 +40,7 @@ pipeline:
     input-artifact: profile-filter-log
 ```
 
-```yaml $(pipeline-model) == 'v3'
+```yaml $(pipeline-model) == 'v3' && !$(no-default-pipeline)
 pass-thru:
   - api-version-parameter-handler
 
@@ -73,7 +73,7 @@ and joins the collections back into a single pipeline (it splits at load time.)
 The final step is the `openapi-document/identity`, which is the pipeline input
 for Single-API version generators (ie, based using `imodeler1` ).
 
-```yaml !$(pipeline-model) || $(pipeline-model) == 'v2'
+```yaml (!$(pipeline-model) || $(pipeline-model) == 'v2') && !$(no-default-pipeline)
 pipeline:
   openapi-document/compose:
     input: openapi-document/model-deduplicator # just before deduplication.
