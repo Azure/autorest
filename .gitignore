@@ -296,3 +296,4 @@ regression-tests/output
 
 # TS incremental build cache
 *.tsbuildinfo
+*.njsproj

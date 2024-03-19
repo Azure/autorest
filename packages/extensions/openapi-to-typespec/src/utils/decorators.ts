@@ -1,15 +1,18 @@
 import {
   ChoiceSchema,
   ObjectSchema,
+  ChoiceValue,
   Parameter,
   Property,
   Schema,
   SchemaType,
   SealedChoiceSchema,
   SerializationStyle,
+  Operation,
   isNumberSchema,
 } from "@autorest/codemodel";
 import { TypespecDecorator, DecoratorArgument } from "../interfaces";
+import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";
 
@@ -52,6 +55,15 @@ export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
     });
   }
 
+  return decorators;
+}
+
+export function getModelClientDecorators(model: ObjectSchema): TypespecDecorator[] {
+  const decorators: TypespecDecorator[] = [];
+
+  if (model.language.csharp?.name) {
+    decorators.push(createCSharpNameDecorator(model));
+  }
   return decorators;
 }
 
@@ -153,6 +165,10 @@ export function getPropertyClientDecorators(element: Property | Parameter): Type
     });
   }
 
+  if (element.language.csharp?.name) {
+    decorators.push(createCSharpNameDecorator(element));
+  }
+
   return decorators;
 }
 
@@ -240,6 +256,35 @@ export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema
 
   return decorators;
 }
+
+export function getEnumClientDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): TypespecDecorator[] {
+  const decorators: TypespecDecorator[] = [];
+
+  if (enumeration.language.csharp?.name) {
+    decorators.push(createCSharpNameDecorator(enumeration));
+  }
+
+  return decorators;
+}
+
+export function getEnumChoiceClientDecorators(enumChoice: ChoiceValue): TypespecDecorator[] {
+  const decorators: TypespecDecorator[] = [];
+
+  if (enumChoice.language.csharp?.name) {
+    decorators.push(createCSharpNameDecorator(enumChoice));
+  }
+  return decorators;
+}
+
+export function getOperationClientDecorators(operation: Operation): TypespecDecorator[] {
+  const decorators: TypespecDecorator[] = [];
+
+  if (operation.language.csharp?.name) {
+    decorators.push(createCSharpNameDecorator(operation));
+  }
+  return decorators;
+}
+
 export function generateDecorators(decorators: TypespecDecorator[] = []): string {
   const definitions: string[] = [];
   for (const decorator of decorators ?? []) {
