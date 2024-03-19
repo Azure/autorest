@@ -12,7 +12,7 @@
 param(
     [Parameter(Mandatory = $true, HelpMessage = "Specifies the swagger config file (not the swagger json, but the readme config) or autorest.md file in the azure-sdk-for-net repo if .net related configuration is expected to be included.")]
     [string] 
-    $ConfigFile,
+    $swaggerConfigFile,
     [Parameter(Mandatory = $false, HelpMessage = "Specified the output folder, deafult to current folder.")]
     [string]
     $outputFolder,
