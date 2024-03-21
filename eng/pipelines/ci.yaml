@@ -7,7 +7,7 @@ trigger:
   - main
 
 extends:
-- template: templates/1es-redirect.yml
+  template: /eng/templates/1es-redirect.yml
   parameters:
     stages:
       - stage: main
@@ -20,7 +20,7 @@ extends:
           - job: main
             displayName: "Build and Unit test"
             steps:
-              - template: ./templates/build.yaml
+              - template: /eng/templates/build.yaml
 
               - script: npx @microsoft/rush test:ci -v
                 displayName: Test
@@ -76,11 +76,11 @@ extends:
           image: $(LINUXVMIMAGE)
           os: linux
         jobs:
-          - template: ./templates/regression-tests.yaml
+          - template: /eng/templates/regression-tests.yaml
             parameters:
               name: node18
               nodeVersion: 18.x
-          - template: ./templates/regression-tests.yaml
+          - template: /eng/templates/regression-tests.yaml
             parameters:
               name: node20
               nodeVersion: 20.x
@@ -93,7 +93,7 @@ extends:
           image: $(LINUXVMIMAGE)
           os: linux
         jobs:
-          - template: ./templates/smoke-tests.yaml
+          - template: /eng/templates/smoke-tests.yaml
             parameters:
               name: node20
               nodeVersion: 20.x

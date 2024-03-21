@@ -6,7 +6,7 @@
 trigger: none
 
 extends:
-- template: templates/1es-redirect.yml
+  template: templates/1es-redirect.yml
   parameters:
     stages:
       - stage: npm
