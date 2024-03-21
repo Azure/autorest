@@ -7,7 +7,7 @@ trigger:
   - main
 
 extends:
-  template: /eng/templates/1es-redirect.yml
+  template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
     stages:
       - stage: main
@@ -20,7 +20,7 @@ extends:
           - job: main
             displayName: "Build and Unit test"
             steps:
-              - template: /eng/templates/build.yaml
+              - template: /eng/pipelines/templates/build.yaml
 
               - script: npx @microsoft/rush test:ci -v
                 displayName: Test
@@ -58,7 +58,7 @@ extends:
                 displayName: Publish packages(.tgz) as pipeline artifacts
 
               - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-                  - template: ./templates/create-tryit-comment.yaml
+                  - template: /eng/pipelines/templates/create-tryit-comment.yaml
           # - job: lintdocs
           #   displayName: Lint docs
           #   continueOnError: true
@@ -76,11 +76,11 @@ extends:
           image: $(LINUXVMIMAGE)
           os: linux
         jobs:
-          - template: /eng/templates/regression-tests.yaml
+          - template: /eng/pipelines/templates/regression-tests.yaml
             parameters:
               name: node18
               nodeVersion: 18.x
-          - template: /eng/templates/regression-tests.yaml
+          - template: /eng/pipelines/templates/regression-tests.yaml
             parameters:
               name: node20
               nodeVersion: 20.x
@@ -93,7 +93,7 @@ extends:
           image: $(LINUXVMIMAGE)
           os: linux
         jobs:
-          - template: /eng/templates/smoke-tests.yaml
+          - template: /eng/pipelines/templates/smoke-tests.yaml
             parameters:
               name: node20
               nodeVersion: 20.x

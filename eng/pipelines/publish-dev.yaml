@@ -6,7 +6,7 @@
 trigger: none
 
 extends:
-  template: templates/1es-redirect.yml
+  template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
     stages:
       - stage: npm
@@ -18,7 +18,7 @@ extends:
           - job: dev
             displayName: Publish dev
             steps:
-              - template: ./templates/build.yaml
+              - template: /eng/pipelines/templates/build.yaml
 
               - script: |
                   commitId=$(git rev-parse --short HEAD)
