@@ -16,21 +16,14 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    # ensure latest npm is installed
-    npm install -g npm 
-
-    npm install -g publish-release
-
-    # install gulp
-    npm install -g gulp
-    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+    npm install -g publish-release@1.6.1
 
     # npm install 
     npm install
     rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
 
     # build packages 
-    gulp publish-preview
+    npm run publish-preview
     
     # publish autorest core to a github release.
     v=`dir src/autorest-core/*.tgz  | sed 's/.*\(2\.0\..*\)\.tgz/\1/g'`
