@@ -15,8 +15,6 @@ steps:
     displayName: "Install Node.js"
 
   - script: |
-      # ensure latest npm is installed
-      npm install -g npm 
       npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
       # grab the file specified
       wget $(pkg)
