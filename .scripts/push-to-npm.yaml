@@ -29,12 +29,12 @@ steps:
       # publish it to npm 
       for file in *.tgz 
       do
-        npm publish $file --tag $npmTag --access public
+        npm publish $file --tag $npmTag --access public --dry-run
         rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
         # set the alternate tag, if applicable
         if [ -n "$(altTag)" ]; then
           tar -zxvf $file
           cd package/
-          npm dist-tag add $(npm show . name)@$(npm show . version) --tag $(altTag)
+          npm dist-tag add $(npm show . name)@$(npm show . version) --tag $(altTag) --dry-run
         fi
       done
