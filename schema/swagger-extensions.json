@@ -1624,9 +1624,9 @@
       "type": "object",
       "properties": {
         "final-state-via": {
-          "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations",
+          "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations\n- `operation-location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Operation-Location`",
           "type": "string",
-          "enum": ["azure-async-operation", "location", "original-uri"]
+          "enum": ["azure-async-operation", "location", "original-uri", "operation-location"]
         }
       },
       "required": ["final-state-via"]
