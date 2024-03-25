@@ -27,7 +27,7 @@ jobs:
           docker build -t ${{ parameters.image }} .
         displayName: Build image
         workingDirectory: ${{ parameters.dockerFolder }}
-    templateContext:
-      outputs:
-      - output: containerImage
-        image: ${{ parameters.image }}
+    # templateContext:
+    #   outputs:
+    #   - output: containerImage
+    #     image: ${{ parameters.image }}
