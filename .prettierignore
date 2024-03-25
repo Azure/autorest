@@ -335,6 +335,9 @@ packages/libs/codemodel/.resources
 **/test/scenarios/expected/**/*.json
 packages/extensions/core/test/plugins/*/expected/*.json
 
+# ensure rush doesn't catch on any yml files
+**/*.yml
+
 # MICROSOFT SECURITY.md
 /SECURITY.md
 
