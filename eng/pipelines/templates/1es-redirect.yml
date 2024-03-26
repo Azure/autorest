@@ -34,6 +34,8 @@ extends:
       psscriptanalyzer:
         compiled: true
         break: true
+      credscan:
+        suppressionsFile: $(Build.SourcesDirectory)/eng/CredScanSuppression.json
       eslint:
         enabled: false
         justificationForDisabling: "ESLint injected task has failures because it uses an old version of mkdirp. We should not fail for tools not controlled by the repo. See: https://dev.azure.com/azure-sdk/internal/_build/results?buildId=3556850"

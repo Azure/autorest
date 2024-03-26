@@ -1,0 +1,12 @@
+{
+  "tool": "Credential Scanner",
+  "suppressions": [
+    {
+      "placeholder": [
+        "#################",
+        "P@$$w0rd"
+      ],
+      "_justification": "Secrets used by test code or documentation, they are fake."
+    }
+  ]
+}
