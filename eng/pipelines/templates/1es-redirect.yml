@@ -25,6 +25,8 @@ extends:
     settings:
       skipBuildTagsForGitHubPullRequests: true
     sdl:
+      git:
+        longpaths: true
       sourceAnalysisPool:
         name: azsdk-pool-mms-win-2022-general
         image: azsdk-pool-mms-win-2022-1espt
