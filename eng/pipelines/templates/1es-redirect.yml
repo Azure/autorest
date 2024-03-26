@@ -34,6 +34,9 @@ extends:
       psscriptanalyzer:
         compiled: true
         break: true
+      eslint:
+        enabled: false
+        justificationForDisabling: "ESLint injected task has failures because it uses an old version of mkdirp. We should not fail for tools not controlled by the repo. See: https://dev.azure.com/azure-sdk/internal/_build/results?buildId=3556850"
     stages:
       - ${{ each stage in parameters.stages }}:
           - ${{ each pair in stage }}:
