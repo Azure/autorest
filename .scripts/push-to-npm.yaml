@@ -17,6 +17,7 @@ extends:
         pool:
           name: $(LINUXNEXTPOOL)
           image: $(LINUXNEXTVMIMAGE)
+          os: linux
 
         steps:
           - task: NodeTool@0
