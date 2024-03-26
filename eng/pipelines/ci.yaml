@@ -6,80 +6,94 @@
 trigger:
   - main
 
-pool:
-  vmImage: "ubuntu-latest"
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    stages:
+      - stage: main
+        displayName: Main
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - job: main
+            displayName: "Build and Unit test"
+            steps:
+              - template: /eng/pipelines/templates/build.yaml
 
-stages:
-  - stage: main
-    displayName: Main
-    jobs:
-      - job: main
-        displayName: "Build and Unit test"
-        steps:
-          - template: ./templates/build.yaml
+              - script: npx @microsoft/rush test:ci -v
+                displayName: Test
 
-          - script: npx @microsoft/rush test:ci -v
-            displayName: Test
+              - task: PublishCodeCoverageResults@1
+                inputs:
+                  codeCoverageTool: Cobertura
+                  summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
+                  reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
-          - task: PublishCodeCoverageResults@1
-            inputs:
-              codeCoverageTool: Cobertura
-              summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
-              reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
+              - script: npx @microsoft/rush check-format
+                displayName: Check formatting
 
-          - script: npx @microsoft/rush check-format
-            displayName: Check formatting
+              - script: npx @microsoft/rush lint -v
+                displayName: Lint
 
-          - script: npx @microsoft/rush lint -v
-            displayName: Lint
+              - script: npx @microsoft/rush regen-codemodel
+                displayName: Regen codemodel schema
 
-          - script: npx @microsoft/rush regen-codemodel
-            displayName: Regen codemodel schema
+              - script: node ./eng/scripts/check-for-changed-files.js
+                displayName: Check Git Status For Changed Files
 
-          - script: node ./eng/scripts/check-for-changed-files.js
-            displayName: Check Git Status For Changed Files
+              - script: |
+                  commitId=$(git rev-parse --short HEAD)
+                  npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
+                displayName: Bump versions
 
-          - script: |
-              commitId=$(git rev-parse --short HEAD)
-              npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
-            displayName: Bump versions
+              - script: npx @microsoft/rush publish --publish --pack --include-all
+                displayName: Pack packages
 
-          - script: npx @microsoft/rush publish --publish --pack --include-all
-            displayName: Pack packages
+              - task: 1ES.PublishPipelineArtifact@1
+                inputs:
+                  targetPath: $(Build.SourcesDirectory)/common/temp/artifacts/packages
+                  artifact: packages
+                displayName: Publish packages(.tgz) as pipeline artifacts
 
-          - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
-            artifact: packages
-            displayName: Publish packages(.tgz) as pipeline artifacts
+              - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+                  - template: /eng/pipelines/templates/create-tryit-comment.yaml
+          # - job: lintdocs
+          #   displayName: Lint docs
+          #   continueOnError: true
+          #   steps:
+          #     - script: |
+          #         sudo npm install -g markdown-link-check
+          #         find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
+          #       displayName: Find
 
-          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: ./templates/create-tryit-comment.yaml
-      # - job: lintdocs
-      #   displayName: Lint docs
-      #   continueOnError: true
-      #   steps:
-      #     - script: |
-      #         sudo npm install -g markdown-link-check
-      #         find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
-      #       displayName: Find
+      - stage: regressiontests
+        displayName: Regression Tests
+        dependsOn: main
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - template: /eng/pipelines/templates/regression-tests.yaml
+            parameters:
+              name: node18
+              nodeVersion: 18.x
+          - template: /eng/pipelines/templates/regression-tests.yaml
+            parameters:
+              name: node20
+              nodeVersion: 20.x
 
-  - stage: regressiontests
-    displayName: Regression Tests
-    dependsOn: main
-    jobs:
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node18
-          nodeVersion: 18.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node20
-          nodeVersion: 20.x
-
-  - stage: smoketests
-    displayName: Smoke Tests
-    dependsOn: main
-    jobs:
-      - template: ./templates/smoke-tests.yaml
-        parameters:
-          name: node20
-          nodeVersion: 20.x
+      - stage: smoketests
+        displayName: Smoke Tests
+        dependsOn: main
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - template: /eng/pipelines/templates/smoke-tests.yaml
+            parameters:
+              name: node20
+              nodeVersion: 20.x
