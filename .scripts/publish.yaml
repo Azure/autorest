@@ -6,28 +6,41 @@
 trigger:
 - v2 
 
-pool:
-  vmImage: 'ubuntu-latest'
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    stages:
+    - stage: Publish_Stage
+      variables:
+        - template: /eng/pipelines/templates/variables/image.yml
+      jobs:
+      - job:
+        displayName: NPM Publishing
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+        pool:
+          name: $(LINUXNEXTPOOL)
+          image: $(LINUXNEXTVMIMAGE)
+          os: linux
 
-- script: |
-    npm install -g publish-release@1.6.1
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '10.x'
+          displayName: 'Install Node.js'
 
-    # npm install 
-    npm install
-    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+        - script: |
+            npm install -g publish-release@1.6.1
 
-    # build packages 
-    npm run publish-preview
-    
-    # publish autorest core to a github release.
-    v=`dir src/autorest-core/*.tgz  | sed 's/.*\(2\.0\..*\)\.tgz/\1/g'`
-    publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='v2 prerelease build' --prerelease --editRelease false --assets ./src/autorest-core/microsoft.azure-autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
-    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
-    cd ..
+            # npm install
+            npm install
+            rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+
+            # build packages
+            npm run publish-preview
+
+            # publish autorest core to a github release.
+            v=`dir src/autorest-core/*.tgz  | sed 's/.*\(2\.0\..*\)\.tgz/\1/g'`
+            publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='v2 prerelease build' --prerelease --editRelease false --assets ./src/autorest-core/microsoft.azure-autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
+            rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+            cd ..
 
