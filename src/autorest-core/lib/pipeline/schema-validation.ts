@@ -11,6 +11,7 @@ import { Parse } from '../ref/yaml';
 import { CreatePerFilePlugin, PipelinePlugin } from "./common";
 import { Channel } from "../message";
 import { OperationAbortedException } from '../exception';
+import { inspect } from 'util';
 
 export function GetPlugin_SchemaValidator(): PipelinePlugin {
   const validator = new SchemaValidator({ breakOnFirstError: false });
@@ -23,7 +24,8 @@ export function GetPlugin_SchemaValidator(): PipelinePlugin {
     const errors = await new Promise<{ code: string, params: string[], message: string, path: string }[] | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
-        const errorString = JSON.stringify(error, null, 2);
+        // Replace '_' with '-' to avoid output formatter interpreting as italics
+        const errorString = inspect(error).replaceAll('_', '-');
 
         config.Message({
           Channel: Channel.Error,
