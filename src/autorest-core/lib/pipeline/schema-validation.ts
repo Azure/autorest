@@ -23,12 +23,14 @@ export function GetPlugin_SchemaValidator(): PipelinePlugin {
     const errors = await new Promise<{ code: string, params: string[], message: string, path: string }[] | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
+        const errorString = JSON.stringify(error, null, 2);
+
         config.Message({
           Channel: Channel.Error,
           Details: error,
           Plugin: "schema-validator",
           Source: [{ document: fileIn.key, Position: { path: parseJsonPointer(error.path) } as any }],
-          Text: `Schema violation: ${error.message}`
+          Text: `Schema violation:\n${errorString}`
         });
       }
       throw new OperationAbortedException();
