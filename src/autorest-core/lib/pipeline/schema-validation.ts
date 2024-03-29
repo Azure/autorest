@@ -25,7 +25,7 @@ export function GetPlugin_SchemaValidator(): PipelinePlugin {
     if (errors !== null) {
       for (const error of errors) {
         // Replace '_' with '-' to avoid output formatter interpreting as italics
-        const errorLog = inspect(error).replaceAll('_', '-');
+        const errorLog = inspect(error, { depth: 3 }).replaceAll('_', '-');
 
         config.Message({
           Channel: Channel.Error,
