@@ -25,14 +25,14 @@ export function GetPlugin_SchemaValidator(): PipelinePlugin {
     if (errors !== null) {
       for (const error of errors) {
         // Replace '_' with '-' to avoid output formatter interpreting as italics
-        const errorString = inspect(error).replaceAll('_', '-');
+        const errorLog = inspect(error).replaceAll('_', '-');
 
         config.Message({
           Channel: Channel.Error,
           Details: error,
           Plugin: "schema-validator",
           Source: [{ document: fileIn.key, Position: { path: parseJsonPointer(error.path) } as any }],
-          Text: `Schema violation:\n${errorString}`
+          Text: `Schema violation: ${error.message}\n${errorLog}`
         });
       }
       throw new OperationAbortedException();
