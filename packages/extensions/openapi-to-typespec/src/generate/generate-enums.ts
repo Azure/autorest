@@ -14,7 +14,9 @@ export function generateEnums(typespecEnum: TypespecEnum) {
   const decorators = generateDecorators(typespecEnum.decorators);
   decorators && definitions.push(decorators);
 
-  const enumDefinition = typespecEnum.isExtensible && !["ApiVersion"].includes(typespecEnum.name)? `
+  const enumDefinition =
+    typespecEnum.isExtensible && !["ApiVersion"].includes(typespecEnum.name)
+      ? `
     union ${typespecEnum.name} {
         ${typespecEnum.choiceType},\n
         ${typespecEnum.members
@@ -23,7 +25,8 @@ export function generateEnums(typespecEnum: TypespecEnum) {
             return `${generateDocs(m)}${kv}`;
           })
           .join(", ")}
-    }\n\n` : `
+    }\n\n`
+      : `
     enum ${typespecEnum.name} {
         ${typespecEnum.members
           .map((m) => {
