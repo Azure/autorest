@@ -10,106 +10,115 @@ namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
 /**
  * Human-readable error code.
  */
-enum ErrorCode {
-  InvalidRequest,
-  InvalidArgument,
-  Unauthorized,
-  Forbidden,
-  NotFound,
-  ProjectNotFound,
-  OperationNotFound,
-  AzureCognitiveSearchNotFound,
-  AzureCognitiveSearchIndexNotFound,
-  TooManyRequests,
-  AzureCognitiveSearchThrottling,
-  AzureCognitiveSearchIndexLimitReached,
-  InternalServerError,
-  ServiceUnavailable,
-  Timeout,
-  QuotaExceeded,
-  Conflict,
-  Warning,
+union ErrorCode {
+  string,
+  "InvalidRequest",
+  "InvalidArgument",
+  "Unauthorized",
+  "Forbidden",
+  "NotFound",
+  "ProjectNotFound",
+  "OperationNotFound",
+  "AzureCognitiveSearchNotFound",
+  "AzureCognitiveSearchIndexNotFound",
+  "TooManyRequests",
+  "AzureCognitiveSearchThrottling",
+  "AzureCognitiveSearchIndexLimitReached",
+  "InternalServerError",
+  "ServiceUnavailable",
+  "Timeout",
+  "QuotaExceeded",
+  "Conflict",
+  "Warning",
 }
 
 /**
  * Human-readable error code.
  */
-enum InnerErrorCode {
-  InvalidRequest,
-  InvalidParameterValue,
-  KnowledgeBaseNotFound,
-  AzureCognitiveSearchNotFound,
-  AzureCognitiveSearchThrottling,
-  ExtractionFailure,
-  InvalidRequestBodyFormat,
-  EmptyRequest,
-  MissingInputDocuments,
-  InvalidDocument,
-  ModelVersionIncorrect,
-  InvalidDocumentBatch,
-  UnsupportedLanguageCode,
-  InvalidCountryHint,
+union InnerErrorCode {
+  string,
+  "InvalidRequest",
+  "InvalidParameterValue",
+  "KnowledgeBaseNotFound",
+  "AzureCognitiveSearchNotFound",
+  "AzureCognitiveSearchThrottling",
+  "ExtractionFailure",
+  "InvalidRequestBodyFormat",
+  "EmptyRequest",
+  "MissingInputDocuments",
+  "InvalidDocument",
+  "ModelVersionIncorrect",
+  "InvalidDocumentBatch",
+  "UnsupportedLanguageCode",
+  "InvalidCountryHint",
 }
 
 /**
  * Job Status.
  */
-enum JobStatus {
-  notStarted,
-  running,
-  succeeded,
-  failed,
-  cancelled,
-  cancelling,
-  partiallyCompleted,
+union JobStatus {
+  string,
+  "notStarted",
+  "running",
+  "succeeded",
+  "failed",
+  "cancelled",
+  "cancelling",
+  "partiallyCompleted",
 }
 
-enum Format {
+union Format {
+  string,
+
   /**
    * Export or Import QnA assets in JSON format.
    */
-  json,
+  "json",
 
   /**
    * Export or Import knowledge base replica including all assets and metadata in
    * Excel format.
    */
-  tsv,
+  "tsv",
 
   /**
    * Export or Import knowledge base replica including all assets and metadata in
    * Tsv format.
    */
-  excel,
+  "excel",
 }
 
-enum AssetKind {
-  qnas,
-  synonyms,
+union AssetKind {
+  string,
+  "qnas",
+  "synonyms",
 }
 
 /**
  * Supported source types.
  */
-enum SourceKind {
-  file,
-  url,
+union SourceKind {
+  string,
+  "file",
+  "url",
 }
 
 /**
  * Content structure type for sources.
  */
-enum SourceContentStructureKind {
-  unstructured,
+union SourceContentStructureKind {
+  string,
+  "unstructured",
 }
 
 /**
  * Update operation type for assets.
  */
-enum UpdateOperationKind {
-  add,
-  delete,
-  replace,
+union UpdateOperationKind {
+  string,
+  "add",
+  "delete",
+  "replace",
 }
 
 /**

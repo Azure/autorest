@@ -14,68 +14,76 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The enablement status of a feature.
  */
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   /**
    * The feature is Enabled.
    */
-  Enabled,
+  "Enabled",
 
   /**
    * The feature is Disabled.
    */
-  Disabled,
+  "Disabled",
 }
 
 /**
  * The status of the current operation.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /**
    * Resource has been created.
    */
-  Succeeded,
+  "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  Failed,
+  "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  Canceled,
+  "Canceled",
 
   /**
    * Deletion in progress
    */
-  Deleting,
+  "Deleting",
 
   /**
    * Change accepted for processing
    */
-  Accepted,
+  "Accepted",
 }
 
 /**
  * The free-trial state.
  */
-enum FreeTrialState {
+union FreeTrialState {
+  string,
+
   /**
    * The free-trial is Active.
    */
-  Active,
+  "Active",
 
   /**
    * The free-trial is Expired.
    */
-  Expired,
+  "Expired",
 }
 
-enum QuotaNames {
+union QuotaNames {
+  string,
+
   /**
    * The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.
    */
-  ScalableExecution,
+  "ScalableExecution",
 }
 
 /**

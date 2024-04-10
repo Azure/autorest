@@ -11,7 +11,6 @@ namespace Azure.Batch;
 /**
  * The type of operating system (e.g. Windows or Linux) of the Image.
  */
-@fixed
 enum OSType {
   /**
    * The Linux operating system.
@@ -28,7 +27,6 @@ enum OSType {
  * Whether the Azure Batch service actively verifies that the Image is compatible
  * with the associated Compute Node agent SKU.
  */
-@fixed
 enum VerificationType {
   /**
    * The Image is guaranteed to be compatible with the associated Compute Node agent
@@ -46,7 +44,6 @@ enum VerificationType {
 /**
  * The state of the Certificate.
  */
-@fixed
 enum CertificateState {
   /**
    * The Certificate is available for use in Pools.
@@ -75,7 +72,6 @@ enum CertificateState {
 /**
  * The format of the Certificate data.
  */
-@fixed
 enum CertificateFormat {
   /**
    * The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.
@@ -91,7 +87,6 @@ enum CertificateFormat {
 /**
  * The state of the Job Schedule.
  */
-@fixed
 enum JobScheduleState {
   /**
    * The Job Schedule is active and will create Jobs as per its schedule.
@@ -132,7 +127,6 @@ enum JobScheduleState {
  * The action the Batch service should take when all Tasks in the Job are in the
  * completed state.
  */
-@fixed
 enum OnAllTasksComplete {
   /**
    * Do nothing. The Job remains active unless terminated or disabled by some other
@@ -152,7 +146,6 @@ enum OnAllTasksComplete {
  * count, or if there was an error starting the Task, for example due to a
  * resource file download error. The default is noaction.
  */
-@fixed
 enum OnTaskFailure {
   /**
    * Do nothing. The Job remains active unless terminated or disabled by some other
@@ -171,7 +164,6 @@ enum OnTaskFailure {
 /**
  * The default is 'taskWorkingDirectory'.
  */
-@fixed
 enum ContainerWorkingDirectory {
   /**
    * Use the standard Batch service Task working directory, which will contain the
@@ -190,7 +182,6 @@ enum ContainerWorkingDirectory {
  * The conditions under which a Task output file or set of files should be
  * uploaded.
  */
-@fixed
 enum OutputFileUploadCondition {
   /**
    * Upload the file(s) only after the Task process exits with an exit code of 0.
@@ -216,7 +207,6 @@ enum OutputFileUploadCondition {
  * tasks, or if certificates have been specified on the pool which should not be
  * accessible by normal tasks but should be accessible by StartTasks.
  */
-@fixed
 enum AutoUserScope {
   /**
    * Specifies that the service should create a new user for the Task.
@@ -233,7 +223,6 @@ enum AutoUserScope {
 /**
  * The elevation level of the user.
  */
-@fixed
 enum ElevationLevel {
   /**
    * The user is a standard user without elevated access.
@@ -251,7 +240,6 @@ enum ElevationLevel {
  * The minimum lifetime of created auto Pools, and how multiple Jobs on a schedule
  * are assigned to Pools.
  */
-@fixed
 enum PoolLifetimeOption {
   /**
    * The Pool exists for the lifetime of the Job Schedule. The Batch Service creates
@@ -274,7 +262,6 @@ enum PoolLifetimeOption {
  * options see:
  * https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
  */
-@fixed
 enum CachingType {
   /**
    * The caching mode for the disk is not enabled.
@@ -295,7 +282,6 @@ enum CachingType {
 /**
  * The storage Account type for use in creating data disks.
  */
-@fixed
 enum StorageAccountType {
   /**
    * The data disk should use standard locally redundant storage.
@@ -311,7 +297,6 @@ enum StorageAccountType {
 /**
  * A disk to encrypt.
  */
-@fixed
 enum DiskEncryptionTarget {
   /**
    * The OS Disk on the compute node is encrypted.
@@ -329,7 +314,6 @@ enum DiskEncryptionTarget {
 /**
  * The default value is regional.
  */
-@fixed
 enum NodePlacementPolicyType {
   /**
    * All nodes in the pool will be allocated in the same region.
@@ -346,7 +330,6 @@ enum NodePlacementPolicyType {
 /**
  * If not specified, the default is spread.
  */
-@fixed
 enum ComputeNodeFillType {
   /**
    * Tasks should be assigned evenly across all Compute Nodes in the Pool.
@@ -364,7 +347,6 @@ enum ComputeNodeFillType {
 /**
  * The scope of dynamic vnet assignment.
  */
-@fixed
 enum DynamicVNetAssignmentScope {
   /**
    * No dynamic VNet assignment is enabled.
@@ -380,7 +362,6 @@ enum DynamicVNetAssignmentScope {
 /**
  * The protocol of the endpoint.
  */
-@fixed
 enum InboundEndpointProtocol {
   /**
    * Use TCP for the endpoint.
@@ -396,7 +377,6 @@ enum InboundEndpointProtocol {
 /**
  * The action that should be taken for a specified IP address, subnet range or tag.
  */
-@fixed
 enum NetworkSecurityGroupRuleAccess {
   /**
    * Allow access.
@@ -412,7 +392,6 @@ enum NetworkSecurityGroupRuleAccess {
 /**
  * The provisioning type for Public IP Addresses for the Pool.
  */
-@fixed
 enum IPAddressProvisioningType {
   /**
    * A public IP will be created and managed by Batch. There may be multiple public
@@ -443,7 +422,6 @@ enum IPAddressProvisioningType {
  * created in the user's home directory (e.g., /home/{user-name}/certs) and
  * Certificates are placed in that directory.
  */
-@fixed
 enum CertificateStoreLocation {
   /**
    * Certificates should be installed to the CurrentUser Certificate store.
@@ -456,7 +434,6 @@ enum CertificateStoreLocation {
   localMachine: "localmachine",
 }
 
-@fixed
 enum CertificateVisibility {
   /**
    * The Certificate should be visible to the user account under which the StartTask
@@ -482,7 +459,6 @@ enum CertificateVisibility {
  * The default value for VirtualMachineConfiguration Pools is 'batch' and for
  * CloudServiceConfiguration Pools is 'interactive'.
  */
-@fixed
 enum LoginMode {
   /**
    * The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended
@@ -504,7 +480,6 @@ enum LoginMode {
 /**
  * The state of the Job.
  */
-@fixed
 enum JobState {
   /**
    * The Job is available to have Tasks scheduled.
@@ -553,7 +528,6 @@ enum JobState {
 /**
  * The category of the error.
  */
-@fixed
 enum ErrorCategory {
   /**
    * The error is due to a user issue, such as misconfiguration.
@@ -569,7 +543,6 @@ enum ErrorCategory {
 /**
  * What to do with active Tasks associated with the Job.
  */
-@fixed
 enum DisableJobOption {
   /**
    * Terminate running Tasks and requeue them. The Tasks will run again when the Job
@@ -592,7 +565,6 @@ enum DisableJobOption {
 /**
  * The current state of the Job Preparation Task on the Compute Node.
  */
-@fixed
 enum JobPreparationTaskState {
   /**
    * The Task is currently running (including retrying).
@@ -610,7 +582,6 @@ enum JobPreparationTaskState {
 /**
  * The result of Task execution.
  */
-@fixed
 enum TaskExecutionResult {
   /**
    * The Task ran successfully.
@@ -628,7 +599,6 @@ enum TaskExecutionResult {
 /**
  * The current state of the Job Release Task on the Compute Node.
  */
-@fixed
 enum JobReleaseTaskState {
   /**
    * The Task is currently running (including retrying).
@@ -646,7 +616,6 @@ enum JobReleaseTaskState {
 /**
  * The current state of the Pool.
  */
-@fixed
 enum PoolState {
   /**
    * The Pool is available to run Tasks subject to the availability of Compute Nodes.
@@ -663,7 +632,6 @@ enum PoolState {
 /**
  * Whether the Pool is resizing.
  */
-@fixed
 enum AllocationState {
   /**
    * The Pool is not resizing. There are no changes to the number of Compute Nodes
@@ -691,7 +659,6 @@ enum AllocationState {
  * dictionary key references will be ARM resource ids in the form:
  * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
  */
-@fixed
 enum PoolIdentityType {
   /**
    * Batch pool has user assigned identities with it.
@@ -708,7 +675,6 @@ enum PoolIdentityType {
 /**
  * The default value is requeue.
  */
-@fixed
 enum ComputeNodeDeallocationOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -745,7 +711,6 @@ enum ComputeNodeDeallocationOption {
  * property value error; if you are calling the REST API directly, the HTTP status
  * code is 400 (Bad Request).
  */
-@fixed
 enum JobAction {
   /**
    * Take no action.
@@ -770,7 +735,6 @@ enum JobAction {
  * 'block' (dependent tasks continue to wait). Batch does not yet support
  * cancellation of dependent tasks.
  */
-@fixed
 enum DependencyAction {
   /**
    * Satisfy tasks waiting on this task; once all dependencies are satisfied, the
@@ -787,7 +751,6 @@ enum DependencyAction {
 /**
  * The state of the Task.
  */
-@fixed
 enum TaskState {
   /**
    * The Task is queued and able to run, but is not currently assigned to a Compute
@@ -825,7 +788,6 @@ enum TaskState {
 /**
  * The status of the add Task request.
  */
-@fixed
 enum TaskAddStatus {
   /**
    * The Task was added successfully.
@@ -848,7 +810,6 @@ enum TaskAddStatus {
 /**
  * The state of the subtask.
  */
-@fixed
 enum SubtaskState {
   /**
    * The Task has been assigned to a Compute Node, but is waiting for a required Job
@@ -881,7 +842,6 @@ enum SubtaskState {
  * on the Compute Node when it was preempted will be rescheduled when another
  * Compute Node becomes available.
  */
-@fixed
 enum ComputeNodeState {
   /**
    * The Compute Node is not currently running a Task.
@@ -960,7 +920,6 @@ enum ComputeNodeState {
 /**
  * Whether the Compute Node is available for Task scheduling.
  */
-@fixed
 enum SchedulingState {
   /**
    * Tasks can be scheduled on the Compute Node.
@@ -978,7 +937,6 @@ enum SchedulingState {
 /**
  * The state of the StartTask on the Compute Node.
  */
-@fixed
 enum StartTaskState {
   /**
    * The StartTask is currently running.
@@ -996,7 +954,6 @@ enum StartTaskState {
 /**
  * The default value is requeue.
  */
-@fixed
 enum ComputeNodeRebootOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -1029,7 +986,6 @@ enum ComputeNodeRebootOption {
 /**
  * The default value is requeue.
  */
-@fixed
 enum ComputeNodeReimageOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks will run
@@ -1062,7 +1018,6 @@ enum ComputeNodeReimageOption {
 /**
  * The default value is requeue.
  */
-@fixed
 enum DisableComputeNodeSchedulingOption {
   /**
    * Terminate running Task processes and requeue the Tasks. The Tasks may run again
@@ -1088,7 +1043,6 @@ enum DisableComputeNodeSchedulingOption {
 /**
  * Level code.
  */
-@fixed
 enum StatusLevelTypes {
   Error,
   Info,

@@ -6,24 +6,27 @@ using TypeSpec.Http;
 
 namespace AutoRestComplexTestService;
 
-enum CmykColors {
-  cyan,
-  Magenta,
-  YELLOW,
-  blacK,
+union CmykColors {
+  string,
+  "cyan",
+  "Magenta",
+  "YELLOW",
+  "blacK",
 }
 
-enum MyKind {
-  Kind1,
+union MyKind {
+  string,
+  "Kind1",
 }
 
 /**
  * Colors possible
  */
-enum GoblinSharkColor {
-  pink,
-  gray,
-  brown,
+union GoblinSharkColor {
+  string,
+  "pink",
+  "gray",
+  "brown",
 
   /**
    * Uppercase RED

@@ -11,18 +11,19 @@ namespace AutoRestPagingTestService;
 /**
  * The status of the request
  */
-enum OperationResultStatus {
-  Succeeded,
-  Failed,
-  canceled,
-  Accepted,
-  Creating,
-  Created,
-  Updating,
-  Updated,
-  Deleting,
-  Deleted,
-  OK,
+union OperationResultStatus {
+  string,
+  "Succeeded",
+  "Failed",
+  "canceled",
+  "Accepted",
+  "Creating",
+  "Created",
+  "Updating",
+  "Updated",
+  "Deleting",
+  "Deleted",
+  "OK",
 }
 
 model ProductResultValue is Azure.Core.Page<Product>;

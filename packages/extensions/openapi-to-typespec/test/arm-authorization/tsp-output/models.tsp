@@ -15,169 +15,185 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The principal type of the assigned principal ID.
  */
-enum PrincipalType {
-  User,
-  Group,
-  ServicePrincipal,
-  ForeignGroup,
-  Device,
+union PrincipalType {
+  string,
+  "User",
+  "Group",
+  "ServicePrincipal",
+  "ForeignGroup",
+  "Device",
 }
 
 /**
  * The role type.
  */
-enum RoleType {
-  BuiltInRole,
-  CustomRole,
+union RoleType {
+  string,
+  "BuiltInRole",
+  "CustomRole",
 }
 
 /**
  * Assignment type of the role assignment schedule
  */
-enum AssignmentType {
-  Activated,
-  Assigned,
+union AssignmentType {
+  string,
+  "Activated",
+  "Assigned",
 }
 
 /**
  * Membership type of the role assignment schedule
  */
-enum RoleManagementScheduleMemberType {
-  Inherited,
-  Direct,
-  Group,
+union RoleManagementScheduleMemberType {
+  string,
+  "Inherited",
+  "Direct",
+  "Group",
 }
 
 /**
  * The status of the role assignment schedule.
  */
-enum RoleManagementScheduleStatus {
-  Accepted,
-  PendingEvaluation,
-  Granted,
-  Denied,
-  PendingProvisioning,
-  Provisioned,
-  PendingRevocation,
-  Revoked,
-  Canceled,
-  Failed,
-  PendingApprovalProvisioning,
-  PendingApproval,
-  FailedAsResourceIsLocked,
-  PendingAdminDecision,
-  AdminApproved,
-  AdminDenied,
-  TimedOut,
-  ProvisioningStarted,
-  Invalid,
-  PendingScheduleCreation,
-  ScheduleCreated,
-  PendingExternalProvisioning,
+union RoleManagementScheduleStatus {
+  string,
+  "Accepted",
+  "PendingEvaluation",
+  "Granted",
+  "Denied",
+  "PendingProvisioning",
+  "Provisioned",
+  "PendingRevocation",
+  "Revoked",
+  "Canceled",
+  "Failed",
+  "PendingApprovalProvisioning",
+  "PendingApproval",
+  "FailedAsResourceIsLocked",
+  "PendingAdminDecision",
+  "AdminApproved",
+  "AdminDenied",
+  "TimedOut",
+  "ProvisioningStarted",
+  "Invalid",
+  "PendingScheduleCreation",
+  "ScheduleCreated",
+  "PendingExternalProvisioning",
 }
 
 /**
  * Type of the scope.
  */
-enum ScopeType {
-  subscription,
-  managementgroup,
-  resourcegroup,
+union ScopeType {
+  string,
+  "subscription",
+  "managementgroup",
+  "resourcegroup",
 }
 
 /**
  * The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc
  */
-enum RoleManagementScheduleRequestType {
-  AdminAssign,
-  AdminRemove,
-  AdminUpdate,
-  AdminExtend,
-  AdminRenew,
-  SelfActivate,
-  SelfDeactivate,
-  SelfExtend,
-  SelfRenew,
+union RoleManagementScheduleRequestType {
+  string,
+  "AdminAssign",
+  "AdminRemove",
+  "AdminUpdate",
+  "AdminExtend",
+  "AdminRenew",
+  "SelfActivate",
+  "SelfDeactivate",
+  "SelfExtend",
+  "SelfRenew",
 }
 
 /**
  * Type of the role assignment schedule expiration
  */
-enum RoleManagementScheduleExpirationType {
-  AfterDuration,
-  AfterDateTime,
-  NoExpiration,
+union RoleManagementScheduleExpirationType {
+  string,
+  "AfterDuration",
+  "AfterDateTime",
+  "NoExpiration",
 }
 
 /**
  * The type of rule
  */
-enum RoleManagementPolicyRuleType {
-  RoleManagementPolicyApprovalRule,
-  RoleManagementPolicyAuthenticationContextRule,
-  RoleManagementPolicyEnablementRule,
-  RoleManagementPolicyExpirationRule,
-  RoleManagementPolicyNotificationRule,
+union RoleManagementPolicyRuleType {
+  string,
+  "RoleManagementPolicyApprovalRule",
+  "RoleManagementPolicyAuthenticationContextRule",
+  "RoleManagementPolicyEnablementRule",
+  "RoleManagementPolicyExpirationRule",
+  "RoleManagementPolicyNotificationRule",
 }
 
 /**
  * The assignment level to which rule is applied.
  */
-enum RoleManagementAssignmentLevel {
-  Assignment,
-  Eligibility,
+union RoleManagementAssignmentLevel {
+  string,
+  "Assignment",
+  "Eligibility",
 }
 
 /**
  * The type of rule
  */
-enum ApprovalMode {
-  SingleStage,
-  Serial,
-  Parallel,
-  NoApproval,
+union ApprovalMode {
+  string,
+  "SingleStage",
+  "Serial",
+  "Parallel",
+  "NoApproval",
 }
 
 /**
  * The type of user.
  */
-enum UserType {
-  User,
-  Group,
+union UserType {
+  string,
+  "User",
+  "Group",
 }
 
 /**
  * The type of enablement rule
  */
-enum EnablementRules {
-  MultiFactorAuthentication,
-  Justification,
-  Ticketing,
+union EnablementRules {
+  string,
+  "MultiFactorAuthentication",
+  "Justification",
+  "Ticketing",
 }
 
 /**
  * The type of notification.
  */
-enum NotificationDeliveryMechanism {
-  Email,
+union NotificationDeliveryMechanism {
+  string,
+  "Email",
 }
 
 /**
  * The notification level.
  */
-enum NotificationLevel {
-  None,
-  Critical,
-  All,
+union NotificationLevel {
+  string,
+  "None",
+  "Critical",
+  "All",
 }
 
 /**
  * The recipient type.
  */
-enum RecipientType {
-  Requestor,
-  Approver,
-  Admin,
+union RecipientType {
+  string,
+  "Requestor",
+  "Approver",
+  "Admin",
 }
 
 /**

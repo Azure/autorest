@@ -16,467 +16,519 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
  */
-enum SkuName {
-  Standard_LRS,
-  Standard_GRS,
-  Standard_RAGRS,
-  Standard_ZRS,
-  Premium_LRS,
-  Premium_ZRS,
-  Standard_GZRS,
-  Standard_RAGZRS,
+union SkuName {
+  string,
+  "Standard_LRS",
+  "Standard_GRS",
+  "Standard_RAGRS",
+  "Standard_ZRS",
+  "Premium_LRS",
+  "Premium_ZRS",
+  "Standard_GZRS",
+  "Standard_RAGZRS",
 }
 
 /**
  * Indicates the type of storage account.
  */
-enum Kind {
-  Storage,
-  StorageV2,
-  BlobStorage,
-  FileStorage,
-  BlockBlobStorage,
+union Kind {
+  string,
+  "Storage",
+  "StorageV2",
+  "BlobStorage",
+  "FileStorage",
+  "BlockBlobStorage",
 }
 
 /**
  * The reason for the restriction. As of now this can be "QuotaId" or "NotAvailableForSubscription". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The "NotAvailableForSubscription" is related to capacity at DC.
  */
-enum ReasonCode {
-  QuotaId,
-  NotAvailableForSubscription,
+union ReasonCode {
+  string,
+  "QuotaId",
+  "NotAvailableForSubscription",
 }
 
 /**
  * The type of extendedLocation.
  */
-enum ExtendedLocationTypes {
-  EdgeZone,
+union ExtendedLocationTypes {
+  string,
+  "EdgeZone",
 }
 
 /**
  * The identity type.
  */
-enum IdentityType {
-  None,
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned,UserAssigned`,
+union IdentityType {
+  string,
+  "None",
+  "SystemAssigned",
+  "UserAssigned",
+  "SystemAssigned,UserAssigned",
 }
 
 /**
  * Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.
  */
-enum AllowedCopyScope {
-  PrivateLink,
-  AAD,
+union AllowedCopyScope {
+  string,
+  "PrivateLink",
+  "AAD",
 }
 
 /**
  * Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.
  */
-enum PublicNetworkAccess {
-  Enabled,
-  Disabled,
+union PublicNetworkAccess {
+  string,
+  "Enabled",
+  "Disabled",
 }
 
 /**
  * The SAS expiration action. Can only be Log.
  */
-enum ExpirationAction {
-  Log,
+union ExpirationAction {
+  string,
+  "Log",
 }
 
 /**
  * Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.
  */
-enum KeyType {
-  Service,
-  Account,
+union KeyType {
+  string,
+  "Service",
+  "Account",
 }
 
 /**
  * The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault
  */
-enum KeySource {
-  `Microsoft.Storage`,
-  `Microsoft.Keyvault`,
+union KeySource {
+  string,
+  "Microsoft.Storage",
+  "Microsoft.Keyvault",
 }
 
 /**
  * Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, "Logging, Metrics"), or None to bypass none of those traffics.
  */
-enum Bypass {
-  None,
-  Logging,
-  Metrics,
-  AzureServices,
+union Bypass {
+  string,
+  "None",
+  "Logging",
+  "Metrics",
+  "AzureServices",
 }
 
 /**
  * Gets the state of virtual network rule.
  */
-enum State {
-  Provisioning,
-  Deprovisioning,
-  Succeeded,
-  Failed,
-  NetworkSourceDeleted,
+union State {
+  string,
+  "Provisioning",
+  "Deprovisioning",
+  "Succeeded",
+  "Failed",
+  "NetworkSourceDeleted",
 }
 
 /**
  * Indicates the directory service used. Note that this enum may be extended in the future.
  */
-enum DirectoryServiceOptions {
-  None,
-  AADDS,
-  AD,
-  AADKERB,
+union DirectoryServiceOptions {
+  string,
+  "None",
+  "AADDS",
+  "AD",
+  "AADKERB",
 }
 
 /**
  * Specifies the Active Directory account type for Azure Storage.
  */
-enum AccountType {
-  User,
-  Computer,
+union AccountType {
+  string,
+  "User",
+  "Computer",
 }
 
 /**
  * Default share permission for users using Kerberos authentication if RBAC role is not assigned.
  */
-enum DefaultSharePermission {
-  None,
-  StorageFileDataSmbShareReader,
-  StorageFileDataSmbShareContributor,
-  StorageFileDataSmbShareElevatedContributor,
+union DefaultSharePermission {
+  string,
+  "None",
+  "StorageFileDataSmbShareReader",
+  "StorageFileDataSmbShareContributor",
+  "StorageFileDataSmbShareElevatedContributor",
 }
 
 /**
  * Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled.
  */
-enum LargeFileSharesState {
-  Disabled,
-  Enabled,
+union LargeFileSharesState {
+  string,
+  "Disabled",
+  "Enabled",
 }
 
 /**
  * Routing Choice defines the kind of network routing opted by the user.
  */
-enum RoutingChoice {
-  MicrosoftRouting,
-  InternetRouting,
+union RoutingChoice {
+  string,
+  "MicrosoftRouting",
+  "InternetRouting",
 }
 
 /**
  * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
  */
-enum MinimumTlsVersion {
-  TLS1_0,
-  TLS1_1,
-  TLS1_2,
+union MinimumTlsVersion {
+  string,
+  "TLS1_0",
+  "TLS1_1",
+  "TLS1_2",
 }
 
 /**
  * The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
  */
-enum AccountImmutabilityPolicyState {
-  Unlocked,
-  Locked,
-  Disabled,
+union AccountImmutabilityPolicyState {
+  string,
+  "Unlocked",
+  "Locked",
+  "Disabled",
 }
 
 /**
  * Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.
  */
-enum DnsEndpointType {
-  Standard,
-  AzureDnsZone,
+union DnsEndpointType {
+  string,
+  "Standard",
+  "AzureDnsZone",
 }
 
 /**
  * The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable.
  */
-enum GeoReplicationStatus {
-  Live,
-  Bootstrap,
-  Unavailable,
+union GeoReplicationStatus {
+  string,
+  "Live",
+  "Bootstrap",
+  "Unavailable",
 }
 
 /**
  * The private endpoint connection status.
  */
-enum PrivateEndpointServiceConnectionStatus {
-  Pending,
-  Approved,
-  Rejected,
+union PrivateEndpointServiceConnectionStatus {
+  string,
+  "Pending",
+  "Approved",
+  "Rejected",
 }
 
 /**
  * The current provisioning state.
  */
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  "Succeeded",
+  "Creating",
+  "Deleting",
+  "Failed",
 }
 
 /**
  * The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed.
  */
-enum BlobRestoreProgressStatus {
-  InProgress,
-  Complete,
-  Failed,
+union BlobRestoreProgressStatus {
+  string,
+  "InProgress",
+  "Complete",
+  "Failed",
 }
 
 /**
  * This property indicates the current sku conversion status.
  */
-enum SkuConversionStatus {
-  InProgress,
-  Succeeded,
-  Failed,
+union SkuConversionStatus {
+  string,
+  "InProgress",
+  "Succeeded",
+  "Failed",
 }
 
 /**
  * The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f).
  */
-enum Services {
-  b,
-  q,
-  t,
-  f,
+union Services {
+  string,
+  "b",
+  "q",
+  "t",
+  "f",
 }
 
 /**
  * The signed resource types that are accessible with the account SAS. Service (s): Access to service-level APIs; Container (c): Access to container-level APIs; Object (o): Access to object-level APIs for blobs, queue messages, table entities, and files.
  */
-enum SignedResourceTypes {
-  s,
-  c,
-  o,
+union SignedResourceTypes {
+  string,
+  "s",
+  "c",
+  "o",
 }
 
 /**
  * The signed permissions for the account SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p).
  */
-enum Permissions {
-  r,
-  d,
-  w,
-  l,
-  a,
-  c,
-  u,
-  p,
+union Permissions {
+  string,
+  "r",
+  "d",
+  "w",
+  "l",
+  "a",
+  "c",
+  "u",
+  "p",
 }
 
 /**
  * The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).
  */
-enum SignedResource {
-  b,
-  c,
-  f,
-  s,
+union SignedResource {
+  string,
+  "b",
+  "c",
+  "f",
+  "s",
 }
 
-enum ManagementPolicyName {
-  default,
+union ManagementPolicyName {
+  string,
+  "default",
 }
 
 /**
  * The valid value is Lifecycle
  */
-enum RuleType {
-  Lifecycle,
+union RuleType {
+  string,
+  "Lifecycle",
 }
 
-enum BlobInventoryPolicyName {
-  default,
+union BlobInventoryPolicyName {
+  string,
+  "default",
 }
 
 /**
  * The valid value is Inventory
  */
-enum InventoryRuleType {
-  Inventory,
+union InventoryRuleType {
+  string,
+  "Inventory",
 }
 
 /**
  * This is a required field, it specifies the format for the inventory files.
  */
-enum Format {
-  Csv,
-  Parquet,
+union Format {
+  string,
+  "Csv",
+  "Parquet",
 }
 
 /**
  * This is a required field. This field is used to schedule an inventory formation.
  */
-enum Schedule {
-  Daily,
-  Weekly,
+union Schedule {
+  string,
+  "Daily",
+  "Weekly",
 }
 
 /**
  * This is a required field. This field specifies the scope of the inventory created either at the blob or container level.
  */
-enum ObjectType {
-  Blob,
-  Container,
+union ObjectType {
+  string,
+  "Blob",
+  "Container",
 }
 
 /**
  * The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault.
  */
-enum EncryptionScopeSource {
-  `Microsoft.Storage`,
-  `Microsoft.KeyVault`,
+union EncryptionScopeSource {
+  string,
+  "Microsoft.Storage",
+  "Microsoft.KeyVault",
 }
 
 /**
  * The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled.
  */
-enum EncryptionScopeState {
-  Enabled,
-  Disabled,
+union EncryptionScopeState {
+  string,
+  "Enabled",
+  "Disabled",
 }
 
-enum ListEncryptionScopesInclude {
-  All,
-  Enabled,
-  Disabled,
+union ListEncryptionScopesInclude {
+  string,
+  "All",
+  "Enabled",
+  "Disabled",
 }
 
-enum AllowedMethods {
-  DELETE,
-  GET,
-  HEAD,
-  MERGE,
-  POST,
-  OPTIONS,
-  PUT,
-  PATCH,
+union AllowedMethods {
+  string,
+  "DELETE",
+  "GET",
+  "HEAD",
+  "MERGE",
+  "POST",
+  "OPTIONS",
+  "PUT",
+  "PATCH",
 }
 
 /**
  * Name of the policy. The valid value is AccessTimeTracking. This field is currently read only
  */
-enum Name {
-  AccessTimeTracking,
+union Name {
+  string,
+  "AccessTimeTracking",
 }
 
-enum ListContainersInclude {
-  deleted,
+union ListContainersInclude {
+  string,
+  "deleted",
 }
 
 /**
  * The lease status of the container.
  */
-enum LeaseStatus {
-  Locked,
-  Unlocked,
+union LeaseStatus {
+  string,
+  "Locked",
+  "Unlocked",
 }
 
 /**
  * Lease state of the container.
  */
-enum LeaseState {
-  Available,
-  Leased,
-  Expired,
-  Breaking,
-  Broken,
+union LeaseState {
+  string,
+  "Available",
+  "Leased",
+  "Expired",
+  "Breaking",
+  "Broken",
 }
 
 /**
  * Specifies whether the lease on a container is of infinite or fixed duration, only when the container is leased.
  */
-enum LeaseDuration {
-  Infinite,
-  Fixed,
+union LeaseDuration {
+  string,
+  "Infinite",
+  "Fixed",
 }
 
 /**
  * The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.
  */
-enum ImmutabilityPolicyState {
-  Locked,
-  Unlocked,
+union ImmutabilityPolicyState {
+  string,
+  "Locked",
+  "Unlocked",
 }
 
 /**
  * The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend.
  */
-enum ImmutabilityPolicyUpdateType {
-  put,
-  lock,
-  extend,
+union ImmutabilityPolicyUpdateType {
+  string,
+  "put",
+  "lock",
+  "extend",
 }
 
 /**
  * This property denotes the container level immutability to object level immutability migration state.
  */
-enum MigrationState {
-  InProgress,
-  Completed,
+union MigrationState {
+  string,
+  "InProgress",
+  "Completed",
 }
 
 /**
  * Specifies the lease action. Can be one of the available actions.
  */
-enum LeaseContainerRequestAction {
-  Acquire,
-  Renew,
-  Change,
-  Release,
-  Break,
+union LeaseContainerRequestAction {
+  string,
+  "Acquire",
+  "Renew",
+  "Change",
+  "Release",
+  "Break",
 }
 
 /**
  * The authentication protocol that is used for the file share. Can only be specified when creating a share.
  */
-enum EnabledProtocols {
-  SMB,
-  NFS,
+union EnabledProtocols {
+  string,
+  "SMB",
+  "NFS",
 }
 
 /**
  * The property is for NFS share only. The default is NoRootSquash.
  */
-enum RootSquashType {
-  NoRootSquash,
-  RootSquash,
-  AllSquash,
+union RootSquashType {
+  string,
+  "NoRootSquash",
+  "RootSquash",
+  "AllSquash",
 }
 
 /**
  * Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.
  */
-enum ShareAccessTier {
-  TransactionOptimized,
-  Hot,
-  Cool,
-  Premium,
+union ShareAccessTier {
+  string,
+  "TransactionOptimized",
+  "Hot",
+  "Cool",
+  "Premium",
 }
 
 /**
  * Specifies the lease action. Can be one of the available actions.
  */
-enum LeaseShareAction {
-  Acquire,
-  Renew,
-  Change,
-  Release,
-  Break,
+union LeaseShareAction {
+  string,
+  "Acquire",
+  "Renew",
+  "Change",
+  "Release",
+  "Break",
 }
 
 /**
  * Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.
  */
-@fixed
 enum Reason {
   AccountNameInvalid,
   AlreadyExists,
@@ -485,7 +537,6 @@ enum Reason {
 /**
  * Specifies the default action of allow or deny when no other rules match.
  */
-@fixed
 enum DefaultAction {
   Allow,
   Deny,
@@ -494,7 +545,6 @@ enum DefaultAction {
 /**
  * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
  */
-@fixed
 enum AccessTier {
   Hot,
   Cool,
@@ -504,7 +554,6 @@ enum AccessTier {
 /**
  * Gets the status of the storage account at the time the operation was called.
  */
-@fixed
 enum ProvisioningState {
   Creating,
   ResolvingDNS,
@@ -514,13 +563,11 @@ enum ProvisioningState {
 /**
  * Gets the status indicating whether the primary location of the storage account is available or unavailable.
  */
-@fixed
 enum AccountStatus {
   available,
   unavailable,
 }
 
-@fixed
 enum StorageAccountExpand {
   geoReplicationStats,
   blobRestoreStatus,
@@ -529,7 +576,6 @@ enum StorageAccountExpand {
 /**
  * Permissions for the key -- read-only or full permissions.
  */
-@fixed
 enum KeyPermission {
   Read,
   Full,
@@ -538,7 +584,6 @@ enum KeyPermission {
 /**
  * Gets the unit of measurement.
  */
-@fixed
 enum UsageUnit {
   Count,
   Bytes,
@@ -551,7 +596,6 @@ enum UsageUnit {
 /**
  * The protocol permitted for a request made with the account SAS.
  */
-@fixed
 enum HttpProtocol {
   `https,http`,
   https,
@@ -560,7 +604,6 @@ enum HttpProtocol {
 /**
  * Specifies whether data in the container may be accessed publicly and the level of access.
  */
-@fixed
 enum PublicAccess {
   Container,
   Blob,

@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -16,52 +14,56 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.
  */
-enum State {
-  Deleting,
-  Succeeded,
-  Failed,
-  Paused,
-  Suspended,
-  Provisioning,
-  Updating,
-  Suspending,
-  Pausing,
-  Resuming,
-  Preparing,
-  Scaling,
+union State {
+  string,
+  "Deleting",
+  "Succeeded",
+  "Failed",
+  "Paused",
+  "Suspended",
+  "Provisioning",
+  "Updating",
+  "Suspending",
+  "Pausing",
+  "Resuming",
+  "Preparing",
+  "Scaling",
 }
 
 /**
  * The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning.
  */
-enum ProvisioningState {
-  Deleting,
-  Succeeded,
-  Failed,
-  Paused,
-  Suspended,
-  Provisioning,
-  Updating,
-  Suspending,
-  Pausing,
-  Resuming,
-  Preparing,
-  Scaling,
+union ProvisioningState {
+  string,
+  "Deleting",
+  "Succeeded",
+  "Failed",
+  "Paused",
+  "Suspended",
+  "Provisioning",
+  "Updating",
+  "Suspending",
+  "Pausing",
+  "Resuming",
+  "Preparing",
+  "Scaling",
 }
 
 /**
  * The name of the Azure pricing tier to which the SKU applies.
  */
-enum SkuTier {
-  Development,
-  Basic,
-  Standard,
+union SkuTier {
+  string,
+  "Development",
+  "Basic",
+  "Standard",
 }
 
 /**
  * The managed mode of the server (0 = not managed, 1 = managed).
  */
-enum ManagedMode {
+union ManagedMode {
+  integer,
   `0`: 0,
   `1`: 1,
 }
@@ -69,7 +71,8 @@ enum ManagedMode {
 /**
  * The server monitor mode for AS server
  */
-enum ServerMonitorMode {
+union ServerMonitorMode {
+  integer,
   `0`: 0,
   `1`: 1,
 }
@@ -77,7 +80,6 @@ enum ServerMonitorMode {
 /**
  * How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.
  */
-@fixed
 enum ConnectionMode {
   All,
   ReadOnly,

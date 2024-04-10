@@ -16,1192 +16,1304 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
  */
-enum RepairAction {
-  Replace,
-  Restart,
-  Reimage,
+union RepairAction {
+  string,
+  "Replace",
+  "Restart",
+  "Reimage",
 }
 
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true
  */
-enum WindowsVMGuestPatchMode {
-  Manual,
-  AutomaticByOS,
-  AutomaticByPlatform,
+union WindowsVMGuestPatchMode {
+  string,
+  "Manual",
+  "AutomaticByOS",
+  "AutomaticByPlatform",
 }
 
 /**
  * Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.
  */
-enum WindowsPatchAssessmentMode {
-  ImageDefault,
-  AutomaticByPlatform,
+union WindowsPatchAssessmentMode {
+  string,
+  "ImageDefault",
+  "AutomaticByPlatform",
 }
 
 /**
  * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
  */
-enum WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
-  Unknown,
-  IfRequired,
-  Never,
-  Always,
+union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
+  string,
+  "Unknown",
+  "IfRequired",
+  "Never",
+  "Always",
 }
 
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true
  */
-enum LinuxVMGuestPatchMode {
-  ImageDefault,
-  AutomaticByPlatform,
+union LinuxVMGuestPatchMode {
+  string,
+  "ImageDefault",
+  "AutomaticByPlatform",
 }
 
 /**
  * Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.
  */
-enum LinuxPatchAssessmentMode {
-  ImageDefault,
-  AutomaticByPlatform,
+union LinuxPatchAssessmentMode {
+  string,
+  "ImageDefault",
+  "AutomaticByPlatform",
 }
 
 /**
  * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
  */
-enum LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
-  Unknown,
-  IfRequired,
-  Never,
-  Always,
+union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
+  string,
+  "Unknown",
+  "IfRequired",
+  "Never",
+  "Always",
 }
 
 /**
  * Specifies how the virtual machine should be created. Possible values are: **Attach.** This value is used when you are using a specialized disk to create the virtual machine. **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you also use the plan element previously described.
  */
-enum DiskCreateOptionTypes {
-  FromImage,
-  Empty,
-  Attach,
+union DiskCreateOptionTypes {
+  string,
+  "FromImage",
+  "Empty",
+  "Attach",
 }
 
 /**
  * Specifies the ephemeral disk option for operating system disk.
  */
-enum DiffDiskOptions {
-  Local,
+union DiffDiskOptions {
+  string,
+  "Local",
 }
 
 /**
  * Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements
  */
-enum DiffDiskPlacement {
-  CacheDisk,
-  ResourceDisk,
+union DiffDiskPlacement {
+  string,
+  "CacheDisk",
+  "ResourceDisk",
 }
 
 /**
  * Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/linux/disks-types
  */
-enum StorageAccountTypes {
-  Standard_LRS,
-  Premium_LRS,
-  StandardSSD_LRS,
-  UltraSSD_LRS,
-  Premium_ZRS,
-  StandardSSD_ZRS,
-  PremiumV2_LRS,
+union StorageAccountTypes {
+  string,
+  "Standard_LRS",
+  "Premium_LRS",
+  "StandardSSD_LRS",
+  "UltraSSD_LRS",
+  "Premium_ZRS",
+  "StandardSSD_ZRS",
+  "PremiumV2_LRS",
 }
 
 /**
  * Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. **Note:** It can be set for only Confidential VMs.
  */
-enum SecurityEncryptionTypes {
-  VMGuestStateOnly,
-  DiskWithVMGuestState,
+union SecurityEncryptionTypes {
+  string,
+  "VMGuestStateOnly",
+  "DiskWithVMGuestState",
 }
 
 /**
  * Specifies the behavior of the managed disk when the VM gets deleted, for example whether the managed disk is deleted or detached. Supported values are: **Delete.** If this value is used, the managed disk is deleted when VM gets deleted. **Detach.** If this value is used, the managed disk is retained after VM gets deleted. Minimum api-version: 2021-03-01.
  */
-enum DiskDeleteOptionTypes {
-  Delete,
-  Detach,
+union DiskDeleteOptionTypes {
+  string,
+  "Delete",
+  "Detach",
 }
 
 /**
  * The Domain name label scope.The concatenation of the hashed domain name label that generated according to the policy from domain name label scope and vm index will be the domain name labels of the PublicIPAddress resources that will be created
  */
-enum DomainNameLabelScopeTypes {
-  TenantReuse,
-  SubscriptionReuse,
-  ResourceGroupReuse,
-  NoReuse,
+union DomainNameLabelScopeTypes {
+  string,
+  "TenantReuse",
+  "SubscriptionReuse",
+  "ResourceGroupReuse",
+  "NoReuse",
 }
 
 /**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
-enum IPVersion {
-  IPv4,
-  IPv6,
+union IPVersion {
+  string,
+  "IPv4",
+  "IPv6",
 }
 
 /**
  * Specify what happens to the network interface when the VM is deleted
  */
-enum DeleteOptions {
-  Delete,
-  Detach,
+union DeleteOptions {
+  string,
+  "Delete",
+  "Detach",
 }
 
 /**
  * Specify public IP sku name
  */
-enum PublicIPAddressSkuName {
-  Basic,
-  Standard,
+union PublicIPAddressSkuName {
+  string,
+  "Basic",
+  "Standard",
 }
 
 /**
  * Specify public IP sku tier
  */
-enum PublicIPAddressSkuTier {
-  Regional,
-  Global,
+union PublicIPAddressSkuTier {
+  string,
+  "Regional",
+  "Global",
 }
 
 /**
  * Specifies whether the Auxiliary mode is enabled for the Network Interface resource.
  */
-enum NetworkInterfaceAuxiliaryMode {
-  None,
-  AcceleratedConnections,
-  Floating,
+union NetworkInterfaceAuxiliaryMode {
+  string,
+  "None",
+  "AcceleratedConnections",
+  "Floating",
 }
 
 /**
  * Specifies whether the Auxiliary sku is enabled for the Network Interface resource.
  */
-enum NetworkInterfaceAuxiliarySku {
-  None,
-  A1,
-  A2,
-  A4,
-  A8,
+union NetworkInterfaceAuxiliarySku {
+  string,
+  "None",
+  "A1",
+  "A2",
+  "A4",
+  "A8",
 }
 
 /**
  * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations
  */
-enum NetworkApiVersion {
-  `2020-11-01`,
+union NetworkApiVersion {
+  string,
+  "2020-11-01",
 }
 
 /**
  * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
  */
-enum SecurityTypes {
-  TrustedLaunch,
-  ConfidentialVM,
+union SecurityTypes {
+  string,
+  "TrustedLaunch",
+  "ConfidentialVM",
 }
 
 /**
  * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
  */
-enum VirtualMachinePriorityTypes {
-  Regular,
-  Low,
-  Spot,
+union VirtualMachinePriorityTypes {
+  string,
+  "Regular",
+  "Low",
+  "Spot",
 }
 
 /**
  * Specifies the eviction policy for the Azure Spot VM/VMSS
  */
-enum VirtualMachineEvictionPolicyTypes {
-  Deallocate,
-  Delete,
+union VirtualMachineEvictionPolicyTypes {
+  string,
+  "Deallocate",
+  "Delete",
 }
 
-enum VirtualMachineScaleSetScaleInRules {
-  Default,
-  OldestVM,
-  NewestVM,
+union VirtualMachineScaleSetScaleInRules {
+  string,
+  "Default",
+  "OldestVM",
+  "NewestVM",
 }
 
 /**
  * Specifies the orchestration mode for the virtual machine scale set.
  */
-enum OrchestrationMode {
-  Uniform,
-  Flexible,
+union OrchestrationMode {
+  string,
+  "Uniform",
+  "Flexible",
 }
 
 /**
  * The type of extendedLocation.
  */
-enum ExtendedLocationTypes {
-  EdgeZone,
+union ExtendedLocationTypes {
+  string,
+  "EdgeZone",
 }
 
-enum ExpandTypesForGetVMScaleSets {
-  userData,
+union ExpandTypesForGetVMScaleSets {
+  string,
+  "userData",
 }
 
 /**
  * The name of the service.
  */
-enum OrchestrationServiceNames {
-  AutomaticRepairs,
+union OrchestrationServiceNames {
+  string,
+  "AutomaticRepairs",
 }
 
 /**
  * The current state of the service.
  */
-enum OrchestrationServiceState {
-  NotRunning,
-  Running,
-  Suspended,
+union OrchestrationServiceState {
+  string,
+  "NotRunning",
+  "Running",
+  "Suspended",
 }
 
 /**
  * The action to be performed.
  */
-enum OrchestrationServiceStateAction {
-  Resume,
-  Suspend,
+union OrchestrationServiceStateAction {
+  string,
+  "Resume",
+  "Suspend",
 }
 
 /**
  * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
  */
-enum HyperVGeneration {
-  V1,
-  V2,
+union HyperVGeneration {
+  string,
+  "V1",
+  "V2",
 }
 
 /**
  * Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set.
  */
-enum VirtualMachineSizeTypes {
-  Basic_A0,
-  Basic_A1,
-  Basic_A2,
-  Basic_A3,
-  Basic_A4,
-  Standard_A0,
-  Standard_A1,
-  Standard_A2,
-  Standard_A3,
-  Standard_A4,
-  Standard_A5,
-  Standard_A6,
-  Standard_A7,
-  Standard_A8,
-  Standard_A9,
-  Standard_A10,
-  Standard_A11,
-  Standard_A1_v2,
-  Standard_A2_v2,
-  Standard_A4_v2,
-  Standard_A8_v2,
-  Standard_A2m_v2,
-  Standard_A4m_v2,
-  Standard_A8m_v2,
-  Standard_B1s,
-  Standard_B1ms,
-  Standard_B2s,
-  Standard_B2ms,
-  Standard_B4ms,
-  Standard_B8ms,
-  Standard_D1,
-  Standard_D2,
-  Standard_D3,
-  Standard_D4,
-  Standard_D11,
-  Standard_D12,
-  Standard_D13,
-  Standard_D14,
-  Standard_D1_v2,
-  Standard_D2_v2,
-  Standard_D3_v2,
-  Standard_D4_v2,
-  Standard_D5_v2,
-  Standard_D2_v3,
-  Standard_D4_v3,
-  Standard_D8_v3,
-  Standard_D16_v3,
-  Standard_D32_v3,
-  Standard_D64_v3,
-  Standard_D2s_v3,
-  Standard_D4s_v3,
-  Standard_D8s_v3,
-  Standard_D16s_v3,
-  Standard_D32s_v3,
-  Standard_D64s_v3,
-  Standard_D11_v2,
-  Standard_D12_v2,
-  Standard_D13_v2,
-  Standard_D14_v2,
-  Standard_D15_v2,
-  Standard_DS1,
-  Standard_DS2,
-  Standard_DS3,
-  Standard_DS4,
-  Standard_DS11,
-  Standard_DS12,
-  Standard_DS13,
-  Standard_DS14,
-  Standard_DS1_v2,
-  Standard_DS2_v2,
-  Standard_DS3_v2,
-  Standard_DS4_v2,
-  Standard_DS5_v2,
-  Standard_DS11_v2,
-  Standard_DS12_v2,
-  Standard_DS13_v2,
-  Standard_DS14_v2,
-  Standard_DS15_v2,
-  `Standard_DS13-4_v2`,
-  `Standard_DS13-2_v2`,
-  `Standard_DS14-8_v2`,
-  `Standard_DS14-4_v2`,
-  Standard_E2_v3,
-  Standard_E4_v3,
-  Standard_E8_v3,
-  Standard_E16_v3,
-  Standard_E32_v3,
-  Standard_E64_v3,
-  Standard_E2s_v3,
-  Standard_E4s_v3,
-  Standard_E8s_v3,
-  Standard_E16s_v3,
-  Standard_E32s_v3,
-  Standard_E64s_v3,
-  `Standard_E32-16_v3`,
-  `Standard_E32-8s_v3`,
-  `Standard_E64-32s_v3`,
-  `Standard_E64-16s_v3`,
-  Standard_F1,
-  Standard_F2,
-  Standard_F4,
-  Standard_F8,
-  Standard_F16,
-  Standard_F1s,
-  Standard_F2s,
-  Standard_F4s,
-  Standard_F8s,
-  Standard_F16s,
-  Standard_F2s_v2,
-  Standard_F4s_v2,
-  Standard_F8s_v2,
-  Standard_F16s_v2,
-  Standard_F32s_v2,
-  Standard_F64s_v2,
-  Standard_F72s_v2,
-  Standard_G1,
-  Standard_G2,
-  Standard_G3,
-  Standard_G4,
-  Standard_G5,
-  Standard_GS1,
-  Standard_GS2,
-  Standard_GS3,
-  Standard_GS4,
-  Standard_GS5,
-  `Standard_GS4-8`,
-  `Standard_GS4-4`,
-  `Standard_GS5-16`,
-  `Standard_GS5-8`,
-  Standard_H8,
-  Standard_H16,
-  Standard_H8m,
-  Standard_H16m,
-  Standard_H16r,
-  Standard_H16mr,
-  Standard_L4s,
-  Standard_L8s,
-  Standard_L16s,
-  Standard_L32s,
-  Standard_M64s,
-  Standard_M64ms,
-  Standard_M128s,
-  Standard_M128ms,
-  `Standard_M64-32ms`,
-  `Standard_M64-16ms`,
-  `Standard_M128-64ms`,
-  `Standard_M128-32ms`,
-  Standard_NC6,
-  Standard_NC12,
-  Standard_NC24,
-  Standard_NC24r,
-  Standard_NC6s_v2,
-  Standard_NC12s_v2,
-  Standard_NC24s_v2,
-  Standard_NC24rs_v2,
-  Standard_NC6s_v3,
-  Standard_NC12s_v3,
-  Standard_NC24s_v3,
-  Standard_NC24rs_v3,
-  Standard_ND6s,
-  Standard_ND12s,
-  Standard_ND24s,
-  Standard_ND24rs,
-  Standard_NV6,
-  Standard_NV12,
-  Standard_NV24,
+union VirtualMachineSizeTypes {
+  string,
+  "Basic_A0",
+  "Basic_A1",
+  "Basic_A2",
+  "Basic_A3",
+  "Basic_A4",
+  "Standard_A0",
+  "Standard_A1",
+  "Standard_A2",
+  "Standard_A3",
+  "Standard_A4",
+  "Standard_A5",
+  "Standard_A6",
+  "Standard_A7",
+  "Standard_A8",
+  "Standard_A9",
+  "Standard_A10",
+  "Standard_A11",
+  "Standard_A1_v2",
+  "Standard_A2_v2",
+  "Standard_A4_v2",
+  "Standard_A8_v2",
+  "Standard_A2m_v2",
+  "Standard_A4m_v2",
+  "Standard_A8m_v2",
+  "Standard_B1s",
+  "Standard_B1ms",
+  "Standard_B2s",
+  "Standard_B2ms",
+  "Standard_B4ms",
+  "Standard_B8ms",
+  "Standard_D1",
+  "Standard_D2",
+  "Standard_D3",
+  "Standard_D4",
+  "Standard_D11",
+  "Standard_D12",
+  "Standard_D13",
+  "Standard_D14",
+  "Standard_D1_v2",
+  "Standard_D2_v2",
+  "Standard_D3_v2",
+  "Standard_D4_v2",
+  "Standard_D5_v2",
+  "Standard_D2_v3",
+  "Standard_D4_v3",
+  "Standard_D8_v3",
+  "Standard_D16_v3",
+  "Standard_D32_v3",
+  "Standard_D64_v3",
+  "Standard_D2s_v3",
+  "Standard_D4s_v3",
+  "Standard_D8s_v3",
+  "Standard_D16s_v3",
+  "Standard_D32s_v3",
+  "Standard_D64s_v3",
+  "Standard_D11_v2",
+  "Standard_D12_v2",
+  "Standard_D13_v2",
+  "Standard_D14_v2",
+  "Standard_D15_v2",
+  "Standard_DS1",
+  "Standard_DS2",
+  "Standard_DS3",
+  "Standard_DS4",
+  "Standard_DS11",
+  "Standard_DS12",
+  "Standard_DS13",
+  "Standard_DS14",
+  "Standard_DS1_v2",
+  "Standard_DS2_v2",
+  "Standard_DS3_v2",
+  "Standard_DS4_v2",
+  "Standard_DS5_v2",
+  "Standard_DS11_v2",
+  "Standard_DS12_v2",
+  "Standard_DS13_v2",
+  "Standard_DS14_v2",
+  "Standard_DS15_v2",
+  "Standard_DS13-4_v2",
+  "Standard_DS13-2_v2",
+  "Standard_DS14-8_v2",
+  "Standard_DS14-4_v2",
+  "Standard_E2_v3",
+  "Standard_E4_v3",
+  "Standard_E8_v3",
+  "Standard_E16_v3",
+  "Standard_E32_v3",
+  "Standard_E64_v3",
+  "Standard_E2s_v3",
+  "Standard_E4s_v3",
+  "Standard_E8s_v3",
+  "Standard_E16s_v3",
+  "Standard_E32s_v3",
+  "Standard_E64s_v3",
+  "Standard_E32-16_v3",
+  "Standard_E32-8s_v3",
+  "Standard_E64-32s_v3",
+  "Standard_E64-16s_v3",
+  "Standard_F1",
+  "Standard_F2",
+  "Standard_F4",
+  "Standard_F8",
+  "Standard_F16",
+  "Standard_F1s",
+  "Standard_F2s",
+  "Standard_F4s",
+  "Standard_F8s",
+  "Standard_F16s",
+  "Standard_F2s_v2",
+  "Standard_F4s_v2",
+  "Standard_F8s_v2",
+  "Standard_F16s_v2",
+  "Standard_F32s_v2",
+  "Standard_F64s_v2",
+  "Standard_F72s_v2",
+  "Standard_G1",
+  "Standard_G2",
+  "Standard_G3",
+  "Standard_G4",
+  "Standard_G5",
+  "Standard_GS1",
+  "Standard_GS2",
+  "Standard_GS3",
+  "Standard_GS4",
+  "Standard_GS5",
+  "Standard_GS4-8",
+  "Standard_GS4-4",
+  "Standard_GS5-16",
+  "Standard_GS5-8",
+  "Standard_H8",
+  "Standard_H16",
+  "Standard_H8m",
+  "Standard_H16m",
+  "Standard_H16r",
+  "Standard_H16mr",
+  "Standard_L4s",
+  "Standard_L8s",
+  "Standard_L16s",
+  "Standard_L32s",
+  "Standard_M64s",
+  "Standard_M64ms",
+  "Standard_M128s",
+  "Standard_M128ms",
+  "Standard_M64-32ms",
+  "Standard_M64-16ms",
+  "Standard_M128-64ms",
+  "Standard_M128-32ms",
+  "Standard_NC6",
+  "Standard_NC12",
+  "Standard_NC24",
+  "Standard_NC24r",
+  "Standard_NC6s_v2",
+  "Standard_NC12s_v2",
+  "Standard_NC24s_v2",
+  "Standard_NC24rs_v2",
+  "Standard_NC6s_v3",
+  "Standard_NC12s_v3",
+  "Standard_NC24s_v3",
+  "Standard_NC24rs_v3",
+  "Standard_ND6s",
+  "Standard_ND12s",
+  "Standard_ND24s",
+  "Standard_ND24rs",
+  "Standard_NV6",
+  "Standard_NV12",
+  "Standard_NV24",
 }
 
 /**
  * Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values are: **ForceDetach.** detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. **This feature is still in preview** mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.
  */
-enum DiskDetachOptionTypes {
-  ForceDetach,
+union DiskDetachOptionTypes {
+  string,
+  "ForceDetach",
 }
 
 /**
  * Specifies the disk controller type configured for the VM and VirtualMachineScaleSet. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region contains V2 (https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes.
  */
-enum DiskControllerTypes {
-  SCSI,
-  NVMe,
+union DiskControllerTypes {
+  string,
+  "SCSI",
+  "NVMe",
 }
 
 /**
  * Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.
  */
-enum IPVersions {
-  IPv4,
-  IPv6,
+union IPVersions {
+  string,
+  "IPv4",
+  "IPv6",
 }
 
 /**
  * Specify the public IP allocation type
  */
-enum PublicIPAllocationMethod {
-  Dynamic,
-  Static,
+union PublicIPAllocationMethod {
+  string,
+  "Dynamic",
+  "Static",
 }
 
 /**
  * Specifies the HyperVGeneration Type associated with a resource
  */
-enum HyperVGenerationType {
-  V1,
-  V2,
+union HyperVGenerationType {
+  string,
+  "V1",
+  "V2",
 }
 
 /**
  * The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Unknown", "Failed", "Succeeded", or "CompletedWithWarnings."
  */
-enum PatchOperationStatus {
-  Unknown,
-  InProgress,
-  Failed,
-  Succeeded,
-  CompletedWithWarnings,
+union PatchOperationStatus {
+  string,
+  "Unknown",
+  "InProgress",
+  "Failed",
+  "Succeeded",
+  "CompletedWithWarnings",
 }
 
-enum ExpandTypeForListVMs {
-  instanceView,
+union ExpandTypeForListVMs {
+  string,
+  "instanceView",
 }
 
-enum ExpandTypesForListVMs {
-  instanceView,
+union ExpandTypesForListVMs {
+  string,
+  "instanceView",
 }
 
 /**
  * Describes the reboot requirements of the patch.
  */
-enum VMGuestPatchRebootBehavior {
-  Unknown,
-  NeverReboots,
-  AlwaysRequiresReboot,
-  CanRequestReboot,
+union VMGuestPatchRebootBehavior {
+  string,
+  "Unknown",
+  "NeverReboots",
+  "AlwaysRequiresReboot",
+  "CanRequestReboot",
 }
 
 /**
  * Describes the availability of a given patch.
  */
-enum PatchAssessmentState {
-  Unknown,
-  Available,
+union PatchAssessmentState {
+  string,
+  "Unknown",
+  "Available",
 }
 
 /**
  * Defines when it is acceptable to reboot a VM during a software update operation.
  */
-enum VMGuestPatchRebootSetting {
-  IfRequired,
-  Never,
-  Always,
+union VMGuestPatchRebootSetting {
+  string,
+  "IfRequired",
+  "Never",
+  "Always",
 }
 
-enum VMGuestPatchClassificationWindows {
-  Critical,
-  Security,
-  UpdateRollUp,
-  FeaturePack,
-  ServicePack,
-  Definition,
-  Tools,
-  Updates,
+union VMGuestPatchClassificationWindows {
+  string,
+  "Critical",
+  "Security",
+  "UpdateRollUp",
+  "FeaturePack",
+  "ServicePack",
+  "Definition",
+  "Tools",
+  "Updates",
 }
 
-enum VMGuestPatchClassificationLinux {
-  Critical,
-  Security,
-  Other,
+union VMGuestPatchClassificationLinux {
+  string,
+  "Critical",
+  "Security",
+  "Other",
 }
 
 /**
  * The reboot state of the VM following completion of the operation.
  */
-enum VMGuestPatchRebootStatus {
-  Unknown,
-  NotNeeded,
-  Required,
-  Started,
-  Failed,
-  Completed,
+union VMGuestPatchRebootStatus {
+  string,
+  "Unknown",
+  "NotNeeded",
+  "Required",
+  "Started",
+  "Failed",
+  "Completed",
 }
 
 /**
  * The state of the patch after the installation operation completed.
  */
-enum PatchInstallationState {
-  Unknown,
-  Installed,
-  Failed,
-  Excluded,
-  NotSelected,
-  Pending,
+union PatchInstallationState {
+  string,
+  "Unknown",
+  "Installed",
+  "Failed",
+  "Excluded",
+  "NotSelected",
+  "Pending",
 }
 
 /**
  * Specifies the HyperVGeneration Type
  */
-enum HyperVGenerationTypes {
-  V1,
-  V2,
+union HyperVGenerationTypes {
+  string,
+  "V1",
+  "V2",
 }
 
 /**
  * VM disk types which are disallowed.
  */
-enum VmDiskTypes {
-  None,
-  Unmanaged,
+union VmDiskTypes {
+  string,
+  "None",
+  "Unmanaged",
 }
 
 /**
  * Specifies the Architecture Type
  */
-enum ArchitectureTypes {
-  x64,
-  Arm64,
+union ArchitectureTypes {
+  string,
+  "x64",
+  "Arm64",
 }
 
 /**
  * Describes the state of the image.
  */
-enum ImageState {
-  Active,
-  ScheduledForDeprecation,
-  Deprecated,
+union ImageState {
+  string,
+  "Active",
+  "ScheduledForDeprecation",
+  "Deprecated",
 }
 
 /**
  * Describes the type of the alternative option.
  */
-enum AlternativeType {
-  None,
-  Offer,
-  Plan,
+union AlternativeType {
+  string,
+  "None",
+  "Offer",
+  "Plan",
 }
 
 /**
  * Specifies the type of the proximity placement group. Possible values are: **Standard** : Co-locate resources within an Azure region or Availability Zone. **Ultra** : For future use.
  */
-enum ProximityPlacementGroupType {
-  Standard,
-  Ultra,
+union ProximityPlacementGroupType {
+  string,
+  "Standard",
+  "Ultra",
 }
 
 /**
  * Gets the Operating System type.
  */
-enum OperatingSystemType {
-  Windows,
-  Linux,
+union OperatingSystemType {
+  string,
+  "Windows",
+  "Linux",
 }
 
 /**
  * The type of key used to encrypt the data of the disk restore point.
  */
-enum RestorePointEncryptionType {
+union RestorePointEncryptionType {
+  string,
+
   /**
    * Disk Restore Point is encrypted at rest with Platform managed key.
    */
-  EncryptionAtRestWithPlatformKey,
+  "EncryptionAtRestWithPlatformKey",
 
   /**
    * Disk Restore Point is encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  EncryptionAtRestWithCustomerKey,
+  "EncryptionAtRestWithCustomerKey",
 
   /**
    * Disk Restore Point is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  EncryptionAtRestWithPlatformAndCustomerKeys,
+  "EncryptionAtRestWithPlatformAndCustomerKeys",
 }
 
 /**
  * ConsistencyMode of the RestorePoint. Can be specified in the input while creating a restore point. For now, only CrashConsistent is accepted as a valid input. Please refer to https://aka.ms/RestorePoints for more details.
  */
-enum ConsistencyModeTypes {
-  CrashConsistent,
-  FileSystemConsistent,
-  ApplicationConsistent,
+union ConsistencyModeTypes {
+  string,
+  "CrashConsistent",
+  "FileSystemConsistent",
+  "ApplicationConsistent",
 }
 
-enum RestorePointCollectionExpandOptions {
-  restorePoints,
+union RestorePointCollectionExpandOptions {
+  string,
+  "restorePoints",
 }
 
-enum RestorePointExpandOptions {
-  instanceView,
+union RestorePointExpandOptions {
+  string,
+  "instanceView",
 }
 
-enum CapacityReservationGroupInstanceViewTypes {
-  instanceView,
+union CapacityReservationGroupInstanceViewTypes {
+  string,
+  "instanceView",
 }
 
-enum ExpandTypesForGetCapacityReservationGroups {
-  `virtualMachineScaleSetVMs/$ref`,
-  `virtualMachines/$ref`,
+union ExpandTypesForGetCapacityReservationGroups {
+  string,
+  "virtualMachineScaleSetVMs/$ref",
+  "virtualMachines/$ref",
 }
 
-enum CapacityReservationInstanceViewTypes {
-  instanceView,
+union CapacityReservationInstanceViewTypes {
+  string,
+  "instanceView",
 }
 
 /**
  * Script execution status.
  */
-enum ExecutionState {
-  Unknown,
-  Pending,
-  Running,
-  Failed,
-  Succeeded,
-  TimedOut,
-  Canceled,
+union ExecutionState {
+  string,
+  "Unknown",
+  "Pending",
+  "Running",
+  "Failed",
+  "Succeeded",
+  "TimedOut",
+  "Canceled",
 }
 
 /**
  * The sku name.
  */
-enum DiskStorageAccountTypes {
+union DiskStorageAccountTypes {
+  string,
+
   /**
    * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
    */
-  Standard_LRS,
+  "Standard_LRS",
 
   /**
    * Premium SSD locally redundant storage. Best for production and performance sensitive workloads.
    */
-  Premium_LRS,
+  "Premium_LRS",
 
   /**
    * Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test.
    */
-  StandardSSD_LRS,
+  "StandardSSD_LRS",
 
   /**
    * Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads.
    */
-  UltraSSD_LRS,
+  "UltraSSD_LRS",
 
   /**
    * Premium SSD zone redundant storage. Best for the production workloads that need storage resiliency against zone failures.
    */
-  Premium_ZRS,
+  "Premium_ZRS",
 
   /**
    * Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures.
    */
-  StandardSSD_ZRS,
+  "StandardSSD_ZRS",
 
   /**
    * Premium SSD v2 locally redundant storage. Best for production and performance-sensitive workloads that consistently require low latency and high IOPS and throughput.
    */
-  PremiumV2_LRS,
+  "PremiumV2_LRS",
 }
 
 /**
  * The architecture of the image. Applicable to OS disks only.
  */
-enum Architecture {
-  x64,
-  Arm64,
+union Architecture {
+  string,
+  "x64",
+  "Arm64",
 }
 
 /**
  * This enumerates the possible sources of a disk's creation.
  */
-enum DiskCreateOption {
+union DiskCreateOption {
+  string,
+
   /**
    * Create an empty data disk of a size given by diskSizeGB.
    */
-  Empty,
+  "Empty",
 
   /**
    * Disk will be attached to a VM.
    */
-  Attach,
+  "Attach",
 
   /**
    * Create a new disk from a platform image specified by the given imageReference or galleryImageReference.
    */
-  FromImage,
+  "FromImage",
 
   /**
    * Create a disk by importing from a blob specified by a sourceUri in a storage account specified by storageAccountId.
    */
-  Import,
+  "Import",
 
   /**
    * Create a new disk or snapshot by copying from a disk or snapshot specified by the given sourceResourceId.
    */
-  Copy,
+  "Copy",
 
   /**
    * Create a new disk by copying from a backup recovery point.
    */
-  Restore,
+  "Restore",
 
   /**
    * Create a new disk by obtaining a write token and using it to directly upload the contents of the disk.
    */
-  Upload,
+  "Upload",
 
   /**
    * Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source.
    */
-  CopyStart,
+  "CopyStart",
 
   /**
    * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId
    */
-  ImportSecure,
+  "ImportSecure",
 
   /**
    * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state
    */
-  UploadPreparedSecure,
+  "UploadPreparedSecure",
 
   /**
    * Create a new disk by exporting from elastic san volume snapshot
    */
-  CopyFromSanSnapshot,
+  "CopyFromSanSnapshot",
 }
 
 /**
  * This enumerates the possible state of the disk.
  */
-enum DiskState {
+union DiskState {
+  string,
+
   /**
    * The disk is not being used and can be attached to a VM.
    */
-  Unattached,
+  "Unattached",
 
   /**
    * The disk is currently attached to a running VM.
    */
-  Attached,
+  "Attached",
 
   /**
    * The disk is attached to a stopped-deallocated VM.
    */
-  Reserved,
+  "Reserved",
 
   /**
    * The disk is attached to a VM which is in hibernated state.
    */
-  Frozen,
+  "Frozen",
 
   /**
    * The disk currently has an Active SAS Uri associated with it.
    */
-  ActiveSAS,
+  "ActiveSAS",
 
   /**
    * The disk is attached to a VM in hibernated state and has an active SAS URI associated with it.
    */
-  ActiveSASFrozen,
+  "ActiveSASFrozen",
 
   /**
    * A disk is ready to be created by upload by requesting a write token.
    */
-  ReadyToUpload,
+  "ReadyToUpload",
 
   /**
    * A disk is created for upload and a write token has been issued for uploading to it.
    */
-  ActiveUpload,
+  "ActiveUpload",
 }
 
 /**
  * The type of key used to encrypt the data of the disk.
  */
-enum EncryptionType {
+union EncryptionType {
+  string,
+
   /**
    * Disk is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets.
    */
-  EncryptionAtRestWithPlatformKey,
+  "EncryptionAtRestWithPlatformKey",
 
   /**
    * Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  EncryptionAtRestWithCustomerKey,
+  "EncryptionAtRestWithCustomerKey",
 
   /**
    * Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  EncryptionAtRestWithPlatformAndCustomerKeys,
+  "EncryptionAtRestWithPlatformAndCustomerKeys",
 }
 
 /**
  * Policy for accessing the disk via network.
  */
-enum NetworkAccessPolicy {
+union NetworkAccessPolicy {
+  string,
+
   /**
    * The disk can be exported or uploaded to from any network.
    */
-  AllowAll,
+  "AllowAll",
 
   /**
    * The disk can be exported or uploaded to using a DiskAccess resource's private endpoints.
    */
-  AllowPrivate,
+  "AllowPrivate",
 
   /**
    * The disk cannot be exported.
    */
-  DenyAll,
+  "DenyAll",
 }
 
 /**
  * Specifies the SecurityType of the VM. Applicable for OS disks only.
  */
-enum DiskSecurityTypes {
+union DiskSecurityTypes {
+  string,
+
   /**
    * Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)
    */
-  TrustedLaunch,
+  "TrustedLaunch",
 
   /**
    * Indicates Confidential VM disk with only VM guest state encrypted
    */
-  ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
+  "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
 
   /**
    * Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key
    */
-  ConfidentialVM_DiskEncryptedWithPlatformKey,
+  "ConfidentialVM_DiskEncryptedWithPlatformKey",
 
   /**
    * Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key
    */
-  ConfidentialVM_DiskEncryptedWithCustomerKey,
+  "ConfidentialVM_DiskEncryptedWithCustomerKey",
 }
 
 /**
  * Policy for controlling export on the disk.
  */
-enum PublicNetworkAccess {
+union PublicNetworkAccess {
+  string,
+
   /**
    * You can generate a SAS URI to access the underlying data of the disk publicly on the internet when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate.
    */
-  Enabled,
+  "Enabled",
 
   /**
    * You cannot access the underlying data of the disk publicly on the internet even when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate.
    */
-  Disabled,
+  "Disabled",
 }
 
 /**
  * Additional authentication requirements when exporting or uploading to a disk or snapshot.
  */
-enum DataAccessAuthMode {
+union DataAccessAuthMode {
+  string,
+
   /**
    * When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth.
    */
-  AzureActiveDirectory,
+  "AzureActiveDirectory",
 
   /**
    * No additional authentication would be performed when accessing export/upload URL.
    */
-  None,
+  "None",
 }
 
 /**
  * The Access Level, accepted values include None, Read, Write.
  */
-enum AccessLevel {
-  None,
-  Read,
-  Write,
+union AccessLevel {
+  string,
+  "None",
+  "Read",
+  "Write",
 }
 
 /**
  * Used to specify the file format when making request for SAS on a VHDX file format snapshot
  */
-enum FileFormat {
+union FileFormat {
+  string,
+
   /**
    * A VHD file is a disk image file in the Virtual Hard Disk file format.
    */
-  VHD,
+  "VHD",
 
   /**
    * A VHDX file is a disk image file in the Virtual Hard Disk v2 file format.
    */
-  VHDX,
+  "VHDX",
 }
 
 /**
  * The private endpoint connection status.
  */
-enum PrivateEndpointServiceConnectionStatus {
-  Pending,
-  Approved,
-  Rejected,
+union PrivateEndpointServiceConnectionStatus {
+  string,
+  "Pending",
+  "Approved",
+  "Rejected",
 }
 
 /**
  * The current provisioning state.
  */
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  "Succeeded",
+  "Creating",
+  "Deleting",
+  "Failed",
 }
 
 /**
  * The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported for new creations. Disk Encryption Sets can be updated with Identity type None during migration of subscription to a new Azure Active Directory tenant; it will cause the encrypted resources to lose access to the keys.
  */
-enum DiskEncryptionSetIdentityType {
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
-  None,
+union DiskEncryptionSetIdentityType {
+  string,
+  "SystemAssigned",
+  "UserAssigned",
+  "SystemAssigned, UserAssigned",
+  "None",
 }
 
 /**
  * The type of key used to encrypt the data of the disk.
  */
-enum DiskEncryptionSetType {
+union DiskEncryptionSetType {
+  string,
+
   /**
    * Resource using diskEncryptionSet would be encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  EncryptionAtRestWithCustomerKey,
+  "EncryptionAtRestWithCustomerKey",
 
   /**
    * Resource using diskEncryptionSet would be encrypted at rest with two layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  EncryptionAtRestWithPlatformAndCustomerKeys,
+  "EncryptionAtRestWithPlatformAndCustomerKeys",
 
   /**
    * Confidential VM supported disk and VM guest state would be encrypted with customer managed key.
    */
-  ConfidentialVmEncryptedWithCustomerKey,
+  "ConfidentialVmEncryptedWithCustomerKey",
 }
 
 /**
  * The sku name.
  */
-enum SnapshotStorageAccountTypes {
+union SnapshotStorageAccountTypes {
+  string,
+
   /**
    * Standard HDD locally redundant storage
    */
-  Standard_LRS,
+  "Standard_LRS",
 
   /**
    * Premium SSD locally redundant storage
    */
-  Premium_LRS,
+  "Premium_LRS",
 
   /**
    * Standard zone redundant storage
    */
-  Standard_ZRS,
+  "Standard_ZRS",
 }
 
 /**
  * Indicates the error code if the background copy of a resource created via the CopyStart operation fails.
  */
-enum CopyCompletionErrorReason {
+union CopyCompletionErrorReason {
+  string,
+
   /**
    * Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress.
    */
-  CopySourceNotFound,
+  "CopySourceNotFound",
 }
 
 /**
  * The type of the extended location.
  */
-enum ExtendedLocationType {
-  EdgeZone,
+union ExtendedLocationType {
+  string,
+  "EdgeZone",
 }
 
 /**
  * The provisioning state, which only appears in the response.
  */
-enum GalleryProvisioningState {
-  Creating,
-  Updating,
-  Failed,
-  Succeeded,
-  Deleting,
-  Migrating,
+union GalleryProvisioningState {
+  string,
+  "Creating",
+  "Updating",
+  "Failed",
+  "Succeeded",
+  "Deleting",
+  "Migrating",
 }
 
 /**
  * This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups** <br><br> **Community**
  */
-enum GallerySharingPermissionTypes {
-  Private,
-  Groups,
-  Community,
+union GallerySharingPermissionTypes {
+  string,
+  "Private",
+  "Groups",
+  "Community",
 }
 
 /**
  * This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**
  */
-enum SharingProfileGroupTypes {
-  Subscriptions,
-  AADTenants,
+union SharingProfileGroupTypes {
+  string,
+  "Subscriptions",
+  "AADTenants",
 }
 
 /**
  * The sharing state of the gallery, which only appears in the response.
  */
-enum SharingState {
-  Succeeded,
-  InProgress,
-  Failed,
-  Unknown,
+union SharingState {
+  string,
+  "Succeeded",
+  "InProgress",
+  "Failed",
+  "Unknown",
 }
 
-enum SelectPermissions {
-  Permissions,
+union SelectPermissions {
+  string,
+  "Permissions",
 }
 
-enum GalleryExpandParams {
-  `SharingProfile/Groups`,
+union GalleryExpandParams {
+  string,
+  "SharingProfile/Groups",
 }
 
 /**
  * Specifies the storage account type to be used to store the image. This property is not updatable.
  */
-enum StorageAccountType {
-  Standard_LRS,
-  Standard_ZRS,
-  Premium_LRS,
+union StorageAccountType {
+  string,
+  "Standard_LRS",
+  "Standard_ZRS",
+  "Premium_LRS",
 }
 
 /**
  * confidential VM encryption types
  */
-enum ConfidentialVMEncryptionType {
-  EncryptedVMGuestStateOnlyWithPmk,
-  EncryptedWithPmk,
-  EncryptedWithCmk,
+union ConfidentialVMEncryptionType {
+  string,
+  "EncryptedVMGuestStateOnlyWithPmk",
+  "EncryptedWithPmk",
+  "EncryptedWithCmk",
 }
 
 /**
  * Optional parameter which specifies the mode to be used for replication. This property is not updatable.
  */
-enum ReplicationMode {
-  Full,
-  Shallow,
+union ReplicationMode {
+  string,
+  "Full",
+  "Shallow",
 }
 
 /**
  * It is type of the extended location.
  */
-enum GalleryExtendedLocationType {
-  EdgeZone,
-  Unknown,
+union GalleryExtendedLocationType {
+  string,
+  "EdgeZone",
+  "Unknown",
 }
 
 /**
  * Specifies the storage account type to be used to store the image. This property is not updatable.
  */
-enum EdgeZoneStorageAccountType {
-  Standard_LRS,
-  Standard_ZRS,
-  StandardSSD_LRS,
-  Premium_LRS,
+union EdgeZoneStorageAccountType {
+  string,
+  "Standard_LRS",
+  "Standard_ZRS",
+  "StandardSSD_LRS",
+  "Premium_LRS",
 }
 
 /**
  * Describes the nature of the policy violation.
  */
-enum PolicyViolationCategory {
-  Other,
-  ImageFlaggedUnsafe,
-  CopyrightValidation,
-  IpTheft,
+union PolicyViolationCategory {
+  string,
+  "Other",
+  "ImageFlaggedUnsafe",
+  "CopyrightValidation",
+  "IpTheft",
 }
 
 /**
  * This is the aggregated replication status based on all the regional replication status flags.
  */
-enum AggregatedReplicationState {
-  Unknown,
-  InProgress,
-  Completed,
-  Failed,
+union AggregatedReplicationState {
+  string,
+  "Unknown",
+  "InProgress",
+  "Completed",
+  "Failed",
 }
 
 /**
  * This is the regional replication state.
  */
-enum ReplicationState {
-  Unknown,
-  Replicating,
-  Completed,
-  Failed,
+union ReplicationState {
+  string,
+  "Unknown",
+  "Replicating",
+  "Completed",
+  "Failed",
 }
 
-enum ReplicationStatusTypes {
-  ReplicationStatus,
+union ReplicationStatusTypes {
+  string,
+  "ReplicationStatus",
 }
 
 /**
  * This property allows you to specify the operation type of gallery sharing update. <br><br> Possible values are: <br><br> **Add** <br><br> **Remove** <br><br> **Reset**
  */
-enum SharingUpdateOperationTypes {
-  Add,
-  Remove,
-  Reset,
-  EnableCommunity,
+union SharingUpdateOperationTypes {
+  string,
+  "Add",
+  "Remove",
+  "Reset",
+  "EnableCommunity",
 }
 
-enum SharedToValues {
-  tenant,
+union SharedToValues {
+  string,
+  "tenant",
 }
 
 /**
  * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
  */
-enum SharedGalleryHostCaching {
-  None,
-  ReadOnly,
-  ReadWrite,
+union SharedGalleryHostCaching {
+  string,
+  "None",
+  "ReadOnly",
+  "ReadWrite",
 }
 
 /**
@@ -1209,10 +1321,11 @@ enum SharedGalleryHostCaching {
  * Possible Values are <br /><br />**Auto**<br /><br />**Manual** <br /><br />**Simultaneous**<br /><br />
  * If not specified, the default value is Auto. If set to Manual, PUT UpdateDomain must be called to apply the update. If set to Auto, the update is automatically applied to each update domain in sequence.
  */
-enum CloudServiceUpgradeMode {
-  Auto,
-  Manual,
-  Simultaneous,
+union CloudServiceUpgradeMode {
+  string,
+  "Auto",
+  "Manual",
+  "Simultaneous",
 }
 
 /**
@@ -1220,23 +1333,24 @@ enum CloudServiceUpgradeMode {
  * Possible values are <br /><br />**Production**<br /><br />**Staging**<br /><br />
  * If not specified, the default value is Production.
  */
-enum CloudServiceSlotType {
-  Production,
-  Staging,
+union CloudServiceSlotType {
+  string,
+  "Production",
+  "Staging",
 }
 
 /**
  * Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
  */
-enum AvailabilitySetSkuTypes {
-  Classic,
-  Aligned,
+union AvailabilitySetSkuTypes {
+  string,
+  "Classic",
+  "Aligned",
 }
 
 /**
  * Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.
  */
-@fixed
 enum UpgradeMode {
   Automatic,
   Manual,
@@ -1246,7 +1360,6 @@ enum UpgradeMode {
 /**
  * Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.
  */
-@fixed
 enum SettingNames {
   AutoLogon,
   FirstLogonCommands,
@@ -1255,7 +1368,6 @@ enum SettingNames {
 /**
  * Specifies the protocol of WinRM listener. Possible values are: **http,** **https.**
  */
-@fixed
 enum ProtocolTypes {
   Http,
   Https,
@@ -1264,7 +1376,6 @@ enum ProtocolTypes {
 /**
  * Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**
  */
-@fixed
 enum CachingTypes {
   None,
   ReadOnly,
@@ -1274,7 +1385,6 @@ enum CachingTypes {
 /**
  * This property allows you to specify the supported type of the OS that application is built for. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**
  */
-@fixed
 enum OperatingSystemTypes {
   Windows,
   Linux,
@@ -1283,7 +1393,6 @@ enum OperatingSystemTypes {
 /**
  * The level code.
  */
-@fixed
 enum StatusLevelTypes {
   Info,
   Warning,
@@ -1293,7 +1402,6 @@ enum StatusLevelTypes {
 /**
  * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
  */
-@fixed
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -1304,7 +1412,6 @@ enum ResourceIdentityType {
 /**
  * The scale type applicable to the sku.
  */
-@fixed
 enum VirtualMachineScaleSetSkuScaleType {
   Automatic,
   None,
@@ -1313,7 +1420,6 @@ enum VirtualMachineScaleSetSkuScaleType {
 /**
  * Code indicating the current status of the upgrade.
  */
-@fixed
 enum UpgradeState {
   RollingForward,
   Cancelled,
@@ -1324,7 +1430,6 @@ enum UpgradeState {
 /**
  * Invoker of the Upgrade Operation
  */
-@fixed
 enum UpgradeOperationInvoker {
   Unknown,
   User,
@@ -1334,7 +1439,6 @@ enum UpgradeOperationInvoker {
 /**
  * Code indicating the current status of the upgrade.
  */
-@fixed
 enum RollingUpgradeStatusCode {
   RollingForward,
   Cancelled,
@@ -1345,7 +1449,6 @@ enum RollingUpgradeStatusCode {
 /**
  * The last action performed on the rolling upgrade.
  */
-@fixed
 enum RollingUpgradeActionType {
   Start,
   Cancel,
@@ -1354,7 +1457,6 @@ enum RollingUpgradeActionType {
 /**
  * The Last Maintenance Operation Result Code.
  */
-@fixed
 enum MaintenanceOperationResultCodeTypes {
   None,
   RetryLater,
@@ -1362,7 +1464,6 @@ enum MaintenanceOperationResultCodeTypes {
   MaintenanceCompleted,
 }
 
-@fixed
 enum InstanceViewTypes {
   instanceView,
   userData,
@@ -1371,7 +1472,6 @@ enum InstanceViewTypes {
 /**
  * Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual.** The default value is: **None.**
  */
-@fixed
 enum DedicatedHostLicenseTypes {
   None,
   Windows_Server_Hybrid,
@@ -1381,7 +1481,6 @@ enum DedicatedHostLicenseTypes {
 /**
  * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
  */
-@fixed
 enum OperatingSystemStateTypes {
   Generalized,
   Specialized,
@@ -1390,7 +1489,6 @@ enum OperatingSystemStateTypes {
 /**
  * Interval value in minutes used to create LogAnalytics call rate logs.
  */
-@fixed
 enum IntervalInMins {
   ThreeMins,
   FiveMins,
@@ -1401,7 +1499,6 @@ enum IntervalInMins {
 /**
  * The scale type applicable to the sku.
  */
-@fixed
 enum ResourceSkuCapacityScaleType {
   Automatic,
   Manual,
@@ -1411,7 +1508,6 @@ enum ResourceSkuCapacityScaleType {
 /**
  * The type of restrictions.
  */
-@fixed
 enum ResourceSkuRestrictionsType {
   Location,
   Zone,
@@ -1420,7 +1516,6 @@ enum ResourceSkuRestrictionsType {
 /**
  * The reason for restriction.
  */
-@fixed
 enum ResourceSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
@@ -1429,7 +1524,6 @@ enum ResourceSkuRestrictionsReasonCode {
 /**
  * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
  */
-@fixed
 enum HostCaching {
   None,
   ReadOnly,
@@ -1439,7 +1533,6 @@ enum HostCaching {
 /**
  * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
  */
-@fixed
 enum GalleryApplicationCustomActionParameterType {
   String,
   ConfigurationDataBlob,

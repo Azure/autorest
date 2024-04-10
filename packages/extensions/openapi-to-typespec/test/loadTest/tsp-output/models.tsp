@@ -10,31 +10,33 @@ namespace Azure.LoadTesting;
 /**
  * The client metric on which the criteria should be applied.
  */
-enum PFMetrics {
-  /**
-   * Pass fail criteria for response time metric
-   */
-  response_time_ms,
+union PFMetrics {
+  string,
 
   /**
    * Pass fail criteria for response time metric
    */
-  latency,
+  "response_time_ms",
+
+  /**
+   * Pass fail criteria for response time metric
+   */
+  "latency",
 
   /**
    * Pass fail criteria for error metric
    */
-  error,
+  "error",
 
   /**
    * Pass fail criteria for total requests
    */
-  requests,
+  "requests",
 
   /**
    * Pass fail criteria for request rate.
    */
-  requests_per_sec,
+  "requests_per_sec",
 }
 
 /**
@@ -43,409 +45,435 @@ enum PFMetrics {
  * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
  * ‘count’ - for requests
  */
-enum PFAgFunc {
+union PFAgFunc {
+  string,
+
   /**
    * Criteria applies for count value
    */
-  count,
+  "count",
 
   /**
    * Criteria applies for given percentage value
    */
-  percentage,
+  "percentage",
 
   /**
    * Criteria applies for avg value
    */
-  avg,
+  "avg",
 
   /**
    * Criteria applies for 50th percentile value
    */
-  p50,
+  "p50",
 
   /**
    * Criteria applies for 90th percentile value
    */
-  p90,
+  "p90",
 
   /**
    * Criteria applies for 95th percentile value
    */
-  p95,
+  "p95",
 
   /**
    * Criteria applies for 99th percentile value
    */
-  p99,
+  "p99",
 
   /**
    * Criteria applies for minimum value
    */
-  min,
+  "min",
 
   /**
    * Criteria applies for maximum value
    */
-  max,
+  "max",
 }
 
 /**
  * Action taken after the threshold is met. Default is ‘continue’.
  */
-enum PFAction {
+union PFAction {
+  string,
+
   /**
    * Test will continue to run even if pass fail metric criteria metric gets failed
    */
-  continue,
+  "continue",
 
   /**
    * Test run will stop if pass fail criteria metric is not passed.
    */
-  stop,
+  "stop",
 }
 
 /**
  * Outcome of the test run.
  */
-enum PFResult {
+union PFResult {
+  string,
+
   /**
    * Given pass fail criteria metric has passed.
    */
-  passed,
+  "passed",
 
   /**
    * Given pass fail criteria metric couldn't determine.
    */
-  undetermined,
+  "undetermined",
 
   /**
    * Given pass fail criteria metric has failed.
    */
-  failed,
+  "failed",
 }
 
 /**
  * Type of secret
  */
-enum SecretType {
+union SecretType {
+  string,
+
   /**
    * If the secret is stored in an Azure Key Vault
    */
-  AKV_SECRET_URI,
+  "AKV_SECRET_URI",
 
   /**
    * If the Plain text secret value provided
    */
-  SECRET_VALUE,
+  "SECRET_VALUE",
 }
 
 /**
  * Type of certificate
  */
-enum CertificateType {
+union CertificateType {
+  string,
+
   /**
    * If the certificate is stored in an Azure Key Vault
    */
-  AKV_CERT_URI,
+  "AKV_CERT_URI",
 }
 
 /**
  * File type
  */
-enum FileType {
+union FileType {
+  string,
+
   /**
    * If file is jmx script
    */
-  JMX_FILE,
+  "JMX_FILE",
 
   /**
    * If file is user properties
    */
-  USER_PROPERTIES,
+  "USER_PROPERTIES",
 
   /**
    * If file is not any of other supported type
    */
-  ADDITIONAL_ARTIFACTS,
+  "ADDITIONAL_ARTIFACTS",
 }
 
 /**
  * Validation status of the file
  */
-enum FileStatus {
+union FileStatus {
+  string,
+
   /**
    * File is not validated.
    */
-  NOT_VALIDATED,
+  "NOT_VALIDATED",
 
   /**
    * File is validated.
    */
-  VALIDATION_SUCCESS,
+  "VALIDATION_SUCCESS",
 
   /**
    * File validation is failed.
    */
-  VALIDATION_FAILURE,
+  "VALIDATION_FAILURE",
 
   /**
    * File validation is in progress.
    */
-  VALIDATION_INITIATED,
+  "VALIDATION_INITIATED",
 
   /**
    * Validation is not required.
    */
-  VALIDATION_NOT_REQUIRED,
+  "VALIDATION_NOT_REQUIRED",
 }
 
 /**
  * Test result for pass/Fail criteria used during the test run.
  */
-enum PFTestResult {
+union PFTestResult {
+  string,
+
   /**
    * Pass/fail criteria has passed.
    */
-  PASSED,
+  "PASSED",
 
   /**
    * Pass/fail criteria is not applicable.
    */
-  NOT_APPLICABLE,
+  "NOT_APPLICABLE",
 
   /**
    * Pass/fail criteria has failed.
    */
-  FAILED,
+  "FAILED",
 }
 
 /**
  * The test run status.
  */
-enum Status {
+union Status {
+  string,
+
   /**
    * Test run request is accepted
    */
-  ACCEPTED,
+  "ACCEPTED",
 
   /**
    * Test run is not yet started.
    */
-  NOTSTARTED,
+  "NOTSTARTED",
 
   /**
    * Test run is getting provision
    */
-  PROVISIONING,
+  "PROVISIONING",
 
   /**
    * Test run is provisioned
    */
-  PROVISIONED,
+  "PROVISIONED",
 
   /**
    * Test run is getting configure
    */
-  CONFIGURING,
+  "CONFIGURING",
 
   /**
    * Test run configuration is done
    */
-  CONFIGURED,
+  "CONFIGURED",
 
   /**
    * Test run has started executing
    */
-  EXECUTING,
+  "EXECUTING",
 
   /**
    * Test run has been executed
    */
-  EXECUTED,
+  "EXECUTED",
 
   /**
    * Test run is getting deprovision
    */
-  DEPROVISIONING,
+  "DEPROVISIONING",
 
   /**
    * Test run request is deprovisioned
    */
-  DEPROVISIONED,
+  "DEPROVISIONED",
 
   /**
    * Test run request is finished
    */
-  DONE,
+  "DONE",
 
   /**
    * Test run request is getting cancelled
    */
-  CANCELLING,
+  "CANCELLING",
 
   /**
    * Test run request is cancelled
    */
-  CANCELLED,
+  "CANCELLED",
 
   /**
    * Test run request is failed
    */
-  FAILED,
+  "FAILED",
 
   /**
    * Test run JMX file is validated
    */
-  VALIDATION_SUCCESS,
+  "VALIDATION_SUCCESS",
 
   /**
    * Test run JMX file validation is failed
    */
-  VALIDATION_FAILURE,
+  "VALIDATION_FAILURE",
 }
 
 /**
  * The primary aggregation type value defining how to use the values for display.
  */
-enum AggregationType {
+union AggregationType {
+  string,
+
   /**
    * Average value
    */
-  Average,
+  "Average",
 
   /**
    * Total count
    */
-  Count,
+  "Count",
 
   /**
    * Aggregation will be average in this case
    */
-  None,
+  "None",
 
   /**
    * Total sum
    */
-  Total,
+  "Total",
 
   /**
    * 90th percentile
    */
-  Percentile90,
+  "Percentile90",
 
   /**
    * 95th percentile
    */
-  Percentile95,
+  "Percentile95",
 
   /**
    * 99th percentile
    */
-  Percentile99,
+  "Percentile99",
 }
 
 /**
  * The unit of the metric.
  */
-enum MetricUnit {
+union MetricUnit {
+  string,
+
   /**
    * No unit specified
    */
-  NotSpecified,
+  "NotSpecified",
 
   /**
    * Percentage
    */
-  Percent,
+  "Percent",
 
   /**
    * Value count
    */
-  Count,
+  "Count",
 
   /**
    * Seconds
    */
-  Seconds,
+  "Seconds",
 
   /**
    * Milliseconds
    */
-  Milliseconds,
+  "Milliseconds",
 
   /**
    * Bytes
    */
-  Bytes,
+  "Bytes",
 
   /**
    * Bytes per second
    */
-  BytesPerSecond,
+  "BytesPerSecond",
 
   /**
    * Count per second
    */
-  CountPerSecond,
+  "CountPerSecond",
 }
 
 /**
  * The time grain specifies the aggregation interval for the metric. Expressed as
  * a duration 'PT1M', 'PT1H', etc.
  */
-enum TimeGrain {
+union TimeGrain {
+  string,
+
   /**
    * 5 seconds, available only if test run duration is less than 10 minutes
    */
-  PT5S,
+  "PT5S",
 
   /**
    * 10 seconds, available only if test run duration is less than 10 minutes
    */
-  PT10S,
+  "PT10S",
 
   /**
    * 1 minute
    */
-  PT1M,
+  "PT1M",
 
   /**
    * 5 minutes, available only if test run duration is greater than 1 minute
    */
-  PT5M,
+  "PT5M",
 
   /**
    * 1 hour, available only if test run duration is greater than 1 minute
    */
-  PT1H,
+  "PT1H",
 }
 
-enum Interval {
+union Interval {
+  string,
+
   /**
    * 5 seconds, available only if test run duration is less than 10 minutes
    */
-  PT5S,
+  "PT5S",
 
   /**
    * 10 seconds, available only if test run duration is less than 10 minutes
    */
-  PT10S,
+  "PT10S",
 
   /**
    * 1 minute
    */
-  PT1M,
+  "PT1M",
 
   /**
    * 5 minutes, available only if test run duration is greater than 1 minute
    */
-  PT5M,
+  "PT5M",
 
   /**
    * 1 hour, available only if test run duration is greater than 1 minute
    */
-  PT1H,
+  "PT1H",
 }
 
 /**

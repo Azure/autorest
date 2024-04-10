@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -16,163 +14,179 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Field for a given condition.
  */
-enum Field {
-  Severity,
-  MonitorService,
-  MonitorCondition,
-  SignalType,
-  TargetResourceType,
-  TargetResource,
-  TargetResourceGroup,
-  AlertRuleId,
-  AlertRuleName,
-  Description,
-  AlertContext,
+union Field {
+  string,
+  "Severity",
+  "MonitorService",
+  "MonitorCondition",
+  "SignalType",
+  "TargetResourceType",
+  "TargetResource",
+  "TargetResourceGroup",
+  "AlertRuleId",
+  "AlertRuleName",
+  "Description",
+  "AlertContext",
 }
 
 /**
  * Operator for a given condition.
  */
-enum Operator {
-  Equals,
-  NotEquals,
-  Contains,
-  DoesNotContain,
+union Operator {
+  string,
+  "Equals",
+  "NotEquals",
+  "Contains",
+  "DoesNotContain",
 }
 
 /**
  * Specifies when the recurrence should be applied.
  */
-enum RecurrenceType {
-  Daily,
-  Weekly,
-  Monthly,
+union RecurrenceType {
+  string,
+  "Daily",
+  "Weekly",
+  "Monthly",
 }
 
-enum Identifier {
-  MonitorServiceList,
+union Identifier {
+  string,
+  "MonitorServiceList",
 }
 
 /**
  * Identification of the information to be retrieved by API call
  */
-enum MetadataIdentifier {
-  MonitorServiceList,
+union MetadataIdentifier {
+  string,
+  "MonitorServiceList",
 }
 
-enum MonitorService {
-  `Application Insights`,
-  `ActivityLog Administrative`,
-  `ActivityLog Security`,
-  `ActivityLog Recommendation`,
-  `ActivityLog Policy`,
-  `ActivityLog Autoscale`,
-  `Log Analytics`,
-  Nagios,
-  Platform,
-  SCOM,
-  ServiceHealth,
-  SmartDetector,
-  `VM Insights`,
-  Zabbix,
+union MonitorService {
+  string,
+  "Application Insights",
+  "ActivityLog Administrative",
+  "ActivityLog Security",
+  "ActivityLog Recommendation",
+  "ActivityLog Policy",
+  "ActivityLog Autoscale",
+  "Log Analytics",
+  "Nagios",
+  "Platform",
+  "SCOM",
+  "ServiceHealth",
+  "SmartDetector",
+  "VM Insights",
+  "Zabbix",
 }
 
-enum MonitorCondition {
-  Fired,
-  Resolved,
+union MonitorCondition {
+  string,
+  "Fired",
+  "Resolved",
 }
 
-enum Severity {
-  Sev0,
-  Sev1,
-  Sev2,
-  Sev3,
-  Sev4,
+union Severity {
+  string,
+  "Sev0",
+  "Sev1",
+  "Sev2",
+  "Sev3",
+  "Sev4",
 }
 
-enum AlertState {
-  New,
-  Acknowledged,
-  Closed,
+union AlertState {
+  string,
+  "New",
+  "Acknowledged",
+  "Closed",
 }
 
-enum AlertsSortByFields {
-  name,
-  severity,
-  alertState,
-  monitorCondition,
-  targetResource,
-  targetResourceName,
-  targetResourceGroup,
-  targetResourceType,
-  startDateTime,
-  lastModifiedDateTime,
+union AlertsSortByFields {
+  string,
+  "name",
+  "severity",
+  "alertState",
+  "monitorCondition",
+  "targetResource",
+  "targetResourceName",
+  "targetResourceGroup",
+  "targetResourceType",
+  "startDateTime",
+  "lastModifiedDateTime",
 }
 
-enum SortOrder {
-  asc,
-  desc,
+union SortOrder {
+  string,
+  "asc",
+  "desc",
 }
 
-enum TimeRange {
-  `1h`,
-  `1d`,
-  `7d`,
-  `30d`,
+union TimeRange {
+  string,
+  "1h",
+  "1d",
+  "7d",
+  "30d",
 }
 
 /**
  * The type of signal the alert is based on, which could be metrics, logs or activity logs.
  */
-enum SignalType {
-  Metric,
-  Log,
-  Unknown,
+union SignalType {
+  string,
+  "Metric",
+  "Log",
+  "Unknown",
 }
 
-enum AlertsSummaryGroupByFields {
-  severity,
-  alertState,
-  monitorCondition,
-  monitorService,
-  signalType,
-  alertRule,
+union AlertsSummaryGroupByFields {
+  string,
+  "severity",
+  "alertState",
+  "monitorCondition",
+  "monitorService",
+  "signalType",
+  "alertRule",
 }
 
-enum SmartGroupsSortByFields {
-  alertsCount,
-  state,
-  severity,
-  startDateTime,
-  lastModifiedDateTime,
+union SmartGroupsSortByFields {
+  string,
+  "alertsCount",
+  "state",
+  "severity",
+  "startDateTime",
+  "lastModifiedDateTime",
 }
 
 /**
  * Smart group state
  */
-enum SmartGroupState {
-  New,
-  Acknowledged,
-  Closed,
+union SmartGroupState {
+  string,
+  "New",
+  "Acknowledged",
+  "Closed",
 }
 
 /**
  * Days of week.
  */
-enum DaysOfWeek {
-  Sunday,
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
+union DaysOfWeek {
+  string,
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 }
 
 /**
  * Reason for the modification
  */
-@fixed
 enum AlertModificationEvent {
   AlertCreated,
   StateChange,
@@ -188,7 +202,6 @@ enum AlertModificationEvent {
 /**
  * Reason for the modification
  */
-@fixed
 enum SmartGroupModificationEvent {
   SmartGroupCreated,
   StateChange,

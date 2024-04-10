@@ -14,48 +14,53 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Enum for different types of AuthCredentials supported.
  */
-enum AuthCredentialsKind {
-  OAuthClientCredentials,
-  ApiKeyAuthCredentials,
+union AuthCredentialsKind {
+  string,
+  "OAuthClientCredentials",
+  "ApiKeyAuthCredentials",
 }
 
 /**
  * Data Manager For Agriculture instance provisioning state.
  */
-enum ProvisioningState {
-  Creating,
-  Updating,
-  Deleting,
-  Succeeded,
-  Failed,
-  Running,
+union ProvisioningState {
+  string,
+  "Creating",
+  "Updating",
+  "Deleting",
+  "Succeeded",
+  "Failed",
+  "Running",
 }
 
 /**
  * Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.
  */
-enum PublicNetworkAccess {
-  Enabled,
-  Disabled,
+union PublicNetworkAccess {
+  string,
+  "Enabled",
+  "Disabled",
 }
 
 /**
  * The private endpoint connection status.
  */
-enum PrivateEndpointServiceConnectionStatus {
-  Pending,
-  Approved,
-  Rejected,
+union PrivateEndpointServiceConnectionStatus {
+  string,
+  "Pending",
+  "Approved",
+  "Rejected",
 }
 
 /**
  * The current provisioning state.
  */
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  "Succeeded",
+  "Creating",
+  "Deleting",
+  "Failed",
 }
 
 /**

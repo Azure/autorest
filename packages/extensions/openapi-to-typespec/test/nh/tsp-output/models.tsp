@@ -8,105 +8,123 @@ using Azure.Core;
 
 namespace NotificationHubsClient;
 
-enum MSApiVersionType {
-  `2015-01`,
-  `2015-04`,
-  `2015-08`,
-  `2016-07`,
+union MSApiVersionType {
+  string,
+  "2015-01",
+  "2015-04",
+  "2015-08",
+  "2016-07",
 }
 
-enum NotificationHubContentModelType {
-  `application/xml`,
+union NotificationHubContentModelType {
+  string,
+  "application/xml",
 }
 
-enum NotificationHubDescriptionModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union NotificationHubDescriptionModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum NotificationHubDescriptionModelAuthorizationRulesItemIType {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union NotificationHubDescriptionModelAuthorizationRulesItemIType {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum NotificationHubDescriptionModelAuthorizationRulesItemClaimType {
-  SharedAccessAuthorizationRule,
+union NotificationHubDescriptionModelAuthorizationRulesItemClaimType {
+  string,
+  "SharedAccessAuthorizationRule",
 }
 
-enum RegistrationEntryModelXmlnsM {
-  `http://schemas.microsoft.com/ado/2007/08/dataservices/metadata`,
+union RegistrationEntryModelXmlnsM {
+  string,
+  "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
 }
 
 /**
  * PNS Platform for the installation
  */
-enum PlatformType {
-  apns,
-  wns,
-  gcm,
-  baidu,
-  adm,
+union PlatformType {
+  string,
+  "apns",
+  "wns",
+  "gcm",
+  "baidu",
+  "adm",
 }
 
-enum InstallationPatchType {
-  add,
-  remove,
-  replace,
+union InstallationPatchType {
+  string,
+  "add",
+  "remove",
+  "replace",
 }
 
-enum FormatParameterType {
-  apple,
-  baidu,
-  gcm,
-  windows,
+union FormatParameterType {
+  string,
+  "apple",
+  "baidu",
+  "gcm",
+  "windows",
 }
 
-enum RegistrationContentModelType {
-  `application/xml`,
+union RegistrationContentModelType {
+  string,
+  "application/xml",
 }
 
-enum AppleRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union AppleRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum AppleTemplateRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union AppleTemplateRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum BaiduRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union BaiduRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum BaiduTemplateRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union BaiduTemplateRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum GcmRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union GcmRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum GcmTemplateRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union GcmTemplateRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum WindowsRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union WindowsRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum WindowsTemplateRegistrationContentModelXmlnsI {
-  `http://www.w3.org/2001/XMLSchema-instance`,
+union WindowsTemplateRegistrationContentModelXmlnsI {
+  string,
+  "http://www.w3.org/2001/XMLSchema-instance",
 }
 
-enum ApiVersionType {
-  `2015-01`,
-  `2015-04`,
-  `2015-08`,
-  `2016-07`,
-  `2020-06`,
+union ApiVersionType {
+  string,
+  "2015-01",
+  "2015-04",
+  "2015-08",
+  "2016-07",
+  "2020-06",
 }
 
 /**
  * Content type for upload
  */
-@fixed
 enum ContentType {
   /**
    * Content Type 'application/json;charset=utf-8'

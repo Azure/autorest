@@ -14,137 +14,150 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The status of the current operation.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /**
    * Represents a succeeded operation.
    */
-  Succeeded,
+  "Succeeded",
 
   /**
    * Represents a failed operation.
    */
-  Failed,
+  "Failed",
 
   /**
    * Represents a canceled operation.
    */
-  Canceled,
+  "Canceled",
 
   /**
    * Represents a pending operation.
    */
-  Provisioning,
+  "Provisioning",
 
   /**
    * Represents a pending operation.
    */
-  Updating,
+  "Updating",
 
   /**
    * Represents an operation under deletion.
    */
-  Deleting,
+  "Deleting",
 
   /**
    * Represents an accepted operation.
    */
-  Accepted,
+  "Accepted",
 }
 
 /**
  * The data type state
  */
-enum ControlState {
+union ControlState {
+  string,
+
   /**
    * Field to enable a setting.
    */
-  Enabled,
+  "Enabled",
 
   /**
    * Field to disable a setting.
    */
-  Disabled,
+  "Disabled",
 }
 
 /**
  * Specifies the default action of allow or deny when no other rules match.
  */
-enum DefaultAction {
+union DefaultAction {
+  string,
+
   /**
    * Represents allow action.
    */
-  Allow,
+  "Allow",
 
   /**
    * Represents deny action.
    */
-  Deny,
+  "Deny",
 }
 
 /**
  * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
  */
-enum ManagedServiceIdentityType {
-  None,
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
+union ManagedServiceIdentityType {
+  string,
+  "None",
+  "SystemAssigned",
+  "UserAssigned",
+  "SystemAssigned, UserAssigned",
 }
 
 /**
  * The data type state
  */
-enum DataProductUserRole {
+union DataProductUserRole {
+  string,
+
   /**
    * Field to specify user of type Reader.
    */
-  Reader,
+  "Reader",
 
   /**
    * Field to specify user of type SensitiveReader.
    * This user has privileged access to read sensitive data of a data product.
    */
-  SensitiveReader,
+  "SensitiveReader",
 }
 
 /**
  * The data type state
  */
-enum DataTypeState {
+union DataTypeState {
+  string,
+
   /**
    * Field to specify stopped state.
    */
-  Stopped,
+  "Stopped",
 
   /**
    * Field to specify running state.
    */
-  Running,
+  "Running",
 }
 
 /**
  * Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, "Logging, Metrics"), or None to bypass none of those traffics.
  */
-enum Bypass {
+union Bypass {
+  string,
+
   /**
    * Represents no bypassing of traffic.
    */
-  None,
+  "None",
 
   /**
    * Represents bypassing logging traffic.
    */
-  Logging,
+  "Logging",
 
   /**
    * Represents bypassing metrics traffic.
    */
-  Metrics,
+  "Metrics",
 
   /**
    * Represents bypassing azure services traffic.
    */
-  AzureServices,
+  "AzureServices",
 }
 
 /**

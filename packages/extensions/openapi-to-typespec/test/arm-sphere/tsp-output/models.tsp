@@ -15,266 +15,282 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Provisioning state of the resource.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /**
    * Resource has been created.
    */
-  Succeeded,
+  "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  Failed,
+  "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  Canceled,
+  "Canceled",
 
   /**
    * The resource is being provisioned
    */
-  Provisioning,
+  "Provisioning",
 
   /**
    * The resource is being updated
    */
-  Updating,
+  "Updating",
 
   /**
    * The resource is being deleted
    */
-  Deleting,
+  "Deleting",
 
   /**
    * The resource create request has been accepted
    */
-  Accepted,
+  "Accepted",
 }
 
 /**
  * Certificate status values.
  */
-enum CertificateStatus {
+union CertificateStatus {
+  string,
+
   /**
    * Certificate is active
    */
-  Active,
+  "Active",
 
   /**
    * Certificate is inactive
    */
-  Inactive,
+  "Inactive",
 
   /**
    * Certificate has expired
    */
-  Expired,
+  "Expired",
 
   /**
    * Certificate has been revoked
    */
-  Revoked,
+  "Revoked",
 }
 
 /**
  * Regional data boundary values.
  */
-enum RegionalDataBoundary {
+union RegionalDataBoundary {
+  string,
+
   /**
    * No data boundary
    */
-  None,
+  "None",
 
   /**
    * EU data boundary
    */
-  EU,
+  "EU",
 }
 
 /**
  * Image type values.
  */
-enum ImageType {
+union ImageType {
+  string,
+
   /**
    * Invalid image.
    */
-  InvalidImageType,
+  "InvalidImageType",
 
   /**
    * One Bl image type
    */
-  OneBl,
+  "OneBl",
 
   /**
    * Pluton image type
    */
-  PlutonRuntime,
+  "PlutonRuntime",
 
   /**
    * Wifi firmware image type
    */
-  WifiFirmware,
+  "WifiFirmware",
 
   /**
    * Security monitor image type
    */
-  SecurityMonitor,
+  "SecurityMonitor",
 
   /**
    * Normal world loader image type
    */
-  NormalWorldLoader,
+  "NormalWorldLoader",
 
   /**
    * Normal world dtb image type
    */
-  NormalWorldDtb,
+  "NormalWorldDtb",
 
   /**
    * Normal world kernel image type
    */
-  NormalWorldKernel,
+  "NormalWorldKernel",
 
   /**
    * Root FS image type
    */
-  RootFs,
+  "RootFs",
 
   /**
    * Services image type
    */
-  Services,
+  "Services",
 
   /**
    * Applications image type
    */
-  Applications,
+  "Applications",
 
   /**
    * FW config image type
    */
-  FwConfig,
+  "FwConfig",
 
   /**
    * Boot manifest image type
    */
-  BootManifest,
+  "BootManifest",
 
   /**
    * Nwfs image type
    */
-  Nwfs,
+  "Nwfs",
 
   /**
    * Trusted key store image type
    */
-  TrustedKeystore,
+  "TrustedKeystore",
 
   /**
    * Policy image type
    */
-  Policy,
+  "Policy",
 
   /**
    * Customer board config image type
    */
-  CustomerBoardConfig,
+  "CustomerBoardConfig",
 
   /**
    * Update certificate store image type
    */
-  UpdateCertStore,
+  "UpdateCertStore",
 
   /**
    * Base system update manifest image type
    */
-  BaseSystemUpdateManifest,
+  "BaseSystemUpdateManifest",
 
   /**
    * Firmware update manifest image type
    */
-  FirmwareUpdateManifest,
+  "FirmwareUpdateManifest",
 
   /**
    * Customer update manifest image type
    */
-  CustomerUpdateManifest,
+  "CustomerUpdateManifest",
 
   /**
    * Recovery manifest image type
    */
-  RecoveryManifest,
+  "RecoveryManifest",
 
   /**
    * manifest set image type
    */
-  ManifestSet,
+  "ManifestSet",
 
   /**
    * Other image type
    */
-  Other,
+  "Other",
 }
 
 /**
  * OS feed type values.
  */
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /**
    * Retail OS feed type.
    */
-  Retail,
+  "Retail",
 
   /**
    * Retail evaluation OS feed type.
    */
-  RetailEval,
+  "RetailEval",
 }
 
 /**
  * Update policy values.
  */
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /**
    * Update all policy.
    */
-  UpdateAll,
+  "UpdateAll",
 
   /**
    * No update for 3rd party app policy.
    */
-  No3rdPartyAppUpdates,
+  "No3rdPartyAppUpdates",
 }
 
 /**
  * Allow crash dumps values.
  */
-enum AllowCrashDumpCollection {
+union AllowCrashDumpCollection {
+  string,
+
   /**
    * Crash dump collection enabled
    */
-  Enabled,
+  "Enabled",
 
   /**
    * Crash dump collection disabled
    */
-  Disabled,
+  "Disabled",
 }
 
 /**
  * Capability image type
  */
-enum CapabilityType {
+union CapabilityType {
+  string,
+
   /**
    * Application development capability
    */
-  ApplicationDevelopment,
+  "ApplicationDevelopment",
 
   /**
    * Field servicing capability
    */
-  FieldServicing,
+  "FieldServicing",
 }
 
 /**
