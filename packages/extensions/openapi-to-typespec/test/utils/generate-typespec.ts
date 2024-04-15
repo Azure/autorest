@@ -4,7 +4,18 @@ import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
 
-const brownFieldProjects = ["arm-agrifood", "arm-alertsmanagement", "arm-analysisservices", "arm-apimanagement", "arm-authorization", "arm-azureintegrationspaces", "arm-compute", "arm-dns", "arm-machinelearningservices", "arm-storage"];
+const brownFieldProjects = [
+  "arm-agrifood",
+  "arm-alertsmanagement",
+  "arm-analysisservices",
+  "arm-apimanagement",
+  "arm-authorization",
+  "arm-azureintegrationspaces",
+  "arm-compute",
+  "arm-dns",
+  "arm-machinelearningservices",
+  "arm-storage",
+];
 
 export async function generateTypespec(repoRoot: string, folder: string, debug = false, isFullCompatible = false) {
   const { path: root } = await resolveProject(__dirname);
