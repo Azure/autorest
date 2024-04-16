@@ -4,19 +4,6 @@ import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
 
-const brownFieldProjects = [
-  "arm-agrifood",
-  "arm-alertsmanagement",
-  "arm-analysisservices",
-  "arm-apimanagement",
-  "arm-authorization",
-  "arm-azureintegrationspaces",
-  "arm-compute",
-  "arm-dns",
-  "arm-machinelearningservices",
-  "arm-storage",
-];
-
 export async function generateTypespec(repoRoot: string, folder: string, debug = false, isFullCompatible = false) {
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder);
@@ -38,11 +25,6 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
 }
 
 export async function generateSwagger(folder: string) {
-  if (brownFieldProjects.includes(folder)) {
-    console.log(`Skipping brown field project ${folder}`);
-    return;
-  }
-
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder, "tsp-output");
   const command = "tsp compile . --emit=@azure-tools/typespec-autorest";
