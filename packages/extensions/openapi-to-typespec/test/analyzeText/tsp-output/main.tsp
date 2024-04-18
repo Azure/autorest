@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 /**
  * The language service API is a suite of natural language processing (NLP) skills
  * built with best-in-class Microsoft machine learning algorithms. The API can be
@@ -33,5 +34,6 @@ enum Versions {
   /**
    * The 2022-05-01 API version.
    */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_05_01: "2022-05-01",
 }

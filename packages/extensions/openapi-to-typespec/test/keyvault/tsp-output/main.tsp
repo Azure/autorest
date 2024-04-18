@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 /**
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.
@@ -28,5 +29,6 @@ enum Versions {
   /**
    * The 7.4-preview.1 API version.
    */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v7_4_preview_1: "7.4-preview.1",
 }

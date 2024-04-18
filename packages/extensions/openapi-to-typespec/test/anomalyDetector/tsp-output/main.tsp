@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 /**
  * The Anomaly Detector API detects anomalies automatically in time series data.
  * It supports two kinds of mode, one is for stateless using, another is for
@@ -49,5 +50,6 @@ enum Versions {
   /**
    * The v1.1-preview.1 API version.
    */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v1_1_preview_1: "v1.1-preview.1",
 }

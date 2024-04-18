@@ -71,8 +71,8 @@ export function generateServiceInformation(program: TypespecProgram) {
     for (const version of serviceInformation.versions) {
       if (isArm) {
         definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
-        definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
       }
+      definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
       definitions.push(`/**\n* The ${version} API version.\n*/`);
       definitions.push(
         `${version.startsWith("v") ? "" : "v"}${version.replaceAll("-", "_").replaceAll(".", "_")}: "${version}",`,
