@@ -2,6 +2,7 @@ import { TypespecProgram, EndpointParameter, Auth } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
 import { getNamespaceStatement } from "../utils/namespace";
+import { ApiVersion } from "../constants";
 
 const VALID_VERSIONS = ["v3", "v4", "v5"];
 
@@ -53,7 +54,7 @@ export function generateServiceInformation(program: TypespecProgram) {
       for (const param of allParams ?? []) {
         const doc = generateDocs(param);
         doc && definitions.push(doc);
-        definitions.push(`${param.name}: ${param.name.startsWith("ApiVersion") ? "Versions" : "string"} `);
+        definitions.push(`${param.name}: ${param.name.startsWith(ApiVersion) ? "Versions" : "string"} `);
       }
     }
     hasParameters && definitions.push("}");

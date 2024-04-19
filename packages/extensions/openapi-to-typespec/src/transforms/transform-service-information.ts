@@ -5,13 +5,13 @@ import {
   OAuth2SecurityScheme,
   ParameterLocation,
   SecurityScheme,
-  codeModelSchema,
 } from "@autorest/codemodel";
 import { getArmCommonTypeVersion } from "../autorest-session";
 import { AadOauth2AuthFlow, ApiKeyAuthentication, Auth, EndpointParameter, ServiceInformation } from "../interfaces";
 import { getOptions } from "../options";
 import { getFirstEndpoint } from "../utils/get-endpoint";
 import { isConstantSchema } from "../utils/schemas";
+import { ApiVersion } from "../constants";
 
 export function transformServiceInformation(model: CodeModel): ServiceInformation {
   const { isArm } = getOptions();

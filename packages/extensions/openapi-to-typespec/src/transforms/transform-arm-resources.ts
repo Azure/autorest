@@ -290,7 +290,7 @@ function getCustomizations(
   if (bodyParam) {
     if (bodyParam.language.default.name !== templateName && isFullCompatible) {
       augmentedDecorators.push(
-        `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "application/json", "${bodyParam.language.default.name}");`,
+        `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "json", "${bodyParam.language.default.name}");`,
       );
       augmentedDecorators.push(
         `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "x-ms-client-name", "${bodyParam.language.default.name}");`,

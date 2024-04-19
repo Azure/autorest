@@ -1,1 +1,1 @@
-const ApiVersion = "ApiVersion";
+export const ApiVersion = "ApiVersion";
