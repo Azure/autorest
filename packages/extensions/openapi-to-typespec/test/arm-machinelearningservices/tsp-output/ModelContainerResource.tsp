@@ -87,7 +87,7 @@ interface ModelContainerResources {
 }
 
 @@encodedName(ModelContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(ModelContainerResources.createOrUpdate::parameters.resource,

@@ -122,7 +122,7 @@ interface RestorePointCollections {
 }
 
 @@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RestorePointCollections.createOrUpdate::parameters.resource,
@@ -133,7 +133,7 @@ interface RestorePointCollections {
   "Parameters supplied to the Create or Update restore point collection operation."
 );
 @@encodedName(RestorePointCollections.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RestorePointCollections.update::parameters.properties,

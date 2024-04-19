@@ -93,7 +93,10 @@ interface RestorePoints {
   >;
 }
 
-@@encodedName(RestorePoints.create::parameters.resource, "json", "parameters");
+@@encodedName(RestorePoints.create::parameters.resource,
+  "application/json",
+  "parameters"
+);
 @@extension(RestorePoints.create::parameters.resource,
   "x-ms-client-name",
   "parameters"

@@ -54,8 +54,6 @@ interface Products {
   /**
    * List Product resources by Catalog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Products_ListByCatalog")
   listByCatalog is ArmResourceListByParent<Product>;
 
   /**

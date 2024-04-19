@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Subscription details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  SubscriptionContractProperties
+)
+model SubscriptionContract extends ProxyResourceBase {
   /**
    * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
    */
@@ -25,6 +31,12 @@ model SubscriptionContract is ProxyResource<SubscriptionContractProperties> {
   @segment("subscriptions")
   @visibility("read")
   name: string;
+
+  /**
+   * Subscription contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SubscriptionContractProperties;
 }
 
 @armResourceOperations
@@ -32,12 +44,16 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_Get")
   get is ArmResourceRead<SubscriptionContract>;
 
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("Subscription_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       SubscriptionContract,
@@ -48,6 +64,8 @@ interface SubscriptionContracts {
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
     {
@@ -78,7 +96,9 @@ interface SubscriptionContracts {
   /**
    * Updates the details of a subscription specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
     SubscriptionUpdateParameters,
@@ -110,6 +130,8 @@ interface SubscriptionContracts {
   /**
    * Deletes the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
     {
@@ -126,6 +148,8 @@ interface SubscriptionContracts {
   /**
    * Lists all subscriptions of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_List")
   list is ArmResourceListByParent<
     SubscriptionContract,
     {
@@ -155,6 +179,8 @@ interface SubscriptionContracts {
   /**
    * Regenerates primary key of existing subscription of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
@@ -163,6 +189,8 @@ interface SubscriptionContracts {
   /**
    * Regenerates secondary key of existing subscription of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
     void
@@ -171,6 +199,8 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription keys.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Subscription_ListSecrets")
   listSecrets is ArmResourceActionSync<
     SubscriptionContract,
     void,
@@ -178,8 +208,24 @@ interface SubscriptionContracts {
   >;
 }
 
+@@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(SubscriptionContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(SubscriptionContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(SubscriptionContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(SubscriptionContracts.update::parameters.properties,
   "Update parameters."

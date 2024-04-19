@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tag Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OperationContract)
-model TagContract is ProxyResource<TagContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(TagContractProperties)
+model TagContract extends ProxyResourceBase {
   /**
    * Tag identifier. Must be unique in the current API Management service instance.
    */
@@ -28,6 +32,12 @@ model TagContract is ProxyResource<TagContractProperties> {
   @segment("tags")
   @visibility("read")
   name: string;
+
+  /**
+   * Tag entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TagContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +45,16 @@ interface TagContracts {
   /**
    * Get tag associated with the Operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Tag_GetByOperation")
   getByOperation is ArmResourceRead<TagContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("Tag_GetEntityStateByOperation")
   getEntityStateByOperation(
     ...ResourceInstanceParameters<TagContract, BaseParameters<TagContract>>,
   ): OkResponse | ErrorResponse;
@@ -48,16 +62,22 @@ interface TagContracts {
   /**
    * Assign tag to the Operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Tag_AssignToOperation")
   assignToOperation is ArmResourceCreateOrReplaceSync<TagContract>;
 
   /**
    * Detach the tag from the Operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Tag_DetachFromOperation")
   detachFromOperation is ArmResourceDeleteSync<TagContract>;
 
   /**
    * Lists all Tags associated with the Operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Tag_ListByOperation")
   listByOperation is ArmResourceListByParent<
     TagContract,
     {

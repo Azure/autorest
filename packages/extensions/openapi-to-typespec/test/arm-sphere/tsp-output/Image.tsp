@@ -47,8 +47,6 @@ interface Images {
   /**
    * List Image resources by Catalog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Images_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Image,
     {

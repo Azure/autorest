@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Comment Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
-model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  IssueCommentContractProperties
+)
+model IssueCommentContract extends ProxyResourceBase {
   /**
    * Comment identifier within an Issue. Must be unique in the current Issue.
    */
@@ -28,6 +34,12 @@ model IssueCommentContract is ProxyResource<IssueCommentContractProperties> {
   @segment("comments")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the Issue Comment.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IssueCommentContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +47,16 @@ interface IssueCommentContracts {
   /**
    * Gets the details of the issue Comment for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssueComment_Get")
   get is ArmResourceRead<IssueCommentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiIssueComment_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IssueCommentContract,
@@ -51,6 +67,8 @@ interface IssueCommentContracts {
   /**
    * Creates a new Comment for the Issue in an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssueComment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     {
@@ -67,6 +85,8 @@ interface IssueCommentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     {
@@ -83,6 +103,8 @@ interface IssueCommentContracts {
   /**
    * Lists all comments for the Issue associated with the specified API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssueComment_ListByService")
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     {
@@ -110,6 +132,14 @@ interface IssueCommentContracts {
   >;
 }
 
+@@encodedName(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(IssueCommentContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IssueCommentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

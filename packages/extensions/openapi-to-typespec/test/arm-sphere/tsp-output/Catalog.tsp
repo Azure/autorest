@@ -52,8 +52,6 @@ interface Catalogs {
   /**
    * List Catalog resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
 
   /**
@@ -211,14 +209,6 @@ interface Catalogs {
   >;
 }
 
-@@encodedName(Catalogs.listDeviceGroups::parameters.body,
-  "json",
-  "listDeviceGroupsRequest"
-);
-@@extension(Catalogs.listDeviceGroups::parameters.body,
-  "x-ms-client-name",
-  "listDeviceGroupsRequest"
-);
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );

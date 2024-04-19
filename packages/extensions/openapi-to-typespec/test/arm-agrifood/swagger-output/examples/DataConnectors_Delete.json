@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataConnectorName": "SatelliteSentinelHub",
+    "dataManagerForAgricultureResourceName": "examples-dataManagerForAgricultureResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {},
+    "204": {},
+    "400": {
+      "error": {
+        "code": "ConnectorConfigurationInvalid",
+        "message": "Connector name not supported. Supported connectors are 'SatelliteSentinelHub' and 'WeatherIBM'."
+      }
+    }
+  },
+  "operationId": "DataConnectors_Delete",
+  "title": "DataConnectors_Delete"
+}

@@ -37,6 +37,8 @@ interface BusinessProcessVersions {
   /**
    * List BusinessProcessVersion resources by BusinessProcess
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BusinessProcessVersions_ListByBusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     {

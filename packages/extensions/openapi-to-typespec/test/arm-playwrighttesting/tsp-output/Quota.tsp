@@ -37,7 +37,5 @@ interface Quotas {
   /**
    * List quotas for a given subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Quotas_ListBySubscription")
   listBySubscription is ArmResourceListByParent<Quota>;
 }

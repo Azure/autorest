@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model ApiContract is ProxyResource<ApiContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
+model ApiContract extends ProxyResourceBase {
   /**
    * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
    */
@@ -28,6 +32,12 @@ model ApiContract is ProxyResource<ApiContractProperties> {
   @segment("apis")
   @visibility("read")
   name: string;
+
+  /**
+   * API entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +45,16 @@ interface ApiContracts {
   /**
    * Gets the details of the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
 
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("Api_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<ApiContract, BaseParameters<ApiContract>>,
   ): OkResponse | ErrorResponse;
@@ -48,6 +62,8 @@ interface ApiContracts {
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     {
@@ -64,7 +80,9 @@ interface ApiContracts {
   /**
    * Updates the specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
     ApiUpdateContract,
@@ -82,6 +100,8 @@ interface ApiContracts {
   /**
    * Deletes the specified API of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     {
@@ -104,6 +124,8 @@ interface ApiContracts {
   /**
    * Lists all APIs of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
     {
@@ -146,6 +168,8 @@ interface ApiContracts {
    * Lists all revisions of an API.
    */
   // FIXME: ApiRevision_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiRevision_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
   listByService(
@@ -195,6 +219,8 @@ interface ApiContracts {
    * Lists all Products, which the API is part of.
    */
   // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiProduct_ListByApis")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
   listByApis(
@@ -244,6 +270,8 @@ interface ApiContracts {
    * Lists a collection of operations associated with tags.
    */
   // FIXME: Operation_ListByTags could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Operation_ListByTags")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
   listByTags(
@@ -297,8 +325,24 @@ interface ApiContracts {
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
 }
 
+@@encodedName(ApiContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
+);
+@@encodedName(ApiContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiContracts.update::parameters.properties,
   "API Update Contract parameters."

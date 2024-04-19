@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model IssueContract is ProxyResource<IssueContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IssueContractProperties)
+model IssueContract extends ProxyResourceBase {
   /**
    * Issue identifier. Must be unique in the current API Management service instance.
    */
@@ -28,6 +32,12 @@ model IssueContract is ProxyResource<IssueContractProperties> {
   @segment("issues")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the Issue.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IssueContractProperties;
 }
 
 @armResourceOperations
@@ -35,6 +45,8 @@ interface IssueContracts {
   /**
    * Gets the details of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_Get")
   get is ArmResourceRead<
     IssueContract,
     {
@@ -51,7 +63,9 @@ interface IssueContracts {
   /**
    * Gets the entity state (Etag) version of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiIssue_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<IssueContract, BaseParameters<IssueContract>>,
   ): OkResponse | ErrorResponse;
@@ -59,6 +73,8 @@ interface IssueContracts {
   /**
    * Creates a new Issue for an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueContract,
     {
@@ -75,7 +91,9 @@ interface IssueContracts {
   /**
    * Updates an existing issue for an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,
     IssueUpdateContract,
@@ -93,6 +111,8 @@ interface IssueContracts {
   /**
    * Deletes the specified Issue from an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_Delete")
   delete is ArmResourceDeleteSync<
     IssueContract,
     {
@@ -109,6 +129,8 @@ interface IssueContracts {
   /**
    * Lists all issues associated with the specified API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_ListByService")
   listByService is ArmResourceListByParent<
     IssueContract,
     {
@@ -142,5 +164,21 @@ interface IssueContracts {
   >;
 }
 
+@@encodedName(IssueContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(IssueContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IssueContracts.createOrUpdate::parameters.resource, "Create parameters.");
+@@encodedName(IssueContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(IssueContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IssueContracts.update::parameters.properties, "Update parameters.");

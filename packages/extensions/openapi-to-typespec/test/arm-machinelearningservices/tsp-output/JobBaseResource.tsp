@@ -131,7 +131,7 @@ interface JobBaseResources {
 }
 
 @@encodedName(JobBaseResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(JobBaseResources.createOrUpdate::parameters.resource,
@@ -141,7 +141,10 @@ interface JobBaseResources {
 @@doc(JobBaseResources.createOrUpdate::parameters.resource,
   "Job definition object."
 );
-@@encodedName(JobBaseResources.update::parameters.properties, "json", "body");
+@@encodedName(JobBaseResources.update::parameters.properties,
+  "application/json",
+  "body"
+);
 @@extension(JobBaseResources.update::parameters.properties,
   "x-ms-client-name",
   "body"

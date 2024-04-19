@@ -70,7 +70,7 @@ interface OutboundRuleBasicResources {
 }
 
 @@encodedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(OutboundRuleBasicResources.createOrUpdate::parameters.resource,

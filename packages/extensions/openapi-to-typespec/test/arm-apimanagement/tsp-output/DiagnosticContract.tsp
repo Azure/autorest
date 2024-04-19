@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Diagnostic details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticContractProperties)
+model DiagnosticContract extends ProxyResourceBase {
   /**
    * Diagnostic identifier. Must be unique in the current API Management service instance.
    */
@@ -28,6 +32,12 @@ model DiagnosticContract is ProxyResource<DiagnosticContractProperties> {
   @segment("diagnostics")
   @visibility("read")
   name: string;
+
+  /**
+   * Diagnostic entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiagnosticContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +45,16 @@ interface DiagnosticContracts {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiDiagnostic_Get")
   get is ArmResourceRead<DiagnosticContract>;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiDiagnostic_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       DiagnosticContract,
@@ -51,6 +65,8 @@ interface DiagnosticContracts {
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
     {
@@ -67,7 +83,9 @@ interface DiagnosticContracts {
   /**
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
     DiagnosticContract,
@@ -85,6 +103,8 @@ interface DiagnosticContracts {
   /**
    * Deletes the specified Diagnostic from an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
     {
@@ -101,6 +121,8 @@ interface DiagnosticContracts {
   /**
    * Lists all diagnostics of an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiDiagnostic_ListByService")
   listByService is ArmResourceListByParent<
     DiagnosticContract,
     {
@@ -128,8 +150,24 @@ interface DiagnosticContracts {
   >;
 }
 
+@@encodedName(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(DiagnosticContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(DiagnosticContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(DiagnosticContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(DiagnosticContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(DiagnosticContracts.update::parameters.properties,
   "Diagnostic Update parameters."

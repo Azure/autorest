@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Gateway hostname configuration details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
-model GatewayHostnameConfigurationContract
-  is ProxyResource<GatewayHostnameConfigurationContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  GatewayHostnameConfigurationContractProperties
+)
+model GatewayHostnameConfigurationContract extends ProxyResourceBase {
   /**
    * Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.
    */
@@ -28,6 +33,12 @@ model GatewayHostnameConfigurationContract
   @segment("hostnameConfigurations")
   @visibility("read")
   name: string;
+
+  /**
+   * Gateway hostname configuration details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GatewayHostnameConfigurationContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +46,16 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Get details of a hostname configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayHostnameConfiguration_Get")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
 
   /**
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("GatewayHostnameConfiguration_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GatewayHostnameConfigurationContract,
@@ -51,6 +66,8 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Creates of updates hostname configuration for a Gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayHostnameConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     {
@@ -67,6 +84,8 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Deletes the specified hostname configuration from the specified Gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     {
@@ -83,6 +102,8 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Lists the collection of hostname configurations for the specified gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayHostnameConfiguration_ListByService")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     {
@@ -110,6 +131,14 @@ interface GatewayHostnameConfigurationContracts {
   >;
 }
 
+@@encodedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   ""
 );

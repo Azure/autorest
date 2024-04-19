@@ -103,7 +103,7 @@ interface CodeVersionResources {
 }
 
 @@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(CodeVersionResources.createOrUpdate::parameters.resource,

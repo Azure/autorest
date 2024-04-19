@@ -54,8 +54,6 @@ interface DeviceGroups {
   /**
    * List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DeviceGroups_ListByProduct")
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {
@@ -101,14 +99,6 @@ interface DeviceGroups {
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
 
-@@encodedName(DeviceGroups.claimDevices::parameters.body,
-  "json",
-  "claimDevicesRequest"
-);
-@@extension(DeviceGroups.claimDevices::parameters.body,
-  "x-ms-client-name",
-  "claimDevicesRequest"
-);
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
