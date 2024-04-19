@@ -87,11 +87,11 @@ function getApiVersions(model: CodeModel): string[] | undefined {
   }
 
   const apiVersionParams = (model.schemas.constants ?? [])
-    .filter((c) => c.language.default.name.startsWith("ApiVersion"))
+    .filter((c) => c.language.default.name.startsWith(ApiVersion))
     .map((c) => c.value.value)
     .concat(
       (model.schemas.choices ?? [])
-        .filter((c) => c.language.default.name.startsWith("ApiVersion"))
+        .filter((c) => c.language.default.name.startsWith(ApiVersion))
         .flatMap((c) => c.choices.map((x) => x.value)),
     );
 
