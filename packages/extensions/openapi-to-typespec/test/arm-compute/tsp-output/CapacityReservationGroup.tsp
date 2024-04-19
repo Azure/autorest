@@ -101,7 +101,7 @@ interface CapacityReservationGroups {
 }
 
 @@encodedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.createOrUpdate::parameters.resource,
@@ -112,7 +112,7 @@ interface CapacityReservationGroups {
   "Parameters supplied to the Create capacity reservation Group."
 );
 @@encodedName(CapacityReservationGroups.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.update::parameters.properties,

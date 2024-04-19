@@ -141,7 +141,7 @@ interface DatastoreResources {
 }
 
 @@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DatastoreResources.createOrUpdate::parameters.resource,

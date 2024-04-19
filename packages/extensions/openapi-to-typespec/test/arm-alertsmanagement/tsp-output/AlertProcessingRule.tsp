@@ -14,7 +14,13 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * Alert processing rule object containing target scopes, conditions and scheduling logic.
  */
-model AlertProcessingRule is TrackedResource<AlertProcessingRuleProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  AlertProcessingRuleProperties
+)
+model AlertProcessingRule extends TrackedResourceBase {
   /**
    * The name of the alert processing rule that needs to be fetched.
    */
@@ -23,6 +29,12 @@ model AlertProcessingRule is TrackedResource<AlertProcessingRuleProperties> {
   @segment("actionRules")
   @visibility("read")
   name: string;
+
+  /**
+   * Alert processing rule properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertProcessingRuleProperties;
 }
 
 @armResourceOperations
@@ -51,6 +63,8 @@ interface AlertProcessingRules {
   /**
    * List all alert processing rules in a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("AlertProcessingRules_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AlertProcessingRule>;
 
   /**
@@ -59,8 +73,24 @@ interface AlertProcessingRules {
   listBySubscription is ArmListBySubscription<AlertProcessingRule>;
 }
 
+@@encodedName(AlertProcessingRules.createOrUpdate::parameters.resource,
+  "application/json",
+  "alertProcessingRule"
+);
+@@extension(AlertProcessingRules.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "alertProcessingRule"
+);
 @@doc(AlertProcessingRules.createOrUpdate::parameters.resource,
   "Alert processing rule to be created/updated."
+);
+@@encodedName(AlertProcessingRules.update::parameters.properties,
+  "application/json",
+  "alertProcessingRulePatch"
+);
+@@extension(AlertProcessingRules.update::parameters.properties,
+  "x-ms-client-name",
+  "alertProcessingRulePatch"
 );
 @@doc(AlertProcessingRules.update::parameters.properties,
   "Parameters supplied to the operation."

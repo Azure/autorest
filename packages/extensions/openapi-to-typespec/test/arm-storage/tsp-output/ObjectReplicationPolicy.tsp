@@ -15,9 +15,14 @@ namespace Microsoft.Storage;
 /**
  * The replication policy between two storage accounts. Multiple rules can be defined in one policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-model ObjectReplicationPolicy
-  is ProxyResource<ObjectReplicationPolicyProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  ObjectReplicationPolicyProperties
+)
+model ObjectReplicationPolicy extends ProxyResourceBase {
   /**
    * For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.
    */
@@ -27,6 +32,12 @@ model ObjectReplicationPolicy
   @segment("objectReplicationPolicies")
   @visibility("read")
   name: string;
+
+  /**
+   * Returns the Storage Account Object Replication Policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ObjectReplicationPolicyProperties;
 }
 
 @armResourceOperations
@@ -49,9 +60,19 @@ interface ObjectReplicationPolicies {
   /**
    * List the object replication policies associated with the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
 
+@@encodedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "application/json",
+  "properties"
+);
+@@extension(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
 @@doc(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."
 );

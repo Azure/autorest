@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Global Schema Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  GlobalSchemaContractProperties
+)
+model GlobalSchemaContract extends ProxyResourceBase {
   /**
    * Schema id identifier. Must be unique in the current API Management service instance.
    */
@@ -27,6 +33,12 @@ model GlobalSchemaContract is ProxyResource<GlobalSchemaContractProperties> {
   @segment("schemas")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the Global Schema.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GlobalSchemaContractProperties;
 }
 
 @armResourceOperations
@@ -34,12 +46,16 @@ interface GlobalSchemaContracts {
   /**
    * Gets the details of the Schema specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GlobalSchema_Get")
   get is ArmResourceRead<GlobalSchemaContract>;
 
   /**
    * Gets the entity state (Etag) version of the Schema specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("GlobalSchema_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GlobalSchemaContract,
@@ -50,6 +66,8 @@ interface GlobalSchemaContracts {
   /**
    * Creates new or updates existing specified Schema of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GlobalSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,
     {
@@ -66,6 +84,8 @@ interface GlobalSchemaContracts {
   /**
    * Deletes specific Schema.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
     {
@@ -82,6 +102,8 @@ interface GlobalSchemaContracts {
   /**
    * Lists a collection of schemas registered with service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GlobalSchema_ListByService")
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,
     {
@@ -109,6 +131,14 @@ interface GlobalSchemaContracts {
   >;
 }
 
+@@encodedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

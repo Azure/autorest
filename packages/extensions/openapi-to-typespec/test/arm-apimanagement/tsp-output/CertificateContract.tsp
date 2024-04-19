@@ -15,8 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Certificate details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model CertificateContract is ProxyResource<CertificateContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  CertificateContractProperties
+)
+model CertificateContract extends ProxyResourceBase {
   /**
    * Identifier of the certificate entity. Must be unique in the current API Management service instance.
    */
@@ -28,6 +34,12 @@ model CertificateContract is ProxyResource<CertificateContractProperties> {
   @segment("certificates")
   @visibility("read")
   name: string;
+
+  /**
+   * Certificate properties details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +47,16 @@ interface CertificateContracts {
   /**
    * Gets the details of the certificate specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificate_Get")
   get is ArmResourceRead<CertificateContract>;
 
   /**
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("Certificate_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       CertificateContract,
@@ -51,6 +67,8 @@ interface CertificateContracts {
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
     {
@@ -67,6 +85,8 @@ interface CertificateContracts {
   /**
    * Deletes specific certificate.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
     {
@@ -83,6 +103,8 @@ interface CertificateContracts {
   /**
    * Lists a collection of all certificates in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificate_ListByService")
   listByService is ArmResourceListByParent<
     CertificateContract,
     {
@@ -118,6 +140,8 @@ interface CertificateContracts {
   /**
    * From KeyVault, Refresh the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Certificate_RefreshSecret")
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
     void,
@@ -125,6 +149,14 @@ interface CertificateContracts {
   >;
 }
 
+@@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(CertificateContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(CertificateContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );

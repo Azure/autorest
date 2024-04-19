@@ -4,7 +4,20 @@ import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
 
-export async function generateTypespec(repoRoot: string, folder: string, debug = false, isFullCompatible = false) {
+const brownFieldProjects = [
+  "arm-agrifood",
+  "arm-alertsmanagement",
+  "arm-analysisservices",
+  "arm-apimanagement",
+  "arm-authorization",
+  "arm-azureintegrationspaces",
+  "arm-compute",
+  "arm-dns",
+  "arm-machinelearningservices",
+  "arm-storage",
+];
+
+export async function generateTypespec(repoRoot: string, folder: string, debug = false) {
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder);
   const dir = await readdir(path);
@@ -21,11 +34,11 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
   }
 
   const swaggerPath = join(path, firstSwagger);
-  generate(repoRoot, swaggerPath, debug, isFullCompatible);
+  generate(repoRoot, swaggerPath, debug, brownFieldProjects.includes(folder));
 }
 
 // A list containing all the projects we could compile. After we enable all the projects, we will delete this list.
-const whiteList = ["anomalyDetector"];
+const whiteList = ["anomalyDetector", "arm-agrifood", "arm-sphere", "arm-test"];
 
 export async function generateSwagger(folder: string) {
   if (!whiteList.includes(folder)) {
@@ -39,6 +52,8 @@ export async function generateSwagger(folder: string) {
   execSync(command, { cwd: path, stdio: "inherit" });
 }
 
+// `isFullCompatible` is mainly used for brownfield projects, where users want to fully honor the definition in the swagger file.
+// For greenfield projects, we expect users to set `isFullCompatible` to `false` so that it would follow the arm template definition.
 function generate(root: string, path: string, debug = false, isFullCompatible = false) {
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
@@ -82,7 +97,7 @@ async function main() {
   for (let i = 0; i < folders.length; i++) {
     const folder = folders[i];
     try {
-      await generateTypespec(repoRoot, folder, debug, i % 2 === 0);
+      await generateTypespec(repoRoot, folder, debug);
       if (swagger) {
         await generateSwagger(folder);
       }

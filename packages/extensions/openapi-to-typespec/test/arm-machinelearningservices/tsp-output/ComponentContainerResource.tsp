@@ -81,7 +81,7 @@ interface ComponentContainerResources {
 }
 
 @@encodedName(ComponentContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(ComponentContainerResources.createOrUpdate::parameters.resource,

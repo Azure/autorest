@@ -72,7 +72,7 @@ interface RoleDefinitions {
 }
 
 @@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "roleDefinition"
 );
 @@extension(RoleDefinitions.createOrUpdate::parameters.resource,

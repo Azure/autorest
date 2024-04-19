@@ -15,8 +15,12 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API Schema Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model SchemaContract is ProxyResource<SchemaContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SchemaContractProperties)
+model SchemaContract extends ProxyResourceBase {
   /**
    * Schema id identifier. Must be unique in the current API Management service instance.
    */
@@ -27,6 +31,12 @@ model SchemaContract is ProxyResource<SchemaContractProperties> {
   @segment("schemas")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the API Schema.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SchemaContractProperties;
 }
 
 @armResourceOperations
@@ -34,12 +44,16 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_Get")
   get is ArmResourceRead<SchemaContract>;
 
   /**
    * Gets the entity state (Etag) version of the schema specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiSchema_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       SchemaContract,
@@ -50,6 +64,8 @@ interface SchemaContracts {
   /**
    * Creates or updates schema configuration for the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     {
@@ -66,6 +82,8 @@ interface SchemaContracts {
   /**
    * Deletes the schema configuration at the Api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
     {
@@ -88,6 +106,8 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_ListByApi")
   listByApi is ArmResourceListByParent<
     SchemaContract,
     {
@@ -115,6 +135,14 @@ interface SchemaContracts {
   >;
 }
 
+@@encodedName(SchemaContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(SchemaContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(SchemaContracts.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );

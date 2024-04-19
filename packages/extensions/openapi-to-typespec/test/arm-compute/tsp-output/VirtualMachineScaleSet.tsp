@@ -572,7 +572,7 @@ interface VirtualMachineScaleSets {
 }
 
 @@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
@@ -583,7 +583,7 @@ interface VirtualMachineScaleSets {
   "The scale set object."
 );
 @@encodedName(VirtualMachineScaleSets.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.update::parameters.properties,
@@ -594,7 +594,7 @@ interface VirtualMachineScaleSets {
   "The scale set object."
 );
 @@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.deallocate::parameters.body,
@@ -605,7 +605,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.deleteInstances::parameters.body,
@@ -616,7 +616,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.powerOff::parameters.body,
@@ -627,7 +627,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.restart::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.restart::parameters.body,
@@ -638,7 +638,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.start::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.start::parameters.body,
@@ -649,7 +649,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.redeploy::parameters.body,
@@ -660,7 +660,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.performMaintenance::parameters.body,
@@ -671,7 +671,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
@@ -682,7 +682,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
-  "json",
+  "application/json",
   "vmScaleSetReimageInput"
 );
 @@extension(VirtualMachineScaleSets.reimage::parameters.body,
@@ -693,7 +693,7 @@ interface VirtualMachineScaleSets {
   "Parameters for Reimaging VM ScaleSet."
 );
 @@encodedName(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.reimageAll::parameters.body,
@@ -704,7 +704,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
@@ -715,7 +715,7 @@ interface VirtualMachineScaleSets {
   "The input object for ConvertToSinglePlacementGroup API."
 );
 @@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,

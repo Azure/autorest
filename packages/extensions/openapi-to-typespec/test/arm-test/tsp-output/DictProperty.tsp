@@ -38,7 +38,5 @@ interface DictProperties {
   /**
    * List resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DictProperties_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }

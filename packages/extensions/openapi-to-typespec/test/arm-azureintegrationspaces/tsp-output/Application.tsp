@@ -54,6 +54,8 @@ interface Applications {
   /**
    * List Application resources by Space
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
     {

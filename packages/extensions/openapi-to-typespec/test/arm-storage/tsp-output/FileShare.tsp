@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * Properties of the file share, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FileServiceProperties)
-model FileShare is ProxyResource<FileShareProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(FileShareProperties)
+model FileShare extends ProxyResourceBase {
   /**
    * The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
    */
@@ -27,6 +31,12 @@ model FileShare is ProxyResource<FileShareProperties> {
   @segment("shares")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the file share.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FileShareProperties;
 }
 
 @armResourceOperations
@@ -100,6 +110,8 @@ interface FileShares {
   /**
    * Lists all shares.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FileShares_List")
   list is ArmResourceListByParent<
     FileShare,
     {
@@ -149,11 +161,43 @@ interface FileShares {
   >;
 }
 
+@@encodedName(FileShares.create::parameters.resource,
+  "application/json",
+  "fileShare"
+);
+@@extension(FileShares.create::parameters.resource,
+  "x-ms-client-name",
+  "fileShare"
+);
 @@doc(FileShares.create::parameters.resource,
   "Properties of the file share to create."
+);
+@@encodedName(FileShares.update::parameters.properties,
+  "application/json",
+  "fileShare"
+);
+@@extension(FileShares.update::parameters.properties,
+  "x-ms-client-name",
+  "fileShare"
 );
 @@doc(FileShares.update::parameters.properties,
   "Properties to update for the file share."
 );
+@@encodedName(FileShares.restore::parameters.body,
+  "application/json",
+  "deletedShare"
+);
+@@extension(FileShares.restore::parameters.body,
+  "x-ms-client-name",
+  "deletedShare"
+);
 @@doc(FileShares.restore::parameters.body, "");
+@@encodedName(FileShares.lease::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(FileShares.lease::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(FileShares.lease::parameters.body, "Lease Share request body.");

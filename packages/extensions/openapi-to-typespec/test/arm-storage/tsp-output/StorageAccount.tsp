@@ -14,7 +14,11 @@ namespace Microsoft.Storage;
 /**
  * The storage account.
  */
-model StorageAccount is TrackedResource<StorageAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
+model StorageAccount extends TrackedResourceBase {
   /**
    * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
    */
@@ -36,6 +40,12 @@ model StorageAccount is TrackedResource<StorageAccountProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties of the storage account.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageAccountProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
@@ -78,6 +88,8 @@ interface StorageAccounts {
   /**
    * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("StorageAccounts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<StorageAccount>;
 
   /**
@@ -115,6 +127,8 @@ interface StorageAccounts {
   /**
    * List SAS credentials of a storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
@@ -124,6 +138,8 @@ interface StorageAccounts {
   /**
    * List service SAS credentials of a specific resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
@@ -201,6 +217,8 @@ interface StorageAccounts {
    * Gets the private link resources that need to be created for a storage account.
    */
   // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateLinkResources_ListByStorageAccount")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
   listByStorageAccount(
@@ -219,20 +237,68 @@ interface StorageAccounts {
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
+@@encodedName(StorageAccounts.create::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(StorageAccounts.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(StorageAccounts.create::parameters.resource,
   "The parameters to provide for the created account."
+);
+@@encodedName(StorageAccounts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(StorageAccounts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(StorageAccounts.update::parameters.properties,
   "The parameters to provide for the updated account."
 );
+@@encodedName(StorageAccounts.regenerateKey::parameters.body,
+  "application/json",
+  "regenerateKey"
+);
+@@extension(StorageAccounts.regenerateKey::parameters.body,
+  "x-ms-client-name",
+  "regenerateKey"
+);
 @@doc(StorageAccounts.regenerateKey::parameters.body,
   "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
+);
+@@encodedName(StorageAccounts.listAccountSAS::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(StorageAccounts.listAccountSAS::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(StorageAccounts.listAccountSAS::parameters.body,
   "The parameters to provide to list SAS credentials for the storage account."
 );
+@@encodedName(StorageAccounts.listServiceSAS::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(StorageAccounts.listServiceSAS::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(StorageAccounts.listServiceSAS::parameters.body,
   "The parameters to provide to list service SAS credentials."
+);
+@@encodedName(StorageAccounts.restoreBlobRanges::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(StorageAccounts.restoreBlobRanges::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(StorageAccounts.restoreBlobRanges::parameters.body,
   "The parameters to provide for restore blob ranges."

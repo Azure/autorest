@@ -80,7 +80,7 @@ interface PrivateEndpointConnections {
 }
 
 @@encodedName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
-  "json",
+  "application/json",
   "privateEndpointConnection"
 );
 @@extension(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,

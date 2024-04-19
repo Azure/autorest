@@ -15,8 +15,12 @@ namespace Microsoft.Storage;
 /**
  * The local user associated with the storage accounts.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-model LocalUser is ProxyResource<LocalUserProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(LocalUserProperties)
+model LocalUser extends ProxyResourceBase {
   /**
    * The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.
    */
@@ -27,6 +31,12 @@ model LocalUser is ProxyResource<LocalUserProperties> {
   @segment("localUsers")
   @visibility("read")
   name: string;
+
+  /**
+   * Storage account local user properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LocalUserProperties;
 }
 
 @armResourceOperations
@@ -49,6 +59,8 @@ interface LocalUsers {
   /**
    * List the local users associated with the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("LocalUsers_List")
   list is ArmResourceListByParent<LocalUser>;
 
   /**
@@ -66,6 +78,14 @@ interface LocalUsers {
   >;
 }
 
+@@encodedName(LocalUsers.createOrUpdate::parameters.resource,
+  "application/json",
+  "properties"
+);
+@@extension(LocalUsers.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
 @@doc(LocalUsers.createOrUpdate::parameters.resource,
   "The local user associated with a storage account."
 );

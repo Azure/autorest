@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tenant Settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model AccessInformationContract
-  is ProxyResource<AccessInformationContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  AccessInformationContractProperties
+)
+model AccessInformationContract extends ProxyResourceBase {
   /**
    * The identifier of the Access configuration.
    */
@@ -26,6 +31,12 @@ model AccessInformationContract
   @segment("tenant")
   @visibility("read")
   name: AccessIdName;
+
+  /**
+   * AccessInformation entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AccessInformationContractProperties;
 }
 
 @armResourceOperations
@@ -33,12 +44,16 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details without secrets.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
 
   /**
    * Tenant access metadata
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("TenantAccess_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       AccessInformationContract,
@@ -49,6 +64,8 @@ interface AccessInformationContracts {
   /**
    * Update tenant access information details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     {
@@ -65,7 +82,9 @@ interface AccessInformationContracts {
   /**
    * Update tenant access information details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
     AccessInformationUpdateParameters,
@@ -83,6 +102,8 @@ interface AccessInformationContracts {
   /**
    * Returns list of access infos - for Git and Management endpoints.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     {
@@ -99,6 +120,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
@@ -107,6 +130,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
@@ -115,6 +140,8 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
     void,
@@ -124,6 +151,8 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key for GIT.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccessGit_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
@@ -132,14 +161,32 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key for GIT.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantAccessGit_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
     void
   >;
 }
 
+@@encodedName(AccessInformationContracts.create::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(AccessInformationContracts.create::parameters.resource,
   "Parameters supplied to retrieve the Tenant Access Information."
+);
+@@encodedName(AccessInformationContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(AccessInformationContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(AccessInformationContracts.update::parameters.properties,
   "Parameters supplied to retrieve the Tenant Access Information."

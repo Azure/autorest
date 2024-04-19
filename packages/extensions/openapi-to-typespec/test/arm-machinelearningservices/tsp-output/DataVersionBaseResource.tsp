@@ -116,7 +116,7 @@ interface DataVersionBaseResources {
 }
 
 @@encodedName(DataVersionBaseResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DataVersionBaseResources.createOrUpdate::parameters.resource,

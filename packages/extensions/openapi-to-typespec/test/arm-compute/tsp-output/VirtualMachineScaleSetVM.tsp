@@ -428,7 +428,7 @@ interface VirtualMachineScaleSetVMS {
 }
 
 @@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSetVMS.update::parameters.resource,
@@ -439,7 +439,7 @@ interface VirtualMachineScaleSetVMS {
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
 );
 @@encodedName(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "json",
+  "application/json",
   "vmScaleSetVMReimageInput"
 );
 @@extension(VirtualMachineScaleSetVMS.reimage::parameters.body,
@@ -450,7 +450,7 @@ interface VirtualMachineScaleSetVMS {
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
 @@encodedName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSetVMS.runCommand::parameters.body,
