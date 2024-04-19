@@ -24,10 +24,18 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
   generate(repoRoot, swaggerPath, debug, isFullCompatible);
 }
 
+// A list containing all the projects we could compile. After we enable all the projects, we will delete this list.
+const whiteList = ["anomalyDetector"];
+
 export async function generateSwagger(folder: string) {
+  if (!whiteList.includes(folder)) {
+    return;
+  }
+
   const { path: root } = await resolveProject(__dirname);
   const path = join(root, "test", folder, "tsp-output");
-  const command = "tsp compile . --emit=@azure-tools/typespec-autorest";
+  const command =
+    "tsp compile . --emit=@azure-tools/typespec-autorest --option @azure-tools/typespec-autorest.output-file=./swagger-output/swagger.json";
   execSync(command, { cwd: path, stdio: "inherit" });
 }
 

@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 /**
  * // FIXME: (missing-service-description) Add service description
  */
@@ -27,5 +28,6 @@ enum Versions {
   /**
    * The 2023-07-01 API version.
    */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_07_01: "2023-07-01",
 }
