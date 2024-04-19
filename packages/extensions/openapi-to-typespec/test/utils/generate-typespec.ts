@@ -52,6 +52,8 @@ export async function generateSwagger(folder: string) {
   execSync(command, { cwd: path, stdio: "inherit" });
 }
 
+// `isFullCompatible` is mainly used for brownfield projects, where users want to fully honor the definition in the swagger file.
+// For greenfield projects, we expect users to set `isFullCompatible` to `false` so that it would follow the arm template definition.
 function generate(root: string, path: string, debug = false, isFullCompatible = false) {
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
