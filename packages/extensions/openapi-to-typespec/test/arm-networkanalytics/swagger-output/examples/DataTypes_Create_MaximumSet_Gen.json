@@ -1,0 +1,73 @@
+{
+  "operationId": "DataTypes_Create",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "dataProductName": "dataproduct01",
+    "dataTypeName": "datatypename",
+    "resource": {
+      "properties": {
+        "databaseCacheRetention": 23,
+        "databaseRetention": 6,
+        "provisioningState": "Succeeded",
+        "state": "STARTED",
+        "storageOutputRetention": 27
+      }
+    },
+    "resourceGroupName": "aoiresourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataTypes_Create_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "datatypeName",
+        "type": "Microsoft.NetworkAnalytics/DataProducts/DataTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/dataProducts/dataproduct01/dataTypes/datatypename",
+        "properties": {
+          "databaseCacheRetention": 23,
+          "databaseRetention": 6,
+          "provisioningState": "Succeeded",
+          "state": "STARTED",
+          "stateReason": "State Reason",
+          "storageOutputRetention": 27,
+          "visualizationUrl": "visualizationUrl"
+        },
+        "systemData": {
+          "createdAt": "2023-09-04T08:26:27.1506343Z",
+          "createdBy": "abc@micros.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-09-04T08:26:27.1506343Z",
+          "lastModifiedBy": "abc@micros.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "datatypename",
+        "type": "Microsoft.NetworkAnalytics/DataProducts/DataTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/dataProducts/dataproduct01/dataTypes/datatypename",
+        "properties": {
+          "databaseCacheRetention": 23,
+          "databaseRetention": 6,
+          "provisioningState": "Succeeded",
+          "state": "STARTED",
+          "stateReason": "State Reason",
+          "storageOutputRetention": 27,
+          "visualizationUrl": "visualizationUrl"
+        },
+        "systemData": {
+          "createdAt": "2023-09-04T08:26:27.1506343Z",
+          "createdBy": "abc@micros.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-09-04T08:26:27.1506343Z",
+          "lastModifiedBy": "abc@micros.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

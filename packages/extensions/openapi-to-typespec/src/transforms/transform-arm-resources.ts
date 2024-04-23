@@ -37,7 +37,8 @@ export function isGeneratedResourceObject(name: string): boolean {
 }
 
 export function replaceGeneratedResourceObject(name: string): string {
-  return generatedResourceObjects.get(name) ?? name;
+  const mappingName = generatedResourceObjects.get(name) ?? name;
+  return mappingName == "AnyObject" ? "{}" : mappingName;
 }
 
 function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {

@@ -61,7 +61,7 @@ interface DataTypes {
   /**
    * Delete data for data type.
    */
-  deleteData is ArmResourceActionNoResponseContentAsync<DataType, AnyObject>;
+  deleteData is ArmResourceActionNoResponseContentAsync<DataType, {}>;
 
   /**
    * Generate sas token for storage container.
