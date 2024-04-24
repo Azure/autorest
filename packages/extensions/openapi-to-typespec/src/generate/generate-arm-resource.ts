@@ -50,7 +50,7 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   if (resource.locationParent) {
-    definitions.push(`@parentResource("${resource.locationParent}")`);
+    definitions.push(`@parentResource(${resource.locationParent})`);
   }
 
   if (
