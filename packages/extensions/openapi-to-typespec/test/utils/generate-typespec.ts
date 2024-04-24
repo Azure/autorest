@@ -45,6 +45,7 @@ const whiteList = [
   "arm-playwrighttesting",
   "arm-servicenetworking",
   "arm-sphere",
+  "arm-storage",
   "arm-test",
 ];
 
