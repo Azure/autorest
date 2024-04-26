@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "accountName": "sto328",
+    "api-version": "2022-09-01",
+    "containerName": "container6185",
+    "monitor": "true",
+    "parameters": {
+      "action": "Acquire",
+      "breakPeriod": null,
+      "leaseDuration": -1,
+      "leaseId": null,
+      "proposedLeaseId": null
+    },
+    "resourceGroupName": "res3376",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "leaseId": "8698f513-fa75-44a1-b8eb-30ba336af27d"
+      }
+    }
+  },
+  "operationId": "BlobContainers_Lease",
+  "title": "Acquire a lease on a container"
+}

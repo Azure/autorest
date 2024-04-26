@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "accountName": "sto8607",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "cors": {
+          "corsRules": [
+            {
+              "allowedHeaders": [
+                "x-ms-meta-abc",
+                "x-ms-meta-data*",
+                "x-ms-meta-target*"
+              ],
+              "allowedMethods": [
+                "GET",
+                "HEAD",
+                "POST",
+                "OPTIONS",
+                "MERGE",
+                "PUT"
+              ],
+              "allowedOrigins": [
+                "http://www.contoso.com",
+                "http://www.fabrikam.com"
+              ],
+              "exposedHeaders": [
+                "x-ms-meta-*"
+              ],
+              "maxAgeInSeconds": 100
+            },
+            {
+              "allowedHeaders": [
+                "*"
+              ],
+              "allowedMethods": [
+                "GET"
+              ],
+              "allowedOrigins": [
+                "*"
+              ],
+              "exposedHeaders": [
+                "*"
+              ],
+              "maxAgeInSeconds": 2
+            },
+            {
+              "allowedHeaders": [
+                "x-ms-meta-12345675754564*"
+              ],
+              "allowedMethods": [
+                "GET",
+                "PUT"
+              ],
+              "allowedOrigins": [
+                "http://www.abc23.com",
+                "https://www.fabrikam.com/*"
+              ],
+              "exposedHeaders": [
+                "x-ms-meta-abc",
+                "x-ms-meta-data*",
+                "x-ms-meta-target*"
+              ],
+              "maxAgeInSeconds": 2000
+            }
+          ]
+        }
+      }
+    },
+    "queueServiceName": "default",
+    "resourceGroupName": "res4410",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/queueServices",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/queueServices/default",
+        "properties": {
+          "cors": {
+            "corsRules": [
+              {
+                "allowedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x-ms-meta-target*"
+                ],
+                "allowedMethods": [
+                  "GET",
+                  "HEAD",
+                  "POST",
+                  "OPTIONS",
+                  "MERGE",
+                  "PUT"
+                ],
+                "allowedOrigins": [
+                  "http://www.contoso.com",
+                  "http://www.fabrikam.com"
+                ],
+                "exposedHeaders": [
+                  "x-ms-meta-*"
+                ],
+                "maxAgeInSeconds": 100
+              },
+              {
+                "allowedHeaders": [
+                  "*"
+                ],
+                "allowedMethods": [
+                  "GET"
+                ],
+                "allowedOrigins": [
+                  "*"
+                ],
+                "exposedHeaders": [
+                  "*"
+                ],
+                "maxAgeInSeconds": 2
+              },
+              {
+                "allowedHeaders": [
+                  "x-ms-meta-12345675754564*"
+                ],
+                "allowedMethods": [
+                  "GET",
+                  "PUT"
+                ],
+                "allowedOrigins": [
+                  "http://www.abc23.com",
+                  "https://www.fabrikam.com/*"
+                ],
+                "exposedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x-ms-meta-target*"
+                ],
+                "maxAgeInSeconds": 2000
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "QueueServices_SetServiceProperties",
+  "title": "QueueServicesPut"
+}

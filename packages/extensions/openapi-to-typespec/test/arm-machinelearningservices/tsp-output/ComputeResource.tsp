@@ -5,151 +5,195 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./Workspace.tsp";
 
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-
 namespace Azure.ResourceManager.MachineLearning;
 // FIXME: ComputeResource has no properties property
 /**
-* Machine Learning compute object wrapped into ARM resource envelope.
-*/
+ * Machine Learning compute object wrapped into ARM resource envelope.
+ */
 @parentResource(Workspace)
 model ComputeResource is TrackedResource<{}> {
-/**
-* Name of the Azure Machine Learning compute.
-*/
-@path
-@key("computeName")
-@segment("computes")
-@visibility("read")
-"name": string;
+  /**
+   * Name of the Azure Machine Learning compute.
+   */
+  @path
+  @key("computeName")
+  @segment("computes")
+  @visibility("read")
+  name: string;
 
-...Azure.ResourceManager.ManagedServiceIdentity
-
-...Azure.ResourceManager.ResourceSku
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
 }
-
-
 
 @armResourceOperations
 interface ComputeResources {
-/**
-* Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.
-*/
-@operationId("Compute_Get")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-get is ArmResourceRead<ComputeResource>
+  /**
+   * Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_Get")
+  get is ArmResourceRead<ComputeResource>;
 
-/**
-* Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
-*/
-@operationId("Compute_CreateOrUpdate")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>
+  /**
+   * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ComputeResource>;
 
-/**
-* Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
-*/
-@parameterVisibility("read")
-@operationId("Compute_Update")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-update is ArmCustomPatchAsync<ComputeResource,ClusterUpdateParameters>
+  /**
+   * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("Compute_Update")
+  update is ArmCustomPatchAsync<ComputeResource, ClusterUpdateParameters>;
 
-/**
-* Deletes specified Machine Learning compute.
-*/
-@operationId("Compute_Delete")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-delete is ArmResourceDeleteAsync<ComputeResource,{
-    ...BaseParameters<ComputeResource>;
-    /**
-* Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
-*/
-@query("underlyingResourceAction")
-"underlyingResourceAction": UnderlyingResourceAction
-    }>
+  /**
+   * Deletes specified Machine Learning compute.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_Delete")
+  delete is ArmResourceDeleteAsync<
+    ComputeResource,
+    {
+      ...BaseParameters<ComputeResource>;
 
-/**
-* Gets computes in specified workspace.
-*/
-@operationId("Compute_List")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-list is ArmResourceListByParent<ComputeResource,{
-    ...BaseParameters<ComputeResource>;
-    /**
-* Continuation token for pagination.
-*/
-@query("$skip")
-"$skip"?: string
-    }>
+      /**
+       * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
+       */
+      @query("underlyingResourceAction")
+      underlyingResourceAction: UnderlyingResourceAction;
+    }
+  >;
 
-/**
-* Updates the custom services list. The list of custom services provided shall be overwritten
-*/
-@operationId("Compute_UpdateCustomServices")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-updateCustomServices is ArmResourceActionSync<ComputeResource,paths·7cv641·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-machinelearningservices-workspaces-workspacename-computes-computename-customservices·post·requestbody·content·application-json·schema,void>
+  /**
+   * Gets computes in specified workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_List")
+  list is ArmResourceListByParent<
+    ComputeResource,
+    {
+      ...BaseParameters<ComputeResource>;
 
-/**
-* Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
-*/
-@operationId("Compute_ListNodes")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-listNodes is ArmResourceActionSync<ComputeResource,void,AmlComputeNodesInformation>
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+    }
+  >;
 
-/**
-* Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
-*/
-@operationId("Compute_ListKeys")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-listKeys is ArmResourceActionSync<ComputeResource,void,ComputeSecrets>
+  /**
+   * Updates the custom services list. The list of custom services provided shall be overwritten
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_UpdateCustomServices")
+  updateCustomServices is ArmResourceActionSync<
+    ComputeResource,
+    CustomService[],
+    void
+  >;
 
-/**
-* Posts a start action to a compute instance
-*/
-@operationId("Compute_Start")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-start is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
+  /**
+   * Get the details (e.g IP address, port etc) of all the compute nodes in the compute.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_ListNodes")
+  listNodes is ArmResourceActionSync<
+    ComputeResource,
+    void,
+    AmlComputeNodesInformation
+  >;
 
-/**
-* Posts a stop action to a compute instance
-*/
-@operationId("Compute_Stop")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-stop is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
+  /**
+   * Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_ListKeys")
+  listKeys is ArmResourceActionSync<ComputeResource, void, ComputeSecrets>;
 
-/**
-* Posts a restart action to a compute instance
-*/
-@operationId("Compute_Restart")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-restart is ArmResourceActionNoResponseContentAsync<ComputeResource,void>
+  /**
+   * Posts a start action to a compute instance
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_Start")
+  start is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
 
-/**
-* Updates the idle shutdown setting of a compute instance.
-*/
-@operationId("Compute_UpdateIdleShutdownSetting")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-updateIdleShutdownSetting is ArmResourceActionSync<ComputeResource,IdleShutdownSetting,void>
+  /**
+   * Posts a stop action to a compute instance
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_Stop")
+  stop is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
 
+  /**
+   * Posts a restart action to a compute instance
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_Restart")
+  restart is ArmResourceActionNoResponseContentAsync<ComputeResource, void>;
+
+  /**
+   * Updates the idle shutdown setting of a compute instance.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Compute_UpdateIdleShutdownSetting")
+  updateIdleShutdownSetting is ArmResourceActionSync<
+    ComputeResource,
+    IdleShutdownSetting,
+    void
+  >;
 }
 
-
-
-@@encodedName(ComputeResources.`createOrUpdate`::parameters.resource, "application/json", "parameters");
-@@extension(ComputeResources.`createOrUpdate`::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.`createOrUpdate`::parameters.resource, "Payload with Machine Learning compute definition.");
-@@encodedName(ComputeResources.`update`::parameters.properties, "application/json", "parameters");
-@@extension(ComputeResources.`update`::parameters.properties, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.`update`::parameters.properties, "Additional parameters for cluster update.");
-@@encodedName(ComputeResources.`updateCustomServices`::parameters.body, "application/json", "customServices");
-@@extension(ComputeResources.`updateCustomServices`::parameters.body, "x-ms-client-name", "customServices");
-@@doc(ComputeResources.`updateCustomServices`::parameters.body, "New list of Custom Services.");
-@@encodedName(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "application/json", "parameters");
-@@extension(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "x-ms-client-name", "parameters");
-@@doc(ComputeResources.`updateIdleShutdownSetting`::parameters.body, "The object for updating idle shutdown setting of specified ComputeInstance.");
+@@encodedName(ComputeResources.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(ComputeResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ComputeResources.createOrUpdate::parameters.resource,
+  "Payload with Machine Learning compute definition."
+);
+@@encodedName(ComputeResources.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(ComputeResources.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ComputeResources.update::parameters.properties,
+  "Additional parameters for cluster update."
+);
+@@encodedName(ComputeResources.updateCustomServices::parameters.body,
+  "application/json",
+  "customServices"
+);
+@@extension(ComputeResources.updateCustomServices::parameters.body,
+  "x-ms-client-name",
+  "customServices"
+);
+@@doc(ComputeResources.updateCustomServices::parameters.body,
+  "New list of Custom Services."
+);
+@@encodedName(ComputeResources.updateIdleShutdownSetting::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ComputeResources.updateIdleShutdownSetting::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ComputeResources.updateIdleShutdownSetting::parameters.body,
+  "The object for updating idle shutdown setting of specified ComputeInstance."
+);

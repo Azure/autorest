@@ -38,7 +38,16 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
 }
 
 // A list containing all the projects we could compile. After we enable all the projects, we will delete this list.
-const whiteList = ["anomalyDetector", "arm-agrifood", "arm-sphere", "arm-test"];
+const whiteList = [
+  "anomalyDetector",
+  "arm-agrifood",
+  "arm-networkanalytics",
+  "arm-playwrighttesting",
+  "arm-servicenetworking",
+  "arm-sphere",
+  "arm-storage",
+  "arm-test",
+];
 
 export async function generateSwagger(folder: string) {
   if (!whiteList.includes(folder)) {

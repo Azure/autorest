@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "accountName": "sto8596",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res9407",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto8596",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
+        "kind": "StorageV2",
+        "location": "eastus",
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "minimumTlsVersion": "TLS1_2",
+          "storageAccountSkuConversionStatus": {
+            "endTime": "2021-09-02T02:53:39.0932539Z",
+            "skuConversionStatus": "InProgress",
+            "startTime": "2022-09-01T02:53:39.0932539Z",
+            "targetSkuName": "Standard_GRS"
+          }
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "operationId": "StorageAccounts_GetProperties",
+  "title": "StorageAccountGetAsyncSkuConversionStatus"
+}

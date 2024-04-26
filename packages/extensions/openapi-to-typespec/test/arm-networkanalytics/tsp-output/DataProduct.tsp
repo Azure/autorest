@@ -86,7 +86,7 @@ interface DataProducts {
    */
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
-    AnyObject,
+    Record<unknown>,
     ListRoleAssignments
   >;
 

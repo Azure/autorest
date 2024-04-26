@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "LegalHold": {
+      "tags": [
+        "tag1",
+        "tag2",
+        "tag3"
+      ]
+    },
+    "accountName": "sto7280",
+    "api-version": "2022-09-01",
+    "containerName": "container8723",
+    "monitor": "true",
+    "resourceGroupName": "res4303",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "hasLegalHold": false,
+        "tags": []
+      }
+    }
+  },
+  "operationId": "BlobContainers_ClearLegalHold",
+  "title": "ClearLegalHoldContainers"
+}

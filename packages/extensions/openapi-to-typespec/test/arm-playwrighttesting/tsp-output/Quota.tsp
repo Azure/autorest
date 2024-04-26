@@ -15,7 +15,7 @@ namespace Microsoft.AzurePlaywrightService;
  * A quota resource
  */
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
+@parentResource(SubscriptionLocationResource)
 model Quota is ProxyResource<QuotaProperties> {
   /**
    * The quota name.

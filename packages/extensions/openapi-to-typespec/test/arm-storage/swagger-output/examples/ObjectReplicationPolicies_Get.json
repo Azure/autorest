@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "objectReplicationPolicyId": "{objectReplicationPolicy-Id}",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{objectReplicationPolicy-Id}",
+        "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/objectReplicationPolicies/{objectReplicationPolicy-Id}",
+        "properties": {
+          "destinationAccount": "destAccount1",
+          "enabledTime": "2019-06-08T03:01:55.7168089Z",
+          "policyId": "{objectReplicationPolicy-Id}",
+          "rules": [
+            {
+              "destinationContainer": "destContainer1",
+              "filters": {
+                "prefixMatch": [
+                  "blobA",
+                  "blobB"
+                ]
+              },
+              "sourceContainer": "sourceContainer1"
+            },
+            {
+              "destinationContainer": "destContainer1",
+              "filters": {
+                "prefixMatch": [
+                  "blobC",
+                  "blobD"
+                ]
+              },
+              "sourceContainer": "sourceContainer1"
+            }
+          ],
+          "sourceAccount": "sto2527"
+        }
+      }
+    }
+  },
+  "operationId": "ObjectReplicationPolicies_Get",
+  "title": "StorageAccountGetObjectReplicationPolicies"
+}

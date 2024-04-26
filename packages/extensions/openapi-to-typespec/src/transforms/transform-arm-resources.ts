@@ -27,7 +27,7 @@ import {
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
-import { transformObjectProperty } from "./transform-object";
+import { getTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
@@ -536,7 +536,7 @@ function convertResourceActionOperations(
           }
         }
 
-        const request = bodyParam ? bodyParam.schema.language.default.name : "void";
+        const request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {

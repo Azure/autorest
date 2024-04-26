@@ -1,0 +1,199 @@
+{
+  "parameters": {
+    "accountName": "sto9699",
+    "api-version": "2022-09-01",
+    "blobInventoryPolicyName": "default",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "policy": {
+          "type": "Inventory",
+          "enabled": true,
+          "rules": [
+            {
+              "name": "inventoryPolicyRule1",
+              "definition": {
+                "format": "Csv",
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob",
+                    "appendBlob",
+                    "pageBlob"
+                  ],
+                  "excludePrefix": [
+                    "excludeprefix1",
+                    "excludeprefix2"
+                  ],
+                  "includeBlobVersions": true,
+                  "includeDeleted": true,
+                  "includeSnapshots": true,
+                  "prefixMatch": [
+                    "inventoryprefix1",
+                    "inventoryprefix2"
+                  ]
+                },
+                "objectType": "Blob",
+                "schedule": "Daily",
+                "schemaFields": [
+                  "Name",
+                  "Creation-Time",
+                  "Last-Modified",
+                  "Content-Length",
+                  "Content-MD5",
+                  "BlobType",
+                  "AccessTier",
+                  "AccessTierChangeTime",
+                  "Snapshot",
+                  "VersionId",
+                  "IsCurrentVersion",
+                  "ContentType",
+                  "ContentEncoding",
+                  "ContentLanguage",
+                  "ContentCRC64",
+                  "CacheControl",
+                  "Metadata",
+                  "DeletionId",
+                  "Deleted",
+                  "DeletedTime",
+                  "RemainingRetentionDays"
+                ]
+              },
+              "destination": "container1",
+              "enabled": true
+            },
+            {
+              "name": "inventoryPolicyRule2",
+              "definition": {
+                "format": "Parquet",
+                "objectType": "Container",
+                "schedule": "Weekly",
+                "schemaFields": [
+                  "Name",
+                  "Last-Modified",
+                  "Metadata",
+                  "LeaseStatus",
+                  "LeaseState",
+                  "LeaseDuration",
+                  "PublicAccess",
+                  "HasImmutabilityPolicy",
+                  "HasLegalHold",
+                  "Etag",
+                  "DefaultEncryptionScope",
+                  "DenyEncryptionScopeOverride",
+                  "ImmutableStorageWithVersioningEnabled",
+                  "Deleted",
+                  "Version",
+                  "DeletedTime",
+                  "RemainingRetentionDays"
+                ]
+              },
+              "destination": "container2",
+              "enabled": true
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DefaultInventoryPolicy",
+        "type": "Microsoft.Storage/storageAccounts/inventoryPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/inventoryPolicies/default",
+        "properties": {
+          "policy": {
+            "type": "Inventory",
+            "enabled": true,
+            "rules": [
+              {
+                "name": "inventoryPolicyRule1",
+                "definition": {
+                  "format": "Csv",
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob",
+                      "appendBlob",
+                      "pageBlob"
+                    ],
+                    "excludePrefix": [
+                      "excludeprefix1",
+                      "excludeprefix2"
+                    ],
+                    "includeBlobVersions": true,
+                    "includeDeleted": true,
+                    "includeSnapshots": true,
+                    "prefixMatch": [
+                      "inventoryprefix1",
+                      "inventoryprefix2"
+                    ]
+                  },
+                  "objectType": "Blob",
+                  "schedule": "Daily",
+                  "schemaFields": [
+                    "Name",
+                    "Creation-Time",
+                    "Last-Modified",
+                    "Content-Length",
+                    "Content-MD5",
+                    "BlobType",
+                    "AccessTier",
+                    "AccessTierChangeTime",
+                    "Snapshot",
+                    "VersionId",
+                    "IsCurrentVersion",
+                    "ContentType",
+                    "ContentEncoding",
+                    "ContentLanguage",
+                    "ContentCRC64",
+                    "CacheControl",
+                    "Metadata",
+                    "DeletionId",
+                    "Deleted",
+                    "DeletedTime",
+                    "RemainingRetentionDays"
+                  ]
+                },
+                "destination": "container1",
+                "enabled": true
+              },
+              {
+                "name": "inventoryPolicyRule2",
+                "definition": {
+                  "format": "Parquet",
+                  "objectType": "Container",
+                  "schedule": "Weekly",
+                  "schemaFields": [
+                    "Name",
+                    "Last-Modified",
+                    "Metadata",
+                    "LeaseStatus",
+                    "LeaseState",
+                    "LeaseDuration",
+                    "PublicAccess",
+                    "HasImmutabilityPolicy",
+                    "HasLegalHold",
+                    "Etag",
+                    "DefaultEncryptionScope",
+                    "DenyEncryptionScopeOverride",
+                    "ImmutableStorageWithVersioningEnabled",
+                    "Deleted",
+                    "Version",
+                    "DeletedTime",
+                    "RemainingRetentionDays"
+                  ]
+                },
+                "destination": "container2",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "BlobInventoryPolicies_CreateOrUpdate",
+  "title": "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount"
+}
