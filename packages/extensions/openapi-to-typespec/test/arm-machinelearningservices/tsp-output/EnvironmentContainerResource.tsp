@@ -87,7 +87,7 @@ interface EnvironmentContainerResources {
 }
 
 @@encodedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(EnvironmentContainerResources.createOrUpdate::parameters.resource,

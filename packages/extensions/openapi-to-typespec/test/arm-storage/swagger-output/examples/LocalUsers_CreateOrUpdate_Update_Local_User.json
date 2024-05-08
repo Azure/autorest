@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "hasSharedKey": false,
+        "hasSshKey": false,
+        "hasSshPassword": false,
+        "homeDirectory": "homedirectory2"
+      }
+    },
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}",
+    "username": "user1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "user1",
+        "type": "Microsoft.Storage/storageAccounts/localUsers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
+        "properties": {
+          "hasSharedKey": false,
+          "hasSshKey": false,
+          "hasSshPassword": false,
+          "homeDirectory": "homedirectory2",
+          "sid": "S-1-2-0-3528686663-1788730862-2791910117-1000"
+        }
+      }
+    }
+  },
+  "operationId": "LocalUsers_CreateOrUpdate",
+  "title": "UpdateLocalUser"
+}

@@ -37,8 +37,6 @@ interface Certificates {
   /**
    * List Certificate resources by Catalog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Certificates_ListByCatalog")
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
@@ -89,14 +87,6 @@ interface Certificates {
   >;
 }
 
-@@encodedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "json",
-  "proofOfPossessionNonceRequest"
-);
-@@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "x-ms-client-name",
-  "proofOfPossessionNonceRequest"
-);
 @@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );

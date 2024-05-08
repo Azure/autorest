@@ -54,8 +54,6 @@ interface Devices {
   /**
    * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Devices_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<Device>;
 
   /**
@@ -68,14 +66,6 @@ interface Devices {
   >;
 }
 
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "json",
-  "generateDeviceCapabilityRequest"
-);
-@@extension(Devices.generateCapabilityImage::parameters.body,
-  "x-ms-client-name",
-  "generateDeviceCapabilityRequest"
-);
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );

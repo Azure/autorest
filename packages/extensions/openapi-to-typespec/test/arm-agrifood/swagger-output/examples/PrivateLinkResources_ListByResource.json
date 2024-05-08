@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "farmbeats",
+            "type": "Microsoft.AgFoodPlatform/farmBeats/privateLinkResources",
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
+            "properties": {
+              "groupId": "farmbeats",
+              "requiredMembers": [
+                "farmbeats"
+              ],
+              "requiredZoneNames": [
+                "privatelink.farmbeats.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByResource",
+  "title": "PrivateLinkResources_ListByResource"
+}

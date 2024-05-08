@@ -20,6 +20,7 @@ function getServiceInformation(program: TypespecProgram) {
     ``,
     `using TypeSpec.Rest;`,
     `using TypeSpec.Http;`,
+    `using TypeSpec.Versioning;`,
   ];
   const content = generateServiceInformation(program);
 

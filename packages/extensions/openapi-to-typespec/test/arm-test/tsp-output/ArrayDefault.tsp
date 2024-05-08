@@ -33,14 +33,10 @@ interface ArrayDefaults {
   /**
    * Get a Resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ArrayDefault_Get")
   get is ArmResourceRead<ArrayDefault>;
 
   /**
    * List resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ArrayDefault_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }

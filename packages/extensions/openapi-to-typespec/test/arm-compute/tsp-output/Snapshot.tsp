@@ -97,7 +97,7 @@ interface Snapshots {
 }
 
 @@encodedName(Snapshots.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "snapshot"
 );
 @@extension(Snapshots.createOrUpdate::parameters.resource,
@@ -107,7 +107,10 @@ interface Snapshots {
 @@doc(Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@encodedName(Snapshots.update::parameters.properties, "json", "snapshot");
+@@encodedName(Snapshots.update::parameters.properties,
+  "application/json",
+  "snapshot"
+);
 @@extension(Snapshots.update::parameters.properties,
   "x-ms-client-name",
   "snapshot"
@@ -116,7 +119,7 @@ interface Snapshots {
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
 @@encodedName(Snapshots.grantAccess::parameters.body,
-  "json",
+  "application/json",
   "grantAccessData"
 );
 @@extension(Snapshots.grantAccess::parameters.body,

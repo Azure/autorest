@@ -164,7 +164,7 @@ interface AnalysisServicesServers {
 }
 
 @@encodedName(AnalysisServicesServers.create::parameters.resource,
-  "json",
+  "application/json",
   "serverParameters"
 );
 @@extension(AnalysisServicesServers.create::parameters.resource,
@@ -175,7 +175,7 @@ interface AnalysisServicesServers {
   "Contains the information used to provision the Analysis Services server."
 );
 @@encodedName(AnalysisServicesServers.update::parameters.properties,
-  "json",
+  "application/json",
   "serverUpdateParameters"
 );
 @@extension(AnalysisServicesServers.update::parameters.properties,

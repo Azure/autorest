@@ -27,7 +27,7 @@ import {
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
-import { transformObjectProperty } from "./transform-object";
+import { getTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
@@ -290,7 +290,7 @@ function getCustomizations(
   if (bodyParam) {
     if (bodyParam.language.default.name !== templateName && isFullCompatible) {
       augmentedDecorators.push(
-        `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "json", "${bodyParam.language.default.name}");`,
+        `@@encodedName(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "application/json", "${bodyParam.language.default.name}");`,
       );
       augmentedDecorators.push(
         `@@extension(${tspOperationGroupName}.\`${operationName}\`::parameters.${templateName}, "x-ms-client-name", "${bodyParam.language.default.name}");`,
@@ -536,7 +536,7 @@ function convertResourceActionOperations(
           }
         }
 
-        const request = bodyParam ? bodyParam.schema.language.default.name : "void";
+        const request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
         const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
         let kind;
         if (!okResponse) {

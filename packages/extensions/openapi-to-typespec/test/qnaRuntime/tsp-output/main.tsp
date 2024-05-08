@@ -4,6 +4,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 /**
  * An API for QnAMaker runtime
  */

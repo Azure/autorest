@@ -1,0 +1,17 @@
+{
+  "operationId": "Images_Get",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "imageName": "myImageId",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Images_Get",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {}
+    }
+  }
+}

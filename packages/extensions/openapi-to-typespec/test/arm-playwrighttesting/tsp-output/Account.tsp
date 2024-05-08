@@ -54,8 +54,6 @@ interface Accounts {
   /**
    * List Account resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Accounts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Account>;
 
   /**

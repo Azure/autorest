@@ -1,0 +1,19 @@
+{
+  "operationId": "Accounts_Delete",
+  "parameters": {
+    "name": "myPlaywrightAccount",
+    "api-version": "2023-10-01-preview",
+    "resourceGroupName": "dummyrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Accounts_Delete",
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.PlaywrightTesting/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-06-01-preview"
+      }
+    },
+    "204": {}
+  }
+}

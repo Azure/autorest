@@ -52,8 +52,6 @@ interface Employees {
   /**
    * List Employee resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Employees_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Employee>;
 
   /**

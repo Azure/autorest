@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "hasSshPassword": true,
+        "homeDirectory": "homedirectory",
+        "permissionScopes": [
+          {
+            "permissions": "rwd",
+            "resourceName": "share1",
+            "service": "file"
+          },
+          {
+            "permissions": "rw",
+            "resourceName": "share2",
+            "service": "file"
+          }
+        ],
+        "sshAuthorizedKeys": [
+          {
+            "description": "key name",
+            "key": "ssh-rsa keykeykeykeykey="
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}",
+    "username": "user1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "user1",
+        "type": "Microsoft.Storage/storageAccounts/localUsers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
+        "properties": {
+          "homeDirectory": "homedirectory",
+          "permissionScopes": [
+            {
+              "permissions": "rwd",
+              "resourceName": "share1",
+              "service": "file"
+            },
+            {
+              "permissions": "rw",
+              "resourceName": "share2",
+              "service": "file"
+            }
+          ],
+          "sid": "S-1-2-0-125132-153423-36235-1000",
+          "sshAuthorizedKeys": [
+            {
+              "description": "key name",
+              "key": "ssh-rsa keykeykeykeykey="
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "LocalUsers_CreateOrUpdate",
+  "title": "CreateLocalUser"
+}

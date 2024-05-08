@@ -112,7 +112,7 @@ interface DataManagerForAgricultures {
 }
 
 @@encodedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "request"
 );
 @@extension(DataManagerForAgricultures.createOrUpdate::parameters.resource,
@@ -123,7 +123,7 @@ interface DataManagerForAgricultures {
   "Data Manager For Agriculture resource create or update request object."
 );
 @@encodedName(DataManagerForAgricultures.update::parameters.properties,
-  "json",
+  "application/json",
   "request"
 );
 @@extension(DataManagerForAgricultures.update::parameters.properties,

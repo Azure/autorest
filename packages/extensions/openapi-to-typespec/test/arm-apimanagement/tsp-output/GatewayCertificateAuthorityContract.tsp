@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Gateway certificate authority details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
-model GatewayCertificateAuthorityContract
-  is ProxyResource<GatewayCertificateAuthorityContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  GatewayCertificateAuthorityContractProperties
+)
+model GatewayCertificateAuthorityContract extends ProxyResourceBase {
   /**
    * Identifier of the certificate entity. Must be unique in the current API Management service instance.
    */
@@ -29,6 +34,12 @@ model GatewayCertificateAuthorityContract
   @segment("certificateAuthorities")
   @visibility("read")
   name: string;
+
+  /**
+   * Gateway certificate authority details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GatewayCertificateAuthorityContractProperties;
 }
 
 @armResourceOperations
@@ -36,12 +47,16 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Get assigned Gateway Certificate Authority details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayCertificateAuthority_Get")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
 
   /**
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("GatewayCertificateAuthority_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       GatewayCertificateAuthorityContract,
@@ -52,6 +67,8 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     {
@@ -68,6 +85,8 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Remove relationship between Certificate Authority and Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     {
@@ -84,6 +103,8 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Lists the collection of Certificate Authorities for the specified Gateway entity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     {
@@ -111,6 +132,14 @@ interface GatewayCertificateAuthorityContracts {
   >;
 }
 
+@@encodedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   ""
 );

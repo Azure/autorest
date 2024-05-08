@@ -86,7 +86,10 @@ interface Images {
   list is ArmListBySubscription<Image>;
 }
 
-@@encodedName(Images.createOrUpdate::parameters.resource, "json", "parameters");
+@@encodedName(Images.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
 @@extension(Images.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "parameters"
@@ -94,7 +97,10 @@ interface Images {
 @@doc(Images.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Image operation."
 );
-@@encodedName(Images.update::parameters.properties, "json", "parameters");
+@@encodedName(Images.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
 @@extension(Images.update::parameters.properties,
   "x-ms-client-name",
   "parameters"

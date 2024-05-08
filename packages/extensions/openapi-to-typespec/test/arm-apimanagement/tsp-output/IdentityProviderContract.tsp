@@ -15,9 +15,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Identity Provider details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model IdentityProviderContract
-  is ProxyResource<IdentityProviderContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  IdentityProviderContractProperties
+)
+model IdentityProviderContract extends ProxyResourceBase {
   /**
    * Identity Provider Type identifier.
    */
@@ -26,6 +31,12 @@ model IdentityProviderContract
   @segment("identityProviders")
   @visibility("read")
   name: IdentityProviderType;
+
+  /**
+   * Identity Provider contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IdentityProviderContractProperties;
 }
 
 @armResourceOperations
@@ -33,12 +44,16 @@ interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("IdentityProvider_Get")
   get is ArmResourceRead<IdentityProviderContract>;
 
   /**
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("IdentityProvider_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       IdentityProviderContract,
@@ -49,6 +64,8 @@ interface IdentityProviderContracts {
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("IdentityProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     {
@@ -65,7 +82,9 @@ interface IdentityProviderContracts {
   /**
    * Updates an existing IdentityProvider configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
     IdentityProviderUpdateParameters,
@@ -83,6 +102,8 @@ interface IdentityProviderContracts {
   /**
    * Deletes the specified identity provider configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     {
@@ -99,11 +120,15 @@ interface IdentityProviderContracts {
   /**
    * Lists a collection of Identity Provider configured in the specified service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<IdentityProviderContract>;
 
   /**
    * Gets the client secret details of the Identity Provider.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
     void,
@@ -111,8 +136,24 @@ interface IdentityProviderContracts {
   >;
 }
 
+@@encodedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(IdentityProviderContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(IdentityProviderContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(IdentityProviderContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(IdentityProviderContracts.update::parameters.properties,
   "Update parameters."

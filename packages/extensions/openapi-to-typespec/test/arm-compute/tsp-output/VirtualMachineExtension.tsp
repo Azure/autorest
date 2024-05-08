@@ -93,7 +93,7 @@ interface VirtualMachineExtensions {
 }
 
 @@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.createOrUpdate::parameters.resource,
@@ -104,7 +104,7 @@ interface VirtualMachineExtensions {
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
 @@encodedName(VirtualMachineExtensions.update::parameters.properties,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.update::parameters.properties,

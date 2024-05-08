@@ -5,9 +5,9 @@ import {
   OAuth2SecurityScheme,
   ParameterLocation,
   SecurityScheme,
-  codeModelSchema,
 } from "@autorest/codemodel";
 import { getArmCommonTypeVersion } from "../autorest-session";
+import { ApiVersion } from "../constants";
 import { AadOauth2AuthFlow, ApiKeyAuthentication, Auth, EndpointParameter, ServiceInformation } from "../interfaces";
 import { getOptions } from "../options";
 import { getFirstEndpoint } from "../utils/get-endpoint";
@@ -86,15 +86,16 @@ function getApiVersions(model: CodeModel): string[] | undefined {
     return undefined;
   }
 
-  const apiVersionParams = (model.schemas.constants ?? []).filter((c) =>
-    c.language.default.name.startsWith("ApiVersion"),
-  );
+  const apiVersionParams = (model.schemas.constants ?? [])
+    .filter((c) => c.language.default.name.startsWith(ApiVersion))
+    .map((c) => c.value.value)
+    .concat(
+      (model.schemas.choices ?? [])
+        .filter((c) => c.language.default.name.startsWith(ApiVersion))
+        .flatMap((c) => c.choices.map((x) => x.value)),
+    );
 
-  if (apiVersionParams.length) {
-    return apiVersionParams.map((c) => c.value.value);
-  }
-
-  return undefined;
+  return apiVersionParams.length > 0 ? apiVersionParams : undefined;
 }
 
 function getEndpointParameter(codeModel: CodeModel) {

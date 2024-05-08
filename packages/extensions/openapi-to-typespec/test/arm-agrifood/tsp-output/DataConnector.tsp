@@ -87,7 +87,7 @@ interface DataConnectors {
 }
 
 @@encodedName(DataConnectors.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DataConnectors.createOrUpdate::parameters.resource,

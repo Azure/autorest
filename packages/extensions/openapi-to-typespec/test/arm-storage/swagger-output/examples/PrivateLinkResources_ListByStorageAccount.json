@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "blob",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/blob",
+            "properties": {
+              "groupId": "blob",
+              "requiredMembers": [
+                "blob"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "blob_secondary",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/blob_secondary",
+            "properties": {
+              "groupId": "blob_secondary",
+              "requiredMembers": [
+                "blob_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.blob.core.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "table",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/table",
+            "properties": {
+              "groupId": "table",
+              "requiredMembers": [
+                "table"
+              ],
+              "requiredZoneNames": [
+                "privatelink.table.core.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "table_secondary",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/table_secondary",
+            "properties": {
+              "groupId": "table_secondary",
+              "requiredMembers": [
+                "table_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.table.core.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "dfs",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/dfs",
+            "properties": {
+              "groupId": "dfs",
+              "requiredMembers": [
+                "dfs"
+              ],
+              "requiredZoneNames": [
+                "privatelink.dfs.core.windows.net"
+              ]
+            }
+          },
+          {
+            "name": "dfs_secondary",
+            "type": "Microsoft.Storage/storageAccounts/privateLinkResources",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/privateLinkResources/dfs_secondary",
+            "properties": {
+              "groupId": "dfs_secondary",
+              "requiredMembers": [
+                "dfs_secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.dfs.core.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByStorageAccount",
+  "title": "StorageAccountListPrivateLinkResources"
+}

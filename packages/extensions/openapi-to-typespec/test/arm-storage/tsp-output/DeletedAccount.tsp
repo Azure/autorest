@@ -14,9 +14,13 @@ namespace Microsoft.Storage;
 /**
  * Deleted storage account
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
-model DeletedAccount is ProxyResource<DeletedAccountProperties> {
+@parentResource(SubscriptionLocationResource)
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DeletedAccountProperties)
+model DeletedAccount extends ProxyResourceBase {
   /**
    * Name of the deleted storage account.
    */
@@ -27,6 +31,12 @@ model DeletedAccount is ProxyResource<DeletedAccountProperties> {
   @segment("deletedAccounts")
   @visibility("read")
   name: string;
+
+  /**
+   * Properties of the deleted account.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedAccountProperties;
 }
 
 @armResourceOperations

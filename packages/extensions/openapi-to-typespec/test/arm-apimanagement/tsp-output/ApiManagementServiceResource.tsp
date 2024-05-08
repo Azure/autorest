@@ -14,8 +14,13 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * A single API Management service resource in List or Get response.
  */
-model ApiManagementServiceResource
-  is TrackedResource<ApiManagementServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  ApiManagementServiceProperties
+)
+model ApiManagementServiceResource extends TrackedResourceBase {
   /**
    * The name of the API Management service.
    */
@@ -39,6 +44,12 @@ model ApiManagementServiceResource
    */
   zones?: string[];
 
+  /**
+   * Properties of the API Management service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ApiManagementServiceProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
 }
@@ -48,17 +59,23 @@ interface ApiManagementServiceResources {
   /**
    * Gets an API Management service resource description.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_Get")
   get is ArmResourceRead<ApiManagementServiceResource>;
 
   /**
    * Creates or updates an API Management service. This is long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiManagementServiceResource>;
 
   /**
    * Updates an existing API Management service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
+  @operationId("ApiManagementService_Update")
   update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
     ApiManagementServiceUpdateParameters
@@ -67,21 +84,29 @@ interface ApiManagementServiceResources {
   /**
    * Deletes an existing API Management service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_Delete")
   delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;
 
   /**
    * List all API Management services within a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
 
   /**
    * Lists all API Management services within an Azure subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_List")
   list is ArmListBySubscription<ApiManagementServiceResource>;
 
   /**
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PerformConnectivityCheckAsync")
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
@@ -91,6 +116,8 @@ interface ApiManagementServiceResources {
   /**
    * Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_Restore")
   restore is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
@@ -100,6 +127,8 @@ interface ApiManagementServiceResources {
   /**
    * Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_Backup")
   backup is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
@@ -109,6 +138,8 @@ interface ApiManagementServiceResources {
   /**
    * Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_GetSsoToken")
   getSsoToken is ArmResourceActionSync<
     ApiManagementServiceResource,
     void,
@@ -118,6 +149,8 @@ interface ApiManagementServiceResources {
   /**
    * Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_ApplyNetworkConfigurationUpdates")
   applyNetworkConfigurationUpdates is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
@@ -127,6 +160,8 @@ interface ApiManagementServiceResources {
   /**
    * This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfiguration_Deploy")
   deploy is ArmResourceActionAsync<
     ApiManagementServiceResource,
     DeployConfigurationParameters,
@@ -145,6 +180,8 @@ interface ApiManagementServiceResources {
   /**
    * This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfiguration_Save")
   save is ArmResourceActionAsync<
     ApiManagementServiceResource,
     SaveConfigurationParameter,
@@ -163,6 +200,8 @@ interface ApiManagementServiceResources {
   /**
    * This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfiguration_Validate")
   validate is ArmResourceActionAsync<
     ApiManagementServiceResource,
     DeployConfigurationParameters,
@@ -181,6 +220,8 @@ interface ApiManagementServiceResources {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementService_CheckNameAvailability")
   checkNameAvailability is checkGlobalNameAvailability<
     ApiManagementServiceCheckNameAvailabilityParameters,
     ApiManagementServiceNameAvailabilityResult
@@ -190,6 +231,8 @@ interface ApiManagementServiceResources {
    * Lists a collection of apis associated with tags.
    */
   // FIXME: Api_ListByTags could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Api_ListByTags")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags")
   @get
   listByTags(
@@ -237,6 +280,8 @@ interface ApiManagementServiceResources {
    * Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.
    */
   // FIXME: ContentType_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentType_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes")
   @get
   listByService(
@@ -259,6 +304,8 @@ interface ApiManagementServiceResources {
    * Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.
    */
   // FIXME: ContentType_Get could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentType_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}")
   @get
   get(
@@ -289,6 +336,8 @@ interface ApiManagementServiceResources {
    * Lists developer portal's content items specified by the provided content type.
    */
   // FIXME: ContentItem_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentItem_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems")
   @get
   listByService(
@@ -319,6 +368,8 @@ interface ApiManagementServiceResources {
    * Returns the developer portal's content item specified by its identifier.
    */
   // FIXME: ContentItem_Get could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ContentItem_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}")
   @get
   get(
@@ -357,6 +408,8 @@ interface ApiManagementServiceResources {
    * Gets all available SKU for a given API Management service
    */
   // FIXME: ApiManagementServiceSkus_ListAvailableServiceSkus could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiManagementServiceSkus_ListAvailableServiceSkus")
   @summary("Gets available SKUs for API Management service")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus")
   @get
@@ -380,6 +433,8 @@ interface ApiManagementServiceResources {
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
   // FIXME: NetworkStatus_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NetworkStatus_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus")
   @get
   listByService(
@@ -401,6 +456,8 @@ interface ApiManagementServiceResources {
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
   // FIXME: NetworkStatus_ListByLocation could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NetworkStatus_ListByLocation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus")
   @get
   listByLocation(
@@ -429,6 +486,8 @@ interface ApiManagementServiceResources {
    * Gets the network endpoints of all outbound dependencies of a ApiManagement service.
    */
   // FIXME: OutboundNetworkDependenciesEndpoints_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OutboundNetworkDependenciesEndpoints_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/outboundNetworkDependenciesEndpoints")
   @get
   listByService(
@@ -450,6 +509,8 @@ interface ApiManagementServiceResources {
    * Lists all policy descriptions.
    */
   // FIXME: PolicyDescription_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PolicyDescription_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions")
   @get
   listByService(
@@ -478,6 +539,8 @@ interface ApiManagementServiceResources {
    * Lists a collection of portalsettings defined within a service instance..
    */
   // FIXME: PortalSettings_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PortalSettings_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings")
   @get
   listByService(
@@ -500,6 +563,8 @@ interface ApiManagementServiceResources {
    * Lists a collection of products associated with tags.
    */
   // FIXME: Product_ListByTags could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Product_ListByTags")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags")
   @get
   listByTags(
@@ -547,6 +612,8 @@ interface ApiManagementServiceResources {
    * Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.
    */
   // FIXME: QuotaByCounterKeys_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("QuotaByCounterKeys_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   @get
   listByService(
@@ -573,6 +640,8 @@ interface ApiManagementServiceResources {
    * Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.
    */
   // FIXME: QuotaByPeriodKeys_Get could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("QuotaByPeriodKeys_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
   @get
   get(
@@ -605,6 +674,8 @@ interface ApiManagementServiceResources {
    * Lists all azure regions in which the service exists.
    */
   // FIXME: Region_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Region_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions")
   @get
   listByService(
@@ -627,6 +698,8 @@ interface ApiManagementServiceResources {
    * Lists report records by API.
    */
   // FIXME: Reports_ListByApi could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByApi")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi")
   @get
   listByApi(
@@ -674,6 +747,8 @@ interface ApiManagementServiceResources {
    * Lists report records by User.
    */
   // FIXME: Reports_ListByUser could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByUser")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser")
   @get
   listByUser(
@@ -721,6 +796,8 @@ interface ApiManagementServiceResources {
    * Lists report records by API Operations.
    */
   // FIXME: Reports_ListByOperation could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByOperation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation")
   @get
   listByOperation(
@@ -768,6 +845,8 @@ interface ApiManagementServiceResources {
    * Lists report records by Product.
    */
   // FIXME: Reports_ListByProduct could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByProduct")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct")
   @get
   listByProduct(
@@ -815,6 +894,8 @@ interface ApiManagementServiceResources {
    * Lists report records by geography.
    */
   // FIXME: Reports_ListByGeo could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByGeo")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo")
   @get
   listByGeo(
@@ -856,6 +937,8 @@ interface ApiManagementServiceResources {
    * Lists report records by subscription.
    */
   // FIXME: Reports_ListBySubscription could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListBySubscription")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription")
   @get
   listBySubscription(
@@ -903,6 +986,8 @@ interface ApiManagementServiceResources {
    * Lists report records by Time.
    */
   // FIXME: Reports_ListByTime could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByTime")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime")
   @get
   listByTime(
@@ -956,6 +1041,8 @@ interface ApiManagementServiceResources {
    * Lists report records by Request.
    */
   // FIXME: Reports_ListByRequest could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Reports_ListByRequest")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest")
   @get
   listByRequest(
@@ -997,6 +1084,8 @@ interface ApiManagementServiceResources {
    * Lists a collection of resources associated with tags.
    */
   // FIXME: TagResource_ListByService could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TagResource_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources")
   @get
   listByService(
@@ -1038,6 +1127,8 @@ interface ApiManagementServiceResources {
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
   // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfiguration_GetSyncState")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
   getSyncState(
@@ -1063,29 +1154,101 @@ interface ApiManagementServiceResources {
   ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
 }
 
+@@encodedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
+);
+@@encodedName(ApiManagementServiceResources.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiManagementServiceResources.update::parameters.properties,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
+@@encodedName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "application/json",
+  "connectivityCheckRequestParams"
+);
+@@extension(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+  "x-ms-client-name",
+  "connectivityCheckRequestParams"
+);
 @@doc(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "Connectivity Check request parameters."
+);
+@@encodedName(ApiManagementServiceResources.restore::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.restore::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiManagementServiceResources.restore::parameters.body,
   "Parameters supplied to the Restore API Management service from backup operation."
 );
+@@encodedName(ApiManagementServiceResources.backup::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.backup::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiManagementServiceResources.backup::parameters.body,
   "Parameters supplied to the ApiManagementService_Backup operation."
+);
+@@encodedName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
+@@encodedName(ApiManagementServiceResources.deploy::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.deploy::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiManagementServiceResources.deploy::parameters.body,
   "Deploy Configuration parameters."
 );
+@@encodedName(ApiManagementServiceResources.save::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.save::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiManagementServiceResources.save::parameters.body,
   "Save Configuration parameters."
+);
+@@encodedName(ApiManagementServiceResources.validate::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiManagementServiceResources.validate::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiManagementServiceResources.validate::parameters.body,
   "Validate Configuration parameters."
