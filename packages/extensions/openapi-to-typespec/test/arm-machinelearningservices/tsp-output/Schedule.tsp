@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
-model Schedule extends ProxyResourceBase {
-  /**
-   * Schedule name.
-   */
-  @path
-  @key("name")
-  @segment("schedules")
-  @visibility("read")
-  name: string;
+model Schedule extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "name",
+    SegmentName = "schedules",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -52,6 +50,9 @@ interface Schedules {
   /**
    * Delete schedule.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Schedule>;
 
   /**
@@ -79,6 +80,8 @@ interface Schedules {
   >;
 }
 
+@@path(Schedule.name);
+@@doc(Schedule.name, "Schedule name.");
 @@encodedName(Schedules.createOrUpdate::parameters.resource,
   "application/json",
   "body"

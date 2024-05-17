@@ -16,16 +16,14 @@ namespace Microsoft.ServiceNetworking;
  * Association Subresource of Traffic Controller
  */
 @parentResource(TrafficController)
-model Association is TrackedResource<AssociationProperties> {
-  /**
-   * Name of Association
-   */
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  @path
-  @key("associationName")
-  @segment("associations")
-  @visibility("read")
-  name: string;
+model Association
+  is Azure.ResourceManager.TrackedResource<AssociationProperties> {
+  ...ResourceNameParameter<
+    Resource = Association,
+    KeyName = "associationName",
+    SegmentName = "associations",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +41,7 @@ interface Associations {
   /**
    * Update a Association
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
 
   /**
@@ -56,3 +54,6 @@ interface Associations {
    */
   listByTrafficController is ArmResourceListByParent<Association>;
 }
+
+@@path(Association.name);
+@@doc(Association.name, "Name of Association");

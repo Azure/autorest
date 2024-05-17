@@ -16,15 +16,13 @@ namespace Microsoft.AzureSphere;
  * An deployment resource belonging to a device group resource.
  */
 @parentResource(DeviceGroup)
-model Deployment is ProxyResource<DeploymentProperties> {
-  /**
-   * Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.
-   */
-  @path
-  @key("deploymentName")
-  @segment("deployments")
-  @visibility("read")
-  name: string;
+model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
+  ...ResourceNameParameter<
+    Resource = Deployment,
+    KeyName = "deploymentName",
+    SegmentName = "deployments",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -78,3 +76,8 @@ interface Deployments {
     }
   >;
 }
+
+@@path(Deployment.name);
+@@doc(Deployment.name,
+  "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group."
+);

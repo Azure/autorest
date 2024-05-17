@@ -17,18 +17,15 @@ namespace Azure.ResourceManager.MachineLearning;
  * Machine Learning compute object wrapped into ARM resource envelope.
  */
 @parentResource(Workspace)
-model ComputeResource is TrackedResource<{}> {
-  /**
-   * Name of the Azure Machine Learning compute.
-   */
-  @path
-  @key("computeName")
-  @segment("computes")
-  @visibility("read")
-  name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+model ComputeResource is Azure.ResourceManager.TrackedResource<{}> {
+  ...ResourceNameParameter<
+    Resource = ComputeResource,
+    KeyName = "computeName",
+    SegmentName = "computes",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -51,7 +48,7 @@ interface ComputeResources {
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Compute_Update")
   update is ArmCustomPatchAsync<ComputeResource, ClusterUpdateParameters>;
 
@@ -59,6 +56,9 @@ interface ComputeResources {
    * Deletes specified Machine Learning compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Compute_Delete")
   delete is ArmResourceDeleteAsync<
     ComputeResource,
@@ -153,6 +153,8 @@ interface ComputeResources {
   >;
 }
 
+@@path(ComputeResource.name);
+@@doc(ComputeResource.name, "Name of the Azure Machine Learning compute.");
 @@encodedName(ComputeResources.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -21,16 +21,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   DataManagerForAgricultureSolutionProperties
 )
-model DataManagerForAgricultureSolution extends ProxyResourceBase {
-  /**
-   * dataManagerForAgricultureSolutionId to be queried.
-   */
-  @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
-  @path
-  @key("dataManagerForAgricultureSolutionId")
-  @segment("farmBeatsSolutionDefinitions")
-  @visibility("read")
-  name: string;
+model DataManagerForAgricultureSolution extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataManagerForAgricultureSolution,
+    KeyName = "dataManagerForAgricultureSolutionId",
+    SegmentName = "farmBeatsSolutionDefinitions",
+    NamePattern = "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+  >;
 
   /**
    * DataManagerForAgricultureSolution properties.
@@ -87,3 +84,8 @@ interface DataManagerForAgricultureSolutions {
     }
   >;
 }
+
+@@path(DataManagerForAgricultureSolution.name);
+@@doc(DataManagerForAgricultureSolution.name,
+  "dataManagerForAgricultureSolutionId to be queried."
+);

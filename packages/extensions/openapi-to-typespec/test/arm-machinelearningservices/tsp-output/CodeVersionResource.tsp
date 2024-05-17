@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(CodeContainerResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(CodeVersion)
-model CodeVersionResource extends ProxyResourceBase {
-  /**
-   * Version identifier.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model CodeVersionResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CodeVersionResource,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,6 +55,9 @@ interface CodeVersionResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeVersions_Delete")
   delete is ArmResourceDeleteAsync<CodeVersionResource>;
 
@@ -102,6 +103,8 @@ interface CodeVersionResources {
   >;
 }
 
+@@path(CodeVersionResource.name);
+@@doc(CodeVersionResource.name, "Version identifier.");
 @@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

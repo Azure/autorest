@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   TenantSettingsContractProperties
 )
-model TenantSettingsContract extends ProxyResourceBase {
+model TenantSettingsContract extends Foundations.ProxyResource {
   /**
    * The identifier of the settings.
    */

@@ -17,11 +17,13 @@ namespace Microsoft.Test;
  */
 @singleton("default")
 @parentResource(Employee)
-model Enroll is TrackedResource<EnrollProperties> {
-  @key("enroll")
-  @segment("enrolls")
-  @visibility("read")
-  name: string;
+model Enroll is Azure.ResourceManager.TrackedResource<EnrollProperties> {
+  ...ResourceNameParameter<
+    Resource = Enroll,
+    KeyName = "enroll",
+    SegmentName = "enrolls",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -31,3 +33,5 @@ interface Enrolls {
    */
   get is ArmResourceRead<Enroll>;
 }
+
+@@doc(Enroll.name, "");

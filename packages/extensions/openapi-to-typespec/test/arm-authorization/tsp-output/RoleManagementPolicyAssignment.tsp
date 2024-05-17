@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleManagementPolicyAssignmentProperties
 )
-model RoleManagementPolicyAssignment extends ExtensionResourceBase {
-  /**
-   * The name of format {guid_guid} the role management policy assignment to get.
-   */
-  @path
-  @key("roleManagementPolicyAssignmentName")
-  @segment("roleManagementPolicyAssignments")
-  @visibility("read")
-  name: string;
+model RoleManagementPolicyAssignment extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleManagementPolicyAssignment,
+    KeyName = "roleManagementPolicyAssignmentName",
+    SegmentName = "roleManagementPolicyAssignments",
+    NamePattern = ""
+  >;
 
   /**
    * Role management policy properties.
@@ -57,6 +55,10 @@ interface RoleManagementPolicyAssignments {
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }
 
+@@path(RoleManagementPolicyAssignment.name);
+@@doc(RoleManagementPolicyAssignment.name,
+  "The name of format {guid_guid} the role management policy assignment to get."
+);
 @@encodedName(RoleManagementPolicyAssignments.create::parameters.resource,
   "application/json",
   "parameters"

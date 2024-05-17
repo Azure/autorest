@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(DedicatedHostGroup)
 @includeInapplicableMetadataInPayload(false)
 model DedicatedHost extends Resource {
-  /**
-   * The name of the dedicated host.
-   */
-  @path
-  @key("hostName")
-  @segment("hosts")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DedicatedHost,
+    KeyName = "hostName",
+    SegmentName = "hosts",
+    NamePattern = ""
+  >;
 
   /**
    * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
@@ -67,12 +65,15 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
 
   /**
    * Delete a dedicated host.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<DedicatedHost>;
 
   /**
@@ -115,6 +116,8 @@ interface DedicatedHosts {
   ): ArmResponse<DedicatedHostSizeListResult> | ErrorResponse;
 }
 
+@@path(DedicatedHost.name);
+@@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

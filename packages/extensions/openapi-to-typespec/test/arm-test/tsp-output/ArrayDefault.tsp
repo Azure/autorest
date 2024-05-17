@@ -16,16 +16,14 @@ namespace Microsoft.Test;
  * A Test resource
  */
 @parentResource(Employee)
-model ArrayDefault is TrackedResource<ArrayDefaultProperties> {
-  /**
-   * Name of resource
-   */
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
-  @key("name")
-  @segment("arraydefaults")
-  @visibility("read")
-  name: string;
+model ArrayDefault
+  is Azure.ResourceManager.TrackedResource<ArrayDefaultProperties> {
+  ...ResourceNameParameter<
+    Resource = ArrayDefault,
+    KeyName = "name",
+    SegmentName = "arraydefaults",
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+  >;
 }
 
 @armResourceOperations
@@ -40,3 +38,6 @@ interface ArrayDefaults {
    */
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
+
+@@path(ArrayDefault.name);
+@@doc(ArrayDefault.name, "Name of resource");

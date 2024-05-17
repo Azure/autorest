@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(DataContainerResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DataVersionBase)
-model DataVersionBaseResource extends ProxyResourceBase {
-  /**
-   * Version identifier.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model DataVersionBaseResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataVersionBaseResource,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,6 +55,9 @@ interface DataVersionBaseResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryDataVersions_Delete")
   delete is ArmResourceDeleteAsync<DataVersionBaseResource>;
 
@@ -115,6 +116,8 @@ interface DataVersionBaseResources {
   >;
 }
 
+@@path(DataVersionBaseResource.name);
+@@doc(DataVersionBaseResource.name, "Version identifier.");
 @@encodedName(DataVersionBaseResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

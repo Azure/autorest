@@ -21,14 +21,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model SharedGallery extends PirSharedGalleryResource {
-  /**
-   * The unique name of the Shared Gallery.
-   */
-  @path
-  @key("galleryUniqueName")
-  @segment("sharedGalleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SharedGallery,
+    KeyName = "galleryUniqueName",
+    SegmentName = "sharedGalleries",
+    NamePattern = ""
+  >;
 
   @extension("x-ms-client-flatten", true)
   @visibility("read,create")
@@ -60,3 +58,6 @@ interface SharedGalleries {
     }
   >;
 }
+
+@@path(SharedGallery.name);
+@@doc(SharedGallery.name, "The unique name of the Shared Gallery.");

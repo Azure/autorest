@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model ProximityPlacementGroup extends Resource {
-  /**
-   * The name of the proximity placement group.
-   */
-  @path
-  @key("proximityPlacementGroupName")
-  @segment("proximityPlacementGroups")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = ProximityPlacementGroup,
+    KeyName = "proximityPlacementGroupName",
+    SegmentName = "proximityPlacementGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.
@@ -65,7 +63,7 @@ interface ProximityPlacementGroups {
   /**
    * Update a proximity placement group.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
@@ -74,6 +72,7 @@ interface ProximityPlacementGroups {
   /**
    * Delete a proximity placement group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
 
   /**
@@ -89,6 +88,10 @@ interface ProximityPlacementGroups {
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
+@@path(ProximityPlacementGroup.name);
+@@doc(ProximityPlacementGroup.name,
+  "The name of the proximity placement group."
+);
 @@encodedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

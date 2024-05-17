@@ -20,17 +20,13 @@ namespace Microsoft.Storage;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DeletedAccountProperties)
-model DeletedAccount extends ProxyResourceBase {
-  /**
-   * Name of the deleted storage account.
-   */
-  @maxLength(24)
-  @minLength(3)
-  @path
-  @key("deletedAccountName")
-  @segment("deletedAccounts")
-  @visibility("read")
-  name: string;
+model DeletedAccount extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DeletedAccount,
+    KeyName = "deletedAccountName",
+    SegmentName = "deletedAccounts",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the deleted account.
@@ -51,3 +47,8 @@ interface DeletedAccounts {
    */
   list is ArmListBySubscription<DeletedAccount>;
 }
+
+@@maxLength(DeletedAccount.name, 24);
+@@minLength(DeletedAccount.name, 3);
+@@path(DeletedAccount.name);
+@@doc(DeletedAccount.name, "Name of the deleted storage account.");

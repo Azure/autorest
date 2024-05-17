@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.AlertsManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   AlertProcessingRuleProperties
 )
-model AlertProcessingRule extends TrackedResourceBase {
-  /**
-   * The name of the alert processing rule that needs to be fetched.
-   */
-  @path
-  @key("alertProcessingRuleName")
-  @segment("actionRules")
-  @visibility("read")
-  name: string;
+model AlertProcessingRule extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = AlertProcessingRule,
+    KeyName = "alertProcessingRuleName",
+    SegmentName = "actionRules",
+    NamePattern = ""
+  >;
 
   /**
    * Alert processing rule properties.
@@ -52,12 +50,13 @@ interface AlertProcessingRules {
   /**
    * Enable, disable, or update tags for an alert processing rule.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<AlertProcessingRule, PatchObject>;
 
   /**
    * Delete an alert processing rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<AlertProcessingRule>;
 
   /**
@@ -73,6 +72,10 @@ interface AlertProcessingRules {
   listBySubscription is ArmListBySubscription<AlertProcessingRule>;
 }
 
+@@path(AlertProcessingRule.name);
+@@doc(AlertProcessingRule.name,
+  "The name of the alert processing rule that needs to be fetched."
+);
 @@encodedName(AlertProcessingRules.createOrUpdate::parameters.resource,
   "application/json",
   "alertProcessingRule"

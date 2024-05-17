@@ -18,14 +18,12 @@ namespace Azure.ResourceManager.Dns;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model DnsZone extends Resource {
-  /**
-   * The name of the DNS zone (without a terminating dot).
-   */
-  @path
-  @key("zoneName")
-  @segment("dnsZones")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DnsZone,
+    KeyName = "zoneName",
+    SegmentName = "dnsZones",
+    NamePattern = ""
+  >;
 
   /**
    * The etag of the zone.
@@ -76,7 +74,7 @@ interface DnsZones {
    * Updates a DNS zone. Does not modify DNS records within the zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Zones_Update")
   update is ArmCustomPatchSync<
     DnsZone,
@@ -96,6 +94,9 @@ interface DnsZones {
    * Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Zones_Delete")
   delete is ArmResourceDeleteAsync<
     DnsZone,
@@ -169,6 +170,8 @@ interface DnsZones {
   ): ArmResponse<ResourceListResult<DnsRecord>> | ErrorResponse;
 }
 
+@@path(DnsZone.name);
+@@doc(DnsZone.name, "The name of the DNS zone (without a terminating dot).");
 @@encodedName(DnsZones.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

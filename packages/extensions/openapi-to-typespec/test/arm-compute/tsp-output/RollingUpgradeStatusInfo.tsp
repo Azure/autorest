@@ -21,10 +21,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 @includeInapplicableMetadataInPayload(false)
 model RollingUpgradeStatusInfo extends Resource {
-  @key("rollingUpgrade")
-  @segment("rollingUpgrades")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RollingUpgradeStatusInfo,
+    KeyName = "rollingUpgrade",
+    SegmentName = "rollingUpgrades",
+    NamePattern = ""
+  >;
 
   /**
    * The status of the latest virtual machine scale set rolling upgrade.
@@ -53,3 +55,5 @@ interface RollingUpgradeStatusInfos {
     }
   >;
 }
+
+@@doc(RollingUpgradeStatusInfo.name, "");

@@ -18,15 +18,13 @@ namespace Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(RoleAssignmentProperties)
-model RoleAssignment extends ExtensionResourceBase {
-  /**
-   * The name of the role assignment. It can be any valid GUID.
-   */
-  @path
-  @key("roleAssignmentName")
-  @segment("roleAssignments")
-  @visibility("read")
-  name: string;
+model RoleAssignment extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleAssignment,
+    KeyName = "roleAssignmentName",
+    SegmentName = "roleAssignments",
+    NamePattern = ""
+  >;
 
   /**
    * Role assignment properties.
@@ -61,6 +59,7 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
     {
@@ -105,6 +104,10 @@ interface RoleAssignments {
   >;
 }
 
+@@path(RoleAssignment.name);
+@@doc(RoleAssignment.name,
+  "The name of the role assignment. It can be any valid GUID."
+);
 @@encodedName(RoleAssignments.create::parameters.resource,
   "application/json",
   "parameters"

@@ -22,15 +22,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @Azure.ResourceManager.Private.armResourceInternal(
   FeaturestoreEntityContainerProperties
 )
-model FeaturestoreEntityContainer extends ProxyResourceBase {
-  /**
-   * Container name. This is case-sensitive.
-   */
-  @path
-  @key("name")
-  @segment("featurestoreEntities")
-  @visibility("read")
-  name: string;
+model FeaturestoreEntityContainer extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FeaturestoreEntityContainer,
+    KeyName = "name",
+    SegmentName = "featurestoreEntities",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -54,6 +52,9 @@ interface FeaturestoreEntityContainers {
   /**
    * Delete container.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<FeaturestoreEntityContainer>;
 
   /**
@@ -105,6 +106,10 @@ interface FeaturestoreEntityContainers {
   >;
 }
 
+@@path(FeaturestoreEntityContainer.name);
+@@doc(FeaturestoreEntityContainer.name,
+  "Container name. This is case-sensitive."
+);
 @@encodedName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "application/json",
   "body"

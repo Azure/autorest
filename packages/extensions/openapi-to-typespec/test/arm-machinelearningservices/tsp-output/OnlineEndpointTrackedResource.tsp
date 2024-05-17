@@ -18,15 +18,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
-model OnlineEndpointTrackedResource extends TrackedResourceBase {
-  /**
-   * Online Endpoint name.
-   */
-  @path
-  @key("endpointName")
-  @segment("onlineEndpoints")
-  @visibility("read")
-  name: string;
+model OnlineEndpointTrackedResource extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = OnlineEndpointTrackedResource,
+    KeyName = "endpointName",
+    SegmentName = "onlineEndpoints",
+    NamePattern = ""
+  >;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -39,8 +37,8 @@ model OnlineEndpointTrackedResource extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: OnlineEndpoint;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -63,7 +61,7 @@ interface OnlineEndpointTrackedResources {
    * Update Online Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
     OnlineEndpointTrackedResource,
@@ -74,6 +72,9 @@ interface OnlineEndpointTrackedResources {
    * Delete Online Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OnlineEndpoints_Delete")
   delete is ArmResourceDeleteAsync<OnlineEndpointTrackedResource>;
 
@@ -165,6 +166,8 @@ interface OnlineEndpointTrackedResources {
   >;
 }
 
+@@path(OnlineEndpointTrackedResource.name);
+@@doc(OnlineEndpointTrackedResource.name, "Online Endpoint name.");
 @@encodedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

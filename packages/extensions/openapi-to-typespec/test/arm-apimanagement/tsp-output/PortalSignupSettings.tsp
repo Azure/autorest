@@ -23,11 +23,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalSignupSettingsProperties
 )
-model PortalSignupSettings extends ProxyResourceBase {
-  @key("portalsetting")
-  @segment("portalsettings")
-  @visibility("read")
-  name: string;
+model PortalSignupSettings extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PortalSignupSettings,
+    KeyName = "portalsetting",
+    SegmentName = "portalsettings",
+    NamePattern = ""
+  >;
 
   /**
    * Sign-up settings contract properties.
@@ -80,7 +82,7 @@ interface PortalSignupSettingsOperationGroup {
    * Update Sign-Up settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("SignUpSettings_Update")
   update is ArmCustomPatchSync<
     PortalSignupSettings,
@@ -104,6 +106,7 @@ interface PortalSignupSettingsOperationGroup {
   listByService is ArmResourceListByParent<PortalSignupSettings>;
 }
 
+@@doc(PortalSignupSettings.name, "");
 @@encodedName(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

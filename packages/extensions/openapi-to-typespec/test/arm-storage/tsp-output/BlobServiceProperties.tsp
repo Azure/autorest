@@ -23,11 +23,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   BlobServicePropertiesProperties
 )
-model BlobServiceProperties extends ProxyResourceBase {
-  @key("blobService")
-  @segment("blobServices")
-  @visibility("read")
-  name: string;
+model BlobServiceProperties extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = BlobServiceProperties,
+    KeyName = "blobService",
+    SegmentName = "blobServices",
+    NamePattern = ""
+  >;
 
   /**
    * The properties of a storage account’s Blob service.
@@ -35,7 +37,7 @@ model BlobServiceProperties extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: BlobServicePropertiesProperties;
 
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -62,6 +64,7 @@ interface BlobServicePropertiesOperationGroup {
   list is ArmResourceListByParent<BlobServiceProperties>;
 }
 
+@@doc(BlobServiceProperties.name, "");
 @@encodedName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DiagnosticContractProperties)
-model DiagnosticContract extends ProxyResourceBase {
-  /**
-   * Diagnostic identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("diagnosticId")
-  @segment("diagnostics")
-  @visibility("read")
-  name: string;
+model DiagnosticContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DiagnosticContract,
+    KeyName = "diagnosticId",
+    SegmentName = "diagnostics",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Diagnostic entity contract properties.
@@ -84,7 +79,7 @@ interface DiagnosticContracts {
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
@@ -104,6 +99,7 @@ interface DiagnosticContracts {
    * Deletes the specified Diagnostic from an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
@@ -150,6 +146,12 @@ interface DiagnosticContracts {
   >;
 }
 
+@@maxLength(DiagnosticContract.name, 80);
+@@minLength(DiagnosticContract.name, 1);
+@@path(DiagnosticContract.name);
+@@doc(DiagnosticContract.name,
+  "Diagnostic identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(DiagnosticContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

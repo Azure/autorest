@@ -22,15 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-model PrivateLinkResource extends ProxyResourceBase {
-  /**
-   * Name of the private link resource.
-   */
-  @path
-  @key("privateLinkSubResourceName")
-  @segment("privateLinkResources")
-  @visibility("read")
-  name: string;
+model PrivateLinkResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "privateLinkSubResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -55,3 +53,6 @@ interface PrivateLinkResources {
   @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
   listPrivateLinkResources is ArmResourceListByParent<PrivateLinkResource>;
 }
+
+@@path(PrivateLinkResource.name);
+@@doc(PrivateLinkResource.name, "Name of the private link resource.");

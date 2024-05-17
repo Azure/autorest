@@ -23,11 +23,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   TableServicePropertiesProperties
 )
-model TableServiceProperties extends ProxyResourceBase {
-  @key("tableService")
-  @segment("tableServices")
-  @visibility("read")
-  name: string;
+model TableServiceProperties extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = TableServiceProperties,
+    KeyName = "tableService",
+    SegmentName = "tableServices",
+    NamePattern = ""
+  >;
 
   /**
    * The properties of a storage account’s Table service.
@@ -60,6 +62,7 @@ interface TableServicePropertiesOperationGroup {
   list is ArmResourceListByParent<TableServiceProperties>;
 }
 
+@@doc(TableServiceProperties.name, "");
 @@encodedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

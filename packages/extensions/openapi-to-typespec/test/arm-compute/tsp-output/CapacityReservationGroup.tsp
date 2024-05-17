@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model CapacityReservationGroup extends Resource {
-  /**
-   * The name of the capacity reservation group.
-   */
-  @path
-  @key("capacityReservationGroupName")
-  @segment("capacityReservationGroups")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CapacityReservationGroup,
+    KeyName = "capacityReservationGroupName",
+    SegmentName = "capacityReservationGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Availability Zones to use for this capacity reservation group. The zones can be assigned only during creation. If not provided, the group supports only regional resources in the region. If provided, enforces each capacity reservation in the group to be in one of the zones.
@@ -65,7 +63,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
     CapacityReservationGroupUpdate
@@ -74,6 +72,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
 
   /**
@@ -100,6 +99,10 @@ interface CapacityReservationGroups {
   listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
 }
 
+@@path(CapacityReservationGroup.name);
+@@doc(CapacityReservationGroup.name,
+  "The name of the capacity reservation group."
+);
 @@encodedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

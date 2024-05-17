@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model RestorePointCollection extends Resource {
-  /**
-   * The name of the restore point collection.
-   */
-  @path
-  @key("restorePointCollectionName")
-  @segment("restorePointCollections")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RestorePointCollection,
+    KeyName = "restorePointCollectionName",
+    SegmentName = "restorePointCollections",
+    NamePattern = ""
+  >;
 
   /**
    * The restore point collection properties.
@@ -77,7 +75,7 @@ interface RestorePointCollections {
   /**
    * The operation to update the restore point collection.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     RestorePointCollection,
     RestorePointCollectionUpdate,
@@ -95,6 +93,9 @@ interface RestorePointCollections {
   /**
    * The operation to delete the restore point collection. This operation will also delete all the contained restore points.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     RestorePointCollection,
     {
@@ -121,6 +122,8 @@ interface RestorePointCollections {
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 
+@@path(RestorePointCollection.name);
+@@doc(RestorePointCollection.name, "The name of the restore point collection.");
 @@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

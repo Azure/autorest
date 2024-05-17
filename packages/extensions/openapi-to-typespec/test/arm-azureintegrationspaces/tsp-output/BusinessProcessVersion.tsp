@@ -16,15 +16,14 @@ namespace Microsoft.IntegrationSpaces;
  * A business process version.
  */
 @parentResource(BusinessProcess)
-model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
-  /**
-   * The version of the business process
-   */
-  @path
-  @key("businessProcessVersion")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model BusinessProcessVersion
+  is Azure.ResourceManager.ProxyResource<BusinessProcessProperties> {
+  ...ResourceNameParameter<
+    Resource = BusinessProcessVersion,
+    KeyName = "businessProcessVersion",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -97,3 +96,6 @@ interface BusinessProcessVersions {
     }
   >;
 }
+
+@@path(BusinessProcessVersion.name);
+@@doc(BusinessProcessVersion.name, "The version of the business process");

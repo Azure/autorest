@@ -21,11 +21,13 @@ namespace Microsoft.Storage;
 @parentResource(StorageAccount)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ManagementPolicyProperties)
-model ManagementPolicy extends ProxyResourceBase {
-  @key("managementPolicy")
-  @segment("managementPolicies")
-  @visibility("read")
-  name: string;
+model ManagementPolicy extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ManagementPolicy,
+    KeyName = "managementPolicy",
+    SegmentName = "managementPolicies",
+    NamePattern = ""
+  >;
 
   /**
    * Returns the Storage Account Data Policies Rules.
@@ -49,9 +51,11 @@ interface ManagementPolicies {
   /**
    * Deletes the managementpolicy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 
+@@doc(ManagementPolicy.name, "");
 @@encodedName(ManagementPolicies.createOrUpdate::parameters.resource,
   "application/json",
   "properties"

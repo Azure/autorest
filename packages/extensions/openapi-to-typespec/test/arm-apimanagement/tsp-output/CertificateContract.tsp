@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   CertificateContractProperties
 )
-model CertificateContract extends ProxyResourceBase {
-  /**
-   * Identifier of the certificate entity. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("certificateId")
-  @segment("certificates")
-  @visibility("read")
-  name: string;
+model CertificateContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CertificateContract,
+    KeyName = "certificateId",
+    SegmentName = "certificates",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Certificate properties details.
@@ -86,6 +81,7 @@ interface CertificateContracts {
    * Deletes specific certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
@@ -149,6 +145,12 @@ interface CertificateContracts {
   >;
 }
 
+@@maxLength(CertificateContract.name, 80);
+@@minLength(CertificateContract.name, 1);
+@@path(CertificateContract.name);
+@@doc(CertificateContract.name,
+  "Identifier of the certificate entity. Must be unique in the current API Management service instance."
+);
 @@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

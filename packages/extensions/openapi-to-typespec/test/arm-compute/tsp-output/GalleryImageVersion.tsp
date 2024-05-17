@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(GalleryImage)
 @includeInapplicableMetadataInPayload(false)
 model GalleryImageVersion extends Resource {
-  /**
-   * The name of the gallery image version to be retrieved.
-   */
-  @path
-  @key("galleryImageVersionName")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = GalleryImageVersion,
+    KeyName = "galleryImageVersionName",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image version.
@@ -62,12 +60,15 @@ interface GalleryImageVersions {
   /**
    * Update a gallery image version.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<GalleryImageVersion, GalleryImageVersionUpdate>;
 
   /**
    * Delete a gallery image version.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<GalleryImageVersion>;
 
   /**
@@ -78,6 +79,10 @@ interface GalleryImageVersions {
   listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
 }
 
+@@path(GalleryImageVersion.name);
+@@doc(GalleryImageVersion.name,
+  "The name of the gallery image version to be retrieved."
+);
 @@encodedName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "application/json",
   "galleryImageVersion"

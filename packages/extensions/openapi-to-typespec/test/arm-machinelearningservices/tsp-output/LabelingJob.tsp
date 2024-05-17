@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LabelingJobProperties)
-model LabelingJob extends ProxyResourceBase {
-  /**
-   * The name and identifier for the LabelingJob.
-   */
-  @path
-  @key("id")
-  @segment("labelingJobs")
-  @visibility("read")
-  name: string;
+model LabelingJob extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = LabelingJob,
+    KeyName = "id",
+    SegmentName = "labelingJobs",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -69,6 +67,7 @@ interface LabelingJobs {
   /**
    * Delete a labeling job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<LabelingJob>;
 
   /**
@@ -115,6 +114,8 @@ interface LabelingJobs {
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
+@@path(LabelingJob.name);
+@@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");
 @@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
   "application/json",
   "body"

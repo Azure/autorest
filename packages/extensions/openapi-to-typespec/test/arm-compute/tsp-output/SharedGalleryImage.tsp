@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SharedGallery)
 @includeInapplicableMetadataInPayload(false)
 model SharedGalleryImage extends PirSharedGalleryResource {
-  /**
-   * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
-   */
-  @path
-  @key("galleryImageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SharedGalleryImage,
+    KeyName = "galleryImageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image definition.
@@ -61,3 +59,8 @@ interface SharedGalleryImages {
     }
   >;
 }
+
+@@path(SharedGalleryImage.name);
+@@doc(SharedGalleryImage.name,
+  "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
+);

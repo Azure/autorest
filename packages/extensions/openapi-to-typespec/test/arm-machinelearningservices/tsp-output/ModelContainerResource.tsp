@@ -20,16 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ModelContainer)
-model ModelContainerResource extends ProxyResourceBase {
-  /**
-   * Container name. This is case-sensitive.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
-  @key("modelName")
-  @segment("models")
-  @visibility("read")
-  name: string;
+model ModelContainerResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ModelContainerResource,
+    KeyName = "modelName",
+    SegmentName = "models",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -58,6 +55,9 @@ interface ModelContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryModelContainers_Delete")
   delete is ArmResourceDeleteAsync<ModelContainerResource>;
 
@@ -86,6 +86,8 @@ interface ModelContainerResources {
   >;
 }
 
+@@path(ModelContainerResource.name);
+@@doc(ModelContainerResource.name, "Container name. This is case-sensitive.");
 @@encodedName(ModelContainerResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

@@ -21,11 +21,13 @@ namespace Microsoft.Storage;
 @parentResource(BlobContainer)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ImmutabilityPolicyProperty)
-model ImmutabilityPolicy extends ProxyResourceBase {
-  @key("immutabilityPolicy")
-  @segment("immutabilityPolicies")
-  @visibility("read")
-  name: string;
+model ImmutabilityPolicy extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ImmutabilityPolicy,
+    KeyName = "immutabilityPolicy",
+    SegmentName = "immutabilityPolicies",
+    NamePattern = ""
+  >;
 
   /**
    * The properties of an ImmutabilityPolicy of a blob container.
@@ -76,6 +78,7 @@ interface ImmutabilityPolicies {
    * Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("BlobContainers_DeleteImmutabilityPolicy")
   deleteImmutabilityPolicy is ArmResourceDeleteSync<
     ImmutabilityPolicy,
@@ -131,6 +134,7 @@ interface ImmutabilityPolicies {
   >;
 }
 
+@@doc(ImmutabilityPolicy.name, "");
 @@encodedName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "application/json",
   "parameters"

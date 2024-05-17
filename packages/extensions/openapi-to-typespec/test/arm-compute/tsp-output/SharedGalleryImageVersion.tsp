@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SharedGalleryImage)
 @includeInapplicableMetadataInPayload(false)
 model SharedGalleryImageVersion extends PirSharedGalleryResource {
-  /**
-   * The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
-   */
-  @path
-  @key("galleryImageVersionName")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SharedGalleryImageVersion,
+    KeyName = "galleryImageVersionName",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image version.
@@ -61,3 +59,8 @@ interface SharedGalleryImageVersions {
     }
   >;
 }
+
+@@path(SharedGalleryImageVersion.name);
+@@doc(SharedGalleryImageVersion.name,
+  "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+);

@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(CloudService)
 @includeInapplicableMetadataInPayload(false)
 model RoleInstance {
-  /**
-   * Name of the role instance.
-   */
-  @path
-  @key("roleInstanceName")
-  @segment("roleInstances")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RoleInstance,
+    KeyName = "roleInstanceName",
+    SegmentName = "roleInstances",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id
@@ -50,6 +48,7 @@ model RoleInstance {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read")
   tags?: Record<string>;
 
@@ -89,6 +88,9 @@ interface RoleInstances {
    * Deletes a role instance from a cloud service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("CloudServiceRoleInstances_Delete")
   delete is ArmResourceDeleteAsync<RoleInstance>;
 
@@ -193,3 +195,6 @@ interface RoleInstances {
     accept: "application/x-rdp",
   ): ArmResponse<void> | ErrorResponse;
 }
+
+@@path(RoleInstance.name);
+@@doc(RoleInstance.name, "Name of the role instance.");

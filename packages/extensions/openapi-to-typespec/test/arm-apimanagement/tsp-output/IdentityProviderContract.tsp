@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IdentityProviderContractProperties
 )
-model IdentityProviderContract extends ProxyResourceBase {
+model IdentityProviderContract extends Foundations.ProxyResource {
   /**
    * Identity Provider Type identifier.
    */
@@ -83,7 +83,7 @@ interface IdentityProviderContracts {
    * Updates an existing IdentityProvider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
@@ -103,6 +103,7 @@ interface IdentityProviderContracts {
    * Deletes the specified identity provider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,

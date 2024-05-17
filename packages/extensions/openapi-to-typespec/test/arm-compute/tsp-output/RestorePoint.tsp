@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(RestorePointCollection)
 @includeInapplicableMetadataInPayload(false)
 model RestorePoint extends ProxyResource {
-  /**
-   * The name of the restore point.
-   */
-  @path
-  @key("restorePointName")
-  @segment("restorePoints")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RestorePoint,
+    KeyName = "restorePointName",
+    SegmentName = "restorePoints",
+    NamePattern = ""
+  >;
 
   /**
    * The restore point properties.
@@ -79,6 +77,9 @@ interface RestorePoints {
   /**
    * The operation to delete the restore point.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     RestorePoint,
     {
@@ -93,6 +94,8 @@ interface RestorePoints {
   >;
 }
 
+@@path(RestorePoint.name);
+@@doc(RestorePoint.name, "The name of the restore point.");
 @@encodedName(RestorePoints.create::parameters.resource,
   "application/json",
   "parameters"

@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueAttachmentContractProperties
 )
-model IssueAttachmentContract extends ProxyResourceBase {
-  /**
-   * Attachment identifier within an Issue. Must be unique in the current Issue.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("attachmentId")
-  @segment("attachments")
-  @visibility("read")
-  name: string;
+model IssueAttachmentContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueAttachmentContract,
+    KeyName = "attachmentId",
+    SegmentName = "attachments",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the Issue Attachment.
@@ -86,6 +81,7 @@ interface IssueAttachmentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
@@ -132,6 +128,12 @@ interface IssueAttachmentContracts {
   >;
 }
 
+@@maxLength(IssueAttachmentContract.name, 256);
+@@minLength(IssueAttachmentContract.name, 1);
+@@path(IssueAttachmentContract.name);
+@@doc(IssueAttachmentContract.name,
+  "Attachment identifier within an Issue. Must be unique in the current Issue."
+);
 @@encodedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -387,14 +387,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -449,14 +449,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -803,14 +803,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -875,14 +875,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -962,14 +962,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1433,7 +1433,7 @@
         "storageAccountSasToken"
       ]
     },
-    "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
+    "Azure.ResourceManager.Foundations.ManagedServiceIdentity": {
       "type": "object",
       "description": "The properties of the managed service identities assigned to this resource.",
       "properties": {
@@ -1448,22 +1448,19 @@
           "readOnly": true
         },
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-          }
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentities",
+          "description": "The identities assigned to this resource by the user."
         }
       },
       "required": [
         "type"
       ]
     },
-    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
       "type": "string",
       "description": "The kind of managed identity assigned to this resource.",
       "enum": [
@@ -1473,7 +1470,7 @@
         "SystemAssigned, UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "ManagedIdentityType",
+        "name": "ManagedServiceIdentityType",
         "modelAsString": true,
         "values": [
           {
@@ -1499,6 +1496,13 @@
         ]
       }
     },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentities": {
+      "type": "object",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.\",",
+      "additionalProperties": {
+        "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+      }
+    },
     "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
@@ -1510,16 +1514,6 @@
         "principalId": {
           "type": "string",
           "description": "The active directory identifier for this principal."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -1661,7 +1655,7 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -1924,7 +1918,7 @@
       "description": "The type used for update operations of the DataProduct.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -2042,15 +2036,8 @@
             "read",
             "create"
           ]
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"

@@ -22,17 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   OpenidConnectProviderContractProperties
 )
-model OpenidConnectProviderContract extends ProxyResourceBase {
-  /**
-   * Identifier of the OpenID Connect Provider.
-   */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("opid")
-  @segment("openidConnectProviders")
-  @visibility("read")
-  name: string;
+model OpenidConnectProviderContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = OpenidConnectProviderContract,
+    KeyName = "opid",
+    SegmentName = "openidConnectProviders",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * OpenId Connect Provider contract properties.
@@ -93,7 +89,7 @@ interface OpenidConnectProviderContracts {
    * Updates the specific OpenID Connect Provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
@@ -121,6 +117,7 @@ interface OpenidConnectProviderContracts {
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
@@ -197,6 +194,11 @@ interface OpenidConnectProviderContracts {
   >;
 }
 
+@@maxLength(OpenidConnectProviderContract.name, 256);
+@@path(OpenidConnectProviderContract.name);
+@@doc(OpenidConnectProviderContract.name,
+  "Identifier of the OpenID Connect Provider."
+);
 @@encodedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

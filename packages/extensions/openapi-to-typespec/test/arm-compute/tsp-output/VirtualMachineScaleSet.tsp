@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSet extends Resource {
-  /**
-   * The name of the VM scale set.
-   */
-  @path
-  @key("vmScaleSetName")
-  @segment("virtualMachineScaleSets")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSet,
+    KeyName = "vmScaleSetName",
+    SegmentName = "virtualMachineScaleSets",
+    NamePattern = ""
+  >;
 
   /**
    * The virtual machine scale set sku.
@@ -102,7 +100,7 @@ interface VirtualMachineScaleSets {
   /**
    * Update a VM scale set.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,
@@ -120,6 +118,9 @@ interface VirtualMachineScaleSets {
   /**
    * Deletes a VM scale set.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSet,
     {
@@ -571,6 +572,8 @@ interface VirtualMachineScaleSets {
   ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
 }
 
+@@path(VirtualMachineScaleSet.name);
+@@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
 @@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

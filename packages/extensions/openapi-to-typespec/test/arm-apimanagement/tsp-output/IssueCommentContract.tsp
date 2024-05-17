@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueCommentContractProperties
 )
-model IssueCommentContract extends ProxyResourceBase {
-  /**
-   * Comment identifier within an Issue. Must be unique in the current Issue.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("commentId")
-  @segment("comments")
-  @visibility("read")
-  name: string;
+model IssueCommentContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueCommentContract,
+    KeyName = "commentId",
+    SegmentName = "comments",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the Issue Comment.
@@ -86,6 +81,7 @@ interface IssueCommentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
@@ -132,6 +128,12 @@ interface IssueCommentContracts {
   >;
 }
 
+@@maxLength(IssueCommentContract.name, 256);
+@@minLength(IssueCommentContract.name, 1);
+@@path(IssueCommentContract.name);
+@@doc(IssueCommentContract.name,
+  "Comment identifier within an Issue. Must be unique in the current Issue."
+);
 @@encodedName(IssueCommentContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

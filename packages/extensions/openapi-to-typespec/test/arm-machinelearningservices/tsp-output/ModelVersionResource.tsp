@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(ModelContainerResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ModelVersion)
-model ModelVersionResource extends ProxyResourceBase {
-  /**
-   * Version identifier. This is case-sensitive.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model ModelVersionResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ModelVersionResource,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,6 +55,9 @@ interface ModelVersionResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryModelVersions_Delete")
   delete is ArmResourceDeleteAsync<ModelVersionResource>;
 
@@ -137,6 +138,8 @@ interface ModelVersionResources {
   >;
 }
 
+@@path(ModelVersionResource.name);
+@@doc(ModelVersionResource.name, "Version identifier. This is case-sensitive.");
 @@encodedName(ModelVersionResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

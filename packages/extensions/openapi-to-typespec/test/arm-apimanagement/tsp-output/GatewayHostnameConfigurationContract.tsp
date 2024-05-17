@@ -22,17 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   GatewayHostnameConfigurationContractProperties
 )
-model GatewayHostnameConfigurationContract extends ProxyResourceBase {
-  /**
-   * Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("hcId")
-  @segment("hostnameConfigurations")
-  @visibility("read")
-  name: string;
+model GatewayHostnameConfigurationContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GatewayHostnameConfigurationContract,
+    KeyName = "hcId",
+    SegmentName = "hostnameConfigurations",
+    NamePattern = ""
+  >;
 
   /**
    * Gateway hostname configuration details.
@@ -85,6 +81,7 @@ interface GatewayHostnameConfigurationContracts {
    * Deletes the specified hostname configuration from the specified Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
@@ -131,6 +128,12 @@ interface GatewayHostnameConfigurationContracts {
   >;
 }
 
+@@maxLength(GatewayHostnameConfigurationContract.name, 80);
+@@minLength(GatewayHostnameConfigurationContract.name, 1);
+@@path(GatewayHostnameConfigurationContract.name);
+@@doc(GatewayHostnameConfigurationContract.name,
+  "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity."
+);
 @@encodedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

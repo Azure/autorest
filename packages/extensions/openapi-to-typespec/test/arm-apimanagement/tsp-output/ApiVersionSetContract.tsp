@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   ApiVersionSetContractProperties
 )
-model ApiVersionSetContract extends ProxyResourceBase {
-  /**
-   * Api Version Set identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("versionSetId")
-  @segment("apiVersionSets")
-  @visibility("read")
-  name: string;
+model ApiVersionSetContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiVersionSetContract,
+    KeyName = "versionSetId",
+    SegmentName = "apiVersionSets",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * API VersionSet contract properties.
@@ -86,7 +81,7 @@ interface ApiVersionSetContracts {
    * Updates the details of the Api VersionSet specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
@@ -106,6 +101,7 @@ interface ApiVersionSetContracts {
    * Deletes specific Api Version Set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
@@ -152,6 +148,12 @@ interface ApiVersionSetContracts {
   >;
 }
 
+@@maxLength(ApiVersionSetContract.name, 80);
+@@minLength(ApiVersionSetContract.name, 1);
+@@path(ApiVersionSetContract.name);
+@@doc(ApiVersionSetContract.name,
+  "Api Version Set identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

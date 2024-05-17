@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetExtension extends SubResourceReadOnly {
-  /**
-   * The name of the VM scale set extension.
-   */
-  @path
-  @key("vmssExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetExtension,
+    KeyName = "vmssExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource type
@@ -85,7 +83,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to update an extension.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
@@ -103,6 +101,9 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to delete the extension.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetExtension,
     {
@@ -135,6 +136,10 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
+@@path(VirtualMachineScaleSetExtension.name);
+@@doc(VirtualMachineScaleSetExtension.name,
+  "The name of the VM scale set extension."
+);
 @@encodedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "application/json",
   "extensionParameters"

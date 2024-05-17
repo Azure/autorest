@@ -14,16 +14,13 @@ namespace Microsoft.AzureSphere;
 /**
  * An Azure Sphere catalog
  */
-model Catalog is TrackedResource<CatalogProperties> {
-  /**
-   * Name of catalog
-   */
-  @pattern("^[A-Za-z0-9_-]{1,50}$")
-  @path
-  @key("catalogName")
-  @segment("catalogs")
-  @visibility("read")
-  name: string;
+model Catalog is Azure.ResourceManager.TrackedResource<CatalogProperties> {
+  ...ResourceNameParameter<
+    Resource = Catalog,
+    KeyName = "catalogName",
+    SegmentName = "catalogs",
+    NamePattern = "^[A-Za-z0-9_-]{1,50}$"
+  >;
 }
 
 @armResourceOperations
@@ -41,7 +38,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   /**
@@ -209,6 +206,8 @@ interface Catalogs {
   >;
 }
 
+@@path(Catalog.name);
+@@doc(Catalog.name, "Name of catalog");
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );

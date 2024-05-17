@@ -18,17 +18,13 @@ namespace Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
-model StorageAccount extends TrackedResourceBase {
-  /**
-   * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-   */
-  @maxLength(24)
-  @minLength(3)
-  @path
-  @key("accountName")
-  @segment("storageAccounts")
-  @visibility("read")
-  name: string;
+model StorageAccount extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = StorageAccount,
+    KeyName = "accountName",
+    SegmentName = "storageAccounts",
+    NamePattern = ""
+  >;
 
   /**
    * Gets the Kind.
@@ -47,8 +43,8 @@ model StorageAccount extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: StorageAccountProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -77,12 +73,13 @@ interface StorageAccounts {
   /**
    * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<StorageAccount, StorageAccountUpdateParameters>;
 
   /**
    * Deletes a storage account in Microsoft Azure.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<StorageAccount>;
 
   /**
@@ -237,6 +234,12 @@ interface StorageAccounts {
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
+@@maxLength(StorageAccount.name, 24);
+@@minLength(StorageAccount.name, 3);
+@@path(StorageAccount.name);
+@@doc(StorageAccount.name,
+  "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
+);
 @@encodedName(StorageAccounts.create::parameters.resource,
   "application/json",
   "parameters"

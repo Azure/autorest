@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   AuthorizationServerContractProperties
 )
-model AuthorizationServerContract extends ProxyResourceBase {
-  /**
-   * Identifier of the authorization server.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("authsid")
-  @segment("authorizationServers")
-  @visibility("read")
-  name: string;
+model AuthorizationServerContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = AuthorizationServerContract,
+    KeyName = "authsid",
+    SegmentName = "authorizationServers",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the External OAuth authorization server Contract.
@@ -86,7 +81,7 @@ interface AuthorizationServerContracts {
    * Updates the details of the authorization server specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
@@ -106,6 +101,7 @@ interface AuthorizationServerContracts {
    * Deletes specific authorization server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
@@ -163,6 +159,12 @@ interface AuthorizationServerContracts {
   >;
 }
 
+@@maxLength(AuthorizationServerContract.name, 80);
+@@minLength(AuthorizationServerContract.name, 1);
+@@path(AuthorizationServerContract.name);
+@@doc(AuthorizationServerContract.name,
+  "Identifier of the authorization server."
+);
 @@encodedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

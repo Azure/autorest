@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSetVM)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
-  /**
-   * The name of the virtual machine extension.
-   */
-  @path
-  @key("vmExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetVMExtension,
+    KeyName = "vmExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource type
@@ -96,7 +94,7 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to update the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
@@ -116,6 +114,9 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to delete the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMExtensions_Delete")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVMExtension,
@@ -155,6 +156,10 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
+@@path(VirtualMachineScaleSetVMExtension.name);
+@@doc(VirtualMachineScaleSetVMExtension.name,
+  "The name of the virtual machine extension."
+);
 @@encodedName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "application/json",
   "extensionParameters"

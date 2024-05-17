@@ -23,11 +23,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   FileServicePropertiesProperties
 )
-model FileServiceProperties extends ProxyResourceBase {
-  @key("fileService")
-  @segment("fileServices")
-  @visibility("read")
-  name: string;
+model FileServiceProperties extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FileServiceProperties,
+    KeyName = "fileService",
+    SegmentName = "fileServices",
+    NamePattern = ""
+  >;
 
   /**
    * The properties of File services in storage account.
@@ -35,7 +37,7 @@ model FileServiceProperties extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: FileServicePropertiesProperties;
 
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -62,6 +64,7 @@ interface FileServicePropertiesOperationGroup {
   list is ArmResourceListByParent<FileServiceProperties>;
 }
 
+@@doc(FileServiceProperties.name, "");
 @@encodedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

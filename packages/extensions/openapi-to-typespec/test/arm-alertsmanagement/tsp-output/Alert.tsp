@@ -19,15 +19,13 @@ namespace Azure.ResourceManager.AlertsManagement;
 @subscriptionResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
-model Alert extends ProxyResourceBase {
-  /**
-   * Unique ID of an alert instance.
-   */
-  @path
-  @key("alertId")
-  @segment("alerts")
-  @visibility("read")
-  name: string;
+model Alert extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Alert,
+    KeyName = "alertId",
+    SegmentName = "alerts",
+    NamePattern = ""
+  >;
 
   /**
    * Alert property bag
@@ -193,6 +191,8 @@ interface Alerts {
   ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
+@@path(Alert.name);
+@@doc(Alert.name, "Unique ID of an alert instance.");
 @@encodedName(Alerts.changeState::parameters.body,
   "application/json",
   "comment"

@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleAssignmentScheduleRequestProperties
 )
-model RoleAssignmentScheduleRequest extends ExtensionResourceBase {
-  /**
-   * The name (guid) of the role assignment schedule request to get.
-   */
-  @path
-  @key("roleAssignmentScheduleRequestName")
-  @segment("roleAssignmentScheduleRequests")
-  @visibility("read")
-  name: string;
+model RoleAssignmentScheduleRequest extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleAssignmentScheduleRequest,
+    KeyName = "roleAssignmentScheduleRequestName",
+    SegmentName = "roleAssignmentScheduleRequests",
+    NamePattern = ""
+  >;
 
   /**
    * Role assignment schedule request properties.
@@ -82,6 +80,10 @@ interface RoleAssignmentScheduleRequests {
   >;
 }
 
+@@path(RoleAssignmentScheduleRequest.name);
+@@doc(RoleAssignmentScheduleRequest.name,
+  "The name (guid) of the role assignment schedule request to get."
+);
 @@encodedName(RoleAssignmentScheduleRequests.create::parameters.resource,
   "application/json",
   "parameters"

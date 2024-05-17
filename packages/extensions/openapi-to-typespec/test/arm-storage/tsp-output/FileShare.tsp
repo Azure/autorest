@@ -20,17 +20,13 @@ namespace Microsoft.Storage;
 @parentResource(FileServiceProperties)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileShareProperties)
-model FileShare extends ProxyResourceBase {
-  /**
-   * The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("shareName")
-  @segment("shares")
-  @visibility("read")
-  name: string;
+model FileShare extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FileShare,
+    KeyName = "shareName",
+    SegmentName = "shares",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the file share.
@@ -82,12 +78,13 @@ interface FileShares {
   /**
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<FileShare, FileShare>;
 
   /**
    * Deletes specified share under its account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     FileShare,
     {
@@ -161,6 +158,12 @@ interface FileShares {
   >;
 }
 
+@@maxLength(FileShare.name, 63);
+@@minLength(FileShare.name, 3);
+@@path(FileShare.name);
+@@doc(FileShare.name,
+  "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
 @@encodedName(FileShares.create::parameters.resource,
   "application/json",
   "fileShare"

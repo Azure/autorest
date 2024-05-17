@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model OSFamily {
-  /**
-   * Name of the OS family.
-   */
-  @path
-  @key("osFamilyName")
-  @segment("cloudServiceOsFamilies")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = OSFamily,
+    KeyName = "osFamilyName",
+    SegmentName = "cloudServiceOsFamilies",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id.
@@ -70,3 +68,6 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
   listOSFamilies is ArmResourceListByParent<OSFamily>;
 }
+
+@@path(OSFamily.name);
+@@doc(OSFamily.name, "Name of the OS family.");

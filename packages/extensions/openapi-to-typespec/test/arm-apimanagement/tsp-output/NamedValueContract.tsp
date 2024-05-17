@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
-model NamedValueContract extends ProxyResourceBase {
-  /**
-   * Identifier of the NamedValue.
-   */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("namedValueId")
-  @segment("namedValues")
-  @visibility("read")
-  name: string;
+model NamedValueContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = NamedValueContract,
+    KeyName = "namedValueId",
+    SegmentName = "namedValues",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * NamedValue entity contract properties.
@@ -83,7 +79,7 @@ interface NamedValueContracts {
    * Updates the specific named value.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,
@@ -103,6 +99,7 @@ interface NamedValueContracts {
    * Deletes specific named value from the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
@@ -177,6 +174,9 @@ interface NamedValueContracts {
   >;
 }
 
+@@maxLength(NamedValueContract.name, 256);
+@@path(NamedValueContract.name);
+@@doc(NamedValueContract.name, "Identifier of the NamedValue.");
 @@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

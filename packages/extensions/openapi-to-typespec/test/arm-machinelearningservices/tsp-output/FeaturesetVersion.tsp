@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(FeaturesetContainer)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FeaturesetVersionProperties)
-model FeaturesetVersion extends ProxyResourceBase {
-  /**
-   * Version identifier. This is case-sensitive.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model FeaturesetVersion extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FeaturesetVersion,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -52,6 +50,9 @@ interface FeaturesetVersions {
   /**
    * Delete version.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<FeaturesetVersion>;
 
   /**
@@ -160,6 +161,8 @@ interface FeaturesetVersions {
   >;
 }
 
+@@path(FeaturesetVersion.name);
+@@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
 @@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
   "application/json",
   "body"

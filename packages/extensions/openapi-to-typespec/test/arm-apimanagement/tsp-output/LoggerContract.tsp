@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LoggerContractProperties)
-model LoggerContract extends ProxyResourceBase {
-  /**
-   * Logger identifier. Must be unique in the API Management service instance.
-   */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("loggerId")
-  @segment("loggers")
-  @visibility("read")
-  name: string;
+model LoggerContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = LoggerContract,
+    KeyName = "loggerId",
+    SegmentName = "loggers",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Logger entity contract properties.
@@ -83,7 +79,7 @@ interface LoggerContracts {
    * Updates an existing logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,
@@ -103,6 +99,7 @@ interface LoggerContracts {
    * Deletes the specified logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
@@ -149,6 +146,11 @@ interface LoggerContracts {
   >;
 }
 
+@@maxLength(LoggerContract.name, 256);
+@@path(LoggerContract.name);
+@@doc(LoggerContract.name,
+  "Logger identifier. Must be unique in the API Management service instance."
+);
 @@encodedName(LoggerContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

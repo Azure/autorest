@@ -16,15 +16,13 @@ namespace Microsoft.AzureSphere;
  * An image resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
-model Image is ProxyResource<ImageProperties> {
-  /**
-   * Image name. Use .default for image creation.
-   */
-  @path
-  @key("imageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+model Image is Azure.ResourceManager.ProxyResource<ImageProperties> {
+  ...ResourceNameParameter<
+    Resource = Image,
+    KeyName = "imageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -78,3 +76,6 @@ interface Images {
     }
   >;
 }
+
+@@path(Image.name);
+@@doc(Image.name, "Image name. Use .default for image creation.");

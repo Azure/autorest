@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachine)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineExtension extends ResourceWithOptionalLocation {
-  /**
-   * The name of the virtual machine extension.
-   */
-  @path
-  @key("vmExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineExtension,
+    KeyName = "vmExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Virtual Machine Extension.
@@ -62,7 +60,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to update the extension.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate
@@ -71,6 +69,9 @@ interface VirtualMachineExtensions {
   /**
    * The operation to delete the extension.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
 
   /**
@@ -92,6 +93,10 @@ interface VirtualMachineExtensions {
   >;
 }
 
+@@path(VirtualMachineExtension.name);
+@@doc(VirtualMachineExtension.name,
+  "The name of the virtual machine extension."
+);
 @@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "application/json",
   "extensionParameters"

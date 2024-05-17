@@ -22,15 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   SubscriptionContractProperties
 )
-model SubscriptionContract extends ProxyResourceBase {
-  /**
-   * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-   */
-  @path
-  @key("subscriptionId")
-  @segment("subscriptions")
-  @visibility("read")
-  name: string;
+model SubscriptionContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SubscriptionContract,
+    KeyName = "subscriptionId",
+    SegmentName = "subscriptions",
+    NamePattern = ""
+  >;
 
   /**
    * Subscription contract properties.
@@ -97,7 +95,7 @@ interface SubscriptionContracts {
    * Updates the details of a subscription specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
@@ -131,6 +129,7 @@ interface SubscriptionContracts {
    * Deletes the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
@@ -208,6 +207,10 @@ interface SubscriptionContracts {
   >;
 }
 
+@@path(SubscriptionContract.name);
+@@doc(SubscriptionContract.name,
+  "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+);
 @@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

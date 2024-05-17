@@ -20,14 +20,12 @@ namespace Azure.ResourceManager.Dns;
 @parentResource(DnsZone)
 @includeInapplicableMetadataInPayload(false)
 model DnsRecord {
-  /**
-   * The name of the record set, relative to the name of the zone.
-   */
-  @path
-  @key("relativeRecordSetName")
-  @segment("A")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DnsRecord,
+    KeyName = "relativeRecordSetName",
+    SegmentName = "A",
+    NamePattern = ""
+  >;
 
   /**
    * The ID of the record set.
@@ -107,7 +105,7 @@ interface DnsRecords {
    * Updates a record set within a DNS zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("RecordSets_Update")
   update is ArmCustomPatchSync<
     DnsRecord,
@@ -133,6 +131,7 @@ interface DnsRecords {
    * Deletes a record set from a DNS zone. This operation cannot be undone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RecordSets_Delete")
   delete is ArmResourceDeleteSync<
     DnsRecord,
@@ -184,6 +183,10 @@ interface DnsRecords {
   >;
 }
 
+@@path(DnsRecord.name);
+@@doc(DnsRecord.name,
+  "The name of the record set, relative to the name of the zone."
+);
 @@encodedName(DnsRecords.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

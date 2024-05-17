@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SchemaContractProperties)
-model SchemaContract extends ProxyResourceBase {
-  /**
-   * Schema id identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("schemaId")
-  @segment("schemas")
-  @visibility("read")
-  name: string;
+model SchemaContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SchemaContract,
+    KeyName = "schemaId",
+    SegmentName = "schemas",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the API Schema.
@@ -83,6 +79,7 @@ interface SchemaContracts {
    * Deletes the schema configuration at the Api.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
@@ -135,6 +132,12 @@ interface SchemaContracts {
   >;
 }
 
+@@maxLength(SchemaContract.name, 80);
+@@minLength(SchemaContract.name, 1);
+@@path(SchemaContract.name);
+@@doc(SchemaContract.name,
+  "Schema id identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(SchemaContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

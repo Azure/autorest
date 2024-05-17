@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(JobBase)
-model JobBaseResource extends ProxyResourceBase {
-  /**
-   * The name and identifier for the Job. This is case-sensitive.
-   */
-  @path
-  @key("id")
-  @segment("jobs")
-  @visibility("read")
-  name: string;
+model JobBaseResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = JobBaseResource,
+    KeyName = "id",
+    SegmentName = "jobs",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,7 +55,7 @@ interface JobBaseResources {
    * Updates a Job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Jobs_Update")
   update is ArmCustomPatchSync<JobBaseResource, PartialJobBasePartialResource>;
 
@@ -65,6 +63,9 @@ interface JobBaseResources {
    * Deletes a Job (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Jobs_Delete")
   delete is ArmResourceDeleteAsync<JobBaseResource>;
 
@@ -130,6 +131,10 @@ interface JobBaseResources {
   cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }
 
+@@path(JobBaseResource.name);
+@@doc(JobBaseResource.name,
+  "The name and identifier for the Job. This is case-sensitive."
+);
 @@encodedName(JobBaseResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

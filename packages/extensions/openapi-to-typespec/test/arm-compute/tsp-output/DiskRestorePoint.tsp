@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(RestorePoint)
 @includeInapplicableMetadataInPayload(false)
 model DiskRestorePoint extends ProxyOnlyResource {
-  /**
-   * The name of the disk restore point created.
-   */
-  @path
-  @key("diskRestorePointName")
-  @segment("diskRestorePoints")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DiskRestorePoint,
+    KeyName = "diskRestorePointName",
+    SegmentName = "diskRestorePoints",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of an incremental disk restore point
@@ -115,6 +113,8 @@ interface DiskRestorePoints {
   >;
 }
 
+@@path(DiskRestorePoint.name);
+@@doc(DiskRestorePoint.name, "The name of the disk restore point created.");
 @@encodedName(DiskRestorePoints.grantAccess::parameters.body,
   "application/json",
   "grantAccessData"

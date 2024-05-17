@@ -18,18 +18,13 @@ namespace Microsoft.Storage;
 @parentResource(QueueServiceProperties)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(QueueProperties)
-model StorageQueue extends ProxyResourceBase {
-  /**
-   * A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$")
-  @path
-  @key("queueName")
-  @segment("queues")
-  @visibility("read")
-  name: string;
+model StorageQueue extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = StorageQueue,
+    KeyName = "queueName",
+    SegmentName = "queues",
+    NamePattern = "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+  >;
 
   /**
    * Queue resource properties.
@@ -58,7 +53,7 @@ interface StorageQueues {
    * Creates a new queue with the specified queue name, under the specified account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Queue_Update")
   update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
 
@@ -66,6 +61,7 @@ interface StorageQueues {
    * Deletes the queue with the specified queue name, under the specified account if it exists.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Queue_Delete")
   delete is ArmResourceDeleteSync<StorageQueue>;
 
@@ -94,6 +90,12 @@ interface StorageQueues {
   >;
 }
 
+@@maxLength(StorageQueue.name, 63);
+@@minLength(StorageQueue.name, 3);
+@@path(StorageQueue.name);
+@@doc(StorageQueue.name,
+  "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters."
+);
 @@encodedName(StorageQueues.create::parameters.resource,
   "application/json",
   "queue"

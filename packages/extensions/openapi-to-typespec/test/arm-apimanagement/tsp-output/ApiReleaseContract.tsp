@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
-model ApiReleaseContract extends ProxyResourceBase {
-  /**
-   * Release identifier within an API. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("releaseId")
-  @segment("releases")
-  @visibility("read")
-  name: string;
+model ApiReleaseContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiReleaseContract,
+    KeyName = "releaseId",
+    SegmentName = "releases",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * ApiRelease entity contract properties.
@@ -84,7 +79,7 @@ interface ApiReleaseContracts {
    * Updates the details of the release of the API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
@@ -104,6 +99,7 @@ interface ApiReleaseContracts {
    * Deletes the specified release in the API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
@@ -150,6 +146,12 @@ interface ApiReleaseContracts {
   >;
 }
 
+@@maxLength(ApiReleaseContract.name, 80);
+@@minLength(ApiReleaseContract.name, 1);
+@@path(ApiReleaseContract.name);
+@@doc(ApiReleaseContract.name,
+  "Release identifier within an API. Must be unique in the current API Management service instance."
+);
 @@encodedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

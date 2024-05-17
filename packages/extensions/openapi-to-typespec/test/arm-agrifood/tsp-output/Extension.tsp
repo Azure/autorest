@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
-model Extension extends ProxyResourceBase {
-  /**
-   * Id of extension resource.
-   */
-  @path
-  @key("extensionId")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+model Extension extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Extension,
+    KeyName = "extensionId",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Extension resource properties.
@@ -36,7 +34,7 @@ model Extension extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: ExtensionProperties;
 
-  ...Azure.ResourceManager.EntityTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations
@@ -54,6 +52,7 @@ interface Extensions {
   /**
    * Uninstall extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Extension>;
 
   /**
@@ -102,6 +101,8 @@ interface Extensions {
   >;
 }
 
+@@path(Extension.name);
+@@doc(Extension.name, "Id of extension resource.");
 @@encodedName(Extensions.createOrUpdate::parameters.resource,
   "application/json",
   "requestBody"

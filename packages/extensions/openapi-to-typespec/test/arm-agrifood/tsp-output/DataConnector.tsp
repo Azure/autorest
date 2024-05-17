@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
-model DataConnector extends ProxyResourceBase {
-  /**
-   * Connector name.
-   */
-  @maxLength(63)
-  @minLength(1)
-  @path
-  @key("dataConnectorName")
-  @segment("dataConnectors")
-  @visibility("read")
-  name: string;
+model DataConnector extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataConnector,
+    KeyName = "dataConnectorName",
+    SegmentName = "dataConnectors",
+    NamePattern = ""
+  >;
 
   /**
    * DataConnector Properties.
@@ -38,7 +34,7 @@ model DataConnector extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: DataConnectorProperties;
 
-  ...Azure.ResourceManager.EntityTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations
@@ -56,6 +52,7 @@ interface DataConnectors {
   /**
    * Delete a Data Connectors with given dataConnector name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<DataConnector>;
 
   /**
@@ -86,6 +83,10 @@ interface DataConnectors {
   >;
 }
 
+@@maxLength(DataConnector.name, 63);
+@@minLength(DataConnector.name, 1);
+@@path(DataConnector.name);
+@@doc(DataConnector.name, "Connector name.");
 @@encodedName(DataConnectors.createOrUpdate::parameters.resource,
   "application/json",
   "body"

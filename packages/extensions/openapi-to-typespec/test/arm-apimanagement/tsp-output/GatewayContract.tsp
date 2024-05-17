@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(GatewayContractProperties)
-model GatewayContract extends ProxyResourceBase {
-  /**
-   * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("gatewayId")
-  @segment("gateways")
-  @visibility("read")
-  name: string;
+model GatewayContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GatewayContract,
+    KeyName = "gatewayId",
+    SegmentName = "gateways",
+    NamePattern = ""
+  >;
 
   /**
    * Gateway details.
@@ -83,7 +79,7 @@ interface GatewayContracts {
    * Updates the details of the gateway specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Gateway_Update")
   update is ArmCustomPatchSync<
     GatewayContract,
@@ -103,6 +99,7 @@ interface GatewayContracts {
    * Deletes specific Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
@@ -228,6 +225,12 @@ interface GatewayContracts {
   ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
 }
 
+@@maxLength(GatewayContract.name, 80);
+@@minLength(GatewayContract.name, 1);
+@@path(GatewayContract.name);
+@@doc(GatewayContract.name,
+  "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
+);
 @@encodedName(GatewayContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

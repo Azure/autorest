@@ -21,14 +21,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGallery extends PirCommunityGalleryResource {
-  /**
-   * The public name of the community gallery.
-   */
-  @path
-  @key("publicGalleryName")
-  @segment("communityGalleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CommunityGallery,
+    KeyName = "publicGalleryName",
+    SegmentName = "communityGalleries",
+    NamePattern = ""
+  >;
 
   @extension("x-ms-client-flatten", true)
   @visibility("read,create")
@@ -42,3 +40,6 @@ interface CommunityGalleries {
    */
   get is ArmResourceRead<CommunityGallery>;
 }
+
+@@path(CommunityGallery.name);
+@@doc(CommunityGallery.name, "The public name of the community gallery.");

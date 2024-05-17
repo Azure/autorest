@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model Gallery extends Resource {
-  /**
-   * The name of the Shared Image Gallery.
-   */
-  @path
-  @key("galleryName")
-  @segment("galleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Gallery,
+    KeyName = "galleryName",
+    SegmentName = "galleries",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Shared Image Gallery.
@@ -66,12 +64,15 @@ interface Galleries {
   /**
    * Update a Shared Image Gallery.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Gallery, GalleryUpdate>;
 
   /**
    * Delete a Shared Image Gallery.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Gallery>;
 
   /**
@@ -94,6 +95,8 @@ interface Galleries {
   update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
 }
 
+@@path(Gallery.name);
+@@doc(Gallery.name, "The name of the Shared Image Gallery.");
 @@encodedName(Galleries.createOrUpdate::parameters.resource,
   "application/json",
   "gallery"

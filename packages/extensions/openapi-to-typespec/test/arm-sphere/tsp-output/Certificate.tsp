@@ -16,15 +16,14 @@ namespace Microsoft.AzureSphere;
  * An certificate resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
-model Certificate is ProxyResource<CertificateProperties> {
-  /**
-   * Serial number of the certificate. Use '.default' to get current active certificate.
-   */
-  @path
-  @key("serialNumber")
-  @segment("certificates")
-  @visibility("read")
-  name: string;
+model Certificate
+  is Azure.ResourceManager.ProxyResource<CertificateProperties> {
+  ...ResourceNameParameter<
+    Resource = Certificate,
+    KeyName = "serialNumber",
+    SegmentName = "certificates",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -87,6 +86,10 @@ interface Certificates {
   >;
 }
 
+@@path(Certificate.name);
+@@doc(Certificate.name,
+  "Serial number of the certificate. Use '.default' to get current active certificate."
+);
 @@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );

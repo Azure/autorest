@@ -20,16 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(CodeContainer)
-model CodeContainerResource extends ProxyResourceBase {
-  /**
-   * Container name.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
-  @key("codeName")
-  @segment("codes")
-  @visibility("read")
-  name: string;
+model CodeContainerResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CodeContainerResource,
+    KeyName = "codeName",
+    SegmentName = "codes",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -58,6 +55,9 @@ interface CodeContainerResources {
    * Delete Code container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeContainers_Delete")
   delete is ArmResourceDeleteAsync<CodeContainerResource>;
 
@@ -80,6 +80,8 @@ interface CodeContainerResources {
   >;
 }
 
+@@path(CodeContainerResource.name);
+@@doc(CodeContainerResource.name, "Container name.");
 @@encodedName(CodeContainerResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
-model ApiContract extends ProxyResourceBase {
-  /**
-   * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("apiId")
-  @segment("apis")
-  @visibility("read")
-  name: string;
+model ApiContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiContract,
+    KeyName = "apiId",
+    SegmentName = "apis",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * API entity contract properties.
@@ -81,7 +76,7 @@ interface ApiContracts {
    * Updates the specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
@@ -101,6 +96,7 @@ interface ApiContracts {
    * Deletes the specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
@@ -325,6 +321,12 @@ interface ApiContracts {
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
 }
 
+@@maxLength(ApiContract.name, 256);
+@@minLength(ApiContract.name, 1);
+@@path(ApiContract.name);
+@@doc(ApiContract.name,
+  "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
+);
 @@encodedName(ApiContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

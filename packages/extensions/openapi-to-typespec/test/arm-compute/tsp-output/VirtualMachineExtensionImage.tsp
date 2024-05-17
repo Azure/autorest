@@ -20,11 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineExtensionImage extends Resource {
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineExtensionImage,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Virtual Machine Extension Image.
@@ -47,3 +48,6 @@ interface VirtualMachineExtensionImages {
   @operationId("VirtualMachineExtensionImages_ListTypes")
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }
+
+@@path(VirtualMachineExtensionImage.name);
+@@doc(VirtualMachineExtensionImage.name, "");

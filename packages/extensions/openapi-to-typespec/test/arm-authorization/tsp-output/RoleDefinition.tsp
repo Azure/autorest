@@ -18,15 +18,13 @@ namespace Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
-model RoleDefinition extends ExtensionResourceBase {
-  /**
-   * The ID of the role definition.
-   */
-  @path
-  @key("roleDefinitionId")
-  @segment("roleDefinitions")
-  @visibility("read")
-  name: string;
+model RoleDefinition extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleDefinition,
+    KeyName = "roleDefinitionId",
+    SegmentName = "roleDefinitions",
+    NamePattern = ""
+  >;
 
   /**
    * Role definition properties.
@@ -50,6 +48,7 @@ interface RoleDefinitions {
   /**
    * Deletes a role definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<RoleDefinition>;
 
   /**
@@ -71,6 +70,8 @@ interface RoleDefinitions {
   >;
 }
 
+@@path(RoleDefinition.name);
+@@doc(RoleDefinition.name, "The ID of the role definition.");
 @@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "roleDefinition"

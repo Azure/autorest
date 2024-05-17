@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(CommunityGallery)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGalleryImage extends PirCommunityGalleryResource {
-  /**
-   * The name of the community gallery image definition.
-   */
-  @path
-  @key("galleryImageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CommunityGalleryImage,
+    KeyName = "galleryImageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image definition.
@@ -50,3 +48,8 @@ interface CommunityGalleryImages {
   @operationId("CommunityGalleryImages_List")
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }
+
+@@path(CommunityGalleryImage.name);
+@@doc(CommunityGalleryImage.name,
+  "The name of the community gallery image definition."
+);

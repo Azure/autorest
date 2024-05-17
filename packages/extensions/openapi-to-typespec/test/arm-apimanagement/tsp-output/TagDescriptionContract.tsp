@@ -22,18 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   TagDescriptionContractProperties
 )
-model TagDescriptionContract extends ProxyResourceBase {
-  /**
-   * Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("tagDescriptionId")
-  @segment("tagDescriptions")
-  @visibility("read")
-  name: string;
+model TagDescriptionContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = TagDescriptionContract,
+    KeyName = "tagDescriptionId",
+    SegmentName = "tagDescriptions",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * TagDescription entity contract properties.
@@ -86,6 +81,7 @@ interface TagDescriptionContracts {
    * Delete tag description for the Api.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
@@ -132,6 +128,12 @@ interface TagDescriptionContracts {
   >;
 }
 
+@@maxLength(TagDescriptionContract.name, 80);
+@@minLength(TagDescriptionContract.name, 1);
+@@path(TagDescriptionContract.name);
+@@doc(TagDescriptionContract.name,
+  "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names."
+);
 @@encodedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

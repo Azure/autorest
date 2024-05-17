@@ -16,16 +16,14 @@ namespace Microsoft.IntegrationSpaces;
  * An integration application under space.
  */
 @parentResource(Space)
-model Application is TrackedResource<ApplicationProperties> {
-  /**
-   * The name of the Application
-   */
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
-  @key("applicationName")
-  @segment("applications")
-  @visibility("read")
-  name: string;
+model Application
+  is Azure.ResourceManager.TrackedResource<ApplicationProperties> {
+  ...ResourceNameParameter<
+    Resource = Application,
+    KeyName = "applicationName",
+    SegmentName = "applications",
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
+  >;
 }
 
 @armResourceOperations
@@ -43,12 +41,13 @@ interface Applications {
   /**
    * Update a Application
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
 
   /**
    * Delete a Application
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Application>;
 
   /**
@@ -159,3 +158,6 @@ interface Applications {
     void
   >;
 }
+
+@@path(Application.name);
+@@doc(Application.name, "The name of the Application");

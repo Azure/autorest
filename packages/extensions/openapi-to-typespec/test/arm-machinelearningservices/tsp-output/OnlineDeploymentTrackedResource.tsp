@@ -18,15 +18,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(OnlineEndpointTrackedResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(OnlineDeployment)
-model OnlineDeploymentTrackedResource extends TrackedResourceBase {
-  /**
-   * Inference Endpoint Deployment name.
-   */
-  @path
-  @key("deploymentName")
-  @segment("deployments")
-  @visibility("read")
-  name: string;
+model OnlineDeploymentTrackedResource extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = OnlineDeploymentTrackedResource,
+    KeyName = "deploymentName",
+    SegmentName = "deployments",
+    NamePattern = ""
+  >;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -39,8 +37,8 @@ model OnlineDeploymentTrackedResource extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: OnlineDeployment;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -63,7 +61,7 @@ interface OnlineDeploymentTrackedResources {
    * Update Online Deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("OnlineDeployments_Update")
   update is ArmCustomPatchAsync<
     OnlineDeploymentTrackedResource,
@@ -74,6 +72,9 @@ interface OnlineDeploymentTrackedResources {
    * Delete Inference Endpoint Deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("OnlineDeployments_Delete")
   delete is ArmResourceDeleteAsync<OnlineDeploymentTrackedResource>;
 
@@ -165,6 +166,10 @@ interface OnlineDeploymentTrackedResources {
   ): ArmResponse<SkuResourceArmPaginatedResult> | ErrorResponse;
 }
 
+@@path(OnlineDeploymentTrackedResource.name);
+@@doc(OnlineDeploymentTrackedResource.name,
+  "Inference Endpoint Deployment name."
+);
 @@encodedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

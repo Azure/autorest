@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(BackendContractProperties)
-model BackendContract extends ProxyResourceBase {
-  /**
-   * Identifier of the Backend entity. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("backendId")
-  @segment("backends")
-  @visibility("read")
-  name: string;
+model BackendContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = BackendContract,
+    KeyName = "backendId",
+    SegmentName = "backends",
+    NamePattern = ""
+  >;
 
   /**
    * Backend entity contract properties.
@@ -83,7 +79,7 @@ interface BackendContracts {
    * Updates an existing backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,
@@ -103,6 +99,7 @@ interface BackendContracts {
    * Deletes the specified backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
@@ -159,6 +156,12 @@ interface BackendContracts {
   >;
 }
 
+@@maxLength(BackendContract.name, 80);
+@@minLength(BackendContract.name, 1);
+@@path(BackendContract.name);
+@@doc(BackendContract.name,
+  "Identifier of the Backend entity. Must be unique in the current API Management service instance."
+);
 @@encodedName(BackendContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

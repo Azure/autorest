@@ -23,11 +23,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalDelegationSettingsProperties
 )
-model PortalDelegationSettings extends ProxyResourceBase {
-  @key("portalsetting")
-  @segment("portalsettings")
-  @visibility("read")
-  name: string;
+model PortalDelegationSettings extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PortalDelegationSettings,
+    KeyName = "portalsetting",
+    SegmentName = "portalsettings",
+    NamePattern = ""
+  >;
 
   /**
    * Delegation settings contract properties.
@@ -80,7 +82,7 @@ interface PortalDelegationSettingsOperationGroup {
    * Update Delegation settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
@@ -115,6 +117,7 @@ interface PortalDelegationSettingsOperationGroup {
   >;
 }
 
+@@doc(PortalDelegationSettings.name, "");
 @@encodedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -14,16 +14,13 @@ namespace Microsoft.IntegrationSpaces;
 /**
  * An integration space.
  */
-model Space is TrackedResource<SpaceResourceProperties> {
-  /**
-   * The name of the space
-   */
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
-  @key("spaceName")
-  @segment("spaces")
-  @visibility("read")
-  name: string;
+model Space is Azure.ResourceManager.TrackedResource<SpaceResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = Space,
+    KeyName = "spaceName",
+    SegmentName = "spaces",
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
+  >;
 }
 
 @armResourceOperations
@@ -41,12 +38,13 @@ interface Spaces {
   /**
    * Update a Space
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<Space, SpaceUpdate>;
 
   /**
    * Delete a Space
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Space>;
 
   /**
@@ -117,3 +115,6 @@ interface Spaces {
    */
   listBySubscription is ArmListBySubscription<Space>;
 }
+
+@@path(Space.name);
+@@doc(Space.name, "The name of the space");

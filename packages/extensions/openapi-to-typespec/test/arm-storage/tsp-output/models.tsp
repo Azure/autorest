@@ -814,6 +814,7 @@ model StorageAccountCreateParameters {
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -882,6 +883,7 @@ model Identity {
   /**
    * Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1952,6 +1954,7 @@ model StorageAccountUpdateParameters {
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -3402,6 +3405,7 @@ model ContainerProperties {
   /**
    * A name-value pair to associate with the container as metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<string>;
 
   /**
@@ -3802,6 +3806,7 @@ model FileShareProperties {
   /**
    * A name-value pair to associate with the share as metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<string>;
 
   /**
@@ -4007,6 +4012,7 @@ model QueueProperties {
   /**
    * A name-value pair that represents queue metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<string>;
 
   /**
@@ -4108,5 +4114,6 @@ model ListQueueProperties {
   /**
    * A name-value pair that represents queue metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<string>;
 }

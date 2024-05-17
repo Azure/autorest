@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   DataManagerForAgricultureProperties
 )
-model DataManagerForAgriculture extends TrackedResourceBase {
-  /**
-   * DataManagerForAgriculture resource name.
-   */
-  @maxLength(63)
-  @minLength(1)
-  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
-  @path
-  @key("dataManagerForAgricultureResourceName")
-  @segment("farmBeats")
-  @visibility("read")
-  name: string;
+model DataManagerForAgriculture extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = DataManagerForAgriculture,
+    KeyName = "dataManagerForAgricultureResourceName",
+    SegmentName = "farmBeats",
+    NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+  >;
 
   /**
    * Data Manager For Agriculture ARM Resource properties.
@@ -39,7 +34,7 @@ model DataManagerForAgriculture extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: DataManagerForAgricultureProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -62,7 +57,7 @@ interface DataManagerForAgricultures {
    * Update a Data Manager For Agriculture resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("DataManagerForAgricultureResources_Update")
   update is ArmCustomPatchAsync<
     DataManagerForAgriculture,
@@ -73,6 +68,7 @@ interface DataManagerForAgricultures {
    * Delete a Data Manager For Agriculture resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DataManagerForAgricultureResources_Delete")
   delete is ArmResourceDeleteSync<DataManagerForAgriculture>;
 
@@ -111,6 +107,12 @@ interface DataManagerForAgricultures {
   listBySubscription is ArmListBySubscription<DataManagerForAgriculture>;
 }
 
+@@maxLength(DataManagerForAgriculture.name, 63);
+@@minLength(DataManagerForAgriculture.name, 1);
+@@path(DataManagerForAgriculture.name);
+@@doc(DataManagerForAgriculture.name,
+  "DataManagerForAgriculture resource name."
+);
 @@encodedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "application/json",
   "request"

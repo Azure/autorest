@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ProductContractProperties)
-model ProductContract extends ProxyResourceBase {
-  /**
-   * Product identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @path
-  @key("productId")
-  @segment("products")
-  @visibility("read")
-  name: string;
+model ProductContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ProductContract,
+    KeyName = "productId",
+    SegmentName = "products",
+    NamePattern = ""
+  >;
 
   /**
    * Product entity contract properties.
@@ -83,7 +79,7 @@ interface ProductContracts {
    * Update existing product details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
@@ -103,6 +99,7 @@ interface ProductContracts {
    * Delete product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
@@ -320,6 +317,12 @@ interface ProductContracts {
   ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
 }
 
+@@maxLength(ProductContract.name, 256);
+@@minLength(ProductContract.name, 1);
+@@path(ProductContract.name);
+@@doc(ProductContract.name,
+  "Product identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(ProductContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

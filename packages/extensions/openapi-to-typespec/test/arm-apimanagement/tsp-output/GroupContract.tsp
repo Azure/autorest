@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(GroupContractProperties)
-model GroupContract extends ProxyResourceBase {
-  /**
-   * Group identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @path
-  @key("groupId")
-  @segment("groups")
-  @visibility("read")
-  name: string;
+model GroupContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GroupContract,
+    KeyName = "groupId",
+    SegmentName = "groups",
+    NamePattern = ""
+  >;
 
   /**
    * Group entity contract properties.
@@ -80,7 +76,7 @@ interface GroupContracts {
    * Updates the details of the group specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
@@ -100,6 +96,7 @@ interface GroupContracts {
    * Deletes specific group of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
@@ -197,6 +194,12 @@ interface GroupContracts {
   ): ArmResponse<ApiManagementGroupUserListResult> | ErrorResponse;
 }
 
+@@maxLength(GroupContract.name, 256);
+@@minLength(GroupContract.name, 1);
+@@path(GroupContract.name);
+@@doc(GroupContract.name,
+  "Group identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(GroupContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -16,16 +16,13 @@ namespace Microsoft.ServiceNetworking;
  * Frontend Subresource of Traffic Controller.
  */
 @parentResource(TrafficController)
-model Frontend is TrackedResource<FrontendProperties> {
-  /**
-   * Frontends
-   */
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  @path
-  @key("frontendName")
-  @segment("frontends")
-  @visibility("read")
-  name: string;
+model Frontend is Azure.ResourceManager.TrackedResource<FrontendProperties> {
+  ...ResourceNameParameter<
+    Resource = Frontend,
+    KeyName = "frontendName",
+    SegmentName = "frontends",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +40,7 @@ interface Frontends {
   /**
    * Update a Frontend
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Frontend, FrontendUpdate>;
 
   /**
@@ -56,3 +53,6 @@ interface Frontends {
    */
   listByTrafficController is ArmResourceListByParent<Frontend>;
 }
+
+@@path(Frontend.name);
+@@doc(Frontend.name, "Frontends");

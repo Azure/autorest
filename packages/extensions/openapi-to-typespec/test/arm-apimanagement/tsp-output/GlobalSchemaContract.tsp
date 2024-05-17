@@ -22,17 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   GlobalSchemaContractProperties
 )
-model GlobalSchemaContract extends ProxyResourceBase {
-  /**
-   * Schema id identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("schemaId")
-  @segment("schemas")
-  @visibility("read")
-  name: string;
+model GlobalSchemaContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GlobalSchemaContract,
+    KeyName = "schemaId",
+    SegmentName = "schemas",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the Global Schema.
@@ -85,6 +81,7 @@ interface GlobalSchemaContracts {
    * Deletes specific Schema.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
@@ -131,6 +128,12 @@ interface GlobalSchemaContracts {
   >;
 }
 
+@@maxLength(GlobalSchemaContract.name, 80);
+@@minLength(GlobalSchemaContract.name, 1);
+@@path(GlobalSchemaContract.name);
+@@doc(GlobalSchemaContract.name,
+  "Schema id identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

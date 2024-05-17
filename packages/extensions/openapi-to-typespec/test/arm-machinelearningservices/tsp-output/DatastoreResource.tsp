@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(Datastore)
-model DatastoreResource extends ProxyResourceBase {
-  /**
-   * Datastore name.
-   */
-  @path
-  @key("name")
-  @segment("datastores")
-  @visibility("read")
-  name: string;
+model DatastoreResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DatastoreResource,
+    KeyName = "name",
+    SegmentName = "datastores",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -68,6 +66,7 @@ interface DatastoreResources {
    * Delete datastore.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
@@ -140,6 +139,8 @@ interface DatastoreResources {
   >;
 }
 
+@@path(DatastoreResource.name);
+@@doc(DatastoreResource.name, "Datastore name.");
 @@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

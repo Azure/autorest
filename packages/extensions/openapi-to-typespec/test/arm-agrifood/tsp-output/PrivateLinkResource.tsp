@@ -22,15 +22,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-model PrivateLinkResource extends ProxyResourceBase {
-  /**
-   * Sub resource name.
-   */
-  @path
-  @key("subResourceName")
-  @segment("privateLinkResources")
-  @visibility("read")
-  name: string;
+model PrivateLinkResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "subResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -53,3 +51,6 @@ interface PrivateLinkResources {
   @operationId("PrivateLinkResources_ListByResource")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }
+
+@@path(PrivateLinkResource.name);
+@@doc(PrivateLinkResource.name, "Sub resource name.");

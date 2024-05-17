@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model SshPublicKeyResource extends Resource {
-  /**
-   * The name of the SSH public key.
-   */
-  @path
-  @key("sshPublicKeyName")
-  @segment("sshPublicKeys")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SshPublicKeyResource,
+    KeyName = "sshPublicKeyName",
+    SegmentName = "sshPublicKeys",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the SSH public key.
@@ -54,7 +52,7 @@ interface SshPublicKeyResources {
    * Updates a new SSH public key resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("SshPublicKeys_Update")
   update is ArmCustomPatchSync<
     SshPublicKeyResource,
@@ -65,6 +63,7 @@ interface SshPublicKeyResources {
    * Delete an SSH public key.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("SshPublicKeys_Delete")
   delete is ArmResourceDeleteSync<SshPublicKeyResource>;
 
@@ -94,6 +93,8 @@ interface SshPublicKeyResources {
   >;
 }
 
+@@path(SshPublicKeyResource.name);
+@@doc(SshPublicKeyResource.name, "The name of the SSH public key.");
 @@encodedName(SshPublicKeyResources.create::parameters.resource,
   "application/json",
   "parameters"

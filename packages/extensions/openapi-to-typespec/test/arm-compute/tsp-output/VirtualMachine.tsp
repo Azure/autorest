@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachine extends Resource {
-  /**
-   * The name of the virtual machine.
-   */
-  @path
-  @key("vmName")
-  @segment("virtualMachines")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachine,
+    KeyName = "vmName",
+    SegmentName = "virtualMachines",
+    NamePattern = ""
+  >;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
@@ -86,12 +84,15 @@ interface VirtualMachines {
   /**
    * The operation to update a virtual machine.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;
 
   /**
    * The operation to delete a virtual machine.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachine,
     {
@@ -324,6 +325,8 @@ interface VirtualMachines {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
+@@path(VirtualMachine.name);
+@@doc(VirtualMachine.name, "The name of the virtual machine.");
 @@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

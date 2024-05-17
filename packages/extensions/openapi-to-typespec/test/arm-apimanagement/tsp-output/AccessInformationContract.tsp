@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   AccessInformationContractProperties
 )
-model AccessInformationContract extends ProxyResourceBase {
+model AccessInformationContract extends Foundations.ProxyResource {
   /**
    * The identifier of the Access configuration.
    */
@@ -83,7 +83,7 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,

@@ -20,15 +20,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleEligibilityScheduleProperties
 )
-model RoleEligibilitySchedule extends ExtensionResourceBase {
-  /**
-   * The name (guid) of the role eligibility schedule to get.
-   */
-  @path
-  @key("roleEligibilityScheduleName")
-  @segment("roleEligibilitySchedules")
-  @visibility("read")
-  name: string;
+model RoleEligibilitySchedule extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleEligibilitySchedule,
+    KeyName = "roleEligibilityScheduleName",
+    SegmentName = "roleEligibilitySchedules",
+    NamePattern = ""
+  >;
 
   /**
    * role eligibility schedule properties.
@@ -62,3 +60,8 @@ interface RoleEligibilitySchedules {
     }
   >;
 }
+
+@@path(RoleEligibilitySchedule.name);
+@@doc(RoleEligibilitySchedule.name,
+  "The name (guid) of the role eligibility schedule to get."
+);

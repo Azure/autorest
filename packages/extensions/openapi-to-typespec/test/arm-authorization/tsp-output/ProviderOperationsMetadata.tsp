@@ -16,15 +16,13 @@ namespace Azure.ResourceManager.Authorization;
  * Provider Operations metadata
  */
 @tenantResource
-model ProviderOperationsMetadata is ProxyResource<{}> {
-  /**
-   * The namespace of the resource provider.
-   */
-  @path
-  @key("resourceProviderNamespace")
-  @segment("providerOperations")
-  @visibility("read")
-  name: string;
+model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
+  ...ResourceNameParameter<
+    Resource = ProviderOperationsMetadata,
+    KeyName = "resourceProviderNamespace",
+    SegmentName = "providerOperations",
+    NamePattern = ""
+  >;
 
   /**
    * The provider display name.
@@ -78,3 +76,8 @@ interface ProviderOperationsMetadataOperationGroup {
     }
   >;
 }
+
+@@path(ProviderOperationsMetadata.name);
+@@doc(ProviderOperationsMetadata.name,
+  "The namespace of the resource provider."
+);

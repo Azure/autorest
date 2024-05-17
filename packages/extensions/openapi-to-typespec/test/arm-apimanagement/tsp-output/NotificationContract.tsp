@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   NotificationContractProperties
 )
-model NotificationContract extends ProxyResourceBase {
+model NotificationContract extends Foundations.ProxyResource {
   /**
    * Notification Name Identifier.
    */

@@ -29,6 +29,11 @@ import {
 import { isResponseSchema } from "../utils/schemas";
 import { getTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
+import {
+  getSuppressionsForArmResourceDeleteAsync,
+  getSuppressionsForArmResourceDeleteSync,
+} from "../utils/suppressions";
+import { generateDocs, generateDocsContent } from "../utils/docs";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -111,12 +116,22 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const otherOperations = operations[1];
 
   const clientDecorators = buildResourceClientDecorators(schema, armResourceOperations, otherOperations);
+  const keyProperty = buildKeyProperty(schema);
+  const properties = [...getOtherProperties(schema, !getArmCommonTypeVersion())];
+  let keyExpression, augmentDecorators;
+  if (keyProperty.name === "name" && keyProperty.type === "string") {
+    keyExpression = buildKeyExpression(schema, keyProperty);
+    augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty);
+  } else {
+    properties.unshift(keyProperty);
+  }
 
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
-    properties: [buildKeyProperty(schema), ...getOtherProperties(schema, !getArmCommonTypeVersion())],
+    properties,
+    keyExpression,
     name: schema.resourceMetadata.SwaggerModelName,
     parents: [],
     resourceParent: getParentResource(schema),
@@ -127,6 +142,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     doc: schema.language.default.description,
     decorators,
     clientDecorators,
+    augmentDecorators,
     resourceOperations: armResourceOperations,
     normalOperations: otherOperations,
     optionalStandardProperties: getArmCommonTypeVersion() ? getResourceOptionalStandardProperties(schema) : [],
@@ -156,29 +172,29 @@ function getResourceOptionalStandardProperties(schema: ArmResourceSchema): strin
   if (msi) {
     let msiType;
     if (msi.schema.language.default.name === "ManagedServiceIdentity") {
-      msiType = "Azure.ResourceManager.ManagedServiceIdentity";
+      msiType = "Azure.ResourceManager.ManagedServiceIdentityProperty";
     } else if (msi.schema.language.default.name === "SystemAssignedServiceIdentity") {
-      msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentity";
+      msiType = "Azure.ResourceManager.ManagedSystemAssignedIdentityProperty";
     } else {
       // TODO: handle non-standard property
-      msiType = "Azure.ResourceManager.ManagedServiceIdentity";
+      msiType = "Azure.ResourceManager.ManagedServiceIdentityProperty";
     }
     optionalStandardProperties.push(msiType);
   }
 
   if (schema.properties?.find((p) => p.serializedName === "sku")) {
     // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourceSku");
+    optionalStandardProperties.push("Azure.ResourceManager.ResourceSkuProperty");
   }
 
   if (schema.properties?.find((p) => p.serializedName === "eTag")) {
     // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.EntityTag");
+    optionalStandardProperties.push("Azure.ResourceManager.EntityTagProperty");
   }
 
   if (schema.properties?.find((p) => p.serializedName === "plan")) {
     // TODO: handle non-standard property
-    optionalStandardProperties.push("Azure.ResourceManager.ResourcePlan");
+    optionalStandardProperties.push("Azure.ResourceManager.ResourcePlanProperty");
   }
 
   return optionalStandardProperties;
@@ -360,7 +376,7 @@ function convertResourceUpdateOperation(
           examples: swaggerOperation.extensions?.["x-ms-examples"],
           customizations,
           // To resolve auto-generate update model with proper visibility
-          decorators: [{ name: "parameterVisibility", arguments: ["read"] }],
+          decorators: [{ name: "parameterVisibility", arguments: [] }],
         },
       ];
     }
@@ -379,22 +395,30 @@ function convertResourceDeleteOperation(
     const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
     const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
     const templateParameters = [resourceMetadata.SwaggerModelName];
+    const kind = isLongRunning
+      ? okResponse
+        ? "ArmResourceDeleteAsync"
+        : "ArmResourceDeleteWithoutOkAsync"
+      : "ArmResourceDeleteSync";
+    const suppressions =
+      kind === "ArmResourceDeleteAsync"
+        ? getSuppressionsForArmResourceDeleteAsync()
+        : kind === "ArmResourceDeleteSync"
+          ? getSuppressionsForArmResourceDeleteSync()
+          : undefined;
     if (baseParameters) {
       templateParameters.push(baseParameters);
     }
     return [
       {
         doc: operation.Description,
-        kind: isLongRunning
-          ? okResponse
-            ? "ArmResourceDeleteAsync"
-            : "ArmResourceDeleteWithoutOkAsync"
-          : "ArmResourceDeleteSync",
+        kind: kind,
         name: getOperationName(operation.OperationID),
         clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: operation.OperationID,
         templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
+        suppressions: suppressions,
       },
     ];
   }
@@ -808,6 +832,36 @@ function getSchemaResponseSchemaName(response: Response | undefined): string | u
   }
 
   return (response as SchemaResponse).schema.language.default.name;
+}
+
+function buildKeyExpression(schema: ArmResourceSchema, keyProperty: TypespecObjectProperty): string {
+  const namePattern = keyProperty.decorators?.find((d) => d.name === "pattern")?.arguments?.[0];
+  const keyName = keyProperty.decorators?.find((d) => d.name === "key")?.arguments?.[0];
+  const segmentName = keyProperty.decorators?.find((d) => d.name === "segment")?.arguments?.[0];
+  return `...ResourceNameParameter<
+    Resource = ${schema.resourceMetadata.SwaggerModelName}
+    ${keyName ? `, KeyName = "${keyName}"` : ""}
+    ${segmentName ? `, SegmentName = "${segmentName}"` : ""},
+    NamePattern = ${namePattern ? `"${namePattern}"` : `""`}
+  >`;
+}
+
+function buildKeyAugmentDecorators(
+  schema: ArmResourceSchema,
+  keyProperty: TypespecObjectProperty,
+): TypespecDecorator[] | undefined {
+  return keyProperty.decorators
+    ?.filter((d) => !["pattern", "key", "segment"].includes(d.name))
+    .filter((d) => !(d.name === "visibility" && d.arguments?.[0] === "read"))
+    .map((d) => {
+      d.target = `${schema.resourceMetadata.SwaggerModelName}.name`;
+      return d;
+    })
+    .concat({
+      name: "doc",
+      target: `${schema.resourceMetadata.SwaggerModelName}.name`,
+      arguments: [generateDocsContent(keyProperty)],
+    });
 }
 
 function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {

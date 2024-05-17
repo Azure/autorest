@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(IssueContractProperties)
-model IssueContract extends ProxyResourceBase {
-  /**
-   * Issue identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("issueId")
-  @segment("issues")
-  @visibility("read")
-  name: string;
+model IssueContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueContract,
+    KeyName = "issueId",
+    SegmentName = "issues",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the Issue.
@@ -92,7 +87,7 @@ interface IssueContracts {
    * Updates an existing issue for an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,
@@ -112,6 +107,7 @@ interface IssueContracts {
    * Deletes the specified Issue from an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssue_Delete")
   delete is ArmResourceDeleteSync<
     IssueContract,
@@ -164,6 +160,12 @@ interface IssueContracts {
   >;
 }
 
+@@maxLength(IssueContract.name, 256);
+@@minLength(IssueContract.name, 1);
+@@path(IssueContract.name);
+@@doc(IssueContract.name,
+  "Issue identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(IssueContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

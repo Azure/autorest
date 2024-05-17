@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(OperationContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
-model PolicyContract extends ProxyResourceBase {
+model PolicyContract extends Foundations.ProxyResource {
   /**
    * The identifier of the Policy.
    */
@@ -92,6 +92,7 @@ interface PolicyContracts {
    * Deletes the policy configuration at the Api Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperationPolicy_Delete")
   delete is ArmResourceDeleteSync<
     PolicyContract,

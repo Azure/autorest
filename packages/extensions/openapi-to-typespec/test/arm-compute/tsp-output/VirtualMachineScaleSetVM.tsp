@@ -20,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetVM extends Resource {
-  /**
-   * The instance ID of the virtual machine.
-   */
-  @path
-  @key("instanceId")
-  @segment("virtualMachines")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetVM,
+    KeyName = "instanceId",
+    SegmentName = "virtualMachines",
+    NamePattern = ""
+  >;
 
   /**
    * The virtual machine instance ID.
@@ -118,6 +116,9 @@ interface VirtualMachineScaleSetVMS {
    * Deletes a virtual machine from a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Delete")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVM,
@@ -427,6 +428,8 @@ interface VirtualMachineScaleSetVMS {
   ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
 }
 
+@@path(VirtualMachineScaleSetVM.name);
+@@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
 @@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "application/json",
   "parameters"

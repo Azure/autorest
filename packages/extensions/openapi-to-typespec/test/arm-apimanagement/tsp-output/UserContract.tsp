@@ -20,17 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(UserContractProperties)
-model UserContract extends ProxyResourceBase {
-  /**
-   * User identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("userId")
-  @segment("users")
-  @visibility("read")
-  name: string;
+model UserContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = UserContract,
+    KeyName = "userId",
+    SegmentName = "users",
+    NamePattern = ""
+  >;
 
   /**
    * User entity contract properties.
@@ -86,7 +82,7 @@ interface UserContracts {
    * Updates the details of the user specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,
@@ -106,6 +102,7 @@ interface UserContracts {
    * Deletes specific user.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
@@ -300,6 +297,12 @@ interface UserContracts {
   ): ArmResponse<UserIdentityListResult> | ErrorResponse;
 }
 
+@@maxLength(UserContract.name, 80);
+@@minLength(UserContract.name, 1);
+@@path(UserContract.name);
+@@doc(UserContract.name,
+  "User identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(UserContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

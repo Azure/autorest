@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   EmailTemplateContractProperties
 )
-model EmailTemplateContract extends ProxyResourceBase {
+model EmailTemplateContract extends Foundations.ProxyResource {
   /**
    * Email Template Name Identifier.
    */
@@ -83,7 +83,7 @@ interface EmailTemplateContracts {
    * Updates API Management email template
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
@@ -103,6 +103,7 @@ interface EmailTemplateContracts {
    * Reset the Email Template to default template provided by the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,

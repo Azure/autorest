@@ -18,14 +18,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model DiskAccess extends Resource {
-  /**
-   * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-   */
-  @path
-  @key("diskAccessName")
-  @segment("diskAccesses")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DiskAccess,
+    KeyName = "diskAccessName",
+    SegmentName = "diskAccesses",
+    NamePattern = ""
+  >;
 
   /**
    * The extended location where the disk access will be created. Extended location cannot be changed.
@@ -51,12 +49,15 @@ interface DiskAccesses {
   /**
    * Updates (patches) a disk access resource.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DiskAccess, DiskAccessUpdate>;
 
   /**
    * Deletes a disk access resource.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<DiskAccess>;
 
   /**
@@ -90,6 +91,10 @@ interface DiskAccesses {
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
+@@path(DiskAccess.name);
+@@doc(DiskAccess.name,
+  "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
+);
 @@encodedName(DiskAccesses.createOrUpdate::parameters.resource,
   "application/json",
   "diskAccess"

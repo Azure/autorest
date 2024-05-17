@@ -20,18 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(CacheContractProperties)
-model CacheContract extends ProxyResourceBase {
-  /**
-   * Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier).
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("cacheId")
-  @segment("caches")
-  @visibility("read")
-  name: string;
+model CacheContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CacheContract,
+    KeyName = "cacheId",
+    SegmentName = "caches",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Cache properties details.
@@ -81,7 +76,7 @@ interface CacheContracts {
    * Updates the details of the cache specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Cache_Update")
   update is ArmCustomPatchSync<
     CacheContract,
@@ -101,6 +96,7 @@ interface CacheContracts {
    * Deletes specific Cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
@@ -141,6 +137,12 @@ interface CacheContracts {
   >;
 }
 
+@@maxLength(CacheContract.name, 80);
+@@minLength(CacheContract.name, 1);
+@@path(CacheContract.name);
+@@doc(CacheContract.name,
+  "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
+);
 @@encodedName(CacheContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
