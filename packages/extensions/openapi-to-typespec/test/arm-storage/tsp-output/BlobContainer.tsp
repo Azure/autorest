@@ -7,7 +7,6 @@ import "./BlobServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface BlobContainers {
   list is ArmResourceListByParent<
     BlobContainer,
     {
-      ...BaseParameters<BlobContainer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
 
       /**
        * Optional. Specified maximum number of containers that can be included in the list.

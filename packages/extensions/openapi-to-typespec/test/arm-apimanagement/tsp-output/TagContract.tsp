@@ -7,7 +7,6 @@ import "./OperationContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -77,7 +76,7 @@ interface TagContracts {
   listByOperation is ArmResourceListByParent<
     TagContract,
     {
-      ...BaseParameters<TagContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

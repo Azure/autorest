@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface SubscriptionContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * Notify change in Subscription State.
@@ -101,7 +100,7 @@ interface SubscriptionContracts {
     SubscriptionContract,
     SubscriptionUpdateParameters,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * Notify change in Subscription State.
@@ -134,7 +133,7 @@ interface SubscriptionContracts {
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -152,7 +151,7 @@ interface SubscriptionContracts {
   list is ArmResourceListByParent<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>

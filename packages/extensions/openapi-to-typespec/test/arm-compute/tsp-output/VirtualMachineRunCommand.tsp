@@ -7,7 +7,6 @@ import "./VirtualMachine.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -42,7 +41,7 @@ interface VirtualMachineRunCommands {
   getByVirtualMachine is ArmResourceRead<
     VirtualMachineRunCommand,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
 
       /**
        * The expand expression to apply on the operation.
@@ -82,7 +81,7 @@ interface VirtualMachineRunCommands {
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
 
       /**
        * The expand expression to apply on the operation.
@@ -99,7 +98,7 @@ interface VirtualMachineRunCommands {
     VirtualMachineRunCommand,
     LocationScope<VirtualMachineRunCommand>,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
       ...LocationResourceParameter;
     }
   >;

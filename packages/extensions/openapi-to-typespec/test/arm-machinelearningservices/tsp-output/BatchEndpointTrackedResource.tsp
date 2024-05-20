@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -86,7 +85,7 @@ interface BatchEndpointTrackedResources {
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
     {
-      ...BaseParameters<BatchEndpointTrackedResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BatchEndpointTrackedResource>;
 
       /**
        * Number of endpoints to be retrieved in a page of results.

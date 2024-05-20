@@ -1,9 +1,9 @@
-import { getOptions } from "../options";
 import { TypespecObjectProperty } from "../interfaces";
+import { getOptions } from "../options";
 import { generateDecorators } from "./decorators";
 import { generateDocs } from "./docs";
-import { getFullyQualifiedName } from "./type-mapping";
 import { generateSuppressions } from "./suppressions";
+import { getFullyQualifiedName } from "./type-mapping";
 
 export function getModelPropertiesDeclarations(properties: TypespecObjectProperty[]): string[] {
   const { isFullCompatible } = getOptions();

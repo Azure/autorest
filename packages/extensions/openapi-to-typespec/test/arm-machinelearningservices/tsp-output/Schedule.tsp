@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface Schedules {
   list is ArmResourceListByParent<
     Schedule,
     {
-      ...BaseParameters<Schedule>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Schedule>;
 
       /**
        * Continuation token for pagination.

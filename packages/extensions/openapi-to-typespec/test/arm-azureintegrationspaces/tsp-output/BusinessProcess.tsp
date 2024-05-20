@@ -7,7 +7,6 @@ import "./Application.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -58,7 +57,7 @@ interface BusinessProcesses {
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {
-      ...BaseParameters<BusinessProcess>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BusinessProcess>;
 
       /**
        * The number of result items to return.

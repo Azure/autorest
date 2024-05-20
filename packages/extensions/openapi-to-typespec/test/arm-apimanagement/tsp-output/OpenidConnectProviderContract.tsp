@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -47,7 +46,7 @@ interface OpenidConnectProviderContracts {
   get is ArmResourceRead<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -67,7 +66,7 @@ interface OpenidConnectProviderContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -95,7 +94,7 @@ interface OpenidConnectProviderContracts {
     OpenidConnectProviderContract,
     OpenidConnectProviderUpdateContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -122,7 +121,7 @@ interface OpenidConnectProviderContracts {
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -148,7 +147,7 @@ interface OpenidConnectProviderContracts {
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -181,7 +180,7 @@ interface OpenidConnectProviderContracts {
     void,
     ClientSecretContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.

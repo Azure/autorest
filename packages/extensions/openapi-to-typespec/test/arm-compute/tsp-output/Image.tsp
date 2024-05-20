@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -45,7 +44,7 @@ interface Images {
   get is ArmResourceRead<
     Image,
     {
-      ...BaseParameters<Image>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
 
       /**
        * The expand expression to apply on the operation.

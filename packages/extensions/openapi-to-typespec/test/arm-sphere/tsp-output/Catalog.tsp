@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface Catalogs {
     void,
     ResourceListResult<Deployment>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -105,7 +104,7 @@ interface Catalogs {
     ListDeviceGroupsRequest,
     ResourceListResult<DeviceGroup>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -141,7 +140,7 @@ interface Catalogs {
     void,
     PagedDeviceInsight,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -177,7 +176,7 @@ interface Catalogs {
     void,
     ResourceListResult<Device>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression

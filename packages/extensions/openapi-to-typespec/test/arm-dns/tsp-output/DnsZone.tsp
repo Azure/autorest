@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -54,7 +53,7 @@ interface DnsZones {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
@@ -80,7 +79,7 @@ interface DnsZones {
     DnsZone,
     ZoneUpdateOptions,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
@@ -101,7 +100,7 @@ interface DnsZones {
   delete is ArmResourceDeleteAsync<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
@@ -119,7 +118,7 @@ interface DnsZones {
   listByResourceGroup is ArmResourceListByParent<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.

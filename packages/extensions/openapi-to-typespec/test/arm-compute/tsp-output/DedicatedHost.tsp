@@ -7,7 +7,6 @@ import "./DedicatedHostGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -47,7 +46,7 @@ interface DedicatedHosts {
   get is ArmResourceRead<
     DedicatedHost,
     {
-      ...BaseParameters<DedicatedHost>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DedicatedHost>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.

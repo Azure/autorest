@@ -7,7 +7,6 @@ import "./CapacityReservationGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -52,7 +51,7 @@ interface CapacityReservations {
   get is ArmResourceRead<
     CapacityReservation,
     {
-      ...BaseParameters<CapacityReservation>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservation>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.

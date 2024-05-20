@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -61,7 +60,7 @@ interface EncryptionScopes {
   list is ArmResourceListByParent<
     EncryptionScope,
     {
-      ...BaseParameters<EncryptionScope>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EncryptionScope>;
 
       /**
        * Optional, specifies the maximum number of encryption scopes that will be included in the list response.

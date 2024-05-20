@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface DataConnectors {
   list is ArmResourceListByParent<
     DataConnector,
     {
-      ...BaseParameters<DataConnector>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DataConnector>;
 
       /**
        * Maximum number of items needed (inclusive).

@@ -7,7 +7,6 @@ import "./VirtualMachine.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -42,7 +41,7 @@ interface VirtualMachineExtensions {
   get is ArmResourceRead<
     VirtualMachineExtension,
     {
-      ...BaseParameters<VirtualMachineExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
 
       /**
        * The expand expression to apply on the operation.
@@ -82,7 +81,7 @@ interface VirtualMachineExtensions {
   list is ArmResourceListByParent<
     VirtualMachineExtension,
     {
-      ...BaseParameters<VirtualMachineExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
 
       /**
        * The expand expression to apply on the operation.

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -66,7 +65,7 @@ interface VirtualMachines {
   get is ArmResourceRead<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
@@ -96,7 +95,7 @@ interface VirtualMachines {
   delete is ArmResourceDeleteAsync<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Optional parameter to force delete virtual machines.
@@ -114,7 +113,7 @@ interface VirtualMachines {
   list is ArmResourceListByParent<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
@@ -137,7 +136,7 @@ interface VirtualMachines {
     VirtualMachine,
     LocationScope<VirtualMachine>,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
       ...LocationResourceParameter;
     }
   >;
@@ -169,7 +168,7 @@ interface VirtualMachines {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Optional parameter to hibernate a virtual machine. (Feature in Preview)
@@ -192,7 +191,7 @@ interface VirtualMachines {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -239,7 +238,7 @@ interface VirtualMachines {
     void,
     RetrieveBootDiagnosticsDataResult,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.

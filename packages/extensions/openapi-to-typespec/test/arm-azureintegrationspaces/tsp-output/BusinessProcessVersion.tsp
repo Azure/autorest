@@ -7,7 +7,6 @@ import "./BusinessProcess.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -41,7 +40,7 @@ interface BusinessProcessVersions {
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     {
-      ...BaseParameters<BusinessProcessVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BusinessProcessVersion>;
 
       /**
        * The number of result items to return.

@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -56,7 +55,7 @@ interface NotificationContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
     {
-      ...BaseParameters<NotificationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -74,7 +73,7 @@ interface NotificationContracts {
   listByService is ArmResourceListByParent<
     NotificationContract,
     {
-      ...BaseParameters<NotificationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
 
       /**
        * Number of records to return.

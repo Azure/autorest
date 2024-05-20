@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -49,7 +48,7 @@ interface SmartGroups {
   getAll is ArmResourceListByParent<
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -127,7 +126,7 @@ interface SmartGroups {
     void,
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * New state of the alert.

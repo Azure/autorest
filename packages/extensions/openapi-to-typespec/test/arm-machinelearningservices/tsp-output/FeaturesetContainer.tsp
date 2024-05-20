@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface FeaturesetContainers {
   list is ArmResourceListByParent<
     FeaturesetContainer,
     {
-      ...BaseParameters<FeaturesetContainer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetContainer>;
 
       /**
        * Continuation token for pagination.

@@ -7,7 +7,6 @@ import "./CloudService.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -74,7 +73,7 @@ interface RoleInstances {
   get is ArmResourceRead<
     RoleInstance,
     {
-      ...BaseParameters<RoleInstance>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RoleInstance>;
 
       /**
        * The expand expression to apply to the operation. 'UserData' is not supported for cloud services.
@@ -102,7 +101,7 @@ interface RoleInstances {
   list is ArmResourceListByParent<
     RoleInstance,
     {
-      ...BaseParameters<RoleInstance>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RoleInstance>;
 
       /**
        * The expand expression to apply to the operation. 'UserData' is not supported for cloud services.

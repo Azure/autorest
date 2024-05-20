@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface IdentityProviderContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -89,7 +88,7 @@ interface IdentityProviderContracts {
     IdentityProviderContract,
     IdentityProviderUpdateParameters,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -108,7 +107,7 @@ interface IdentityProviderContracts {
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.

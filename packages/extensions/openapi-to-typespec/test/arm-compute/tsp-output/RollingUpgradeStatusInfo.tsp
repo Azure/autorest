@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -45,7 +44,7 @@ interface RollingUpgradeStatusInfos {
   getLatest is ArmResourceRead<
     RollingUpgradeStatusInfo,
     {
-      ...BaseParameters<RollingUpgradeStatusInfo>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RollingUpgradeStatusInfo>;
 
       /**
        * The name of the VM scale set.

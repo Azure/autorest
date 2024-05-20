@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -43,7 +42,7 @@ interface LabelingJobs {
   get is ArmResourceRead<
     LabelingJob,
     {
-      ...BaseParameters<LabelingJob>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
 
       /**
        * Boolean value to indicate whether to include JobInstructions in response.
@@ -78,7 +77,7 @@ interface LabelingJobs {
   list is ArmResourceListByParent<
     LabelingJob,
     {
-      ...BaseParameters<LabelingJob>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
 
       /**
        * Continuation token for pagination.

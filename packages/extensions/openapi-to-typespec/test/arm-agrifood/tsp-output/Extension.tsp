@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface Extensions {
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     {
-      ...BaseParameters<Extension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Extension>;
 
       /**
        * Installed extension ids.

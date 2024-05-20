@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -76,7 +75,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
     {
-      ...BaseParameters<WorkspaceConnectionPropertiesV2BasicResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<WorkspaceConnectionPropertiesV2BasicResource>;
 
       /**
        * Target of the workspace connection.

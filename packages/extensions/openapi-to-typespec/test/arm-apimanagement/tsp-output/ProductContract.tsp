@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface ProductContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -85,7 +84,7 @@ interface ProductContracts {
     ProductContract,
     ProductUpdateParameters,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface ProductContracts {
   delete is ArmResourceDeleteSync<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -128,7 +127,7 @@ interface ProductContracts {
   listByService is ArmResourceListByParent<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| groups | expand |     |     |</br>

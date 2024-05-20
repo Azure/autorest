@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface ComputeResources {
   delete is ArmResourceDeleteAsync<
     ComputeResource,
     {
-      ...BaseParameters<ComputeResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ComputeResource>;
 
       /**
        * Delete the underlying compute if 'Delete', or detach the underlying compute from workspace if 'Detach'.
@@ -81,7 +80,7 @@ interface ComputeResources {
   list is ArmResourceListByParent<
     ComputeResource,
     {
-      ...BaseParameters<ComputeResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ComputeResource>;
 
       /**
        * Continuation token for pagination.

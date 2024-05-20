@@ -7,7 +7,6 @@ import "./OnlineEndpointTrackedResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -86,7 +85,7 @@ interface OnlineDeploymentTrackedResources {
   list is ArmResourceListByParent<
     OnlineDeploymentTrackedResource,
     {
-      ...BaseParameters<OnlineDeploymentTrackedResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OnlineDeploymentTrackedResource>;
 
       /**
        * Ordering of list.

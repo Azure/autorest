@@ -7,7 +7,6 @@ import "./BlobContainer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -46,7 +45,7 @@ interface ImmutabilityPolicies {
   getImmutabilityPolicy is ArmResourceRead<
     ImmutabilityPolicy,
     {
-      ...BaseParameters<ImmutabilityPolicy>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
 
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
@@ -64,7 +63,7 @@ interface ImmutabilityPolicies {
   createOrUpdateImmutabilityPolicy is ArmResourceCreateOrReplaceSync<
     ImmutabilityPolicy,
     {
-      ...BaseParameters<ImmutabilityPolicy>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
 
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
@@ -83,7 +82,7 @@ interface ImmutabilityPolicies {
   deleteImmutabilityPolicy is ArmResourceDeleteSync<
     ImmutabilityPolicy,
     {
-      ...BaseParameters<ImmutabilityPolicy>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
 
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
@@ -103,7 +102,7 @@ interface ImmutabilityPolicies {
     void,
     ImmutabilityPolicy,
     {
-      ...BaseParameters<ImmutabilityPolicy>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
 
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
@@ -123,7 +122,7 @@ interface ImmutabilityPolicies {
     ImmutabilityPolicy,
     ImmutabilityPolicy,
     {
-      ...BaseParameters<ImmutabilityPolicy>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
 
       /**
        * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.

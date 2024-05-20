@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -80,7 +79,7 @@ interface DataManagerForAgricultures {
   listByResourceGroup is ArmResourceListByParent<
     DataManagerForAgriculture,
     {
-      ...BaseParameters<DataManagerForAgriculture>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DataManagerForAgriculture>;
 
       /**
        * Maximum number of items needed (inclusive).

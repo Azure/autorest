@@ -7,7 +7,6 @@ import "./DataContainerResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface DataVersionBaseResources {
   list is ArmResourceListByParent<
     DataVersionBaseResource,
     {
-      ...BaseParameters<DataVersionBaseResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DataVersionBaseResource>;
 
       /**
        * Please choose OrderBy value from ['createdtime', 'modifiedtime']

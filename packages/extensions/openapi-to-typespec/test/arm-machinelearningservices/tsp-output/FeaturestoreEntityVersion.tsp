@@ -7,7 +7,6 @@ import "./FeaturestoreEntityContainer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface FeaturestoreEntityVersions {
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     {
-      ...BaseParameters<FeaturestoreEntityVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturestoreEntityVersion>;
 
       /**
        * Continuation token for pagination.

@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface AuthorizationServerContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -87,7 +86,7 @@ interface AuthorizationServerContracts {
     AuthorizationServerContract,
     AuthorizationServerUpdateContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -106,7 +105,7 @@ interface AuthorizationServerContracts {
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -124,7 +123,7 @@ interface AuthorizationServerContracts {
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

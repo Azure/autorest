@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -86,7 +85,7 @@ interface OnlineEndpointTrackedResources {
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
     {
-      ...BaseParameters<OnlineEndpointTrackedResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OnlineEndpointTrackedResource>;
 
       /**
        * Name of the endpoint.

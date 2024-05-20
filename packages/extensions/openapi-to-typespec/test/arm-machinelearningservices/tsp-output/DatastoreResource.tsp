@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -52,7 +51,7 @@ interface DatastoreResources {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
     {
-      ...BaseParameters<DatastoreResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
 
       /**
        * Flag to skip validation.
@@ -78,7 +77,7 @@ interface DatastoreResources {
   list is ArmResourceListByParent<
     DatastoreResource,
     {
-      ...BaseParameters<DatastoreResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
 
       /**
        * Continuation token for pagination.

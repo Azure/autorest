@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -48,7 +47,7 @@ interface ProviderOperationsMetadataOperationGroup {
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.
@@ -66,7 +65,7 @@ interface ProviderOperationsMetadataOperationGroup {
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.

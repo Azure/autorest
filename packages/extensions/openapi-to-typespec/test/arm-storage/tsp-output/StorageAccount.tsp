@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -55,7 +54,7 @@ interface StorageAccounts {
   getProperties is ArmResourceRead<
     StorageAccount,
     {
-      ...BaseParameters<StorageAccount>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
 
       /**
        * May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.
@@ -102,7 +101,7 @@ interface StorageAccounts {
     void,
     StorageAccountListKeysResult,
     {
-      ...BaseParameters<StorageAccount>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
 
       /**
        * Specifies type of the key to be listed. Possible value is kerb.
@@ -151,7 +150,7 @@ interface StorageAccounts {
     void,
     void,
     {
-      ...BaseParameters<StorageAccount>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
 
       /**
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
@@ -169,7 +168,7 @@ interface StorageAccounts {
     void,
     void,
     {
-      ...BaseParameters<StorageAccount>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
 
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.

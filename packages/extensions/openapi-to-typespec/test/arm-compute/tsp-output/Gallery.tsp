@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -40,7 +39,7 @@ interface Galleries {
   get is ArmResourceRead<
     Gallery,
     {
-      ...BaseParameters<Gallery>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Gallery>;
 
       /**
        * The select expression to apply on the operation.

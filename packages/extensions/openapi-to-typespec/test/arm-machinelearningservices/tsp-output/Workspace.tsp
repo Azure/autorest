@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -64,7 +63,7 @@ interface Workspaces {
   delete is ArmResourceDeleteAsync<
     Workspace,
     {
-      ...BaseParameters<Workspace>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
 
       /**
        * Flag to indicate delete is a purge request.
@@ -82,7 +81,7 @@ interface Workspaces {
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     {
-      ...BaseParameters<Workspace>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
 
       /**
        * Continuation token for pagination.

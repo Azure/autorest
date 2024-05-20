@@ -7,7 +7,6 @@ import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -39,7 +38,7 @@ interface Certificates {
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
-      ...BaseParameters<Certificate>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Certificate>;
 
       /**
        * Filter the result list using the given expression

@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -45,7 +44,7 @@ interface IssueContracts {
   get is ArmResourceRead<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * Expand the comment attachments.
@@ -73,7 +72,7 @@ interface IssueContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -93,7 +92,7 @@ interface IssueContracts {
     IssueContract,
     IssueUpdateContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -112,7 +111,7 @@ interface IssueContracts {
   delete is ArmResourceDeleteSync<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -130,7 +129,7 @@ interface IssueContracts {
   listByService is ArmResourceListByParent<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>

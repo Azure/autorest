@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -40,7 +39,7 @@ interface RestorePointCollections {
   get is ArmResourceRead<
     RestorePointCollection,
     {
-      ...BaseParameters<RestorePointCollection>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
 
       /**
        * The name of the restore point collection.
@@ -62,7 +61,7 @@ interface RestorePointCollections {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RestorePointCollection,
     {
-      ...BaseParameters<RestorePointCollection>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
 
       /**
        * The name of the restore point collection.
@@ -80,7 +79,7 @@ interface RestorePointCollections {
     RestorePointCollection,
     RestorePointCollectionUpdate,
     {
-      ...BaseParameters<RestorePointCollection>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
 
       /**
        * The name of the restore point collection.
@@ -99,7 +98,7 @@ interface RestorePointCollections {
   delete is ArmResourceDeleteAsync<
     RestorePointCollection,
     {
-      ...BaseParameters<RestorePointCollection>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
 
       /**
        * The name of the Restore Point Collection.

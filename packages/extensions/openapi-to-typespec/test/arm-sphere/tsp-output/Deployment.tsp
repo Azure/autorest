@@ -7,7 +7,6 @@ import "./DeviceGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -48,7 +47,7 @@ interface Deployments {
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {
-      ...BaseParameters<Deployment>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Deployment>;
 
       /**
        * Filter the result list using the given expression

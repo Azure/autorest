@@ -7,7 +7,6 @@ import "./SharedGallery.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -49,7 +48,7 @@ interface SharedGalleryImages {
   list is ArmResourceListByParent<
     SharedGalleryImage,
     {
-      ...BaseParameters<SharedGalleryImage>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SharedGalleryImage>;
 
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.

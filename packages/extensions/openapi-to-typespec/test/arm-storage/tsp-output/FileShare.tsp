@@ -7,7 +7,6 @@ import "./FileServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -43,7 +42,7 @@ interface FileShares {
   get is ArmResourceRead<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: stats. Should be passed as a string with delimiter ','.
@@ -65,7 +64,7 @@ interface FileShares {
   create is ArmResourceCreateOrReplaceSync<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: snapshots. Should be passed as a string with delimiter ','
@@ -88,7 +87,7 @@ interface FileShares {
   delete is ArmResourceDeleteSync<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to delete a snapshot.
@@ -112,7 +111,7 @@ interface FileShares {
   list is ArmResourceListByParent<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional. Specified maximum number of shares that can be included in the list.
@@ -147,7 +146,7 @@ interface FileShares {
     LeaseShareRequest,
     LeaseShareResponse,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional. Specify the snapshot time to lease a snapshot.

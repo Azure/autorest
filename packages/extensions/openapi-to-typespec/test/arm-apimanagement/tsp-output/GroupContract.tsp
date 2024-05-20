@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -62,7 +61,7 @@ interface GroupContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -82,7 +81,7 @@ interface GroupContracts {
     GroupContract,
     GroupUpdateParameters,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,7 +100,7 @@ interface GroupContracts {
   delete is ArmResourceDeleteSync<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -119,7 +118,7 @@ interface GroupContracts {
   listByService is ArmResourceListByParent<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| externalId | filter | eq |     |</br>

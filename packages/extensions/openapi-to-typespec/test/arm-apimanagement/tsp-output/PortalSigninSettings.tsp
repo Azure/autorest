@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -68,7 +67,7 @@ interface PortalSigninSettingsOperationGroup {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSigninSettings,
     {
-      ...BaseParameters<PortalSigninSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSigninSettings>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -88,7 +87,7 @@ interface PortalSigninSettingsOperationGroup {
     PortalSigninSettings,
     PortalSigninSettings,
     {
-      ...BaseParameters<PortalSigninSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSigninSettings>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.

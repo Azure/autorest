@@ -7,7 +7,6 @@ import "./GatewayContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface GatewayHostnameConfigurationContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     {
-      ...BaseParameters<GatewayHostnameConfigurationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,7 +85,7 @@ interface GatewayHostnameConfigurationContracts {
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     {
-      ...BaseParameters<GatewayHostnameConfigurationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface GatewayHostnameConfigurationContracts {
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     {
-      ...BaseParameters<GatewayHostnameConfigurationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| hostname | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

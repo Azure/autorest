@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface OperationContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -85,7 +84,7 @@ interface OperationContracts {
     OperationContract,
     OperationUpdateContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface OperationContracts {
   delete is ArmResourceDeleteSync<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -122,7 +121,7 @@ interface OperationContracts {
   listByApi is ArmResourceListByParent<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

@@ -7,7 +7,6 @@ import "./EnvironmentContainerResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface EnvironmentVersionResources {
   list is ArmResourceListByParent<
     EnvironmentVersionResource,
     {
-      ...BaseParameters<EnvironmentVersionResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EnvironmentVersionResource>;
 
       /**
        * Ordering of list.

@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -78,7 +77,7 @@ interface VirtualMachineScaleSetVMS {
   get is ArmResourceRead<
     VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -102,7 +101,7 @@ interface VirtualMachineScaleSetVMS {
   update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set where the extension should be create or updated.
@@ -123,7 +122,7 @@ interface VirtualMachineScaleSetVMS {
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -147,7 +146,7 @@ interface VirtualMachineScaleSetVMS {
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVM,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
@@ -179,7 +178,7 @@ interface VirtualMachineScaleSetVMS {
     VirtualMachineScaleSetVMReimageParameters,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -199,7 +198,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -219,7 +218,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -239,7 +238,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -265,7 +264,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -285,7 +284,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -305,7 +304,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -325,7 +324,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     RetrieveBootDiagnosticsDataResult,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -351,7 +350,7 @@ interface VirtualMachineScaleSetVMS {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -370,7 +369,7 @@ interface VirtualMachineScaleSetVMS {
     VirtualMachineScaleSetVM,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.
@@ -390,7 +389,7 @@ interface VirtualMachineScaleSetVMS {
     RunCommandInput,
     RunCommandResult,
     {
-      ...BaseParameters<VirtualMachineScaleSetVM>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
        * The name of the VM scale set.

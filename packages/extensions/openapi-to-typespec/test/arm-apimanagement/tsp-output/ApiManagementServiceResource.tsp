@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -165,7 +164,7 @@ interface ApiManagementServiceResources {
     DeployConfigurationParameters,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.
@@ -185,7 +184,7 @@ interface ApiManagementServiceResources {
     SaveConfigurationParameter,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.
@@ -205,7 +204,7 @@ interface ApiManagementServiceResources {
     DeployConfigurationParameters,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.

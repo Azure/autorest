@@ -7,7 +7,6 @@ import "./ComponentContainerResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface ComponentVersionResources {
   list is ArmResourceListByParent<
     ComponentVersionResource,
     {
-      ...BaseParameters<ComponentVersionResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ComponentVersionResource>;
 
       /**
        * Ordering of list.

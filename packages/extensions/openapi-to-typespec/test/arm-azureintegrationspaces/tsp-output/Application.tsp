@@ -7,7 +7,6 @@ import "./Space.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -58,7 +57,7 @@ interface Applications {
   listBySpace is ArmResourceListByParent<
     Application,
     {
-      ...BaseParameters<Application>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Application>;
 
       /**
        * The number of result items to return.

@@ -7,7 +7,6 @@ import "./RestorePoint.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -44,7 +43,7 @@ interface DiskRestorePoints {
   get is ArmResourceRead<
     DiskRestorePoint,
     {
-      ...BaseParameters<DiskRestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
 
       /**
        * The name of the restore point collection that the disk restore point belongs.
@@ -62,7 +61,7 @@ interface DiskRestorePoints {
   listByRestorePoint is ArmResourceListByParent<
     DiskRestorePoint,
     {
-      ...BaseParameters<DiskRestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
 
       /**
        * The name of the restore point collection that the disk restore point belongs.
@@ -82,7 +81,7 @@ interface DiskRestorePoints {
     GrantAccessData,
     AccessUri,
     {
-      ...BaseParameters<DiskRestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
 
       /**
        * The name of the restore point collection that the disk restore point belongs.
@@ -102,7 +101,7 @@ interface DiskRestorePoints {
     void,
     void,
     {
-      ...BaseParameters<DiskRestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
 
       /**
        * The name of the restore point collection that the disk restore point belongs.

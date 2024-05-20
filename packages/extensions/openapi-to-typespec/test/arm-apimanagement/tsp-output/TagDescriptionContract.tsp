@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface TagDescriptionContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,7 +85,7 @@ interface TagDescriptionContracts {
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface TagDescriptionContracts {
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

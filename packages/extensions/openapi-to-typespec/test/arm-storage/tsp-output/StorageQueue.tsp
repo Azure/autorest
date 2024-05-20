@@ -7,7 +7,6 @@ import "./QueueServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -73,7 +72,7 @@ interface StorageQueues {
   list is ArmResourceListByParent<
     StorageQueue,
     {
-      ...BaseParameters<StorageQueue>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<StorageQueue>;
 
       /**
        * Optional, a maximum number of queues that should be included in a list queue response

@@ -33,8 +33,8 @@ import {
   isSealedChoiceSchema,
   isStringSchema,
 } from "../utils/schemas";
-import { getDefaultValue, transformValue } from "../utils/values";
 import { getSuppressionsForRecordProperty } from "../utils/suppressions";
+import { getDefaultValue, transformValue } from "../utils/values";
 
 const typespecTypes = new Map<string, string>([
   [SchemaType.Date, "plainDate"],

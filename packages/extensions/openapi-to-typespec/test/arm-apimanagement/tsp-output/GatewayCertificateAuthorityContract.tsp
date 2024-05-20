@@ -7,7 +7,6 @@ import "./GatewayContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface GatewayCertificateAuthorityContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,7 +85,7 @@ interface GatewayCertificateAuthorityContracts {
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface GatewayCertificateAuthorityContracts {
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>

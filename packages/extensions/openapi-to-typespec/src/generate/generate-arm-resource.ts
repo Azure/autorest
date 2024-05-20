@@ -8,8 +8,8 @@ import { replaceGeneratedResourceObject } from "../transforms/transform-arm-reso
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
-import { generateOperation } from "./generate-operations";
 import { generateSuppressions } from "../utils/suppressions";
+import { generateOperation } from "./generate-operations";
 
 export function generateArmResource(resource: TspArmResource): string {
   const definitions: string[] = [];

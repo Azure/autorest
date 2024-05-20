@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -53,7 +52,7 @@ interface DataManagerForAgricultureSolutions {
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.

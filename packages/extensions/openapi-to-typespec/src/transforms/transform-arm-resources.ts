@@ -16,6 +16,7 @@ import {
 import { getOptions, updateOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOperationClientDecorators } from "../utils/decorators";
+import { generateDocs, generateDocsContent } from "../utils/docs";
 import {
   ArmResource,
   ArmResourceSchema,
@@ -27,13 +28,13 @@ import {
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isResponseSchema } from "../utils/schemas";
-import { getTypespecType, transformObjectProperty } from "./transform-object";
-import { transformParameter, transformRequest } from "./transform-operations";
 import {
   getSuppressionsForArmResourceDeleteAsync,
   getSuppressionsForArmResourceDeleteSync,
 } from "../utils/suppressions";
-import { generateDocs, generateDocsContent } from "../utils/docs";
+import { getFullyQualifiedName } from "../utils/type-mapping";
+import { getTypespecType, transformObjectProperty } from "./transform-object";
+import { transformParameter, transformRequest } from "./transform-operations";
 
 const generatedResourceObjects: Map<string, string> = new Map<string, string>();
 
@@ -750,13 +751,13 @@ function buildOperationBaseParameters(operation: Operation, resource: ArmResourc
     }
   }
 
-  let parameterTemplate = `BaseParameters<${resource.SwaggerModelName}>`;
+  let parameterTemplate = `${getFullyQualifiedName("BaseParameters")}<${resource.SwaggerModelName}>`;
   if (resource.IsExtensionResource) {
-    parameterTemplate = "ExtensionBaseParameters";
+    parameterTemplate = `${getFullyQualifiedName("ExtensionBaseParameters")}`;
   } else if (resource.IsTenantResource) {
-    parameterTemplate = "TenantBaseParameters";
+    parameterTemplate = `${getFullyQualifiedName("TenantBaseParameters")}`;
   } else if (resource.IsSubscriptionResource) {
-    parameterTemplate = "SubscriptionBaseParameters";
+    parameterTemplate = `${getFullyQualifiedName("SubscriptionBaseParameters")}`;
   }
 
   if (otherParameters.length) {

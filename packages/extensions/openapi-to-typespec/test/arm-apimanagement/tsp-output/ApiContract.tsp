@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -62,7 +61,7 @@ interface ApiContracts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -82,7 +81,7 @@ interface ApiContracts {
     ApiContract,
     ApiUpdateContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,7 +100,7 @@ interface ApiContracts {
   delete is ArmResourceDeleteSync<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * Delete all revisions of the Api.
@@ -125,7 +124,7 @@ interface ApiContracts {
   listByService is ArmResourceListByParent<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq, ne |  |</br>

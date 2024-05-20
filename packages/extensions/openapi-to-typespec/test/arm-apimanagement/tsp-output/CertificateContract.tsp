@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface CertificateContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,7 +85,7 @@ interface CertificateContracts {
   delete is ArmResourceDeleteSync<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface CertificateContracts {
   listByService is ArmResourceListByParent<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| subject | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| thumbprint | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| expirationDate | filter | ge, le, eq, ne, gt, lt |     |</br>

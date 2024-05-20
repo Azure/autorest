@@ -7,7 +7,6 @@ import "./CodeContainerResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface CodeVersionResources {
   list is ArmResourceListByParent<
     CodeVersionResource,
     {
-      ...BaseParameters<CodeVersionResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CodeVersionResource>;
 
       /**
        * Ordering of list.

@@ -7,7 +7,6 @@ import "./GalleryImage.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -42,7 +41,7 @@ interface GalleryImageVersions {
   get is ArmResourceRead<
     GalleryImageVersion,
     {
-      ...BaseParameters<GalleryImageVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryImageVersion>;
 
       /**
        * The expand expression to apply on the operation.

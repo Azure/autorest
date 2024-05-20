@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -56,7 +55,7 @@ interface TenantSettingsContracts {
   listByService is ArmResourceListByParent<
     TenantSettingsContract,
     {
-      ...BaseParameters<TenantSettingsContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TenantSettingsContract>;
 
       /**
        * Not used

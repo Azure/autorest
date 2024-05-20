@@ -7,7 +7,6 @@ import "./IssueContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -67,7 +66,7 @@ interface IssueCommentContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,7 +85,7 @@ interface IssueCommentContracts {
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface IssueCommentContracts {
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

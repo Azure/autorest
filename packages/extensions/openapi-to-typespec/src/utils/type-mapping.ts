@@ -1,7 +1,11 @@
-export function getFullyQualifiedName(type: string): string {
+export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
   switch (type) {
     case "ManagedServiceIdentity":
-      return "Azure.ResourceManager.Foundations.ManagedServiceIdentity";
+    case "TenantBaseParameters":
+    case "BaseParameters":
+    case "SubscriptionBaseParameters":
+    case "ExtensionBaseParameters":
+      return `${namespace ?? "Azure.ResourceManager.Foundations"}.${type}`;
     default:
       return type;
   }

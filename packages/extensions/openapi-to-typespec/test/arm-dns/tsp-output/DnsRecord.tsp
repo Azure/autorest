@@ -7,7 +7,6 @@ import "./DnsZone.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -61,7 +60,7 @@ interface DnsRecords {
   get is ArmResourceRead<
     DnsRecord,
     {
-      ...BaseParameters<DnsRecord>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsRecord>;
 
       /**
        * The type of DNS record in this record set.
@@ -79,7 +78,7 @@ interface DnsRecords {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsRecord,
     {
-      ...BaseParameters<DnsRecord>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsRecord>;
 
       /**
        * The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).
@@ -111,7 +110,7 @@ interface DnsRecords {
     DnsRecord,
     DnsRecord,
     {
-      ...BaseParameters<DnsRecord>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsRecord>;
 
       /**
        * The type of DNS record in this record set.
@@ -136,7 +135,7 @@ interface DnsRecords {
   delete is ArmResourceDeleteSync<
     DnsRecord,
     {
-      ...BaseParameters<DnsRecord>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsRecord>;
 
       /**
        * The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).
@@ -160,7 +159,7 @@ interface DnsRecords {
   listByType is ArmResourceListByParent<
     DnsRecord,
     {
-      ...BaseParameters<DnsRecord>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsRecord>;
 
       /**
        * The type of record sets to enumerate.

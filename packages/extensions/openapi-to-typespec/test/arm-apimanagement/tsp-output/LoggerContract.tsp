@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface LoggerContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -85,7 +84,7 @@ interface LoggerContracts {
     LoggerContract,
     LoggerUpdateContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,7 +103,7 @@ interface LoggerContracts {
   delete is ArmResourceDeleteSync<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -122,7 +121,7 @@ interface LoggerContracts {
   listByService is ArmResourceListByParent<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| loggerType | filter | eq |     |</br>| resourceId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

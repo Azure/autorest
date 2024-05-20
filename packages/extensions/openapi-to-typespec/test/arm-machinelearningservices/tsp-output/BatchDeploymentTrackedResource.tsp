@@ -7,7 +7,6 @@ import "./BatchEndpointTrackedResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -86,7 +85,7 @@ interface BatchDeploymentTrackedResources {
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
     {
-      ...BaseParameters<BatchDeploymentTrackedResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BatchDeploymentTrackedResource>;
 
       /**
        * Ordering of list.

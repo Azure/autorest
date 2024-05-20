@@ -7,7 +7,6 @@ import "./Registry.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -69,7 +68,7 @@ interface ModelContainerResources {
   list is ArmResourceListByParent<
     ModelContainerResource,
     {
-      ...BaseParameters<ModelContainerResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ModelContainerResource>;
 
       /**
        * Continuation token for pagination.

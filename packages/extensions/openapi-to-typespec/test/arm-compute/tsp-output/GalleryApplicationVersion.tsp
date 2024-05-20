@@ -7,7 +7,6 @@ import "./GalleryApplication.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -42,7 +41,7 @@ interface GalleryApplicationVersions {
   get is ArmResourceRead<
     GalleryApplicationVersion,
     {
-      ...BaseParameters<GalleryApplicationVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryApplicationVersion>;
 
       /**
        * The expand expression to apply on the operation.

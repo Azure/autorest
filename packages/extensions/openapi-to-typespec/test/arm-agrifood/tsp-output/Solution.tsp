@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface Solutions {
   list is ArmResourceListByParent<
     Solution,
     {
-      ...BaseParameters<Solution>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Solution>;
 
       /**
        * Installed Solution ids.

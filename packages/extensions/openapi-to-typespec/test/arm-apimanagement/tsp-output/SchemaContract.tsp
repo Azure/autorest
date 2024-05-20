@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -65,7 +64,7 @@ interface SchemaContracts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -84,7 +83,7 @@ interface SchemaContracts {
   delete is ArmResourceDeleteSync<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * If true removes all references to the schema before deleting it.
@@ -108,7 +107,7 @@ interface SchemaContracts {
   listByApi is ArmResourceListByParent<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| contentType | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

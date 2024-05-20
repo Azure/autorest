@@ -7,7 +7,6 @@ import "./FeaturesetContainer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -63,7 +62,7 @@ interface FeaturesetVersions {
   list is ArmResourceListByParent<
     FeaturesetVersion,
     {
-      ...BaseParameters<FeaturesetVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetVersion>;
 
       /**
        * Continuation token for pagination.
@@ -132,7 +131,7 @@ interface FeaturesetVersions {
     void,
     FeaturesetJobArmPaginatedResult,
     {
-      ...BaseParameters<FeaturesetVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetVersion>;
 
       /**
        * Continuation token for pagination.

@@ -7,7 +7,6 @@ import "./FeaturesetVersion.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -50,7 +49,7 @@ interface Features {
   list is ArmResourceListByParent<
     Feature,
     {
-      ...BaseParameters<Feature>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Feature>;
 
       /**
        * Continuation token for pagination.

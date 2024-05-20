@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -76,7 +75,7 @@ interface PortalRevisionContracts {
     PortalRevisionContract,
     PortalRevisionContract,
     {
-      ...BaseParameters<PortalRevisionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalRevisionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -94,7 +93,7 @@ interface PortalRevisionContracts {
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     {
-      ...BaseParameters<PortalRevisionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalRevisionContract>;
 
       /**
        * | Field       | Supported operators    | Supported functions               |

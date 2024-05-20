@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -48,7 +47,7 @@ interface VirtualMachineScaleSetExtensions {
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set containing the extension.
@@ -70,7 +69,7 @@ interface VirtualMachineScaleSetExtensions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be create or updated.
@@ -88,7 +87,7 @@ interface VirtualMachineScaleSetExtensions {
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be updated.
@@ -107,7 +106,7 @@ interface VirtualMachineScaleSetExtensions {
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be deleted.
@@ -125,7 +124,7 @@ interface VirtualMachineScaleSetExtensions {
   list is ArmResourceListByParent<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set containing the extension.

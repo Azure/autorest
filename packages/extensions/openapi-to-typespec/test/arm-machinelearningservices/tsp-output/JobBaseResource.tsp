@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -77,7 +76,7 @@ interface JobBaseResources {
   list is ArmResourceListByParent<
     JobBaseResource,
     {
-      ...BaseParameters<JobBaseResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<JobBaseResource>;
 
       /**
        * Continuation token for pagination.

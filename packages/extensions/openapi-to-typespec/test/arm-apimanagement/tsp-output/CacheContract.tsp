@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -62,7 +61,7 @@ interface CacheContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -82,7 +81,7 @@ interface CacheContracts {
     CacheContract,
     CacheUpdateParameters,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,7 +100,7 @@ interface CacheContracts {
   delete is ArmResourceDeleteSync<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -119,7 +118,7 @@ interface CacheContracts {
   listByService is ArmResourceListByParent<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * Number of records to return.
