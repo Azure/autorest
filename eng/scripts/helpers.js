@@ -21,6 +21,9 @@ function run(command, args, options) {
 
   if (process.platform === "win32" && isCmdOnWindows.includes(command)) {
     command += ".cmd";
+    // When spawning .bat or .cmd files on windows, node will now error with EINVAL if shell is not set to true.
+    // https://nodejs.org/en/blog/vulnerability/april-2024-security-releases-2
+    options.shell = true;
   }
 
   const proc = (options.sync ? spawnSync : spawn)(command, args, options);
