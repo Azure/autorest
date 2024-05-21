@@ -58,7 +58,7 @@ interface RoleDefinitions {
   list is ArmResourceListByParent<
     RoleDefinition,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.

@@ -47,7 +47,7 @@ interface DenyAssignments {
   listForResource is ArmResourceListByParent<
     DenyAssignment,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
 
