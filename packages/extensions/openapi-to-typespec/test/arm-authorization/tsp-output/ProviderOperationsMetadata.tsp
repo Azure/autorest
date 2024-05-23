@@ -76,7 +76,6 @@ interface ProviderOperationsMetadataOperationGroup {
   >;
 }
 
-@@path(ProviderOperationsMetadata.name);
 @@doc(ProviderOperationsMetadata.name,
   "The namespace of the resource provider."
 );

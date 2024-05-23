@@ -129,7 +129,6 @@ interface IssueCommentContracts {
 
 @@maxLength(IssueCommentContract.name, 256);
 @@minLength(IssueCommentContract.name, 1);
-@@path(IssueCommentContract.name);
 @@doc(IssueCommentContract.name,
   "Comment identifier within an Issue. Must be unique in the current Issue."
 );

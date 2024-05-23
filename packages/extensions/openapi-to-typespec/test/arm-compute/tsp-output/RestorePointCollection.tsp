@@ -121,7 +121,6 @@ interface RestorePointCollections {
   listAll is ArmListBySubscription<RestorePointCollection>;
 }
 
-@@path(RestorePointCollection.name);
 @@doc(RestorePointCollection.name, "The name of the restore point collection.");
 @@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
   "application/json",

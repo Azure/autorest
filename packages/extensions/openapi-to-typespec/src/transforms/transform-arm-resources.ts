@@ -852,7 +852,7 @@ function buildKeyAugmentDecorators(
   keyProperty: TypespecObjectProperty,
 ): TypespecDecorator[] | undefined {
   return keyProperty.decorators
-    ?.filter((d) => !["pattern", "key", "segment"].includes(d.name))
+    ?.filter((d) => !["pattern", "key", "segment", "path"].includes(d.name))
     .filter((d) => !(d.name === "visibility" && d.arguments?.[0] === "read"))
     .map((d) => {
       d.target = `${schema.resourceMetadata.SwaggerModelName}.name`;

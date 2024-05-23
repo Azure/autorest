@@ -194,7 +194,6 @@ interface OpenidConnectProviderContracts {
 }
 
 @@maxLength(OpenidConnectProviderContract.name, 256);
-@@path(OpenidConnectProviderContract.name);
 @@doc(OpenidConnectProviderContract.name,
   "Identifier of the OpenID Connect Provider."
 );

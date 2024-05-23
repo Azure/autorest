@@ -65,5 +65,4 @@ interface DeletedServiceContracts {
 
 @@maxLength(DeletedServiceContract.name, 50);
 @@minLength(DeletedServiceContract.name, 1);
-@@path(DeletedServiceContract.name);
 @@doc(DeletedServiceContract.name, "The name of the API Management service.");

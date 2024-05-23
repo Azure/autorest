@@ -162,7 +162,6 @@ interface AnalysisServicesServers {
 
 @@maxLength(AnalysisServicesServer.name, 63);
 @@minLength(AnalysisServicesServer.name, 3);
-@@path(AnalysisServicesServer.name);
 @@doc(AnalysisServicesServer.name,
   "The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63."
 );

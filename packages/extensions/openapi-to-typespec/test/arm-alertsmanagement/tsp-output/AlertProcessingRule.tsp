@@ -71,7 +71,6 @@ interface AlertProcessingRules {
   listBySubscription is ArmListBySubscription<AlertProcessingRule>;
 }
 
-@@path(AlertProcessingRule.name);
 @@doc(AlertProcessingRule.name,
   "The name of the alert processing rule that needs to be fetched."
 );

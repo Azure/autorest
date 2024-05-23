@@ -84,7 +84,6 @@ interface DataConnectors {
 
 @@maxLength(DataConnector.name, 63);
 @@minLength(DataConnector.name, 1);
-@@path(DataConnector.name);
 @@doc(DataConnector.name, "Connector name.");
 @@encodedName(DataConnectors.createOrUpdate::parameters.resource,
   "application/json",

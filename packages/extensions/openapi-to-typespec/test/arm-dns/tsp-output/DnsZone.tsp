@@ -169,7 +169,6 @@ interface DnsZones {
   ): ArmResponse<ResourceListResult<DnsRecord>> | ErrorResponse;
 }
 
-@@path(DnsZone.name);
 @@doc(DnsZone.name, "The name of the DNS zone (without a terminating dot).");
 @@encodedName(DnsZones.createOrUpdate::parameters.resource,
   "application/json",

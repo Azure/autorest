@@ -38,5 +38,4 @@ interface ArrayDefaults {
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
 
-@@path(ArrayDefault.name);
 @@doc(ArrayDefault.name, "Name of resource");

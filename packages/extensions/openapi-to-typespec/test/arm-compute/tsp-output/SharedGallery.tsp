@@ -58,5 +58,4 @@ interface SharedGalleries {
   >;
 }
 
-@@path(SharedGallery.name);
 @@doc(SharedGallery.name, "The unique name of the Shared Gallery.");

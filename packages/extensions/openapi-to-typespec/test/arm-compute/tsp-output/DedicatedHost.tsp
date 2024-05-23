@@ -115,7 +115,6 @@ interface DedicatedHosts {
   ): ArmResponse<DedicatedHostSizeListResult> | ErrorResponse;
 }
 
-@@path(DedicatedHost.name);
 @@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
   "application/json",

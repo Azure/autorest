@@ -103,7 +103,6 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   >;
 }
 
-@@path(WorkspaceConnectionPropertiesV2BasicResource.name);
 @@doc(WorkspaceConnectionPropertiesV2BasicResource.name,
   "Friendly name of the workspace connection"
 );

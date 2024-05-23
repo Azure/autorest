@@ -115,7 +115,6 @@ interface DataVersionBaseResources {
   >;
 }
 
-@@path(DataVersionBaseResource.name);
 @@doc(DataVersionBaseResource.name, "Version identifier.");
 @@encodedName(DataVersionBaseResources.createOrUpdate::parameters.resource,
   "application/json",

@@ -154,5 +154,4 @@ interface SmartGroups {
   ): ArmResponse<SmartGroupModification> | ErrorResponse;
 }
 
-@@path(SmartGroup.name);
 @@doc(SmartGroup.name, "Smart group unique id. ");

@@ -92,7 +92,6 @@ interface VirtualMachineExtensions {
   >;
 }
 
-@@path(VirtualMachineExtension.name);
 @@doc(VirtualMachineExtension.name,
   "The name of the virtual machine extension."
 );

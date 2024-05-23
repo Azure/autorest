@@ -205,7 +205,6 @@ interface Catalogs {
   >;
 }
 
-@@path(Catalog.name);
 @@doc(Catalog.name, "Name of catalog");
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."

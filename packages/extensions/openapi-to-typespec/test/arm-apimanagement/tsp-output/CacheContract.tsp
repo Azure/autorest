@@ -138,7 +138,6 @@ interface CacheContracts {
 
 @@maxLength(CacheContract.name, 80);
 @@minLength(CacheContract.name, 1);
-@@path(CacheContract.name);
 @@doc(CacheContract.name,
   "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
 );

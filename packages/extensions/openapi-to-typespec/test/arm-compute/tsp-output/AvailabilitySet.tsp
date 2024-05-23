@@ -92,7 +92,6 @@ interface AvailabilitySets {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
-@@path(AvailabilitySet.name);
 @@doc(AvailabilitySet.name, "The name of the availability set.");
 @@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
   "application/json",

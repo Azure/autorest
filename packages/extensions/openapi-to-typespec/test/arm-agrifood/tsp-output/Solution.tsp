@@ -152,7 +152,6 @@ interface Solutions {
   >;
 }
 
-@@path(Solution.name);
 @@doc(Solution.name, "SolutionId for Data Manager For Agriculture Resource.");
 @@encodedName(Solutions.createOrUpdate::parameters.resource,
   "application/json",

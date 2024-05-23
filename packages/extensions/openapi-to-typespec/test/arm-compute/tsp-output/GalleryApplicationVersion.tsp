@@ -81,7 +81,6 @@ interface GalleryApplicationVersions {
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
 
-@@path(GalleryApplicationVersion.name);
 @@doc(GalleryApplicationVersion.name,
   "The name of the gallery Application Version to be retrieved."
 );

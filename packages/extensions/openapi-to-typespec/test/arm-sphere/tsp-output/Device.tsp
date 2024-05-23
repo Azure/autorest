@@ -62,7 +62,6 @@ interface Devices {
   >;
 }
 
-@@path(Device.name);
 @@doc(Device.name, "Device name");
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."

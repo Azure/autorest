@@ -195,5 +195,4 @@ interface RoleInstances {
   ): ArmResponse<void> | ErrorResponse;
 }
 
-@@path(RoleInstance.name);
 @@doc(RoleInstance.name, "Name of the role instance.");

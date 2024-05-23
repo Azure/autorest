@@ -54,5 +54,4 @@ interface Associations {
   listByTrafficController is ArmResourceListByParent<Association>;
 }
 
-@@path(Association.name);
 @@doc(Association.name, "Name of Association");

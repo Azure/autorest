@@ -571,7 +571,6 @@ interface VirtualMachineScaleSets {
   ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
 }
 
-@@path(VirtualMachineScaleSet.name);
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
 @@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "application/json",

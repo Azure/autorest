@@ -103,7 +103,6 @@ interface EnvironmentVersionResources {
   >;
 }
 
-@@path(EnvironmentVersionResource.name);
 @@doc(EnvironmentVersionResource.name,
   "Version identifier. This is case-sensitive."
 );

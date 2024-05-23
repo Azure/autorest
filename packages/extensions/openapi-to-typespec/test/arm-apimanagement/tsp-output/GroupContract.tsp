@@ -195,7 +195,6 @@ interface GroupContracts {
 
 @@maxLength(GroupContract.name, 256);
 @@minLength(GroupContract.name, 1);
-@@path(GroupContract.name);
 @@doc(GroupContract.name,
   "Group identifier. Must be unique in the current API Management service instance."
 );

@@ -242,7 +242,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
-@@path(Workspace.name);
 @@doc(Workspace.name, "Name of Azure Machine Learning workspace.");
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",

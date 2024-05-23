@@ -79,7 +79,6 @@ interface ComponentContainerResources {
   >;
 }
 
-@@path(ComponentContainerResource.name);
 @@doc(ComponentContainerResource.name, "Container name.");
 @@encodedName(ComponentContainerResources.createOrUpdate::parameters.resource,
   "application/json",

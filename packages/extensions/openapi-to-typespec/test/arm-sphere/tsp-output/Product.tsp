@@ -67,5 +67,4 @@ interface Products {
   >;
 }
 
-@@path(Product.name);
 @@doc(Product.name, "Name of product.");

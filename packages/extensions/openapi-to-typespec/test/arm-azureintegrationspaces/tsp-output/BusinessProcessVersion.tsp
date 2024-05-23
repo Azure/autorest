@@ -96,5 +96,4 @@ interface BusinessProcessVersions {
   >;
 }
 
-@@path(BusinessProcessVersion.name);
 @@doc(BusinessProcessVersion.name, "The version of the business process");

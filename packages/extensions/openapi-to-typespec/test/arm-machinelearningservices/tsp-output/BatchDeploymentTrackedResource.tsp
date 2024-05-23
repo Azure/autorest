@@ -108,7 +108,6 @@ interface BatchDeploymentTrackedResources {
   >;
 }
 
-@@path(BatchDeploymentTrackedResource.name);
 @@doc(BatchDeploymentTrackedResource.name,
   "The identifier for the Batch deployments."
 );

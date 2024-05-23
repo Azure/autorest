@@ -157,7 +157,6 @@ interface BackendContracts {
 
 @@maxLength(BackendContract.name, 80);
 @@minLength(BackendContract.name, 1);
-@@path(BackendContract.name);
 @@doc(BackendContract.name,
   "Identifier of the Backend entity. Must be unique in the current API Management service instance."
 );

@@ -71,5 +71,4 @@ interface CloudServiceRoles {
   list is ArmResourceListByParent<CloudServiceRole>;
 }
 
-@@path(CloudServiceRole.name);
 @@doc(CloudServiceRole.name, "Name of the role.");

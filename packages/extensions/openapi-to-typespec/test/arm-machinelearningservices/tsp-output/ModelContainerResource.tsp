@@ -85,7 +85,6 @@ interface ModelContainerResources {
   >;
 }
 
-@@path(ModelContainerResource.name);
 @@doc(ModelContainerResource.name, "Container name. This is case-sensitive.");
 @@encodedName(ModelContainerResources.createOrUpdate::parameters.resource,
   "application/json",

@@ -98,7 +98,6 @@ interface CapacityReservationGroups {
   listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
 }
 
-@@path(CapacityReservationGroup.name);
 @@doc(CapacityReservationGroup.name,
   "The name of the capacity reservation group."
 );

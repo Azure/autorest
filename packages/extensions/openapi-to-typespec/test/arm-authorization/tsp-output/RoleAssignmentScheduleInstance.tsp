@@ -60,7 +60,6 @@ interface RoleAssignmentScheduleInstances {
   >;
 }
 
-@@path(RoleAssignmentScheduleInstance.name);
 @@doc(RoleAssignmentScheduleInstance.name,
   "The name (hash of schedule name + time) of the role assignment schedule to get."
 );

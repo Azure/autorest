@@ -298,7 +298,6 @@ interface UserContracts {
 
 @@maxLength(UserContract.name, 80);
 @@minLength(UserContract.name, 1);
-@@path(UserContract.name);
 @@doc(UserContract.name,
   "User identifier. Must be unique in the current API Management service instance."
 );

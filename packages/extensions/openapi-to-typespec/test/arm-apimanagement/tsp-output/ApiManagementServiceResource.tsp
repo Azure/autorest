@@ -1153,7 +1153,6 @@ interface ApiManagementServiceResources {
 
 @@maxLength(ApiManagementServiceResource.name, 50);
 @@minLength(ApiManagementServiceResource.name, 1);
-@@path(ApiManagementServiceResource.name);
 @@doc(ApiManagementServiceResource.name,
   "The name of the API Management service."
 );

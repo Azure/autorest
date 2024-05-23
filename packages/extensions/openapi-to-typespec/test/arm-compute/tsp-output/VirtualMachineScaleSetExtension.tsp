@@ -135,7 +135,6 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
-@@path(VirtualMachineScaleSetExtension.name);
 @@doc(VirtualMachineScaleSetExtension.name,
   "The name of the VM scale set extension."
 );

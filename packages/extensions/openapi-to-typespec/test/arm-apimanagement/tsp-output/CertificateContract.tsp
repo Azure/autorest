@@ -146,7 +146,6 @@ interface CertificateContracts {
 
 @@maxLength(CertificateContract.name, 80);
 @@minLength(CertificateContract.name, 1);
-@@path(CertificateContract.name);
 @@doc(CertificateContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );

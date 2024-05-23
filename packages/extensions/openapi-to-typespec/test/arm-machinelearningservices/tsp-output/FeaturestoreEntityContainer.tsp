@@ -105,7 +105,6 @@ interface FeaturestoreEntityContainers {
   >;
 }
 
-@@path(FeaturestoreEntityContainer.name);
 @@doc(FeaturestoreEntityContainer.name,
   "Container name. This is case-sensitive."
 );

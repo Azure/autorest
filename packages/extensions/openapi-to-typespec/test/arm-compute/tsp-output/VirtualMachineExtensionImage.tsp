@@ -48,5 +48,4 @@ interface VirtualMachineExtensionImages {
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }
 
-@@path(VirtualMachineExtensionImage.name);
 @@doc(VirtualMachineExtensionImage.name, "");

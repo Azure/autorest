@@ -160,7 +160,6 @@ interface FeaturesetVersions {
   >;
 }
 
-@@path(FeaturesetVersion.name);
 @@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
 @@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
   "application/json",

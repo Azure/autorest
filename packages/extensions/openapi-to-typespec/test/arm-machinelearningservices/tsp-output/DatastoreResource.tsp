@@ -138,7 +138,6 @@ interface DatastoreResources {
   >;
 }
 
-@@path(DatastoreResource.name);
 @@doc(DatastoreResource.name, "Datastore name.");
 @@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
   "application/json",

@@ -97,7 +97,6 @@ interface ComponentVersionResources {
   >;
 }
 
-@@path(ComponentVersionResource.name);
 @@doc(ComponentVersionResource.name, "Version identifier.");
 @@encodedName(ComponentVersionResources.createOrUpdate::parameters.resource,
   "application/json",

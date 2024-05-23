@@ -201,7 +201,6 @@ interface CloudServices {
   ): ArmResponse<UpdateDomainListResult> | ErrorResponse;
 }
 
-@@path(CloudService.name);
 @@doc(CloudService.name, "Name of the cloud service.");
 @@encodedName(CloudServices.createOrUpdate::parameters.resource,
   "application/json",

@@ -94,7 +94,6 @@ interface Galleries {
   update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
 }
 
-@@path(Gallery.name);
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
 @@encodedName(Galleries.createOrUpdate::parameters.resource,
   "application/json",

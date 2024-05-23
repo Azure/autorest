@@ -53,5 +53,4 @@ interface Frontends {
   listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 
-@@path(Frontend.name);
 @@doc(Frontend.name, "Frontends");

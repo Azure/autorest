@@ -37,5 +37,4 @@ interface DictProperties {
   listByResourceGroup is ArmResourceListByParent<DictProperty>;
 }
 
-@@path(DictProperty.name);
 @@doc(DictProperty.name, "Name of resource");

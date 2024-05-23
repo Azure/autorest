@@ -160,7 +160,6 @@ interface AuthorizationServerContracts {
 
 @@maxLength(AuthorizationServerContract.name, 80);
 @@minLength(AuthorizationServerContract.name, 1);
-@@path(AuthorizationServerContract.name);
 @@doc(AuthorizationServerContract.name,
   "Identifier of the authorization server."
 );

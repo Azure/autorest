@@ -117,7 +117,6 @@ interface FeaturestoreEntityVersions {
   >;
 }
 
-@@path(FeaturestoreEntityVersion.name);
 @@doc(FeaturestoreEntityVersion.name,
   "Version identifier. This is case-sensitive."
 );

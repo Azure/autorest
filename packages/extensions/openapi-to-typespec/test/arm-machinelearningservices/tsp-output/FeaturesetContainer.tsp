@@ -105,7 +105,6 @@ interface FeaturesetContainers {
   >;
 }
 
-@@path(FeaturesetContainer.name);
 @@doc(FeaturesetContainer.name, "Container name. This is case-sensitive.");
 @@encodedName(FeaturesetContainers.createOrUpdate::parameters.resource,
   "application/json",

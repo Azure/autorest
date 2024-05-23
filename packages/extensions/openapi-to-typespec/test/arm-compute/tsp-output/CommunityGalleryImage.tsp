@@ -48,7 +48,6 @@ interface CommunityGalleryImages {
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }
 
-@@path(CommunityGalleryImage.name);
 @@doc(CommunityGalleryImage.name,
   "The name of the community gallery image definition."
 );

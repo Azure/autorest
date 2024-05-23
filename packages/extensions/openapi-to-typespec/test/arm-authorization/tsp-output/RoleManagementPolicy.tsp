@@ -55,7 +55,6 @@ interface RoleManagementPolicies {
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }
 
-@@path(RoleManagementPolicy.name);
 @@doc(RoleManagementPolicy.name,
   "The name (guid) of the role management policy to get."
 );

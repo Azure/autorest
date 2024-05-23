@@ -68,7 +68,6 @@ interface OutboundRuleBasicResources {
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 
-@@path(OutboundRuleBasicResource.name);
 @@doc(OutboundRuleBasicResource.name,
   "Name of the workspace managed network outbound rule"
 );

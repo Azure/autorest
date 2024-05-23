@@ -86,7 +86,6 @@ interface Images {
   list is ArmListBySubscription<Image>;
 }
 
-@@path(Image.name);
 @@doc(Image.name, "The name of the image.");
 @@encodedName(Images.createOrUpdate::parameters.resource,
   "application/json",

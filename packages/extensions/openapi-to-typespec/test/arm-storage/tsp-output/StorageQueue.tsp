@@ -91,7 +91,6 @@ interface StorageQueues {
 
 @@maxLength(StorageQueue.name, 63);
 @@minLength(StorageQueue.name, 3);
-@@path(StorageQueue.name);
 @@doc(StorageQueue.name,
   "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters."
 );

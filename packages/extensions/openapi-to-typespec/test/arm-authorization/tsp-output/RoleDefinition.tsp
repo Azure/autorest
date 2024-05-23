@@ -69,7 +69,6 @@ interface RoleDefinitions {
   >;
 }
 
-@@path(RoleDefinition.name);
 @@doc(RoleDefinition.name, "The ID of the role definition.");
 @@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
   "application/json",

@@ -76,7 +76,6 @@ interface LocalUsers {
 
 @@maxLength(LocalUser.name, 64);
 @@minLength(LocalUser.name, 3);
-@@path(LocalUser.name);
 @@doc(LocalUser.name,
   "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
 );

@@ -152,7 +152,6 @@ interface ComputeResources {
   >;
 }
 
-@@path(ComputeResource.name);
 @@doc(ComputeResource.name, "Name of the Azure Machine Learning compute.");
 @@encodedName(ComputeResources.createOrUpdate::parameters.resource,
   "application/json",

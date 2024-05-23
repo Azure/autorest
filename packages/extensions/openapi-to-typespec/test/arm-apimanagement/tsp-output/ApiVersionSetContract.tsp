@@ -149,7 +149,6 @@ interface ApiVersionSetContracts {
 
 @@maxLength(ApiVersionSetContract.name, 80);
 @@minLength(ApiVersionSetContract.name, 1);
-@@path(ApiVersionSetContract.name);
 @@doc(ApiVersionSetContract.name,
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );

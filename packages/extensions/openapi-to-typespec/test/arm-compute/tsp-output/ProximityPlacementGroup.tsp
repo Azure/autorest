@@ -87,7 +87,6 @@ interface ProximityPlacementGroups {
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
-@@path(ProximityPlacementGroup.name);
 @@doc(ProximityPlacementGroup.name,
   "The name of the proximity placement group."
 );

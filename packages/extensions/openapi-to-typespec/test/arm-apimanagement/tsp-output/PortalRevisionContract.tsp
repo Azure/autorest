@@ -125,7 +125,6 @@ interface PortalRevisionContracts {
 
 @@maxLength(PortalRevisionContract.name, 256);
 @@minLength(PortalRevisionContract.name, 1);
-@@path(PortalRevisionContract.name);
 @@doc(PortalRevisionContract.name,
   "Portal revision identifier. Must be unique in the current API Management service instance."
 );

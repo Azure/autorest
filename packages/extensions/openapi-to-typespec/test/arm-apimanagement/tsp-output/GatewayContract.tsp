@@ -226,7 +226,6 @@ interface GatewayContracts {
 
 @@maxLength(GatewayContract.name, 80);
 @@minLength(GatewayContract.name, 1);
-@@path(GatewayContract.name);
 @@doc(GatewayContract.name,
   "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
 );

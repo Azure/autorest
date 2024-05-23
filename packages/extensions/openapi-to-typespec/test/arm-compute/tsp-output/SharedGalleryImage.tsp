@@ -59,7 +59,6 @@ interface SharedGalleryImages {
   >;
 }
 
-@@path(SharedGalleryImage.name);
 @@doc(SharedGalleryImage.name,
   "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
 );

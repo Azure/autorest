@@ -159,7 +159,6 @@ interface FileShares {
 
 @@maxLength(FileShare.name, 63);
 @@minLength(FileShare.name, 3);
-@@path(FileShare.name);
 @@doc(FileShare.name,
   "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );

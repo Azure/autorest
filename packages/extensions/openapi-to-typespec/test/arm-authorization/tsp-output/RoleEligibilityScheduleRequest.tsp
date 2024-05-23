@@ -79,7 +79,6 @@ interface RoleEligibilityScheduleRequests {
   >;
 }
 
-@@path(RoleEligibilityScheduleRequest.name);
 @@doc(RoleEligibilityScheduleRequest.name,
   "The name (guid) of the role eligibility schedule request to get."
 );

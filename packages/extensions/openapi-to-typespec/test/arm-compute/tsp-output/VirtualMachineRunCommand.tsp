@@ -104,7 +104,6 @@ interface VirtualMachineRunCommands {
   >;
 }
 
-@@path(VirtualMachineRunCommand.name);
 @@doc(VirtualMachineRunCommand.name,
   "The name of the virtual machine run command."
 );

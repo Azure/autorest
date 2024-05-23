@@ -235,7 +235,6 @@ interface StorageAccounts {
 
 @@maxLength(StorageAccount.name, 24);
 @@minLength(StorageAccount.name, 3);
-@@path(StorageAccount.name);
 @@doc(StorageAccount.name,
   "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );

@@ -130,7 +130,6 @@ interface JobBaseResources {
   cancel is ArmResourceActionAsync<JobBaseResource, void, void>;
 }
 
-@@path(JobBaseResource.name);
 @@doc(JobBaseResource.name,
   "The name and identifier for the Job. This is case-sensitive."
 );

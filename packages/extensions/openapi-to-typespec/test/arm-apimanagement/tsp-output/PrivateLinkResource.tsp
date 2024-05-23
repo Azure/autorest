@@ -53,5 +53,4 @@ interface PrivateLinkResources {
   listPrivateLinkResources is ArmResourceListByParent<PrivateLinkResource>;
 }
 
-@@path(PrivateLinkResource.name);
 @@doc(PrivateLinkResource.name, "Name of the private link resource.");

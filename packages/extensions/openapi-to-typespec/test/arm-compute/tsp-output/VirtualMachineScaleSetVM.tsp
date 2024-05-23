@@ -427,7 +427,6 @@ interface VirtualMachineScaleSetVMS {
   ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
 }
 
-@@path(VirtualMachineScaleSetVM.name);
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
 @@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "application/json",

@@ -165,7 +165,6 @@ interface OnlineDeploymentTrackedResources {
   ): ArmResponse<SkuResourceArmPaginatedResult> | ErrorResponse;
 }
 
-@@path(OnlineDeploymentTrackedResource.name);
 @@doc(OnlineDeploymentTrackedResource.name,
   "Inference Endpoint Deployment name."
 );

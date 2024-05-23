@@ -40,5 +40,4 @@ interface CommunityGalleries {
   get is ArmResourceRead<CommunityGallery>;
 }
 
-@@path(CommunityGallery.name);
 @@doc(CommunityGallery.name, "The public name of the community gallery.");

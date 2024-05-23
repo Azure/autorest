@@ -147,7 +147,6 @@ interface DiagnosticContracts {
 
 @@maxLength(DiagnosticContract.name, 80);
 @@minLength(DiagnosticContract.name, 1);
-@@path(DiagnosticContract.name);
 @@doc(DiagnosticContract.name,
   "Diagnostic identifier. Must be unique in the current API Management service instance."
 );

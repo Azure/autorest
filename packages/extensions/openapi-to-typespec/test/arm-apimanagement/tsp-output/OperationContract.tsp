@@ -153,7 +153,6 @@ interface OperationContracts {
 
 @@maxLength(OperationContract.name, 80);
 @@minLength(OperationContract.name, 1);
-@@path(OperationContract.name);
 @@doc(OperationContract.name,
   "Operation identifier within an API. Must be unique in the current API Management service instance."
 );

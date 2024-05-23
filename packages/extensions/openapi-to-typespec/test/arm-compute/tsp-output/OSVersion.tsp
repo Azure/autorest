@@ -68,5 +68,4 @@ interface OSVersions {
   listOSVersions is ArmResourceListByParent<OSVersion>;
 }
 
-@@path(OSVersion.name);
 @@doc(OSVersion.name, "Name of the OS version.");

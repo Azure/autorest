@@ -133,7 +133,6 @@ interface SchemaContracts {
 
 @@maxLength(SchemaContract.name, 80);
 @@minLength(SchemaContract.name, 1);
-@@path(SchemaContract.name);
 @@doc(SchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );

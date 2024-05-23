@@ -57,5 +57,4 @@ interface TrafficControllers {
   listBySubscription is ArmListBySubscription<TrafficController>;
 }
 
-@@path(TrafficController.name);
 @@doc(TrafficController.name, "traffic controller name for path");

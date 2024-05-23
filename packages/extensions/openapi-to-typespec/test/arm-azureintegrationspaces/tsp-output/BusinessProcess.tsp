@@ -113,5 +113,4 @@ interface BusinessProcesses {
   >;
 }
 
-@@path(BusinessProcess.name);
 @@doc(BusinessProcess.name, "The name of the business process");

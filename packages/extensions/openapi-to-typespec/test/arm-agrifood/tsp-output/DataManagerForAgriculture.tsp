@@ -108,7 +108,6 @@ interface DataManagerForAgricultures {
 
 @@maxLength(DataManagerForAgriculture.name, 63);
 @@minLength(DataManagerForAgriculture.name, 1);
-@@path(DataManagerForAgriculture.name);
 @@doc(DataManagerForAgriculture.name,
   "DataManagerForAgriculture resource name."
 );

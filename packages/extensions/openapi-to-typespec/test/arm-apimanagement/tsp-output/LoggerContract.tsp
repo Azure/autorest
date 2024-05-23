@@ -146,7 +146,6 @@ interface LoggerContracts {
 }
 
 @@maxLength(LoggerContract.name, 256);
-@@path(LoggerContract.name);
 @@doc(LoggerContract.name,
   "Logger identifier. Must be unique in the API Management service instance."
 );

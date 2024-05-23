@@ -60,7 +60,6 @@ interface RoleEligibilitySchedules {
   >;
 }
 
-@@path(RoleEligibilitySchedule.name);
 @@doc(RoleEligibilitySchedule.name,
   "The name (guid) of the role eligibility schedule to get."
 );

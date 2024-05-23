@@ -324,7 +324,6 @@ interface VirtualMachines {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
-@@path(VirtualMachine.name);
 @@doc(VirtualMachine.name, "The name of the virtual machine.");
 @@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
   "application/json",

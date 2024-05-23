@@ -72,5 +72,4 @@ interface DataTypes {
 
 @@maxLength(DataType.name, 63);
 @@minLength(DataType.name, 3);
-@@path(DataType.name);
 @@doc(DataType.name, "The data type name.");

@@ -88,7 +88,6 @@ interface CapacityReservations {
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 
-@@path(CapacityReservation.name);
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
 @@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
   "application/json",

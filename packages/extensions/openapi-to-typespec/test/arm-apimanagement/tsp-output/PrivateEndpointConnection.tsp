@@ -70,7 +70,6 @@ interface PrivateEndpointConnections {
   listByService is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@path(PrivateEndpointConnection.name);
 @@doc(PrivateEndpointConnection.name,
   "Name of the private endpoint connection."
 );

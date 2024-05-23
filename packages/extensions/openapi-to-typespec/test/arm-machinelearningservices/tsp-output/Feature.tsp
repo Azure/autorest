@@ -72,5 +72,4 @@ interface Features {
   >;
 }
 
-@@path(Feature.name);
 @@doc(Feature.name, "Feature Name. This is case-sensitive.");

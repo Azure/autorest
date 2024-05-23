@@ -60,7 +60,6 @@ interface RoleAssignmentSchedules {
   >;
 }
 
-@@path(RoleAssignmentSchedule.name);
 @@doc(RoleAssignmentSchedule.name,
   "The name (guid) of the role assignment schedule to get."
 );

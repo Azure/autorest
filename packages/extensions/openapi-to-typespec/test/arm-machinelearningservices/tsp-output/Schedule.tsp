@@ -79,7 +79,6 @@ interface Schedules {
   >;
 }
 
-@@path(Schedule.name);
 @@doc(Schedule.name, "Schedule name.");
 @@encodedName(Schedules.createOrUpdate::parameters.resource,
   "application/json",

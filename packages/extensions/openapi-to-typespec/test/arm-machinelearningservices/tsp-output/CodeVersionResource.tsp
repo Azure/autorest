@@ -102,7 +102,6 @@ interface CodeVersionResources {
   >;
 }
 
-@@path(CodeVersionResource.name);
 @@doc(CodeVersionResource.name, "Version identifier.");
 @@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
   "application/json",

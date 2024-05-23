@@ -84,7 +84,6 @@ interface DataManagerForAgricultureSolutions {
   >;
 }
 
-@@path(DataManagerForAgricultureSolution.name);
 @@doc(DataManagerForAgricultureSolution.name,
   "dataManagerForAgricultureSolutionId to be queried."
 );

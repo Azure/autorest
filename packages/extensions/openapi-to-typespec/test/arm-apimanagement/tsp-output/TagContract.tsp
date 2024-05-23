@@ -102,7 +102,6 @@ interface TagContracts {
 
 @@maxLength(TagContract.name, 80);
 @@minLength(TagContract.name, 1);
-@@path(TagContract.name);
 @@doc(TagContract.name,
   "Tag identifier. Must be unique in the current API Management service instance."
 );

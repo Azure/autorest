@@ -96,7 +96,6 @@ interface DeviceGroups {
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
 
-@@path(DeviceGroup.name);
 @@doc(DeviceGroup.name, "Name of device group.");
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."

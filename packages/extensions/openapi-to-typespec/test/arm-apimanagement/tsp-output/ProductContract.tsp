@@ -318,7 +318,6 @@ interface ProductContracts {
 
 @@maxLength(ProductContract.name, 256);
 @@minLength(ProductContract.name, 1);
-@@path(ProductContract.name);
 @@doc(ProductContract.name,
   "Product identifier. Must be unique in the current API Management service instance."
 );

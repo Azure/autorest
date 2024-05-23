@@ -129,7 +129,6 @@ interface TagDescriptionContracts {
 
 @@maxLength(TagDescriptionContract.name, 80);
 @@minLength(TagDescriptionContract.name, 1);
-@@path(TagDescriptionContract.name);
 @@doc(TagDescriptionContract.name,
   "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names."
 );

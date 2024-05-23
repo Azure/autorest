@@ -115,5 +115,4 @@ interface Spaces {
   listBySubscription is ArmListBySubscription<Space>;
 }
 
-@@path(Space.name);
 @@doc(Space.name, "The name of the space");

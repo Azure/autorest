@@ -63,7 +63,6 @@ interface ObjectReplicationPolicies {
 }
 
 @@minLength(ObjectReplicationPolicy.name, 1);
-@@path(ObjectReplicationPolicy.name);
 @@doc(ObjectReplicationPolicy.name,
   "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file."
 );

@@ -129,7 +129,6 @@ interface GatewayCertificateAuthorityContracts {
 
 @@maxLength(GatewayCertificateAuthorityContract.name, 80);
 @@minLength(GatewayCertificateAuthorityContract.name, 1);
-@@path(GatewayCertificateAuthorityContract.name);
 @@doc(GatewayCertificateAuthorityContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );

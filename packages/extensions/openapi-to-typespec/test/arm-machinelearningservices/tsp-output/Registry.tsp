@@ -82,7 +82,6 @@ interface Registries {
   removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }
 
-@@path(Registry.name);
 @@doc(Registry.name,
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );

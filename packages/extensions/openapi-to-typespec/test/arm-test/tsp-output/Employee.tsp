@@ -56,5 +56,4 @@ interface Employees {
   listBySubscription is ArmListBySubscription<Employee>;
 }
 
-@@path(Employee.name);
 @@doc(Employee.name, "Name of employee");

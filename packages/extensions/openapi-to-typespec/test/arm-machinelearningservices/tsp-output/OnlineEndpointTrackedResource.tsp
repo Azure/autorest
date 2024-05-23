@@ -165,7 +165,6 @@ interface OnlineEndpointTrackedResources {
   >;
 }
 
-@@path(OnlineEndpointTrackedResource.name);
 @@doc(OnlineEndpointTrackedResource.name, "Online Endpoint name.");
 @@encodedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "application/json",

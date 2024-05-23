@@ -116,7 +116,6 @@ interface InfrastructureResources {
   >;
 }
 
-@@path(InfrastructureResource.name);
 @@doc(InfrastructureResource.name,
   "The name of the infrastructure resource in the space."
 );

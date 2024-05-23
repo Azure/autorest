@@ -76,5 +76,4 @@ interface Images {
   >;
 }
 
-@@path(Image.name);
 @@doc(Image.name, "Image name. Use .default for image creation.");

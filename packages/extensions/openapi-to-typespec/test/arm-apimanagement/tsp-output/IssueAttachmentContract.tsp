@@ -129,7 +129,6 @@ interface IssueAttachmentContracts {
 
 @@maxLength(IssueAttachmentContract.name, 256);
 @@minLength(IssueAttachmentContract.name, 1);
-@@path(IssueAttachmentContract.name);
 @@doc(IssueAttachmentContract.name,
   "Attachment identifier within an Issue. Must be unique in the current Issue."
 );

@@ -68,5 +68,4 @@ interface OSFamilies {
   listOSFamilies is ArmResourceListByParent<OSFamily>;
 }
 
-@@path(OSFamily.name);
 @@doc(OSFamily.name, "Name of the OS family.");

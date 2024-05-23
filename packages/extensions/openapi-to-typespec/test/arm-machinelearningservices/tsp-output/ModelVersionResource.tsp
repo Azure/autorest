@@ -137,7 +137,6 @@ interface ModelVersionResources {
   >;
 }
 
-@@path(ModelVersionResource.name);
 @@doc(ModelVersionResource.name, "Version identifier. This is case-sensitive.");
 @@encodedName(ModelVersionResources.createOrUpdate::parameters.resource,
   "application/json",

@@ -113,7 +113,6 @@ interface BatchEndpointTrackedResources {
   >;
 }
 
-@@path(BatchEndpointTrackedResource.name);
 @@doc(BatchEndpointTrackedResource.name, "Name for the Batch Endpoint.");
 @@encodedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "application/json",

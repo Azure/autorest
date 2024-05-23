@@ -79,7 +79,6 @@ interface CodeContainerResources {
   >;
 }
 
-@@path(CodeContainerResource.name);
 @@doc(CodeContainerResource.name, "Container name.");
 @@encodedName(CodeContainerResources.createOrUpdate::parameters.resource,
   "application/json",

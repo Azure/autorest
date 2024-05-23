@@ -85,7 +85,6 @@ interface EnvironmentContainerResources {
   >;
 }
 
-@@path(EnvironmentContainerResource.name);
 @@doc(EnvironmentContainerResource.name,
   "Container name. This is case-sensitive."
 );

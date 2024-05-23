@@ -93,7 +93,6 @@ interface RestorePoints {
   >;
 }
 
-@@path(RestorePoint.name);
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@encodedName(RestorePoints.create::parameters.resource,
   "application/json",

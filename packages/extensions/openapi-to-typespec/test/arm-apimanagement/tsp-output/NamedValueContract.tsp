@@ -174,7 +174,6 @@ interface NamedValueContracts {
 }
 
 @@maxLength(NamedValueContract.name, 256);
-@@path(NamedValueContract.name);
 @@doc(NamedValueContract.name, "Identifier of the NamedValue.");
 @@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
   "application/json",

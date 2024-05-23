@@ -92,7 +92,6 @@ interface SshPublicKeyResources {
   >;
 }
 
-@@path(SshPublicKeyResource.name);
 @@doc(SshPublicKeyResource.name, "The name of the SSH public key.");
 @@encodedName(SshPublicKeyResources.create::parameters.resource,
   "application/json",

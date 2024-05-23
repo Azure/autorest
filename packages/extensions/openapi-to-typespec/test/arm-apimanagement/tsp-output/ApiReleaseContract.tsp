@@ -147,7 +147,6 @@ interface ApiReleaseContracts {
 
 @@maxLength(ApiReleaseContract.name, 80);
 @@minLength(ApiReleaseContract.name, 1);
-@@path(ApiReleaseContract.name);
 @@doc(ApiReleaseContract.name,
   "Release identifier within an API. Must be unique in the current API Management service instance."
 );

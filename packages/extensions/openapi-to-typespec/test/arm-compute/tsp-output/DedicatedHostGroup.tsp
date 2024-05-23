@@ -84,7 +84,6 @@ interface DedicatedHostGroups {
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 
-@@path(DedicatedHostGroup.name);
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
 @@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "application/json",

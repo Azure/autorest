@@ -113,7 +113,6 @@ interface LabelingJobs {
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
-@@path(LabelingJob.name);
 @@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");
 @@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
   "application/json",

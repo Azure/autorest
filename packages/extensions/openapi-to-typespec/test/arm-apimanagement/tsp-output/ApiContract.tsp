@@ -322,7 +322,6 @@ interface ApiContracts {
 
 @@maxLength(ApiContract.name, 256);
 @@minLength(ApiContract.name, 1);
-@@path(ApiContract.name);
 @@doc(ApiContract.name,
   "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
 );

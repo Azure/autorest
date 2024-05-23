@@ -85,7 +85,6 @@ interface Certificates {
   >;
 }
 
-@@path(Certificate.name);
 @@doc(Certificate.name,
   "Serial number of the certificate. Use '.default' to get current active certificate."
 );

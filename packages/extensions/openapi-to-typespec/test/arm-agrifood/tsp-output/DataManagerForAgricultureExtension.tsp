@@ -100,7 +100,6 @@ interface DataManagerForAgricultureExtensions {
   >;
 }
 
-@@path(DataManagerForAgricultureExtension.name);
 @@doc(DataManagerForAgricultureExtension.name,
   "dataManagerForAgricultureExtensionId to be queried."
 );

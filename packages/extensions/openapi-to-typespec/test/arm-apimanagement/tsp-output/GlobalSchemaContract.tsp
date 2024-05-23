@@ -129,7 +129,6 @@ interface GlobalSchemaContracts {
 
 @@maxLength(GlobalSchemaContract.name, 80);
 @@minLength(GlobalSchemaContract.name, 1);
-@@path(GlobalSchemaContract.name);
 @@doc(GlobalSchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );

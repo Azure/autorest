@@ -182,7 +182,6 @@ interface DnsRecords {
   >;
 }
 
-@@path(DnsRecord.name);
 @@doc(DnsRecord.name,
   "The name of the record set, relative to the name of the zone."
 );

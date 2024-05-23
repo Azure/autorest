@@ -84,5 +84,4 @@ interface DenyAssignments {
   >;
 }
 
-@@path(DenyAssignment.name);
 @@doc(DenyAssignment.name, "The ID of the deny assignment to get.");

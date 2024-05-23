@@ -103,7 +103,6 @@ interface RoleAssignments {
   >;
 }
 
-@@path(RoleAssignment.name);
 @@doc(RoleAssignment.name,
   "The name of the role assignment. It can be any valid GUID."
 );

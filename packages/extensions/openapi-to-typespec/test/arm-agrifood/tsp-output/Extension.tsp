@@ -100,7 +100,6 @@ interface Extensions {
   >;
 }
 
-@@path(Extension.name);
 @@doc(Extension.name, "Id of extension resource.");
 @@encodedName(Extensions.createOrUpdate::parameters.resource,
   "application/json",

@@ -67,7 +67,6 @@ interface GalleryApplications {
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
 
-@@path(GalleryApplication.name);
 @@doc(GalleryApplication.name,
   "The name of the gallery Application Definition to be retrieved."
 );

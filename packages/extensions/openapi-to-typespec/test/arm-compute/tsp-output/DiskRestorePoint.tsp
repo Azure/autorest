@@ -112,7 +112,6 @@ interface DiskRestorePoints {
   >;
 }
 
-@@path(DiskRestorePoint.name);
 @@doc(DiskRestorePoint.name, "The name of the disk restore point created.");
 @@encodedName(DiskRestorePoints.grantAccess::parameters.body,
   "application/json",

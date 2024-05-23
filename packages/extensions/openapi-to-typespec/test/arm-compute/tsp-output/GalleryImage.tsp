@@ -67,7 +67,6 @@ interface GalleryImages {
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }
 
-@@path(GalleryImage.name);
 @@doc(GalleryImage.name,
   "The name of the gallery image definition to be retrieved."
 );

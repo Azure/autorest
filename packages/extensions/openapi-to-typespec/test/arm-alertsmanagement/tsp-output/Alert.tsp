@@ -190,7 +190,6 @@ interface Alerts {
   ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
-@@path(Alert.name);
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@encodedName(Alerts.changeState::parameters.body,
   "application/json",

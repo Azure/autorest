@@ -158,5 +158,4 @@ interface Applications {
   >;
 }
 
-@@path(Application.name);
 @@doc(Application.name, "The name of the Application");

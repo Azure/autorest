@@ -49,5 +49,4 @@ interface DeletedAccounts {
 
 @@maxLength(DeletedAccount.name, 24);
 @@minLength(DeletedAccount.name, 3);
-@@path(DeletedAccount.name);
 @@doc(DeletedAccount.name, "Name of the deleted storage account.");
