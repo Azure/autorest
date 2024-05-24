@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -19,15 +18,13 @@ namespace Azure.ResourceManager.AlertsManagement;
 @subscriptionResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
-model Alert extends ProxyResourceBase {
-  /**
-   * Unique ID of an alert instance.
-   */
-  @path
-  @key("alertId")
-  @segment("alerts")
-  @visibility("read")
-  name: string;
+model Alert extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Alert,
+    KeyName = "alertId",
+    SegmentName = "alerts",
+    NamePattern = ""
+  >;
 
   /**
    * Alert property bag
@@ -51,7 +48,7 @@ interface Alerts {
   getAll is ArmResourceListByParent<
     Alert,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -165,7 +162,7 @@ interface Alerts {
     string,
     Alert,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
@@ -193,6 +190,7 @@ interface Alerts {
   ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
+@@doc(Alert.name, "Unique ID of an alert instance.");
 @@encodedName(Alerts.changeState::parameters.body,
   "application/json",
   "comment"

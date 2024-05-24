@@ -7,7 +7,6 @@ import "./FeaturestoreEntityContainer.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @Azure.ResourceManager.Private.armResourceInternal(
   FeaturestoreEntityVersionProperties
 )
-model FeaturestoreEntityVersion extends ProxyResourceBase {
-  /**
-   * Version identifier. This is case-sensitive.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model FeaturestoreEntityVersion extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FeaturestoreEntityVersion,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -54,6 +51,9 @@ interface FeaturestoreEntityVersions {
   /**
    * Delete version.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<FeaturestoreEntityVersion>;
 
   /**
@@ -64,7 +64,7 @@ interface FeaturestoreEntityVersions {
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     {
-      ...BaseParameters<FeaturestoreEntityVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturestoreEntityVersion>;
 
       /**
        * Continuation token for pagination.
@@ -117,6 +117,9 @@ interface FeaturestoreEntityVersions {
   >;
 }
 
+@@doc(FeaturestoreEntityVersion.name,
+  "Version identifier. This is case-sensitive."
+);
 @@encodedName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "application/json",
   "body"

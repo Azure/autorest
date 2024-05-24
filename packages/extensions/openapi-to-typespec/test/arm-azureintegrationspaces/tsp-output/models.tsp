@@ -89,6 +89,7 @@ model SpaceUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -125,6 +126,7 @@ model ApplicationProperties {
   /**
    * The tracking data stores.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackingDataStores: Record<TrackingDataStore>;
 }
 
@@ -160,6 +162,7 @@ model ApplicationUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -180,6 +183,7 @@ model ApplicationUpdateProperties {
   /**
    * The tracking data stores.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackingDataStores?: Record<TrackingDataStore>;
 }
 
@@ -222,11 +226,13 @@ model BusinessProcessProperties {
   /**
    * The business process stages.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessStages?: Record<BusinessProcessStage>;
 
   /**
    * The business process mapping.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessMapping?: Record<BusinessProcessMappingItem>;
 }
 
@@ -257,6 +263,7 @@ model BusinessProcessStage {
   /**
    * The properties within the properties of the business process stage.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
   /**
@@ -327,11 +334,13 @@ model BusinessProcessUpdateProperties {
   /**
    * The business process stages.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessStages?: Record<BusinessProcessStage>;
 
   /**
    * The business process mapping.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessMapping?: Record<BusinessProcessMappingItem>;
 }
 
@@ -392,16 +401,19 @@ model BusinessProcessDevelopmentArtifactProperties {
   /**
    * The business process stages.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessStages?: Record<BusinessProcessStage>;
 
   /**
    * The business process mapping.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessMapping?: Record<BusinessProcessMappingItem>;
 
   /**
    * The tracking profile for the business process.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackingProfiles?: Record<TrackingProfileDefinition>;
 }
 
@@ -423,6 +435,7 @@ model TrackingProfileDefinition {
   /**
    * The tracking definitions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackingDefinitions?: Record<FlowTrackingDefinition>;
 }
 
@@ -453,6 +466,7 @@ model FlowTrackingDefinition {
   /**
    * The tracking events.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   events?: Record<TrackingEventDefinition>;
 }
 
@@ -498,6 +512,7 @@ model TrackingEventDefinition {
   /**
    * The properties to be collected for event.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<Record<unknown>>;
 }
 

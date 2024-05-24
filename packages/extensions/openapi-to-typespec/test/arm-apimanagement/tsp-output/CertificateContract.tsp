@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   CertificateContractProperties
 )
-model CertificateContract extends ProxyResourceBase {
-  /**
-   * Identifier of the certificate entity. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("certificateId")
-  @segment("certificates")
-  @visibility("read")
-  name: string;
+model CertificateContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CertificateContract,
+    KeyName = "certificateId",
+    SegmentName = "certificates",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Certificate properties details.
@@ -72,7 +66,7 @@ interface CertificateContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,11 +80,12 @@ interface CertificateContracts {
    * Deletes specific certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -108,7 +103,7 @@ interface CertificateContracts {
   listByService is ArmResourceListByParent<
     CertificateContract,
     {
-      ...BaseParameters<CertificateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| subject | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| thumbprint | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| expirationDate | filter | ge, le, eq, ne, gt, lt |     |</br>
@@ -149,6 +144,11 @@ interface CertificateContracts {
   >;
 }
 
+@@maxLength(CertificateContract.name, 80);
+@@minLength(CertificateContract.name, 1);
+@@doc(CertificateContract.name,
+  "Identifier of the certificate entity. Must be unique in the current API Management service instance."
+);
 @@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

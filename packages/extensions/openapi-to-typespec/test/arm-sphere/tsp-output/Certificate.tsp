@@ -7,7 +7,6 @@ import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,14 @@ namespace Microsoft.AzureSphere;
  * An certificate resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
-model Certificate is ProxyResource<CertificateProperties> {
-  /**
-   * Serial number of the certificate. Use '.default' to get current active certificate.
-   */
-  @path
-  @key("serialNumber")
-  @segment("certificates")
-  @visibility("read")
-  name: string;
+model Certificate
+  is Azure.ResourceManager.ProxyResource<CertificateProperties> {
+  ...ResourceNameParameter<
+    Resource = Certificate,
+    KeyName = "serialNumber",
+    SegmentName = "certificates",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -40,7 +38,7 @@ interface Certificates {
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
-      ...BaseParameters<Certificate>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Certificate>;
 
       /**
        * Filter the result list using the given expression
@@ -87,6 +85,9 @@ interface Certificates {
   >;
 }
 
+@@doc(Certificate.name,
+  "Serial number of the certificate. Use '.default' to get current active certificate."
+);
 @@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );

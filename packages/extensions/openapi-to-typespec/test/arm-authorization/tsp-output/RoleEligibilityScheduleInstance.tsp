@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleEligibilityScheduleInstanceProperties
 )
-model RoleEligibilityScheduleInstance extends ExtensionResourceBase {
-  /**
-   * The name (hash of schedule name + time) of the role eligibility schedule to get.
-   */
-  @path
-  @key("roleEligibilityScheduleInstanceName")
-  @segment("roleEligibilityScheduleInstances")
-  @visibility("read")
-  name: string;
+model RoleEligibilityScheduleInstance extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleEligibilityScheduleInstance,
+    KeyName = "roleEligibilityScheduleInstanceName",
+    SegmentName = "roleEligibilityScheduleInstances",
+    NamePattern = ""
+  >;
 
   /**
    * Role eligibility schedule instance properties.
@@ -52,7 +49,7 @@ interface RoleEligibilityScheduleInstances {
   listForScope is ArmResourceListByParent<
     RoleEligibilityScheduleInstance,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.
@@ -62,3 +59,7 @@ interface RoleEligibilityScheduleInstances {
     }
   >;
 }
+
+@@doc(RoleEligibilityScheduleInstance.name,
+  "The name (hash of schedule name + time) of the role eligibility schedule to get."
+);

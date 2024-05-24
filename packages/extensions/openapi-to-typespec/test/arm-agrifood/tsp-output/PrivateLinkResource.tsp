@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateLinkResourceProperties
 )
-model PrivateLinkResource extends ProxyResourceBase {
-  /**
-   * Sub resource name.
-   */
-  @path
-  @key("subResourceName")
-  @segment("privateLinkResources")
-  @visibility("read")
-  name: string;
+model PrivateLinkResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "subResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -53,3 +50,5 @@ interface PrivateLinkResources {
   @operationId("PrivateLinkResources_ListByResource")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }
+
+@@doc(PrivateLinkResource.name, "Sub resource name.");

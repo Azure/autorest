@@ -609,17 +609,6 @@
         "score"
       ]
     },
-    "ApiVersion": {
-      "type": "string",
-      "description": "Anomaly Detector API version (for example, v1.0).",
-      "enum": [
-        "v1.1-preview.1"
-      ],
-      "x-ms-enum": {
-        "name": "ApiVersion",
-        "modelAsString": true
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1526,24 +1515,6 @@
         "timestamps",
         "values"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "v1.1-preview.1"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v1_1_preview_1",
-            "value": "v1.1-preview.1",
-            "description": "The v1.1-preview.1 API version."
-          }
-        ]
-      }
     }
   },
   "parameters": {

@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(OperationContractProperties)
-model OperationContract extends ProxyResourceBase {
-  /**
-   * Operation identifier within an API. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("operationId")
-  @segment("operations")
-  @visibility("read")
-  name: string;
+model OperationContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = OperationContract,
+    KeyName = "operationId",
+    SegmentName = "operations",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the Operation Contract.
@@ -69,7 +64,7 @@ interface OperationContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface OperationContracts {
    * Updates the details of the operation in the API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiOperation_Update")
   update is ArmCustomPatchSync<
     OperationContract,
     OperationUpdateContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface OperationContracts {
    * Deletes the specified operation in the API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperation_Delete")
   delete is ArmResourceDeleteSync<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +121,7 @@ interface OperationContracts {
   listByApi is ArmResourceListByParent<
     OperationContract,
     {
-      ...BaseParameters<OperationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OperationContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -155,6 +151,11 @@ interface OperationContracts {
   >;
 }
 
+@@maxLength(OperationContract.name, 80);
+@@minLength(OperationContract.name, 1);
+@@doc(OperationContract.name,
+  "Operation identifier within an API. Must be unique in the current API Management service instance."
+);
 @@encodedName(OperationContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

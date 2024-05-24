@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model Snapshot extends Resource {
-  /**
-   * The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.
-   */
-  @path
-  @key("snapshotName")
-  @segment("snapshots")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Snapshot,
+    KeyName = "snapshotName",
+    SegmentName = "snapshots",
+    NamePattern = ""
+  >;
 
   /**
    * Unused. Always Null.
@@ -65,12 +62,15 @@ interface Snapshots {
   /**
    * Updates (patches) a snapshot.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
 
   /**
    * Deletes a snapshot.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Snapshot>;
 
   /**
@@ -96,6 +96,9 @@ interface Snapshots {
   revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }
 
+@@doc(Snapshot.name,
+  "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
+);
 @@encodedName(Snapshots.createOrUpdate::parameters.resource,
   "application/json",
   "snapshot"

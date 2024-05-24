@@ -7,7 +7,6 @@ import "./OperationContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,7 +19,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(OperationContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
-model PolicyContract extends ProxyResourceBase {
+model PolicyContract extends Foundations.ProxyResource {
   /**
    * The identifier of the Policy.
    */
@@ -47,7 +46,7 @@ interface PolicyContracts {
   get is ArmResourceRead<
     PolicyContract,
     {
-      ...BaseParameters<PolicyContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
 
       /**
        * Policy Export Format.
@@ -78,7 +77,7 @@ interface PolicyContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PolicyContract,
     {
-      ...BaseParameters<PolicyContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -92,11 +91,12 @@ interface PolicyContracts {
    * Deletes the policy configuration at the Api Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperationPolicy_Delete")
   delete is ArmResourceDeleteSync<
     PolicyContract,
     {
-      ...BaseParameters<PolicyContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.

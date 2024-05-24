@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,11 +14,14 @@ namespace Microsoft.NetworkAnalytics;
  * The data catalog resource.
  */
 @singleton("default")
-model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
-  @key("dataProductsCatalog")
-  @segment("dataProductsCatalogs")
-  @visibility("read")
-  name: string;
+model DataProductsCatalog
+  is Azure.ResourceManager.ProxyResource<DataProductsCatalogProperties> {
+  ...ResourceNameParameter<
+    Resource = DataProductsCatalog,
+    KeyName = "dataProductsCatalog",
+    SegmentName = "dataProductsCatalogs",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -39,3 +41,5 @@ interface DataProductsCatalogs {
    */
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 }
+
+@@doc(DataProductsCatalog.name, "");

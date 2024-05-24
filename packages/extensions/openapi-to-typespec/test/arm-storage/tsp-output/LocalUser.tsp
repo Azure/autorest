@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Microsoft.Storage;
 @parentResource(StorageAccount)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LocalUserProperties)
-model LocalUser extends ProxyResourceBase {
-  /**
-   * The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account.
-   */
-  @maxLength(64)
-  @minLength(3)
-  @path
-  @key("username")
-  @segment("localUsers")
-  @visibility("read")
-  name: string;
+model LocalUser extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = LocalUser,
+    KeyName = "username",
+    SegmentName = "localUsers",
+    NamePattern = ""
+  >;
 
   /**
    * Storage account local user properties.
@@ -54,6 +49,7 @@ interface LocalUsers {
   /**
    * Deletes the local user associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<LocalUser>;
 
   /**
@@ -78,6 +74,11 @@ interface LocalUsers {
   >;
 }
 
+@@maxLength(LocalUser.name, 64);
+@@minLength(LocalUser.name, 3);
+@@doc(LocalUser.name,
+  "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
+);
 @@encodedName(LocalUsers.createOrUpdate::parameters.resource,
   "application/json",
   "properties"

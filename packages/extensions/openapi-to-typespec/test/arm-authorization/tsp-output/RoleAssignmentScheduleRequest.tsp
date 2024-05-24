@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleAssignmentScheduleRequestProperties
 )
-model RoleAssignmentScheduleRequest extends ExtensionResourceBase {
-  /**
-   * The name (guid) of the role assignment schedule request to get.
-   */
-  @path
-  @key("roleAssignmentScheduleRequestName")
-  @segment("roleAssignmentScheduleRequests")
-  @visibility("read")
-  name: string;
+model RoleAssignmentScheduleRequest extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleAssignmentScheduleRequest,
+    KeyName = "roleAssignmentScheduleRequestName",
+    SegmentName = "roleAssignmentScheduleRequests",
+    NamePattern = ""
+  >;
 
   /**
    * Role assignment schedule request properties.
@@ -57,7 +54,7 @@ interface RoleAssignmentScheduleRequests {
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleRequest,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver.
@@ -82,6 +79,9 @@ interface RoleAssignmentScheduleRequests {
   >;
 }
 
+@@doc(RoleAssignmentScheduleRequest.name,
+  "The name (guid) of the role assignment schedule request to get."
+);
 @@encodedName(RoleAssignmentScheduleRequests.create::parameters.resource,
   "application/json",
   "parameters"

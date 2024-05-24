@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,13 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
-model Registry extends TrackedResourceBase {
-  /**
-   * Name of Azure Machine Learning registry. This is case-insensitive
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$")
-  @path
-  @key("registryName")
-  @segment("registries")
-  @visibility("read")
-  name: string;
+model Registry extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = Registry,
+    KeyName = "registryName",
+    SegmentName = "registries",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+  >;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -38,8 +34,8 @@ model Registry extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: RegistryProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -57,12 +53,15 @@ interface Registries {
   /**
    * Update tags
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Registry, PartialRegistryPartialTrackedResource>;
 
   /**
    * Delete registry
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Registry>;
 
   /**
@@ -83,6 +82,9 @@ interface Registries {
   removeRegions is ArmResourceActionAsync<Registry, Registry, Registry>;
 }
 
+@@doc(Registry.name,
+  "Name of Azure Machine Learning registry. This is case-insensitive"
+);
 @@encodedName(Registries.createOrUpdate::parameters.resource,
   "application/json",
   "body"

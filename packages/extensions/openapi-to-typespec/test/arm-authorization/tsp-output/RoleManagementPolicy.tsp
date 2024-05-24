@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleManagementPolicyProperties
 )
-model RoleManagementPolicy extends ExtensionResourceBase {
-  /**
-   * The name (guid) of the role management policy to get.
-   */
-  @path
-  @key("roleManagementPolicyName")
-  @segment("roleManagementPolicies")
-  @visibility("read")
-  name: string;
+model RoleManagementPolicy extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleManagementPolicy,
+    KeyName = "roleManagementPolicyName",
+    SegmentName = "roleManagementPolicies",
+    NamePattern = ""
+  >;
 
   /**
    * Role management policy properties.
@@ -47,7 +44,7 @@ interface RoleManagementPolicies {
   /**
    * Update a role management policy
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<RoleManagementPolicy, RoleManagementPolicy>;
 
   /**
@@ -58,6 +55,9 @@ interface RoleManagementPolicies {
   listForScope is ArmResourceListByParent<RoleManagementPolicy>;
 }
 
+@@doc(RoleManagementPolicy.name,
+  "The name (guid) of the role management policy to get."
+);
 @@encodedName(RoleManagementPolicies.update::parameters.properties,
   "application/json",
   "parameters"

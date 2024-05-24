@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   ApiVersionSetContractProperties
 )
-model ApiVersionSetContract extends ProxyResourceBase {
-  /**
-   * Api Version Set identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("versionSetId")
-  @segment("apiVersionSets")
-  @visibility("read")
-  name: string;
+model ApiVersionSetContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiVersionSetContract,
+    KeyName = "versionSetId",
+    SegmentName = "apiVersionSets",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * API VersionSet contract properties.
@@ -72,7 +66,7 @@ interface ApiVersionSetContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
     {
-      ...BaseParameters<ApiVersionSetContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,13 +80,13 @@ interface ApiVersionSetContracts {
    * Updates the details of the Api VersionSet specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
     ApiVersionSetUpdateParameters,
     {
-      ...BaseParameters<ApiVersionSetContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -106,11 +100,12 @@ interface ApiVersionSetContracts {
    * Deletes specific Api Version Set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
     {
-      ...BaseParameters<ApiVersionSetContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -128,7 +123,7 @@ interface ApiVersionSetContracts {
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,
     {
-      ...BaseParameters<ApiVersionSetContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>
@@ -152,6 +147,11 @@ interface ApiVersionSetContracts {
   >;
 }
 
+@@maxLength(ApiVersionSetContract.name, 80);
+@@minLength(ApiVersionSetContract.name, 1);
+@@doc(ApiVersionSetContract.name,
+  "Api Version Set identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

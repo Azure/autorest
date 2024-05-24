@@ -1,8 +1,12 @@
 import { TypespecObjectProperty } from "../interfaces";
+import { getOptions } from "../options";
 import { generateDecorators } from "./decorators";
 import { generateDocs } from "./docs";
+import { generateSuppressions } from "./suppressions";
+import { getFullyQualifiedName } from "./type-mapping";
 
 export function getModelPropertiesDeclarations(properties: TypespecObjectProperty[]): string[] {
+  const { isFullCompatible } = getOptions();
   const definitions: string[] = [];
   for (const property of properties) {
     const propertyDoc = generateDocs(property);
@@ -14,7 +18,12 @@ export function getModelPropertiesDeclarations(properties: TypespecObjectPropert
     if (property.defaultValue) {
       defaultValue = ` = ${property.defaultValue}`;
     }
-    definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type}${defaultValue};`);
+    if (isFullCompatible && property.suppressions) {
+      definitions.push(...generateSuppressions(property.suppressions));
+    }
+    definitions.push(
+      `"${property.name}"${getOptionalOperator(property)}: ${getFullyQualifiedName(property.type)}${defaultValue};`,
+    );
   }
 
   return definitions;

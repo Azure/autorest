@@ -7,7 +7,6 @@ import "./DataProduct.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,18 +15,13 @@ namespace Microsoft.NetworkAnalytics;
  * The data type resource.
  */
 @parentResource(DataProduct)
-model DataType is ProxyResource<DataTypeProperties> {
-  /**
-   * The data type name.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z][a-z0-9-]*$")
-  @path
-  @key("dataTypeName")
-  @segment("dataTypes")
-  @visibility("read")
-  name: string;
+model DataType is Azure.ResourceManager.ProxyResource<DataTypeProperties> {
+  ...ResourceNameParameter<
+    Resource = DataType,
+    KeyName = "dataTypeName",
+    SegmentName = "dataTypes",
+    NamePattern = "^[a-z][a-z0-9-]*$"
+  >;
 }
 
 @armResourceOperations
@@ -45,7 +39,7 @@ interface DataTypes {
   /**
    * Update data type resource.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DataType, DataTypeUpdate>;
 
   /**
@@ -75,3 +69,7 @@ interface DataTypes {
     ContainerSasToken
   >;
 }
+
+@@maxLength(DataType.name, 63);
+@@minLength(DataType.name, 3);
+@@doc(DataType.name, "The data type name.");

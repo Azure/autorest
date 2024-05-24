@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,17 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalRevisionContractProperties
 )
-model PortalRevisionContract extends ProxyResourceBase {
-  /**
-   * Portal revision identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @path
-  @key("portalRevisionId")
-  @segment("portalRevisions")
-  @visibility("read")
-  name: string;
+model PortalRevisionContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PortalRevisionContract,
+    KeyName = "portalRevisionId",
+    SegmentName = "portalRevisions",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the portal revisions.
@@ -74,13 +69,13 @@ interface PortalRevisionContracts {
    * Updates the description of specified portal revision or makes it current.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("PortalRevision_Update")
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
     PortalRevisionContract,
     {
-      ...BaseParameters<PortalRevisionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalRevisionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -98,7 +93,7 @@ interface PortalRevisionContracts {
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     {
-      ...BaseParameters<PortalRevisionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalRevisionContract>;
 
       /**
        * | Field       | Supported operators    | Supported functions               |
@@ -128,6 +123,11 @@ interface PortalRevisionContracts {
   >;
 }
 
+@@maxLength(PortalRevisionContract.name, 256);
+@@minLength(PortalRevisionContract.name, 1);
+@@doc(PortalRevisionContract.name,
+  "Portal revision identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,16 +21,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   ObjectReplicationPolicyProperties
 )
-model ObjectReplicationPolicy extends ProxyResourceBase {
-  /**
-   * For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file.
-   */
-  @minLength(1)
-  @path
-  @key("objectReplicationPolicyId")
-  @segment("objectReplicationPolicies")
-  @visibility("read")
-  name: string;
+model ObjectReplicationPolicy extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ObjectReplicationPolicy,
+    KeyName = "objectReplicationPolicyId",
+    SegmentName = "objectReplicationPolicies",
+    NamePattern = ""
+  >;
 
   /**
    * Returns the Storage Account Object Replication Policy.
@@ -55,6 +51,7 @@ interface ObjectReplicationPolicies {
   /**
    * Deletes the object replication policy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
   /**
@@ -65,6 +62,10 @@ interface ObjectReplicationPolicies {
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
 
+@@minLength(ObjectReplicationPolicy.name, 1);
+@@doc(ObjectReplicationPolicy.name,
+  "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file."
+);
 @@encodedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
   "application/json",
   "properties"

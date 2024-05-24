@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DiagnosticContractProperties)
-model DiagnosticContract extends ProxyResourceBase {
-  /**
-   * Diagnostic identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("diagnosticId")
-  @segment("diagnostics")
-  @visibility("read")
-  name: string;
+model DiagnosticContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DiagnosticContract,
+    KeyName = "diagnosticId",
+    SegmentName = "diagnostics",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Diagnostic entity contract properties.
@@ -70,7 +64,7 @@ interface DiagnosticContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
     {
-      ...BaseParameters<DiagnosticContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -84,13 +78,13 @@ interface DiagnosticContracts {
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
     DiagnosticContract,
     {
-      ...BaseParameters<DiagnosticContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,11 +98,12 @@ interface DiagnosticContracts {
    * Deletes the specified Diagnostic from an API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
     {
-      ...BaseParameters<DiagnosticContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -126,7 +121,7 @@ interface DiagnosticContracts {
   listByService is ArmResourceListByParent<
     DiagnosticContract,
     {
-      ...BaseParameters<DiagnosticContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -150,6 +145,11 @@ interface DiagnosticContracts {
   >;
 }
 
+@@maxLength(DiagnosticContract.name, 80);
+@@minLength(DiagnosticContract.name, 1);
+@@doc(DiagnosticContract.name,
+  "Diagnostic identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(DiagnosticContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,15 +17,13 @@ namespace Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DenyAssignmentProperties)
-model DenyAssignment extends ExtensionResourceBase {
-  /**
-   * The ID of the deny assignment to get.
-   */
-  @path
-  @key("denyAssignmentId")
-  @segment("denyAssignments")
-  @visibility("read")
-  name: string;
+model DenyAssignment extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = DenyAssignment,
+    KeyName = "denyAssignmentId",
+    SegmentName = "denyAssignments",
+    NamePattern = ""
+  >;
 
   /**
    * Deny assignment properties.
@@ -50,7 +47,7 @@ interface DenyAssignments {
   listForResource is ArmResourceListByParent<
     DenyAssignment,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
 
@@ -86,3 +83,5 @@ interface DenyAssignments {
     }
   >;
 }
+
+@@doc(DenyAssignment.name, "The ID of the deny assignment to get.");

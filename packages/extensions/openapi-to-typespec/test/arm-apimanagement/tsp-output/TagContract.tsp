@@ -7,7 +7,6 @@ import "./OperationContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(OperationContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(TagContractProperties)
-model TagContract extends ProxyResourceBase {
-  /**
-   * Tag identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("tagId")
-  @segment("tags")
-  @visibility("read")
-  name: string;
+model TagContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = TagContract,
+    KeyName = "tagId",
+    SegmentName = "tags",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Tag entity contract properties.
@@ -70,6 +64,7 @@ interface TagContracts {
    * Detach the tag from the Operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Tag_DetachFromOperation")
   detachFromOperation is ArmResourceDeleteSync<TagContract>;
 
@@ -81,7 +76,7 @@ interface TagContracts {
   listByOperation is ArmResourceListByParent<
     TagContract,
     {
-      ...BaseParameters<TagContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -104,3 +99,9 @@ interface TagContracts {
     }
   >;
 }
+
+@@maxLength(TagContract.name, 80);
+@@minLength(TagContract.name, 1);
+@@doc(TagContract.name,
+  "Tag identifier. Must be unique in the current API Management service instance."
+);

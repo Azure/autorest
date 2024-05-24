@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model DedicatedHostGroup extends Resource {
-  /**
-   * The name of the dedicated host group.
-   */
-  @path
-  @key("hostGroupName")
-  @segment("hostGroups")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DedicatedHostGroup,
+    KeyName = "hostGroupName",
+    SegmentName = "hostGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.
@@ -47,7 +44,7 @@ interface DedicatedHostGroups {
   get is ArmResourceRead<
     DedicatedHostGroup,
     {
-      ...BaseParameters<DedicatedHostGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DedicatedHostGroup>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group. 'UserData' is not supported for dedicated host group.
@@ -65,12 +62,13 @@ interface DedicatedHostGroups {
   /**
    * Update an dedicated host group.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<DedicatedHostGroup, DedicatedHostGroupUpdate>;
 
   /**
    * Delete a dedicated host group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<DedicatedHostGroup>;
 
   /**
@@ -86,6 +84,7 @@ interface DedicatedHostGroups {
   listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
 }
 
+@@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
 @@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

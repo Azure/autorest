@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(GatewayContractProperties)
-model GatewayContract extends ProxyResourceBase {
-  /**
-   * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("gatewayId")
-  @segment("gateways")
-  @visibility("read")
-  name: string;
+model GatewayContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GatewayContract,
+    KeyName = "gatewayId",
+    SegmentName = "gateways",
+    NamePattern = ""
+  >;
 
   /**
    * Gateway details.
@@ -69,7 +64,7 @@ interface GatewayContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
     {
-      ...BaseParameters<GatewayContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface GatewayContracts {
    * Updates the details of the gateway specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Gateway_Update")
   update is ArmCustomPatchSync<
     GatewayContract,
     GatewayContract,
     {
-      ...BaseParameters<GatewayContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface GatewayContracts {
    * Deletes specific Gateway.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
     {
-      ...BaseParameters<GatewayContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +121,7 @@ interface GatewayContracts {
   listByService is ArmResourceListByParent<
     GatewayContract,
     {
-      ...BaseParameters<GatewayContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| region | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -228,6 +224,11 @@ interface GatewayContracts {
   ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
 }
 
+@@maxLength(GatewayContract.name, 80);
+@@minLength(GatewayContract.name, 1);
+@@doc(GatewayContract.name,
+  "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
+);
 @@encodedName(GatewayContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

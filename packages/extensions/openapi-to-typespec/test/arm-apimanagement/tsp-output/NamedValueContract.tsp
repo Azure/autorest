@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
-model NamedValueContract extends ProxyResourceBase {
-  /**
-   * Identifier of the NamedValue.
-   */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("namedValueId")
-  @segment("namedValues")
-  @visibility("read")
-  name: string;
+model NamedValueContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = NamedValueContract,
+    KeyName = "namedValueId",
+    SegmentName = "namedValues",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * NamedValue entity contract properties.
@@ -69,7 +64,7 @@ interface NamedValueContracts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface NamedValueContracts {
    * Updates the specific named value.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,
     NamedValueUpdateParameters,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface NamedValueContracts {
    * Deletes specific named value from the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +121,7 @@ interface NamedValueContracts {
   listByService is ArmResourceListByParent<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| tags | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -177,6 +173,8 @@ interface NamedValueContracts {
   >;
 }
 
+@@maxLength(NamedValueContract.name, 256);
+@@doc(NamedValueContract.name, "Identifier of the NamedValue.");
 @@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

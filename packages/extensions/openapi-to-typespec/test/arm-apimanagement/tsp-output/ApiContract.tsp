@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
-model ApiContract extends ProxyResourceBase {
-  /**
-   * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("apiId")
-  @segment("apis")
-  @visibility("read")
-  name: string;
+model ApiContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiContract,
+    KeyName = "apiId",
+    SegmentName = "apis",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * API entity contract properties.
@@ -67,7 +61,7 @@ interface ApiContracts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -81,13 +75,13 @@ interface ApiContracts {
    * Updates the specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
     ApiUpdateContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,11 +95,12 @@ interface ApiContracts {
    * Deletes the specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * Delete all revisions of the Api.
@@ -129,7 +124,7 @@ interface ApiContracts {
   listByService is ArmResourceListByParent<
     ApiContract,
     {
-      ...BaseParameters<ApiContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq, ne |  |</br>
@@ -325,6 +320,11 @@ interface ApiContracts {
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
 }
 
+@@maxLength(ApiContract.name, 256);
+@@minLength(ApiContract.name, 1);
+@@doc(ApiContract.name,
+  "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
+);
 @@encodedName(ApiContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

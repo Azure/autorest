@@ -7,7 +7,6 @@ import "./GatewayContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   GatewayCertificateAuthorityContractProperties
 )
-model GatewayCertificateAuthorityContract extends ProxyResourceBase {
-  /**
-   * Identifier of the certificate entity. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("certificateId")
-  @segment("certificateAuthorities")
-  @visibility("read")
-  name: string;
+model GatewayCertificateAuthorityContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GatewayCertificateAuthorityContract,
+    KeyName = "certificateId",
+    SegmentName = "certificateAuthorities",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Gateway certificate authority details.
@@ -72,7 +66,7 @@ interface GatewayCertificateAuthorityContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,11 +80,12 @@ interface GatewayCertificateAuthorityContracts {
    * Remove relationship between Certificate Authority and Gateway entity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -108,7 +103,7 @@ interface GatewayCertificateAuthorityContracts {
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     {
-      ...BaseParameters<GatewayCertificateAuthorityContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>
@@ -132,6 +127,11 @@ interface GatewayCertificateAuthorityContracts {
   >;
 }
 
+@@maxLength(GatewayCertificateAuthorityContract.name, 80);
+@@minLength(GatewayCertificateAuthorityContract.name, 1);
+@@doc(GatewayCertificateAuthorityContract.name,
+  "Identifier of the certificate entity. Must be unique in the current API Management service instance."
+);
 @@encodedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

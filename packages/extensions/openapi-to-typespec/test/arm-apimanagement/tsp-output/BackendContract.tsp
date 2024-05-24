@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(BackendContractProperties)
-model BackendContract extends ProxyResourceBase {
-  /**
-   * Identifier of the Backend entity. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("backendId")
-  @segment("backends")
-  @visibility("read")
-  name: string;
+model BackendContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = BackendContract,
+    KeyName = "backendId",
+    SegmentName = "backends",
+    NamePattern = ""
+  >;
 
   /**
    * Backend entity contract properties.
@@ -69,7 +64,7 @@ interface BackendContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
     {
-      ...BaseParameters<BackendContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface BackendContracts {
    * Updates an existing backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,
     BackendUpdateParameters,
     {
-      ...BaseParameters<BackendContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface BackendContracts {
    * Deletes the specified backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
     {
-      ...BaseParameters<BackendContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +121,7 @@ interface BackendContracts {
   listByService is ArmResourceListByParent<
     BackendContract,
     {
-      ...BaseParameters<BackendContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| url | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -159,6 +155,11 @@ interface BackendContracts {
   >;
 }
 
+@@maxLength(BackendContract.name, 80);
+@@minLength(BackendContract.name, 1);
+@@doc(BackendContract.name,
+  "Identifier of the Backend entity. Must be unique in the current API Management service instance."
+);
 @@encodedName(BackendContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

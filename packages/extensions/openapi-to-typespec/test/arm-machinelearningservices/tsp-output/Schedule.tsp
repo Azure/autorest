@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
-model Schedule extends ProxyResourceBase {
-  /**
-   * Schedule name.
-   */
-  @path
-  @key("name")
-  @segment("schedules")
-  @visibility("read")
-  name: string;
+model Schedule extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "name",
+    SegmentName = "schedules",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -52,6 +49,9 @@ interface Schedules {
   /**
    * Delete schedule.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Schedule>;
 
   /**
@@ -62,7 +62,7 @@ interface Schedules {
   list is ArmResourceListByParent<
     Schedule,
     {
-      ...BaseParameters<Schedule>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Schedule>;
 
       /**
        * Continuation token for pagination.
@@ -79,6 +79,7 @@ interface Schedules {
   >;
 }
 
+@@doc(Schedule.name, "Schedule name.");
 @@encodedName(Schedules.createOrUpdate::parameters.resource,
   "application/json",
   "body"

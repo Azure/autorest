@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -19,15 +18,13 @@ namespace Azure.ResourceManager.AlertsManagement;
 @subscriptionResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SmartGroupProperties)
-model SmartGroup extends ProxyResourceBase {
-  /**
-   * Smart group unique id.
-   */
-  @path
-  @key("smartGroupId")
-  @segment("smartGroups")
-  @visibility("read")
-  name: string;
+model SmartGroup extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SmartGroup,
+    KeyName = "smartGroupId",
+    SegmentName = "smartGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of smart group.
@@ -51,7 +48,7 @@ interface SmartGroups {
   getAll is ArmResourceListByParent<
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -129,7 +126,7 @@ interface SmartGroups {
     void,
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
@@ -156,3 +153,5 @@ interface SmartGroups {
     smartGroupId: string,
   ): ArmResponse<SmartGroupModification> | ErrorResponse;
 }
+
+@@doc(SmartGroup.name, "Smart group unique id. ");

@@ -7,7 +7,6 @@ import "./CloudService.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(CloudService)
 @includeInapplicableMetadataInPayload(false)
 model CloudServiceRole {
-  /**
-   * Name of the role.
-   */
-  @path
-  @key("roleName")
-  @segment("roles")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CloudServiceRole,
+    KeyName = "roleName",
+    SegmentName = "roles",
+    NamePattern = ""
+  >;
 
   /**
    * Resource id
@@ -73,3 +70,5 @@ interface CloudServiceRoles {
   @operationId("CloudServiceRoles_List")
   list is ArmResourceListByParent<CloudServiceRole>;
 }
+
+@@doc(CloudServiceRole.name, "Name of the role.");

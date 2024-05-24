@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -23,11 +22,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   QueueServicePropertiesProperties
 )
-model QueueServiceProperties extends ProxyResourceBase {
-  @key("queueService")
-  @segment("queueServices")
-  @visibility("read")
-  name: string;
+model QueueServiceProperties extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = QueueServiceProperties,
+    KeyName = "queueService",
+    SegmentName = "queueServices",
+    NamePattern = ""
+  >;
 
   /**
    * The properties of a storage account’s Queue service.
@@ -60,6 +61,7 @@ interface QueueServicePropertiesOperationGroup {
   list is ArmResourceListByParent<QueueServiceProperties>;
 }
 
+@@doc(QueueServiceProperties.name, "");
 @@encodedName(QueueServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

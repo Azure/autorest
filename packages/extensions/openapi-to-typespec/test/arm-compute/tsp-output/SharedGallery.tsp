@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -21,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model SharedGallery extends PirSharedGalleryResource {
-  /**
-   * The unique name of the Shared Gallery.
-   */
-  @path
-  @key("galleryUniqueName")
-  @segment("sharedGalleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SharedGallery,
+    KeyName = "galleryUniqueName",
+    SegmentName = "sharedGalleries",
+    NamePattern = ""
+  >;
 
   @extension("x-ms-client-flatten", true)
   @visibility("read,create")
@@ -50,7 +47,7 @@ interface SharedGalleries {
   list is ArmResourceListByParent<
     SharedGallery,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
@@ -60,3 +57,5 @@ interface SharedGalleries {
     }
   >;
 }
+
+@@doc(SharedGallery.name, "The unique name of the Shared Gallery.");

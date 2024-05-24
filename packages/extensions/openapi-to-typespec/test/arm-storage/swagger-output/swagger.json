@@ -734,14 +734,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1151,6 +1151,71 @@
           }
         }
       },
+      "patch": {
+        "operationId": "BlobContainers_Update",
+        "tags": [
+          "BlobContainers"
+        ],
+        "description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "blobContainer",
+            "in": "body",
+            "description": "Properties to update for the blob container.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobContainer"
+            },
+            "x-ms-client-name": "blobContainer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContainers": {
+            "$ref": "./examples/BlobContainers_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "BlobContainers_Delete",
         "tags": [
@@ -1270,82 +1335,6 @@
         "x-ms-examples": {
           "ClearLegalHoldContainers": {
             "$ref": "./examples/BlobContainers_ClearLegalHold.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/containers/{name}": {
-      "patch": {
-        "operationId": "BlobContainers_Update",
-        "tags": [
-          "BlobContainers"
-        ],
-        "description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "blobContainer",
-            "in": "body",
-            "description": "Properties to update for the blob container.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BlobContainer"
-            },
-            "x-ms-client-name": "blobContainer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BlobContainer"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateContainers": {
-            "$ref": "./examples/BlobContainers_Update.json"
           }
         }
       }
@@ -1810,14 +1799,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2125,9 +2114,7 @@
             "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope_With_Infrastructure_Encryption.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}/encryptionScopes/{name}": {
+      },
       "patch": {
         "operationId": "EncryptionScopes_Patch",
         "tags": [
@@ -2155,15 +2142,6 @@
           },
           {
             "name": "encryptionScopeName",
-            "in": "path",
-            "description": "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "name",
             "in": "path",
             "description": "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
             "required": true,
@@ -2247,14 +2225,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2684,6 +2662,74 @@
           }
         }
       },
+      "patch": {
+        "operationId": "FileShares_Update",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "fileShare",
+            "in": "body",
+            "description": "Properties to update for the file share.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            },
+            "x-ms-client-name": "fileShare"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateShareAcls": {
+            "$ref": "./examples/FileShares_Update_Update_Share_Acls.json"
+          },
+          "UpdateShares": {
+            "$ref": "./examples/FileShares_Update_Update_Shares.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "FileShares_Delete",
         "tags": [
@@ -2895,85 +2941,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/shares/{name}": {
-      "patch": {
-        "operationId": "FileShares_Update",
-        "tags": [
-          "FileShares"
-        ],
-        "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "shareName",
-            "in": "path",
-            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "fileShare",
-            "in": "body",
-            "description": "Properties to update for the file share.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FileShare"
-            },
-            "x-ms-client-name": "fileShare"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FileShare"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateShareAcls": {
-            "$ref": "./examples/FileShares_Update_Update_Share_Acls.json"
-          },
-          "UpdateShares": {
-            "$ref": "./examples/FileShares_Update_Update_Shares.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hierarchicalNamespaceMigration": {
       "post": {
         "operationId": "StorageAccounts_HierarchicalNamespaceMigration",
@@ -3012,14 +2979,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -4836,6 +4803,72 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Queue_Update",
+        "tags": [
+          "StorageQueues"
+        ],
+        "description": "Creates a new queue with the specified queue name, under the specified account.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+          },
+          {
+            "name": "queue",
+            "in": "body",
+            "description": "Queue properties and metadata to be created with",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageQueue"
+            },
+            "x-ms-client-name": "queue"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageQueue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueueOperationPatch": {
+            "$ref": "./examples/Queue_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Queue_Delete",
         "tags": [
@@ -4889,84 +4922,6 @@
         "x-ms-examples": {
           "QueueOperationDelete": {
             "$ref": "./examples/Queue_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}/queues/{name}": {
-      "patch": {
-        "operationId": "Queue_Update",
-        "tags": [
-          "StorageQueues"
-        ],
-        "description": "Creates a new queue with the specified queue name, under the specified account.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
-          },
-          {
-            "name": "queue",
-            "in": "body",
-            "description": "Queue properties and metadata to be created with",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageQueue"
-            },
-            "x-ms-client-name": "queue"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StorageQueue"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueueOperationPatch": {
-            "$ref": "./examples/Queue_Update.json"
           }
         }
       }
@@ -5079,14 +5034,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -5497,6 +5452,75 @@
           }
         }
       },
+      "patch": {
+        "operationId": "Table_Update",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Creates a new table with the specified table name, under the specified account.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide to create a table.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TableOperationPatch": {
+            "$ref": "./examples/Table_Update_Table_Operation_Patch.json"
+          },
+          "TableOperationPutOrPatchAcls": {
+            "$ref": "./examples/Table_Update_Table_Operation_Put_Or_Patch_Acls.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Table_Delete",
         "tags": [
@@ -5550,87 +5574,6 @@
         "x-ms-examples": {
           "TableOperationDelete": {
             "$ref": "./examples/Table_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}/tables/{name}": {
-      "patch": {
-        "operationId": "Table_Update",
-        "tags": [
-          "Tables"
-        ],
-        "description": "Creates a new table with the specified table name, under the specified account.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "tableName",
-            "in": "path",
-            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters to provide to create a table.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Table"
-            },
-            "x-ms-client-name": "parameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TableOperationPatch": {
-            "$ref": "./examples/Table_Update_Table_Operation_Patch.json"
-          },
-          "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Update_Table_Operation_Put_Or_Patch_Acls.json"
           }
         }
       }
@@ -5979,19 +5922,12 @@
       "type": "object",
       "description": "The storage account blob inventory policy.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/BlobInventoryPolicyProperties",
           "description": "Returns the storage account blob inventory policy rules.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -6257,10 +6193,6 @@
       "type": "object",
       "description": "The properties of a storage account’s Blob service.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/BlobServicePropertiesProperties",
           "description": "The properties of a storage account’s Blob service.",
@@ -6271,9 +6203,6 @@
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -7052,10 +6981,6 @@
       "type": "object",
       "description": "The properties of File services in storage account.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/FileServicePropertiesProperties",
           "description": "The properties of File services in storage account.",
@@ -7066,9 +6991,6 @@
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -7406,10 +7328,6 @@
       "type": "object",
       "description": "The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ImmutabilityPolicyProperty",
           "description": "The properties of an ImmutabilityPolicy of a blob container.",
@@ -7417,7 +7335,6 @@
         }
       },
       "required": [
-        "name",
         "properties"
       ],
       "allOf": [
@@ -8076,19 +7993,12 @@
       "type": "object",
       "description": "The Get Storage Account ManagementPolicies operation response.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ManagementPolicyProperties",
           "description": "Returns the Storage Account Data Policies Rules.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -8838,19 +8748,12 @@
       "type": "object",
       "description": "The properties of a storage account’s Queue service.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/QueueServicePropertiesProperties",
           "description": "The properties of a storage account’s Queue service.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -10102,19 +10005,12 @@
       "type": "object",
       "description": "The properties of a storage account’s Table service.",
       "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/TableServicePropertiesProperties",
           "description": "The properties of a storage account’s Table service.",
           "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"

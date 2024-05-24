@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiContract)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
-model ApiReleaseContract extends ProxyResourceBase {
-  /**
-   * Release identifier within an API. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("releaseId")
-  @segment("releases")
-  @visibility("read")
-  name: string;
+model ApiReleaseContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiReleaseContract,
+    KeyName = "releaseId",
+    SegmentName = "releases",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * ApiRelease entity contract properties.
@@ -70,7 +64,7 @@ interface ApiReleaseContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -84,13 +78,13 @@ interface ApiReleaseContracts {
    * Updates the details of the release of the API specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,11 +98,12 @@ interface ApiReleaseContracts {
    * Deletes the specified release in the API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -126,7 +121,7 @@ interface ApiReleaseContracts {
   listByService is ArmResourceListByParent<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| notes | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -150,6 +145,11 @@ interface ApiReleaseContracts {
   >;
 }
 
+@@maxLength(ApiReleaseContract.name, 80);
+@@minLength(ApiReleaseContract.name, 1);
+@@doc(ApiReleaseContract.name,
+  "Release identifier within an API. Must be unique in the current API Management service instance."
+);
 @@encodedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

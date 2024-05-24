@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model DiskEncryptionSet extends Resource {
-  /**
-   * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-   */
-  @path
-  @key("diskEncryptionSetName")
-  @segment("diskEncryptionSets")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DiskEncryptionSet,
+    KeyName = "diskEncryptionSetName",
+    SegmentName = "diskEncryptionSets",
+    NamePattern = ""
+  >;
 
   /**
    * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
@@ -51,12 +48,15 @@ interface DiskEncryptionSets {
   /**
    * Updates (patches) a disk encryption set.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DiskEncryptionSet, DiskEncryptionSetUpdate>;
 
   /**
    * Deletes a disk encryption set.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
 
   /**
@@ -90,6 +90,9 @@ interface DiskEncryptionSets {
   ): ArmResponse<ResourceUriList> | ErrorResponse;
 }
 
+@@doc(DiskEncryptionSet.name,
+  "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
+);
 @@encodedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "application/json",
   "diskEncryptionSet"

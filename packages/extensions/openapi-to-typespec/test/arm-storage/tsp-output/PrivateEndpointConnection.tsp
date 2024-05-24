@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Microsoft.Storage;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateEndpointConnectionProperties
 )
-model PrivateEndpointConnection extends ProxyResourceBase {
-  /**
-   * The name of the private endpoint connection associated with the Azure resource
-   */
-  @path
-  @key("privateEndpointConnectionName")
-  @segment("privateEndpointConnections")
-  @visibility("read")
-  name: string;
+model PrivateEndpointConnection extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -54,6 +51,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
@@ -64,6 +62,9 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
+@@doc(PrivateEndpointConnection.name,
+  "The name of the private endpoint connection associated with the Azure resource"
+);
 @@encodedName(PrivateEndpointConnections.put::parameters.resource,
   "application/json",
   "properties"

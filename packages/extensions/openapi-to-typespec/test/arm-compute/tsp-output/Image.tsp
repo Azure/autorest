@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model Image extends Resource {
-  /**
-   * The name of the image.
-   */
-  @path
-  @key("imageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Image,
+    KeyName = "imageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 
   /**
    * The extended location of the Image.
@@ -47,7 +44,7 @@ interface Images {
   get is ArmResourceRead<
     Image,
     {
-      ...BaseParameters<Image>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
 
       /**
        * The expand expression to apply on the operation.
@@ -65,12 +62,15 @@ interface Images {
   /**
    * Update an image.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Image, ImageUpdate>;
 
   /**
    * Deletes an Image.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Image>;
 
   /**
@@ -86,6 +86,7 @@ interface Images {
   list is ArmListBySubscription<Image>;
 }
 
+@@doc(Image.name, "The name of the image.");
 @@encodedName(Images.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

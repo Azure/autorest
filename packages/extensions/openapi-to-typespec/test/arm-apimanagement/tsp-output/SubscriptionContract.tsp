@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   SubscriptionContractProperties
 )
-model SubscriptionContract extends ProxyResourceBase {
-  /**
-   * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-   */
-  @path
-  @key("subscriptionId")
-  @segment("subscriptions")
-  @visibility("read")
-  name: string;
+model SubscriptionContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SubscriptionContract,
+    KeyName = "subscriptionId",
+    SegmentName = "subscriptions",
+    NamePattern = ""
+  >;
 
   /**
    * Subscription contract properties.
@@ -69,7 +66,7 @@ interface SubscriptionContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * Notify change in Subscription State.
@@ -97,13 +94,13 @@ interface SubscriptionContracts {
    * Updates the details of a subscription specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
     SubscriptionUpdateParameters,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * Notify change in Subscription State.
@@ -131,11 +128,12 @@ interface SubscriptionContracts {
    * Deletes the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -153,7 +151,7 @@ interface SubscriptionContracts {
   list is ArmResourceListByParent<
     SubscriptionContract,
     {
-      ...BaseParameters<SubscriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
@@ -208,6 +206,9 @@ interface SubscriptionContracts {
   >;
 }
 
+@@doc(SubscriptionContract.name,
+  "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+);
 @@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

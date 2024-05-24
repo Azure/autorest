@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model OSFamily {
-  /**
-   * Name of the OS family.
-   */
-  @path
-  @key("osFamilyName")
-  @segment("cloudServiceOsFamilies")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = OSFamily,
+    KeyName = "osFamilyName",
+    SegmentName = "cloudServiceOsFamilies",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id.
@@ -70,3 +67,5 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
   listOSFamilies is ArmResourceListByParent<OSFamily>;
 }
+
+@@doc(OSFamily.name, "Name of the OS family.");

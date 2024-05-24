@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(GroupContractProperties)
-model GroupContract extends ProxyResourceBase {
-  /**
-   * Group identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @path
-  @key("groupId")
-  @segment("groups")
-  @visibility("read")
-  name: string;
+model GroupContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GroupContract,
+    KeyName = "groupId",
+    SegmentName = "groups",
+    NamePattern = ""
+  >;
 
   /**
    * Group entity contract properties.
@@ -66,7 +61,7 @@ interface GroupContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -80,13 +75,13 @@ interface GroupContracts {
    * Updates the details of the group specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Group_Update")
   update is ArmCustomPatchSync<
     GroupContract,
     GroupUpdateParameters,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -100,11 +95,12 @@ interface GroupContracts {
    * Deletes specific group of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Group_Delete")
   delete is ArmResourceDeleteSync<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -122,7 +118,7 @@ interface GroupContracts {
   listByService is ArmResourceListByParent<
     GroupContract,
     {
-      ...BaseParameters<GroupContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GroupContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| externalId | filter | eq |     |</br>
@@ -197,6 +193,11 @@ interface GroupContracts {
   ): ArmResponse<ApiManagementGroupUserListResult> | ErrorResponse;
 }
 
+@@maxLength(GroupContract.name, 256);
+@@minLength(GroupContract.name, 1);
+@@doc(GroupContract.name,
+  "Group identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(GroupContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -7,7 +7,6 @@ import "./RestorePointCollection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(RestorePointCollection)
 @includeInapplicableMetadataInPayload(false)
 model RestorePoint extends ProxyResource {
-  /**
-   * The name of the restore point.
-   */
-  @path
-  @key("restorePointName")
-  @segment("restorePoints")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RestorePoint,
+    KeyName = "restorePointName",
+    SegmentName = "restorePoints",
+    NamePattern = ""
+  >;
 
   /**
    * The restore point properties.
@@ -44,7 +41,7 @@ interface RestorePoints {
   get is ArmResourceRead<
     RestorePoint,
     {
-      ...BaseParameters<RestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
 
       /**
        * The name of the restore point collection.
@@ -66,7 +63,7 @@ interface RestorePoints {
   create is ArmResourceCreateOrReplaceAsync<
     RestorePoint,
     {
-      ...BaseParameters<RestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
 
       /**
        * The name of the restore point collection.
@@ -79,10 +76,13 @@ interface RestorePoints {
   /**
    * The operation to delete the restore point.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     RestorePoint,
     {
-      ...BaseParameters<RestorePoint>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
 
       /**
        * The name of the Restore Point Collection.
@@ -93,6 +93,7 @@ interface RestorePoints {
   >;
 }
 
+@@doc(RestorePoint.name, "The name of the restore point.");
 @@encodedName(RestorePoints.create::parameters.resource,
   "application/json",
   "parameters"

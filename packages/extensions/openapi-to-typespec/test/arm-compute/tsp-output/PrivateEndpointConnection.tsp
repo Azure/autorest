@@ -7,7 +7,6 @@ import "./DiskAccess.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(DiskAccess)
 @includeInapplicableMetadataInPayload(false)
 model PrivateEndpointConnection {
-  /**
-   * The name of the private endpoint connection.
-   */
-  @path
-  @key("privateEndpointConnectionName")
-  @segment("privateEndpointConnections")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
 
   /**
    * private endpoint connection Id
@@ -68,6 +65,9 @@ interface PrivateEndpointConnections {
    * Deletes a private endpoint connection under a disk access resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_DeleteAPrivateEndpointConnection")
   deleteAPrivateEndpointConnection is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
@@ -79,6 +79,9 @@ interface PrivateEndpointConnections {
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
+@@doc(PrivateEndpointConnection.name,
+  "The name of the private endpoint connection."
+);
 @@encodedName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "application/json",
   "privateEndpointConnection"

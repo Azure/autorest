@@ -7,7 +7,6 @@ import "./IssueContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueAttachmentContractProperties
 )
-model IssueAttachmentContract extends ProxyResourceBase {
-  /**
-   * Attachment identifier within an Issue. Must be unique in the current Issue.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("attachmentId")
-  @segment("attachments")
-  @visibility("read")
-  name: string;
+model IssueAttachmentContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueAttachmentContract,
+    KeyName = "attachmentId",
+    SegmentName = "attachments",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the Issue Attachment.
@@ -72,7 +66,7 @@ interface IssueAttachmentContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
     {
-      ...BaseParameters<IssueAttachmentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,11 +80,12 @@ interface IssueAttachmentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
     {
-      ...BaseParameters<IssueAttachmentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -108,7 +103,7 @@ interface IssueAttachmentContracts {
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,
     {
-      ...BaseParameters<IssueAttachmentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -132,6 +127,11 @@ interface IssueAttachmentContracts {
   >;
 }
 
+@@maxLength(IssueAttachmentContract.name, 256);
+@@minLength(IssueAttachmentContract.name, 1);
+@@doc(IssueAttachmentContract.name,
+  "Attachment identifier within an Issue. Must be unique in the current Issue."
+);
 @@encodedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

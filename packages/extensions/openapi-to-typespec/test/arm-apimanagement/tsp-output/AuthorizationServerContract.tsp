@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   AuthorizationServerContractProperties
 )
-model AuthorizationServerContract extends ProxyResourceBase {
-  /**
-   * Identifier of the authorization server.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("authsid")
-  @segment("authorizationServers")
-  @visibility("read")
-  name: string;
+model AuthorizationServerContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = AuthorizationServerContract,
+    KeyName = "authsid",
+    SegmentName = "authorizationServers",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the External OAuth authorization server Contract.
@@ -72,7 +66,7 @@ interface AuthorizationServerContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,13 +80,13 @@ interface AuthorizationServerContracts {
    * Updates the details of the authorization server specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
     AuthorizationServerUpdateContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -106,11 +100,12 @@ interface AuthorizationServerContracts {
    * Deletes specific authorization server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -128,7 +123,7 @@ interface AuthorizationServerContracts {
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     {
-      ...BaseParameters<AuthorizationServerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -163,6 +158,11 @@ interface AuthorizationServerContracts {
   >;
 }
 
+@@maxLength(AuthorizationServerContract.name, 80);
+@@minLength(AuthorizationServerContract.name, 1);
+@@doc(AuthorizationServerContract.name,
+  "Identifier of the authorization server."
+);
 @@encodedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

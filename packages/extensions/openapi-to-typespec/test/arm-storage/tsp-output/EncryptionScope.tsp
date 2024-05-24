@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Microsoft.Storage;
 @parentResource(StorageAccount)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EncryptionScopeProperties)
-model EncryptionScope extends ProxyResourceBase {
-  /**
-   * The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("encryptionScopeName")
-  @segment("encryptionScopes")
-  @visibility("read")
-  name: string;
+model EncryptionScope extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = EncryptionScope,
+    KeyName = "encryptionScopeName",
+    SegmentName = "encryptionScopes",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the encryption scope.
@@ -54,7 +49,7 @@ interface EncryptionScopes {
   /**
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<EncryptionScope, EncryptionScope>;
 
   /**
@@ -65,7 +60,7 @@ interface EncryptionScopes {
   list is ArmResourceListByParent<
     EncryptionScope,
     {
-      ...BaseParameters<EncryptionScope>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EncryptionScope>;
 
       /**
        * Optional, specifies the maximum number of encryption scopes that will be included in the list response.
@@ -90,6 +85,11 @@ interface EncryptionScopes {
   >;
 }
 
+@@maxLength(EncryptionScope.name, 63);
+@@minLength(EncryptionScope.name, 3);
+@@doc(EncryptionScope.name,
+  "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
 @@encodedName(EncryptionScopes.put::parameters.resource,
   "application/json",
   "encryptionScope"

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model CloudService {
-  /**
-   * Name of the cloud service.
-   */
-  @path
-  @key("cloudServiceName")
-  @segment("cloudServices")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CloudService,
+    KeyName = "cloudServiceName",
+    SegmentName = "cloudServices",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id.
@@ -47,6 +44,7 @@ model CloudService {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -82,12 +80,15 @@ interface CloudServices {
   /**
    * Update a cloud service.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<CloudService, CloudServiceUpdate>;
 
   /**
    * Deletes a cloud service.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<CloudService>;
 
   /**
@@ -200,6 +201,7 @@ interface CloudServices {
   ): ArmResponse<UpdateDomainListResult> | ErrorResponse;
 }
 
+@@doc(CloudService.name, "Name of the cloud service.");
 @@encodedName(CloudServices.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

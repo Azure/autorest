@@ -7,7 +7,6 @@ import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,13 @@ namespace Microsoft.AzureSphere;
  * An image resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
-model Image is ProxyResource<ImageProperties> {
-  /**
-   * Image name. Use .default for image creation.
-   */
-  @path
-  @key("imageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+model Image is Azure.ResourceManager.ProxyResource<ImageProperties> {
+  ...ResourceNameParameter<
+    Resource = Image,
+    KeyName = "imageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -50,7 +47,7 @@ interface Images {
   listByCatalog is ArmResourceListByParent<
     Image,
     {
-      ...BaseParameters<Image>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
 
       /**
        * Filter the result list using the given expression
@@ -78,3 +75,5 @@ interface Images {
     }
   >;
 }
+
+@@doc(Image.name, "Image name. Use .default for image creation.");

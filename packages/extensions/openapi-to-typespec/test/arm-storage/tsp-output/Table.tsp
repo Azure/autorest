@@ -7,7 +7,6 @@ import "./TableServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Microsoft.Storage;
 @parentResource(TableServiceProperties)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(TableProperties)
-model Table extends ProxyResourceBase {
-  /**
-   * A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[A-Za-z][A-Za-z0-9]{2,62}$")
-  @path
-  @key("tableName")
-  @segment("tables")
-  @visibility("read")
-  name: string;
+model Table extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Table,
+    KeyName = "tableName",
+    SegmentName = "tables",
+    NamePattern = "^[A-Za-z][A-Za-z0-9]{2,62}$"
+  >;
 
   /**
    * Table resource properties.
@@ -60,7 +54,7 @@ interface Tables {
    * Creates a new table with the specified table name, under the specified account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Table_Update")
   update is ArmCustomPatchSync<Table, Table>;
 
@@ -68,6 +62,7 @@ interface Tables {
    * Deletes the table with the specified table name, under the specified account if it exists.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<Table>;
 
@@ -79,6 +74,11 @@ interface Tables {
   list is ArmResourceListByParent<Table>;
 }
 
+@@maxLength(Table.name, 63);
+@@minLength(Table.name, 3);
+@@doc(Table.name,
+  "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character."
+);
 @@encodedName(Tables.create::parameters.resource,
   "application/json",
   "parameters"

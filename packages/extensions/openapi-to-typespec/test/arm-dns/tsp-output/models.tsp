@@ -43,6 +43,7 @@ model RecordSetProperties {
   /**
    * The metadata attached to the record set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   metadata?: Record<string>;
 
   /**
@@ -419,6 +420,7 @@ model Resource {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -429,6 +431,7 @@ model ZoneUpdateOptions {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 

@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,7 +21,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   AccessInformationContractProperties
 )
-model AccessInformationContract extends ProxyResourceBase {
+model AccessInformationContract extends Foundations.ProxyResource {
   /**
    * The identifier of the Access configuration.
    */
@@ -69,7 +68,7 @@ interface AccessInformationContracts {
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
     {
-      ...BaseParameters<AccessInformationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -83,13 +82,13 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
     AccessInformationUpdateParameters,
     {
-      ...BaseParameters<AccessInformationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -107,7 +106,7 @@ interface AccessInformationContracts {
   listByService is ArmResourceListByParent<
     AccessInformationContract,
     {
-      ...BaseParameters<AccessInformationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
 
       /**
        * Not used

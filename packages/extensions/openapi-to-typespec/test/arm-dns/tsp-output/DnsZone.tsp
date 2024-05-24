@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Azure.ResourceManager.Dns;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model DnsZone extends Resource {
-  /**
-   * The name of the DNS zone (without a terminating dot).
-   */
-  @path
-  @key("zoneName")
-  @segment("dnsZones")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DnsZone,
+    KeyName = "zoneName",
+    SegmentName = "dnsZones",
+    NamePattern = ""
+  >;
 
   /**
    * The etag of the zone.
@@ -56,7 +53,7 @@ interface DnsZones {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
@@ -76,13 +73,13 @@ interface DnsZones {
    * Updates a DNS zone. Does not modify DNS records within the zone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Zones_Update")
   update is ArmCustomPatchSync<
     DnsZone,
     ZoneUpdateOptions,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
@@ -96,11 +93,14 @@ interface DnsZones {
    * Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Zones_Delete")
   delete is ArmResourceDeleteAsync<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
@@ -118,7 +118,7 @@ interface DnsZones {
   listByResourceGroup is ArmResourceListByParent<
     DnsZone,
     {
-      ...BaseParameters<DnsZone>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DnsZone>;
 
       /**
        * The maximum number of record sets to return. If not specified, returns up to 100 record sets.
@@ -169,6 +169,7 @@ interface DnsZones {
   ): ArmResponse<ResourceListResult<DnsRecord>> | ErrorResponse;
 }
 
+@@doc(DnsZone.name, "The name of the DNS zone (without a terminating dot).");
 @@encodedName(DnsZones.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

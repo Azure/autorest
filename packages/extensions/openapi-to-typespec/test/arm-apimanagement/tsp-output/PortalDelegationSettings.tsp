@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -23,11 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalDelegationSettingsProperties
 )
-model PortalDelegationSettings extends ProxyResourceBase {
-  @key("portalsetting")
-  @segment("portalsettings")
-  @visibility("read")
-  name: string;
+model PortalDelegationSettings extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PortalDelegationSettings,
+    KeyName = "portalsetting",
+    SegmentName = "portalsettings",
+    NamePattern = ""
+  >;
 
   /**
    * Delegation settings contract properties.
@@ -66,7 +67,7 @@ interface PortalDelegationSettingsOperationGroup {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalDelegationSettings,
     {
-      ...BaseParameters<PortalDelegationSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalDelegationSettings>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -80,13 +81,13 @@ interface PortalDelegationSettingsOperationGroup {
    * Update Delegation settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("DelegationSettings_Update")
   update is ArmCustomPatchSync<
     PortalDelegationSettings,
     PortalDelegationSettings,
     {
-      ...BaseParameters<PortalDelegationSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalDelegationSettings>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -115,6 +116,7 @@ interface PortalDelegationSettingsOperationGroup {
   >;
 }
 
+@@doc(PortalDelegationSettings.name, "");
 @@encodedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

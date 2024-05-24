@@ -7,7 +7,6 @@ import "./BlobServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Microsoft.Storage;
 @parentResource(BlobServiceProperties)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ContainerProperties)
-model BlobContainer extends ProxyResourceBase {
-  /**
-   * The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("containerName")
-  @segment("containers")
-  @visibility("read")
-  name: string;
+model BlobContainer extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = BlobContainer,
+    KeyName = "containerName",
+    SegmentName = "containers",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the blob container.
@@ -54,12 +49,13 @@ interface BlobContainers {
   /**
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
 
   /**
    * Deletes specified container under its account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<BlobContainer>;
 
   /**
@@ -70,7 +66,7 @@ interface BlobContainers {
   list is ArmResourceListByParent<
     BlobContainer,
     {
-      ...BaseParameters<BlobContainer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
 
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
@@ -117,6 +113,11 @@ interface BlobContainers {
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
 }
 
+@@maxLength(BlobContainer.name, 63);
+@@minLength(BlobContainer.name, 3);
+@@doc(BlobContainer.name,
+  "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
 @@encodedName(BlobContainers.create::parameters.resource,
   "application/json",
   "blobContainer"

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -21,14 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGallery extends PirCommunityGalleryResource {
-  /**
-   * The public name of the community gallery.
-   */
-  @path
-  @key("publicGalleryName")
-  @segment("communityGalleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CommunityGallery,
+    KeyName = "publicGalleryName",
+    SegmentName = "communityGalleries",
+    NamePattern = ""
+  >;
 
   @extension("x-ms-client-flatten", true)
   @visibility("read,create")
@@ -42,3 +39,5 @@ interface CommunityGalleries {
    */
   get is ArmResourceRead<CommunityGallery>;
 }
+
+@@doc(CommunityGallery.name, "The public name of the community gallery.");

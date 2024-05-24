@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ProductContractProperties)
-model ProductContract extends ProxyResourceBase {
-  /**
-   * Product identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @path
-  @key("productId")
-  @segment("products")
-  @visibility("read")
-  name: string;
+model ProductContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ProductContract,
+    KeyName = "productId",
+    SegmentName = "products",
+    NamePattern = ""
+  >;
 
   /**
    * Product entity contract properties.
@@ -69,7 +64,7 @@ interface ProductContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface ProductContracts {
    * Update existing product details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
     ProductUpdateParameters,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface ProductContracts {
    * Delete product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -131,7 +127,7 @@ interface ProductContracts {
   listByService is ArmResourceListByParent<
     ProductContract,
     {
-      ...BaseParameters<ProductContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| groups | expand |     |     |</br>
@@ -320,6 +316,11 @@ interface ProductContracts {
   ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
 }
 
+@@maxLength(ProductContract.name, 256);
+@@minLength(ProductContract.name, 1);
+@@doc(ProductContract.name,
+  "Product identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(ProductContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

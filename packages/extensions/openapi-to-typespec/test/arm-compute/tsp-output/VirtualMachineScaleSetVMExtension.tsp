@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSetVM.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSetVM)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
-  /**
-   * The name of the virtual machine extension.
-   */
-  @path
-  @key("vmExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetVMExtension,
+    KeyName = "vmExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource type
@@ -58,7 +55,7 @@ interface VirtualMachineScaleSetVMExtensions {
   get is ArmResourceRead<
     VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       /**
        * The name of the VM scale set.
@@ -82,7 +79,7 @@ interface VirtualMachineScaleSetVMExtensions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       /**
        * The name of the VM scale set.
@@ -96,13 +93,13 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to update the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate,
     {
-      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       /**
        * The name of the VM scale set.
@@ -116,11 +113,14 @@ interface VirtualMachineScaleSetVMExtensions {
    * The operation to delete the VMSS VM extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMExtensions_Delete")
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       /**
        * The name of the VM scale set.
@@ -138,7 +138,7 @@ interface VirtualMachineScaleSetVMExtensions {
   list is ArmResourceListByParent<
     VirtualMachineScaleSetVMExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetVMExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVMExtension>;
 
       /**
        * The name of the VM scale set.
@@ -155,6 +155,9 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
+@@doc(VirtualMachineScaleSetVMExtension.name,
+  "The name of the virtual machine extension."
+);
 @@encodedName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "application/json",
   "extensionParameters"

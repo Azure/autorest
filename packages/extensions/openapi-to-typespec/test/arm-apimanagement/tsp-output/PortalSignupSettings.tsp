@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -23,11 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PortalSignupSettingsProperties
 )
-model PortalSignupSettings extends ProxyResourceBase {
-  @key("portalsetting")
-  @segment("portalsettings")
-  @visibility("read")
-  name: string;
+model PortalSignupSettings extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PortalSignupSettings,
+    KeyName = "portalsetting",
+    SegmentName = "portalsettings",
+    NamePattern = ""
+  >;
 
   /**
    * Sign-up settings contract properties.
@@ -66,7 +67,7 @@ interface PortalSignupSettingsOperationGroup {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSignupSettings,
     {
-      ...BaseParameters<PortalSignupSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSignupSettings>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -80,13 +81,13 @@ interface PortalSignupSettingsOperationGroup {
    * Update Sign-Up settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("SignUpSettings_Update")
   update is ArmCustomPatchSync<
     PortalSignupSettings,
     PortalSignupSettings,
     {
-      ...BaseParameters<PortalSignupSettings>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSignupSettings>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -104,6 +105,7 @@ interface PortalSignupSettingsOperationGroup {
   listByService is ArmResourceListByParent<PortalSignupSettings>;
 }
 
+@@doc(PortalSignupSettings.name, "");
 @@encodedName(PortalSignupSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

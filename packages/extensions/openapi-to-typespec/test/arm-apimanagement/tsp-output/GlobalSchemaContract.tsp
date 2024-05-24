@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,17 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   GlobalSchemaContractProperties
 )
-model GlobalSchemaContract extends ProxyResourceBase {
-  /**
-   * Schema id identifier. Must be unique in the current API Management service instance.
-   */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("schemaId")
-  @segment("schemas")
-  @visibility("read")
-  name: string;
+model GlobalSchemaContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = GlobalSchemaContract,
+    KeyName = "schemaId",
+    SegmentName = "schemas",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the Global Schema.
@@ -71,7 +66,7 @@ interface GlobalSchemaContracts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GlobalSchemaContract,
     {
-      ...BaseParameters<GlobalSchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GlobalSchemaContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -85,11 +80,12 @@ interface GlobalSchemaContracts {
    * Deletes specific Schema.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GlobalSchema_Delete")
   delete is ArmResourceDeleteSync<
     GlobalSchemaContract,
     {
-      ...BaseParameters<GlobalSchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GlobalSchemaContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -107,7 +103,7 @@ interface GlobalSchemaContracts {
   listByService is ArmResourceListByParent<
     GlobalSchemaContract,
     {
-      ...BaseParameters<GlobalSchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GlobalSchemaContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -131,6 +127,11 @@ interface GlobalSchemaContracts {
   >;
 }
 
+@@maxLength(GlobalSchemaContract.name, 80);
+@@minLength(GlobalSchemaContract.name, 1);
+@@doc(GlobalSchemaContract.name,
+  "Schema id identifier. Must be unique in the current API Management service instance."
+);
 @@encodedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

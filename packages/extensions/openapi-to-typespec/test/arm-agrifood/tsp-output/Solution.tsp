@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,16 +19,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(SolutionProperties)
-model Solution extends ProxyResourceBase {
-  /**
-   * SolutionId for Data Manager For Agriculture Resource.
-   */
-  @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
-  @path
-  @key("solutionId")
-  @segment("solutions")
-  @visibility("read")
-  name: string;
+model Solution extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Solution,
+    KeyName = "solutionId",
+    SegmentName = "solutions",
+    NamePattern = "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+  >;
 
   /**
    * Solution resource properties.
@@ -37,7 +33,7 @@ model Solution extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: SolutionProperties;
 
-  ...Azure.ResourceManager.EntityTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations
@@ -55,6 +51,7 @@ interface Solutions {
   /**
    * Uninstall Solution.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Solution>;
 
   /**
@@ -65,7 +62,7 @@ interface Solutions {
   list is ArmResourceListByParent<
     Solution,
     {
-      ...BaseParameters<Solution>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Solution>;
 
       /**
        * Installed Solution ids.
@@ -155,6 +152,7 @@ interface Solutions {
   >;
 }
 
+@@doc(Solution.name, "SolutionId for Data Manager For Agriculture Resource.");
 @@encodedName(Solutions.createOrUpdate::parameters.resource,
   "application/json",
   "requestBody"

@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,7 +21,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IdentityProviderContractProperties
 )
-model IdentityProviderContract extends ProxyResourceBase {
+model IdentityProviderContract extends Foundations.ProxyResource {
   /**
    * Identity Provider Type identifier.
    */
@@ -69,7 +68,7 @@ interface IdentityProviderContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +82,13 @@ interface IdentityProviderContracts {
    * Updates an existing IdentityProvider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
     IdentityProviderUpdateParameters,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +102,12 @@ interface IdentityProviderContracts {
    * Deletes the specified identity provider configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     {
-      ...BaseParameters<IdentityProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.

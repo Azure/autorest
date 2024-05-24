@@ -1,12 +1,12 @@
 import { TypespecDecorator, TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 
-type Imports = {
+export type Imports = {
   modules: string[];
   namespaces: string[];
 };
 
-export function getModelsImports(program: TypespecProgram) {
+export function getModelsImports(program: TypespecProgram): Imports {
   const modules = new Set<string>();
   const namespaces = new Set<string>();
   for (const choice of program.models.enums) {

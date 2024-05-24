@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   DeletedServiceContractProperties
 )
-model DeletedServiceContract extends ProxyResourceBase {
-  /**
-   * The name of the API Management service.
-   */
-  @maxLength(50)
-  @minLength(1)
-  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-  @path
-  @key("serviceName")
-  @segment("deletedservices")
-  @visibility("read")
-  name: string;
+model DeletedServiceContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DeletedServiceContract,
+    KeyName = "serviceName",
+    SegmentName = "deletedservices",
+    NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+  >;
 
   /**
    * Deleted API Management Service details.
@@ -55,6 +49,9 @@ interface DeletedServiceContracts {
    * Purges Api Management Service (deletes it with no option to undelete).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DeletedServices_Purge")
   purge is ArmResourceDeleteAsync<DeletedServiceContract>;
 
@@ -65,3 +62,7 @@ interface DeletedServiceContracts {
   @operationId("DeletedServices_ListBySubscription")
   listBySubscription is ArmListBySubscription<DeletedServiceContract>;
 }
+
+@@maxLength(DeletedServiceContract.name, 50);
+@@minLength(DeletedServiceContract.name, 1);
+@@doc(DeletedServiceContract.name, "The name of the API Management service.");

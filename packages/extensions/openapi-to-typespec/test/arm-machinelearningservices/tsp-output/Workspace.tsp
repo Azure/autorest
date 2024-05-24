@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,17 +17,13 @@ namespace Azure.ResourceManager.MachineLearning;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
-model Workspace extends TrackedResourceBase {
-  /**
-   * Name of Azure Machine Learning workspace.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @path
-  @key("workspaceName")
-  @segment("workspaces")
-  @visibility("read")
-  name: string;
-
+model Workspace extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = Workspace,
+    KeyName = "workspaceName",
+    SegmentName = "workspaces",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+  >;
   kind?: string;
 
   /**
@@ -37,8 +32,8 @@ model Workspace extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: WorkspaceProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -56,16 +51,19 @@ interface Workspaces {
   /**
    * Updates a machine learning workspace with the specified parameters.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Workspace, WorkspaceUpdateParameters>;
 
   /**
    * Deletes a machine learning workspace.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     Workspace,
     {
-      ...BaseParameters<Workspace>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
 
       /**
        * Flag to indicate delete is a purge request.
@@ -83,7 +81,7 @@ interface Workspaces {
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     {
-      ...BaseParameters<Workspace>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
 
       /**
        * Continuation token for pagination.
@@ -244,6 +242,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
   ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
+@@doc(Workspace.name, "Name of Azure Machine Learning workspace.");
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "body"

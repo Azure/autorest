@@ -7,7 +7,6 @@ import "./IssueContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,18 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   IssueCommentContractProperties
 )
-model IssueCommentContract extends ProxyResourceBase {
-  /**
-   * Comment identifier within an Issue. Must be unique in the current Issue.
-   */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("commentId")
-  @segment("comments")
-  @visibility("read")
-  name: string;
+model IssueCommentContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueCommentContract,
+    KeyName = "commentId",
+    SegmentName = "comments",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Properties of the Issue Comment.
@@ -72,7 +66,7 @@ interface IssueCommentContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,11 +80,12 @@ interface IssueCommentContracts {
    * Deletes the specified comment from an Issue.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -108,7 +103,7 @@ interface IssueCommentContracts {
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     {
-      ...BaseParameters<IssueCommentContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -132,6 +127,11 @@ interface IssueCommentContracts {
   >;
 }
 
+@@maxLength(IssueCommentContract.name, 256);
+@@minLength(IssueCommentContract.name, 1);
+@@doc(IssueCommentContract.name,
+  "Comment identifier within an Issue. Must be unique in the current Issue."
+);
 @@encodedName(IssueCommentContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

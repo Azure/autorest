@@ -7,7 +7,6 @@ import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,13 @@ namespace Microsoft.AzureSphere;
  * An product resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
-model Product is ProxyResource<ProductProperties> {
-  /**
-   * Name of product.
-   */
-  @pattern("^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$")
-  @path
-  @key("productName")
-  @segment("products")
-  @visibility("read")
-  name: string;
+model Product is Azure.ResourceManager.ProxyResource<ProductProperties> {
+  ...ResourceNameParameter<
+    Resource = Product,
+    KeyName = "productName",
+    SegmentName = "products",
+    NamePattern = "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +39,7 @@ interface Products {
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
   /**
@@ -70,3 +66,5 @@ interface Products {
     ResourceListResult<DeviceGroup>
   >;
 }
+
+@@doc(Product.name, "Name of product.");

@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,7 +21,7 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   EmailTemplateContractProperties
 )
-model EmailTemplateContract extends ProxyResourceBase {
+model EmailTemplateContract extends Foundations.ProxyResource {
   /**
    * Email Template Name Identifier.
    */
@@ -69,7 +68,7 @@ interface EmailTemplateContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
     {
-      ...BaseParameters<EmailTemplateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +82,13 @@ interface EmailTemplateContracts {
    * Updates API Management email template
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
     EmailTemplateUpdateParameters,
     {
-      ...BaseParameters<EmailTemplateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +102,12 @@ interface EmailTemplateContracts {
    * Reset the Email Template to default template provided by the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     {
-      ...BaseParameters<EmailTemplateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +125,7 @@ interface EmailTemplateContracts {
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     {
-      ...BaseParameters<EmailTemplateContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   ApiManagementServiceProperties
 )
-model ApiManagementServiceResource extends TrackedResourceBase {
-  /**
-   * The name of the API Management service.
-   */
-  @maxLength(50)
-  @minLength(1)
-  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-  @path
-  @key("serviceName")
-  @segment("service")
-  @visibility("read")
-  name: string;
+model ApiManagementServiceResource extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = ApiManagementServiceResource,
+    KeyName = "serviceName",
+    SegmentName = "service",
+    NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+  >;
 
   /**
    * ETag of the resource.
@@ -50,8 +44,8 @@ model ApiManagementServiceResource extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: ApiManagementServiceProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -74,7 +68,7 @@ interface ApiManagementServiceResources {
    * Updates an existing API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("ApiManagementService_Update")
   update is ArmCustomPatchAsync<
     ApiManagementServiceResource,
@@ -85,6 +79,9 @@ interface ApiManagementServiceResources {
    * Deletes an existing API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiManagementService_Delete")
   delete is ArmResourceDeleteAsync<ApiManagementServiceResource>;
 
@@ -167,7 +164,7 @@ interface ApiManagementServiceResources {
     DeployConfigurationParameters,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.
@@ -187,7 +184,7 @@ interface ApiManagementServiceResources {
     SaveConfigurationParameter,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.
@@ -207,7 +204,7 @@ interface ApiManagementServiceResources {
     DeployConfigurationParameters,
     OperationResultContract,
     {
-      ...BaseParameters<ApiManagementServiceResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
 
       /**
        * The identifier of the Git Configuration Operation.
@@ -1154,6 +1151,11 @@ interface ApiManagementServiceResources {
   ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
 }
 
+@@maxLength(ApiManagementServiceResource.name, 50);
+@@minLength(ApiManagementServiceResource.name, 1);
+@@doc(ApiManagementServiceResource.name,
+  "The name of the API Management service."
+);
 @@encodedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

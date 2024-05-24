@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model OSVersion {
-  /**
-   * Name of the OS version.
-   */
-  @path
-  @key("osVersionName")
-  @segment("cloudServiceOsVersions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = OSVersion,
+    KeyName = "osVersionName",
+    SegmentName = "cloudServiceOsVersions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id.
@@ -70,3 +67,5 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_ListOSVersions")
   listOSVersions is ArmResourceListByParent<OSVersion>;
 }
+
+@@doc(OSVersion.name, "Name of the OS version.");

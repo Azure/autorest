@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LoggerContractProperties)
-model LoggerContract extends ProxyResourceBase {
-  /**
-   * Logger identifier. Must be unique in the API Management service instance.
-   */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("loggerId")
-  @segment("loggers")
-  @visibility("read")
-  name: string;
+model LoggerContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = LoggerContract,
+    KeyName = "loggerId",
+    SegmentName = "loggers",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Logger entity contract properties.
@@ -69,7 +64,7 @@ interface LoggerContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -83,13 +78,13 @@ interface LoggerContracts {
    * Updates an existing logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,
     LoggerUpdateContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -103,11 +98,12 @@ interface LoggerContracts {
    * Deletes the specified logger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -125,7 +121,7 @@ interface LoggerContracts {
   listByService is ArmResourceListByParent<
     LoggerContract,
     {
-      ...BaseParameters<LoggerContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| loggerType | filter | eq |     |</br>| resourceId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -149,6 +145,10 @@ interface LoggerContracts {
   >;
 }
 
+@@maxLength(LoggerContract.name, 256);
+@@doc(LoggerContract.name,
+  "Logger identifier. Must be unique in the API Management service instance."
+);
 @@encodedName(LoggerContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

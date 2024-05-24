@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
-model Extension extends ProxyResourceBase {
-  /**
-   * Id of extension resource.
-   */
-  @path
-  @key("extensionId")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+model Extension extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Extension,
+    KeyName = "extensionId",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Extension resource properties.
@@ -36,7 +33,7 @@ model Extension extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: ExtensionProperties;
 
-  ...Azure.ResourceManager.EntityTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations
@@ -54,6 +51,7 @@ interface Extensions {
   /**
    * Uninstall extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Extension>;
 
   /**
@@ -64,7 +62,7 @@ interface Extensions {
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
     {
-      ...BaseParameters<Extension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Extension>;
 
       /**
        * Installed extension ids.
@@ -102,6 +100,7 @@ interface Extensions {
   >;
 }
 
+@@doc(Extension.name, "Id of extension resource.");
 @@encodedName(Extensions.createOrUpdate::parameters.resource,
   "application/json",
   "requestBody"

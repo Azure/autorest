@@ -7,7 +7,6 @@ import "./FileServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Microsoft.Storage;
 @parentResource(FileServiceProperties)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileShareProperties)
-model FileShare extends ProxyResourceBase {
-  /**
-   * The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("shareName")
-  @segment("shares")
-  @visibility("read")
-  name: string;
+model FileShare extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FileShare,
+    KeyName = "shareName",
+    SegmentName = "shares",
+    NamePattern = ""
+  >;
 
   /**
    * Properties of the file share.
@@ -47,7 +42,7 @@ interface FileShares {
   get is ArmResourceRead<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: stats. Should be passed as a string with delimiter ','.
@@ -69,7 +64,7 @@ interface FileShares {
   create is ArmResourceCreateOrReplaceSync<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: snapshots. Should be passed as a string with delimiter ','
@@ -82,16 +77,17 @@ interface FileShares {
   /**
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<FileShare, FileShare>;
 
   /**
    * Deletes specified share under its account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional, used to delete a snapshot.
@@ -115,7 +111,7 @@ interface FileShares {
   list is ArmResourceListByParent<
     FileShare,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional. Specified maximum number of shares that can be included in the list.
@@ -150,7 +146,7 @@ interface FileShares {
     LeaseShareRequest,
     LeaseShareResponse,
     {
-      ...BaseParameters<FileShare>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
 
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
@@ -161,6 +157,11 @@ interface FileShares {
   >;
 }
 
+@@maxLength(FileShare.name, 63);
+@@minLength(FileShare.name, 3);
+@@doc(FileShare.name,
+  "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
 @@encodedName(FileShares.create::parameters.resource,
   "application/json",
   "fileShare"

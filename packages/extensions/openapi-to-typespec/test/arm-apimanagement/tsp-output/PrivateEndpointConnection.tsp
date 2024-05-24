@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateEndpointConnectionProperties
 )
-model PrivateEndpointConnection extends ProxyResourceBase {
-  /**
-   * Name of the private endpoint connection.
-   */
-  @path
-  @key("privateEndpointConnectionName")
-  @segment("privateEndpointConnections")
-  @visibility("read")
-  name: string;
+model PrivateEndpointConnection extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -59,6 +56,9 @@ interface PrivateEndpointConnections {
    * Deletes the specified Private Endpoint Connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("PrivateEndpointConnection_Delete")
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
@@ -70,6 +70,9 @@ interface PrivateEndpointConnections {
   listByService is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
+@@doc(PrivateEndpointConnection.name,
+  "Name of the private endpoint connection."
+);
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "application/json",
   "privateEndpointConnectionRequest"

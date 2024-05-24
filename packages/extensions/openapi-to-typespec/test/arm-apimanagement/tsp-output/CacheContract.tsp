@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,18 +19,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @parentResource(ApiManagementServiceResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(CacheContractProperties)
-model CacheContract extends ProxyResourceBase {
-  /**
-   * Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier).
-   */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("cacheId")
-  @segment("caches")
-  @visibility("read")
-  name: string;
+model CacheContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CacheContract,
+    KeyName = "cacheId",
+    SegmentName = "caches",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
 
   /**
    * Cache properties details.
@@ -67,7 +61,7 @@ interface CacheContracts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -81,13 +75,13 @@ interface CacheContracts {
    * Updates the details of the cache specified by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Cache_Update")
   update is ArmCustomPatchSync<
     CacheContract,
     CacheUpdateParameters,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,11 +95,12 @@ interface CacheContracts {
    * Deletes specific Cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -123,7 +118,7 @@ interface CacheContracts {
   listByService is ArmResourceListByParent<
     CacheContract,
     {
-      ...BaseParameters<CacheContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
 
       /**
        * Number of records to return.
@@ -141,6 +136,11 @@ interface CacheContracts {
   >;
 }
 
+@@maxLength(CacheContract.name, 80);
+@@minLength(CacheContract.name, 1);
+@@doc(CacheContract.name,
+  "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
+);
 @@encodedName(CacheContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

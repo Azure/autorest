@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,16 +13,13 @@ namespace Microsoft.Test;
 /**
  * A Test resource
  */
-model Employee is TrackedResource<EmployeeProperties> {
-  /**
-   * Name of employee
-   */
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
-  @key("employeeName")
-  @segment("employees")
-  @visibility("read")
-  name: string;
+model Employee is Azure.ResourceManager.TrackedResource<EmployeeProperties> {
+  ...ResourceNameParameter<
+    Resource = Employee,
+    KeyName = "employeeName",
+    SegmentName = "employees",
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+  >;
 }
 
 @armResourceOperations
@@ -41,7 +37,7 @@ interface Employees {
   /**
    * Update a Employee
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Employee, EmployeeUpdate>;
 
   /**
@@ -59,3 +55,5 @@ interface Employees {
    */
   listBySubscription is ArmListBySubscription<Employee>;
 }
+
+@@doc(Employee.name, "Name of employee");

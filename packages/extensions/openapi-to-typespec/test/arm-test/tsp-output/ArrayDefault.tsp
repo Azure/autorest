@@ -7,7 +7,6 @@ import "./Employee.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,14 @@ namespace Microsoft.Test;
  * A Test resource
  */
 @parentResource(Employee)
-model ArrayDefault is TrackedResource<ArrayDefaultProperties> {
-  /**
-   * Name of resource
-   */
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
-  @key("name")
-  @segment("arraydefaults")
-  @visibility("read")
-  name: string;
+model ArrayDefault
+  is Azure.ResourceManager.TrackedResource<ArrayDefaultProperties> {
+  ...ResourceNameParameter<
+    Resource = ArrayDefault,
+    KeyName = "name",
+    SegmentName = "arraydefaults",
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+  >;
 }
 
 @armResourceOperations
@@ -40,3 +37,5 @@ interface ArrayDefaults {
    */
   listByResourceGroup is ArmResourceListByParent<ArrayDefault>;
 }
+
+@@doc(ArrayDefault.name, "Name of resource");
