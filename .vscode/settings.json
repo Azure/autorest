@@ -31,5 +31,6 @@
   },
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
-  }
+  },
+  "typespec.tsp-server.path": "./packages/extensions/openapi-to-typespec/node_modules/@typespec/compiler"
 }

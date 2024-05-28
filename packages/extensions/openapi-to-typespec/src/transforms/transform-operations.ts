@@ -21,7 +21,7 @@ import {
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
-import { getPropertyDecorators } from "../utils/decorators";
+import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isConstantSchema } from "../utils/schemas";
@@ -114,6 +114,7 @@ export function transformRequest(_request: Request, operation: Operation, codeMo
     doc,
     summary,
     parameters,
+    clientDecorators: getOperationClientDecorators(operation),
     verb: transformVerb(requests?.[0].protocol),
     route: transformRoute(requests?.[0].protocol),
     responses: [...new Set(transformedResponses)],

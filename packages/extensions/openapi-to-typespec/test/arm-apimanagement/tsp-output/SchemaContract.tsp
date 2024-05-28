@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,18 +14,24 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API Schema Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model SchemaContract is ProxyResource<SchemaContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SchemaContractProperties)
+model SchemaContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SchemaContract,
+    KeyName = "schemaId",
+    SegmentName = "schemas",
+    NamePattern = ""
+  >;
+
   /**
-   * Schema id identifier. Must be unique in the current API Management service instance.
+   * Properties of the API Schema.
    */
-  @maxLength(80)
-  @minLength(1)
-  @path
-  @key("schemaId")
-  @segment("schemas")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: SchemaContractProperties;
 }
 
 @armResourceOperations
@@ -34,12 +39,16 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_Get")
   get is ArmResourceRead<SchemaContract>;
 
   /**
    * Gets the entity state (Etag) version of the schema specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiSchema_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       SchemaContract,
@@ -50,10 +59,12 @@ interface SchemaContracts {
   /**
    * Creates or updates schema configuration for the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -66,10 +77,13 @@ interface SchemaContracts {
   /**
    * Deletes the schema configuration at the Api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("ApiSchema_Delete")
   delete is ArmResourceDeleteSync<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * If true removes all references to the schema before deleting it.
@@ -88,10 +102,12 @@ interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiSchema_ListByApi")
   listByApi is ArmResourceListByParent<
     SchemaContract,
     {
-      ...BaseParameters<SchemaContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SchemaContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| contentType | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -115,6 +131,19 @@ interface SchemaContracts {
   >;
 }
 
+@@maxLength(SchemaContract.name, 80);
+@@minLength(SchemaContract.name, 1);
+@@doc(SchemaContract.name,
+  "Schema id identifier. Must be unique in the current API Management service instance."
+);
+@@encodedName(SchemaContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(SchemaContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(SchemaContracts.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );

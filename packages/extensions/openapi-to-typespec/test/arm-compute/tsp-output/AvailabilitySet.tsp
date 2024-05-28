@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model AvailabilitySet extends Resource {
-  /**
-   * The name of the availability set.
-   */
-  @path
-  @key("availabilitySetName")
-  @segment("availabilitySets")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = AvailabilitySet,
+    KeyName = "availabilitySetName",
+    SegmentName = "availabilitySets",
+    NamePattern = ""
+  >;
 
   /**
    * Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
@@ -54,12 +51,13 @@ interface AvailabilitySets {
   /**
    * Update an availability set.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<AvailabilitySet, AvailabilitySetUpdate>;
 
   /**
    * Delete an availability set.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<AvailabilitySet>;
 
   /**
@@ -94,8 +92,9 @@ interface AvailabilitySets {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
+@@doc(AvailabilitySet.name, "The name of the availability set.");
 @@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(AvailabilitySets.createOrUpdate::parameters.resource,
@@ -106,7 +105,7 @@ interface AvailabilitySets {
   "Parameters supplied to the Create Availability Set operation."
 );
 @@encodedName(AvailabilitySets.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(AvailabilitySets.update::parameters.properties,

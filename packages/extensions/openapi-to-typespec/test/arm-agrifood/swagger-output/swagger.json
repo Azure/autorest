@@ -1,0 +1,3076 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure AgFoodPlatform RP Service",
+    "version": "2023-06-01-preview",
+    "description": "APIs documentation for Microsoft Azure Data Manager for Agriculture Service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DataConnectors"
+    },
+    {
+      "name": "DataManagerForAgricultures"
+    },
+    {
+      "name": "DataManagerForAgricultureExtensions"
+    },
+    {
+      "name": "Extensions"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "Solutions"
+    },
+    {
+      "name": "DataManagerForAgricultureSolutions"
+    }
+  ],
+  "paths": {
+    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions": {
+      "get": {
+        "operationId": "DataManagerForAgricultureExtensions_List",
+        "tags": [
+          "DataManagerForAgricultureExtensions"
+        ],
+        "description": "Get list of Data Manager For Agriculture extension.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "farmBeatsExtensionIds",
+            "in": "query",
+            "description": "DataManagerForAgricultureExtension ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "farmBeatsExtensionNames",
+            "in": "query",
+            "description": "DataManagerForAgriculture extension names.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extensionCategories",
+            "in": "query",
+            "description": "Extension categories.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "publisherIds",
+            "in": "query",
+            "description": "Publisher ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureExtensions_List": {
+            "$ref": "./examples/DataManagerForAgricultureExtensions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}": {
+      "get": {
+        "operationId": "DataManagerForAgricultureExtensions_Get",
+        "tags": [
+          "DataManagerForAgricultureExtensions"
+        ],
+        "description": "Get Data Manager For Agriculture extension.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureExtensionId",
+            "in": "path",
+            "description": "dataManagerForAgricultureExtensionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureExtension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureExtensions_Get": {
+            "$ref": "./examples/DataManagerForAgricultureExtensions_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions": {
+      "get": {
+        "operationId": "SolutionsDiscoverability_List",
+        "tags": [
+          "DataManagerForAgricultureSolutions"
+        ],
+        "description": "Get list of Data Manager For Agriculture solutions.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "farmBeatsSolutionIds",
+            "in": "query",
+            "description": "Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "farmBeatsSolutionNames",
+            "in": "query",
+            "description": "Names of Data Manager For Agriculture Solutions which the customer requests to fetch.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureSolutionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionsDiscoverability_List": {
+            "$ref": "./examples/SolutionsDiscoverability_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}": {
+      "get": {
+        "operationId": "SolutionsDiscoverability_Get",
+        "tags": [
+          "DataManagerForAgricultureSolutions"
+        ],
+        "description": "Get Data Manager For Agriculture solution by id.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureSolutionId",
+            "in": "path",
+            "description": "dataManagerForAgricultureSolutionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureSolution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionsDiscoverability_Get": {
+            "$ref": "./examples/SolutionsDiscoverability_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Azure.ResourceManager.AgFoodPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats": {
+      "get": {
+        "operationId": "DataManagerForAgricultureResources_ListBySubscription",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Lists the DataManagerForAgriculture instances for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_ListBySubscription": {
+            "$ref": "./examples/DataManagerForAgricultureResources_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailabilityOperations_CheckNameAvailability",
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
+      "get": {
+        "operationId": "OperationResultsOperations_Get",
+        "description": "Get operationResults for a Data Manager For Agriculture resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locations",
+            "in": "path",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationResultsId",
+            "in": "path",
+            "description": "operationResultsId for a specific location.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats": {
+      "get": {
+        "operationId": "DataManagerForAgricultureResources_ListByResourceGroup",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Lists the DataManagerForAgriculture instances for a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_ListByResourceGroup": {
+            "$ref": "./examples/DataManagerForAgricultureResources_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}": {
+      "get": {
+        "operationId": "DataManagerForAgricultureResources_Get",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Get DataManagerForAgriculture resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Get": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataManagerForAgricultureResources_CreateOrUpdate",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Create or update Data Manager For Agriculture resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Data Manager For Agriculture resource create or update request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            },
+            "x-ms-client-name": "request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataManagerForAgriculture' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataManagerForAgriculture' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_CreateOrUpdate": {
+            "$ref": "./examples/DataManagerForAgricultureResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DataManagerForAgricultureResources_Update",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Update a Data Manager For Agriculture resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureUpdateRequestModel"
+            },
+            "x-ms-client-name": "request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Update": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DataManagerForAgricultureResources_Delete",
+        "tags": [
+          "DataManagerForAgricultures"
+        ],
+        "description": "Delete a Data Manager For Agriculture resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Delete": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors": {
+      "get": {
+        "operationId": "DataConnectors_List",
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Lists the Data Connector Credentials for MADMA instance.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_List": {
+            "$ref": "./examples/DataConnectors_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}": {
+      "get": {
+        "operationId": "DataConnectors_Get",
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Get specific Data Connector resource by DataConnectorName.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_Get": {
+            "$ref": "./examples/DataConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataConnectors_CreateOrUpdate",
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Create or update Data Connector For MADMA resource.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body must be valid DataConnector request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_CreateOrUpdate": {
+            "$ref": "./examples/DataConnectors_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataConnectors_Delete",
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Delete a Data Connectors with given dataConnector name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_Delete": {
+            "$ref": "./examples/DataConnectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions": {
+      "get": {
+        "operationId": "Extensions_ListByDataManagerForAgriculture",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Get installed extensions details.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionIds",
+            "in": "query",
+            "description": "Installed extension ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "extensionCategories",
+            "in": "query",
+            "description": "Installed extension categories.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_ListByDataManagerForAgriculture": {
+            "$ref": "./examples/Extensions_ListByDataManagerForAgriculture.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}": {
+      "get": {
+        "operationId": "Extensions_Get",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Get installed extension details by extension id.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Get": {
+            "$ref": "./examples/Extensions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Extensions_CreateOrUpdate",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Extension resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "x-ms-client-name": "requestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Extension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Resource 'Extension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_CreateOrUpdate": {
+            "$ref": "./examples/Extensions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Extensions_Delete",
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Uninstall extension.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "extensionId",
+            "in": "path",
+            "description": "Id of extension resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Delete": {
+            "$ref": "./examples/Extensions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByResource",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get list of Private endpoint connections.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByResource": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get Private endpoint connection object.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approves or Rejects a Private endpoint connection request.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "x-ms-client-name": "request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_CreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete Private endpoint connection request.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByResource",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get list of Private link resources.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByResource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get Private link resource object.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "subResourceName",
+            "in": "path",
+            "description": "Sub resource name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions": {
+      "get": {
+        "operationId": "Solutions_List",
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Get installed Solutions details.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionIds",
+            "in": "query",
+            "description": "Installed Solution ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Ids of the resource.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "description": "Names of the resource.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "propertyFilters",
+            "in": "query",
+            "description": "Filters on key-value pairs within the Properties object.\neg. \"{testKey} eq {testValue}\".",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "Statuses of the resource.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "minCreatedDateTime",
+            "in": "query",
+            "description": "Minimum creation date of resource (inclusive).",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "maxCreatedDateTime",
+            "in": "query",
+            "description": "Maximum creation date of resource (inclusive).",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "minLastModifiedDateTime",
+            "in": "query",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "maxLastModifiedDateTime",
+            "in": "query",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for getting next set of results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_List": {
+            "$ref": "./examples/Solutions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}": {
+      "get": {
+        "operationId": "Solutions_Get",
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Get installed Solution details by Solution id.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "solutionId",
+            "in": "path",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_Get": {
+            "$ref": "./examples/Solutions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Solutions_CreateOrUpdate",
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Install Or Update Solution.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "solutionId",
+            "in": "path",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Solution resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            },
+            "x-ms-client-name": "requestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Solution' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "201": {
+            "description": "Resource 'Solution' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_CreateOrUpdate": {
+            "$ref": "./examples/Solutions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Solutions_Delete",
+        "tags": [
+          "Solutions"
+        ],
+        "description": "Uninstall Solution.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "solutionId",
+            "in": "path",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solutions_Delete": {
+            "$ref": "./examples/Solutions_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiKeyAuthCredentials": {
+      "type": "object",
+      "description": "ApiKeyAuthCredentials class for ApiKey based Auth.",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of the key vault."
+        }
+      },
+      "required": [
+        "apiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKeyAuthCredentials"
+    },
+    "ApiProperties": {
+      "type": "object",
+      "description": "Api properties.",
+      "properties": {
+        "apiFreshnessTimeInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval in minutes for which the weather data for the api needs to be refreshed.",
+          "maximum": 10080
+        }
+      }
+    },
+    "ArmAsyncOperation": {
+      "type": "object",
+      "description": "Arm async operation class.\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the async operation."
+        },
+        "error": {
+          "$ref": "#/definitions/ArmAsyncOperationError",
+          "description": "Arm async operation error class.\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format."
+        }
+      }
+    },
+    "ArmAsyncOperationError": {
+      "type": "object",
+      "description": "Arm async operation error class.\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status of the async operation."
+        },
+        "message": {
+          "type": "string",
+          "description": "Status of the async operation."
+        }
+      }
+    },
+    "AuthCredentials": {
+      "type": "object",
+      "description": "AuthCredentials abstract base class for Auth Purpose.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for AuthCredentials."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "Azure.ResourceManager.Foundations.CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "Possible reasons for a name not being available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name already exists."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The check availability result.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates if the resource name is available."
+        },
+        "reason": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.CheckNameAvailabilityReason",
+          "description": "The reason why the given name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed reason why the given name is available."
+        }
+      }
+    },
+    "DataConnector": {
+      "type": "object",
+      "description": "DataConnector Model.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataConnectorProperties",
+          "description": "DataConnector Properties.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataConnectorListResult": {
+      "type": "object",
+      "description": "The response of a DataConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/DataConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataConnectorProperties": {
+      "type": "object",
+      "description": "DataConnector Properties.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/AuthCredentials",
+          "description": "AuthCredentials abstract base class for Auth Purpose."
+        }
+      },
+      "required": [
+        "credentials"
+      ]
+    },
+    "DataManagerForAgriculture": {
+      "type": "object",
+      "description": "Data Manager For Agriculture ARM Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureProperties",
+          "description": "Data Manager For Agriculture ARM Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataManagerForAgricultureExtension": {
+      "type": "object",
+      "description": "DataManagerForAgriculture extension resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureExtensionProperties",
+          "description": "DataManagerForAgricultureExtension properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataManagerForAgricultureExtensionListResult": {
+      "type": "object",
+      "description": "The response of a DataManagerForAgricultureExtension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataManagerForAgricultureExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgricultureExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataManagerForAgricultureExtensionProperties": {
+      "type": "object",
+      "description": "DataManagerForAgricultureExtension properties.",
+      "properties": {
+        "targetResourceType": {
+          "type": "string",
+          "description": "Target ResourceType of the Data Manager For Agriculture Extension.",
+          "readOnly": true
+        },
+        "farmBeatsExtensionId": {
+          "type": "string",
+          "description": "Data Manager For Agriculture Extension ID.",
+          "minLength": 2,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "readOnly": true
+        },
+        "farmBeatsExtensionName": {
+          "type": "string",
+          "description": "Data Manager For Agriculture Extension name.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "farmBeatsExtensionVersion": {
+          "type": "string",
+          "description": "Data Manager For Agriculture Extension version.",
+          "minLength": 2,
+          "maxLength": 100,
+          "pattern": "^([1-9]|10).\\d$",
+          "readOnly": true
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher ID.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description.",
+          "minLength": 2,
+          "maxLength": 500,
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "type": "string",
+          "description": "Category of the extension. e.g. weather/sensor/satellite.",
+          "minLength": 2,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "type": "string",
+          "description": "Data Manager For Agriculture Extension auth link.",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "type": "string",
+          "description": "Data Manager For Agriculture Extension api docs link.",
+          "readOnly": true
+        },
+        "detailedInformation": {
+          "type": "array",
+          "description": "Detailed information which shows summary of requested data.\nUsed in descriptive get extension metadata call.\nInformation for weather category per api included are apisSupported,\ncustomParameters, PlatformParameters and Units supported.",
+          "items": {
+            "$ref": "#/definitions/DetailedInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataManagerForAgricultureListResult": {
+      "type": "object",
+      "description": "The response of a DataManagerForAgriculture list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataManagerForAgriculture items on this page",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgriculture"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataManagerForAgricultureProperties": {
+      "type": "object",
+      "description": "Data Manager For Agriculture ARM Resource properties.",
+      "properties": {
+        "instanceUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Uri of the Data Manager For Agriculture instance.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Data Manager For Agriculture instance provisioning state.",
+          "readOnly": true
+        },
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration",
+          "description": "Sensor integration request model."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Property to allow or block public traffic for an Azure Data Manager For Agriculture resource."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private endpoints.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataManagerForAgricultureSolution": {
+      "type": "object",
+      "description": "DataManagerForAgriculture solution resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureSolutionProperties",
+          "description": "DataManagerForAgricultureSolution properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataManagerForAgricultureSolutionListResult": {
+      "type": "object",
+      "description": "The response of a DataManagerForAgricultureSolution list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataManagerForAgricultureSolution items on this page",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgricultureSolution"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataManagerForAgricultureSolutionProperties": {
+      "type": "object",
+      "description": "DataManagerForAgricultureSolution properties.",
+      "properties": {
+        "partnerId": {
+          "type": "string",
+          "description": "Solution Partner Id.",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "type": "string",
+          "description": "Solution Partner Tenant Id.",
+          "readOnly": true
+        },
+        "dataAccessScopes": {
+          "type": "array",
+          "description": "Gets scope of the Data manager For Agriculture data access that's required for processing solution request to partner.\nExample: For gdd they might need weatherScope and satelliteScope.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails"
+        },
+        "openApiSpecsDictionary": {
+          "type": "object",
+          "description": "Gets api-version Swagger Document Dictionary to capture all api-versions of swagger exposed by partner to Data Manager For Agriculture.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "accessFBApplicationId": {
+          "type": "string",
+          "description": "Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.",
+          "readOnly": true
+        },
+        "saaSApplicationId": {
+          "type": "string",
+          "description": "Application id of the SaaS multi tenant application.",
+          "readOnly": true
+        },
+        "actionIds": {
+          "type": "array",
+          "description": "List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "roleId": {
+          "type": "string",
+          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
+          "readOnly": true
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
+          "readOnly": true
+        },
+        "accessFBApplicationName": {
+          "type": "string",
+          "description": "Application name of the multi tenant application to be used by partner to access Data Manager For Agriculture Data.",
+          "readOnly": true
+        }
+      }
+    },
+    "DataManagerForAgricultureUpdateProperties": {
+      "type": "object",
+      "description": "Data Manager For Agriculture ARM Resource properties.",
+      "properties": {
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration",
+          "description": "Sensor integration request model."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Property to allow or block public traffic for an Azure Data Manager For Agriculture resource."
+        }
+      }
+    },
+    "DataManagerForAgricultureUpdateRequestModel": {
+      "type": "object",
+      "description": "DataManagerForAgriculture update request.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Geo-location where the resource lives."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureUpdateProperties",
+          "description": "Data Manager For Agriculture ARM Resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetailedInformation": {
+      "type": "object",
+      "description": "Model to capture detailed information for Data Manager For AgricultureExtensions.",
+      "properties": {
+        "apiName": {
+          "type": "string",
+          "description": "ApiName available for the Data Manager For Agriculture Extension."
+        },
+        "apiDocsLink": {
+          "type": "string",
+          "description": "Extension provider's API documentation link."
+        },
+        "apiType": {
+          "type": "string",
+          "description": "Type of Api in Extension."
+        },
+        "customParameters": {
+          "type": "array",
+          "description": "List of customParameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platformParameters": {
+          "type": "array",
+          "description": "List of platformParameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiDefaultInputParameters": {
+          "type": "array",
+          "description": "List of defaultParameters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitsSupported": {
+          "$ref": "#/definitions/UnitSystemsInfo",
+          "description": "Unit systems info for the data provider."
+        },
+        "apiInputParameters": {
+          "type": "array",
+          "description": "List of apiInputParameters.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "Extension resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "Extension resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionListResult": {
+      "type": "object",
+      "description": "The response of a Extension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Extension items on this page",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Extension resource properties.",
+      "properties": {
+        "extensionId": {
+          "type": "string",
+          "description": "Extension Id.",
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "type": "string",
+          "description": "Extension category. e.g. weather/sensor/satellite.",
+          "readOnly": true
+        },
+        "installedExtensionVersion": {
+          "type": "string",
+          "description": "Installed extension version.",
+          "pattern": "^([1-9]|10).\\d$",
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "type": "string",
+          "description": "Extension auth link.",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "type": "string",
+          "description": "Extension api docs link.",
+          "readOnly": true
+        },
+        "additionalApiProperties": {
+          "type": "object",
+          "description": "Additional Api Properties.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity. The value must be an UUID.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource. The value must be an UUID.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of the key vault.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of the key vault.",
+          "minLength": 1
+        },
+        "keyName": {
+          "type": "string",
+          "description": "Name of Key Vault key.",
+          "minLength": 1
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of Key Vault key.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "keyVersion"
+      ]
+    },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "properties": {
+        "saasOfferId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        }
+      }
+    },
+    "OAuthClientCredentials": {
+      "type": "object",
+      "description": "OAuthClientCredentials for clientId clientSecret auth.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "ClientId associated with the provider.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of the key vault."
+        }
+      },
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "OAuthClientCredentials"
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "The private endpoint resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM identifier for private endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the private endpoint connection.",
+      "properties": {
+        "groupIds": {
+          "type": "array",
+          "description": "The group ids for the private endpoint resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource private link DNS zone name.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "A collection of information about the state of the connection between service consumer and provider.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Data Manager For Agriculture instance provisioning state.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "SensorIntegration": {
+      "type": "object",
+      "description": "Sensor integration request model.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Sensor integration enable state."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Sensor integration instance provisioning state.",
+          "readOnly": true
+        },
+        "provisioningInfo": {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse",
+          "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)."
+        }
+      }
+    },
+    "Solution": {
+      "type": "object",
+      "description": "Solution resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties",
+          "description": "Solution resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionListResult": {
+      "type": "object",
+      "description": "The response of a Solution list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Solution items on this page",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionProperties": {
+      "type": "object",
+      "description": "Solution resource properties.",
+      "properties": {
+        "partnerId": {
+          "type": "string",
+          "description": "Partner Id of the Solution.",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "type": "string",
+          "description": "SaaS subscriptionId of the installed SaaS application.",
+          "minLength": 1
+        },
+        "saasSubscriptionName": {
+          "type": "string",
+          "description": "SaaS subscription name of the installed SaaS application.",
+          "minLength": 1
+        },
+        "marketplacePublisherId": {
+          "type": "string",
+          "description": "SaaS application Marketplace Publisher Id.",
+          "minLength": 1
+        },
+        "planId": {
+          "type": "string",
+          "description": "SaaS application Plan Id.",
+          "minLength": 1
+        },
+        "roleAssignmentId": {
+          "type": "string",
+          "description": "Role Assignment Id."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "SaaS application Offer Id.",
+          "minLength": 1
+        },
+        "termId": {
+          "type": "string",
+          "description": "SaaS application Term Id.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "saasSubscriptionId",
+        "saasSubscriptionName",
+        "marketplacePublisherId",
+        "planId",
+        "offerId",
+        "termId"
+      ],
+      "additionalProperties": {}
+    },
+    "UnitSystemsInfo": {
+      "type": "object",
+      "description": "Unit systems info for the data provider.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "UnitSystem key sent as part of ProviderInput.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "values": {
+          "type": "array",
+          "description": "List of unit systems supported by this data provider.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "key",
+        "values"
+      ]
+    }
+  },
+  "parameters": {}
+}

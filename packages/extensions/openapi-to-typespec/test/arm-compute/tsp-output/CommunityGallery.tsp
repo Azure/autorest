@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,17 +17,15 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
+@parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGallery extends PirCommunityGalleryResource {
-  /**
-   * The public name of the community gallery.
-   */
-  @path
-  @key("publicGalleryName")
-  @segment("communityGalleries")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CommunityGallery,
+    KeyName = "publicGalleryName",
+    SegmentName = "communityGalleries",
+    NamePattern = ""
+  >;
 
   @extension("x-ms-client-flatten", true)
   @visibility("read,create")
@@ -42,3 +39,5 @@ interface CommunityGalleries {
    */
   get is ArmResourceRead<CommunityGallery>;
 }
+
+@@doc(CommunityGallery.name, "The public name of the community gallery.");

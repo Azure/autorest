@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,16 +13,24 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * An alert created in alert management service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model Alert is ProxyResource<AlertProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
+model Alert extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Alert,
+    KeyName = "alertId",
+    SegmentName = "alerts",
+    NamePattern = ""
+  >;
+
   /**
-   * Unique ID of an alert instance.
+   * Alert property bag
    */
-  @path
-  @key("alertId")
-  @segment("alerts")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertProperties;
 }
 
 @armResourceOperations
@@ -36,10 +43,12 @@ interface Alerts {
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Alerts_GetAll")
   getAll is ArmResourceListByParent<
     Alert,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -153,7 +162,7 @@ interface Alerts {
     string,
     Alert,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
@@ -181,4 +190,10 @@ interface Alerts {
   ): ArmResponse<AlertModification> | ErrorResponse;
 }
 
+@@doc(Alert.name, "Unique ID of an alert instance.");
+@@encodedName(Alerts.changeState::parameters.body,
+  "application/json",
+  "comment"
+);
+@@extension(Alerts.changeState::parameters.body, "x-ms-client-name", "comment");
 @@doc(Alerts.changeState::parameters.body, "reason of change alert state");

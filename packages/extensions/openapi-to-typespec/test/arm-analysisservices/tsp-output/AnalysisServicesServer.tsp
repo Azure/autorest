@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,17 +17,12 @@ namespace Azure.ResourceManager.Analysis;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model AnalysisServicesServer extends Resource {
-  /**
-   * The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63.
-   */
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
-  @path
-  @key("serverName")
-  @segment("servers")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = AnalysisServicesServer,
+    KeyName = "serverName",
+    SegmentName = "servers",
+    NamePattern = "^[a-z][a-z0-9]*$"
+  >;
 
   /**
    * Properties of the provision operation request.
@@ -57,7 +51,7 @@ interface AnalysisServicesServers {
    * Updates the current state of the specified Analysis Services server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
     AnalysisServicesServer,
@@ -68,6 +62,9 @@ interface AnalysisServicesServers {
    * Deletes the specified Analysis Services server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Servers_Delete")
   delete is ArmResourceDeleteAsync<AnalysisServicesServer>;
 
@@ -163,8 +160,13 @@ interface AnalysisServicesServers {
   ): ArmResponse<SkuEnumerationForExistingResourceResult> | ErrorResponse;
 }
 
+@@maxLength(AnalysisServicesServer.name, 63);
+@@minLength(AnalysisServicesServer.name, 3);
+@@doc(AnalysisServicesServer.name,
+  "The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63."
+);
 @@encodedName(AnalysisServicesServers.create::parameters.resource,
-  "json",
+  "application/json",
   "serverParameters"
 );
 @@extension(AnalysisServicesServers.create::parameters.resource,
@@ -175,7 +177,7 @@ interface AnalysisServicesServers {
   "Contains the information used to provision the Analysis Services server."
 );
 @@encodedName(AnalysisServicesServers.update::parameters.properties,
-  "json",
+  "application/json",
   "serverUpdateParameters"
 );
 @@extension(AnalysisServicesServers.update::parameters.properties,

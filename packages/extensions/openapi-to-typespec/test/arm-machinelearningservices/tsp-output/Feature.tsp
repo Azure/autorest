@@ -7,7 +7,6 @@ import "./FeaturesetVersion.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,16 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(FeaturesetVersion)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FeatureProperties)
-model Feature extends ProxyResourceBase {
-  /**
-   * Feature Name. This is case-sensitive.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
-  @key("featureName")
-  @segment("features")
-  @visibility("read")
-  name: string;
+model Feature extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = Feature,
+    KeyName = "featureName",
+    SegmentName = "features",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -53,7 +49,7 @@ interface Features {
   list is ArmResourceListByParent<
     Feature,
     {
-      ...BaseParameters<Feature>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Feature>;
 
       /**
        * Continuation token for pagination.
@@ -75,3 +71,5 @@ interface Features {
     }
   >;
 }
+
+@@doc(Feature.name, "Feature Name. This is case-sensitive.");

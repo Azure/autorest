@@ -15,6 +15,7 @@ export interface TypespecOptions {
 export interface TypespecChoiceValue extends WithDoc {
   name: string;
   value: string | number | boolean;
+  clientDecorators?: TypespecDecorator[];
 }
 
 export interface WithDoc {
@@ -42,6 +43,7 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   operationGroupName?: string;
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
+  clientDecorators?: TypespecDecorator[];
 }
 
 export type ResourceKind =
@@ -120,10 +122,15 @@ export interface TypespecEnum extends TypespecDataType {
   members: TypespecChoiceValue[];
   isExtensible: boolean;
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
 }
 
 export interface WithFixMe {
   fixMe?: string[];
+}
+
+export interface WithSuppressDirectives {
+  suppressions?: WithSuppressDirective[];
 }
 
 export interface WithSuppressDirective {
@@ -137,12 +144,13 @@ export interface TypespecParameter extends TypespecDataType {
   isOptional: boolean;
   type: string;
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   location: TypespecParameterLocation;
   serializedName: string;
   defaultValue?: any;
 }
 
-export interface TypespecObjectProperty extends TypespecDataType {
+export interface TypespecObjectProperty extends TypespecDataType, WithSuppressDirectives {
   kind: "property";
   isOptional: boolean;
   type: string;
@@ -156,6 +164,7 @@ export interface TypespecDecorator extends WithFixMe, WithSuppressDirective {
   arguments?: (string | number)[] | DecoratorArgument[];
   module?: string;
   namespace?: string;
+  target?: string;
 }
 
 export interface TypespecAlias {
@@ -171,6 +180,8 @@ export interface TypespecObject extends TypespecDataType {
   extendedParents?: string[];
   spreadParents?: string[];
   decorators?: TypespecDecorator[];
+  augmentDecorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   alias?: TypespecAlias;
 }
 
@@ -196,11 +207,12 @@ export function isFirstLevelResource(value: string): value is FirstLevelResource
   return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);
 }
 
-export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
+export interface TspArmResourceOperationBase extends WithDoc, WithFixMe, WithSuppressDirectives {
   kind: string;
   name: string;
   templateParameters?: string[];
   decorators?: TypespecDecorator[];
+  clientDecorators?: TypespecDecorator[];
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
   customizations?: string[];
@@ -246,6 +258,7 @@ export interface TspArmResourceExistsOperation extends TspArmResourceOperationBa
 
 export interface TspArmResource extends TypespecObject {
   resourceKind: ArmResourceKind;
+  keyExpression: string | undefined;
   propertiesModelName: string;
   propertiesPropertyRequired: boolean;
   propertiesPropertyVisibility: string[];

@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,19 +14,24 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * ApiRelease details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model ApiReleaseContract is ProxyResource<ApiReleaseContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
+model ApiReleaseContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ApiReleaseContract,
+    KeyName = "releaseId",
+    SegmentName = "releases",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
+
   /**
-   * Release identifier within an API. Must be unique in the current API Management service instance.
+   * ApiRelease entity contract properties.
    */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("releaseId")
-  @segment("releases")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiReleaseContractProperties;
 }
 
 @armResourceOperations
@@ -35,12 +39,16 @@ interface ApiReleaseContracts {
   /**
    * Returns the details of an API release.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiRelease_Get")
   get is ArmResourceRead<ApiReleaseContract>;
 
   /**
    * Returns the etag of an API release.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiRelease_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       ApiReleaseContract,
@@ -51,10 +59,12 @@ interface ApiReleaseContracts {
   /**
    * Creates a new Release for the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiRelease_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -67,12 +77,14 @@ interface ApiReleaseContracts {
   /**
    * Updates the details of the release of the API specified by its identifier.
    */
-  @parameterVisibility("read")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility
+  @operationId("ApiRelease_Update")
   update is ArmCustomPatchSync<
     ApiReleaseContract,
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -85,10 +97,13 @@ interface ApiReleaseContracts {
   /**
    * Deletes the specified release in the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("ApiRelease_Delete")
   delete is ArmResourceDeleteSync<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -101,10 +116,12 @@ interface ApiReleaseContracts {
   /**
    * Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiRelease_ListByService")
   listByService is ArmResourceListByParent<
     ApiReleaseContract,
     {
-      ...BaseParameters<ApiReleaseContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ApiReleaseContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| notes | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -128,8 +145,29 @@ interface ApiReleaseContracts {
   >;
 }
 
+@@maxLength(ApiReleaseContract.name, 80);
+@@minLength(ApiReleaseContract.name, 1);
+@@doc(ApiReleaseContract.name,
+  "Release identifier within an API. Must be unique in the current API Management service instance."
+);
+@@encodedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiReleaseContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(ApiReleaseContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(ApiReleaseContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(ApiReleaseContracts.update::parameters.properties,
   "API Release Update parameters."

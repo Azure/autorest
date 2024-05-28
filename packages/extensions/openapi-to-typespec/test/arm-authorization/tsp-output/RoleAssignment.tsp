@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,15 +17,13 @@ namespace Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(RoleAssignmentProperties)
-model RoleAssignment extends ExtensionResourceBase {
-  /**
-   * The name of the role assignment. It can be any valid GUID.
-   */
-  @path
-  @key("roleAssignmentName")
-  @segment("roleAssignments")
-  @visibility("read")
-  name: string;
+model RoleAssignment extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleAssignment,
+    KeyName = "roleAssignmentName",
+    SegmentName = "roleAssignments",
+    NamePattern = ""
+  >;
 
   /**
    * Role assignment properties.
@@ -43,7 +40,7 @@ interface RoleAssignments {
   get is ArmResourceRead<
     RoleAssignment,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * Tenant ID for cross-tenant request
@@ -61,10 +58,11 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * Tenant ID for cross-tenant request
@@ -82,7 +80,7 @@ interface RoleAssignments {
   listForScope is ArmResourceListByParent<
     RoleAssignment,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
@@ -105,8 +103,11 @@ interface RoleAssignments {
   >;
 }
 
+@@doc(RoleAssignment.name,
+  "The name of the role assignment. It can be any valid GUID."
+);
 @@encodedName(RoleAssignments.create::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RoleAssignments.create::parameters.resource,

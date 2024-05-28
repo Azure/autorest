@@ -7,7 +7,6 @@ import "./BusinessProcess.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,14 @@ namespace Microsoft.IntegrationSpaces;
  * A business process version.
  */
 @parentResource(BusinessProcess)
-model BusinessProcessVersion is ProxyResource<BusinessProcessProperties> {
-  /**
-   * The version of the business process
-   */
-  @path
-  @key("businessProcessVersion")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model BusinessProcessVersion
+  is Azure.ResourceManager.ProxyResource<BusinessProcessProperties> {
+  ...ResourceNameParameter<
+    Resource = BusinessProcessVersion,
+    KeyName = "businessProcessVersion",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -37,10 +35,12 @@ interface BusinessProcessVersions {
   /**
    * List BusinessProcessVersion resources by BusinessProcess
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BusinessProcessVersions_ListByBusinessProcess")
   listByBusinessProcess is ArmResourceListByParent<
     BusinessProcessVersion,
     {
-      ...BaseParameters<BusinessProcessVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BusinessProcessVersion>;
 
       /**
        * The number of result items to return.
@@ -95,3 +95,5 @@ interface BusinessProcessVersions {
     }
   >;
 }
+
+@@doc(BusinessProcessVersion.name, "The version of the business process");

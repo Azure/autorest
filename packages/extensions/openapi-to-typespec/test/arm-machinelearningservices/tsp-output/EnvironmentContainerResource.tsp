@@ -7,7 +7,6 @@ import "./Registry.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,16 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EnvironmentContainer)
-model EnvironmentContainerResource extends ProxyResourceBase {
-  /**
-   * Container name. This is case-sensitive.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
-  @key("environmentName")
-  @segment("environments")
-  @visibility("read")
-  name: string;
+model EnvironmentContainerResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = EnvironmentContainerResource,
+    KeyName = "environmentName",
+    SegmentName = "environments",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -58,6 +54,9 @@ interface EnvironmentContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryEnvironmentContainers_Delete")
   delete is ArmResourceDeleteAsync<EnvironmentContainerResource>;
 
@@ -69,7 +68,7 @@ interface EnvironmentContainerResources {
   list is ArmResourceListByParent<
     EnvironmentContainerResource,
     {
-      ...BaseParameters<EnvironmentContainerResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EnvironmentContainerResource>;
 
       /**
        * Continuation token for pagination.
@@ -86,8 +85,11 @@ interface EnvironmentContainerResources {
   >;
 }
 
+@@doc(EnvironmentContainerResource.name,
+  "Container name. This is case-sensitive."
+);
 @@encodedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(EnvironmentContainerResources.createOrUpdate::parameters.resource,

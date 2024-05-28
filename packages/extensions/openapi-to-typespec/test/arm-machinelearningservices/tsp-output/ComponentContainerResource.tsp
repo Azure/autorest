@@ -7,7 +7,6 @@ import "./Registry.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,16 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ComponentContainer)
-model ComponentContainerResource extends ProxyResourceBase {
-  /**
-   * Container name.
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
-  @path
-  @key("componentName")
-  @segment("components")
-  @visibility("read")
-  name: string;
+model ComponentContainerResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = ComponentContainerResource,
+    KeyName = "componentName",
+    SegmentName = "components",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -58,6 +54,9 @@ interface ComponentContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryComponentContainers_Delete")
   delete is ArmResourceDeleteAsync<ComponentContainerResource>;
 
@@ -69,7 +68,7 @@ interface ComponentContainerResources {
   list is ArmResourceListByParent<
     ComponentContainerResource,
     {
-      ...BaseParameters<ComponentContainerResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ComponentContainerResource>;
 
       /**
        * Continuation token for pagination.
@@ -80,8 +79,9 @@ interface ComponentContainerResources {
   >;
 }
 
+@@doc(ComponentContainerResource.name, "Container name.");
 @@encodedName(ComponentContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(ComponentContainerResources.createOrUpdate::parameters.resource,

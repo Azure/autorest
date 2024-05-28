@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateEndpointConnectionProperties
 )
-model PrivateEndpointConnection extends ProxyResourceBase {
-  /**
-   * Private endpoint connection name.
-   */
-  @path
-  @key("privateEndpointConnectionName")
-  @segment("privateEndpointConnections")
-  @visibility("read")
-  name: string;
+model PrivateEndpointConnection extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
 
   /**
    * Resource properties.
@@ -54,6 +51,9 @@ interface PrivateEndpointConnections {
   /**
    * Delete Private endpoint connection request.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
   /**
@@ -64,8 +64,9 @@ interface PrivateEndpointConnections {
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
+@@doc(PrivateEndpointConnection.name, "Private endpoint connection name.");
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "request"
 );
 @@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,

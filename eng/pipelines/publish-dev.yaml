@@ -5,25 +5,29 @@
 
 trigger: none
 
-pool:
-  vmImage: "ubuntu-latest"
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    stages:
+      - stage: npm
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - job: dev
+            displayName: Publish dev
+            steps:
+              - template: /eng/pipelines/templates/build.yaml
 
-stages:
-  - stage: npm
-    jobs:
-      - job: dev
-        displayName: Publish dev
-        steps:
-          - template: ./templates/build.yaml
+              - script: |
+                  commitId=$(git rev-parse --short HEAD)
+                  npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
+                displayName: Bump versions
 
-          - script: |
-              commitId=$(git rev-parse --short HEAD)
-              npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
-            displayName: Bump versions
+              - script: npx @microsoft/rush publish --publish --pack --include-all
+                displayName: Pack packages
 
-          - script: npx @microsoft/rush publish --publish --pack --include-all
-            displayName: Pack packages
-
-          - script: |
-              npx @microsoft/rush publish --publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --npm-auth-token "$(azure-sdk-devops-npm-token)" --include-all --set-access-level public
-            displayName: Publish packages
+              - script: |
+                  npx @microsoft/rush publish --publish --registry https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools-feeds/npm/registry --npm-auth-token "$(azure-sdk-devops-npm-token)" --include-all --set-access-level public
+                displayName: Publish packages

@@ -7,7 +7,6 @@ import "./Gallery.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(Gallery)
 @includeInapplicableMetadataInPayload(false)
 model GalleryApplication extends Resource {
-  /**
-   * The name of the gallery Application Definition to be retrieved.
-   */
-  @path
-  @key("galleryApplicationName")
-  @segment("applications")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = GalleryApplication,
+    KeyName = "galleryApplicationName",
+    SegmentName = "applications",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery Application Definition.
@@ -51,12 +48,15 @@ interface GalleryApplications {
   /**
    * Update a gallery Application Definition.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<GalleryApplication, GalleryApplicationUpdate>;
 
   /**
    * Delete a gallery Application.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<GalleryApplication>;
 
   /**
@@ -67,8 +67,11 @@ interface GalleryApplications {
   listByGallery is ArmResourceListByParent<GalleryApplication>;
 }
 
+@@doc(GalleryApplication.name,
+  "The name of the gallery Application Definition to be retrieved."
+);
 @@encodedName(GalleryApplications.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "galleryApplication"
 );
 @@extension(GalleryApplications.createOrUpdate::parameters.resource,
@@ -79,7 +82,7 @@ interface GalleryApplications {
   "Parameters supplied to the create or update gallery Application operation."
 );
 @@encodedName(GalleryApplications.update::parameters.properties,
-  "json",
+  "application/json",
   "galleryApplication"
 );
 @@extension(GalleryApplications.update::parameters.properties,

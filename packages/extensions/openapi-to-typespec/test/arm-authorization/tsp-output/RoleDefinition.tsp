@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,15 +17,13 @@ namespace Azure.ResourceManager.Authorization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
-model RoleDefinition extends ExtensionResourceBase {
-  /**
-   * The ID of the role definition.
-   */
-  @path
-  @key("roleDefinitionId")
-  @segment("roleDefinitions")
-  @visibility("read")
-  name: string;
+model RoleDefinition extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleDefinition,
+    KeyName = "roleDefinitionId",
+    SegmentName = "roleDefinitions",
+    NamePattern = ""
+  >;
 
   /**
    * Role definition properties.
@@ -50,6 +47,7 @@ interface RoleDefinitions {
   /**
    * Deletes a role definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<RoleDefinition>;
 
   /**
@@ -60,7 +58,7 @@ interface RoleDefinitions {
   list is ArmResourceListByParent<
     RoleDefinition,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
@@ -71,8 +69,9 @@ interface RoleDefinitions {
   >;
 }
 
+@@doc(RoleDefinition.name, "The ID of the role definition.");
 @@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "roleDefinition"
 );
 @@extension(RoleDefinitions.createOrUpdate::parameters.resource,

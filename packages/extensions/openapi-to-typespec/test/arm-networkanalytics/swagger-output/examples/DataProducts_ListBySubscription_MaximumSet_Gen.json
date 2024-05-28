@@ -1,0 +1,105 @@
+{
+  "operationId": "DataProducts_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-11-15",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "title": "DataProducts_ListBySubscription_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetworkAnalytics/DataProducts?api-version=2023-11-15$skiptoken=aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "value": [
+          {
+            "name": "dataproduct01",
+            "type": "Microsoft.NetworkAnalytics/DataProducts",
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/aoiresourceGroupName/providers/Microsoft.NetworkAnalytics/DataProducts/dataproduct01",
+            "identity": {
+              "type": "IdentityType",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "userAssignedIdentities": {
+                "key8474": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "location": "eastus",
+            "properties": {
+              "availableMinorVersions": [
+                "1.0.1",
+                "1.0.2"
+              ],
+              "consumptionEndpoints": {
+                "fileAccessResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
+                "fileAccessUrl": "https://operatorinsightsstorageResourceName.blob.core.windows.net",
+                "ingestionResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Storage/storageAccounts/storageResourceName",
+                "ingestionUrl": "https://aoiingestionstorageResourceName.blob.core.windows.net",
+                "queryResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.Kusto/clusters/clusterName",
+                "queryUrl": "https://opinsightsclusterName.regionName.kusto.windows.net"
+              },
+              "currentMinorVersion": "1.0.1",
+              "customerEncryptionKey": {
+                "keyName": "keyName",
+                "keyVaultUri": "https://KeyVault.vault.azure.net",
+                "keyVersion": "keyVersion"
+              },
+              "customerManagedKeyEncryptionEnabled": "Enabled",
+              "documentation": "https://learn.microsoft.com/",
+              "keyVaultUrl": "https://myKeyVault.vault.azure.net",
+              "majorVersion": "1.0.0",
+              "managedResourceGroupConfiguration": {
+                "name": "managedResourceGroupName",
+                "location": "eastus"
+              },
+              "networkacls": {
+                "allowedQueryIpRangeList": [
+                  "1.1.1.1",
+                  "1.1.1.2"
+                ],
+                "defaultAction": "Allow",
+                "ipRules": [
+                  {
+                    "action": "Allow",
+                    "value": "1.1.1.1"
+                  }
+                ],
+                "virtualNetworkRule": [
+                  {
+                    "action": "Allow",
+                    "id": "/subscriptions/subscriptionId/resourcegroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/virtualNetworkName/subnets/subnetName",
+                    "state": "Succeeded"
+                  }
+                ]
+              },
+              "owners": [
+                "abc@micros.com"
+              ],
+              "privateLinksEnabled": "Disabled",
+              "product": "MCC",
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Enabled",
+              "publisher": "Microsoft",
+              "purviewAccount": "testpurview",
+              "purviewCollection": "134567890",
+              "redundancy": "Disabled",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000"
+            },
+            "systemData": {
+              "createdAt": "2023-09-04T08:26:27.1506343Z",
+              "createdBy": "abc@micros.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-09-04T08:26:27.1506343Z",
+              "lastModifiedBy": "abc@micros.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "userSpecifiedKeyName": "userSpecifiedKeyValue"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

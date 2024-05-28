@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachine extends Resource {
-  /**
-   * The name of the virtual machine.
-   */
-  @path
-  @key("vmName")
-  @segment("virtualMachines")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachine,
+    KeyName = "vmName",
+    SegmentName = "virtualMachines",
+    NamePattern = ""
+  >;
 
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
@@ -68,7 +65,7 @@ interface VirtualMachines {
   get is ArmResourceRead<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
@@ -86,16 +83,19 @@ interface VirtualMachines {
   /**
    * The operation to update a virtual machine.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<VirtualMachine, VirtualMachineUpdate>;
 
   /**
    * The operation to delete a virtual machine.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Optional parameter to force delete virtual machines.
@@ -113,7 +113,7 @@ interface VirtualMachines {
   list is ArmResourceListByParent<
     VirtualMachine,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
@@ -136,7 +136,7 @@ interface VirtualMachines {
     VirtualMachine,
     LocationScope<VirtualMachine>,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
       ...LocationResourceParameter;
     }
   >;
@@ -168,7 +168,7 @@ interface VirtualMachines {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Optional parameter to hibernate a virtual machine. (Feature in Preview)
@@ -191,7 +191,7 @@ interface VirtualMachines {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -238,7 +238,7 @@ interface VirtualMachines {
     void,
     RetrieveBootDiagnosticsDataResult,
     {
-      ...BaseParameters<VirtualMachine>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
 
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -324,8 +324,9 @@ interface VirtualMachines {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
+@@doc(VirtualMachine.name, "The name of the virtual machine.");
 @@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachines.createOrUpdate::parameters.resource,
@@ -336,7 +337,7 @@ interface VirtualMachines {
   "Parameters supplied to the Create Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachines.update::parameters.properties,
@@ -346,7 +347,10 @@ interface VirtualMachines {
 @@doc(VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.capture::parameters.body, "json", "parameters");
+@@encodedName(VirtualMachines.capture::parameters.body,
+  "application/json",
+  "parameters"
+);
 @@extension(VirtualMachines.capture::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -354,7 +358,10 @@ interface VirtualMachines {
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.reimage::parameters.body, "json", "parameters");
+@@encodedName(VirtualMachines.reimage::parameters.body,
+  "application/json",
+  "parameters"
+);
 @@extension(VirtualMachines.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
@@ -363,7 +370,7 @@ interface VirtualMachines {
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.installPatches::parameters.body,
-  "json",
+  "application/json",
   "installPatchesInput"
 );
 @@extension(VirtualMachines.installPatches::parameters.body,
@@ -374,7 +381,7 @@ interface VirtualMachines {
   "Input for InstallPatches as directly received by the API"
 );
 @@encodedName(VirtualMachines.runCommand::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachines.runCommand::parameters.body,

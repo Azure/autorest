@@ -3122,7 +3122,9 @@ model ScaleSettings {
 /**
  * Specifies the custom service configuration
  */
-model CustomService extends Record<unknown> {
+model CustomService {
+  ...Record<unknown>;
+
   /**
    * Name of the Custom Service
    */
@@ -3136,6 +3138,7 @@ model CustomService extends Record<unknown> {
   /**
    * Environment Variable for the container
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   environmentVariables?: Record<EnvironmentVariable>;
 
   /**
@@ -3154,7 +3157,9 @@ model CustomService extends Record<unknown> {
   volumes?: VolumeDefinition[];
 }
 
-model Image extends Record<unknown> {
+model Image {
+  ...Record<unknown>;
+
   /**
    * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images
    */
@@ -3166,7 +3171,9 @@ model Image extends Record<unknown> {
   reference?: string;
 }
 
-model EnvironmentVariable extends Record<unknown> {
+model EnvironmentVariable {
+  ...Record<unknown>;
+
   /**
    * Type of the Environment Variable. Possible values are: local - For local variable
    */
@@ -3178,7 +3185,9 @@ model EnvironmentVariable extends Record<unknown> {
   value?: string;
 }
 
-model Docker extends Record<unknown> {
+model Docker {
+  ...Record<unknown>;
+
   /**
    * Indicate whether container shall run in privileged or non-privileged mode.
    */
@@ -3402,11 +3411,13 @@ model ResourceBase {
   /**
    * The asset property dictionary.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -3743,6 +3754,7 @@ model ModelVersion extends AssetBase {
   /**
    * Mapping of model flavors to their properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   flavors?: Record<FlavorData>;
 
   /**
@@ -3782,6 +3794,7 @@ model FlavorData {
   /**
    * Model flavor-specific data.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   data?: Record<string>;
 }
 
@@ -3798,6 +3811,7 @@ model PackageRequest {
   /**
    * Collection of environment variables.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   environmentVariables?: Record<string>;
 
@@ -3822,6 +3836,7 @@ model PackageRequest {
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   tags?: Record<string>;
 
@@ -3908,6 +3923,7 @@ model PackageResponse {
   /**
    * Collection of environment variables.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read")
   environmentVariables?: Record<string>;
 
@@ -3938,6 +3954,7 @@ model PackageResponse {
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read")
   tags?: Record<string>;
 
@@ -3999,6 +4016,7 @@ model EndpointPropertiesBase {
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
   /**
@@ -4054,6 +4072,7 @@ model PartialManagedServiceIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<Record<unknown>>;
 }
 
@@ -4064,6 +4083,7 @@ model PartialMinimalTrackedResource {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -4184,6 +4204,7 @@ model ResourceConfiguration {
   /**
    * Additional properties bag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   properties?: Record<Record<unknown>>;
 }
@@ -4225,11 +4246,13 @@ model EndpointDeploymentPropertiesBase {
   /**
    * Environment variables configuration for the deployment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   environmentVariables?: Record<string>;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 }
 
@@ -4264,6 +4287,7 @@ model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -4388,6 +4412,7 @@ model MaterializationSettings {
   /**
    * Specifies the spark compute settings
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   sparkConfiguration?: Record<string>;
 
   /**
@@ -4415,6 +4440,7 @@ model NotificationSetting {
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create", "update")
   webhooks?: Record<Webhook>;
 }
@@ -4543,11 +4569,13 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the spark compute settings
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   sparkConfiguration?: Record<string>;
 
   /**
    * Specifies the tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -4611,6 +4639,7 @@ model FeaturesetJob {
   /**
    * Specifies the tags if any
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -4722,6 +4751,7 @@ model JobBase extends ResourceBase {
   /**
    * Configuration for secrets to be made available during runtime.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   secretsConfiguration?: Record<SecretConfiguration>;
 
@@ -4729,6 +4759,7 @@ model JobBase extends ResourceBase {
    * List of JobEndpoints.
    * For local jobs, a job endpoint will have an endpoint value of FileStreamObject.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   services?: Record<JobService>;
 
   /**
@@ -4799,6 +4830,7 @@ model JobService {
   /**
    * Additional properties to set on the endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 
   /**
@@ -4841,6 +4873,7 @@ model PartialNotificationSetting {
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   webhooks?: Record<Webhook>;
 }
 
@@ -4870,6 +4903,7 @@ model LabelingJobProperties extends JobBase {
   /**
    * Label categories of the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create", "update")
   labelCategories?: Record<LabelCategory>;
 
@@ -4950,6 +4984,7 @@ model LabelCategory {
   /**
    * Dictionary of label classes in this category.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create", "update")
   classes?: Record<LabelClass>;
 
@@ -4979,6 +5014,7 @@ model LabelClass {
   /**
    * Dictionary of subclasses of the label class.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create", "update")
   subclasses?: Record<LabelClass>;
 }
@@ -5097,6 +5133,7 @@ model OnlineEndpoint extends EndpointPropertiesBase {
   /**
    * Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   mirrorTraffic?: Record<int32>;
 
   /**
@@ -5113,6 +5150,7 @@ model OnlineEndpoint extends EndpointPropertiesBase {
   /**
    * Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   traffic?: Record<int32>;
 }
 
@@ -5184,6 +5222,7 @@ model DataCollector {
    * [Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
    * Model data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   collections: Record<Collection>;
 
   /**
@@ -5763,6 +5802,7 @@ model PartialRegistryPartialTrackedResource {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -6088,6 +6128,7 @@ model ManagedNetworkSettings {
   /**
    * Dictionary of <OutboundRule>
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   outboundRules?: Record<OutboundRule>;
 
   /**
@@ -6262,7 +6303,7 @@ model WorkspaceUpdateParameters {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * The properties that the machine learning workspace will be updated with.
@@ -6277,6 +6318,7 @@ model WorkspaceUpdateParameters {
   /**
    * The resource tags for the machine learning workspace.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -6397,46 +6439,55 @@ model DiagnoseRequestProperties {
   /**
    * Setting for diagnosing dependent application insights
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   applicationInsights?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent container registry
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   containerRegistry?: Record<unknown>;
 
   /**
    * Setting for diagnosing dns resolution
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   dnsResolution?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent key vault
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   keyVault?: Record<unknown>;
 
   /**
    * Setting for diagnosing network security group
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   nsg?: Record<unknown>;
 
   /**
    * Setting for diagnosing unclassified category of problems
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   others?: Record<unknown>;
 
   /**
    * Setting for diagnosing resource lock
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   resourceLock?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent storage account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   storageAccount?: Record<unknown>;
 
   /**
    * Setting for diagnosing user defined routing
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   udr?: Record<unknown>;
 }
 
@@ -6615,7 +6666,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * Same as workspace location.
@@ -6635,6 +6686,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Dictionary of <string>
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -6897,6 +6949,7 @@ model KubernetesProperties {
   /**
    * Instance Type Schema
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   instanceTypes?: Record<InstanceTypeSchema>;
 }
 
@@ -6907,6 +6960,7 @@ model InstanceTypeSchema {
   /**
    * Node Selector
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   nodeSelector?: Record<string>;
 
   /**
@@ -6922,11 +6976,13 @@ model InstanceTypeSchemaResources {
   /**
    * Resource requests for this instance type
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   requests?: Record<string>;
 
   /**
    * Resource limits for this instance type
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   limits?: Record<string>;
 }
 
@@ -8242,12 +8298,14 @@ model AutoMLJob extends JobBase {
   /**
    * Environment variables included in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   environmentVariables?: Record<string>;
 
   /**
    * Mapping of output data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   outputs?: Record<JobOutput>;
 
@@ -8725,11 +8783,13 @@ model BatchPipelineComponentDeploymentConfiguration
   /**
    * Run-time settings for the pipeline job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   settings?: Record<string>;
 
   /**
    * The tags which will be applied to the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
@@ -9098,6 +9158,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * Dictionary of column name and its type (int, float, string, datetime etc).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   columnNameAndTypes?: Record<string>;
 
   /**
@@ -9115,6 +9176,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   transformerParams?: Record<ColumnTransformer[]>;
 }
 
@@ -9501,12 +9563,14 @@ model CommandJob extends JobBase {
   /**
    * Environment variables included in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   environmentVariables?: Record<string>;
 
   /**
    * Mapping of input data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputs?: Record<JobInput>;
 
@@ -9519,6 +9583,7 @@ model CommandJob extends JobBase {
   /**
    * Mapping of output data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   outputs?: Record<JobOutput>;
 
@@ -9640,6 +9705,7 @@ model MonitorDefinition {
   /**
    * [Required] The signals to monitor.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   signals: Record<MonitoringSignalBase>;
 }
@@ -9684,6 +9750,7 @@ model MonitoringSignalBase {
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   properties?: Record<string>;
 }
 
@@ -9758,6 +9825,7 @@ model OnlineInferenceConfiguration {
   /**
    * Additional configurations
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   configurations?: Record<string>;
 
   /**
@@ -9827,12 +9895,14 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * Monitoring assets to take as input. Key is the component input port name, value is the data asset.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputAssets?: Record<MonitoringInputDataBase>;
 
   /**
    * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputs?: Record<JobInput>;
 
@@ -9862,6 +9932,7 @@ model MonitoringInputDataBase {
   /**
    * Mapping of column names to special uses.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   columns?: Record<string>;
 
@@ -9894,6 +9965,7 @@ model MonitoringWorkspaceConnection {
    * The properties of a workspace service connection to store as environment variables in the submitted jobs.
    * Key is workspace connection property path, name is environment variable key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   environmentVariables?: Record<string>;
 
@@ -9901,6 +9973,7 @@ model MonitoringWorkspaceConnection {
    * The properties of a workspace service connection to store as secrets in the submitted jobs.
    * Key is workspace connection property path, name is secret key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   secrets?: Record<string>;
 }
@@ -9966,6 +10039,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
@@ -10062,6 +10136,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
 
@@ -11547,7 +11622,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * [Required] Monitor compute identity type enum.
@@ -12048,18 +12123,21 @@ model PipelineJob extends JobBase {
   /**
    * Inputs for the pipeline job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputs?: Record<JobInput>;
 
   /**
    * Jobs construct the Pipeline Job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   jobs?: Record<Record<unknown>>;
 
   /**
    * Outputs for the pipeline job
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   outputs?: Record<JobOutput>;
 
@@ -12364,6 +12442,7 @@ model SparkJob extends JobBase {
   /**
    * Spark configured properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   conf?: Record<string>;
 
@@ -12388,6 +12467,7 @@ model SparkJob extends JobBase {
   /**
    * Mapping of input data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputs?: Record<JobInput>;
 
@@ -12400,6 +12480,7 @@ model SparkJob extends JobBase {
   /**
    * Mapping of output data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   outputs?: Record<JobOutput>;
 
@@ -12519,6 +12600,7 @@ model SweepJob extends JobBase {
   /**
    * Mapping of input data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   inputs?: Record<JobInput>;
 
@@ -12536,6 +12618,7 @@ model SweepJob extends JobBase {
   /**
    * Mapping of output data bindings used in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   outputs?: Record<JobOutput>;
 
@@ -12625,6 +12708,7 @@ model TrialComponent {
   /**
    * Environment variables included in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read", "create")
   environmentVariables?: Record<string>;
 
@@ -12962,6 +13046,7 @@ model CustomKeys {
   /**
    * Dictionary of <string>
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   keys?: Record<string>;
 }
 

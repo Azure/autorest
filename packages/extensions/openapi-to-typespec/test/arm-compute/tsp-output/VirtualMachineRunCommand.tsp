@@ -7,7 +7,6 @@ import "./VirtualMachine.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachine)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineRunCommand extends Resource {
-  /**
-   * The name of the virtual machine run command.
-   */
-  @path
-  @key("runCommandName")
-  @segment("runCommands")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineRunCommand,
+    KeyName = "runCommandName",
+    SegmentName = "runCommands",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Virtual Machine run command.
@@ -44,7 +41,7 @@ interface VirtualMachineRunCommands {
   getByVirtualMachine is ArmResourceRead<
     VirtualMachineRunCommand,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
 
       /**
        * The expand expression to apply on the operation.
@@ -62,7 +59,7 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to update the run command.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate
@@ -71,6 +68,9 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to delete the run command.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<VirtualMachineRunCommand>;
 
   /**
@@ -81,7 +81,7 @@ interface VirtualMachineRunCommands {
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
 
       /**
        * The expand expression to apply on the operation.
@@ -98,14 +98,17 @@ interface VirtualMachineRunCommands {
     VirtualMachineRunCommand,
     LocationScope<VirtualMachineRunCommand>,
     {
-      ...BaseParameters<VirtualMachineRunCommand>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
       ...LocationResourceParameter;
     }
   >;
 }
 
+@@doc(VirtualMachineRunCommand.name,
+  "The name of the virtual machine run command."
+);
 @@encodedName(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "runCommand"
 );
 @@extension(VirtualMachineRunCommands.createOrUpdate::parameters.resource,
@@ -116,7 +119,7 @@ interface VirtualMachineRunCommands {
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
 @@encodedName(VirtualMachineRunCommands.update::parameters.properties,
-  "json",
+  "application/json",
   "runCommand"
 );
 @@extension(VirtualMachineRunCommands.update::parameters.properties,

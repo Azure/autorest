@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleEligibilityScheduleRequestProperties
 )
-model RoleEligibilityScheduleRequest extends ExtensionResourceBase {
-  /**
-   * The name (guid) of the role eligibility schedule request to get.
-   */
-  @path
-  @key("roleEligibilityScheduleRequestName")
-  @segment("roleEligibilityScheduleRequests")
-  @visibility("read")
-  name: string;
+model RoleEligibilityScheduleRequest extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleEligibilityScheduleRequest,
+    KeyName = "roleEligibilityScheduleRequestName",
+    SegmentName = "roleEligibilityScheduleRequests",
+    NamePattern = ""
+  >;
 
   /**
    * Role eligibility schedule request properties.
@@ -57,7 +54,7 @@ interface RoleEligibilityScheduleRequests {
   listForScope is ArmResourceListByParent<
     RoleEligibilityScheduleRequest,
     {
-      ...ExtensionBaseParameters;
+      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver.
@@ -82,8 +79,11 @@ interface RoleEligibilityScheduleRequests {
   >;
 }
 
+@@doc(RoleEligibilityScheduleRequest.name,
+  "The name (guid) of the role eligibility schedule request to get."
+);
 @@encodedName(RoleEligibilityScheduleRequests.create::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.create::parameters.resource,
@@ -94,7 +94,7 @@ interface RoleEligibilityScheduleRequests {
   "Parameters for the role eligibility schedule request."
 );
 @@encodedName(RoleEligibilityScheduleRequests.validate::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RoleEligibilityScheduleRequests.validate::parameters.body,

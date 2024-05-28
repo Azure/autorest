@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,15 +17,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(BatchEndpoint)
-model BatchEndpointTrackedResource extends TrackedResourceBase {
-  /**
-   * Name for the Batch Endpoint.
-   */
-  @path
-  @key("endpointName")
-  @segment("batchEndpoints")
-  @visibility("read")
-  name: string;
+model BatchEndpointTrackedResource extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = BatchEndpointTrackedResource,
+    KeyName = "endpointName",
+    SegmentName = "batchEndpoints",
+    NamePattern = ""
+  >;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
@@ -39,8 +36,8 @@ model BatchEndpointTrackedResource extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: BatchEndpoint;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -63,7 +60,7 @@ interface BatchEndpointTrackedResources {
    * Update a batch inference endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("BatchEndpoints_Update")
   update is ArmCustomPatchAsync<
     BatchEndpointTrackedResource,
@@ -74,6 +71,9 @@ interface BatchEndpointTrackedResources {
    * Delete Batch Inference Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("BatchEndpoints_Delete")
   delete is ArmResourceDeleteAsync<BatchEndpointTrackedResource>;
 
@@ -85,7 +85,7 @@ interface BatchEndpointTrackedResources {
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
     {
-      ...BaseParameters<BatchEndpointTrackedResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BatchEndpointTrackedResource>;
 
       /**
        * Number of endpoints to be retrieved in a page of results.
@@ -113,8 +113,9 @@ interface BatchEndpointTrackedResources {
   >;
 }
 
+@@doc(BatchEndpointTrackedResource.name, "Name for the Batch Endpoint.");
 @@encodedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
@@ -125,7 +126,7 @@ interface BatchEndpointTrackedResources {
   "Batch inference endpoint definition object."
 );
 @@encodedName(BatchEndpointTrackedResources.update::parameters.properties,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(BatchEndpointTrackedResources.update::parameters.properties,

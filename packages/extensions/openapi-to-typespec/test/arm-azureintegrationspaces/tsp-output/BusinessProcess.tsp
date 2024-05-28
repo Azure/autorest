@@ -7,7 +7,6 @@ import "./Application.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,14 @@ namespace Microsoft.IntegrationSpaces;
  * A business process under application.
  */
 @parentResource(Application)
-model BusinessProcess is ProxyResource<BusinessProcessProperties> {
-  /**
-   * The name of the business process
-   */
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
-  @key("businessProcessName")
-  @segment("businessProcesses")
-  @visibility("read")
-  name: string;
+model BusinessProcess
+  is Azure.ResourceManager.ProxyResource<BusinessProcessProperties> {
+  ...ResourceNameParameter<
+    Resource = BusinessProcess,
+    KeyName = "businessProcessName",
+    SegmentName = "businessProcesses",
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
+  >;
 }
 
 @armResourceOperations
@@ -43,21 +40,24 @@ interface BusinessProcesses {
   /**
    * Update a BusinessProcess
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<BusinessProcess, BusinessProcessUpdate>;
 
   /**
    * Delete a BusinessProcess
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<BusinessProcess>;
 
   /**
    * List BusinessProcess resources by Application
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
     {
-      ...BaseParameters<BusinessProcess>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BusinessProcess>;
 
       /**
        * The number of result items to return.
@@ -112,3 +112,5 @@ interface BusinessProcesses {
     }
   >;
 }
+
+@@doc(BusinessProcess.name, "The name of the business process");

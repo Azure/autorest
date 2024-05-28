@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(Datastore)
-model DatastoreResource extends ProxyResourceBase {
-  /**
-   * Datastore name.
-   */
-  @path
-  @key("name")
-  @segment("datastores")
-  @visibility("read")
-  name: string;
+model DatastoreResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DatastoreResource,
+    KeyName = "name",
+    SegmentName = "datastores",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -54,7 +51,7 @@ interface DatastoreResources {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
     {
-      ...BaseParameters<DatastoreResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
 
       /**
        * Flag to skip validation.
@@ -68,6 +65,7 @@ interface DatastoreResources {
    * Delete datastore.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
 
@@ -79,7 +77,7 @@ interface DatastoreResources {
   list is ArmResourceListByParent<
     DatastoreResource,
     {
-      ...BaseParameters<DatastoreResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
 
       /**
        * Continuation token for pagination.
@@ -140,8 +138,9 @@ interface DatastoreResources {
   >;
 }
 
+@@doc(DatastoreResource.name, "Datastore name.");
 @@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DatastoreResources.createOrUpdate::parameters.resource,

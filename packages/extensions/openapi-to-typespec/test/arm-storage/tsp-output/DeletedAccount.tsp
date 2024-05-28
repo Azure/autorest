@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,19 +13,25 @@ namespace Microsoft.Storage;
 /**
  * Deleted storage account
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
-model DeletedAccount is ProxyResource<DeletedAccountProperties> {
+@parentResource(SubscriptionLocationResource)
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(DeletedAccountProperties)
+model DeletedAccount extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DeletedAccount,
+    KeyName = "deletedAccountName",
+    SegmentName = "deletedAccounts",
+    NamePattern = ""
+  >;
+
   /**
-   * Name of the deleted storage account.
+   * Properties of the deleted account.
    */
-  @maxLength(24)
-  @minLength(3)
-  @path
-  @key("deletedAccountName")
-  @segment("deletedAccounts")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedAccountProperties;
 }
 
 @armResourceOperations
@@ -41,3 +46,7 @@ interface DeletedAccounts {
    */
   list is ArmListBySubscription<DeletedAccount>;
 }
+
+@@maxLength(DeletedAccount.name, 24);
+@@minLength(DeletedAccount.name, 3);
+@@doc(DeletedAccount.name, "Name of the deleted storage account.");

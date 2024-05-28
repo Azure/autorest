@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,9 +14,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tenant Settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model TenantSettingsContract
-  is ProxyResource<TenantSettingsContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  TenantSettingsContractProperties
+)
+model TenantSettingsContract extends Foundations.ProxyResource {
   /**
    * The identifier of the settings.
    */
@@ -26,6 +30,12 @@ model TenantSettingsContract
   @segment("settings")
   @visibility("read")
   name: SettingsTypeName;
+
+  /**
+   * TenantSettings entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TenantSettingsContractProperties;
 }
 
 @armResourceOperations
@@ -33,15 +43,19 @@ interface TenantSettingsContracts {
   /**
    * Get tenant settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantSettings_Get")
   get is ArmResourceRead<TenantSettingsContract>;
 
   /**
    * Public settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantSettings_ListByService")
   listByService is ArmResourceListByParent<
     TenantSettingsContract,
     {
-      ...BaseParameters<TenantSettingsContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TenantSettingsContract>;
 
       /**
        * Not used

@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,19 +14,24 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model IssueContract is ProxyResource<IssueContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(IssueContractProperties)
+model IssueContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = IssueContract,
+    KeyName = "issueId",
+    SegmentName = "issues",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
+
   /**
-   * Issue identifier. Must be unique in the current API Management service instance.
+   * Properties of the Issue.
    */
-  @maxLength(256)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("issueId")
-  @segment("issues")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: IssueContractProperties;
 }
 
 @armResourceOperations
@@ -35,10 +39,12 @@ interface IssueContracts {
   /**
    * Gets the details of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_Get")
   get is ArmResourceRead<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * Expand the comment attachments.
@@ -51,7 +57,9 @@ interface IssueContracts {
   /**
    * Gets the entity state (Etag) version of the Issue for an API specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiIssue_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<IssueContract, BaseParameters<IssueContract>>,
   ): OkResponse | ErrorResponse;
@@ -59,10 +67,12 @@ interface IssueContracts {
   /**
    * Creates a new Issue for an API or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -75,12 +85,14 @@ interface IssueContracts {
   /**
    * Updates an existing issue for an API.
    */
-  @parameterVisibility("read")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility
+  @operationId("ApiIssue_Update")
   update is ArmCustomPatchSync<
     IssueContract,
     IssueUpdateContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -93,10 +105,13 @@ interface IssueContracts {
   /**
    * Deletes the specified Issue from an API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("ApiIssue_Delete")
   delete is ArmResourceDeleteSync<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -109,10 +124,12 @@ interface IssueContracts {
   /**
    * Lists all issues associated with the specified API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiIssue_ListByService")
   listByService is ArmResourceListByParent<
     IssueContract,
     {
-      ...BaseParameters<IssueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<IssueContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>
@@ -142,5 +159,26 @@ interface IssueContracts {
   >;
 }
 
+@@maxLength(IssueContract.name, 256);
+@@minLength(IssueContract.name, 1);
+@@doc(IssueContract.name,
+  "Issue identifier. Must be unique in the current API Management service instance."
+);
+@@encodedName(IssueContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(IssueContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IssueContracts.createOrUpdate::parameters.resource, "Create parameters.");
+@@encodedName(IssueContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(IssueContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(IssueContracts.update::parameters.properties, "Update parameters.");

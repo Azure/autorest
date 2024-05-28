@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,8 +14,14 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Notification details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model NotificationContract is ProxyResource<NotificationContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  NotificationContractProperties
+)
+model NotificationContract extends Foundations.ProxyResource {
   /**
    * Notification Name Identifier.
    */
@@ -25,6 +30,12 @@ model NotificationContract is ProxyResource<NotificationContractProperties> {
   @segment("notifications")
   @visibility("read")
   name: NotificationName;
+
+  /**
+   * Notification entity contract properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NotificationContractProperties;
 }
 
 @armResourceOperations
@@ -32,15 +43,19 @@ interface NotificationContracts {
   /**
    * Gets the details of the Notification specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
 
   /**
    * Create or Update API Management publisher notification.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Notification_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
     {
-      ...BaseParameters<NotificationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -53,10 +68,12 @@ interface NotificationContracts {
   /**
    * Lists a collection of properties defined within a service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Notification_ListByService")
   listByService is ArmResourceListByParent<
     NotificationContract,
     {
-      ...BaseParameters<NotificationContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
 
       /**
        * Number of records to return.
@@ -77,6 +94,8 @@ interface NotificationContracts {
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
   // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NotificationRecipientUser_ListByNotification")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
   listByNotification(
@@ -105,6 +124,8 @@ interface NotificationContracts {
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
   // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NotificationRecipientEmail_ListByNotification")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get
   listByNotification(

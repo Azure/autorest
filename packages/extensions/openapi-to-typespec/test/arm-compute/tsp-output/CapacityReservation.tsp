@@ -7,7 +7,6 @@ import "./CapacityReservationGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(CapacityReservationGroup)
 @includeInapplicableMetadataInPayload(false)
 model CapacityReservation extends Resource {
-  /**
-   * The name of the capacity reservation.
-   */
-  @path
-  @key("capacityReservationName")
-  @segment("capacityReservations")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CapacityReservation,
+    KeyName = "capacityReservationName",
+    SegmentName = "capacityReservations",
+    NamePattern = ""
+  >;
 
   /**
    * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.
@@ -54,7 +51,7 @@ interface CapacityReservations {
   get is ArmResourceRead<
     CapacityReservation,
     {
-      ...BaseParameters<CapacityReservation>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservation>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.
@@ -72,12 +69,15 @@ interface CapacityReservations {
   /**
    * The operation to update a capacity reservation.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<CapacityReservation, CapacityReservationUpdate>;
 
   /**
    * The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<CapacityReservation>;
 
   /**
@@ -88,8 +88,9 @@ interface CapacityReservations {
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 
+@@doc(CapacityReservation.name, "The name of the capacity reservation.");
 @@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservations.createOrUpdate::parameters.resource,
@@ -100,7 +101,7 @@ interface CapacityReservations {
   "Parameters supplied to the Create capacity reservation."
 );
 @@encodedName(CapacityReservations.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservations.update::parameters.properties,

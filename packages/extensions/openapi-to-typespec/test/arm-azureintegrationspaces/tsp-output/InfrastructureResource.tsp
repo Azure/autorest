@@ -7,7 +7,6 @@ import "./Space.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -17,16 +16,13 @@ namespace Microsoft.IntegrationSpaces;
  */
 @parentResource(Space)
 model InfrastructureResource
-  is ProxyResource<InfrastructureResourceProperties> {
-  /**
-   * The name of the infrastructure resource in the space.
-   */
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
-  @key("infrastructureResourceName")
-  @segment("infrastructureResources")
-  @visibility("read")
-  name: string;
+  is Azure.ResourceManager.ProxyResource<InfrastructureResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = InfrastructureResource,
+    KeyName = "infrastructureResourceName",
+    SegmentName = "infrastructureResources",
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
+  >;
 }
 
 @armResourceOperations
@@ -44,7 +40,7 @@ interface InfrastructureResources {
   /**
    * Update a InfrastructureResource
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<
     InfrastructureResource,
     InfrastructureResourceUpdate
@@ -53,15 +49,18 @@ interface InfrastructureResources {
   /**
    * Delete a InfrastructureResource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<InfrastructureResource>;
 
   /**
    * List InfrastructureResource resources by Space
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("InfrastructureResources_ListBySpace")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
     {
-      ...BaseParameters<InfrastructureResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<InfrastructureResource>;
 
       /**
        * The number of result items to return.
@@ -116,3 +115,7 @@ interface InfrastructureResources {
     }
   >;
 }
+
+@@doc(InfrastructureResource.name,
+  "The name of the infrastructure resource in the space."
+);

@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetExtension extends SubResourceReadOnly {
-  /**
-   * The name of the VM scale set extension.
-   */
-  @path
-  @key("vmssExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetExtension,
+    KeyName = "vmssExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource type
@@ -50,7 +47,7 @@ interface VirtualMachineScaleSetExtensions {
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set containing the extension.
@@ -72,7 +69,7 @@ interface VirtualMachineScaleSetExtensions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be create or updated.
@@ -85,12 +82,12 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to update an extension.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be updated.
@@ -103,10 +100,13 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to delete the extension.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set where the extension should be deleted.
@@ -124,7 +124,7 @@ interface VirtualMachineScaleSetExtensions {
   list is ArmResourceListByParent<
     VirtualMachineScaleSetExtension,
     {
-      ...BaseParameters<VirtualMachineScaleSetExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
        * The name of the VM scale set containing the extension.
@@ -135,8 +135,11 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
+@@doc(VirtualMachineScaleSetExtension.name,
+  "The name of the VM scale set extension."
+);
 @@encodedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
@@ -147,7 +150,7 @@ interface VirtualMachineScaleSetExtensions {
   "Parameters supplied to the Create VM scale set Extension operation."
 );
 @@encodedName(VirtualMachineScaleSetExtensions.update::parameters.properties,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineScaleSetExtensions.update::parameters.properties,

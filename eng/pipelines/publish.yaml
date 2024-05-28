@@ -7,66 +7,76 @@ trigger:
   - main
   - release/*
 
-pool:
-  vmImage: "ubuntu-latest"
+extends:
+  template: /eng/pipelines/templates/1es-redirect.yml
+  parameters:
+    authenticatedContainerRegistries:
+      - serviceConnection: azsdkengsys
+    stages:
+      - stage: npm
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - job: stable
+            displayName: Publish stable
+            steps:
+              - template: /eng/pipelines/templates/build.yaml
 
-stages:
-  - stage: npm
-    jobs:
-      - job: stable
-        displayName: Publish stable
-        steps:
-          - template: ./templates/build.yaml
+              - script: npx @microsoft/rush publish --publish --pack --include-all
+                displayName: Pack packages
 
-          - script: npx @microsoft/rush publish --publish --pack --include-all
-            displayName: Pack packages
+              - script: |
+                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
+                displayName: Publish packages
 
-          - script: |
-              NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
-            displayName: Publish packages
+          - job: prerelease
+            displayName: Publish prerelease
+            dependsOn: stable # Publish prerelease after to prevent race condition.
+            steps:
+              - template: /eng/pipelines/templates/build.yaml
 
-      - job: prerelease
-        displayName: Publish prerelease
-        dependsOn: stable # Publish prerelease after to prevent race condition.
-        steps:
-          - template: ./templates/build.yaml
+              - script: node ./eng/bump-for-prerelease.js
+                displayName: Bump version to prerelease targets
 
-          - script: node ./eng/bump-for-prerelease.js
-            displayName: Bump version to prerelease targets
-
-          - script: |
-              NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
-            displayName: Publish packages
-  - stage: Docker
-    dependsOn: npm
-    jobs:
-      - template: ./templates/build-and-push-docker.yaml
-        parameters:
-          name: base
-          image: azsdkengsys.azurecr.io/azuresdk/autorest
-          dockerFolder: ./docker/base/ubuntu
-          readmePath: docker/base/readme.md
-      - template: ./templates/build-and-push-docker.yaml
-        parameters:
-          name: dotnet
-          image: azsdkengsys.azurecr.io/azuresdk/autorest-dotnet
-          dockerFolder: ./docker/dotnet/ubuntu
-          readmePath: docker/dotnet/readme.md
-      - template: ./templates/build-and-push-docker.yaml
-        parameters:
-          name: python
-          image: azsdkengsys.azurecr.io/azuresdk/autorest-python
-          dockerFolder: ./docker/python/ubuntu
-          readmePath: docker/python/readme.md
-      - template: ./templates/build-and-push-docker.yaml
-        parameters:
-          name: java
-          image: azsdkengsys.azurecr.io/azuresdk/autorest-java
-          dockerFolder: ./docker/java/ubuntu
-          readmePath: docker/java/readme.md
-      - template: ./templates/build-and-push-docker.yaml
-        parameters:
-          name: all
-          image: azsdkengsys.azurecr.io/azuresdk/autorest-all
-          dockerFolder: ./docker/all/ubuntu
-          readmePath: docker/all/readme.md
+              - script: |
+                  NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
+                displayName: Publish packages
+      - stage: Docker
+        dependsOn: npm
+        pool:
+          name: $(LINUXPOOL)
+          image: $(LINUXVMIMAGE)
+          os: linux
+        jobs:
+          - template: /eng/pipelines/templates/build-and-push-docker.yaml
+            parameters:
+              name: base
+              image: azsdkengsys.azurecr.io/azuresdk/autorest
+              dockerFolder: ./docker/base/ubuntu
+              readmePath: docker/base/readme.md
+          - template: /eng/pipelines/templates/build-and-push-docker.yaml
+            parameters:
+              name: dotnet
+              image: azsdkengsys.azurecr.io/azuresdk/autorest-dotnet
+              dockerFolder: ./docker/dotnet/ubuntu
+              readmePath: docker/dotnet/readme.md
+          - template: /eng/pipelines/templates/build-and-push-docker.yaml
+            parameters:
+              name: python
+              image: azsdkengsys.azurecr.io/azuresdk/autorest-python
+              dockerFolder: ./docker/python/ubuntu
+              readmePath: docker/python/readme.md
+          - template: /eng/pipelines/templates/build-and-push-docker.yaml
+            parameters:
+              name: java
+              image: azsdkengsys.azurecr.io/azuresdk/autorest-java
+              dockerFolder: ./docker/java/ubuntu
+              readmePath: docker/java/readme.md
+          - template: /eng/pipelines/templates/build-and-push-docker.yaml
+            parameters:
+              name: all
+              image: azsdkengsys.azurecr.io/azuresdk/autorest-all
+              dockerFolder: ./docker/all/ubuntu
+              readmePath: docker/all/readme.md

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
+    "resourceGroupName": "examples-rg",
+    "subResourceName": "farmbeats",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "farmbeats",
+        "type": "Microsoft.AgFoodPlatform/farmBeats/privateLinkResources",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-farmbeatsResourceName",
+        "properties": {
+          "groupId": "farmbeats",
+          "requiredMembers": [
+            "farmbeats"
+          ],
+          "requiredZoneNames": [
+            "privatelink.farmbeats.azure.net"
+          ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Resource with subscriptionId '11111111-2222-3333-4444-555555555555', resource group 'examples-rg' and resourcename 'examples-farmbeatsResourceName' not found."
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "PrivateLinkResources_Get"
+}

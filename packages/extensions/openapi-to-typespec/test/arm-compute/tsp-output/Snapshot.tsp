@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model Snapshot extends Resource {
-  /**
-   * The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.
-   */
-  @path
-  @key("snapshotName")
-  @segment("snapshots")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Snapshot,
+    KeyName = "snapshotName",
+    SegmentName = "snapshots",
+    NamePattern = ""
+  >;
 
   /**
    * Unused. Always Null.
@@ -65,12 +62,15 @@ interface Snapshots {
   /**
    * Updates (patches) a snapshot.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Snapshot, SnapshotUpdate>;
 
   /**
    * Deletes a snapshot.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Snapshot>;
 
   /**
@@ -96,8 +96,11 @@ interface Snapshots {
   revokeAccess is ArmResourceActionAsync<Snapshot, void, void>;
 }
 
+@@doc(Snapshot.name,
+  "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
+);
 @@encodedName(Snapshots.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "snapshot"
 );
 @@extension(Snapshots.createOrUpdate::parameters.resource,
@@ -107,7 +110,10 @@ interface Snapshots {
 @@doc(Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@encodedName(Snapshots.update::parameters.properties, "json", "snapshot");
+@@encodedName(Snapshots.update::parameters.properties,
+  "application/json",
+  "snapshot"
+);
 @@extension(Snapshots.update::parameters.properties,
   "x-ms-client-name",
   "snapshot"
@@ -116,7 +122,7 @@ interface Snapshots {
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
 @@encodedName(Snapshots.grantAccess::parameters.body,
-  "json",
+  "application/json",
   "grantAccessData"
 );
 @@extension(Snapshots.grantAccess::parameters.body,

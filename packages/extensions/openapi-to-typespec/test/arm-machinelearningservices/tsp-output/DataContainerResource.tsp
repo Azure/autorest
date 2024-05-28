@@ -7,7 +7,6 @@ import "./Registry.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Registry)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DataContainer)
-model DataContainerResource extends ProxyResourceBase {
-  /**
-   * Container name.
-   */
-  @path
-  @key("name")
-  @segment("data")
-  @visibility("read")
-  name: string;
+model DataContainerResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataContainerResource,
+    KeyName = "name",
+    SegmentName = "data",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,6 +54,9 @@ interface DataContainerResources {
    * Delete container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryDataContainers_Delete")
   delete is ArmResourceDeleteAsync<DataContainerResource>;
 
@@ -68,7 +68,7 @@ interface DataContainerResources {
   list is ArmResourceListByParent<
     DataContainerResource,
     {
-      ...BaseParameters<DataContainerResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DataContainerResource>;
 
       /**
        * Continuation token for pagination.
@@ -85,8 +85,9 @@ interface DataContainerResources {
   >;
 }
 
+@@doc(DataContainerResource.name, "Container name.");
 @@encodedName(DataContainerResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DataContainerResources.createOrUpdate::parameters.resource,

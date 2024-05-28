@@ -1,0 +1,4403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Sphere resource management API.",
+    "version": "2022-09-01-preview",
+    "description": "Azure Sphere resource management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Catalogs"
+    },
+    {
+      "name": "Certificates"
+    },
+    {
+      "name": "Images"
+    },
+    {
+      "name": "Products"
+    },
+    {
+      "name": "DeviceGroups"
+    },
+    {
+      "name": "Deployments"
+    },
+    {
+      "name": "Devices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureSphere/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/catalogs": {
+      "get": {
+        "operationId": "Catalogs_ListBySubscription",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "List Catalog resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListBySubscription": {
+            "$ref": "./examples/Catalogs_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs": {
+      "get": {
+        "operationId": "Catalogs_ListByResourceGroup",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "List Catalog resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListByResourceGroup": {
+            "$ref": "./examples/Catalogs_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}": {
+      "get": {
+        "operationId": "Catalogs_Get",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Get a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Get": {
+            "$ref": "./examples/Catalogs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Catalogs_CreateOrUpdate",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Create a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Catalog' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "201": {
+            "description": "Resource 'Catalog' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_CreateOrUpdate": {
+            "$ref": "./examples/Catalogs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Catalogs_Update",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Update a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Update": {
+            "$ref": "./examples/Catalogs_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Catalogs_Delete",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Delete a Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_Delete": {
+            "$ref": "./examples/Catalogs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates": {
+      "get": {
+        "operationId": "Certificates_ListByCatalog",
+        "tags": [
+          "Certificates"
+        ],
+        "description": "List Certificate resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_ListByCatalog": {
+            "$ref": "./examples/Certificates_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}": {
+      "get": {
+        "operationId": "Certificates_Get",
+        "tags": [
+          "Certificates"
+        ],
+        "description": "Get a Certificate",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Get": {
+            "$ref": "./examples/Certificates_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveCertChain": {
+      "post": {
+        "operationId": "Certificates_RetrieveCertChain",
+        "tags": [
+          "Certificates"
+        ],
+        "description": "Retrieves cert chain.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateChainResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_RetrieveCertChain": {
+            "$ref": "./examples/Certificates_RetrieveCertChain.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/certificates/{serialNumber}/retrieveProofOfPossessionNonce": {
+      "post": {
+        "operationId": "Certificates_RetrieveProofOfPossessionNonce",
+        "tags": [
+          "Certificates"
+        ],
+        "description": "Gets the proof of possession nonce.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Proof of possession nonce request body ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProofOfPossessionNonceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProofOfPossessionNonceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_RetrieveProofOfPossessionNonce": {
+            "$ref": "./examples/Certificates_RetrieveProofOfPossessionNonce.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices": {
+      "post": {
+        "operationId": "Catalogs_CountDevices",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Counts devices in catalog.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CountDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_CountDevices": {
+            "$ref": "./examples/Catalogs_CountDevices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images": {
+      "get": {
+        "operationId": "Images_ListByCatalog",
+        "tags": [
+          "Images"
+        ],
+        "description": "List Image resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListByCatalog": {
+            "$ref": "./examples/Images_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}": {
+      "get": {
+        "operationId": "Images_Get",
+        "tags": [
+          "Images"
+        ],
+        "description": "Get a Image",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "Image name. Use .default for image creation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_Get": {
+            "$ref": "./examples/Images_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Images_CreateOrUpdate",
+        "tags": [
+          "Images"
+        ],
+        "description": "Create a Image",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "Image name. Use .default for image creation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Image' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Resource 'Image' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Image_CreateOrUpdate": {
+            "$ref": "./examples/Images_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Images_Delete",
+        "tags": [
+          "Images"
+        ],
+        "description": "Delete a Image",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "Image name. Use .default for image creation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_Delete": {
+            "$ref": "./examples/Images_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeployments": {
+      "post": {
+        "operationId": "Catalogs_ListDeployments",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Lists deployments for catalog.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListDeployments": {
+            "$ref": "./examples/Catalogs_ListDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceGroups": {
+      "post": {
+        "operationId": "Catalogs_ListDeviceGroups",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "List the device groups for the catalog.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List device groups for catalog.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListDeviceGroupsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListDeviceGroups": {
+            "$ref": "./examples/Catalogs_ListDeviceGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceInsights": {
+      "post": {
+        "operationId": "Catalogs_ListDeviceInsights",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Lists device insights for catalog.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceInsight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListDeviceInsights": {
+            "$ref": "./examples/Catalogs_ListDeviceInsights.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDevices": {
+      "post": {
+        "operationId": "Catalogs_ListDevices",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Lists devices for catalog.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_ListDevices": {
+            "$ref": "./examples/Catalogs_ListDevices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products": {
+      "get": {
+        "operationId": "Products_ListByCatalog",
+        "tags": [
+          "Products"
+        ],
+        "description": "List Product resources by Catalog",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_ListByCatalog": {
+            "$ref": "./examples/Products_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}": {
+      "get": {
+        "operationId": "Products_Get",
+        "tags": [
+          "Products"
+        ],
+        "description": "Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_Get": {
+            "$ref": "./examples/Products_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Products_CreateOrUpdate",
+        "tags": [
+          "Products"
+        ],
+        "description": "Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Product' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Resource 'Product' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_CreateOrUpdate": {
+            "$ref": "./examples/Products_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Products_Update",
+        "tags": [
+          "Products"
+        ],
+        "description": "Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_Update": {
+            "$ref": "./examples/Products_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Products_Delete",
+        "tags": [
+          "Products"
+        ],
+        "description": "Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_Delete": {
+            "$ref": "./examples/Products_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices": {
+      "post": {
+        "operationId": "Products_CountDevices",
+        "tags": [
+          "Products"
+        ],
+        "description": "Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CountDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_CountDevices": {
+            "$ref": "./examples/Products_CountDevices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups": {
+      "get": {
+        "operationId": "DeviceGroups_ListByProduct",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_ListByProduct": {
+            "$ref": "./examples/DeviceGroups_ListByProduct.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}": {
+      "get": {
+        "operationId": "DeviceGroups_Get",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_Get": {
+            "$ref": "./examples/DeviceGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceGroups_CreateOrUpdate",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeviceGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeviceGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_CreateOrUpdate": {
+            "$ref": "./examples/DeviceGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeviceGroups_Update",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_Update": {
+            "$ref": "./examples/DeviceGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DeviceGroups_Delete",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_Delete": {
+            "$ref": "./examples/DeviceGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/claimDevices": {
+      "post": {
+        "operationId": "DeviceGroups_ClaimDevices",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Bulk claim devices request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClaimDevicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_ClaimDevices": {
+            "$ref": "./examples/DeviceGroups_ClaimDevices.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices": {
+      "post": {
+        "operationId": "DeviceGroups_CountDevices",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CountDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_CountDevices": {
+            "$ref": "./examples/DeviceGroups_CountDevices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments": {
+      "get": {
+        "operationId": "Deployments_ListByDeviceGroup",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_ListByDeviceGroup": {
+            "$ref": "./examples/Deployments_ListByDeviceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "Deployments_Get",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Deployments_CreateOrUpdate",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Deployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'Deployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_CreateOrUpdate": {
+            "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Deployments_Delete",
+        "tags": [
+          "Deployments"
+        ],
+        "description": "Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices": {
+      "get": {
+        "operationId": "Devices_ListByDeviceGroup",
+        "tags": [
+          "Devices"
+        ],
+        "description": "List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_ListByDeviceGroup": {
+            "$ref": "./examples/Devices_ListByDeviceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}": {
+      "get": {
+        "operationId": "Devices_Get",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Device name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_Get": {
+            "$ref": "./examples/Devices_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_CreateOrUpdate",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Device name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Device' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "201": {
+            "description": "Resource 'Device' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_CreateOrUpdate": {
+            "$ref": "./examples/Devices_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Devices_Update",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Device name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_Update": {
+            "$ref": "./examples/Devices_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Devices_Delete",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Delete a Device",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Device name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_Delete": {
+            "$ref": "./examples/Devices_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}/generateCapabilityImage": {
+      "post": {
+        "operationId": "Devices_GenerateCapabilityImage",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "Device name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Generate capability image request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateCapabilityImageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SignedCapabilityImageResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Devices_GenerateCapabilityImage": {
+            "$ref": "./examples/Devices_GenerateCapabilityImage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/generateDefaultDeviceGroups": {
+      "post": {
+        "operationId": "Products_GenerateDefaultDeviceGroups",
+        "tags": [
+          "Products"
+        ],
+        "description": "Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Products_GenerateDefaultDeviceGroups": {
+            "$ref": "./examples/Products_GenerateDefaultDeviceGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllowCrashDumpCollection": {
+      "type": "string",
+      "description": "Allow crash dumps values.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AllowCrashDumpCollection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Crash dump collection enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Crash dump collection disabled"
+          }
+        ]
+      }
+    },
+    "CapabilityType": {
+      "type": "string",
+      "description": "Capability image type",
+      "enum": [
+        "ApplicationDevelopment",
+        "FieldServicing"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplicationDevelopment",
+            "value": "ApplicationDevelopment",
+            "description": "Application development capability"
+          },
+          {
+            "name": "FieldServicing",
+            "value": "FieldServicing",
+            "description": "Field servicing capability"
+          }
+        ]
+      }
+    },
+    "Catalog": {
+      "type": "object",
+      "description": "An Azure Sphere catalog",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CatalogProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CatalogListResult": {
+      "type": "object",
+      "description": "The response of a Catalog list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Catalog items on this page",
+          "items": {
+            "$ref": "#/definitions/Catalog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CatalogProperties": {
+      "type": "object",
+      "description": "Catalog properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Catalog.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "An certificate resource belonging to a catalog resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateChainResponse": {
+      "type": "object",
+      "description": "The certificate chain response.",
+      "properties": {
+        "certificateChain": {
+          "type": "string",
+          "description": "The certificate chain.",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateListResult": {
+      "type": "object",
+      "description": "The response of a Certificate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Certificate items on this page",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CertificateProperties": {
+      "type": "object",
+      "description": "The properties of certificate",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "The certificate as a UTF-8 encoded base 64 string.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateStatus",
+          "description": "The certificate status.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "The certificate subject.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The certificate thumbprint.",
+          "readOnly": true
+        },
+        "expiryUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate expiry date.",
+          "readOnly": true
+        },
+        "notBeforeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate not before date.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateStatus": {
+      "type": "string",
+      "description": "Certificate status values.",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Expired",
+        "Revoked"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Certificate is active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Certificate is inactive"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Certificate has expired"
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Certificate has been revoked"
+          }
+        ]
+      }
+    },
+    "ClaimDevicesRequest": {
+      "type": "object",
+      "description": "Request to the action call to bulk claim devices.",
+      "properties": {
+        "deviceIdentifiers": {
+          "type": "array",
+          "description": "Device identifiers of the devices to be claimed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "deviceIdentifiers"
+      ]
+    },
+    "CountDeviceResponse": {
+      "type": "object",
+      "description": "Response to the action call for count devices in a catalog.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CountElementsResponse"
+        }
+      ]
+    },
+    "CountElementsResponse": {
+      "type": "object",
+      "description": "Response of the count for elements.",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of children resources in parent resource."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Deployment": {
+      "type": "object",
+      "description": "An deployment resource belonging to a device group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentListResult": {
+      "type": "object",
+      "description": "The response of a Deployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Deployment items on this page",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "description": "The properties of deployment",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Deployment ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deployedImages": {
+          "type": "array",
+          "description": "Images deployed",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentDateUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deployment date UTC",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "An device resource belonging to a device group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceGroup": {
+      "type": "object",
+      "description": "An device group resource belonging to a product resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceGroupProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceGroupListResult": {
+      "type": "object",
+      "description": "The response of a DeviceGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceGroupProperties": {
+      "type": "object",
+      "description": "The properties of deviceGroup",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the device group."
+        },
+        "osFeedType": {
+          "$ref": "#/definitions/OSFeedType",
+          "description": "Operating system feed type of the device group."
+        },
+        "updatePolicy": {
+          "$ref": "#/definitions/UpdatePolicy",
+          "description": "Update policy of the device group."
+        },
+        "allowCrashDumpsCollection": {
+          "$ref": "#/definitions/AllowCrashDumpCollection",
+          "description": "Flag to define if the user allows for crash dump collection."
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for the device group."
+        },
+        "hasDeployment": {
+          "type": "boolean",
+          "description": "Deployment status for the device group.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceGroupUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DeviceGroup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceGroupUpdateProperties",
+          "description": "The updatable properties of the DeviceGroup."
+        }
+      }
+    },
+    "DeviceGroupUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DeviceGroup.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the device group."
+        },
+        "osFeedType": {
+          "$ref": "#/definitions/OSFeedType",
+          "description": "Operating system feed type of the device group."
+        },
+        "updatePolicy": {
+          "$ref": "#/definitions/UpdatePolicy",
+          "description": "Update policy of the device group."
+        },
+        "allowCrashDumpsCollection": {
+          "$ref": "#/definitions/AllowCrashDumpCollection",
+          "description": "Flag to define if the user allows for crash dump collection."
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for the device group."
+        }
+      }
+    },
+    "DeviceInsight": {
+      "type": "object",
+      "description": "Device insight report.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID"
+        },
+        "description": {
+          "type": "string",
+          "description": "Event description"
+        },
+        "startTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event start timestamp"
+        },
+        "endTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event end timestamp"
+        },
+        "eventCategory": {
+          "type": "string",
+          "description": "Event category"
+        },
+        "eventClass": {
+          "type": "string",
+          "description": "Event class"
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Event type"
+        },
+        "eventCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Event count"
+        }
+      },
+      "required": [
+        "deviceId",
+        "description",
+        "startTimestampUtc",
+        "endTimestampUtc",
+        "eventCategory",
+        "eventClass",
+        "eventType",
+        "eventCount"
+      ]
+    },
+    "DeviceListResult": {
+      "type": "object",
+      "description": "The response of a Device list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Device items on this page",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "description": "The properties of device",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "chipSku": {
+          "type": "string",
+          "description": "SKU of the chip",
+          "readOnly": true
+        },
+        "lastAvailableOsVersion": {
+          "type": "string",
+          "description": "OS version available for installation when update requested",
+          "readOnly": true
+        },
+        "lastInstalledOsVersion": {
+          "type": "string",
+          "description": "OS version running on device when update requested",
+          "readOnly": true
+        },
+        "lastOsUpdateUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when update requested and new OS version available",
+          "readOnly": true
+        },
+        "lastUpdateRequestUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when update was last requested",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Device.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceUpdateProperties",
+          "description": "The updatable properties of the Device."
+        }
+      }
+    },
+    "DeviceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Device.",
+      "properties": {
+        "deviceGroupId": {
+          "type": "string",
+          "description": "Device group id"
+        }
+      }
+    },
+    "GenerateCapabilityImageRequest": {
+      "type": "object",
+      "description": "Request of the action to create a signed device capability image",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities to create",
+          "items": {
+            "$ref": "#/definitions/CapabilityType"
+          }
+        }
+      },
+      "required": [
+        "capabilities"
+      ]
+    },
+    "Image": {
+      "type": "object",
+      "description": "An image resource belonging to a catalog resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImageListResult": {
+      "type": "object",
+      "description": "The response of a Image list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Image items on this page",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImageProperties": {
+      "type": "object",
+      "description": "The properties of image",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "imageId": {
+          "type": "string",
+          "description": "Image ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name",
+          "readOnly": true
+        },
+        "regionalDataBoundary": {
+          "$ref": "#/definitions/RegionalDataBoundary",
+          "description": "Regional data boundary for an image",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "description": "Location the image",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The image description.",
+          "readOnly": true
+        },
+        "componentId": {
+          "type": "string",
+          "description": "The image component id.",
+          "readOnly": true
+        },
+        "imageType": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The image type.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageType": {
+      "type": "string",
+      "description": "Image type values.",
+      "enum": [
+        "InvalidImageType",
+        "OneBl",
+        "PlutonRuntime",
+        "WifiFirmware",
+        "SecurityMonitor",
+        "NormalWorldLoader",
+        "NormalWorldDtb",
+        "NormalWorldKernel",
+        "RootFs",
+        "Services",
+        "Applications",
+        "FwConfig",
+        "BootManifest",
+        "Nwfs",
+        "TrustedKeystore",
+        "Policy",
+        "CustomerBoardConfig",
+        "UpdateCertStore",
+        "BaseSystemUpdateManifest",
+        "FirmwareUpdateManifest",
+        "CustomerUpdateManifest",
+        "RecoveryManifest",
+        "ManifestSet",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ImageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidImageType",
+            "value": "InvalidImageType",
+            "description": "Invalid image."
+          },
+          {
+            "name": "OneBl",
+            "value": "OneBl",
+            "description": "One Bl image type"
+          },
+          {
+            "name": "PlutonRuntime",
+            "value": "PlutonRuntime",
+            "description": "Pluton image type"
+          },
+          {
+            "name": "WifiFirmware",
+            "value": "WifiFirmware",
+            "description": "Wifi firmware image type"
+          },
+          {
+            "name": "SecurityMonitor",
+            "value": "SecurityMonitor",
+            "description": "Security monitor image type"
+          },
+          {
+            "name": "NormalWorldLoader",
+            "value": "NormalWorldLoader",
+            "description": "Normal world loader image type"
+          },
+          {
+            "name": "NormalWorldDtb",
+            "value": "NormalWorldDtb",
+            "description": "Normal world dtb image type"
+          },
+          {
+            "name": "NormalWorldKernel",
+            "value": "NormalWorldKernel",
+            "description": "Normal world kernel image type"
+          },
+          {
+            "name": "RootFs",
+            "value": "RootFs",
+            "description": "Root FS image type"
+          },
+          {
+            "name": "Services",
+            "value": "Services",
+            "description": "Services image type"
+          },
+          {
+            "name": "Applications",
+            "value": "Applications",
+            "description": "Applications image type"
+          },
+          {
+            "name": "FwConfig",
+            "value": "FwConfig",
+            "description": "FW config image type"
+          },
+          {
+            "name": "BootManifest",
+            "value": "BootManifest",
+            "description": "Boot manifest image type"
+          },
+          {
+            "name": "Nwfs",
+            "value": "Nwfs",
+            "description": "Nwfs image type"
+          },
+          {
+            "name": "TrustedKeystore",
+            "value": "TrustedKeystore",
+            "description": "Trusted key store image type"
+          },
+          {
+            "name": "Policy",
+            "value": "Policy",
+            "description": "Policy image type"
+          },
+          {
+            "name": "CustomerBoardConfig",
+            "value": "CustomerBoardConfig",
+            "description": "Customer board config image type"
+          },
+          {
+            "name": "UpdateCertStore",
+            "value": "UpdateCertStore",
+            "description": "Update certificate store image type"
+          },
+          {
+            "name": "BaseSystemUpdateManifest",
+            "value": "BaseSystemUpdateManifest",
+            "description": "Base system update manifest image type"
+          },
+          {
+            "name": "FirmwareUpdateManifest",
+            "value": "FirmwareUpdateManifest",
+            "description": "Firmware update manifest image type"
+          },
+          {
+            "name": "CustomerUpdateManifest",
+            "value": "CustomerUpdateManifest",
+            "description": "Customer update manifest image type"
+          },
+          {
+            "name": "RecoveryManifest",
+            "value": "RecoveryManifest",
+            "description": "Recovery manifest image type"
+          },
+          {
+            "name": "ManifestSet",
+            "value": "ManifestSet",
+            "description": "manifest set image type"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other image type"
+          }
+        ]
+      }
+    },
+    "ListDeviceGroupsRequest": {
+      "type": "object",
+      "description": "Request of the action to list device groups for a catalog.",
+      "properties": {
+        "deviceGroupName": {
+          "type": "string",
+          "description": "Device Group name."
+        }
+      }
+    },
+    "OSFeedType": {
+      "type": "string",
+      "description": "OS feed type values.",
+      "enum": [
+        "Retail",
+        "RetailEval"
+      ],
+      "x-ms-enum": {
+        "name": "OSFeedType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retail",
+            "value": "Retail",
+            "description": "Retail OS feed type."
+          },
+          {
+            "name": "RetailEval",
+            "value": "RetailEval",
+            "description": "Retail evaluation OS feed type."
+          }
+        ]
+      }
+    },
+    "PagedDeviceInsight": {
+      "type": "object",
+      "description": "Paged collection of DeviceInsight items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceInsight items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceInsight"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Product": {
+      "type": "object",
+      "description": "An product resource belonging to a catalog resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductListResult": {
+      "type": "object",
+      "description": "The response of a Product list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Product items on this page",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProductProperties": {
+      "type": "object",
+      "description": "The properties of product",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the product"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "ProductUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Product.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductUpdateProperties",
+          "description": "The updatable properties of the Product."
+        }
+      }
+    },
+    "ProductUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Product.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the product"
+        }
+      }
+    },
+    "ProofOfPossessionNonceRequest": {
+      "type": "object",
+      "description": "Request for the proof of possession nonce",
+      "properties": {
+        "proofOfPossessionNonce": {
+          "type": "string",
+          "description": "The proof of possession nonce"
+        }
+      },
+      "required": [
+        "proofOfPossessionNonce"
+      ]
+    },
+    "ProofOfPossessionNonceResponse": {
+      "type": "object",
+      "description": "Result of the action to generate a proof of possession nonce",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateProperties"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegionalDataBoundary": {
+      "type": "string",
+      "description": "Regional data boundary values.",
+      "enum": [
+        "None",
+        "EU"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalDataBoundary",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No data boundary"
+          },
+          {
+            "name": "EU",
+            "value": "EU",
+            "description": "EU data boundary"
+          }
+        ]
+      }
+    },
+    "SignedCapabilityImageResponse": {
+      "type": "object",
+      "description": "Signed device capability image response",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The signed device capability image as a UTF-8 encoded base 64 string.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdatePolicy": {
+      "type": "string",
+      "description": "Update policy values.",
+      "enum": [
+        "UpdateAll",
+        "No3rdPartyAppUpdates"
+      ],
+      "x-ms-enum": {
+        "name": "UpdatePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpdateAll",
+            "value": "UpdateAll",
+            "description": "Update all policy."
+          },
+          {
+            "name": "No3rdPartyAppUpdates",
+            "value": "No3rdPartyAppUpdates",
+            "description": "No update for 3rd party app policy."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

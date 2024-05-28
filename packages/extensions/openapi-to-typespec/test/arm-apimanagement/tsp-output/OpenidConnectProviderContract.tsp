@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,19 +14,26 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * OpenId Connect Provider details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model OpenidConnectProviderContract
-  is ProxyResource<OpenidConnectProviderContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  OpenidConnectProviderContractProperties
+)
+model OpenidConnectProviderContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = OpenidConnectProviderContract,
+    KeyName = "opid",
+    SegmentName = "openidConnectProviders",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
+
   /**
-   * Identifier of the OpenID Connect Provider.
+   * OpenId Connect Provider contract properties.
    */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("opid")
-  @segment("openidConnectProviders")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: OpenidConnectProviderContractProperties;
 }
 
 @armResourceOperations
@@ -35,10 +41,12 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets specific OpenID Connect Provider without secrets.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OpenIdConnectProvider_Get")
   get is ArmResourceRead<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -53,10 +61,12 @@ interface OpenidConnectProviderContracts {
   /**
    * Creates or updates the OpenID Connect Provider.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OpenIdConnectProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -77,12 +87,14 @@ interface OpenidConnectProviderContracts {
   /**
    * Updates the specific OpenID Connect Provider.
    */
-  @parameterVisibility("read")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility
+  @operationId("OpenIdConnectProvider_Update")
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
     OpenidConnectProviderUpdateContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -103,10 +115,13 @@ interface OpenidConnectProviderContracts {
   /**
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -127,10 +142,12 @@ interface OpenidConnectProviderContracts {
   /**
    * Lists of all the OpenId Connect Providers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OpenIdConnectProvider_ListByService")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -156,12 +173,14 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the client secret details of the OpenID Connect Provider.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("OpenIdConnectProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,
     ClientSecretContract,
     {
-      ...BaseParameters<OpenidConnectProviderContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
        * Identifier of the OpenID Connect Provider.
@@ -174,8 +193,28 @@ interface OpenidConnectProviderContracts {
   >;
 }
 
+@@maxLength(OpenidConnectProviderContract.name, 256);
+@@doc(OpenidConnectProviderContract.name,
+  "Identifier of the OpenID Connect Provider."
+);
+@@encodedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(OpenidConnectProviderContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(OpenidConnectProviderContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(OpenidConnectProviderContracts.update::parameters.properties,
   "Update parameters."

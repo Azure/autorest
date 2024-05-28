@@ -1,0 +1,1532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Anomaly Detector Client",
+    "version": "v1.1-preview.1",
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data.\nIt supports two kinds of mode, one is for stateless using, another is for\nstateful using. In stateless mode, there are three functionalities. Entire\nDetect is for detecting the whole series with model trained by the time series,\nLast Detect is detecting last point with model trained by points before.\nChangePoint Detect is for detecting trend changes in time series. In stateful\nmode, user can store time series, the stored time series will be used for\ndetection anomalies. Under this mode, user can still use the above three\nfunctionalities by only giving a time range without preparing time series in\nclient side. Besides the above three functionalities, stateful model also\nprovide group based detection and labeling service. By leveraging labeling\nservice user can provide labels for each detection result, these labels will be\nused for retuning or regenerating detection models. Inconsistency detection is\na kind of group based detection, this detection will find inconsistency ones in\na set of time series. By using anomaly detector service, business customers can\ndiscover incidents and establish a logic flow for root cause analysis.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "$host",
+        "in": "path",
+        "description": "server parameter",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "Endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "ApiVersion",
+        "in": "path",
+        "description": "The available API versions.",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "v1.1-preview.1"
+        ],
+        "x-ms-enum": {
+          "name": "Versions",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "v1_1_preview_1",
+              "value": "v1.1-preview.1",
+              "description": "The v1.1-preview.1 API version."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/multivariate/entire/detect/{resultId}/{resultId}": {
+      "get": {
+        "operationId": "GetDetectionResult",
+        "summary": "Get Multivariate Anomaly Detection Result",
+        "description": "Get multivariate anomaly detection result based on resultId returned by the\nDetectAnomalyAsync api",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multivariate/models": {
+      "get": {
+        "operationId": "ListMultivariateModel",
+        "summary": "List Multivariate Models",
+        "description": "List models of a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModelSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "TrainMultivariateModel",
+        "summary": "Train a Multivariate Anomaly Detection Model",
+        "description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure storage\nUri (preferably a Shared Access Signature Uri). All time-series used in\ngenerate the model must be zipped into one single file. Each time-series will\nbe in a single CSV file in which the first column is timestamp and the second\ncolumn is value.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelInfo"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multivariate/models/{modelId}": {
+      "delete": {
+        "operationId": "DeleteMultivariateModel",
+        "summary": "Delete Multivariate Model",
+        "description": "Delete an existing multivariate model according to the modelId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multivariate/models/{modelId}/{modelId}": {
+      "get": {
+        "operationId": "GetMultivariateModel",
+        "summary": "Get Multivariate Model",
+        "description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multivariate/models/{modelId}/entire/detect": {
+      "post": {
+        "operationId": "DetectAnomaly",
+        "summary": "Detect Multivariate Anomaly",
+        "description": "Submit detection multivariate anomaly task with the trained model of modelId,\nthe input schema should be the same with the training request. Thus request\nwill be complete asynchronously and will return a resultId for querying the\ndetection result.The request should be a source link to indicate an externally\naccessible Azure storage Uri (preferably a Shared Access Signature Uri). All\ntime-series used in generate the model must be zipped into one single file.\nEach time-series will be as follows: the first column is timestamp and the\nsecond column is value.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Detect anomaly request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multivariate/models/{modelId}/last/detect": {
+      "post": {
+        "operationId": "LastDetectAnomaly",
+        "summary": "Detect anomalies in the last a few points of the request body",
+        "description": "Synchronized API for anomaly detection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request for last detection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LastDetectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LastDetectionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timeseries/changepoint/detect": {
+      "post": {
+        "operationId": "DetectChangePoint",
+        "summary": "Detect change point for the entire series",
+        "description": "Evaluate change point score of every series point",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timeseries/entire/detect": {
+      "post": {
+        "operationId": "DetectEntireSeries",
+        "summary": "Detect anomalies for the entire series in batch.",
+        "description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntireDetectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timeseries/last/detect": {
+      "post": {
+        "operationId": "DetectLastPoint",
+        "summary": "Detect anomaly status of the latest point in time series.",
+        "description": "This operation generates a model using points before the latest one. With this\nmethod, only historical points are used to determine whether the target point\nis an anomaly. The latest point detecting operation matches the scenario of\nreal-time monitoring of business metrics.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LastDetectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlignMode": {
+      "type": "string",
+      "description": "An optional field, indicating how we align different variables to the same\ntime-range. Either Inner or Outer.",
+      "enum": [
+        "Inner",
+        "Outer"
+      ],
+      "x-ms-enum": {
+        "name": "AlignMode",
+        "modelAsString": false
+      }
+    },
+    "AlignPolicy": {
+      "type": "object",
+      "description": "An optional field, indicating the manner to align multiple variables.",
+      "properties": {
+        "alignMode": {
+          "$ref": "#/definitions/AlignMode",
+          "description": "An optional field, indicating how we align different variables to the same\ntime-range. Either Inner or Outer."
+        },
+        "fillNAMethod": {
+          "$ref": "#/definitions/FillNAMethod",
+          "description": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to\nNotFill, when the alignMode is Outer."
+        },
+        "paddingValue": {
+          "type": "number",
+          "format": "float",
+          "description": "An optional field. Required when fillNAMethod is Fixed."
+        }
+      }
+    },
+    "AnomalyDetectorError": {
+      "type": "object",
+      "description": "Error information returned by the API.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/AnomalyDetectorErrorCodes",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining the error reported by the service."
+        }
+      }
+    },
+    "AnomalyDetectorErrorCodes": {
+      "type": "string",
+      "description": "The error code.",
+      "enum": [
+        "InvalidCustomInterval",
+        "BadArgument",
+        "InvalidGranularity",
+        "InvalidPeriod",
+        "InvalidModelArgument",
+        "InvalidSeries",
+        "InvalidJsonFormat",
+        "RequiredGranularity",
+        "RequiredSeries",
+        "InvalidImputeMode",
+        "InvalidImputeFixedValue"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyDetectorErrorCodes",
+        "modelAsString": true
+      }
+    },
+    "AnomalyInterpretation": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "string"
+        },
+        "contributionScore": {
+          "type": "number",
+          "format": "float"
+        },
+        "correlationChanges": {
+          "$ref": "#/definitions/CorrelationChanges"
+        }
+      }
+    },
+    "AnomalyState": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "timestamp"
+        },
+        "value": {
+          "$ref": "#/definitions/AnomalyValue"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error message for the current timestamp",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "AnomalyValue": {
+      "type": "object",
+      "properties": {
+        "isAnomaly": {
+          "type": "boolean",
+          "description": "True if an anomaly is detected at the current timestamp."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly.",
+          "maximum": 1
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "Raw score from the model.",
+          "maximum": 2
+        },
+        "interpretation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyInterpretation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "isAnomaly",
+        "severity",
+        "score"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ChangePointDetectRequest": {
+      "type": "object",
+      "description": "The request of change point detection.",
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesPoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "granularity": {
+          "$ref": "#/definitions/TimeGranularity",
+          "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid."
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted."
+        }
+      },
+      "required": [
+        "series",
+        "granularity"
+      ]
+    },
+    "ChangePointDetectResponse": {
+      "type": "object",
+      "description": "The response of change point detection.",
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
+          "readOnly": true
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "CorrelationChanges": {
+      "type": "object",
+      "properties": {
+        "changedVariables": {
+          "type": "array",
+          "description": "correlated variables",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataSchema": {
+      "type": "string",
+      "enum": [
+        "OneTable",
+        "MultiTable"
+      ],
+      "x-ms-enum": {
+        "name": "DataSchema",
+        "modelAsString": false
+      }
+    },
+    "DetectRequest": {
+      "type": "object",
+      "description": "The request of entire or last anomaly detection.",
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesPoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "granularity": {
+          "$ref": "#/definitions/TimeGranularity",
+          "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent."
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically."
+        },
+        "maxAnomalyRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
+        },
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted."
+        },
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\"."
+        },
+        "imputeFixedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Used to specify the value to fill, it's used when granularity is not \"none\" and\nimputeMode is \"fixed\"."
+        }
+      },
+      "required": [
+        "series"
+      ]
+    },
+    "DetectionRequest": {
+      "type": "object",
+      "description": "Detection request.",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "Source link to the input variables. Each variable should be a csv with two\ncolumns, `timestamp` and `value`. The file name of the variable will be used as\nits name. The variables used in detection should be exactly the same with those\nused in the training phase."
+        },
+        "topContributorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Top contributor count."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the start time of data for detection. Should be\ndate-time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the end time of data for detection. Should be\ndate-time."
+        }
+      },
+      "required": [
+        "dataSource",
+        "topContributorCount",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "DetectionResult": {
+      "type": "object",
+      "description": "Detection results for the given resultId.",
+      "properties": {
+        "resultId": {
+          "type": "string"
+        },
+        "summary": {
+          "$ref": "#/definitions/DetectionResultSummary",
+          "description": "Multivariate anomaly detection status."
+        },
+        "results": {
+          "type": "array",
+          "description": "Detection result for each timestamp.",
+          "items": {
+            "$ref": "#/definitions/AnomalyState"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resultId",
+        "summary",
+        "results"
+      ]
+    },
+    "DetectionResultSummary": {
+      "type": "object",
+      "description": "Multivariate anomaly detection status.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/DetectionStatus",
+          "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error message when detection is failed.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "variableStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          },
+          "x-ms-identifiers": []
+        },
+        "setupInfo": {
+          "$ref": "#/definitions/DetectionRequest",
+          "description": "Detection request."
+        }
+      },
+      "required": [
+        "status",
+        "setupInfo"
+      ]
+    },
+    "DetectionStatus": {
+      "type": "string",
+      "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "READY",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionStatus",
+        "modelAsString": false
+      }
+    },
+    "DiagnosticsInfo": {
+      "type": "object",
+      "description": "Diagnostics Information for inspecting model/variable states.",
+      "properties": {
+        "modelState": {
+          "$ref": "#/definitions/ModelState"
+        },
+        "variableStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EntireDetectResponse": {
+      "type": "object",
+      "description": "The response of entire anomaly detection.",
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound."
+        },
+        "expectedValues": {
+          "type": "array",
+          "description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "upperMargins": {
+          "type": "array",
+          "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "lowerMargins": {
+          "type": "array",
+          "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "isAnomaly": {
+          "type": "array",
+          "description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "isNegativeAnomaly": {
+          "type": "array",
+          "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "isPositiveAnomaly": {
+          "type": "array",
+          "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "required": [
+        "period",
+        "expectedValues",
+        "upperMargins",
+        "lowerMargins",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message explaining the error reported by the service."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "FillNAMethod": {
+      "type": "string",
+      "description": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to\nNotFill, when the alignMode is Outer.",
+      "enum": [
+        "Previous",
+        "Subsequent",
+        "Linear",
+        "Zero",
+        "Fixed",
+        "NotFill"
+      ],
+      "x-ms-enum": {
+        "name": "FillNAMethod",
+        "modelAsString": true
+      }
+    },
+    "ImputeMode": {
+      "type": "string",
+      "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero,\nnotFill.",
+      "enum": [
+        "auto",
+        "previous",
+        "linear",
+        "fixed",
+        "zero",
+        "notFill"
+      ],
+      "x-ms-enum": {
+        "name": "ImputeMode",
+        "modelAsString": true
+      }
+    },
+    "LastDetectResponse": {
+      "type": "object",
+      "description": "The response of last anomaly detection.",
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound."
+        },
+        "suggestedWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Suggested input series points needed for detecting the latest point."
+        },
+        "expectedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Expected value of the latest point."
+        },
+        "upperMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed."
+        },
+        "lowerMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin."
+        },
+        "isAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction."
+        },
+        "isNegativeAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one."
+        },
+        "isPositiveAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0."
+        }
+      },
+      "required": [
+        "period",
+        "suggestedWindow",
+        "expectedValue",
+        "upperMargin",
+        "lowerMargin",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly"
+      ]
+    },
+    "LastDetectionRequest": {
+      "type": "object",
+      "properties": {
+        "variables": {
+          "type": "array",
+          "description": "variables",
+          "items": {
+            "$ref": "#/definitions/VariableValues"
+          },
+          "x-ms-identifiers": []
+        },
+        "topContributorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Top contributor count."
+        }
+      },
+      "required": [
+        "variables",
+        "topContributorCount"
+      ]
+    },
+    "LastDetectionResult": {
+      "type": "object",
+      "properties": {
+        "variableStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableState"
+          },
+          "x-ms-identifiers": []
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyState"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Model": {
+      "type": "object",
+      "description": "Response of getting a model.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Model identifier."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was created."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was last updated."
+        },
+        "modelInfo": {
+          "$ref": "#/definitions/ModelInfo",
+          "description": "Training result of a model including its status, errors and diagnostics\ninformation."
+        }
+      },
+      "required": [
+        "modelId",
+        "createdTime",
+        "lastUpdatedTime"
+      ]
+    },
+    "ModelInfo": {
+      "type": "object",
+      "description": "Training result of a model including its status, errors and diagnostics\ninformation.",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "Source link to the input variables. Each variable should be a csv file with two\ncolumns, `timestamp` and `value`. By default, the file name of the variable\nwill be used as its variable name."
+        },
+        "dataSchema": {
+          "$ref": "#/definitions/DataSchema"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the start time of training data. Should be\ndate-time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A required field, indicating the end time of training data. Should be date-time."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "An optional field. The name of the model whose maximum length is 24.",
+          "maxLength": 24
+        },
+        "slidingWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An optional field, indicating how many previous points will be used to compute\nthe anomaly score of the subsequent point."
+        },
+        "alignPolicy": {
+          "$ref": "#/definitions/AlignPolicy",
+          "description": "An optional field, indicating the manner to align multiple variables."
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus",
+          "description": "Model status. One of CREATED, RUNNING, READY, and FAILED."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error messages when failed to create a model.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnosticsInfo": {
+          "$ref": "#/definitions/DiagnosticsInfo",
+          "description": "Diagnostics Information for inspecting model/variable states."
+        }
+      },
+      "required": [
+        "dataSource",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "ModelList": {
+      "type": "object",
+      "description": "Response of listing models.",
+      "properties": {
+        "models": {
+          "type": "array",
+          "description": "List of models",
+          "items": {
+            "$ref": "#/definitions/ModelSnapshot"
+          },
+          "x-ms-identifiers": []
+        },
+        "currentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current count of trained multivariate models."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of models that can be trained for this subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch more models."
+        }
+      },
+      "required": [
+        "models",
+        "currentCount",
+        "maxCount"
+      ]
+    },
+    "ModelSnapshot": {
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "Model identifier."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was created."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time (UTC) when the model was last updated."
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus",
+          "description": "Model status. One of CREATED, RUNNING, READY, and FAILED."
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "variablesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of variables."
+        }
+      },
+      "required": [
+        "modelId",
+        "createdTime",
+        "lastUpdatedTime",
+        "status",
+        "variablesCount"
+      ]
+    },
+    "ModelState": {
+      "type": "object",
+      "properties": {
+        "epochIds": {
+          "type": "array",
+          "description": "Epoch id",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "trainLosses": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "validationLosses": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "latenciesInSeconds": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "ModelStatus": {
+      "type": "string",
+      "description": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "READY",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ModelStatus",
+        "modelAsString": false
+      }
+    },
+    "PagedModelSnapshot": {
+      "type": "object",
+      "description": "Paged collection of ModelSnapshot items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ModelSnapshot items on this page",
+          "items": {
+            "$ref": "#/definitions/ModelSnapshot"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TimeGranularity": {
+      "type": "string",
+      "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely",
+        "secondly",
+        "microsecond",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "TimeGranularity",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "yearly",
+            "value": "yearly"
+          },
+          {
+            "name": "monthly",
+            "value": "monthly"
+          },
+          {
+            "name": "weekly",
+            "value": "weekly"
+          },
+          {
+            "name": "daily",
+            "value": "daily"
+          },
+          {
+            "name": "hourly",
+            "value": "hourly"
+          },
+          {
+            "name": "perMinute",
+            "value": "minutely"
+          },
+          {
+            "name": "perSecond",
+            "value": "secondly"
+          },
+          {
+            "name": "microsecond",
+            "value": "microsecond"
+          },
+          {
+            "name": "none",
+            "value": "none"
+          }
+        ]
+      }
+    },
+    "TimeSeriesPoint": {
+      "type": "object",
+      "description": "The definition of input timeseries points.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional argument, timestamp of a data point (ISO8601 format)."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The measurement of that point, should be float."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VariableState": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "string",
+          "description": "Variable name."
+        },
+        "filledNARatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Proportion of NaN values filled of the variable.",
+          "maximum": 1
+        },
+        "effectiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of effective points counted."
+        },
+        "firstTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "First timestamp of the variable."
+        },
+        "lastTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last timestamp of the variable."
+        }
+      }
+    },
+    "VariableValues": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "variable name"
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "timestamps",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "values",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "timestamps",
+        "values"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

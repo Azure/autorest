@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -17,14 +16,15 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
+@parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineExtensionImage extends Resource {
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineExtensionImage,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Virtual Machine Extension Image.
@@ -47,3 +47,5 @@ interface VirtualMachineExtensionImages {
   @operationId("VirtualMachineExtensionImages_ListTypes")
   listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
 }
+
+@@doc(VirtualMachineExtensionImage.name, "");

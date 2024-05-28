@@ -7,7 +7,6 @@ import "./DedicatedHostGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(DedicatedHostGroup)
 @includeInapplicableMetadataInPayload(false)
 model DedicatedHost extends Resource {
-  /**
-   * The name of the dedicated host.
-   */
-  @path
-  @key("hostName")
-  @segment("hosts")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = DedicatedHost,
+    KeyName = "hostName",
+    SegmentName = "hosts",
+    NamePattern = ""
+  >;
 
   /**
    * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
@@ -49,7 +46,7 @@ interface DedicatedHosts {
   get is ArmResourceRead<
     DedicatedHost,
     {
-      ...BaseParameters<DedicatedHost>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DedicatedHost>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.
@@ -67,12 +64,15 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DedicatedHost, DedicatedHostUpdate>;
 
   /**
    * Delete a dedicated host.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<DedicatedHost>;
 
   /**
@@ -115,8 +115,9 @@ interface DedicatedHosts {
   ): ArmResponse<DedicatedHostSizeListResult> | ErrorResponse;
 }
 
+@@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(DedicatedHosts.createOrUpdate::parameters.resource,
@@ -127,7 +128,7 @@ interface DedicatedHosts {
   "Parameters supplied to the Create Dedicated Host."
 );
 @@encodedName(DedicatedHosts.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(DedicatedHosts.update::parameters.properties,

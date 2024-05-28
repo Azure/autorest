@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,16 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(OutboundRule)
-model OutboundRuleBasicResource extends ProxyResourceBase {
-  /**
-   * Name of the workspace managed network outbound rule
-   */
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @path
-  @key("ruleName")
-  @segment("outboundRules")
-  @visibility("read")
-  name: string;
+model OutboundRuleBasicResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = OutboundRuleBasicResource,
+    KeyName = "ruleName",
+    SegmentName = "outboundRules",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+  >;
 
   /**
    * Outbound Rule for the managed network of a machine learning workspace.
@@ -58,6 +54,9 @@ interface OutboundRuleBasicResources {
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ManagedNetworkSettingsRule_Delete")
   delete is ArmResourceDeleteAsync<OutboundRuleBasicResource>;
 
@@ -69,8 +68,11 @@ interface OutboundRuleBasicResources {
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
 
+@@doc(OutboundRuleBasicResource.name,
+  "Name of the workspace managed network outbound rule"
+);
 @@encodedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(OutboundRuleBasicResources.createOrUpdate::parameters.resource,

@@ -7,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -21,10 +20,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 @includeInapplicableMetadataInPayload(false)
 model RollingUpgradeStatusInfo extends Resource {
-  @key("rollingUpgrade")
-  @segment("rollingUpgrades")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = RollingUpgradeStatusInfo,
+    KeyName = "rollingUpgrade",
+    SegmentName = "rollingUpgrades",
+    NamePattern = ""
+  >;
 
   /**
    * The status of the latest virtual machine scale set rolling upgrade.
@@ -43,7 +44,7 @@ interface RollingUpgradeStatusInfos {
   getLatest is ArmResourceRead<
     RollingUpgradeStatusInfo,
     {
-      ...BaseParameters<RollingUpgradeStatusInfo>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<RollingUpgradeStatusInfo>;
 
       /**
        * The name of the VM scale set.
@@ -53,3 +54,5 @@ interface RollingUpgradeStatusInfos {
     }
   >;
 }
+
+@@doc(RollingUpgradeStatusInfo.name, "");

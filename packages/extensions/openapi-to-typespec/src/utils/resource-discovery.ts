@@ -21,6 +21,12 @@ export interface _ArmPagingMetadata {
   NextLinkName: string;
 }
 
+export interface Metadata {
+  Resources: Record<string, ArmResource>;
+  RenameMapping: Record<string, string>;
+  OverrideOperationName: Record<string, string>;
+}
+
 export interface ArmResource {
   Name: string;
   GetOperations: _ArmResourceOperation[];
@@ -46,7 +52,7 @@ export interface ArmResource {
   IsSingletonResource: boolean;
 }
 
-let armResourceCache: Record<string, ArmResource> | undefined;
+let metadataCache: Metadata | undefined;
 
 export interface OperationWithResourceOperationFlag extends Operation {
   isResourceOperation?: boolean;
@@ -118,19 +124,19 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
   }
 }
 
-export function getArmResourcesMetadata(): Record<string, ArmResource> {
-  if (armResourceCache) {
-    return armResourceCache;
+export function getArmResourcesMetadata(): Metadata {
+  if (metadataCache) {
+    return metadataCache;
   }
   const session = getSession();
   const outputFolder: string = session.configuration["output-folder"] ?? "";
 
   try {
     const content = readFileSync(join(outputFolder, "resources.json"), "utf-8");
-    const { Resources }: { Resources: Record<string, ArmResource> } = JSON.parse(content);
-    armResourceCache = Resources;
+    const metadata: Metadata = JSON.parse(content);
+    metadataCache = metadata;
 
-    return armResourceCache;
+    return metadataCache;
   } catch (e) {
     throw new Error(`Failed to load resources.json from ${outputFolder} \n ${e}`);
   }
@@ -141,7 +147,8 @@ export interface ArmResourceSchema extends ObjectSchema {
 }
 
 export function tagSchemaAsResource(schema: ObjectSchema): void {
-  const resourcesMetadata = getArmResourcesMetadata();
+  const metadata = getArmResourcesMetadata();
+  const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
     if (resourcesMetadata[resourceName].SwaggerModelName.toLowerCase() === schema.language.default.name.toLowerCase()) {

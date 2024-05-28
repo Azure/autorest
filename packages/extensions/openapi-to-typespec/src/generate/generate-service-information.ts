@@ -1,3 +1,4 @@
+import { ApiVersion } from "../constants";
 import { TypespecProgram, EndpointParameter, Auth } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDocs } from "../utils/docs";
@@ -53,7 +54,7 @@ export function generateServiceInformation(program: TypespecProgram) {
       for (const param of allParams ?? []) {
         const doc = generateDocs(param);
         doc && definitions.push(doc);
-        definitions.push(`${param.name}: string `);
+        definitions.push(`${param.name}: ${param.name.startsWith(ApiVersion) ? "Versions" : "string"} `);
       }
     }
     hasParameters && definitions.push("}");
@@ -71,10 +72,12 @@ export function generateServiceInformation(program: TypespecProgram) {
     for (const version of serviceInformation.versions) {
       if (isArm) {
         definitions.push(`@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)`);
-        definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
       }
+      definitions.push(`@useDependency(Azure.Core.Versions.v1_0_Preview_1)`);
       definitions.push(`/**\n* The ${version} API version.\n*/`);
-      definitions.push(`v${version.replaceAll("-", "_")}: "${version}",`);
+      definitions.push(
+        `${version.startsWith("v") ? "" : "v"}${version.replaceAll("-", "_").replaceAll(".", "_")}: "${version}",`,
+      );
     }
     definitions.push("}");
   }

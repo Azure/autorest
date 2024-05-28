@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @Azure.ResourceManager.Private.armResourceInternal(
   PrivateEndpointConnectionProperties
 )
-model PrivateEndpointConnection extends TrackedResourceBase {
-  /**
-   * NRP Private Endpoint Connection Name
-   */
-  @path
-  @key("privateEndpointConnectionName")
-  @segment("privateEndpointConnections")
-  @visibility("read")
-  name: string;
+model PrivateEndpointConnection extends Foundations.TrackedResource {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = ""
+  >;
 
   /**
    * Private endpoint connection properties.
@@ -38,8 +35,8 @@ model PrivateEndpointConnection extends TrackedResourceBase {
   @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionProperties;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -58,6 +55,7 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to delete a PE connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
@@ -68,8 +66,9 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
+@@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
