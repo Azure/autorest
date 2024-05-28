@@ -1,6 +1,6 @@
 {
   "name": "@autorest/openapi-to-typespec",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Autorest plugin to scaffold a Typespec definition from an OpenAPI document",
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",
