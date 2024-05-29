@@ -20,37 +20,37 @@ union ProvisioningState {
   /**
    * Represents a succeeded operation.
    */
-  "Succeeded",
+  Succeeded: "Succeeded",
 
   /**
    * Represents a failed operation.
    */
-  "Failed",
+  Failed: "Failed",
 
   /**
    * Represents a canceled operation.
    */
-  "Canceled",
+  Canceled: "Canceled",
 
   /**
    * Represents a pending operation.
    */
-  "Provisioning",
+  Provisioning: "Provisioning",
 
   /**
    * Represents a pending operation.
    */
-  "Updating",
+  Updating: "Updating",
 
   /**
    * Represents an operation under deletion.
    */
-  "Deleting",
+  Deleting: "Deleting",
 
   /**
    * Represents an accepted operation.
    */
-  "Accepted",
+  Accepted: "Accepted",
 }
 
 /**
@@ -62,12 +62,12 @@ union ControlState {
   /**
    * Field to enable a setting.
    */
-  "Enabled",
+  Enabled: "Enabled",
 
   /**
    * Field to disable a setting.
    */
-  "Disabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -79,12 +79,12 @@ union DefaultAction {
   /**
    * Represents allow action.
    */
-  "Allow",
+  Allow: "Allow",
 
   /**
    * Represents deny action.
    */
-  "Deny",
+  Deny: "Deny",
 }
 
 /**
@@ -92,10 +92,10 @@ union DefaultAction {
  */
 union ManagedServiceIdentityType {
   string,
-  "None",
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned, UserAssigned",
+  None: "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
 }
 
 /**
@@ -107,13 +107,13 @@ union DataProductUserRole {
   /**
    * Field to specify user of type Reader.
    */
-  "Reader",
+  Reader: "Reader",
 
   /**
    * Field to specify user of type SensitiveReader.
    * This user has privileged access to read sensitive data of a data product.
    */
-  "SensitiveReader",
+  SensitiveReader: "SensitiveReader",
 }
 
 /**
@@ -125,12 +125,12 @@ union DataTypeState {
   /**
    * Field to specify stopped state.
    */
-  "Stopped",
+  Stopped: "Stopped",
 
   /**
    * Field to specify running state.
    */
-  "Running",
+  Running: "Running",
 }
 
 /**
@@ -142,22 +142,22 @@ union Bypass {
   /**
    * Represents no bypassing of traffic.
    */
-  "None",
+  None: "None",
 
   /**
    * Represents bypassing logging traffic.
    */
-  "Logging",
+  Logging: "Logging",
 
   /**
    * Represents bypassing metrics traffic.
    */
-  "Metrics",
+  Metrics: "Metrics",
 
   /**
    * Represents bypassing azure services traffic.
    */
-  "AzureServices",
+  AzureServices: "AzureServices",
 }
 
 /**

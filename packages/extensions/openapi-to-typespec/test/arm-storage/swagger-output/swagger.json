@@ -431,7 +431,7 @@
             ],
             "x-ms-enum": {
               "name": "StorageAccountExpand",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -975,7 +975,13 @@
             ],
             "x-ms-enum": {
               "name": "ListContainersInclude",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "deleted",
+                  "value": "deleted"
+                }
+              ]
             }
           },
           {
@@ -1948,7 +1954,21 @@
             ],
             "x-ms-enum": {
               "name": "ListEncryptionScopesInclude",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "All",
+                  "value": "All"
+                },
+                {
+                  "name": "Enabled",
+                  "value": "Enabled"
+                },
+                {
+                  "name": "Disabled",
+                  "value": "Disabled"
+                }
+              ]
             }
           },
           {
@@ -5609,7 +5629,7 @@
       ],
       "x-ms-enum": {
         "name": "AccessTier",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AccountImmutabilityPolicyProperties": {
@@ -5643,7 +5663,21 @@
       ],
       "x-ms-enum": {
         "name": "AccountImmutabilityPolicyState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unlocked",
+            "value": "Unlocked"
+          },
+          {
+            "name": "Locked",
+            "value": "Locked"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
       }
     },
     "AccountSasParameters": {
@@ -5708,7 +5742,7 @@
       ],
       "x-ms-enum": {
         "name": "AccountStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AccountType": {
@@ -5720,7 +5754,17 @@
       ],
       "x-ms-enum": {
         "name": "AccountType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User"
+          },
+          {
+            "name": "Computer",
+            "value": "Computer"
+          }
+        ]
       }
     },
     "ActiveDirectoryProperties": {
@@ -5774,7 +5818,17 @@
       ],
       "x-ms-enum": {
         "name": "AllowedCopyScope",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink"
+          },
+          {
+            "name": "AAD",
+            "value": "AAD"
+          }
+        ]
       }
     },
     "AllowedMethods": {
@@ -5791,7 +5845,41 @@
       ],
       "x-ms-enum": {
         "name": "AllowedMethods",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DELETE",
+            "value": "DELETE"
+          },
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD"
+          },
+          {
+            "name": "MERGE",
+            "value": "MERGE"
+          },
+          {
+            "name": "POST",
+            "value": "POST"
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT"
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH"
+          }
+        ]
       }
     },
     "Azure.ResourceManager.Foundations.SkuTier": {
@@ -6142,7 +6230,21 @@
       ],
       "x-ms-enum": {
         "name": "BlobRestoreProgressStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Complete",
+            "value": "Complete"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
       }
     },
     "BlobRestoreRange": {
@@ -6543,7 +6645,25 @@
       ],
       "x-ms-enum": {
         "name": "DefaultSharePermission",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "StorageFileDataSmbShareReader",
+            "value": "StorageFileDataSmbShareReader"
+          },
+          {
+            "name": "StorageFileDataSmbShareContributor",
+            "value": "StorageFileDataSmbShareContributor"
+          },
+          {
+            "name": "StorageFileDataSmbShareElevatedContributor",
+            "value": "StorageFileDataSmbShareElevatedContributor"
+          }
+        ]
       }
     },
     "DeleteRetentionPolicy": {
@@ -6666,7 +6786,25 @@
       ],
       "x-ms-enum": {
         "name": "DirectoryServiceOptions",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "AADDS",
+            "value": "AADDS"
+          },
+          {
+            "name": "AD",
+            "value": "AD"
+          },
+          {
+            "name": "AADKERB",
+            "value": "AADKERB"
+          }
+        ]
       }
     },
     "DnsEndpointType": {
@@ -6678,7 +6816,17 @@
       ],
       "x-ms-enum": {
         "name": "DnsEndpointType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard"
+          },
+          {
+            "name": "AzureDnsZone",
+            "value": "AzureDnsZone"
+          }
+        ]
       }
     },
     "EnabledProtocols": {
@@ -6690,7 +6838,17 @@
       ],
       "x-ms-enum": {
         "name": "EnabledProtocols",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SMB",
+            "value": "SMB"
+          },
+          {
+            "name": "NFS",
+            "value": "NFS"
+          }
+        ]
       }
     },
     "Encryption": {
@@ -6711,7 +6869,17 @@
           ],
           "x-ms-enum": {
             "name": "KeySource",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Microsoft.Storage",
+                "value": "Microsoft.Storage"
+              },
+              {
+                "name": "Microsoft.Keyvault",
+                "value": "Microsoft.Keyvault"
+              }
+            ]
           }
         },
         "requireInfrastructureEncryption": {
@@ -6847,7 +7015,17 @@
       ],
       "x-ms-enum": {
         "name": "EncryptionScopeSource",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.Storage",
+            "value": "Microsoft.Storage"
+          },
+          {
+            "name": "Microsoft.KeyVault",
+            "value": "Microsoft.KeyVault"
+          }
+        ]
       }
     },
     "EncryptionScopeState": {
@@ -6859,7 +7037,17 @@
       ],
       "x-ms-enum": {
         "name": "EncryptionScopeState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
       }
     },
     "EncryptionService": {
@@ -6974,7 +7162,13 @@
       ],
       "x-ms-enum": {
         "name": "ExtendedLocationTypes",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone"
+          }
+        ]
       }
     },
     "FileServiceProperties": {
@@ -7206,7 +7400,17 @@
       ],
       "x-ms-enum": {
         "name": "Format",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Csv",
+            "value": "Csv"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet"
+          }
+        ]
       }
     },
     "GeoReplicationStats": {
@@ -7241,7 +7445,21 @@
       ],
       "x-ms-enum": {
         "name": "GeoReplicationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Live",
+            "value": "Live"
+          },
+          {
+            "name": "Bootstrap",
+            "value": "Bootstrap"
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable"
+          }
+        ]
       }
     },
     "HttpProtocol": {
@@ -7253,7 +7471,7 @@
       ],
       "x-ms-enum": {
         "name": "HttpProtocol",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "IPRule": {
@@ -7321,7 +7539,25 @@
       ],
       "x-ms-enum": {
         "name": "IdentityType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
       }
     },
     "ImmutabilityPolicy": {
@@ -7400,7 +7636,17 @@
       ],
       "x-ms-enum": {
         "name": "ImmutabilityPolicyState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Locked",
+            "value": "Locked"
+          },
+          {
+            "name": "Unlocked",
+            "value": "Unlocked"
+          }
+        ]
       }
     },
     "ImmutabilityPolicyUpdateType": {
@@ -7413,7 +7659,21 @@
       ],
       "x-ms-enum": {
         "name": "ImmutabilityPolicyUpdateType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "put",
+            "value": "put"
+          },
+          {
+            "name": "lock",
+            "value": "lock"
+          },
+          {
+            "name": "extend",
+            "value": "extend"
+          }
+        ]
       }
     },
     "ImmutableStorageAccount": {
@@ -7459,7 +7719,13 @@
       ],
       "x-ms-enum": {
         "name": "InventoryRuleType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inventory",
+            "value": "Inventory"
+          }
+        ]
       }
     },
     "KeyCreationTime": {
@@ -7485,7 +7751,7 @@
       ],
       "x-ms-enum": {
         "name": "KeyPermission",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "KeyPolicy": {
@@ -7511,7 +7777,17 @@
       ],
       "x-ms-enum": {
         "name": "KeyType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Service",
+            "value": "Service"
+          },
+          {
+            "name": "Account",
+            "value": "Account"
+          }
+        ]
       }
     },
     "KeyVaultProperties": {
@@ -7564,7 +7840,29 @@
       ],
       "x-ms-enum": {
         "name": "Kind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Storage",
+            "value": "Storage"
+          },
+          {
+            "name": "StorageV2",
+            "value": "StorageV2"
+          },
+          {
+            "name": "BlobStorage",
+            "value": "BlobStorage"
+          },
+          {
+            "name": "FileStorage",
+            "value": "FileStorage"
+          },
+          {
+            "name": "BlockBlobStorage",
+            "value": "BlockBlobStorage"
+          }
+        ]
       }
     },
     "LargeFileSharesState": {
@@ -7576,7 +7874,17 @@
       ],
       "x-ms-enum": {
         "name": "LargeFileSharesState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          }
+        ]
       }
     },
     "LastAccessTimeTrackingPolicy": {
@@ -7651,7 +7959,29 @@
       ],
       "x-ms-enum": {
         "name": "LeaseContainerRequestAction",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Acquire",
+            "value": "Acquire"
+          },
+          {
+            "name": "Renew",
+            "value": "Renew"
+          },
+          {
+            "name": "Change",
+            "value": "Change"
+          },
+          {
+            "name": "Release",
+            "value": "Release"
+          },
+          {
+            "name": "Break",
+            "value": "Break"
+          }
+        ]
       }
     },
     "LeaseContainerResponse": {
@@ -7677,7 +8007,17 @@
       ],
       "x-ms-enum": {
         "name": "LeaseDuration",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Infinite",
+            "value": "Infinite"
+          },
+          {
+            "name": "Fixed",
+            "value": "Fixed"
+          }
+        ]
       }
     },
     "LeaseShareAction": {
@@ -7692,7 +8032,29 @@
       ],
       "x-ms-enum": {
         "name": "LeaseShareAction",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Acquire",
+            "value": "Acquire"
+          },
+          {
+            "name": "Renew",
+            "value": "Renew"
+          },
+          {
+            "name": "Change",
+            "value": "Change"
+          },
+          {
+            "name": "Release",
+            "value": "Release"
+          },
+          {
+            "name": "Break",
+            "value": "Break"
+          }
+        ]
       }
     },
     "LeaseShareRequest": {
@@ -7752,7 +8114,29 @@
       ],
       "x-ms-enum": {
         "name": "LeaseState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available"
+          },
+          {
+            "name": "Leased",
+            "value": "Leased"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired"
+          },
+          {
+            "name": "Breaking",
+            "value": "Breaking"
+          },
+          {
+            "name": "Broken",
+            "value": "Broken"
+          }
+        ]
       }
     },
     "LeaseStatus": {
@@ -7764,7 +8148,17 @@
       ],
       "x-ms-enum": {
         "name": "LeaseStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Locked",
+            "value": "Locked"
+          },
+          {
+            "name": "Unlocked",
+            "value": "Unlocked"
+          }
+        ]
       }
     },
     "LegalHold": {
@@ -8225,7 +8619,17 @@
       ],
       "x-ms-enum": {
         "name": "MigrationState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          }
+        ]
       }
     },
     "MinimumTlsVersion": {
@@ -8238,7 +8642,21 @@
       ],
       "x-ms-enum": {
         "name": "MinimumTlsVersion",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TLS1_0",
+            "value": "TLS1_0"
+          },
+          {
+            "name": "TLS1_1",
+            "value": "TLS1_1"
+          },
+          {
+            "name": "TLS1_2",
+            "value": "TLS1_2"
+          }
+        ]
       }
     },
     "Multichannel": {
@@ -8259,7 +8677,13 @@
       ],
       "x-ms-enum": {
         "name": "Name",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessTimeTracking",
+            "value": "AccessTimeTracking"
+          }
+        ]
       }
     },
     "NetworkRuleSet": {
@@ -8278,7 +8702,25 @@
           ],
           "x-ms-enum": {
             "name": "Bypass",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None"
+              },
+              {
+                "name": "Logging",
+                "value": "Logging"
+              },
+              {
+                "name": "Metrics",
+                "value": "Metrics"
+              },
+              {
+                "name": "AzureServices",
+                "value": "AzureServices"
+              }
+            ]
           }
         },
         "resourceAccessRules": {
@@ -8315,7 +8757,7 @@
           ],
           "x-ms-enum": {
             "name": "DefaultAction",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -8449,7 +8891,17 @@
       ],
       "x-ms-enum": {
         "name": "ObjectType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Blob",
+            "value": "Blob"
+          },
+          {
+            "name": "Container",
+            "value": "Container"
+          }
+        ]
       }
     },
     "PermissionScope": {
@@ -8489,7 +8941,41 @@
       ],
       "x-ms-enum": {
         "name": "Permissions",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "r",
+            "value": "r"
+          },
+          {
+            "name": "d",
+            "value": "d"
+          },
+          {
+            "name": "w",
+            "value": "w"
+          },
+          {
+            "name": "l",
+            "value": "l"
+          },
+          {
+            "name": "a",
+            "value": "a"
+          },
+          {
+            "name": "c",
+            "value": "c"
+          },
+          {
+            "name": "u",
+            "value": "u"
+          },
+          {
+            "name": "p",
+            "value": "p"
+          }
+        ]
       }
     },
     "PrivateEndpoint": {
@@ -8573,7 +9059,25 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -8587,7 +9091,21 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          }
+        ]
       }
     },
     "PrivateLinkResource": {
@@ -8698,7 +9216,7 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "PublicAccess": {
@@ -8711,7 +9229,7 @@
       ],
       "x-ms-enum": {
         "name": "PublicAccess",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "PublicNetworkAccess": {
@@ -8723,7 +9241,17 @@
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
       }
     },
     "QueueProperties": {
@@ -8800,7 +9328,7 @@
       ],
       "x-ms-enum": {
         "name": "Reason",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "ReasonCode": {
@@ -8812,7 +9340,17 @@
       ],
       "x-ms-enum": {
         "name": "ReasonCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QuotaId",
+            "value": "QuotaId"
+          },
+          {
+            "name": "NotAvailableForSubscription",
+            "value": "NotAvailableForSubscription"
+          }
+        ]
       }
     },
     "Resource": {
@@ -8915,7 +9453,21 @@
       ],
       "x-ms-enum": {
         "name": "RootSquashType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoRootSquash",
+            "value": "NoRootSquash"
+          },
+          {
+            "name": "RootSquash",
+            "value": "RootSquash"
+          },
+          {
+            "name": "AllSquash",
+            "value": "AllSquash"
+          }
+        ]
       }
     },
     "RoutingChoice": {
@@ -8927,7 +9479,17 @@
       ],
       "x-ms-enum": {
         "name": "RoutingChoice",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftRouting",
+            "value": "MicrosoftRouting"
+          },
+          {
+            "name": "InternetRouting",
+            "value": "InternetRouting"
+          }
+        ]
       }
     },
     "RoutingPreference": {
@@ -8956,7 +9518,13 @@
       ],
       "x-ms-enum": {
         "name": "RuleType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Lifecycle",
+            "value": "Lifecycle"
+          }
+        ]
       }
     },
     "SKUCapability": {
@@ -8992,7 +9560,13 @@
           ],
           "x-ms-enum": {
             "name": "ExpirationAction",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Log",
+                "value": "Log"
+              }
+            ]
           }
         }
       },
@@ -9010,7 +9584,17 @@
       ],
       "x-ms-enum": {
         "name": "Schedule",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly"
+          }
+        ]
       }
     },
     "ServiceSasParameters": {
@@ -9124,7 +9708,25 @@
       ],
       "x-ms-enum": {
         "name": "Services",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "b",
+            "value": "b"
+          },
+          {
+            "name": "q",
+            "value": "q"
+          },
+          {
+            "name": "t",
+            "value": "t"
+          },
+          {
+            "name": "f",
+            "value": "f"
+          }
+        ]
       }
     },
     "ShareAccessTier": {
@@ -9138,7 +9740,25 @@
       ],
       "x-ms-enum": {
         "name": "ShareAccessTier",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TransactionOptimized",
+            "value": "TransactionOptimized"
+          },
+          {
+            "name": "Hot",
+            "value": "Hot"
+          },
+          {
+            "name": "Cool",
+            "value": "Cool"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium"
+          }
+        ]
       }
     },
     "SignedIdentifier": {
@@ -9165,7 +9785,25 @@
       ],
       "x-ms-enum": {
         "name": "SignedResource",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "b",
+            "value": "b"
+          },
+          {
+            "name": "c",
+            "value": "c"
+          },
+          {
+            "name": "f",
+            "value": "f"
+          },
+          {
+            "name": "s",
+            "value": "s"
+          }
+        ]
       }
     },
     "SignedResourceTypes": {
@@ -9178,7 +9816,21 @@
       ],
       "x-ms-enum": {
         "name": "SignedResourceTypes",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "s",
+            "value": "s"
+          },
+          {
+            "name": "c",
+            "value": "c"
+          },
+          {
+            "name": "o",
+            "value": "o"
+          }
+        ]
       }
     },
     "Sku": {
@@ -9209,7 +9861,21 @@
       ],
       "x-ms-enum": {
         "name": "SkuConversionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -9281,7 +9947,41 @@
       ],
       "x-ms-enum": {
         "name": "SkuName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS"
+          },
+          {
+            "name": "Standard_GRS",
+            "value": "Standard_GRS"
+          },
+          {
+            "name": "Standard_RAGRS",
+            "value": "Standard_RAGRS"
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS"
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS"
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS"
+          },
+          {
+            "name": "Standard_GZRS",
+            "value": "Standard_GZRS"
+          },
+          {
+            "name": "Standard_RAGZRS",
+            "value": "Standard_RAGZRS"
+          }
+        ]
       }
     },
     "SmbSetting": {
@@ -9335,7 +10035,29 @@
       ],
       "x-ms-enum": {
         "name": "State",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Deprovisioning",
+            "value": "Deprovisioning"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "NetworkSourceDeleted",
+            "value": "NetworkSourceDeleted"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -10240,7 +10962,7 @@
       ],
       "x-ms-enum": {
         "name": "UsageUnit",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "VirtualNetworkRule": {

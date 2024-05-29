@@ -16,8 +16,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union AuthCredentialsKind {
   string,
-  "OAuthClientCredentials",
-  "ApiKeyAuthCredentials",
+  OAuthClientCredentials: "OAuthClientCredentials",
+  ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
 }
 
 /**
@@ -25,12 +25,12 @@ union AuthCredentialsKind {
  */
 union ProvisioningState {
   string,
-  "Creating",
-  "Updating",
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Running",
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Running: "Running",
 }
 
 /**
@@ -38,8 +38,8 @@ union ProvisioningState {
  */
 union PublicNetworkAccess {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -47,9 +47,9 @@ union PublicNetworkAccess {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  "Pending",
-  "Approved",
-  "Rejected",
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
@@ -57,10 +57,10 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  "Succeeded",
-  "Creating",
-  "Deleting",
-  "Failed",
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**

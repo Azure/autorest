@@ -15,10 +15,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 union Protocol {
   string,
-  "http",
-  "https",
-  "ws",
-  "wss",
+  http: "http",
+  https: "https",
+  ws: "ws",
+  wss: "wss",
 }
 
 /**
@@ -26,15 +26,15 @@ union Protocol {
  */
 union VersioningScheme {
   string,
-  "Segment",
-  "Query",
-  "Header",
+  Segment: "Segment",
+  Query: "Query",
+  Header: "Header",
 }
 
 union BearerTokenSendingMethod {
   string,
-  "authorizationHeader",
-  "query",
+  authorizationHeader: "authorizationHeader",
+  query: "query",
 }
 
 /**
@@ -42,10 +42,10 @@ union BearerTokenSendingMethod {
  */
 union ApiType {
   string,
-  "http",
-  "soap",
-  "websocket",
-  "graphql",
+  http: "http",
+  soap: "soap",
+  websocket: "websocket",
+  graphql: "graphql",
 }
 
 /**
@@ -57,57 +57,57 @@ union ContentFormat {
   /**
    * The contents are inline and Content type is a WADL document.
    */
-  "wadl-xml",
+  `wadl-xml`: "wadl-xml",
 
   /**
    * The WADL document is hosted on a publicly accessible internet address.
    */
-  "wadl-link-json",
+  `wadl-link-json`: "wadl-link-json",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 2.0 JSON Document.
    */
-  "swagger-json",
+  `swagger-json`: "swagger-json",
 
   /**
    * The OpenAPI 2.0 JSON document is hosted on a publicly accessible internet address.
    */
-  "swagger-link-json",
+  `swagger-link-json`: "swagger-link-json",
 
   /**
    * The contents are inline and the document is a WSDL/Soap document.
    */
-  "wsdl",
+  wsdl: "wsdl",
 
   /**
    * The WSDL document is hosted on a publicly accessible internet address.
    */
-  "wsdl-link",
+  `wsdl-link`: "wsdl-link",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 3.0 YAML Document.
    */
-  "openapi",
+  openapi: "openapi",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 3.0 JSON Document.
    */
-  "openapi+json",
+  `openapi+json`: "openapi+json",
 
   /**
    * The OpenAPI 3.0 YAML document is hosted on a publicly accessible internet address.
    */
-  "openapi-link",
+  `openapi-link`: "openapi-link",
 
   /**
    * The OpenAPI 3.0 JSON document is hosted on a publicly accessible internet address.
    */
-  "openapi+json-link",
+  `openapi+json-link`: "openapi+json-link",
 
   /**
    * The GraphQL API endpoint hosted on a publicly accessible internet address.
    */
-  "graphql-link",
+  `graphql-link`: "graphql-link",
 }
 
 /**
@@ -150,27 +150,27 @@ union PolicyContentFormat {
   /**
    * The contents are inline and Content type is an XML document.
    */
-  "xml",
+  xml: "xml",
 
   /**
    * The policy XML document is hosted on a http endpoint accessible from the API Management service.
    */
-  "xml-link",
+  `xml-link`: "xml-link",
 
   /**
    * The contents are inline and Content type is a non XML encoded policy document.
    */
-  "rawxml",
+  rawxml: "rawxml",
 
   /**
    * The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
    */
-  "rawxml-link",
+  `rawxml-link`: "rawxml-link",
 }
 
 union PolicyIdName {
   string,
-  "policy",
+  policy: "policy",
 }
 
 union PolicyExportFormat {
@@ -179,12 +179,12 @@ union PolicyExportFormat {
   /**
    * The contents are inline and Content type is an XML document.
    */
-  "xml",
+  xml: "xml",
 
   /**
    * The contents are inline and Content type is a non XML encoded policy document.
    */
-  "rawxml",
+  rawxml: "rawxml",
 }
 
 /**
@@ -196,7 +196,7 @@ union AlwaysLog {
   /**
    * Always log all erroneous request regardless of sampling settings.
    */
-  "allErrors",
+  allErrors: "allErrors",
 }
 
 /**
@@ -208,7 +208,7 @@ union SamplingType {
   /**
    * Fixed-rate sampling.
    */
-  "fixed",
+  fixed: "fixed",
 }
 
 /**
@@ -220,12 +220,12 @@ union DataMaskingMode {
   /**
    * Mask the value of an entity.
    */
-  "Mask",
+  Mask: "Mask",
 
   /**
    * Hide the presence of an entity.
    */
-  "Hide",
+  Hide: "Hide",
 }
 
 /**
@@ -237,17 +237,17 @@ union HttpCorrelationProtocol {
   /**
    * Do not read and inject correlation headers.
    */
-  "None",
+  None: "None",
 
   /**
    * Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.
    */
-  "Legacy",
+  Legacy: "Legacy",
 
   /**
    * Inject Trace Context headers. See https://w3c.github.io/trace-context.
    */
-  "W3C",
+  W3C: "W3C",
 }
 
 /**
@@ -259,17 +259,17 @@ union Verbosity {
   /**
    * All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
    */
-  "verbose",
+  verbose: "verbose",
 
   /**
    * Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
    */
-  "information",
+  information: "information",
 
   /**
    * Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
    */
-  "error",
+  error: "error",
 }
 
 /**
@@ -281,12 +281,12 @@ union OperationNameFormat {
   /**
    * API_NAME;rev=API_REVISION - OPERATION_NAME
    */
-  "Name",
+  Name: "Name",
 
   /**
    * HTTP_VERB URL
    */
-  "Url",
+  Url: "Url",
 }
 
 /**
@@ -298,27 +298,27 @@ union State {
   /**
    * The issue is proposed.
    */
-  "proposed",
+  proposed: "proposed",
 
   /**
    * The issue is opened.
    */
-  "open",
+  open: "open",
 
   /**
    * The issue was removed.
    */
-  "removed",
+  removed: "removed",
 
   /**
    * The issue is now resolved.
    */
-  "resolved",
+  resolved: "resolved",
 
   /**
    * The issue was closed.
    */
-  "closed",
+  closed: "closed",
 }
 
 union ExportFormat {
@@ -352,7 +352,7 @@ union ExportFormat {
 
 union ExportApi {
   string,
-  "true",
+  `true`: "true",
 }
 
 /**
@@ -388,22 +388,22 @@ union GrantType {
   /**
    * Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.
    */
-  "authorizationCode",
+  authorizationCode: "authorizationCode",
 
   /**
    * Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.
    */
-  "implicit",
+  implicit: "implicit",
 
   /**
    * Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.
    */
-  "resourceOwnerPassword",
+  resourceOwnerPassword: "resourceOwnerPassword",
 
   /**
    * Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.
    */
-  "clientCredentials",
+  clientCredentials: "clientCredentials",
 }
 
 union ClientAuthenticationMethod {
@@ -412,12 +412,12 @@ union ClientAuthenticationMethod {
   /**
    * Basic Client Authentication method.
    */
-  "Basic",
+  Basic: "Basic",
 
   /**
    * Body based Authentication method.
    */
-  "Body",
+  Body: "Body",
 }
 
 /**
@@ -429,12 +429,12 @@ union BackendProtocol {
   /**
    * The Backend is a RESTful service.
    */
-  "http",
+  http: "http",
 
   /**
    * The Backend is a SOAP service.
    */
-  "soap",
+  soap: "soap",
 }
 
 /**
@@ -442,7 +442,7 @@ union BackendProtocol {
  */
 union PreferredIPVersion {
   string,
-  "IPv4",
+  IPv4: "IPv4",
 }
 
 /**
@@ -450,9 +450,9 @@ union PreferredIPVersion {
  */
 union ConnectivityCheckProtocol {
   string,
-  "TCP",
-  "HTTP",
-  "HTTPS",
+  TCP: "TCP",
+  HTTP: "HTTP",
+  HTTPS: "HTTPS",
 }
 
 /**
@@ -460,8 +460,8 @@ union ConnectivityCheckProtocol {
  */
 union Method {
   string,
-  "GET",
-  "POST",
+  GET: "GET",
+  POST: "POST",
 }
 
 /**
@@ -469,8 +469,8 @@ union Method {
  */
 union Severity {
   string,
-  "Error",
-  "Warning",
+  Error: "Error",
+  Warning: "Warning",
 }
 
 /**
@@ -478,15 +478,15 @@ union Severity {
  */
 union IssueType {
   string,
-  "Unknown",
-  "AgentStopped",
-  "GuestFirewall",
-  "DnsResolution",
-  "SocketBind",
-  "NetworkSecurityRule",
-  "UserDefinedRoute",
-  "PortThrottled",
-  "Platform",
+  Unknown: "Unknown",
+  AgentStopped: "AgentStopped",
+  GuestFirewall: "GuestFirewall",
+  DnsResolution: "DnsResolution",
+  SocketBind: "SocketBind",
+  NetworkSecurityRule: "NetworkSecurityRule",
+  UserDefinedRoute: "UserDefinedRoute",
+  PortThrottled: "PortThrottled",
+  Platform: "Platform",
 }
 
 /**
@@ -494,10 +494,10 @@ union IssueType {
  */
 union ConnectionStatus {
   string,
-  "Unknown",
-  "Connected",
-  "Disconnected",
-  "Degraded",
+  Unknown: "Unknown",
+  Connected: "Connected",
+  Disconnected: "Disconnected",
+  Degraded: "Degraded",
 }
 
 /**
@@ -509,32 +509,32 @@ union SkuType {
   /**
    * Developer SKU of Api Management.
    */
-  "Developer",
+  Developer: "Developer",
 
   /**
    * Standard SKU of Api Management.
    */
-  "Standard",
+  Standard: "Standard",
 
   /**
    * Premium SKU of Api Management.
    */
-  "Premium",
+  Premium: "Premium",
 
   /**
    * Basic SKU of Api Management.
    */
-  "Basic",
+  Basic: "Basic",
 
   /**
    * Consumption SKU of Api Management.
    */
-  "Consumption",
+  Consumption: "Consumption",
 
   /**
    * Isolated SKU of Api Management.
    */
-  "Isolated",
+  Isolated: "Isolated",
 }
 
 /**
@@ -546,17 +546,17 @@ union ResourceSkuCapacityScaleType {
   /**
    * Supported scale type automatic.
    */
-  "automatic",
+  automatic: "automatic",
 
   /**
    * Supported scale type manual.
    */
-  "manual",
+  manual: "manual",
 
   /**
    * Scaling not supported.
    */
-  "none",
+  none: "none",
 }
 
 /**
@@ -568,17 +568,17 @@ union AccessType {
   /**
    * Use access key.
    */
-  "AccessKey",
+  AccessKey: "AccessKey",
 
   /**
    * Use system assigned managed identity.
    */
-  "SystemAssignedManagedIdentity",
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
 
   /**
    * Use user assigned managed identity.
    */
-  "UserAssignedManagedIdentity",
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 }
 
 /**
@@ -586,11 +586,11 @@ union AccessType {
  */
 union HostnameType {
   string,
-  "Proxy",
-  "Portal",
-  "Management",
-  "Scm",
-  "DeveloperPortal",
+  Proxy: "Proxy",
+  Portal: "Portal",
+  Management: "Management",
+  Scm: "Scm",
+  DeveloperPortal: "DeveloperPortal",
 }
 
 /**
@@ -598,10 +598,10 @@ union HostnameType {
  */
 union CertificateSource {
   string,
-  "Managed",
-  "KeyVault",
-  "Custom",
-  "BuiltIn",
+  Managed: "Managed",
+  KeyVault: "KeyVault",
+  Custom: "Custom",
+  BuiltIn: "BuiltIn",
 }
 
 /**
@@ -609,9 +609,9 @@ union CertificateSource {
  */
 union CertificateStatus {
   string,
-  "Completed",
-  "Failed",
-  "InProgress",
+  Completed: "Completed",
+  Failed: "Failed",
+  InProgress: "InProgress",
 }
 
 /**
@@ -619,8 +619,8 @@ union CertificateStatus {
  */
 union PublicNetworkAccess {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -632,22 +632,22 @@ union PlatformVersion {
   /**
    * Platform version cannot be determined, as compute platform is not deployed.
    */
-  "undetermined",
+  undetermined: "undetermined",
 
   /**
    * Platform running the service on Single Tenant V1 platform.
    */
-  "stv1",
+  stv1: "stv1",
 
   /**
    * Platform running the service on Single Tenant V2 platform.
    */
-  "stv2",
+  stv2: "stv2",
 
   /**
    * Platform running the service on Multi Tenant V1 platform.
    */
-  "mtv1",
+  mtv1: "mtv1",
 }
 
 /**
@@ -655,8 +655,8 @@ union PlatformVersion {
  */
 union CertificateConfigurationStoreName {
   string,
-  "CertificateAuthority",
-  "Root",
+  CertificateAuthority: "CertificateAuthority",
+  Root: "Root",
 }
 
 /**
@@ -668,17 +668,17 @@ union VirtualNetworkType {
   /**
    * The service is not part of any Virtual Network.
    */
-  "None",
+  None: "None",
 
   /**
    * The service is part of Virtual Network and it is accessible from Internet.
    */
-  "External",
+  External: "External",
 
   /**
    * The service is part of Virtual Network and it is only accessible from within the virtual network.
    */
-  "Internal",
+  Internal: "Internal",
 }
 
 /**
@@ -686,9 +686,9 @@ union VirtualNetworkType {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  "Pending",
-  "Approved",
-  "Rejected",
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
@@ -696,28 +696,28 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union ApimIdentityType {
   string,
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned, UserAssigned",
-  "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+  None: "None",
 }
 
 union TemplateName {
   string,
-  "applicationApprovedNotificationMessage",
-  "accountClosedDeveloper",
-  "quotaLimitApproachingDeveloperNotificationMessage",
-  "newDeveloperNotificationMessage",
-  "emailChangeIdentityDefault",
-  "inviteUserNotificationMessage",
-  "newCommentNotificationMessage",
-  "confirmSignUpIdentityDefault",
-  "newIssueNotificationMessage",
-  "purchaseDeveloperNotificationMessage",
-  "passwordResetIdentityDefault",
-  "passwordResetByAdminNotificationMessage",
-  "rejectDeveloperNotificationMessage",
-  "requestDeveloperNotificationMessage",
+  applicationApprovedNotificationMessage: "applicationApprovedNotificationMessage",
+  accountClosedDeveloper: "accountClosedDeveloper",
+  quotaLimitApproachingDeveloperNotificationMessage: "quotaLimitApproachingDeveloperNotificationMessage",
+  newDeveloperNotificationMessage: "newDeveloperNotificationMessage",
+  emailChangeIdentityDefault: "emailChangeIdentityDefault",
+  inviteUserNotificationMessage: "inviteUserNotificationMessage",
+  newCommentNotificationMessage: "newCommentNotificationMessage",
+  confirmSignUpIdentityDefault: "confirmSignUpIdentityDefault",
+  newIssueNotificationMessage: "newIssueNotificationMessage",
+  purchaseDeveloperNotificationMessage: "purchaseDeveloperNotificationMessage",
+  passwordResetIdentityDefault: "passwordResetIdentityDefault",
+  passwordResetByAdminNotificationMessage: "passwordResetByAdminNotificationMessage",
+  rejectDeveloperNotificationMessage: "rejectDeveloperNotificationMessage",
+  requestDeveloperNotificationMessage: "requestDeveloperNotificationMessage",
 }
 
 /**
@@ -729,22 +729,22 @@ union UserState {
   /**
    * User state is active.
    */
-  "active",
+  active: "active",
 
   /**
    * User is blocked. Blocked users cannot authenticate at developer portal or call API.
    */
-  "blocked",
+  blocked: "blocked",
 
   /**
    * User account is pending. Requires identity confirmation before it can be made active.
    */
-  "pending",
+  pending: "pending",
 
   /**
    * User account is closed. All identities and related entities are removed.
    */
-  "deleted",
+  deleted: "deleted",
 }
 
 union IdentityProviderType {
@@ -753,32 +753,32 @@ union IdentityProviderType {
   /**
    * Facebook as Identity provider.
    */
-  "facebook",
+  facebook: "facebook",
 
   /**
    * Google as Identity provider.
    */
-  "google",
+  google: "google",
 
   /**
    * Microsoft Live as Identity provider.
    */
-  "microsoft",
+  microsoft: "microsoft",
 
   /**
    * Twitter as Identity provider.
    */
-  "twitter",
+  twitter: "twitter",
 
   /**
    * Azure Active Directory as Identity provider.
    */
-  "aad",
+  aad: "aad",
 
   /**
    * Azure Active Directory B2C as Identity provider.
    */
-  "aadB2C",
+  aadB2C: "aadB2C",
 }
 
 /**
@@ -790,17 +790,17 @@ union LoggerType {
   /**
    * Azure Event Hub as log destination.
    */
-  "azureEventHub",
+  azureEventHub: "azureEventHub",
 
   /**
    * Azure Application Insights as log destination.
    */
-  "applicationInsights",
+  applicationInsights: "applicationInsights",
 
   /**
    * Azure Monitor
    */
-  "azureMonitor",
+  azureMonitor: "azureMonitor",
 }
 
 /**
@@ -808,9 +808,9 @@ union LoggerType {
  */
 union ConnectivityStatusType {
   string,
-  "initializing",
-  "success",
-  "failure",
+  initializing: "initializing",
+  success: "success",
+  failure: "failure",
 }
 
 union NotificationName {
@@ -819,37 +819,37 @@ union NotificationName {
   /**
    * The following email recipients and users will receive email notifications about subscription requests for API products requiring approval.
    */
-  "RequestPublisherNotificationMessage",
+  RequestPublisherNotificationMessage: "RequestPublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications about new API product subscriptions.
    */
-  "PurchasePublisherNotificationMessage",
+  PurchasePublisherNotificationMessage: "PurchasePublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications when new applications are submitted to the application gallery.
    */
-  "NewApplicationNotificationMessage",
+  NewApplicationNotificationMessage: "NewApplicationNotificationMessage",
 
   /**
    * The following recipients will receive blind carbon copies of all emails sent to developers.
    */
-  "BCC",
+  BCC: "BCC",
 
   /**
    * The following email recipients and users will receive email notifications when a new issue or comment is submitted on the developer portal.
    */
-  "NewIssuePublisherNotificationMessage",
+  NewIssuePublisherNotificationMessage: "NewIssuePublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications when developer closes his account.
    */
-  "AccountClosedPublisher",
+  AccountClosedPublisher: "AccountClosedPublisher",
 
   /**
    * The following email recipients and users will receive email notifications when subscription usage gets close to usage quota.
    */
-  "QuotaLimitApproachingPublisherNotificationMessage",
+  QuotaLimitApproachingPublisherNotificationMessage: "QuotaLimitApproachingPublisherNotificationMessage",
 }
 
 /**
@@ -861,22 +861,22 @@ union PortalRevisionStatus {
   /**
    * Portal's revision has been queued.
    */
-  "pending",
+  pending: "pending",
 
   /**
    * Portal's revision is being published.
    */
-  "publishing",
+  publishing: "publishing",
 
   /**
    * Portal's revision publishing completed.
    */
-  "completed",
+  completed: "completed",
 
   /**
    * Portal's revision publishing failed.
    */
-  "failed",
+  failed: "failed",
 }
 
 /**
@@ -884,10 +884,10 @@ union PortalRevisionStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  "Succeeded",
-  "Creating",
-  "Deleting",
-  "Failed",
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
@@ -909,7 +909,7 @@ union SchemaType {
 
 union SettingsTypeName {
   string,
-  "public",
+  public: "public",
 }
 
 union AppType {
@@ -918,23 +918,23 @@ union AppType {
   /**
    * User create request was sent by legacy developer portal.
    */
-  "portal",
+  portal: "portal",
 
   /**
    * User create request was sent by new developer portal.
    */
-  "developerPortal",
+  developerPortal: "developerPortal",
 }
 
 union AccessIdName {
   string,
-  "access",
-  "gitAccess",
+  access: "access",
+  gitAccess: "gitAccess",
 }
 
 union ConfigurationIdName {
   string,
-  "configuration",
+  configuration: "configuration",
 }
 
 /**
@@ -946,12 +946,12 @@ union Confirmation {
   /**
    * Send an e-mail to the user confirming they have successfully signed up.
    */
-  "signup",
+  signup: "signup",
 
   /**
    * Send an e-mail inviting the user to sign-up and complete registration.
    */
-  "invite",
+  invite: "invite",
 }
 
 /**

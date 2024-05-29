@@ -8,15 +8,15 @@ namespace AutoRestComplexTestService;
 
 union CmykColors {
   string,
-  "cyan",
-  "Magenta",
-  "YELLOW",
-  "blacK",
+  cyan: "cyan",
+  Magenta: "Magenta",
+  YELLOW: "YELLOW",
+  blacK: "blacK",
 }
 
 union MyKind {
   string,
-  "Kind1",
+  Kind1: "Kind1",
 }
 
 /**
@@ -24,9 +24,9 @@ union MyKind {
  */
 union GoblinSharkColor {
   string,
-  "pink",
-  "gray",
-  "brown",
+  pink: "pink",
+  gray: "gray",
+  brown: "brown",
 
   /**
    * Uppercase RED

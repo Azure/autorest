@@ -21,12 +21,12 @@ enum ApiVersion {
  */
 union ImputeMode {
   string,
-  "auto",
-  "previous",
-  "linear",
-  "fixed",
-  "zero",
-  "notFill",
+  auto: "auto",
+  previous: "previous",
+  linear: "linear",
+  fixed: "fixed",
+  zero: "zero",
+  notFill: "notFill",
 }
 
 /**
@@ -34,17 +34,17 @@ union ImputeMode {
  */
 union AnomalyDetectorErrorCodes {
   string,
-  "InvalidCustomInterval",
-  "BadArgument",
-  "InvalidGranularity",
-  "InvalidPeriod",
-  "InvalidModelArgument",
-  "InvalidSeries",
-  "InvalidJsonFormat",
-  "RequiredGranularity",
-  "RequiredSeries",
-  "InvalidImputeMode",
-  "InvalidImputeFixedValue",
+  InvalidCustomInterval: "InvalidCustomInterval",
+  BadArgument: "BadArgument",
+  InvalidGranularity: "InvalidGranularity",
+  InvalidPeriod: "InvalidPeriod",
+  InvalidModelArgument: "InvalidModelArgument",
+  InvalidSeries: "InvalidSeries",
+  InvalidJsonFormat: "InvalidJsonFormat",
+  RequiredGranularity: "RequiredGranularity",
+  RequiredSeries: "RequiredSeries",
+  InvalidImputeMode: "InvalidImputeMode",
+  InvalidImputeFixedValue: "InvalidImputeFixedValue",
 }
 
 /**
@@ -54,12 +54,12 @@ union AnomalyDetectorErrorCodes {
  */
 union FillNAMethod {
   string,
-  "Previous",
-  "Subsequent",
-  "Linear",
-  "Zero",
-  "Fixed",
-  "NotFill",
+  Previous: "Previous",
+  Subsequent: "Subsequent",
+  Linear: "Linear",
+  Zero: "Zero",
+  Fixed: "Fixed",
+  NotFill: "NotFill",
 }
 
 /**

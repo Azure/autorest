@@ -15,12 +15,12 @@ union RankerKind {
   /**
    * Question only ranker.
    */
-  "QuestionOnly",
+  QuestionOnly: "QuestionOnly",
 
   /**
    * Default ranker.
    */
-  "Default",
+  Default: "Default",
 }
 
 /**
@@ -28,8 +28,8 @@ union RankerKind {
  */
 union LogicalOperationKind {
   string,
-  "AND",
-  "OR",
+  AND: "AND",
+  OR: "OR",
 }
 
 /**
@@ -37,24 +37,24 @@ union LogicalOperationKind {
  */
 union ErrorCode {
   string,
-  "InvalidRequest",
-  "InvalidArgument",
-  "Unauthorized",
-  "Forbidden",
-  "NotFound",
-  "ProjectNotFound",
-  "OperationNotFound",
-  "AzureCognitiveSearchNotFound",
-  "AzureCognitiveSearchIndexNotFound",
-  "TooManyRequests",
-  "AzureCognitiveSearchThrottling",
-  "AzureCognitiveSearchIndexLimitReached",
-  "InternalServerError",
-  "ServiceUnavailable",
-  "Timeout",
-  "QuotaExceeded",
-  "Conflict",
-  "Warning",
+  InvalidRequest: "InvalidRequest",
+  InvalidArgument: "InvalidArgument",
+  Unauthorized: "Unauthorized",
+  Forbidden: "Forbidden",
+  NotFound: "NotFound",
+  ProjectNotFound: "ProjectNotFound",
+  OperationNotFound: "OperationNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+  TooManyRequests: "TooManyRequests",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+  InternalServerError: "InternalServerError",
+  ServiceUnavailable: "ServiceUnavailable",
+  Timeout: "Timeout",
+  QuotaExceeded: "QuotaExceeded",
+  Conflict: "Conflict",
+  Warning: "Warning",
 }
 
 /**
@@ -62,20 +62,20 @@ union ErrorCode {
  */
 union InnerErrorCode {
   string,
-  "InvalidRequest",
-  "InvalidParameterValue",
-  "KnowledgeBaseNotFound",
-  "AzureCognitiveSearchNotFound",
-  "AzureCognitiveSearchThrottling",
-  "ExtractionFailure",
-  "InvalidRequestBodyFormat",
-  "EmptyRequest",
-  "MissingInputDocuments",
-  "InvalidDocument",
-  "ModelVersionIncorrect",
-  "InvalidDocumentBatch",
-  "UnsupportedLanguageCode",
-  "InvalidCountryHint",
+  InvalidRequest: "InvalidRequest",
+  InvalidParameterValue: "InvalidParameterValue",
+  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  ExtractionFailure: "ExtractionFailure",
+  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+  EmptyRequest: "EmptyRequest",
+  MissingInputDocuments: "MissingInputDocuments",
+  InvalidDocument: "InvalidDocument",
+  ModelVersionIncorrect: "ModelVersionIncorrect",
+  InvalidDocumentBatch: "InvalidDocumentBatch",
+  UnsupportedLanguageCode: "UnsupportedLanguageCode",
+  InvalidCountryHint: "InvalidCountryHint",
 }
 
 /**
@@ -92,21 +92,21 @@ union StringIndexType {
    * option if your application is written in .Net Framework or .Net Core and you
    * will be using StringInfo.
    */
-  "TextElements_v8",
+  TextElements_v8: "TextElements_v8",
 
   /**
    * Returned offset and length values will correspond to Unicode code points. Use
    * this option if your application is written in a language that support Unicode,
    * for example Python.
    */
-  "UnicodeCodePoint",
+  UnicodeCodePoint: "UnicodeCodePoint",
 
   /**
    * Returned offset and length values will correspond to UTF-16 code units. Use
    * this option if your application is written in a language that support Unicode,
    * for example Java, JavaScript.
    */
-  "Utf16CodeUnit",
+  Utf16CodeUnit: "Utf16CodeUnit",
 }
 
 /**

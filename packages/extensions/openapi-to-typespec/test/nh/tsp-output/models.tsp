@@ -10,35 +10,35 @@ namespace NotificationHubsClient;
 
 union MSApiVersionType {
   string,
-  "2015-01",
-  "2015-04",
-  "2015-08",
-  "2016-07",
+  `2015-01`: "2015-01",
+  `2015-04`: "2015-04",
+  `2015-08`: "2015-08",
+  `2016-07`: "2016-07",
 }
 
 union NotificationHubContentModelType {
   string,
-  "application/xml",
+  `application/xml`: "application/xml",
 }
 
 union NotificationHubDescriptionModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union NotificationHubDescriptionModelAuthorizationRulesItemIType {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union NotificationHubDescriptionModelAuthorizationRulesItemClaimType {
   string,
-  "SharedAccessAuthorizationRule",
+  SharedAccessAuthorizationRule: "SharedAccessAuthorizationRule",
 }
 
 union RegistrationEntryModelXmlnsM {
   string,
-  "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
+  `http://schemas.microsoft.com/ado/2007/08/dataservices/metadata`: "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
 }
 
 /**
@@ -46,80 +46,80 @@ union RegistrationEntryModelXmlnsM {
  */
 union PlatformType {
   string,
-  "apns",
-  "wns",
-  "gcm",
-  "baidu",
-  "adm",
+  apns: "apns",
+  wns: "wns",
+  gcm: "gcm",
+  baidu: "baidu",
+  adm: "adm",
 }
 
 union InstallationPatchType {
   string,
-  "add",
-  "remove",
-  "replace",
+  add: "add",
+  remove: "remove",
+  replace: "replace",
 }
 
 union FormatParameterType {
   string,
-  "apple",
-  "baidu",
-  "gcm",
-  "windows",
+  apple: "apple",
+  baidu: "baidu",
+  gcm: "gcm",
+  windows: "windows",
 }
 
 union RegistrationContentModelType {
   string,
-  "application/xml",
+  `application/xml`: "application/xml",
 }
 
 union AppleRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union AppleTemplateRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union BaiduRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union BaiduTemplateRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union GcmRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union GcmTemplateRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union WindowsRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union WindowsTemplateRegistrationContentModelXmlnsI {
   string,
-  "http://www.w3.org/2001/XMLSchema-instance",
+  `http://www.w3.org/2001/XMLSchema-instance`: "http://www.w3.org/2001/XMLSchema-instance",
 }
 
 union ApiVersionType {
   string,
-  "2015-01",
-  "2015-04",
-  "2015-08",
-  "2016-07",
-  "2020-06",
+  `2015-01`: "2015-01",
+  `2015-04`: "2015-04",
+  `2015-08`: "2015-08",
+  `2016-07`: "2016-07",
+  `2020-06`: "2020-06",
 }
 
 /**

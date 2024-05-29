@@ -18,7 +18,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union UsageUnit {
   string,
-  "Count",
+  Count: "Count",
 }
 
 /**
@@ -26,7 +26,7 @@ union UsageUnit {
  */
 union BillingCurrency {
   string,
-  "USD",
+  USD: "USD",
 }
 
 /**
@@ -34,7 +34,7 @@ union BillingCurrency {
  */
 union UnitOfMeasure {
   string,
-  "OneHour",
+  OneHour: "OneHour",
 }
 
 /**
@@ -42,8 +42,8 @@ union UnitOfMeasure {
  */
 union VMPriceOSType {
   string,
-  "Linux",
-  "Windows",
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
@@ -51,9 +51,9 @@ union VMPriceOSType {
  */
 union VMTier {
   string,
-  "Standard",
-  "LowPriority",
-  "Spot",
+  Standard: "Standard",
+  LowPriority: "LowPriority",
+  Spot: "Spot",
 }
 
 /**
@@ -61,7 +61,7 @@ union VMTier {
  */
 union QuotaUnit {
   string,
-  "Count",
+  Count: "Count",
 }
 
 /**
@@ -69,14 +69,14 @@ union QuotaUnit {
  */
 union Status {
   string,
-  "Undefined",
-  "Success",
-  "Failure",
-  "InvalidQuotaBelowClusterMinimum",
-  "InvalidQuotaExceedsSubscriptionLimit",
-  "InvalidVMFamilyName",
-  "OperationNotSupportedForSku",
-  "OperationNotEnabledForRegion",
+  Undefined: "Undefined",
+  Success: "Success",
+  Failure: "Failure",
+  InvalidQuotaBelowClusterMinimum: "InvalidQuotaBelowClusterMinimum",
+  InvalidQuotaExceedsSubscriptionLimit: "InvalidQuotaExceedsSubscriptionLimit",
+  InvalidVMFamilyName: "InvalidVMFamilyName",
+  OperationNotSupportedForSku: "OperationNotSupportedForSku",
+  OperationNotEnabledForRegion: "OperationNotEnabledForRegion",
 }
 
 /**
@@ -84,10 +84,10 @@ union Status {
  */
 union ManagedServiceIdentityType {
   string,
-  "None",
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned,UserAssigned",
+  None: "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
 /**
@@ -95,16 +95,16 @@ union ManagedServiceIdentityType {
  */
 union ComputeType {
   string,
-  "AKS",
-  "Kubernetes",
-  "AmlCompute",
-  "ComputeInstance",
-  "DataFactory",
-  "VirtualMachine",
-  "HDInsight",
-  "Databricks",
-  "DataLakeAnalytics",
-  "SynapseSpark",
+  AKS: "AKS",
+  Kubernetes: "Kubernetes",
+  AmlCompute: "AmlCompute",
+  ComputeInstance: "ComputeInstance",
+  DataFactory: "DataFactory",
+  VirtualMachine: "VirtualMachine",
+  HDInsight: "HDInsight",
+  Databricks: "Databricks",
+  DataLakeAnalytics: "DataLakeAnalytics",
+  SynapseSpark: "SynapseSpark",
 }
 
 /**
@@ -112,19 +112,19 @@ union ComputeType {
  */
 union ProvisioningState {
   string,
-  "Unknown",
-  "Updating",
-  "Creating",
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+  Unknown: "Unknown",
+  Updating: "Updating",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 union UnderlyingResourceAction {
   string,
-  "Delete",
-  "Detach",
+  Delete: "Delete",
+  Detach: "Detach",
 }
 
 /**
@@ -132,8 +132,8 @@ union UnderlyingResourceAction {
  */
 union ImageType {
   string,
-  "docker",
-  "azureml",
+  docker: "docker",
+  azureml: "azureml",
 }
 
 /**
@@ -141,7 +141,7 @@ union ImageType {
  */
 union EnvironmentVariableType {
   string,
-  "local",
+  local: "local",
 }
 
 /**
@@ -149,9 +149,9 @@ union EnvironmentVariableType {
  */
 union Protocol {
   string,
-  "tcp",
-  "udp",
-  "http",
+  tcp: "tcp",
+  udp: "udp",
+  http: "http",
 }
 
 /**
@@ -159,10 +159,10 @@ union Protocol {
  */
 union VolumeDefinitionType {
   string,
-  "bind",
-  "volume",
-  "tmpfs",
-  "npipe",
+  bind: "bind",
+  volume: "volume",
+  tmpfs: "tmpfs",
+  npipe: "npipe",
 }
 
 /**
@@ -170,12 +170,12 @@ union VolumeDefinitionType {
  */
 union NodeState {
   string,
-  "idle",
-  "running",
-  "preparing",
-  "unusable",
-  "leaving",
-  "preempted",
+  idle: "idle",
+  running: "running",
+  preparing: "preparing",
+  unusable: "unusable",
+  leaving: "leaving",
+  preempted: "preempted",
 }
 
 /**
@@ -183,18 +183,18 @@ union NodeState {
  */
 union AssetProvisioningState {
   string,
-  "Succeeded",
-  "Failed",
-  "Canceled",
-  "Creating",
-  "Updating",
-  "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
 }
 
 union AutoDeleteCondition {
   string,
-  "CreatedGreaterThan",
-  "LastAccessedGreaterThan",
+  CreatedGreaterThan: "CreatedGreaterThan",
+  LastAccessedGreaterThan: "LastAccessedGreaterThan",
 }
 
 /**
@@ -202,8 +202,8 @@ union AutoDeleteCondition {
  */
 union PendingUploadType {
   string,
-  "None",
-  "TemporaryBlobReference",
+  None: "None",
+  TemporaryBlobReference: "TemporaryBlobReference",
 }
 
 /**
@@ -211,14 +211,14 @@ union PendingUploadType {
  */
 union PendingUploadCredentialType {
   string,
-  "SAS",
+  SAS: "SAS",
 }
 
 union ListViewType {
   string,
-  "ActiveOnly",
-  "ArchivedOnly",
-  "All",
+  ActiveOnly: "ActiveOnly",
+  ArchivedOnly: "ArchivedOnly",
+  All: "All",
 }
 
 /**
@@ -226,9 +226,9 @@ union ListViewType {
  */
 union DataType {
   string,
-  "uri_file",
-  "uri_folder",
-  "mltable",
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
 }
 
 /**
@@ -240,12 +240,12 @@ union ProtectionLevel {
   /**
    * All means Intellectual Property is fully protected.
    */
-  "All",
+  All: "All",
 
   /**
    * None means it is not an Intellectual Property.
    */
-  "None",
+  None: "None",
 }
 
 /**
@@ -253,8 +253,8 @@ union ProtectionLevel {
  */
 union AutoRebuildSetting {
   string,
-  "Disabled",
-  "OnBaseImageUpdate",
+  Disabled: "Disabled",
+  OnBaseImageUpdate: "OnBaseImageUpdate",
 }
 
 /**
@@ -262,8 +262,8 @@ union AutoRebuildSetting {
  */
 union EnvironmentType {
   string,
-  "Curated",
-  "UserCreated",
+  Curated: "Curated",
+  UserCreated: "UserCreated",
 }
 
 /**
@@ -271,8 +271,8 @@ union EnvironmentType {
  */
 union OperatingSystemType {
   string,
-  "Linux",
-  "Windows",
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
@@ -280,7 +280,7 @@ union OperatingSystemType {
  */
 union BaseEnvironmentSourceType {
   string,
-  "EnvironmentAsset",
+  EnvironmentAsset: "EnvironmentAsset",
 }
 
 /**
@@ -288,10 +288,10 @@ union BaseEnvironmentSourceType {
  */
 union InferencingServerType {
   string,
-  "AzureMLOnline",
-  "AzureMLBatch",
-  "Triton",
-  "Custom",
+  AzureMLOnline: "AzureMLOnline",
+  AzureMLBatch: "AzureMLBatch",
+  Triton: "Triton",
+  Custom: "Custom",
 }
 
 /**
@@ -299,8 +299,8 @@ union InferencingServerType {
  */
 union PackageInputType {
   string,
-  "UriFile",
-  "UriFolder",
+  UriFile: "UriFile",
+  UriFolder: "UriFolder",
 }
 
 /**
@@ -308,8 +308,8 @@ union PackageInputType {
  */
 union PackageInputDeliveryMode {
   string,
-  "Copy",
-  "Download",
+  Copy: "Copy",
+  Download: "Download",
 }
 
 /**
@@ -317,9 +317,9 @@ union PackageInputDeliveryMode {
  */
 union InputPathType {
   string,
-  "Url",
-  "PathId",
-  "PathVersion",
+  Url: "Url",
+  PathId: "PathId",
+  PathVersion: "PathVersion",
 }
 
 /**
@@ -327,10 +327,10 @@ union InputPathType {
  */
 union PackageBuildState {
   string,
-  "NotStarted",
-  "Running",
-  "Succeeded",
-  "Failed",
+  NotStarted: "NotStarted",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
 }
 
 /**
@@ -338,12 +338,12 @@ union PackageBuildState {
  */
 union EndpointProvisioningState {
   string,
-  "Creating",
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Updating",
-  "Canceled",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Updating: "Updating",
+  Canceled: "Canceled",
 }
 
 /**
@@ -351,9 +351,9 @@ union EndpointProvisioningState {
  */
 union EndpointAuthMode {
   string,
-  "AMLToken",
-  "Key",
-  "AADToken",
+  AMLToken: "AMLToken",
+  Key: "Key",
+  AADToken: "AADToken",
 }
 
 /**
@@ -361,8 +361,8 @@ union EndpointAuthMode {
  */
 union BatchDeploymentConfigurationType {
   string,
-  "Model",
-  "PipelineComponent",
+  Model: "Model",
+  PipelineComponent: "PipelineComponent",
 }
 
 /**
@@ -372,9 +372,9 @@ union BatchDeploymentConfigurationType {
  */
 union BatchLoggingLevel {
   string,
-  "Info",
-  "Warning",
-  "Debug",
+  Info: "Info",
+  Warning: "Warning",
+  Debug: "Debug",
 }
 
 /**
@@ -382,9 +382,9 @@ union BatchLoggingLevel {
  */
 union ReferenceType {
   string,
-  "Id",
-  "DataPath",
-  "OutputPath",
+  Id: "Id",
+  DataPath: "DataPath",
+  OutputPath: "OutputPath",
 }
 
 /**
@@ -392,8 +392,8 @@ union ReferenceType {
  */
 union BatchOutputAction {
   string,
-  "SummaryOnly",
-  "AppendRow",
+  SummaryOnly: "SummaryOnly",
+  AppendRow: "AppendRow",
 }
 
 /**
@@ -401,13 +401,13 @@ union BatchOutputAction {
  */
 union DeploymentProvisioningState {
   string,
-  "Creating",
-  "Deleting",
-  "Scaling",
-  "Updating",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Scaling: "Scaling",
+  Updating: "Updating",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 /**
@@ -415,13 +415,13 @@ union DeploymentProvisioningState {
  */
 union CredentialsType {
   string,
-  "AccountKey",
-  "Certificate",
-  "None",
-  "Sas",
-  "ServicePrincipal",
-  "KerberosKeytab",
-  "KerberosPassword",
+  AccountKey: "AccountKey",
+  Certificate: "Certificate",
+  None: "None",
+  Sas: "Sas",
+  ServicePrincipal: "ServicePrincipal",
+  KerberosKeytab: "KerberosKeytab",
+  KerberosPassword: "KerberosPassword",
 }
 
 /**
@@ -429,12 +429,12 @@ union CredentialsType {
  */
 union DatastoreType {
   string,
-  "AzureBlob",
-  "AzureDataLakeGen1",
-  "AzureDataLakeGen2",
-  "AzureFile",
-  "Hdfs",
-  "OneLake",
+  AzureBlob: "AzureBlob",
+  AzureDataLakeGen1: "AzureDataLakeGen1",
+  AzureDataLakeGen2: "AzureDataLakeGen2",
+  AzureFile: "AzureFile",
+  Hdfs: "Hdfs",
+  OneLake: "OneLake",
 }
 
 /**
@@ -442,24 +442,24 @@ union DatastoreType {
  */
 union SecretsType {
   string,
-  "AccountKey",
-  "Certificate",
-  "Sas",
-  "ServicePrincipal",
-  "KerberosPassword",
-  "KerberosKeytab",
+  AccountKey: "AccountKey",
+  Certificate: "Certificate",
+  Sas: "Sas",
+  ServicePrincipal: "ServicePrincipal",
+  KerberosPassword: "KerberosPassword",
+  KerberosKeytab: "KerberosKeytab",
 }
 
 union FeatureDataType {
   string,
-  "String",
-  "Integer",
-  "Long",
-  "Float",
-  "Double",
-  "Binary",
-  "Datetime",
-  "Boolean",
+  String: "String",
+  Integer: "Integer",
+  Long: "Long",
+  Float: "Float",
+  Double: "Double",
+  Binary: "Binary",
+  Datetime: "Datetime",
+  Boolean: "Boolean",
 }
 
 /**
@@ -467,9 +467,9 @@ union FeatureDataType {
  */
 union EmailNotificationEnableType {
   string,
-  "JobCompleted",
-  "JobFailed",
-  "JobCancelled",
+  JobCompleted: "JobCompleted",
+  JobFailed: "JobFailed",
+  JobCancelled: "JobCancelled",
 }
 
 /**
@@ -477,7 +477,7 @@ union EmailNotificationEnableType {
  */
 union WebhookType {
   string,
-  "AzureDevOps",
+  AzureDevOps: "AzureDevOps",
 }
 
 /**
@@ -489,27 +489,27 @@ union RecurrenceFrequency {
   /**
    * Minute frequency
    */
-  "Minute",
+  Minute: "Minute",
 
   /**
    * Hour frequency
    */
-  "Hour",
+  Hour: "Hour",
 
   /**
    * Day frequency
    */
-  "Day",
+  Day: "Day",
 
   /**
    * Week frequency
    */
-  "Week",
+  Week: "Week",
 
   /**
    * Month frequency
    */
-  "Month",
+  Month: "Month",
 }
 
 /**
@@ -521,51 +521,51 @@ union WeekDay {
   /**
    * Monday weekday
    */
-  "Monday",
+  Monday: "Monday",
 
   /**
    * Tuesday weekday
    */
-  "Tuesday",
+  Tuesday: "Tuesday",
 
   /**
    * Wednesday weekday
    */
-  "Wednesday",
+  Wednesday: "Wednesday",
 
   /**
    * Thursday weekday
    */
-  "Thursday",
+  Thursday: "Thursday",
 
   /**
    * Friday weekday
    */
-  "Friday",
+  Friday: "Friday",
 
   /**
    * Saturday weekday
    */
-  "Saturday",
+  Saturday: "Saturday",
 
   /**
    * Sunday weekday
    */
-  "Sunday",
+  Sunday: "Sunday",
 }
 
 union TriggerType {
   string,
-  "Recurrence",
-  "Cron",
+  Recurrence: "Recurrence",
+  Cron: "Cron",
 }
 
 union MaterializationStoreType {
   string,
-  "None",
-  "Online",
-  "Offline",
-  "OnlineAndOffline",
+  None: "None",
+  Online: "Online",
+  Offline: "Offline",
+  OnlineAndOffline: "OnlineAndOffline",
 }
 
 /**
@@ -577,84 +577,84 @@ union JobStatus {
   /**
    * Run hasn't started yet.
    */
-  "NotStarted",
+  NotStarted: "NotStarted",
 
   /**
    * Run has started. The user has a run ID.
    */
-  "Starting",
+  Starting: "Starting",
 
   /**
    * (Not used currently) It will be used if ES is creating the compute target.
    */
-  "Provisioning",
+  Provisioning: "Provisioning",
 
   /**
    * The run environment is being prepared.
    */
-  "Preparing",
+  Preparing: "Preparing",
 
   /**
    * The job is queued in the compute target. For example, in BatchAI the job is in queued state, while waiting for all required nodes to be ready.
    */
-  "Queued",
+  Queued: "Queued",
 
   /**
    * The job started to run in the compute target.
    */
-  "Running",
+  Running: "Running",
 
   /**
    * Job is completed in the target. It is in output collection state now.
    */
-  "Finalizing",
+  Finalizing: "Finalizing",
 
   /**
    * Cancellation has been requested for the job.
    */
-  "CancelRequested",
+  CancelRequested: "CancelRequested",
 
   /**
    * Job completed successfully. This reflects that both the job itself and output collection states completed successfully
    */
-  "Completed",
+  Completed: "Completed",
 
   /**
    * Job failed.
    */
-  "Failed",
+  Failed: "Failed",
 
   /**
    * Following cancellation request, the job is now successfully canceled.
    */
-  "Canceled",
+  Canceled: "Canceled",
 
   /**
    * When heartbeat is enabled, if the run isn't updating any information to RunHistory then the run goes to NotResponding state.
    * NotResponding is the only state that is exempt from strict transition orders. A run can go from NotResponding to any of the previous states.
    */
-  "NotResponding",
+  NotResponding: "NotResponding",
 
   /**
    * The job is paused by users. Some adjustment to labeling jobs can be made only in paused state.
    */
-  "Paused",
+  Paused: "Paused",
 
   /**
    * Default job status if not mapped to all other statuses
    */
-  "Unknown",
+  Unknown: "Unknown",
 
   /**
    * The job is in a scheduled state. Job is not in any active state.
    */
-  "Scheduled",
+  Scheduled: "Scheduled",
 }
 
 union FeaturestoreJobType {
   string,
-  "RecurrentMaterialization",
-  "BackfillMaterialization",
+  RecurrentMaterialization: "RecurrentMaterialization",
+  BackfillMaterialization: "BackfillMaterialization",
 }
 
 /**
@@ -662,9 +662,9 @@ union FeaturestoreJobType {
  */
 union IdentityConfigurationType {
   string,
-  "Managed",
-  "AMLToken",
-  "UserIdentity",
+  Managed: "Managed",
+  AMLToken: "AMLToken",
+  UserIdentity: "UserIdentity",
 }
 
 /**
@@ -672,12 +672,12 @@ union IdentityConfigurationType {
  */
 union JobType {
   string,
-  "AutoML",
-  "Command",
-  "Labeling",
-  "Sweep",
-  "Pipeline",
-  "Spark",
+  AutoML: "AutoML",
+  Command: "Command",
+  Labeling: "Labeling",
+  Sweep: "Sweep",
+  Pipeline: "Pipeline",
+  Spark: "Spark",
 }
 
 /**
@@ -685,8 +685,8 @@ union JobType {
  */
 union NodesValueType {
   string,
-  "All",
-  "Custom",
+  All: "All",
+  Custom: "Custom",
 }
 
 /**
@@ -694,8 +694,8 @@ union NodesValueType {
  */
 union IncrementalDataRefresh {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -703,8 +703,8 @@ union IncrementalDataRefresh {
  */
 union MultiSelect {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -712,14 +712,14 @@ union MultiSelect {
  */
 union MediaType {
   string,
-  "Image",
-  "Text",
+  Image: "Image",
+  Text: "Text",
 }
 
 union MLAssistConfigurationType {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -727,17 +727,17 @@ union MLAssistConfigurationType {
  */
 union JobProvisioningState {
   string,
-  "Succeeded",
-  "Failed",
-  "Canceled",
-  "InProgress",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
+  InProgress: "InProgress",
 }
 
 union StatusMessageLevel {
   string,
-  "Error",
-  "Information",
-  "Warning",
+  Error: "Error",
+  Information: "Information",
+  Warning: "Warning",
 }
 
 /**
@@ -745,9 +745,9 @@ union StatusMessageLevel {
  */
 union ExportFormatType {
   string,
-  "Dataset",
-  "Coco",
-  "CSV",
+  Dataset: "Dataset",
+  Coco: "Coco",
+  CSV: "CSV",
 }
 
 /**
@@ -755,17 +755,17 @@ union ExportFormatType {
  */
 union EndpointComputeType {
   string,
-  "Managed",
-  "Kubernetes",
-  "AzureMLCompute",
+  Managed: "Managed",
+  Kubernetes: "Kubernetes",
+  AzureMLCompute: "AzureMLCompute",
 }
 
 union OrderString {
   string,
-  "CreatedAtDesc",
-  "CreatedAtAsc",
-  "UpdatedAtDesc",
-  "UpdatedAtAsc",
+  CreatedAtDesc: "CreatedAtDesc",
+  CreatedAtAsc: "CreatedAtAsc",
+  UpdatedAtDesc: "UpdatedAtDesc",
+  UpdatedAtAsc: "UpdatedAtAsc",
 }
 
 /**
@@ -773,23 +773,23 @@ union OrderString {
  */
 union PublicNetworkAccessType {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union DataCollectionMode {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union RollingRateType {
   string,
-  "Year",
-  "Month",
-  "Day",
-  "Hour",
-  "Minute",
+  Year: "Year",
+  Month: "Month",
+  Day: "Day",
+  Hour: "Hour",
+  Minute: "Minute",
 }
 
 /**
@@ -797,14 +797,14 @@ union RollingRateType {
  */
 union EgressPublicNetworkAccessType {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union ScaleType {
   string,
-  "Default",
-  "TargetUtilization",
+  Default: "Default",
+  TargetUtilization: "TargetUtilization",
 }
 
 /**
@@ -816,17 +816,17 @@ union ContainerType {
   /**
    * The container used to download models and score script.
    */
-  "StorageInitializer",
+  StorageInitializer: "StorageInitializer",
 
   /**
    * The container used to serve user's request.
    */
-  "InferenceServer",
+  InferenceServer: "InferenceServer",
 
   /**
    * The container used to collect payload and custom logging when mdc is enabled.
    */
-  "ModelDataCollector",
+  ModelDataCollector: "ModelDataCollector",
 }
 
 /**
@@ -838,48 +838,48 @@ union SkuScaleType {
   /**
    * Automatically scales node count.
    */
-  "Automatic",
+  Automatic: "Automatic",
 
   /**
    * Node count scaled upon user request.
    */
-  "Manual",
+  Manual: "Manual",
 
   /**
    * Fixed set of nodes.
    */
-  "None",
+  None: "None",
 }
 
 union KeyType {
   string,
-  "Primary",
-  "Secondary",
+  Primary: "Primary",
+  Secondary: "Secondary",
 }
 
 union ScheduleListViewType {
   string,
-  "EnabledOnly",
-  "DisabledOnly",
-  "All",
+  EnabledOnly: "EnabledOnly",
+  DisabledOnly: "DisabledOnly",
+  All: "All",
 }
 
 union ScheduleActionType {
   string,
-  "CreateJob",
-  "InvokeBatchEndpoint",
-  "ImportData",
-  "CreateMonitor",
+  CreateJob: "CreateJob",
+  InvokeBatchEndpoint: "InvokeBatchEndpoint",
+  ImportData: "ImportData",
+  CreateMonitor: "CreateMonitor",
 }
 
 union ScheduleProvisioningStatus {
   string,
-  "Creating",
-  "Updating",
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 /**
@@ -887,11 +887,11 @@ union ScheduleProvisioningStatus {
  */
 union EndpointServiceConnectionStatus {
   string,
-  "Approved",
-  "Pending",
-  "Rejected",
-  "Disconnected",
-  "Timeout",
+  Approved: "Approved",
+  Pending: "Pending",
+  Rejected: "Rejected",
+  Disconnected: "Disconnected",
+  Timeout: "Timeout",
 }
 
 /**
@@ -899,8 +899,8 @@ union EndpointServiceConnectionStatus {
  */
 union EncryptionStatus {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -908,9 +908,9 @@ union EncryptionStatus {
  */
 union IsolationMode {
   string,
-  "Disabled",
-  "AllowInternetOutbound",
-  "AllowOnlyApprovedOutbound",
+  Disabled: "Disabled",
+  AllowInternetOutbound: "AllowInternetOutbound",
+  AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
 /**
@@ -918,9 +918,9 @@ union IsolationMode {
  */
 union RuleCategory {
   string,
-  "Required",
-  "Recommended",
-  "UserDefined",
+  Required: "Required",
+  Recommended: "Recommended",
+  UserDefined: "UserDefined",
 }
 
 /**
@@ -928,8 +928,8 @@ union RuleCategory {
  */
 union RuleStatus {
   string,
-  "Inactive",
-  "Active",
+  Inactive: "Inactive",
+  Active: "Active",
 }
 
 /**
@@ -937,9 +937,9 @@ union RuleStatus {
  */
 union RuleType {
   string,
-  "FQDN",
-  "PrivateEndpoint",
-  "ServiceTag",
+  FQDN: "FQDN",
+  PrivateEndpoint: "PrivateEndpoint",
+  ServiceTag: "ServiceTag",
 }
 
 /**
@@ -947,8 +947,8 @@ union RuleType {
  */
 union ManagedNetworkStatus {
   string,
-  "Inactive",
-  "Active",
+  Inactive: "Inactive",
+  Active: "Active",
 }
 
 /**
@@ -956,10 +956,10 @@ union ManagedNetworkStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  "Succeeded",
-  "Creating",
-  "Deleting",
-  "Failed",
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
@@ -967,15 +967,15 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union ConnectionAuthType {
   string,
-  "PAT",
-  "ManagedIdentity",
-  "UsernamePassword",
-  "None",
-  "SAS",
-  "ServicePrincipal",
-  "AccessKey",
-  "ApiKey",
-  "CustomKeys",
+  PAT: "PAT",
+  ManagedIdentity: "ManagedIdentity",
+  UsernamePassword: "UsernamePassword",
+  None: "None",
+  SAS: "SAS",
+  ServicePrincipal: "ServicePrincipal",
+  AccessKey: "AccessKey",
+  ApiKey: "ApiKey",
+  CustomKeys: "CustomKeys",
 }
 
 /**
@@ -983,22 +983,22 @@ union ConnectionAuthType {
  */
 union ConnectionCategory {
   string,
-  "PythonFeed",
-  "ContainerRegistry",
-  "Git",
-  "S3",
-  "Snowflake",
-  "AzureSqlDb",
-  "AzureSynapseAnalytics",
-  "AzureMySqlDb",
-  "AzurePostgresDb",
-  "ADLSGen2",
-  "Redis",
-  "ApiKey",
-  "AzureOpenAI",
-  "CognitiveSearch",
-  "CognitiveService",
-  "CustomKeys",
+  PythonFeed: "PythonFeed",
+  ContainerRegistry: "ContainerRegistry",
+  Git: "Git",
+  S3: "S3",
+  Snowflake: "Snowflake",
+  AzureSqlDb: "AzureSqlDb",
+  AzureSynapseAnalytics: "AzureSynapseAnalytics",
+  AzureMySqlDb: "AzureMySqlDb",
+  AzurePostgresDb: "AzurePostgresDb",
+  ADLSGen2: "ADLSGen2",
+  Redis: "Redis",
+  ApiKey: "ApiKey",
+  AzureOpenAI: "AzureOpenAI",
+  CognitiveSearch: "CognitiveSearch",
+  CognitiveService: "CognitiveService",
+  CustomKeys: "CustomKeys",
 }
 
 /**
@@ -1006,9 +1006,9 @@ union ConnectionCategory {
  */
 union DiagnoseResultLevel {
   string,
-  "Warning",
-  "Error",
-  "Information",
+  Warning: "Warning",
+  Error: "Error",
+  Information: "Information",
 }
 
 /**
@@ -1016,9 +1016,9 @@ union DiagnoseResultLevel {
  */
 union ClusterPurpose {
   string,
-  "FastProd",
-  "DenseProd",
-  "DevTest",
+  FastProd: "FastProd",
+  DenseProd: "DenseProd",
+  DevTest: "DevTest",
 }
 
 /**
@@ -1026,9 +1026,9 @@ union ClusterPurpose {
  */
 union SslConfigStatus {
   string,
-  "Disabled",
-  "Enabled",
-  "Auto",
+  Disabled: "Disabled",
+  Enabled: "Enabled",
+  Auto: "Auto",
 }
 
 /**
@@ -1036,8 +1036,8 @@ union SslConfigStatus {
  */
 union LoadBalancerType {
   string,
-  "PublicIp",
-  "InternalLoadBalancer",
+  PublicIp: "PublicIp",
+  InternalLoadBalancer: "InternalLoadBalancer",
 }
 
 /**
@@ -1045,8 +1045,8 @@ union LoadBalancerType {
  */
 union OsType {
   string,
-  "Linux",
-  "Windows",
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
@@ -1054,8 +1054,8 @@ union OsType {
  */
 union VmPriority {
   string,
-  "Dedicated",
-  "LowPriority",
+  Dedicated: "Dedicated",
+  LowPriority: "LowPriority",
 }
 
 /**
@@ -1063,9 +1063,9 @@ union VmPriority {
  */
 union RemoteLoginPortPublicAccess {
   string,
-  "Enabled",
-  "Disabled",
-  "NotSpecified",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
+  NotSpecified: "NotSpecified",
 }
 
 /**
@@ -1073,8 +1073,8 @@ union RemoteLoginPortPublicAccess {
  */
 union AllocationState {
   string,
-  "Steady",
-  "Resizing",
+  Steady: "Steady",
+  Resizing: "Resizing",
 }
 
 /**
@@ -1082,8 +1082,8 @@ union AllocationState {
  */
 union ApplicationSharingPolicy {
   string,
-  "Personal",
-  "Shared",
+  Personal: "Personal",
+  Shared: "Shared",
 }
 
 /**
@@ -1091,8 +1091,8 @@ union ApplicationSharingPolicy {
  */
 union MlflowAutologger {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -1100,8 +1100,8 @@ union MlflowAutologger {
  */
 union SshPublicAccess {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -1109,21 +1109,21 @@ union SshPublicAccess {
  */
 union ComputeInstanceState {
   string,
-  "Creating",
-  "CreateFailed",
-  "Deleting",
-  "Running",
-  "Restarting",
-  "JobRunning",
-  "SettingUp",
-  "SetupFailed",
-  "Starting",
-  "Stopped",
-  "Stopping",
-  "UserSettingUp",
-  "UserSetupFailed",
-  "Unknown",
-  "Unusable",
+  Creating: "Creating",
+  CreateFailed: "CreateFailed",
+  Deleting: "Deleting",
+  Running: "Running",
+  Restarting: "Restarting",
+  JobRunning: "JobRunning",
+  SettingUp: "SettingUp",
+  SetupFailed: "SetupFailed",
+  Starting: "Starting",
+  Stopped: "Stopped",
+  Stopping: "Stopping",
+  UserSettingUp: "UserSettingUp",
+  UserSetupFailed: "UserSetupFailed",
+  Unknown: "Unknown",
+  Unusable: "Unusable",
 }
 
 /**
@@ -1131,7 +1131,7 @@ union ComputeInstanceState {
  */
 union ComputeInstanceAuthorizationType {
   string,
-  "personal",
+  personal: "personal",
 }
 
 /**
@@ -1139,12 +1139,12 @@ union ComputeInstanceAuthorizationType {
  */
 union OperationName {
   string,
-  "Create",
-  "Start",
-  "Stop",
-  "Restart",
-  "Reimage",
-  "Delete",
+  Create: "Create",
+  Start: "Start",
+  Stop: "Stop",
+  Restart: "Restart",
+  Reimage: "Reimage",
+  Delete: "Delete",
 }
 
 /**
@@ -1152,14 +1152,14 @@ union OperationName {
  */
 union OperationStatus {
   string,
-  "InProgress",
-  "Succeeded",
-  "CreateFailed",
-  "StartFailed",
-  "StopFailed",
-  "RestartFailed",
-  "ReimageFailed",
-  "DeleteFailed",
+  InProgress: "InProgress",
+  Succeeded: "Succeeded",
+  CreateFailed: "CreateFailed",
+  StartFailed: "StartFailed",
+  StopFailed: "StopFailed",
+  RestartFailed: "RestartFailed",
+  ReimageFailed: "ReimageFailed",
+  DeleteFailed: "DeleteFailed",
 }
 
 /**
@@ -1167,9 +1167,9 @@ union OperationStatus {
  */
 union OperationTrigger {
   string,
-  "User",
-  "Schedule",
-  "IdleShutdown",
+  User: "User",
+  Schedule: "Schedule",
+  IdleShutdown: "IdleShutdown",
 }
 
 /**
@@ -1177,9 +1177,9 @@ union OperationTrigger {
  */
 union ProvisioningStatus {
   string,
-  "Completed",
-  "Provisioning",
-  "Failed",
+  Completed: "Completed",
+  Provisioning: "Provisioning",
+  Failed: "Failed",
 }
 
 /**
@@ -1187,8 +1187,8 @@ union ProvisioningStatus {
  */
 union ScheduleStatus {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -1196,8 +1196,8 @@ union ScheduleStatus {
  */
 union ComputePowerAction {
   string,
-  "Start",
-  "Stop",
+  Start: "Start",
+  Stop: "Stop",
 }
 
 /**
@@ -1205,9 +1205,9 @@ union ComputePowerAction {
  */
 union ScheduleProvisioningState {
   string,
-  "Completed",
-  "Provisioning",
-  "Failed",
+  Completed: "Completed",
+  Provisioning: "Provisioning",
+  Failed: "Failed",
 }
 
 /**
@@ -1215,9 +1215,9 @@ union ScheduleProvisioningState {
  */
 union Autosave {
   string,
-  "None",
-  "Local",
-  "Remote",
+  None: "None",
+  Local: "Local",
+  Remote: "Remote",
 }
 
 /**
@@ -1225,8 +1225,8 @@ union Autosave {
  */
 union Network {
   string,
-  "Bridge",
-  "Host",
+  Bridge: "Bridge",
+  Host: "Host",
 }
 
 /**
@@ -1234,9 +1234,9 @@ union Network {
  */
 union Caching {
   string,
-  "None",
-  "ReadOnly",
-  "ReadWrite",
+  None: "None",
+  ReadOnly: "ReadOnly",
+  ReadWrite: "ReadWrite",
 }
 
 /**
@@ -1244,8 +1244,8 @@ union Caching {
  */
 union StorageAccountType {
   string,
-  "Standard_LRS",
-  "Premium_LRS",
+  Standard_LRS: "Standard_LRS",
+  Premium_LRS: "Premium_LRS",
 }
 
 /**
@@ -1253,9 +1253,9 @@ union StorageAccountType {
  */
 union SourceType {
   string,
-  "Dataset",
-  "Datastore",
-  "URI",
+  Dataset: "Dataset",
+  Datastore: "Datastore",
+  URI: "URI",
 }
 
 /**
@@ -1263,8 +1263,8 @@ union SourceType {
  */
 union MountAction {
   string,
-  "Mount",
-  "Unmount",
+  Mount: "Mount",
+  Unmount: "Unmount",
 }
 
 /**
@@ -1272,12 +1272,12 @@ union MountAction {
  */
 union MountState {
   string,
-  "MountRequested",
-  "Mounted",
-  "MountFailed",
-  "UnmountRequested",
-  "UnmountFailed",
-  "Unmounted",
+  MountRequested: "MountRequested",
+  Mounted: "Mounted",
+  MountFailed: "MountFailed",
+  UnmountRequested: "UnmountRequested",
+  UnmountFailed: "UnmountFailed",
+  Unmounted: "Unmounted",
 }
 
 union MonitoringFeatureFilterType {
@@ -1286,17 +1286,17 @@ union MonitoringFeatureFilterType {
   /**
    * Includes all features.
    */
-  "AllFeatures",
+  AllFeatures: "AllFeatures",
 
   /**
    * Only includes the top contributing features, measured by feature attribution.
    */
-  "TopNByAttribution",
+  TopNByAttribution: "TopNByAttribution",
 
   /**
    * Includes a user-defined subset of features.
    */
-  "FeatureSubset",
+  FeatureSubset: "FeatureSubset",
 }
 
 /**
@@ -1308,12 +1308,12 @@ union MonitorComputeIdentityType {
   /**
    * Authenticates through user's AML token.
    */
-  "AmlToken",
+  AmlToken: "AmlToken",
 
   /**
    * Authenticates through a user-provided managed identity.
    */
-  "ManagedIdentity",
+  ManagedIdentity: "ManagedIdentity",
 }
 
 /**
@@ -1321,12 +1321,12 @@ union MonitorComputeIdentityType {
  */
 union InputDeliveryMode {
   string,
-  "ReadOnlyMount",
-  "ReadWriteMount",
-  "Download",
-  "Direct",
-  "EvalMount",
-  "EvalDownload",
+  ReadOnlyMount: "ReadOnlyMount",
+  ReadWriteMount: "ReadWriteMount",
+  Download: "Download",
+  Direct: "Direct",
+  EvalMount: "EvalMount",
+  EvalDownload: "EvalDownload",
 }
 
 /**
@@ -1334,9 +1334,9 @@ union InputDeliveryMode {
  */
 union OutputDeliveryMode {
   string,
-  "ReadWriteMount",
-  "Upload",
-  "Direct",
+  ReadWriteMount: "ReadWriteMount",
+  Upload: "Upload",
+  Direct: "Direct",
 }
 
 /**
@@ -1348,12 +1348,12 @@ union ForecastHorizonMode {
   /**
    * Forecast horizon to be determined automatically.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Use the custom forecast horizon.
    */
-  "Custom",
+  Custom: "Custom",
 }
 
 /**
@@ -1361,12 +1361,12 @@ union ForecastHorizonMode {
  */
 union JobOutputType {
   string,
-  "uri_file",
-  "uri_folder",
-  "mltable",
-  "custom_model",
-  "mlflow_model",
-  "triton_model",
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
 }
 
 /**
@@ -1374,11 +1374,11 @@ union JobOutputType {
  */
 union JobTier {
   string,
-  "Null",
-  "Spot",
-  "Basic",
-  "Standard",
-  "Premium",
+  Null: "Null",
+  Spot: "Spot",
+  Basic: "Basic",
+  Standard: "Standard",
+  Premium: "Premium",
 }
 
 /**
@@ -1390,32 +1390,32 @@ union LogVerbosity {
   /**
    * No logs emitted.
    */
-  "NotSet",
+  NotSet: "NotSet",
 
   /**
    * Debug and above log statements logged.
    */
-  "Debug",
+  Debug: "Debug",
 
   /**
    * Info and above log statements logged.
    */
-  "Info",
+  Info: "Info",
 
   /**
    * Warning and above log statements logged.
    */
-  "Warning",
+  Warning: "Warning",
 
   /**
    * Error and above log statements logged.
    */
-  "Error",
+  Error: "Error",
 
   /**
    * Only critical statements logged.
    */
-  "Critical",
+  Critical: "Critical",
 }
 
 /**
@@ -1428,59 +1428,59 @@ union TaskType {
    * Classification in machine learning and statistics is a supervised learning approach in which
    * the computer program learns from the data given to it and make new observations or classifications.
    */
-  "Classification",
+  Classification: "Classification",
 
   /**
    * Regression means to predict the value using the input data. Regression models are used to predict a continuous value.
    */
-  "Regression",
+  Regression: "Regression",
 
   /**
    * Forecasting is a special kind of regression task that deals with time-series data and creates forecasting model
    * that can be used to predict the near future values based on the inputs.
    */
-  "Forecasting",
+  Forecasting: "Forecasting",
 
   /**
    * Image Classification. Multi-class image classification is used when an image is classified with only a single label
    * from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.
    */
-  "ImageClassification",
+  ImageClassification: "ImageClassification",
 
   /**
    * Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
    * from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.
    */
-  "ImageClassificationMultilabel",
+  ImageClassificationMultilabel: "ImageClassificationMultilabel",
 
   /**
    * Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
    * bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.
    */
-  "ImageObjectDetection",
+  ImageObjectDetection: "ImageObjectDetection",
 
   /**
    * Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
    * drawing a polygon around each object in the image.
    */
-  "ImageInstanceSegmentation",
+  ImageInstanceSegmentation: "ImageInstanceSegmentation",
 
   /**
    * Text classification (also known as text tagging or text categorization) is the process of sorting texts into categories.
    * Categories are mutually exclusive.
    */
-  "TextClassification",
+  TextClassification: "TextClassification",
 
   /**
    * Multilabel classification task assigns each sample to a group (zero or more) of target labels.
    */
-  "TextClassificationMultilabel",
+  TextClassificationMultilabel: "TextClassificationMultilabel",
 
   /**
    * Text Named Entity Recognition a.k.a. TextNER.
    * Named Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more.
    */
-  "TextNER",
+  TextNER: "TextNER",
 }
 
 /**
@@ -1488,13 +1488,13 @@ union TaskType {
  */
 union JobInputType {
   string,
-  "literal",
-  "uri_file",
-  "uri_folder",
-  "mltable",
-  "custom_model",
-  "mlflow_model",
-  "triton_model",
+  literal: "literal",
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
 }
 
 /**
@@ -1506,12 +1506,12 @@ union NCrossValidationsMode {
   /**
    * Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Use custom N-Cross validations value.
    */
-  "Custom",
+  Custom: "Custom",
 }
 
 /**
@@ -1523,12 +1523,12 @@ union SeasonalityMode {
   /**
    * Seasonality to be determined automatically.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Use the custom seasonality value.
    */
-  "Custom",
+  Custom: "Custom",
 }
 
 /**
@@ -1540,12 +1540,12 @@ union TargetLagsMode {
   /**
    * Target lags to be determined automatically.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Use the custom target lags.
    */
-  "Custom",
+  Custom: "Custom",
 }
 
 /**
@@ -1557,12 +1557,12 @@ union TargetRollingWindowSizeMode {
   /**
    * Determine rolling windows size automatically.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Use the specified rolling window size.
    */
-  "Custom",
+  Custom: "Custom",
 }
 
 /**
@@ -1570,8 +1570,8 @@ union TargetRollingWindowSizeMode {
  */
 union MLFlowAutologgerState {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union MonitoringAlertNotificationType {
@@ -1580,12 +1580,12 @@ union MonitoringAlertNotificationType {
   /**
    * Settings for Azure Monitor based alerting.
    */
-  "AzureMonitor",
+  AzureMonitor: "AzureMonitor",
 
   /**
    * Settings for AML email notifications.
    */
-  "Email",
+  Email: "Email",
 }
 
 union ServiceDataAccessAuthIdentity {
@@ -1594,31 +1594,31 @@ union ServiceDataAccessAuthIdentity {
   /**
    * Do not use any identity for service data access.
    */
-  "None",
+  None: "None",
 
   /**
    * Use the system assigned managed identity of the Workspace to authenticate service data access.
    */
-  "WorkspaceSystemAssignedIdentity",
+  WorkspaceSystemAssignedIdentity: "WorkspaceSystemAssignedIdentity",
 
   /**
    * Use the user assigned managed identity of the Workspace to authenticate service data access.
    */
-  "WorkspaceUserAssignedIdentity",
+  WorkspaceUserAssignedIdentity: "WorkspaceUserAssignedIdentity",
 }
 
 union EarlyTerminationPolicyType {
   string,
-  "Bandit",
-  "MedianStopping",
-  "TruncationSelection",
+  Bandit: "Bandit",
+  MedianStopping: "MedianStopping",
+  TruncationSelection: "TruncationSelection",
 }
 
 union SamplingAlgorithmType {
   string,
-  "Grid",
-  "Random",
-  "Bayesian",
+  Grid: "Grid",
+  Random: "Random",
+  Bayesian: "Bayesian",
 }
 
 union CategoricalDataDriftMetric {
@@ -1627,17 +1627,17 @@ union CategoricalDataDriftMetric {
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  "JensenShannonDistance",
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  "PopulationStabilityIndex",
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Pearsons Chi Squared Test metric.
    */
-  "PearsonsChiSquaredTest",
+  PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
 union MonitoringFeatureDataType {
@@ -1646,12 +1646,12 @@ union MonitoringFeatureDataType {
   /**
    * Used for features of numerical data type.
    */
-  "Numerical",
+  Numerical: "Numerical",
 
   /**
    * Used for features of categorical data type.
    */
-  "Categorical",
+  Categorical: "Categorical",
 }
 
 union CategoricalDataQualityMetric {
@@ -1660,17 +1660,17 @@ union CategoricalDataQualityMetric {
   /**
    * Calculates the rate of null values.
    */
-  "NullValueRate",
+  NullValueRate: "NullValueRate",
 
   /**
    * Calculates the rate of data type errors.
    */
-  "DataTypeErrorRate",
+  DataTypeErrorRate: "DataTypeErrorRate",
 
   /**
    * Calculates the rate values are out of bounds.
    */
-  "OutOfBoundsRate",
+  OutOfBoundsRate: "OutOfBoundsRate",
 }
 
 union CategoricalPredictionDriftMetric {
@@ -1679,17 +1679,17 @@ union CategoricalPredictionDriftMetric {
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  "JensenShannonDistance",
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  "PopulationStabilityIndex",
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Pearsons Chi Squared Test metric.
    */
-  "PearsonsChiSquaredTest",
+  PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
 /**
@@ -1703,29 +1703,29 @@ union ClassificationPrimaryMetrics {
    * This metric represents arithmetic mean of the score for each class,
    * weighted by the number of true instances in each class.
    */
-  "AUCWeighted",
+  AUCWeighted: "AUCWeighted",
 
   /**
    * Accuracy is the ratio of predictions that exactly match the true class labels.
    */
-  "Accuracy",
+  Accuracy: "Accuracy",
 
   /**
    * Normalized macro recall is recall macro-averaged and normalized, so that random
    * performance has a score of 0, and perfect performance has a score of 1.
    */
-  "NormMacroRecall",
+  NormMacroRecall: "NormMacroRecall",
 
   /**
    * The arithmetic mean of the average precision score for each class, weighted by
    * the number of true instances in each class.
    */
-  "AveragePrecisionScoreWeighted",
+  AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
   /**
    * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
    */
-  "PrecisionScoreWeighted",
+  PrecisionScoreWeighted: "PrecisionScoreWeighted",
 }
 
 /**
@@ -1740,76 +1740,76 @@ union ClassificationModels {
    * Logistic regression is fast and relatively uncomplicated, and it's convenient for you to interpret the results.
    * Although it's essentially a method for binary classification, it can also be applied to multiclass problems.
    */
-  "LogisticRegression",
+  LogisticRegression: "LogisticRegression",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    */
-  "SGD",
+  SGD: "SGD",
 
   /**
    * The multinomial Naive Bayes classifier is suitable for classification with discrete features (e.g., word counts for text classification).
    * The multinomial distribution normally requires integer feature counts. However, in practice, fractional counts such as tf-idf may also work.
    */
-  "MultinomialNaiveBayes",
+  MultinomialNaiveBayes: "MultinomialNaiveBayes",
 
   /**
    * Naive Bayes classifier for multivariate Bernoulli models.
    */
-  "BernoulliNaiveBayes",
+  BernoulliNaiveBayes: "BernoulliNaiveBayes",
 
   /**
    * A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.
    * After giving an SVM model sets of labeled training data for each category, they're able to categorize new text.
    */
-  "SVM",
+  SVM: "SVM",
 
   /**
    * A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.
    * After giving an SVM model sets of labeled training data for each category, they're able to categorize new text.
    * Linear SVM performs best when input data is linear, i.e., data can be easily classified by drawing the straight line between classified values on a plotted graph.
    */
-  "LinearSVM",
+  LinearSVM: "LinearSVM",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  "KNN",
+  KNN: "KNN",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  "DecisionTree",
+  DecisionTree: "DecisionTree",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  "RandomForest",
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  "ExtremeRandomTrees",
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  "LightGBM",
+  LightGBM: "LightGBM",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  "GradientBoosting",
+  GradientBoosting: "GradientBoosting",
 
   /**
    * XGBoost: Extreme Gradient Boosting Algorithm. This algorithm is used for structured data where target column values can be divided into distinct class values.
    */
-  "XGBoostClassifier",
+  XGBoostClassifier: "XGBoostClassifier",
 }
 
 /**
@@ -1819,32 +1819,32 @@ union ClassificationModels {
  */
 union StackMetaLearnerType {
   string,
-  "None",
+  None: "None",
 
   /**
    * Default meta-learners are LogisticRegression for classification tasks.
    */
-  "LogisticRegression",
+  LogisticRegression: "LogisticRegression",
 
   /**
    * Default meta-learners are LogisticRegression for classification task when CV is on.
    */
-  "LogisticRegressionCV",
+  LogisticRegressionCV: "LogisticRegressionCV",
 
-  "LightGBMClassifier",
+  LightGBMClassifier: "LightGBMClassifier",
 
   /**
    * Default meta-learners are LogisticRegression for regression task.
    */
-  "ElasticNet",
+  ElasticNet: "ElasticNet",
 
   /**
    * Default meta-learners are LogisticRegression for regression task when CV is on.
    */
-  "ElasticNetCV",
+  ElasticNetCV: "ElasticNetCV",
 
-  "LightGBMRegressor",
-  "LinearRegression",
+  LightGBMRegressor: "LightGBMRegressor",
+  LinearRegression: "LinearRegression",
 }
 
 /**
@@ -1856,17 +1856,17 @@ union TrainingMode {
   /**
    * Auto mode
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Distributed training mode
    */
-  "Distributed",
+  Distributed: "Distributed",
 
   /**
    * Non distributed training mode
    */
-  "NonDistributed",
+  NonDistributed: "NonDistributed",
 }
 
 /**
@@ -1878,52 +1878,52 @@ union BlockedTransformers {
   /**
    * Target encoding for text data.
    */
-  "TextTargetEncoder",
+  TextTargetEncoder: "TextTargetEncoder",
 
   /**
    * Ohe hot encoding creates a binary feature transformation.
    */
-  "OneHotEncoder",
+  OneHotEncoder: "OneHotEncoder",
 
   /**
    * Target encoding for categorical data.
    */
-  "CatTargetEncoder",
+  CatTargetEncoder: "CatTargetEncoder",
 
   /**
    * Tf-Idf stands for, term-frequency times inverse document-frequency. This is a common term weighting scheme for identifying information from documents.
    */
-  "TfIdf",
+  TfIdf: "TfIdf",
 
   /**
    * Weight of Evidence encoding is a technique used to encode categorical variables. It uses the natural log of the P(1)/P(0) to create weights.
    */
-  "WoETargetEncoder",
+  WoETargetEncoder: "WoETargetEncoder",
 
   /**
    * Label encoder converts labels/categorical variables in a numerical form.
    */
-  "LabelEncoder",
+  LabelEncoder: "LabelEncoder",
 
   /**
    * Word embedding helps represents words or phrases as a vector, or a series of numbers.
    */
-  "WordEmbedding",
+  WordEmbedding: "WordEmbedding",
 
   /**
    * Naive Bayes is a classified that is used for classification of discrete features that are categorically distributed.
    */
-  "NaiveBayes",
+  NaiveBayes: "NaiveBayes",
 
   /**
    * Count Vectorizer converts a collection of text documents to a matrix of token counts.
    */
-  "CountVectorizer",
+  CountVectorizer: "CountVectorizer",
 
   /**
    * Hashing One Hot Encoder can turn categorical variables into a limited number of new features. This is often used for high-cardinality categorical features.
    */
-  "HashOneHotEncoder",
+  HashOneHotEncoder: "HashOneHotEncoder",
 }
 
 /**
@@ -1935,17 +1935,17 @@ union FeaturizationMode {
   /**
    * Auto mode, system performs featurization without any custom featurization inputs.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * Custom featurization.
    */
-  "Custom",
+  Custom: "Custom",
 
   /**
    * Featurization off. 'Forecasting' task cannot use this value.
    */
-  "Off",
+  Off: "Off",
 }
 
 union ClassificationModelPerformanceMetric {
@@ -1954,17 +1954,17 @@ union ClassificationModelPerformanceMetric {
   /**
    * Calculates the accuracy of the model predictions.
    */
-  "Accuracy",
+  Accuracy: "Accuracy",
 
   /**
    * Calculates the precision of the model predictions.
    */
-  "Precision",
+  Precision: "Precision",
 
   /**
    * Calculates the recall of the model predictions.
    */
-  "Recall",
+  Recall: "Recall",
 }
 
 union MonitoringModelType {
@@ -1973,12 +1973,12 @@ union MonitoringModelType {
   /**
    * A model trained for classification tasks.
    */
-  "Classification",
+  Classification: "Classification",
 
   /**
    * A model trained for regressions tasks.
    */
-  "Regression",
+  Regression: "Regression",
 }
 
 /**
@@ -1986,16 +1986,16 @@ union MonitoringModelType {
  */
 union DistributionType {
   string,
-  "PyTorch",
-  "TensorFlow",
-  "Mpi",
-  "Ray",
+  PyTorch: "PyTorch",
+  TensorFlow: "TensorFlow",
+  Mpi: "Mpi",
+  Ray: "Ray",
 }
 
 union JobLimitsType {
   string,
-  "Command",
-  "Sweep",
+  Command: "Command",
+  Sweep: "Sweep",
 }
 
 /**
@@ -2007,7 +2007,7 @@ union MonitorComputeType {
   /**
    * Serverless Spark compute.
    */
-  "ServerlessSpark",
+  ServerlessSpark: "ServerlessSpark",
 }
 
 /**
@@ -2015,9 +2015,9 @@ union MonitorComputeType {
  */
 union ModelTaskType {
   string,
-  "Classification",
-  "Regression",
-  "QuestionAnswering",
+  Classification: "Classification",
+  Regression: "Regression",
+  QuestionAnswering: "QuestionAnswering",
 }
 
 union MonitoringNotificationMode {
@@ -2026,12 +2026,12 @@ union MonitoringNotificationMode {
   /**
    * Disabled notifications will not produce emails/metrics leveraged for alerting.
    */
-  "Disabled",
+  Disabled: "Disabled",
 
   /**
    * Enabled notification will produce emails/metrics leveraged for alerting.
    */
-  "Enabled",
+  Enabled: "Enabled",
 }
 
 union MonitoringSignalType {
@@ -2040,42 +2040,42 @@ union MonitoringSignalType {
   /**
    * Tracks model input data distribution change, comparing against training data or past production data.
    */
-  "DataDrift",
+  DataDrift: "DataDrift",
 
   /**
    * Tracks prediction result data distribution change, comparing against validation/test label data or past production data.
    */
-  "PredictionDrift",
+  PredictionDrift: "PredictionDrift",
 
   /**
    * Tracks model input data integrity.
    */
-  "DataQuality",
+  DataQuality: "DataQuality",
 
   /**
    * Tracks feature importance change in production, comparing against feature importance at training time.
    */
-  "FeatureAttributionDrift",
+  FeatureAttributionDrift: "FeatureAttributionDrift",
 
   /**
    * Tracks a custom signal provided by users.
    */
-  "Custom",
+  Custom: "Custom",
 
   /**
    * Tracks model performance based on ground truth data.
    */
-  "ModelPerformance",
+  ModelPerformance: "ModelPerformance",
 
   /**
    * Tracks the safety and quality of generated content.
    */
-  "GenerationSafetyQuality",
+  GenerationSafetyQuality: "GenerationSafetyQuality",
 
   /**
    * Tracks the token usage of generative endpoints.
    */
-  "GenerationTokenStatistics",
+  GenerationTokenStatistics: "GenerationTokenStatistics",
 }
 
 /**
@@ -2087,17 +2087,17 @@ union MonitoringInputDataType {
   /**
    * An input data with a fixed window size.
    */
-  "Static",
+  Static: "Static",
 
   /**
    * An input data which trailing relatively to the monitor's current run.
    */
-  "Trailing",
+  Trailing: "Trailing",
 
   /**
    * An input data with tabular format which doesn't require preprocessing.
    */
-  "Fixed",
+  Fixed: "Fixed",
 }
 
 /**
@@ -2105,8 +2105,8 @@ union MonitoringInputDataType {
  */
 union DataImportSourceType {
   string,
-  "database",
-  "file_system",
+  database: "database",
+  file_system: "file_system",
 }
 
 union FeatureAttributionMetric {
@@ -2115,7 +2115,7 @@ union FeatureAttributionMetric {
   /**
    * The Normalized Discounted Cumulative Gain metric.
    */
-  "NormalizedDiscountedCumulativeGain",
+  NormalizedDiscountedCumulativeGain: "NormalizedDiscountedCumulativeGain",
 }
 
 /**
@@ -2127,12 +2127,12 @@ union FeatureLags {
   /**
    * No feature lags generated.
    */
-  "None",
+  None: "None",
 
   /**
    * System auto-generates feature lags.
    */
-  "Auto",
+  Auto: "Auto",
 }
 
 /**
@@ -2144,22 +2144,22 @@ union ShortSeriesHandlingConfiguration {
   /**
    * Represents no/null value.
    */
-  "None",
+  None: "None",
 
   /**
    * Short series will be padded if there are no long series, otherwise short series will be dropped.
    */
-  "Auto",
+  Auto: "Auto",
 
   /**
    * All the short series will be padded.
    */
-  "Pad",
+  Pad: "Pad",
 
   /**
    * All the short series will be dropped.
    */
-  "Drop",
+  Drop: "Drop",
 }
 
 /**
@@ -2171,12 +2171,12 @@ union TargetAggregationFunction {
   /**
    * Represent no value set.
    */
-  "None",
+  None: "None",
 
-  "Sum",
-  "Max",
-  "Min",
-  "Mean",
+  Sum: "Sum",
+  Max: "Max",
+  Min: "Min",
+  Mean: "Mean",
 }
 
 /**
@@ -2188,10 +2188,10 @@ union UseStl {
   /**
    * No stl decomposition.
    */
-  "None",
+  None: "None",
 
-  "Season",
-  "SeasonTrend",
+  Season: "Season",
+  SeasonTrend: "SeasonTrend",
 }
 
 /**
@@ -2203,22 +2203,22 @@ union ForecastingPrimaryMetrics {
   /**
    * The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation.
    */
-  "SpearmanCorrelation",
+  SpearmanCorrelation: "SpearmanCorrelation",
 
   /**
    * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
    */
-  "NormalizedRootMeanSquaredError",
+  NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
   /**
    * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
    */
-  "R2Score",
+  R2Score: "R2Score",
 
   /**
    * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
    */
-  "NormalizedMeanAbsoluteError",
+  NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
 /**
@@ -2231,105 +2231,105 @@ union ForecastingModels {
    * Auto-Autoregressive Integrated Moving Average (ARIMA) model uses time-series data and statistical analysis to interpret the data and make future predictions.
    * This model aims to explain data by using time series data on its past values and uses linear regression to make predictions.
    */
-  "AutoArima",
+  AutoArima: "AutoArima",
 
   /**
    * Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects.
    * It works best with time series that have strong seasonal effects and several seasons of historical data. Prophet is robust to missing data and shifts in the trend, and typically handles outliers well.
    */
-  "Prophet",
+  Prophet: "Prophet",
 
   /**
    * The Naive forecasting model makes predictions by carrying forward the latest target value for each time-series in the training data.
    */
-  "Naive",
+  Naive: "Naive",
 
   /**
    * The Seasonal Naive forecasting model makes predictions by carrying forward the latest season of target values for each time-series in the training data.
    */
-  "SeasonalNaive",
+  SeasonalNaive: "SeasonalNaive",
 
   /**
    * The Average forecasting model makes predictions by carrying forward the average of the target values for each time-series in the training data.
    */
-  "Average",
+  Average: "Average",
 
   /**
    * The Seasonal Average forecasting model makes predictions by carrying forward the average value of the latest season of data for each time-series in the training data.
    */
-  "SeasonalAverage",
+  SeasonalAverage: "SeasonalAverage",
 
   /**
    * Exponential smoothing is a time series forecasting method for univariate data that can be extended to support data with a systematic trend or seasonal component.
    */
-  "ExponentialSmoothing",
+  ExponentialSmoothing: "ExponentialSmoothing",
 
   /**
    * An Autoregressive Integrated Moving Average with Explanatory Variable (ARIMAX) model can be viewed as a multiple regression model with one or more autoregressive (AR) terms and/or one or more moving average (MA) terms.
    * This method is suitable for forecasting when data is stationary/non stationary, and multivariate with any type of data pattern, i.e., level/trend /seasonality/cyclicity.
    */
-  "Arimax",
+  Arimax: "Arimax",
 
   /**
    * TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro.
    */
-  "TCNForecaster",
+  TCNForecaster: "TCNForecaster",
 
   /**
    * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
    */
-  "ElasticNet",
+  ElasticNet: "ElasticNet",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  "GradientBoosting",
+  GradientBoosting: "GradientBoosting",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  "DecisionTree",
+  DecisionTree: "DecisionTree",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  "KNN",
+  KNN: "KNN",
 
   /**
    * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
    */
-  "LassoLars",
+  LassoLars: "LassoLars",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    * It's an inexact but powerful technique.
    */
-  "SGD",
+  SGD: "SGD",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  "RandomForest",
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  "ExtremeRandomTrees",
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  "LightGBM",
+  LightGBM: "LightGBM",
 
   /**
    * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
    */
-  "XGBoostRegressor",
+  XGBoostRegressor: "XGBoostRegressor",
 }
 
 /**
@@ -2337,16 +2337,16 @@ union ForecastingModels {
  */
 union GenerationSafetyQualityMetric {
   string,
-  "AcceptableGroundednessScorePerInstance",
-  "AggregatedGroundednessPassRate",
-  "AcceptableCoherenceScorePerInstance",
-  "AggregatedCoherencePassRate",
-  "AcceptableFluencyScorePerInstance",
-  "AggregatedFluencyPassRate",
-  "AcceptableSimilarityScorePerInstance",
-  "AggregatedSimilarityPassRate",
-  "AcceptableRelevanceScorePerInstance",
-  "AggregatedRelevancePassRate",
+  AcceptableGroundednessScorePerInstance: "AcceptableGroundednessScorePerInstance",
+  AggregatedGroundednessPassRate: "AggregatedGroundednessPassRate",
+  AcceptableCoherenceScorePerInstance: "AcceptableCoherenceScorePerInstance",
+  AggregatedCoherencePassRate: "AggregatedCoherencePassRate",
+  AcceptableFluencyScorePerInstance: "AcceptableFluencyScorePerInstance",
+  AggregatedFluencyPassRate: "AggregatedFluencyPassRate",
+  AcceptableSimilarityScorePerInstance: "AcceptableSimilarityScorePerInstance",
+  AggregatedSimilarityPassRate: "AggregatedSimilarityPassRate",
+  AcceptableRelevanceScorePerInstance: "AcceptableRelevanceScorePerInstance",
+  AggregatedRelevancePassRate: "AggregatedRelevancePassRate",
 }
 
 /**
@@ -2354,8 +2354,8 @@ union GenerationSafetyQualityMetric {
  */
 union GenerationTokenStatisticsMetric {
   string,
-  "TotalTokenCount",
-  "TotalTokenCountPerGroup",
+  TotalTokenCount: "TotalTokenCount",
+  TotalTokenCountPerGroup: "TotalTokenCountPerGroup",
 }
 
 /**
@@ -2367,17 +2367,17 @@ union LearningRateScheduler {
   /**
    * No learning rate scheduler selected.
    */
-  "None",
+  None: "None",
 
   /**
    * Cosine Annealing With Warmup.
    */
-  "WarmupCosine",
+  WarmupCosine: "WarmupCosine",
 
   /**
    * Step learning rate scheduler.
    */
-  "Step",
+  Step: "Step",
 }
 
 /**
@@ -2389,22 +2389,22 @@ union StochasticOptimizer {
   /**
    * No optimizer selected.
    */
-  "None",
+  None: "None",
 
   /**
    * Stochastic Gradient Descent optimizer.
    */
-  "Sgd",
+  Sgd: "Sgd",
 
   /**
    * Adam is algorithm the optimizes stochastic objective functions based on adaptive estimates of moments
    */
-  "Adam",
+  Adam: "Adam",
 
   /**
    * AdamW is a variant of the optimizer Adam that has an improved implementation of weight decay.
    */
-  "Adamw",
+  Adamw: "Adamw",
 }
 
 /**
@@ -2418,34 +2418,34 @@ union ClassificationMultilabelPrimaryMetrics {
    * This metric represents arithmetic mean of the score for each class,
    * weighted by the number of true instances in each class.
    */
-  "AUCWeighted",
+  AUCWeighted: "AUCWeighted",
 
   /**
    * Accuracy is the ratio of predictions that exactly match the true class labels.
    */
-  "Accuracy",
+  Accuracy: "Accuracy",
 
   /**
    * Normalized macro recall is recall macro-averaged and normalized, so that random
    * performance has a score of 0, and perfect performance has a score of 1.
    */
-  "NormMacroRecall",
+  NormMacroRecall: "NormMacroRecall",
 
   /**
    * The arithmetic mean of the average precision score for each class, weighted by
    * the number of true instances in each class.
    */
-  "AveragePrecisionScoreWeighted",
+  AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
   /**
    * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
    */
-  "PrecisionScoreWeighted",
+  PrecisionScoreWeighted: "PrecisionScoreWeighted",
 
   /**
    * Intersection Over Union. Intersection of predictions divided by union of predictions.
    */
-  "IOU",
+  IOU: "IOU",
 }
 
 /**
@@ -2458,7 +2458,7 @@ union InstanceSegmentationPrimaryMetrics {
    * Mean Average Precision (MAP) is the average of AP (Average Precision).
    * AP is calculated for each class and averaged to get the MAP.
    */
-  "MeanAveragePrecision",
+  MeanAveragePrecision: "MeanAveragePrecision",
 }
 
 union LogTrainingMetrics {
@@ -2467,12 +2467,12 @@ union LogTrainingMetrics {
   /**
    * Enable compute and log training metrics.
    */
-  "Enable",
+  Enable: "Enable",
 
   /**
    * Disable compute and log training metrics.
    */
-  "Disable",
+  Disable: "Disable",
 }
 
 union LogValidationLoss {
@@ -2481,12 +2481,12 @@ union LogValidationLoss {
   /**
    * Enable compute and log validation metrics.
    */
-  "Enable",
+  Enable: "Enable",
 
   /**
    * Disable compute and log validation metrics.
    */
-  "Disable",
+  Disable: "Disable",
 }
 
 /**
@@ -2498,27 +2498,27 @@ union ModelSize {
   /**
    * No value selected.
    */
-  "None",
+  None: "None",
 
   /**
    * Small size.
    */
-  "Small",
+  Small: "Small",
 
   /**
    * Medium size.
    */
-  "Medium",
+  Medium: "Medium",
 
   /**
    * Large size.
    */
-  "Large",
+  Large: "Large",
 
   /**
    * Extra large size.
    */
-  "ExtraLarge",
+  ExtraLarge: "ExtraLarge",
 }
 
 /**
@@ -2530,22 +2530,22 @@ union ValidationMetricType {
   /**
    * No metric.
    */
-  "None",
+  None: "None",
 
   /**
    * Coco metric.
    */
-  "Coco",
+  Coco: "Coco",
 
   /**
    * Voc metric.
    */
-  "Voc",
+  Voc: "Voc",
 
   /**
    * CocoVoc metric.
    */
-  "CocoVoc",
+  CocoVoc: "CocoVoc",
 }
 
 /**
@@ -2558,7 +2558,7 @@ union ObjectDetectionPrimaryMetrics {
    * Mean Average Precision (MAP) is the average of AP (Average Precision).
    * AP is calculated for each class and averaged to get the MAP.
    */
-  "MeanAveragePrecision",
+  MeanAveragePrecision: "MeanAveragePrecision",
 }
 
 /**
@@ -2566,9 +2566,9 @@ union ObjectDetectionPrimaryMetrics {
  */
 union ImageAnnotationType {
   string,
-  "Classification",
-  "BoundingBox",
-  "InstanceSegmentation",
+  Classification: "Classification",
+  BoundingBox: "BoundingBox",
+  InstanceSegmentation: "InstanceSegmentation",
 }
 
 /**
@@ -2576,8 +2576,8 @@ union ImageAnnotationType {
  */
 union TextAnnotationType {
   string,
-  "Classification",
-  "NamedEntityRecognition",
+  Classification: "Classification",
+  NamedEntityRecognition: "NamedEntityRecognition",
 }
 
 /**
@@ -2585,7 +2585,7 @@ union TextAnnotationType {
  */
 union OneLakeArtifactType {
   string,
-  "LakeHouse",
+  LakeHouse: "LakeHouse",
 }
 
 /**
@@ -2597,37 +2597,37 @@ union NlpLearningRateScheduler {
   /**
    * No learning rate schedule.
    */
-  "None",
+  None: "None",
 
   /**
    * Linear warmup and decay.
    */
-  "Linear",
+  Linear: "Linear",
 
   /**
    * Linear warmup then cosine decay.
    */
-  "Cosine",
+  Cosine: "Cosine",
 
   /**
    * Linear warmup, cosine decay, then restart to initial LR.
    */
-  "CosineWithRestarts",
+  CosineWithRestarts: "CosineWithRestarts",
 
   /**
    * Increase linearly then polynomially decay.
    */
-  "Polynomial",
+  Polynomial: "Polynomial",
 
   /**
    * Constant learning rate.
    */
-  "Constant",
+  Constant: "Constant",
 
   /**
    * Linear warmup followed by constant value.
    */
-  "ConstantWithWarmup",
+  ConstantWithWarmup: "ConstantWithWarmup",
 }
 
 union NumericalDataDriftMetric {
@@ -2636,22 +2636,22 @@ union NumericalDataDriftMetric {
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  "JensenShannonDistance",
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  "PopulationStabilityIndex",
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Normalized Wasserstein Distance metric.
    */
-  "NormalizedWassersteinDistance",
+  NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
   /**
    * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
    */
-  "TwoSampleKolmogorovSmirnovTest",
+  TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
 union NumericalDataQualityMetric {
@@ -2660,17 +2660,17 @@ union NumericalDataQualityMetric {
   /**
    * Calculates the rate of null values.
    */
-  "NullValueRate",
+  NullValueRate: "NullValueRate",
 
   /**
    * Calculates the rate of data type errors.
    */
-  "DataTypeErrorRate",
+  DataTypeErrorRate: "DataTypeErrorRate",
 
   /**
    * Calculates the rate values are out of bounds.
    */
-  "OutOfBoundsRate",
+  OutOfBoundsRate: "OutOfBoundsRate",
 }
 
 union NumericalPredictionDriftMetric {
@@ -2679,22 +2679,22 @@ union NumericalPredictionDriftMetric {
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  "JensenShannonDistance",
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  "PopulationStabilityIndex",
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Normalized Wasserstein Distance metric.
    */
-  "NormalizedWassersteinDistance",
+  NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
   /**
    * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
    */
-  "TwoSampleKolmogorovSmirnovTest",
+  TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
 /**
@@ -2702,8 +2702,8 @@ union NumericalPredictionDriftMetric {
  */
 union Goal {
   string,
-  "Minimize",
-  "Maximize",
+  Minimize: "Minimize",
+  Maximize: "Maximize",
 }
 
 /**
@@ -2711,8 +2711,8 @@ union Goal {
  */
 union RandomSamplingAlgorithmRule {
   string,
-  "Random",
-  "Sobol",
+  Random: "Random",
+  Sobol: "Sobol",
 }
 
 /**
@@ -2724,22 +2724,22 @@ union RegressionPrimaryMetrics {
   /**
    * The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation.
    */
-  "SpearmanCorrelation",
+  SpearmanCorrelation: "SpearmanCorrelation",
 
   /**
    * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
    */
-  "NormalizedRootMeanSquaredError",
+  NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
   /**
    * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
    */
-  "R2Score",
+  R2Score: "R2Score",
 
   /**
    * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
    */
-  "NormalizedMeanAbsoluteError",
+  NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
 /**
@@ -2751,58 +2751,58 @@ union RegressionModels {
   /**
    * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
    */
-  "ElasticNet",
+  ElasticNet: "ElasticNet",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  "GradientBoosting",
+  GradientBoosting: "GradientBoosting",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  "DecisionTree",
+  DecisionTree: "DecisionTree",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  "KNN",
+  KNN: "KNN",
 
   /**
    * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
    */
-  "LassoLars",
+  LassoLars: "LassoLars",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    * It's an inexact but powerful technique.
    */
-  "SGD",
+  SGD: "SGD",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  "RandomForest",
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  "ExtremeRandomTrees",
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  "LightGBM",
+  LightGBM: "LightGBM",
 
   /**
    * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
    */
-  "XGBoostRegressor",
+  XGBoostRegressor: "XGBoostRegressor",
 }
 
 union RegressionModelPerformanceMetric {
@@ -2811,23 +2811,23 @@ union RegressionModelPerformanceMetric {
   /**
    * The Mean Absolute Error (MAE) metric.
    */
-  "MeanAbsoluteError",
+  MeanAbsoluteError: "MeanAbsoluteError",
 
   /**
    * The Root Mean Squared Error (RMSE) metric.
    */
-  "RootMeanSquaredError",
+  RootMeanSquaredError: "RootMeanSquaredError",
 
   /**
    * The Mean Squared Error (MSE) metric.
    */
-  "MeanSquaredError",
+  MeanSquaredError: "MeanSquaredError",
 }
 
 union SparkJobEntryType {
   string,
-  "SparkJobPythonEntry",
-  "SparkJobScalaEntry",
+  SparkJobPythonEntry: "SparkJobPythonEntry",
+  SparkJobScalaEntry: "SparkJobScalaEntry",
 }
 
 /**
@@ -2835,8 +2835,8 @@ union SparkJobEntryType {
  */
 union RuleAction {
   string,
-  "Allow",
-  "Deny",
+  Allow: "Allow",
+  Deny: "Deny",
 }
 
 /**

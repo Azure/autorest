@@ -13,8 +13,8 @@ namespace Azure.Language.Authoring;
  */
 union ConfidentialLedgerQueryState {
   string,
-  "Loading",
-  "Ready",
+  Loading: "Loading",
+  Ready: "Ready",
 }
 
 /**
@@ -22,8 +22,8 @@ union ConfidentialLedgerQueryState {
  */
 union TransactionState {
   string,
-  "Committed",
-  "Pending",
+  Committed: "Committed",
+  Pending: "Pending",
 }
 
 /**
@@ -31,9 +31,9 @@ union TransactionState {
  */
 union ConfidentialLedgerUserRoleName {
   string,
-  "Administrator",
-  "Contributor",
-  "Reader",
+  Administrator: "Administrator",
+  Contributor: "Contributor",
+  Reader: "Reader",
 }
 
 /**

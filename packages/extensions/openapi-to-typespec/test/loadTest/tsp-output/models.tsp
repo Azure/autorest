@@ -16,27 +16,27 @@ union PFMetrics {
   /**
    * Pass fail criteria for response time metric
    */
-  "response_time_ms",
+  response_time_ms: "response_time_ms",
 
   /**
    * Pass fail criteria for response time metric
    */
-  "latency",
+  latency: "latency",
 
   /**
    * Pass fail criteria for error metric
    */
-  "error",
+  error: "error",
 
   /**
    * Pass fail criteria for total requests
    */
-  "requests",
+  requests: "requests",
 
   /**
    * Pass fail criteria for request rate.
    */
-  "requests_per_sec",
+  requests_per_sec: "requests_per_sec",
 }
 
 /**
@@ -51,47 +51,47 @@ union PFAgFunc {
   /**
    * Criteria applies for count value
    */
-  "count",
+  count: "count",
 
   /**
    * Criteria applies for given percentage value
    */
-  "percentage",
+  percentage: "percentage",
 
   /**
    * Criteria applies for avg value
    */
-  "avg",
+  avg: "avg",
 
   /**
    * Criteria applies for 50th percentile value
    */
-  "p50",
+  p50: "p50",
 
   /**
    * Criteria applies for 90th percentile value
    */
-  "p90",
+  p90: "p90",
 
   /**
    * Criteria applies for 95th percentile value
    */
-  "p95",
+  p95: "p95",
 
   /**
    * Criteria applies for 99th percentile value
    */
-  "p99",
+  p99: "p99",
 
   /**
    * Criteria applies for minimum value
    */
-  "min",
+  min: "min",
 
   /**
    * Criteria applies for maximum value
    */
-  "max",
+  max: "max",
 }
 
 /**
@@ -103,12 +103,12 @@ union PFAction {
   /**
    * Test will continue to run even if pass fail metric criteria metric gets failed
    */
-  "continue",
+  continue: "continue",
 
   /**
    * Test run will stop if pass fail criteria metric is not passed.
    */
-  "stop",
+  stop: "stop",
 }
 
 /**
@@ -120,17 +120,17 @@ union PFResult {
   /**
    * Given pass fail criteria metric has passed.
    */
-  "passed",
+  passed: "passed",
 
   /**
    * Given pass fail criteria metric couldn't determine.
    */
-  "undetermined",
+  undetermined: "undetermined",
 
   /**
    * Given pass fail criteria metric has failed.
    */
-  "failed",
+  failed: "failed",
 }
 
 /**
@@ -142,12 +142,12 @@ union SecretType {
   /**
    * If the secret is stored in an Azure Key Vault
    */
-  "AKV_SECRET_URI",
+  AKV_SECRET_URI: "AKV_SECRET_URI",
 
   /**
    * If the Plain text secret value provided
    */
-  "SECRET_VALUE",
+  SECRET_VALUE: "SECRET_VALUE",
 }
 
 /**
@@ -159,7 +159,7 @@ union CertificateType {
   /**
    * If the certificate is stored in an Azure Key Vault
    */
-  "AKV_CERT_URI",
+  AKV_CERT_URI: "AKV_CERT_URI",
 }
 
 /**
@@ -171,17 +171,17 @@ union FileType {
   /**
    * If file is jmx script
    */
-  "JMX_FILE",
+  JMX_FILE: "JMX_FILE",
 
   /**
    * If file is user properties
    */
-  "USER_PROPERTIES",
+  USER_PROPERTIES: "USER_PROPERTIES",
 
   /**
    * If file is not any of other supported type
    */
-  "ADDITIONAL_ARTIFACTS",
+  ADDITIONAL_ARTIFACTS: "ADDITIONAL_ARTIFACTS",
 }
 
 /**
@@ -193,27 +193,27 @@ union FileStatus {
   /**
    * File is not validated.
    */
-  "NOT_VALIDATED",
+  NOT_VALIDATED: "NOT_VALIDATED",
 
   /**
    * File is validated.
    */
-  "VALIDATION_SUCCESS",
+  VALIDATION_SUCCESS: "VALIDATION_SUCCESS",
 
   /**
    * File validation is failed.
    */
-  "VALIDATION_FAILURE",
+  VALIDATION_FAILURE: "VALIDATION_FAILURE",
 
   /**
    * File validation is in progress.
    */
-  "VALIDATION_INITIATED",
+  VALIDATION_INITIATED: "VALIDATION_INITIATED",
 
   /**
    * Validation is not required.
    */
-  "VALIDATION_NOT_REQUIRED",
+  VALIDATION_NOT_REQUIRED: "VALIDATION_NOT_REQUIRED",
 }
 
 /**
@@ -225,17 +225,17 @@ union PFTestResult {
   /**
    * Pass/fail criteria has passed.
    */
-  "PASSED",
+  PASSED: "PASSED",
 
   /**
    * Pass/fail criteria is not applicable.
    */
-  "NOT_APPLICABLE",
+  NOT_APPLICABLE: "NOT_APPLICABLE",
 
   /**
    * Pass/fail criteria has failed.
    */
-  "FAILED",
+  FAILED: "FAILED",
 }
 
 /**
@@ -247,82 +247,82 @@ union Status {
   /**
    * Test run request is accepted
    */
-  "ACCEPTED",
+  ACCEPTED: "ACCEPTED",
 
   /**
    * Test run is not yet started.
    */
-  "NOTSTARTED",
+  NOTSTARTED: "NOTSTARTED",
 
   /**
    * Test run is getting provision
    */
-  "PROVISIONING",
+  PROVISIONING: "PROVISIONING",
 
   /**
    * Test run is provisioned
    */
-  "PROVISIONED",
+  PROVISIONED: "PROVISIONED",
 
   /**
    * Test run is getting configure
    */
-  "CONFIGURING",
+  CONFIGURING: "CONFIGURING",
 
   /**
    * Test run configuration is done
    */
-  "CONFIGURED",
+  CONFIGURED: "CONFIGURED",
 
   /**
    * Test run has started executing
    */
-  "EXECUTING",
+  EXECUTING: "EXECUTING",
 
   /**
    * Test run has been executed
    */
-  "EXECUTED",
+  EXECUTED: "EXECUTED",
 
   /**
    * Test run is getting deprovision
    */
-  "DEPROVISIONING",
+  DEPROVISIONING: "DEPROVISIONING",
 
   /**
    * Test run request is deprovisioned
    */
-  "DEPROVISIONED",
+  DEPROVISIONED: "DEPROVISIONED",
 
   /**
    * Test run request is finished
    */
-  "DONE",
+  DONE: "DONE",
 
   /**
    * Test run request is getting cancelled
    */
-  "CANCELLING",
+  CANCELLING: "CANCELLING",
 
   /**
    * Test run request is cancelled
    */
-  "CANCELLED",
+  CANCELLED: "CANCELLED",
 
   /**
    * Test run request is failed
    */
-  "FAILED",
+  FAILED: "FAILED",
 
   /**
    * Test run JMX file is validated
    */
-  "VALIDATION_SUCCESS",
+  VALIDATION_SUCCESS: "VALIDATION_SUCCESS",
 
   /**
    * Test run JMX file validation is failed
    */
-  "VALIDATION_FAILURE",
+  VALIDATION_FAILURE: "VALIDATION_FAILURE",
 }
 
 /**
@@ -334,37 +334,37 @@ union AggregationType {
   /**
    * Average value
    */
-  "Average",
+  Average: "Average",
 
   /**
    * Total count
    */
-  "Count",
+  Count: "Count",
 
   /**
    * Aggregation will be average in this case
    */
-  "None",
+  None: "None",
 
   /**
    * Total sum
    */
-  "Total",
+  Total: "Total",
 
   /**
    * 90th percentile
    */
-  "Percentile90",
+  Percentile90: "Percentile90",
 
   /**
    * 95th percentile
    */
-  "Percentile95",
+  Percentile95: "Percentile95",
 
   /**
    * 99th percentile
    */
-  "Percentile99",
+  Percentile99: "Percentile99",
 }
 
 /**
@@ -376,42 +376,42 @@ union MetricUnit {
   /**
    * No unit specified
    */
-  "NotSpecified",
+  NotSpecified: "NotSpecified",
 
   /**
    * Percentage
    */
-  "Percent",
+  Percent: "Percent",
 
   /**
    * Value count
    */
-  "Count",
+  Count: "Count",
 
   /**
    * Seconds
    */
-  "Seconds",
+  Seconds: "Seconds",
 
   /**
    * Milliseconds
    */
-  "Milliseconds",
+  Milliseconds: "Milliseconds",
 
   /**
    * Bytes
    */
-  "Bytes",
+  Bytes: "Bytes",
 
   /**
    * Bytes per second
    */
-  "BytesPerSecond",
+  BytesPerSecond: "BytesPerSecond",
 
   /**
    * Count per second
    */
-  "CountPerSecond",
+  CountPerSecond: "CountPerSecond",
 }
 
 /**
@@ -424,27 +424,27 @@ union TimeGrain {
   /**
    * 5 seconds, available only if test run duration is less than 10 minutes
    */
-  "PT5S",
+  PT5S: "PT5S",
 
   /**
    * 10 seconds, available only if test run duration is less than 10 minutes
    */
-  "PT10S",
+  PT10S: "PT10S",
 
   /**
    * 1 minute
    */
-  "PT1M",
+  PT1M: "PT1M",
 
   /**
    * 5 minutes, available only if test run duration is greater than 1 minute
    */
-  "PT5M",
+  PT5M: "PT5M",
 
   /**
    * 1 hour, available only if test run duration is greater than 1 minute
    */
-  "PT1H",
+  PT1H: "PT1H",
 }
 
 union Interval {
@@ -453,27 +453,27 @@ union Interval {
   /**
    * 5 seconds, available only if test run duration is less than 10 minutes
    */
-  "PT5S",
+  PT5S: "PT5S",
 
   /**
    * 10 seconds, available only if test run duration is less than 10 minutes
    */
-  "PT10S",
+  PT10S: "PT10S",
 
   /**
    * 1 minute
    */
-  "PT1M",
+  PT1M: "PT1M",
 
   /**
    * 5 minutes, available only if test run duration is greater than 1 minute
    */
-  "PT5M",
+  PT5M: "PT5M",
 
   /**
    * 1 hour, available only if test run duration is greater than 1 minute
    */
-  "PT1H",
+  PT1H: "PT1H",
 }
 
 /**

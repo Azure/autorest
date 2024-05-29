@@ -16,18 +16,18 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union State {
   string,
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Paused",
-  "Suspended",
-  "Provisioning",
-  "Updating",
-  "Suspending",
-  "Pausing",
-  "Resuming",
-  "Preparing",
-  "Scaling",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Paused: "Paused",
+  Suspended: "Suspended",
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Suspending: "Suspending",
+  Pausing: "Pausing",
+  Resuming: "Resuming",
+  Preparing: "Preparing",
+  Scaling: "Scaling",
 }
 
 /**
@@ -35,18 +35,18 @@ union State {
  */
 union ProvisioningState {
   string,
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Paused",
-  "Suspended",
-  "Provisioning",
-  "Updating",
-  "Suspending",
-  "Pausing",
-  "Resuming",
-  "Preparing",
-  "Scaling",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Paused: "Paused",
+  Suspended: "Suspended",
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Suspending: "Suspending",
+  Pausing: "Pausing",
+  Resuming: "Resuming",
+  Preparing: "Preparing",
+  Scaling: "Scaling",
 }
 
 /**
@@ -54,9 +54,9 @@ union ProvisioningState {
  */
 union SkuTier {
   string,
-  "Development",
-  "Basic",
-  "Standard",
+  Development: "Development",
+  Basic: "Basic",
+  Standard: "Standard",
 }
 
 /**

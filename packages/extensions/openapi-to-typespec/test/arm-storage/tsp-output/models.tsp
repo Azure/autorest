@@ -18,14 +18,14 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union SkuName {
   string,
-  "Standard_LRS",
-  "Standard_GRS",
-  "Standard_RAGRS",
-  "Standard_ZRS",
-  "Premium_LRS",
-  "Premium_ZRS",
-  "Standard_GZRS",
-  "Standard_RAGZRS",
+  Standard_LRS: "Standard_LRS",
+  Standard_GRS: "Standard_GRS",
+  Standard_RAGRS: "Standard_RAGRS",
+  Standard_ZRS: "Standard_ZRS",
+  Premium_LRS: "Premium_LRS",
+  Premium_ZRS: "Premium_ZRS",
+  Standard_GZRS: "Standard_GZRS",
+  Standard_RAGZRS: "Standard_RAGZRS",
 }
 
 /**
@@ -33,11 +33,11 @@ union SkuName {
  */
 union Kind {
   string,
-  "Storage",
-  "StorageV2",
-  "BlobStorage",
-  "FileStorage",
-  "BlockBlobStorage",
+  Storage: "Storage",
+  StorageV2: "StorageV2",
+  BlobStorage: "BlobStorage",
+  FileStorage: "FileStorage",
+  BlockBlobStorage: "BlockBlobStorage",
 }
 
 /**
@@ -45,8 +45,8 @@ union Kind {
  */
 union ReasonCode {
   string,
-  "QuotaId",
-  "NotAvailableForSubscription",
+  QuotaId: "QuotaId",
+  NotAvailableForSubscription: "NotAvailableForSubscription",
 }
 
 /**
@@ -54,7 +54,7 @@ union ReasonCode {
  */
 union ExtendedLocationTypes {
   string,
-  "EdgeZone",
+  EdgeZone: "EdgeZone",
 }
 
 /**
@@ -62,10 +62,10 @@ union ExtendedLocationTypes {
  */
 union IdentityType {
   string,
-  "None",
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned,UserAssigned",
+  None: "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
 /**
@@ -73,8 +73,8 @@ union IdentityType {
  */
 union AllowedCopyScope {
   string,
-  "PrivateLink",
-  "AAD",
+  PrivateLink: "PrivateLink",
+  AAD: "AAD",
 }
 
 /**
@@ -82,8 +82,8 @@ union AllowedCopyScope {
  */
 union PublicNetworkAccess {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -91,7 +91,7 @@ union PublicNetworkAccess {
  */
 union ExpirationAction {
   string,
-  "Log",
+  Log: "Log",
 }
 
 /**
@@ -99,8 +99,8 @@ union ExpirationAction {
  */
 union KeyType {
   string,
-  "Service",
-  "Account",
+  Service: "Service",
+  Account: "Account",
 }
 
 /**
@@ -108,8 +108,8 @@ union KeyType {
  */
 union KeySource {
   string,
-  "Microsoft.Storage",
-  "Microsoft.Keyvault",
+  `Microsoft.Storage`: "Microsoft.Storage",
+  `Microsoft.Keyvault`: "Microsoft.Keyvault",
 }
 
 /**
@@ -117,10 +117,10 @@ union KeySource {
  */
 union Bypass {
   string,
-  "None",
-  "Logging",
-  "Metrics",
-  "AzureServices",
+  None: "None",
+  Logging: "Logging",
+  Metrics: "Metrics",
+  AzureServices: "AzureServices",
 }
 
 /**
@@ -128,11 +128,11 @@ union Bypass {
  */
 union State {
   string,
-  "Provisioning",
-  "Deprovisioning",
-  "Succeeded",
-  "Failed",
-  "NetworkSourceDeleted",
+  Provisioning: "Provisioning",
+  Deprovisioning: "Deprovisioning",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  NetworkSourceDeleted: "NetworkSourceDeleted",
 }
 
 /**
@@ -140,10 +140,10 @@ union State {
  */
 union DirectoryServiceOptions {
   string,
-  "None",
-  "AADDS",
-  "AD",
-  "AADKERB",
+  None: "None",
+  AADDS: "AADDS",
+  AD: "AD",
+  AADKERB: "AADKERB",
 }
 
 /**
@@ -151,8 +151,8 @@ union DirectoryServiceOptions {
  */
 union AccountType {
   string,
-  "User",
-  "Computer",
+  User: "User",
+  Computer: "Computer",
 }
 
 /**
@@ -160,10 +160,10 @@ union AccountType {
  */
 union DefaultSharePermission {
   string,
-  "None",
-  "StorageFileDataSmbShareReader",
-  "StorageFileDataSmbShareContributor",
-  "StorageFileDataSmbShareElevatedContributor",
+  None: "None",
+  StorageFileDataSmbShareReader: "StorageFileDataSmbShareReader",
+  StorageFileDataSmbShareContributor: "StorageFileDataSmbShareContributor",
+  StorageFileDataSmbShareElevatedContributor: "StorageFileDataSmbShareElevatedContributor",
 }
 
 /**
@@ -171,8 +171,8 @@ union DefaultSharePermission {
  */
 union LargeFileSharesState {
   string,
-  "Disabled",
-  "Enabled",
+  Disabled: "Disabled",
+  Enabled: "Enabled",
 }
 
 /**
@@ -180,8 +180,8 @@ union LargeFileSharesState {
  */
 union RoutingChoice {
   string,
-  "MicrosoftRouting",
-  "InternetRouting",
+  MicrosoftRouting: "MicrosoftRouting",
+  InternetRouting: "InternetRouting",
 }
 
 /**
@@ -189,9 +189,9 @@ union RoutingChoice {
  */
 union MinimumTlsVersion {
   string,
-  "TLS1_0",
-  "TLS1_1",
-  "TLS1_2",
+  TLS1_0: "TLS1_0",
+  TLS1_1: "TLS1_1",
+  TLS1_2: "TLS1_2",
 }
 
 /**
@@ -199,9 +199,9 @@ union MinimumTlsVersion {
  */
 union AccountImmutabilityPolicyState {
   string,
-  "Unlocked",
-  "Locked",
-  "Disabled",
+  Unlocked: "Unlocked",
+  Locked: "Locked",
+  Disabled: "Disabled",
 }
 
 /**
@@ -209,8 +209,8 @@ union AccountImmutabilityPolicyState {
  */
 union DnsEndpointType {
   string,
-  "Standard",
-  "AzureDnsZone",
+  Standard: "Standard",
+  AzureDnsZone: "AzureDnsZone",
 }
 
 /**
@@ -218,9 +218,9 @@ union DnsEndpointType {
  */
 union GeoReplicationStatus {
   string,
-  "Live",
-  "Bootstrap",
-  "Unavailable",
+  Live: "Live",
+  Bootstrap: "Bootstrap",
+  Unavailable: "Unavailable",
 }
 
 /**
@@ -228,9 +228,9 @@ union GeoReplicationStatus {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  "Pending",
-  "Approved",
-  "Rejected",
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
@@ -238,10 +238,10 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  "Succeeded",
-  "Creating",
-  "Deleting",
-  "Failed",
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
@@ -249,9 +249,9 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union BlobRestoreProgressStatus {
   string,
-  "InProgress",
-  "Complete",
-  "Failed",
+  InProgress: "InProgress",
+  Complete: "Complete",
+  Failed: "Failed",
 }
 
 /**
@@ -259,9 +259,9 @@ union BlobRestoreProgressStatus {
  */
 union SkuConversionStatus {
   string,
-  "InProgress",
-  "Succeeded",
-  "Failed",
+  InProgress: "InProgress",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
 }
 
 /**
@@ -269,10 +269,10 @@ union SkuConversionStatus {
  */
 union Services {
   string,
-  "b",
-  "q",
-  "t",
-  "f",
+  b: "b",
+  q: "q",
+  t: "t",
+  f: "f",
 }
 
 /**
@@ -280,9 +280,9 @@ union Services {
  */
 union SignedResourceTypes {
   string,
-  "s",
-  "c",
-  "o",
+  s: "s",
+  c: "c",
+  o: "o",
 }
 
 /**
@@ -290,14 +290,14 @@ union SignedResourceTypes {
  */
 union Permissions {
   string,
-  "r",
-  "d",
-  "w",
-  "l",
-  "a",
-  "c",
-  "u",
-  "p",
+  r: "r",
+  d: "d",
+  w: "w",
+  l: "l",
+  a: "a",
+  c: "c",
+  u: "u",
+  p: "p",
 }
 
 /**
@@ -305,15 +305,15 @@ union Permissions {
  */
 union SignedResource {
   string,
-  "b",
-  "c",
-  "f",
-  "s",
+  b: "b",
+  c: "c",
+  f: "f",
+  s: "s",
 }
 
 union ManagementPolicyName {
   string,
-  "default",
+  default: "default",
 }
 
 /**
@@ -321,12 +321,12 @@ union ManagementPolicyName {
  */
 union RuleType {
   string,
-  "Lifecycle",
+  Lifecycle: "Lifecycle",
 }
 
 union BlobInventoryPolicyName {
   string,
-  "default",
+  default: "default",
 }
 
 /**
@@ -334,7 +334,7 @@ union BlobInventoryPolicyName {
  */
 union InventoryRuleType {
   string,
-  "Inventory",
+  Inventory: "Inventory",
 }
 
 /**
@@ -342,8 +342,8 @@ union InventoryRuleType {
  */
 union Format {
   string,
-  "Csv",
-  "Parquet",
+  Csv: "Csv",
+  Parquet: "Parquet",
 }
 
 /**
@@ -351,8 +351,8 @@ union Format {
  */
 union Schedule {
   string,
-  "Daily",
-  "Weekly",
+  Daily: "Daily",
+  Weekly: "Weekly",
 }
 
 /**
@@ -360,8 +360,8 @@ union Schedule {
  */
 union ObjectType {
   string,
-  "Blob",
-  "Container",
+  Blob: "Blob",
+  Container: "Container",
 }
 
 /**
@@ -369,8 +369,8 @@ union ObjectType {
  */
 union EncryptionScopeSource {
   string,
-  "Microsoft.Storage",
-  "Microsoft.KeyVault",
+  `Microsoft.Storage`: "Microsoft.Storage",
+  `Microsoft.KeyVault`: "Microsoft.KeyVault",
 }
 
 /**
@@ -378,27 +378,27 @@ union EncryptionScopeSource {
  */
 union EncryptionScopeState {
   string,
-  "Enabled",
-  "Disabled",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union ListEncryptionScopesInclude {
   string,
-  "All",
-  "Enabled",
-  "Disabled",
+  All: "All",
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 union AllowedMethods {
   string,
-  "DELETE",
-  "GET",
-  "HEAD",
-  "MERGE",
-  "POST",
-  "OPTIONS",
-  "PUT",
-  "PATCH",
+  DELETE: "DELETE",
+  GET: "GET",
+  HEAD: "HEAD",
+  MERGE: "MERGE",
+  POST: "POST",
+  OPTIONS: "OPTIONS",
+  PUT: "PUT",
+  PATCH: "PATCH",
 }
 
 /**
@@ -406,12 +406,12 @@ union AllowedMethods {
  */
 union Name {
   string,
-  "AccessTimeTracking",
+  AccessTimeTracking: "AccessTimeTracking",
 }
 
 union ListContainersInclude {
   string,
-  "deleted",
+  deleted: "deleted",
 }
 
 /**
@@ -419,8 +419,8 @@ union ListContainersInclude {
  */
 union LeaseStatus {
   string,
-  "Locked",
-  "Unlocked",
+  Locked: "Locked",
+  Unlocked: "Unlocked",
 }
 
 /**
@@ -428,11 +428,11 @@ union LeaseStatus {
  */
 union LeaseState {
   string,
-  "Available",
-  "Leased",
-  "Expired",
-  "Breaking",
-  "Broken",
+  Available: "Available",
+  Leased: "Leased",
+  Expired: "Expired",
+  Breaking: "Breaking",
+  Broken: "Broken",
 }
 
 /**
@@ -440,8 +440,8 @@ union LeaseState {
  */
 union LeaseDuration {
   string,
-  "Infinite",
-  "Fixed",
+  Infinite: "Infinite",
+  Fixed: "Fixed",
 }
 
 /**
@@ -449,8 +449,8 @@ union LeaseDuration {
  */
 union ImmutabilityPolicyState {
   string,
-  "Locked",
-  "Unlocked",
+  Locked: "Locked",
+  Unlocked: "Unlocked",
 }
 
 /**
@@ -458,9 +458,9 @@ union ImmutabilityPolicyState {
  */
 union ImmutabilityPolicyUpdateType {
   string,
-  "put",
-  "lock",
-  "extend",
+  put: "put",
+  lock: "lock",
+  extend: "extend",
 }
 
 /**
@@ -468,8 +468,8 @@ union ImmutabilityPolicyUpdateType {
  */
 union MigrationState {
   string,
-  "InProgress",
-  "Completed",
+  InProgress: "InProgress",
+  Completed: "Completed",
 }
 
 /**
@@ -477,11 +477,11 @@ union MigrationState {
  */
 union LeaseContainerRequestAction {
   string,
-  "Acquire",
-  "Renew",
-  "Change",
-  "Release",
-  "Break",
+  Acquire: "Acquire",
+  Renew: "Renew",
+  Change: "Change",
+  Release: "Release",
+  Break: "Break",
 }
 
 /**
@@ -489,8 +489,8 @@ union LeaseContainerRequestAction {
  */
 union EnabledProtocols {
   string,
-  "SMB",
-  "NFS",
+  SMB: "SMB",
+  NFS: "NFS",
 }
 
 /**
@@ -498,9 +498,9 @@ union EnabledProtocols {
  */
 union RootSquashType {
   string,
-  "NoRootSquash",
-  "RootSquash",
-  "AllSquash",
+  NoRootSquash: "NoRootSquash",
+  RootSquash: "RootSquash",
+  AllSquash: "AllSquash",
 }
 
 /**
@@ -508,10 +508,10 @@ union RootSquashType {
  */
 union ShareAccessTier {
   string,
-  "TransactionOptimized",
-  "Hot",
-  "Cool",
-  "Premium",
+  TransactionOptimized: "TransactionOptimized",
+  Hot: "Hot",
+  Cool: "Cool",
+  Premium: "Premium",
 }
 
 /**
@@ -519,11 +519,11 @@ union ShareAccessTier {
  */
 union LeaseShareAction {
   string,
-  "Acquire",
-  "Renew",
-  "Change",
-  "Release",
-  "Break",
+  Acquire: "Acquire",
+  Renew: "Renew",
+  Change: "Change",
+  Release: "Release",
+  Break: "Break",
 }
 
 /**

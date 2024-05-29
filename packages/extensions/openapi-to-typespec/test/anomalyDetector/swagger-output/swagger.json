@@ -480,7 +480,7 @@
       ],
       "x-ms-enum": {
         "name": "AlignMode",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AlignPolicy": {
@@ -534,7 +534,53 @@
       ],
       "x-ms-enum": {
         "name": "AnomalyDetectorErrorCodes",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidCustomInterval",
+            "value": "InvalidCustomInterval"
+          },
+          {
+            "name": "BadArgument",
+            "value": "BadArgument"
+          },
+          {
+            "name": "InvalidGranularity",
+            "value": "InvalidGranularity"
+          },
+          {
+            "name": "InvalidPeriod",
+            "value": "InvalidPeriod"
+          },
+          {
+            "name": "InvalidModelArgument",
+            "value": "InvalidModelArgument"
+          },
+          {
+            "name": "InvalidSeries",
+            "value": "InvalidSeries"
+          },
+          {
+            "name": "InvalidJsonFormat",
+            "value": "InvalidJsonFormat"
+          },
+          {
+            "name": "RequiredGranularity",
+            "value": "RequiredGranularity"
+          },
+          {
+            "name": "RequiredSeries",
+            "value": "RequiredSeries"
+          },
+          {
+            "name": "InvalidImputeMode",
+            "value": "InvalidImputeMode"
+          },
+          {
+            "name": "InvalidImputeFixedValue",
+            "value": "InvalidImputeFixedValue"
+          }
+        ]
       }
     },
     "AnomalyInterpretation": {
@@ -759,7 +805,7 @@
       ],
       "x-ms-enum": {
         "name": "DataSchema",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "DetectRequest": {
@@ -913,7 +959,7 @@
       ],
       "x-ms-enum": {
         "name": "DetectionStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "DiagnosticsInfo": {
@@ -1035,7 +1081,33 @@
       ],
       "x-ms-enum": {
         "name": "FillNAMethod",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Previous",
+            "value": "Previous"
+          },
+          {
+            "name": "Subsequent",
+            "value": "Subsequent"
+          },
+          {
+            "name": "Linear",
+            "value": "Linear"
+          },
+          {
+            "name": "Zero",
+            "value": "Zero"
+          },
+          {
+            "name": "Fixed",
+            "value": "Fixed"
+          },
+          {
+            "name": "NotFill",
+            "value": "NotFill"
+          }
+        ]
       }
     },
     "ImputeMode": {
@@ -1051,7 +1123,33 @@
       ],
       "x-ms-enum": {
         "name": "ImputeMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto"
+          },
+          {
+            "name": "previous",
+            "value": "previous"
+          },
+          {
+            "name": "linear",
+            "value": "linear"
+          },
+          {
+            "name": "fixed",
+            "value": "fixed"
+          },
+          {
+            "name": "zero",
+            "value": "zero"
+          },
+          {
+            "name": "notFill",
+            "value": "notFill"
+          }
+        ]
       }
     },
     "LastDetectResponse": {
@@ -1356,7 +1454,7 @@
       ],
       "x-ms-enum": {
         "name": "ModelStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "PagedModelSnapshot": {
@@ -1397,7 +1495,7 @@
       ],
       "x-ms-enum": {
         "name": "TimeGranularity",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "yearly",

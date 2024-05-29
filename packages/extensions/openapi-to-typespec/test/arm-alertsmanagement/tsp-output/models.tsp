@@ -16,17 +16,17 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union Field {
   string,
-  "Severity",
-  "MonitorService",
-  "MonitorCondition",
-  "SignalType",
-  "TargetResourceType",
-  "TargetResource",
-  "TargetResourceGroup",
-  "AlertRuleId",
-  "AlertRuleName",
-  "Description",
-  "AlertContext",
+  Severity: "Severity",
+  MonitorService: "MonitorService",
+  MonitorCondition: "MonitorCondition",
+  SignalType: "SignalType",
+  TargetResourceType: "TargetResourceType",
+  TargetResource: "TargetResource",
+  TargetResourceGroup: "TargetResourceGroup",
+  AlertRuleId: "AlertRuleId",
+  AlertRuleName: "AlertRuleName",
+  Description: "Description",
+  AlertContext: "AlertContext",
 }
 
 /**
@@ -34,10 +34,10 @@ union Field {
  */
 union Operator {
   string,
-  "Equals",
-  "NotEquals",
-  "Contains",
-  "DoesNotContain",
+  Equals: "Equals",
+  NotEquals: "NotEquals",
+  Contains: "Contains",
+  DoesNotContain: "DoesNotContain",
 }
 
 /**
@@ -45,14 +45,14 @@ union Operator {
  */
 union RecurrenceType {
   string,
-  "Daily",
-  "Weekly",
-  "Monthly",
+  Daily: "Daily",
+  Weekly: "Weekly",
+  Monthly: "Monthly",
 }
 
 union Identifier {
   string,
-  "MonitorServiceList",
+  MonitorServiceList: "MonitorServiceList",
 }
 
 /**
@@ -60,75 +60,75 @@ union Identifier {
  */
 union MetadataIdentifier {
   string,
-  "MonitorServiceList",
+  MonitorServiceList: "MonitorServiceList",
 }
 
 union MonitorService {
   string,
-  "Application Insights",
-  "ActivityLog Administrative",
-  "ActivityLog Security",
-  "ActivityLog Recommendation",
-  "ActivityLog Policy",
-  "ActivityLog Autoscale",
-  "Log Analytics",
-  "Nagios",
-  "Platform",
-  "SCOM",
-  "ServiceHealth",
-  "SmartDetector",
-  "VM Insights",
-  "Zabbix",
+  `Application Insights`: "Application Insights",
+  `ActivityLog Administrative`: "ActivityLog Administrative",
+  `ActivityLog Security`: "ActivityLog Security",
+  `ActivityLog Recommendation`: "ActivityLog Recommendation",
+  `ActivityLog Policy`: "ActivityLog Policy",
+  `ActivityLog Autoscale`: "ActivityLog Autoscale",
+  `Log Analytics`: "Log Analytics",
+  Nagios: "Nagios",
+  Platform: "Platform",
+  SCOM: "SCOM",
+  ServiceHealth: "ServiceHealth",
+  SmartDetector: "SmartDetector",
+  `VM Insights`: "VM Insights",
+  Zabbix: "Zabbix",
 }
 
 union MonitorCondition {
   string,
-  "Fired",
-  "Resolved",
+  Fired: "Fired",
+  Resolved: "Resolved",
 }
 
 union Severity {
   string,
-  "Sev0",
-  "Sev1",
-  "Sev2",
-  "Sev3",
-  "Sev4",
+  Sev0: "Sev0",
+  Sev1: "Sev1",
+  Sev2: "Sev2",
+  Sev3: "Sev3",
+  Sev4: "Sev4",
 }
 
 union AlertState {
   string,
-  "New",
-  "Acknowledged",
-  "Closed",
+  New: "New",
+  Acknowledged: "Acknowledged",
+  Closed: "Closed",
 }
 
 union AlertsSortByFields {
   string,
-  "name",
-  "severity",
-  "alertState",
-  "monitorCondition",
-  "targetResource",
-  "targetResourceName",
-  "targetResourceGroup",
-  "targetResourceType",
-  "startDateTime",
-  "lastModifiedDateTime",
+  name: "name",
+  severity: "severity",
+  alertState: "alertState",
+  monitorCondition: "monitorCondition",
+  targetResource: "targetResource",
+  targetResourceName: "targetResourceName",
+  targetResourceGroup: "targetResourceGroup",
+  targetResourceType: "targetResourceType",
+  startDateTime: "startDateTime",
+  lastModifiedDateTime: "lastModifiedDateTime",
 }
 
 union SortOrder {
   string,
-  "asc",
-  "desc",
+  asc: "asc",
+  desc: "desc",
 }
 
 union TimeRange {
   string,
-  "1h",
-  "1d",
-  "7d",
-  "30d",
+  `1h`: "1h",
+  `1d`: "1d",
+  `7d`: "7d",
+  `30d`: "30d",
 }
 
 /**
@@ -136,28 +136,28 @@ union TimeRange {
  */
 union SignalType {
   string,
-  "Metric",
-  "Log",
-  "Unknown",
+  Metric: "Metric",
+  Log: "Log",
+  Unknown: "Unknown",
 }
 
 union AlertsSummaryGroupByFields {
   string,
-  "severity",
-  "alertState",
-  "monitorCondition",
-  "monitorService",
-  "signalType",
-  "alertRule",
+  severity: "severity",
+  alertState: "alertState",
+  monitorCondition: "monitorCondition",
+  monitorService: "monitorService",
+  signalType: "signalType",
+  alertRule: "alertRule",
 }
 
 union SmartGroupsSortByFields {
   string,
-  "alertsCount",
-  "state",
-  "severity",
-  "startDateTime",
-  "lastModifiedDateTime",
+  alertsCount: "alertsCount",
+  state: "state",
+  severity: "severity",
+  startDateTime: "startDateTime",
+  lastModifiedDateTime: "lastModifiedDateTime",
 }
 
 /**
@@ -165,9 +165,9 @@ union SmartGroupsSortByFields {
  */
 union SmartGroupState {
   string,
-  "New",
-  "Acknowledged",
-  "Closed",
+  New: "New",
+  Acknowledged: "Acknowledged",
+  Closed: "Closed",
 }
 
 /**
@@ -175,13 +175,13 @@ union SmartGroupState {
  */
 union DaysOfWeek {
   string,
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
 }
 
 /**

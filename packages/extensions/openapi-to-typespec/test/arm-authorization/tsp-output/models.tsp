@@ -17,11 +17,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union PrincipalType {
   string,
-  "User",
-  "Group",
-  "ServicePrincipal",
-  "ForeignGroup",
-  "Device",
+  User: "User",
+  Group: "Group",
+  ServicePrincipal: "ServicePrincipal",
+  ForeignGroup: "ForeignGroup",
+  Device: "Device",
 }
 
 /**
@@ -29,8 +29,8 @@ union PrincipalType {
  */
 union RoleType {
   string,
-  "BuiltInRole",
-  "CustomRole",
+  BuiltInRole: "BuiltInRole",
+  CustomRole: "CustomRole",
 }
 
 /**
@@ -38,8 +38,8 @@ union RoleType {
  */
 union AssignmentType {
   string,
-  "Activated",
-  "Assigned",
+  Activated: "Activated",
+  Assigned: "Assigned",
 }
 
 /**
@@ -47,9 +47,9 @@ union AssignmentType {
  */
 union RoleManagementScheduleMemberType {
   string,
-  "Inherited",
-  "Direct",
-  "Group",
+  Inherited: "Inherited",
+  Direct: "Direct",
+  Group: "Group",
 }
 
 /**
@@ -57,28 +57,28 @@ union RoleManagementScheduleMemberType {
  */
 union RoleManagementScheduleStatus {
   string,
-  "Accepted",
-  "PendingEvaluation",
-  "Granted",
-  "Denied",
-  "PendingProvisioning",
-  "Provisioned",
-  "PendingRevocation",
-  "Revoked",
-  "Canceled",
-  "Failed",
-  "PendingApprovalProvisioning",
-  "PendingApproval",
-  "FailedAsResourceIsLocked",
-  "PendingAdminDecision",
-  "AdminApproved",
-  "AdminDenied",
-  "TimedOut",
-  "ProvisioningStarted",
-  "Invalid",
-  "PendingScheduleCreation",
-  "ScheduleCreated",
-  "PendingExternalProvisioning",
+  Accepted: "Accepted",
+  PendingEvaluation: "PendingEvaluation",
+  Granted: "Granted",
+  Denied: "Denied",
+  PendingProvisioning: "PendingProvisioning",
+  Provisioned: "Provisioned",
+  PendingRevocation: "PendingRevocation",
+  Revoked: "Revoked",
+  Canceled: "Canceled",
+  Failed: "Failed",
+  PendingApprovalProvisioning: "PendingApprovalProvisioning",
+  PendingApproval: "PendingApproval",
+  FailedAsResourceIsLocked: "FailedAsResourceIsLocked",
+  PendingAdminDecision: "PendingAdminDecision",
+  AdminApproved: "AdminApproved",
+  AdminDenied: "AdminDenied",
+  TimedOut: "TimedOut",
+  ProvisioningStarted: "ProvisioningStarted",
+  Invalid: "Invalid",
+  PendingScheduleCreation: "PendingScheduleCreation",
+  ScheduleCreated: "ScheduleCreated",
+  PendingExternalProvisioning: "PendingExternalProvisioning",
 }
 
 /**
@@ -86,9 +86,9 @@ union RoleManagementScheduleStatus {
  */
 union ScopeType {
   string,
-  "subscription",
-  "managementgroup",
-  "resourcegroup",
+  subscription: "subscription",
+  managementgroup: "managementgroup",
+  resourcegroup: "resourcegroup",
 }
 
 /**
@@ -96,15 +96,15 @@ union ScopeType {
  */
 union RoleManagementScheduleRequestType {
   string,
-  "AdminAssign",
-  "AdminRemove",
-  "AdminUpdate",
-  "AdminExtend",
-  "AdminRenew",
-  "SelfActivate",
-  "SelfDeactivate",
-  "SelfExtend",
-  "SelfRenew",
+  AdminAssign: "AdminAssign",
+  AdminRemove: "AdminRemove",
+  AdminUpdate: "AdminUpdate",
+  AdminExtend: "AdminExtend",
+  AdminRenew: "AdminRenew",
+  SelfActivate: "SelfActivate",
+  SelfDeactivate: "SelfDeactivate",
+  SelfExtend: "SelfExtend",
+  SelfRenew: "SelfRenew",
 }
 
 /**
@@ -112,9 +112,9 @@ union RoleManagementScheduleRequestType {
  */
 union RoleManagementScheduleExpirationType {
   string,
-  "AfterDuration",
-  "AfterDateTime",
-  "NoExpiration",
+  AfterDuration: "AfterDuration",
+  AfterDateTime: "AfterDateTime",
+  NoExpiration: "NoExpiration",
 }
 
 /**
@@ -122,11 +122,11 @@ union RoleManagementScheduleExpirationType {
  */
 union RoleManagementPolicyRuleType {
   string,
-  "RoleManagementPolicyApprovalRule",
-  "RoleManagementPolicyAuthenticationContextRule",
-  "RoleManagementPolicyEnablementRule",
-  "RoleManagementPolicyExpirationRule",
-  "RoleManagementPolicyNotificationRule",
+  RoleManagementPolicyApprovalRule: "RoleManagementPolicyApprovalRule",
+  RoleManagementPolicyAuthenticationContextRule: "RoleManagementPolicyAuthenticationContextRule",
+  RoleManagementPolicyEnablementRule: "RoleManagementPolicyEnablementRule",
+  RoleManagementPolicyExpirationRule: "RoleManagementPolicyExpirationRule",
+  RoleManagementPolicyNotificationRule: "RoleManagementPolicyNotificationRule",
 }
 
 /**
@@ -134,8 +134,8 @@ union RoleManagementPolicyRuleType {
  */
 union RoleManagementAssignmentLevel {
   string,
-  "Assignment",
-  "Eligibility",
+  Assignment: "Assignment",
+  Eligibility: "Eligibility",
 }
 
 /**
@@ -143,10 +143,10 @@ union RoleManagementAssignmentLevel {
  */
 union ApprovalMode {
   string,
-  "SingleStage",
-  "Serial",
-  "Parallel",
-  "NoApproval",
+  SingleStage: "SingleStage",
+  Serial: "Serial",
+  Parallel: "Parallel",
+  NoApproval: "NoApproval",
 }
 
 /**
@@ -154,8 +154,8 @@ union ApprovalMode {
  */
 union UserType {
   string,
-  "User",
-  "Group",
+  User: "User",
+  Group: "Group",
 }
 
 /**
@@ -163,9 +163,9 @@ union UserType {
  */
 union EnablementRules {
   string,
-  "MultiFactorAuthentication",
-  "Justification",
-  "Ticketing",
+  MultiFactorAuthentication: "MultiFactorAuthentication",
+  Justification: "Justification",
+  Ticketing: "Ticketing",
 }
 
 /**
@@ -173,7 +173,7 @@ union EnablementRules {
  */
 union NotificationDeliveryMechanism {
   string,
-  "Email",
+  Email: "Email",
 }
 
 /**
@@ -181,9 +181,9 @@ union NotificationDeliveryMechanism {
  */
 union NotificationLevel {
   string,
-  "None",
-  "Critical",
-  "All",
+  None: "None",
+  Critical: "Critical",
+  All: "All",
 }
 
 /**
@@ -191,9 +191,9 @@ union NotificationLevel {
  */
 union RecipientType {
   string,
-  "Requestor",
-  "Approver",
-  "Admin",
+  Requestor: "Requestor",
+  Approver: "Approver",
+  Admin: "Admin",
 }
 
 /**

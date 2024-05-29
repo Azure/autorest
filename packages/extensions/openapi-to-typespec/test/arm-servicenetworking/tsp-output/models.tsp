@@ -13,18 +13,18 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 union ProvisioningState {
   string,
-  "Provisioning",
-  "Updating",
-  "Deleting",
-  "Accepted",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 union AssociationType {
   string,
-  "subnets",
+  subnets: "subnets",
 }
 
 /**

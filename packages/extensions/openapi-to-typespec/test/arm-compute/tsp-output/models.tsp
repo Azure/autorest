@@ -18,9 +18,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union RepairAction {
   string,
-  "Replace",
-  "Restart",
-  "Reimage",
+  Replace: "Replace",
+  Restart: "Restart",
+  Reimage: "Reimage",
 }
 
 /**
@@ -28,9 +28,9 @@ union RepairAction {
  */
 union WindowsVMGuestPatchMode {
   string,
-  "Manual",
-  "AutomaticByOS",
-  "AutomaticByPlatform",
+  Manual: "Manual",
+  AutomaticByOS: "AutomaticByOS",
+  AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
@@ -38,8 +38,8 @@ union WindowsVMGuestPatchMode {
  */
 union WindowsPatchAssessmentMode {
   string,
-  "ImageDefault",
-  "AutomaticByPlatform",
+  ImageDefault: "ImageDefault",
+  AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
@@ -47,10 +47,10 @@ union WindowsPatchAssessmentMode {
  */
 union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
-  "Unknown",
-  "IfRequired",
-  "Never",
-  "Always",
+  Unknown: "Unknown",
+  IfRequired: "IfRequired",
+  Never: "Never",
+  Always: "Always",
 }
 
 /**
@@ -58,8 +58,8 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
  */
 union LinuxVMGuestPatchMode {
   string,
-  "ImageDefault",
-  "AutomaticByPlatform",
+  ImageDefault: "ImageDefault",
+  AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
@@ -67,8 +67,8 @@ union LinuxVMGuestPatchMode {
  */
 union LinuxPatchAssessmentMode {
   string,
-  "ImageDefault",
-  "AutomaticByPlatform",
+  ImageDefault: "ImageDefault",
+  AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
@@ -76,10 +76,10 @@ union LinuxPatchAssessmentMode {
  */
 union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
-  "Unknown",
-  "IfRequired",
-  "Never",
-  "Always",
+  Unknown: "Unknown",
+  IfRequired: "IfRequired",
+  Never: "Never",
+  Always: "Always",
 }
 
 /**
@@ -87,9 +87,9 @@ union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
  */
 union DiskCreateOptionTypes {
   string,
-  "FromImage",
-  "Empty",
-  "Attach",
+  FromImage: "FromImage",
+  Empty: "Empty",
+  Attach: "Attach",
 }
 
 /**
@@ -97,7 +97,7 @@ union DiskCreateOptionTypes {
  */
 union DiffDiskOptions {
   string,
-  "Local",
+  Local: "Local",
 }
 
 /**
@@ -105,8 +105,8 @@ union DiffDiskOptions {
  */
 union DiffDiskPlacement {
   string,
-  "CacheDisk",
-  "ResourceDisk",
+  CacheDisk: "CacheDisk",
+  ResourceDisk: "ResourceDisk",
 }
 
 /**
@@ -114,13 +114,13 @@ union DiffDiskPlacement {
  */
 union StorageAccountTypes {
   string,
-  "Standard_LRS",
-  "Premium_LRS",
-  "StandardSSD_LRS",
-  "UltraSSD_LRS",
-  "Premium_ZRS",
-  "StandardSSD_ZRS",
-  "PremiumV2_LRS",
+  Standard_LRS: "Standard_LRS",
+  Premium_LRS: "Premium_LRS",
+  StandardSSD_LRS: "StandardSSD_LRS",
+  UltraSSD_LRS: "UltraSSD_LRS",
+  Premium_ZRS: "Premium_ZRS",
+  StandardSSD_ZRS: "StandardSSD_ZRS",
+  PremiumV2_LRS: "PremiumV2_LRS",
 }
 
 /**
@@ -128,8 +128,8 @@ union StorageAccountTypes {
  */
 union SecurityEncryptionTypes {
   string,
-  "VMGuestStateOnly",
-  "DiskWithVMGuestState",
+  VMGuestStateOnly: "VMGuestStateOnly",
+  DiskWithVMGuestState: "DiskWithVMGuestState",
 }
 
 /**
@@ -137,8 +137,8 @@ union SecurityEncryptionTypes {
  */
 union DiskDeleteOptionTypes {
   string,
-  "Delete",
-  "Detach",
+  Delete: "Delete",
+  Detach: "Detach",
 }
 
 /**
@@ -146,10 +146,10 @@ union DiskDeleteOptionTypes {
  */
 union DomainNameLabelScopeTypes {
   string,
-  "TenantReuse",
-  "SubscriptionReuse",
-  "ResourceGroupReuse",
-  "NoReuse",
+  TenantReuse: "TenantReuse",
+  SubscriptionReuse: "SubscriptionReuse",
+  ResourceGroupReuse: "ResourceGroupReuse",
+  NoReuse: "NoReuse",
 }
 
 /**
@@ -157,8 +157,8 @@ union DomainNameLabelScopeTypes {
  */
 union IPVersion {
   string,
-  "IPv4",
-  "IPv6",
+  IPv4: "IPv4",
+  IPv6: "IPv6",
 }
 
 /**
@@ -166,8 +166,8 @@ union IPVersion {
  */
 union DeleteOptions {
   string,
-  "Delete",
-  "Detach",
+  Delete: "Delete",
+  Detach: "Detach",
 }
 
 /**
@@ -175,8 +175,8 @@ union DeleteOptions {
  */
 union PublicIPAddressSkuName {
   string,
-  "Basic",
-  "Standard",
+  Basic: "Basic",
+  Standard: "Standard",
 }
 
 /**
@@ -184,8 +184,8 @@ union PublicIPAddressSkuName {
  */
 union PublicIPAddressSkuTier {
   string,
-  "Regional",
-  "Global",
+  Regional: "Regional",
+  Global: "Global",
 }
 
 /**
@@ -193,9 +193,9 @@ union PublicIPAddressSkuTier {
  */
 union NetworkInterfaceAuxiliaryMode {
   string,
-  "None",
-  "AcceleratedConnections",
-  "Floating",
+  None: "None",
+  AcceleratedConnections: "AcceleratedConnections",
+  Floating: "Floating",
 }
 
 /**
@@ -203,11 +203,11 @@ union NetworkInterfaceAuxiliaryMode {
  */
 union NetworkInterfaceAuxiliarySku {
   string,
-  "None",
-  "A1",
-  "A2",
-  "A4",
-  "A8",
+  None: "None",
+  A1: "A1",
+  A2: "A2",
+  A4: "A4",
+  A8: "A8",
 }
 
 /**
@@ -215,7 +215,7 @@ union NetworkInterfaceAuxiliarySku {
  */
 union NetworkApiVersion {
   string,
-  "2020-11-01",
+  `2020-11-01`: "2020-11-01",
 }
 
 /**
@@ -223,8 +223,8 @@ union NetworkApiVersion {
  */
 union SecurityTypes {
   string,
-  "TrustedLaunch",
-  "ConfidentialVM",
+  TrustedLaunch: "TrustedLaunch",
+  ConfidentialVM: "ConfidentialVM",
 }
 
 /**
@@ -232,9 +232,9 @@ union SecurityTypes {
  */
 union VirtualMachinePriorityTypes {
   string,
-  "Regular",
-  "Low",
-  "Spot",
+  Regular: "Regular",
+  Low: "Low",
+  Spot: "Spot",
 }
 
 /**
@@ -242,15 +242,15 @@ union VirtualMachinePriorityTypes {
  */
 union VirtualMachineEvictionPolicyTypes {
   string,
-  "Deallocate",
-  "Delete",
+  Deallocate: "Deallocate",
+  Delete: "Delete",
 }
 
 union VirtualMachineScaleSetScaleInRules {
   string,
-  "Default",
-  "OldestVM",
-  "NewestVM",
+  Default: "Default",
+  OldestVM: "OldestVM",
+  NewestVM: "NewestVM",
 }
 
 /**
@@ -258,8 +258,8 @@ union VirtualMachineScaleSetScaleInRules {
  */
 union OrchestrationMode {
   string,
-  "Uniform",
-  "Flexible",
+  Uniform: "Uniform",
+  Flexible: "Flexible",
 }
 
 /**
@@ -267,12 +267,12 @@ union OrchestrationMode {
  */
 union ExtendedLocationTypes {
   string,
-  "EdgeZone",
+  EdgeZone: "EdgeZone",
 }
 
 union ExpandTypesForGetVMScaleSets {
   string,
-  "userData",
+  userData: "userData",
 }
 
 /**
@@ -280,7 +280,7 @@ union ExpandTypesForGetVMScaleSets {
  */
 union OrchestrationServiceNames {
   string,
-  "AutomaticRepairs",
+  AutomaticRepairs: "AutomaticRepairs",
 }
 
 /**
@@ -288,9 +288,9 @@ union OrchestrationServiceNames {
  */
 union OrchestrationServiceState {
   string,
-  "NotRunning",
-  "Running",
-  "Suspended",
+  NotRunning: "NotRunning",
+  Running: "Running",
+  Suspended: "Suspended",
 }
 
 /**
@@ -298,8 +298,8 @@ union OrchestrationServiceState {
  */
 union OrchestrationServiceStateAction {
   string,
-  "Resume",
-  "Suspend",
+  Resume: "Resume",
+  Suspend: "Suspend",
 }
 
 /**
@@ -307,8 +307,8 @@ union OrchestrationServiceStateAction {
  */
 union HyperVGeneration {
   string,
-  "V1",
-  "V2",
+  V1: "V1",
+  V2: "V2",
 }
 
 /**
@@ -316,172 +316,172 @@ union HyperVGeneration {
  */
 union VirtualMachineSizeTypes {
   string,
-  "Basic_A0",
-  "Basic_A1",
-  "Basic_A2",
-  "Basic_A3",
-  "Basic_A4",
-  "Standard_A0",
-  "Standard_A1",
-  "Standard_A2",
-  "Standard_A3",
-  "Standard_A4",
-  "Standard_A5",
-  "Standard_A6",
-  "Standard_A7",
-  "Standard_A8",
-  "Standard_A9",
-  "Standard_A10",
-  "Standard_A11",
-  "Standard_A1_v2",
-  "Standard_A2_v2",
-  "Standard_A4_v2",
-  "Standard_A8_v2",
-  "Standard_A2m_v2",
-  "Standard_A4m_v2",
-  "Standard_A8m_v2",
-  "Standard_B1s",
-  "Standard_B1ms",
-  "Standard_B2s",
-  "Standard_B2ms",
-  "Standard_B4ms",
-  "Standard_B8ms",
-  "Standard_D1",
-  "Standard_D2",
-  "Standard_D3",
-  "Standard_D4",
-  "Standard_D11",
-  "Standard_D12",
-  "Standard_D13",
-  "Standard_D14",
-  "Standard_D1_v2",
-  "Standard_D2_v2",
-  "Standard_D3_v2",
-  "Standard_D4_v2",
-  "Standard_D5_v2",
-  "Standard_D2_v3",
-  "Standard_D4_v3",
-  "Standard_D8_v3",
-  "Standard_D16_v3",
-  "Standard_D32_v3",
-  "Standard_D64_v3",
-  "Standard_D2s_v3",
-  "Standard_D4s_v3",
-  "Standard_D8s_v3",
-  "Standard_D16s_v3",
-  "Standard_D32s_v3",
-  "Standard_D64s_v3",
-  "Standard_D11_v2",
-  "Standard_D12_v2",
-  "Standard_D13_v2",
-  "Standard_D14_v2",
-  "Standard_D15_v2",
-  "Standard_DS1",
-  "Standard_DS2",
-  "Standard_DS3",
-  "Standard_DS4",
-  "Standard_DS11",
-  "Standard_DS12",
-  "Standard_DS13",
-  "Standard_DS14",
-  "Standard_DS1_v2",
-  "Standard_DS2_v2",
-  "Standard_DS3_v2",
-  "Standard_DS4_v2",
-  "Standard_DS5_v2",
-  "Standard_DS11_v2",
-  "Standard_DS12_v2",
-  "Standard_DS13_v2",
-  "Standard_DS14_v2",
-  "Standard_DS15_v2",
-  "Standard_DS13-4_v2",
-  "Standard_DS13-2_v2",
-  "Standard_DS14-8_v2",
-  "Standard_DS14-4_v2",
-  "Standard_E2_v3",
-  "Standard_E4_v3",
-  "Standard_E8_v3",
-  "Standard_E16_v3",
-  "Standard_E32_v3",
-  "Standard_E64_v3",
-  "Standard_E2s_v3",
-  "Standard_E4s_v3",
-  "Standard_E8s_v3",
-  "Standard_E16s_v3",
-  "Standard_E32s_v3",
-  "Standard_E64s_v3",
-  "Standard_E32-16_v3",
-  "Standard_E32-8s_v3",
-  "Standard_E64-32s_v3",
-  "Standard_E64-16s_v3",
-  "Standard_F1",
-  "Standard_F2",
-  "Standard_F4",
-  "Standard_F8",
-  "Standard_F16",
-  "Standard_F1s",
-  "Standard_F2s",
-  "Standard_F4s",
-  "Standard_F8s",
-  "Standard_F16s",
-  "Standard_F2s_v2",
-  "Standard_F4s_v2",
-  "Standard_F8s_v2",
-  "Standard_F16s_v2",
-  "Standard_F32s_v2",
-  "Standard_F64s_v2",
-  "Standard_F72s_v2",
-  "Standard_G1",
-  "Standard_G2",
-  "Standard_G3",
-  "Standard_G4",
-  "Standard_G5",
-  "Standard_GS1",
-  "Standard_GS2",
-  "Standard_GS3",
-  "Standard_GS4",
-  "Standard_GS5",
-  "Standard_GS4-8",
-  "Standard_GS4-4",
-  "Standard_GS5-16",
-  "Standard_GS5-8",
-  "Standard_H8",
-  "Standard_H16",
-  "Standard_H8m",
-  "Standard_H16m",
-  "Standard_H16r",
-  "Standard_H16mr",
-  "Standard_L4s",
-  "Standard_L8s",
-  "Standard_L16s",
-  "Standard_L32s",
-  "Standard_M64s",
-  "Standard_M64ms",
-  "Standard_M128s",
-  "Standard_M128ms",
-  "Standard_M64-32ms",
-  "Standard_M64-16ms",
-  "Standard_M128-64ms",
-  "Standard_M128-32ms",
-  "Standard_NC6",
-  "Standard_NC12",
-  "Standard_NC24",
-  "Standard_NC24r",
-  "Standard_NC6s_v2",
-  "Standard_NC12s_v2",
-  "Standard_NC24s_v2",
-  "Standard_NC24rs_v2",
-  "Standard_NC6s_v3",
-  "Standard_NC12s_v3",
-  "Standard_NC24s_v3",
-  "Standard_NC24rs_v3",
-  "Standard_ND6s",
-  "Standard_ND12s",
-  "Standard_ND24s",
-  "Standard_ND24rs",
-  "Standard_NV6",
-  "Standard_NV12",
-  "Standard_NV24",
+  Basic_A0: "Basic_A0",
+  Basic_A1: "Basic_A1",
+  Basic_A2: "Basic_A2",
+  Basic_A3: "Basic_A3",
+  Basic_A4: "Basic_A4",
+  Standard_A0: "Standard_A0",
+  Standard_A1: "Standard_A1",
+  Standard_A2: "Standard_A2",
+  Standard_A3: "Standard_A3",
+  Standard_A4: "Standard_A4",
+  Standard_A5: "Standard_A5",
+  Standard_A6: "Standard_A6",
+  Standard_A7: "Standard_A7",
+  Standard_A8: "Standard_A8",
+  Standard_A9: "Standard_A9",
+  Standard_A10: "Standard_A10",
+  Standard_A11: "Standard_A11",
+  Standard_A1_v2: "Standard_A1_v2",
+  Standard_A2_v2: "Standard_A2_v2",
+  Standard_A4_v2: "Standard_A4_v2",
+  Standard_A8_v2: "Standard_A8_v2",
+  Standard_A2m_v2: "Standard_A2m_v2",
+  Standard_A4m_v2: "Standard_A4m_v2",
+  Standard_A8m_v2: "Standard_A8m_v2",
+  Standard_B1s: "Standard_B1s",
+  Standard_B1ms: "Standard_B1ms",
+  Standard_B2s: "Standard_B2s",
+  Standard_B2ms: "Standard_B2ms",
+  Standard_B4ms: "Standard_B4ms",
+  Standard_B8ms: "Standard_B8ms",
+  Standard_D1: "Standard_D1",
+  Standard_D2: "Standard_D2",
+  Standard_D3: "Standard_D3",
+  Standard_D4: "Standard_D4",
+  Standard_D11: "Standard_D11",
+  Standard_D12: "Standard_D12",
+  Standard_D13: "Standard_D13",
+  Standard_D14: "Standard_D14",
+  Standard_D1_v2: "Standard_D1_v2",
+  Standard_D2_v2: "Standard_D2_v2",
+  Standard_D3_v2: "Standard_D3_v2",
+  Standard_D4_v2: "Standard_D4_v2",
+  Standard_D5_v2: "Standard_D5_v2",
+  Standard_D2_v3: "Standard_D2_v3",
+  Standard_D4_v3: "Standard_D4_v3",
+  Standard_D8_v3: "Standard_D8_v3",
+  Standard_D16_v3: "Standard_D16_v3",
+  Standard_D32_v3: "Standard_D32_v3",
+  Standard_D64_v3: "Standard_D64_v3",
+  Standard_D2s_v3: "Standard_D2s_v3",
+  Standard_D4s_v3: "Standard_D4s_v3",
+  Standard_D8s_v3: "Standard_D8s_v3",
+  Standard_D16s_v3: "Standard_D16s_v3",
+  Standard_D32s_v3: "Standard_D32s_v3",
+  Standard_D64s_v3: "Standard_D64s_v3",
+  Standard_D11_v2: "Standard_D11_v2",
+  Standard_D12_v2: "Standard_D12_v2",
+  Standard_D13_v2: "Standard_D13_v2",
+  Standard_D14_v2: "Standard_D14_v2",
+  Standard_D15_v2: "Standard_D15_v2",
+  Standard_DS1: "Standard_DS1",
+  Standard_DS2: "Standard_DS2",
+  Standard_DS3: "Standard_DS3",
+  Standard_DS4: "Standard_DS4",
+  Standard_DS11: "Standard_DS11",
+  Standard_DS12: "Standard_DS12",
+  Standard_DS13: "Standard_DS13",
+  Standard_DS14: "Standard_DS14",
+  Standard_DS1_v2: "Standard_DS1_v2",
+  Standard_DS2_v2: "Standard_DS2_v2",
+  Standard_DS3_v2: "Standard_DS3_v2",
+  Standard_DS4_v2: "Standard_DS4_v2",
+  Standard_DS5_v2: "Standard_DS5_v2",
+  Standard_DS11_v2: "Standard_DS11_v2",
+  Standard_DS12_v2: "Standard_DS12_v2",
+  Standard_DS13_v2: "Standard_DS13_v2",
+  Standard_DS14_v2: "Standard_DS14_v2",
+  Standard_DS15_v2: "Standard_DS15_v2",
+  `Standard_DS13-4_v2`: "Standard_DS13-4_v2",
+  `Standard_DS13-2_v2`: "Standard_DS13-2_v2",
+  `Standard_DS14-8_v2`: "Standard_DS14-8_v2",
+  `Standard_DS14-4_v2`: "Standard_DS14-4_v2",
+  Standard_E2_v3: "Standard_E2_v3",
+  Standard_E4_v3: "Standard_E4_v3",
+  Standard_E8_v3: "Standard_E8_v3",
+  Standard_E16_v3: "Standard_E16_v3",
+  Standard_E32_v3: "Standard_E32_v3",
+  Standard_E64_v3: "Standard_E64_v3",
+  Standard_E2s_v3: "Standard_E2s_v3",
+  Standard_E4s_v3: "Standard_E4s_v3",
+  Standard_E8s_v3: "Standard_E8s_v3",
+  Standard_E16s_v3: "Standard_E16s_v3",
+  Standard_E32s_v3: "Standard_E32s_v3",
+  Standard_E64s_v3: "Standard_E64s_v3",
+  `Standard_E32-16_v3`: "Standard_E32-16_v3",
+  `Standard_E32-8s_v3`: "Standard_E32-8s_v3",
+  `Standard_E64-32s_v3`: "Standard_E64-32s_v3",
+  `Standard_E64-16s_v3`: "Standard_E64-16s_v3",
+  Standard_F1: "Standard_F1",
+  Standard_F2: "Standard_F2",
+  Standard_F4: "Standard_F4",
+  Standard_F8: "Standard_F8",
+  Standard_F16: "Standard_F16",
+  Standard_F1s: "Standard_F1s",
+  Standard_F2s: "Standard_F2s",
+  Standard_F4s: "Standard_F4s",
+  Standard_F8s: "Standard_F8s",
+  Standard_F16s: "Standard_F16s",
+  Standard_F2s_v2: "Standard_F2s_v2",
+  Standard_F4s_v2: "Standard_F4s_v2",
+  Standard_F8s_v2: "Standard_F8s_v2",
+  Standard_F16s_v2: "Standard_F16s_v2",
+  Standard_F32s_v2: "Standard_F32s_v2",
+  Standard_F64s_v2: "Standard_F64s_v2",
+  Standard_F72s_v2: "Standard_F72s_v2",
+  Standard_G1: "Standard_G1",
+  Standard_G2: "Standard_G2",
+  Standard_G3: "Standard_G3",
+  Standard_G4: "Standard_G4",
+  Standard_G5: "Standard_G5",
+  Standard_GS1: "Standard_GS1",
+  Standard_GS2: "Standard_GS2",
+  Standard_GS3: "Standard_GS3",
+  Standard_GS4: "Standard_GS4",
+  Standard_GS5: "Standard_GS5",
+  `Standard_GS4-8`: "Standard_GS4-8",
+  `Standard_GS4-4`: "Standard_GS4-4",
+  `Standard_GS5-16`: "Standard_GS5-16",
+  `Standard_GS5-8`: "Standard_GS5-8",
+  Standard_H8: "Standard_H8",
+  Standard_H16: "Standard_H16",
+  Standard_H8m: "Standard_H8m",
+  Standard_H16m: "Standard_H16m",
+  Standard_H16r: "Standard_H16r",
+  Standard_H16mr: "Standard_H16mr",
+  Standard_L4s: "Standard_L4s",
+  Standard_L8s: "Standard_L8s",
+  Standard_L16s: "Standard_L16s",
+  Standard_L32s: "Standard_L32s",
+  Standard_M64s: "Standard_M64s",
+  Standard_M64ms: "Standard_M64ms",
+  Standard_M128s: "Standard_M128s",
+  Standard_M128ms: "Standard_M128ms",
+  `Standard_M64-32ms`: "Standard_M64-32ms",
+  `Standard_M64-16ms`: "Standard_M64-16ms",
+  `Standard_M128-64ms`: "Standard_M128-64ms",
+  `Standard_M128-32ms`: "Standard_M128-32ms",
+  Standard_NC6: "Standard_NC6",
+  Standard_NC12: "Standard_NC12",
+  Standard_NC24: "Standard_NC24",
+  Standard_NC24r: "Standard_NC24r",
+  Standard_NC6s_v2: "Standard_NC6s_v2",
+  Standard_NC12s_v2: "Standard_NC12s_v2",
+  Standard_NC24s_v2: "Standard_NC24s_v2",
+  Standard_NC24rs_v2: "Standard_NC24rs_v2",
+  Standard_NC6s_v3: "Standard_NC6s_v3",
+  Standard_NC12s_v3: "Standard_NC12s_v3",
+  Standard_NC24s_v3: "Standard_NC24s_v3",
+  Standard_NC24rs_v3: "Standard_NC24rs_v3",
+  Standard_ND6s: "Standard_ND6s",
+  Standard_ND12s: "Standard_ND12s",
+  Standard_ND24s: "Standard_ND24s",
+  Standard_ND24rs: "Standard_ND24rs",
+  Standard_NV6: "Standard_NV6",
+  Standard_NV12: "Standard_NV12",
+  Standard_NV24: "Standard_NV24",
 }
 
 /**
@@ -489,7 +489,7 @@ union VirtualMachineSizeTypes {
  */
 union DiskDetachOptionTypes {
   string,
-  "ForceDetach",
+  ForceDetach: "ForceDetach",
 }
 
 /**
@@ -497,8 +497,8 @@ union DiskDetachOptionTypes {
  */
 union DiskControllerTypes {
   string,
-  "SCSI",
-  "NVMe",
+  SCSI: "SCSI",
+  NVMe: "NVMe",
 }
 
 /**
@@ -506,8 +506,8 @@ union DiskControllerTypes {
  */
 union IPVersions {
   string,
-  "IPv4",
-  "IPv6",
+  IPv4: "IPv4",
+  IPv6: "IPv6",
 }
 
 /**
@@ -515,8 +515,8 @@ union IPVersions {
  */
 union PublicIPAllocationMethod {
   string,
-  "Dynamic",
-  "Static",
+  Dynamic: "Dynamic",
+  Static: "Static",
 }
 
 /**
@@ -524,8 +524,8 @@ union PublicIPAllocationMethod {
  */
 union HyperVGenerationType {
   string,
-  "V1",
-  "V2",
+  V1: "V1",
+  V2: "V2",
 }
 
 /**
@@ -533,21 +533,21 @@ union HyperVGenerationType {
  */
 union PatchOperationStatus {
   string,
-  "Unknown",
-  "InProgress",
-  "Failed",
-  "Succeeded",
-  "CompletedWithWarnings",
+  Unknown: "Unknown",
+  InProgress: "InProgress",
+  Failed: "Failed",
+  Succeeded: "Succeeded",
+  CompletedWithWarnings: "CompletedWithWarnings",
 }
 
 union ExpandTypeForListVMs {
   string,
-  "instanceView",
+  instanceView: "instanceView",
 }
 
 union ExpandTypesForListVMs {
   string,
-  "instanceView",
+  instanceView: "instanceView",
 }
 
 /**
@@ -555,10 +555,10 @@ union ExpandTypesForListVMs {
  */
 union VMGuestPatchRebootBehavior {
   string,
-  "Unknown",
-  "NeverReboots",
-  "AlwaysRequiresReboot",
-  "CanRequestReboot",
+  Unknown: "Unknown",
+  NeverReboots: "NeverReboots",
+  AlwaysRequiresReboot: "AlwaysRequiresReboot",
+  CanRequestReboot: "CanRequestReboot",
 }
 
 /**
@@ -566,8 +566,8 @@ union VMGuestPatchRebootBehavior {
  */
 union PatchAssessmentState {
   string,
-  "Unknown",
-  "Available",
+  Unknown: "Unknown",
+  Available: "Available",
 }
 
 /**
@@ -575,28 +575,28 @@ union PatchAssessmentState {
  */
 union VMGuestPatchRebootSetting {
   string,
-  "IfRequired",
-  "Never",
-  "Always",
+  IfRequired: "IfRequired",
+  Never: "Never",
+  Always: "Always",
 }
 
 union VMGuestPatchClassificationWindows {
   string,
-  "Critical",
-  "Security",
-  "UpdateRollUp",
-  "FeaturePack",
-  "ServicePack",
-  "Definition",
-  "Tools",
-  "Updates",
+  Critical: "Critical",
+  Security: "Security",
+  UpdateRollUp: "UpdateRollUp",
+  FeaturePack: "FeaturePack",
+  ServicePack: "ServicePack",
+  Definition: "Definition",
+  Tools: "Tools",
+  Updates: "Updates",
 }
 
 union VMGuestPatchClassificationLinux {
   string,
-  "Critical",
-  "Security",
-  "Other",
+  Critical: "Critical",
+  Security: "Security",
+  Other: "Other",
 }
 
 /**
@@ -604,12 +604,12 @@ union VMGuestPatchClassificationLinux {
  */
 union VMGuestPatchRebootStatus {
   string,
-  "Unknown",
-  "NotNeeded",
-  "Required",
-  "Started",
-  "Failed",
-  "Completed",
+  Unknown: "Unknown",
+  NotNeeded: "NotNeeded",
+  Required: "Required",
+  Started: "Started",
+  Failed: "Failed",
+  Completed: "Completed",
 }
 
 /**
@@ -617,12 +617,12 @@ union VMGuestPatchRebootStatus {
  */
 union PatchInstallationState {
   string,
-  "Unknown",
-  "Installed",
-  "Failed",
-  "Excluded",
-  "NotSelected",
-  "Pending",
+  Unknown: "Unknown",
+  Installed: "Installed",
+  Failed: "Failed",
+  Excluded: "Excluded",
+  NotSelected: "NotSelected",
+  Pending: "Pending",
 }
 
 /**
@@ -630,8 +630,8 @@ union PatchInstallationState {
  */
 union HyperVGenerationTypes {
   string,
-  "V1",
-  "V2",
+  V1: "V1",
+  V2: "V2",
 }
 
 /**
@@ -639,8 +639,8 @@ union HyperVGenerationTypes {
  */
 union VmDiskTypes {
   string,
-  "None",
-  "Unmanaged",
+  None: "None",
+  Unmanaged: "Unmanaged",
 }
 
 /**
@@ -648,8 +648,8 @@ union VmDiskTypes {
  */
 union ArchitectureTypes {
   string,
-  "x64",
-  "Arm64",
+  x64: "x64",
+  Arm64: "Arm64",
 }
 
 /**
@@ -657,9 +657,9 @@ union ArchitectureTypes {
  */
 union ImageState {
   string,
-  "Active",
-  "ScheduledForDeprecation",
-  "Deprecated",
+  Active: "Active",
+  ScheduledForDeprecation: "ScheduledForDeprecation",
+  Deprecated: "Deprecated",
 }
 
 /**
@@ -667,9 +667,9 @@ union ImageState {
  */
 union AlternativeType {
   string,
-  "None",
-  "Offer",
-  "Plan",
+  None: "None",
+  Offer: "Offer",
+  Plan: "Plan",
 }
 
 /**
@@ -677,8 +677,8 @@ union AlternativeType {
  */
 union ProximityPlacementGroupType {
   string,
-  "Standard",
-  "Ultra",
+  Standard: "Standard",
+  Ultra: "Ultra",
 }
 
 /**
@@ -686,8 +686,8 @@ union ProximityPlacementGroupType {
  */
 union OperatingSystemType {
   string,
-  "Windows",
-  "Linux",
+  Windows: "Windows",
+  Linux: "Linux",
 }
 
 /**
@@ -699,17 +699,17 @@ union RestorePointEncryptionType {
   /**
    * Disk Restore Point is encrypted at rest with Platform managed key.
    */
-  "EncryptionAtRestWithPlatformKey",
+  EncryptionAtRestWithPlatformKey: "EncryptionAtRestWithPlatformKey",
 
   /**
    * Disk Restore Point is encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  "EncryptionAtRestWithCustomerKey",
+  EncryptionAtRestWithCustomerKey: "EncryptionAtRestWithCustomerKey",
 
   /**
    * Disk Restore Point is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  "EncryptionAtRestWithPlatformAndCustomerKeys",
+  EncryptionAtRestWithPlatformAndCustomerKeys: "EncryptionAtRestWithPlatformAndCustomerKeys",
 }
 
 /**
@@ -717,35 +717,35 @@ union RestorePointEncryptionType {
  */
 union ConsistencyModeTypes {
   string,
-  "CrashConsistent",
-  "FileSystemConsistent",
-  "ApplicationConsistent",
+  CrashConsistent: "CrashConsistent",
+  FileSystemConsistent: "FileSystemConsistent",
+  ApplicationConsistent: "ApplicationConsistent",
 }
 
 union RestorePointCollectionExpandOptions {
   string,
-  "restorePoints",
+  restorePoints: "restorePoints",
 }
 
 union RestorePointExpandOptions {
   string,
-  "instanceView",
+  instanceView: "instanceView",
 }
 
 union CapacityReservationGroupInstanceViewTypes {
   string,
-  "instanceView",
+  instanceView: "instanceView",
 }
 
 union ExpandTypesForGetCapacityReservationGroups {
   string,
-  "virtualMachineScaleSetVMs/$ref",
-  "virtualMachines/$ref",
+  `virtualMachineScaleSetVMs/$ref`: "virtualMachineScaleSetVMs/$ref",
+  `virtualMachines/$ref`: "virtualMachines/$ref",
 }
 
 union CapacityReservationInstanceViewTypes {
   string,
-  "instanceView",
+  instanceView: "instanceView",
 }
 
 /**
@@ -753,13 +753,13 @@ union CapacityReservationInstanceViewTypes {
  */
 union ExecutionState {
   string,
-  "Unknown",
-  "Pending",
-  "Running",
-  "Failed",
-  "Succeeded",
-  "TimedOut",
-  "Canceled",
+  Unknown: "Unknown",
+  Pending: "Pending",
+  Running: "Running",
+  Failed: "Failed",
+  Succeeded: "Succeeded",
+  TimedOut: "TimedOut",
+  Canceled: "Canceled",
 }
 
 /**
@@ -771,37 +771,37 @@ union DiskStorageAccountTypes {
   /**
    * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
    */
-  "Standard_LRS",
+  Standard_LRS: "Standard_LRS",
 
   /**
    * Premium SSD locally redundant storage. Best for production and performance sensitive workloads.
    */
-  "Premium_LRS",
+  Premium_LRS: "Premium_LRS",
 
   /**
    * Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test.
    */
-  "StandardSSD_LRS",
+  StandardSSD_LRS: "StandardSSD_LRS",
 
   /**
    * Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads.
    */
-  "UltraSSD_LRS",
+  UltraSSD_LRS: "UltraSSD_LRS",
 
   /**
    * Premium SSD zone redundant storage. Best for the production workloads that need storage resiliency against zone failures.
    */
-  "Premium_ZRS",
+  Premium_ZRS: "Premium_ZRS",
 
   /**
    * Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures.
    */
-  "StandardSSD_ZRS",
+  StandardSSD_ZRS: "StandardSSD_ZRS",
 
   /**
    * Premium SSD v2 locally redundant storage. Best for production and performance-sensitive workloads that consistently require low latency and high IOPS and throughput.
    */
-  "PremiumV2_LRS",
+  PremiumV2_LRS: "PremiumV2_LRS",
 }
 
 /**
@@ -809,8 +809,8 @@ union DiskStorageAccountTypes {
  */
 union Architecture {
   string,
-  "x64",
-  "Arm64",
+  x64: "x64",
+  Arm64: "Arm64",
 }
 
 /**
@@ -822,57 +822,57 @@ union DiskCreateOption {
   /**
    * Create an empty data disk of a size given by diskSizeGB.
    */
-  "Empty",
+  Empty: "Empty",
 
   /**
    * Disk will be attached to a VM.
    */
-  "Attach",
+  Attach: "Attach",
 
   /**
    * Create a new disk from a platform image specified by the given imageReference or galleryImageReference.
    */
-  "FromImage",
+  FromImage: "FromImage",
 
   /**
    * Create a disk by importing from a blob specified by a sourceUri in a storage account specified by storageAccountId.
    */
-  "Import",
+  Import: "Import",
 
   /**
    * Create a new disk or snapshot by copying from a disk or snapshot specified by the given sourceResourceId.
    */
-  "Copy",
+  Copy: "Copy",
 
   /**
    * Create a new disk by copying from a backup recovery point.
    */
-  "Restore",
+  Restore: "Restore",
 
   /**
    * Create a new disk by obtaining a write token and using it to directly upload the contents of the disk.
    */
-  "Upload",
+  Upload: "Upload",
 
   /**
    * Create a new disk by using a deep copy process, where the resource creation is considered complete only after all data has been copied from the source.
    */
-  "CopyStart",
+  CopyStart: "CopyStart",
 
   /**
    * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId
    */
-  "ImportSecure",
+  ImportSecure: "ImportSecure",
 
   /**
    * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state
    */
-  "UploadPreparedSecure",
+  UploadPreparedSecure: "UploadPreparedSecure",
 
   /**
    * Create a new disk by exporting from elastic san volume snapshot
    */
-  "CopyFromSanSnapshot",
+  CopyFromSanSnapshot: "CopyFromSanSnapshot",
 }
 
 /**
@@ -884,42 +884,42 @@ union DiskState {
   /**
    * The disk is not being used and can be attached to a VM.
    */
-  "Unattached",
+  Unattached: "Unattached",
 
   /**
    * The disk is currently attached to a running VM.
    */
-  "Attached",
+  Attached: "Attached",
 
   /**
    * The disk is attached to a stopped-deallocated VM.
    */
-  "Reserved",
+  Reserved: "Reserved",
 
   /**
    * The disk is attached to a VM which is in hibernated state.
    */
-  "Frozen",
+  Frozen: "Frozen",
 
   /**
    * The disk currently has an Active SAS Uri associated with it.
    */
-  "ActiveSAS",
+  ActiveSAS: "ActiveSAS",
 
   /**
    * The disk is attached to a VM in hibernated state and has an active SAS URI associated with it.
    */
-  "ActiveSASFrozen",
+  ActiveSASFrozen: "ActiveSASFrozen",
 
   /**
    * A disk is ready to be created by upload by requesting a write token.
    */
-  "ReadyToUpload",
+  ReadyToUpload: "ReadyToUpload",
 
   /**
    * A disk is created for upload and a write token has been issued for uploading to it.
    */
-  "ActiveUpload",
+  ActiveUpload: "ActiveUpload",
 }
 
 /**
@@ -931,17 +931,17 @@ union EncryptionType {
   /**
    * Disk is encrypted at rest with Platform managed key. It is the default encryption type. This is not a valid encryption type for disk encryption sets.
    */
-  "EncryptionAtRestWithPlatformKey",
+  EncryptionAtRestWithPlatformKey: "EncryptionAtRestWithPlatformKey",
 
   /**
    * Disk is encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  "EncryptionAtRestWithCustomerKey",
+  EncryptionAtRestWithCustomerKey: "EncryptionAtRestWithCustomerKey",
 
   /**
    * Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  "EncryptionAtRestWithPlatformAndCustomerKeys",
+  EncryptionAtRestWithPlatformAndCustomerKeys: "EncryptionAtRestWithPlatformAndCustomerKeys",
 }
 
 /**
@@ -953,17 +953,17 @@ union NetworkAccessPolicy {
   /**
    * The disk can be exported or uploaded to from any network.
    */
-  "AllowAll",
+  AllowAll: "AllowAll",
 
   /**
    * The disk can be exported or uploaded to using a DiskAccess resource's private endpoints.
    */
-  "AllowPrivate",
+  AllowPrivate: "AllowPrivate",
 
   /**
    * The disk cannot be exported.
    */
-  "DenyAll",
+  DenyAll: "DenyAll",
 }
 
 /**
@@ -975,22 +975,22 @@ union DiskSecurityTypes {
   /**
    * Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)
    */
-  "TrustedLaunch",
+  TrustedLaunch: "TrustedLaunch",
 
   /**
    * Indicates Confidential VM disk with only VM guest state encrypted
    */
-  "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+  ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey: "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
 
   /**
    * Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key
    */
-  "ConfidentialVM_DiskEncryptedWithPlatformKey",
+  ConfidentialVM_DiskEncryptedWithPlatformKey: "ConfidentialVM_DiskEncryptedWithPlatformKey",
 
   /**
    * Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key
    */
-  "ConfidentialVM_DiskEncryptedWithCustomerKey",
+  ConfidentialVM_DiskEncryptedWithCustomerKey: "ConfidentialVM_DiskEncryptedWithCustomerKey",
 }
 
 /**
@@ -1002,12 +1002,12 @@ union PublicNetworkAccess {
   /**
    * You can generate a SAS URI to access the underlying data of the disk publicly on the internet when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate.
    */
-  "Enabled",
+  Enabled: "Enabled",
 
   /**
    * You cannot access the underlying data of the disk publicly on the internet even when NetworkAccessPolicy is set to AllowAll. You can access the data via the SAS URI only from your trusted Azure VNET when NetworkAccessPolicy is set to AllowPrivate.
    */
-  "Disabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -1019,12 +1019,12 @@ union DataAccessAuthMode {
   /**
    * When export/upload URL is used, the system checks if the user has an identity in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth.
    */
-  "AzureActiveDirectory",
+  AzureActiveDirectory: "AzureActiveDirectory",
 
   /**
    * No additional authentication would be performed when accessing export/upload URL.
    */
-  "None",
+  None: "None",
 }
 
 /**
@@ -1032,9 +1032,9 @@ union DataAccessAuthMode {
  */
 union AccessLevel {
   string,
-  "None",
-  "Read",
-  "Write",
+  None: "None",
+  Read: "Read",
+  Write: "Write",
 }
 
 /**
@@ -1046,12 +1046,12 @@ union FileFormat {
   /**
    * A VHD file is a disk image file in the Virtual Hard Disk file format.
    */
-  "VHD",
+  VHD: "VHD",
 
   /**
    * A VHDX file is a disk image file in the Virtual Hard Disk v2 file format.
    */
-  "VHDX",
+  VHDX: "VHDX",
 }
 
 /**
@@ -1059,9 +1059,9 @@ union FileFormat {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  "Pending",
-  "Approved",
-  "Rejected",
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
@@ -1069,10 +1069,10 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  "Succeeded",
-  "Creating",
-  "Deleting",
-  "Failed",
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
@@ -1080,10 +1080,10 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union DiskEncryptionSetIdentityType {
   string,
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned, UserAssigned",
-  "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+  None: "None",
 }
 
 /**
@@ -1095,17 +1095,17 @@ union DiskEncryptionSetType {
   /**
    * Resource using diskEncryptionSet would be encrypted at rest with Customer managed key that can be changed and revoked by a customer.
    */
-  "EncryptionAtRestWithCustomerKey",
+  EncryptionAtRestWithCustomerKey: "EncryptionAtRestWithCustomerKey",
 
   /**
    * Resource using diskEncryptionSet would be encrypted at rest with two layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
-  "EncryptionAtRestWithPlatformAndCustomerKeys",
+  EncryptionAtRestWithPlatformAndCustomerKeys: "EncryptionAtRestWithPlatformAndCustomerKeys",
 
   /**
    * Confidential VM supported disk and VM guest state would be encrypted with customer managed key.
    */
-  "ConfidentialVmEncryptedWithCustomerKey",
+  ConfidentialVmEncryptedWithCustomerKey: "ConfidentialVmEncryptedWithCustomerKey",
 }
 
 /**
@@ -1117,17 +1117,17 @@ union SnapshotStorageAccountTypes {
   /**
    * Standard HDD locally redundant storage
    */
-  "Standard_LRS",
+  Standard_LRS: "Standard_LRS",
 
   /**
    * Premium SSD locally redundant storage
    */
-  "Premium_LRS",
+  Premium_LRS: "Premium_LRS",
 
   /**
    * Standard zone redundant storage
    */
-  "Standard_ZRS",
+  Standard_ZRS: "Standard_ZRS",
 }
 
 /**
@@ -1139,7 +1139,7 @@ union CopyCompletionErrorReason {
   /**
    * Indicates that the source snapshot was deleted while the background copy of the resource created via CopyStart operation was in progress.
    */
-  "CopySourceNotFound",
+  CopySourceNotFound: "CopySourceNotFound",
 }
 
 /**
@@ -1147,7 +1147,7 @@ union CopyCompletionErrorReason {
  */
 union ExtendedLocationType {
   string,
-  "EdgeZone",
+  EdgeZone: "EdgeZone",
 }
 
 /**
@@ -1155,12 +1155,12 @@ union ExtendedLocationType {
  */
 union GalleryProvisioningState {
   string,
-  "Creating",
-  "Updating",
-  "Failed",
-  "Succeeded",
-  "Deleting",
-  "Migrating",
+  Creating: "Creating",
+  Updating: "Updating",
+  Failed: "Failed",
+  Succeeded: "Succeeded",
+  Deleting: "Deleting",
+  Migrating: "Migrating",
 }
 
 /**
@@ -1168,9 +1168,9 @@ union GalleryProvisioningState {
  */
 union GallerySharingPermissionTypes {
   string,
-  "Private",
-  "Groups",
-  "Community",
+  Private: "Private",
+  Groups: "Groups",
+  Community: "Community",
 }
 
 /**
@@ -1178,8 +1178,8 @@ union GallerySharingPermissionTypes {
  */
 union SharingProfileGroupTypes {
   string,
-  "Subscriptions",
-  "AADTenants",
+  Subscriptions: "Subscriptions",
+  AADTenants: "AADTenants",
 }
 
 /**
@@ -1187,20 +1187,20 @@ union SharingProfileGroupTypes {
  */
 union SharingState {
   string,
-  "Succeeded",
-  "InProgress",
-  "Failed",
-  "Unknown",
+  Succeeded: "Succeeded",
+  InProgress: "InProgress",
+  Failed: "Failed",
+  Unknown: "Unknown",
 }
 
 union SelectPermissions {
   string,
-  "Permissions",
+  Permissions: "Permissions",
 }
 
 union GalleryExpandParams {
   string,
-  "SharingProfile/Groups",
+  `SharingProfile/Groups`: "SharingProfile/Groups",
 }
 
 /**
@@ -1208,9 +1208,9 @@ union GalleryExpandParams {
  */
 union StorageAccountType {
   string,
-  "Standard_LRS",
-  "Standard_ZRS",
-  "Premium_LRS",
+  Standard_LRS: "Standard_LRS",
+  Standard_ZRS: "Standard_ZRS",
+  Premium_LRS: "Premium_LRS",
 }
 
 /**
@@ -1218,9 +1218,9 @@ union StorageAccountType {
  */
 union ConfidentialVMEncryptionType {
   string,
-  "EncryptedVMGuestStateOnlyWithPmk",
-  "EncryptedWithPmk",
-  "EncryptedWithCmk",
+  EncryptedVMGuestStateOnlyWithPmk: "EncryptedVMGuestStateOnlyWithPmk",
+  EncryptedWithPmk: "EncryptedWithPmk",
+  EncryptedWithCmk: "EncryptedWithCmk",
 }
 
 /**
@@ -1228,8 +1228,8 @@ union ConfidentialVMEncryptionType {
  */
 union ReplicationMode {
   string,
-  "Full",
-  "Shallow",
+  Full: "Full",
+  Shallow: "Shallow",
 }
 
 /**
@@ -1237,8 +1237,8 @@ union ReplicationMode {
  */
 union GalleryExtendedLocationType {
   string,
-  "EdgeZone",
-  "Unknown",
+  EdgeZone: "EdgeZone",
+  Unknown: "Unknown",
 }
 
 /**
@@ -1246,10 +1246,10 @@ union GalleryExtendedLocationType {
  */
 union EdgeZoneStorageAccountType {
   string,
-  "Standard_LRS",
-  "Standard_ZRS",
-  "StandardSSD_LRS",
-  "Premium_LRS",
+  Standard_LRS: "Standard_LRS",
+  Standard_ZRS: "Standard_ZRS",
+  StandardSSD_LRS: "StandardSSD_LRS",
+  Premium_LRS: "Premium_LRS",
 }
 
 /**
@@ -1257,10 +1257,10 @@ union EdgeZoneStorageAccountType {
  */
 union PolicyViolationCategory {
   string,
-  "Other",
-  "ImageFlaggedUnsafe",
-  "CopyrightValidation",
-  "IpTheft",
+  Other: "Other",
+  ImageFlaggedUnsafe: "ImageFlaggedUnsafe",
+  CopyrightValidation: "CopyrightValidation",
+  IpTheft: "IpTheft",
 }
 
 /**
@@ -1268,10 +1268,10 @@ union PolicyViolationCategory {
  */
 union AggregatedReplicationState {
   string,
-  "Unknown",
-  "InProgress",
-  "Completed",
-  "Failed",
+  Unknown: "Unknown",
+  InProgress: "InProgress",
+  Completed: "Completed",
+  Failed: "Failed",
 }
 
 /**
@@ -1279,15 +1279,15 @@ union AggregatedReplicationState {
  */
 union ReplicationState {
   string,
-  "Unknown",
-  "Replicating",
-  "Completed",
-  "Failed",
+  Unknown: "Unknown",
+  Replicating: "Replicating",
+  Completed: "Completed",
+  Failed: "Failed",
 }
 
 union ReplicationStatusTypes {
   string,
-  "ReplicationStatus",
+  ReplicationStatus: "ReplicationStatus",
 }
 
 /**
@@ -1295,15 +1295,15 @@ union ReplicationStatusTypes {
  */
 union SharingUpdateOperationTypes {
   string,
-  "Add",
-  "Remove",
-  "Reset",
-  "EnableCommunity",
+  Add: "Add",
+  Remove: "Remove",
+  Reset: "Reset",
+  EnableCommunity: "EnableCommunity",
 }
 
 union SharedToValues {
   string,
-  "tenant",
+  tenant: "tenant",
 }
 
 /**
@@ -1311,9 +1311,9 @@ union SharedToValues {
  */
 union SharedGalleryHostCaching {
   string,
-  "None",
-  "ReadOnly",
-  "ReadWrite",
+  None: "None",
+  ReadOnly: "ReadOnly",
+  ReadWrite: "ReadWrite",
 }
 
 /**
@@ -1323,9 +1323,9 @@ union SharedGalleryHostCaching {
  */
 union CloudServiceUpgradeMode {
   string,
-  "Auto",
-  "Manual",
-  "Simultaneous",
+  Auto: "Auto",
+  Manual: "Manual",
+  Simultaneous: "Simultaneous",
 }
 
 /**
@@ -1335,8 +1335,8 @@ union CloudServiceUpgradeMode {
  */
 union CloudServiceSlotType {
   string,
-  "Production",
-  "Staging",
+  Production: "Production",
+  Staging: "Staging",
 }
 
 /**
@@ -1344,8 +1344,8 @@ union CloudServiceSlotType {
  */
 union AvailabilitySetSkuTypes {
   string,
-  "Classic",
-  "Aligned",
+  Classic: "Classic",
+  Aligned: "Aligned",
 }
 
 /**

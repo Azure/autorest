@@ -13,17 +13,17 @@ namespace AutoRestPagingTestService;
  */
 union OperationResultStatus {
   string,
-  "Succeeded",
-  "Failed",
-  "canceled",
-  "Accepted",
-  "Creating",
-  "Created",
-  "Updating",
-  "Updated",
-  "Deleting",
-  "Deleted",
-  "OK",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  canceled: "canceled",
+  Accepted: "Accepted",
+  Creating: "Creating",
+  Created: "Created",
+  Updating: "Updating",
+  Updated: "Updated",
+  Deleting: "Deleting",
+  Deleted: "Deleted",
+  OK: "OK",
 }
 
 model ProductResultValue is Azure.Core.Page<Product>;

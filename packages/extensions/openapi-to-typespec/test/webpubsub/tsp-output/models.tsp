@@ -8,8 +8,8 @@ namespace AzureWebPubSubServiceRESTAPI;
 
 union WebPubSubPermission {
   string,
-  "sendToGroup",
-  "joinLeaveGroup",
+  sendToGroup: "sendToGroup",
+  joinLeaveGroup: "joinLeaveGroup",
 }
 
 /**

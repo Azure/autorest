@@ -11,8 +11,8 @@ namespace QnAMakerRuntimeClient;
  */
 union StrictFiltersCompoundOperationType {
   string,
-  "AND",
-  "OR",
+  AND: "AND",
+  OR: "OR",
 }
 
 /**
@@ -20,20 +20,20 @@ union StrictFiltersCompoundOperationType {
  */
 union ErrorCodeType {
   string,
-  "BadArgument",
-  "Forbidden",
-  "NotFound",
-  "KbNotFound",
-  "Unauthorized",
-  "Unspecified",
-  "EndpointKeysError",
-  "QuotaExceeded",
-  "QnaRuntimeError",
-  "SKULimitExceeded",
-  "OperationNotFound",
-  "ServiceError",
-  "ValidationFailure",
-  "ExtractionFailure",
+  BadArgument: "BadArgument",
+  Forbidden: "Forbidden",
+  NotFound: "NotFound",
+  KbNotFound: "KbNotFound",
+  Unauthorized: "Unauthorized",
+  Unspecified: "Unspecified",
+  EndpointKeysError: "EndpointKeysError",
+  QuotaExceeded: "QuotaExceeded",
+  QnaRuntimeError: "QnaRuntimeError",
+  SKULimitExceeded: "SKULimitExceeded",
+  OperationNotFound: "OperationNotFound",
+  ServiceError: "ServiceError",
+  ValidationFailure: "ValidationFailure",
+  ExtractionFailure: "ExtractionFailure",
 }
 
 /**

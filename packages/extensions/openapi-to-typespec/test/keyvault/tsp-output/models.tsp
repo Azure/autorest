@@ -23,7 +23,7 @@ union DeletionRecoveryLevel {
    * accepting a Delete operation at the entity level or higher (vault, resource
    * group, subscription etc.)
    */
-  "Purgeable",
+  Purgeable: "Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -32,7 +32,7 @@ union DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  "Recoverable+Purgeable",
+  `Recoverable+Purgeable`: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -41,7 +41,7 @@ union DeletionRecoveryLevel {
    * while the subscription is still available. System wil permanently delete it
    * after 90 days, if not recovered
    */
-  "Recoverable",
+  Recoverable: "Recoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable within
@@ -49,7 +49,7 @@ union DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  "Recoverable+ProtectedSubscription",
+  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -58,7 +58,7 @@ union DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  "CustomizedRecoverable+Purgeable",
+  `CustomizedRecoverable+Purgeable`: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -67,7 +67,7 @@ union DeletionRecoveryLevel {
    * deleted entity during the retention interval and while the subscription is
    * still available.
    */
-  "CustomizedRecoverable",
+  CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable,
@@ -77,7 +77,7 @@ union DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  "CustomizedRecoverable+ProtectedSubscription",
+  `CustomizedRecoverable+ProtectedSubscription`: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
@@ -90,43 +90,43 @@ union JsonWebKeyType {
   /**
    * Elliptic Curve.
    */
-  "EC",
+  EC: "EC",
 
   /**
    * Elliptic Curve with a private key which is stored in the HSM.
    */
-  "EC-HSM",
+  `EC-HSM`: "EC-HSM",
 
   /**
    * RSA (https://tools.ietf.org/html/rfc3447)
    */
-  "RSA",
+  RSA: "RSA",
 
   /**
    * RSA with a private key which is stored in the HSM.
    */
-  "RSA-HSM",
+  `RSA-HSM`: "RSA-HSM",
 
   /**
    * Octet sequence (used to represent symmetric keys)
    */
-  "oct",
+  oct: "oct",
 
   /**
    * Octet sequence (used to represent symmetric keys) which is stored the HSM.
    */
-  "oct-HSM",
+  `oct-HSM`: "oct-HSM",
 
   /**
    * Octet key pair (https://tools.ietf.org/html/rfc8037)
    */
-  "OKP",
+  OKP: "OKP",
 
   /**
    * Octet key pair (https://tools.ietf.org/html/rfc8037) with a private key which
    * is stored in the HSM.
    */
-  "OKP-HSM",
+  `OKP-HSM`: "OKP-HSM",
 }
 
 /**
@@ -138,40 +138,40 @@ union JsonWebKeyCurveName {
   /**
    * The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.
    */
-  "P-256",
+  `P-256`: "P-256",
 
   /**
    * The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.
    */
-  "P-384",
+  `P-384`: "P-384",
 
   /**
    * The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.
    */
-  "P-521",
+  `P-521`: "P-521",
 
   /**
    * The SECG SECP256K1 elliptic curve.
    */
-  "P-256K",
+  `P-256K`: "P-256K",
 
   /**
    * The Ed25519 Edwards curve.
    */
-  "Ed25519",
+  Ed25519: "Ed25519",
 }
 
 union KeyUsageType {
   string,
-  "digitalSignature",
-  "nonRepudiation",
-  "keyEncipherment",
-  "dataEncipherment",
-  "keyAgreement",
-  "keyCertSign",
-  "cRLSign",
-  "encipherOnly",
-  "decipherOnly",
+  digitalSignature: "digitalSignature",
+  nonRepudiation: "nonRepudiation",
+  keyEncipherment: "keyEncipherment",
+  dataEncipherment: "dataEncipherment",
+  keyAgreement: "keyAgreement",
+  keyCertSign: "keyCertSign",
+  cRLSign: "cRLSign",
+  encipherOnly: "encipherOnly",
+  decipherOnly: "decipherOnly",
 }
 
 /**
@@ -179,14 +179,14 @@ union KeyUsageType {
  */
 union JsonWebKeyOperation {
   string,
-  "encrypt",
-  "decrypt",
-  "sign",
-  "verify",
-  "wrapKey",
-  "unwrapKey",
-  "import",
-  "export",
+  encrypt: "encrypt",
+  decrypt: "decrypt",
+  sign: "sign",
+  verify: "verify",
+  wrapKey: "wrapKey",
+  unwrapKey: "unwrapKey",
+  `import`: "import",
+  export: "export",
 }
 
 /**
@@ -194,21 +194,21 @@ union JsonWebKeyOperation {
  */
 union JsonWebKeyEncryptionAlgorithm {
   string,
-  "RSA-OAEP",
-  "RSA-OAEP-256",
-  "RSA1_5",
-  "A128GCM",
-  "A192GCM",
-  "A256GCM",
-  "A128KW",
-  "A192KW",
-  "A256KW",
-  "A128CBC",
-  "A192CBC",
-  "A256CBC",
-  "A128CBCPAD",
-  "A192CBCPAD",
-  "A256CBCPAD",
+  `RSA-OAEP`: "RSA-OAEP",
+  `RSA-OAEP-256`: "RSA-OAEP-256",
+  RSA1_5: "RSA1_5",
+  A128GCM: "A128GCM",
+  A192GCM: "A192GCM",
+  A256GCM: "A256GCM",
+  A128KW: "A128KW",
+  A192KW: "A192KW",
+  A256KW: "A256KW",
+  A128CBC: "A128CBC",
+  A192CBC: "A192CBC",
+  A256CBC: "A256CBC",
+  A128CBCPAD: "A128CBCPAD",
+  A192CBCPAD: "A192CBCPAD",
+  A256CBCPAD: "A256CBCPAD",
 }
 
 /**
@@ -222,72 +222,72 @@ union JsonWebKeySignatureAlgorithm {
    * RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "PS256",
+  PS256: "PS256",
 
   /**
    * RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "PS384",
+  PS384: "PS384",
 
   /**
    * RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "PS512",
+  PS512: "PS512",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "RS256",
+  RS256: "RS256",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "RS384",
+  RS384: "RS384",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "RS512",
+  RS512: "RS512",
 
   /**
    * Reserved
    */
-  "RSNULL",
+  RSNULL: "RSNULL",
 
   /**
    * ECDSA using P-256 and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518.
    */
-  "ES256",
+  ES256: "ES256",
 
   /**
    * ECDSA using P-384 and SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "ES384",
+  ES384: "ES384",
 
   /**
    * ECDSA using P-521 and SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "ES512",
+  ES512: "ES512",
 
   /**
    * ECDSA using P-256K and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  "ES256K",
+  ES256K: "ES256K",
 
   /**
    * Edwards-Curve Digital Signature Algorithm, as described in
    * https://tools.ietf.org/html/rfc8032.
    */
-  "EdDSA",
+  EdDSA: "EdDSA",
 }
 
 /**
@@ -295,9 +295,9 @@ union JsonWebKeySignatureAlgorithm {
  */
 union KeyEncryptionAlgorithm {
   string,
-  "CKM_RSA_AES_KEY_WRAP",
-  "RSA_AES_KEY_WRAP_256",
-  "RSA_AES_KEY_WRAP_384",
+  CKM_RSA_AES_KEY_WRAP: "CKM_RSA_AES_KEY_WRAP",
+  RSA_AES_KEY_WRAP_256: "RSA_AES_KEY_WRAP_256",
+  RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
 }
 
 /**
@@ -305,7 +305,7 @@ union KeyEncryptionAlgorithm {
  */
 union RoleDefinitionType {
   string,
-  "Microsoft.Authorization/roleDefinitions",
+  `Microsoft.Authorization/roleDefinitions`: "Microsoft.Authorization/roleDefinitions",
 }
 
 /**
@@ -322,7 +322,7 @@ union RoleType {
   /**
    * Custom role.
    */
-  "CustomRole",
+  CustomRole: "CustomRole",
 }
 
 /**
@@ -524,7 +524,7 @@ union RoleScope {
  */
 union SettingTypeEnum {
   string,
-  "boolean",
+  boolean: "boolean",
 }
 
 /**
@@ -532,8 +532,8 @@ union SettingTypeEnum {
  */
 union SasTokenType {
   string,
-  "account",
-  "service",
+  account: "account",
+  service: "service",
 }
 
 /**

@@ -12,24 +12,24 @@ namespace MicrosoftCognitiveLanguageServiceQuestionAnsweringAuthoring;
  */
 union ErrorCode {
   string,
-  "InvalidRequest",
-  "InvalidArgument",
-  "Unauthorized",
-  "Forbidden",
-  "NotFound",
-  "ProjectNotFound",
-  "OperationNotFound",
-  "AzureCognitiveSearchNotFound",
-  "AzureCognitiveSearchIndexNotFound",
-  "TooManyRequests",
-  "AzureCognitiveSearchThrottling",
-  "AzureCognitiveSearchIndexLimitReached",
-  "InternalServerError",
-  "ServiceUnavailable",
-  "Timeout",
-  "QuotaExceeded",
-  "Conflict",
-  "Warning",
+  InvalidRequest: "InvalidRequest",
+  InvalidArgument: "InvalidArgument",
+  Unauthorized: "Unauthorized",
+  Forbidden: "Forbidden",
+  NotFound: "NotFound",
+  ProjectNotFound: "ProjectNotFound",
+  OperationNotFound: "OperationNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+  TooManyRequests: "TooManyRequests",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+  InternalServerError: "InternalServerError",
+  ServiceUnavailable: "ServiceUnavailable",
+  Timeout: "Timeout",
+  QuotaExceeded: "QuotaExceeded",
+  Conflict: "Conflict",
+  Warning: "Warning",
 }
 
 /**
@@ -37,20 +37,20 @@ union ErrorCode {
  */
 union InnerErrorCode {
   string,
-  "InvalidRequest",
-  "InvalidParameterValue",
-  "KnowledgeBaseNotFound",
-  "AzureCognitiveSearchNotFound",
-  "AzureCognitiveSearchThrottling",
-  "ExtractionFailure",
-  "InvalidRequestBodyFormat",
-  "EmptyRequest",
-  "MissingInputDocuments",
-  "InvalidDocument",
-  "ModelVersionIncorrect",
-  "InvalidDocumentBatch",
-  "UnsupportedLanguageCode",
-  "InvalidCountryHint",
+  InvalidRequest: "InvalidRequest",
+  InvalidParameterValue: "InvalidParameterValue",
+  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  ExtractionFailure: "ExtractionFailure",
+  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+  EmptyRequest: "EmptyRequest",
+  MissingInputDocuments: "MissingInputDocuments",
+  InvalidDocument: "InvalidDocument",
+  ModelVersionIncorrect: "ModelVersionIncorrect",
+  InvalidDocumentBatch: "InvalidDocumentBatch",
+  UnsupportedLanguageCode: "UnsupportedLanguageCode",
+  InvalidCountryHint: "InvalidCountryHint",
 }
 
 /**
@@ -58,13 +58,13 @@ union InnerErrorCode {
  */
 union JobStatus {
   string,
-  "notStarted",
-  "running",
-  "succeeded",
-  "failed",
-  "cancelled",
-  "cancelling",
-  "partiallyCompleted",
+  notStarted: "notStarted",
+  running: "running",
+  succeeded: "succeeded",
+  failed: "failed",
+  cancelled: "cancelled",
+  cancelling: "cancelling",
+  partiallyCompleted: "partiallyCompleted",
 }
 
 union Format {
@@ -73,25 +73,25 @@ union Format {
   /**
    * Export or Import QnA assets in JSON format.
    */
-  "json",
+  json: "json",
 
   /**
    * Export or Import knowledge base replica including all assets and metadata in
    * Excel format.
    */
-  "tsv",
+  tsv: "tsv",
 
   /**
    * Export or Import knowledge base replica including all assets and metadata in
    * Tsv format.
    */
-  "excel",
+  excel: "excel",
 }
 
 union AssetKind {
   string,
-  "qnas",
-  "synonyms",
+  qnas: "qnas",
+  synonyms: "synonyms",
 }
 
 /**
@@ -99,8 +99,8 @@ union AssetKind {
  */
 union SourceKind {
   string,
-  "file",
-  "url",
+  file: "file",
+  url: "url",
 }
 
 /**
@@ -108,7 +108,7 @@ union SourceKind {
  */
 union SourceContentStructureKind {
   string,
-  "unstructured",
+  unstructured: "unstructured",
 }
 
 /**
@@ -116,9 +116,9 @@ union SourceContentStructureKind {
  */
 union UpdateOperationKind {
   string,
-  "add",
-  "delete",
-  "replace",
+  add: "add",
+  delete: "delete",
+  replace: "replace",
 }
 
 /**
