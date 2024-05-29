@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "accountName": "sto2220",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res418",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "keys": [
+          {
+            "keyName": "key1",
+            "permissions": "Full",
+            "value": "<value>"
+          },
+          {
+            "keyName": "key2",
+            "permissions": "Full",
+            "value": "<value>"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "StorageAccounts_ListKeys",
+  "title": "StorageAccountListKeys"
+}

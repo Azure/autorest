@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,13 @@ namespace Azure.ResourceManager.Authorization;
  * Provider Operations metadata
  */
 @tenantResource
-model ProviderOperationsMetadata is ProxyResource<{}> {
-  /**
-   * The namespace of the resource provider.
-   */
-  @path
-  @key("resourceProviderNamespace")
-  @segment("providerOperations")
-  @visibility("read")
-  name: string;
+model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
+  ...ResourceNameParameter<
+    Resource = ProviderOperationsMetadata,
+    KeyName = "resourceProviderNamespace",
+    SegmentName = "providerOperations",
+    NamePattern = ""
+  >;
 
   /**
    * The provider display name.
@@ -50,7 +47,7 @@ interface ProviderOperationsMetadataOperationGroup {
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.
@@ -68,7 +65,7 @@ interface ProviderOperationsMetadataOperationGroup {
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Specifies whether to expand the values.
@@ -78,3 +75,7 @@ interface ProviderOperationsMetadataOperationGroup {
     }
   >;
 }
+
+@@doc(ProviderOperationsMetadata.name,
+  "The namespace of the resource provider."
+);

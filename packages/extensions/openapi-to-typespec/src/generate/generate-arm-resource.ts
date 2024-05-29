@@ -5,9 +5,10 @@ import pluralize from "pluralize";
 import { getArmCommonTypeVersion } from "../autorest-session";
 import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
-import { generateDecorators } from "../utils/decorators";
+import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
+import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation } from "./generate-operations";
 
 export function generateArmResource(resource: TspArmResource): string {
@@ -20,6 +21,10 @@ export function generateArmResource(resource: TspArmResource): string {
   definitions.push(generateArmResourceOperation(resource));
 
   definitions.push("\n");
+
+  for (const a of resource.augmentDecorators ?? []) {
+    definitions.push(generateAugmentedDecorators(a.target!, [a]));
+  }
 
   for (const o of resource.resourceOperations) {
     for (const d of o.customizations ?? []) {
@@ -50,7 +55,7 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   if (resource.locationParent) {
-    definitions.push(`@parentResource("${resource.locationParent}")`);
+    definitions.push(`@parentResource(${resource.locationParent})`);
   }
 
   if (
@@ -61,8 +66,13 @@ function generateArmResourceModel(resource: TspArmResource): string {
       resource.propertiesPropertyVisibility.includes("read") &&
       resource.propertiesPropertyVisibility.includes("create"))
   ) {
-    definitions.push(`model ${resource.name} is ${resource.resourceKind}<${resource.propertiesModelName}> {`);
+    definitions.push(
+      `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}> {`,
+    );
 
+    if (resource.keyExpression) {
+      definitions.push(`${resource.keyExpression}`);
+    }
     definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
   } else {
     definitions.push(
@@ -81,9 +91,12 @@ function generateArmResourceModel(resource: TspArmResource): string {
       }
     } else {
       definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
-      definitions.push(`model ${resource.name} extends ${resource.resourceKind}Base {`);
+      definitions.push(`model ${resource.name} extends Foundations.${resource.resourceKind} {`);
     }
 
+    if (resource.keyExpression) {
+      definitions.push(`${resource.keyExpression}`);
+    }
     definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
 
     const propertyDoc = generateDocs({ doc: resource.propertiesPropertyDescription });
@@ -133,6 +146,9 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
       definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);
+    }
+    if (isFullCompatible && operation.suppressions) {
+      definitions.push(...generateSuppressions(operation.suppressions));
     }
     if (operation.kind === "ArmResourceExists") {
       definitions.push(`op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`);

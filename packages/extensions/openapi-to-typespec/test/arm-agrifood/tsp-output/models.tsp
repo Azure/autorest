@@ -122,7 +122,7 @@ model Resource {
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility("read")
-  id?: ResourceIdentifier;
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
@@ -443,6 +443,7 @@ model DataManagerForAgricultureUpdateRequestModel {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -508,6 +509,7 @@ model ExtensionInstallationRequest {
   /**
    * Additional Api Properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   additionalApiProperties?: Record<ApiProperties>;
 }
 
@@ -561,6 +563,7 @@ model ExtensionProperties {
   /**
    * Additional Api Properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read")
   additionalApiProperties?: Record<ApiProperties>;
 }
@@ -590,7 +593,9 @@ model PrivateLinkResourceProperties {
 /**
  * Solution resource properties.
  */
-model SolutionProperties extends Record<unknown> {
+model SolutionProperties {
+  ...Record<unknown>;
+
   /**
    * Partner Id of the Solution.
    */
@@ -667,6 +672,7 @@ model DataManagerForAgricultureSolutionProperties {
   /**
    * Gets api-version Swagger Document Dictionary to capture all api-versions of swagger exposed by partner to Data Manager For Agriculture.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility("read")
   openApiSpecsDictionary?: Record<unknown>;
 

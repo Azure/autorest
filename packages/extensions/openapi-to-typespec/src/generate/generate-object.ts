@@ -18,8 +18,6 @@ export function generateObject(typespecObject: TypespecObject) {
   if (typespecObject.extendedParents?.length) {
     const firstParent = typespecObject.extendedParents[0];
     definitions.push(`model ${typespecObject.name} extends ${firstParent} {`);
-  } else if (typespecObject.spreadParents && typespecObject.spreadParents.length === 1) {
-    definitions.push(`model ${typespecObject.name} extends ${typespecObject.spreadParents[0]} {`);
   } else if (typespecObject.alias) {
     const { alias, params } = typespecObject.alias;
 
@@ -29,10 +27,8 @@ export function generateObject(typespecObject: TypespecObject) {
   }
 
   if (typespecObject.spreadParents?.length) {
-    if (typespecObject.extendedParents?.length || typespecObject.spreadParents.length > 1) {
-      for (const parent of typespecObject.spreadParents) {
-        definitions.push(`...${parent};`);
-      }
+    for (const parent of typespecObject.spreadParents) {
+      definitions.push(`...${parent};`);
     }
   }
 

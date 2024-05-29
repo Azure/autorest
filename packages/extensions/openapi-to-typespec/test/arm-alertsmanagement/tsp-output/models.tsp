@@ -328,6 +328,7 @@ model ManagedResource extends Resource {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -402,6 +403,7 @@ model PatchObject {
   /**
    * Tags to be updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 

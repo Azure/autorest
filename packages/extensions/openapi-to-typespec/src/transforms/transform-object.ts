@@ -33,6 +33,7 @@ import {
   isSealedChoiceSchema,
   isStringSchema,
 } from "../utils/schemas";
+import { getSuppressionsForRecordProperty } from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
 
 const typespecTypes = new Map<string, string>([
@@ -85,14 +86,15 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     discriminatorProperty && properties.push(discriminatorProperty);
   }
 
+  const [extendedParents, spreadParents] = getExtendedAndSpreadParents(schema, codeModel);
   const updatedVisited: TypespecObject = {
     name,
     doc,
     kind: "object",
     properties,
     parents: getParents(schema),
-    extendedParents: getExtendedParents(schema),
-    spreadParents: getSpreadParents(schema, codeModel),
+    extendedParents,
+    spreadParents,
     decorators: getModelDecorators(schema),
     clientDecorators: getModelClientDecorators(schema),
   };
@@ -153,6 +155,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     clientDecorators: getPropertyClientDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
     defaultValue: getDefaultValue(type, propertySchema.schema),
+    suppressions: isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined,
   };
 }
 
@@ -173,37 +176,48 @@ function getParents(schema: ObjectSchema): string[] {
     .map((p) => p.language.default.name);
 }
 
-function getExtendedParents(schema: ObjectSchema): string[] {
+function getExtendedAndSpreadParents(
+  schema: ObjectSchema,
+  codeModel: CodeModel,
+): [extendedParents: string[], spreadParents: string[]] {
+  // If there is a discriminative parent: extendedParents = [this discriminative parent], spreadParents = [all the other parents]
+  // Else if only one parent which is not dictionary: extendedParents = [this parent], spreadParents = []
+  // Else if only one parent which is dictionary: extendedParents = [], spreadParents = [Record<elementType>]
+  // Else: extendedParents = [], spreadParents = [all the parents]
   const immediateParents = schema.parents?.immediate ?? [];
-  return immediateParents
-    .filter((p) => p.language.default.name !== schema.language.default.name)
-    .filter((p) => getOwnDiscriminator(p as ObjectSchema))
-    .map((p) => p.language.default.name);
-}
 
-function getSpreadParents(schema: ObjectSchema, codeModel: CodeModel): string[] {
-  const immediateParents = schema.parents?.immediate ?? [];
-  const spreadingParents = immediateParents
-    .filter((p) => p.language.default.name !== schema.language.default.name)
-    .filter((p) => !isDictionarySchema(p))
-    .filter((p) => !getOwnDiscriminator(p as ObjectSchema))
-    .map((p) => p.language.default.name);
-
-  const dictionaryParent = immediateParents.find((p) => isDictionarySchema(p)) as DictionarySchema | undefined;
-  if (dictionaryParent) {
-    spreadingParents.push(`Record<${getTypespecType(dictionaryParent.elementType, codeModel)}>`);
+  const discriminativeParent = immediateParents.find((p) => getOwnDiscriminator(p as ObjectSchema));
+  if (discriminativeParent) {
+    return [
+      [discriminativeParent.language.default.name],
+      immediateParents
+        .filter((p) => p !== discriminativeParent)
+        .map((p) =>
+          isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
+        ),
+    ];
   }
-  return spreadingParents;
+
+  if (immediateParents.length === 1 && !isDictionarySchema(immediateParents[0])) {
+    return [[immediateParents[0].language.default.name], []];
+  }
+
+  return [
+    [],
+    immediateParents.map((p) =>
+      isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
+    ),
+  ];
 }
 
 function getArmIdType(schema: Schema): string {
   const allowedResources = schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"];
   if (allowedResources) {
-    return `ResourceIdentifier<[${schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"]
+    return `Azure.Core.armResourceIdentifier<[${schema.extensions?.["x-ms-arm-id-details"]?.["allowedResources"]
       .map((r: { [x: string]: string }) => '{type: "' + r["type"] + '";}')
       .join(",")}]>`;
   } else {
-    return "ResourceIdentifier";
+    return "Azure.Core.armResourceIdentifier";
   }
 }
 

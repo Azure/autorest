@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(Workspace)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LabelingJobProperties)
-model LabelingJob extends ProxyResourceBase {
-  /**
-   * The name and identifier for the LabelingJob.
-   */
-  @path
-  @key("id")
-  @segment("labelingJobs")
-  @visibility("read")
-  name: string;
+model LabelingJob extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = LabelingJob,
+    KeyName = "id",
+    SegmentName = "labelingJobs",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -45,7 +42,7 @@ interface LabelingJobs {
   get is ArmResourceRead<
     LabelingJob,
     {
-      ...BaseParameters<LabelingJob>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
 
       /**
        * Boolean value to indicate whether to include JobInstructions in response.
@@ -69,6 +66,7 @@ interface LabelingJobs {
   /**
    * Delete a labeling job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<LabelingJob>;
 
   /**
@@ -79,7 +77,7 @@ interface LabelingJobs {
   list is ArmResourceListByParent<
     LabelingJob,
     {
-      ...BaseParameters<LabelingJob>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
 
       /**
        * Continuation token for pagination.
@@ -115,7 +113,11 @@ interface LabelingJobs {
   resume is ArmResourceActionAsync<LabelingJob, void, void>;
 }
 
-@@encodedName(LabelingJobs.createOrUpdate::parameters.resource, "json", "body");
+@@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");
+@@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
+  "application/json",
+  "body"
+);
 @@extension(LabelingJobs.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "body"

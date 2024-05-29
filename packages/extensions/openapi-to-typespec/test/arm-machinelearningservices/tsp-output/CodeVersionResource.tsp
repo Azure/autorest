@@ -7,7 +7,6 @@ import "./CodeContainerResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @parentResource(CodeContainerResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(CodeVersion)
-model CodeVersionResource extends ProxyResourceBase {
-  /**
-   * Version identifier.
-   */
-  @path
-  @key("version")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+model CodeVersionResource extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = CodeVersionResource,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -57,6 +54,9 @@ interface CodeVersionResources {
    * Delete version.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("RegistryCodeVersions_Delete")
   delete is ArmResourceDeleteAsync<CodeVersionResource>;
 
@@ -68,7 +68,7 @@ interface CodeVersionResources {
   list is ArmResourceListByParent<
     CodeVersionResource,
     {
-      ...BaseParameters<CodeVersionResource>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CodeVersionResource>;
 
       /**
        * Ordering of list.
@@ -102,8 +102,9 @@ interface CodeVersionResources {
   >;
 }
 
+@@doc(CodeVersionResource.name, "Version identifier.");
 @@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(CodeVersionResources.createOrUpdate::parameters.resource,

@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "apiProperties": {
+        "examples-api": {
+          "apiFreshnessTimeInMinutes": 3600
+        }
+      },
+      "extensionVersion": "1.0"
+    },
+    "dataManagerForAgricultureResourceName": "examples-dataManagerForAgricultureResourceName",
+    "extensionId": "provider.extension",
+    "resourceGroupName": "examples-rg",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "provider.extension",
+        "type": "Microsoft.AgFoodPlatform/farmBeats/extensions",
+        "eTag": "7200b954-0000-0700-0000-603cbbc40000",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeats/examples-dataManagerForAgricultureResourceName/extensions/provider.extension",
+        "properties": {
+          "additionalApiProperties": {
+            "examples-api": {
+              "apiFreshnessTimeInMinutes": 3600
+            }
+          },
+          "extensionApiDocsLink": "https://docs.provider.com/documentation/extension",
+          "extensionAuthLink": "https://www.provider.com/extension/",
+          "extensionCategory": "Weather",
+          "installedExtensionVersion": "1.0"
+        },
+        "systemData": {
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-01T01:01:02.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Extensions_CreateOrUpdate",
+  "title": "Extensions_CreateOrUpdate"
+}

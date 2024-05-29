@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "accountName": "sto2527",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "{subscription-id}",
+    "username": "user1"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "LocalUsers_Delete",
+  "title": "DeleteLocalUser"
+}

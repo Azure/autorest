@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,16 +13,13 @@ namespace Microsoft.AzureSphere;
 /**
  * An Azure Sphere catalog
  */
-model Catalog is TrackedResource<CatalogProperties> {
-  /**
-   * Name of catalog
-   */
-  @pattern("^[A-Za-z0-9_-]{1,50}$")
-  @path
-  @key("catalogName")
-  @segment("catalogs")
-  @visibility("read")
-  name: string;
+model Catalog is Azure.ResourceManager.TrackedResource<CatalogProperties> {
+  ...ResourceNameParameter<
+    Resource = Catalog,
+    KeyName = "catalogName",
+    SegmentName = "catalogs",
+    NamePattern = "^[A-Za-z0-9_-]{1,50}$"
+  >;
 }
 
 @armResourceOperations
@@ -41,7 +37,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   /**
@@ -52,8 +48,6 @@ interface Catalogs {
   /**
    * List Catalog resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Catalog>;
 
   /**
@@ -74,7 +68,7 @@ interface Catalogs {
     void,
     ResourceListResult<Deployment>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -110,7 +104,7 @@ interface Catalogs {
     ListDeviceGroupsRequest,
     ResourceListResult<DeviceGroup>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -146,7 +140,7 @@ interface Catalogs {
     void,
     PagedDeviceInsight,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -182,7 +176,7 @@ interface Catalogs {
     void,
     ResourceListResult<Device>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
 
       /**
        * Filter the result list using the given expression
@@ -211,14 +205,7 @@ interface Catalogs {
   >;
 }
 
-@@encodedName(Catalogs.listDeviceGroups::parameters.body,
-  "json",
-  "listDeviceGroupsRequest"
-);
-@@extension(Catalogs.listDeviceGroups::parameters.body,
-  "x-ms-client-name",
-  "listDeviceGroupsRequest"
-);
+@@doc(Catalog.name, "Name of catalog");
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );

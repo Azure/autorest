@@ -7,7 +7,6 @@ import "./GalleryApplication.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(GalleryApplication)
 @includeInapplicableMetadataInPayload(false)
 model GalleryApplicationVersion extends Resource {
-  /**
-   * The name of the gallery Application Version to be retrieved.
-   */
-  @path
-  @key("galleryApplicationVersionName")
-  @segment("versions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = GalleryApplicationVersion,
+    KeyName = "galleryApplicationVersionName",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image version.
@@ -44,7 +41,7 @@ interface GalleryApplicationVersions {
   get is ArmResourceRead<
     GalleryApplicationVersion,
     {
-      ...BaseParameters<GalleryApplicationVersion>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryApplicationVersion>;
 
       /**
        * The expand expression to apply on the operation.
@@ -62,7 +59,7 @@ interface GalleryApplicationVersions {
   /**
    * Update a gallery Application Version.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     GalleryApplicationVersion,
     GalleryApplicationVersionUpdate
@@ -71,6 +68,9 @@ interface GalleryApplicationVersions {
   /**
    * Delete a gallery Application Version.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<GalleryApplicationVersion>;
 
   /**
@@ -81,8 +81,11 @@ interface GalleryApplicationVersions {
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
 
+@@doc(GalleryApplicationVersion.name,
+  "The name of the gallery Application Version to be retrieved."
+);
 @@encodedName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "galleryApplicationVersion"
 );
 @@extension(GalleryApplicationVersions.createOrUpdate::parameters.resource,
@@ -93,7 +96,7 @@ interface GalleryApplicationVersions {
   "Parameters supplied to the create or update gallery Application Version operation."
 );
 @@encodedName(GalleryApplicationVersions.update::parameters.properties,
-  "json",
+  "application/json",
   "galleryApplicationVersion"
 );
 @@extension(GalleryApplicationVersions.update::parameters.properties,

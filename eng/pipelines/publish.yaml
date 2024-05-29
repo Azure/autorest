@@ -10,6 +10,8 @@ trigger:
 extends:
   template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
+    authenticatedContainerRegistries:
+      - serviceConnection: azsdkengsys
     stages:
       - stage: npm
         pool:

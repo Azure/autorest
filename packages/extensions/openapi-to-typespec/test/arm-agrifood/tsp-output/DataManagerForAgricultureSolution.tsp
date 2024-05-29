@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -21,16 +20,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @Azure.ResourceManager.Private.armResourceInternal(
   DataManagerForAgricultureSolutionProperties
 )
-model DataManagerForAgricultureSolution extends ProxyResourceBase {
-  /**
-   * dataManagerForAgricultureSolutionId to be queried.
-   */
-  @pattern("^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$")
-  @path
-  @key("dataManagerForAgricultureSolutionId")
-  @segment("farmBeatsSolutionDefinitions")
-  @visibility("read")
-  name: string;
+model DataManagerForAgricultureSolution extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataManagerForAgricultureSolution,
+    KeyName = "dataManagerForAgricultureSolutionId",
+    SegmentName = "farmBeatsSolutionDefinitions",
+    NamePattern = "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+  >;
 
   /**
    * DataManagerForAgricultureSolution properties.
@@ -56,7 +52,7 @@ interface DataManagerForAgricultureSolutions {
   list is ArmResourceListByParent<
     DataManagerForAgricultureSolution,
     {
-      ...TenantBaseParameters;
+      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
 
       /**
        * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.
@@ -87,3 +83,7 @@ interface DataManagerForAgricultureSolutions {
     }
   >;
 }
+
+@@doc(DataManagerForAgricultureSolution.name,
+  "dataManagerForAgricultureSolutionId to be queried."
+);

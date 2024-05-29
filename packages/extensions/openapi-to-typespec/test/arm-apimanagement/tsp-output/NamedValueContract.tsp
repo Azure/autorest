@@ -7,7 +7,6 @@ import "./ApiManagementServiceResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,18 +14,24 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * NamedValue details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-model NamedValueContract is ProxyResource<NamedValueContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
+model NamedValueContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = NamedValueContract,
+    KeyName = "namedValueId",
+    SegmentName = "namedValues",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
+
   /**
-   * Identifier of the NamedValue.
+   * NamedValue entity contract properties.
    */
-  @maxLength(256)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("namedValueId")
-  @segment("namedValues")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: NamedValueContractProperties;
 }
 
 @armResourceOperations
@@ -34,12 +39,16 @@ interface NamedValueContracts {
   /**
    * Gets the details of the named value specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NamedValue_Get")
   get is ArmResourceRead<NamedValueContract>;
 
   /**
    * Gets the entity state (Etag) version of the named value specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("NamedValue_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       NamedValueContract,
@@ -50,10 +59,12 @@ interface NamedValueContracts {
   /**
    * Creates or updates named value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NamedValue_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -66,12 +77,14 @@ interface NamedValueContracts {
   /**
    * Updates the specific named value.
    */
-  @parameterVisibility("read")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility
+  @operationId("NamedValue_Update")
   update is ArmCustomPatchAsync<
     NamedValueContract,
     NamedValueUpdateParameters,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -84,10 +97,13 @@ interface NamedValueContracts {
   /**
    * Deletes specific named value from the API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("NamedValue_Delete")
   delete is ArmResourceDeleteSync<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -100,10 +116,12 @@ interface NamedValueContracts {
   /**
    * Lists a collection of named values defined within a service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NamedValue_ListByService")
   listByService is ArmResourceListByParent<
     NamedValueContract,
     {
-      ...BaseParameters<NamedValueContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<NamedValueContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| tags | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -135,6 +153,8 @@ interface NamedValueContracts {
   /**
    * Gets the secret of the named value specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NamedValue_ListValue")
   listValue is ArmResourceActionSync<
     NamedValueContract,
     void,
@@ -144,6 +164,8 @@ interface NamedValueContracts {
   /**
    * Refresh the secret of the named value specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NamedValue_RefreshSecret")
   refreshSecret is ArmResourceActionAsync<
     NamedValueContract,
     void,
@@ -151,7 +173,25 @@ interface NamedValueContracts {
   >;
 }
 
+@@maxLength(NamedValueContract.name, 256);
+@@doc(NamedValueContract.name, "Identifier of the NamedValue.");
+@@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(NamedValueContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(NamedValueContracts.createOrUpdate::parameters.resource,
   "Create parameters."
+);
+@@encodedName(NamedValueContracts.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@extension(NamedValueContracts.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(NamedValueContracts.update::parameters.properties, "Update parameters.");

@@ -7,7 +7,6 @@ import "./Product.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,14 @@ namespace Microsoft.AzureSphere;
  * An device group resource belonging to a product resource.
  */
 @parentResource(Product)
-model DeviceGroup is ProxyResource<DeviceGroupProperties> {
-  /**
-   * Name of device group.
-   */
-  @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$")
-  @path
-  @key("deviceGroupName")
-  @segment("deviceGroups")
-  @visibility("read")
-  name: string;
+model DeviceGroup
+  is Azure.ResourceManager.ProxyResource<DeviceGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = DeviceGroup,
+    KeyName = "deviceGroupName",
+    SegmentName = "deviceGroups",
+    NamePattern = "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +40,7 @@ interface DeviceGroups {
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
 
   /**
@@ -54,12 +51,10 @@ interface DeviceGroups {
   /**
    * List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DeviceGroups_ListByProduct")
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {
-      ...BaseParameters<DeviceGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DeviceGroup>;
 
       /**
        * Filter the result list using the given expression
@@ -101,14 +96,7 @@ interface DeviceGroups {
   countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
 
-@@encodedName(DeviceGroups.claimDevices::parameters.body,
-  "json",
-  "claimDevicesRequest"
-);
-@@extension(DeviceGroups.claimDevices::parameters.body,
-  "x-ms-client-name",
-  "claimDevicesRequest"
-);
+@@doc(DeviceGroup.name, "Name of device group.");
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );

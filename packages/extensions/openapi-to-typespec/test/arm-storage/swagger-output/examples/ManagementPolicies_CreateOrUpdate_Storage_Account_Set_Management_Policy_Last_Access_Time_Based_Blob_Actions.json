@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "accountName": "sto9699",
+    "api-version": "2022-09-01",
+    "managementPolicyName": "default",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "policy": {
+          "rules": [
+            {
+              "name": "olcmtest",
+              "type": "Lifecycle",
+              "definition": {
+                "actions": {
+                  "baseBlob": {
+                    "delete": {
+                      "daysAfterLastAccessTimeGreaterThan": 1000
+                    },
+                    "enableAutoTierToHotFromCool": true,
+                    "tierToArchive": {
+                      "daysAfterLastAccessTimeGreaterThan": 90
+                    },
+                    "tierToCool": {
+                      "daysAfterLastAccessTimeGreaterThan": 30
+                    }
+                  },
+                  "snapshot": {
+                    "delete": {
+                      "daysAfterCreationGreaterThan": 30
+                    }
+                  }
+                },
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob"
+                  ],
+                  "prefixMatch": [
+                    "olcmtestcontainer"
+                  ]
+                }
+              },
+              "enabled": true
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DefaultManagementPolicy",
+        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
+        "properties": {
+          "lastModifiedTime": "2018-06-08T02:53:39.0932539Z",
+          "policy": {
+            "rules": [
+              {
+                "name": "olcmtest",
+                "type": "Lifecycle",
+                "definition": {
+                  "actions": {
+                    "baseBlob": {
+                      "delete": {
+                        "daysAfterLastAccessTimeGreaterThan": 1000
+                      },
+                      "enableAutoTierToHotFromCool": true,
+                      "tierToArchive": {
+                        "daysAfterLastAccessTimeGreaterThan": 90
+                      },
+                      "tierToCool": {
+                        "daysAfterLastAccessTimeGreaterThan": 30
+                      }
+                    },
+                    "snapshot": {
+                      "delete": {
+                        "daysAfterCreationGreaterThan": 30
+                      }
+                    }
+                  },
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer"
+                    ]
+                  }
+                },
+                "enabled": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagementPolicies_CreateOrUpdate",
+  "title": "StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions"
+}

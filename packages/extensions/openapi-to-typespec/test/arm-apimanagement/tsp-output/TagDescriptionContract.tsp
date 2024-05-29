@@ -7,7 +7,6 @@ import "./ApiContract.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,20 +14,26 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Contract details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-model TagDescriptionContract
-  is ProxyResource<TagDescriptionContractProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(
+  TagDescriptionContractProperties
+)
+model TagDescriptionContract extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = TagDescriptionContract,
+    KeyName = "tagDescriptionId",
+    SegmentName = "tagDescriptions",
+    NamePattern = "^[^*#&+:<>?]+$"
+  >;
+
   /**
-   * Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names.
+   * TagDescription entity contract properties.
    */
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[^*#&+:<>?]+$")
-  @path
-  @key("tagDescriptionId")
-  @segment("tagDescriptions")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: TagDescriptionContractProperties;
 }
 
 @armResourceOperations
@@ -36,12 +41,16 @@ interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiTagDescription_Get")
   get is ArmResourceRead<TagDescriptionContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @head
+  @operationId("ApiTagDescription_GetEntityTag")
   getEntityTag(
     ...ResourceInstanceParameters<
       TagDescriptionContract,
@@ -52,10 +61,12 @@ interface TagDescriptionContracts {
   /**
    * Create/Update tag description in scope of the Api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiTagDescription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -68,10 +79,13 @@ interface TagDescriptionContracts {
   /**
    * Delete tag description for the Api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -84,10 +98,12 @@ interface TagDescriptionContracts {
   /**
    * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ApiTagDescription_ListByService")
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
     {
-      ...BaseParameters<TagDescriptionContract>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
 
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
@@ -111,6 +127,19 @@ interface TagDescriptionContracts {
   >;
 }
 
+@@maxLength(TagDescriptionContract.name, 80);
+@@minLength(TagDescriptionContract.name, 1);
+@@doc(TagDescriptionContract.name,
+  "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names."
+);
+@@encodedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@extension(TagDescriptionContracts.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
 @@doc(TagDescriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

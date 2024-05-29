@@ -1,0 +1,250 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "DTN.ContentServices",
+            "type": "Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions",
+            "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/DTN.ContentServices",
+            "properties": {
+              "detailedInformation": [
+                {
+                  "apiInputParameters": [
+                    "stationId",
+                    "lat",
+                    "lon",
+                    "days",
+                    "units",
+                    "precision",
+                    "sector"
+                  ],
+                  "apiName": "GetDailyObservations",
+                  "customParameters": [
+                    "stationId",
+                    "stationLatitude",
+                    "stationLongitude",
+                    "timeZone",
+                    "sunrise",
+                    "sunset",
+                    "weatherCode",
+                    "weatherDescription",
+                    "maxTemperature",
+                    "minTemperature",
+                    "avgHeatIndex",
+                    "maxHeatIndex",
+                    "minHeatIndex",
+                    "maxWindChill",
+                    "minWindChill",
+                    "maxFeelsLike",
+                    "minFeelsLike",
+                    "avgFeelsLike",
+                    "maxWindSpeed",
+                    "avgWetBulbGlobeTemp",
+                    "maxWetBulbGlobeTemp",
+                    "minWetBulbGlobeTemp",
+                    "minutesOfSunshine",
+                    "cornHeatUnit",
+                    "evapotranspiration"
+                  ],
+                  "platformParameters": [
+                    "cloudCover",
+                    "dewPoint",
+                    "growingDegreeDay",
+                    "precipitation",
+                    "pressure",
+                    "relativeHumidity",
+                    "temperature",
+                    "wetBulbTemperature",
+                    "dateTime",
+                    "windChill",
+                    "windSpeed",
+                    "windDirection"
+                  ],
+                  "unitsSupported": {
+                    "key": "units",
+                    "values": [
+                      "us",
+                      "si"
+                    ]
+                  }
+                },
+                {
+                  "apiInputParameters": [
+                    "stationId",
+                    "lat",
+                    "lon",
+                    "hours",
+                    "units",
+                    "precision",
+                    "sector"
+                  ],
+                  "apiName": "GetHourlyObservations",
+                  "customParameters": [
+                    "stationId",
+                    "stationLatitude",
+                    "stationLongitude",
+                    "timeZone",
+                    "weatherCode",
+                    "weatherDescription",
+                    "feelsLike",
+                    "visibilityWeatherCode",
+                    "visibilityWeatherDescription",
+                    "minutesOfSunshine"
+                  ],
+                  "platformParameters": [
+                    "cloudCover",
+                    "dewPoint",
+                    "precipitation",
+                    "pressure",
+                    "relativeHumidity",
+                    "temperature",
+                    "wetBulbTemperature",
+                    "dateTime",
+                    "visibility",
+                    "windChill",
+                    "windSpeed",
+                    "windDirection",
+                    "windGust"
+                  ],
+                  "unitsSupported": {
+                    "key": "units",
+                    "values": [
+                      "us",
+                      "si"
+                    ]
+                  }
+                },
+                {
+                  "apiInputParameters": [
+                    "stationId",
+                    "lat",
+                    "lon",
+                    "days",
+                    "units",
+                    "precision",
+                    "sector"
+                  ],
+                  "apiName": "GetHourlyForecasts",
+                  "customParameters": [
+                    "stationId",
+                    "stationLatitude",
+                    "stationLongitude",
+                    "timeZone",
+                    "weatherCode",
+                    "weatherDescription",
+                    "feelsLike",
+                    "visibilityWeatherCode",
+                    "visibilityWeatherDescription",
+                    "minutesOfSunshine"
+                  ],
+                  "platformParameters": [
+                    "cloudCover",
+                    "dewPoint",
+                    "precipitation",
+                    "pressure",
+                    "relativeHumidity",
+                    "temperature",
+                    "wetBulbTemperature",
+                    "dateTime",
+                    "visibility",
+                    "windChill",
+                    "windSpeed",
+                    "windDirection",
+                    "windGust"
+                  ],
+                  "unitsSupported": {
+                    "key": "units",
+                    "values": [
+                      "us",
+                      "si"
+                    ]
+                  }
+                },
+                {
+                  "apiInputParameters": [
+                    "stationId",
+                    "lat",
+                    "lon",
+                    "days",
+                    "units",
+                    "precision",
+                    "sector"
+                  ],
+                  "apiName": "GetDailyForecasts",
+                  "customParameters": [
+                    "stationId",
+                    "stationLatitude",
+                    "stationLongitude",
+                    "timeZone",
+                    "sunrise",
+                    "sunset",
+                    "weatherCode",
+                    "weatherDescription",
+                    "maxTemperature",
+                    "minTemperature",
+                    "avgHeatIndex",
+                    "maxHeatIndex",
+                    "minHeatIndex",
+                    "maxWindChill",
+                    "minWindChill",
+                    "maxFeelsLike",
+                    "minFeelsLike",
+                    "avgFeelsLike",
+                    "maxWindSpeed",
+                    "avgWetBulbGlobeTemp",
+                    "maxWetBulbGlobeTemp",
+                    "minWetBulbGlobeTemp",
+                    "minutesOfSunshine",
+                    "cornHeatUnit",
+                    "evapotranspiration"
+                  ],
+                  "platformParameters": [
+                    "cloudCover",
+                    "dewPoint",
+                    "growingDegreeDay",
+                    "precipitation",
+                    "pressure",
+                    "relativeHumidity",
+                    "temperature",
+                    "wetBulbTemperature",
+                    "dateTime",
+                    "windChill",
+                    "windSpeed",
+                    "windDirection"
+                  ],
+                  "unitsSupported": {
+                    "key": "units",
+                    "values": [
+                      "us",
+                      "si"
+                    ]
+                  }
+                }
+              ],
+              "extensionApiDocsLink": "https://cs-docs.dtn.com/api/weather-observations-and-forecasts-rest-api/",
+              "extensionAuthLink": "https://www.dtn.com/dtn-content-integration/",
+              "extensionCategory": "Weather",
+              "farmBeatsExtensionId": "DTN.ContentServices",
+              "farmBeatsExtensionName": "DTN",
+              "farmBeatsExtensionVersion": "1.0",
+              "publisherId": "dtn",
+              "targetResourceType": "FarmBeats"
+            },
+            "systemData": {
+              "createdAt": "2021-04-12T15:28:06Z",
+              "lastModifiedAt": "2021-04-12T15:30:01Z"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DataManagerForAgricultureExtensions_List",
+  "title": "DataManagerForAgricultureExtensions_List"
+}

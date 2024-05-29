@@ -7,7 +7,6 @@ import "./SharedGallery.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(SharedGallery)
 @includeInapplicableMetadataInPayload(false)
 model SharedGalleryImage extends PirSharedGalleryResource {
-  /**
-   * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
-   */
-  @path
-  @key("galleryImageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = SharedGalleryImage,
+    KeyName = "galleryImageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image definition.
@@ -51,7 +48,7 @@ interface SharedGalleryImages {
   list is ArmResourceListByParent<
     SharedGalleryImage,
     {
-      ...BaseParameters<SharedGalleryImage>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<SharedGalleryImage>;
 
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
@@ -61,3 +58,7 @@ interface SharedGalleryImages {
     }
   >;
 }
+
+@@doc(SharedGalleryImage.name,
+  "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
+);

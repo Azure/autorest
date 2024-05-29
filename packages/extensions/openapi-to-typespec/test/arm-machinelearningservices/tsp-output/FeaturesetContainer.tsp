@@ -7,7 +7,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -22,15 +21,13 @@ namespace Azure.ResourceManager.MachineLearning;
 @Azure.ResourceManager.Private.armResourceInternal(
   FeaturesetContainerProperties
 )
-model FeaturesetContainer extends ProxyResourceBase {
-  /**
-   * Container name. This is case-sensitive.
-   */
-  @path
-  @key("name")
-  @segment("featuresets")
-  @visibility("read")
-  name: string;
+model FeaturesetContainer extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = FeaturesetContainer,
+    KeyName = "name",
+    SegmentName = "featuresets",
+    NamePattern = ""
+  >;
 
   /**
    * [Required] Additional attributes of the entity.
@@ -54,6 +51,9 @@ interface FeaturesetContainers {
   /**
    * Delete container.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<FeaturesetContainer>;
 
   /**
@@ -64,7 +64,7 @@ interface FeaturesetContainers {
   list is ArmResourceListByParent<
     FeaturesetContainer,
     {
-      ...BaseParameters<FeaturesetContainer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetContainer>;
 
       /**
        * Continuation token for pagination.
@@ -105,8 +105,9 @@ interface FeaturesetContainers {
   >;
 }
 
+@@doc(FeaturesetContainer.name, "Container name. This is case-sensitive.");
 @@encodedName(FeaturesetContainers.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(FeaturesetContainers.createOrUpdate::parameters.resource,

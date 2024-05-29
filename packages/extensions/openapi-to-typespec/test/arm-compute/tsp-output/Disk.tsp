@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model Disk extends Resource {
-  /**
-   * The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-   */
-  @path
-  @key("diskName")
-  @segment("disks")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Disk,
+    KeyName = "diskName",
+    SegmentName = "disks",
+    NamePattern = ""
+  >;
 
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
@@ -76,12 +73,15 @@ interface Disks {
   /**
    * Updates (patches) a disk.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Disk, DiskUpdate>;
 
   /**
    * Deletes a disk.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<Disk>;
 
   /**
@@ -107,7 +107,13 @@ interface Disks {
   revokeAccess is ArmResourceActionAsync<Disk, void, void>;
 }
 
-@@encodedName(Disks.createOrUpdate::parameters.resource, "json", "disk");
+@@doc(Disk.name,
+  "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
+);
+@@encodedName(Disks.createOrUpdate::parameters.resource,
+  "application/json",
+  "disk"
+);
 @@extension(Disks.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "disk"
@@ -115,12 +121,15 @@ interface Disks {
 @@doc(Disks.createOrUpdate::parameters.resource,
   "Disk object supplied in the body of the Put disk operation."
 );
-@@encodedName(Disks.update::parameters.properties, "json", "disk");
+@@encodedName(Disks.update::parameters.properties, "application/json", "disk");
 @@extension(Disks.update::parameters.properties, "x-ms-client-name", "disk");
 @@doc(Disks.update::parameters.properties,
   "Disk object supplied in the body of the Patch disk operation."
 );
-@@encodedName(Disks.grantAccess::parameters.body, "json", "grantAccessData");
+@@encodedName(Disks.grantAccess::parameters.body,
+  "application/json",
+  "grantAccessData"
+);
 @@extension(Disks.grantAccess::parameters.body,
   "x-ms-client-name",
   "grantAccessData"

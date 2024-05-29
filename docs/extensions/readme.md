@@ -467,6 +467,8 @@ Swagger 2.0 specification requires that when used, the value of `discriminator` 
 
 ## x-ms-client-flatten
 
+Note: This extension is not recommended anymore, and will be refused in Swagger reviews going forward. This is kept for legacy only for SDK that have done a stable SDK release.
+
 This extension allows to flatten deeply nested payloads into a more user friendly object. For example a payload that looks like this on the wire:
 
 ```json5

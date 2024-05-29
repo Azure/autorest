@@ -7,7 +7,6 @@ import "./Space.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,14 @@ namespace Microsoft.IntegrationSpaces;
  * An integration application under space.
  */
 @parentResource(Space)
-model Application is TrackedResource<ApplicationProperties> {
-  /**
-   * The name of the Application
-   */
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
-  @path
-  @key("applicationName")
-  @segment("applications")
-  @visibility("read")
-  name: string;
+model Application
+  is Azure.ResourceManager.TrackedResource<ApplicationProperties> {
+  ...ResourceNameParameter<
+    Resource = Application,
+    KeyName = "applicationName",
+    SegmentName = "applications",
+    NamePattern = "[a-zA-Z0-9_.()-]{0,79}$"
+  >;
 }
 
 @armResourceOperations
@@ -43,21 +40,24 @@ interface Applications {
   /**
    * Update a Application
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<Application, ApplicationUpdate>;
 
   /**
    * Delete a Application
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<Application>;
 
   /**
    * List Application resources by Space
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
     {
-      ...BaseParameters<Application>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Application>;
 
       /**
        * The number of result items to return.
@@ -157,3 +157,5 @@ interface Applications {
     void
   >;
 }
+
+@@doc(Application.name, "The name of the Application");

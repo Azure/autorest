@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,16 +13,24 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * Set of related alerts grouped together smartly by AMS.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model SmartGroup is ProxyResource<SmartGroupProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(SmartGroupProperties)
+model SmartGroup extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = SmartGroup,
+    KeyName = "smartGroupId",
+    SegmentName = "smartGroups",
+    NamePattern = ""
+  >;
+
   /**
-   * Smart group unique id.
+   * Properties of smart group.
    */
-  @path
-  @key("smartGroupId")
-  @segment("smartGroups")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: SmartGroupProperties;
 }
 
 @armResourceOperations
@@ -36,10 +43,12 @@ interface SmartGroups {
   /**
    * List all the Smart Groups within a specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
@@ -117,7 +126,7 @@ interface SmartGroups {
     void,
     SmartGroup,
     {
-      ...SubscriptionBaseParameters;
+      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
       /**
        * New state of the alert.
@@ -144,3 +153,5 @@ interface SmartGroups {
     smartGroupId: string,
   ): ArmResponse<SmartGroupModification> | ErrorResponse;
 }
+
+@@doc(SmartGroup.name, "Smart group unique id. ");

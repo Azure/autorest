@@ -7,7 +7,6 @@ import "./CommunityGallery.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(CommunityGallery)
 @includeInapplicableMetadataInPayload(false)
 model CommunityGalleryImage extends PirCommunityGalleryResource {
-  /**
-   * The name of the community gallery image definition.
-   */
-  @path
-  @key("galleryImageName")
-  @segment("images")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CommunityGalleryImage,
+    KeyName = "galleryImageName",
+    SegmentName = "images",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a gallery image definition.
@@ -50,3 +47,7 @@ interface CommunityGalleryImages {
   @operationId("CommunityGalleryImages_List")
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }
+
+@@doc(CommunityGalleryImage.name,
+  "The name of the community gallery image definition."
+);

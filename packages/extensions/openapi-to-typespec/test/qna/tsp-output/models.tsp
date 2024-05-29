@@ -399,7 +399,9 @@ model ErrorResponse {
 /**
  * The error object.
  */
-model Error extends Record<unknown> {
+model Error {
+  ...Record<unknown>;
+
   /**
    * One of a server-defined set of error codes.
    */

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,15 +19,13 @@ namespace Azure.ResourceManager.Authorization;
 @Azure.ResourceManager.Private.armResourceInternal(
   RoleManagementPolicyAssignmentProperties
 )
-model RoleManagementPolicyAssignment extends ExtensionResourceBase {
-  /**
-   * The name of format {guid_guid} the role management policy assignment to get.
-   */
-  @path
-  @key("roleManagementPolicyAssignmentName")
-  @segment("roleManagementPolicyAssignments")
-  @visibility("read")
-  name: string;
+model RoleManagementPolicyAssignment extends Foundations.ExtensionResource {
+  ...ResourceNameParameter<
+    Resource = RoleManagementPolicyAssignment,
+    KeyName = "roleManagementPolicyAssignmentName",
+    SegmentName = "roleManagementPolicyAssignments",
+    NamePattern = ""
+  >;
 
   /**
    * Role management policy properties.
@@ -57,8 +54,11 @@ interface RoleManagementPolicyAssignments {
   listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
 }
 
+@@doc(RoleManagementPolicyAssignment.name,
+  "The name of format {guid_guid} the role management policy assignment to get."
+);
 @@encodedName(RoleManagementPolicyAssignments.create::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(RoleManagementPolicyAssignments.create::parameters.resource,

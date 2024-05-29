@@ -1,0 +1,776 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "dataManagerForAgricultureSolutionId": "bayerAgPowered.gdu"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bayerAgPowered.gdu",
+        "type": "Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions",
+        "id": "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/bayerAgPowered.gdu",
+        "properties": {
+          "accessFBApplicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "accessFBApplicationName": "solution provider 1",
+          "actionIds": [
+            "actionId1"
+          ],
+          "dataAccessScopes": [
+            "Weather",
+            "Scenes"
+          ],
+          "marketplaceOfferDetails": {
+            "publisherId": "publisherId",
+            "saasOfferId": "saasOfferId"
+          },
+          "openApiSpecsDictionary": {
+            "v1": {
+              "info": {
+                "description": "This is a sample server Petstore server. You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/). For this sample, you can use the api key `special-key` to test the authorization filters.",
+                "contact": {
+                  "email": "apiteam@swagger.io"
+                },
+                "license": {
+                  "name": "Apache 2.0",
+                  "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+                },
+                "termsOfService": "http://swagger.io/terms/",
+                "title": "Swagger Petstore",
+                "version": "1.0.6"
+              },
+              "basePath": "/",
+              "definitions": {
+                "Error": {
+                  "type": "object",
+                  "description": "An error from the Azure AgPlatform service.",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Server-defined set of error codes."
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Human-readable representation of the error."
+                    },
+                    "target": {
+                      "type": "string",
+                      "description": "Target of the error."
+                    },
+                    "details": {
+                      "type": "array",
+                      "description": "Array of details about specific errors that led to this reported error."
+                    }
+                  }
+                },
+                "ErrorResponse": {
+                  "type": "object",
+                  "description": "An error response from the Azure AgPlatform service.\r\n<see href=\"https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses\">ErrorResponse reference document.</see>.",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "description": "An error from the Azure AgPlatform service.",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "Server-defined set of error codes."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Human-readable representation of the error."
+                        },
+                        "target": {
+                          "type": "string",
+                          "description": "Target of the error."
+                        },
+                        "details": {
+                          "type": "array",
+                          "description": "Array of details about specific errors that led to this reported error."
+                        }
+                      }
+                    },
+                    "traceId": {
+                      "type": "string",
+                      "description": "Unique trace Id."
+                    }
+                  }
+                },
+                "InnerError": {
+                  "type": "object",
+                  "description": "Inner error containing list of errors.\r\n<see href=\"https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#innererror--object\">InnerError reference document</see>.",
+                  "additionalProperties": {
+                    "type": "object"
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Specific error code than was provided by the\r\ncontaining error."
+                    }
+                  }
+                },
+                "WeatherDataIngestionJob": {
+                  "type": "object",
+                  "description": "Schema of weather ingestion job.",
+                  "additionalProperties": {},
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name to identify resource.",
+                      "maxLength": 100,
+                      "minLength": 0
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Textual description of the resource.",
+                      "maxLength": 500,
+                      "minLength": 0
+                    },
+                    "boundaryId": {
+                      "type": "string",
+                      "description": "The id of the boundary object for which weather data is being fetched."
+                    },
+                    "createdDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                      "readOnly": true
+                    },
+                    "durationInSeconds": {
+                      "type": "number",
+                      "format": "double",
+                      "description": "Duration of the job in seconds.",
+                      "readOnly": true
+                    },
+                    "endTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                      "readOnly": true
+                    },
+                    "extensionApiInput": {
+                      "type": "object",
+                      "description": "Extension api input dictionary which would be used to feed request query/body/parameter information.",
+                      "additionalProperties": {
+                        "type": "object"
+                      }
+                    },
+                    "extensionApiName": {
+                      "type": "string",
+                      "description": "Extension api name to which request is to be made.",
+                      "maxLength": 100,
+                      "minLength": 2
+                    },
+                    "extensionDataProviderApiKey": {
+                      "type": "string",
+                      "description": "Api key of the weather data provider.",
+                      "maxLength": 200,
+                      "minLength": 2
+                    },
+                    "extensionDataProviderAppId": {
+                      "type": "string",
+                      "description": "App id of the weather data provider.",
+                      "maxLength": 200,
+                      "minLength": 2
+                    },
+                    "extensionId": {
+                      "type": "string",
+                      "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+                      "maxLength": 100,
+                      "minLength": 2,
+                      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+                    },
+                    "farmerId": {
+                      "type": "string",
+                      "description": "The id of the farmer object for which weather data is being fetched."
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "Unique job id.",
+                      "readOnly": true
+                    },
+                    "lastActionDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                      "readOnly": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Status message to capture more details of the job.",
+                      "readOnly": true
+                    },
+                    "properties": {
+                      "type": "object",
+                      "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+                      "additionalProperties": {
+                        "type": "object"
+                      },
+                      "example": {
+                        "key1": "value1",
+                        "key2": 123.45
+                      }
+                    },
+                    "startTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                      "readOnly": true
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "boundaryId",
+                    "extensionApiInput",
+                    "extensionApiName",
+                    "extensionId",
+                    "farmerId"
+                  ]
+                }
+              },
+              "externalDocs": {
+                "description": "Find out more about Swagger",
+                "url": "http://swagger.io"
+              },
+              "host": "addon.azurewebsites.net",
+              "paths": {
+                "/v1/resources/{resourceId}": {
+                  "get": {
+                    "operationId": "Weather_GetDataIngestionJobDetails",
+                    "description": "Get weather ingestion job.",
+                    "parameters": [
+                      {
+                        "name": "resourceId",
+                        "type": "string",
+                        "description": "Id of the job.",
+                        "in": "path",
+                        "required": true
+                      },
+                      {
+                        "name": "api-version",
+                        "type": "string",
+                        "description": "The requested API version",
+                        "default": "2021-07-31-preview",
+                        "in": "query",
+                        "required": true
+                      }
+                    ],
+                    "produces": [
+                      "application/json"
+                    ],
+                    "tags": [
+                      "Weather"
+                    ],
+                    "responses": {
+                      "200": {
+                        "schema": {
+                          "type": "object",
+                          "description": "Schema of weather ingestion job.",
+                          "additionalProperties": {},
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name to identify resource.",
+                              "maxLength": 100,
+                              "minLength": 0
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Textual description of the resource.",
+                              "maxLength": 500,
+                              "minLength": 0
+                            },
+                            "boundaryId": {
+                              "type": "string",
+                              "description": "The id of the boundary object for which weather data is being fetched."
+                            },
+                            "createdDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "durationInSeconds": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Duration of the job in seconds.",
+                              "readOnly": true
+                            },
+                            "endTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "extensionApiInput": {
+                              "type": "object",
+                              "description": "Extension api input dictionary which would be used to feed request query/body/parameter information.",
+                              "additionalProperties": {
+                                "type": "object"
+                              }
+                            },
+                            "extensionApiName": {
+                              "type": "string",
+                              "description": "Extension api name to which request is to be made.",
+                              "maxLength": 100,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderApiKey": {
+                              "type": "string",
+                              "description": "Api key of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderAppId": {
+                              "type": "string",
+                              "description": "App id of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionId": {
+                              "type": "string",
+                              "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+                              "maxLength": 100,
+                              "minLength": 2,
+                              "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+                            },
+                            "farmerId": {
+                              "type": "string",
+                              "description": "The id of the farmer object for which weather data is being fetched."
+                            },
+                            "id": {
+                              "type": "string",
+                              "description": "Unique job id.",
+                              "readOnly": true
+                            },
+                            "lastActionDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "description": "Status message to capture more details of the job.",
+                              "readOnly": true
+                            },
+                            "properties": {
+                              "type": "object",
+                              "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+                              "additionalProperties": {
+                                "type": "object"
+                              },
+                              "example": {
+                                "key1": "value1",
+                                "key2": 123.45
+                              }
+                            },
+                            "startTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+                              "readOnly": true
+                            }
+                          },
+                          "required": [
+                            "boundaryId",
+                            "extensionApiInput",
+                            "extensionApiName",
+                            "extensionId",
+                            "farmerId"
+                          ]
+                        },
+                        "description": "Success"
+                      },
+                      "default": {
+                        "schema": {
+                          "type": "object",
+                          "description": "An error response from the Azure AgPlatform service.\r\n<see href=\"https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses\">ErrorResponse reference document.</see>.",
+                          "properties": {
+                            "error": {
+                              "type": "object",
+                              "description": "An error from the Azure AgPlatform service.",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "description": "Server-defined set of error codes."
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "description": "Human-readable representation of the error."
+                                },
+                                "target": {
+                                  "type": "string",
+                                  "description": "Target of the error."
+                                },
+                                "details": {
+                                  "type": "array",
+                                  "description": "Array of details about specific errors that led to this reported error."
+                                }
+                              }
+                            },
+                            "traceId": {
+                              "type": "string",
+                              "description": "Unique trace Id."
+                            }
+                          }
+                        },
+                        "description": "Error"
+                      }
+                    }
+                  },
+                  "put": {
+                    "operationId": "Weather_CreateDataIngestionJob",
+                    "description": "Create a weather data ingestion job.",
+                    "consumes": [
+                      "application/json"
+                    ],
+                    "parameters": [
+                      {
+                        "name": "resourceId",
+                        "type": "string",
+                        "description": "Job id supplied by user.",
+                        "in": "path",
+                        "required": true
+                      },
+                      {
+                        "name": "api-version",
+                        "type": "string",
+                        "description": "The requested API version",
+                        "default": "2021-07-31-preview",
+                        "in": "query",
+                        "required": true
+                      },
+                      {
+                        "name": "body",
+                        "schema": {
+                          "type": "object",
+                          "description": "Schema of weather ingestion job.",
+                          "additionalProperties": {},
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name to identify resource.",
+                              "maxLength": 100,
+                              "minLength": 0
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Textual description of the resource.",
+                              "maxLength": 500,
+                              "minLength": 0
+                            },
+                            "boundaryId": {
+                              "type": "string",
+                              "description": "The id of the boundary object for which weather data is being fetched."
+                            },
+                            "createdDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "durationInSeconds": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Duration of the job in seconds.",
+                              "readOnly": true
+                            },
+                            "endTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "extensionApiInput": {
+                              "type": "object",
+                              "description": "Extension api input dictionary which would be used to feed request query/body/parameter information.",
+                              "additionalProperties": {
+                                "type": "object"
+                              }
+                            },
+                            "extensionApiName": {
+                              "type": "string",
+                              "description": "Extension api name to which request is to be made.",
+                              "maxLength": 100,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderApiKey": {
+                              "type": "string",
+                              "description": "Api key of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderAppId": {
+                              "type": "string",
+                              "description": "App id of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionId": {
+                              "type": "string",
+                              "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+                              "maxLength": 100,
+                              "minLength": 2,
+                              "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+                            },
+                            "farmerId": {
+                              "type": "string",
+                              "description": "The id of the farmer object for which weather data is being fetched."
+                            },
+                            "id": {
+                              "type": "string",
+                              "description": "Unique job id.",
+                              "readOnly": true
+                            },
+                            "lastActionDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "description": "Status message to capture more details of the job.",
+                              "readOnly": true
+                            },
+                            "properties": {
+                              "type": "object",
+                              "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+                              "additionalProperties": {
+                                "type": "object"
+                              },
+                              "example": {
+                                "key1": "value1",
+                                "key2": 123.45
+                              }
+                            },
+                            "startTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+                              "readOnly": true
+                            }
+                          },
+                          "required": [
+                            "boundaryId",
+                            "extensionApiInput",
+                            "extensionApiName",
+                            "extensionId",
+                            "farmerId"
+                          ]
+                        },
+                        "description": "Job parameters supplied by user.",
+                        "in": "body"
+                      }
+                    ],
+                    "produces": [
+                      "application/json"
+                    ],
+                    "tags": [
+                      "Weather"
+                    ],
+                    "x-ms-long-running-operation": true,
+                    "x-ms-long-running-operation-options": {
+                      "final-state-via": "location"
+                    },
+                    "responses": {
+                      "202": {
+                        "schema": {
+                          "type": "object",
+                          "description": "Schema of weather ingestion job.",
+                          "additionalProperties": {},
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name to identify resource.",
+                              "maxLength": 100,
+                              "minLength": 0
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Textual description of the resource.",
+                              "maxLength": 500,
+                              "minLength": 0
+                            },
+                            "boundaryId": {
+                              "type": "string",
+                              "description": "The id of the boundary object for which weather data is being fetched."
+                            },
+                            "createdDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "durationInSeconds": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Duration of the job in seconds.",
+                              "readOnly": true
+                            },
+                            "endTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "extensionApiInput": {
+                              "type": "object",
+                              "description": "Extension api input dictionary which would be used to feed request query/body/parameter information.",
+                              "additionalProperties": {
+                                "type": "object"
+                              }
+                            },
+                            "extensionApiName": {
+                              "type": "string",
+                              "description": "Extension api name to which request is to be made.",
+                              "maxLength": 100,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderApiKey": {
+                              "type": "string",
+                              "description": "Api key of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionDataProviderAppId": {
+                              "type": "string",
+                              "description": "App id of the weather data provider.",
+                              "maxLength": 200,
+                              "minLength": 2
+                            },
+                            "extensionId": {
+                              "type": "string",
+                              "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
+                              "maxLength": 100,
+                              "minLength": 2,
+                              "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+                            },
+                            "farmerId": {
+                              "type": "string",
+                              "description": "The id of the farmer object for which weather data is being fetched."
+                            },
+                            "id": {
+                              "type": "string",
+                              "description": "Unique job id.",
+                              "readOnly": true
+                            },
+                            "lastActionDateTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "description": "Status message to capture more details of the job.",
+                              "readOnly": true
+                            },
+                            "properties": {
+                              "type": "object",
+                              "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+                              "additionalProperties": {
+                                "type": "object"
+                              },
+                              "example": {
+                                "key1": "value1",
+                                "key2": 123.45
+                              }
+                            },
+                            "startTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
+                              "readOnly": true
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+                              "readOnly": true
+                            }
+                          },
+                          "required": [
+                            "boundaryId",
+                            "extensionApiInput",
+                            "extensionApiName",
+                            "extensionId",
+                            "farmerId"
+                          ]
+                        },
+                        "description": "Success"
+                      },
+                      "default": {
+                        "schema": {
+                          "type": "object",
+                          "description": "An error response from the Azure AgPlatform service.\r\n<see href=\"https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses\">ErrorResponse reference document.</see>.",
+                          "properties": {
+                            "error": {
+                              "type": "object",
+                              "description": "An error from the Azure AgPlatform service.",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "description": "Server-defined set of error codes."
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "description": "Human-readable representation of the error."
+                                },
+                                "target": {
+                                  "type": "string",
+                                  "description": "Target of the error."
+                                },
+                                "details": {
+                                  "type": "array",
+                                  "description": "Array of details about specific errors that led to this reported error."
+                                }
+                              }
+                            },
+                            "traceId": {
+                              "type": "string",
+                              "description": "Unique trace Id."
+                            }
+                          }
+                        },
+                        "description": "Error"
+                      }
+                    }
+                  }
+                }
+              },
+              "schemes": [
+                "https"
+              ],
+              "swagger": "2.0"
+            }
+          },
+          "partnerId": "abc",
+          "partnerTenantId": "556b0c04-d33e-48d0-9f6f-f893c8c77e00",
+          "roleId": "role1",
+          "roleName": "roleName1",
+          "saaSApplicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "systemData": {
+          "createdAt": "2022-07-25T10:15:15Z",
+          "lastModifiedAt": "2022-07-25T10:15:15Z"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "SolutionsDiscoverability_Get",
+  "title": "SolutionsDiscoverability_Get"
+}

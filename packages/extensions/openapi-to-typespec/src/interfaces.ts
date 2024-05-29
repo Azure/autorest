@@ -130,6 +130,10 @@ export interface WithFixMe {
   fixMe?: string[];
 }
 
+export interface WithSuppressDirectives {
+  suppressions?: WithSuppressDirective[];
+}
+
 export interface WithSuppressDirective {
   suppressionCode?: string;
   suppressionMessage?: string;
@@ -147,7 +151,7 @@ export interface TypespecParameter extends TypespecDataType {
   defaultValue?: any;
 }
 
-export interface TypespecObjectProperty extends TypespecDataType {
+export interface TypespecObjectProperty extends TypespecDataType, WithSuppressDirectives {
   kind: "property";
   isOptional: boolean;
   type: string;
@@ -161,6 +165,7 @@ export interface TypespecDecorator extends WithFixMe, WithSuppressDirective {
   arguments?: (string | number)[] | DecoratorArgument[];
   module?: string;
   namespace?: string;
+  target?: string;
 }
 
 export interface TypespecAlias {
@@ -176,6 +181,7 @@ export interface TypespecObject extends TypespecDataType {
   extendedParents?: string[];
   spreadParents?: string[];
   decorators?: TypespecDecorator[];
+  augmentDecorators?: TypespecDecorator[];
   clientDecorators?: TypespecDecorator[];
   alias?: TypespecAlias;
 }
@@ -202,7 +208,7 @@ export function isFirstLevelResource(value: string): value is FirstLevelResource
   return FIRST_LEVEL_RESOURCE.includes(value as FirstLevelResource);
 }
 
-export interface TspArmResourceOperationBase extends WithDoc, WithFixMe {
+export interface TspArmResourceOperationBase extends WithDoc, WithFixMe, WithSuppressDirectives {
   kind: string;
   name: string;
   templateParameters?: string[];
@@ -253,6 +259,7 @@ export interface TspArmResourceExistsOperation extends TspArmResourceOperationBa
 
 export interface TspArmResource extends TypespecObject {
   resourceKind: ArmResourceKind;
+  keyExpression: string | undefined;
   propertiesModelName: string;
   propertiesPropertyRequired: boolean;
   propertiesPropertyVisibility: string[];

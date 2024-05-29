@@ -7,7 +7,6 @@ import "./VirtualMachine.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,14 +19,12 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachine)
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineExtension extends ResourceWithOptionalLocation {
-  /**
-   * The name of the virtual machine extension.
-   */
-  @path
-  @key("vmExtensionName")
-  @segment("extensions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineExtension,
+    KeyName = "vmExtensionName",
+    SegmentName = "extensions",
+    NamePattern = ""
+  >;
 
   /**
    * Describes the properties of a Virtual Machine Extension.
@@ -44,7 +41,7 @@ interface VirtualMachineExtensions {
   get is ArmResourceRead<
     VirtualMachineExtension,
     {
-      ...BaseParameters<VirtualMachineExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
 
       /**
        * The expand expression to apply on the operation.
@@ -62,7 +59,7 @@ interface VirtualMachineExtensions {
   /**
    * The operation to update the extension.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineExtension,
     VirtualMachineExtensionUpdate
@@ -71,6 +68,9 @@ interface VirtualMachineExtensions {
   /**
    * The operation to delete the extension.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<VirtualMachineExtension>;
 
   /**
@@ -81,7 +81,7 @@ interface VirtualMachineExtensions {
   list is ArmResourceListByParent<
     VirtualMachineExtension,
     {
-      ...BaseParameters<VirtualMachineExtension>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
 
       /**
        * The expand expression to apply on the operation.
@@ -92,8 +92,11 @@ interface VirtualMachineExtensions {
   >;
 }
 
+@@doc(VirtualMachineExtension.name,
+  "The name of the virtual machine extension."
+);
 @@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.createOrUpdate::parameters.resource,
@@ -104,7 +107,7 @@ interface VirtualMachineExtensions {
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
 @@encodedName(VirtualMachineExtensions.update::parameters.properties,
-  "json",
+  "application/json",
   "extensionParameters"
 );
 @@extension(VirtualMachineExtensions.update::parameters.properties,

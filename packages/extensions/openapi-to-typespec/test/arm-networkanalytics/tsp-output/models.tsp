@@ -394,7 +394,7 @@ model ConsumptionEndpointsProperties {
    * Resource Id of ingestion endpoint.
    */
   @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
+  ingestionResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -410,7 +410,7 @@ model ConsumptionEndpointsProperties {
    * Resource Id of file access endpoint.
    */
   @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
+  fileAccessResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -426,7 +426,7 @@ model ConsumptionEndpointsProperties {
    * Resource Id of query endpoint.
    */
   @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
+  queryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }
@@ -530,7 +530,7 @@ model DataProductUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * Resource tags.

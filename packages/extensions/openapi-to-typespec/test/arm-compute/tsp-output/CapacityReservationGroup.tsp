@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model CapacityReservationGroup extends Resource {
-  /**
-   * The name of the capacity reservation group.
-   */
-  @path
-  @key("capacityReservationGroupName")
-  @segment("capacityReservationGroups")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = CapacityReservationGroup,
+    KeyName = "capacityReservationGroupName",
+    SegmentName = "capacityReservationGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Availability Zones to use for this capacity reservation group. The zones can be assigned only during creation. If not provided, the group supports only regional resources in the region. If provided, enforces each capacity reservation in the group to be in one of the zones.
@@ -47,7 +44,7 @@ interface CapacityReservationGroups {
   get is ArmResourceRead<
     CapacityReservationGroup,
     {
-      ...BaseParameters<CapacityReservationGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
 
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.
@@ -65,7 +62,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     CapacityReservationGroup,
     CapacityReservationGroupUpdate
@@ -74,6 +71,7 @@ interface CapacityReservationGroups {
   /**
    * The operation to delete a capacity reservation group. This operation is allowed only if all the associated resources are disassociated from the reservation group and all capacity reservations under the reservation group have also been deleted. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<CapacityReservationGroup>;
 
   /**
@@ -84,7 +82,7 @@ interface CapacityReservationGroups {
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
     {
-      ...BaseParameters<CapacityReservationGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
 
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
@@ -100,8 +98,11 @@ interface CapacityReservationGroups {
   listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
 }
 
+@@doc(CapacityReservationGroup.name,
+  "The name of the capacity reservation group."
+);
 @@encodedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.createOrUpdate::parameters.resource,
@@ -112,7 +113,7 @@ interface CapacityReservationGroups {
   "Parameters supplied to the Create capacity reservation Group."
 );
 @@encodedName(CapacityReservationGroups.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(CapacityReservationGroups.update::parameters.properties,

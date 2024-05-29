@@ -7,7 +7,6 @@ import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,18 +14,24 @@ namespace Microsoft.Storage;
 /**
  * The Encryption Scope resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-model EncryptionScope is ProxyResource<EncryptionScopeProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(EncryptionScopeProperties)
+model EncryptionScope extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = EncryptionScope,
+    KeyName = "encryptionScopeName",
+    SegmentName = "encryptionScopes",
+    NamePattern = ""
+  >;
+
   /**
-   * The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
+   * Properties of the encryption scope.
    */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("encryptionScopeName")
-  @segment("encryptionScopes")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: EncryptionScopeProperties;
 }
 
 @armResourceOperations
@@ -44,16 +49,18 @@ interface EncryptionScopes {
   /**
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   patch is ArmCustomPatchSync<EncryptionScope, EncryptionScope>;
 
   /**
    * Lists all the encryption scopes available under the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("EncryptionScopes_List")
   list is ArmResourceListByParent<
     EncryptionScope,
     {
-      ...BaseParameters<EncryptionScope>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<EncryptionScope>;
 
       /**
        * Optional, specifies the maximum number of encryption scopes that will be included in the list response.
@@ -78,8 +85,29 @@ interface EncryptionScopes {
   >;
 }
 
+@@maxLength(EncryptionScope.name, 63);
+@@minLength(EncryptionScope.name, 3);
+@@doc(EncryptionScope.name,
+  "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
+@@encodedName(EncryptionScopes.put::parameters.resource,
+  "application/json",
+  "encryptionScope"
+);
+@@extension(EncryptionScopes.put::parameters.resource,
+  "x-ms-client-name",
+  "encryptionScope"
+);
 @@doc(EncryptionScopes.put::parameters.resource,
   "Encryption scope properties to be used for the create or update."
+);
+@@encodedName(EncryptionScopes.patch::parameters.properties,
+  "application/json",
+  "encryptionScope"
+);
+@@extension(EncryptionScopes.patch::parameters.properties,
+  "x-ms-client-name",
+  "encryptionScope"
 );
 @@doc(EncryptionScopes.patch::parameters.properties,
   "Encryption scope properties to be used for the update."

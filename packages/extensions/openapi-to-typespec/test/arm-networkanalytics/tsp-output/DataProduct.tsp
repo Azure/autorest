@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,20 +13,15 @@ namespace Microsoft.NetworkAnalytics;
 /**
  * The data product resource.
  */
-model DataProduct is TrackedResource<DataProductProperties> {
-  /**
-   * The data product resource name
-   */
-  @maxLength(63)
-  @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
-  @path
-  @key("dataProductName")
-  @segment("dataProducts")
-  @visibility("read")
-  name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+model DataProduct
+  is Azure.ResourceManager.TrackedResource<DataProductProperties> {
+  ...ResourceNameParameter<
+    Resource = DataProduct,
+    KeyName = "dataProductName",
+    SegmentName = "dataProducts",
+    NamePattern = "^[a-z][a-z0-9]*$"
+  >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -45,7 +39,7 @@ interface DataProducts {
   /**
    * Update data product resource.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DataProduct, DataProductUpdate>;
 
   /**
@@ -86,7 +80,7 @@ interface DataProducts {
    */
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,
-    AnyObject,
+    Record<unknown>,
     ListRoleAssignments
   >;
 
@@ -103,3 +97,7 @@ interface DataProducts {
    */
   rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
 }
+
+@@maxLength(DataProduct.name, 63);
+@@minLength(DataProduct.name, 3);
+@@doc(DataProduct.name, "The data product resource name");

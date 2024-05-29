@@ -7,7 +7,6 @@ import "./DataManagerForAgriculture.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,17 +19,13 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 @parentResource(DataManagerForAgriculture)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
-model DataConnector extends ProxyResourceBase {
-  /**
-   * Connector name.
-   */
-  @maxLength(63)
-  @minLength(1)
-  @path
-  @key("dataConnectorName")
-  @segment("dataConnectors")
-  @visibility("read")
-  name: string;
+model DataConnector extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = DataConnector,
+    KeyName = "dataConnectorName",
+    SegmentName = "dataConnectors",
+    NamePattern = ""
+  >;
 
   /**
    * DataConnector Properties.
@@ -38,7 +33,7 @@ model DataConnector extends ProxyResourceBase {
   @extension("x-ms-client-flatten", true)
   properties: DataConnectorProperties;
 
-  ...Azure.ResourceManager.EntityTag;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations
@@ -56,6 +51,7 @@ interface DataConnectors {
   /**
    * Delete a Data Connectors with given dataConnector name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<DataConnector>;
 
   /**
@@ -66,7 +62,7 @@ interface DataConnectors {
   list is ArmResourceListByParent<
     DataConnector,
     {
-      ...BaseParameters<DataConnector>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DataConnector>;
 
       /**
        * Maximum number of items needed (inclusive).
@@ -86,8 +82,11 @@ interface DataConnectors {
   >;
 }
 
+@@maxLength(DataConnector.name, 63);
+@@minLength(DataConnector.name, 1);
+@@doc(DataConnector.name, "Connector name.");
 @@encodedName(DataConnectors.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "body"
 );
 @@extension(DataConnectors.createOrUpdate::parameters.resource,

@@ -1,0 +1,29 @@
+{
+  "operationId": "Products_ListByCatalog",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Products_ListByCatalog",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "value": [
+          {
+            "name": "MyProduct1",
+            "type": "Microsoft.AzureSphere/catalogs/products",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1"
+          },
+          {
+            "name": "MyProduct2",
+            "type": "Microsoft.AzureSphere/catalogs/products",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct2"
+          }
+        ]
+      }
+    }
+  }
+}

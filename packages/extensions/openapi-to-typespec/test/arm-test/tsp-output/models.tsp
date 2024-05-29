@@ -161,7 +161,9 @@ model EnrollProperties {
 /**
  * Resource properties
  */
-model ArrayDefaultProperties extends Record<unknown> {
+model ArrayDefaultProperties {
+  ...Record<unknown>;
+
   /**
    * Array of strings
    */

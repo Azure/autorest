@@ -281,6 +281,7 @@ model Resource {
   /**
    * Key-value pairs of additional resource provisioning properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
@@ -296,6 +297,7 @@ model AnalysisServicesServerUpdateParameters {
   /**
    * Key-value pairs of additional provisioning properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**

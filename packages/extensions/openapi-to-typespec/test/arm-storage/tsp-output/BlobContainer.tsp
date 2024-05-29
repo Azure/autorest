@@ -7,7 +7,6 @@ import "./BlobServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,18 +14,24 @@ namespace Microsoft.Storage;
 /**
  * Properties of the blob container, including Id, resource name, resource type, Etag.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BlobServiceProperties)
-model BlobContainer is ProxyResource<ContainerProperties> {
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ContainerProperties)
+model BlobContainer extends Foundations.ProxyResource {
+  ...ResourceNameParameter<
+    Resource = BlobContainer,
+    KeyName = "containerName",
+    SegmentName = "containers",
+    NamePattern = ""
+  >;
+
   /**
-   * The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.
+   * Properties of the blob container.
    */
-  @maxLength(63)
-  @minLength(3)
-  @path
-  @key("containerName")
-  @segment("containers")
-  @visibility("read")
-  name: string;
+  @extension("x-ms-client-flatten", true)
+  properties?: ContainerProperties;
 }
 
 @armResourceOperations
@@ -44,21 +49,24 @@ interface BlobContainers {
   /**
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<BlobContainer, BlobContainer>;
 
   /**
    * Deletes specified container under its account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<BlobContainer>;
 
   /**
    * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BlobContainers_List")
   list is ArmResourceListByParent<
     BlobContainer,
     {
-      ...BaseParameters<BlobContainer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
 
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
@@ -105,16 +113,61 @@ interface BlobContainers {
   objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, void>;
 }
 
+@@maxLength(BlobContainer.name, 63);
+@@minLength(BlobContainer.name, 3);
+@@doc(BlobContainer.name,
+  "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
+);
+@@encodedName(BlobContainers.create::parameters.resource,
+  "application/json",
+  "blobContainer"
+);
+@@extension(BlobContainers.create::parameters.resource,
+  "x-ms-client-name",
+  "blobContainer"
+);
 @@doc(BlobContainers.create::parameters.resource,
   "Properties of the blob container to create."
+);
+@@encodedName(BlobContainers.update::parameters.properties,
+  "application/json",
+  "blobContainer"
+);
+@@extension(BlobContainers.update::parameters.properties,
+  "x-ms-client-name",
+  "blobContainer"
 );
 @@doc(BlobContainers.update::parameters.properties,
   "Properties to update for the blob container."
 );
+@@encodedName(BlobContainers.setLegalHold::parameters.body,
+  "application/json",
+  "LegalHold"
+);
+@@extension(BlobContainers.setLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
 @@doc(BlobContainers.setLegalHold::parameters.body,
   "The LegalHold property that will be set to a blob container."
 );
+@@encodedName(BlobContainers.clearLegalHold::parameters.body,
+  "application/json",
+  "LegalHold"
+);
+@@extension(BlobContainers.clearLegalHold::parameters.body,
+  "x-ms-client-name",
+  "LegalHold"
+);
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
+);
+@@encodedName(BlobContainers.lease::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(BlobContainers.lease::parameters.body,
+  "x-ms-client-name",
+  "parameters"
 );
 @@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

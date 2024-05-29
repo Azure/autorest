@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model ProximityPlacementGroup extends Resource {
-  /**
-   * The name of the proximity placement group.
-   */
-  @path
-  @key("proximityPlacementGroupName")
-  @segment("proximityPlacementGroups")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = ProximityPlacementGroup,
+    KeyName = "proximityPlacementGroupName",
+    SegmentName = "proximityPlacementGroups",
+    NamePattern = ""
+  >;
 
   /**
    * Specifies the Availability Zone where virtual machine, virtual machine scale set or availability set associated with the  proximity placement group can be created.
@@ -47,7 +44,7 @@ interface ProximityPlacementGroups {
   get is ArmResourceRead<
     ProximityPlacementGroup,
     {
-      ...BaseParameters<ProximityPlacementGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<ProximityPlacementGroup>;
 
       /**
        * includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.
@@ -65,7 +62,7 @@ interface ProximityPlacementGroups {
   /**
    * Update a proximity placement group.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     ProximityPlacementGroup,
     ProximityPlacementGroupUpdate
@@ -74,6 +71,7 @@ interface ProximityPlacementGroups {
   /**
    * Delete a proximity placement group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<ProximityPlacementGroup>;
 
   /**
@@ -89,8 +87,11 @@ interface ProximityPlacementGroups {
   listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
 }
 
+@@doc(ProximityPlacementGroup.name,
+  "The name of the proximity placement group."
+);
 @@encodedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.createOrUpdate::parameters.resource,
@@ -101,7 +102,7 @@ interface ProximityPlacementGroups {
   "Parameters supplied to the Create Proximity Placement Group operation."
 );
 @@encodedName(ProximityPlacementGroups.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(ProximityPlacementGroups.update::parameters.properties,

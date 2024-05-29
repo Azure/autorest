@@ -24,6 +24,15 @@ export function generateDocs({ doc }: WithDocs): string {
   return `/**\n* ${wrapped.join("\n* ")}\n*/`;
 }
 
+export function generateDocsContent({ doc }: WithDocs): string {
+  if (isEmptyDoc(doc)) {
+    return ``;
+  }
+
+  const wrapped = lineWrap(doc);
+  return wrapped.length === 1 ? `${wrapped[0]}` : `""\n${wrapped.join("\n")}\n""`;
+}
+
 export function generateSummary({ summary }: WithSummary): string {
   if (isEmptyDoc(summary)) {
     return "";

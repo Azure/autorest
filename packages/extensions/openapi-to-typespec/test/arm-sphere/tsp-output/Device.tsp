@@ -7,7 +7,6 @@ import "./DeviceGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,16 +15,13 @@ namespace Microsoft.AzureSphere;
  * An device resource belonging to a device group resource.
  */
 @parentResource(DeviceGroup)
-model Device is ProxyResource<DeviceProperties> {
-  /**
-   * Device name
-   */
-  @pattern("^[a-zA-Z0-9-]{128}$")
-  @path
-  @key("deviceName")
-  @segment("devices")
-  @visibility("read")
-  name: string;
+model Device is Azure.ResourceManager.ProxyResource<DeviceProperties> {
+  ...ResourceNameParameter<
+    Resource = Device,
+    KeyName = "deviceName",
+    SegmentName = "devices",
+    NamePattern = "^[a-zA-Z0-9-]{128}$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +39,7 @@ interface Devices {
   /**
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Device, DeviceUpdate>;
 
   /**
@@ -54,8 +50,6 @@ interface Devices {
   /**
    * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Devices_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<Device>;
 
   /**
@@ -68,14 +62,7 @@ interface Devices {
   >;
 }
 
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "json",
-  "generateDeviceCapabilityRequest"
-);
-@@extension(Devices.generateCapabilityImage::parameters.body,
-  "x-ms-client-name",
-  "generateDeviceCapabilityRequest"
-);
+@@doc(Device.name, "Device name");
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );

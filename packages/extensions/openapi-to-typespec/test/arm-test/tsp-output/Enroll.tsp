@@ -7,7 +7,6 @@ import "./Employee.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -17,11 +16,13 @@ namespace Microsoft.Test;
  */
 @singleton("default")
 @parentResource(Employee)
-model Enroll is TrackedResource<EnrollProperties> {
-  @key("enroll")
-  @segment("enrolls")
-  @visibility("read")
-  name: string;
+model Enroll is Azure.ResourceManager.TrackedResource<EnrollProperties> {
+  ...ResourceNameParameter<
+    Resource = Enroll,
+    KeyName = "enroll",
+    SegmentName = "enrolls",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -31,3 +32,5 @@ interface Enrolls {
    */
   get is ArmResourceRead<Enroll>;
 }
+
+@@doc(Enroll.name, "");

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,14 +17,12 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSet extends Resource {
-  /**
-   * The name of the VM scale set.
-   */
-  @path
-  @key("vmScaleSetName")
-  @segment("virtualMachineScaleSets")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSet,
+    KeyName = "vmScaleSetName",
+    SegmentName = "virtualMachineScaleSets",
+    NamePattern = ""
+  >;
 
   /**
    * The virtual machine scale set sku.
@@ -67,7 +64,7 @@ interface VirtualMachineScaleSets {
   get is ArmResourceRead<
     VirtualMachineScaleSet,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -89,7 +86,7 @@ interface VirtualMachineScaleSets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSet,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set to create or update.
@@ -102,12 +99,12 @@ interface VirtualMachineScaleSets {
   /**
    * Update a VM scale set.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set to create or update.
@@ -120,10 +117,13 @@ interface VirtualMachineScaleSets {
   /**
    * Deletes a VM scale set.
    */
+  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSet,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -153,7 +153,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     LocationScope<VirtualMachineScaleSet>,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
       ...LocationResourceParameter;
     }
   >;
@@ -171,7 +171,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -195,7 +195,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -219,7 +219,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -243,7 +243,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -261,7 +261,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -279,7 +279,7 @@ interface VirtualMachineScaleSets {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -297,7 +297,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -315,7 +315,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -333,7 +333,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -351,7 +351,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetReimageParameters,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -369,7 +369,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSetVMInstanceIDs,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -387,7 +387,7 @@ interface VirtualMachineScaleSets {
     void,
     RecoveryWalkResponse,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -423,7 +423,7 @@ interface VirtualMachineScaleSets {
     VMScaleSetConvertToSinglePlacementGroupInput,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the virtual machine scale set to create or update.
@@ -441,7 +441,7 @@ interface VirtualMachineScaleSets {
     OrchestrationServiceStateInput,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the virtual machine scale set to create or update.
@@ -461,7 +461,7 @@ interface VirtualMachineScaleSets {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -481,7 +481,7 @@ interface VirtualMachineScaleSets {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -501,7 +501,7 @@ interface VirtualMachineScaleSets {
     void,
     void,
     {
-      ...BaseParameters<VirtualMachineScaleSet>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
        * The name of the VM scale set.
@@ -571,8 +571,9 @@ interface VirtualMachineScaleSets {
   ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
 }
 
+@@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
 @@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
@@ -583,7 +584,7 @@ interface VirtualMachineScaleSets {
   "The scale set object."
 );
 @@encodedName(VirtualMachineScaleSets.update::parameters.properties,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.update::parameters.properties,
@@ -594,7 +595,7 @@ interface VirtualMachineScaleSets {
   "The scale set object."
 );
 @@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.deallocate::parameters.body,
@@ -605,7 +606,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.deleteInstances::parameters.body,
@@ -616,7 +617,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.powerOff::parameters.body,
@@ -627,7 +628,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.restart::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.restart::parameters.body,
@@ -638,7 +639,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.start::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.start::parameters.body,
@@ -649,7 +650,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.redeploy::parameters.body,
@@ -660,7 +661,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.performMaintenance::parameters.body,
@@ -671,7 +672,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
@@ -682,7 +683,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
-  "json",
+  "application/json",
   "vmScaleSetReimageInput"
 );
 @@extension(VirtualMachineScaleSets.reimage::parameters.body,
@@ -693,7 +694,7 @@ interface VirtualMachineScaleSets {
   "Parameters for Reimaging VM ScaleSet."
 );
 @@encodedName(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "json",
+  "application/json",
   "vmInstanceIDs"
 );
 @@extension(VirtualMachineScaleSets.reimageAll::parameters.body,
@@ -704,7 +705,7 @@ interface VirtualMachineScaleSets {
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
@@ -715,7 +716,7 @@ interface VirtualMachineScaleSets {
   "The input object for ConvertToSinglePlacementGroup API."
 );
 @@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "json",
+  "application/json",
   "parameters"
 );
 @@extension(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,

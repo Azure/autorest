@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -17,17 +16,15 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@parentResource("SubscriptionLocationResource")
+@parentResource(SubscriptionLocationResource)
 @includeInapplicableMetadataInPayload(false)
 model OSVersion {
-  /**
-   * Name of the OS version.
-   */
-  @path
-  @key("osVersionName")
-  @segment("cloudServiceOsVersions")
-  @visibility("read")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = OSVersion,
+    KeyName = "osVersionName",
+    SegmentName = "cloudServiceOsVersions",
+    NamePattern = ""
+  >;
 
   /**
    * Resource Id.
@@ -70,3 +67,5 @@ interface OSVersions {
   @operationId("CloudServiceOperatingSystems_ListOSVersions")
   listOSVersions is ArmResourceListByParent<OSVersion>;
 }
+
+@@doc(OSVersion.name, "Name of the OS version.");

@@ -7,7 +7,6 @@ import "./DeviceGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,13 @@ namespace Microsoft.AzureSphere;
  * An deployment resource belonging to a device group resource.
  */
 @parentResource(DeviceGroup)
-model Deployment is ProxyResource<DeploymentProperties> {
-  /**
-   * Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.
-   */
-  @path
-  @key("deploymentName")
-  @segment("deployments")
-  @visibility("read")
-  name: string;
+model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
+  ...ResourceNameParameter<
+    Resource = Deployment,
+    KeyName = "deploymentName",
+    SegmentName = "deployments",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -47,12 +44,10 @@ interface Deployments {
   /**
    * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Deployments_ListByDeviceGroup")
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
     {
-      ...BaseParameters<Deployment>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Deployment>;
 
       /**
        * Filter the result list using the given expression
@@ -80,3 +75,7 @@ interface Deployments {
     }
   >;
 }
+
+@@doc(Deployment.name,
+  "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group."
+);
