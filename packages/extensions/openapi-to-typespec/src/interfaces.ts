@@ -123,6 +123,7 @@ export interface TypespecEnum extends TypespecDataType {
   isExtensible: boolean;
   decorators?: TypespecDecorator[];
   clientDecorators?: TypespecDecorator[];
+  choiceType: string;
 }
 
 export interface WithFixMe {

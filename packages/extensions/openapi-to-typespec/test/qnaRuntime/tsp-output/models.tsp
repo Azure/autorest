@@ -9,29 +9,31 @@ namespace QnAMakerRuntimeClient;
 /**
  * Optional field. Set to OR for using OR as Operation for Strict Filters.
  */
-enum StrictFiltersCompoundOperationType {
-  AND,
-  OR,
+union StrictFiltersCompoundOperationType {
+  string,
+  AND: "AND",
+  OR: "OR",
 }
 
 /**
  * Human readable error code.
  */
-enum ErrorCodeType {
-  BadArgument,
-  Forbidden,
-  NotFound,
-  KbNotFound,
-  Unauthorized,
-  Unspecified,
-  EndpointKeysError,
-  QuotaExceeded,
-  QnaRuntimeError,
-  SKULimitExceeded,
-  OperationNotFound,
-  ServiceError,
-  ValidationFailure,
-  ExtractionFailure,
+union ErrorCodeType {
+  string,
+  BadArgument: "BadArgument",
+  Forbidden: "Forbidden",
+  NotFound: "NotFound",
+  KbNotFound: "KbNotFound",
+  Unauthorized: "Unauthorized",
+  Unspecified: "Unspecified",
+  EndpointKeysError: "EndpointKeysError",
+  QuotaExceeded: "QuotaExceeded",
+  QnaRuntimeError: "QnaRuntimeError",
+  SKULimitExceeded: "SKULimitExceeded",
+  OperationNotFound: "OperationNotFound",
+  ServiceError: "ServiceError",
+  ValidationFailure: "ValidationFailure",
+  ExtractionFailure: "ExtractionFailure",
 }
 
 /**

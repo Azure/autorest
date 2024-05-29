@@ -15,26 +15,28 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The status of the current operation.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /**
    * Resource has been created.
    */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  Canceled,
+  Canceled: "Canceled",
 
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
 }
 
 /**

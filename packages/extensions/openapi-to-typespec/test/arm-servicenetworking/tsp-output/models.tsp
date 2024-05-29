@@ -11,18 +11,20 @@ namespace Microsoft.ServiceNetworking;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-enum ProvisioningState {
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
-  Succeeded,
-  Failed,
-  Canceled,
+union ProvisioningState {
+  string,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
-enum AssociationType {
-  subnets,
+union AssociationType {
+  string,
+  subnets: "subnets",
 }
 
 /**

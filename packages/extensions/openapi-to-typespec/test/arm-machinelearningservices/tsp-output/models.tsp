@@ -16,317 +16,353 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * An enum describing the unit of usage measurement.
  */
-enum UsageUnit {
-  Count,
+union UsageUnit {
+  string,
+  Count: "Count",
 }
 
 /**
  * Three lettered code specifying the currency of the VM price. Example: USD
  */
-enum BillingCurrency {
-  USD,
+union BillingCurrency {
+  string,
+  USD: "USD",
 }
 
 /**
  * The unit of time measurement for the specified VM price. Example: OneHour
  */
-enum UnitOfMeasure {
-  OneHour,
+union UnitOfMeasure {
+  string,
+  OneHour: "OneHour",
 }
 
 /**
  * Operating system type used by the VM.
  */
-enum VMPriceOSType {
-  Linux,
-  Windows,
+union VMPriceOSType {
+  string,
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
  * The type of the VM.
  */
-enum VMTier {
-  Standard,
-  LowPriority,
-  Spot,
+union VMTier {
+  string,
+  Standard: "Standard",
+  LowPriority: "LowPriority",
+  Spot: "Spot",
 }
 
 /**
  * An enum describing the unit of quota measurement.
  */
-enum QuotaUnit {
-  Count,
+union QuotaUnit {
+  string,
+  Count: "Count",
 }
 
 /**
  * Status of update workspace quota.
  */
-enum Status {
-  Undefined,
-  Success,
-  Failure,
-  InvalidQuotaBelowClusterMinimum,
-  InvalidQuotaExceedsSubscriptionLimit,
-  InvalidVMFamilyName,
-  OperationNotSupportedForSku,
-  OperationNotEnabledForRegion,
+union Status {
+  string,
+  Undefined: "Undefined",
+  Success: "Success",
+  Failure: "Failure",
+  InvalidQuotaBelowClusterMinimum: "InvalidQuotaBelowClusterMinimum",
+  InvalidQuotaExceedsSubscriptionLimit: "InvalidQuotaExceedsSubscriptionLimit",
+  InvalidVMFamilyName: "InvalidVMFamilyName",
+  OperationNotSupportedForSku: "OperationNotSupportedForSku",
+  OperationNotEnabledForRegion: "OperationNotEnabledForRegion",
 }
 
 /**
  * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
  */
-enum ManagedServiceIdentityType {
-  None,
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned,UserAssigned`,
+union ManagedServiceIdentityType {
+  string,
+  None: "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
 /**
  * The type of compute
  */
-enum ComputeType {
-  AKS,
-  Kubernetes,
-  AmlCompute,
-  ComputeInstance,
-  DataFactory,
-  VirtualMachine,
-  HDInsight,
-  Databricks,
-  DataLakeAnalytics,
-  SynapseSpark,
+union ComputeType {
+  string,
+  AKS: "AKS",
+  Kubernetes: "Kubernetes",
+  AmlCompute: "AmlCompute",
+  ComputeInstance: "ComputeInstance",
+  DataFactory: "DataFactory",
+  VirtualMachine: "VirtualMachine",
+  HDInsight: "HDInsight",
+  Databricks: "Databricks",
+  DataLakeAnalytics: "DataLakeAnalytics",
+  SynapseSpark: "SynapseSpark",
 }
 
 /**
  * The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.
  */
-enum ProvisioningState {
-  Unknown,
-  Updating,
-  Creating,
-  Deleting,
-  Succeeded,
-  Failed,
-  Canceled,
+union ProvisioningState {
+  string,
+  Unknown: "Unknown",
+  Updating: "Updating",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
-enum UnderlyingResourceAction {
-  Delete,
-  Detach,
+union UnderlyingResourceAction {
+  string,
+  Delete: "Delete",
+  Detach: "Detach",
 }
 
 /**
  * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images
  */
-enum ImageType {
-  docker,
-  azureml,
+union ImageType {
+  string,
+  docker: "docker",
+  azureml: "azureml",
 }
 
 /**
  * Type of the Environment Variable. Possible values are: local - For local variable
  */
-enum EnvironmentVariableType {
-  local,
+union EnvironmentVariableType {
+  string,
+  local: "local",
 }
 
 /**
  * Protocol over which communication will happen over this endpoint
  */
-enum Protocol {
-  tcp,
-  udp,
-  http,
+union Protocol {
+  string,
+  tcp: "tcp",
+  udp: "udp",
+  http: "http",
 }
 
 /**
  * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
  */
-enum VolumeDefinitionType {
-  bind,
-  volume,
-  tmpfs,
-  npipe,
+union VolumeDefinitionType {
+  string,
+  bind: "bind",
+  volume: "volume",
+  tmpfs: "tmpfs",
+  npipe: "npipe",
 }
 
 /**
  * State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.
  */
-enum NodeState {
-  idle,
-  running,
-  preparing,
-  unusable,
-  leaving,
-  preempted,
+union NodeState {
+  string,
+  idle: "idle",
+  running: "running",
+  preparing: "preparing",
+  unusable: "unusable",
+  leaving: "leaving",
+  preempted: "preempted",
 }
 
 /**
  * Provisioning state of registry asset.
  */
-enum AssetProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
-  Creating,
-  Updating,
-  Deleting,
+union AssetProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
 }
 
-enum AutoDeleteCondition {
-  CreatedGreaterThan,
-  LastAccessedGreaterThan,
+union AutoDeleteCondition {
+  string,
+  CreatedGreaterThan: "CreatedGreaterThan",
+  LastAccessedGreaterThan: "LastAccessedGreaterThan",
 }
 
 /**
  * Type of storage to use for the pending upload location
  */
-enum PendingUploadType {
-  None,
-  TemporaryBlobReference,
+union PendingUploadType {
+  string,
+  None: "None",
+  TemporaryBlobReference: "TemporaryBlobReference",
 }
 
 /**
  * Enum to determine the PendingUpload credentials type.
  */
-enum PendingUploadCredentialType {
-  SAS,
+union PendingUploadCredentialType {
+  string,
+  SAS: "SAS",
 }
 
-enum ListViewType {
-  ActiveOnly,
-  ArchivedOnly,
-  All,
+union ListViewType {
+  string,
+  ActiveOnly: "ActiveOnly",
+  ArchivedOnly: "ArchivedOnly",
+  All: "All",
 }
 
 /**
  * Enum to determine the type of data.
  */
-enum DataType {
-  uri_file,
-  uri_folder,
-  mltable,
+union DataType {
+  string,
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
 }
 
 /**
  * Protection level associated with the Intellectual Property.
  */
-enum ProtectionLevel {
+union ProtectionLevel {
+  string,
+
   /**
    * All means Intellectual Property is fully protected.
    */
-  All,
+  All: "All",
 
   /**
    * None means it is not an Intellectual Property.
    */
-  None,
+  None: "None",
 }
 
 /**
  * AutoRebuild setting for the derived image
  */
-enum AutoRebuildSetting {
-  Disabled,
-  OnBaseImageUpdate,
+union AutoRebuildSetting {
+  string,
+  Disabled: "Disabled",
+  OnBaseImageUpdate: "OnBaseImageUpdate",
 }
 
 /**
  * Environment type is either user created or curated by Azure ML service
  */
-enum EnvironmentType {
-  Curated,
-  UserCreated,
+union EnvironmentType {
+  string,
+  Curated: "Curated",
+  UserCreated: "UserCreated",
 }
 
 /**
  * The type of operating system.
  */
-enum OperatingSystemType {
-  Linux,
-  Windows,
+union OperatingSystemType {
+  string,
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
  * Base environment type.
  */
-enum BaseEnvironmentSourceType {
-  EnvironmentAsset,
+union BaseEnvironmentSourceType {
+  string,
+  EnvironmentAsset: "EnvironmentAsset",
 }
 
 /**
  * Inferencing server type for various targets.
  */
-enum InferencingServerType {
-  AzureMLOnline,
-  AzureMLBatch,
-  Triton,
-  Custom,
+union InferencingServerType {
+  string,
+  AzureMLOnline: "AzureMLOnline",
+  AzureMLBatch: "AzureMLBatch",
+  Triton: "Triton",
+  Custom: "Custom",
 }
 
 /**
  * Type of the inputs.
  */
-enum PackageInputType {
-  UriFile,
-  UriFolder,
+union PackageInputType {
+  string,
+  UriFile: "UriFile",
+  UriFolder: "UriFolder",
 }
 
 /**
  * Mounting type of the model or the inputs
  */
-enum PackageInputDeliveryMode {
-  Copy,
-  Download,
+union PackageInputDeliveryMode {
+  string,
+  Copy: "Copy",
+  Download: "Download",
 }
 
 /**
  * Input path type for package inputs.
  */
-enum InputPathType {
-  Url,
-  PathId,
-  PathVersion,
+union InputPathType {
+  string,
+  Url: "Url",
+  PathId: "PathId",
+  PathVersion: "PathVersion",
 }
 
 /**
  * Package build state returned in package response.
  */
-enum PackageBuildState {
-  NotStarted,
-  Running,
-  Succeeded,
-  Failed,
+union PackageBuildState {
+  string,
+  NotStarted: "NotStarted",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
 }
 
 /**
  * State of endpoint provisioning.
  */
-enum EndpointProvisioningState {
-  Creating,
-  Deleting,
-  Succeeded,
-  Failed,
-  Updating,
-  Canceled,
+union EndpointProvisioningState {
+  string,
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Updating: "Updating",
+  Canceled: "Canceled",
 }
 
 /**
  * Enum to determine endpoint authentication mode.
  */
-enum EndpointAuthMode {
-  AMLToken,
-  Key,
-  AADToken,
+union EndpointAuthMode {
+  string,
+  AMLToken: "AMLToken",
+  Key: "Key",
+  AADToken: "AADToken",
 }
 
 /**
  * The enumerated property types for batch deployments.
  */
-enum BatchDeploymentConfigurationType {
-  Model,
-  PipelineComponent,
+union BatchDeploymentConfigurationType {
+  string,
+  Model: "Model",
+  PipelineComponent: "PipelineComponent",
 }
 
 /**
@@ -334,1323 +370,1446 @@ enum BatchDeploymentConfigurationType {
  * Increasing verbosity order for logging is : Warning, Info and Debug.
  * The default value is Info.
  */
-enum BatchLoggingLevel {
-  Info,
-  Warning,
-  Debug,
+union BatchLoggingLevel {
+  string,
+  Info: "Info",
+  Warning: "Warning",
+  Debug: "Debug",
 }
 
 /**
  * Enum to determine which reference method to use for an asset.
  */
-enum ReferenceType {
-  Id,
-  DataPath,
-  OutputPath,
+union ReferenceType {
+  string,
+  Id: "Id",
+  DataPath: "DataPath",
+  OutputPath: "OutputPath",
 }
 
 /**
  * Enum to determine how batch inferencing will handle output
  */
-enum BatchOutputAction {
-  SummaryOnly,
-  AppendRow,
+union BatchOutputAction {
+  string,
+  SummaryOnly: "SummaryOnly",
+  AppendRow: "AppendRow",
 }
 
 /**
  * Possible values for DeploymentProvisioningState.
  */
-enum DeploymentProvisioningState {
-  Creating,
-  Deleting,
-  Scaling,
-  Updating,
-  Succeeded,
-  Failed,
-  Canceled,
+union DeploymentProvisioningState {
+  string,
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Scaling: "Scaling",
+  Updating: "Updating",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 /**
  * Enum to determine the datastore credentials type.
  */
-enum CredentialsType {
-  AccountKey,
-  Certificate,
-  None,
-  Sas,
-  ServicePrincipal,
-  KerberosKeytab,
-  KerberosPassword,
+union CredentialsType {
+  string,
+  AccountKey: "AccountKey",
+  Certificate: "Certificate",
+  None: "None",
+  Sas: "Sas",
+  ServicePrincipal: "ServicePrincipal",
+  KerberosKeytab: "KerberosKeytab",
+  KerberosPassword: "KerberosPassword",
 }
 
 /**
  * Enum to determine the datastore contents type.
  */
-enum DatastoreType {
-  AzureBlob,
-  AzureDataLakeGen1,
-  AzureDataLakeGen2,
-  AzureFile,
-  Hdfs,
-  OneLake,
+union DatastoreType {
+  string,
+  AzureBlob: "AzureBlob",
+  AzureDataLakeGen1: "AzureDataLakeGen1",
+  AzureDataLakeGen2: "AzureDataLakeGen2",
+  AzureFile: "AzureFile",
+  Hdfs: "Hdfs",
+  OneLake: "OneLake",
 }
 
 /**
  * Enum to determine the datastore secrets type.
  */
-enum SecretsType {
-  AccountKey,
-  Certificate,
-  Sas,
-  ServicePrincipal,
-  KerberosPassword,
-  KerberosKeytab,
+union SecretsType {
+  string,
+  AccountKey: "AccountKey",
+  Certificate: "Certificate",
+  Sas: "Sas",
+  ServicePrincipal: "ServicePrincipal",
+  KerberosPassword: "KerberosPassword",
+  KerberosKeytab: "KerberosKeytab",
 }
 
-enum FeatureDataType {
-  String,
-  Integer,
-  Long,
-  Float,
-  Double,
-  Binary,
-  Datetime,
-  Boolean,
+union FeatureDataType {
+  string,
+  String: "String",
+  Integer: "Integer",
+  Long: "Long",
+  Float: "Float",
+  Double: "Double",
+  Binary: "Binary",
+  Datetime: "Datetime",
+  Boolean: "Boolean",
 }
 
 /**
  * Enum to determine the email notification type.
  */
-enum EmailNotificationEnableType {
-  JobCompleted,
-  JobFailed,
-  JobCancelled,
+union EmailNotificationEnableType {
+  string,
+  JobCompleted: "JobCompleted",
+  JobFailed: "JobFailed",
+  JobCancelled: "JobCancelled",
 }
 
 /**
  * Enum to determine the webhook callback service type.
  */
-enum WebhookType {
-  AzureDevOps,
+union WebhookType {
+  string,
+  AzureDevOps: "AzureDevOps",
 }
 
 /**
  * Enum to describe the frequency of a recurrence schedule
  */
-enum RecurrenceFrequency {
+union RecurrenceFrequency {
+  string,
+
   /**
    * Minute frequency
    */
-  Minute,
+  Minute: "Minute",
 
   /**
    * Hour frequency
    */
-  Hour,
+  Hour: "Hour",
 
   /**
    * Day frequency
    */
-  Day,
+  Day: "Day",
 
   /**
    * Week frequency
    */
-  Week,
+  Week: "Week",
 
   /**
    * Month frequency
    */
-  Month,
+  Month: "Month",
 }
 
 /**
  * Enum of weekday
  */
-enum WeekDay {
+union WeekDay {
+  string,
+
   /**
    * Monday weekday
    */
-  Monday,
+  Monday: "Monday",
 
   /**
    * Tuesday weekday
    */
-  Tuesday,
+  Tuesday: "Tuesday",
 
   /**
    * Wednesday weekday
    */
-  Wednesday,
+  Wednesday: "Wednesday",
 
   /**
    * Thursday weekday
    */
-  Thursday,
+  Thursday: "Thursday",
 
   /**
    * Friday weekday
    */
-  Friday,
+  Friday: "Friday",
 
   /**
    * Saturday weekday
    */
-  Saturday,
+  Saturday: "Saturday",
 
   /**
    * Sunday weekday
    */
-  Sunday,
+  Sunday: "Sunday",
 }
 
-enum TriggerType {
-  Recurrence,
-  Cron,
+union TriggerType {
+  string,
+  Recurrence: "Recurrence",
+  Cron: "Cron",
 }
 
-enum MaterializationStoreType {
-  None,
-  Online,
-  Offline,
-  OnlineAndOffline,
+union MaterializationStoreType {
+  string,
+  None: "None",
+  Online: "Online",
+  Offline: "Offline",
+  OnlineAndOffline: "OnlineAndOffline",
 }
 
 /**
  * The status of a job.
  */
-enum JobStatus {
+union JobStatus {
+  string,
+
   /**
    * Run hasn't started yet.
    */
-  NotStarted,
+  NotStarted: "NotStarted",
 
   /**
    * Run has started. The user has a run ID.
    */
-  Starting,
+  Starting: "Starting",
 
   /**
    * (Not used currently) It will be used if ES is creating the compute target.
    */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /**
    * The run environment is being prepared.
    */
-  Preparing,
+  Preparing: "Preparing",
 
   /**
    * The job is queued in the compute target. For example, in BatchAI the job is in queued state, while waiting for all required nodes to be ready.
    */
-  Queued,
+  Queued: "Queued",
 
   /**
    * The job started to run in the compute target.
    */
-  Running,
+  Running: "Running",
 
   /**
    * Job is completed in the target. It is in output collection state now.
    */
-  Finalizing,
+  Finalizing: "Finalizing",
 
   /**
    * Cancellation has been requested for the job.
    */
-  CancelRequested,
+  CancelRequested: "CancelRequested",
 
   /**
    * Job completed successfully. This reflects that both the job itself and output collection states completed successfully
    */
-  Completed,
+  Completed: "Completed",
 
   /**
    * Job failed.
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * Following cancellation request, the job is now successfully canceled.
    */
-  Canceled,
+  Canceled: "Canceled",
 
   /**
    * When heartbeat is enabled, if the run isn't updating any information to RunHistory then the run goes to NotResponding state.
    * NotResponding is the only state that is exempt from strict transition orders. A run can go from NotResponding to any of the previous states.
    */
-  NotResponding,
+  NotResponding: "NotResponding",
 
   /**
    * The job is paused by users. Some adjustment to labeling jobs can be made only in paused state.
    */
-  Paused,
+  Paused: "Paused",
 
   /**
    * Default job status if not mapped to all other statuses
    */
-  Unknown,
+  Unknown: "Unknown",
 
   /**
    * The job is in a scheduled state. Job is not in any active state.
    */
-  Scheduled,
+  Scheduled: "Scheduled",
 }
 
-enum FeaturestoreJobType {
-  RecurrentMaterialization,
-  BackfillMaterialization,
+union FeaturestoreJobType {
+  string,
+  RecurrentMaterialization: "RecurrentMaterialization",
+  BackfillMaterialization: "BackfillMaterialization",
 }
 
 /**
  * Enum to determine identity framework.
  */
-enum IdentityConfigurationType {
-  Managed,
-  AMLToken,
-  UserIdentity,
+union IdentityConfigurationType {
+  string,
+  Managed: "Managed",
+  AMLToken: "AMLToken",
+  UserIdentity: "UserIdentity",
 }
 
 /**
  * Enum to determine the type of job.
  */
-enum JobType {
-  AutoML,
-  Command,
-  Labeling,
-  Sweep,
-  Pipeline,
-  Spark,
+union JobType {
+  string,
+  AutoML: "AutoML",
+  Command: "Command",
+  Labeling: "Labeling",
+  Sweep: "Sweep",
+  Pipeline: "Pipeline",
+  Spark: "Spark",
 }
 
 /**
  * The enumerated types for the nodes value
  */
-enum NodesValueType {
-  All,
-  Custom,
+union NodesValueType {
+  string,
+  All: "All",
+  Custom: "Custom",
 }
 
 /**
  * Whether IncrementalDataRefresh is enabled
  */
-enum IncrementalDataRefresh {
-  Enabled,
-  Disabled,
+union IncrementalDataRefresh {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Whether multiSelect is enabled
  */
-enum MultiSelect {
-  Enabled,
-  Disabled,
+union MultiSelect {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Media type of data asset.
  */
-enum MediaType {
-  Image,
-  Text,
+union MediaType {
+  string,
+  Image: "Image",
+  Text: "Text",
 }
 
-enum MLAssistConfigurationType {
-  Enabled,
-  Disabled,
+union MLAssistConfigurationType {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Enum to determine the job provisioning state.
  */
-enum JobProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
-  InProgress,
+union JobProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
+  InProgress: "InProgress",
 }
 
-enum StatusMessageLevel {
-  Error,
-  Information,
-  Warning,
+union StatusMessageLevel {
+  string,
+  Error: "Error",
+  Information: "Information",
+  Warning: "Warning",
 }
 
 /**
  * The format of exported labels.
  */
-enum ExportFormatType {
-  Dataset,
-  Coco,
-  CSV,
+union ExportFormatType {
+  string,
+  Dataset: "Dataset",
+  Coco: "Coco",
+  CSV: "CSV",
 }
 
 /**
  * Enum to determine endpoint compute type.
  */
-enum EndpointComputeType {
-  Managed,
-  Kubernetes,
-  AzureMLCompute,
+union EndpointComputeType {
+  string,
+  Managed: "Managed",
+  Kubernetes: "Kubernetes",
+  AzureMLCompute: "AzureMLCompute",
 }
 
-enum OrderString {
-  CreatedAtDesc,
-  CreatedAtAsc,
-  UpdatedAtDesc,
-  UpdatedAtAsc,
+union OrderString {
+  string,
+  CreatedAtDesc: "CreatedAtDesc",
+  CreatedAtAsc: "CreatedAtAsc",
+  UpdatedAtDesc: "UpdatedAtDesc",
+  UpdatedAtAsc: "UpdatedAtAsc",
 }
 
 /**
  * Enum to determine whether PublicNetworkAccess is Enabled or Disabled.
  */
-enum PublicNetworkAccessType {
-  Enabled,
-  Disabled,
+union PublicNetworkAccessType {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
-enum DataCollectionMode {
-  Enabled,
-  Disabled,
+union DataCollectionMode {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
-enum RollingRateType {
-  Year,
-  Month,
-  Day,
-  Hour,
-  Minute,
+union RollingRateType {
+  string,
+  Year: "Year",
+  Month: "Month",
+  Day: "Day",
+  Hour: "Hour",
+  Minute: "Minute",
 }
 
 /**
  * Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.
  */
-enum EgressPublicNetworkAccessType {
-  Enabled,
-  Disabled,
+union EgressPublicNetworkAccessType {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
-enum ScaleType {
-  Default,
-  TargetUtilization,
+union ScaleType {
+  string,
+  Default: "Default",
+  TargetUtilization: "TargetUtilization",
 }
 
 /**
  * The type of container to retrieve logs from.
  */
-enum ContainerType {
+union ContainerType {
+  string,
+
   /**
    * The container used to download models and score script.
    */
-  StorageInitializer,
+  StorageInitializer: "StorageInitializer",
 
   /**
    * The container used to serve user's request.
    */
-  InferenceServer,
+  InferenceServer: "InferenceServer",
 
   /**
    * The container used to collect payload and custom logging when mdc is enabled.
    */
-  ModelDataCollector,
+  ModelDataCollector: "ModelDataCollector",
 }
 
 /**
  * Node scaling setting for the compute sku.
  */
-enum SkuScaleType {
+union SkuScaleType {
+  string,
+
   /**
    * Automatically scales node count.
    */
-  Automatic,
+  Automatic: "Automatic",
 
   /**
    * Node count scaled upon user request.
    */
-  Manual,
+  Manual: "Manual",
 
   /**
    * Fixed set of nodes.
    */
-  None,
+  None: "None",
 }
 
-enum KeyType {
-  Primary,
-  Secondary,
+union KeyType {
+  string,
+  Primary: "Primary",
+  Secondary: "Secondary",
 }
 
-enum ScheduleListViewType {
-  EnabledOnly,
-  DisabledOnly,
-  All,
+union ScheduleListViewType {
+  string,
+  EnabledOnly: "EnabledOnly",
+  DisabledOnly: "DisabledOnly",
+  All: "All",
 }
 
-enum ScheduleActionType {
-  CreateJob,
-  InvokeBatchEndpoint,
-  ImportData,
-  CreateMonitor,
+union ScheduleActionType {
+  string,
+  CreateJob: "CreateJob",
+  InvokeBatchEndpoint: "InvokeBatchEndpoint",
+  ImportData: "ImportData",
+  CreateMonitor: "CreateMonitor",
 }
 
-enum ScheduleProvisioningStatus {
-  Creating,
-  Updating,
-  Deleting,
-  Succeeded,
-  Failed,
-  Canceled,
+union ScheduleProvisioningStatus {
+  string,
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 /**
  * Connection status of the service consumer with the service provider
  */
-enum EndpointServiceConnectionStatus {
-  Approved,
-  Pending,
-  Rejected,
-  Disconnected,
-  Timeout,
+union EndpointServiceConnectionStatus {
+  string,
+  Approved: "Approved",
+  Pending: "Pending",
+  Rejected: "Rejected",
+  Disconnected: "Disconnected",
+  Timeout: "Timeout",
 }
 
 /**
  * Indicates whether or not the encryption is enabled for the workspace.
  */
-enum EncryptionStatus {
-  Enabled,
-  Disabled,
+union EncryptionStatus {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Isolation mode for the managed network of a machine learning workspace.
  */
-enum IsolationMode {
-  Disabled,
-  AllowInternetOutbound,
-  AllowOnlyApprovedOutbound,
+union IsolationMode {
+  string,
+  Disabled: "Disabled",
+  AllowInternetOutbound: "AllowInternetOutbound",
+  AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
 /**
  * Category of a managed network Outbound Rule of a machine learning workspace.
  */
-enum RuleCategory {
-  Required,
-  Recommended,
-  UserDefined,
+union RuleCategory {
+  string,
+  Required: "Required",
+  Recommended: "Recommended",
+  UserDefined: "UserDefined",
 }
 
 /**
  * Type of a managed network Outbound Rule of a machine learning workspace.
  */
-enum RuleStatus {
-  Inactive,
-  Active,
+union RuleStatus {
+  string,
+  Inactive: "Inactive",
+  Active: "Active",
 }
 
 /**
  * Type of a managed network Outbound Rule of a machine learning workspace.
  */
-enum RuleType {
-  FQDN,
-  PrivateEndpoint,
-  ServiceTag,
+union RuleType {
+  string,
+  FQDN: "FQDN",
+  PrivateEndpoint: "PrivateEndpoint",
+  ServiceTag: "ServiceTag",
 }
 
 /**
  * Status for the managed network of a machine learning workspace.
  */
-enum ManagedNetworkStatus {
-  Inactive,
-  Active,
+union ManagedNetworkStatus {
+  string,
+  Inactive: "Inactive",
+  Active: "Active",
 }
 
 /**
  * The current provisioning state.
  */
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
  * Authentication type of the connection target
  */
-enum ConnectionAuthType {
-  PAT,
-  ManagedIdentity,
-  UsernamePassword,
-  None,
-  SAS,
-  ServicePrincipal,
-  AccessKey,
-  ApiKey,
-  CustomKeys,
+union ConnectionAuthType {
+  string,
+  PAT: "PAT",
+  ManagedIdentity: "ManagedIdentity",
+  UsernamePassword: "UsernamePassword",
+  None: "None",
+  SAS: "SAS",
+  ServicePrincipal: "ServicePrincipal",
+  AccessKey: "AccessKey",
+  ApiKey: "ApiKey",
+  CustomKeys: "CustomKeys",
 }
 
 /**
  * Category of the connection
  */
-enum ConnectionCategory {
-  PythonFeed,
-  ContainerRegistry,
-  Git,
-  S3,
-  Snowflake,
-  AzureSqlDb,
-  AzureSynapseAnalytics,
-  AzureMySqlDb,
-  AzurePostgresDb,
-  ADLSGen2,
-  Redis,
-  ApiKey,
-  AzureOpenAI,
-  CognitiveSearch,
-  CognitiveService,
-  CustomKeys,
+union ConnectionCategory {
+  string,
+  PythonFeed: "PythonFeed",
+  ContainerRegistry: "ContainerRegistry",
+  Git: "Git",
+  S3: "S3",
+  Snowflake: "Snowflake",
+  AzureSqlDb: "AzureSqlDb",
+  AzureSynapseAnalytics: "AzureSynapseAnalytics",
+  AzureMySqlDb: "AzureMySqlDb",
+  AzurePostgresDb: "AzurePostgresDb",
+  ADLSGen2: "ADLSGen2",
+  Redis: "Redis",
+  ApiKey: "ApiKey",
+  AzureOpenAI: "AzureOpenAI",
+  CognitiveSearch: "CognitiveSearch",
+  CognitiveService: "CognitiveService",
+  CustomKeys: "CustomKeys",
 }
 
 /**
  * Level of workspace setup error
  */
-enum DiagnoseResultLevel {
-  Warning,
-  Error,
-  Information,
+union DiagnoseResultLevel {
+  string,
+  Warning: "Warning",
+  Error: "Error",
+  Information: "Information",
 }
 
 /**
  * Intended usage of the cluster
  */
-enum ClusterPurpose {
-  FastProd,
-  DenseProd,
-  DevTest,
+union ClusterPurpose {
+  string,
+  FastProd: "FastProd",
+  DenseProd: "DenseProd",
+  DevTest: "DevTest",
 }
 
 /**
  * Enable or disable ssl for scoring
  */
-enum SslConfigStatus {
-  Disabled,
-  Enabled,
-  Auto,
+union SslConfigStatus {
+  string,
+  Disabled: "Disabled",
+  Enabled: "Enabled",
+  Auto: "Auto",
 }
 
 /**
  * Load Balancer Type
  */
-enum LoadBalancerType {
-  PublicIp,
-  InternalLoadBalancer,
+union LoadBalancerType {
+  string,
+  PublicIp: "PublicIp",
+  InternalLoadBalancer: "InternalLoadBalancer",
 }
 
 /**
  * Compute OS Type
  */
-enum OsType {
-  Linux,
-  Windows,
+union OsType {
+  string,
+  Linux: "Linux",
+  Windows: "Windows",
 }
 
 /**
  * Virtual Machine priority
  */
-enum VmPriority {
-  Dedicated,
-  LowPriority,
+union VmPriority {
+  string,
+  Dedicated: "Dedicated",
+  LowPriority: "LowPriority",
 }
 
 /**
  * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.
  */
-enum RemoteLoginPortPublicAccess {
-  Enabled,
-  Disabled,
-  NotSpecified,
+union RemoteLoginPortPublicAccess {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
+  NotSpecified: "NotSpecified",
 }
 
 /**
  * Allocation state of the compute. Possible values are: steady - Indicates that the compute is not resizing. There are no changes to the number of compute nodes in the compute in progress. A compute enters this state when it is created and when no operations are being performed on the compute to change the number of compute nodes. resizing - Indicates that the compute is resizing; that is, compute nodes are being added to or removed from the compute.
  */
-enum AllocationState {
-  Steady,
-  Resizing,
+union AllocationState {
+  string,
+  Steady: "Steady",
+  Resizing: "Resizing",
 }
 
 /**
  * Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.
  */
-enum ApplicationSharingPolicy {
-  Personal,
-  Shared,
+union ApplicationSharingPolicy {
+  string,
+  Personal: "Personal",
+  Shared: "Shared",
 }
 
 /**
  * Indicates whether mlflow autologger is enabled for notebooks.
  */
-enum MlflowAutologger {
-  Enabled,
-  Disabled,
+union MlflowAutologger {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.
  */
-enum SshPublicAccess {
-  Enabled,
-  Disabled,
+union SshPublicAccess {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Current state of an ComputeInstance.
  */
-enum ComputeInstanceState {
-  Creating,
-  CreateFailed,
-  Deleting,
-  Running,
-  Restarting,
-  JobRunning,
-  SettingUp,
-  SetupFailed,
-  Starting,
-  Stopped,
-  Stopping,
-  UserSettingUp,
-  UserSetupFailed,
-  Unknown,
-  Unusable,
+union ComputeInstanceState {
+  string,
+  Creating: "Creating",
+  CreateFailed: "CreateFailed",
+  Deleting: "Deleting",
+  Running: "Running",
+  Restarting: "Restarting",
+  JobRunning: "JobRunning",
+  SettingUp: "SettingUp",
+  SetupFailed: "SetupFailed",
+  Starting: "Starting",
+  Stopped: "Stopped",
+  Stopping: "Stopping",
+  UserSettingUp: "UserSettingUp",
+  UserSetupFailed: "UserSetupFailed",
+  Unknown: "Unknown",
+  Unusable: "Unusable",
 }
 
 /**
  * The Compute Instance Authorization type. Available values are personal (default).
  */
-enum ComputeInstanceAuthorizationType {
-  personal,
+union ComputeInstanceAuthorizationType {
+  string,
+  personal: "personal",
 }
 
 /**
  * Name of the last operation.
  */
-enum OperationName {
-  Create,
-  Start,
-  Stop,
-  Restart,
-  Reimage,
-  Delete,
+union OperationName {
+  string,
+  Create: "Create",
+  Start: "Start",
+  Stop: "Stop",
+  Restart: "Restart",
+  Reimage: "Reimage",
+  Delete: "Delete",
 }
 
 /**
  * Operation status.
  */
-enum OperationStatus {
-  InProgress,
-  Succeeded,
-  CreateFailed,
-  StartFailed,
-  StopFailed,
-  RestartFailed,
-  ReimageFailed,
-  DeleteFailed,
+union OperationStatus {
+  string,
+  InProgress: "InProgress",
+  Succeeded: "Succeeded",
+  CreateFailed: "CreateFailed",
+  StartFailed: "StartFailed",
+  StopFailed: "StopFailed",
+  RestartFailed: "RestartFailed",
+  ReimageFailed: "ReimageFailed",
+  DeleteFailed: "DeleteFailed",
 }
 
 /**
  * Trigger of operation.
  */
-enum OperationTrigger {
-  User,
-  Schedule,
-  IdleShutdown,
+union OperationTrigger {
+  string,
+  User: "User",
+  Schedule: "Schedule",
+  IdleShutdown: "IdleShutdown",
 }
 
 /**
  * The current deployment state of schedule.
  */
-enum ProvisioningStatus {
-  Completed,
-  Provisioning,
-  Failed,
+union ProvisioningStatus {
+  string,
+  Completed: "Completed",
+  Provisioning: "Provisioning",
+  Failed: "Failed",
 }
 
 /**
  * Is the schedule enabled or disabled?
  */
-enum ScheduleStatus {
-  Enabled,
-  Disabled,
+union ScheduleStatus {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * [Required] The compute power action.
  */
-enum ComputePowerAction {
-  Start,
-  Stop,
+union ComputePowerAction {
+  string,
+  Start: "Start",
+  Stop: "Stop",
 }
 
 /**
  * The current deployment state of schedule.
  */
-enum ScheduleProvisioningState {
-  Completed,
-  Provisioning,
-  Failed,
+union ScheduleProvisioningState {
+  string,
+  Completed: "Completed",
+  Provisioning: "Provisioning",
+  Failed: "Failed",
 }
 
 /**
  * Auto save settings.
  */
-enum Autosave {
-  None,
-  Local,
-  Remote,
+union Autosave {
+  string,
+  None: "None",
+  Local: "Local",
+  Remote: "Remote",
 }
 
 /**
  * network of this container.
  */
-enum Network {
-  Bridge,
-  Host,
+union Network {
+  string,
+  Bridge: "Bridge",
+  Host: "Host",
 }
 
 /**
  * Caching type of Data Disk.
  */
-enum Caching {
-  None,
-  ReadOnly,
-  ReadWrite,
+union Caching {
+  string,
+  None: "None",
+  ReadOnly: "ReadOnly",
+  ReadWrite: "ReadWrite",
 }
 
 /**
  * type of this storage account.
  */
-enum StorageAccountType {
-  Standard_LRS,
-  Premium_LRS,
+union StorageAccountType {
+  string,
+  Standard_LRS: "Standard_LRS",
+  Premium_LRS: "Premium_LRS",
 }
 
 /**
  * Data source type.
  */
-enum SourceType {
-  Dataset,
-  Datastore,
-  URI,
+union SourceType {
+  string,
+  Dataset: "Dataset",
+  Datastore: "Datastore",
+  URI: "URI",
 }
 
 /**
  * Mount Action.
  */
-enum MountAction {
-  Mount,
-  Unmount,
+union MountAction {
+  string,
+  Mount: "Mount",
+  Unmount: "Unmount",
 }
 
 /**
  * Mount state.
  */
-enum MountState {
-  MountRequested,
-  Mounted,
-  MountFailed,
-  UnmountRequested,
-  UnmountFailed,
-  Unmounted,
+union MountState {
+  string,
+  MountRequested: "MountRequested",
+  Mounted: "Mounted",
+  MountFailed: "MountFailed",
+  UnmountRequested: "UnmountRequested",
+  UnmountFailed: "UnmountFailed",
+  Unmounted: "Unmounted",
 }
 
-enum MonitoringFeatureFilterType {
+union MonitoringFeatureFilterType {
+  string,
+
   /**
    * Includes all features.
    */
-  AllFeatures,
+  AllFeatures: "AllFeatures",
 
   /**
    * Only includes the top contributing features, measured by feature attribution.
    */
-  TopNByAttribution,
+  TopNByAttribution: "TopNByAttribution",
 
   /**
    * Includes a user-defined subset of features.
    */
-  FeatureSubset,
+  FeatureSubset: "FeatureSubset",
 }
 
 /**
  * Monitor compute identity type enum.
  */
-enum MonitorComputeIdentityType {
+union MonitorComputeIdentityType {
+  string,
+
   /**
    * Authenticates through user's AML token.
    */
-  AmlToken,
+  AmlToken: "AmlToken",
 
   /**
    * Authenticates through a user-provided managed identity.
    */
-  ManagedIdentity,
+  ManagedIdentity: "ManagedIdentity",
 }
 
 /**
  * Enum to determine the input data delivery mode.
  */
-enum InputDeliveryMode {
-  ReadOnlyMount,
-  ReadWriteMount,
-  Download,
-  Direct,
-  EvalMount,
-  EvalDownload,
+union InputDeliveryMode {
+  string,
+  ReadOnlyMount: "ReadOnlyMount",
+  ReadWriteMount: "ReadWriteMount",
+  Download: "Download",
+  Direct: "Direct",
+  EvalMount: "EvalMount",
+  EvalDownload: "EvalDownload",
 }
 
 /**
  * Output data delivery mode enums.
  */
-enum OutputDeliveryMode {
-  ReadWriteMount,
-  Upload,
-  Direct,
+union OutputDeliveryMode {
+  string,
+  ReadWriteMount: "ReadWriteMount",
+  Upload: "Upload",
+  Direct: "Direct",
 }
 
 /**
  * Enum to determine forecast horizon selection mode.
  */
-enum ForecastHorizonMode {
+union ForecastHorizonMode {
+  string,
+
   /**
    * Forecast horizon to be determined automatically.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Use the custom forecast horizon.
    */
-  Custom,
+  Custom: "Custom",
 }
 
 /**
  * Enum to determine the Job Output Type.
  */
-enum JobOutputType {
-  uri_file,
-  uri_folder,
-  mltable,
-  custom_model,
-  mlflow_model,
-  triton_model,
+union JobOutputType {
+  string,
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
 }
 
 /**
  * Enum to determine the job tier.
  */
-enum JobTier {
-  Null,
-  Spot,
-  Basic,
-  Standard,
-  Premium,
+union JobTier {
+  string,
+  Null: "Null",
+  Spot: "Spot",
+  Basic: "Basic",
+  Standard: "Standard",
+  Premium: "Premium",
 }
 
 /**
  * Enum for setting log verbosity.
  */
-enum LogVerbosity {
+union LogVerbosity {
+  string,
+
   /**
    * No logs emitted.
    */
-  NotSet,
+  NotSet: "NotSet",
 
   /**
    * Debug and above log statements logged.
    */
-  Debug,
+  Debug: "Debug",
 
   /**
    * Info and above log statements logged.
    */
-  Info,
+  Info: "Info",
 
   /**
    * Warning and above log statements logged.
    */
-  Warning,
+  Warning: "Warning",
 
   /**
    * Error and above log statements logged.
    */
-  Error,
+  Error: "Error",
 
   /**
    * Only critical statements logged.
    */
-  Critical,
+  Critical: "Critical",
 }
 
 /**
  * AutoMLJob Task type.
  */
-enum TaskType {
+union TaskType {
+  string,
+
   /**
    * Classification in machine learning and statistics is a supervised learning approach in which
    * the computer program learns from the data given to it and make new observations or classifications.
    */
-  Classification,
+  Classification: "Classification",
 
   /**
    * Regression means to predict the value using the input data. Regression models are used to predict a continuous value.
    */
-  Regression,
+  Regression: "Regression",
 
   /**
    * Forecasting is a special kind of regression task that deals with time-series data and creates forecasting model
    * that can be used to predict the near future values based on the inputs.
    */
-  Forecasting,
+  Forecasting: "Forecasting",
 
   /**
    * Image Classification. Multi-class image classification is used when an image is classified with only a single label
    * from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.
    */
-  ImageClassification,
+  ImageClassification: "ImageClassification",
 
   /**
    * Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
    * from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.
    */
-  ImageClassificationMultilabel,
+  ImageClassificationMultilabel: "ImageClassificationMultilabel",
 
   /**
    * Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
    * bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.
    */
-  ImageObjectDetection,
+  ImageObjectDetection: "ImageObjectDetection",
 
   /**
    * Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
    * drawing a polygon around each object in the image.
    */
-  ImageInstanceSegmentation,
+  ImageInstanceSegmentation: "ImageInstanceSegmentation",
 
   /**
    * Text classification (also known as text tagging or text categorization) is the process of sorting texts into categories.
    * Categories are mutually exclusive.
    */
-  TextClassification,
+  TextClassification: "TextClassification",
 
   /**
    * Multilabel classification task assigns each sample to a group (zero or more) of target labels.
    */
-  TextClassificationMultilabel,
+  TextClassificationMultilabel: "TextClassificationMultilabel",
 
   /**
    * Text Named Entity Recognition a.k.a. TextNER.
    * Named Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more.
    */
-  TextNER,
+  TextNER: "TextNER",
 }
 
 /**
  * Enum to determine the Job Input Type.
  */
-enum JobInputType {
-  literal,
-  uri_file,
-  uri_folder,
-  mltable,
-  custom_model,
-  mlflow_model,
-  triton_model,
+union JobInputType {
+  string,
+  literal: "literal",
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
 }
 
 /**
  * Determines how N-Cross validations value is determined.
  */
-enum NCrossValidationsMode {
+union NCrossValidationsMode {
+  string,
+
   /**
    * Determine N-Cross validations value automatically. Supported only for 'Forecasting' AutoML task.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Use custom N-Cross validations value.
    */
-  Custom,
+  Custom: "Custom",
 }
 
 /**
  * Forecasting seasonality mode.
  */
-enum SeasonalityMode {
+union SeasonalityMode {
+  string,
+
   /**
    * Seasonality to be determined automatically.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Use the custom seasonality value.
    */
-  Custom,
+  Custom: "Custom",
 }
 
 /**
  * Target lags selection modes.
  */
-enum TargetLagsMode {
+union TargetLagsMode {
+  string,
+
   /**
    * Target lags to be determined automatically.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Use the custom target lags.
    */
-  Custom,
+  Custom: "Custom",
 }
 
 /**
  * Target rolling windows size mode.
  */
-enum TargetRollingWindowSizeMode {
+union TargetRollingWindowSizeMode {
+  string,
+
   /**
    * Determine rolling windows size automatically.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Use the specified rolling window size.
    */
-  Custom,
+  Custom: "Custom",
 }
 
 /**
  * Enum to determine the state of mlflow autologger.
  */
-enum MLFlowAutologgerState {
-  Enabled,
-  Disabled,
+union MLFlowAutologgerState {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
-enum MonitoringAlertNotificationType {
+union MonitoringAlertNotificationType {
+  string,
+
   /**
    * Settings for Azure Monitor based alerting.
    */
-  AzureMonitor,
+  AzureMonitor: "AzureMonitor",
 
   /**
    * Settings for AML email notifications.
    */
-  Email,
+  Email: "Email",
 }
 
-enum ServiceDataAccessAuthIdentity {
+union ServiceDataAccessAuthIdentity {
+  string,
+
   /**
    * Do not use any identity for service data access.
    */
-  None,
+  None: "None",
 
   /**
    * Use the system assigned managed identity of the Workspace to authenticate service data access.
    */
-  WorkspaceSystemAssignedIdentity,
+  WorkspaceSystemAssignedIdentity: "WorkspaceSystemAssignedIdentity",
 
   /**
    * Use the user assigned managed identity of the Workspace to authenticate service data access.
    */
-  WorkspaceUserAssignedIdentity,
+  WorkspaceUserAssignedIdentity: "WorkspaceUserAssignedIdentity",
 }
 
-enum EarlyTerminationPolicyType {
-  Bandit,
-  MedianStopping,
-  TruncationSelection,
+union EarlyTerminationPolicyType {
+  string,
+  Bandit: "Bandit",
+  MedianStopping: "MedianStopping",
+  TruncationSelection: "TruncationSelection",
 }
 
-enum SamplingAlgorithmType {
-  Grid,
-  Random,
-  Bayesian,
+union SamplingAlgorithmType {
+  string,
+  Grid: "Grid",
+  Random: "Random",
+  Bayesian: "Bayesian",
 }
 
-enum CategoricalDataDriftMetric {
+union CategoricalDataDriftMetric {
+  string,
+
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  JensenShannonDistance,
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  PopulationStabilityIndex,
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Pearsons Chi Squared Test metric.
    */
-  PearsonsChiSquaredTest,
+  PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
-enum MonitoringFeatureDataType {
+union MonitoringFeatureDataType {
+  string,
+
   /**
    * Used for features of numerical data type.
    */
-  Numerical,
+  Numerical: "Numerical",
 
   /**
    * Used for features of categorical data type.
    */
-  Categorical,
+  Categorical: "Categorical",
 }
 
-enum CategoricalDataQualityMetric {
+union CategoricalDataQualityMetric {
+  string,
+
   /**
    * Calculates the rate of null values.
    */
-  NullValueRate,
+  NullValueRate: "NullValueRate",
 
   /**
    * Calculates the rate of data type errors.
    */
-  DataTypeErrorRate,
+  DataTypeErrorRate: "DataTypeErrorRate",
 
   /**
    * Calculates the rate values are out of bounds.
    */
-  OutOfBoundsRate,
+  OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-enum CategoricalPredictionDriftMetric {
+union CategoricalPredictionDriftMetric {
+  string,
+
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  JensenShannonDistance,
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  PopulationStabilityIndex,
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Pearsons Chi Squared Test metric.
    */
-  PearsonsChiSquaredTest,
+  PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
 /**
  * Primary metrics for classification tasks.
  */
-enum ClassificationPrimaryMetrics {
+union ClassificationPrimaryMetrics {
+  string,
+
   /**
    * AUC is the Area under the curve.
    * This metric represents arithmetic mean of the score for each class,
    * weighted by the number of true instances in each class.
    */
-  AUCWeighted,
+  AUCWeighted: "AUCWeighted",
 
   /**
    * Accuracy is the ratio of predictions that exactly match the true class labels.
    */
-  Accuracy,
+  Accuracy: "Accuracy",
 
   /**
    * Normalized macro recall is recall macro-averaged and normalized, so that random
    * performance has a score of 0, and perfect performance has a score of 1.
    */
-  NormMacroRecall,
+  NormMacroRecall: "NormMacroRecall",
 
   /**
    * The arithmetic mean of the average precision score for each class, weighted by
    * the number of true instances in each class.
    */
-  AveragePrecisionScoreWeighted,
+  AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
   /**
    * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
    */
-  PrecisionScoreWeighted,
+  PrecisionScoreWeighted: "PrecisionScoreWeighted",
 }
 
 /**
  * Enum for all classification models supported by AutoML.
  */
-enum ClassificationModels {
+union ClassificationModels {
+  string,
+
   /**
    * Logistic regression is a fundamental classification technique.
    * It belongs to the group of linear classifiers and is somewhat similar to polynomial and linear regression.
    * Logistic regression is fast and relatively uncomplicated, and it's convenient for you to interpret the results.
    * Although it's essentially a method for binary classification, it can also be applied to multiclass problems.
    */
-  LogisticRegression,
+  LogisticRegression: "LogisticRegression",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    */
-  SGD,
+  SGD: "SGD",
 
   /**
    * The multinomial Naive Bayes classifier is suitable for classification with discrete features (e.g., word counts for text classification).
    * The multinomial distribution normally requires integer feature counts. However, in practice, fractional counts such as tf-idf may also work.
    */
-  MultinomialNaiveBayes,
+  MultinomialNaiveBayes: "MultinomialNaiveBayes",
 
   /**
    * Naive Bayes classifier for multivariate Bernoulli models.
    */
-  BernoulliNaiveBayes,
+  BernoulliNaiveBayes: "BernoulliNaiveBayes",
 
   /**
    * A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.
    * After giving an SVM model sets of labeled training data for each category, they're able to categorize new text.
    */
-  SVM,
+  SVM: "SVM",
 
   /**
    * A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for two-group classification problems.
    * After giving an SVM model sets of labeled training data for each category, they're able to categorize new text.
    * Linear SVM performs best when input data is linear, i.e., data can be easily classified by drawing the straight line between classified values on a plotted graph.
    */
-  LinearSVM,
+  LinearSVM: "LinearSVM",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  KNN,
+  KNN: "KNN",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  DecisionTree,
+  DecisionTree: "DecisionTree",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  RandomForest,
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  ExtremeRandomTrees,
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  LightGBM,
+  LightGBM: "LightGBM",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  GradientBoosting,
+  GradientBoosting: "GradientBoosting",
 
   /**
    * XGBoost: Extreme Gradient Boosting Algorithm. This algorithm is used for structured data where target column values can be divided into distinct class values.
    */
-  XGBoostClassifier,
+  XGBoostClassifier: "XGBoostClassifier",
 }
 
 /**
@@ -1658,948 +1817,1026 @@ enum ClassificationModels {
  * Default meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).
  * This parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression
  */
-enum StackMetaLearnerType {
-  None,
+union StackMetaLearnerType {
+  string,
+  None: "None",
 
   /**
    * Default meta-learners are LogisticRegression for classification tasks.
    */
-  LogisticRegression,
+  LogisticRegression: "LogisticRegression",
 
   /**
    * Default meta-learners are LogisticRegression for classification task when CV is on.
    */
-  LogisticRegressionCV,
+  LogisticRegressionCV: "LogisticRegressionCV",
 
-  LightGBMClassifier,
+  LightGBMClassifier: "LightGBMClassifier",
 
   /**
    * Default meta-learners are LogisticRegression for regression task.
    */
-  ElasticNet,
+  ElasticNet: "ElasticNet",
 
   /**
    * Default meta-learners are LogisticRegression for regression task when CV is on.
    */
-  ElasticNetCV,
+  ElasticNetCV: "ElasticNetCV",
 
-  LightGBMRegressor,
-  LinearRegression,
+  LightGBMRegressor: "LightGBMRegressor",
+  LinearRegression: "LinearRegression",
 }
 
 /**
  * Training mode dictates whether to use distributed training or not
  */
-enum TrainingMode {
+union TrainingMode {
+  string,
+
   /**
    * Auto mode
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Distributed training mode
    */
-  Distributed,
+  Distributed: "Distributed",
 
   /**
    * Non distributed training mode
    */
-  NonDistributed,
+  NonDistributed: "NonDistributed",
 }
 
 /**
  * Enum for all classification models supported by AutoML.
  */
-enum BlockedTransformers {
+union BlockedTransformers {
+  string,
+
   /**
    * Target encoding for text data.
    */
-  TextTargetEncoder,
+  TextTargetEncoder: "TextTargetEncoder",
 
   /**
    * Ohe hot encoding creates a binary feature transformation.
    */
-  OneHotEncoder,
+  OneHotEncoder: "OneHotEncoder",
 
   /**
    * Target encoding for categorical data.
    */
-  CatTargetEncoder,
+  CatTargetEncoder: "CatTargetEncoder",
 
   /**
    * Tf-Idf stands for, term-frequency times inverse document-frequency. This is a common term weighting scheme for identifying information from documents.
    */
-  TfIdf,
+  TfIdf: "TfIdf",
 
   /**
    * Weight of Evidence encoding is a technique used to encode categorical variables. It uses the natural log of the P(1)/P(0) to create weights.
    */
-  WoETargetEncoder,
+  WoETargetEncoder: "WoETargetEncoder",
 
   /**
    * Label encoder converts labels/categorical variables in a numerical form.
    */
-  LabelEncoder,
+  LabelEncoder: "LabelEncoder",
 
   /**
    * Word embedding helps represents words or phrases as a vector, or a series of numbers.
    */
-  WordEmbedding,
+  WordEmbedding: "WordEmbedding",
 
   /**
    * Naive Bayes is a classified that is used for classification of discrete features that are categorically distributed.
    */
-  NaiveBayes,
+  NaiveBayes: "NaiveBayes",
 
   /**
    * Count Vectorizer converts a collection of text documents to a matrix of token counts.
    */
-  CountVectorizer,
+  CountVectorizer: "CountVectorizer",
 
   /**
    * Hashing One Hot Encoder can turn categorical variables into a limited number of new features. This is often used for high-cardinality categorical features.
    */
-  HashOneHotEncoder,
+  HashOneHotEncoder: "HashOneHotEncoder",
 }
 
 /**
  * Featurization mode - determines data featurization mode.
  */
-enum FeaturizationMode {
+union FeaturizationMode {
+  string,
+
   /**
    * Auto mode, system performs featurization without any custom featurization inputs.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * Custom featurization.
    */
-  Custom,
+  Custom: "Custom",
 
   /**
    * Featurization off. 'Forecasting' task cannot use this value.
    */
-  Off,
+  Off: "Off",
 }
 
-enum ClassificationModelPerformanceMetric {
+union ClassificationModelPerformanceMetric {
+  string,
+
   /**
    * Calculates the accuracy of the model predictions.
    */
-  Accuracy,
+  Accuracy: "Accuracy",
 
   /**
    * Calculates the precision of the model predictions.
    */
-  Precision,
+  Precision: "Precision",
 
   /**
    * Calculates the recall of the model predictions.
    */
-  Recall,
+  Recall: "Recall",
 }
 
-enum MonitoringModelType {
+union MonitoringModelType {
+  string,
+
   /**
    * A model trained for classification tasks.
    */
-  Classification,
+  Classification: "Classification",
 
   /**
    * A model trained for regressions tasks.
    */
-  Regression,
+  Regression: "Regression",
 }
 
 /**
  * Enum to determine the job distribution type.
  */
-enum DistributionType {
-  PyTorch,
-  TensorFlow,
-  Mpi,
-  Ray,
+union DistributionType {
+  string,
+  PyTorch: "PyTorch",
+  TensorFlow: "TensorFlow",
+  Mpi: "Mpi",
+  Ray: "Ray",
 }
 
-enum JobLimitsType {
-  Command,
-  Sweep,
+union JobLimitsType {
+  string,
+  Command: "Command",
+  Sweep: "Sweep",
 }
 
 /**
  * Monitor compute type enum.
  */
-enum MonitorComputeType {
+union MonitorComputeType {
+  string,
+
   /**
    * Serverless Spark compute.
    */
-  ServerlessSpark,
+  ServerlessSpark: "ServerlessSpark",
 }
 
 /**
  * Model task type enum.
  */
-enum ModelTaskType {
-  Classification,
-  Regression,
-  QuestionAnswering,
+union ModelTaskType {
+  string,
+  Classification: "Classification",
+  Regression: "Regression",
+  QuestionAnswering: "QuestionAnswering",
 }
 
-enum MonitoringNotificationMode {
+union MonitoringNotificationMode {
+  string,
+
   /**
    * Disabled notifications will not produce emails/metrics leveraged for alerting.
    */
-  Disabled,
+  Disabled: "Disabled",
 
   /**
    * Enabled notification will produce emails/metrics leveraged for alerting.
    */
-  Enabled,
+  Enabled: "Enabled",
 }
 
-enum MonitoringSignalType {
+union MonitoringSignalType {
+  string,
+
   /**
    * Tracks model input data distribution change, comparing against training data or past production data.
    */
-  DataDrift,
+  DataDrift: "DataDrift",
 
   /**
    * Tracks prediction result data distribution change, comparing against validation/test label data or past production data.
    */
-  PredictionDrift,
+  PredictionDrift: "PredictionDrift",
 
   /**
    * Tracks model input data integrity.
    */
-  DataQuality,
+  DataQuality: "DataQuality",
 
   /**
    * Tracks feature importance change in production, comparing against feature importance at training time.
    */
-  FeatureAttributionDrift,
+  FeatureAttributionDrift: "FeatureAttributionDrift",
 
   /**
    * Tracks a custom signal provided by users.
    */
-  Custom,
+  Custom: "Custom",
 
   /**
    * Tracks model performance based on ground truth data.
    */
-  ModelPerformance,
+  ModelPerformance: "ModelPerformance",
 
   /**
    * Tracks the safety and quality of generated content.
    */
-  GenerationSafetyQuality,
+  GenerationSafetyQuality: "GenerationSafetyQuality",
 
   /**
    * Tracks the token usage of generative endpoints.
    */
-  GenerationTokenStatistics,
+  GenerationTokenStatistics: "GenerationTokenStatistics",
 }
 
 /**
  * Monitoring input data type enum.
  */
-enum MonitoringInputDataType {
+union MonitoringInputDataType {
+  string,
+
   /**
    * An input data with a fixed window size.
    */
-  Static,
+  Static: "Static",
 
   /**
    * An input data which trailing relatively to the monitor's current run.
    */
-  Trailing,
+  Trailing: "Trailing",
 
   /**
    * An input data with tabular format which doesn't require preprocessing.
    */
-  Fixed,
+  Fixed: "Fixed",
 }
 
 /**
  * Enum to determine the type of data.
  */
-enum DataImportSourceType {
-  database,
-  file_system,
+union DataImportSourceType {
+  string,
+  database: "database",
+  file_system: "file_system",
 }
 
-enum FeatureAttributionMetric {
+union FeatureAttributionMetric {
+  string,
+
   /**
    * The Normalized Discounted Cumulative Gain metric.
    */
-  NormalizedDiscountedCumulativeGain,
+  NormalizedDiscountedCumulativeGain: "NormalizedDiscountedCumulativeGain",
 }
 
 /**
  * Flag for generating lags for the numeric features.
  */
-enum FeatureLags {
+union FeatureLags {
+  string,
+
   /**
    * No feature lags generated.
    */
-  None,
+  None: "None",
 
   /**
    * System auto-generates feature lags.
    */
-  Auto,
+  Auto: "Auto",
 }
 
 /**
  * The parameter defining how if AutoML should handle short time series.
  */
-enum ShortSeriesHandlingConfiguration {
+union ShortSeriesHandlingConfiguration {
+  string,
+
   /**
    * Represents no/null value.
    */
-  None,
+  None: "None",
 
   /**
    * Short series will be padded if there are no long series, otherwise short series will be dropped.
    */
-  Auto,
+  Auto: "Auto",
 
   /**
    * All the short series will be padded.
    */
-  Pad,
+  Pad: "Pad",
 
   /**
    * All the short series will be dropped.
    */
-  Drop,
+  Drop: "Drop",
 }
 
 /**
  * Target aggregate function.
  */
-enum TargetAggregationFunction {
+union TargetAggregationFunction {
+  string,
+
   /**
    * Represent no value set.
    */
-  None,
+  None: "None",
 
-  Sum,
-  Max,
-  Min,
-  Mean,
+  Sum: "Sum",
+  Max: "Max",
+  Min: "Min",
+  Mean: "Mean",
 }
 
 /**
  * Configure STL Decomposition of the time-series target column.
  */
-enum UseStl {
+union UseStl {
+  string,
+
   /**
    * No stl decomposition.
    */
-  None,
+  None: "None",
 
-  Season,
-  SeasonTrend,
+  Season: "Season",
+  SeasonTrend: "SeasonTrend",
 }
 
 /**
  * Primary metrics for Forecasting task.
  */
-enum ForecastingPrimaryMetrics {
+union ForecastingPrimaryMetrics {
+  string,
+
   /**
    * The Spearman's rank coefficient of correlation is a non-parametric measure of rank correlation.
    */
-  SpearmanCorrelation,
+  SpearmanCorrelation: "SpearmanCorrelation",
 
   /**
    * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
    */
-  NormalizedRootMeanSquaredError,
+  NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
   /**
    * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
    */
-  R2Score,
+  R2Score: "R2Score",
 
   /**
    * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
    */
-  NormalizedMeanAbsoluteError,
+  NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
 /**
  * Enum for all forecasting models supported by AutoML.
  */
-enum ForecastingModels {
+union ForecastingModels {
+  string,
+
   /**
    * Auto-Autoregressive Integrated Moving Average (ARIMA) model uses time-series data and statistical analysis to interpret the data and make future predictions.
    * This model aims to explain data by using time series data on its past values and uses linear regression to make predictions.
    */
-  AutoArima,
+  AutoArima: "AutoArima",
 
   /**
    * Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, plus holiday effects.
    * It works best with time series that have strong seasonal effects and several seasons of historical data. Prophet is robust to missing data and shifts in the trend, and typically handles outliers well.
    */
-  Prophet,
+  Prophet: "Prophet",
 
   /**
    * The Naive forecasting model makes predictions by carrying forward the latest target value for each time-series in the training data.
    */
-  Naive,
+  Naive: "Naive",
 
   /**
    * The Seasonal Naive forecasting model makes predictions by carrying forward the latest season of target values for each time-series in the training data.
    */
-  SeasonalNaive,
+  SeasonalNaive: "SeasonalNaive",
 
   /**
    * The Average forecasting model makes predictions by carrying forward the average of the target values for each time-series in the training data.
    */
-  Average,
+  Average: "Average",
 
   /**
    * The Seasonal Average forecasting model makes predictions by carrying forward the average value of the latest season of data for each time-series in the training data.
    */
-  SeasonalAverage,
+  SeasonalAverage: "SeasonalAverage",
 
   /**
    * Exponential smoothing is a time series forecasting method for univariate data that can be extended to support data with a systematic trend or seasonal component.
    */
-  ExponentialSmoothing,
+  ExponentialSmoothing: "ExponentialSmoothing",
 
   /**
    * An Autoregressive Integrated Moving Average with Explanatory Variable (ARIMAX) model can be viewed as a multiple regression model with one or more autoregressive (AR) terms and/or one or more moving average (MA) terms.
    * This method is suitable for forecasting when data is stationary/non stationary, and multivariate with any type of data pattern, i.e., level/trend /seasonality/cyclicity.
    */
-  Arimax,
+  Arimax: "Arimax",
 
   /**
    * TCNForecaster: Temporal Convolutional Networks Forecaster. //TODO: Ask forecasting team for brief intro.
    */
-  TCNForecaster,
+  TCNForecaster: "TCNForecaster",
 
   /**
    * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
    */
-  ElasticNet,
+  ElasticNet: "ElasticNet",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  GradientBoosting,
+  GradientBoosting: "GradientBoosting",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  DecisionTree,
+  DecisionTree: "DecisionTree",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  KNN,
+  KNN: "KNN",
 
   /**
    * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
    */
-  LassoLars,
+  LassoLars: "LassoLars",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    * It's an inexact but powerful technique.
    */
-  SGD,
+  SGD: "SGD",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  RandomForest,
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  ExtremeRandomTrees,
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  LightGBM,
+  LightGBM: "LightGBM",
 
   /**
    * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
    */
-  XGBoostRegressor,
+  XGBoostRegressor: "XGBoostRegressor",
 }
 
 /**
  * Generation safety quality metric enum.
  */
-enum GenerationSafetyQualityMetric {
-  AcceptableGroundednessScorePerInstance,
-  AggregatedGroundednessPassRate,
-  AcceptableCoherenceScorePerInstance,
-  AggregatedCoherencePassRate,
-  AcceptableFluencyScorePerInstance,
-  AggregatedFluencyPassRate,
-  AcceptableSimilarityScorePerInstance,
-  AggregatedSimilarityPassRate,
-  AcceptableRelevanceScorePerInstance,
-  AggregatedRelevancePassRate,
+union GenerationSafetyQualityMetric {
+  string,
+  AcceptableGroundednessScorePerInstance: "AcceptableGroundednessScorePerInstance",
+  AggregatedGroundednessPassRate: "AggregatedGroundednessPassRate",
+  AcceptableCoherenceScorePerInstance: "AcceptableCoherenceScorePerInstance",
+  AggregatedCoherencePassRate: "AggregatedCoherencePassRate",
+  AcceptableFluencyScorePerInstance: "AcceptableFluencyScorePerInstance",
+  AggregatedFluencyPassRate: "AggregatedFluencyPassRate",
+  AcceptableSimilarityScorePerInstance: "AcceptableSimilarityScorePerInstance",
+  AggregatedSimilarityPassRate: "AggregatedSimilarityPassRate",
+  AcceptableRelevanceScorePerInstance: "AcceptableRelevanceScorePerInstance",
+  AggregatedRelevancePassRate: "AggregatedRelevancePassRate",
 }
 
 /**
  * Generation token statistics metric enum.
  */
-enum GenerationTokenStatisticsMetric {
-  TotalTokenCount,
-  TotalTokenCountPerGroup,
+union GenerationTokenStatisticsMetric {
+  string,
+  TotalTokenCount: "TotalTokenCount",
+  TotalTokenCountPerGroup: "TotalTokenCountPerGroup",
 }
 
 /**
  * Learning rate scheduler enum.
  */
-enum LearningRateScheduler {
+union LearningRateScheduler {
+  string,
+
   /**
    * No learning rate scheduler selected.
    */
-  None,
+  None: "None",
 
   /**
    * Cosine Annealing With Warmup.
    */
-  WarmupCosine,
+  WarmupCosine: "WarmupCosine",
 
   /**
    * Step learning rate scheduler.
    */
-  Step,
+  Step: "Step",
 }
 
 /**
  * Stochastic optimizer for image models.
  */
-enum StochasticOptimizer {
+union StochasticOptimizer {
+  string,
+
   /**
    * No optimizer selected.
    */
-  None,
+  None: "None",
 
   /**
    * Stochastic Gradient Descent optimizer.
    */
-  Sgd,
+  Sgd: "Sgd",
 
   /**
    * Adam is algorithm the optimizes stochastic objective functions based on adaptive estimates of moments
    */
-  Adam,
+  Adam: "Adam",
 
   /**
    * AdamW is a variant of the optimizer Adam that has an improved implementation of weight decay.
    */
-  Adamw,
+  Adamw: "Adamw",
 }
 
 /**
  * Primary metrics for classification multilabel tasks.
  */
-enum ClassificationMultilabelPrimaryMetrics {
+union ClassificationMultilabelPrimaryMetrics {
+  string,
+
   /**
    * AUC is the Area under the curve.
    * This metric represents arithmetic mean of the score for each class,
    * weighted by the number of true instances in each class.
    */
-  AUCWeighted,
+  AUCWeighted: "AUCWeighted",
 
   /**
    * Accuracy is the ratio of predictions that exactly match the true class labels.
    */
-  Accuracy,
+  Accuracy: "Accuracy",
 
   /**
    * Normalized macro recall is recall macro-averaged and normalized, so that random
    * performance has a score of 0, and perfect performance has a score of 1.
    */
-  NormMacroRecall,
+  NormMacroRecall: "NormMacroRecall",
 
   /**
    * The arithmetic mean of the average precision score for each class, weighted by
    * the number of true instances in each class.
    */
-  AveragePrecisionScoreWeighted,
+  AveragePrecisionScoreWeighted: "AveragePrecisionScoreWeighted",
 
   /**
    * The arithmetic mean of precision for each class, weighted by number of true instances in each class.
    */
-  PrecisionScoreWeighted,
+  PrecisionScoreWeighted: "PrecisionScoreWeighted",
 
   /**
    * Intersection Over Union. Intersection of predictions divided by union of predictions.
    */
-  IOU,
+  IOU: "IOU",
 }
 
 /**
  * Primary metrics for InstanceSegmentation tasks.
  */
-enum InstanceSegmentationPrimaryMetrics {
+union InstanceSegmentationPrimaryMetrics {
+  string,
+
   /**
    * Mean Average Precision (MAP) is the average of AP (Average Precision).
    * AP is calculated for each class and averaged to get the MAP.
    */
-  MeanAveragePrecision,
+  MeanAveragePrecision: "MeanAveragePrecision",
 }
 
-enum LogTrainingMetrics {
+union LogTrainingMetrics {
+  string,
+
   /**
    * Enable compute and log training metrics.
    */
-  Enable,
+  Enable: "Enable",
 
   /**
    * Disable compute and log training metrics.
    */
-  Disable,
+  Disable: "Disable",
 }
 
-enum LogValidationLoss {
+union LogValidationLoss {
+  string,
+
   /**
    * Enable compute and log validation metrics.
    */
-  Enable,
+  Enable: "Enable",
 
   /**
    * Disable compute and log validation metrics.
    */
-  Disable,
+  Disable: "Disable",
 }
 
 /**
  * Image model size.
  */
-enum ModelSize {
+union ModelSize {
+  string,
+
   /**
    * No value selected.
    */
-  None,
+  None: "None",
 
   /**
    * Small size.
    */
-  Small,
+  Small: "Small",
 
   /**
    * Medium size.
    */
-  Medium,
+  Medium: "Medium",
 
   /**
    * Large size.
    */
-  Large,
+  Large: "Large",
 
   /**
    * Extra large size.
    */
-  ExtraLarge,
+  ExtraLarge: "ExtraLarge",
 }
 
 /**
  * Metric computation method to use for validation metrics in image tasks.
  */
-enum ValidationMetricType {
+union ValidationMetricType {
+  string,
+
   /**
    * No metric.
    */
-  None,
+  None: "None",
 
   /**
    * Coco metric.
    */
-  Coco,
+  Coco: "Coco",
 
   /**
    * Voc metric.
    */
-  Voc,
+  Voc: "Voc",
 
   /**
    * CocoVoc metric.
    */
-  CocoVoc,
+  CocoVoc: "CocoVoc",
 }
 
 /**
  * Primary metrics for Image ObjectDetection task.
  */
-enum ObjectDetectionPrimaryMetrics {
+union ObjectDetectionPrimaryMetrics {
+  string,
+
   /**
    * Mean Average Precision (MAP) is the average of AP (Average Precision).
    * AP is calculated for each class and averaged to get the MAP.
    */
-  MeanAveragePrecision,
+  MeanAveragePrecision: "MeanAveragePrecision",
 }
 
 /**
  * Annotation type of image data.
  */
-enum ImageAnnotationType {
-  Classification,
-  BoundingBox,
-  InstanceSegmentation,
+union ImageAnnotationType {
+  string,
+  Classification: "Classification",
+  BoundingBox: "BoundingBox",
+  InstanceSegmentation: "InstanceSegmentation",
 }
 
 /**
  * Annotation type of text data.
  */
-enum TextAnnotationType {
-  Classification,
-  NamedEntityRecognition,
+union TextAnnotationType {
+  string,
+  Classification: "Classification",
+  NamedEntityRecognition: "NamedEntityRecognition",
 }
 
 /**
  * Enum to determine OneLake artifact type.
  */
-enum OneLakeArtifactType {
-  LakeHouse,
+union OneLakeArtifactType {
+  string,
+  LakeHouse: "LakeHouse",
 }
 
 /**
  * Enum of learning rate schedulers that aligns with those supported by HF
  */
-enum NlpLearningRateScheduler {
+union NlpLearningRateScheduler {
+  string,
+
   /**
    * No learning rate schedule.
    */
-  None,
+  None: "None",
 
   /**
    * Linear warmup and decay.
    */
-  Linear,
+  Linear: "Linear",
 
   /**
    * Linear warmup then cosine decay.
    */
-  Cosine,
+  Cosine: "Cosine",
 
   /**
    * Linear warmup, cosine decay, then restart to initial LR.
    */
-  CosineWithRestarts,
+  CosineWithRestarts: "CosineWithRestarts",
 
   /**
    * Increase linearly then polynomially decay.
    */
-  Polynomial,
+  Polynomial: "Polynomial",
 
   /**
    * Constant learning rate.
    */
-  Constant,
+  Constant: "Constant",
 
   /**
    * Linear warmup followed by constant value.
    */
-  ConstantWithWarmup,
+  ConstantWithWarmup: "ConstantWithWarmup",
 }
 
-enum NumericalDataDriftMetric {
+union NumericalDataDriftMetric {
+  string,
+
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  JensenShannonDistance,
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  PopulationStabilityIndex,
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Normalized Wasserstein Distance metric.
    */
-  NormalizedWassersteinDistance,
+  NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
   /**
    * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
    */
-  TwoSampleKolmogorovSmirnovTest,
+  TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
-enum NumericalDataQualityMetric {
+union NumericalDataQualityMetric {
+  string,
+
   /**
    * Calculates the rate of null values.
    */
-  NullValueRate,
+  NullValueRate: "NullValueRate",
 
   /**
    * Calculates the rate of data type errors.
    */
-  DataTypeErrorRate,
+  DataTypeErrorRate: "DataTypeErrorRate",
 
   /**
    * Calculates the rate values are out of bounds.
    */
-  OutOfBoundsRate,
+  OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-enum NumericalPredictionDriftMetric {
+union NumericalPredictionDriftMetric {
+  string,
+
   /**
    * The Jensen Shannon Distance (JSD) metric.
    */
-  JensenShannonDistance,
+  JensenShannonDistance: "JensenShannonDistance",
 
   /**
    * The Population Stability Index (PSI) metric.
    */
-  PopulationStabilityIndex,
+  PopulationStabilityIndex: "PopulationStabilityIndex",
 
   /**
    * The Normalized Wasserstein Distance metric.
    */
-  NormalizedWassersteinDistance,
+  NormalizedWassersteinDistance: "NormalizedWassersteinDistance",
 
   /**
    * The Two Sample Kolmogorov-Smirnov Test (two-sample K–S) metric.
    */
-  TwoSampleKolmogorovSmirnovTest,
+  TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
 /**
  * Defines supported metric goals for hyperparameter tuning
  */
-enum Goal {
-  Minimize,
-  Maximize,
+union Goal {
+  string,
+  Minimize: "Minimize",
+  Maximize: "Maximize",
 }
 
 /**
  * The specific type of random algorithm
  */
-enum RandomSamplingAlgorithmRule {
-  Random,
-  Sobol,
+union RandomSamplingAlgorithmRule {
+  string,
+  Random: "Random",
+  Sobol: "Sobol",
 }
 
 /**
  * Primary metrics for Regression task.
  */
-enum RegressionPrimaryMetrics {
+union RegressionPrimaryMetrics {
+  string,
+
   /**
    * The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation.
    */
-  SpearmanCorrelation,
+  SpearmanCorrelation: "SpearmanCorrelation",
 
   /**
    * The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales.
    */
-  NormalizedRootMeanSquaredError,
+  NormalizedRootMeanSquaredError: "NormalizedRootMeanSquaredError",
 
   /**
    * The R2 score is one of the performance evaluation measures for forecasting-based machine learning models.
    */
-  R2Score,
+  R2Score: "R2Score",
 
   /**
    * The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales.
    */
-  NormalizedMeanAbsoluteError,
+  NormalizedMeanAbsoluteError: "NormalizedMeanAbsoluteError",
 }
 
 /**
  * Enum for all Regression models supported by AutoML.
  */
-enum RegressionModels {
+union RegressionModels {
+  string,
+
   /**
    * Elastic net is a popular type of regularized linear regression that combines two popular penalties, specifically the L1 and L2 penalty functions.
    */
-  ElasticNet,
+  ElasticNet: "ElasticNet",
 
   /**
    * The technique of transiting week learners into a strong learner is called Boosting. The gradient boosting algorithm process works on this theory of execution.
    */
-  GradientBoosting,
+  GradientBoosting: "GradientBoosting",
 
   /**
    * Decision Trees are a non-parametric supervised learning method used for both classification and regression tasks.
    * The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
    */
-  DecisionTree,
+  DecisionTree: "DecisionTree",
 
   /**
    * K-nearest neighbors (KNN) algorithm uses 'feature similarity' to predict the values of new datapoints
    * which further means that the new data point will be assigned a value based on how closely it matches the points in the training set.
    */
-  KNN,
+  KNN: "KNN",
 
   /**
    * Lasso model fit with Least Angle Regression a.k.a. Lars. It is a Linear Model trained with an L1 prior as regularizer.
    */
-  LassoLars,
+  LassoLars: "LassoLars",
 
   /**
    * SGD: Stochastic gradient descent is an optimization algorithm often used in machine learning applications
    * to find the model parameters that correspond to the best fit between predicted and actual outputs.
    * It's an inexact but powerful technique.
    */
-  SGD,
+  SGD: "SGD",
 
   /**
    * Random forest is a supervised learning algorithm.
    * The "forest" it builds, is an ensemble of decision trees, usually trained with the bagging method.
    * The general idea of the bagging method is that a combination of learning models increases the overall result.
    */
-  RandomForest,
+  RandomForest: "RandomForest",
 
   /**
    * Extreme Trees is an ensemble machine learning algorithm that combines the predictions from many decision trees. It is related to the widely used random forest algorithm.
    */
-  ExtremeRandomTrees,
+  ExtremeRandomTrees: "ExtremeRandomTrees",
 
   /**
    * LightGBM is a gradient boosting framework that uses tree based learning algorithms.
    */
-  LightGBM,
+  LightGBM: "LightGBM",
 
   /**
    * XGBoostRegressor: Extreme Gradient Boosting Regressor is a supervised machine learning model using ensemble of base learners.
    */
-  XGBoostRegressor,
+  XGBoostRegressor: "XGBoostRegressor",
 }
 
-enum RegressionModelPerformanceMetric {
+union RegressionModelPerformanceMetric {
+  string,
+
   /**
    * The Mean Absolute Error (MAE) metric.
    */
-  MeanAbsoluteError,
+  MeanAbsoluteError: "MeanAbsoluteError",
 
   /**
    * The Root Mean Squared Error (RMSE) metric.
    */
-  RootMeanSquaredError,
+  RootMeanSquaredError: "RootMeanSquaredError",
 
   /**
    * The Mean Squared Error (MSE) metric.
    */
-  MeanSquaredError,
+  MeanSquaredError: "MeanSquaredError",
 }
 
-enum SparkJobEntryType {
-  SparkJobPythonEntry,
-  SparkJobScalaEntry,
+union SparkJobEntryType {
+  string,
+  SparkJobPythonEntry: "SparkJobPythonEntry",
+  SparkJobScalaEntry: "SparkJobScalaEntry",
 }
 
 /**
  * The action enum for networking rule.
  */
-enum RuleAction {
-  Allow,
-  Deny,
+union RuleAction {
+  string,
+  Allow: "Allow",
+  Deny: "Deny",
 }
 
 /**

@@ -243,20 +243,6 @@ function escapeRegex(str: string) {
   return str.replace(/\\/g, "\\\\");
 }
 
-export function getEnumDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): TypespecDecorator[] {
-  const decorators: TypespecDecorator[] = [];
-
-  if (isSealedChoiceSchema(enumeration)) {
-    decorators.push({
-      name: "fixed",
-      module: "@azure-tools/typespec-azure-core",
-      namespace: "Azure.Core",
-    });
-  }
-
-  return decorators;
-}
-
 export function getEnumClientDecorators(enumeration: SealedChoiceSchema | ChoiceSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
 

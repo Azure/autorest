@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 
 namespace Azure.Keyvault;
 
@@ -14,7 +13,9 @@ namespace Azure.Keyvault;
  * permanently deleted by a privileged user; otherwise, only the system can purge
  * the certificate, at the end of the retention interval.
  */
-enum DeletionRecoveryLevel {
+union DeletionRecoveryLevel {
+  string,
+
   /**
    * Denotes a vault state in which deletion is an irreversible operation, without
    * the possibility for recovery. This level corresponds to no protection being
@@ -22,7 +23,7 @@ enum DeletionRecoveryLevel {
    * accepting a Delete operation at the entity level or higher (vault, resource
    * group, subscription etc.)
    */
-  Purgeable,
+  Purgeable: "Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -31,7 +32,7 @@ enum DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+Purgeable`,
+  `Recoverable+Purgeable`: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -40,7 +41,7 @@ enum DeletionRecoveryLevel {
    * while the subscription is still available. System wil permanently delete it
    * after 90 days, if not recovered
    */
-  Recoverable,
+  Recoverable: "Recoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable within
@@ -48,7 +49,7 @@ enum DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+ProtectedSubscription`,
+  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -57,7 +58,7 @@ enum DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  `CustomizedRecoverable+Purgeable`,
+  `CustomizedRecoverable+Purgeable`: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -66,7 +67,7 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval and while the subscription is
    * still available.
    */
-  CustomizedRecoverable,
+  CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable,
@@ -76,230 +77,243 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  `CustomizedRecoverable+ProtectedSubscription`,
+  `CustomizedRecoverable+ProtectedSubscription`: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
  * JsonWebKey Key Type (kty), as defined in
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.
  */
-enum JsonWebKeyType {
+union JsonWebKeyType {
+  string,
+
   /**
    * Elliptic Curve.
    */
-  EC,
+  EC: "EC",
 
   /**
    * Elliptic Curve with a private key which is stored in the HSM.
    */
-  `EC-HSM`,
+  `EC-HSM`: "EC-HSM",
 
   /**
    * RSA (https://tools.ietf.org/html/rfc3447)
    */
-  RSA,
+  RSA: "RSA",
 
   /**
    * RSA with a private key which is stored in the HSM.
    */
-  `RSA-HSM`,
+  `RSA-HSM`: "RSA-HSM",
 
   /**
    * Octet sequence (used to represent symmetric keys)
    */
-  oct,
+  oct: "oct",
 
   /**
    * Octet sequence (used to represent symmetric keys) which is stored the HSM.
    */
-  `oct-HSM`,
+  `oct-HSM`: "oct-HSM",
 
   /**
    * Octet key pair (https://tools.ietf.org/html/rfc8037)
    */
-  OKP,
+  OKP: "OKP",
 
   /**
    * Octet key pair (https://tools.ietf.org/html/rfc8037) with a private key which
    * is stored in the HSM.
    */
-  `OKP-HSM`,
+  `OKP-HSM`: "OKP-HSM",
 }
 
 /**
  * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
  */
-enum JsonWebKeyCurveName {
+union JsonWebKeyCurveName {
+  string,
+
   /**
    * The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.
    */
-  `P-256`,
+  `P-256`: "P-256",
 
   /**
    * The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.
    */
-  `P-384`,
+  `P-384`: "P-384",
 
   /**
    * The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.
    */
-  `P-521`,
+  `P-521`: "P-521",
 
   /**
    * The SECG SECP256K1 elliptic curve.
    */
-  `P-256K`,
+  `P-256K`: "P-256K",
 
   /**
    * The Ed25519 Edwards curve.
    */
-  Ed25519,
+  Ed25519: "Ed25519",
 }
 
-enum KeyUsageType {
-  digitalSignature,
-  nonRepudiation,
-  keyEncipherment,
-  dataEncipherment,
-  keyAgreement,
-  keyCertSign,
-  cRLSign,
-  encipherOnly,
-  decipherOnly,
+union KeyUsageType {
+  string,
+  digitalSignature: "digitalSignature",
+  nonRepudiation: "nonRepudiation",
+  keyEncipherment: "keyEncipherment",
+  dataEncipherment: "dataEncipherment",
+  keyAgreement: "keyAgreement",
+  keyCertSign: "keyCertSign",
+  cRLSign: "cRLSign",
+  encipherOnly: "encipherOnly",
+  decipherOnly: "decipherOnly",
 }
 
 /**
  * JSON web key operations. For more information, see JsonWebKeyOperation.
  */
-enum JsonWebKeyOperation {
-  encrypt,
-  decrypt,
-  sign,
-  verify,
-  wrapKey,
-  unwrapKey,
-  `import`,
-  export,
+union JsonWebKeyOperation {
+  string,
+  encrypt: "encrypt",
+  decrypt: "decrypt",
+  sign: "sign",
+  verify: "verify",
+  wrapKey: "wrapKey",
+  unwrapKey: "unwrapKey",
+  `import`: "import",
+  export: "export",
 }
 
 /**
  * algorithm identifier
  */
-enum JsonWebKeyEncryptionAlgorithm {
-  `RSA-OAEP`,
-  `RSA-OAEP-256`,
-  RSA1_5,
-  A128GCM,
-  A192GCM,
-  A256GCM,
-  A128KW,
-  A192KW,
-  A256KW,
-  A128CBC,
-  A192CBC,
-  A256CBC,
-  A128CBCPAD,
-  A192CBCPAD,
-  A256CBCPAD,
+union JsonWebKeyEncryptionAlgorithm {
+  string,
+  `RSA-OAEP`: "RSA-OAEP",
+  `RSA-OAEP-256`: "RSA-OAEP-256",
+  RSA1_5: "RSA1_5",
+  A128GCM: "A128GCM",
+  A192GCM: "A192GCM",
+  A256GCM: "A256GCM",
+  A128KW: "A128KW",
+  A192KW: "A192KW",
+  A256KW: "A256KW",
+  A128CBC: "A128CBC",
+  A192CBC: "A192CBC",
+  A256CBC: "A256CBC",
+  A128CBCPAD: "A128CBCPAD",
+  A192CBCPAD: "A192CBCPAD",
+  A256CBCPAD: "A256CBCPAD",
 }
 
 /**
  * The signing/verification algorithm identifier. For more information on possible
  * algorithm types, see JsonWebKeySignatureAlgorithm.
  */
-enum JsonWebKeySignatureAlgorithm {
+union JsonWebKeySignatureAlgorithm {
+  string,
+
   /**
    * RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS256,
+  PS256: "PS256",
 
   /**
    * RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS384,
+  PS384: "PS384",
 
   /**
    * RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS512,
+  PS512: "PS512",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS256,
+  RS256: "RS256",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS384,
+  RS384: "RS384",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS512,
+  RS512: "RS512",
 
   /**
    * Reserved
    */
-  RSNULL,
+  RSNULL: "RSNULL",
 
   /**
    * ECDSA using P-256 and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518.
    */
-  ES256,
+  ES256: "ES256",
 
   /**
    * ECDSA using P-384 and SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES384,
+  ES384: "ES384",
 
   /**
    * ECDSA using P-521 and SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES512,
+  ES512: "ES512",
 
   /**
    * ECDSA using P-256K and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES256K,
+  ES256K: "ES256K",
 
   /**
    * Edwards-Curve Digital Signature Algorithm, as described in
    * https://tools.ietf.org/html/rfc8032.
    */
-  EdDSA,
+  EdDSA: "EdDSA",
 }
 
 /**
  * The encryption algorithm to use to protected the exported key material
  */
-enum KeyEncryptionAlgorithm {
-  CKM_RSA_AES_KEY_WRAP,
-  RSA_AES_KEY_WRAP_256,
-  RSA_AES_KEY_WRAP_384,
+union KeyEncryptionAlgorithm {
+  string,
+  CKM_RSA_AES_KEY_WRAP: "CKM_RSA_AES_KEY_WRAP",
+  RSA_AES_KEY_WRAP_256: "RSA_AES_KEY_WRAP_256",
+  RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
 }
 
 /**
  * The role definition type.
  */
-enum RoleDefinitionType {
-  `Microsoft.Authorization/roleDefinitions`,
+union RoleDefinitionType {
+  string,
+  `Microsoft.Authorization/roleDefinitions`: "Microsoft.Authorization/roleDefinitions",
 }
 
 /**
  * The role type.
  */
-enum RoleType {
+union RoleType {
+  string,
+
   /**
    * Built in role.
    */
@@ -308,13 +322,15 @@ enum RoleType {
   /**
    * Custom role.
    */
-  CustomRole,
+  CustomRole: "CustomRole",
 }
 
 /**
  * Supported permissions for data actions.
  */
-enum DataAction {
+union DataAction {
+  string,
+
   /**
    * Read HSM key metadata.
    */
@@ -489,7 +505,9 @@ enum DataAction {
 /**
  * The role scope.
  */
-enum RoleScope {
+union RoleScope {
+  string,
+
   /**
    * Global scope
    */
@@ -504,22 +522,23 @@ enum RoleScope {
 /**
  * The type specifier of the value.
  */
-enum SettingTypeEnum {
-  boolean,
+union SettingTypeEnum {
+  string,
+  boolean: "boolean",
 }
 
 /**
  * The type of SAS token the SAS definition will create.
  */
-enum SasTokenType {
-  account,
-  service,
+union SasTokenType {
+  string,
+  account: "account",
+  service: "service",
 }
 
 /**
  * The type of the action.
  */
-@fixed
 enum ActionType {
   EmailContacts,
   AutoRenew,
@@ -530,7 +549,6 @@ enum ActionType {
 /**
  * operation status
  */
-@fixed
 enum OperationStatus {
   Success,
   InProgress,

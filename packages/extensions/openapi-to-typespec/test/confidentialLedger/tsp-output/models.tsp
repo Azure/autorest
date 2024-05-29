@@ -11,26 +11,29 @@ namespace Azure.Language.Authoring;
 /**
  * State of a ledger query.
  */
-enum ConfidentialLedgerQueryState {
-  Loading,
-  Ready,
+union ConfidentialLedgerQueryState {
+  string,
+  Loading: "Loading",
+  Ready: "Ready",
 }
 
 /**
  * Represents the state of the transaction.
  */
-enum TransactionState {
-  Committed,
-  Pending,
+union TransactionState {
+  string,
+  Committed: "Committed",
+  Pending: "Pending",
 }
 
 /**
  * Represents an assignable role.
  */
-enum ConfidentialLedgerUserRoleName {
-  Administrator,
-  Contributor,
-  Reader,
+union ConfidentialLedgerUserRoleName {
+  string,
+  Administrator: "Administrator",
+  Contributor: "Contributor",
+  Reader: "Reader",
 }
 
 /**

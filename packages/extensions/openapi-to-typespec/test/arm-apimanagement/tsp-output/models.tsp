@@ -13,95 +13,101 @@ namespace Azure.ResourceManager.ApiManagement;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-enum Protocol {
-  http,
-  https,
-  ws,
-  wss,
+union Protocol {
+  string,
+  http: "http",
+  https: "https",
+  ws: "ws",
+  wss: "wss",
 }
 
 /**
  * An value that determines where the API Version identifier will be located in a HTTP request.
  */
-enum VersioningScheme {
-  Segment,
-  Query,
-  Header,
+union VersioningScheme {
+  string,
+  Segment: "Segment",
+  Query: "Query",
+  Header: "Header",
 }
 
-enum BearerTokenSendingMethod {
-  authorizationHeader,
-  query,
+union BearerTokenSendingMethod {
+  string,
+  authorizationHeader: "authorizationHeader",
+  query: "query",
 }
 
 /**
  * Type of API.
  */
-enum ApiType {
-  http,
-  soap,
-  websocket,
-  graphql,
+union ApiType {
+  string,
+  http: "http",
+  soap: "soap",
+  websocket: "websocket",
+  graphql: "graphql",
 }
 
 /**
  * Format of the Content in which the API is getting imported.
  */
-enum ContentFormat {
+union ContentFormat {
+  string,
+
   /**
    * The contents are inline and Content type is a WADL document.
    */
-  `wadl-xml`,
+  `wadl-xml`: "wadl-xml",
 
   /**
    * The WADL document is hosted on a publicly accessible internet address.
    */
-  `wadl-link-json`,
+  `wadl-link-json`: "wadl-link-json",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 2.0 JSON Document.
    */
-  `swagger-json`,
+  `swagger-json`: "swagger-json",
 
   /**
    * The OpenAPI 2.0 JSON document is hosted on a publicly accessible internet address.
    */
-  `swagger-link-json`,
+  `swagger-link-json`: "swagger-link-json",
 
   /**
    * The contents are inline and the document is a WSDL/Soap document.
    */
-  wsdl,
+  wsdl: "wsdl",
 
   /**
    * The WSDL document is hosted on a publicly accessible internet address.
    */
-  `wsdl-link`,
+  `wsdl-link`: "wsdl-link",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 3.0 YAML Document.
    */
-  openapi,
+  openapi: "openapi",
 
   /**
    * The contents are inline and Content Type is a OpenAPI 3.0 JSON Document.
    */
-  `openapi+json`,
+  `openapi+json`: "openapi+json",
 
   /**
    * The OpenAPI 3.0 YAML document is hosted on a publicly accessible internet address.
    */
-  `openapi-link`,
+  `openapi-link`: "openapi-link",
 
   /**
    * The OpenAPI 3.0 JSON document is hosted on a publicly accessible internet address.
    */
-  `openapi+json-link`,
+  `openapi+json-link`: "openapi+json-link",
 
   /**
    * The GraphQL API endpoint hosted on a publicly accessible internet address.
    */
-  `graphql-link`,
+  `graphql-link`: "graphql-link",
 }
 
 /**
@@ -111,7 +117,9 @@ enum ContentFormat {
  *  * `websocket` creates websocket API
  *  * `graphql` creates GraphQL API.
  */
-enum SoapApiType {
+union SoapApiType {
+  string,
+
   /**
    * Imports a SOAP API having a RESTful front end.
    */
@@ -136,165 +144,186 @@ enum SoapApiType {
 /**
  * Format of the policyContent.
  */
-enum PolicyContentFormat {
+union PolicyContentFormat {
+  string,
+
   /**
    * The contents are inline and Content type is an XML document.
    */
-  xml,
+  xml: "xml",
 
   /**
    * The policy XML document is hosted on a http endpoint accessible from the API Management service.
    */
-  `xml-link`,
+  `xml-link`: "xml-link",
 
   /**
    * The contents are inline and Content type is a non XML encoded policy document.
    */
-  rawxml,
+  rawxml: "rawxml",
 
   /**
    * The policy document is not Xml encoded and is hosted on a http endpoint accessible from the API Management service.
    */
-  `rawxml-link`,
+  `rawxml-link`: "rawxml-link",
 }
 
-enum PolicyIdName {
-  policy,
+union PolicyIdName {
+  string,
+  policy: "policy",
 }
 
-enum PolicyExportFormat {
+union PolicyExportFormat {
+  string,
+
   /**
    * The contents are inline and Content type is an XML document.
    */
-  xml,
+  xml: "xml",
 
   /**
    * The contents are inline and Content type is a non XML encoded policy document.
    */
-  rawxml,
+  rawxml: "rawxml",
 }
 
 /**
  * Specifies for what type of messages sampling settings should not apply.
  */
-enum AlwaysLog {
+union AlwaysLog {
+  string,
+
   /**
    * Always log all erroneous request regardless of sampling settings.
    */
-  allErrors,
+  allErrors: "allErrors",
 }
 
 /**
  * Sampling type.
  */
-enum SamplingType {
+union SamplingType {
+  string,
+
   /**
    * Fixed-rate sampling.
    */
-  fixed,
+  fixed: "fixed",
 }
 
 /**
  * Data masking mode.
  */
-enum DataMaskingMode {
+union DataMaskingMode {
+  string,
+
   /**
    * Mask the value of an entity.
    */
-  Mask,
+  Mask: "Mask",
 
   /**
    * Hide the presence of an entity.
    */
-  Hide,
+  Hide: "Hide",
 }
 
 /**
  * Sets correlation protocol to use for Application Insights diagnostics.
  */
-enum HttpCorrelationProtocol {
+union HttpCorrelationProtocol {
+  string,
+
   /**
    * Do not read and inject correlation headers.
    */
-  None,
+  None: "None",
 
   /**
    * Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md.
    */
-  Legacy,
+  Legacy: "Legacy",
 
   /**
    * Inject Trace Context headers. See https://w3c.github.io/trace-context.
    */
-  W3C,
+  W3C: "W3C",
 }
 
 /**
  * The verbosity level applied to traces emitted by trace policies.
  */
-enum Verbosity {
+union Verbosity {
+  string,
+
   /**
    * All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance.
    */
-  verbose,
+  verbose: "verbose",
 
   /**
    * Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance.
    */
-  information,
+  information: "information",
 
   /**
    * Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance.
    */
-  error,
+  error: "error",
 }
 
 /**
  * The format of the Operation Name for Application Insights telemetries. Default is Name.
  */
-enum OperationNameFormat {
+union OperationNameFormat {
+  string,
+
   /**
    * API_NAME;rev=API_REVISION - OPERATION_NAME
    */
-  Name,
+  Name: "Name",
 
   /**
    * HTTP_VERB URL
    */
-  Url,
+  Url: "Url",
 }
 
 /**
  * Status of the issue.
  */
-enum State {
+union State {
+  string,
+
   /**
    * The issue is proposed.
    */
-  proposed,
+  proposed: "proposed",
 
   /**
    * The issue is opened.
    */
-  open,
+  open: "open",
 
   /**
    * The issue was removed.
    */
-  removed,
+  removed: "removed",
 
   /**
    * The issue is now resolved.
    */
-  resolved,
+  resolved: "resolved",
 
   /**
    * The issue was closed.
    */
-  closed,
+  closed: "closed",
 }
 
-enum ExportFormat {
+union ExportFormat {
+  string,
+
   /**
    * Export the Api Definition in OpenAPI 2.0 Specification as JSON document to the Storage Blob.
    */
@@ -321,14 +350,17 @@ enum ExportFormat {
   OpenapiJson: "openapi+json-link",
 }
 
-enum ExportApi {
-  `true`,
+union ExportApi {
+  string,
+  `true`: "true",
 }
 
 /**
  * Format in which the API Details are exported to the Storage Blob with Sas Key valid for 5 minutes.
  */
-enum ExportResultFormat {
+union ExportResultFormat {
+  string,
+
   /**
    * The API Definition is exported in OpenAPI Specification 2.0 format to the Storage Blob.
    */
@@ -350,476 +382,520 @@ enum ExportResultFormat {
   OpenApi: "openapi-link",
 }
 
-enum GrantType {
+union GrantType {
+  string,
+
   /**
    * Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.
    */
-  authorizationCode,
+  authorizationCode: "authorizationCode",
 
   /**
    * Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.
    */
-  implicit,
+  implicit: "implicit",
 
   /**
    * Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.
    */
-  resourceOwnerPassword,
+  resourceOwnerPassword: "resourceOwnerPassword",
 
   /**
    * Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.
    */
-  clientCredentials,
+  clientCredentials: "clientCredentials",
 }
 
-enum ClientAuthenticationMethod {
+union ClientAuthenticationMethod {
+  string,
+
   /**
    * Basic Client Authentication method.
    */
-  Basic,
+  Basic: "Basic",
 
   /**
    * Body based Authentication method.
    */
-  Body,
+  Body: "Body",
 }
 
 /**
  * Backend communication protocol.
  */
-enum BackendProtocol {
+union BackendProtocol {
+  string,
+
   /**
    * The Backend is a RESTful service.
    */
-  http,
+  http: "http",
 
   /**
    * The Backend is a SOAP service.
    */
-  soap,
+  soap: "soap",
 }
 
 /**
  * The IP version to be used. Only IPv4 is supported for now.
  */
-enum PreferredIPVersion {
-  IPv4,
+union PreferredIPVersion {
+  string,
+  IPv4: "IPv4",
 }
 
 /**
  * The request's protocol. Specific protocol configuration can be available based on this selection. The specified destination address must be coherent with this value.
  */
-enum ConnectivityCheckProtocol {
-  TCP,
-  HTTP,
-  HTTPS,
+union ConnectivityCheckProtocol {
+  string,
+  TCP: "TCP",
+  HTTP: "HTTP",
+  HTTPS: "HTTPS",
 }
 
 /**
  * The HTTP method to be used.
  */
-enum Method {
-  GET,
-  POST,
+union Method {
+  string,
+  GET: "GET",
+  POST: "POST",
 }
 
 /**
  * The severity of the issue.
  */
-enum Severity {
-  Error,
-  Warning,
+union Severity {
+  string,
+  Error: "Error",
+  Warning: "Warning",
 }
 
 /**
  * The type of issue.
  */
-enum IssueType {
-  Unknown,
-  AgentStopped,
-  GuestFirewall,
-  DnsResolution,
-  SocketBind,
-  NetworkSecurityRule,
-  UserDefinedRoute,
-  PortThrottled,
-  Platform,
+union IssueType {
+  string,
+  Unknown: "Unknown",
+  AgentStopped: "AgentStopped",
+  GuestFirewall: "GuestFirewall",
+  DnsResolution: "DnsResolution",
+  SocketBind: "SocketBind",
+  NetworkSecurityRule: "NetworkSecurityRule",
+  UserDefinedRoute: "UserDefinedRoute",
+  PortThrottled: "PortThrottled",
+  Platform: "Platform",
 }
 
 /**
  * The connection status.
  */
-enum ConnectionStatus {
-  Unknown,
-  Connected,
-  Disconnected,
-  Degraded,
+union ConnectionStatus {
+  string,
+  Unknown: "Unknown",
+  Connected: "Connected",
+  Disconnected: "Disconnected",
+  Degraded: "Degraded",
 }
 
 /**
  * Name of the Sku.
  */
-enum SkuType {
+union SkuType {
+  string,
+
   /**
    * Developer SKU of Api Management.
    */
-  Developer,
+  Developer: "Developer",
 
   /**
    * Standard SKU of Api Management.
    */
-  Standard,
+  Standard: "Standard",
 
   /**
    * Premium SKU of Api Management.
    */
-  Premium,
+  Premium: "Premium",
 
   /**
    * Basic SKU of Api Management.
    */
-  Basic,
+  Basic: "Basic",
 
   /**
    * Consumption SKU of Api Management.
    */
-  Consumption,
+  Consumption: "Consumption",
 
   /**
    * Isolated SKU of Api Management.
    */
-  Isolated,
+  Isolated: "Isolated",
 }
 
 /**
  * The scale type applicable to the sku.
  */
-enum ResourceSkuCapacityScaleType {
+union ResourceSkuCapacityScaleType {
+  string,
+
   /**
    * Supported scale type automatic.
    */
-  automatic,
+  automatic: "automatic",
 
   /**
    * Supported scale type manual.
    */
-  manual,
+  manual: "manual",
 
   /**
    * Scaling not supported.
    */
-  none,
+  none: "none",
 }
 
 /**
  * The type of access to be used for the storage account.
  */
-enum AccessType {
+union AccessType {
+  string,
+
   /**
    * Use access key.
    */
-  AccessKey,
+  AccessKey: "AccessKey",
 
   /**
    * Use system assigned managed identity.
    */
-  SystemAssignedManagedIdentity,
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
 
   /**
    * Use user assigned managed identity.
    */
-  UserAssignedManagedIdentity,
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 }
 
 /**
  * Hostname type.
  */
-enum HostnameType {
-  Proxy,
-  Portal,
-  Management,
-  Scm,
-  DeveloperPortal,
+union HostnameType {
+  string,
+  Proxy: "Proxy",
+  Portal: "Portal",
+  Management: "Management",
+  Scm: "Scm",
+  DeveloperPortal: "DeveloperPortal",
 }
 
 /**
  * Certificate Source.
  */
-enum CertificateSource {
-  Managed,
-  KeyVault,
-  Custom,
-  BuiltIn,
+union CertificateSource {
+  string,
+  Managed: "Managed",
+  KeyVault: "KeyVault",
+  Custom: "Custom",
+  BuiltIn: "BuiltIn",
 }
 
 /**
  * Certificate Status.
  */
-enum CertificateStatus {
-  Completed,
-  Failed,
-  InProgress,
+union CertificateStatus {
+  string,
+  Completed: "Completed",
+  Failed: "Failed",
+  InProgress: "InProgress",
 }
 
 /**
  * Whether or not public endpoint access is allowed for this API Management service.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'
  */
-enum PublicNetworkAccess {
-  Enabled,
-  Disabled,
+union PublicNetworkAccess {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * Compute Platform Version running the service.
  */
-enum PlatformVersion {
+union PlatformVersion {
+  string,
+
   /**
    * Platform version cannot be determined, as compute platform is not deployed.
    */
-  undetermined,
+  undetermined: "undetermined",
 
   /**
    * Platform running the service on Single Tenant V1 platform.
    */
-  stv1,
+  stv1: "stv1",
 
   /**
    * Platform running the service on Single Tenant V2 platform.
    */
-  stv2,
+  stv2: "stv2",
 
   /**
    * Platform running the service on Multi Tenant V1 platform.
    */
-  mtv1,
+  mtv1: "mtv1",
 }
 
 /**
  * The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only Root and CertificateAuthority are valid locations.
  */
-enum CertificateConfigurationStoreName {
-  CertificateAuthority,
-  Root,
+union CertificateConfigurationStoreName {
+  string,
+  CertificateAuthority: "CertificateAuthority",
+  Root: "Root",
 }
 
 /**
  * The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.
  */
-enum VirtualNetworkType {
+union VirtualNetworkType {
+  string,
+
   /**
    * The service is not part of any Virtual Network.
    */
-  None,
+  None: "None",
 
   /**
    * The service is part of Virtual Network and it is accessible from Internet.
    */
-  External,
+  External: "External",
 
   /**
    * The service is part of Virtual Network and it is only accessible from within the virtual network.
    */
-  Internal,
+  Internal: "Internal",
 }
 
 /**
  * The private endpoint connection status.
  */
-enum PrivateEndpointServiceConnectionStatus {
-  Pending,
-  Approved,
-  Rejected,
+union PrivateEndpointServiceConnectionStatus {
+  string,
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
  * The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
-enum ApimIdentityType {
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
-  None,
+union ApimIdentityType {
+  string,
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+  None: "None",
 }
 
-enum TemplateName {
-  applicationApprovedNotificationMessage,
-  accountClosedDeveloper,
-  quotaLimitApproachingDeveloperNotificationMessage,
-  newDeveloperNotificationMessage,
-  emailChangeIdentityDefault,
-  inviteUserNotificationMessage,
-  newCommentNotificationMessage,
-  confirmSignUpIdentityDefault,
-  newIssueNotificationMessage,
-  purchaseDeveloperNotificationMessage,
-  passwordResetIdentityDefault,
-  passwordResetByAdminNotificationMessage,
-  rejectDeveloperNotificationMessage,
-  requestDeveloperNotificationMessage,
+union TemplateName {
+  string,
+  applicationApprovedNotificationMessage: "applicationApprovedNotificationMessage",
+  accountClosedDeveloper: "accountClosedDeveloper",
+  quotaLimitApproachingDeveloperNotificationMessage: "quotaLimitApproachingDeveloperNotificationMessage",
+  newDeveloperNotificationMessage: "newDeveloperNotificationMessage",
+  emailChangeIdentityDefault: "emailChangeIdentityDefault",
+  inviteUserNotificationMessage: "inviteUserNotificationMessage",
+  newCommentNotificationMessage: "newCommentNotificationMessage",
+  confirmSignUpIdentityDefault: "confirmSignUpIdentityDefault",
+  newIssueNotificationMessage: "newIssueNotificationMessage",
+  purchaseDeveloperNotificationMessage: "purchaseDeveloperNotificationMessage",
+  passwordResetIdentityDefault: "passwordResetIdentityDefault",
+  passwordResetByAdminNotificationMessage: "passwordResetByAdminNotificationMessage",
+  rejectDeveloperNotificationMessage: "rejectDeveloperNotificationMessage",
+  requestDeveloperNotificationMessage: "requestDeveloperNotificationMessage",
 }
 
 /**
  * Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
  */
-enum UserState {
+union UserState {
+  string,
+
   /**
    * User state is active.
    */
-  active,
+  active: "active",
 
   /**
    * User is blocked. Blocked users cannot authenticate at developer portal or call API.
    */
-  blocked,
+  blocked: "blocked",
 
   /**
    * User account is pending. Requires identity confirmation before it can be made active.
    */
-  pending,
+  pending: "pending",
 
   /**
    * User account is closed. All identities and related entities are removed.
    */
-  deleted,
+  deleted: "deleted",
 }
 
-enum IdentityProviderType {
+union IdentityProviderType {
+  string,
+
   /**
    * Facebook as Identity provider.
    */
-  facebook,
+  facebook: "facebook",
 
   /**
    * Google as Identity provider.
    */
-  google,
+  google: "google",
 
   /**
    * Microsoft Live as Identity provider.
    */
-  microsoft,
+  microsoft: "microsoft",
 
   /**
    * Twitter as Identity provider.
    */
-  twitter,
+  twitter: "twitter",
 
   /**
    * Azure Active Directory as Identity provider.
    */
-  aad,
+  aad: "aad",
 
   /**
    * Azure Active Directory B2C as Identity provider.
    */
-  aadB2C,
+  aadB2C: "aadB2C",
 }
 
 /**
  * Logger type.
  */
-enum LoggerType {
+union LoggerType {
+  string,
+
   /**
    * Azure Event Hub as log destination.
    */
-  azureEventHub,
+  azureEventHub: "azureEventHub",
 
   /**
    * Azure Application Insights as log destination.
    */
-  applicationInsights,
+  applicationInsights: "applicationInsights",
 
   /**
    * Azure Monitor
    */
-  azureMonitor,
+  azureMonitor: "azureMonitor",
 }
 
 /**
  * Resource Connectivity Status Type identifier.
  */
-enum ConnectivityStatusType {
-  initializing,
-  success,
-  failure,
+union ConnectivityStatusType {
+  string,
+  initializing: "initializing",
+  success: "success",
+  failure: "failure",
 }
 
-enum NotificationName {
+union NotificationName {
+  string,
+
   /**
    * The following email recipients and users will receive email notifications about subscription requests for API products requiring approval.
    */
-  RequestPublisherNotificationMessage,
+  RequestPublisherNotificationMessage: "RequestPublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications about new API product subscriptions.
    */
-  PurchasePublisherNotificationMessage,
+  PurchasePublisherNotificationMessage: "PurchasePublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications when new applications are submitted to the application gallery.
    */
-  NewApplicationNotificationMessage,
+  NewApplicationNotificationMessage: "NewApplicationNotificationMessage",
 
   /**
    * The following recipients will receive blind carbon copies of all emails sent to developers.
    */
-  BCC,
+  BCC: "BCC",
 
   /**
    * The following email recipients and users will receive email notifications when a new issue or comment is submitted on the developer portal.
    */
-  NewIssuePublisherNotificationMessage,
+  NewIssuePublisherNotificationMessage: "NewIssuePublisherNotificationMessage",
 
   /**
    * The following email recipients and users will receive email notifications when developer closes his account.
    */
-  AccountClosedPublisher,
+  AccountClosedPublisher: "AccountClosedPublisher",
 
   /**
    * The following email recipients and users will receive email notifications when subscription usage gets close to usage quota.
    */
-  QuotaLimitApproachingPublisherNotificationMessage,
+  QuotaLimitApproachingPublisherNotificationMessage: "QuotaLimitApproachingPublisherNotificationMessage",
 }
 
 /**
  * Status of the portal's revision.
  */
-enum PortalRevisionStatus {
+union PortalRevisionStatus {
+  string,
+
   /**
    * Portal's revision has been queued.
    */
-  pending,
+  pending: "pending",
 
   /**
    * Portal's revision is being published.
    */
-  publishing,
+  publishing: "publishing",
 
   /**
    * Portal's revision publishing completed.
    */
-  completed,
+  completed: "completed",
 
   /**
    * Portal's revision publishing failed.
    */
-  failed,
+  failed: "failed",
 }
 
 /**
  * The current provisioning state.
  */
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
  * Schema Type. Immutable.
  */
-enum SchemaType {
+union SchemaType {
+  string,
+
   /**
    * Xml schema type.
    */
@@ -831,56 +907,61 @@ enum SchemaType {
   Json: "json",
 }
 
-enum SettingsTypeName {
-  public,
+union SettingsTypeName {
+  string,
+  public: "public",
 }
 
-enum AppType {
+union AppType {
+  string,
+
   /**
    * User create request was sent by legacy developer portal.
    */
-  portal,
+  portal: "portal",
 
   /**
    * User create request was sent by new developer portal.
    */
-  developerPortal,
+  developerPortal: "developerPortal",
 }
 
-enum AccessIdName {
-  access,
-  gitAccess,
+union AccessIdName {
+  string,
+  access: "access",
+  gitAccess: "gitAccess",
 }
 
-enum ConfigurationIdName {
-  configuration,
+union ConfigurationIdName {
+  string,
+  configuration: "configuration",
 }
 
 /**
  * Determines the type of confirmation e-mail that will be sent to the newly created user.
  */
-enum Confirmation {
+union Confirmation {
+  string,
+
   /**
    * Send an e-mail to the user confirming they have successfully signed up.
    */
-  signup,
+  signup: "signup",
 
   /**
    * Send an e-mail inviting the user to sign-up and complete registration.
    */
-  invite,
+  invite: "invite",
 }
 
 /**
  * whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
  */
-@fixed
 enum ProductState {
   notPublished,
   published,
 }
 
-@fixed
 enum AuthorizationMethod {
   HEAD,
   OPTIONS,
@@ -895,7 +976,6 @@ enum AuthorizationMethod {
 /**
  * Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.
  */
-@fixed
 enum NameAvailabilityReason {
   Valid,
   Invalid,
@@ -905,7 +985,6 @@ enum NameAvailabilityReason {
 /**
  * The Key being regenerated.
  */
-@fixed
 enum GatewayRegenerateKeyType {
   primary,
   secondary,
@@ -914,7 +993,6 @@ enum GatewayRegenerateKeyType {
 /**
  * The Key to be used to generate token for user.
  */
-@fixed
 enum KeyType {
   primary,
   secondary,
@@ -923,14 +1001,12 @@ enum KeyType {
 /**
  * Group type.
  */
-@fixed
 enum GroupType {
   custom,
   system,
   external,
 }
 
-@fixed
 enum PolicyScopeContract {
   Tenant,
   Product,
@@ -942,7 +1018,6 @@ enum PolicyScopeContract {
 /**
  * Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.
  */
-@fixed
 enum SubscriptionState {
   suspended,
   active,
@@ -955,7 +1030,6 @@ enum SubscriptionState {
 /**
  * The scale type applicable to the sku.
  */
-@fixed
 enum ApiManagementSkuCapacityScaleType {
   Automatic,
   Manual,
@@ -965,7 +1039,6 @@ enum ApiManagementSkuCapacityScaleType {
 /**
  * The type of restrictions.
  */
-@fixed
 enum ApiManagementSkuRestrictionsType {
   Location,
   Zone,
@@ -974,7 +1047,6 @@ enum ApiManagementSkuRestrictionsType {
 /**
  * The reason for restriction.
  */
-@fixed
 enum ApiManagementSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
@@ -983,7 +1055,6 @@ enum ApiManagementSkuRestrictionsReasonCode {
 /**
  * Status of an async operation.
  */
-@fixed
 enum AsyncOperationStatus {
   Started,
   InProgress,

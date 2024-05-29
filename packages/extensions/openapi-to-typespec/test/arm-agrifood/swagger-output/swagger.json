@@ -2806,7 +2806,25 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -2820,7 +2838,21 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          }
+        ]
       }
     },
     "PrivateLinkResource": {
@@ -2917,7 +2949,33 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Running",
+            "value": "Running"
+          }
+        ]
       },
       "readOnly": true
     },
@@ -2930,7 +2988,17 @@
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
       }
     },
     "SensorIntegration": {
