@@ -11,7 +11,7 @@ extends:
   template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
     authenticatedContainerRegistries:
-      - serviceConnection: azsdkengsys
+      - serviceConnection: Azure SDK Engineering System
     stages:
       - stage: npm
         pool:
