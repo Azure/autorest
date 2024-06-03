@@ -10,8 +10,8 @@ trigger:
 extends:
   template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
-    authenticatedContainerRegistries:
-      - serviceConnection: Azure SDK Engineering System
+    # authenticatedContainerRegistries:
+    #   - serviceConnection: Azure SDK Engineering System
     stages:
       - stage: npm
         pool:
