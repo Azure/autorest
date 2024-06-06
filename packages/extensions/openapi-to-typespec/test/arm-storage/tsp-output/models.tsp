@@ -214,6 +214,7 @@ enum PrivateEndpointServiceConnectionStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -504,6 +505,7 @@ enum AccessTier {
 /**
  * Gets the status of the storage account at the time the operation was called.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @fixed
 enum ProvisioningState {
   Creating,

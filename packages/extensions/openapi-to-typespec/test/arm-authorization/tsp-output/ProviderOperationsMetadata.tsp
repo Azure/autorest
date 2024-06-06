@@ -31,11 +31,13 @@ model ProviderOperationsMetadata is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * The provider resource types
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   resourceTypes?: AuthorizationProviderResourceType[];
 
   /**
    * The provider operations.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   operations?: ProviderOperation[];
 }
 

@@ -242,6 +242,7 @@ model DenyAssignmentProperties {
   /**
    * An array of permissions that are denied by the deny assignment.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   permissions?: DenyAssignmentPermission[];
 
   /**
@@ -348,6 +349,7 @@ model AuthorizationProviderResourceType {
   /**
    * The resource type operations.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   operations?: ProviderOperation[];
 }
 
@@ -519,6 +521,7 @@ model RoleDefinitionProperties {
   /**
    * Role definition permissions.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   permissions?: Permission[];
 
   /**
@@ -1683,6 +1686,7 @@ model ApprovalSettings {
   /**
    * The approval stages of the request.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   approvalStages?: ApprovalStage[];
 }
 

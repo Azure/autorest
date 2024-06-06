@@ -2359,7 +2359,9 @@
           "items": {
             "$ref": "#/definitions/RoleAssignmentDetail"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "roleAssignmentId"
+          ]
         }
       },
       "required": [

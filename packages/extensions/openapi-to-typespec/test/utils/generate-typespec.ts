@@ -83,6 +83,7 @@ function generate(root: string, path: string, debug = false, isFullCompatible = 
     ...(debug ? ["--openapi-to-typespec.debugger"] : []),
     ...(isFullCompatible ? ["--openapi-to-typespec.isFullCompatible"] : []),
     ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
+    "--openapi-to-typespec.isTest",
   ];
   const spawn = spawnSync("node", args, { stdio: "inherit" });
 

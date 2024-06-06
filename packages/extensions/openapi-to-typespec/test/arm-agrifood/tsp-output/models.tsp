@@ -22,6 +22,7 @@ enum AuthCredentialsKind {
 /**
  * Data Manager For Agriculture instance provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum ProvisioningState {
   Creating,
   Updating,
@@ -51,6 +52,7 @@ enum PrivateEndpointServiceConnectionStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -217,6 +219,7 @@ model DataManagerForAgricultureExtensionProperties {
    * customParameters, PlatformParameters and Units supported.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   detailedInformation?: DetailedInformation[];
 }
 

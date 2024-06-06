@@ -24,6 +24,7 @@ export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeMod
         ],
       }),
     };
+    dataTypes.set(schema, typespecEnum);
   }
   return typespecEnum;
 }

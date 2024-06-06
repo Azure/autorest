@@ -1,8 +1,11 @@
 import { TypespecEnum } from "../interfaces";
+import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { generateSuppressions } from "../utils/suppressions";
 
 export function generateEnums(typespecEnum: TypespecEnum) {
+  const { isFullCompatible } = getOptions();
   const definitions: string[] = [];
   const doc = generateDocs(typespecEnum);
   definitions.push(doc);
@@ -14,6 +17,9 @@ export function generateEnums(typespecEnum: TypespecEnum) {
   const decorators = generateDecorators(typespecEnum.decorators);
   decorators && definitions.push(decorators);
 
+  if (isFullCompatible && typespecEnum.suppressions) {
+    definitions.push(...generateSuppressions(typespecEnum.suppressions));
+  }
   const enumDefinition = `
     enum ${typespecEnum.name} {
         ${typespecEnum.members

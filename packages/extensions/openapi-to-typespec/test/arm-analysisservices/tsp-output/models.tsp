@@ -34,6 +34,7 @@ enum State {
 /**
  * The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum ProvisioningState {
   Deleting,
   Succeeded,
@@ -213,6 +214,7 @@ model IPv4FirewallSettings {
   /**
    * An array of firewall rules.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["firewallRuleName"])
   firewallRules?: IPv4FirewallRule[];
 
   /**
@@ -311,6 +313,7 @@ model SkuEnumerationForExistingResourceResult {
   /**
    * The collection of available SKUs for existing resources.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["sku/name"])
   value?: SkuDetailsForExistingResource[];
 }
 
@@ -406,12 +409,14 @@ model OperationPropertiesServiceSpecification {
    * The metric specifications.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   metricSpecifications?: MetricSpecifications[];
 
   /**
    * The log specifications.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   logSpecifications?: LogSpecifications[];
 }
 
@@ -453,6 +458,7 @@ model MetricSpecifications {
    * The dimensions of metric.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   dimensions?: MetricDimensions[];
 }
 

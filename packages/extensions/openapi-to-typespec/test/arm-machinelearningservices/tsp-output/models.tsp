@@ -867,6 +867,7 @@ enum ManagedNetworkStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 enum PrivateEndpointConnectionProvisioningState {
   Succeeded,
   Creating,
@@ -2678,6 +2679,7 @@ model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes supported by AmlCompute.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   value?: VirtualMachineSize[];
 }
 
@@ -2767,6 +2769,7 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   values: EstimatedVMPrice[];
 }
 
@@ -3054,6 +3057,7 @@ model Compute {
    * Errors during provisioning
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
   provisioningErrors?: ErrorResponse[];
 
   /**
@@ -3149,11 +3153,13 @@ model CustomService {
   /**
    * Configuring the endpoints for the container
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   endpoints?: Endpoint[];
 
   /**
    * Configuring the volumes for the container
    */
+  @OpenAPI.extension("x-ms-identifiers", ["source", "target"])
   volumes?: VolumeDefinition[];
 }
 
@@ -3304,6 +3310,7 @@ model AmlComputeNodesInformation {
    */
   @visibility("read")
   @items
+  @OpenAPI.extension("x-ms-identifiers", ["nodeId"])
   nodes?: AmlComputeNodeInformation[];
 
   /**
@@ -3825,6 +3832,7 @@ model PackageRequest {
    * Collection of inputs.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   inputs?: ModelPackageInput[];
 
   /**
@@ -3937,6 +3945,7 @@ model PackageResponse {
    * Collection of inputs.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   inputs?: ModelPackageInput[];
 
   /**
@@ -4671,6 +4680,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   indexColumns?: IndexColumn[];
 
   /**
@@ -4941,6 +4951,7 @@ model LabelingJobProperties extends JobBase {
    * Status messages of the job.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   statusMessages?: StatusMessage[];
 
   /**
@@ -5567,6 +5578,7 @@ model RegistryProperties {
   /**
    * Details of each region the registry is in
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   regionDetails?: RegistryRegionArmDetails[];
 }
 
@@ -5676,6 +5688,7 @@ model RegistryRegionArmDetails {
   /**
    * List of ACR accounts
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   acrDetails?: AcrDetails[];
 
   /**
@@ -5686,6 +5699,7 @@ model RegistryRegionArmDetails {
   /**
    * List of storage accounts
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   storageAccountDetails?: StorageAccountDetails[];
 }
 
@@ -5952,6 +5966,7 @@ model WorkspaceProperties {
    * The list of private endpoint connections in the workspace.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -5985,6 +6000,7 @@ model WorkspaceProperties {
   /**
    * The list of shared private link resources in this workspace.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -6496,14 +6512,31 @@ model DiagnoseResponseResult {
 }
 
 model DiagnoseResponseResultValue {
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   userDefinedRouteResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   resourceLockResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   dnsResolutionResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   storageAccountResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   keyVaultResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   containerRegistryResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   applicationInsightsResults?: DiagnoseResult[];
+
+  @OpenAPI.extension("x-ms-identifiers", ["message"])
   otherResults?: DiagnoseResult[];
 }
 
@@ -6560,6 +6593,7 @@ model RegistryListCredentialsResult {
   @visibility("read")
   location?: string;
 
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   passwords?: Password[];
 
   /**
@@ -6626,6 +6660,7 @@ model ListStorageAccountKeysResult {
 }
 
 model ExternalFqdnResponse {
+  @OpenAPI.extension("x-ms-identifiers", ["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
 
@@ -6638,11 +6673,15 @@ model FqdnEndpointsPropertyBag {
 
 model FqdnEndpoints {
   category?: string;
+
+  @OpenAPI.extension("x-ms-identifiers", ["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
 model FqdnEndpoint {
   domainName?: string;
+
+  @OpenAPI.extension("x-ms-identifiers", ["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
@@ -6761,6 +6800,7 @@ model AKSSchemaProperties {
    * System services
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["publicIpAddress"])
   systemServices?: SystemService[];
 
   /**
@@ -7052,6 +7092,7 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
   errors?: ErrorResponse[];
 
   /**
@@ -7208,6 +7249,7 @@ model ComputeInstanceProperties {
   /**
    * List of Custom Services added to the compute.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   customServices?: CustomService[];
 
   /**
@@ -7226,6 +7268,7 @@ model ComputeInstanceProperties {
    * Describes available applications and their endpoints on this ComputeInstance.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["displayName"])
   applications?: ComputeInstanceApplication[];
 
   /**
@@ -7238,6 +7281,7 @@ model ComputeInstanceProperties {
    * Collection of errors encountered on this ComputeInstance.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["/error/code"])
   errors?: ErrorResponse[];
 
   /**
@@ -7286,18 +7330,21 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   containers?: ComputeInstanceContainer[];
 
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   dataDisks?: ComputeInstanceDataDisk[];
 
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   dataMounts?: ComputeInstanceDataMount[];
 
   /**
@@ -7680,6 +7727,7 @@ model ComputeInstanceContainer {
    * services of this containers.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   services?: Record<unknown>[];
 }
 
@@ -9109,6 +9157,7 @@ model TableVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   searchSpace?: TableParameterSubspace[];
 
   /**
@@ -9910,6 +9959,7 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: CustomMetricThreshold[];
 
   /**
@@ -10053,6 +10103,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: DataDriftMetricThresholdBase[];
 
   /**
@@ -10150,6 +10201,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: DataQualityMetricThresholdBase[];
 
   /**
@@ -10184,6 +10236,7 @@ model DatabaseSource extends DataImportSource {
   /**
    * SQL StoredProcedure parameters
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   storedProcedureParams?: Record<string>[];
 
   /**
@@ -10256,6 +10309,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] The data which drift will be calculated for.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   productionData: MonitoringInputDataBase[];
 
   /**
@@ -10469,12 +10523,14 @@ model GenerationSafetyQualityMonitoringSignal extends MonitoringSignalBase {
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: GenerationSafetyQualityMetricThreshold[];
 
   /**
    * Gets or sets the target data for computing metrics.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   productionData?: MonitoringInputDataBase[];
 
   /**
@@ -10521,6 +10577,7 @@ model GenerationTokenStatisticsSignal extends MonitoringSignalBase {
    * [Required] Gets or sets the metrics to calculate and the corresponding thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: GenerationTokenStatisticsMetricThreshold[];
 
   /**
@@ -10605,6 +10662,7 @@ model ImageClassificationBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   searchSpace?: ImageModelDistributionSettingsClassification[];
 }
 
@@ -11134,6 +11192,7 @@ model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   searchSpace?: ImageModelDistributionSettingsObjectDetection[];
 }
 
@@ -11698,6 +11757,7 @@ model ModelPerformanceSignal extends MonitoringSignalBase {
    * [Required] The data produced by the production service which drift will be calculated for.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   productionData: MonitoringInputDataBase[];
 
   /**
@@ -11898,6 +11958,7 @@ model NlpVertical {
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   searchSpace?: NlpParameterSubspace[];
 
   /**
@@ -12164,6 +12225,7 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
    * [Required] A list of metrics to calculate and their associated thresholds.
    */
   @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
   metricThresholds: PredictionDriftMetricThresholdBase[];
 
   /**

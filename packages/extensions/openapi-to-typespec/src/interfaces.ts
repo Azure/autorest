@@ -10,6 +10,7 @@ export interface TypespecOptions {
   guessResourceKey: boolean;
   isArm: boolean;
   isFullCompatible: boolean;
+  isTest: boolean;
 }
 
 export interface TypespecChoiceValue extends WithDoc {
@@ -99,7 +100,7 @@ export interface EndpointParameter extends WithDoc {
   name: string;
 }
 
-export interface TypespecDataType extends WithDoc, WithFixMe {
+export interface TypespecDataType extends WithDoc, WithFixMe, WithSuppressDirectives {
   kind: string;
   name: string;
 }
@@ -161,7 +162,7 @@ export interface TypespecObjectProperty extends TypespecDataType, WithSuppressDi
 
 export interface TypespecDecorator extends WithFixMe, WithSuppressDirective {
   name: string;
-  arguments?: (string | number)[] | DecoratorArgument[];
+  arguments?: (string | number | string[])[] | DecoratorArgument[];
   module?: string;
   namespace?: string;
   target?: string;

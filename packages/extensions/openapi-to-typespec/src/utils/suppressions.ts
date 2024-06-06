@@ -1,4 +1,10 @@
+import { ChoiceSchema, Property, Schema, SealedChoiceSchema } from "@autorest/codemodel";
 import { WithSuppressDirective } from "../interfaces";
+import { isChoiceSchema, isSealedChoiceSchema, isDictionarySchema, isStringSchema } from "./schemas";
+
+export function getPropertySuppressions(propertySchema: Property): WithSuppressDirective[] | undefined {
+  return isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined;
+}
 
 export function generateSuppressions(suppressions: WithSuppressDirective[]): string[] {
   const definitions: string[] = [];
@@ -35,6 +41,15 @@ export function getSuppressionsForRecordProperty(): WithSuppressDirective[] {
   return [
     {
       suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-no-record",
+      suppressionMessage: "For backward compatibility",
+    },
+  ];
+}
+
+export function getSuppressionsForProvisioningState(): WithSuppressDirective[] {
+  return [
+    {
+      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state",
       suppressionMessage: "For backward compatibility",
     },
   ];
