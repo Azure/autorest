@@ -9,68 +9,73 @@ namespace Azure.Language.QnAMaker;
 /**
  * Type of ranker to be used.
  */
-enum RankerKind {
+union RankerKind {
+  string,
+
   /**
    * Question only ranker.
    */
-  QuestionOnly,
+  QuestionOnly: "QuestionOnly",
 
   /**
    * Default ranker.
    */
-  Default,
+  Default: "Default",
 }
 
 /**
  * Set to 'OR' or 'AND' for using corresponding logical operation.
  */
-enum LogicalOperationKind {
-  AND,
-  OR,
+union LogicalOperationKind {
+  string,
+  AND: "AND",
+  OR: "OR",
 }
 
 /**
  * Human-readable error code.
  */
-enum ErrorCode {
-  InvalidRequest,
-  InvalidArgument,
-  Unauthorized,
-  Forbidden,
-  NotFound,
-  ProjectNotFound,
-  OperationNotFound,
-  AzureCognitiveSearchNotFound,
-  AzureCognitiveSearchIndexNotFound,
-  TooManyRequests,
-  AzureCognitiveSearchThrottling,
-  AzureCognitiveSearchIndexLimitReached,
-  InternalServerError,
-  ServiceUnavailable,
-  Timeout,
-  QuotaExceeded,
-  Conflict,
-  Warning,
+union ErrorCode {
+  string,
+  InvalidRequest: "InvalidRequest",
+  InvalidArgument: "InvalidArgument",
+  Unauthorized: "Unauthorized",
+  Forbidden: "Forbidden",
+  NotFound: "NotFound",
+  ProjectNotFound: "ProjectNotFound",
+  OperationNotFound: "OperationNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
+  TooManyRequests: "TooManyRequests",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
+  InternalServerError: "InternalServerError",
+  ServiceUnavailable: "ServiceUnavailable",
+  Timeout: "Timeout",
+  QuotaExceeded: "QuotaExceeded",
+  Conflict: "Conflict",
+  Warning: "Warning",
 }
 
 /**
  * Human-readable error code.
  */
-enum InnerErrorCode {
-  InvalidRequest,
-  InvalidParameterValue,
-  KnowledgeBaseNotFound,
-  AzureCognitiveSearchNotFound,
-  AzureCognitiveSearchThrottling,
-  ExtractionFailure,
-  InvalidRequestBodyFormat,
-  EmptyRequest,
-  MissingInputDocuments,
-  InvalidDocument,
-  ModelVersionIncorrect,
-  InvalidDocumentBatch,
-  UnsupportedLanguageCode,
-  InvalidCountryHint,
+union InnerErrorCode {
+  string,
+  InvalidRequest: "InvalidRequest",
+  InvalidParameterValue: "InvalidParameterValue",
+  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
+  ExtractionFailure: "ExtractionFailure",
+  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
+  EmptyRequest: "EmptyRequest",
+  MissingInputDocuments: "MissingInputDocuments",
+  InvalidDocument: "InvalidDocument",
+  ModelVersionIncorrect: "ModelVersionIncorrect",
+  InvalidDocumentBatch: "InvalidDocumentBatch",
+  UnsupportedLanguageCode: "UnsupportedLanguageCode",
+  InvalidCountryHint: "InvalidCountryHint",
 }
 
 /**
@@ -78,28 +83,30 @@ enum InnerErrorCode {
  * Elements (Graphemes) according to Unicode v8.0.0. For additional information
  * see https://aka.ms/text-analytics-offsets.
  */
-enum StringIndexType {
+union StringIndexType {
+  string,
+
   /**
    * Returned offset and length values will correspond to TextElements (Graphemes
    * and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this
    * option if your application is written in .Net Framework or .Net Core and you
    * will be using StringInfo.
    */
-  TextElements_v8,
+  TextElements_v8: "TextElements_v8",
 
   /**
    * Returned offset and length values will correspond to Unicode code points. Use
    * this option if your application is written in a language that support Unicode,
    * for example Python.
    */
-  UnicodeCodePoint,
+  UnicodeCodePoint: "UnicodeCodePoint",
 
   /**
    * Returned offset and length values will correspond to UTF-16 code units. Use
    * this option if your application is written in a language that support Unicode,
    * for example Java, JavaScript.
    */
-  Utf16CodeUnit,
+  Utf16CodeUnit: "Utf16CodeUnit",
 }
 
 /**

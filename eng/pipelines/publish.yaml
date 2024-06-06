@@ -10,8 +10,8 @@ trigger:
 extends:
   template: /eng/pipelines/templates/1es-redirect.yml
   parameters:
-    authenticatedContainerRegistries:
-      - serviceConnection: azsdkengsys
+    # authenticatedContainerRegistries:
+    #   - serviceConnection: Azure SDK Engineering System
     stages:
       - stage: npm
         pool:
@@ -43,40 +43,40 @@ extends:
               - script: |
                   NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
                 displayName: Publish packages
-      - stage: Docker
-        dependsOn: npm
-        pool:
-          name: $(LINUXPOOL)
-          image: $(LINUXVMIMAGE)
-          os: linux
-        jobs:
-          - template: /eng/pipelines/templates/build-and-push-docker.yaml
-            parameters:
-              name: base
-              image: azsdkengsys.azurecr.io/azuresdk/autorest
-              dockerFolder: ./docker/base/ubuntu
-              readmePath: docker/base/readme.md
-          - template: /eng/pipelines/templates/build-and-push-docker.yaml
-            parameters:
-              name: dotnet
-              image: azsdkengsys.azurecr.io/azuresdk/autorest-dotnet
-              dockerFolder: ./docker/dotnet/ubuntu
-              readmePath: docker/dotnet/readme.md
-          - template: /eng/pipelines/templates/build-and-push-docker.yaml
-            parameters:
-              name: python
-              image: azsdkengsys.azurecr.io/azuresdk/autorest-python
-              dockerFolder: ./docker/python/ubuntu
-              readmePath: docker/python/readme.md
-          - template: /eng/pipelines/templates/build-and-push-docker.yaml
-            parameters:
-              name: java
-              image: azsdkengsys.azurecr.io/azuresdk/autorest-java
-              dockerFolder: ./docker/java/ubuntu
-              readmePath: docker/java/readme.md
-          - template: /eng/pipelines/templates/build-and-push-docker.yaml
-            parameters:
-              name: all
-              image: azsdkengsys.azurecr.io/azuresdk/autorest-all
-              dockerFolder: ./docker/all/ubuntu
-              readmePath: docker/all/readme.md
+      # - stage: Docker
+      #   dependsOn: npm
+      #   pool:
+      #     name: $(LINUXPOOL)
+      #     image: $(LINUXVMIMAGE)
+      #     os: linux
+      #   jobs:
+      #     - template: /eng/pipelines/templates/build-and-push-docker.yaml
+      #       parameters:
+      #         name: base
+      #         image: azsdkengsys.azurecr.io/azuresdk/autorest
+      #         dockerFolder: ./docker/base/ubuntu
+      #         readmePath: docker/base/readme.md
+      #     - template: /eng/pipelines/templates/build-and-push-docker.yaml
+      #       parameters:
+      #         name: dotnet
+      #         image: azsdkengsys.azurecr.io/azuresdk/autorest-dotnet
+      #         dockerFolder: ./docker/dotnet/ubuntu
+      #         readmePath: docker/dotnet/readme.md
+      #     - template: /eng/pipelines/templates/build-and-push-docker.yaml
+      #       parameters:
+      #         name: python
+      #         image: azsdkengsys.azurecr.io/azuresdk/autorest-python
+      #         dockerFolder: ./docker/python/ubuntu
+      #         readmePath: docker/python/readme.md
+      #     - template: /eng/pipelines/templates/build-and-push-docker.yaml
+      #       parameters:
+      #         name: java
+      #         image: azsdkengsys.azurecr.io/azuresdk/autorest-java
+      #         dockerFolder: ./docker/java/ubuntu
+      #         readmePath: docker/java/readme.md
+      #     - template: /eng/pipelines/templates/build-and-push-docker.yaml
+      #       parameters:
+      #         name: all
+      #         image: azsdkengsys.azurecr.io/azuresdk/autorest-all
+      #         dockerFolder: ./docker/all/ubuntu
+      #         readmePath: docker/all/readme.md

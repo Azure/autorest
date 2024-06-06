@@ -15,169 +15,185 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The principal type of the assigned principal ID.
  */
-enum PrincipalType {
-  User,
-  Group,
-  ServicePrincipal,
-  ForeignGroup,
-  Device,
+union PrincipalType {
+  string,
+  User: "User",
+  Group: "Group",
+  ServicePrincipal: "ServicePrincipal",
+  ForeignGroup: "ForeignGroup",
+  Device: "Device",
 }
 
 /**
  * The role type.
  */
-enum RoleType {
-  BuiltInRole,
-  CustomRole,
+union RoleType {
+  string,
+  BuiltInRole: "BuiltInRole",
+  CustomRole: "CustomRole",
 }
 
 /**
  * Assignment type of the role assignment schedule
  */
-enum AssignmentType {
-  Activated,
-  Assigned,
+union AssignmentType {
+  string,
+  Activated: "Activated",
+  Assigned: "Assigned",
 }
 
 /**
  * Membership type of the role assignment schedule
  */
-enum RoleManagementScheduleMemberType {
-  Inherited,
-  Direct,
-  Group,
+union RoleManagementScheduleMemberType {
+  string,
+  Inherited: "Inherited",
+  Direct: "Direct",
+  Group: "Group",
 }
 
 /**
  * The status of the role assignment schedule.
  */
-enum RoleManagementScheduleStatus {
-  Accepted,
-  PendingEvaluation,
-  Granted,
-  Denied,
-  PendingProvisioning,
-  Provisioned,
-  PendingRevocation,
-  Revoked,
-  Canceled,
-  Failed,
-  PendingApprovalProvisioning,
-  PendingApproval,
-  FailedAsResourceIsLocked,
-  PendingAdminDecision,
-  AdminApproved,
-  AdminDenied,
-  TimedOut,
-  ProvisioningStarted,
-  Invalid,
-  PendingScheduleCreation,
-  ScheduleCreated,
-  PendingExternalProvisioning,
+union RoleManagementScheduleStatus {
+  string,
+  Accepted: "Accepted",
+  PendingEvaluation: "PendingEvaluation",
+  Granted: "Granted",
+  Denied: "Denied",
+  PendingProvisioning: "PendingProvisioning",
+  Provisioned: "Provisioned",
+  PendingRevocation: "PendingRevocation",
+  Revoked: "Revoked",
+  Canceled: "Canceled",
+  Failed: "Failed",
+  PendingApprovalProvisioning: "PendingApprovalProvisioning",
+  PendingApproval: "PendingApproval",
+  FailedAsResourceIsLocked: "FailedAsResourceIsLocked",
+  PendingAdminDecision: "PendingAdminDecision",
+  AdminApproved: "AdminApproved",
+  AdminDenied: "AdminDenied",
+  TimedOut: "TimedOut",
+  ProvisioningStarted: "ProvisioningStarted",
+  Invalid: "Invalid",
+  PendingScheduleCreation: "PendingScheduleCreation",
+  ScheduleCreated: "ScheduleCreated",
+  PendingExternalProvisioning: "PendingExternalProvisioning",
 }
 
 /**
  * Type of the scope.
  */
-enum ScopeType {
-  subscription,
-  managementgroup,
-  resourcegroup,
+union ScopeType {
+  string,
+  subscription: "subscription",
+  managementgroup: "managementgroup",
+  resourcegroup: "resourcegroup",
 }
 
 /**
  * The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc
  */
-enum RoleManagementScheduleRequestType {
-  AdminAssign,
-  AdminRemove,
-  AdminUpdate,
-  AdminExtend,
-  AdminRenew,
-  SelfActivate,
-  SelfDeactivate,
-  SelfExtend,
-  SelfRenew,
+union RoleManagementScheduleRequestType {
+  string,
+  AdminAssign: "AdminAssign",
+  AdminRemove: "AdminRemove",
+  AdminUpdate: "AdminUpdate",
+  AdminExtend: "AdminExtend",
+  AdminRenew: "AdminRenew",
+  SelfActivate: "SelfActivate",
+  SelfDeactivate: "SelfDeactivate",
+  SelfExtend: "SelfExtend",
+  SelfRenew: "SelfRenew",
 }
 
 /**
  * Type of the role assignment schedule expiration
  */
-enum RoleManagementScheduleExpirationType {
-  AfterDuration,
-  AfterDateTime,
-  NoExpiration,
+union RoleManagementScheduleExpirationType {
+  string,
+  AfterDuration: "AfterDuration",
+  AfterDateTime: "AfterDateTime",
+  NoExpiration: "NoExpiration",
 }
 
 /**
  * The type of rule
  */
-enum RoleManagementPolicyRuleType {
-  RoleManagementPolicyApprovalRule,
-  RoleManagementPolicyAuthenticationContextRule,
-  RoleManagementPolicyEnablementRule,
-  RoleManagementPolicyExpirationRule,
-  RoleManagementPolicyNotificationRule,
+union RoleManagementPolicyRuleType {
+  string,
+  RoleManagementPolicyApprovalRule: "RoleManagementPolicyApprovalRule",
+  RoleManagementPolicyAuthenticationContextRule: "RoleManagementPolicyAuthenticationContextRule",
+  RoleManagementPolicyEnablementRule: "RoleManagementPolicyEnablementRule",
+  RoleManagementPolicyExpirationRule: "RoleManagementPolicyExpirationRule",
+  RoleManagementPolicyNotificationRule: "RoleManagementPolicyNotificationRule",
 }
 
 /**
  * The assignment level to which rule is applied.
  */
-enum RoleManagementAssignmentLevel {
-  Assignment,
-  Eligibility,
+union RoleManagementAssignmentLevel {
+  string,
+  Assignment: "Assignment",
+  Eligibility: "Eligibility",
 }
 
 /**
  * The type of rule
  */
-enum ApprovalMode {
-  SingleStage,
-  Serial,
-  Parallel,
-  NoApproval,
+union ApprovalMode {
+  string,
+  SingleStage: "SingleStage",
+  Serial: "Serial",
+  Parallel: "Parallel",
+  NoApproval: "NoApproval",
 }
 
 /**
  * The type of user.
  */
-enum UserType {
-  User,
-  Group,
+union UserType {
+  string,
+  User: "User",
+  Group: "Group",
 }
 
 /**
  * The type of enablement rule
  */
-enum EnablementRules {
-  MultiFactorAuthentication,
-  Justification,
-  Ticketing,
+union EnablementRules {
+  string,
+  MultiFactorAuthentication: "MultiFactorAuthentication",
+  Justification: "Justification",
+  Ticketing: "Ticketing",
 }
 
 /**
  * The type of notification.
  */
-enum NotificationDeliveryMechanism {
-  Email,
+union NotificationDeliveryMechanism {
+  string,
+  Email: "Email",
 }
 
 /**
  * The notification level.
  */
-enum NotificationLevel {
-  None,
-  Critical,
-  All,
+union NotificationLevel {
+  string,
+  None: "None",
+  Critical: "Critical",
+  All: "All",
 }
 
 /**
  * The recipient type.
  */
-enum RecipientType {
-  Requestor,
-  Approver,
-  Admin,
+union RecipientType {
+  string,
+  Requestor: "Requestor",
+  Approver: "Approver",
+  Admin: "Admin",
 }
 
 /**

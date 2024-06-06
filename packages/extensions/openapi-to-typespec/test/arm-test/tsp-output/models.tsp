@@ -14,41 +14,43 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The provisioning state of a resource.
  */
-enum ProvisioningStateTest {
+union ProvisioningStateTest {
+  string,
+
   /**
    * Resource has been created.
    */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  Canceled,
+  Canceled: "Canceled",
 
   /**
    * The resource is being provisioned
    */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /**
    * The resource is updating
    */
-  Updating,
+  Updating: "Updating",
 
   /**
    * The resource is being deleted
    */
-  Deleting,
+  Deleting: "Deleting",
 
   /**
    * The resource create request has been accepted
    */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 /**

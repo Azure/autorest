@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/openapi-to-typespec",
-      "comment": "Add command to run compilation on test projects",
+      "comment": "Change enum outout to the latest definition",
       "type": "patch"
     }
   ],

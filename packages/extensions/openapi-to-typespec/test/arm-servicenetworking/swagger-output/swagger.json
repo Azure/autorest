@@ -1050,7 +1050,13 @@
       ],
       "x-ms-enum": {
         "name": "AssociationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subnets",
+            "value": "subnets"
+          }
+        ]
       }
     },
     "AssociationUpdate": {
@@ -1167,7 +1173,37 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
       },
       "readOnly": true
     },

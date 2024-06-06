@@ -14,50 +14,55 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Enum for different types of AuthCredentials supported.
  */
-enum AuthCredentialsKind {
-  OAuthClientCredentials,
-  ApiKeyAuthCredentials,
+union AuthCredentialsKind {
+  string,
+  OAuthClientCredentials: "OAuthClientCredentials",
+  ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
 }
 
 /**
  * Data Manager For Agriculture instance provisioning state.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-enum ProvisioningState {
-  Creating,
-  Updating,
-  Deleting,
-  Succeeded,
-  Failed,
-  Running,
+union ProvisioningState {
+  string,
+  Creating: "Creating",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Running: "Running",
 }
 
 /**
  * Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.
  */
-enum PublicNetworkAccess {
-  Enabled,
-  Disabled,
+union PublicNetworkAccess {
+  string,
+  Enabled: "Enabled",
+  Disabled: "Disabled",
 }
 
 /**
  * The private endpoint connection status.
  */
-enum PrivateEndpointServiceConnectionStatus {
-  Pending,
-  Approved,
-  Rejected,
+union PrivateEndpointServiceConnectionStatus {
+  string,
+  Pending: "Pending",
+  Approved: "Approved",
+  Rejected: "Rejected",
 }
 
 /**
  * The current provisioning state.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-enum PrivateEndpointConnectionProvisioningState {
-  Succeeded,
-  Creating,
-  Deleting,
-  Failed,
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**

@@ -1,22 +1,20 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 
 namespace AzureWebPubSubServiceRESTAPI;
 
-enum WebPubSubPermission {
-  sendToGroup,
-  joinLeaveGroup,
+union WebPubSubPermission {
+  string,
+  sendToGroup: "sendToGroup",
+  joinLeaveGroup: "joinLeaveGroup",
 }
 
 /**
  * Content type for upload
  */
-@fixed
 enum ContentType {
   /**
    * Content Type 'application/json'

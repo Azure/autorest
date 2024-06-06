@@ -19,30 +19,32 @@ enum ApiVersion {
  * Define the impute method, can be one of auto, previous, linear, fixed, zero,
  * notFill.
  */
-enum ImputeMode {
-  auto,
-  previous,
-  linear,
-  fixed,
-  zero,
-  notFill,
+union ImputeMode {
+  string,
+  auto: "auto",
+  previous: "previous",
+  linear: "linear",
+  fixed: "fixed",
+  zero: "zero",
+  notFill: "notFill",
 }
 
 /**
  * The error code.
  */
-enum AnomalyDetectorErrorCodes {
-  InvalidCustomInterval,
-  BadArgument,
-  InvalidGranularity,
-  InvalidPeriod,
-  InvalidModelArgument,
-  InvalidSeries,
-  InvalidJsonFormat,
-  RequiredGranularity,
-  RequiredSeries,
-  InvalidImputeMode,
-  InvalidImputeFixedValue,
+union AnomalyDetectorErrorCodes {
+  string,
+  InvalidCustomInterval: "InvalidCustomInterval",
+  BadArgument: "BadArgument",
+  InvalidGranularity: "InvalidGranularity",
+  InvalidPeriod: "InvalidPeriod",
+  InvalidModelArgument: "InvalidModelArgument",
+  InvalidSeries: "InvalidSeries",
+  InvalidJsonFormat: "InvalidJsonFormat",
+  RequiredGranularity: "RequiredGranularity",
+  RequiredSeries: "RequiredSeries",
+  InvalidImputeMode: "InvalidImputeMode",
+  InvalidImputeFixedValue: "InvalidImputeFixedValue",
 }
 
 /**
@@ -50,13 +52,14 @@ enum AnomalyDetectorErrorCodes {
  * Previous, Subsequent, Linear, Zero, Fixed, and NotFill. Cannot be set to
  * NotFill, when the alignMode is Outer.
  */
-enum FillNAMethod {
-  Previous,
-  Subsequent,
-  Linear,
-  Zero,
-  Fixed,
-  NotFill,
+union FillNAMethod {
+  string,
+  Previous: "Previous",
+  Subsequent: "Subsequent",
+  Linear: "Linear",
+  Zero: "Zero",
+  Fixed: "Fixed",
+  NotFill: "NotFill",
 }
 
 /**
@@ -65,7 +68,6 @@ enum FillNAMethod {
  * be none by default. If granularity is none, the timestamp property in time
  * series point can be absent.
  */
-@fixed
 enum TimeGranularity {
   yearly,
   monthly,
@@ -81,7 +83,6 @@ enum TimeGranularity {
 /**
  * Status of detection results. One of CREATED, RUNNING, READY, and FAILED.
  */
-@fixed
 enum DetectionStatus {
   CREATED,
   RUNNING,
@@ -89,7 +90,6 @@ enum DetectionStatus {
   FAILED,
 }
 
-@fixed
 enum DataSchema {
   OneTable,
   MultiTable,
@@ -99,7 +99,6 @@ enum DataSchema {
  * An optional field, indicating how we align different variables to the same
  * time-range. Either Inner or Outer.
  */
-@fixed
 enum AlignMode {
   Inner,
   Outer,
@@ -108,7 +107,6 @@ enum AlignMode {
 /**
  * Model status. One of CREATED, RUNNING, READY, and FAILED.
  */
-@fixed
 enum ModelStatus {
   CREATED,
   RUNNING,

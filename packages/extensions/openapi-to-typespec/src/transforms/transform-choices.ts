@@ -1,7 +1,7 @@
 import { ChoiceSchema, ChoiceValue, CodeModel, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
 import { TypespecChoiceValue, TypespecEnum } from "../interfaces";
-import { getEnumChoiceClientDecorators, getEnumClientDecorators, getEnumDecorators } from "../utils/decorators";
+import { getEnumChoiceClientDecorators, getEnumClientDecorators } from "../utils/decorators";
 import { transformValue } from "../utils/values";
 
 export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeModel: CodeModel): TypespecEnum {
@@ -11,7 +11,7 @@ export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeMod
 
   if (!typespecEnum) {
     typespecEnum = {
-      decorators: getEnumDecorators(schema),
+      decorators: [],
       clientDecorators: getEnumClientDecorators(schema),
       doc: schema.language.default.description,
       kind: "enum",
@@ -23,6 +23,7 @@ export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeMod
           "// FIXME: (synthetic-name) This enum has a generated name. Please rename it to something more appropriate.",
         ],
       }),
+      choiceType: schema.choiceType.type,
     };
     dataTypes.set(schema, typespecEnum);
   }
