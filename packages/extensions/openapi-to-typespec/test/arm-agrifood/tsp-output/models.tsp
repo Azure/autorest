@@ -23,6 +23,7 @@ union AuthCredentialsKind {
 /**
  * Data Manager For Agriculture instance provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningState {
   string,
   Creating: "Creating",
@@ -55,6 +56,7 @@ union PrivateEndpointServiceConnectionStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
   Succeeded: "Succeeded",
@@ -222,6 +224,7 @@ model DataManagerForAgricultureExtensionProperties {
    * customParameters, PlatformParameters and Units supported.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   detailedInformation?: DetailedInformation[];
 }
 

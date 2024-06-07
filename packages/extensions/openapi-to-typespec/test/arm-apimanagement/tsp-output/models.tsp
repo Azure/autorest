@@ -882,6 +882,7 @@ union PortalRevisionStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
   Succeeded: "Succeeded",
@@ -1359,6 +1360,7 @@ model ErrorResponseBody {
   /**
    * The list of invalid fields send in request, in case of validation error.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
   details?: ErrorFieldContract[];
 }
 
@@ -1605,6 +1607,7 @@ model OperationEntityBaseContract {
   /**
    * Collection of URL template parameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
   templateParameters?: ParameterContract[];
 
   /**
@@ -1621,6 +1624,7 @@ model OperationEntityBaseContract {
   /**
    * Array of Operation responses.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   responses?: ResponseContract[];
 
   /**
@@ -1717,16 +1721,19 @@ model RequestContract {
   /**
    * Collection of operation request query parameters.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
   queryParameters?: ParameterContract[];
 
   /**
    * Collection of operation request headers.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
   headers?: ParameterContract[];
 
   /**
    * Collection of operation request representations.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   representations?: RepresentationContract[];
 }
 
@@ -1752,6 +1759,7 @@ model RepresentationContract {
   /**
    * Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'..
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
   formParameters?: ParameterContract[];
 
   /**
@@ -1778,11 +1786,13 @@ model ResponseContract {
   /**
    * Collection of operation response representations.
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   representations?: RepresentationContract[];
 
   /**
    * Collection of operation response headers.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "type"])
   headers?: ParameterContract[];
 }
 
@@ -2053,11 +2063,13 @@ model DataMasking {
   /**
    * Masking settings for Url query parameters
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   queryParams?: DataMaskingEntity[];
 
   /**
    * Masking settings for headers
    */
+  @OpenAPI.extension("x-ms-identifiers", [])
   headers?: DataMaskingEntity[];
 }
 
@@ -2551,6 +2563,7 @@ model AuthorizationServerContractBaseProperties {
   /**
    * Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   tokenBodyParameters?: TokenBodyParameterContract[];
 
   /**
@@ -2773,6 +2786,7 @@ model BackendServiceFabricClusterProperties {
   /**
    * Server X509 Certificate Names Collection
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   serverX509Names?: X509CertificateName[];
 }
 
@@ -3188,6 +3202,7 @@ model ConnectivityCheckRequestProtocolConfigurationHttpConfiguration {
   /**
    * List of headers to be included in the request.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   headers?: HttpHeader[];
 }
 
@@ -3291,6 +3306,7 @@ model ConnectivityHop {
    * List of issues.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   issues?: ConnectivityIssue[];
 }
 
@@ -3320,6 +3336,7 @@ model ConnectivityIssue {
    * Provides additional context on the issue.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   context?: Record<string>[];
 }
 
@@ -3578,6 +3595,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Custom hostname configuration of the API Management service.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["hostName", "type"])
   hostnameConfigurations?: HostnameConfiguration[];
 
   /**
@@ -3610,6 +3628,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Additional datacenter locations of the API Management service.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["location", "sku"])
   additionalLocations?: AdditionalLocation[];
 
   /**
@@ -3621,6 +3640,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["certificate/thumbprint"])
   certificates?: CertificateConfiguration[];
 
   /**
@@ -4173,6 +4193,7 @@ model EmailTemplateContractProperties {
   /**
    * Email Template Parameter values.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -4244,6 +4265,7 @@ model EmailTemplateUpdateParameterProperties {
   /**
    * Email Template Parameter values.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -4572,6 +4594,7 @@ model UserContractProperties extends UserEntityBaseParameters {
    * Collection of groups user is part of.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["displayName"])
   groups?: GroupContractProperties[];
 }
 
@@ -4966,6 +4989,7 @@ model NetworkStatusContract {
   /**
    * Gets the list of Connectivity Status to the Resources on which the service depends upon.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "resourceType"])
   connectivityStatus: ConnectivityStatusContract[];
 }
 
@@ -5212,6 +5236,7 @@ model OutboundEnvironmentEndpointList {
    */
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @key
+  @OpenAPI.extension("x-ms-identifiers", [])
   value: OutboundEnvironmentEndpoint[];
 
   /**
@@ -5233,6 +5258,7 @@ model OutboundEnvironmentEndpoint {
   /**
    * The endpoints that the Api Management Service reaches the service at.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -5248,6 +5274,7 @@ model EndpointDependency {
   /**
    * The Ports used when connecting to DomainName.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["region", "port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -5713,6 +5740,7 @@ model QuotaCounterListResult {
   /**
    * Quota counter values.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["counterKey", "periodKey"])
   value?: QuotaCounterContract[];
 
   /**
@@ -5979,6 +6007,7 @@ model RequestReportListResult {
    * Page values.
    */
   @items
+  @OpenAPI.extension("x-ms-identifiers", ["url"])
   value?: RequestReportRecordContract[];
 
   /**
@@ -6182,6 +6211,7 @@ model ApiManagementSku {
    * A list of locations and availability zones in those locations where the SKU is available.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["location"])
   locationInfo?: ApiManagementSkuLocationInfo[];
 
   /**
@@ -6194,18 +6224,21 @@ model ApiManagementSku {
    * Metadata for retrieving price info.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["meterID"])
   costs?: ApiManagementSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
   restrictions?: ApiManagementSkuRestrictions[];
 }
 
@@ -6255,6 +6288,7 @@ model ApiManagementSkuLocationInfo {
    * Details of capabilities available to a SKU in specific zones.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   zoneDetails?: ApiManagementSkuZoneDetails[];
 }
 
@@ -6272,6 +6306,7 @@ model ApiManagementSkuZoneDetails {
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 }
 
@@ -6690,6 +6725,7 @@ model OperationResultContractProperties {
    * This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["objectKey"])
   actionLog?: OperationResultLogItemContract[];
 }
 

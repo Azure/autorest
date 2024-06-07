@@ -21,6 +21,7 @@ export function updateOptions() {
     guessResourceKey: getGuessResourceKey(session),
     isArm: getIsArm(session),
     isFullCompatible: getIsFullCompatible(session),
+    isTest: getIsTest(session),
   };
 }
 
@@ -45,4 +46,8 @@ export function getNamespace(session: Session<CodeModel>) {
 export function getIsFullCompatible(session: Session<CodeModel>) {
   const isFullCompatible = session.configuration["isFullCompatible"] ?? false;
   return isFullCompatible !== false;
+}
+
+export function getIsTest(session: Session<CodeModel>) {
+  return session.configuration["isTest"] === true;
 }

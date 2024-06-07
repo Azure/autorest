@@ -12,7 +12,7 @@ import {
 } from "@autorest/codemodel";
 import { get } from "lodash";
 import { getDataTypes } from "../data-types";
-import { TypespecObject, TypespecObjectProperty } from "../interfaces";
+import { TypespecObject, TypespecObjectProperty, WithSuppressDirective } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
 import {
   getModelClientDecorators,
@@ -33,8 +33,13 @@ import {
   isSealedChoiceSchema,
   isStringSchema,
 } from "../utils/schemas";
-import { getSuppressionsForRecordProperty } from "../utils/suppressions";
+import {
+  getPropertySuppressions,
+  getSuppressionsForProvisioningState,
+  getSuppressionsForRecordProperty,
+} from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
+import { transformEnum } from "./transform-choices";
 
 const typespecTypes = new Map<string, string>([
   [SchemaType.Date, "plainDate"],
@@ -144,6 +149,15 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
 
   logger.info(`Transforming property ${propertySchema.language.default.name} of type ${propertySchema.schema.type}`);
 
+  if (isChoiceSchema(propertySchema.schema) || isSealedChoiceSchema(propertySchema.schema)) {
+    const type = transformEnum(propertySchema.schema, codeModel);
+    if (name === "provisioningState" && isStringSchema(propertySchema.schema.choiceType)) {
+      const choiceValue = propertySchema.schema.choices.map((choiceValue) => choiceValue.value);
+      if (!(choiceValue.includes("Succeeded") && choiceValue.includes("Failed") && choiceValue.includes("Canceled"))) {
+        type.suppressions = getSuppressionsForProvisioningState();
+      }
+    }
+  }
   const type = getTypespecType(propertySchema.schema, codeModel);
   return {
     kind: "property",
@@ -155,7 +169,7 @@ export function transformObjectProperty(propertySchema: Property, codeModel: Cod
     clientDecorators: getPropertyClientDecorators(propertySchema),
     fixMe: getFixme(propertySchema, codeModel),
     defaultValue: getDefaultValue(type, propertySchema.schema),
-    suppressions: isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined,
+    suppressions: getPropertySuppressions(propertySchema),
   };
 }
 

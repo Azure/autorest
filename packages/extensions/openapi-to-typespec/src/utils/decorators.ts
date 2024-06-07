@@ -149,6 +149,15 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     });
   }
 
+  if (!isParameter(element) && element.extensions?.["x-ms-identifiers"]?.length >= 0) {
+    decorators.push({
+      name: "OpenAPI.extension",
+      arguments: ["x-ms-identifiers", element.extensions!["x-ms-identifiers"]],
+      //namespace: "TypeSpec.OpenAPI",
+      //module: "@typespec/openapi",
+    });
+  }
+
   return decorators;
 }
 
@@ -311,11 +320,13 @@ export function generateAugmentedDecorators(keyName: string, decorators: Typespe
   return definitions.join("\n");
 }
 
-function getArgumentValue(argument: DecoratorArgument | string | number): string {
+function getArgumentValue(argument: DecoratorArgument | string | number | string[]): string {
   if (typeof argument === "string") {
     return `"${argument}"`;
   } else if (typeof argument === "number") {
     return `${argument}`;
+  } else if (Array.isArray(argument)) {
+    return `[${argument.map((a) => `"${a}"`).join(", ")}]`;
   } else {
     let value = argument.value;
     if (!argument.options?.unwrap) {
