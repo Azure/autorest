@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 28 May 2024 21:27:00 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jun 2024 02:12:15 GMT and should not be manually modified.
+
+## 0.8.1
+Fri, 07 Jun 2024 02:12:15 GMT
+
+### Patches
+
+- Add output information to generated tsp
+- Change enum outout to the latest definition
 
 ## 0.8.0
 Tue, 28 May 2024 21:27:00 GMT
