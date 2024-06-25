@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.8.2",
+      "tag": "@autorest/openapi-to-typespec_v0.8.2",
+      "date": "Tue, 25 Jun 2024 08:03:35 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade compiler version to 0.57"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.8.1",
       "tag": "@autorest/openapi-to-typespec_v0.8.1",
       "date": "Fri, 07 Jun 2024 02:12:15 GMT",

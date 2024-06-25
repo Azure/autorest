@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Fri, 07 Jun 2024 02:12:15 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jun 2024 08:03:35 GMT and should not be manually modified.
+
+## 0.8.2
+Tue, 25 Jun 2024 08:03:35 GMT
+
+### Patches
+
+- Upgrade compiler version to 0.57
 
 ## 0.8.1
 Fri, 07 Jun 2024 02:12:15 GMT
