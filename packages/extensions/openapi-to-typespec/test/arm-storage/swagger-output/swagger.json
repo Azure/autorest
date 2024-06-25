@@ -431,7 +431,7 @@
             ],
             "x-ms-enum": {
               "name": "StorageAccountExpand",
-              "modelAsString": true
+              "modelAsString": false
             }
           },
           {
@@ -522,6 +522,10 @@
               "$ref": "#/definitions/StorageAccount"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -5629,7 +5633,7 @@
       ],
       "x-ms-enum": {
         "name": "AccessTier",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "AccountImmutabilityPolicyProperties": {
@@ -5742,7 +5746,7 @@
       ],
       "x-ms-enum": {
         "name": "AccountStatus",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "AccountType": {
@@ -5882,9 +5886,9 @@
         ]
       }
     },
-    "Azure.ResourceManager.Foundations.SkuTier": {
+    "Azure.ResourceManager.CommonTypes.SkuTier": {
       "type": "string",
-      "description": "Available service tiers for the SKU.",
+      "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
       "enum": [
         "Free",
         "Basic",
@@ -5893,7 +5897,7 @@
       ],
       "x-ms-enum": {
         "name": "SkuTier",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Free",
@@ -5916,20 +5920,6 @@
             "description": "The Premium service tier."
           }
         ]
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
       }
     },
     "AzureEntityResource": {
@@ -7471,7 +7461,7 @@
       ],
       "x-ms-enum": {
         "name": "HttpProtocol",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "IPRule": {
@@ -7520,7 +7510,7 @@
           "type": "object",
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+            "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -7751,7 +7741,7 @@
       ],
       "x-ms-enum": {
         "name": "KeyPermission",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "KeyPolicy": {
@@ -8757,7 +8747,7 @@
           ],
           "x-ms-enum": {
             "name": "DefaultAction",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -9216,7 +9206,7 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "PublicAccess": {
@@ -9229,7 +9219,7 @@
       ],
       "x-ms-enum": {
         "name": "PublicAccess",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "PublicNetworkAccess": {
@@ -9328,7 +9318,7 @@
       ],
       "x-ms-enum": {
         "name": "Reason",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "ReasonCode": {
@@ -9842,7 +9832,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         }
@@ -9888,7 +9878,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         },
@@ -10080,7 +10070,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "sku": {
@@ -10962,7 +10952,7 @@
       ],
       "x-ms-enum": {
         "name": "UsageUnit",
-        "modelAsString": true
+        "modelAsString": false
       }
     },
     "VirtualNetworkRule": {

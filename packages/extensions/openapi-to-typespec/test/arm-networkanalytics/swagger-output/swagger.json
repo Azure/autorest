@@ -314,6 +314,10 @@
               "$ref": "#/definitions/DataProduct"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -720,6 +724,10 @@
               "$ref": "#/definitions/DataType"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1433,90 +1441,6 @@
         "storageAccountSasToken"
       ]
     },
-    "Azure.ResourceManager.Foundations.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The properties of the managed service identities assigned to this resource.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The Active Directory tenant id of the principal.",
-          "readOnly": true
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier of this principal.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentities",
-          "description": "The identities assigned to this resource by the user."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentities": {
-      "type": "object",
-      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.\",",
-      "additionalProperties": {
-        "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      }
-    },
     "ConsumptionEndpointsProperties": {
       "type": "object",
       "description": "Details of Consumption Properties",
@@ -1648,14 +1572,10 @@
         "properties": {
           "$ref": "#/definitions/DataProductProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentity",
+          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -1918,7 +1838,7 @@
       "description": "The type used for update operations of the DataProduct.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentity",
+          "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -2031,11 +1951,7 @@
         "properties": {
           "$ref": "#/definitions/DataProductsCatalogProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2094,11 +2010,7 @@
         "properties": {
           "$ref": "#/definitions/DataTypeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

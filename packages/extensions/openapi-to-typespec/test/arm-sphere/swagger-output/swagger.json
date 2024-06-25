@@ -271,6 +271,10 @@
               "$ref": "#/definitions/Catalog"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -908,6 +912,10 @@
               "$ref": "#/definitions/Image"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1511,6 +1519,10 @@
               "$ref": "#/definitions/Product"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1960,6 +1972,10 @@
               "$ref": "#/definitions/DeviceGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2539,6 +2555,10 @@
               "$ref": "#/definitions/Deployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2857,6 +2877,10 @@
               "$ref": "#/definitions/Device"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3278,11 +3302,7 @@
         "properties": {
           "$ref": "#/definitions/CatalogProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3343,11 +3363,7 @@
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3513,11 +3529,7 @@
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3590,11 +3602,7 @@
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3610,11 +3618,7 @@
         "properties": {
           "$ref": "#/definitions/DeviceGroupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3877,11 +3881,7 @@
         "properties": {
           "$ref": "#/definitions/ImageProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4190,11 +4190,7 @@
         "properties": {
           "$ref": "#/definitions/ProductProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

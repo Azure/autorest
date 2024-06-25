@@ -149,9 +149,9 @@ interface QuestionAnsweringProjectsOperations {
    * metadata, and assets.
    */
   @summary("""
-Gets the status of an Export job, once job completes, returns the project
-metadata, and assets.
-""")
+    Gets the status of an Export job, once job completes, returns the project
+    metadata, and assets.
+    """)
   @route("/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}")
   @get
   getExportStatus is Azure.Core.Foundations.Operation<

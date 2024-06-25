@@ -2055,7 +2055,7 @@
         "kind"
       ]
     },
-    "Azure.ResourceManager.Foundations.CheckNameAvailabilityReason": {
+    "Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason": {
       "type": "string",
       "description": "Possible reasons for a name not being available.",
       "enum": [
@@ -2102,7 +2102,7 @@
           "description": "Indicates if the resource name is available."
         },
         "reason": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.CheckNameAvailabilityReason",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason",
           "description": "The reason why the given name is not available."
         },
         "message": {

@@ -114,9 +114,9 @@ interface PoolOperations {
    * last aggregation interval is returned.
    */
   @summary("""
-Lists the usage metrics, aggregated by Pool across individual time intervals,
-for the specified Account.
-""")
+    Lists the usage metrics, aggregated by Pool across individual time intervals,
+    for the specified Account.
+    """)
   listUsageMetrics is Azure.Core.ResourceList<
     PoolUsageMetrics,
     {
@@ -2134,9 +2134,9 @@ interface JobOperations {
    * JobPreparationTaskNotSpecified.
    */
   @summary("""
-Lists the execution status of the Job Preparation and Job Release Task for the
-specified Job across the Compute Nodes where the Job has run.
-""")
+    Lists the execution status of the Job Preparation and Job Release Task for the
+    specified Job across the Compute Nodes where the Job has run.
+    """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
   listPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
@@ -4358,9 +4358,9 @@ interface TaskOperations {
    * If the Task is not a multi-instance Task then this returns an empty collection.
    */
   @summary("""
-Lists all of the subtasks that are associated with the specified multi-instance
-Task.
-""")
+    Lists all of the subtasks that are associated with the specified multi-instance
+    Task.
+    """)
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
   @get
   listSubtasks is Azure.Core.Foundations.Operation<
@@ -4509,9 +4509,9 @@ Task.
    * will fail if the Job has completed (or is terminating or deleting).
    */
   @summary("""
-Reactivates a Task, allowing it to run again even if its retry count has been
-exhausted.
-""")
+    Reactivates a Task, allowing it to run again even if its retry count has been
+    exhausted.
+    """)
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
   reactivate is Azure.Core.Foundations.Operation<
@@ -4716,9 +4716,9 @@ interface ComputeNodeOperations {
    * Account on a Compute Node only when it is in the idle or running state.
    */
   @summary("""
-Updates the password and expiration time of a user Account on the specified
-Compute Node.
-""")
+    Updates the password and expiration time of a user Account on the specified
+    Compute Node.
+    """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
   updateUser is Azure.Core.Foundations.Operation<
@@ -5184,9 +5184,9 @@ Compute Node.
    * support to aid in debugging issues with the Batch service.
    */
   @summary("""
-Upload Azure Batch service log files from the specified Compute Node to Azure
-Blob Storage.
-""")
+    Upload Azure Batch service log files from the specified Compute Node to Azure
+    Blob Storage.
+    """)
   uploadBatchServiceLogs is Azure.Core.ResourceCreateWithServiceProvidedName<
     UploadBatchServiceLogsResult,
     {
