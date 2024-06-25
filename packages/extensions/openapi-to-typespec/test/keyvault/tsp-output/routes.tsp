@@ -524,9 +524,9 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
  * operation requires the certificates/create permission.
  */
 @summary("""
-Merges a certificate or a certificate chain with a key pair existing on the
-server.
-""")
+  Merges a certificate or a certificate chain with a key pair existing on the
+  server.
+  """)
 @route("/certificates/{certificate-name}/pending/merge")
 @post
 op mergeCertificate is Azure.Core.Foundations.Operation<
@@ -585,9 +585,9 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
  * soft-delete enabled vaults.
  */
 @summary("""
-Lists the deleted certificates in the specified vault currently available for
-recovery.
-""")
+  Lists the deleted certificates in the specified vault currently available for
+  recovery.
+  """)
 @route("/deletedcertificates")
 @get
 op getDeletedCertificates is Azure.Core.Foundations.Operation<
@@ -658,9 +658,9 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
  * permission.
  */
 @summary("""
-Recovers the deleted certificate back to its current version under
-/certificates.
-""")
+  Recovers the deleted certificate back to its current version under
+  /certificates.
+  """)
 @route("/deletedcertificates/{certificate-name}/recover")
 @post
 op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
@@ -680,9 +680,9 @@ op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
  * key. It requires the keys/create permission.
  */
 @summary("""
-Creates a new key, stores it, then returns key parameters and attributes to the
-client.
-""")
+  Creates a new key, stores it, then returns key parameters and attributes to the
+  client.
+  """)
 @route("/keys/{key-name}/create")
 @post
 op createKey is Azure.Core.Foundations.Operation<
@@ -711,9 +711,9 @@ op createKey is Azure.Core.Foundations.Operation<
  * keys/rotate permission.
  */
 @summary("""
-Creates a new key version, stores it, then returns key parameters, attributes
-and policy to the client.
-""")
+  Creates a new key version, stores it, then returns key parameters, attributes
+  and policy to the client.
+  """)
 @route("/keys/{key-name}/rotate")
 @post
 op rotateKey is Azure.Core.Foundations.Operation<
@@ -735,9 +735,9 @@ op rotateKey is Azure.Core.Foundations.Operation<
  * of the key. This operation requires the keys/import permission.
  */
 @summary("""
-Imports an externally created key, stores it, and returns key parameters and
-attributes to the client.
-""")
+  Imports an externally created key, stores it, and returns key parameters and
+  attributes to the client.
+  """)
 @route("/keys/{key-name}")
 @put
 op importKey is Azure.Core.Foundations.Operation<
@@ -786,9 +786,9 @@ op deleteKey is Azure.Core.Foundations.Operation<
  * operation requires the keys/update permission.
  */
 @summary("""
-The update key operation changes specified attributes of a stored key and can
-be applied to any key type and key version stored in Azure Key Vault.
-""")
+  The update key operation changes specified attributes of a stored key and can
+  be applied to any key type and key version stored in Azure Key Vault.
+  """)
 @route("/keys/{key-name}/{key-version}")
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
@@ -955,9 +955,9 @@ op restoreKey is Azure.Core.Foundations.Operation<
  * public key material. This operation requires the keys/encrypt permission.
  */
 @summary("""
-Encrypts an arbitrary sequence of bytes using an encryption key that is stored
-in a key vault.
-""")
+  Encrypts an arbitrary sequence of bytes using an encryption key that is stored
+  in a key vault.
+  """)
 @route("/keys/{key-name}/{key-version}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
@@ -1130,9 +1130,9 @@ op wrapKey is Azure.Core.Foundations.Operation<
  * keys/unwrapKey permission.
  */
 @summary("""
-Unwraps a symmetric key using the specified key that was initially used for
-wrapping that key.
-""")
+  Unwraps a symmetric key using the specified key that was initially used for
+  wrapping that key.
+  """)
 @route("/keys/{key-name}/{key-version}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
@@ -1595,9 +1595,9 @@ op restoreSecret is Azure.Core.Foundations.Operation<
  * Description of the pool setting to be updated
  */
 @summary("""
-Updates key vault account setting, stores it, then returns the setting name and
-value to the client.
-""")
+  Updates key vault account setting, stores it, then returns the setting name and
+  value to the client.
+  """)
 @route("/settings/{setting-name}")
 @patch
 op updateSettings is Azure.Core.Foundations.Operation<

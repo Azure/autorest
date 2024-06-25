@@ -32,8 +32,8 @@ namespace AzureWebPubSubServiceRESTAPI;
  */
 enum Versions {
   /**
-   * The 2023-07-01 API version.
+   * The 2024-01-01 API version.
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_07_01: "2023-07-01",
+  v2024_01_01: "2024-01-01",
 }

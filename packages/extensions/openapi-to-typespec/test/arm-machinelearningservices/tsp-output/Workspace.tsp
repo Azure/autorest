@@ -220,12 +220,12 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PrivateLinkResources_List")
   @summary("""
-Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
-Each "private link resource" is a connection endpoint (IP address) to the resource.
-Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
-Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
-Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
-""")
+    Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
+    Each "private link resource" is a connection endpoint (IP address) to the resource.
+    Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
+    Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
+    Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
+    """)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources")
   @get
   list(

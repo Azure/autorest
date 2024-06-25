@@ -125,6 +125,14 @@ interface WebPubSubOperations {
       group?: string[];
 
       /**
+       * The type of client. Case-insensitive. If not set, it's "Default". For Web
+       * PubSub for Socket.IO, only the default value is supported. For Web PubSub, the
+       * valid values are 'Default' and 'MQTT'.
+       */
+      @query("clientType")
+      clientType?: WebPubSubClientType = WebPubSubClientType.Default;
+
+      /**
        * Accept header
        */
       @header

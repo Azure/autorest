@@ -407,17 +407,17 @@ interface pathsOperations {
   >;
 
   @doc("""
-Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the csv-array format
-""")
+    Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+    using the csv-array format
+    """)
   @route("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
   @get
   arrayCsvInPath is Azure.Core.Foundations.Operation<
     {
       @doc("""
-an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the csv-array format
-""")
+        an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+        using the csv-array format
+        """)
       @path
       arrayPath: string[];
     },
@@ -887,17 +887,17 @@ interface queriesOperations {
   >;
 
   @doc("""
-Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-''] using the csv-array format
-""")
+    Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+    ''] using the csv-array format
+    """)
   @route("/queries/array/csv/string/valid")
   @get
   arrayStringCsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
-an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the csv-array format
-""")
+        an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+        using the csv-array format
+        """)
       @query({
         name: "arrayQuery",
         format: "csv",
@@ -966,17 +966,17 @@ using the csv-array format
   >;
 
   @doc("""
-Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-''] using the ssv-array format
-""")
+    Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+    ''] using the ssv-array format
+    """)
   @route("/queries/array/ssv/string/valid")
   @get
   arrayStringSsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
-an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the ssv-array format
-""")
+        an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+        using the ssv-array format
+        """)
       @query({
         name: "arrayQuery",
         format: "ssv",
@@ -987,17 +987,17 @@ using the ssv-array format
   >;
 
   @doc("""
-Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-''] using the tsv-array format
-""")
+    Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+    ''] using the tsv-array format
+    """)
   @route("/queries/array/tsv/string/valid")
   @get
   arrayStringTsvValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
-an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the tsv-array format
-""")
+        an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+        using the tsv-array format
+        """)
       @query({
         name: "arrayQuery",
         format: "tsv",
@@ -1008,17 +1008,17 @@ using the tsv-array format
   >;
 
   @doc("""
-Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
-''] using the pipes-array format
-""")
+    Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+    ''] using the pipes-array format
+    """)
   @route("/queries/array/pipes/string/valid")
   @get
   arrayStringPipesValid is Azure.Core.Foundations.Operation<
     {
       @doc("""
-an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
-using the pipes-array format
-""")
+        an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
+        using the pipes-array format
+        """)
       @query({
         name: "arrayQuery",
         format: "pipes",

@@ -6,6 +6,12 @@ using TypeSpec.Http;
 
 namespace AzureWebPubSubServiceRESTAPI;
 
+union WebPubSubClientType {
+  string,
+  Default: "Default",
+  MQTT: "MQTT",
+}
+
 union WebPubSubPermission {
   string,
   sendToGroup: "sendToGroup",

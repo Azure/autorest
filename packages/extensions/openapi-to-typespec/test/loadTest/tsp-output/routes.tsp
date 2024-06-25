@@ -82,9 +82,9 @@ interface LoadTestAdministrationOperations {
    * subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
    */
   @summary("""
-Get all load tests by the fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-""")
+    Get all load tests by the fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+    """)
   @route("/tests")
   @get
   listTests is Azure.Core.Foundations.Operation<
@@ -133,10 +133,10 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
    * should be provided in the request body as application/octet-stream.
    */
   @summary("""
-Upload input file for a given test name. File size can't be more than 50 MB.
-Existing file with same name for the given test will be overwritten. File
-should be provided in the request body as application/octet-stream.
-""")
+    Upload input file for a given test name. File size can't be more than 50 MB.
+    Existing file with same name for the given test will be overwritten. File
+    should be provided in the request body as application/octet-stream.
+    """)
   @route("/tests/{testId}/files/{fileName}")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
@@ -701,9 +701,9 @@ interface LoadTestRunOperations {
    * run.
    */
   @summary("""
-Get associated app component (collection of azure resources) for the given test
-run.
-""")
+    Get associated app component (collection of azure resources) for the given test
+    run.
+    """)
   @route("/test-runs/{testRunId}/app-components")
   @get
   getAppComponents is Azure.Core.Foundations.Operation<

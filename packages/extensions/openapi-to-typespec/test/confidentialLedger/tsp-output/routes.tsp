@@ -89,10 +89,10 @@ op createLedgerEntry is Azure.Core.ResourceCreateWithServiceProvidedName<
  * if the loading is still ongoing.
  */
 @summary("""
-Gets the ledger entry at the specified transaction id. A collection id may
-optionally be specified to indicate the collection from which to fetch the
-value.
-""")
+  Gets the ledger entry at the specified transaction id. A collection id may
+  optionally be specified to indicate the collection from which to fetch the
+  value.
+  """)
 @route("/app/transactions/{transactionId}")
 @get
 op getLedgerEntry is Azure.Core.Foundations.Operation<
