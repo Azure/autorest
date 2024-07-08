@@ -46,6 +46,7 @@ const typespecTypes = new Map<string, string>([
   [SchemaType.DateTime, "utcDateTime"],
   [SchemaType.UnixTime, "plainTime"],
   [SchemaType.String, "string"],
+  [SchemaType.Char, "string"],
   [SchemaType.Time, "plainTime"],
   [SchemaType.Uuid, "string"],
   [SchemaType.Uri, "url"],
