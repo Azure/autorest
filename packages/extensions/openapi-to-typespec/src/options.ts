@@ -39,7 +39,7 @@ export function getIsArm(session: Session<CodeModel>) {
   const inputs = session.configuration["inputFileUris"] as string[];
 
   for (const input of inputs) {
-    if (input.includes("") && input.includes("resource-manager")) {
+    if (input.includes("resource-manager")) {
       return true;
     }
   }
