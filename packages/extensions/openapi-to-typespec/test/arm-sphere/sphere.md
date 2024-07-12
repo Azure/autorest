@@ -4,5 +4,4 @@ title: "Azure Sphere resource management API."
 clear-output-folder: false
 guessResourceKey: false
 isAzureSpec: true
-isArm: true
 ```

@@ -6,4 +6,5 @@ clear-output-folder: false
 namespace: "Azure.Keyvault"
 tag: package-preview-7.4-preview.1
 guessResourceKey: false
+isArm: false
 ```
