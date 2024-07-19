@@ -2,6 +2,18 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.9.0",
+      "tag": "@autorest/openapi-to-typespec_v0.9.0",
+      "date": "Fri, 19 Jul 2024 18:28:00 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Support char type from swagger and Automatically detect ARM specs"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.8.2",
       "tag": "@autorest/openapi-to-typespec_v0.8.2",
       "date": "Tue, 25 Jun 2024 08:03:35 GMT",
