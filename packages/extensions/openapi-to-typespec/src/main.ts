@@ -21,11 +21,13 @@ import { pretransformRename } from "./pretransforms/rename-pretransform";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
+import { serialize } from "@azure-tools/codegen";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
   const codeModel = session.model;
+  await host.writeFile({ filename: "codelModel.yaml", content: serialize(codeModel, codeModelSchema)} );
   pretransformNames(codeModel);
   pretransformArmResources(codeModel);
   pretransformRename(codeModel);

@@ -1,4 +1,4 @@
-import { getAllProperties, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
+import { getAllProperties, HttpMethod, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { isResponseSchema, isStringSchema } from "utils/schemas";
 
 const ProvidersSegment = "/providers/";
@@ -8,22 +8,39 @@ export interface OperationSet {
     Operations: Array<Operation>;
 }
 
-function getResourceDataSchema(set: OperationSet): string | undefined {
+const resourceDataSchemaCache = new WeakMap<OperationSet, string | undefined>();
+
+export function getResourceDataSchema(set: OperationSet): string | undefined {
+    if (resourceDataSchemaCache.has(set)) return resourceDataSchemaCache.get(set);
+
     // Check if the request path has even number of segments after the providers segment
-    if (!checkEvenSegments(set.RequestPath)) return undefined;
+    if (!checkEvenSegments(set.RequestPath)) {
+        resourceDataSchemaCache.set(set, undefined);
+        return undefined;
+    }
 
     // before we are finding any operations, we need to ensure this operation set has a GET request.
-    if (findOperation(set, "get") === undefined) return undefined;
+    if (findOperation(set, HttpMethod.Get) === undefined) {
+        resourceDataSchemaCache.set(set, undefined);
+        return undefined;
+    }
 
     // try put operation to get the resource name
-    let resourceSchemaName = getResourceSchemaName(set, "put");
-    if (resourceSchemaName !== undefined) return resourceSchemaName;
+    let resourceSchemaName = getResourceSchemaName(set, HttpMethod.Put);
+    if (resourceSchemaName !== undefined) {
+        resourceDataSchemaCache.set(set, resourceSchemaName);
+        return resourceSchemaName;
+    }
 
     // try get operation to get the resource name
-    resourceSchemaName = getResourceSchemaName(set, "get");
-    if (resourceSchemaName !== undefined) return resourceSchemaName;
+    resourceSchemaName = getResourceSchemaName(set, HttpMethod.Get);
+    if (resourceSchemaName !== undefined) {
+        resourceDataSchemaCache.set(set, resourceSchemaName);
+        return resourceSchemaName;
+    }
 
     // We tried everything, this is not a resource
+    resourceDataSchemaCache.set(set, undefined);
     return undefined;
 }
 
@@ -39,11 +56,11 @@ function checkEvenSegments(path: string): boolean {
     return segments.length % 2 === 0;
 }
 
-function findOperation(set: OperationSet, method: string): Operation | undefined {
-    return set.Operations.find(o => o.requests![0].protocol.http?.method === "get");
+export function findOperation(set: OperationSet, method: HttpMethod): Operation | undefined {
+    return set.Operations.find(o => o.requests![0].protocol.http?.method === method);
 }
 
-function getResourceSchemaName(set: OperationSet, method: string) {
+function getResourceSchemaName(set: OperationSet, method: HttpMethod): string | undefined {
     const operation = findOperation(set, method);
     if (operation === undefined) return undefined;
 
@@ -78,4 +95,11 @@ function isResource(schema: ObjectSchema): boolean {
         }
     }
     return idPropertyFound && typePropertyFound && namePropertyFound;
+}
+
+function getSingletonResourceSuffix(set: OperationSet): string | undefined {
+    // return undefined if this is not a resource
+    if (getResourceDataSchema(set) === undefined) return undefined;
+
+    
 }
