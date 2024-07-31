@@ -1,7 +1,7 @@
 import { CodeModel, HttpMethod, Operation } from "@autorest/codemodel";
 import { getLogger } from "utils/logger";
 import { _ArmResourceOperation, ArmResource, Metadata } from "utils/resource-discovery";
-import { findOperation, getResourceDataSchema, OperationSet } from "./operation-set";
+import { findOperation, getParentOfResourceCollectionOperation, getResourceDataSchema, OperationSet } from "./operation-set";
 import { lastWordToSingular } from "utils/strings";
 
 const logger = () => getLogger("parse-metadata");
@@ -31,6 +31,25 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
             }
             else {
                 operationSetsByResourceDataSchemaName[resourceSchemaName] = [operationSet];
+            }
+        }
+    }
+
+    const childOperationsByRequestPath: {[path: string]: Operation[]} = {};
+    for (const key in operationSets) {
+        const operationSet = operationSets[key];
+        if (getResourceDataSchema(operationSet)) continue;
+
+        for (const operation of operationSet.Operations) {
+            // Check if this operation is a collection operation
+            const parentPath = getParentOfResourceCollectionOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat());
+            if (parentPath !== undefined) {
+                if (parentPath in childOperationsByRequestPath) {
+                    childOperationsByRequestPath[parentPath].push(operation);
+                }
+                else {
+                    childOperationsByRequestPath[parentPath] = [operation];
+                }
             }
         }
     }
