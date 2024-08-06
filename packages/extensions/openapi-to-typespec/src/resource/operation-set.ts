@@ -1,13 +1,12 @@
 import { ArraySchema, CodeModel, getAllProperties, HttpMethod, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { getLogger } from "utils/logger";
-import { isArraySchema, isResponseSchema, isStringSchema } from "utils/schemas";
+import { isArmIdSchema, isArraySchema, isResponseSchema, isStringSchema } from "../utils/schemas";
 
 const ProvidersSegment = "/providers/";
-const ManagementGroupScope = "/providers/Microsoft.Management/managementGroups/{managementGroupId}";
+const ManagementGroupPath = "/providers/Microsoft.Management/managementGroups/{managementGroupId}";
 const ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
-const ResourceGroupScope = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}";
+const ResourceGroupPath = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}";
 const ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
-const SubscriptionScope = "/subscriptions/{subscriptionId}";
+const SubscriptionPath = "/subscriptions/{subscriptionId}";
 const SubscriptionScopePrefix = "/subscriptions";
 const TenantScope = "";
 const TenantScopePrefix = "/tenants";
@@ -19,7 +18,12 @@ export interface OperationSet {
 
 const resourceDataSchemaCache = new WeakMap<OperationSet, string | undefined>();
 
-
+export function getParentOfLifeCycleOperation(requestPath: string, operationSets: OperationSet[]): string | undefined {
+    const candidates: OperationSet[] = operationSets.filter(o => requestPath.includes(o.RequestPath));
+    if (candidates.length === 0) return undefined;
+    const bestOne = candidates.sort(c => c.RequestPath.split("/").length)[0];
+    return bestOne.RequestPath;
+}
 
 export function getParentOfResourceCollectionOperation(operation: Operation, requestPath: string, operationSets: OperationSet[]): string | undefined {
     // first we need to ensure this operation at least returns a collection of something
@@ -41,7 +45,7 @@ export function getParentOfResourceCollectionOperation(operation: Operation, req
         const trimmedResourceRequestPath = resourceRequestPath.substring(providerIndexOfResource);
         const trimmedRequestPath = requestPath.substring(providerIndexOfRequest);
 
-        if (!trimmedRequestPath.includes(trimmedResourceRequestPath)) continue;
+        if (!trimmedResourceRequestPath.includes(trimmedRequestPath)) continue;
 
         candidates.push(operationSet);
     }
@@ -55,21 +59,25 @@ export function getParentOfResourceCollectionOperation(operation: Operation, req
 
 function getScopeResourceType(path: string): string {
     const scopePath = getScopePath(path);
-    if (scopePath === SubscriptionScope) return "Microsoft.Resources/subscriptions";
-    if (scopePath === ResourceGroupScope) return "Microsoft.Resources/resourceGroups";
-    if (scopePath === ManagementGroupScope) return "Microsoft.Management/managementGroups";
+    if (scopePath === SubscriptionPath) return "Microsoft.Resources/subscriptions";
+    if (scopePath === ResourceGroupPath) return "Microsoft.Resources/resourceGroups";
+    if (scopePath === ManagementGroupPath) return "Microsoft.Management/managementGroups";
     if (scopePath === TenantScope) return "Microsoft.Resources/tenants";
     if (scopePath === "*") return "*";
 
-    const index = scopePath.lastIndexOf(ProvidersSegment);
-    if (index < 0 || scopePath.substring(index + ProvidersSegment.length).includes("/") === false) {
-        const pathToLower = scopePath.toLowerCase();
+    return getResourceType(scopePath);
+}
+
+export function getResourceType(path: string): string {
+    const index = path.lastIndexOf(ProvidersSegment);
+    if (index < 0 || path.substring(index + ProvidersSegment.length).includes("/") === false) {
+        const pathToLower = path.toLowerCase();
         if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return "Microsoft.Resources/resourceGroups";
         if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return "Microsoft.Resources/subscriptions";
         if (pathToLower.startsWith(TenantScopePrefix.toLowerCase())) return "Microsoft.Resources/tenants";
     }
 
-    return scopePath.substring(index + ProvidersSegment.length).split("/").reduce(
+    return path.substring(index + ProvidersSegment.length).split("/").reduce(
         (result, current, index) => {
             if (index === 0 || index % 2 === 1) return result === "" ? current : `${result}/${current}`;
             else return result;
@@ -82,26 +90,28 @@ function getScopePath(path: string): string {
     const pathToLower = path.toLowerCase();
 
     const index = pathToLower.lastIndexOf(ProvidersSegment);
-    if (index === 0 && pathToLower.startsWith(ManagementGroupScopePrefix.toLowerCase())) return ManagementGroupScope;
+    if (index === 0 && pathToLower.startsWith(ManagementGroupScopePrefix.toLowerCase())) return ManagementGroupPath;
     if (index > 0) return path.slice(0, index);
-    if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return ResourceGroupScope;
-    if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return SubscriptionScope;
+    if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return ResourceGroupPath;
+    if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return SubscriptionPath
     if (pathToLower.startsWith(TenantScopePrefix.toLowerCase())) return TenantScope;
 
     return path;
 }
 
 function getCollectionOperationItemType(operation: Operation): string | undefined {
-    var response = operation.responses?.find(r => isResponseSchema(r));
+    const response = operation.responses?.find(r => isResponseSchema(r));
     if (response === undefined) return undefined;
 
     let itemName = "value";
-    if (operation.extensions?.["x-ms-pageable"]) {
-        itemName = operation.extensions?.["x-ms-pageable"].itemName;
+    if (operation.extensions?.["x-ms-pageable"]?.itemName) {
+        itemName = operation.extensions?.["x-ms-pageable"]?.itemName;
     }
-    if (isArraySchema(response.schema)) return response.schema.elementType.language.default.name;
-    if (isObjectSchema(response.schema)) {
-        const responseSchema = response.schema.properties?.find(p => p.serializedName === itemName && isArraySchema(p.schema));
+
+    const schemaResponse = response as SchemaResponse;
+    if (isArraySchema(schemaResponse.schema)) return schemaResponse.schema.elementType.language.default.name;
+    if (isObjectSchema(schemaResponse.schema)) {
+        const responseSchema = schemaResponse.schema.properties?.find(p => p.serializedName === itemName && isArraySchema(p.schema));
         if (!responseSchema) return undefined;
         return (responseSchema.schema as ArraySchema).elementType.language.default.name;
     }
@@ -182,7 +192,7 @@ function isResource(schema: ObjectSchema): boolean {
     for (const property of getAllProperties(schema)) {
         if (property.flattenedNames) continue;
 
-        if (property.serializedName === "id" && isStringSchema(property.schema)) {
+        if (property.serializedName === "id" && (isStringSchema(property.schema) || isArmIdSchema(property.schema))) {
             idPropertyFound = true;
         }
         else if (property.serializedName === "type" && isStringSchema(property.schema)) {
