@@ -8,7 +8,7 @@ const ResourceGroupPath = "/subscriptions/{subscriptionId}/resourceGroups/{resou
 const ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
 const SubscriptionPath = "/subscriptions/{subscriptionId}";
 const SubscriptionScopePrefix = "/subscriptions";
-const TenantScope = "";
+const TenantPath = "";
 const TenantScopePrefix = "/tenants";
 
 export interface OperationSet {
@@ -17,6 +17,7 @@ export interface OperationSet {
 }
 
 const resourceDataSchemaCache = new WeakMap<OperationSet, string | undefined>();
+const extensionMethodCache = new WeakMap<OperationSet, [Operation, string][]>();
 
 export function getParentOfLifeCycleOperation(requestPath: string, operationSets: OperationSet[]): string | undefined {
     const candidates: OperationSet[] = operationSets.filter(o => requestPath.includes(o.RequestPath));
@@ -46,15 +47,64 @@ export function getParentOfResourceCollectionOperation(operation: Operation, req
         const trimmedRequestPath = requestPath.substring(providerIndexOfRequest);
 
         if (!trimmedResourceRequestPath.includes(trimmedRequestPath)) continue;
+        if (getResourceDataSchema(operationSet) !== itemType) continue;
 
         candidates.push(operationSet);
     }
 
     if (candidates.length === 0) return undefined;
-    const bestOne = candidates.sort(c => c.RequestPath.split("/").length)[0];
-
-    if (getResourceDataSchema(bestOne) !== itemType) return undefined;
+    const bestOne = candidates.sort((a, b) => a.RequestPath.split("/").length - b.RequestPath.split("/").length)[0];
     return bestOne.RequestPath;
+}
+
+export function setParentOfExtensionOperation(operation: Operation, requestPath: string, operationSets: OperationSet[]): void {
+    const itemType = getCollectionOperationItemType(operation);
+    if (itemType === undefined) return;
+    
+    const providerIndexOfRequest = requestPath.lastIndexOf(ProvidersSegment);
+    const trimmedRequestPath = requestPath.substring(providerIndexOfRequest);
+
+    let extensionType = "";
+    switch (getScopePath(requestPath)) {
+        case ResourceGroupPath:
+            extensionType = "Resource";
+            break;
+        case SubscriptionPath:
+            extensionType = "Subscription";
+            break;
+        case ManagementGroupPath:
+            extensionType = "ManagementGroup";
+            break;
+        case TenantPath:
+            extensionType = "Tenant";
+            break;
+    }
+
+    const candidates: OperationSet[] = [];
+    for (const operationSet of operationSets) {
+        const resourceRequestPath = operationSet.RequestPath;
+
+        const providerIndexOfResource = resourceRequestPath.lastIndexOf(ProvidersSegment);
+        const trimmedResourceRequestPath = resourceRequestPath.substring(providerIndexOfResource);
+        if (!trimmedResourceRequestPath.includes(trimmedRequestPath)) continue;
+        if (getResourceDataSchema(operationSet) !== itemType) continue;
+
+        candidates.push(operationSet);
+    }
+
+    if (candidates.length === 0) return;
+    const bestOne = candidates.sort((a, b) => a.RequestPath.split("/").length - b.RequestPath.split("/").length)[0];
+
+    if (extensionMethodCache.has(bestOne)) {
+        extensionMethodCache.get(bestOne)!.push([operation, extensionType]);
+    }
+    else {
+        extensionMethodCache.set(bestOne, [[operation, extensionType]]);
+    }
+}
+
+export function getExtensionOperation(set: OperationSet): [Operation, string][] {
+    return extensionMethodCache.get(set) ?? [];
 }
 
 function getScopeResourceType(path: string): string {
@@ -62,10 +112,26 @@ function getScopeResourceType(path: string): string {
     if (scopePath === SubscriptionPath) return "Microsoft.Resources/subscriptions";
     if (scopePath === ResourceGroupPath) return "Microsoft.Resources/resourceGroups";
     if (scopePath === ManagementGroupPath) return "Microsoft.Management/managementGroups";
-    if (scopePath === TenantScope) return "Microsoft.Resources/tenants";
+    if (scopePath === TenantPath) return "Microsoft.Resources/tenants";
     if (scopePath === "*") return "*";
 
     return getResourceType(scopePath);
+}
+
+export function getParents(set: OperationSet, operationSets: OperationSet[]): string[] {
+    let segments = set.RequestPath.split("/");
+    if (segments.length < 2) return [];
+
+    segments = segments.slice(0, -2);
+    if (segments.length < 2) return [];
+
+    if (segments[segments.length - 2] === "providers") segments = segments.slice(0, -2);
+    const parentPath = segments.join("/");
+    if (parentPath === ResourceGroupPath) return ["ResourceGroupResource"];
+    if (parentPath === SubscriptionPath) return ["SubscriptionResource"];
+    if (parentPath === TenantPath) return ["TenantResource"];
+    const operationSet = operationSets.find(set => set.RequestPath === parentPath);
+    return [getResourceDataSchema(operationSet!)!];
 }
 
 export function getResourceType(path: string): string {
@@ -86,6 +152,16 @@ export function getResourceType(path: string): string {
     );
 }
 
+export function getResourceKey(path: string): string {
+    const segments = path.split("/");
+    return segments[segments.length - 1].replace(/^\{(.+)\}$/,'$1');
+}
+
+export function getResourceKeySegment(path: string): string {
+    const segments = path.split("/");
+    return segments[segments.length - 2];
+}
+
 function getScopePath(path: string): string {
     const pathToLower = path.toLowerCase();
 
@@ -94,7 +170,7 @@ function getScopePath(path: string): string {
     if (index > 0) return path.slice(0, index);
     if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return ResourceGroupPath;
     if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return SubscriptionPath
-    if (pathToLower.startsWith(TenantScopePrefix.toLowerCase())) return TenantScope;
+    if (pathToLower.startsWith(TenantScopePrefix.toLowerCase())) return TenantPath;
 
     return path;
 }

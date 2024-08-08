@@ -22,12 +22,15 @@ import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
 import { serialize } from "@azure-tools/codegen";
+import { parseMetadata } from "./resource/parse-metadata";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
   const codeModel = session.model;
   await host.writeFile({ filename: "codelModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+  const metadata = parseMetadata(codeModel);
+  await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
   pretransformNames(codeModel);
   pretransformArmResources(codeModel);
   pretransformRename(codeModel);
