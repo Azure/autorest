@@ -20,14 +20,13 @@ namespace Azure.ResourceManager.ApiManagement;
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
 model PolicyContract extends Foundations.ProxyResource {
-  /**
-   * The identifier of the Policy.
-   */
-  @path
-  @key("policyId")
-  @segment("policies")
-  @visibility("read")
-  name: PolicyIdName;
+  ...ResourceNameParameter<
+    Resource = PolicyContract,
+    KeyName = "policyId",
+    SegmentName = "policies",
+    NamePattern = "",
+    Type = PolicyIdName
+  >;
 
   /**
    * Properties of the Policy.
@@ -114,6 +113,7 @@ interface PolicyContracts {
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }
 
+@@doc(PolicyContract.name, "The identifier of the Policy.");
 @@encodedName(PolicyContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

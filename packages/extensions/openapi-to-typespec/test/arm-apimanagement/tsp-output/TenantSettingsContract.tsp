@@ -22,14 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
   TenantSettingsContractProperties
 )
 model TenantSettingsContract extends Foundations.ProxyResource {
-  /**
-   * The identifier of the settings.
-   */
-  @path
-  @key("settingsType")
-  @segment("settings")
-  @visibility("read")
-  name: SettingsTypeName;
+  ...ResourceNameParameter<
+    Resource = TenantSettingsContract,
+    KeyName = "settingsType",
+    SegmentName = "settings",
+    NamePattern = "",
+    Type = SettingsTypeName
+  >;
 
   /**
    * TenantSettings entity contract properties.
@@ -65,3 +64,5 @@ interface TenantSettingsContracts {
     }
   >;
 }
+
+@@doc(TenantSettingsContract.name, "The identifier of the settings.");

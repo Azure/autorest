@@ -22,14 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
   IdentityProviderContractProperties
 )
 model IdentityProviderContract extends Foundations.ProxyResource {
-  /**
-   * Identity Provider Type identifier.
-   */
-  @path
-  @key("identityProviderName")
-  @segment("identityProviders")
-  @visibility("read")
-  name: IdentityProviderType;
+  ...ResourceNameParameter<
+    Resource = IdentityProviderContract,
+    KeyName = "identityProviderName",
+    SegmentName = "identityProviders",
+    NamePattern = "",
+    Type = IdentityProviderType
+  >;
 
   /**
    * Identity Provider contract properties.
@@ -136,6 +135,7 @@ interface IdentityProviderContracts {
   >;
 }
 
+@@doc(IdentityProviderContract.name, "Identity Provider Type identifier.");
 @@encodedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
