@@ -362,7 +362,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults": {
       "get": {
-        "operationId": "ArrayDefaults_ListByEmployee",
+        "operationId": "ArrayDefaults_ListByResourceGroup",
         "tags": [
           "ArrayDefaults"
         ],
@@ -457,7 +457,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties": {
       "get": {
-        "operationId": "DictProperties_ListByEmployee",
+        "operationId": "DictProperties_ListByResourceGroup",
         "tags": [
           "DictProperties"
         ],
