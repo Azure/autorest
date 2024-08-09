@@ -120,7 +120,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const keyProperty = buildKeyProperty(schema);
   const properties = [...getOtherProperties(schema, !getArmCommonTypeVersion())];
   let keyExpression, augmentDecorators;
-  if (keyProperty.name === "name" && keyProperty.type === "string") {
+  if (keyProperty.name === "name") {
     keyExpression = buildKeyExpression(schema, keyProperty);
     augmentDecorators = buildKeyAugmentDecorators(schema, keyProperty);
   } else {
@@ -844,6 +844,7 @@ function buildKeyExpression(schema: ArmResourceSchema, keyProperty: TypespecObje
     ${keyName ? `, KeyName = "${keyName}"` : ""}
     ${segmentName ? `, SegmentName = "${segmentName}"` : ""},
     NamePattern = ${namePattern ? `"${namePattern}"` : `""`}
+    ${keyProperty.type !== "string" ? `, Type = ${keyProperty.type}` : ""}
   >`;
 }
 

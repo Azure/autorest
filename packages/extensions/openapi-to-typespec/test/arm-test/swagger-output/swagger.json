@@ -362,7 +362,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/arraydefaults": {
       "get": {
-        "operationId": "ArrayDefaults_ListByEmployee",
+        "operationId": "ArrayDefaults_ListByResourceGroup",
         "tags": [
           "ArrayDefaults"
         ],
@@ -457,7 +457,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Test/employees/{employeeName}/dictproperties": {
       "get": {
-        "operationId": "DictProperties_ListByEmployee",
+        "operationId": "DictProperties_ListByResourceGroup",
         "tags": [
           "DictProperties"
         ],
@@ -600,8 +600,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ArrayDefaultProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -656,8 +655,7 @@
         "properties": {
           "type": "object",
           "description": "The resource-specific properties for this resource.",
-          "additionalProperties": {},
-          "x-ms-client-flatten": true
+          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -693,8 +691,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EmployeeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -792,8 +789,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnrollProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

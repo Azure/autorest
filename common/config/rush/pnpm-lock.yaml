@@ -15,17 +15,17 @@ dependencies:
     specifier: ~3.0.0
     version: 3.0.255
   '@azure-tools/typespec-autorest':
-    specifier: ^0.43.0
-    version: 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@azure-tools/typespec-azure-resource-manager@0.43.0)(@azure-tools/typespec-client-generator-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
+    specifier: ^0.44.0
+    version: 0.44.1(@azure-tools/typespec-azure-core@0.44.0)(@azure-tools/typespec-azure-resource-manager@0.44.0)(@azure-tools/typespec-client-generator-core@0.44.3)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
   '@azure-tools/typespec-azure-core':
-    specifier: ^0.43.0
-    version: 0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)
+    specifier: ^0.44.0
+    version: 0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0)
   '@azure-tools/typespec-azure-resource-manager':
-    specifier: ^0.43.0
-    version: 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
+    specifier: ^0.44.0
+    version: 0.44.0(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
   '@azure-tools/typespec-client-generator-core':
-    specifier: ^0.43.0
-    version: 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
+    specifier: ^0.44.0
+    version: 0.44.3(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
   '@azure-tools/uri':
     specifier: ~3.1.1
     version: 3.1.1
@@ -168,26 +168,26 @@ dependencies:
     specifier: ^6.11.0
     version: 6.11.0(eslint@8.53.0)(typescript@5.2.2)
   '@typespec/compiler':
-    specifier: ^0.57.0
-    version: 0.57.0
+    specifier: ^0.58.0
+    version: 0.58.1
   '@typespec/http':
-    specifier: ^0.57.0
-    version: 0.57.0(@typespec/compiler@0.57.0)
+    specifier: ^0.58.0
+    version: 0.58.0(@typespec/compiler@0.58.1)
   '@typespec/openapi':
-    specifier: ^0.57.0
-    version: 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
+    specifier: ^0.58.0
+    version: 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
   '@typespec/openapi3':
-    specifier: ^0.57.0
-    version: 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/versioning@0.57.0)
+    specifier: ^0.58.0
+    version: 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/versioning@0.58.0)
   '@typespec/prettier-plugin-typespec':
-    specifier: ^0.57.0
-    version: 0.57.0
+    specifier: ^0.58.0
+    version: 0.58.0
   '@typespec/rest':
-    specifier: ^0.57.0
-    version: 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
+    specifier: ^0.58.0
+    version: 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
   '@typespec/versioning':
-    specifier: ^0.57.0
-    version: 0.57.0(@typespec/compiler@0.57.0)
+    specifier: ^0.58.0
+    version: 0.58.0(@typespec/compiler@0.58.1)
   ajv:
     specifier: ^8.6.0
     version: 8.12.0
@@ -378,6 +378,10 @@ packages:
       '@jridgewell/trace-mapping': 0.3.20
     dev: false
 
+  /@apidevtools/swagger-methods@3.0.2:
+    resolution: {integrity: sha512-QAkD5kK2b1WfjDS/UQn/qQkbwF31uqRjPTrsCs5ZG9BQGAkjwvqGFjjPqAuzac/IYzpPtRzjCP1WrTuAIjMrXg==}
+    dev: false
+
   /@azure-tools/async-io@3.0.254:
     resolution: {integrity: sha512-X1C7XdyCuo50ch9FzKtTvmK18FgDxxf1Bbt3cSoknQqeDaRegHSSCO+zByq2YA4NvUzKXeZ1engh29IDxZXgpQ==}
     engines: {node: '>=10.12.0'}
@@ -396,78 +400,80 @@ packages:
     engines: {node: '>=10.12.0'}
     dev: false
 
-  /@azure-tools/typespec-autorest@0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@azure-tools/typespec-azure-resource-manager@0.43.0)(@azure-tools/typespec-client-generator-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0):
-    resolution: {integrity: sha512-tZ9uXXOdxu2y01W9n3mzXf+IEY2MQkP/JaQaKlcOx2+dbklHNQWSDU0Vm6Gmm6l//XiF9QiI8653BiuO97czyw==}
+  /@azure-tools/typespec-autorest@0.44.1(@azure-tools/typespec-azure-core@0.44.0)(@azure-tools/typespec-azure-resource-manager@0.44.0)(@azure-tools/typespec-client-generator-core@0.44.3)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0):
+    resolution: {integrity: sha512-lw/iM659GuFgckDeRFFu0vx6wGBy814n+mjzbpi0Qwjvj8/hYULSjpty9P4WBDE30rYCUde1pWX5nK6TnwhOkQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@azure-tools/typespec-azure-core': ~0.43.0
-      '@azure-tools/typespec-azure-resource-manager': ~0.43.0
-      '@azure-tools/typespec-client-generator-core': ~0.43.0
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
-      '@typespec/openapi': ~0.57.0
-      '@typespec/rest': ~0.57.0
-      '@typespec/versioning': ~0.57.0
+      '@azure-tools/typespec-azure-core': ~0.44.0
+      '@azure-tools/typespec-azure-resource-manager': ~0.44.0
+      '@azure-tools/typespec-client-generator-core': ~0.44.2
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
+      '@typespec/openapi': ~0.58.0
+      '@typespec/rest': ~0.58.0
+      '@typespec/versioning': ~0.58.0
     dependencies:
-      '@azure-tools/typespec-azure-core': 0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)
-      '@azure-tools/typespec-azure-resource-manager': 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
-      '@azure-tools/typespec-client-generator-core': 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/openapi': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/rest': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/versioning': 0.57.0(@typespec/compiler@0.57.0)
+      '@azure-tools/typespec-azure-core': 0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0)
+      '@azure-tools/typespec-azure-resource-manager': 0.44.0(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
+      '@azure-tools/typespec-client-generator-core': 0.44.3(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/openapi': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/rest': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/versioning': 0.58.0(@typespec/compiler@0.58.1)
     dev: false
 
-  /@azure-tools/typespec-azure-core@0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0):
-    resolution: {integrity: sha512-B1r0i3segJ7RuNXxcAMBy8H2t+jTkaf74dkyUWD0HIFPkhETN0uR59nuor+s+LoLU8yI4JypOFSNZt6e1rod8w==}
+  /@azure-tools/typespec-azure-core@0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0):
+    resolution: {integrity: sha512-d11QK2v5fOZH8YUqf42FsqHEirKCHzeKFq4Uo/51BXCXmJJahsTaFMAG2M0GoJe8tmTHeMijStnVMfzcGNqCAA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
-      '@typespec/rest': ~0.57.0
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
+      '@typespec/rest': ~0.58.0
     dependencies:
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/rest': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/rest': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
     dev: false
 
-  /@azure-tools/typespec-azure-resource-manager@0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0):
-    resolution: {integrity: sha512-0GQL+/o1u+PAB63FpYz3sy3ZgZvCtk5T4sDAnICnV23v2YWIONDMUfxxd0x40xJbY6PkcwwHDpBLNMqajf2H6A==}
+  /@azure-tools/typespec-azure-resource-manager@0.44.0(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0):
+    resolution: {integrity: sha512-m4dG41at6En1swbxlvCDl1v4Mvrfp17acDnRxEcd4SdKP2R9eVS2mBy1tSuFtMcJlOnoBZ5CxQgk+Osg/Q9nmA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@azure-tools/typespec-azure-core': ~0.43.0
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
-      '@typespec/openapi': ~0.57.0
-      '@typespec/rest': ~0.57.0
-      '@typespec/versioning': ~0.57.0
+      '@azure-tools/typespec-azure-core': ~0.44.0
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
+      '@typespec/openapi': ~0.58.0
+      '@typespec/rest': ~0.58.0
+      '@typespec/versioning': ~0.58.0
     dependencies:
-      '@azure-tools/typespec-azure-core': 0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/openapi': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/rest': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/versioning': 0.57.0(@typespec/compiler@0.57.0)
+      '@azure-tools/typespec-azure-core': 0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/openapi': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/rest': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/versioning': 0.58.0(@typespec/compiler@0.58.1)
       change-case: 5.4.4
       pluralize: 8.0.0
     dev: false
 
-  /@azure-tools/typespec-client-generator-core@0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0):
-    resolution: {integrity: sha512-rssB/zsg89wstzJC1MWzbd8oPpqbgoftkp9G/NP3BoMb/gCP5uRLggwlSUAgnoU2Lt0jBUKcMlqEiVLTAkY9LA==}
+  /@azure-tools/typespec-client-generator-core@0.44.3(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0):
+    resolution: {integrity: sha512-HXjxQs7ELrTuIDqOjlYhP4rM4AXb143klbiM8dkEGtqNBRCk77gVCGYVH1M3kWKAEs0dQKhzoUukscqRsfELuw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@azure-tools/typespec-azure-core': ~0.43.0
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
-      '@typespec/rest': ~0.57.0
-      '@typespec/versioning': ~0.57.0
+      '@azure-tools/typespec-azure-core': ~0.44.0
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
+      '@typespec/openapi': ~0.58.0
+      '@typespec/rest': ~0.58.0
+      '@typespec/versioning': ~0.58.0
     dependencies:
-      '@azure-tools/typespec-azure-core': 0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/rest': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/versioning': 0.57.0(@typespec/compiler@0.57.0)
+      '@azure-tools/typespec-azure-core': 0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/openapi': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/rest': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/versioning': 0.58.0(@typespec/compiler@0.58.1)
       change-case: 5.4.4
       pluralize: 8.0.0
     dev: false
@@ -503,6 +509,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/highlight': 7.24.5
+      picocolors: 1.0.1
+    dev: false
+
+  /@babel/code-frame@7.24.7:
+    resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/highlight': 7.24.7
       picocolors: 1.0.1
     dev: false
 
@@ -630,6 +644,11 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: false
 
+  /@babel/helper-validator-identifier@7.24.7:
+    resolution: {integrity: sha512-rR+PBcQ1SMQDDyF6X0wxtG8QyLCgUB0eRAGguqRLfkCA87l7yAP7ehq8SNj96OOGTO8OBV70KhuFYcIkHXOg0w==}
+    engines: {node: '>=6.9.0'}
+    dev: false
+
   /@babel/helper-validator-option@7.22.15:
     resolution: {integrity: sha512-bMn7RmyFjY/mdECUbgn9eoSY4vqvacUnS9i9vGAGttgFWesO6B4CYWA7XlpbWgBt71iv/hfbPlynohStqnu5hA==}
     engines: {node: '>=6.9.0'}
@@ -660,6 +679,16 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-validator-identifier': 7.24.5
+      chalk: 2.4.2
+      js-tokens: 4.0.0
+      picocolors: 1.0.1
+    dev: false
+
+  /@babel/highlight@7.24.7:
+    resolution: {integrity: sha512-EStJpq4OuY8xYfhGVXngigBJRWxftKX9ksiGDnmlY3o7B/V7KIAc9X4oiK87uPJSc/vs5L869bem5fhZa8caZw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.0.1
@@ -798,6 +827,13 @@ packages:
     dependencies:
       '@babel/core': 7.23.3
       '@babel/helper-plugin-utils': 7.22.5
+    dev: false
+
+  /@babel/runtime@7.25.0:
+    resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
     dev: false
 
   /@babel/template@7.22.15:
@@ -947,6 +983,11 @@ packages:
   /@humanwhocodes/module-importer@1.0.1:
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
+    dev: false
+
+  /@humanwhocodes/momoa@2.0.4:
+    resolution: {integrity: sha512-RE815I4arJFtt+FVeU1Tgp9/Xvecacji8w/V6XtXsWWH/wz/eNkNbhb+ny/+PlVZjV0rxQpRSQKNKE3lcktHEA==}
+    engines: {node: '>=10.10.0'}
     dev: false
 
   /@humanwhocodes/object-schema@2.0.1:
@@ -1250,6 +1291,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: false
 
+  /@jsdevtools/ono@7.1.3:
+    resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1288,7 +1333,7 @@ packages:
     resolution: {integrity: sha512-7kZUAaLscfgbwBQRbvdMYaZOWyMEcPTH/tJjnyAWJ/dvvs9Ef+CERx/qJb9GExJpl1qipaDGn7KqHnFGGixd0w==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      semver: 7.6.1
+      semver: 7.6.2
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -1308,6 +1353,52 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       tslib: 2.6.2
+    dev: false
+
+  /@readme/better-ajv-errors@1.6.0(ajv@8.13.0):
+    resolution: {integrity: sha512-9gO9rld84Jgu13kcbKRU+WHseNhaVt76wYMeRDGsUGYxwJtI3RmEJ9LY9dZCYQGI8eUZLuxb5qDja0nqklpFjQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      ajv: 4.11.8 - 8
+    dependencies:
+      '@babel/code-frame': 7.24.2
+      '@babel/runtime': 7.25.0
+      '@humanwhocodes/momoa': 2.0.4
+      ajv: 8.13.0
+      chalk: 4.1.2
+      json-to-ast: 2.1.0
+      jsonpointer: 5.0.1
+      leven: 3.1.0
+    dev: false
+
+  /@readme/json-schema-ref-parser@1.2.0:
+    resolution: {integrity: sha512-Bt3QVovFSua4QmHa65EHUmh2xS0XJ3rgTEUPH998f4OW4VVJke3BuS16f+kM0ZLOGdvIrzrPRqwihuv5BAjtrA==}
+    dependencies:
+      '@jsdevtools/ono': 7.1.3
+      '@types/json-schema': 7.0.15
+      call-me-maybe: 1.0.2
+      js-yaml: 4.1.0
+    dev: false
+
+  /@readme/openapi-parser@2.6.0:
+    resolution: {integrity: sha512-pyFJXezWj9WI1O+gdp95CoxfY+i+Uq3kKk4zXIFuRAZi9YnHpHOpjumWWr67wkmRTw19Hskh9spyY0Iyikf3fA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      openapi-types: '>=7'
+    dependencies:
+      '@apidevtools/swagger-methods': 3.0.2
+      '@jsdevtools/ono': 7.1.3
+      '@readme/better-ajv-errors': 1.6.0(ajv@8.13.0)
+      '@readme/json-schema-ref-parser': 1.2.0
+      '@readme/openapi-schemas': 3.1.0
+      ajv: 8.13.0
+      ajv-draft-04: 1.0.0(ajv@8.13.0)
+      call-me-maybe: 1.0.2
+    dev: false
+
+  /@readme/openapi-schemas@3.1.0:
+    resolution: {integrity: sha512-9FC/6ho8uFa8fV50+FPy/ngWN53jaUu4GRXlAjcxIRrzhltJnpKkBG2Tp0IDraFJeWrOpk84RJ9EMEEYzaI1Bw==}
+    engines: {node: '>=18'}
     dev: false
 
   /@sinclair/typebox@0.27.8:
@@ -1713,7 +1804,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.6.1
+      semver: 7.6.2
       tsutils: 3.21.0(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
@@ -1796,86 +1887,91 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
-  /@typespec/compiler@0.57.0:
-    resolution: {integrity: sha512-Z5L7J90Ol21IbzU+rBD2wzKy2vJ2Yg2FIzi+yB5rtb7/c4oBea/CgEByMVHBtT7uw45ZXJpHOiepuGSPVXw2EA==}
+  /@typespec/compiler@0.58.1:
+    resolution: {integrity: sha512-bVxxM35r40OtuL4+/9W/g1EevlnWnW6i151nsZAFOJj1xWHoE2G9zkx5/Feic8OlzArjhGGLJOLH3Ez1Wrw35A==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
-      '@babel/code-frame': 7.24.2
-      ajv: 8.13.0
+      '@babel/code-frame': 7.24.7
+      ajv: 8.16.0
       change-case: 5.4.4
-      globby: 14.0.1
+      globby: 14.0.2
       mustache: 4.2.0
       picocolors: 1.0.1
-      prettier: 3.2.5
+      prettier: 3.3.3
       prompts: 2.4.2
       semver: 7.6.2
+      temporal-polyfill: 0.2.5
       vscode-languageserver: 9.0.1
       vscode-languageserver-textdocument: 1.0.11
-      yaml: 2.4.2
+      yaml: 2.4.5
       yargs: 17.7.2
     dev: false
 
-  /@typespec/http@0.57.0(@typespec/compiler@0.57.0):
-    resolution: {integrity: sha512-k3bWOTPNqlRB3/TmrXVBtObmxj2J20l2FnhGXvs+tjdtbXLxCQWmvQz6xlne9nkLAtWVB/pQRUn+oMJfhWta3w==}
+  /@typespec/http@0.58.0(@typespec/compiler@0.58.1):
+    resolution: {integrity: sha512-jQpkugg9AZVrNDMkDIgZRpIoRkkU2b0LtKWqMGg33MItYj9/DYSgDtY7xb7oCBppRtFFZ/h138HyhYl3zQxZRg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@typespec/compiler': ~0.57.0
+      '@typespec/compiler': ~0.58.0
     dependencies:
-      '@typespec/compiler': 0.57.0
+      '@typespec/compiler': 0.58.1
     dev: false
 
-  /@typespec/openapi3@0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/versioning@0.57.0):
-    resolution: {integrity: sha512-spNLzwCTduPISJBTWhqsMLTjuGC3Tdh/FVI1rTGnRunB7ZXjhRyz031o1bCe2BZeW1w1sacZGfe+ba8sXqgMxA==}
+  /@typespec/openapi3@0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/versioning@0.58.0):
+    resolution: {integrity: sha512-G9t9CWT9cN6ip39dLZaE6JdEDxGsFyOUxA2s6a087rweoTH85XzsFiQL7uiUD8vHhXyEo6tF6sy3LMZVN0BsoQ==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+    peerDependencies:
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
+      '@typespec/openapi': ~0.58.0
+      '@typespec/versioning': ~0.58.0
+    dependencies:
+      '@readme/openapi-parser': 2.6.0
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/openapi': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/versioning': 0.58.0(@typespec/compiler@0.58.1)
+      yaml: 2.4.5
+    transitivePeerDependencies:
+      - openapi-types
+    dev: false
+
+  /@typespec/openapi@0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0):
+    resolution: {integrity: sha512-gu6nXfmpfZrfq8Etpgl1dpMfsXii7EzQyhZgsPhIy7ZwV5bDmFk1/oyhTqIpWrnr4pD3r151T2BQjzJefjf15A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
-      '@typespec/openapi': ~0.57.0
-      '@typespec/versioning': ~0.57.0
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
     dependencies:
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/openapi': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/versioning': 0.57.0(@typespec/compiler@0.57.0)
-      yaml: 2.4.2
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
     dev: false
 
-  /@typespec/openapi@0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0):
-    resolution: {integrity: sha512-35wK/BqjOXSlhWuGMwoYN3FSgIYFOKtw8ot4ErcgmxAGuKaS2GkUhZvtQJXUn2ByU0Fl4jqslPmTz8SEcz7rbw==}
+  /@typespec/prettier-plugin-typespec@0.58.0:
+    resolution: {integrity: sha512-GtG9MvVGKytT6jPEksySSRMKl6IYg7dWnjLWMkCwvoViuSAlz3lxjIO0hGUaU5maNCC2+fe5m4vvFmNXGlMOsg==}
+    dependencies:
+      prettier: 3.3.3
+    dev: false
+
+  /@typespec/rest@0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0):
+    resolution: {integrity: sha512-QBxkED0/KQKG22pwzis0n7BY+uLMSZZPSoVe/ESBFika9n5/yyeQ0l58xbFFwwfxAxe4xwuZ5PNwTdEXZbzr5g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
+      '@typespec/compiler': ~0.58.0
+      '@typespec/http': ~0.58.0
     dependencies:
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
     dev: false
 
-  /@typespec/prettier-plugin-typespec@0.57.0:
-    resolution: {integrity: sha512-nWrgv/yPGYfE4FL6ON3BpYZnvCdZYvE6yrgcr/ifqZnMBJfCLl4sk+tk3JoVysj6kTTWaFME7GQ/X/guMvbjUA==}
-    dependencies:
-      prettier: 3.2.5
-    dev: false
-
-  /@typespec/rest@0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0):
-    resolution: {integrity: sha512-mZj76Kf+cmH38pYA6LT8Zz7QjuR3fdQo5bc8pXhKMwLq9vRqNLz6Z9InbOeo8zY+xP0GfUwEU9kXczmCc8gyRA==}
+  /@typespec/versioning@0.58.0(@typespec/compiler@0.58.1):
+    resolution: {integrity: sha512-brnQQ3wKWh4AbgqmnVLj+8zyOaDk9VPWg4QBecdQxzz7PrSrlAzIzRfeIyr67+hwi/0SvkTAB6GNH7YYTypKGA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      '@typespec/compiler': ~0.57.0
-      '@typespec/http': ~0.57.0
+      '@typespec/compiler': ~0.58.0
     dependencies:
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-    dev: false
-
-  /@typespec/versioning@0.57.0(@typespec/compiler@0.57.0):
-    resolution: {integrity: sha512-kk6zCNSwcqqYB9isNNagTy+Zv6wEIRA4NkcZ/X1riTj2zhJwKsIFNXQWm1yxpZn+BY4+1QtuaQHuBLo8HbgR/w==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      '@typespec/compiler': ~0.57.0
-    dependencies:
-      '@typespec/compiler': 0.57.0
+      '@typespec/compiler': 0.58.1
     dev: false
 
   /@ungap/structured-clone@1.2.0:
@@ -2119,6 +2215,17 @@ packages:
       indent-string: 5.0.0
     dev: false
 
+  /ajv-draft-04@1.0.0(ajv@8.13.0):
+    resolution: {integrity: sha512-mv00Te6nmYbRp5DCwclxtt7yV/joXJPGS7nM+97GdxvuttCOfgI3K4U25zboyeX0O+myI8ERluxQe5wljMmVIw==}
+    peerDependencies:
+      ajv: ^8.5.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
+    dependencies:
+      ajv: 8.13.0
+    dev: false
+
   /ajv-errors@3.0.0(ajv@8.12.0):
     resolution: {integrity: sha512-V3wD15YHfHz6y0KdhYFjyy9vWtEVALT9UrxfN3zqlI6dMioHnJrqOYfyPKol3oqrnCM9uwkcdCwkJ0WUcbLMTQ==}
     peerDependencies:
@@ -2175,6 +2282,15 @@ packages:
 
   /ajv@8.13.0:
     resolution: {integrity: sha512-PRA911Blj99jR5RMeTunVbNXMF6Lp4vZXnk5GQjcnUWUTsrXtekg/pnmFFI2u/I36Y/2bITGS30GZCXei6uNkA==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+      uri-js: 4.4.1
+    dev: false
+
+  /ajv@8.16.0:
+    resolution: {integrity: sha512-F0twR8U1ZU67JIEtekUcLkXkoO5mMMmgGD8sK/xUFzJ805jxHQl92hImFAqqXMyMYjSPOyUPAwHYhB72g5sTXw==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -2581,7 +2697,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.6.1
+      semver: 7.6.2
     dev: false
 
   /bundle-name@3.0.0:
@@ -2650,6 +2766,10 @@ packages:
       function-bind: 1.1.2
       get-intrinsic: 1.2.2
       set-function-length: 1.1.1
+    dev: false
+
+  /call-me-maybe@1.0.2:
+    resolution: {integrity: sha512-HpX65o1Hnr9HH25ojC1YGs7HCQLq0GCOibSaWER0eNpgJ/Z1MZv2mTc7+xh6WOPxbRVcmgbv4hGU+uSQ/2xFZQ==}
     dev: false
 
   /callsites@3.1.0:
@@ -2849,6 +2969,11 @@ packages:
 
   /code-block-writer@11.0.3:
     resolution: {integrity: sha512-NiujjUFB4SwScJq2bwbYUtXbZhBSlY6vYzm++3Q6oC+U+injTqfPYFK8wS9COOmb2lueqp0ZRB4nK1VYeHgNyw==}
+    dev: false
+
+  /code-error-fragment@0.0.230:
+    resolution: {integrity: sha512-cadkfKp6932H8UkhzE/gcUqhRMNf8jHzkAN7+5Myabswaghu4xABTgPHDCjW+dBAJxj/SpkTYokpzDqY4pCzQw==}
+    engines: {node: '>= 4'}
     dev: false
 
   /collect-v8-coverage@1.0.2:
@@ -4314,8 +4439,8 @@ packages:
       slash: 4.0.0
     dev: false
 
-  /globby@14.0.1:
-    resolution: {integrity: sha512-jOMLD2Z7MAhyG8aJpNOpmziMOP4rPLcc95oQPKXBazW82z+CEgPFBQvEpRUa1KeIMUJo4Wsm+q6uzO/Q/4BksQ==}
+  /globby@14.0.2:
+    resolution: {integrity: sha512-s3Fq41ZVh7vbbe2PN3nrW7yC7U7MFVc5c98/iTl9c2GawNMKx/J648KQRW6WKkuU8GIbbh2IXfIRQjOZnXcTnw==}
     engines: {node: '>=18'}
     dependencies:
       '@sindresorhus/merge-streams': 2.3.0
@@ -4334,6 +4459,10 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    dev: false
+
+  /grapheme-splitter@1.0.4:
+    resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: false
 
   /graphemer@1.4.0:
@@ -4914,7 +5043,7 @@ packages:
       '@babel/parser': 7.23.3
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.6.1
+      semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5415,7 +5544,7 @@ packages:
       jest-util: 29.7.0
       natural-compare: 1.4.0
       pretty-format: 29.7.0
-      semver: 7.6.1
+      semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5579,6 +5708,14 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: false
 
+  /json-to-ast@2.1.0:
+    resolution: {integrity: sha512-W9Lq347r8tA1DfMvAGn9QNcgYm4Wm7Yc+k8e6vezpMnRT+NHbtlxgNBXRVjXe9YM6eTn6+p/MKOlV/aABJcSnQ==}
+    engines: {node: '>= 4'}
+    dependencies:
+      code-error-fragment: 0.0.230
+      grapheme-splitter: 1.0.4
+    dev: false
+
   /json5@1.0.2:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
@@ -5614,6 +5751,11 @@ packages:
   /jsonpath-plus@6.0.1:
     resolution: {integrity: sha512-EvGovdvau6FyLexFH2OeXfIITlgIbgZoAZe3usiySeaIDm5QS+A10DKNpaPBBqqRSZr2HN6HVNXxtwUAr2apEw==}
     engines: {node: '>=10.0.0'}
+    dev: false
+
+  /jsonpointer@5.0.1:
+    resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /junk@4.0.1:
@@ -5729,7 +5871,7 @@ packages:
     resolution: {integrity: sha512-Yj9mA8fPiVgOUpByoTZO5pNrcl5Yk37FcSHsUINpAsaBIEZIuqcCclDZJCVxqQShDsmYX8QG63svJiTbOATZwg==}
     engines: {node: 14 || >=16.14}
     dependencies:
-      semver: 7.6.1
+      semver: 7.6.2
     dev: false
 
   /lru-cache@5.1.1:
@@ -5754,7 +5896,7 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.6.1
+      semver: 7.6.2
     dev: false
 
   /make-error@1.3.6:
@@ -6117,7 +6259,7 @@ packages:
     resolution: {integrity: sha512-SQkEP4hmNWjlniS5zdnfIXTk1x7Ome85RDzHlTbBtzE97Gfwz/Ipw4v/Ryk20DWIy3yCNVLVlGKApCnmvYoJbA==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.6.1
+      semver: 7.6.2
     dev: false
 
   /node-domexception@1.0.0:
@@ -6789,8 +6931,8 @@ packages:
     hasBin: true
     dev: false
 
-  /prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+  /prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
     dev: false
@@ -6987,6 +7129,10 @@ packages:
 
   /recursive-diff@1.0.9:
     resolution: {integrity: sha512-5mqpskzvXDo5Vy29Vj8tH30a0+XBmY11aqWGoN/uB94UHRwndX2EuPvH+WtbqOYkrwAF718/lDo6U4CB1qSSqQ==}
+    dev: false
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
     dev: false
 
   /regex-not@1.0.2:
@@ -7808,6 +7954,16 @@ packages:
       yallist: 4.0.0
     dev: false
 
+  /temporal-polyfill@0.2.5:
+    resolution: {integrity: sha512-ye47xp8Cb0nDguAhrrDS1JT1SzwEV9e26sSsrWzVu+yPZ7LzceEcH0i2gci9jWfOfSCCgM3Qv5nOYShVUUFUXA==}
+    dependencies:
+      temporal-spec: 0.2.4
+    dev: false
+
+  /temporal-spec@0.2.4:
+    resolution: {integrity: sha512-lDMFv4nKQrSjlkHKAlHVqKrBG4DyFfa9F74cmBZ3Iy3ed8yvWnlWSIdi4IKfSqwmazAohBNwiN64qGx4y5Q3IQ==}
+    dev: false
+
   /terser-webpack-plugin@5.3.9(webpack@5.89.0):
     resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
     engines: {node: '>= 10.13.0'}
@@ -8304,7 +8460,7 @@ packages:
     dependencies:
       browserslist: 4.22.1
       escalade: 3.1.1
-      picocolors: 1.0.0
+      picocolors: 1.0.1
     dev: false
 
   /upper-case-first@2.0.2:
@@ -8688,8 +8844,8 @@ packages:
     resolution: {integrity: sha512-2PTINUwsRqSd+s8XxKaJWQlUuEMHJQyEuh2edBbW8KNJz0SJPwUSD2zRWqezFEdN7IzAgeuYHFUCF7o8zRdZ0A==}
     dev: false
 
-  /yaml@2.4.2:
-    resolution: {integrity: sha512-B3VqDZ+JAg1nZpaEmWtTXUlBneoGx6CPM9b0TENK6aoSu5t73dItudwdgmi6tHlIZZId4dZ9skcAQ2UbcyAeVA==}
+  /yaml@2.4.5:
+    resolution: {integrity: sha512-aBx2bnqDzVOyNKfsysjA2ms5ZlnjSAW2eG3/L5G/CSujfjLJTJsEw1bGw8kCf04KodQWk1pxlGnZ56CRxiawmg==}
     engines: {node: '>= 14'}
     hasBin: true
     dev: false
@@ -8761,7 +8917,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-zmT8H4TPYLbIAfpAIuWq2Fl5ElGAw/YDNepBCev66YxQpJQ764g2UyRcfWksA/YxHSIrpCALm0aKJ/t/TbfdNQ==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-fIgRGOmU1tuhRBEDMgEsCO3Y4uFGcZ9rhGulYqI42nwz1r/cL3Eqn8XYlFg/lU/3lrj26gcfYdejMhHEzZ4wkw==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -8819,7 +8975,7 @@ packages:
     dev: false
 
   file:projects/cadl.tgz(ts-node@10.9.1)(webpack-cli@5.1.4)(webpack@5.89.0):
-    resolution: {integrity: sha512-av7i43qPFgwFiE7GHT5KJPa4d0FHlFTbx/y04efEF/83afKlgZ5HVMrFi7N/+lYpm1lHBMPZ0aPn4gK6m23EsQ==, tarball: file:projects/cadl.tgz}
+    resolution: {integrity: sha512-GO2iRP6pv3OR2QwYUE+tb7TP6nC+o6bv5ErnrT1vleUz33DH9Kz1Jb9obYFl+4GgtXAaT0fSvCUNgm3pA5ej+A==, tarball: file:projects/cadl.tgz}
     id: file:projects/cadl.tgz
     name: '@rush-temp/cadl'
     version: 0.0.0
@@ -8865,7 +9021,7 @@ packages:
     dev: false
 
   file:projects/codegen.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-3C8weoCa1kCOKeoOVrLzpSZo5dzm6rUBu6GpSekpssx7TPkHZP/9D2Zk7gaMX3IdLiJe9UHH8mMtNEUZM07QMQ==, tarball: file:projects/codegen.tgz}
+    resolution: {integrity: sha512-VovTenml5aFvdxVxeubTWgNxH95b97qPKSJfccqCog+K5N1MLKQ8OyLfHBIj1we1u2OWAwsUVfDAJDBRsZvCmQ==, tarball: file:projects/codegen.tgz}
     id: file:projects/codegen.tgz
     name: '@rush-temp/codegen'
     version: 0.0.0
@@ -8905,7 +9061,7 @@ packages:
     dev: false
 
   file:projects/codemodel.tgz(jest@29.7.0)(prettier@3.1.0):
-    resolution: {integrity: sha512-XU/8wU9Jo2eyvIFEVi22uh9YHNGK2X69RZ3fhSsdx9e6Ccp2ajm3QX++m7rV8b1FthMVeIn3FHFGIC7miuT2/Q==, tarball: file:projects/codemodel.tgz}
+    resolution: {integrity: sha512-eciCOrz1bsEKinYsI0hZwEsNX/tZZSbOwiI6BGzznOoVjf7gZ/bE9IhoVnRz6rQ192Qtrkz0IzsoAmCHNZQ1cw==, tarball: file:projects/codemodel.tgz}
     id: file:projects/codemodel.tgz
     name: '@rush-temp/codemodel'
     version: 0.0.0
@@ -8937,7 +9093,7 @@ packages:
     dev: false
 
   file:projects/common.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-dr0VbBpkYbGLe+5tnqwXZcU37okgm1NFocwBAyMKuwD8M7QRNEBSw+CWz04fKcO6bFUc4QZHbNQyM9RiDZs8pg==, tarball: file:projects/common.tgz}
+    resolution: {integrity: sha512-Dr5MV/1kdgzhxptcFbe1cla9YfQKIIPgZ+KjDwrrSlUGr8B4449Bq++2So07dJMQANDoyXjEPYVWoMAUB3YndA==, tarball: file:projects/common.tgz}
     id: file:projects/common.tgz
     name: '@rush-temp/common'
     version: 0.0.0
@@ -8970,7 +9126,7 @@ packages:
     dev: false
 
   file:projects/compare.tgz(prettier@3.1.0):
-    resolution: {integrity: sha512-TdSUwopQGGjakA2XILTfCpdkmPjMt0tg/U2uHdTsRPS3cBco9dE42Lzg2fQWuqo8kpP54tIAQ38w2mIg9IYiLw==, tarball: file:projects/compare.tgz}
+    resolution: {integrity: sha512-+V9SrJtEo0ilGKK7vr0UsFzAxl0GfRPB+MxBS8dl9KkR0/YTOIOgbY2nKDXPxsG5vkaFZ71hgDAwAbdqVOxhWg==, tarball: file:projects/compare.tgz}
     id: file:projects/compare.tgz
     name: '@rush-temp/compare'
     version: 0.0.0
@@ -9016,7 +9172,7 @@ packages:
     dev: false
 
   file:projects/configuration.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-QIvRtuY4X8HzqQc5WSZSnxTEMte4WOqY5CcI2VgvRWeuj9X/BpUwCvUJG7qQc7FhQ/KUlTLC4Qqfsy3DzD+/gA==, tarball: file:projects/configuration.tgz}
+    resolution: {integrity: sha512-refACiofNn9MEmuxOHQ+FlnM1QVGK7jt1n0cTpoK3vUp9A865OmlIPq6GPuSRw6WqGD1vJFX4IS+ng7+fJwGIA==, tarball: file:projects/configuration.tgz}
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
     version: 0.0.0
@@ -9057,7 +9213,7 @@ packages:
     dev: false
 
   file:projects/core.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-zdm2pbBeVnYjQfB4bYGn+EDY8BISYjyHr1MIPfuq2kjXIdsQIeE0+rX5dBJ22dJWZrbwX8lv77SAsa5wTH5IAg==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-mJr9LRJtSDgwhpqjtwQWiIQMb3NCx8EbDVhf2vRK8uZAfx8R0nerrRziF7PMNbVV5wS4C8OAxI4DxCcQlSgcrg==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     version: 0.0.0
@@ -9122,7 +9278,7 @@ packages:
     dev: false
 
   file:projects/datastore.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-6/wu2bBUSvArdPUcvguk4iP5weUXdYt6po8oTByiu4MOKai2WH6T2elniSQVeNa8i0nspiwRrrKZfBA1LRYNfw==, tarball: file:projects/datastore.tgz}
+    resolution: {integrity: sha512-rw9TMnec+y4rClT4qX7eiU/MnaDL4sxvFHk5dFVa3n0W2aK8BSvOKfnYezMGXEQ6AcBwC1b3jOIQyGGl/y7LHg==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     version: 0.0.0
@@ -9163,7 +9319,7 @@ packages:
     dev: false
 
   file:projects/deduplication.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-OeYQ73RhcmGwZbW6Ctnuh+q4vIjgRR2880FOuFYSGSAia3/ROZGlAzQqZrHn2/vsOcYXRWZHXy/84HCRcSsIww==, tarball: file:projects/deduplication.tgz}
+    resolution: {integrity: sha512-v0Qz78yfJ+q4XeJE/VJp9JDKvIjRt264L4SrYTs+m85UIFpBl4XoP7sSUOk5yuTSeJlaEbaAQ5WRwJcnT+Q8vw==, tarball: file:projects/deduplication.tgz}
     id: file:projects/deduplication.tgz
     name: '@rush-temp/deduplication'
     version: 0.0.0
@@ -9197,7 +9353,7 @@ packages:
     dev: false
 
   file:projects/extension-base.tgz(jest@29.7.0)(prettier@3.1.0):
-    resolution: {integrity: sha512-tooRuR6QsOAqpII/MvkKbICjhyRxKFNPhT1y05CG5wlgrqTrwok6sYt0M6bGb73apeC0n7MZbPpWvSR7kQKdrQ==, tarball: file:projects/extension-base.tgz}
+    resolution: {integrity: sha512-MBEh+961tu6edrkkdRYUrNtAngts+uuekG3CzzYbIpmsTup2RzIk57euiWSh8zA0d3375iPVMwuHd6m6ORcaxA==, tarball: file:projects/extension-base.tgz}
     id: file:projects/extension-base.tgz
     name: '@rush-temp/extension-base'
     version: 0.0.0
@@ -9225,7 +9381,7 @@ packages:
     dev: false
 
   file:projects/extension.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-YXVy7zorVQE5y0/DwaZobVpgJKsMg8FN2/17G/IXxFH8qzEmEoC6gJPE26mf10HTI0noSGV3NCWCSyzsReEb7w==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-BtX8trhAIukgMnSIDC0Ou3fn3IKV9dNyF4oVHAqvudItaLrJSLRfzg6wxyXabSFFSRrohWNSx3ZdnNRgJsRSWw==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
@@ -9270,7 +9426,7 @@ packages:
     dev: false
 
   file:projects/fixer.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-ZyqP7Gub1FyIjYmv7IBtE8jOfK/dp5fTUcRo5WjMCldnLJlqLvZrteccdnVqeKd+TRi3PDnanrW1k6z+CekfQw==, tarball: file:projects/fixer.tgz}
+    resolution: {integrity: sha512-hgI1LGdKk3LtK5qtwPy1GcbgVQyo6jHY/+eKB7lgrg0YQHQtbOOx66NJcV9CYLuYl5eWEwHcI94wnGOy7ehkGA==, tarball: file:projects/fixer.tgz}
     id: file:projects/fixer.tgz
     name: '@rush-temp/fixer'
     version: 0.0.0
@@ -9314,7 +9470,7 @@ packages:
     dev: false
 
   file:projects/json.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-TWVpPxmRslYdAtw0qUukBOH0VgsqWuIxh7p1KWAysUa5kQ1OhGT8XqG5+ADb70+RgXFbHGYYN9iqjOAapp4QMw==, tarball: file:projects/json.tgz}
+    resolution: {integrity: sha512-8ePBJH0KNMHYtw84tnP/BDhe2srShAUkXkcow/UjMU5FbaGBouPvLYlYzqA2ZDDYIlsKDEEKxQu594xORCCFYw==, tarball: file:projects/json.tgz}
     id: file:projects/json.tgz
     name: '@rush-temp/json'
     version: 0.0.0
@@ -9343,7 +9499,7 @@ packages:
     dev: false
 
   file:projects/jsonschema.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-w+3HeMxVDFR0oXDmQegTFnxPoC15xfB20qKeGDyhs10ODDeBw3P5+sdokfFu/n/jzUWtyB71vrwaUOzxhr/fbA==, tarball: file:projects/jsonschema.tgz}
+    resolution: {integrity: sha512-TlSf9AgX2HVChk9Rc4GyUIPrZrOyrE91SPpFJlYKkK4FASq6oAEstJvpL/+GRBL8KRP2aY2JWQ8AyYEDbEDG0Q==, tarball: file:projects/jsonschema.tgz}
     id: file:projects/jsonschema.tgz
     name: '@rush-temp/jsonschema'
     version: 0.0.0
@@ -9372,7 +9528,7 @@ packages:
     dev: false
 
   file:projects/modelerfour.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-6jJDUoekbhc7cEhjyadfzwunHkiOCehYPZh/QEEuOzzTJSixWUIle6ejSyptngSe8uxSsVpDJ/4QSTj6UvFoPw==, tarball: file:projects/modelerfour.tgz}
+    resolution: {integrity: sha512-yqvv8uLcXaCtMnHap9s3Ks9ozN6NLDmS8EzHhCP5XgKAQCnQoBuX2J64Kkt5WRdtuvIEJqDtx8kX/qKapZeQWg==, tarball: file:projects/modelerfour.tgz}
     id: file:projects/modelerfour.tgz
     name: '@rush-temp/modelerfour'
     version: 0.0.0
@@ -9423,7 +9579,7 @@ packages:
     dev: false
 
   file:projects/oai2-to-oai3.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-EmqXeZJWuoXi6p1c9Flme9Km7H1ISlOOEX1rMEhn/G14Fxe2BJujI8iheV/3eN7CyqwhdBr3Zko2CY77132LDQ==, tarball: file:projects/oai2-to-oai3.tgz}
+    resolution: {integrity: sha512-429l1k8VRbB/Qk1N0kCG+c70ZG5B2ixgF3RQCrm1dF6T0946z327MpAITNIfL0qtD5vC0jW3hzBasXPaMXc7Mw==, tarball: file:projects/oai2-to-oai3.tgz}
     id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
     version: 0.0.0
@@ -9460,15 +9616,15 @@ packages:
     dev: false
 
   file:projects/openapi-to-typespec.tgz(jest@29.7.0):
-    resolution: {integrity: sha512-9YYhU9b3KOm8wKYwa3zFQBE5tKLSPCSQ1+IW63Z7xEMJ4T8BIo25l0Z3dhz0pwMFx8NtftauMplKNimQVjh0UQ==, tarball: file:projects/openapi-to-typespec.tgz}
+    resolution: {integrity: sha512-28nKqU7UU1PglD2CKC3x/TLVCfBuqh49TKi8tvA6RXvJ8IzaYBMAVy0PEYv7roph6UBtBB+suT7SkGOWZBRARQ==, tarball: file:projects/openapi-to-typespec.tgz}
     id: file:projects/openapi-to-typespec.tgz
     name: '@rush-temp/openapi-to-typespec'
     version: 0.0.0
     dependencies:
-      '@azure-tools/typespec-autorest': 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@azure-tools/typespec-azure-resource-manager@0.43.0)(@azure-tools/typespec-client-generator-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
-      '@azure-tools/typespec-azure-core': 0.43.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)
-      '@azure-tools/typespec-azure-resource-manager': 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
-      '@azure-tools/typespec-client-generator-core': 0.43.0(@azure-tools/typespec-azure-core@0.43.0)(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/rest@0.57.0)(@typespec/versioning@0.57.0)
+      '@azure-tools/typespec-autorest': 0.44.1(@azure-tools/typespec-azure-core@0.44.0)(@azure-tools/typespec-azure-resource-manager@0.44.0)(@azure-tools/typespec-client-generator-core@0.44.3)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
+      '@azure-tools/typespec-azure-core': 0.44.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/rest@0.58.0)
+      '@azure-tools/typespec-azure-resource-manager': 0.44.0(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
+      '@azure-tools/typespec-client-generator-core': 0.44.3(@azure-tools/typespec-azure-core@0.44.0)(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/rest@0.58.0)(@typespec/versioning@0.58.0)
       '@types/fs-extra': 9.0.13
       '@types/lodash': 4.14.201
       '@types/node': 20.9.0
@@ -9477,13 +9633,13 @@ packages:
       '@types/webpack': 5.28.5(webpack-cli@5.1.4)
       '@typescript-eslint/eslint-plugin': 6.11.0(@typescript-eslint/parser@6.11.0)(eslint@8.53.0)(typescript@5.2.2)
       '@typescript-eslint/parser': 6.11.0(eslint@8.53.0)(typescript@5.2.2)
-      '@typespec/compiler': 0.57.0
-      '@typespec/http': 0.57.0(@typespec/compiler@0.57.0)
-      '@typespec/openapi': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/openapi3': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)(@typespec/openapi@0.57.0)(@typespec/versioning@0.57.0)
-      '@typespec/prettier-plugin-typespec': 0.57.0
-      '@typespec/rest': 0.57.0(@typespec/compiler@0.57.0)(@typespec/http@0.57.0)
-      '@typespec/versioning': 0.57.0(@typespec/compiler@0.57.0)
+      '@typespec/compiler': 0.58.1
+      '@typespec/http': 0.58.0(@typespec/compiler@0.58.1)
+      '@typespec/openapi': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/openapi3': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)(@typespec/openapi@0.58.0)(@typespec/versioning@0.58.0)
+      '@typespec/prettier-plugin-typespec': 0.58.0
+      '@typespec/rest': 0.58.0(@typespec/compiler@0.58.1)(@typespec/http@0.58.0)
+      '@typespec/versioning': 0.58.0(@typespec/compiler@0.58.1)
       chalk: 4.1.2
       change-case: 5.0.2
       change-case-all: 2.1.0
@@ -9511,6 +9667,7 @@ packages:
       - esbuild
       - eslint-config-prettier
       - jest
+      - openapi-types
       - supports-color
       - uglify-js
       - webpack-bundle-analyzer
@@ -9518,7 +9675,7 @@ packages:
     dev: false
 
   file:projects/openapi.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-jeOfewor/wxa+HdeUSgWjhsV4FbhMs9QX8uxqJxh7KZvTBxcvw1XhQkrriRoSEXnBXmHDuAvxKG6gEImlL6c7w==, tarball: file:projects/openapi.tgz}
+    resolution: {integrity: sha512-HE2/rfH9QyCccaXSR+AEAe/wGVAe/l37tqzQYSU1sFWE+u4MkZA1p7IoBgXOit6m8qOi9HGYFbm4TlpkPLKUrQ==, tarball: file:projects/openapi.tgz}
     id: file:projects/openapi.tgz
     name: '@rush-temp/openapi'
     version: 0.0.0
@@ -9547,13 +9704,13 @@ packages:
     dev: false
 
   file:projects/schemas.tgz:
-    resolution: {integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==, tarball: file:projects/schemas.tgz}
+    resolution: {integrity: sha512-aeHJHwq6RJNeECiY4g86CukjYKRNg8eHFoxQVmU/aCtNct/TMpfrAc19FVV4JyuNRKtXdFrVNjO2hUJxZXQSQA==, tarball: file:projects/schemas.tgz}
     name: '@rush-temp/schemas'
     version: 0.0.0
     dev: false
 
   file:projects/system-requirements.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-z9xJ+0SQtAhIFr9wve8giTZZxNxdWfI6JxRdXLqEpRLZHHakvBWugiaIe/sfMbYBz+2tFyvHVmI1g6MqA5w1EA==, tarball: file:projects/system-requirements.tgz}
+    resolution: {integrity: sha512-2/b/vgr/a7FOjk7eTBfvo9o+w4QywiBeIgIHzYhVYTJcy5Huxm1ce0sNnId9Bay+/MrR8aw3lvRDlPUrWdbJUQ==, tarball: file:projects/system-requirements.tgz}
     id: file:projects/system-requirements.tgz
     name: '@rush-temp/system-requirements'
     version: 0.0.0
@@ -9588,7 +9745,7 @@ packages:
     dev: false
 
   file:projects/test-public-packages.tgz(prettier@3.1.0):
-    resolution: {integrity: sha512-4kAwPf9RR49MJI4A3gfHMTkVAOcI+r5jV9HKcXAQzs0sr5z/XZbsjTT0gOIu2uLz1KvrVZxxmx/5m1scKzFQgg==, tarball: file:projects/test-public-packages.tgz}
+    resolution: {integrity: sha512-e/CJlHEX7+rfz3fOY70mxIN6ynrQSfG8XYgLfT0dydzZ1YbV/IeloiF4OKNr5ckxt6Hx8wrTg6ULJTEv4uImXw==, tarball: file:projects/test-public-packages.tgz}
     id: file:projects/test-public-packages.tgz
     name: '@rush-temp/test-public-packages'
     version: 0.0.0
@@ -9609,7 +9766,7 @@ packages:
     dev: false
 
   file:projects/test-utils.tgz(@types/node@20.9.0)(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-PjGDVMkoTdQpgj3j0MSrYPkMoilJ3rXaramucEQu/DXD2iUlUqLbATiDxEeOeeJcbyChAWoj8U/ZPV0UG3JdZg==, tarball: file:projects/test-utils.tgz}
+    resolution: {integrity: sha512-tit5MjyO3D/0svfHHHE79slcHCUmLc+cyL2DJ+jLP/LFZ1FCDGzyNhW04+fJbCd0LIM05efwORznprhNtesO9A==, tarball: file:projects/test-utils.tgz}
     id: file:projects/test-utils.tgz
     name: '@rush-temp/test-utils'
     version: 0.0.0
@@ -9636,7 +9793,7 @@ packages:
     dev: false
 
   file:projects/yaml.tgz(prettier@3.1.0)(ts-node@10.9.1):
-    resolution: {integrity: sha512-BKdiJVcGwcy3siN8gBZEoV3uGhFsHHp2cz7xx1bhy7yUgO8mU1utB0CClwHw575UMrMfxJ/2/tOwWZZ6YRzNVA==, tarball: file:projects/yaml.tgz}
+    resolution: {integrity: sha512-H8/9GzwHHWTFw9aj6TqJWA8Hnb0a2ZwNMDALfKiPxzqK8qkqA7ddM9XXKwrK9Vn4Hfry5Lf80q59WoI5KkzaJw==, tarball: file:projects/yaml.tgz}
     id: file:projects/yaml.tgz
     name: '@rush-temp/yaml'
     version: 0.0.0

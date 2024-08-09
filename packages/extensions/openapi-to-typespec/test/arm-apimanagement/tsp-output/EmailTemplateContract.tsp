@@ -22,14 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
   EmailTemplateContractProperties
 )
 model EmailTemplateContract extends Foundations.ProxyResource {
-  /**
-   * Email Template Name Identifier.
-   */
-  @path
-  @key("templateName")
-  @segment("templates")
-  @visibility("read")
-  name: TemplateName;
+  ...ResourceNameParameter<
+    Resource = EmailTemplateContract,
+    KeyName = "templateName",
+    SegmentName = "templates",
+    NamePattern = "",
+    Type = TemplateName
+  >;
 
   /**
    * Email Template entity contract properties.
@@ -149,6 +148,7 @@ interface EmailTemplateContracts {
   >;
 }
 
+@@doc(EmailTemplateContract.name, "Email Template Name Identifier.");
 @@encodedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

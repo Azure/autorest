@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -1391,6 +1393,7 @@ model ApiCreateOrUpdateParameter {
   /**
    * API entity create of update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiCreateOrUpdateProperties;
 }
 
@@ -1446,6 +1449,7 @@ model ApiUpdateContract {
   /**
    * Properties of the API entity that can be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiContractUpdateProperties;
 }
 
@@ -1803,6 +1807,7 @@ model OperationUpdateContract {
   /**
    * Properties of the API Operation entity that can be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationUpdateContractProperties;
 }
 
@@ -1919,6 +1924,7 @@ model SchemaContractProperties {
   /**
    * Create or update Properties of the API Schema Document.
    */
+  @extension("x-ms-client-flatten", true)
   document?: SchemaDocumentProperties;
 }
 
@@ -2133,6 +2139,7 @@ model IssueUpdateContract {
   /**
    * Issue entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IssueUpdateContractProperties;
 }
 
@@ -2242,6 +2249,7 @@ model TagDescriptionCreateParameters {
   /**
    * Properties supplied to Create TagDescription operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TagDescriptionBaseProperties;
 }
 
@@ -2482,6 +2490,7 @@ model ApiVersionSetUpdateParameters {
   /**
    * Parameters to update or create an API Version Set Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiVersionSetUpdateParametersProperties;
 }
 
@@ -2620,6 +2629,7 @@ model AuthorizationServerUpdateContract extends Resource {
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AuthorizationServerUpdateContractProperties;
 }
 
@@ -2900,6 +2910,7 @@ model BackendUpdateParameters {
   /**
    * Backend entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackendUpdateParameterProperties;
 }
 
@@ -2927,6 +2938,7 @@ model BackendReconnectContract extends Resource {
   /**
    * Reconnect request properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackendReconnectProperties;
 }
 
@@ -2977,6 +2989,7 @@ model CacheUpdateParameters {
   /**
    * Cache update properties details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CacheUpdateProperties;
 }
 
@@ -3091,6 +3104,7 @@ model CertificateCreateOrUpdateParameters {
   /**
    * Certificate create or update properties details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateCreateOrUpdateProperties;
 }
 
@@ -3352,6 +3366,7 @@ model ContentTypeContract extends Resource {
   /**
    * Properties of the content type.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ContentTypeContractProperties;
 }
 
@@ -3395,6 +3410,7 @@ model ContentItemContract extends Resource {
    * Properties of the content item.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 }
 
@@ -3915,6 +3931,7 @@ model RemotePrivateEndpointConnectionWrapper {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionWrapperProperties;
 }
 
@@ -4052,6 +4069,7 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
   /**
    * Properties of the API Management service.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApiManagementServiceUpdateProperties;
 
   /**
@@ -4232,6 +4250,7 @@ model EmailTemplateUpdateParameters {
   /**
    * Email Template Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EmailTemplateUpdateParameterProperties;
 }
 
@@ -4420,6 +4439,7 @@ model AssociationContract extends Resource {
   /**
    * Association entity contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AssociationContractProperties;
 }
 
@@ -4484,6 +4504,7 @@ model GroupCreateParameters {
   /**
    * Properties supplied to Create Group operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GroupCreateParametersProperties;
 }
 
@@ -4521,6 +4542,7 @@ model GroupUpdateParameters {
   /**
    * Group entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GroupUpdateParametersProperties;
 }
 
@@ -4711,6 +4733,7 @@ model IdentityProviderCreateContract extends Resource {
   /**
    * Identity Provider contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IdentityProviderCreateContractProperties;
 }
 
@@ -4739,6 +4762,7 @@ model IdentityProviderUpdateParameters {
   /**
    * Identity Provider update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IdentityProviderUpdateProperties;
 }
 
@@ -4809,6 +4833,7 @@ model LoggerUpdateContract {
   /**
    * Logger entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LoggerUpdateParameters;
 }
 
@@ -4885,6 +4910,7 @@ model NamedValueCreateContract extends Resource {
   /**
    * NamedValue entity contract properties for PUT operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NamedValueCreateContractProperties;
 }
 
@@ -4920,6 +4946,7 @@ model NamedValueUpdateParameters {
   /**
    * NamedValue entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NamedValueUpdateParameterProperties;
 }
 
@@ -5102,6 +5129,7 @@ model RecipientUserContract extends Resource {
   /**
    * Recipient User entity contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RecipientUsersContractProperties;
 }
 
@@ -5142,6 +5170,7 @@ model RecipientEmailContract extends Resource {
   /**
    * Recipient Email contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RecipientEmailContractProperties;
 }
 
@@ -5193,6 +5222,7 @@ model OpenidConnectProviderUpdateContract {
   /**
    * OpenId Connect Provider Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OpenidConnectProviderUpdateContractProperties;
 }
 
@@ -5315,6 +5345,7 @@ model PolicyDescriptionContract extends Resource {
   /**
    * Policy description contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PolicyDescriptionContractProperties;
 }
 
@@ -5382,6 +5413,7 @@ model PortalSettingsContract extends Resource {
   /**
    * Portal Settings contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PortalSettingsContractProperties;
 }
 
@@ -5608,6 +5640,7 @@ model ProductUpdateParameters {
   /**
    * Product entity Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProductUpdateProperties;
 }
 
@@ -5815,6 +5848,7 @@ model QuotaCounterValueUpdateContract {
   /**
    * Quota counter value details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaCounterValueContractProperties;
 }
 
@@ -6136,6 +6170,7 @@ model GlobalSchemaContractProperties {
   /**
    * Global Schema document object for json-based schema formats(e.g. json schema).
    */
+  @extension("x-ms-client-flatten", true)
   document?: Record<unknown>;
 }
 
@@ -6400,6 +6435,7 @@ model SubscriptionCreateParameters {
   /**
    * Subscription contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionCreateParameterProperties;
 }
 
@@ -6456,6 +6492,7 @@ model SubscriptionUpdateParameters {
   /**
    * Subscription Update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionUpdateParameterProperties;
 }
 
@@ -6540,6 +6577,7 @@ model TagCreateUpdateParameters {
   /**
    * Properties supplied to Create Tag operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TagContractProperties;
 }
 
@@ -6570,6 +6608,7 @@ model AccessInformationCreateParameters {
   /**
    * Tenant access information update parameter properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessInformationCreateParameterProperties;
 }
 
@@ -6605,6 +6644,7 @@ model AccessInformationUpdateParameters {
   /**
    * Tenant access information update parameter properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessInformationUpdateParameterProperties;
 }
 
@@ -6655,6 +6695,7 @@ model DeployConfigurationParameters {
   /**
    * Deploy Configuration Parameter contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeployConfigurationParameterProperties;
 }
 
@@ -6680,6 +6721,7 @@ model OperationResultContract extends Resource {
   /**
    * Properties of the Operation Contract.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationResultContractProperties;
 }
 
@@ -6756,6 +6798,7 @@ model SaveConfigurationParameter {
   /**
    * Properties of the Save Configuration Parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SaveConfigurationParameterProperties;
 }
 
@@ -6781,6 +6824,7 @@ model TenantConfigurationSyncStateContract extends Resource {
   /**
    * Properties returned Tenant Configuration Sync State check.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TenantConfigurationSyncStateContractProperties;
 }
 
@@ -6840,6 +6884,7 @@ model UserCreateParameters {
   /**
    * User entity create contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserCreateParameterProperties;
 }
 
@@ -6891,6 +6936,7 @@ model UserUpdateParameters {
   /**
    * User entity update contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserUpdateParametersProperties;
 }
 
@@ -6952,6 +6998,7 @@ model UserTokenParameters {
   /**
    * User Token Parameter contract properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserTokenParameterProperties;
 }
 
@@ -7016,5 +7063,6 @@ model QuotaCounterValueContract {
   /**
    * Quota counter Value Properties.
    */
+  @extension("x-ms-client-flatten", true)
   value?: QuotaCounterValueContractProperties;
 }

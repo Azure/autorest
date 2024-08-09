@@ -20,12 +20,12 @@ union EnablementStatus {
   /**
    * The feature is Enabled.
    */
-  "Enabled",
+  Enabled: "Enabled",
 
   /**
    * The feature is Disabled.
    */
-  "Disabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -37,27 +37,27 @@ union ProvisioningState {
   /**
    * Resource has been created.
    */
-  "Succeeded",
+  Succeeded: "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  "Failed",
+  Failed: "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  "Canceled",
+  Canceled: "Canceled",
 
   /**
    * Deletion in progress
    */
-  "Deleting",
+  Deleting: "Deleting",
 
   /**
    * Change accepted for processing
    */
-  "Accepted",
+  Accepted: "Accepted",
 }
 
 /**
@@ -69,12 +69,12 @@ union FreeTrialState {
   /**
    * The free-trial is Active.
    */
-  "Active",
+  Active: "Active",
 
   /**
    * The free-trial is Expired.
    */
-  "Expired",
+  Expired: "Expired",
 }
 
 union QuotaNames {
@@ -83,7 +83,7 @@ union QuotaNames {
   /**
    * The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.
    */
-  "ScalableExecution",
+  ScalableExecution: "ScalableExecution",
 }
 
 /**

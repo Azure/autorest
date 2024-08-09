@@ -123,7 +123,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas": {
       "get": {
-        "operationId": "Quotas_ListByLocation",
+        "operationId": "Quotas_ListBySubscription",
         "tags": [
           "Quotas"
         ],
@@ -151,6 +151,11 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_ListBySubscription": {
+            "$ref": "./examples/Quotas_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -357,6 +362,10 @@
               "$ref": "#/definitions/Account"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -471,14 +480,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -511,12 +520,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -763,12 +767,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/QuotaProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

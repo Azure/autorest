@@ -38,8 +38,8 @@ namespace Azure.Search;
  */
 enum Versions {
   /**
-   * The 2024-07-01 API version.
+   * The 2024-09-01-preview API version.
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_07_01: "2024-07-01",
+  v2024_09_01_preview: "2024-09-01-preview",
 }

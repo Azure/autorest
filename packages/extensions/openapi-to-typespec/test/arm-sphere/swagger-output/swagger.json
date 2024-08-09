@@ -3301,8 +3301,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CatalogProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3362,8 +3361,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3528,8 +3526,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3601,8 +3598,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3617,8 +3613,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3880,8 +3875,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4189,8 +4183,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

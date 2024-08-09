@@ -975,8 +975,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssociationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1104,8 +1103,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1230,8 +1228,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TrafficControllerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

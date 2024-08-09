@@ -22,14 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
   AccessInformationContractProperties
 )
 model AccessInformationContract extends Foundations.ProxyResource {
-  /**
-   * The identifier of the Access configuration.
-   */
-  @path
-  @key("accessName")
-  @segment("tenant")
-  @visibility("read")
-  name: AccessIdName;
+  ...ResourceNameParameter<
+    Resource = AccessInformationContract,
+    KeyName = "accessName",
+    SegmentName = "tenant",
+    NamePattern = "",
+    Type = AccessIdName
+  >;
 
   /**
    * AccessInformation entity contract properties.
@@ -168,6 +167,9 @@ interface AccessInformationContracts {
   >;
 }
 
+@@doc(AccessInformationContract.name,
+  "The identifier of the Access configuration."
+);
 @@encodedName(AccessInformationContracts.create::parameters.resource,
   "application/json",
   "parameters"

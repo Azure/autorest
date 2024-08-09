@@ -22,14 +22,13 @@ namespace Azure.ResourceManager.ApiManagement;
   NotificationContractProperties
 )
 model NotificationContract extends Foundations.ProxyResource {
-  /**
-   * Notification Name Identifier.
-   */
-  @path
-  @key("notificationName")
-  @segment("notifications")
-  @visibility("read")
-  name: NotificationName;
+  ...ResourceNameParameter<
+    Resource = NotificationContract,
+    KeyName = "notificationName",
+    SegmentName = "notifications",
+    NamePattern = "",
+    Type = NotificationName
+  >;
 
   /**
    * Notification entity contract properties.
@@ -150,3 +149,5 @@ interface NotificationContracts {
     ...SubscriptionIdParameter,
   ): ArmResponse<RecipientEmailListResult> | ErrorResponse;
 }
+
+@@doc(NotificationContract.name, "Notification Name Identifier.");

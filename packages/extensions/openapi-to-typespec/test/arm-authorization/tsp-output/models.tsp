@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -223,6 +225,7 @@ model ClassicAdministrator {
   /**
    * Properties for the classic administrator.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClassicAdministratorProperties;
 }
 
@@ -396,6 +399,7 @@ model ProviderOperation {
   /**
    * The operation properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 
   /**
@@ -481,6 +485,7 @@ model RoleAssignmentCreateParameters {
   /**
    * Role assignment properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: RoleAssignmentProperties;
 }
 
@@ -692,16 +697,19 @@ model ExpandedProperties {
   /**
    * Details of the resource scope
    */
+  @extension("x-ms-client-flatten", true)
   scope?: ExpandedPropertiesScope;
 
   /**
    * Details of role definition
    */
+  @extension("x-ms-client-flatten", true)
   roleDefinition?: ExpandedPropertiesRoleDefinition;
 
   /**
    * Details of the principal
    */
+  @extension("x-ms-client-flatten", true)
   principal?: ExpandedPropertiesPrincipal;
 }
 
@@ -926,6 +934,7 @@ model RoleAssignmentScheduleRequestProperties {
   /**
    * Schedule info of the role assignment schedule
    */
+  @extension("x-ms-client-flatten", true)
   scheduleInfo?: RoleAssignmentScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -984,6 +993,7 @@ model RoleAssignmentScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role assignment schedule
    */
+  @extension("x-ms-client-flatten", true)
   expiration?: RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1218,6 +1228,7 @@ model RoleEligibilityScheduleRequestProperties {
   /**
    * Schedule info of the role eligibility schedule
    */
+  @extension("x-ms-client-flatten", true)
   scheduleInfo?: RoleEligibilityScheduleRequestPropertiesScheduleInfo;
 
   /**
@@ -1281,6 +1292,7 @@ model RoleEligibilityScheduleRequestPropertiesScheduleInfo {
   /**
    * Expiration of the role eligibility schedule
    */
+  @extension("x-ms-client-flatten", true)
   expiration?: RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration;
 }
 
@@ -1435,6 +1447,7 @@ model PolicyProperties {
    * Details of the resource scope
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   scope?: PolicyPropertiesScope;
 }
 
@@ -1500,16 +1513,19 @@ model PolicyAssignmentProperties {
   /**
    * Details of the resource scope
    */
+  @extension("x-ms-client-flatten", true)
   scope?: PolicyAssignmentPropertiesScope;
 
   /**
    * Details of role definition
    */
+  @extension("x-ms-client-flatten", true)
   roleDefinition?: PolicyAssignmentPropertiesRoleDefinition;
 
   /**
    * Details of the policy
    */
+  @extension("x-ms-client-flatten", true)
   policy?: PolicyAssignmentPropertiesPolicy;
 }
 
