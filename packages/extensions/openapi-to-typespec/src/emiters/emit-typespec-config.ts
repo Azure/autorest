@@ -6,7 +6,7 @@ import { formatFile } from "../utils/format";
 
 export async function emitTypespecConfig(filePath: string, programDetails: TypespecProgram): Promise<void> {
   const session = getSession();
-  const { isArm } = getOptions();
+  const { isArm, isFullCompatible } = getOptions();
   let content = `
   emit:
     - "@azure-tools/typespec-autorest"
@@ -43,8 +43,8 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"
-    examples-directory: "{project-root}/examples"
-    arm-resource-flattening: true
+    examples-directory: "{project-root}/examples"${isFullCompatible ? `
+    arm-resource-flattening: true` : ""}
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"

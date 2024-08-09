@@ -15,6 +15,7 @@ import { TypespecDecorator, DecoratorArgument } from "../interfaces";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";
+import { getOptions } from "../options";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
@@ -68,6 +69,7 @@ export function getModelClientDecorators(model: ObjectSchema): TypespecDecorator
 }
 
 export function getPropertyDecorators(element: Property | Parameter): TypespecDecorator[] {
+  const { isFullCompatible } = getOptions();
   const decorators: TypespecDecorator[] = [];
 
   const paging = element.language.default.paging ?? {};
@@ -158,13 +160,23 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
     });
   }
 
+  if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
+    decorators.push({
+      name: "extension",
+      module: "@typespec/openapi",
+      namespace: "TypeSpec.OpenAPI",
+      arguments: [{value:`"x-ms-client-flatten"`}, {value: "true"}]
+    });
+  }
+
   return decorators;
 }
 
 export function getPropertyClientDecorators(element: Property | Parameter): TypespecDecorator[] {
+  const { isFullCompatible } = getOptions();
   const decorators: TypespecDecorator[] = [];
 
-  if (element.extensions?.["x-ms-client-flatten"]) {
+  if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
     decorators.push({
       name: "flattenProperty",
       module: "@azure-tools/typespec-client-generator-core",
