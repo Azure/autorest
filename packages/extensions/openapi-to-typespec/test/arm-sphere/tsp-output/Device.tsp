@@ -63,6 +63,7 @@ interface Devices {
 }
 
 @@doc(Device.name, "Device name");
+@@doc(Device.properties, "The resource-specific properties for this resource.");
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );

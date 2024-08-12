@@ -13,10 +13,8 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the dedicated host group that the dedicated hosts should be assigned to. Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model DedicatedHostGroup extends Resource {
+model DedicatedHostGroup
+  is Azure.ResourceManager.TrackedResource<DedicatedHostGroupProperties> {
   ...ResourceNameParameter<
     Resource = DedicatedHostGroup,
     KeyName = "hostGroupName",
@@ -28,12 +26,6 @@ model DedicatedHostGroup extends Resource {
    * Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.
    */
   zones?: string[];
-
-  /**
-   * Dedicated Host Group Properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: DedicatedHostGroupProperties;
 }
 
 @armResourceOperations
@@ -85,6 +77,7 @@ interface DedicatedHostGroups {
 }
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
+@@doc(DedicatedHostGroup.properties, "Dedicated Host Group Properties.");
 @@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

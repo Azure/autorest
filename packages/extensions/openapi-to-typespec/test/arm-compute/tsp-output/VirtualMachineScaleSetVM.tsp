@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Describes a virtual machine scale set virtual machine.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachineScaleSet)
-@includeInapplicableMetadataInPayload(false)
-model VirtualMachineScaleSetVM extends Resource {
+model VirtualMachineScaleSetVM
+  is Azure.ResourceManager.TrackedResource<VirtualMachineScaleSetVMProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineScaleSetVM,
     KeyName = "instanceId",
@@ -59,12 +57,6 @@ model VirtualMachineScaleSetVM extends Resource {
    * The identity of the virtual machine, if configured.
    */
   identity?: VirtualMachineIdentity;
-
-  /**
-   * Describes the properties of a virtual machine scale set virtual machine.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineScaleSetVMProperties;
 }
 
 @armResourceOperations
@@ -428,6 +420,9 @@ interface VirtualMachineScaleSetVMS {
 }
 
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
+@@doc(VirtualMachineScaleSetVM.properties,
+  "Describes the properties of a virtual machine scale set virtual machine."
+);
 @@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "application/json",
   "parameters"

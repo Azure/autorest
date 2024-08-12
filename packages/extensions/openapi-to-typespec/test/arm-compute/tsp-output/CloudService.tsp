@@ -13,10 +13,8 @@ namespace Microsoft.Compute;
 /**
  * Describes the cloud service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model CloudService {
+model CloudService
+  is Azure.ResourceManager.TrackedResource<CloudServiceProperties> {
   ...ResourceNameParameter<
     Resource = CloudService,
     KeyName = "cloudServiceName",
@@ -57,12 +55,6 @@ model CloudService {
    * List of logical availability zone of the resource. List should contain only 1 zone where cloud service should be provisioned. This field is optional.
    */
   zones?: string[];
-
-  /**
-   * Cloud service properties
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CloudServiceProperties;
 }
 
 @armResourceOperations
@@ -202,6 +194,7 @@ interface CloudServices {
 }
 
 @@doc(CloudService.name, "Name of the cloud service.");
+@@doc(CloudService.properties, "Cloud service properties");
 @@encodedName(CloudServices.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

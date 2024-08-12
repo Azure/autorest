@@ -14,26 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The replication policy between two storage accounts. Multiple rules can be defined in one policy.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ObjectReplicationPolicyProperties
-)
-model ObjectReplicationPolicy extends Foundations.ProxyResource {
+model ObjectReplicationPolicy
+  is Azure.ResourceManager.ProxyResource<ObjectReplicationPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ObjectReplicationPolicy,
     KeyName = "objectReplicationPolicyId",
     SegmentName = "objectReplicationPolicies",
     NamePattern = ""
   >;
-
-  /**
-   * Returns the Storage Account Object Replication Policy.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ObjectReplicationPolicyProperties;
 }
 
 @armResourceOperations
@@ -65,6 +54,9 @@ interface ObjectReplicationPolicies {
 @@minLength(ObjectReplicationPolicy.name, 1);
 @@doc(ObjectReplicationPolicy.name,
   "For the destination account, provide the value 'default'. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file."
+);
+@@doc(ObjectReplicationPolicy.properties,
+  "Returns the Storage Account Object Replication Policy."
 );
 @@encodedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
   "application/json",

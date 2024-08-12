@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Support char type from swagger and Automatically detect ARM specs",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

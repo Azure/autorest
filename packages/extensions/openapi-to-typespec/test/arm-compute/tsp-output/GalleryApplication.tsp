@@ -14,23 +14,15 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery Application Definition that you want to create or update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Gallery)
-@includeInapplicableMetadataInPayload(false)
-model GalleryApplication extends Resource {
+model GalleryApplication
+  is Azure.ResourceManager.TrackedResource<GalleryApplicationProperties> {
   ...ResourceNameParameter<
     Resource = GalleryApplication,
     KeyName = "galleryApplicationName",
     SegmentName = "applications",
     NamePattern = ""
   >;
-
-  /**
-   * Describes the properties of a gallery Application Definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryApplicationProperties;
 }
 
 @armResourceOperations
@@ -69,6 +61,9 @@ interface GalleryApplications {
 
 @@doc(GalleryApplication.name,
   "The name of the gallery Application Definition to be retrieved."
+);
+@@doc(GalleryApplication.properties,
+  "Describes the properties of a gallery Application Definition."
 );
 @@encodedName(GalleryApplications.createOrUpdate::parameters.resource,
   "application/json",

@@ -14,28 +14,16 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tenant Settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  AccessInformationContractProperties
-)
-model AccessInformationContract extends Foundations.ProxyResource {
-  /**
-   * The identifier of the Access configuration.
-   */
-  @path
-  @key("accessName")
-  @segment("tenant")
-  @visibility("read")
-  name: AccessIdName;
-
-  /**
-   * AccessInformation entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AccessInformationContractProperties;
+model AccessInformationContract
+  is Azure.ResourceManager.ProxyResource<AccessInformationContractProperties> {
+  ...ResourceNameParameter<
+    Resource = AccessInformationContract,
+    KeyName = "accessName",
+    SegmentName = "tenant",
+    NamePattern = "",
+    Type = AccessIdName
+  >;
 }
 
 @armResourceOperations
@@ -168,6 +156,12 @@ interface AccessInformationContracts {
   >;
 }
 
+@@doc(AccessInformationContract.name,
+  "The identifier of the Access configuration."
+);
+@@doc(AccessInformationContract.properties,
+  "AccessInformation entity contract properties."
+);
 @@encodedName(AccessInformationContracts.create::parameters.resource,
   "application/json",
   "parameters"

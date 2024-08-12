@@ -34,3 +34,4 @@ interface Enrolls {
 }
 
 @@doc(Enroll.name, "");
+@@doc(Enroll.properties, "The resource-specific properties for this resource.");

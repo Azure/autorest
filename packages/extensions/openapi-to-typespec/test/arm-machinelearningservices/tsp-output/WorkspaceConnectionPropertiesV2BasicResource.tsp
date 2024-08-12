@@ -12,24 +12,18 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  WorkspaceConnectionPropertiesV2
-)
 model WorkspaceConnectionPropertiesV2BasicResource
-  extends Foundations.ProxyResource {
+  is Azure.ResourceManager.ProxyResource<
+    WorkspaceConnectionPropertiesV2,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = WorkspaceConnectionPropertiesV2BasicResource,
     KeyName = "connectionName",
     SegmentName = "connections",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
-
-  @extension("x-ms-client-flatten", true)
-  properties: WorkspaceConnectionPropertiesV2;
 }
 
 @armResourceOperations
@@ -106,6 +100,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 @@doc(WorkspaceConnectionPropertiesV2BasicResource.name,
   "Friendly name of the workspace connection"
 );
+@@doc(WorkspaceConnectionPropertiesV2BasicResource.properties, "");
 @@encodedName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "application/json",
   "body"

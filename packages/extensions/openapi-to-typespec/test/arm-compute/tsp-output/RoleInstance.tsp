@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Describes the cloud service role instance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CloudService)
-@includeInapplicableMetadataInPayload(false)
-model RoleInstance {
+model RoleInstance
+  is Azure.ResourceManager.ProxyResource<RoleInstanceProperties> {
   ...ResourceNameParameter<
     Resource = RoleInstance,
     KeyName = "roleInstanceName",
@@ -55,12 +53,6 @@ model RoleInstance {
    * The role instance SKU.
    */
   sku?: InstanceSku;
-
-  /**
-   * Role instance properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleInstanceProperties;
 }
 
 @armResourceOperations
@@ -196,3 +188,4 @@ interface RoleInstances {
 }
 
 @@doc(RoleInstance.name, "Name of the role instance.");
+@@doc(RoleInstance.properties, "Role instance properties.");

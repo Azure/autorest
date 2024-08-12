@@ -12,24 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(QueueServiceProperties)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(QueueProperties)
-model StorageQueue extends Foundations.ProxyResource {
+model StorageQueue is Azure.ResourceManager.ProxyResource<QueueProperties> {
   ...ResourceNameParameter<
     Resource = StorageQueue,
     KeyName = "queueName",
     SegmentName = "queues",
     NamePattern = "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
   >;
-
-  /**
-   * Queue resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: QueueProperties;
 }
 
 @armResourceOperations
@@ -94,6 +84,7 @@ interface StorageQueues {
 @@doc(StorageQueue.name,
   "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters."
 );
+@@doc(StorageQueue.properties, "Queue resource properties.");
 @@encodedName(StorageQueues.create::parameters.resource,
   "application/json",
   "queue"

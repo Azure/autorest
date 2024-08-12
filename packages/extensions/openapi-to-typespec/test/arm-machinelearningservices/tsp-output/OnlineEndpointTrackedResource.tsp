@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(OnlineEndpoint)
-model OnlineEndpointTrackedResource extends Foundations.TrackedResource {
+model OnlineEndpointTrackedResource
+  is Azure.ResourceManager.TrackedResource<OnlineEndpoint, false> {
   ...ResourceNameParameter<
     Resource = OnlineEndpointTrackedResource,
     KeyName = "endpointName",
@@ -29,12 +26,6 @@ model OnlineEndpointTrackedResource extends Foundations.TrackedResource {
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   kind?: string;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: OnlineEndpoint;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -166,6 +157,9 @@ interface OnlineEndpointTrackedResources {
 }
 
 @@doc(OnlineEndpointTrackedResource.name, "Online Endpoint name.");
+@@doc(OnlineEndpointTrackedResource.properties,
+  "[Required] Additional attributes of the entity."
+);
 @@encodedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

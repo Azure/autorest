@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tag Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OperationContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(TagContractProperties)
-model TagContract extends Foundations.ProxyResource {
+model TagContract
+  is Azure.ResourceManager.ProxyResource<TagContractProperties> {
   ...ResourceNameParameter<
     Resource = TagContract,
     KeyName = "tagId",
     SegmentName = "tags",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Tag entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: TagContractProperties;
 }
 
 @armResourceOperations
@@ -105,3 +96,4 @@ interface TagContracts {
 @@doc(TagContract.name,
   "Tag identifier. Must be unique in the current API Management service instance."
 );
+@@doc(TagContract.properties, "Tag entity contract properties.");

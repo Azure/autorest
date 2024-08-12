@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Describes a VMSS VM Extension.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachineScaleSetVM)
-@includeInapplicableMetadataInPayload(false)
-model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
+model VirtualMachineScaleSetVMExtension
+  is Azure.ResourceManager.ProxyResource<VirtualMachineExtensionProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineScaleSetVMExtension,
     KeyName = "vmExtensionName",
@@ -37,12 +35,6 @@ model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
    */
   @visibility("read", "create")
   location?: string;
-
-  /**
-   * Describes the properties of a Virtual Machine Extension.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineExtensionProperties;
 }
 
 @armResourceOperations
@@ -157,6 +149,9 @@ interface VirtualMachineScaleSetVMExtensions {
 
 @@doc(VirtualMachineScaleSetVMExtension.name,
   "The name of the virtual machine extension."
+);
+@@doc(VirtualMachineScaleSetVMExtension.properties,
+  "Describes the properties of a Virtual Machine Extension."
 );
 @@encodedName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "application/json",

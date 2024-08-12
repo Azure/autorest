@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Describes a role of the cloud service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CloudService)
-@includeInapplicableMetadataInPayload(false)
-model CloudServiceRole {
+model CloudServiceRole
+  is Azure.ResourceManager.ProxyResource<CloudServiceRoleProperties> {
   ...ResourceNameParameter<
     Resource = CloudServiceRole,
     KeyName = "roleName",
@@ -48,12 +46,6 @@ model CloudServiceRole {
    * Describes the cloud service role sku.
    */
   sku?: CloudServiceRoleSku;
-
-  /**
-   * The cloud service role properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CloudServiceRoleProperties;
 }
 
 @armResourceOperations
@@ -72,3 +64,4 @@ interface CloudServiceRoles {
 }
 
 @@doc(CloudServiceRole.name, "Name of the role.");
+@@doc(CloudServiceRole.properties, "The cloud service role properties.");

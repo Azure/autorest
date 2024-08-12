@@ -13,10 +13,7 @@ namespace Microsoft.Compute;
 /**
  * Disk resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model Disk extends Resource {
+model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   ...ResourceNameParameter<
     Resource = Disk,
     KeyName = "diskName",
@@ -50,12 +47,6 @@ model Disk extends Resource {
    * The extended location where the disk will be created. Extended location cannot be changed.
    */
   extendedLocation?: ExtendedLocation;
-
-  /**
-   * Disk resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: DiskProperties;
 }
 
 @armResourceOperations
@@ -110,6 +101,7 @@ interface Disks {
 @@doc(Disk.name,
   "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
+@@doc(Disk.properties, "Disk resource properties.");
 @@encodedName(Disks.createOrUpdate::parameters.resource,
   "application/json",
   "disk"

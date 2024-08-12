@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Issue Attachment Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IssueContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  IssueAttachmentContractProperties
-)
-model IssueAttachmentContract extends Foundations.ProxyResource {
+model IssueAttachmentContract
+  is Azure.ResourceManager.ProxyResource<IssueAttachmentContractProperties> {
   ...ResourceNameParameter<
     Resource = IssueAttachmentContract,
     KeyName = "attachmentId",
     SegmentName = "attachments",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Properties of the Issue Attachment.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: IssueAttachmentContractProperties;
 }
 
 @armResourceOperations
@@ -131,6 +120,9 @@ interface IssueAttachmentContracts {
 @@minLength(IssueAttachmentContract.name, 1);
 @@doc(IssueAttachmentContract.name,
   "Attachment identifier within an Issue. Must be unique in the current Issue."
+);
+@@doc(IssueAttachmentContract.properties,
+  "Properties of the Issue Attachment."
 );
 @@encodedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "application/json",

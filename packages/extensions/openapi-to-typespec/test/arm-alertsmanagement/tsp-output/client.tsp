@@ -6,3 +6,6 @@ using Azure.ResourceManager.AlertsManagement;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PatchObject.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SmartGroup.properties);

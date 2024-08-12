@@ -14,25 +14,15 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * DataConnector Model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(DataConnectorProperties)
-model DataConnector extends Foundations.ProxyResource {
+model DataConnector
+  is Azure.ResourceManager.ProxyResource<DataConnectorProperties, false> {
   ...ResourceNameParameter<
     Resource = DataConnector,
     KeyName = "dataConnectorName",
     SegmentName = "dataConnectors",
     NamePattern = ""
   >;
-
-  /**
-   * DataConnector Properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: DataConnectorProperties;
-
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
@@ -85,6 +75,7 @@ interface DataConnectors {
 @@maxLength(DataConnector.name, 63);
 @@minLength(DataConnector.name, 1);
 @@doc(DataConnector.name, "Connector name.");
+@@doc(DataConnector.properties, "DataConnector Properties.");
 @@encodedName(DataConnectors.createOrUpdate::parameters.resource,
   "application/json",
   "body"

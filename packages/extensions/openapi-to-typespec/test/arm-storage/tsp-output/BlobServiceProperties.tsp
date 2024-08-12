@@ -14,28 +14,16 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Blob service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  BlobServicePropertiesProperties
-)
-model BlobServiceProperties extends Foundations.ProxyResource {
+model BlobServiceProperties
+  is Azure.ResourceManager.ProxyResource<BlobServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = BlobServiceProperties,
     KeyName = "blobService",
     SegmentName = "blobServices",
     NamePattern = ""
   >;
-
-  /**
-   * The properties of a storage account’s Blob service.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: BlobServicePropertiesProperties;
-
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
@@ -64,6 +52,9 @@ interface BlobServicePropertiesOperationGroup {
 }
 
 @@doc(BlobServiceProperties.name, "");
+@@doc(BlobServiceProperties.properties,
+  "The properties of a storage account’s Blob service."
+);
 @@encodedName(BlobServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

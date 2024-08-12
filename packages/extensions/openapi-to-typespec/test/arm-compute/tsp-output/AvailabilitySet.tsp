@@ -13,10 +13,8 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to an availability set at creation time. An existing VM cannot be added to an availability set.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model AvailabilitySet extends Resource {
+model AvailabilitySet
+  is Azure.ResourceManager.TrackedResource<AvailabilitySetProperties> {
   ...ResourceNameParameter<
     Resource = AvailabilitySet,
     KeyName = "availabilitySetName",
@@ -28,12 +26,6 @@ model AvailabilitySet extends Resource {
    * Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
    */
   sku?: Sku;
-
-  /**
-   * The instance view of a resource.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AvailabilitySetProperties;
 }
 
 @armResourceOperations
@@ -93,6 +85,7 @@ interface AvailabilitySets {
 }
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
+@@doc(AvailabilitySet.properties, "The instance view of a resource.");
 @@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

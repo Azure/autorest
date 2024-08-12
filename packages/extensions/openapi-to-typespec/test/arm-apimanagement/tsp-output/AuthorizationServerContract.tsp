@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * External OAuth authorization server settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  AuthorizationServerContractProperties
-)
-model AuthorizationServerContract extends Foundations.ProxyResource {
+model AuthorizationServerContract
+  is Azure.ResourceManager.ProxyResource<AuthorizationServerContractProperties> {
   ...ResourceNameParameter<
     Resource = AuthorizationServerContract,
     KeyName = "authsid",
     SegmentName = "authorizationServers",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Properties of the External OAuth authorization server Contract.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AuthorizationServerContractProperties;
 }
 
 @armResourceOperations
@@ -162,6 +151,9 @@ interface AuthorizationServerContracts {
 @@minLength(AuthorizationServerContract.name, 1);
 @@doc(AuthorizationServerContract.name,
   "Identifier of the authorization server."
+);
+@@doc(AuthorizationServerContract.properties,
+  "Properties of the External OAuth authorization server Contract."
 );
 @@encodedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "application/json",

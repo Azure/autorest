@@ -44,6 +44,39 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PolicyAssignmentProperties.policy);
 
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DenyAssignment.properties);
+
 @@clientName(ProviderOperationsMetadataOperationGroup,
   "ProviderOperationsMetadata"
 );
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleAssignment.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleDefinition.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleAssignmentSchedule.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleAssignmentScheduleInstance.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleAssignmentScheduleRequest.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleEligibilitySchedule.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleEligibilityScheduleInstance.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleEligibilityScheduleRequest.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleManagementPolicy.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleManagementPolicyAssignment.properties);

@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -16,15 +15,14 @@ namespace Microsoft.AzurePlaywrightService;
  */
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-model Quota is ProxyResource<QuotaProperties> {
-  /**
-   * The quota name.
-   */
-  @path
-  @key("name")
-  @segment("quotas")
-  @visibility("read")
-  name: QuotaNames;
+model Quota is Azure.ResourceManager.ProxyResource<QuotaProperties> {
+  ...ResourceNameParameter<
+    Resource = Quota,
+    KeyName = "name",
+    SegmentName = "quotas",
+    NamePattern = "",
+    Type = QuotaNames
+  >;
 }
 
 @armResourceOperations
@@ -39,3 +37,6 @@ interface Quotas {
    */
   listBySubscription is ArmResourceListByParent<Quota>;
 }
+
+@@doc(Quota.name, "The quota name.");
+@@doc(Quota.properties, "The resource-specific properties for this resource.");

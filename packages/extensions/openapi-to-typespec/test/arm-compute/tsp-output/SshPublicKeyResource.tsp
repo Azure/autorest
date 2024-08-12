@@ -13,22 +13,14 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the SSH public key.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model SshPublicKeyResource extends Resource {
+model SshPublicKeyResource
+  is Azure.ResourceManager.TrackedResource<SshPublicKeyResourceProperties> {
   ...ResourceNameParameter<
     Resource = SshPublicKeyResource,
     KeyName = "sshPublicKeyName",
     SegmentName = "sshPublicKeys",
     NamePattern = ""
   >;
-
-  /**
-   * Properties of the SSH public key.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SshPublicKeyResourceProperties;
 }
 
 @armResourceOperations
@@ -93,6 +85,7 @@ interface SshPublicKeyResources {
 }
 
 @@doc(SshPublicKeyResource.name, "The name of the SSH public key.");
+@@doc(SshPublicKeyResource.properties, "Properties of the SSH public key.");
 @@encodedName(SshPublicKeyResources.create::parameters.resource,
   "application/json",
   "parameters"

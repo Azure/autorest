@@ -13,24 +13,14 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * An alert created in alert management service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
-model Alert extends Foundations.ProxyResource {
+model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
   ...ResourceNameParameter<
     Resource = Alert,
     KeyName = "alertId",
     SegmentName = "alerts",
     NamePattern = ""
   >;
-
-  /**
-   * Alert property bag
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AlertProperties;
 }
 
 @armResourceOperations
@@ -191,6 +181,7 @@ interface Alerts {
 }
 
 @@doc(Alert.name, "Unique ID of an alert instance.");
+@@doc(Alert.properties, "Alert property bag");
 @@encodedName(Alerts.changeState::parameters.body,
   "application/json",
   "comment"

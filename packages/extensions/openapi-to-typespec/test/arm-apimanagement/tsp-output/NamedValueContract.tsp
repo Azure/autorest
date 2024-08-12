@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * NamedValue details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(NamedValueContractProperties)
-model NamedValueContract extends Foundations.ProxyResource {
+model NamedValueContract
+  is Azure.ResourceManager.ProxyResource<NamedValueContractProperties> {
   ...ResourceNameParameter<
     Resource = NamedValueContract,
     KeyName = "namedValueId",
     SegmentName = "namedValues",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * NamedValue entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: NamedValueContractProperties;
 }
 
 @armResourceOperations
@@ -175,6 +166,7 @@ interface NamedValueContracts {
 
 @@maxLength(NamedValueContract.name, 256);
 @@doc(NamedValueContract.name, "Identifier of the NamedValue.");
+@@doc(NamedValueContract.properties, "NamedValue entity contract properties.");
 @@encodedName(NamedValueContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

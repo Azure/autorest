@@ -14,23 +14,15 @@ namespace Microsoft.Compute;
 /**
  * Restore Point details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RestorePointCollection)
-@includeInapplicableMetadataInPayload(false)
-model RestorePoint extends ProxyResource {
+model RestorePoint
+  is Azure.ResourceManager.ProxyResource<RestorePointProperties> {
   ...ResourceNameParameter<
     Resource = RestorePoint,
     KeyName = "restorePointName",
     SegmentName = "restorePoints",
     NamePattern = ""
   >;
-
-  /**
-   * The restore point properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RestorePointProperties;
 }
 
 @armResourceOperations
@@ -94,6 +86,7 @@ interface RestorePoints {
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");
+@@doc(RestorePoint.properties, "The restore point properties.");
 @@encodedName(RestorePoints.create::parameters.resource,
   "application/json",
   "parameters"

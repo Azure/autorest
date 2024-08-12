@@ -13,12 +13,9 @@ namespace Microsoft.Compute;
 /**
  * Describes a cloud service OS version.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-@includeInapplicableMetadataInPayload(false)
-model OSVersion {
+model OSVersion is Azure.ResourceManager.ProxyResource<OSVersionProperties> {
   ...ResourceNameParameter<
     Resource = OSVersion,
     KeyName = "osVersionName",
@@ -43,12 +40,6 @@ model OSVersion {
    */
   @visibility("read")
   location?: string;
-
-  /**
-   * OS version properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OSVersionProperties;
 }
 
 @armResourceOperations
@@ -69,3 +60,4 @@ interface OSVersions {
 }
 
 @@doc(OSVersion.name, "Name of the OS version.");
+@@doc(OSVersion.properties, "OS version properties.");

@@ -13,12 +13,9 @@ namespace Microsoft.Compute;
 /**
  * Describes a cloud service OS family.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-@includeInapplicableMetadataInPayload(false)
-model OSFamily {
+model OSFamily is Azure.ResourceManager.ProxyResource<OSFamilyProperties> {
   ...ResourceNameParameter<
     Resource = OSFamily,
     KeyName = "osFamilyName",
@@ -43,12 +40,6 @@ model OSFamily {
    */
   @visibility("read")
   location?: string;
-
-  /**
-   * OS family properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OSFamilyProperties;
 }
 
 @armResourceOperations
@@ -69,3 +60,4 @@ interface OSFamilies {
 }
 
 @@doc(OSFamily.name, "Name of the OS family.");
+@@doc(OSFamily.properties, "OS family properties.");

@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * The Private Endpoint Connection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiskAccess)
-@includeInapplicableMetadataInPayload(false)
-model PrivateEndpointConnection {
+model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
@@ -37,12 +35,6 @@ model PrivateEndpointConnection {
    */
   @visibility("read")
   type?: string;
-
-  /**
-   * Resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations
@@ -82,6 +74,7 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
+@@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@encodedName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "application/json",
   "privateEndpointConnection"

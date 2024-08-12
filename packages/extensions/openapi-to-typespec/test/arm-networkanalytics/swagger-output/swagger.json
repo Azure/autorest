@@ -1571,8 +1571,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataProductProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1950,8 +1949,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataProductsCatalogProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2009,8 +2007,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataTypeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

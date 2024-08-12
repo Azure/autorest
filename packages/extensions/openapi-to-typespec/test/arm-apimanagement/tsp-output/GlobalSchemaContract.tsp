@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Global Schema Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  GlobalSchemaContractProperties
-)
-model GlobalSchemaContract extends Foundations.ProxyResource {
+model GlobalSchemaContract
+  is Azure.ResourceManager.ProxyResource<GlobalSchemaContractProperties> {
   ...ResourceNameParameter<
     Resource = GlobalSchemaContract,
     KeyName = "schemaId",
     SegmentName = "schemas",
     NamePattern = ""
   >;
-
-  /**
-   * Properties of the Global Schema.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GlobalSchemaContractProperties;
 }
 
 @armResourceOperations
@@ -132,6 +121,7 @@ interface GlobalSchemaContracts {
 @@doc(GlobalSchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
+@@doc(GlobalSchemaContract.properties, "Properties of the Global Schema.");
 @@encodedName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

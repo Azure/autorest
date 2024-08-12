@@ -13,25 +13,14 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Information about current or upcoming role eligibility schedule instance
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  RoleEligibilityScheduleInstanceProperties
-)
-model RoleEligibilityScheduleInstance extends Foundations.ExtensionResource {
+model RoleEligibilityScheduleInstance
+  is Azure.ResourceManager.ExtensionResource<RoleEligibilityScheduleInstanceProperties> {
   ...ResourceNameParameter<
     Resource = RoleEligibilityScheduleInstance,
     KeyName = "roleEligibilityScheduleInstanceName",
     SegmentName = "roleEligibilityScheduleInstances",
     NamePattern = ""
   >;
-
-  /**
-   * Role eligibility schedule instance properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleEligibilityScheduleInstanceProperties;
 }
 
 @armResourceOperations
@@ -62,4 +51,7 @@ interface RoleEligibilityScheduleInstances {
 
 @@doc(RoleEligibilityScheduleInstance.name,
   "The name (hash of schedule name + time) of the role eligibility schedule to get."
+);
+@@doc(RoleEligibilityScheduleInstance.properties,
+  "Role eligibility schedule instance properties."
 );

@@ -206,6 +206,9 @@ interface Catalogs {
 }
 
 @@doc(Catalog.name, "Name of catalog");
+@@doc(Catalog.properties,
+  "The resource-specific properties for this resource."
+);
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );

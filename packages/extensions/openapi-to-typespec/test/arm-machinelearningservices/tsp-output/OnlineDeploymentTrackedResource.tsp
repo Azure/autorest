@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OnlineEndpointTrackedResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(OnlineDeployment)
-model OnlineDeploymentTrackedResource extends Foundations.TrackedResource {
+model OnlineDeploymentTrackedResource
+  is Azure.ResourceManager.TrackedResource<OnlineDeployment, false> {
   ...ResourceNameParameter<
     Resource = OnlineDeploymentTrackedResource,
     KeyName = "deploymentName",
@@ -29,12 +26,6 @@ model OnlineDeploymentTrackedResource extends Foundations.TrackedResource {
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   kind?: string;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: OnlineDeployment;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -167,6 +158,9 @@ interface OnlineDeploymentTrackedResources {
 
 @@doc(OnlineDeploymentTrackedResource.name,
   "Inference Endpoint Deployment name."
+);
+@@doc(OnlineDeploymentTrackedResource.properties,
+  "[Required] Additional attributes of the entity."
 );
 @@encodedName(OnlineDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "application/json",

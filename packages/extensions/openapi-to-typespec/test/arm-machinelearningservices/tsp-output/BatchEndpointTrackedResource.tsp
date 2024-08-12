@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(BatchEndpoint)
-model BatchEndpointTrackedResource extends Foundations.TrackedResource {
+model BatchEndpointTrackedResource
+  is Azure.ResourceManager.TrackedResource<BatchEndpoint, false> {
   ...ResourceNameParameter<
     Resource = BatchEndpointTrackedResource,
     KeyName = "endpointName",
@@ -29,12 +26,6 @@ model BatchEndpointTrackedResource extends Foundations.TrackedResource {
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   kind?: string;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: BatchEndpoint;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -114,6 +105,9 @@ interface BatchEndpointTrackedResources {
 }
 
 @@doc(BatchEndpointTrackedResource.name, "Name for the Batch Endpoint.");
+@@doc(BatchEndpointTrackedResource.properties,
+  "[Required] Additional attributes of the entity."
+);
 @@encodedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

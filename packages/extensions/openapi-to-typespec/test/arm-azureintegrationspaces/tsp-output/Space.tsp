@@ -116,3 +116,4 @@ interface Spaces {
 }
 
 @@doc(Space.name, "The name of the space");
+@@doc(Space.properties, "The resource-specific properties for this resource.");

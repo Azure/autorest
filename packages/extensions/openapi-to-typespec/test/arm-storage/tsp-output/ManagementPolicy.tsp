@@ -14,25 +14,16 @@ namespace Microsoft.Storage;
 /**
  * The Get Storage Account ManagementPolicies operation response.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ManagementPolicyProperties)
-model ManagementPolicy extends Foundations.ProxyResource {
+model ManagementPolicy
+  is Azure.ResourceManager.ProxyResource<ManagementPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ManagementPolicy,
     KeyName = "managementPolicy",
     SegmentName = "managementPolicies",
     NamePattern = ""
   >;
-
-  /**
-   * Returns the Storage Account Data Policies Rules.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ManagementPolicyProperties;
 }
 
 @armResourceOperations
@@ -55,6 +46,9 @@ interface ManagementPolicies {
 }
 
 @@doc(ManagementPolicy.name, "");
+@@doc(ManagementPolicy.properties,
+  "Returns the Storage Account Data Policies Rules."
+);
 @@encodedName(ManagementPolicies.createOrUpdate::parameters.resource,
   "application/json",
   "properties"

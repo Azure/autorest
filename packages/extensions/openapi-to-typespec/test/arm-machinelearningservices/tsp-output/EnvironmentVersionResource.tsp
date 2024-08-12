@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EnvironmentContainerResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(EnvironmentVersion)
-model EnvironmentVersionResource extends Foundations.ProxyResource {
+model EnvironmentVersionResource
+  is Azure.ResourceManager.ProxyResource<EnvironmentVersion, false> {
   ...ResourceNameParameter<
     Resource = EnvironmentVersionResource,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: EnvironmentVersion;
 }
 
 @armResourceOperations
@@ -105,6 +96,9 @@ interface EnvironmentVersionResources {
 
 @@doc(EnvironmentVersionResource.name,
   "Version identifier. This is case-sensitive."
+);
+@@doc(EnvironmentVersionResource.properties,
+  "[Required] Additional attributes of the entity."
 );
 @@encodedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
   "application/json",

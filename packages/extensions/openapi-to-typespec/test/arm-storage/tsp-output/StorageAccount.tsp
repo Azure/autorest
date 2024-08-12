@@ -13,11 +13,8 @@ namespace Microsoft.Storage;
 /**
  * The storage account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
-model StorageAccount extends Foundations.TrackedResource {
+model StorageAccount
+  is Azure.ResourceManager.TrackedResource<StorageAccountProperties> {
   ...ResourceNameParameter<
     Resource = StorageAccount,
     KeyName = "accountName",
@@ -35,12 +32,6 @@ model StorageAccount extends Foundations.TrackedResource {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
-
-  /**
-   * Properties of the storage account.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: StorageAccountProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -238,6 +229,7 @@ interface StorageAccounts {
 @@doc(StorageAccount.name,
   "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
+@@doc(StorageAccount.properties, "Properties of the storage account.");
 @@encodedName(StorageAccounts.create::parameters.resource,
   "application/json",
   "parameters"

@@ -263,8 +263,8 @@ export interface TspArmResource extends TypespecObject {
   keyExpression: string | undefined;
   propertiesModelName: string;
   propertiesPropertyRequired: boolean;
-  propertiesPropertyVisibility: string[];
   propertiesPropertyDescription: string;
+  propertiesPropertyClientDecorator: TypespecDecorator[];
   resourceParent?: TspArmResource;
   resourceOperations: TspArmResourceOperation[];
   normalOperations: TypespecOperation[];

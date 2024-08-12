@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Outbound Rule Basic Resource for the managed network of a machine learning workspace.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(OutboundRule)
-model OutboundRuleBasicResource extends Foundations.ProxyResource {
+model OutboundRuleBasicResource
+  is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
   ...ResourceNameParameter<
     Resource = OutboundRuleBasicResource,
     KeyName = "ruleName",
     SegmentName = "outboundRules",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
-
-  /**
-   * Outbound Rule for the managed network of a machine learning workspace.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: OutboundRule;
 }
 
 @armResourceOperations
@@ -70,6 +61,9 @@ interface OutboundRuleBasicResources {
 
 @@doc(OutboundRuleBasicResource.name,
   "Name of the workspace managed network outbound rule"
+);
+@@doc(OutboundRuleBasicResource.properties,
+  "Outbound Rule for the managed network of a machine learning workspace."
 );
 @@encodedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "application/json",

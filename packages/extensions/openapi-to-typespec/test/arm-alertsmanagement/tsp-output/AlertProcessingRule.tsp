@@ -13,25 +13,14 @@ namespace Azure.ResourceManager.AlertsManagement;
 /**
  * Alert processing rule object containing target scopes, conditions and scheduling logic.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  AlertProcessingRuleProperties
-)
-model AlertProcessingRule extends Foundations.TrackedResource {
+model AlertProcessingRule
+  is Azure.ResourceManager.TrackedResource<AlertProcessingRuleProperties> {
   ...ResourceNameParameter<
     Resource = AlertProcessingRule,
     KeyName = "alertProcessingRuleName",
     SegmentName = "actionRules",
     NamePattern = ""
   >;
-
-  /**
-   * Alert processing rule properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: AlertProcessingRuleProperties;
 }
 
 @armResourceOperations
@@ -74,6 +63,7 @@ interface AlertProcessingRules {
 @@doc(AlertProcessingRule.name,
   "The name of the alert processing rule that needs to be fetched."
 );
+@@doc(AlertProcessingRule.properties, "Alert processing rule properties.");
 @@encodedName(AlertProcessingRules.createOrUpdate::parameters.resource,
   "application/json",
   "alertProcessingRule"

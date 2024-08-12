@@ -14,23 +14,15 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image version that you want to create or update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GalleryImage)
-@includeInapplicableMetadataInPayload(false)
-model GalleryImageVersion extends Resource {
+model GalleryImageVersion
+  is Azure.ResourceManager.TrackedResource<GalleryImageVersionProperties> {
   ...ResourceNameParameter<
     Resource = GalleryImageVersion,
     KeyName = "galleryImageVersionName",
     SegmentName = "versions",
     NamePattern = ""
   >;
-
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryImageVersionProperties;
 }
 
 @armResourceOperations
@@ -80,6 +72,9 @@ interface GalleryImageVersions {
 
 @@doc(GalleryImageVersion.name,
   "The name of the gallery image version to be retrieved."
+);
+@@doc(GalleryImageVersion.properties,
+  "Describes the properties of a gallery image version."
 );
 @@encodedName(GalleryImageVersions.createOrUpdate::parameters.resource,
   "application/json",

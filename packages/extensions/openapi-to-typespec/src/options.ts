@@ -31,8 +31,21 @@ export function getGuessResourceKey(session: Session<CodeModel>) {
 }
 
 export function getIsArm(session: Session<CodeModel>) {
-  const isArm = session.configuration["isArm"] ?? false;
-  return isArm !== false;
+  if (session.configuration["isArm"] !== undefined) {
+    // If isArm is explicitly set, use it.
+    return Boolean(session.configuration["isArm"]);
+  }
+
+  const inputs = session.configuration["inputFileUris"] as string[];
+
+  for (const input of inputs) {
+    if (input.includes("resource-manager")) {
+      return true;
+    }
+  }
+
+  // by default is isArm is not explicitly set, we assume it is DataPlane.
+  return false;
 }
 
 export function getIsAzureSpec(session: Session<CodeModel>) {

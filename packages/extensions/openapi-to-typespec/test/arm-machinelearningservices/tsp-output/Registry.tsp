@@ -11,11 +11,8 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
-model Registry extends Foundations.TrackedResource {
+model Registry
+  is Azure.ResourceManager.TrackedResource<RegistryProperties, false> {
   ...ResourceNameParameter<
     Resource = Registry,
     KeyName = "registryName",
@@ -27,12 +24,6 @@ model Registry extends Foundations.TrackedResource {
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   kind?: string;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: RegistryProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -85,6 +76,7 @@ interface Registries {
 @@doc(Registry.name,
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );
+@@doc(Registry.properties, "[Required] Additional attributes of the entity.");
 @@encodedName(Registries.createOrUpdate::parameters.resource,
   "application/json",
   "body"
