@@ -12,10 +12,10 @@ import {
   isNumberSchema,
 } from "@autorest/codemodel";
 import { TypespecDecorator, DecoratorArgument } from "../interfaces";
+import { getOptions } from "../options";
 import { createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOwnDiscriminator } from "./discriminator";
 import { isSealedChoiceSchema, isStringSchema } from "./schemas";
-import { getOptions } from "../options";
 
 export function getModelDecorators(model: ObjectSchema): TypespecDecorator[] {
   const decorators: TypespecDecorator[] = [];
