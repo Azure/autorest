@@ -36,8 +36,6 @@ export function generateArmResource(resource: TspArmResource): string {
 }
 
 function generateArmResourceModel(resource: TspArmResource): string {
-  const { isFullCompatible } = getOptions();
-
   let definitions: string[] = [];
 
   for (const fixme of resource.fixMe ?? []) {
@@ -58,57 +56,16 @@ function generateArmResourceModel(resource: TspArmResource): string {
     definitions.push(`@parentResource(${resource.locationParent})`);
   }
 
-  if (
-    !isFullCompatible ||
-    (getArmCommonTypeVersion() &&
-      !resource.propertiesPropertyRequired &&
-      resource.propertiesPropertyVisibility.length === 2 &&
-      resource.propertiesPropertyVisibility.includes("read") &&
-      resource.propertiesPropertyVisibility.includes("create"))
-  ) {
-    definitions.push(
-      `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}> {`,
-    );
+  definitions.push(
+    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${
+      resource.propertiesPropertyRequired ? ", false" : ""
+    }> {`,
+  );
 
-    if (resource.keyExpression) {
-      definitions.push(`${resource.keyExpression}`);
-    }
-    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
-  } else {
-    definitions.push(
-      `#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"`,
-    );
-    definitions.push(
-      `#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"`,
-    );
-    definitions.push(`@includeInapplicableMetadataInPayload(false)`);
-
-    if (!getArmCommonTypeVersion()) {
-      if (resource.baseModelName) {
-        definitions.push(`model ${resource.name} extends ${resource.baseModelName} {`);
-      } else {
-        definitions.push(`model ${resource.name} {`);
-      }
-    } else {
-      definitions.push(`@Azure.ResourceManager.Private.armResourceInternal(${resource.propertiesModelName})`);
-      definitions.push(`model ${resource.name} extends Foundations.${resource.resourceKind} {`);
-    }
-
-    if (resource.keyExpression) {
-      definitions.push(`${resource.keyExpression}`);
-    }
-    definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
-
-    const propertyDoc = generateDocs({ doc: resource.propertiesPropertyDescription });
-    propertyDoc && definitions.push(propertyDoc);
-
-    definitions.push(`@extension("x-ms-client-flatten", true)`);
-    if (resource.propertiesPropertyVisibility.length > 0) {
-      definitions.push(`@visibility("${resource.propertiesPropertyVisibility.join(",")}")`);
-    }
-
-    definitions.push(`properties${resource.propertiesPropertyRequired ? "" : "?"}: ${resource.propertiesModelName}`);
+  if (resource.keyExpression) {
+    definitions.push(`${resource.keyExpression}`);
   }
+  definitions = [...definitions, ...getModelPropertiesDeclarations(resource.properties)];
 
   for (const p of resource.optionalStandardProperties) {
     definitions.push(`\n...${p}`);

@@ -36,7 +36,9 @@ namespace Azure.Search;
 * Indicates a MySql datasource.
 */"MySql": "mysql", /**
 * Indicates an ADLS Gen2 datasource.
-*/"AdlsGen2": "adlsgen2"
+*/"AdlsGen2": "adlsgen2", /**
+* Indicates a Microsoft Fabric OneLake datasource.
+*/"OneLake": "onelake"
     }
 
 /**
@@ -141,6 +143,31 @@ namespace Azure.Search;
 * execution environment if the indexer needs to access resources securely over
 * shared private link resources.
 */"private": "private"
+    }
+
+/**
+* Details the status of an individual indexer execution.
+*/
+    union IndexerExecutionStatusDetail {
+        string,
+
+        /**
+* Indicates that the reset that occurred was for a call to ResetDocs.
+*/"ResetDocs": "resetDocs"
+    }
+
+/**
+* Represents the mode the indexer is executing in.
+*/
+    union IndexingMode {
+        string,
+
+        /**
+* The indexer is indexing all documents in the datasource.
+*/"IndexingAllDocs": "indexingAllDocs", /**
+* The indexer is indexing selective, reset documents in the datasource. The
+* documents being indexed are defined on indexer status.
+*/"indexingResetDocs": "indexingResetDocs"
     }
 
 /**
@@ -406,6 +433,33 @@ namespace Azure.Search;
     }
 
 /**
+* Defines the names of all text normalizers supported by the search engine.
+*/
+    union LexicalNormalizerName {
+        string,
+
+        /**
+* Converts alphabetic, numeric, and symbolic Unicode characters which are not in
+* the first 127 ASCII characters (the "Basic Latin" Unicode block) into their
+* ASCII equivalents, if such equivalents exist. See
+* http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html
+*/"AsciiFolding": "asciifolding", /**
+* Removes elisions. For example, "l'avion" (the plane) will be converted to
+* "avion" (plane). See
+* http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html
+*/"Elision": "elision", /**
+* Normalizes token text to lowercase. See
+* https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.html
+*/"Lowercase": "lowercase", /**
+* Standard normalizer, which consists of lowercase and asciifolding. See
+* http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html
+*/"Standard": "standard", /**
+* Normalizes token text to uppercase. See
+* https://lucene.apache.org/core/6_6_1/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html
+*/"Uppercase": "uppercase"
+    }
+
+/**
 * The encoding format for interpreting vector field contents.
 */
     union VectorEncodingFormat {
@@ -440,7 +494,13 @@ namespace Azure.Search;
 * Generate embeddings using an Azure OpenAI resource at query time.
 */"AzureOpenAI": "azureOpenAI", /**
 * Generate embeddings using a custom web endpoint at query time.
-*/"CustomWebApi": "customWebApi"
+*/"CustomWebApi": "customWebApi", /**
+* Generate embeddings for an image or text input at query time using the Azure AI
+* Services Vision Vectorize API.
+*/"AIServicesVision": "aiServicesVision", /**
+* Generate embeddings using an Azure Machine Learning endpoint deployed via the
+* Azure AI Studio Model Catalog at query time.
+*/"AML": "aml"
     }
 
 /**
@@ -704,6 +764,199 @@ namespace Azure.Search;
     }
 
 /**
+* Enables a debugging tool that can be used to further explore your search
+* results.
+*/
+    union QueryDebugMode {
+        string,
+
+        /**
+* No query debugging information will be returned.
+*/"Disabled": "disabled", /**
+* Allows the user to further explore their reranked results.
+*/"Semantic": "semantic"
+    }
+
+/**
+* The language of the query.
+*/
+    union QueryLanguage {
+        string,
+
+        /**
+* Query language not specified.
+*/"None": "none", /**
+* Query language value for English (United States).
+*/"EnUs": "en-us", /**
+* Query language value for English (Great Britain).
+*/"EnGb": "en-gb", /**
+* Query language value for English (India).
+*/"EnIn": "en-in", /**
+* Query language value for English (Canada).
+*/"EnCa": "en-ca", /**
+* Query language value for English (Australia).
+*/"EnAu": "en-au", /**
+* Query language value for French (France).
+*/"FrFr": "fr-fr", /**
+* Query language value for French (Canada).
+*/"FrCa": "fr-ca", /**
+* Query language value for German (Germany).
+*/"DeDe": "de-de", /**
+* Query language value for Spanish (Spain).
+*/"EsEs": "es-es", /**
+* Query language value for Spanish (Mexico).
+*/"EsMx": "es-mx", /**
+* Query language value for Chinese (China).
+*/"ZhCn": "zh-cn", /**
+* Query language value for Chinese (Taiwan).
+*/"ZhTw": "zh-tw", /**
+* Query language value for Portuguese (Brazil).
+*/"PtBr": "pt-br", /**
+* Query language value for Portuguese (Portugal).
+*/"PtPt": "pt-pt", /**
+* Query language value for Italian (Italy).
+*/"ItIt": "it-it", /**
+* Query language value for Japanese (Japan).
+*/"JaJp": "ja-jp", /**
+* Query language value for Korean (Korea).
+*/"KoKr": "ko-kr", /**
+* Query language value for Russian (Russia).
+*/"RuRu": "ru-ru", /**
+* Query language value for Czech (Czech Republic).
+*/"CsCz": "cs-cz", /**
+* Query language value for Dutch (Belgium).
+*/"NlBe": "nl-be", /**
+* Query language value for Dutch (Netherlands).
+*/"NlNl": "nl-nl", /**
+* Query language value for Hungarian (Hungary).
+*/"HuHu": "hu-hu", /**
+* Query language value for Polish (Poland).
+*/"PlPl": "pl-pl", /**
+* Query language value for Swedish (Sweden).
+*/"SvSe": "sv-se", /**
+* Query language value for Turkish (Turkey).
+*/"TrTr": "tr-tr", /**
+* Query language value for Hindi (India).
+*/"HiIn": "hi-in", /**
+* Query language value for Arabic (Saudi Arabia).
+*/"ArSa": "ar-sa", /**
+* Query language value for Arabic (Egypt).
+*/"ArEg": "ar-eg", /**
+* Query language value for Arabic (Morocco).
+*/"ArMa": "ar-ma", /**
+* Query language value for Arabic (Kuwait).
+*/"ArKw": "ar-kw", /**
+* Query language value for Arabic (Jordan).
+*/"ArJo": "ar-jo", /**
+* Query language value for Danish (Denmark).
+*/"DaDk": "da-dk", /**
+* Query language value for Norwegian (Norway).
+*/"NoNo": "no-no", /**
+* Query language value for Bulgarian (Bulgaria).
+*/"BgBg": "bg-bg", /**
+* Query language value for Croatian (Croatia).
+*/"HrHr": "hr-hr", /**
+* Query language value for Croatian (Bosnia and Herzegovina).
+*/"HrBa": "hr-ba", /**
+* Query language value for Malay (Malaysia).
+*/"MsMy": "ms-my", /**
+* Query language value for Malay (Brunei Darussalam).
+*/"MsBn": "ms-bn", /**
+* Query language value for Slovenian (Slovenia).
+*/"SlSl": "sl-sl", /**
+* Query language value for Tamil (India).
+*/"TaIn": "ta-in", /**
+* Query language value for Vietnamese (Viet Nam).
+*/"ViVn": "vi-vn", /**
+* Query language value for Greek (Greece).
+*/"ElGr": "el-gr", /**
+* Query language value for Romanian (Romania).
+*/"RoRo": "ro-ro", /**
+* Query language value for Icelandic (Iceland).
+*/"IsIs": "is-is", /**
+* Query language value for Indonesian (Indonesia).
+*/"IdId": "id-id", /**
+* Query language value for Thai (Thailand).
+*/"ThTh": "th-th", /**
+* Query language value for Lithuanian (Lithuania).
+*/"LtLt": "lt-lt", /**
+* Query language value for Ukrainian (Ukraine).
+*/"UkUa": "uk-ua", /**
+* Query language value for Latvian (Latvia).
+*/"LvLv": "lv-lv", /**
+* Query language value for Estonian (Estonia).
+*/"EtEe": "et-ee", /**
+* Query language value for Catalan.
+*/"CaEs": "ca-es", /**
+* Query language value for Finnish (Finland).
+*/"FiFi": "fi-fi", /**
+* Query language value for Serbian (Bosnia and Herzegovina).
+*/"SrBa": "sr-ba", /**
+* Query language value for Serbian (Montenegro).
+*/"SrMe": "sr-me", /**
+* Query language value for Serbian (Serbia).
+*/"SrRs": "sr-rs", /**
+* Query language value for Slovak (Slovakia).
+*/"SkSk": "sk-sk", /**
+* Query language value for Norwegian (Norway).
+*/"NbNo": "nb-no", /**
+* Query language value for Armenian (Armenia).
+*/"HyAm": "hy-am", /**
+* Query language value for Bengali (India).
+*/"BnIn": "bn-in", /**
+* Query language value for Basque.
+*/"EuEs": "eu-es", /**
+* Query language value for Galician.
+*/"GlEs": "gl-es", /**
+* Query language value for Gujarati (India).
+*/"GuIn": "gu-in", /**
+* Query language value for Hebrew (Israel).
+*/"HeIl": "he-il", /**
+* Query language value for Irish (Ireland).
+*/"GaIe": "ga-ie", /**
+* Query language value for Kannada (India).
+*/"KnIn": "kn-in", /**
+* Query language value for Malayalam (India).
+*/"MlIn": "ml-in", /**
+* Query language value for Marathi (India).
+*/"MrIn": "mr-in", /**
+* Query language value for Persian (U.A.E.).
+*/"FaAe": "fa-ae", /**
+* Query language value for Punjabi (India).
+*/"PaIn": "pa-in", /**
+* Query language value for Telugu (India).
+*/"TeIn": "te-in", /**
+* Query language value for Urdu (Pakistan).
+*/"UrPk": "ur-pk"
+    }
+
+
+    union Speller {
+        string,
+
+        /**
+* Speller not enabled.
+*/"None": "none", /**
+* Speller corrects individual query terms using a static lexicon for the language
+* specified by the queryLanguage parameter.
+*/"Lexicon": "lexicon"
+    }
+
+/**
+* Improve search recall by spell-correcting individual search query terms.
+*/
+    union QuerySpellerType {
+        string,
+
+        /**
+* Speller not enabled.
+*/"None": "none", /**
+* Speller corrects individual query terms using a static lexicon for the language
+* specified by the queryLanguage parameter.
+*/"Lexicon": "lexicon"
+    }
+
+/**
 * The kind of vector query being performed.
 */
     union VectorQueryKind {
@@ -713,7 +966,31 @@ namespace Azure.Search;
 * Vector query where a raw vector value is provided.
 */"Vector": "vector", /**
 * Vector query where a text value that needs to be vectorized is provided.
-*/"Text": "text"
+*/"Text": "text", /**
+* Vector query where an url that represents an image value that needs to be
+* vectorized is provided.
+*/"ImageUrl": "imageUrl", /**
+* Vector query where a base 64 encoded binary of an image that needs to be
+* vectorized is provided.
+*/"ImageBinary": "imageBinary"
+    }
+
+/**
+* The kind of vector query being performed.
+*/
+    union VectorThresholdKind {
+        string,
+
+        /**
+* The results of the vector query will be filtered based on the vector similarity
+* metric. Note this is the canonical definition of similarity metric, not the
+* 'distance' version. The threshold direction (larger or smaller) will be chosen
+* automatically according to the metric used by the field.
+*/"VectorSimilarity": "vectorSimilarity", @doc("""
+The results of the vector query will filter based on the '@search.score' value.
+Note this is the @search.score returned as part of the search response. The
+threshold direction will be chosen for higher @search.score.
+""")"SearchScore": "searchScore"
     }
 
 /**
@@ -730,6 +1007,39 @@ namespace Azure.Search;
 */"PostFilter": "postFilter", /**
 * The filter will be applied before the search query.
 */"PreFilter": "preFilter"
+    }
+
+/**
+* Determines whether the count and facets should includes all documents that
+* matched the search query, or only the documents that are retrieved within the
+* 'maxTextRecallSize' window. The default value is 'countAllResults'.
+*/
+    union HybridCountAndFacetMode {
+        string,
+
+        /**
+* Only include documents that were matched within the 'maxTextRecallSize'
+* retrieval window when computing 'count' and 'facets'.
+*/"CountRetrievableResults": "countRetrievableResults", /**
+* Include all documents that were matched by the search query when computing
+* 'count' and 'facets', regardless of whether or not those documents are within
+* the 'maxTextRecallSize' retrieval window.
+*/"CountAllResults": "countAllResults"
+    }
+
+/**
+* The way the field was used for the semantic enrichment process.
+*/
+    union SemanticFieldState {
+        string,
+
+        /**
+* The field was fully used for semantic enrichment.
+*/"Used": "used", /**
+* The field was not used for semantic enrichment.
+*/"Unused": "unused", /**
+* The field was partially used for semantic enrichment.
+*/"Partial": "partial"
     }
 
 /**
@@ -828,6 +1138,16 @@ namespace Azure.Search;
         string,
 
         "TextEmbeddingAda002": "text-embedding-ada-002", "TextEmbedding3Large": "text-embedding-3-large", "TextEmbedding3Small": "text-embedding-3-small"
+    }
+
+/**
+* The name of the embedding model from the Azure AI Studio Catalog that will be
+* called.
+*/
+    union AIStudioModelCatalogName {
+        string,
+
+        "OpenAI_CLIP_Image_Text_Embeddings_vit_base_patch32": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32", "OpenAI_CLIP_Image_Text_Embeddings_ViT_Large_Patch14_336": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336", "Facebook_DinoV2_Image_Embeddings_ViT_Base": "Facebook-DinoV2-Image-Embeddings-ViT-Base", "Facebook_DinoV2_Image_Embeddings_ViT_Giant": "Facebook-DinoV2-Image-Embeddings-ViT-Giant", "Cohere_embed_v3_english": "Cohere-embed-v3-english", "Cohere_embed_v3_multilingual": "Cohere-embed-v3-multilingual"
     }
 
 /**
@@ -1611,6 +1931,39 @@ namespace Azure.Search;
     }
 
 /**
+* A value indicating which unit to use.
+*/
+    union SplitSkillUnit {
+        string,
+
+        /**
+* The length will be measured by character.
+*/"Characters": "characters", /**
+* The length will be measured by an AzureOpenAI tokenizer from the tiktoken
+* library.
+*/"AzureOpenAITokens": "azureOpenAITokens"
+    }
+
+/**
+* A value indicating which tokenizer to use.
+*/
+    union SplitSkillEncoderModelName {
+        string,
+
+        /**
+* Refers to a base model trained with a 50,000 token vocabulary, often used in
+* general natural language processing tasks.
+*/"R50kBase": "r50k_base", /**
+* A base model with a 50,000 token vocabulary, optimized for prompt-based tasks.
+*/"P50kBase": "p50k_base", /**
+* Similar to p50k_base but fine-tuned for editing or rephrasing tasks with a
+* 50,000 token vocabulary.
+*/"P50kEdit": "p50k_edit", /**
+* A base model with a 100,000 token vocabulary.
+*/"CL100kBase": "cl100k_base"
+    }
+
+/**
 * The language codes supported for input text by CustomEntityLookupSkill.
 */
     union CustomEntityLookupSkillLanguage {
@@ -1861,7 +2214,8 @@ namespace Azure.Search;
 
 /**
 * Specifies the syntax of the search query. The default is 'simple'. Use 'full'
-* if your query uses the Lucene query syntax.
+* if your query uses the Lucene query syntax and 'semantic' if query syntax is
+* not needed.
 */
     enum QueryType {
         /**
@@ -2494,6 +2848,13 @@ model SearchIndexerDataSource {
 */
 "container": SearchIndexerDataContainer;
 /**
+* An explicit managed identity to use for this datasource. If not specified and
+* the connection string is a managed identity, the system-assigned managed
+* identity is used. If not specified, the value remains unchanged. If "none" is
+* specified, the value of this property is cleared.
+*/
+"identity"?: SearchIndexerDataIdentity;
+/**
 * The data change detection policy for the datasource.
 */
 "dataChangeDetectionPolicy"?: DataChangeDetectionPolicy;
@@ -2551,6 +2912,13 @@ model SearchIndexerDataContainer {
 }
 
 /**
+* Abstract base type for data identities.
+*/
+@discriminator("@odata.type")
+model SearchIndexerDataIdentity {
+}
+
+/**
 * Base type for data change detection policies.
 */
 @discriminator("@odata.type")
@@ -2592,6 +2960,14 @@ model SearchResourceEncryptionKey {
 * Vault. Not required if using managed identity instead.
 */
 "accessCredentials"?: AzureActiveDirectoryApplicationCredentials;
+/**
+* An explicit managed identity to use for this encryption key. If not specified
+* and the access credentials property is null, the system-assigned managed
+* identity is used. On update to the resource, if the explicit identity is
+* unspecified, it remains unchanged. If "none" is specified, the value of this
+* property is cleared.
+*/
+"identity"?: SearchIndexerDataIdentity;
 }
 
 /**
@@ -2689,6 +3065,18 @@ model ListDataSourcesResult {
 "dataSources": SearchIndexerDataSource[];
 }
 
+
+model DocumentKeysOrIds {
+/**
+* document keys to be reset
+*/
+"documentKeys"?: string[];
+/**
+* datasource document identifiers to be reset
+*/
+"datasourceDocumentIds"?: string[];
+}
+
 /**
 * Represents an indexer.
 */
@@ -2757,6 +3145,11 @@ model SearchIndexer {
 * services created on or after January 1, 2019.
 */
 "encryptionKey"?: SearchResourceEncryptionKey;
+/**
+* Adds caching to an enrichment pipeline to allow for incremental modification
+* steps without having to rebuild the index every time.
+*/
+"cache"?: SearchIndexerCache;
 }
 
 /**
@@ -2933,6 +3326,27 @@ model FieldMappingFunction {
 "parameters"?: Record<unknown>;
 }
 
+
+model SearchIndexerCache {
+/**
+* The connection string to the storage account where the cache data will be
+* persisted.
+*/
+"storageConnectionString"?: string;
+/**
+* Specifies whether incremental reprocessing is enabled.
+*/
+"enableReprocessing"?: boolean;
+/**
+* The user-assigned managed identity used for connections to the enrichment
+* cache.  If the connection string indicates an identity (ResourceId) and it's
+* not specified, the system-assigned managed identity is used. On updates to the
+* indexer, if the identity is unspecified, the value remains unchanged. If set to
+* "none", the value of this property is cleared.
+*/
+"identity"?: SearchIndexerDataIdentity;
+}
+
 /**
 * Response from a List Indexers request. If successful, it includes the full
 * definitions of all indexers.
@@ -2986,6 +3400,16 @@ model IndexerExecutionResult {
 @visibility("read")
 "status": IndexerExecutionStatus;
 /**
+* The outcome of this indexer execution.
+*/
+@visibility("read")
+"statusDetail"?: IndexerExecutionStatusDetail;
+/**
+* All of the state that defines and dictates the indexer's current execution.
+*/
+@visibility("read")
+"currentState"?: IndexerCurrentState;
+/**
 * The error message indicating the top-level error, if any.
 */
 @visibility("read")
@@ -3036,6 +3460,56 @@ model IndexerExecutionResult {
 */
 @visibility("read")
 "finalTrackingState"?: string;
+}
+
+/**
+* Represents all of the state that defines and dictates the indexer's current
+* execution.
+*/
+model IndexerCurrentState {
+/**
+* The mode the indexer is running in.
+*/
+@visibility("read")
+"mode"?: IndexingMode;
+/**
+* Change tracking state used when indexing starts on all documents in the
+* datasource.
+*/
+@visibility("read")
+"allDocsInitialChangeTrackingState"?: string;
+/**
+* Change tracking state value when indexing finishes on all documents in the
+* datasource.
+*/
+@visibility("read")
+"allDocsFinalChangeTrackingState"?: string;
+/**
+* Change tracking state used when indexing starts on select, reset documents in
+* the datasource.
+*/
+@visibility("read")
+"resetDocsInitialChangeTrackingState"?: string;
+/**
+* Change tracking state value when indexing finishes on select, reset documents
+* in the datasource.
+*/
+@visibility("read")
+"resetDocsFinalChangeTrackingState"?: string;
+/**
+* The list of document keys that have been reset. The document key is the
+* document's unique identifier for the data in the search index. The indexer will
+* prioritize selectively re-ingesting these keys.
+*/
+@visibility("read")
+"resetDocumentKeys"?: string[];
+/**
+* The list of datasource document ids that have been reset. The datasource
+* document id is the unique identifier for the data in the datasource. The
+* indexer will prioritize selectively re-ingesting these ids.
+*/
+@visibility("read")
+"resetDatasourceDocumentIds"?: string[];
 }
 
 /**
@@ -3284,6 +3758,20 @@ model SearchIndexerKnowledgeStore {
 * A list of additional projections to perform during indexing.
 */
 "projections": SearchIndexerKnowledgeStoreProjection[];
+/**
+* The user-assigned managed identity used for connections to Azure Storage when
+* writing knowledge store projections. If the connection string indicates an
+* identity (ResourceId) and it's not specified, the system-assigned managed
+* identity is used. On updates to the indexer, if the identity is unspecified,
+* the value remains unchanged. If set to "none", the value of this property is
+* cleared.
+*/
+"identity"?: SearchIndexerDataIdentity;
+/**
+* A dictionary of knowledge store-specific configuration properties. Each name is
+* the name of a specific property. Each value must be of a primitive type.
+*/
+"parameters"?: SearchIndexerKnowledgeStoreParameters;
 }
 
 /**
@@ -3363,6 +3851,19 @@ model SearchIndexerKnowledgeStoreFileProjectionSelector extends SearchIndexerKno
 }
 
 /**
+* A dictionary of knowledge store-specific configuration properties. Each name is
+* the name of a specific property. Each value must be of a primitive type.
+*/
+model SearchIndexerKnowledgeStoreParameters {
+...Record<unknown>;
+/**
+* Whether or not projections should synthesize a generated key name if one isn't
+* already present.
+*/
+"synthesizeGeneratedKeyName"?: boolean;
+}
+
+/**
 * Definition of additional projections to secondary search indexes.
 */
 model SearchIndexerIndexProjections {
@@ -3429,6 +3930,14 @@ model ListSkillsetsResult {
 @key
 @encodedName("application/json", "value")
 "skillsets": SearchIndexerSkillset[];
+}
+
+
+model SkillNames {
+/**
+* the names of skills to be reset.
+*/
+"skillNames"?: string[];
 }
 
 /**
@@ -3535,6 +4044,10 @@ model SearchIndex {
 * The character filters for the index.
 */
 "charFilters"?: CharFilter[];
+/**
+* The normalizers for the index.
+*/
+"normalizers"?: LexicalNormalizer[];
 /**
 * A description of an encryption key that you create in Azure Key Vault. This key
 * is used to provide an additional level of encryption-at-rest for your data when
@@ -3689,6 +4202,13 @@ model SearchField {
 * it cannot be changed for the field. Must be null for complex fields.
 */
 "indexAnalyzer"?: LexicalAnalyzerName;
+/**
+* The name of the normalizer to use for the field. This option can be used only
+* with fields with filterable, sortable, or facetable enabled. Once the
+* normalizer is chosen, it cannot be changed for the field. Must be null for
+* complex fields.
+*/
+"normalizer"?: LexicalNormalizerName;
 /**
 * The dimensionality of the vector field.
 */
@@ -3864,6 +4384,20 @@ model CharFilter {
 * The name of the char filter. It must only contain letters, digits, spaces,
 * dashes or underscores, can only start and end with alphanumeric characters, and
 * is limited to 128 characters.
+*/
+"name": string;
+}
+
+/**
+* Base type for normalizers.
+*/
+@discriminator("@odata.type")
+model LexicalNormalizer {
+/**
+* The name of the normalizer. It must only contain letters, digits, spaces,
+* dashes or underscores, can only start and end with alphanumeric characters, and
+* is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor
+* be named 'asciifolding', 'standard', 'lowercase', 'uppercase', or 'elision'.
 */
 "name": string;
 }
@@ -4049,6 +4583,16 @@ model VectorSearchCompressionConfiguration {
 * values improve recall at the expense of latency.
 */
 "defaultOversampling"?: float64;
+/**
+* The number of dimensions to truncate the vectors to. Truncating the vectors
+* reduces the size of the vectors and the amount of data that needs to be
+* transferred during search. This can save storage cost and improve search
+* performance at the expense of recall. It should be only used for embeddings
+* trained with Matryoshka Representation Learning (MRL) such as OpenAI
+* text-embedding-3-large (small). The default value is null, which means no
+* truncation.
+*/
+"truncationDimension"?: int32;
 }
 
 /**
@@ -4111,6 +4655,10 @@ model AnalyzeRequest {
 */
 "tokenizer"?: LexicalTokenizerName;
 /**
+* The name of the normalizer to use to normalize the given text.
+*/
+"normalizer"?: LexicalNormalizerName;
+/**
 * An optional list of token filters to use when breaking the given text. This
 * parameter can only be set when using the tokenizer parameter.
 */
@@ -4164,6 +4712,45 @@ model AnalyzedTokenInfo {
 }
 
 /**
+* Represents an index alias, which describes a mapping from the alias name to an
+* index. The alias name can be used in place of the index name for supported
+* operations.
+*/
+@resource("aliases")
+model SearchAlias {
+/**
+* The name of the alias.
+*/
+// FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+@key
+"name": string;
+/**
+* The name of the index this alias maps to. Only one index name may be specified.
+*/
+"indexes": string[];
+/**
+* The ETag of the alias.
+*/
+@encodedName("application/json", "@odata.etag")
+"eTag"?: string;
+}
+
+/**
+* Response from a List Aliases request. If successful, it includes the associated
+* index mappings for all aliases.
+*/
+@pagedResult
+model ListAliasesResult {
+/**
+* The aliases in the Search service.
+*/
+@visibility("read")
+@items
+@encodedName("application/json", "value")
+"aliases": SearchAlias[];
+}
+
+/**
 * Response from a get service statistics request. If successful, it includes
 * service level counters and limits.
 */
@@ -4184,6 +4771,11 @@ model ServiceStatistics {
 * Represents service-level resource counters and quotas.
 */
 model ServiceCounters {
+/**
+* Total number of aliases.
+*/
+@encodedName("application/json", "aliasesCount")
+"aliasCounter": ResourceCounter;
 /**
 * Total number of documents across all indexes in the service.
 */
@@ -4482,6 +5074,11 @@ model SearchRequest {
 */
 "scoringProfile"?: string;
 /**
+* Enables a debugging tool that can be used to further explore your reranked
+* results.
+*/
+"debug"?: QueryDebugMode;
+/**
 * A full-text search query expression; Use "*" or omit this parameter to match
 * all documents.
 */
@@ -4499,6 +5096,15 @@ model SearchRequest {
 * in order to count the document as a match.
 */
 "searchMode"?: SearchMode;
+/**
+* A value that specifies the language of the search query.
+*/
+"queryLanguage"?: QueryLanguage;
+/**
+* A value that specified the type of the speller to use to spell-correct
+* individual search query terms.
+*/
+"speller"?: QuerySpellerType;
 /**
 * The comma-separated list of fields to retrieve. If unspecified, all fields
 * marked as retrievable in the schema are included.
@@ -4553,6 +5159,10 @@ model SearchRequest {
 */
 "captions"?: QueryCaptionType;
 /**
+* The comma-separated list of field names used for semantic ranking.
+*/
+"semanticFields"?: string;
+/**
 * The query parameters for vector and hybrid search queries.
 */
 "vectorQueries"?: VectorQuery[];
@@ -4561,6 +5171,10 @@ model SearchRequest {
 * is performed. Default is 'preFilter' for new indexes.
 */
 "vectorFilterMode"?: VectorFilterMode;
+/**
+* The query parameters to configure hybrid search behaviors.
+*/
+"hybridSearch"?: HybridSearch;
 }
 
 /**
@@ -4600,6 +5214,46 @@ model VectorQuery {
 * larger than zero. 
 */
 "weight"?: float32;
+/**
+* The threshold used for vector queries. Note this can only be set if all
+* 'fields' use the same similarity metric.
+*/
+"threshold"?: VectorThreshold;
+/**
+* The OData filter expression to apply to this specific vector query. If no
+* filter expression is defined at the vector level, the expression defined in the
+* top level filter parameter is used instead.
+*/
+"filterOverride"?: string;
+}
+
+/**
+* The threshold used for vector queries.
+*/
+@discriminator("kind")
+model VectorThreshold {
+}
+
+/**
+* TThe query parameters to configure hybrid search behaviors.
+*/
+model HybridSearch {
+/**
+* Determines the maximum number of documents to be retrieved by the text query
+* portion of a hybrid search request. Those documents will be combined with the
+* documents matching the vector queries to produce a single final list of
+* results. Choosing a larger maxTextRecallSize value will allow retrieving and
+* paging through more documents (using the top and skip parameters), at the cost
+* of higher resource utilization and higher latency. The value needs to be
+* between 1 and 10,000. Default is 1000.
+*/
+"maxTextRecallSize"?: int32;
+/**
+* Determines whether the count and facets should includes all documents that
+* matched the search query, or only the documents that are retrieved within the
+* 'maxTextRecallSize' window.
+*/
+"countAndFacetMode"?: HybridCountAndFacetMode;
 }
 
 /**
@@ -4638,6 +5292,13 @@ model SearchResult {
 @visibility("read")
 @encodedName("application/json", "@search.captions")
 "captions"?: QueryCaptionResult[];
+/**
+* Contains debugging information that can be used to further explore your search
+* results.
+*/
+@visibility("read")
+@encodedName("application/json", "@search.documentDebugInfo")
+"documentDebugInfo"?: DocumentDebugInfo[];
 }
 
 /**
@@ -4659,6 +5320,153 @@ model QueryCaptionResult {
 */
 @visibility("read")
 "highlights"?: string;
+}
+
+/**
+* Contains debugging information that can be used to further explore your search
+* results.
+*/
+model DocumentDebugInfo {
+/**
+* Contains debugging information specific to semantic ranking requests.
+*/
+@visibility("read")
+"semantic"?: SemanticDebugInfo;
+/**
+* Contains debugging information specific to vector and hybrid search.
+*/
+@visibility("read")
+"vectors"?: VectorsDebugInfo;
+}
+
+
+model SemanticDebugInfo {
+/**
+* The title field that was sent to the semantic enrichment process, as well as
+* how it was used
+*/
+@visibility("read")
+"titleField"?: QueryResultDocumentSemanticField;
+/**
+* The content fields that were sent to the semantic enrichment process, as well
+* as how they were used
+*/
+@visibility("read")
+"contentFields"?: QueryResultDocumentSemanticField[];
+/**
+* The keyword fields that were sent to the semantic enrichment process, as well
+* as how they were used
+*/
+@visibility("read")
+"keywordFields"?: QueryResultDocumentSemanticField[];
+/**
+* The raw concatenated strings that were sent to the semantic enrichment process.
+*/
+@visibility("read")
+"rerankerInput"?: QueryResultDocumentRerankerInput;
+}
+
+/**
+* Description of fields that were sent to the semantic enrichment process, as
+* well as how they were used
+*/
+model QueryResultDocumentSemanticField {
+/**
+* The name of the field that was sent to the semantic enrichment process
+*/
+@visibility("read")
+"name"?: string;
+/**
+* The way the field was used for the semantic enrichment process (fully used,
+* partially used, or unused)
+*/
+@visibility("read")
+"state"?: SemanticFieldState;
+}
+
+/**
+* The raw concatenated strings that were sent to the semantic enrichment process.
+*/
+model QueryResultDocumentRerankerInput {
+/**
+* The raw string for the title field that was used for semantic enrichment.
+*/
+@visibility("read")
+"title"?: string;
+/**
+* The raw concatenated strings for the content fields that were used for semantic
+* enrichment.
+*/
+@visibility("read")
+"content"?: string;
+/**
+* The raw concatenated strings for the keyword fields that were used for semantic
+* enrichment.
+*/
+@visibility("read")
+"keywords"?: string;
+}
+
+
+model VectorsDebugInfo {
+/**
+* The breakdown of subscores of the document prior to the chosen result set
+* fusion/combination method such as RRF.
+*/
+@visibility("read")
+"subscores"?: QueryResultDocumentSubscores;
+}
+
+/**
+* The breakdown of subscores between the text and vector query components of the
+* search query for this document. Each vector query is shown as a separate object
+* in the same order they were received.
+*/
+model QueryResultDocumentSubscores {
+/**
+* The BM25 or Classic score for the text portion of the query.
+*/
+@visibility("read")
+"text"?: TextResult;
+@doc("The vector similarity and @search.score values for each vector query.")
+@visibility("read")
+"vectors"?: Record<SingleVectorFieldResult>[];
+/**
+* The BM25 or Classic score for the text portion of the query.
+*/
+@visibility("read")
+"documentBoost"?: float64;
+}
+
+/**
+* The BM25 or Classic score for the text portion of the query.
+*/
+model TextResult {
+/**
+* The BM25 or Classic score for the text portion of the query.
+*/
+@visibility("read")
+"searchScore"?: float64;
+}
+
+@doc("""
+A single vector field result. Both @search.score and vector similarity values
+are returned. Vector similarity is related to @search.score by an equation.
+""")
+model SingleVectorFieldResult {
+@doc("""
+The @search.score value that is calculated from the vector similarity score.
+This is the score that's visible in a pure single-field single-vector query.
+""")
+@visibility("read")
+"searchScore"?: float64;
+/**
+* The vector similarity score for this document. Note this is the canonical
+* definition of similarity metric, not the 'distance' version. For example,
+* cosine similarity instead of cosine distance.
+*/
+@visibility("read")
+"vectorSimilarity"?: float64;
 }
 
 /**
@@ -5038,6 +5846,31 @@ model StopAnalyzer extends LexicalAnalyzer {
 * A URI fragment specifying the type of analyzer.
 */
 "@odata.type": "#Microsoft.Azure.Search.StopAnalyzer";
+}
+
+/**
+* Allows you to configure normalization for filterable, sortable, and facetable
+* fields, which by default operate with strict matching. This is a user-defined
+* configuration consisting of at least one or more filters, which modify the
+* token that is stored.
+*/
+model CustomNormalizer extends LexicalNormalizer {
+/**
+* A list of token filters used to filter out or modify the input token. For
+* example, you can specify a lowercase filter that converts all characters to
+* lowercase. The filters are run in the order in which they are listed.
+*/
+"tokenFilters"?: TokenFilterName[];
+/**
+* A list of character filters used to prepare input text before it is processed.
+* For instance, they can replace certain characters or symbols. The filters are
+* run in the order in which they are listed.
+*/
+"charFilters"?: CharFilterName[];
+/**
+* A URI fragment specifying the type of normalizer.
+*/
+"@odata.type": "#Microsoft.Azure.Search.CustomNormalizer";
 }
 
 /**
@@ -6154,13 +6987,6 @@ model AzureOpenAIParameters {
 }
 
 /**
-* Abstract base type for data identities.
-*/
-@discriminator("@odata.type")
-model SearchIndexerDataIdentity {
-}
-
-/**
 * Specifies a user-defined vectorizer for generating the vector embedding of a
 * query string. Integration of an external vectorizer is achieved using the
 * custom Web API interface of a skillset.
@@ -6216,6 +7042,106 @@ model WebApiParameters {
 * cleared.
 */
 "authIdentity"?: SearchIndexerDataIdentity;
+}
+
+/**
+* Specifies the AI Services Vision parameters for vectorizing a query image or
+* text.
+*/
+model AIServicesVisionVectorizer extends VectorSearchVectorizer {
+/**
+* Contains the parameters specific to AI Services Vision embedding vectorization.
+*/
+@encodedName("application/json", "aiServicesVisionParameters")
+"AIServicesVisionParameters"?: AIServicesVisionParameters;
+/**
+* The name of the kind of vectorization method being configured for use with
+* vector search.
+*/
+"kind": "aiServicesVision";
+}
+
+/**
+* Specifies the AI Services Vision parameters for vectorizing a query image or
+* text.
+*/
+model AIServicesVisionParameters {
+/**
+* The version of the model to use when calling the AI Services Vision service. It
+* will default to the latest available when not specified.
+*/
+"modelVersion": string;
+/**
+* The resource URI of the AI Services resource.
+*/
+"resourceUri": url;
+/**
+* API key of the designated AI Services resource.
+*/
+"apiKey"?: string;
+/**
+* The user-assigned managed identity used for outbound connections. If an
+* authResourceId is provided and it's not specified, the system-assigned managed
+* identity is used. On updates to the index, if the identity is unspecified, the
+* value remains unchanged. If set to "none", the value of this property is
+* cleared.
+*/
+"authIdentity"?: SearchIndexerDataIdentity;
+}
+
+/**
+* Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio
+* Model Catalog for generating the vector embedding of a query string.
+*/
+model AMLVectorizer extends VectorSearchVectorizer {
+/**
+* Specifies the properties of the AML vectorizer.
+*/
+@encodedName("application/json", "amlParameters")
+"AMLParameters"?: AMLParameters;
+/**
+* The name of the kind of vectorization method being configured for use with
+* vector search.
+*/
+"kind": "aml";
+}
+
+/**
+* Specifies the properties for connecting to an AML vectorizer.
+*/
+model AMLParameters {
+/**
+* (Required for no authentication or key authentication) The scoring URI of the
+* AML service to which the JSON payload will be sent. Only the https URI scheme
+* is allowed.
+*/
+@encodedName("application/json", "uri")
+"scoringUri": url;
+/**
+* (Required for key authentication) The key for the AML service.
+*/
+@encodedName("application/json", "key")
+"authenticationKey"?: string;
+/**
+* (Required for token authentication). The Azure Resource Manager resource ID of
+* the AML service. It should be in the format
+* subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}.
+*/
+"resourceId"?: string;
+/**
+* (Optional) When specified, indicates the timeout for the http client making the
+* API call.
+*/
+"timeout"?: duration;
+/**
+* (Optional for token authentication). The region the AML service is deployed in.
+*/
+"region"?: string;
+/**
+* The name of the embedding model from the Azure AI Studio Catalog that is
+* deployed at the provided endpoint.
+*/
+"modelName"?: AIStudioModelCatalogName;
 }
 
 /**
@@ -6289,6 +7215,17 @@ model SoftDeleteColumnDeletionDetectionPolicy extends DataDeletionDetectionPolic
 * A URI fragment specifying the type of data deletion detection policy.
 */
 "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
+}
+
+/**
+* Defines a data deletion detection policy utilizing Azure Blob Storage's native
+* soft delete feature for deletion detection.
+*/
+model NativeBlobSoftDeleteDeletionDetectionPolicy extends DataDeletionDetectionPolicy {
+/**
+* A URI fragment specifying the type of data deletion detection policy.
+*/
+"@odata.type": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy";
 }
 
 /**
@@ -6412,19 +7349,6 @@ model TagScoringParameters {
 * to compare against the target field.
 */
 "tagsParameter": string;
-}
-
-/**
-* A dictionary of knowledge store-specific configuration properties. Each name is
-* the name of a specific property. Each value must be of a primitive type.
-*/
-model SearchIndexerKnowledgeStoreParameters {
-...Record<unknown>;
-/**
-* Whether or not projections should synthesize a generated key name if one isn't
-* already present.
-*/
-"synthesizeGeneratedKeyName"?: boolean;
 }
 
 /**
@@ -6903,9 +7827,39 @@ model SplitSkill extends SearchIndexerSkill {
 */
 "maximumPagesToTake"?: int32;
 /**
+* Only applies if textSplitMode is set to pages. There are two possible values.
+* The choice of the values will decide the length (maximumPageLength and
+* pageOverlapLength) measurement. The default is 'characters', which means the
+* length will be measured by character.
+*/
+"unit"?: SplitSkillUnit;
+/**
+* Only applies if the unit is set to azureOpenAITokens. If specified, the
+* splitSkill will use these parameters when performing the tokenization. The
+* parameters are a valid 'encoderModelName' and an optional
+* 'allowedSpecialTokens' property.
+*/
+"azureOpenAITokenizerParameters"?: AzureOpenAITokenizerParameters;
+/**
 * A URI fragment specifying the type of skill.
 */
 "@odata.type": "#Microsoft.Skills.Text.SplitSkill";
+}
+
+
+model AzureOpenAITokenizerParameters {
+/**
+* Only applies if the unit is set to azureOpenAITokens. Options include
+* 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is
+* 'CL100k_base'.
+*/
+"encoderModelName"?: SplitSkillEncoderModelName;
+/**
+* (Optional) Only applies if the unit is set to azureOpenAITokens. This parameter
+* defines a collection of special tokens that are permitted within the
+* tokenization process.
+*/
+"allowedSpecialTokens"?: string[];
 }
 
 /**
@@ -7051,6 +8005,54 @@ model WebApiSkill extends SearchIndexerSkill {
 }
 
 /**
+* The AML skill allows you to extend AI enrichment with a custom Azure Machine
+* Learning (AML) model. Once an AML model is trained and deployed, an AML skill
+* integrates it into AI enrichment.
+*/
+model AzureMachineLearningSkill extends SearchIndexerSkill {
+/**
+* (Required for no authentication or key authentication) The scoring URI of the
+* AML service to which the JSON payload will be sent. Only the https URI scheme
+* is allowed.
+*/
+@encodedName("application/json", "uri")
+"scoringUri"?: url;
+/**
+* (Required for key authentication) The key for the AML service.
+*/
+@encodedName("application/json", "key")
+"authenticationKey"?: string;
+/**
+* (Required for token authentication). The Azure Resource Manager resource ID of
+* the AML service. It should be in the format
+* subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}.
+*/
+"resourceId"?: string;
+/**
+* (Optional) When specified, indicates the timeout for the http client making the
+* API call.
+*/
+"timeout"?: duration;
+/**
+* (Optional for token authentication). The region the AML service is deployed in.
+*/
+"region"?: string;
+/**
+* (Optional) When specified, indicates the number of calls the indexer will make
+* in parallel to the endpoint you have provided. You can decrease this value if
+* your endpoint is failing under too high of a request load, or raise it if your
+* endpoint is able to accept more requests and you would like an increase in the
+* performance of the indexer. If not set, a default value of 5 is used. The
+* degreeOfParallelism can be set to a maximum of 10 and a minimum of 1.
+*/
+"degreeOfParallelism"?: int32;
+/**
+* A URI fragment specifying the type of skill.
+*/
+"@odata.type": "#Microsoft.Skills.Custom.AmlSkill";
+}
+
+/**
 * Allows you to generate a vector embedding for a given text input using the
 * Azure OpenAI resource.
 */
@@ -7065,6 +8067,22 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 * A URI fragment specifying the type of skill.
 */
 "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
+}
+
+/**
+* Allows you to generate a vector embedding for a given image or text input using
+* the Azure AI Services Vision Vectorize API.
+*/
+model VisionVectorizeSkill extends SearchIndexerSkill {
+/**
+* The version of the model to use when calling the AI Services Vision service. It
+* will default to the latest available when not specified.
+*/
+"modelVersion": string;
+/**
+* A URI fragment specifying the type of skill.
+*/
+"@odata.type": "#Microsoft.Skills.Vision.VectorizeSkill";
 }
 
 /**
@@ -7095,4 +8113,73 @@ model VectorizableTextQuery extends VectorQuery {
 * The kind of vector query being performed.
 */
 "kind": "text";
+}
+
+/**
+* The query parameters to use for vector search when an url that represents an
+* image value that needs to be vectorized is provided.
+*/
+model VectorizableImageUrlQuery extends VectorQuery {
+/**
+* The URL of an image to be vectorized to perform a vector search query.
+*/
+"url"?: string;
+/**
+* The kind of vector query being performed.
+*/
+"kind": "imageUrl";
+}
+
+/**
+* The query parameters to use for vector search when a base 64 encoded binary of
+* an image that needs to be vectorized is provided.
+*/
+model VectorizableImageBinaryQuery extends VectorQuery {
+/**
+* The base 64 encoded binary of an image to be vectorized to perform a vector
+* search query.
+*/
+"base64Image"?: string;
+/**
+* The kind of vector query being performed.
+*/
+"kind": "imageBinary";
+}
+
+/**
+* The results of the vector query will be filtered based on the vector similarity
+* metric. Note this is the canonical definition of similarity metric, not the
+* 'distance' version. The threshold direction (larger or smaller) will be chosen
+* automatically according to the metric used by the field.
+*/
+model VectorSimilarityThreshold extends VectorThreshold {
+/**
+* The threshold will filter based on the similarity metric value. Note this is
+* the canonical definition of similarity metric, not the 'distance' version. The
+* threshold direction (larger or smaller) will be chosen automatically according
+* to the metric used by the field.
+*/
+"value": float64;
+/**
+* The kind of threshold used to filter vector queries
+*/
+"kind": "vectorSimilarity";
+}
+
+@doc("""
+The results of the vector query will filter based on the '@search.score' value.
+Note this is the @search.score returned as part of the search response. The
+threshold direction will be chosen for higher @search.score.
+""")
+model SearchScoreThreshold extends VectorThreshold {
+@doc("""
+The threshold will filter based on the '@search.score' value. Note this is the
+@search.score returned as part of the search response. The threshold direction
+will be chosen for higher @search.score.
+""")
+"value": float64;
+/**
+* The kind of threshold used to filter vector queries
+*/
+"kind": "searchScore";
 }

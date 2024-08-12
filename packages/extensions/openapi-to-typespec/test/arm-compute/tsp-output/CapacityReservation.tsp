@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the capacity reservation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CapacityReservationGroup)
-@includeInapplicableMetadataInPayload(false)
-model CapacityReservation extends Resource {
+model CapacityReservation
+  is Azure.ResourceManager.TrackedResource<CapacityReservationProperties> {
   ...ResourceNameParameter<
     Resource = CapacityReservation,
     KeyName = "capacityReservationName",
@@ -35,12 +33,6 @@ model CapacityReservation extends Resource {
    * Availability Zone to use for this capacity reservation. The zone has to be single value and also should be part for the list of zones specified during the capacity reservation group creation. The zone can be assigned only during creation. If not provided, the reservation supports only non-zonal deployments. If provided, enforces VM/VMSS using this capacity reservation to be in same zone.
    */
   zones?: string[];
-
-  /**
-   * Properties of the Capacity reservation.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CapacityReservationProperties;
 }
 
 @armResourceOperations
@@ -89,6 +81,9 @@ interface CapacityReservations {
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
+@@doc(CapacityReservation.properties,
+  "Properties of the Capacity reservation."
+);
 @@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -106,8 +106,6 @@ async function main() {
 
   for (let i = 0; i < folders.length; i++) {
     const folder = folders[i];
-    // https://github.com/Azure/typespec-azure/issues/862
-    if (folder === "arm-playwrighttesting") continue;
     try {
       await generateTypespec(repoRoot, folder, debug);
       if (swagger) {

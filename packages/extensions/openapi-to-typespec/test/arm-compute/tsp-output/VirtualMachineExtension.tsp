@@ -14,23 +14,15 @@ namespace Microsoft.Compute;
 /**
  * Describes a Virtual Machine Extension.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachine)
-@includeInapplicableMetadataInPayload(false)
-model VirtualMachineExtension extends ResourceWithOptionalLocation {
+model VirtualMachineExtension
+  is Azure.ResourceManager.TrackedResource<VirtualMachineExtensionProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineExtension,
     KeyName = "vmExtensionName",
     SegmentName = "extensions",
     NamePattern = ""
   >;
-
-  /**
-   * Describes the properties of a Virtual Machine Extension.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineExtensionProperties;
 }
 
 @armResourceOperations
@@ -94,6 +86,9 @@ interface VirtualMachineExtensions {
 
 @@doc(VirtualMachineExtension.name,
   "The name of the virtual machine extension."
+);
+@@doc(VirtualMachineExtension.properties,
+  "Describes the properties of a Virtual Machine Extension."
 );
 @@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "application/json",

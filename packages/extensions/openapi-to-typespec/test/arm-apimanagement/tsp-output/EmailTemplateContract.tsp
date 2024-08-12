@@ -14,28 +14,16 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Email Template details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  EmailTemplateContractProperties
-)
-model EmailTemplateContract extends Foundations.ProxyResource {
-  /**
-   * Email Template Name Identifier.
-   */
-  @path
-  @key("templateName")
-  @segment("templates")
-  @visibility("read")
-  name: TemplateName;
-
-  /**
-   * Email Template entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: EmailTemplateContractProperties;
+model EmailTemplateContract
+  is Azure.ResourceManager.ProxyResource<EmailTemplateContractProperties> {
+  ...ResourceNameParameter<
+    Resource = EmailTemplateContract,
+    KeyName = "templateName",
+    SegmentName = "templates",
+    NamePattern = "",
+    Type = TemplateName
+  >;
 }
 
 @armResourceOperations
@@ -149,6 +137,10 @@ interface EmailTemplateContracts {
   >;
 }
 
+@@doc(EmailTemplateContract.name, "Email Template Name Identifier.");
+@@doc(EmailTemplateContract.properties,
+  "Email Template entity contract properties."
+);
 @@encodedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -63,5 +63,11 @@ export function generateArmResourceClientDecorator(resource: TspArmResource): st
     decorators && definitions.push(decorators);
   }
 
+  const propertyDecorators = generateAugmentedDecorators(
+    `${resource.name}.properties`,
+    resource.propertiesPropertyClientDecorator,
+  );
+  propertyDecorators && definitions.push(propertyDecorators);
+
   return definitions.join("\n");
 }

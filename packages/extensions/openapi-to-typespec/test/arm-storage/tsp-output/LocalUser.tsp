@@ -14,24 +14,14 @@ namespace Microsoft.Storage;
 /**
  * The local user associated with the storage accounts.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(LocalUserProperties)
-model LocalUser extends Foundations.ProxyResource {
+model LocalUser is Azure.ResourceManager.ProxyResource<LocalUserProperties> {
   ...ResourceNameParameter<
     Resource = LocalUser,
     KeyName = "username",
     SegmentName = "localUsers",
     NamePattern = ""
   >;
-
-  /**
-   * Storage account local user properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: LocalUserProperties;
 }
 
 @armResourceOperations
@@ -79,6 +69,7 @@ interface LocalUsers {
 @@doc(LocalUser.name,
   "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
 );
+@@doc(LocalUser.properties, "Storage account local user properties.");
 @@encodedName(LocalUsers.createOrUpdate::parameters.resource,
   "application/json",
   "properties"

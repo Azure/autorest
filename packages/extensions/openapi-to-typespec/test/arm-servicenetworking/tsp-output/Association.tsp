@@ -55,3 +55,6 @@ interface Associations {
 }
 
 @@doc(Association.name, "Name of Association");
+@@doc(Association.properties,
+  "The resource-specific properties for this resource."
+);

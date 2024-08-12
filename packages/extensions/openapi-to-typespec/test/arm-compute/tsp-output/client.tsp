@@ -125,3 +125,120 @@ using Microsoft.Compute;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Extension.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineScaleSet.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineScaleSetExtension.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineExtension.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RollingUpgradeStatusInfo.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineScaleSetVMExtension.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineScaleSetVM.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachine.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineExtensionImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(AvailabilitySet.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ProximityPlacementGroup.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DedicatedHostGroup.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DedicatedHost.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SshPublicKeyResource.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Image.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RestorePointCollection.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RestorePoint.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CapacityReservationGroup.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CapacityReservation.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(VirtualMachineRunCommand.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Disk.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskAccess.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(PrivateEndpointConnection.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskEncryptionSet.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskRestorePoint.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Snapshot.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Gallery.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryApplication.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryApplicationVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImageVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImageVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleInstance.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CloudServiceRole.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CloudService.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(OSVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(OSFamily.properties);

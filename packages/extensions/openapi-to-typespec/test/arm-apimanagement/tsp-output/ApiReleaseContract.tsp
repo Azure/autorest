@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * ApiRelease details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ApiReleaseContractProperties)
-model ApiReleaseContract extends Foundations.ProxyResource {
+model ApiReleaseContract
+  is Azure.ResourceManager.ProxyResource<ApiReleaseContractProperties> {
   ...ResourceNameParameter<
     Resource = ApiReleaseContract,
     KeyName = "releaseId",
     SegmentName = "releases",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * ApiRelease entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ApiReleaseContractProperties;
 }
 
 @armResourceOperations
@@ -150,6 +141,7 @@ interface ApiReleaseContracts {
 @@doc(ApiReleaseContract.name,
   "Release identifier within an API. Must be unique in the current API Management service instance."
 );
+@@doc(ApiReleaseContract.properties, "ApiRelease entity contract properties.");
 @@encodedName(ApiReleaseContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

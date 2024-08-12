@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * OpenId Connect Provider details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  OpenidConnectProviderContractProperties
-)
-model OpenidConnectProviderContract extends Foundations.ProxyResource {
+model OpenidConnectProviderContract
+  is Azure.ResourceManager.ProxyResource<OpenidConnectProviderContractProperties> {
   ...ResourceNameParameter<
     Resource = OpenidConnectProviderContract,
     KeyName = "opid",
     SegmentName = "openidConnectProviders",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * OpenId Connect Provider contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OpenidConnectProviderContractProperties;
 }
 
 @armResourceOperations
@@ -196,6 +185,9 @@ interface OpenidConnectProviderContracts {
 @@maxLength(OpenidConnectProviderContract.name, 256);
 @@doc(OpenidConnectProviderContract.name,
   "Identifier of the OpenID Connect Provider."
+);
+@@doc(OpenidConnectProviderContract.properties,
+  "OpenId Connect Provider contract properties."
 );
 @@encodedName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "application/json",

@@ -14,28 +14,16 @@ namespace Microsoft.Storage;
 /**
  * The properties of File services in storage account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  FileServicePropertiesProperties
-)
-model FileServiceProperties extends Foundations.ProxyResource {
+model FileServiceProperties
+  is Azure.ResourceManager.ProxyResource<FileServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = FileServiceProperties,
     KeyName = "fileService",
     SegmentName = "fileServices",
     NamePattern = ""
   >;
-
-  /**
-   * The properties of File services in storage account.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: FileServicePropertiesProperties;
-
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
@@ -64,6 +52,9 @@ interface FileServicePropertiesOperationGroup {
 }
 
 @@doc(FileServiceProperties.name, "");
+@@doc(FileServiceProperties.properties,
+  "The properties of File services in storage account."
+);
 @@encodedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

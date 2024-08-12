@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Cache details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(CacheContractProperties)
-model CacheContract extends Foundations.ProxyResource {
+model CacheContract
+  is Azure.ResourceManager.ProxyResource<CacheContractProperties> {
   ...ResourceNameParameter<
     Resource = CacheContract,
     KeyName = "cacheId",
     SegmentName = "caches",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Cache properties details.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CacheContractProperties;
 }
 
 @armResourceOperations
@@ -141,6 +132,7 @@ interface CacheContracts {
 @@doc(CacheContract.name,
   "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
 );
+@@doc(CacheContract.properties, "Cache properties details.");
 @@encodedName(CacheContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

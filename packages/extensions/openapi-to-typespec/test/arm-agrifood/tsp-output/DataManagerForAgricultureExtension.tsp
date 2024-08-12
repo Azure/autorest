@@ -13,26 +13,15 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * DataManagerForAgriculture extension resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  DataManagerForAgricultureExtensionProperties
-)
-model DataManagerForAgricultureExtension extends Foundations.ProxyResource {
+model DataManagerForAgricultureExtension
+  is Azure.ResourceManager.ProxyResource<DataManagerForAgricultureExtensionProperties> {
   ...ResourceNameParameter<
     Resource = DataManagerForAgricultureExtension,
     KeyName = "dataManagerForAgricultureExtensionId",
     SegmentName = "farmBeatsExtensionDefinitions",
     NamePattern = "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
   >;
-
-  /**
-   * DataManagerForAgricultureExtension properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: DataManagerForAgricultureExtensionProperties;
 }
 
 @armResourceOperations
@@ -102,4 +91,7 @@ interface DataManagerForAgricultureExtensions {
 
 @@doc(DataManagerForAgricultureExtension.name,
   "dataManagerForAgricultureExtensionId to be queried."
+);
+@@doc(DataManagerForAgricultureExtension.properties,
+  "DataManagerForAgricultureExtension properties."
 );

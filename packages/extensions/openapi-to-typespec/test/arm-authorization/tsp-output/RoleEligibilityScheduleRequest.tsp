@@ -13,25 +13,14 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Eligibility schedule request
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  RoleEligibilityScheduleRequestProperties
-)
-model RoleEligibilityScheduleRequest extends Foundations.ExtensionResource {
+model RoleEligibilityScheduleRequest
+  is Azure.ResourceManager.ExtensionResource<RoleEligibilityScheduleRequestProperties> {
   ...ResourceNameParameter<
     Resource = RoleEligibilityScheduleRequest,
     KeyName = "roleEligibilityScheduleRequestName",
     SegmentName = "roleEligibilityScheduleRequests",
     NamePattern = ""
   >;
-
-  /**
-   * Role eligibility schedule request properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleEligibilityScheduleRequestProperties;
 }
 
 @armResourceOperations
@@ -81,6 +70,9 @@ interface RoleEligibilityScheduleRequests {
 
 @@doc(RoleEligibilityScheduleRequest.name,
   "The name (guid) of the role eligibility schedule request to get."
+);
+@@doc(RoleEligibilityScheduleRequest.properties,
+  "Role eligibility schedule request properties."
 );
 @@encodedName(RoleEligibilityScheduleRequests.create::parameters.resource,
   "application/json",

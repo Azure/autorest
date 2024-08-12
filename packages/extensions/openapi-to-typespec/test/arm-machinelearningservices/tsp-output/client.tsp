@@ -18,3 +18,12 @@ using Azure.ResourceManager.MachineLearning;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Registry.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Workspace.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(PrivateEndpointConnection.properties);

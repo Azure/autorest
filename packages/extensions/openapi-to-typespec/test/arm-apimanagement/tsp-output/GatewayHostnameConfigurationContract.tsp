@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Gateway hostname configuration details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  GatewayHostnameConfigurationContractProperties
-)
-model GatewayHostnameConfigurationContract extends Foundations.ProxyResource {
+model GatewayHostnameConfigurationContract
+  is Azure.ResourceManager.ProxyResource<GatewayHostnameConfigurationContractProperties> {
   ...ResourceNameParameter<
     Resource = GatewayHostnameConfigurationContract,
     KeyName = "hcId",
     SegmentName = "hostnameConfigurations",
     NamePattern = ""
   >;
-
-  /**
-   * Gateway hostname configuration details.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GatewayHostnameConfigurationContractProperties;
 }
 
 @armResourceOperations
@@ -131,6 +120,9 @@ interface GatewayHostnameConfigurationContracts {
 @@minLength(GatewayHostnameConfigurationContract.name, 1);
 @@doc(GatewayHostnameConfigurationContract.name,
   "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity."
+);
+@@doc(GatewayHostnameConfigurationContract.properties,
+  "Gateway hostname configuration details."
 );
 @@encodedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   "application/json",

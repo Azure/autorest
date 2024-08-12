@@ -58,3 +58,6 @@ interface TrafficControllers {
 }
 
 @@doc(TrafficController.name, "traffic controller name for path");
+@@doc(TrafficController.properties,
+  "The resource-specific properties for this resource."
+);

@@ -77,3 +77,4 @@ interface Images {
 }
 
 @@doc(Image.name, "Image name. Use .default for image creation.");
+@@doc(Image.properties, "The resource-specific properties for this resource.");

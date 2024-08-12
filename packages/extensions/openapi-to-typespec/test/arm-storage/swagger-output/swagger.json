@@ -5886,42 +5886,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.SkuTier": {
-      "type": "string",
-      "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
-      "enum": [
-        "Free",
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Free",
-            "value": "Free",
-            "description": "The Free service tier."
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "The Basic service tier."
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "The Standard service tier."
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The Premium service tier."
-          }
-        ]
-      }
-    },
     "AzureEntityResource": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
@@ -7242,7 +7206,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FileShareProperties",
-          "description": "The file share properties be listed out."
+          "description": "The file share properties be listed out.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7575,7 +7540,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImmutabilityPolicyProperty",
-          "description": "The properties of an ImmutabilityPolicy of a blob container."
+          "description": "The properties of an ImmutabilityPolicy of a blob container.",
+          "x-ms-client-flatten": true
         },
         "etag": {
           "type": "string",
@@ -8216,7 +8182,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
-          "description": "The blob container properties be listed out."
+          "description": "The blob container properties be listed out.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8231,6 +8198,7 @@
         "properties": {
           "$ref": "#/definitions/ListQueueProperties",
           "description": "List Queue resource properties.",
+          "x-ms-client-flatten": true,
           "x-ms-client-name": "queueProperties"
         }
       },
@@ -9104,7 +9072,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties."
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9832,7 +9801,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuTier",
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         }
@@ -9878,7 +9847,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuTier",
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         },
@@ -10055,6 +10024,11 @@
       "type": "object",
       "description": "The storage account.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "Properties of the storage account.",
+          "x-ms-client-flatten": true
+        },
         "kind": {
           "$ref": "#/definitions/Kind",
           "description": "Gets the Kind.",
@@ -10063,11 +10037,6 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "Properties of the storage account.",
-          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -10577,7 +10546,8 @@
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters",
-          "description": "The parameters used when updating a storage account."
+          "description": "The parameters used when updating a storage account.",
+          "x-ms-client-flatten": true
         },
         "kind": {
           "$ref": "#/definitions/Kind",
@@ -10587,6 +10557,7 @@
     },
     "StorageQueue": {
       "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/QueueProperties",

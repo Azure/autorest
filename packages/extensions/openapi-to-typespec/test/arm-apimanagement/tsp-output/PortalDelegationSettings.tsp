@@ -14,27 +14,16 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Delegation settings for a developer portal.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("delegation")
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PortalDelegationSettingsProperties
-)
-model PortalDelegationSettings extends Foundations.ProxyResource {
+model PortalDelegationSettings
+  is Azure.ResourceManager.ProxyResource<PortalDelegationSettingsProperties> {
   ...ResourceNameParameter<
     Resource = PortalDelegationSettings,
     KeyName = "portalsetting",
     SegmentName = "portalsettings",
     NamePattern = ""
   >;
-
-  /**
-   * Delegation settings contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PortalDelegationSettingsProperties;
 }
 
 @armResourceOperations
@@ -117,6 +106,9 @@ interface PortalDelegationSettingsOperationGroup {
 }
 
 @@doc(PortalDelegationSettings.name, "");
+@@doc(PortalDelegationSettings.properties,
+  "Delegation settings contract properties."
+);
 @@encodedName(PortalDelegationSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

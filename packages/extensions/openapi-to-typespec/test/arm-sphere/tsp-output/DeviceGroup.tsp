@@ -97,6 +97,9 @@ interface DeviceGroups {
 }
 
 @@doc(DeviceGroup.name, "Name of device group.");
+@@doc(DeviceGroup.properties,
+  "The resource-specific properties for this resource."
+);
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );

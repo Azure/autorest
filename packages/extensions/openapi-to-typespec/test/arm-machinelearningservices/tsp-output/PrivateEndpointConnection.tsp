@@ -14,27 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * The Private Endpoint Connection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateEndpointConnectionProperties
-)
-model PrivateEndpointConnection extends Foundations.TrackedResource {
+model PrivateEndpointConnection
+  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-
-  /**
-   * Private endpoint connection properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PrivateEndpointConnectionProperties;
-
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
@@ -67,6 +55,9 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");
+@@doc(PrivateEndpointConnection.properties,
+  "Private endpoint connection properties."
+);
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "application/json",
   "body"

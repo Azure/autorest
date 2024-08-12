@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FeaturesetContainer)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(FeaturesetVersionProperties)
-model FeaturesetVersion extends Foundations.ProxyResource {
+model FeaturesetVersion
+  is Azure.ResourceManager.ProxyResource<FeaturesetVersionProperties, false> {
   ...ResourceNameParameter<
     Resource = FeaturesetVersion,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: FeaturesetVersionProperties;
 }
 
 @armResourceOperations
@@ -161,6 +152,9 @@ interface FeaturesetVersions {
 }
 
 @@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
+@@doc(FeaturesetVersion.properties,
+  "[Required] Additional attributes of the entity."
+);
 @@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
   "application/json",
   "body"

@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchEndpointTrackedResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(BatchDeployment)
-model BatchDeploymentTrackedResource extends Foundations.TrackedResource {
+model BatchDeploymentTrackedResource
+  is Azure.ResourceManager.TrackedResource<BatchDeployment, false> {
   ...ResourceNameParameter<
     Resource = BatchDeploymentTrackedResource,
     KeyName = "deploymentName",
@@ -29,12 +26,6 @@ model BatchDeploymentTrackedResource extends Foundations.TrackedResource {
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
   kind?: string;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: BatchDeployment;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -110,6 +101,9 @@ interface BatchDeploymentTrackedResources {
 
 @@doc(BatchDeploymentTrackedResource.name,
   "The identifier for the Batch deployments."
+);
+@@doc(BatchDeploymentTrackedResource.properties,
+  "[Required] Additional attributes of the entity."
 );
 @@encodedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "application/json",

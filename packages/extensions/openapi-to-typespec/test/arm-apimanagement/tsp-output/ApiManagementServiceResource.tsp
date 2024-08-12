@@ -13,13 +13,11 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * A single API Management service resource in List or Get response.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ApiManagementServiceProperties
-)
-model ApiManagementServiceResource extends Foundations.TrackedResource {
+model ApiManagementServiceResource
+  is Azure.ResourceManager.TrackedResource<
+    ApiManagementServiceProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = ApiManagementServiceResource,
     KeyName = "serviceName",
@@ -37,12 +35,6 @@ model ApiManagementServiceResource extends Foundations.TrackedResource {
    * A list of availability zones denoting where the resource needs to come from.
    */
   zones?: string[];
-
-  /**
-   * Properties of the API Management service.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: ApiManagementServiceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -1155,6 +1147,9 @@ interface ApiManagementServiceResources {
 @@minLength(ApiManagementServiceResource.name, 1);
 @@doc(ApiManagementServiceResource.name,
   "The name of the API Management service."
+);
+@@doc(ApiManagementServiceResource.properties,
+  "Properties of the API Management service."
 );
 @@encodedName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "application/json",

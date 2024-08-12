@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -438,6 +440,7 @@ model DnsResourceReferenceRequest {
   /**
    * The properties of the Resource Reference Request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DnsResourceReferenceRequestProperties;
 }
 
@@ -458,6 +461,7 @@ model DnsResourceReferenceResult {
   /**
    * The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DnsResourceReferenceResultProperties;
 }
 

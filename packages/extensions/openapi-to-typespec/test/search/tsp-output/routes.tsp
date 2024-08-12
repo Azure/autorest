@@ -38,7 +38,12 @@ interface DataSourcesOperations {
 * resource on success.
 */
 @header
-"Prefer": }}>;
+"Prefer": 
+/**
+* Ignores cache reset requirements.
+*/
+@query("ignoreResetRequirements")
+"skipIndexerResetRequirementForCache"?: boolean}}>;
 
 
 
@@ -130,6 +135,33 @@ interface IndexersOperations {
 
 
 /**
+* Resets specific documents in the datasource to be selectively re-ingested by
+* the indexer.
+*/
+@route("/indexers('{indexerName}')/search.resetdocs")
+@post op `resetDocs` is Azure.Core.Foundations.Operation<{/**
+* The name of the indexer to reset documents for.
+*/
+@path
+"indexerName": string
+/**
+* If false, keys or ids will be appended to existing ones. If true, only the keys
+* or ids in this payload will be queued to be re-ingested.
+*/
+@query("overwrite")
+"overwrite"?: boolean
+/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string
+
+@body
+"keysOrIds"?: DocumentKeysOrIds}, void>;
+
+
+
+/**
 * Runs an indexer on-demand.
 */
 @route("/indexers('{indexerName}')/search.run")
@@ -172,7 +204,17 @@ interface IndexersOperations {
 * resource on success.
 */
 @header
-"Prefer": }}>;
+"Prefer": 
+/**
+* Ignores cache reset requirements.
+*/
+@query("ignoreResetRequirements")
+"skipIndexerResetRequirementForCache"?: boolean
+/**
+* Disables cache reprocessing change detection.
+*/
+@query("disableCacheReprocessingChangeDetection")
+"disableCacheReprocessingChangeDetection"?: boolean}}>;
 
 
 
@@ -290,7 +332,17 @@ interface SkillsetsOperations {
 * resource on success.
 */
 @header
-"Prefer": }}>;
+"Prefer": 
+/**
+* Ignores cache reset requirements.
+*/
+@query("ignoreResetRequirements")
+"skipIndexerResetRequirementForCache"?: boolean
+/**
+* Disables cache reprocessing change detection.
+*/
+@query("disableCacheReprocessingChangeDetection")
+"disableCacheReprocessingChangeDetection"?: boolean}}>;
 
 
 
@@ -358,6 +410,28 @@ interface SkillsetsOperations {
 */
 @header
 "x-ms-client-request-id"?: string}}>;
+
+
+
+/**
+* Reset an existing skillset in a search service.
+*/
+@route("/skillsets('{skillsetName}')/search.resetskills")
+@post op `resetSkills` is Azure.Core.Foundations.Operation<{/**
+* The name of the skillset to reset.
+*/
+@path
+"skillsetName": string
+/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string
+/**
+* The names of skills to reset.
+*/
+@body
+"skillNames": SkillNames}, void>;
 
 
 
@@ -615,6 +689,101 @@ interface IndexesOperations {
 
 }
 
+interface AliasesOperations {
+/**
+* Creates a new search alias.
+*/
+
+`create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchAlias , { parameters: {/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string}}>;
+
+
+
+/**
+* Lists all aliases available for a search service.
+*/
+
+`list` is Azure.Core.ResourceList<SearchAlias , { parameters: {/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string}}>;
+
+
+
+/**
+* Creates a new search alias or updates an alias if it already exists.
+*/
+
+`createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchAlias , { parameters: {/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string
+/**
+* Defines the If-Match condition. The operation will be performed only if the
+* ETag on the server matches this value.
+*/
+@header
+"If-Match"?: string
+/**
+* Defines the If-None-Match condition. The operation will be performed only if
+* the ETag on the server does not match this value.
+*/
+@header
+"If-None-Match"?: string
+/**
+* For HTTP PUT requests, instructs the service to return the created/updated
+* resource on success.
+*/
+@header
+"Prefer": }}>;
+
+
+
+/**
+* Deletes a search alias and its associated mapping to an index. This operation
+* is permanent, with no recovery option. The mapped index is untouched by this
+* operation.
+*/
+
+`delete` is Azure.Core.ResourceDelete<SearchAlias , { parameters: {/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string
+/**
+* Defines the If-Match condition. The operation will be performed only if the
+* ETag on the server matches this value.
+*/
+@header
+"If-Match"?: string
+/**
+* Defines the If-None-Match condition. The operation will be performed only if
+* the ETag on the server does not match this value.
+*/
+@header
+"If-None-Match"?: string}}>;
+
+
+
+/**
+* Retrieves an alias definition.
+*/
+
+`get` is Azure.Core.ResourceRead<SearchAlias , { parameters: {/**
+* The tracking ID sent with the request to help with debugging.
+*/
+@header
+"x-ms-client-request-id"?: string}}>;
+
+
+
+}
+
 /**
 * Gets service level statistics for a search service.
 */
@@ -834,7 +1003,28 @@ interface DocumentsOperations {
 * ranking phase, and the L2 semantic phase.
 */
 @query("semanticQuery")
-"semanticQuery"?: string}, SearchDocumentsResult>;
+"semanticQuery"?: string
+/**
+* Enables a debugging tool that can be used to further explore your search
+* results.
+*/
+@query("debug")
+"debug"?: QueryDebugMode
+/**
+* The language of the query.
+*/
+@query("queryLanguage")
+"queryLanguage"?: QueryLanguage
+/**
+* Improve search recall by spell-correcting individual search query terms.
+*/
+@query("speller")
+"speller"?: Speller
+/**
+* The list of field names used for semantic ranking.
+*/
+@query({name: "semanticFields", format: "csv"})
+"semanticFields"?: string[]}, SearchDocumentsResult>;
 
 
 

@@ -14,27 +14,16 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Sign-In settings for the Developer Portal.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("signin")
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PortalSigninSettingProperties
-)
-model PortalSigninSettings extends Foundations.ProxyResource {
+model PortalSigninSettings
+  is Azure.ResourceManager.ProxyResource<PortalSigninSettingProperties> {
   ...ResourceNameParameter<
     Resource = PortalSigninSettings,
     KeyName = "portalsetting",
     SegmentName = "portalsettings",
     NamePattern = ""
   >;
-
-  /**
-   * Sign-in settings contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PortalSigninSettingProperties;
 }
 
 @armResourceOperations
@@ -106,6 +95,7 @@ interface PortalSigninSettingsOperationGroup {
 }
 
 @@doc(PortalSigninSettings.name, "");
+@@doc(PortalSigninSettings.properties, "Sign-in settings contract properties.");
 @@encodedName(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

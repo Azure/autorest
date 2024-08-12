@@ -13,23 +13,14 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role Assignments
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(RoleAssignmentProperties)
-model RoleAssignment extends Foundations.ExtensionResource {
+model RoleAssignment
+  is Azure.ResourceManager.ExtensionResource<RoleAssignmentProperties> {
   ...ResourceNameParameter<
     Resource = RoleAssignment,
     KeyName = "roleAssignmentName",
     SegmentName = "roleAssignments",
     NamePattern = ""
   >;
-
-  /**
-   * Role assignment properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleAssignmentProperties;
 }
 
 @armResourceOperations
@@ -106,6 +97,7 @@ interface RoleAssignments {
 @@doc(RoleAssignment.name,
   "The name of the role assignment. It can be any valid GUID."
 );
+@@doc(RoleAssignment.properties, "Role assignment properties.");
 @@encodedName(RoleAssignments.create::parameters.resource,
   "application/json",
   "parameters"

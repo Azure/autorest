@@ -39,3 +39,6 @@ interface ArrayDefaults {
 }
 
 @@doc(ArrayDefault.name, "Name of resource");
+@@doc(ArrayDefault.properties,
+  "The resource-specific properties for this resource."
+);

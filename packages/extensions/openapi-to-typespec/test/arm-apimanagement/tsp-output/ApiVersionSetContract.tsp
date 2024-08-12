@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API Version Set Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  ApiVersionSetContractProperties
-)
-model ApiVersionSetContract extends Foundations.ProxyResource {
+model ApiVersionSetContract
+  is Azure.ResourceManager.ProxyResource<ApiVersionSetContractProperties> {
   ...ResourceNameParameter<
     Resource = ApiVersionSetContract,
     KeyName = "versionSetId",
     SegmentName = "apiVersionSets",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * API VersionSet contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ApiVersionSetContractProperties;
 }
 
 @armResourceOperations
@@ -152,6 +141,7 @@ interface ApiVersionSetContracts {
 @@doc(ApiVersionSetContract.name,
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );
+@@doc(ApiVersionSetContract.properties, "API VersionSet contract properties.");
 @@encodedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

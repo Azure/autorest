@@ -79,3 +79,6 @@ interface Deployments {
 @@doc(Deployment.name,
   "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group."
 );
+@@doc(Deployment.properties,
+  "The resource-specific properties for this resource."
+);

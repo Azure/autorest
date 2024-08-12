@@ -14,26 +14,16 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Policy Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(OperationContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(PolicyContractProperties)
-model PolicyContract extends Foundations.ProxyResource {
-  /**
-   * The identifier of the Policy.
-   */
-  @path
-  @key("policyId")
-  @segment("policies")
-  @visibility("read")
-  name: PolicyIdName;
-
-  /**
-   * Properties of the Policy.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PolicyContractProperties;
+model PolicyContract
+  is Azure.ResourceManager.ProxyResource<PolicyContractProperties> {
+  ...ResourceNameParameter<
+    Resource = PolicyContract,
+    KeyName = "policyId",
+    SegmentName = "policies",
+    NamePattern = "",
+    Type = PolicyIdName
+  >;
 }
 
 @armResourceOperations
@@ -114,6 +104,8 @@ interface PolicyContracts {
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }
 
+@@doc(PolicyContract.name, "The identifier of the Policy.");
+@@doc(PolicyContract.properties, "Properties of the Policy.");
 @@encodedName(PolicyContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

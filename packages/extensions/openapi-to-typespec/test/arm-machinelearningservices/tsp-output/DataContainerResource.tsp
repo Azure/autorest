@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(DataContainer)
-model DataContainerResource extends Foundations.ProxyResource {
+model DataContainerResource
+  is Azure.ResourceManager.ProxyResource<DataContainer, false> {
   ...ResourceNameParameter<
     Resource = DataContainerResource,
     KeyName = "name",
     SegmentName = "data",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: DataContainer;
 }
 
 @armResourceOperations
@@ -86,6 +77,9 @@ interface DataContainerResources {
 }
 
 @@doc(DataContainerResource.name, "Container name.");
+@@doc(DataContainerResource.properties,
+  "[Required] Additional attributes of the entity."
+);
 @@encodedName(DataContainerResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

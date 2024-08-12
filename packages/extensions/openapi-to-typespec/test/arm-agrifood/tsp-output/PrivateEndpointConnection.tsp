@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * The private endpoint connection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataManagerForAgriculture)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateEndpointConnectionProperties
-)
-model PrivateEndpointConnection extends Foundations.ProxyResource {
+model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
-
-  /**
-   * Resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations
@@ -65,6 +54,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "Private endpoint connection name.");
+@@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "application/json",
   "request"

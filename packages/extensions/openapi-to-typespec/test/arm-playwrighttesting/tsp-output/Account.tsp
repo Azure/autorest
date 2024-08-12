@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,18 +13,13 @@ namespace Microsoft.AzurePlaywrightService;
 /**
  * An account resource
  */
-model Account is TrackedResource<AccountProperties> {
-  /**
-   * Name of account
-   */
-  @maxLength(64)
-  @minLength(3)
-  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
-  @path
-  @key("name")
-  @segment("accounts")
-  @visibility("read")
-  name: string;
+model Account is Azure.ResourceManager.TrackedResource<AccountProperties> {
+  ...ResourceNameParameter<
+    Resource = Account,
+    KeyName = "name",
+    SegmentName = "accounts",
+    NamePattern = "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+  >;
 }
 
 @armResourceOperations
@@ -43,7 +37,7 @@ interface Accounts {
   /**
    * Update a Account
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<Account, AccountUpdate>;
 
   /**
@@ -61,3 +55,10 @@ interface Accounts {
    */
   listBySubscription is ArmListBySubscription<Account>;
 }
+
+@@maxLength(Account.name, 64);
+@@minLength(Account.name, 3);
+@@doc(Account.name, "Name of account");
+@@doc(Account.properties,
+  "The resource-specific properties for this resource."
+);

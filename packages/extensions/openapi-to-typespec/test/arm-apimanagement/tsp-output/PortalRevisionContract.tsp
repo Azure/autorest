@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Portal Revision's contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PortalRevisionContractProperties
-)
-model PortalRevisionContract extends Foundations.ProxyResource {
+model PortalRevisionContract
+  is Azure.ResourceManager.ProxyResource<PortalRevisionContractProperties> {
   ...ResourceNameParameter<
     Resource = PortalRevisionContract,
     KeyName = "portalRevisionId",
     SegmentName = "portalRevisions",
     NamePattern = ""
   >;
-
-  /**
-   * Properties of the portal revisions.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PortalRevisionContractProperties;
 }
 
 @armResourceOperations
@@ -128,6 +117,7 @@ interface PortalRevisionContracts {
 @@doc(PortalRevisionContract.name,
   "Portal revision identifier. Must be unique in the current API Management service instance."
 );
+@@doc(PortalRevisionContract.properties, "Properties of the portal revisions.");
 @@encodedName(PortalRevisionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

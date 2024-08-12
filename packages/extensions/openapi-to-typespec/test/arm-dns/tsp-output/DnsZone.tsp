@@ -13,10 +13,7 @@ namespace Azure.ResourceManager.Dns;
 /**
  * Describes a DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model DnsZone extends Resource {
+model DnsZone is Azure.ResourceManager.TrackedResource<ZoneProperties> {
   ...ResourceNameParameter<
     Resource = DnsZone,
     KeyName = "zoneName",
@@ -28,12 +25,6 @@ model DnsZone extends Resource {
    * The etag of the zone.
    */
   etag?: string;
-
-  /**
-   * The properties of the zone.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ZoneProperties;
 }
 
 @armResourceOperations
@@ -170,6 +161,7 @@ interface DnsZones {
 }
 
 @@doc(DnsZone.name, "The name of the DNS zone (without a terminating dot).");
+@@doc(DnsZone.properties, "The properties of the zone.");
 @@encodedName(DnsZones.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -54,3 +54,6 @@ interface Frontends {
 }
 
 @@doc(Frontend.name, "Frontends");
+@@doc(Frontend.properties,
+  "The resource-specific properties for this resource."
+);

@@ -119,3 +119,6 @@ interface InfrastructureResources {
 @@doc(InfrastructureResource.name,
   "The name of the infrastructure resource in the space."
 );
+@@doc(InfrastructureResource.properties,
+  "The resource-specific properties for this resource."
+);
