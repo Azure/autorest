@@ -1,4 +1,4 @@
-import { Operation, Parameter, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
+import { Operation, Parameter, Property, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
@@ -54,6 +54,7 @@ function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {
 }
 
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
+  const { isFullCompatible } = getOptions();
   const fixMe: string[] = [];
 
   if (!getSession().configuration["namespace"]) {
@@ -80,14 +81,12 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const propertiesModelSchema = propertiesModel?.schema;
   let propertiesModelName = propertiesModelSchema?.language.default.name;
   let propertiesPropertyRequired = false;
-  let propertiesPropertyVisibility = ["read", "create"];
   let propertiesPropertyDescription = "";
 
   if (propertiesModelSchema?.type === SchemaType.Dictionary) {
     propertiesModelName = "Record<unknown>";
   } else if (propertiesModelSchema?.type === SchemaType.Object) {
     propertiesPropertyRequired = propertiesModel?.required ?? false;
-    propertiesPropertyVisibility = propertiesModel?.extensions?.["x-ms-mutability"] ?? [];
     propertiesPropertyDescription = propertiesModel?.language.default.description ?? "";
   }
 
@@ -127,6 +126,22 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     properties.unshift(keyProperty);
   }
 
+  if (propertiesModel) {
+    if (augmentDecorators === undefined) augmentDecorators = buildPropertiesAugmentDecorators(schema, propertiesModel);
+    else augmentDecorators.push(...buildPropertiesAugmentDecorators(schema, propertiesModel));
+  }
+
+  const propertiesPropertyClientDecorator = [];
+  if (isFullCompatible && propertiesModel?.extensions?.["x-ms-client-flatten"]) {
+    propertiesPropertyClientDecorator.push({
+        name: "flattenProperty",
+        module: "@azure-tools/typespec-client-generator-core",
+        namespace: "Azure.ClientGenerator.Core",
+        suppressionCode: "deprecated",
+        suppressionMessage: "@flattenProperty decorator is not recommended to use.",
+      });
+  }
+
   return {
     fixMe,
     resourceKind: getResourceKind(schema),
@@ -138,8 +153,8 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     resourceParent: getParentResource(schema),
     propertiesModelName,
     propertiesPropertyRequired,
-    propertiesPropertyVisibility,
     propertiesPropertyDescription,
+    propertiesPropertyClientDecorator,
     doc: schema.language.default.description,
     decorators,
     clientDecorators,
@@ -864,6 +879,14 @@ function buildKeyAugmentDecorators(
       target: `${schema.resourceMetadata.SwaggerModelName}.name`,
       arguments: [generateDocsContent(keyProperty)],
     });
+}
+
+function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesModel: Property): TypespecDecorator[] {
+  return [{
+    name: "doc",
+      target: `${schema.resourceMetadata.SwaggerModelName}.properties`,
+      arguments: [generateDocsContent({doc: propertiesModel?.language.default.description})],
+  }];
 }
 
 function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {

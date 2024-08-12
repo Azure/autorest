@@ -68,3 +68,6 @@ interface Products {
 }
 
 @@doc(Product.name, "Name of product.");
+@@doc(Product.properties,
+  "The resource-specific properties for this resource."
+);

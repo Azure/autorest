@@ -14,14 +14,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Tenant Settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  TenantSettingsContractProperties
-)
-model TenantSettingsContract extends Foundations.ProxyResource {
+model TenantSettingsContract
+  is Azure.ResourceManager.ProxyResource<TenantSettingsContractProperties> {
   ...ResourceNameParameter<
     Resource = TenantSettingsContract,
     KeyName = "settingsType",
@@ -29,12 +24,6 @@ model TenantSettingsContract extends Foundations.ProxyResource {
     NamePattern = "",
     Type = SettingsTypeName
   >;
-
-  /**
-   * TenantSettings entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: TenantSettingsContractProperties;
 }
 
 @armResourceOperations
@@ -66,3 +55,6 @@ interface TenantSettingsContracts {
 }
 
 @@doc(TenantSettingsContract.name, "The identifier of the settings.");
+@@doc(TenantSettingsContract.properties,
+  "TenantSettings entity contract properties."
+);

@@ -2,16 +2,16 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Azure.ResourceManager.Dns;
+using Azure.ResourceManager.AgFoodPlatform;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DnsResourceReferenceRequest.properties);
+@@flattenProperty(DataManagerForAgriculture.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DnsResourceReferenceResult.properties);
+@@flattenProperty(PrivateEndpointConnection.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DnsRecord.properties);
+@@flattenProperty(Extension.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DnsZone.properties);
+@@flattenProperty(PrivateLinkResource.properties);

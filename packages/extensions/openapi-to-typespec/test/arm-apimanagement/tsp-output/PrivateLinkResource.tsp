@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateLinkResourceProperties
-)
-model PrivateLinkResource extends Foundations.ProxyResource {
+model PrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
   ...ResourceNameParameter<
     Resource = PrivateLinkResource,
     KeyName = "privateLinkSubResourceName",
     SegmentName = "privateLinkResources",
     NamePattern = ""
   >;
-
-  /**
-   * Resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations
@@ -54,3 +43,4 @@ interface PrivateLinkResources {
 }
 
 @@doc(PrivateLinkResource.name, "Name of the private link resource.");
+@@doc(PrivateLinkResource.properties, "Resource properties.");

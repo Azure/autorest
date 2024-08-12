@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ApiContractProperties)
-model ApiContract extends Foundations.ProxyResource {
+model ApiContract
+  is Azure.ResourceManager.ProxyResource<ApiContractProperties> {
   ...ResourceNameParameter<
     Resource = ApiContract,
     KeyName = "apiId",
     SegmentName = "apis",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * API entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ApiContractProperties;
 }
 
 @armResourceOperations
@@ -325,6 +316,7 @@ interface ApiContracts {
 @@doc(ApiContract.name,
   "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
 );
+@@doc(ApiContract.properties, "API entity contract properties.");
 @@encodedName(ApiContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

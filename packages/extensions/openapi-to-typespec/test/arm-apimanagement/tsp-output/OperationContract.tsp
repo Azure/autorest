@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * API Operation details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(OperationContractProperties)
-model OperationContract extends Foundations.ProxyResource {
+model OperationContract
+  is Azure.ResourceManager.ProxyResource<OperationContractProperties> {
   ...ResourceNameParameter<
     Resource = OperationContract,
     KeyName = "operationId",
     SegmentName = "operations",
     NamePattern = ""
   >;
-
-  /**
-   * Properties of the Operation Contract.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: OperationContractProperties;
 }
 
 @armResourceOperations
@@ -156,6 +147,7 @@ interface OperationContracts {
 @@doc(OperationContract.name,
   "Operation identifier within an API. Must be unique in the current API Management service instance."
 );
+@@doc(OperationContract.properties, "Properties of the Operation Contract.");
 @@encodedName(OperationContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

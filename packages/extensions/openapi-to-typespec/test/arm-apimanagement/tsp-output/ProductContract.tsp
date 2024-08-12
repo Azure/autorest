@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Product details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ProductContractProperties)
-model ProductContract extends Foundations.ProxyResource {
+model ProductContract
+  is Azure.ResourceManager.ProxyResource<ProductContractProperties> {
   ...ResourceNameParameter<
     Resource = ProductContract,
     KeyName = "productId",
     SegmentName = "products",
     NamePattern = ""
   >;
-
-  /**
-   * Product entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ProductContractProperties;
 }
 
 @armResourceOperations
@@ -321,6 +312,7 @@ interface ProductContracts {
 @@doc(ProductContract.name,
   "Product identifier. Must be unique in the current API Management service instance."
 );
+@@doc(ProductContract.properties, "Product entity contract properties.");
 @@encodedName(ProductContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

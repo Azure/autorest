@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Certificate details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  CertificateContractProperties
-)
-model CertificateContract extends Foundations.ProxyResource {
+model CertificateContract
+  is Azure.ResourceManager.ProxyResource<CertificateContractProperties> {
   ...ResourceNameParameter<
     Resource = CertificateContract,
     KeyName = "certificateId",
     SegmentName = "certificates",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Certificate properties details.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CertificateContractProperties;
 }
 
 @armResourceOperations
@@ -149,6 +138,7 @@ interface CertificateContracts {
 @@doc(CertificateContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );
+@@doc(CertificateContract.properties, "Certificate properties details.");
 @@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

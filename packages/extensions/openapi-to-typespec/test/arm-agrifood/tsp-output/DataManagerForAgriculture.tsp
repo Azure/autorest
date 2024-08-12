@@ -13,26 +13,14 @@ namespace Azure.ResourceManager.AgFoodPlatform;
 /**
  * Data Manager For Agriculture ARM Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  DataManagerForAgricultureProperties
-)
-model DataManagerForAgriculture extends Foundations.TrackedResource {
+model DataManagerForAgriculture
+  is Azure.ResourceManager.TrackedResource<DataManagerForAgricultureProperties> {
   ...ResourceNameParameter<
     Resource = DataManagerForAgriculture,
     KeyName = "dataManagerForAgricultureResourceName",
     SegmentName = "farmBeats",
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
-
-  /**
-   * Data Manager For Agriculture ARM Resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: DataManagerForAgricultureProperties;
-
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
@@ -110,6 +98,9 @@ interface DataManagerForAgricultures {
 @@minLength(DataManagerForAgriculture.name, 1);
 @@doc(DataManagerForAgriculture.name,
   "DataManagerForAgriculture resource name."
+);
+@@doc(DataManagerForAgriculture.properties,
+  "Data Manager For Agriculture ARM Resource properties."
 );
 @@encodedName(DataManagerForAgricultures.createOrUpdate::parameters.resource,
   "application/json",

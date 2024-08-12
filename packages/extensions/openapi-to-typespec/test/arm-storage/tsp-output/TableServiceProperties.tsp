@@ -14,27 +14,16 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Table service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(StorageAccount)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  TableServicePropertiesProperties
-)
-model TableServiceProperties extends Foundations.ProxyResource {
+model TableServiceProperties
+  is Azure.ResourceManager.ProxyResource<TableServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = TableServiceProperties,
     KeyName = "tableService",
     SegmentName = "tableServices",
     NamePattern = ""
   >;
-
-  /**
-   * The properties of a storage account’s Table service.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: TableServicePropertiesProperties;
 }
 
 @armResourceOperations
@@ -62,6 +51,9 @@ interface TableServicePropertiesOperationGroup {
 }
 
 @@doc(TableServiceProperties.name, "");
+@@doc(TableServiceProperties.properties,
+  "The properties of a storage account’s Table service."
+);
 @@encodedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "application/json",
   "parameters"

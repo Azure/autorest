@@ -13,22 +13,13 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the Shared Image Gallery that you want to create or update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model Gallery extends Resource {
+model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   ...ResourceNameParameter<
     Resource = Gallery,
     KeyName = "galleryName",
     SegmentName = "galleries",
     NamePattern = ""
   >;
-
-  /**
-   * Describes the properties of a Shared Image Gallery.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryProperties;
 }
 
 @armResourceOperations
@@ -95,6 +86,9 @@ interface Galleries {
 }
 
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
+@@doc(Gallery.properties,
+  "Describes the properties of a Shared Image Gallery."
+);
 @@encodedName(Galleries.createOrUpdate::parameters.resource,
   "application/json",
   "gallery"

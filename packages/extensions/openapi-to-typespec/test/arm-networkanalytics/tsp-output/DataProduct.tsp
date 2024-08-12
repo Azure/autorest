@@ -101,3 +101,6 @@ interface DataProducts {
 @@maxLength(DataProduct.name, 63);
 @@minLength(DataProduct.name, 3);
 @@doc(DataProduct.name, "The data product resource name");
+@@doc(DataProduct.properties,
+  "The resource-specific properties for this resource."
+);

@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Gateway certificate authority details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayContract)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  GatewayCertificateAuthorityContractProperties
-)
-model GatewayCertificateAuthorityContract extends Foundations.ProxyResource {
+model GatewayCertificateAuthorityContract
+  is Azure.ResourceManager.ProxyResource<GatewayCertificateAuthorityContractProperties> {
   ...ResourceNameParameter<
     Resource = GatewayCertificateAuthorityContract,
     KeyName = "certificateId",
     SegmentName = "certificateAuthorities",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-
-  /**
-   * Gateway certificate authority details.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GatewayCertificateAuthorityContractProperties;
 }
 
 @armResourceOperations
@@ -131,6 +120,9 @@ interface GatewayCertificateAuthorityContracts {
 @@minLength(GatewayCertificateAuthorityContract.name, 1);
 @@doc(GatewayCertificateAuthorityContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
+);
+@@doc(GatewayCertificateAuthorityContract.properties,
+  "Gateway certificate authority details."
 );
 @@encodedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   "application/json",

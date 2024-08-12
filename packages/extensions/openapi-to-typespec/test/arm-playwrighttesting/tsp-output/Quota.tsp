@@ -39,3 +39,4 @@ interface Quotas {
 }
 
 @@doc(Quota.name, "The quota name.");
+@@doc(Quota.properties, "The resource-specific properties for this resource.");

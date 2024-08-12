@@ -14,11 +14,9 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the Dedicated host.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DedicatedHostGroup)
-@includeInapplicableMetadataInPayload(false)
-model DedicatedHost extends Resource {
+model DedicatedHost
+  is Azure.ResourceManager.TrackedResource<DedicatedHostProperties> {
   ...ResourceNameParameter<
     Resource = DedicatedHost,
     KeyName = "hostName",
@@ -30,12 +28,6 @@ model DedicatedHost extends Resource {
    * SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
    */
   sku: Sku;
-
-  /**
-   * Properties of the dedicated host.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: DedicatedHostProperties;
 }
 
 @armResourceOperations
@@ -116,6 +108,7 @@ interface DedicatedHosts {
 }
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");
+@@doc(DedicatedHost.properties, "Properties of the dedicated host.");
 @@encodedName(DedicatedHosts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

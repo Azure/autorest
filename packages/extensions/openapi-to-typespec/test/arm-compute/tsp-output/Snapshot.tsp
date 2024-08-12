@@ -13,10 +13,7 @@ namespace Microsoft.Compute;
 /**
  * Snapshot resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-model Snapshot extends Resource {
+model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   ...ResourceNameParameter<
     Resource = Snapshot,
     KeyName = "snapshotName",
@@ -39,12 +36,6 @@ model Snapshot extends Resource {
    * The extended location where the snapshot will be created. Extended location cannot be changed.
    */
   extendedLocation?: ExtendedLocation;
-
-  /**
-   * Snapshot resource properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SnapshotProperties;
 }
 
 @armResourceOperations
@@ -99,6 +90,7 @@ interface Snapshots {
 @@doc(Snapshot.name,
   "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
 );
+@@doc(Snapshot.properties, "Snapshot resource properties.");
 @@encodedName(Snapshots.createOrUpdate::parameters.resource,
   "application/json",
   "snapshot"

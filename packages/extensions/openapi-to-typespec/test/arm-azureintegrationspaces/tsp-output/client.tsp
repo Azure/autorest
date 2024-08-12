@@ -21,3 +21,18 @@ using Microsoft.IntegrationSpaces;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(InfrastructureResourceUpdate.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Space.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Application.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(BusinessProcess.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(BusinessProcessVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(InfrastructureResource.properties);

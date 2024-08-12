@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CodeContainerResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(CodeVersion)
-model CodeVersionResource extends Foundations.ProxyResource {
+model CodeVersionResource
+  is Azure.ResourceManager.ProxyResource<CodeVersion, false> {
   ...ResourceNameParameter<
     Resource = CodeVersionResource,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: CodeVersion;
 }
 
 @armResourceOperations
@@ -103,6 +94,9 @@ interface CodeVersionResources {
 }
 
 @@doc(CodeVersionResource.name, "Version identifier.");
+@@doc(CodeVersionResource.properties,
+  "[Required] Additional attributes of the entity."
+);
 @@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
   "application/json",
   "body"

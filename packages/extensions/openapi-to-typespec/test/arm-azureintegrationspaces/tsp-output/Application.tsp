@@ -159,3 +159,6 @@ interface Applications {
 }
 
 @@doc(Application.name, "The name of the Application");
+@@doc(Application.properties,
+  "The resource-specific properties for this resource."
+);

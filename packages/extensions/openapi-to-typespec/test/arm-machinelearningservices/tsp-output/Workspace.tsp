@@ -13,11 +13,8 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * An object that represents a machine learning workspace.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
-model Workspace extends Foundations.TrackedResource {
+model Workspace
+  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -25,13 +22,6 @@ model Workspace extends Foundations.TrackedResource {
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
   kind?: string;
-
-  /**
-   * Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: WorkspaceProperties;
-
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
@@ -243,6 +233,7 @@ interface Workspaces {
 }
 
 @@doc(Workspace.name, "Name of Azure Machine Learning workspace.");
+@@doc(Workspace.properties, "Additional attributes of the entity.");
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "body"

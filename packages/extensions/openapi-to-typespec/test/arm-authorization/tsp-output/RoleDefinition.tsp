@@ -13,23 +13,14 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Role definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(RoleDefinitionProperties)
-model RoleDefinition extends Foundations.ExtensionResource {
+model RoleDefinition
+  is Azure.ResourceManager.ExtensionResource<RoleDefinitionProperties> {
   ...ResourceNameParameter<
     Resource = RoleDefinition,
     KeyName = "roleDefinitionId",
     SegmentName = "roleDefinitions",
     NamePattern = ""
   >;
-
-  /**
-   * Role definition properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleDefinitionProperties;
 }
 
 @armResourceOperations
@@ -70,6 +61,7 @@ interface RoleDefinitions {
 }
 
 @@doc(RoleDefinition.name, "The ID of the role definition.");
+@@doc(RoleDefinition.properties, "Role definition properties.");
 @@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "roleDefinition"

@@ -14,24 +14,14 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(JobBase)
-model JobBaseResource extends Foundations.ProxyResource {
+model JobBaseResource is Azure.ResourceManager.ProxyResource<JobBase, false> {
   ...ResourceNameParameter<
     Resource = JobBaseResource,
     KeyName = "id",
     SegmentName = "jobs",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: JobBase;
 }
 
 @armResourceOperations
@@ -132,6 +122,9 @@ interface JobBaseResources {
 
 @@doc(JobBaseResource.name,
   "The name and identifier for the Job. This is case-sensitive."
+);
+@@doc(JobBaseResource.properties,
+  "[Required] Additional attributes of the entity."
 );
 @@encodedName(JobBaseResources.createOrUpdate::parameters.resource,
   "application/json",

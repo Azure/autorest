@@ -14,26 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Subscription details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  SubscriptionContractProperties
-)
-model SubscriptionContract extends Foundations.ProxyResource {
+model SubscriptionContract
+  is Azure.ResourceManager.ProxyResource<SubscriptionContractProperties> {
   ...ResourceNameParameter<
     Resource = SubscriptionContract,
     KeyName = "subscriptionId",
     SegmentName = "subscriptions",
     NamePattern = ""
   >;
-
-  /**
-   * Subscription contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SubscriptionContractProperties;
 }
 
 @armResourceOperations
@@ -209,6 +198,7 @@ interface SubscriptionContracts {
 @@doc(SubscriptionContract.name,
   "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
 );
+@@doc(SubscriptionContract.properties, "Subscription contract properties.");
 @@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

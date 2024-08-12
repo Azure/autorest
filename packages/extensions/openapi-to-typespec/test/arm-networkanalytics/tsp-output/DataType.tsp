@@ -73,3 +73,6 @@ interface DataTypes {
 @@maxLength(DataType.name, 63);
 @@minLength(DataType.name, 3);
 @@doc(DataType.name, "The data type name.");
+@@doc(DataType.properties,
+  "The resource-specific properties for this resource."
+);

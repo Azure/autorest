@@ -14,26 +14,18 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FeaturestoreEntityContainer)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  FeaturestoreEntityVersionProperties
-)
-model FeaturestoreEntityVersion extends Foundations.ProxyResource {
+model FeaturestoreEntityVersion
+  is Azure.ResourceManager.ProxyResource<
+    FeaturestoreEntityVersionProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = FeaturestoreEntityVersion,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-
-  /**
-   * [Required] Additional attributes of the entity.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties: FeaturestoreEntityVersionProperties;
 }
 
 @armResourceOperations
@@ -119,6 +111,9 @@ interface FeaturestoreEntityVersions {
 
 @@doc(FeaturestoreEntityVersion.name,
   "Version identifier. This is case-sensitive."
+);
+@@doc(FeaturestoreEntityVersion.properties,
+  "[Required] Additional attributes of the entity."
 );
 @@encodedName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "application/json",

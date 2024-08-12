@@ -14,14 +14,9 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Identity Provider details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  IdentityProviderContractProperties
-)
-model IdentityProviderContract extends Foundations.ProxyResource {
+model IdentityProviderContract
+  is Azure.ResourceManager.ProxyResource<IdentityProviderContractProperties> {
   ...ResourceNameParameter<
     Resource = IdentityProviderContract,
     KeyName = "identityProviderName",
@@ -29,12 +24,6 @@ model IdentityProviderContract extends Foundations.ProxyResource {
     NamePattern = "",
     Type = IdentityProviderType
   >;
-
-  /**
-   * Identity Provider contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: IdentityProviderContractProperties;
 }
 
 @armResourceOperations
@@ -136,6 +125,9 @@ interface IdentityProviderContracts {
 }
 
 @@doc(IdentityProviderContract.name, "Identity Provider Type identifier.");
+@@doc(IdentityProviderContract.properties,
+  "Identity Provider contract properties."
+);
 @@encodedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

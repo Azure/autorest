@@ -13,25 +13,14 @@ namespace Azure.ResourceManager.Authorization;
 /**
  * Information about current or upcoming role assignment schedule instance
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  RoleAssignmentScheduleInstanceProperties
-)
-model RoleAssignmentScheduleInstance extends Foundations.ExtensionResource {
+model RoleAssignmentScheduleInstance
+  is Azure.ResourceManager.ExtensionResource<RoleAssignmentScheduleInstanceProperties> {
   ...ResourceNameParameter<
     Resource = RoleAssignmentScheduleInstance,
     KeyName = "roleAssignmentScheduleInstanceName",
     SegmentName = "roleAssignmentScheduleInstances",
     NamePattern = ""
   >;
-
-  /**
-   * Role assignment schedule instance properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: RoleAssignmentScheduleInstanceProperties;
 }
 
 @armResourceOperations
@@ -62,4 +51,7 @@ interface RoleAssignmentScheduleInstances {
 
 @@doc(RoleAssignmentScheduleInstance.name,
   "The name (hash of schedule name + time) of the role assignment schedule to get."
+);
+@@doc(RoleAssignmentScheduleInstance.properties,
+  "Role assignment schedule instance properties."
 );

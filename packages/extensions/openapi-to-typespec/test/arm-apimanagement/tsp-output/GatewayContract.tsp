@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * Gateway details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(GatewayContractProperties)
-model GatewayContract extends Foundations.ProxyResource {
+model GatewayContract
+  is Azure.ResourceManager.ProxyResource<GatewayContractProperties> {
   ...ResourceNameParameter<
     Resource = GatewayContract,
     KeyName = "gatewayId",
     SegmentName = "gateways",
     NamePattern = ""
   >;
-
-  /**
-   * Gateway details.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GatewayContractProperties;
 }
 
 @armResourceOperations
@@ -229,6 +220,7 @@ interface GatewayContracts {
 @@doc(GatewayContract.name,
   "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
 );
+@@doc(GatewayContract.properties, "Gateway details.");
 @@encodedName(GatewayContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

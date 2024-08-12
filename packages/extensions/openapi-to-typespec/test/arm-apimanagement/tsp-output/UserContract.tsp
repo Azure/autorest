@@ -14,24 +14,15 @@ namespace Azure.ResourceManager.ApiManagement;
 /**
  * User details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiManagementServiceResource)
-@includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(UserContractProperties)
-model UserContract extends Foundations.ProxyResource {
+model UserContract
+  is Azure.ResourceManager.ProxyResource<UserContractProperties> {
   ...ResourceNameParameter<
     Resource = UserContract,
     KeyName = "userId",
     SegmentName = "users",
     NamePattern = ""
   >;
-
-  /**
-   * User entity contract properties.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: UserContractProperties;
 }
 
 @armResourceOperations
@@ -301,6 +292,7 @@ interface UserContracts {
 @@doc(UserContract.name,
   "User identifier. Must be unique in the current API Management service instance."
 );
+@@doc(UserContract.properties, "User entity contract properties.");
 @@encodedName(UserContracts.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"

@@ -10024,6 +10024,11 @@
       "type": "object",
       "description": "The storage account.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "Properties of the storage account.",
+          "x-ms-client-flatten": true
+        },
         "kind": {
           "$ref": "#/definitions/Kind",
           "description": "Gets the Kind.",
@@ -10032,11 +10037,6 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "Properties of the storage account.",
-          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -10557,6 +10557,7 @@
     },
     "StorageQueue": {
       "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/QueueProperties",
