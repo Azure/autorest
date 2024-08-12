@@ -134,12 +134,12 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
   const propertiesPropertyClientDecorator = [];
   if (isFullCompatible && propertiesModel?.extensions?.["x-ms-client-flatten"]) {
     propertiesPropertyClientDecorator.push({
-        name: "flattenProperty",
-        module: "@azure-tools/typespec-client-generator-core",
-        namespace: "Azure.ClientGenerator.Core",
-        suppressionCode: "deprecated",
-        suppressionMessage: "@flattenProperty decorator is not recommended to use.",
-      });
+      name: "flattenProperty",
+      module: "@azure-tools/typespec-client-generator-core",
+      namespace: "Azure.ClientGenerator.Core",
+      suppressionCode: "deprecated",
+      suppressionMessage: "@flattenProperty decorator is not recommended to use.",
+    });
   }
 
   return {
@@ -882,11 +882,13 @@ function buildKeyAugmentDecorators(
 }
 
 function buildPropertiesAugmentDecorators(schema: ArmResourceSchema, propertiesModel: Property): TypespecDecorator[] {
-  return [{
-    name: "doc",
+  return [
+    {
+      name: "doc",
       target: `${schema.resourceMetadata.SwaggerModelName}.properties`,
-      arguments: [generateDocsContent({doc: propertiesModel?.language.default.description})],
-  }];
+      arguments: [generateDocsContent({ doc: propertiesModel?.language.default.description })],
+    },
+  ];
 }
 
 function buildKeyProperty(schema: ArmResourceSchema): TypespecObjectProperty {

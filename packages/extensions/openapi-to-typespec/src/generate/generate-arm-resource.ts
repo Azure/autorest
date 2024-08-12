@@ -57,7 +57,9 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   definitions.push(
-    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${resource.propertiesPropertyRequired ? ", false" : ""}> {`,
+    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${
+      resource.propertiesPropertyRequired ? ", false" : ""
+    }> {`,
   );
 
   if (resource.keyExpression) {
