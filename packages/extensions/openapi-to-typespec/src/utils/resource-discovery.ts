@@ -146,12 +146,11 @@ export interface ArmResourceSchema extends ObjectSchema {
   resourceMetadata: ArmResource;
 }
 
-export function tagSchemaAsResource(schema: ObjectSchema): void {
-  const metadata = getArmResourcesMetadata();
+export function tagSchemaAsResource(schema: ObjectSchema, metadata: Metadata): void {
   const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
-    if (resourcesMetadata[resourceName].SwaggerModelName.toLowerCase() === schema.language.default.name.toLowerCase()) {
+    if (resourcesMetadata[resourceName].SwaggerModelName === schema.language.default.name) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
       return;
     }

@@ -1,13 +1,14 @@
 import { CodeModel } from "@autorest/codemodel";
 import { getOptions } from "../options";
-import { tagSchemaAsResource } from "../utils/resource-discovery";
+import { ArmResourceSchema, Metadata, tagSchemaAsResource } from "../utils/resource-discovery";
 
-export function pretransformArmResources(codeModel: CodeModel): void {
+export function pretransformArmResources(codeModel: CodeModel, metadata: Metadata): void {
   const { isArm } = getOptions();
   if (!isArm) {
     return;
   }
+
   for (const schema of codeModel.schemas?.objects ?? []) {
-    tagSchemaAsResource(schema);
+    tagSchemaAsResource(schema, metadata);
   }
 }

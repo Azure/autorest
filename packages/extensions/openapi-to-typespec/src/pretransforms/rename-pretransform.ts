@@ -19,13 +19,11 @@ type RenamableSchema = Schema | Property | Parameter | ChoiceValue | Operation;
 
 const logger = () => getLogger("rename-pretransform");
 
-export function pretransformRename(codeModel: CodeModel): void {
+export function pretransformRename(codeModel: CodeModel, metadata: Metadata): void {
   const { isArm } = getOptions();
   if (!isArm) {
     return;
   }
-
-  const metadata = getArmResourcesMetadata();
 
   applyRenameMapping(metadata, codeModel);
   applyOverrideOperationName(metadata, codeModel);
@@ -84,7 +82,7 @@ function applyRenameMapping(metadata: Metadata, codeModel: CodeModel) {
     ].find((o: Schema) => o.language.default.name.toLowerCase() === lowerFirstSubKey);
 
     if (!found) {
-      logger().warning(`Can't find object or enum for RenameMapping rule: ${key} -> ${value}`);
+      logger().info(`Can't find object or enum for RenameMapping rule: ${key} -> ${value}`);
       continue;
     }
 
@@ -116,7 +114,7 @@ function transformObject(keys: string[], value: string, target: ObjectSchema) {
     const lowerPropertyName = keys[1].toLowerCase();
     const found = target.properties?.find((p) => p.language.default.name.toLowerCase() === lowerPropertyName);
     if (found) parseNewCSharpNameAndSetToSchema(found, value);
-    else logger().warning(`Can't find object property for RenameMapping rule: ${keys.join(".")} -> ${value}`);
+    else logger().info(`Can't find object property for RenameMapping rule: ${keys.join(".")} -> ${value}`);
   } else if (keys.length > 2) {
     // handle flatten scenario
     const lowerPropName = keys.pop()?.toLowerCase();
@@ -128,7 +126,7 @@ function transformObject(keys: string[], value: string, target: ObjectSchema) {
     const foundProp = cur?.properties?.find((p) => p.language.default.name.toLowerCase() === lowerPropName);
     if (foundProp) parseNewCSharpNameAndSetToSchema(foundProp, value);
     else {
-      logger().warning(`Can't find object property for RenameMapping rule: ${keys.join(".")} -> ${value}`);
+      logger().info(`Can't find object property for RenameMapping rule: ${keys.join(".")} -> ${value}`);
     }
   } else {
     logger().error(`Unexpected keys for object property RenameMapping: ${keys.join(".")}`);

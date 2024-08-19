@@ -1,5 +1,6 @@
-import { ArraySchema, CodeModel, getAllProperties, HttpMethod, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { isArmIdSchema, isArraySchema, isResponseSchema, isStringSchema } from "../utils/schemas";
+import { ArraySchema, HttpMethod, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
+import { isArraySchema, isResponseSchema } from "../utils/schemas";
+import { isResource } from "./resource-equivalent";
 
 const ProvidersSegment = "/providers/";
 const ManagementGroupPath = "/providers/Microsoft.Management/managementGroups/{managementGroupId}";
@@ -259,26 +260,6 @@ function getResourceSchemaName(set: OperationSet, method: HttpMethod): string | 
     if (!isResource(response.schema)) return undefined;
 
     return response.schema.language.default.name;
-}
-
-function isResource(schema: ObjectSchema): boolean {
-    let idPropertyFound = false;
-    let typePropertyFound = false;
-    let namePropertyFound = false;
-    for (const property of getAllProperties(schema)) {
-        if (property.flattenedNames) continue;
-
-        if (property.serializedName === "id" && (isStringSchema(property.schema) || isArmIdSchema(property.schema))) {
-            idPropertyFound = true;
-        }
-        else if (property.serializedName === "type" && isStringSchema(property.schema)) {
-            typePropertyFound = true;
-        }
-        else if (property.serializedName === "name" && isStringSchema(property.schema)) {
-            namePropertyFound = true;
-        }
-    }
-    return idPropertyFound && typePropertyFound && namePropertyFound;
 }
 
 function getSingletonResourceSuffix(set: OperationSet): string | undefined {

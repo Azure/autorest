@@ -27,13 +27,13 @@ import { parseMetadata } from "./resource/parse-metadata";
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
-  const codeModel = session.model;
-  await host.writeFile({ filename: "codelModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+  const codeModel = session.model;  
+  pretransformNames(codeModel);
+  await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
   const metadata = parseMetadata(codeModel);
   await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
-  pretransformNames(codeModel);
-  pretransformArmResources(codeModel);
-  pretransformRename(codeModel);
+  pretransformArmResources(codeModel, metadata);
+  pretransformRename(codeModel, metadata);
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);
