@@ -91,10 +91,7 @@ interface DatastoreResources {
       /**
        * Names of datastores to return.
        */
-      @query({
-        name: "names",
-        format: "csv",
-      })
+      @query("names")
       names?: string[];
 
       /**

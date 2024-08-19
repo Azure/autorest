@@ -56,19 +56,13 @@ interface Extensions {
       /**
        * Installed extension ids.
        */
-      @query({
-        name: "extensionIds",
-        format: "multi",
-      })
+      @query(#{ name: "extensionIds", explode: true })
       extensionIds?: string[];
 
       /**
        * Installed extension categories.
        */
-      @query({
-        name: "extensionCategories",
-        format: "multi",
-      })
+      @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
 
       /**
