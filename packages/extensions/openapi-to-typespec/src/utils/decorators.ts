@@ -132,9 +132,14 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
             format = "tsv";
             break;
         }
-        locationDecorator.arguments = [
+        locationDecorator.arguments = format === "multi" ? [
           {
-            value: `{name: "${element.language.default.serializedName}", format: "${format}"}`,
+            value: `#{ name: "${element.language.default.serializedName}", explode: true }`,
+            options: { unwrap: true },
+          },
+        ] : [
+          {
+            value: format === "csv" ? `"${element.language.default.serializedName}"` : `{name: "${element.language.default.serializedName}", format: "${format}"}`,
             options: { unwrap: true },
           },
         ];

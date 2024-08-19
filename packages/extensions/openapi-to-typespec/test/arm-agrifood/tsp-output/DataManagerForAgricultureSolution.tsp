@@ -46,19 +46,13 @@ interface DataManagerForAgricultureSolutions {
       /**
        * Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.
        */
-      @query({
-        name: "farmBeatsSolutionIds",
-        format: "multi",
-      })
+      @query(#{ name: "farmBeatsSolutionIds", explode: true })
       farmBeatsSolutionIds?: string[];
 
       /**
        * Names of Data Manager For Agriculture Solutions which the customer requests to fetch.
        */
-      @query({
-        name: "farmBeatsSolutionNames",
-        format: "multi",
-      })
+      @query(#{ name: "farmBeatsSolutionNames", explode: true })
       farmBeatsSolutionNames?: string[];
 
       /**

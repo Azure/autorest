@@ -83,28 +83,19 @@ interface Spaces {
       /**
        * Select the specified fields to be included in the response.
        */
-      @query({
-        name: "select",
-        format: "multi",
-      })
+      @query(#{ name: "select", explode: true })
       select?: string[];
 
       /**
        * Expand the indicated resources into the response.
        */
-      @query({
-        name: "expand",
-        format: "multi",
-      })
+      @query(#{ name: "expand", explode: true })
       expand?: string[];
 
       /**
        * Expressions that specify the order of returned results.
        */
-      @query({
-        name: "orderby",
-        format: "multi",
-      })
+      @query(#{ name: "orderby", explode: true })
       orderby?: string[];
     }
   >;
