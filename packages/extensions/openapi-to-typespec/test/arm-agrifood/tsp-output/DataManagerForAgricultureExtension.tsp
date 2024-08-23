@@ -44,37 +44,25 @@ interface DataManagerForAgricultureExtensions {
       /**
        * DataManagerForAgricultureExtension ids.
        */
-      @query({
-        name: "farmBeatsExtensionIds",
-        format: "multi",
-      })
+      @query(#{ name: "farmBeatsExtensionIds", explode: true })
       farmBeatsExtensionIds?: string[];
 
       /**
        * DataManagerForAgriculture extension names.
        */
-      @query({
-        name: "farmBeatsExtensionNames",
-        format: "multi",
-      })
+      @query(#{ name: "farmBeatsExtensionNames", explode: true })
       farmBeatsExtensionNames?: string[];
 
       /**
        * Extension categories.
        */
-      @query({
-        name: "extensionCategories",
-        format: "multi",
-      })
+      @query(#{ name: "extensionCategories", explode: true })
       extensionCategories?: string[];
 
       /**
        * Publisher ids.
        */
-      @query({
-        name: "publisherIds",
-        format: "multi",
-      })
+      @query(#{ name: "publisherIds", explode: true })
       publisherIds?: string[];
 
       /**

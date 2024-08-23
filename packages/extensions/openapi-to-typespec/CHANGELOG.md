@@ -1,6 +1,17 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 25 Jun 2024 08:03:35 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Aug 2024 04:49:28 GMT and should not be manually modified.
+
+## 0.9.0
+Mon, 12 Aug 2024 04:49:28 GMT
+
+### Minor changes
+
+- Support char type from swagger and Automatically detect ARM specs
+
+### Patches
+
+- upgrade tsp version of converter to 0.58
 
 ## 0.8.2
 Tue, 25 Jun 2024 08:03:35 GMT

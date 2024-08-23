@@ -56,47 +56,32 @@ interface Solutions {
       /**
        * Installed Solution ids.
        */
-      @query({
-        name: "solutionIds",
-        format: "multi",
-      })
+      @query(#{ name: "solutionIds", explode: true })
       solutionIds?: string[];
 
       /**
        * Ids of the resource.
        */
-      @query({
-        name: "ids",
-        format: "multi",
-      })
+      @query(#{ name: "ids", explode: true })
       ids?: string[];
 
       /**
        * Names of the resource.
        */
-      @query({
-        name: "names",
-        format: "multi",
-      })
+      @query(#{ name: "names", explode: true })
       names?: string[];
 
       /**
        * Filters on key-value pairs within the Properties object.
        * eg. "{testKey} eq {testValue}".
        */
-      @query({
-        name: "propertyFilters",
-        format: "multi",
-      })
+      @query(#{ name: "propertyFilters", explode: true })
       propertyFilters?: string[];
 
       /**
        * Statuses of the resource.
        */
-      @query({
-        name: "statuses",
-        format: "multi",
-      })
+      @query(#{ name: "statuses", explode: true })
       statuses?: string[];
 
       /**

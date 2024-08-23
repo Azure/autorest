@@ -832,7 +832,7 @@ interface DocumentsOperations {
 * expression contains a field name, optionally followed by a comma-separated list
 * of name:value pairs.
 */
-@query({name: "facet", format: "multi"})
+@query(#{ name: "facet", explode: true })
 "Facets"?: string[]
 /**
 * The OData $filter expression to apply to the search query.
@@ -843,7 +843,7 @@ interface DocumentsOperations {
 * The list of field names to use for hit highlights. Only searchable fields can
 * be used for hit highlighting.
 */
-@query({name: "highlight", format: "csv"})
+@query("highlight")
 "HighlightFields"?: string[]
 /**
 * A string tag that is appended to hit highlights. Must be set with
@@ -874,7 +874,7 @@ interface DocumentsOperations {
 * specified, the default sort order is descending by document match score. There
 * can be at most 32 $orderby clauses.
 */
-@query({name: "$orderby", format: "csv"})
+@query("$orderby")
 "OrderBy"?: string[]
 /**
 * A value that specifies the syntax of the search query. The default is 'simple'.
@@ -888,7 +888,7 @@ interface DocumentsOperations {
 * scoring profile defines a function with a parameter called 'mylocation' the
 * parameter string would be "mylocation--122.2,44.8" (without the quotes).
 */
-@query({name: "scoringParameter", format: "multi"})
+@query(#{ name: "scoringParameter", explode: true })
 "ScoringParameters"?: string[]
 /**
 * The name of a scoring profile to evaluate match scores for matching documents
@@ -902,7 +902,7 @@ interface DocumentsOperations {
 * names of each fielded search expression take precedence over any field names
 * listed in this parameter.
 */
-@query({name: "searchFields", format: "csv"})
+@query("searchFields")
 "searchFields"?: string[]
 /**
 * A value that specifies whether any or all of the search terms must be matched
@@ -931,7 +931,7 @@ interface DocumentsOperations {
 * The list of fields to retrieve. If unspecified, all fields marked as
 * retrievable in the schema are included.
 */
-@query({name: "$select", format: "csv"})
+@query("$select")
 "$select"?: string[]
 /**
 * The number of search results to skip. This value cannot be greater than
@@ -1023,7 +1023,7 @@ interface DocumentsOperations {
 /**
 * The list of field names used for semantic ranking.
 */
-@query({name: "semanticFields", format: "csv"})
+@query("semanticFields")
 "semanticFields"?: string[]}, SearchDocumentsResult>;
 
 
@@ -1058,7 +1058,7 @@ interface DocumentsOperations {
 * List of field names to retrieve for the document; Any field not retrieved will
 * be missing from the returned document.
 */
-@query({name: "$select", format: "csv"})
+@query("$select")
 "SelectedFields"?: string[]
 /**
 * The tracking ID sent with the request to help with debugging.
@@ -1127,19 +1127,19 @@ interface DocumentsOperations {
 * specified, the default sort order is descending by document match score. There
 * can be at most 32 $orderby clauses.
 */
-@query({name: "$orderby", format: "csv"})
+@query("$orderby")
 "OrderBy"?: string[]
 /**
 * The list of field names to search for the specified search text. Target fields
 * must be included in the specified suggester.
 */
-@query({name: "searchFields", format: "csv"})
+@query("searchFields")
 "searchFields"?: string[]
 /**
 * The list of fields to retrieve. If unspecified, only the key field will be
 * included in the results.
 */
-@query({name: "$select", format: "csv"})
+@query("$select")
 "$select"?: string[]
 /**
 * The number of suggestions to retrieve. The value must be a number between 1 and
@@ -1256,7 +1256,7 @@ interface DocumentsOperations {
 * The list of field names to consider when querying for auto-completed terms.
 * Target fields must be included in the specified suggester.
 */
-@query({name: "searchFields", format: "csv"})
+@query("searchFields")
 "searchFields"?: string[]
 /**
 * The number of auto-completed terms to retrieve. This must be a value between 1

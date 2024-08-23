@@ -62,10 +62,7 @@ interface WebPubSubOperations {
       /**
        * Exclude these connectionIds when closing the connections in the hub.
        */
-      @query({
-        name: "excluded",
-        format: "multi",
-      })
+      @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
       /**
@@ -102,10 +99,7 @@ interface WebPubSubOperations {
       /**
        * Roles that the connection with the generated token will have.
        */
-      @query({
-        name: "role",
-        format: "multi",
-      })
+      @query(#{ name: "role", explode: true })
       role?: string[];
 
       /**
@@ -118,10 +112,7 @@ interface WebPubSubOperations {
       /**
        * Groups that the connection will join when it connects.
        */
-      @query({
-        name: "group",
-        format: "multi",
-      })
+      @query(#{ name: "group", explode: true })
       group?: string[];
 
       /**
@@ -185,10 +176,7 @@ interface WebPubSubOperations {
       /**
        * Excluded connection Ids.
        */
-      @query({
-        name: "excluded",
-        format: "multi",
-      })
+      @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
       /**
@@ -413,10 +401,7 @@ interface WebPubSubOperations {
       /**
        * Exclude these connectionIds when closing the connections in the group.
        */
-      @query({
-        name: "excluded",
-        format: "multi",
-      })
+      @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
       /**
@@ -456,10 +441,7 @@ interface WebPubSubOperations {
       /**
        * Excluded connection Ids
        */
-      @query({
-        name: "excluded",
-        format: "multi",
-      })
+      @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
       /**
@@ -737,10 +719,7 @@ interface WebPubSubOperations {
       /**
        * Exclude these connectionIds when closing the connections for the user.
        */
-      @query({
-        name: "excluded",
-        format: "multi",
-      })
+      @query(#{ name: "excluded", explode: true })
       excluded?: string[];
 
       /**

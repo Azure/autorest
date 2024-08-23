@@ -1102,6 +1102,8 @@ final-state-schema | A `ref` to the schema of the final result | For languages t
 
 The polling mechanism in itself remains unchanged, the only impact of this option could be to do an additional final GET, or skip a final GET.
 
+**NOTE** `final-state-via` is _only_ applicable to `POST` operations. Setting this for other operations will have _no effect_.
+
 The `final-state-schema` can be used to specify the schema of the response of whichever means is indicated in `final-state-via` for obtaining the final result.
 
 **Parent element**: [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)

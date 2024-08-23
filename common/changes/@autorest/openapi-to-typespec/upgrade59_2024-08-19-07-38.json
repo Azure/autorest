@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/openapi-to-typespec",
-      "comment": "upgrade tsp version of converter to 0.58",
+      "comment": "Upgrade tsp compiler to 0.59",
       "type": "patch"
     }
   ],

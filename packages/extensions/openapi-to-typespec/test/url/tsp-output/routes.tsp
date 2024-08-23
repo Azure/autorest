@@ -898,10 +898,7 @@ interface queriesOperations {
         an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, '']
         using the csv-array format
         """)
-      @query({
-        name: "arrayQuery",
-        format: "csv",
-      })
+      @query("arrayQuery")
       arrayQuery?: string[];
     },
     void
@@ -917,10 +914,7 @@ interface queriesOperations {
       /**
        * a null array of string using the csv-array format
        */
-      @query({
-        name: "arrayQuery",
-        format: "csv",
-      })
+      @query("arrayQuery")
       arrayQuery?: string[];
     },
     void
@@ -936,10 +930,7 @@ interface queriesOperations {
       /**
        * an empty array [] of string using the csv-array format
        */
-      @query({
-        name: "arrayQuery",
-        format: "csv",
-      })
+      @query("arrayQuery")
       arrayQuery?: string[];
     },
     void
@@ -956,10 +947,7 @@ interface queriesOperations {
       /**
        * Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
        */
-      @query({
-        name: "arrayQuery",
-        format: "csv",
-      })
+      @query("arrayQuery")
       arrayQuery?: string[];
     },
     void
