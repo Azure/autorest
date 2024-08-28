@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -67,7 +66,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DataManagerForAgriculture"],
+      "Parents": [
+        "DataManagerForAgriculture"
+      ],
       "SwaggerModelName": "DataConnector",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats/dataConnectors",
       "ResourceKey": "dataConnectorName",
@@ -104,7 +105,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -116,7 +116,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["TenantResource"],
+      "Parents": [
+        "TenantResource"
+      ],
       "SwaggerModelName": "DataManagerForAgricultureExtension",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions",
       "ResourceKey": "dataManagerForAgricultureExtensionId",
@@ -183,7 +185,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -193,14 +194,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDataManagerForAgricultures",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/farmBeats",
           "Method": "GET",
           "OperationID": "DataManagerForAgricultureResources_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -210,7 +210,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DataManagerForAgriculture",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats",
       "ResourceKey": "dataManagerForAgricultureResourceName",
@@ -277,7 +279,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByDataManagerForAgriculture",
-            "NextPageMethod": "ListByDataManagerForAgricultureNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -289,7 +290,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DataManagerForAgriculture"],
+      "Parents": [
+        "DataManagerForAgriculture"
+      ],
       "SwaggerModelName": "Extension",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats/extensions",
       "ResourceKey": "extensionId",
@@ -301,8 +304,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "AgFoodPlatformPrivateEndpointConnection": {
-      "Name": "AgFoodPlatformPrivateEndpointConnection",
+    "PrivateEndpointConnection": {
+      "Name": "PrivateEndpointConnection",
       "GetOperations": [
         {
           "Name": "Get",
@@ -356,9 +359,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResource",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Get list of Private endpoint connections."
         }
@@ -368,7 +370,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DataManagerForAgriculture"],
+      "Parents": [
+        "DataManagerForAgriculture"
+      ],
       "SwaggerModelName": "PrivateEndpointConnection",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats/privateEndpointConnections",
       "ResourceKey": "privateEndpointConnectionName",
@@ -380,8 +384,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "AgFoodPlatformPrivateLinkResource": {
-      "Name": "AgFoodPlatformPrivateLinkResource",
+    "PrivateLinkResource": {
+      "Name": "PrivateLinkResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -405,9 +409,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResource",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Get list of Private link resources."
         }
@@ -417,7 +420,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DataManagerForAgriculture"],
+      "Parents": [
+        "DataManagerForAgriculture"
+      ],
       "SwaggerModelName": "PrivateLinkResource",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats/privateLinkResources",
       "ResourceKey": "subResourceName",
@@ -484,7 +489,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -496,7 +500,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DataManagerForAgriculture"],
+      "Parents": [
+        "DataManagerForAgriculture"
+      ],
       "SwaggerModelName": "Solution",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeats/solutions",
       "ResourceKey": "solutionId",
@@ -533,7 +539,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -545,7 +550,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["TenantResource"],
+      "Parents": [
+        "TenantResource"
+      ],
       "SwaggerModelName": "DataManagerForAgricultureSolution",
       "ResourceType": "Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions",
       "ResourceKey": "dataManagerForAgricultureSolutionId",
@@ -557,5 +564,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

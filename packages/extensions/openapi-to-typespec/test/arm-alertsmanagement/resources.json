@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -65,14 +64,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetAlertProcessingRules",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules",
           "Method": "GET",
           "OperationID": "AlertProcessingRules_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -82,7 +80,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "AlertProcessingRule",
       "ResourceType": "Microsoft.AlertsManagement/actionRules",
       "ResourceKey": "alertProcessingRuleName",
@@ -94,8 +94,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ServiceAlert": {
-      "Name": "ServiceAlert",
+    "Alert": {
+      "Name": "Alert",
       "GetOperations": [
         {
           "Name": "Get",
@@ -119,7 +119,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "GetAll",
-            "NextPageMethod": "GetAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -127,26 +126,7 @@
         }
       ],
       "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [
-        {
-          "Name": "GetServiceAlertSummary",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertsSummary",
-          "Method": "GET",
-          "OperationID": "Alerts_GetSummary",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by \u0027Severity\u0027 returns the count of alerts for each severity)."
-        },
-        {
-          "Name": "GetServiceAlertMetadata",
-          "Path": "/providers/Microsoft.AlertsManagement/alertsMetaData",
-          "Method": "GET",
-          "OperationID": "Alerts_MetaData",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "List alerts meta data information based on value of identifier parameter."
-        }
-      ],
+      "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
@@ -169,7 +149,9 @@
           "Description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed)."
         }
       ],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "Alert",
       "ResourceType": "Microsoft.AlertsManagement/alerts",
       "ResourceKey": "alertId",
@@ -206,7 +188,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "GetAll",
-            "NextPageMethod": "GetAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -237,7 +218,9 @@
           "Description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) ."
         }
       ],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "SmartGroup",
       "ResourceType": "Microsoft.AlertsManagement/smartGroups",
       "ResourceKey": "smartGroupId",
@@ -249,5 +232,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

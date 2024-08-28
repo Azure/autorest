@@ -106,6 +106,10 @@ async function main() {
 
   for (let i = 0; i < folders.length; i++) {
     const folder = folders[i];
+    // Multipath cases
+    if (["arm-apimanagement", "arm-compute", "arm-machinelearningservices"].includes(folder)) continue;
+    // Expanded cases: https://github.com/Azure/typespec-azure/issues/1261
+    if (folder === "arm-dns") continue;
     try {
       await generateTypespec(repoRoot, folder, debug);
       if (swagger) {

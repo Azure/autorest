@@ -29,7 +29,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   setSession(session);
   const codeModel = session.model;  
   pretransformNames(codeModel);
-  await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+  // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
   const metadata = parseMetadata(codeModel);
   await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
   pretransformArmResources(codeModel, metadata);

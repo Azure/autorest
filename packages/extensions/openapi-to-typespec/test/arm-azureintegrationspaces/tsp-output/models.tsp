@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -532,23 +531,6 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
    */
   @OpenAPI.extension("x-ms-identifiers", [])
   value: SaveOrGetBusinessProcessDevelopmentArtifactResponse[];
-}
-
-/**
- * The response of a ApplicationResource list operation.
- */
-model ApplicationResourceListResult is Azure.Core.Page<ApplicationResource>;
-
-/**
- * A resource under application.
- */
-model ApplicationResource extends ProxyResource {
-  /**
-   * The resource-specific properties for this resource.
-   */
-  @visibility("read", "create")
-  @extension("x-ms-client-flatten", true)
-  properties?: ApplicationResourceProperties;
 }
 
 /**

@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The properties of File services in storage account.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model FileServiceProperties
   is Azure.ResourceManager.ProxyResource<FileServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = FileServiceProperties,
-    KeyName = "fileService",
+    KeyName = "FileServicesName",
     SegmentName = "fileServices",
-    NamePattern = ""
+    NamePattern = "",
+    Type = "default"
   >;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
@@ -51,7 +51,11 @@ interface FileServicePropertiesOperationGroup {
   list is ArmResourceListByParent<FileServiceProperties>;
 }
 
-@@doc(FileServiceProperties.name, "");
+@@doc(FileServiceProperties.name,
+  "The name of the file Service within the specified storage account. File Service Name must be ",
+  default,
+  ""
+);
 @@doc(FileServiceProperties.properties,
   "The properties of File services in storage account."
 );

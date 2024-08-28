@@ -2137,6 +2137,11 @@ model StorageAccountPropertiesUpdateParameters {
 }
 
 /**
+ * The response from the List Deleted Accounts operation.
+ */
+model DeletedAccountListResult is Azure.Core.Page<DeletedAccount>;
+
+/**
  * Attributes of a deleted storage account.
  */
 model DeletedAccountProperties {

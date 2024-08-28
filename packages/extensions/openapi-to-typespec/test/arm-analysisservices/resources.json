@@ -1,7 +1,7 @@
 {
   "Resources": {
-    "AnalysisServer": {
-      "Name": "AnalysisServer",
+    "AnalysisServicesServer": {
+      "Name": "AnalysisServicesServer",
       "GetOperations": [
         {
           "Name": "Get",
@@ -55,9 +55,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets all the Analysis Services servers for the given resource group."
         }
@@ -65,41 +64,17 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetAnalysisServers",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers",
           "Method": "GET",
           "OperationID": "Servers_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all the Analysis Services servers for the given subscription."
-        },
-        {
-          "Name": "GetEligibleSkus",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus",
-          "Method": "GET",
-          "OperationID": "Servers_ListSkusForNew",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListSkusForNew",
-            "NextPageMethod": null,
-            "ItemName": "value",
-            "NextLinkName": null
-          },
-          "Description": "Lists eligible SKUs for Analysis Services resource provider."
-        },
-        {
-          "Name": "CheckAnalysisServerNameAvailability",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/checkNameAvailability",
-          "Method": "POST",
-          "OperationID": "Servers_CheckNameAvailability",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Check the name availability in the target location."
         }
       ],
       "OperationsFromManagementGroupExtension": [],
@@ -124,21 +99,20 @@
           "Description": "Resumes operation of the specified Analysis Services server instance."
         },
         {
-          "Name": "GetExistingSkus",
+          "Name": "ListSkusForExisting",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus",
           "Method": "GET",
           "OperationID": "Servers_ListSkusForExisting",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListSkusForExisting",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists eligible SKUs for an Analysis Services resource."
         },
         {
-          "Name": "GetGatewayStatus",
+          "Name": "ListGatewayStatus",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus",
           "Method": "POST",
           "OperationID": "Servers_ListGatewayStatus",
@@ -156,7 +130,9 @@
           "Description": "Dissociates a Unified Gateway associated with the server."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "AnalysisServicesServer",
       "ResourceType": "Microsoft.AnalysisServices/servers",
       "ResourceKey": "serverName",
@@ -168,5 +144,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

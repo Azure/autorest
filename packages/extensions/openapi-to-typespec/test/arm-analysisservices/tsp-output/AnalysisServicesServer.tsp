@@ -75,13 +75,6 @@ interface AnalysisServicesServers {
   list is ArmListBySubscription<AnalysisServicesServer>;
 
   /**
-   * Lists eligible SKUs for Analysis Services resource provider.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Servers_ListSkusForNew")
-  listSkusForNew is ArmListBySubscription<AnalysisServicesServer>;
-
-  /**
    * Suspends operation of the specified Analysis Services server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
@@ -115,16 +108,6 @@ interface AnalysisServicesServers {
     AnalysisServicesServer,
     void,
     void
-  >;
-
-  /**
-   * Check the name availability in the target location.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Servers_CheckNameAvailability")
-  checkNameAvailability is checkLocalNameAvailability<
-    CheckServerNameAvailabilityParameters,
-    CheckServerNameAvailabilityResult
   >;
 
   /**

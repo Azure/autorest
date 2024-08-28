@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Queue service.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model QueueServiceProperties
   is Azure.ResourceManager.ProxyResource<QueueServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = QueueServiceProperties,
-    KeyName = "queueService",
+    KeyName = "queueServiceName",
     SegmentName = "queueServices",
-    NamePattern = ""
+    NamePattern = "",
+    Type = "default"
   >;
 }
 
@@ -50,7 +50,9 @@ interface QueueServicePropertiesOperationGroup {
   list is ArmResourceListByParent<QueueServiceProperties>;
 }
 
-@@doc(QueueServiceProperties.name, "");
+@@doc(QueueServiceProperties.name,
+  "The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'"
+);
 @@doc(QueueServiceProperties.properties,
   "The properties of a storage account’s Queue service."
 );

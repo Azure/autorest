@@ -1,5 +1,5 @@
-import { getAllProperties, ObjectSchema } from "@autorest/codemodel";
-import { isArmIdSchema, isDictionarySchema, isStringSchema } from "../utils/schemas";
+import { ArraySchema, getAllProperties, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
+import { isArmIdSchema, isArraySchema, isDictionarySchema, isResponseSchema, isStringSchema } from "../utils/schemas";
 
 export function isResource(schema: ObjectSchema): boolean {
     let idPropertyFound = false;
@@ -37,4 +37,23 @@ export function isTrackedResource(schema: ObjectSchema): boolean {
         }
     }
     return isLocationFound && isTagsFound;
+}
+
+export function getPagingItemType(operation: Operation): string | undefined {
+    const response = operation.responses?.find(r => isResponseSchema(r));
+    if (response === undefined) return undefined;
+
+    let itemName = "value";
+    if (operation.extensions?.["x-ms-pageable"]?.itemName) {
+        itemName = operation.extensions?.["x-ms-pageable"]?.itemName;
+    }
+
+    const schemaResponse = response as SchemaResponse;
+    if (isArraySchema(schemaResponse.schema)) return schemaResponse.schema.elementType.language.default.name;
+    if (isObjectSchema(schemaResponse.schema)) {
+        const responseSchema = schemaResponse.schema.properties?.find(p => p.serializedName === itemName && isArraySchema(p.schema));
+        if (!responseSchema) return undefined;
+        return (responseSchema.schema as ArraySchema).elementType.language.default.name;
+    }
+    return undefined;
 }

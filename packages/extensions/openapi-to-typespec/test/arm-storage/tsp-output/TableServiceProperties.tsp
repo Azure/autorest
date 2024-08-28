@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Table service.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model TableServiceProperties
   is Azure.ResourceManager.ProxyResource<TableServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = TableServiceProperties,
-    KeyName = "tableService",
+    KeyName = "tableServiceName",
     SegmentName = "tableServices",
-    NamePattern = ""
+    NamePattern = "",
+    Type = "default"
   >;
 }
 
@@ -50,7 +50,9 @@ interface TableServicePropertiesOperationGroup {
   list is ArmResourceListByParent<TableServiceProperties>;
 }
 
-@@doc(TableServiceProperties.name, "");
+@@doc(TableServiceProperties.name,
+  "The name of the Table Service within the specified storage account. Table Service Name must be 'default'"
+);
 @@doc(TableServiceProperties.properties,
   "The properties of a storage account’s Table service."
 );

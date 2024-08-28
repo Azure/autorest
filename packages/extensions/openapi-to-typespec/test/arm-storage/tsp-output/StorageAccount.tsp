@@ -193,14 +193,6 @@ interface StorageAccounts {
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
 
   /**
-   * Checks that the storage account name is valid and is not already in use.
-   */
-  checkNameAvailability is checkGlobalNameAvailability<
-    StorageAccountCheckNameAvailabilityParameters,
-    CheckNameAvailabilityResult
-  >;
-
-  /**
    * Gets the private link resources that need to be created for a storage account.
    */
   // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation

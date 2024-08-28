@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./BlobServiceProperties.tsp";
+import "./StorageAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 /**
  * Properties of the blob container, including Id, resource name, resource type, Etag.
  */
-@parentResource(BlobServiceProperties)
+@parentResource(StorageAccount)
 model BlobContainer
   is Azure.ResourceManager.ProxyResource<ContainerProperties> {
   ...ResourceNameParameter<
@@ -90,6 +90,42 @@ interface BlobContainers {
   clearLegalHold is ArmResourceActionSync<BlobContainer, LegalHold, LegalHold>;
 
   /**
+   * Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.
+   */
+  lockImmutabilityPolicy is ArmResourceActionSync<
+    BlobContainer,
+    void,
+    ImmutabilityPolicy,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
+
+      /**
+       * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
+   * Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.
+   */
+  extendImmutabilityPolicy is ArmResourceActionSync<
+    BlobContainer,
+    ImmutabilityPolicy,
+    ImmutabilityPolicy,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
+
+      /**
+       * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
    * The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   lease is ArmResourceActionSync<
@@ -153,6 +189,17 @@ interface BlobContainers {
 );
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
+);
+@@encodedName(BlobContainers.extendImmutabilityPolicy::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(BlobContainers.extendImmutabilityPolicy::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(BlobContainers.extendImmutabilityPolicy::parameters.body,
+  "The ImmutabilityPolicy Properties that will be extended for a blob container."
 );
 @@encodedName(BlobContainers.lease::parameters.body,
   "application/json",

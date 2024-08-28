@@ -1,14 +1,13 @@
 import { CodeModel, HttpMethod, Operation } from "@autorest/codemodel";
 import { getLogger } from "../utils/logger";
 import { _ArmPagingMetadata, _ArmResourceOperation, ArmResource, Metadata } from "../utils/resource-discovery";
-import { findOperation, getExtensionOperation, getParentOfLifeCycleOperation, getParentOfResourceCollectionOperation, getParents, getResourceDataSchema, getResourceKey, getResourceKeySegment, getResourceType, OperationSet, setParentOfExtensionOperation } from "./operation-set";
+import { findOperation, getResourceDataSchema, OperationSet } from "./operation-set";
 import { lastWordToSingular } from "../utils/strings";
-import { isTrackedResource } from "./resource-equivalent";
+import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
+import { getExtensionOperation, getOtherOperations, getParents, getResourceCollectionOperations, setParentOfExtensionOperation, setParentOfOtherOperation, setParentOfResourceCollectionOperation } from "./find-parent";
+import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
 
 const logger = () => getLogger("parse-metadata");
-
-const otherOperationsByRequestPath: {[path: string]: Operation[]} = {};
-const listOperationsByRequestPath: {[path: string]: Operation[]} = {};
 
 export function parseMetadata(codeModel: CodeModel): Metadata {
     const operationSets: {[path: string]: OperationSet} = {};
@@ -45,26 +44,12 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
 
         for (const operation of operationSet.Operations) {
             // Check if this operation is a collection operation
-            let parentPath = getParentOfResourceCollectionOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat());
-            if (parentPath !== undefined) {
-                listOperationsByRequestPath[parentPath] ??= [];
-                listOperationsByRequestPath[parentPath].push(operation);
-                continue;
-            }
+            if (setParentOfResourceCollectionOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat())) continue;
 
             // Otherwise we find a request path that is the longest parent of this, and belongs to a resource
-            if (parentPath === undefined) {
-                parentPath = getParentOfLifeCycleOperation(key, Object.values(operationSetsByResourceDataSchemaName).flat());
-                if (parentPath !== undefined) {
-                    otherOperationsByRequestPath[parentPath] ??= [];
-                    otherOperationsByRequestPath[parentPath].push(operation);
-                    continue;
-                }
-            }
+            if (setParentOfOtherOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat())) continue;
             
-            if (parentPath === undefined) {
-                setParentOfExtensionOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat());
-            }
+            setParentOfExtensionOperation(operation, key, Object.values(operationSetsByResourceDataSchemaName).flat());
         }
     }
 
@@ -72,7 +57,7 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
     for (const resourceSchemaName in operationSetsByResourceDataSchemaName) {
         const operationSets = operationSetsByResourceDataSchemaName[resourceSchemaName];
         if (operationSets.length > 1) {
-            throw `SchemaName: ${resourceSchemaName} has more than one operation set`;
+            throw `We cannot support multi path with same model.\nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets.map(o => o.RequestPath).join('\n')}`;
         }
         resources[resourceSchemaName] = buildResource(resourceSchemaName, operationSets[0], Object.values(operationSetsByResourceDataSchemaName).flat(), codeModel);
     }
@@ -90,15 +75,15 @@ function buildResource(resourceSchemaName: string, set: OperationSet, operationS
     const createOperation = buildLifeCycleOperation(set, HttpMethod.Put, "CreateOrUpdate");
     const updateOperation = buildLifeCycleOperation(set, HttpMethod.Patch, "Update") ?? buildLifeCycleOperation(set, HttpMethod.Put, "Update");
     const deleteOperation = buildLifeCycleOperation(set, HttpMethod.Delete, "Delete");
-    const listOperation = buildListOperation(set.RequestPath);
-    const otherOperation = buildOtherOperation(set.RequestPath);
+    const listOperation = buildListOperation(set);
+    const otherOperation = buildOtherOperation(set);
 
     const resourceSchema = codeModel.schemas.objects?.find(o => o.language.default.name === resourceSchemaName);
     if (!resourceSchema) {
         logger().error(`Cannot find resource schema for name ${resourceSchemaName}`);
     }
 
-    const parents = getParents(set, operationSets);
+    const parents = getParents(set.RequestPath, operationSets);
     const isTenantResource = parents.length > 0 && parents[0] === "TenantResource";
     const isSubscriptionResource = parents.length > 0 && parents[0] === "SubscriptionResource";
     const isManagementGroupResource = parents.length > 0 && parents[0] === "ManagementGroupResource";
@@ -133,7 +118,7 @@ function buildResource(resourceSchemaName: string, set: OperationSet, operationS
         CreateOperations: createOperation ? [createOperation] : [],
         UpdateOperations: updateOperation ? [updateOperation] : [],
         DeleteOperations: deleteOperation ? [deleteOperation] : [],
-        ListOperations: listOperation ? [listOperation] : [],
+        ListOperations: listOperation ?? [],
         OperationsFromResourceGroupExtension: operationsFromResourceGroupExtension,
         OperationsFromSubscriptionExtension: operationsFromSubscriptionExtension,
         OperationsFromManagementGroupExtension: operationsFromManagementGroupExtension,
@@ -148,14 +133,14 @@ function buildResource(resourceSchemaName: string, set: OperationSet, operationS
         IsTenantResource: isTenantResource,
         IsSubscriptionResource: isSubscriptionResource,
         IsManagementGroupResource: isManagementGroupResource,
-        IsExtensionResource: false,
-        IsSingletonResource: false,
+        IsExtensionResource: isScopedPath(set.RequestPath),
+        IsSingletonResource: isSingleton(set.RequestPath),
     };
 }
 
 function buildResourceOperationFromOperation(operation: Operation, operationName: string): _ArmResourceOperation {
     let pagingMetadata: _ArmPagingMetadata | null = null;
-    if (operationName === "GetAll" || operation.extensions?.["x-ms-pageable"]) {
+    if (operationName === "GetAll" || getPagingItemType(operation) !== undefined) {
         let itemName = "value";
         let nextLinkName = "nextLink";
         if (operation.extensions?.["x-ms-pageable"]?.itemName) {
@@ -185,14 +170,14 @@ function buildResourceOperationFromOperation(operation: Operation, operationName
     };
 }
 
-function buildOtherOperation(requestPath: string): _ArmResourceOperation[] {
-    const operations = otherOperationsByRequestPath[requestPath];
-    return operations ? operations.map(o => buildResourceOperationFromOperation(o, o.language.default.name)) : [];
+function buildOtherOperation(set: OperationSet): _ArmResourceOperation[] {
+    const operations = getOtherOperations(set);
+    return operations.map(o => buildResourceOperationFromOperation(o, o.language.default.name));
 }
 
-function buildListOperation(requestPath: string):_ArmResourceOperation | undefined {
-    const operation = listOperationsByRequestPath[requestPath];
-    return operation?.length ? buildResourceOperationFromOperation(operation[0], "GetAll") : undefined;
+function buildListOperation(set: OperationSet): _ArmResourceOperation[] | undefined {
+    const operation = getResourceCollectionOperations(set);
+    return operation?.length ? operation.map(o => buildResourceOperationFromOperation(o, "GetAll")) : undefined;
 }
 
 function buildLifeCycleOperation(set: OperationSet, method: HttpMethod, operationName: string): _ArmResourceOperation | undefined {

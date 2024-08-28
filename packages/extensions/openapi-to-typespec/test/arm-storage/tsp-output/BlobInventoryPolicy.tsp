@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The storage account blob inventory policy.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model BlobInventoryPolicy
   is Azure.ResourceManager.ProxyResource<BlobInventoryPolicyProperties> {
   ...ResourceNameParameter<
     Resource = BlobInventoryPolicy,
-    KeyName = "inventoryPolicy",
+    KeyName = "blobInventoryPolicyName",
     SegmentName = "inventoryPolicies",
-    NamePattern = ""
+    NamePattern = "",
+    Type = BlobInventoryPolicyName
   >;
 }
 
@@ -52,7 +52,9 @@ interface BlobInventoryPolicies {
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }
 
-@@doc(BlobInventoryPolicy.name, "");
+@@doc(BlobInventoryPolicy.name,
+  "The name of the storage account blob inventory policy. It should always be 'default'"
+);
 @@doc(BlobInventoryPolicy.properties,
   "Returns the storage account blob inventory policy rules."
 );
