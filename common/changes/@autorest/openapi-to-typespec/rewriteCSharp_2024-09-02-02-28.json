@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/openapi-to-typespec",
+      "comment": "Remove .net generator dependency of tsp converter",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/openapi-to-typespec"
+}

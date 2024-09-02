@@ -28,13 +28,13 @@ import { markResources } from "./utils/resources";
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
-  const codeModel = session.model;  
+  const codeModel = session.model;
   pretransformNames(codeModel);
   const { isArm } = getOptions();
   if (isArm) {
     // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
     const metadata = parseMetadata(codeModel);
-    await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
+    await host.writeFile({ filename: "resources.json", content: JSON.stringify(metadata, null, 2) });
     pretransformArmResources(codeModel, metadata);
     pretransformRename(codeModel, metadata);
   }
