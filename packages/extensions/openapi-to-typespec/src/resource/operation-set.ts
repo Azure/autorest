@@ -1,7 +1,7 @@
 import { ArraySchema, HttpMethod, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
-import { isResource } from "./resource-equivalent";
 import { ProvidersSegment } from "./constants";
+import { isResource } from "./resource-equivalent";
 
 export interface OperationSet {
     RequestPath: string;

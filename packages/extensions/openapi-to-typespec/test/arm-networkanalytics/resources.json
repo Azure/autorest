@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -65,14 +64,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDataProducts",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProducts",
           "Method": "GET",
           "OperationID": "DataProducts_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -101,7 +99,7 @@
           "Description": "Generate sas token for storage account."
         },
         {
-          "Name": "GetRolesAssignments",
+          "Name": "ListRolesAssignments",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/listRolesAssignments",
           "Method": "POST",
           "OperationID": "DataProducts_ListRolesAssignments",
@@ -128,7 +126,9 @@
           "Description": "Initiate key rotation on Data Product."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DataProduct",
       "ResourceType": "Microsoft.NetworkAnalytics/dataProducts",
       "ResourceKey": "dataProductName",
@@ -156,18 +156,31 @@
       "CreateOperations": [],
       "UpdateOperations": [],
       "DeleteOperations": [],
-      "ListOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs",
+          "Method": "GET",
+          "OperationID": "DataProductsCatalogs_ListByResourceGroup",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByResourceGroup",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List data catalog by resource group."
+        }
+      ],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDataProductsCatalogs",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs",
           "Method": "GET",
           "OperationID": "DataProductsCatalogs_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -177,7 +190,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DataProductsCatalog",
       "ResourceType": "Microsoft.NetworkAnalytics/dataProductsCatalogs",
       "ResourceKey": "default",
@@ -244,7 +259,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByDataProduct",
-            "NextPageMethod": "ListByDataProductNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -275,7 +289,9 @@
           "Description": "Generate sas token for storage container."
         }
       ],
-      "Parents": ["DataProduct"],
+      "Parents": [
+        "DataProduct"
+      ],
       "SwaggerModelName": "DataType",
       "ResourceType": "Microsoft.NetworkAnalytics/dataProducts/dataTypes",
       "ResourceKey": "dataTypeName",
@@ -287,5 +303,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

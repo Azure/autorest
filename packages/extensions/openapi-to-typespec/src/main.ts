@@ -4,6 +4,7 @@
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
+import { serialize } from "@azure-tools/codegen";
 import { OpenAPI3Document } from "@azure-tools/openapi";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
@@ -15,25 +16,28 @@ import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { emitTypespecConfig } from "./emiters/emit-typespec-config";
 import { getModel } from "./model";
+import { getOptions } from "./options";
 import { pretransformArmResources } from "./pretransforms/arm-pretransform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
 import { pretransformRename } from "./pretransforms/rename-pretransform";
+import { parseMetadata } from "./resource/parse-metadata";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
-import { serialize } from "@azure-tools/codegen";
-import { parseMetadata } from "./resource/parse-metadata";
 
 export async function processConverter(host: AutorestExtensionHost) {
   const session = await startSession<CodeModel>(host, codeModelSchema);
   setSession(session);
   const codeModel = session.model;  
   pretransformNames(codeModel);
-  // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
-  const metadata = parseMetadata(codeModel);
-  await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
-  pretransformArmResources(codeModel, metadata);
-  pretransformRename(codeModel, metadata);
+  const { isArm } = getOptions();
+  if (isArm) {
+    // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+    const metadata = parseMetadata(codeModel);
+    await host.writeFile({filename: "resources.json", content: JSON.stringify(metadata, null, 2)});
+    pretransformArmResources(codeModel, metadata);
+    pretransformRename(codeModel, metadata);
+  }
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);

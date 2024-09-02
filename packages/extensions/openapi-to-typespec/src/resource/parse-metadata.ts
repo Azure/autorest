@@ -1,10 +1,10 @@
 import { CodeModel, HttpMethod, Operation } from "@autorest/codemodel";
 import { getLogger } from "../utils/logger";
 import { _ArmPagingMetadata, _ArmResourceOperation, ArmResource, Metadata } from "../utils/resource-discovery";
-import { findOperation, getResourceDataSchema, OperationSet } from "./operation-set";
 import { lastWordToSingular } from "../utils/strings";
-import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getExtensionOperation, getOtherOperations, getParents, getResourceCollectionOperations, setParentOfExtensionOperation, setParentOfOtherOperation, setParentOfResourceCollectionOperation } from "./find-parent";
+import { findOperation, getResourceDataSchema, OperationSet } from "./operation-set";
+import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
 
 const logger = () => getLogger("parse-metadata");
@@ -25,7 +25,7 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
     const operationSetsByResourceDataSchemaName: {[name: string]: OperationSet[]} = {};
     for (const key in operationSets) {
         const operationSet = operationSets[key];
-        let resourceSchemaName = getResourceDataSchema(operationSet);
+        const resourceSchemaName = getResourceDataSchema(operationSet);
         if (resourceSchemaName !== undefined) {
             // resourceSchemaName = lastWordToSingular(resourceSchemaName);
 
@@ -187,9 +187,11 @@ function buildLifeCycleOperation(set: OperationSet, method: HttpMethod, operatio
 
 function getNormalizeHttpPath(operation: Operation): string {
     if (operation.requests?.length !== 1) {
-        logger().error(`No request or more than 1 requests in operation ${operation.operationId}`);
+        throw `No request or more than 1 requests in operation ${operation.operationId}`;
     }
 
     const path = operation.requests![0].protocol.http?.path;
-    return (path?.length === 1 ? path : path?.replace(/\/$/, '')) ?? logger().error(`Invalid http path ${path} for operation ${operation.operationId}`);
+    const normalizedPath = path?.length === 1 ? path : path?.replace(/\/$/, '');
+    if (!normalizedPath) throw `Invalid http path ${path} for operation ${operation.operationId}`;
+    return normalizedPath;
 }

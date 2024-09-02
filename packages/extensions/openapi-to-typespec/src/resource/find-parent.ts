@@ -1,9 +1,9 @@
 import { ArraySchema, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { getResourceDataSchema, OperationSet } from "./operation-set";
-import { ManagementGroupPath, ManagementGroupScopePrefix, ProvidersSegment, ResourceGroupPath, ResourceGroupScopePrefix, SubscriptionPath, SubscriptionScopePrefix, TenantPath, TenantScopePrefix } from "./constants";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
-import { getResourceType, getScopePath, isScopedSegment, pathIncludes } from "./utils";
+import { ManagementGroupPath, ManagementGroupScopePrefix, ProvidersSegment, ResourceGroupPath, ResourceGroupScopePrefix, SubscriptionPath, SubscriptionScopePrefix, TenantPath, TenantScopePrefix } from "./constants";
+import { getResourceDataSchema, OperationSet } from "./operation-set";
 import { getPagingItemType } from "./resource-equivalent";
+import { getResourceType, getScopePath, isScopedSegment, pathIncludes } from "./utils";
 
 const extensionMethodCache = new WeakMap<OperationSet, [Operation, string][]>();
 const resourceCollectionMethodCache = new WeakMap<OperationSet, Operation[]>();

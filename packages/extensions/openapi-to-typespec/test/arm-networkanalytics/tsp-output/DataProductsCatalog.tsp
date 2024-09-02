@@ -32,6 +32,11 @@ interface DataProductsCatalogs {
   get is ArmResourceRead<DataProductsCatalog>;
 
   /**
+   * List data catalog by resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
+
+  /**
    * List data catalog by subscription.
    */
   listBySubscription is ArmListBySubscription<DataProductsCatalog>;
