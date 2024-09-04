@@ -204,8 +204,8 @@ The flags listed here are still provisional. Code generated with these flags can
 [namespace_folders]: https://packaging.python.org/guides/packaging-namespace-packages/#pkgutil-style-namespace-packages
 [bearer_token_credential_policy]: https://docs.microsoft.com/en-us/python/api/azure-core/azure.core.pipeline.policies.bearertokencredentialpolicy?view=azure-python
 [azure_key_credential_policy]: https://docs.microsoft.com/en-us/python/api/azure-core/azure.core.pipeline.policies.azurekeycredentialpolicy?view=azure-python
-[shared_generator_assets]: https://github.com/Azure/autorest.csharp/tree/feature/v3/src/assets/Generator.Shared
-[shared_azure_core_assets]: https://github.com/Azure/autorest.csharp/tree/feature/v3/src/assets/Azure.Core.Shared
+[shared_generator_assets]: https://github.com/Azure/autorest.csharp/tree/main/src/assets/Generator.Shared
+[shared_azure_core_assets]: https://github.com/Azure/autorest.csharp/tree/main/src/assets/Azure.Core.Shared
 [autorest_csharp]: https://github.com/Azure/autorest.csharp
 [azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk
 [pom]: https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#what-is-a-pom
