@@ -11,7 +11,7 @@ import {
   setParentOfOtherOperation,
   setParentOfResourceCollectionOperation,
 } from "./find-parent";
-import { findOperation, getResourceDataSchema, OperationSet } from "./operation-set";
+import { findOperation, getResourceDataSchema, OperationSet, populateSingletonRequestPath } from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
 
@@ -25,7 +25,7 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
     if (path in operationSets) {
       operationSets[path].Operations.push(operation);
     } else {
-      operationSets[path] = { RequestPath: path, Operations: [operation] };
+      operationSets[path] = { RequestPath: path, Operations: [operation], SingletonRequestPath: undefined };
     }
   }
 
@@ -34,8 +34,7 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
     const operationSet = operationSets[key];
     const resourceSchemaName = getResourceDataSchema(operationSet);
     if (resourceSchemaName !== undefined) {
-      // resourceSchemaName = lastWordToSingular(resourceSchemaName);
-
+      populateSingletonRequestPath(operationSet);
       if (resourceSchemaName in operationSetsByResourceDataSchemaName) {
         operationSetsByResourceDataSchemaName[resourceSchemaName].push(operationSet);
       } else {
@@ -160,7 +159,7 @@ function buildResource(
     IsSubscriptionResource: isSubscriptionResource,
     IsManagementGroupResource: isManagementGroupResource,
     IsExtensionResource: isScopedPath(set.RequestPath),
-    IsSingletonResource: isSingleton(set.RequestPath),
+    IsSingletonResource: isSingleton(set),
   };
 }
 

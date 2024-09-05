@@ -1,11 +1,12 @@
 import { ArraySchema, HttpMethod, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
-import { isArraySchema, isResponseSchema } from "../utils/schemas";
+import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
 import { ProvidersSegment } from "./constants";
 import { isResource } from "./resource-equivalent";
 
 export interface OperationSet {
   RequestPath: string;
   Operations: Array<Operation>;
+  SingletonRequestPath: string | undefined;
 }
 
 const resourceDataSchemaCache = new WeakMap<OperationSet, string | undefined>();
@@ -54,6 +55,30 @@ function checkEvenSegments(path: string): boolean {
   const following = path.substring(index);
   const segments = following.split("/").filter((s) => s.length > 0);
   return segments.length % 2 === 0;
+}
+
+export function populateSingletonRequestPath(set: OperationSet): void {
+  const updatedSegments: string[] = [];
+  const segments = set.RequestPath.split("/");
+  for (const segment of segments) {
+    if (segment.match(/^\{\w+\}$/) === null) {
+      updatedSegments.push(segment);
+    }
+    else {
+      const keyName = segment.replace(/^\{(\w+)\}$/, "$1");
+      const resourceKeyParameter = set.Operations[0].parameters?.find(p => p.language.default.name === keyName);
+      if (resourceKeyParameter === undefined) throw `Cannot find parameter ${keyName}`;
+
+      if (!isConstantSchema(resourceKeyParameter.schema)) {
+        updatedSegments.push(segment);
+      }
+      else {
+        const value = resourceKeyParameter.schema.value.value;
+        updatedSegments.push(value);
+      }
+    }
+  }
+  set.SingletonRequestPath = updatedSegments.join("/");
 }
 
 export function findOperation(set: OperationSet, method: HttpMethod): Operation | undefined {

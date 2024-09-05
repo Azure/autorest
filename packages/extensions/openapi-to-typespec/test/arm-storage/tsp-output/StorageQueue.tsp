@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./StorageAccount.tsp";
+import "./QueueServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Storage;
 
-@parentResource(StorageAccount)
+@parentResource(QueueServiceProperties)
 model StorageQueue is Azure.ResourceManager.ProxyResource<QueueProperties> {
   ...ResourceNameParameter<
     Resource = StorageQueue,

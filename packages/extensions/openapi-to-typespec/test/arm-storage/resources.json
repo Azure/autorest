@@ -776,7 +776,7 @@
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
-      "IsSingletonResource": false
+      "IsSingletonResource": true
     },
     "BlobContainer": {
       "Name": "BlobContainer",
@@ -863,24 +863,6 @@
           "Description": "Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request."
         },
         {
-          "Name": "LockImmutabilityPolicy",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock",
-          "Method": "POST",
-          "OperationID": "BlobContainers_LockImmutabilityPolicy",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation."
-        },
-        {
-          "Name": "ExtendImmutabilityPolicy",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend",
-          "Method": "POST",
-          "OperationID": "BlobContainers_ExtendImmutabilityPolicy",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation."
-        },
-        {
           "Name": "Lease",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease",
           "Method": "POST",
@@ -900,7 +882,7 @@
         }
       ],
       "Parents": [
-        "StorageAccount"
+        "BlobServiceProperty"
       ],
       "SwaggerModelName": "BlobContainer",
       "ResourceType": "Microsoft.Storage/storageAccounts/blobServices/containers",
@@ -964,7 +946,26 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
+      "OtherOperations": [
+        {
+          "Name": "LockImmutabilityPolicy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock",
+          "Method": "POST",
+          "OperationID": "BlobContainers_LockImmutabilityPolicy",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation."
+        },
+        {
+          "Name": "ExtendImmutabilityPolicy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend",
+          "Method": "POST",
+          "OperationID": "BlobContainers_ExtendImmutabilityPolicy",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation."
+        }
+      ],
       "Parents": [
         "BlobContainer"
       ],
@@ -977,7 +978,7 @@
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
-      "IsSingletonResource": false
+      "IsSingletonResource": true
     },
     "FileServiceProperties": {
       "Name": "FileServiceProperty",
@@ -1047,7 +1048,7 @@
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
-      "IsSingletonResource": false
+      "IsSingletonResource": true
     },
     "FileShare": {
       "Name": "FileShare",
@@ -1135,7 +1136,7 @@
         }
       ],
       "Parents": [
-        "StorageAccount"
+        "FileServiceProperty"
       ],
       "SwaggerModelName": "FileShare",
       "ResourceType": "Microsoft.Storage/storageAccounts/fileServices/shares",
@@ -1216,7 +1217,7 @@
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
-      "IsSingletonResource": false
+      "IsSingletonResource": true
     },
     "StorageQueue": {
       "Name": "StorageQueue",
@@ -1285,7 +1286,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
       "Parents": [
-        "StorageAccount"
+        "QueueServiceProperty"
       ],
       "SwaggerModelName": "StorageQueue",
       "ResourceType": "Microsoft.Storage/storageAccounts/queueServices/queues",
@@ -1366,7 +1367,7 @@
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
       "IsExtensionResource": false,
-      "IsSingletonResource": false
+      "IsSingletonResource": true
     },
     "Table": {
       "Name": "Table",
@@ -1435,7 +1436,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
       "Parents": [
-        "StorageAccount"
+        "TableServiceProperty"
       ],
       "SwaggerModelName": "Table",
       "ResourceType": "Microsoft.Storage/storageAccounts/tableServices/tables",

@@ -14,6 +14,7 @@ import {
 import { getResourceDataSchema, OperationSet } from "./operation-set";
 import { getPagingItemType } from "./resource-equivalent";
 import { getResourceType, getScopePath, isScopedSegment, pathIncludes } from "./utils";
+import { lastWordToSingular } from "../utils/strings";
 
 const extensionMethodCache = new WeakMap<OperationSet, [Operation, string][]>();
 const resourceCollectionMethodCache = new WeakMap<OperationSet, Operation[]>();
@@ -69,7 +70,7 @@ export function setParentOfOtherOperation(
   requestPath: string,
   operationSets: OperationSet[],
 ): boolean {
-  const candidates: OperationSet[] = operationSets.filter((o) => pathIncludes(requestPath, o.RequestPath));
+  const candidates: OperationSet[] = operationSets.filter((o) => pathIncludes(requestPath, o.SingletonRequestPath ?? o.RequestPath));
   if (candidates.length === 0) return false;
 
   const bestOne = candidates.sort((a, b) => b.RequestPath.split("/").length - a.RequestPath.split("/").length)[0];
@@ -152,11 +153,11 @@ export function getParents(requestPath: string, operationSets: OperationSet[]): 
   if (parentPath === ResourceGroupPath) return ["ResourceGroupResource"];
   if (parentPath === SubscriptionPath) return ["SubscriptionResource"];
   if (parentPath === TenantPath) return ["TenantResource"];
-  const operationSet = operationSets.find((set) => set.RequestPath === parentPath);
+  const operationSet = operationSets.find((set) => (set.SingletonRequestPath ?? set.RequestPath) === parentPath);
   if (operationSet === undefined) {
     return getParents(parentPath, operationSets);
   }
-  return [getResourceDataSchema(operationSet!)!];
+  return [lastWordToSingular(getResourceDataSchema(operationSet!)!)];
 }
 
 function getScopeResourceType(path: string): string {

@@ -1,3 +1,4 @@
+import { isConstantSchema } from "../utils/schemas";
 import {
   ManagementGroupPath,
   ManagementGroupScopePrefix,
@@ -9,6 +10,7 @@ import {
   TenantPath,
   TenantScopePrefix,
 } from "./constants";
+import { OperationSet } from "./operation-set";
 
 export function getResourceType(path: string): string {
   const index = path.lastIndexOf(ProvidersSegment);
@@ -31,7 +33,7 @@ export function getResourceType(path: string): string {
 
 export function getResourceKey(path: string): string {
   const segments = path.split("/");
-  return segments[segments.length - 1].replace(/^\{(.+)\}$/, "$1");
+  return segments[segments.length - 1].replace(/^\{(\w+)\}$/, "$1");
 }
 
 export function getResourceKeySegment(path: string): string {
@@ -61,11 +63,14 @@ export function isScopedPath(path: string): boolean {
   return isScopedSegment(getScopePath(path));
 }
 
-export function isSingleton(path: string): boolean {
-  const segments = path.split("/");
-  const lastSegment = segments[segments.length - 1];
-  const pattern = /^\{\w+\}$/;
-  return lastSegment.match(pattern) === null;
+export function isSingleton(set: OperationSet): boolean {
+  const lastSegment = getLastSegment(set.RequestPath);
+  if (lastSegment.match(/^\{\w+\}$/) === null) return true;
+
+  const resourceKey = lastSegment.replace(/^\{(\w+)\}$/, "$1");
+  const resourceKeyParameter = set.Operations[0].parameters?.find(p => p.language.default.name === resourceKey);
+  if (resourceKeyParameter === undefined) throw `Cannot find parameter ${resourceKey}`;
+  return isConstantSchema(resourceKeyParameter?.schema)
 }
 
 export function pathIncludes(path1: string, path2: string): boolean {
@@ -73,4 +78,9 @@ export function pathIncludes(path1: string, path2: string): boolean {
   const lowerPath2 = path2.toLowerCase();
   // TO-DO: escape the variable case
   return lowerPath1.includes(lowerPath2);
+}
+
+function getLastSegment(path: string): string {
+  const segments = path.split("/");
+  return segments[segments.length - 1];
 }

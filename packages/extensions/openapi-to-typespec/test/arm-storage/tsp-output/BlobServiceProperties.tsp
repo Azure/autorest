@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The properties of a storage account’s Blob service.
  */
+@singleton("default")
 @parentResource(StorageAccount)
 model BlobServiceProperties
   is Azure.ResourceManager.ProxyResource<BlobServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = BlobServiceProperties,
-    KeyName = "BlobServicesName",
+    KeyName = "blobService",
     SegmentName = "blobServices",
-    NamePattern = "",
-    Type = "default"
+    NamePattern = ""
   >;
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
@@ -51,9 +51,7 @@ interface BlobServicePropertiesOperationGroup {
   list is ArmResourceListByParent<BlobServiceProperties>;
 }
 
-@@doc(BlobServiceProperties.name,
-  "The name of the blob Service within the specified storage account. Blob Service Name must be 'default'"
-);
+@@doc(BlobServiceProperties.name, "");
 @@doc(BlobServiceProperties.properties,
   "The properties of a storage account’s Blob service."
 );

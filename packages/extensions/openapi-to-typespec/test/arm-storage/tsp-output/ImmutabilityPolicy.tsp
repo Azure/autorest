@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
  */
+@singleton("default")
 @parentResource(BlobContainer)
 model ImmutabilityPolicy
   is Azure.ResourceManager.ProxyResource<ImmutabilityPolicyProperty, false> {
   ...ResourceNameParameter<
     Resource = ImmutabilityPolicy,
-    KeyName = "immutabilityPolicyName",
+    KeyName = "immutabilityPolicy",
     SegmentName = "immutabilityPolicies",
-    NamePattern = "",
-    Type = "default"
+    NamePattern = ""
   >;
 }
 
@@ -82,11 +82,49 @@ interface ImmutabilityPolicies {
       `If-Match`: string;
     }
   >;
+
+  /**
+   * Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BlobContainers_LockImmutabilityPolicy")
+  lockImmutabilityPolicy is ArmResourceActionSync<
+    ImmutabilityPolicy,
+    void,
+    ImmutabilityPolicy,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
+
+      /**
+       * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
+
+  /**
+   * Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BlobContainers_ExtendImmutabilityPolicy")
+  extendImmutabilityPolicy is ArmResourceActionSync<
+    ImmutabilityPolicy,
+    ImmutabilityPolicy,
+    ImmutabilityPolicy,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<ImmutabilityPolicy>;
+
+      /**
+       * The entity state (ETag) version of the immutability policy to update. A value of "*" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.
+       */
+      @header
+      `If-Match`: string;
+    }
+  >;
 }
 
-@@doc(ImmutabilityPolicy.name,
-  "The name of the blob container immutabilityPolicy within the specified storage account. ImmutabilityPolicy Name must be 'default'"
-);
+@@doc(ImmutabilityPolicy.name, "");
 @@doc(ImmutabilityPolicy.properties,
   "The properties of an ImmutabilityPolicy of a blob container."
 );
@@ -100,4 +138,15 @@ interface ImmutabilityPolicies {
 );
 @@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
+);
+@@encodedName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "The ImmutabilityPolicy Properties that will be extended for a blob container."
 );

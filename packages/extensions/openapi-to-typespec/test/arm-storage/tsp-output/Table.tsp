@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./StorageAccount.tsp";
+import "./TableServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 /**
  * Properties of the table, including Id, resource name, resource type.
  */
-@parentResource(StorageAccount)
+@parentResource(TableServiceProperties)
 model Table is Azure.ResourceManager.ProxyResource<TableProperties> {
   ...ResourceNameParameter<
     Resource = Table,

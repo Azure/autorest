@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./StorageAccount.tsp";
+import "./FileServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.Storage;
 /**
  * Properties of the file share, including Id, resource name, resource type, Etag.
  */
-@parentResource(StorageAccount)
+@parentResource(FileServiceProperties)
 model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
   ...ResourceNameParameter<
     Resource = FileShare,
