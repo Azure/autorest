@@ -1,5 +1,6 @@
 import { ArraySchema, isObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
+import { lastWordToSingular } from "../utils/strings";
 import {
   ManagementGroupPath,
   ManagementGroupScopePrefix,
@@ -14,7 +15,6 @@ import {
 import { getResourceDataSchema, OperationSet } from "./operation-set";
 import { getPagingItemType } from "./resource-equivalent";
 import { getResourceType, getScopePath, isScopedSegment, pathIncludes } from "./utils";
-import { lastWordToSingular } from "../utils/strings";
 
 const extensionMethodCache = new WeakMap<OperationSet, [Operation, string][]>();
 const resourceCollectionMethodCache = new WeakMap<OperationSet, Operation[]>();
