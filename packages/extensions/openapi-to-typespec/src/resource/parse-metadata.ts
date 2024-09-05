@@ -70,9 +70,11 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
   for (const resourceSchemaName in operationSetsByResourceDataSchemaName) {
     const operationSets = operationSetsByResourceDataSchemaName[resourceSchemaName];
     if (operationSets.length > 1) {
-      console.warn(`We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
-        .map((o) => o.RequestPath)
-        .join("\n")}`);
+      console.warn(
+        `We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
+          .map((o) => o.RequestPath)
+          .join("\n")}`,
+      );
     }
     resources[resourceSchemaName] = buildResource(
       resourceSchemaName,

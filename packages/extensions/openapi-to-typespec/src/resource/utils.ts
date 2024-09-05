@@ -68,9 +68,9 @@ export function isSingleton(set: OperationSet): boolean {
   if (lastSegment.match(/^\{\w+\}$/) === null) return true;
 
   const resourceKey = lastSegment.replace(/^\{(\w+)\}$/, "$1");
-  const resourceKeyParameter = set.Operations[0].parameters?.find(p => p.language.default.name === resourceKey);
+  const resourceKeyParameter = set.Operations[0].parameters?.find((p) => p.language.default.name === resourceKey);
   if (resourceKeyParameter === undefined) throw `Cannot find parameter ${resourceKey}`;
-  return isConstantSchema(resourceKeyParameter?.schema)
+  return isConstantSchema(resourceKeyParameter?.schema);
 }
 
 export function pathIncludes(path1: string, path2: string): boolean {

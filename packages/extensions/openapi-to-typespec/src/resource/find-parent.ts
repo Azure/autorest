@@ -70,7 +70,9 @@ export function setParentOfOtherOperation(
   requestPath: string,
   operationSets: OperationSet[],
 ): boolean {
-  const candidates: OperationSet[] = operationSets.filter((o) => pathIncludes(requestPath, o.SingletonRequestPath ?? o.RequestPath));
+  const candidates: OperationSet[] = operationSets.filter((o) =>
+    pathIncludes(requestPath, o.SingletonRequestPath ?? o.RequestPath),
+  );
   if (candidates.length === 0) return false;
 
   const bestOne = candidates.sort((a, b) => b.RequestPath.split("/").length - a.RequestPath.split("/").length)[0];
