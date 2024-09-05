@@ -40,11 +40,6 @@ interface DataProductsCatalogs {
    * List data catalog by subscription.
    */
   listBySubscription is ArmListBySubscription<DataProductsCatalog>;
-
-  /**
-   * List data catalog by resource group.
-   */
-  listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 }
 
 @@doc(DataProductsCatalog.name, "");

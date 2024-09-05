@@ -30,7 +30,6 @@ export function setParentOfResourceCollectionOperation(
   if (itemType === undefined) return false;
 
   // then check if its path is a prefix of which resource's operationSet
-  // if there are multiple resources that share the same prefix of request path, we choose the shortest one
   const requestScopeType = getScopeResourceType(requestPath);
   const candidates: OperationSet[] = [];
   for (const operationSet of operationSets) {
@@ -50,6 +49,7 @@ export function setParentOfResourceCollectionOperation(
     candidates.push(operationSet);
   }
 
+  // if there are multiple resources that share the same prefix of request path, we choose the shortest one
   if (candidates.length === 0) return false;
   const bestOne = candidates.sort((a, b) => b.RequestPath.split("/").length - a.RequestPath.split("/").length)[0];
 

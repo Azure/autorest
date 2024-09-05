@@ -19,7 +19,7 @@ export function getResourceType(path: string): string {
     if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return "Microsoft.Resources/resourceGroups";
     if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return "Microsoft.Resources/subscriptions";
     if (pathToLower.startsWith(TenantScopePrefix.toLowerCase())) return "Microsoft.Resources/tenants";
-    throw `Path ${path} doesn't have resouce type`;
+    throw `Path ${path} doesn't have resource type`;
   }
 
   return path
@@ -45,7 +45,7 @@ export function getScopePath(path: string): string {
   const pathToLower = path.toLowerCase();
 
   const index = pathToLower.lastIndexOf(ProvidersSegment);
-  if (index === 0 && pathToLower.startsWith(ManagementGroupScopePrefix.toLowerCase())) return ManagementGroupPath;
+  if (pathToLower.startsWith(ManagementGroupScopePrefix.toLowerCase())) return ManagementGroupPath;
   if (index >= 0) return path.slice(0, index);
   if (pathToLower.startsWith(ResourceGroupScopePrefix.toLowerCase())) return ResourceGroupPath;
   if (pathToLower.startsWith(SubscriptionScopePrefix.toLowerCase())) return SubscriptionPath;
