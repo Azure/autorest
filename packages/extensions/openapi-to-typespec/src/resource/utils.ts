@@ -68,8 +68,11 @@ export function isSingleton(set: OperationSet): boolean {
   if (lastSegment.match(/^\{\w+\}$/) === null) return true;
 
   const resourceKey = lastSegment.replace(/^\{(\w+)\}$/, "$1");
-  const resourceKeyParameter = set.Operations[0].parameters?.find((p) => p.language.default.name === resourceKey|| p.language.default.serializedName === resourceKey);
-  if (resourceKeyParameter === undefined) throw `Cannot find parameter ${resourceKey} in operation ${set.Operations[0].operationId}`;
+  const resourceKeyParameter = set.Operations[0].parameters?.find(
+    (p) => p.language.default.name === resourceKey || p.language.default.serializedName === resourceKey,
+  );
+  if (resourceKeyParameter === undefined)
+    throw `Cannot find parameter ${resourceKey} in operation ${set.Operations[0].operationId}`;
   return isConstantSchema(resourceKeyParameter?.schema);
 }
 

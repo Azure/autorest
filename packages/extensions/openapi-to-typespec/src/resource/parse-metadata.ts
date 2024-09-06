@@ -70,9 +70,11 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
   for (const resourceSchemaName in operationSetsByResourceDataSchemaName) {
     const operationSets = operationSetsByResourceDataSchemaName[resourceSchemaName];
     if (operationSets.length > 1) {
-      logger().info(`We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
+      logger().info(
+        `We cannot support multi path with same model. Some operations will be lost. \nResource schema name: ${resourceSchemaName}.\nPath:\n${operationSets
           .map((o) => o.RequestPath)
-          .join("\n")}`);
+          .join("\n")}`,
+      );
       resources[resourceSchemaName + "FixMe"] = {
         Name: resourceSchemaName + "FixMe",
         GetOperations: [],
@@ -96,7 +98,7 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
         IsManagementGroupResource: false,
         IsExtensionResource: false,
         IsSingletonResource: false,
-      }
+      };
     }
     resources[resourceSchemaName] = buildResource(
       resourceSchemaName,
@@ -202,7 +204,7 @@ function buildResourceOperationFromOperation(operation: Operation, operationName
     pagingMetadata = {
       Method: operation.language.default.name,
       ItemName: itemName,
-      NextLinkName: nextLinkName
+      NextLinkName: nextLinkName,
     };
   }
 

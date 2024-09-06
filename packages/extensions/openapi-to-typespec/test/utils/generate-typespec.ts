@@ -73,7 +73,7 @@ async function generate(root: string, path: string, debug = false, isFullCompati
     overrideGuess = fileContent.includes("guessResourceKey: false");
   }
 
-  const files = await readdir(join(dirname(path), "tsp-output"), {recursive: true});
+  const files = await readdir(join(dirname(path), "tsp-output"), { recursive: true });
   for (const file of files) {
     const fullPath = join(dirname(path), "tsp-output", file);
     if (lstatSync(fullPath).isDirectory()) continue;

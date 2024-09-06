@@ -1,14 +1,20 @@
-import { Metadata } from "../utils/resource-discovery";
 import { getSession } from "../autorest-session";
 import { generateServiceInformation } from "../generate/generate-service-information";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
+import { Metadata } from "../utils/resource-discovery";
 const packageInfo = require("../../package.json");
 
-export async function emitMain(filePath: string, program: TypespecProgram, metadata: Metadata | undefined): Promise<void> {
+export async function emitMain(
+  filePath: string,
+  program: TypespecProgram,
+  metadata: Metadata | undefined,
+): Promise<void> {
   const { isArm } = getOptions();
-  const content = `${getHeaders()}\n${isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)}`;
+  const content = `${getHeaders()}\n${
+    isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)
+  }`;
   const session = getSession();
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
 }

@@ -37,11 +37,14 @@ export async function emitArmResources(program: TypespecProgram, metadata: Metad
     }
   }
 
-  const multiPathResources = Object.keys(metadata.Resources).filter(key => key.endsWith("FixMe"));
+  const multiPathResources = Object.keys(metadata.Resources).filter((key) => key.endsWith("FixMe"));
   for (const resource of multiPathResources) {
     const originalName = resource.replace("FixMe", "");
     const filePath = join(basePath, `${resource}.tsp`);
-    session.writeFile({ filename: filePath, content: `// You defined multiple pathes under the model ${originalName}. We currently don't support it. Please fix it manually.` });
+    session.writeFile({
+      filename: filePath,
+      content: `// You defined multiple pathes under the model ${originalName}. We currently don't support it. Please fix it manually.`,
+    });
   }
 }
 

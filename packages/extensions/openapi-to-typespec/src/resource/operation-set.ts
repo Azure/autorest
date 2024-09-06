@@ -65,8 +65,11 @@ export function populateSingletonRequestPath(set: OperationSet): void {
       updatedSegments.push(segment);
     } else {
       const keyName = segment.replace(/^\{(\w+)\}$/, "$1");
-      const resourceKeyParameter = set.Operations[0].parameters?.find((p) => p.language.default.name === keyName || p.language.default.serializedName === keyName);
-      if (resourceKeyParameter === undefined) throw `Cannot find parameter ${keyName} in operation ${set.Operations[0].operationId}`;
+      const resourceKeyParameter = set.Operations[0].parameters?.find(
+        (p) => p.language.default.name === keyName || p.language.default.serializedName === keyName,
+      );
+      if (resourceKeyParameter === undefined)
+        throw `Cannot find parameter ${keyName} in operation ${set.Operations[0].operationId}`;
 
       if (!isConstantSchema(resourceKeyParameter.schema)) {
         updatedSegments.push(segment);
