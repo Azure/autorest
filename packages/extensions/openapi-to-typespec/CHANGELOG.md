@@ -1,6 +1,13 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 20 Aug 2024 21:31:07 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Sep 2024 08:41:02 GMT and should not be manually modified.
+
+## 0.10.0
+Fri, 06 Sep 2024 08:41:02 GMT
+
+### Minor changes
+
+- Remove .net generator dependency of tsp converter
 
 ## 0.9.1
 Tue, 20 Aug 2024 21:31:07 GMT
