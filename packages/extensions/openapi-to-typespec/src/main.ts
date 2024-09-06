@@ -31,9 +31,10 @@ export async function processConverter(host: AutorestExtensionHost) {
   const codeModel = session.model;
   pretransformNames(codeModel);
   const { isArm } = getOptions();
+  let metadata = undefined;
   if (isArm) {
     // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
-    const metadata = parseMetadata(codeModel);
+    metadata = parseMetadata(codeModel);
     await host.writeFile({ filename: "resources.json", content: JSON.stringify(metadata, null, 2) });
     pretransformArmResources(codeModel, metadata);
     pretransformRename(codeModel, metadata);
@@ -42,10 +43,12 @@ export async function processConverter(host: AutorestExtensionHost) {
   markErrorModels(codeModel);
   markResources(codeModel);
   const programDetails = getModel(codeModel);
-  await emitArmResources(programDetails, getOutuptDirectory(session));
+  if (isArm) {
+    await emitArmResources(programDetails, metadata!, getOutuptDirectory(session));
+  }
   await emitModels(getFilePath(session, "models.tsp"), programDetails);
   await emitRoutes(getFilePath(session, "routes.tsp"), programDetails);
-  await emitMain(getFilePath(session, "main.tsp"), programDetails);
+  await emitMain(getFilePath(session, "main.tsp"), programDetails, metadata);
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
   await emitClient(getFilePath(session, "client.tsp"), programDetails);

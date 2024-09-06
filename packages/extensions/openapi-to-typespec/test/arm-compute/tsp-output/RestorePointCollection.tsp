@@ -34,12 +34,6 @@ interface RestorePointCollections {
       ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
 
       /**
-       * The name of the restore point collection.
-       */
-      @path
-      restorePointCollectionName: string;
-
-      /**
        * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
        */
       @query("$expand")
@@ -50,18 +44,7 @@ interface RestorePointCollections {
   /**
    * The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    RestorePointCollection,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
-
-      /**
-       * The name of the restore point collection.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<RestorePointCollection>;
 
   /**
    * The operation to update the restore point collection.
@@ -69,16 +52,7 @@ interface RestorePointCollections {
   @parameterVisibility
   update is ArmCustomPatchSync<
     RestorePointCollection,
-    RestorePointCollectionUpdate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
-
-      /**
-       * The name of the restore point collection.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
+    RestorePointCollectionUpdate
   >;
 
   /**
@@ -87,18 +61,7 @@ interface RestorePointCollections {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
-    RestorePointCollection,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
-
-      /**
-       * The name of the Restore Point Collection.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  delete is ArmResourceDeleteAsync<RestorePointCollection>;
 
   /**
    * Gets the list of restore point collections in a resource group.

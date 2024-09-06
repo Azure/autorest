@@ -37,6 +37,70 @@ interface VirtualMachineSizesOperations {
   ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
 }
 
+interface VirtualMachineScaleSetsOperations {
+  /**
+   * Gets all the VM scale sets under the specified subscription for the specified location.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachineScaleSets")
+  @get
+  listByLocation(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<VirtualMachineScaleSet>> | ErrorResponse;
+}
+
+interface VirtualMachineScaleSetVMsOperations {
+  /**
+   * Gets a list of all virtual machines in a VM scale sets.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    virtualMachineScaleSetName: string,
+
+    /**
+     * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
+     */
+    @query("$select")
+    $select?: string,
+
+    /**
+     * The expand expression to apply to the operation. Allowed values are 'instanceView'.
+     */
+    @query("$expand")
+    $expand?: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetVMListResult> | ErrorResponse;
+}
+
+interface VirtualMachinesOperations {
+  /**
+   * Gets all the virtual machines under the specified subscription for the specified location.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines")
+  @get
+  listByLocation(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<ResourceListResult<VirtualMachine>> | ErrorResponse;
+}
+
 interface VirtualMachineImagesOperations {
   /**
    * Gets a virtual machine image.
@@ -358,38 +422,6 @@ interface VirtualMachineImagesEdgeZoneOperations {
   ): ArmResponse<void> | ErrorResponse;
 }
 
-interface VirtualMachineExtensionImagesOperations {
-  /**
-   * Gets a list of virtual machine extension image versions.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
-  @get
-  listVersions(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    @path
-    publisherName: string,
-
-    @path
-    type: string,
-
-    /**
-     * The filter to apply on the operation.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    @query("$top")
-    $top?: int32,
-
-    @query("$orderby")
-    $orderby?: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
-}
-
 interface LogAnalyticsOperations {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
@@ -424,6 +456,49 @@ interface LogAnalyticsOperations {
     @body
     parameters: ThrottledRequestsInput,
   ): ArmResponse<LogAnalyticsOperationResult | void> | ErrorResponse;
+}
+
+interface VirtualMachineRunCommandsOperations {
+  /**
+   * Lists all available run commands for a subscription in a location.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * Accept header
+     */
+    @header
+    accept: "application/json, text/json",
+  ): ArmResponse<RunCommandListResult> | ErrorResponse;
+
+  /**
+   * Gets specific run command for a subscription in a location.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The command id.
+     */
+    @path
+    commandId: string,
+
+    ...SubscriptionIdParameter,
+
+    /**
+     * Accept header
+     */
+    @header
+    accept: "application/json, text/json",
+  ): ArmResponse<RunCommandDocument> | ErrorResponse;
 }
 
 interface VirtualMachineScaleSetVMRunCommandsOperations {
@@ -648,4 +723,263 @@ interface ResourceSkusOperations {
     @query("includeExtendedLocations")
     includeExtendedLocations?: string,
   ): ArmResponse<ResourceSkusResult> | ErrorResponse;
+}
+
+interface SharedGalleriesOperations {
+  /**
+   * List shared galleries by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The query parameter to decide what shared galleries to fetch when doing listing operations.
+     */
+    @query("sharedTo")
+    sharedTo?: SharedToValues,
+  ): ArmResponse<SharedGalleryList> | ErrorResponse;
+
+  /**
+   * Get a shared gallery by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The unique name of the Shared Gallery.
+     */
+    @path
+    galleryUniqueName: string,
+  ): ArmResponse<SharedGallery> | ErrorResponse;
+}
+
+interface SharedGalleryImagesOperations {
+  /**
+   * List shared gallery images by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The unique name of the Shared Gallery.
+     */
+    @path
+    galleryUniqueName: string,
+
+    /**
+     * The query parameter to decide what shared galleries to fetch when doing listing operations.
+     */
+    @query("sharedTo")
+    sharedTo?: SharedToValues,
+  ): ArmResponse<SharedGalleryImageList> | ErrorResponse;
+
+  /**
+   * Get a shared gallery image by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The unique name of the Shared Gallery.
+     */
+    @path
+    galleryUniqueName: string,
+
+    /**
+     * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
+     */
+    @path
+    galleryImageName: string,
+  ): ArmResponse<SharedGalleryImage> | ErrorResponse;
+}
+
+interface SharedGalleryImageVersionsOperations {
+  /**
+   * List shared gallery image versions by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The unique name of the Shared Gallery.
+     */
+    @path
+    galleryUniqueName: string,
+
+    /**
+     * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
+     */
+    @path
+    galleryImageName: string,
+
+    /**
+     * The query parameter to decide what shared galleries to fetch when doing listing operations.
+     */
+    @query("sharedTo")
+    sharedTo?: SharedToValues,
+  ): ArmResponse<SharedGalleryImageVersionList> | ErrorResponse;
+
+  /**
+   * Get a shared gallery image version by subscription id or tenant id.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The unique name of the Shared Gallery.
+     */
+    @path
+    galleryUniqueName: string,
+
+    /**
+     * The name of the Shared Gallery Image Definition from which the Image Versions are to be listed.
+     */
+    @path
+    galleryImageName: string,
+
+    /**
+     * The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
+     */
+    @path
+    galleryImageVersionName: string,
+  ): ArmResponse<SharedGalleryImageVersion> | ErrorResponse;
+}
+
+interface CommunityGalleriesOperations {
+  /**
+   * Get a community gallery by gallery public name.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+  ): ArmResponse<CommunityGallery> | ErrorResponse;
+}
+
+interface CommunityGalleryImagesOperations {
+  /**
+   * Get a community gallery image.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+
+    /**
+     * The name of the community gallery image definition.
+     */
+    @path
+    galleryImageName: string,
+  ): ArmResponse<CommunityGalleryImage> | ErrorResponse;
+
+  /**
+   * List community gallery images inside a gallery.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+  ): ArmResponse<CommunityGalleryImageList> | ErrorResponse;
+}
+
+interface CommunityGalleryImageVersionsOperations {
+  /**
+   * Get a community gallery image version.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+
+    /**
+     * The name of the community gallery image definition.
+     */
+    @path
+    galleryImageName: string,
+
+    /**
+     * The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>
+     */
+    @path
+    galleryImageVersionName: string,
+  ): ArmResponse<CommunityGalleryImageVersion> | ErrorResponse;
+
+  /**
+   * List community gallery image versions inside an image.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+
+    /**
+     * The name of the community gallery image definition.
+     */
+    @path
+    galleryImageName: string,
+  ): ArmResponse<CommunityGalleryImageVersionList> | ErrorResponse;
 }

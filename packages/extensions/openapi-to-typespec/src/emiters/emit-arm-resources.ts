@@ -4,8 +4,9 @@ import { generateArmResource, generateArmResourceExamples } from "../generate/ge
 import { TypespecProgram, TspArmResource } from "../interfaces";
 import { formatTypespecFile } from "../utils/format";
 import { getNamespaceStatement } from "../utils/namespace";
+import { Metadata } from "../utils/resource-discovery";
 
-export async function emitArmResources(program: TypespecProgram, basePath: string) {
+export async function emitArmResources(program: TypespecProgram, metadata: Metadata, basePath: string) {
   // Create a file per resource
   const session = getSession();
   const { serviceInformation } = program;
@@ -34,6 +35,13 @@ export async function emitArmResources(program: TypespecProgram, basePath: strin
         session.writeFile({ filename: join(basePath, "examples", "unknown", `${filename}.json`), content });
       }
     }
+  }
+
+  const multiPathResources = Object.keys(metadata.Resources).filter(key => key.endsWith("FixMe"));
+  for (const resource of multiPathResources) {
+    const originalName = resource.replace("FixMe", "");
+    const filePath = join(basePath, `${resource}.tsp`);
+    session.writeFile({ filename: filePath, content: `// You defined multiple pathes under the model ${originalName}. We currently don't support it. Please fix it manually.` });
   }
 }
 

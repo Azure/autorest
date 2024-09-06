@@ -19,9 +19,9 @@ model SubscriptionContract
   is Azure.ResourceManager.ProxyResource<SubscriptionContractProperties> {
   ...ResourceNameParameter<
     Resource = SubscriptionContract,
-    KeyName = "subscriptionId",
+    KeyName = "sid",
     SegmentName = "subscriptions",
-    NamePattern = ""
+    NamePattern = "^[^*#&+:<>?]+$"
   >;
 }
 
@@ -195,8 +195,9 @@ interface SubscriptionContracts {
   >;
 }
 
+@@maxLength(SubscriptionContract.name, 256);
 @@doc(SubscriptionContract.name,
-  "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+  "Subscription entity Identifier. The entity represents the association between a user and a product in API Management."
 );
 @@doc(SubscriptionContract.properties, "Subscription contract properties.");
 @@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,

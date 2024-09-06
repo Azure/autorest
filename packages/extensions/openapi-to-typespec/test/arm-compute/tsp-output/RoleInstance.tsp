@@ -16,7 +16,7 @@ namespace Microsoft.Compute;
  */
 @parentResource(CloudService)
 model RoleInstance
-  is Azure.ResourceManager.ProxyResource<RoleInstanceProperties> {
+  is Azure.ResourceManager.TrackedResource<RoleInstanceProperties> {
   ...ResourceNameParameter<
     Resource = RoleInstance,
     KeyName = "roleInstanceName",

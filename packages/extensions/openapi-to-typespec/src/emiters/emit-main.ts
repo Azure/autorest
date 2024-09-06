@@ -1,14 +1,14 @@
+import { Metadata } from "../utils/resource-discovery";
 import { getSession } from "../autorest-session";
 import { generateServiceInformation } from "../generate/generate-service-information";
 import { TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
-import { getArmResourcesMetadata } from "../utils/resource-discovery";
 const packageInfo = require("../../package.json");
 
-export async function emitMain(filePath: string, program: TypespecProgram): Promise<void> {
+export async function emitMain(filePath: string, program: TypespecProgram, metadata: Metadata | undefined): Promise<void> {
   const { isArm } = getOptions();
-  const content = `${getHeaders()}\n${isArm ? getArmServiceInformation(program) : getServiceInformation(program)}`;
+  const content = `${getHeaders()}\n${isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)}`;
   const session = getSession();
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
 }
@@ -40,14 +40,14 @@ function getServiceInformation(program: TypespecProgram) {
   return [...imports, content].join("\n");
 }
 
-function getArmServiceInformation(program: TypespecProgram) {
+function getArmServiceInformation(program: TypespecProgram, metadata: Metadata) {
   const imports = [
     `import "@typespec/rest";`,
     `import "@typespec/versioning";`,
     `import "@azure-tools/typespec-azure-core";`,
     `import "@azure-tools/typespec-azure-resource-manager";`,
     `import "./models.tsp";`,
-    ...getArmResourceImports(program),
+    ...getArmResourceImports(program, metadata),
     ``,
     `using TypeSpec.Rest;`,
     `using TypeSpec.Http;`,
@@ -61,12 +61,14 @@ function getArmServiceInformation(program: TypespecProgram) {
   return [...imports, content].join("\n");
 }
 
-function getArmResourceImports(program: TypespecProgram): string[] {
-  const resourceMetadata = getArmResourcesMetadata();
+function getArmResourceImports(program: TypespecProgram, metadata: Metadata): string[] {
   const imports: string[] = [];
 
-  for (const resource in resourceMetadata.Resources) {
-    imports.push(`import "./${resourceMetadata.Resources[resource].SwaggerModelName}.tsp";`);
+  for (const resource in metadata.Resources) {
+    const fileName = metadata.Resources[resource].Name;
+    if (fileName) {
+      imports.push(`import "./${fileName}.tsp";`);
+    }
   }
 
   if (program.operationGroups.length > 0) {

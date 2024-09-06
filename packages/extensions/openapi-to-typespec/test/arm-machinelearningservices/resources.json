@@ -1,7 +1,7 @@
 {
   "Resources": {
-    "MachineLearningCompute": {
-      "Name": "MachineLearningCompute",
+    "ComputeResource": {
+      "Name": "ComputeResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -10,7 +10,7 @@
           "OperationID": "Compute_Get",
           "IsLongRunning": false,
           "PagingMetadata": null,
-          "Description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use \u0027keys\u0027 nested resource to get them."
+          "Description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them."
         }
       ],
       "CreateOperations": [
@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -77,21 +76,20 @@
           "Description": "Updates the custom services list. The list of custom services provided shall be overwritten"
         },
         {
-          "Name": "GetNodes",
+          "Name": "ListNodes",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes",
           "Method": "POST",
           "OperationID": "Compute_ListNodes",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListNodes",
-            "NextPageMethod": "ListNodesNextPage",
             "ItemName": "nodes",
             "NextLinkName": "nextLink"
           },
           "Description": "Get the details (e.g IP address, port etc) of all the compute nodes in the compute."
         },
         {
-          "Name": "GetKeys",
+          "Name": "ListKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys",
           "Method": "POST",
           "OperationID": "Compute_ListKeys",
@@ -136,7 +134,9 @@
           "Description": "Updates the idle shutdown setting of a compute instance."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "ComputeResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/computes",
       "ResourceKey": "computeName",
@@ -148,8 +148,32 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryCodeContainer": {
-      "Name": "MachineLearningRegistryCodeContainer",
+    "CodeContainerResourceFixMe": {
+      "Name": "CodeContainerResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "CodeContainerResource": {
+      "Name": "CodeContainerResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -203,7 +227,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -215,7 +238,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistry"],
+      "Parents": [
+        "Registry"
+      ],
       "SwaggerModelName": "CodeContainerResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/codes",
       "ResourceKey": "codeName",
@@ -227,78 +252,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningCodeContainer": {
-      "Name": "MachineLearningCodeContainer",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}",
-          "Method": "GET",
-          "OperationID": "CodeContainers_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get container."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}",
-          "Method": "PUT",
-          "OperationID": "CodeContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}",
-          "Method": "PUT",
-          "OperationID": "CodeContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}",
-          "Method": "DELETE",
-          "OperationID": "CodeContainers_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete container."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes",
-          "Method": "GET",
-          "OperationID": "CodeContainers_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List containers."
-        }
-      ],
+    "CodeVersionResourceFixMe": {
+      "Name": "CodeVersionResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
-      "SwaggerModelName": "CodeContainerResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/codes",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "codes",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -306,8 +276,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryCodeVersion": {
-      "Name": "MachineLearningRegistryCodeVersion",
+    "CodeVersionResource": {
+      "Name": "CodeVersionResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -361,7 +331,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -383,7 +352,9 @@
           "Description": "Generate a storage location and credential for the client to upload a code asset to."
         }
       ],
-      "Parents": ["MachineLearningRegistryCodeContainer"],
+      "Parents": [
+        "CodeContainerResource"
+      ],
       "SwaggerModelName": "CodeVersionResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/codes/versions",
       "ResourceKey": "version",
@@ -395,88 +366,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningCodeVersion": {
-      "Name": "MachineLearningCodeVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}",
-          "Method": "GET",
-          "OperationID": "CodeVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get version."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "CodeVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "CodeVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}",
-          "Method": "DELETE",
-          "OperationID": "CodeVersions_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete version."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions",
-          "Method": "GET",
-          "OperationID": "CodeVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List versions."
-        }
-      ],
+    "ComponentContainerResourceFixMe": {
+      "Name": "ComponentContainerResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "CreateOrGetStartPendingUpload",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload",
-          "Method": "POST",
-          "OperationID": "CodeVersions_CreateOrGetStartPendingUpload",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Generate a storage location and credential for the client to upload a code asset to."
-        }
-      ],
-      "Parents": ["MachineLearningCodeContainer"],
-      "SwaggerModelName": "CodeVersionResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/codes/versions",
-      "ResourceKey": "version",
-      "ResourceKeySegment": "versions",
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -484,8 +390,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearninRegistryComponentContainer": {
-      "Name": "MachineLearninRegistryComponentContainer",
+    "ComponentContainerResource": {
+      "Name": "ComponentContainerResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -539,7 +445,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -551,7 +456,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistry"],
+      "Parents": [
+        "Registry"
+      ],
       "SwaggerModelName": "ComponentContainerResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/components",
       "ResourceKey": "componentName",
@@ -563,78 +470,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningComponentContainer": {
-      "Name": "MachineLearningComponentContainer",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}",
-          "Method": "GET",
-          "OperationID": "ComponentContainers_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get container."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}",
-          "Method": "PUT",
-          "OperationID": "ComponentContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}",
-          "Method": "PUT",
-          "OperationID": "ComponentContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}",
-          "Method": "DELETE",
-          "OperationID": "ComponentContainers_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete container."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components",
-          "Method": "GET",
-          "OperationID": "ComponentContainers_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List component containers."
-        }
-      ],
+    "ComponentVersionResourceFixMe": {
+      "Name": "ComponentVersionResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
-      "SwaggerModelName": "ComponentContainerResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/components",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "components",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -642,8 +494,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearninRegistryComponentVersion": {
-      "Name": "MachineLearninRegistryComponentVersion",
+    "ComponentVersionResource": {
+      "Name": "ComponentVersionResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -697,7 +549,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -709,7 +560,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearninRegistryComponentContainer"],
+      "Parents": [
+        "ComponentContainerResource"
+      ],
       "SwaggerModelName": "ComponentVersionResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/components/versions",
       "ResourceKey": "version",
@@ -721,78 +574,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningComponentVersion": {
-      "Name": "MachineLearningComponentVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}",
-          "Method": "GET",
-          "OperationID": "ComponentVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get version."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "ComponentVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "ComponentVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}",
-          "Method": "DELETE",
-          "OperationID": "ComponentVersions_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete version."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions",
-          "Method": "GET",
-          "OperationID": "ComponentVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List component versions."
-        }
-      ],
+    "DataContainerResourceFixMe": {
+      "Name": "DataContainerResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningComponentContainer"],
-      "SwaggerModelName": "ComponentVersionResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/components/versions",
-      "ResourceKey": "version",
-      "ResourceKeySegment": "versions",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -800,8 +598,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryDataContainer": {
-      "Name": "MachineLearningRegistryDataContainer",
+    "DataContainerResource": {
+      "Name": "DataContainerResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -855,7 +653,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -867,7 +664,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistry"],
+      "Parents": [
+        "Registry"
+      ],
       "SwaggerModelName": "DataContainerResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/data",
       "ResourceKey": "name",
@@ -879,78 +678,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningDataContainer": {
-      "Name": "MachineLearningDataContainer",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}",
-          "Method": "GET",
-          "OperationID": "DataContainers_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get container."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}",
-          "Method": "PUT",
-          "OperationID": "DataContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}",
-          "Method": "PUT",
-          "OperationID": "DataContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}",
-          "Method": "DELETE",
-          "OperationID": "DataContainers_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete container."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data",
-          "Method": "GET",
-          "OperationID": "DataContainers_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List data containers."
-        }
-      ],
+    "DataVersionBaseResourceFixMe": {
+      "Name": "DataVersionBaseResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
-      "SwaggerModelName": "DataContainerResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/data",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "data",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -958,8 +702,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryDataVersion": {
-      "Name": "MachineLearningRegistryDataVersion",
+    "DataVersionBaseResource": {
+      "Name": "DataVersionBaseResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1013,7 +757,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1035,7 +778,9 @@
           "Description": "Generate a storage location and credential for the client to upload a data asset to."
         }
       ],
-      "Parents": ["MachineLearningRegistryDataContainer"],
+      "Parents": [
+        "DataContainerResource"
+      ],
       "SwaggerModelName": "DataVersionBaseResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/data/versions",
       "ResourceKey": "version",
@@ -1047,78 +792,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningDataVersion": {
-      "Name": "MachineLearningDataVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}",
-          "Method": "GET",
-          "OperationID": "DataVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get version."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "DataVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "DataVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}",
-          "Method": "DELETE",
-          "OperationID": "DataVersions_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete version."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions",
-          "Method": "GET",
-          "OperationID": "DataVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List data versions in the data container"
-        }
-      ],
+    "EnvironmentContainerResourceFixMe": {
+      "Name": "EnvironmentContainerResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningDataContainer"],
-      "SwaggerModelName": "DataVersionBaseResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/data/versions",
-      "ResourceKey": "version",
-      "ResourceKeySegment": "versions",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -1126,8 +816,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryEnvironmentContainer": {
-      "Name": "MachineLearningRegistryEnvironmentContainer",
+    "EnvironmentContainerResource": {
+      "Name": "EnvironmentContainerResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1181,7 +871,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1193,7 +882,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistry"],
+      "Parents": [
+        "Registry"
+      ],
       "SwaggerModelName": "EnvironmentContainerResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/environments",
       "ResourceKey": "environmentName",
@@ -1205,78 +896,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningEnvironmentContainer": {
-      "Name": "MachineLearningEnvironmentContainer",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}",
-          "Method": "GET",
-          "OperationID": "EnvironmentContainers_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get container."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}",
-          "Method": "PUT",
-          "OperationID": "EnvironmentContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}",
-          "Method": "PUT",
-          "OperationID": "EnvironmentContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}",
-          "Method": "DELETE",
-          "OperationID": "EnvironmentContainers_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete container."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments",
-          "Method": "GET",
-          "OperationID": "EnvironmentContainers_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List environment containers."
-        }
-      ],
+    "EnvironmentVersionResourceFixMe": {
+      "Name": "EnvironmentVersionResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
-      "SwaggerModelName": "EnvironmentContainerResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/environments",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "environments",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -1284,8 +920,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryEnvironmentVersion": {
-      "Name": "MachineLearningRegistryEnvironmentVersion",
+    "EnvironmentVersionResource": {
+      "Name": "EnvironmentVersionResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1339,7 +975,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1351,7 +986,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistryEnvironmentContainer"],
+      "Parents": [
+        "EnvironmentContainerResource"
+      ],
       "SwaggerModelName": "EnvironmentVersionResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/environments/versions",
       "ResourceKey": "version",
@@ -1363,78 +1000,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningEnvironmentVersion": {
-      "Name": "MachineLearningEnvironmentVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}",
-          "Method": "GET",
-          "OperationID": "EnvironmentVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get version."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "EnvironmentVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates an EnvironmentVersion."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "EnvironmentVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates an EnvironmentVersion."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}",
-          "Method": "DELETE",
-          "OperationID": "EnvironmentVersions_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete version."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions",
-          "Method": "GET",
-          "OperationID": "EnvironmentVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List versions."
-        }
-      ],
+    "ModelContainerResourceFixMe": {
+      "Name": "ModelContainerResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningEnvironmentContainer"],
-      "SwaggerModelName": "EnvironmentVersionResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/environments/versions",
-      "ResourceKey": "version",
-      "ResourceKeySegment": "versions",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -1442,8 +1024,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryModelContainer": {
-      "Name": "MachineLearningRegistryModelContainer",
+    "ModelContainerResource": {
+      "Name": "ModelContainerResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1497,7 +1079,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1509,7 +1090,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningRegistry"],
+      "Parents": [
+        "Registry"
+      ],
       "SwaggerModelName": "ModelContainerResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/models",
       "ResourceKey": "modelName",
@@ -1521,78 +1104,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningModelContainer": {
-      "Name": "MachineLearningModelContainer",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}",
-          "Method": "GET",
-          "OperationID": "ModelContainers_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get container."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}",
-          "Method": "PUT",
-          "OperationID": "ModelContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}",
-          "Method": "PUT",
-          "OperationID": "ModelContainers_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update container."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}",
-          "Method": "DELETE",
-          "OperationID": "ModelContainers_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete container."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models",
-          "Method": "GET",
-          "OperationID": "ModelContainers_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List model containers."
-        }
-      ],
+    "ModelVersionResourceFixMe": {
+      "Name": "ModelVersionResourceFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
-      "SwaggerModelName": "ModelContainerResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/models",
-      "ResourceKey": "name",
-      "ResourceKeySegment": "models",
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -1600,8 +1128,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistryModelVersion": {
-      "Name": "MachineLearningRegistryModelVersion",
+    "ModelVersionResource": {
+      "Name": "ModelVersionResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1655,7 +1183,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1686,7 +1213,9 @@
           "Description": "Generate a storage location and credential for the client to upload a model asset to."
         }
       ],
-      "Parents": ["MachineLearningRegistryModelContainer"],
+      "Parents": [
+        "ModelContainerResource"
+      ],
       "SwaggerModelName": "ModelVersionResource",
       "ResourceType": "Microsoft.MachineLearningServices/registries/models/versions",
       "ResourceKey": "version",
@@ -1698,97 +1227,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningModelVersion": {
-      "Name": "MachineLearningModelVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}",
-          "Method": "GET",
-          "OperationID": "ModelVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get version."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "ModelVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}",
-          "Method": "PUT",
-          "OperationID": "ModelVersions_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Create or update version."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}",
-          "Method": "DELETE",
-          "OperationID": "ModelVersions_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Delete version."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions",
-          "Method": "GET",
-          "OperationID": "ModelVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List model versions."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "Package",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/package",
-          "Method": "POST",
-          "OperationID": "ModelVersions_Package",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Model Version Package operation."
-        }
-      ],
-      "Parents": ["MachineLearningModelContainer"],
-      "SwaggerModelName": "ModelVersionResource",
-      "ResourceType": "Microsoft.MachineLearningServices/workspaces/models/versions",
-      "ResourceKey": "version",
-      "ResourceKeySegment": "versions",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "MachineLearningBatchEndpoint": {
-      "Name": "MachineLearningBatchEndpoint",
+    "BatchEndpointTrackedResource": {
+      "Name": "BatchEndpointTrackedResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1842,7 +1282,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1855,7 +1294,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetKeys",
+          "Name": "ListKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys",
           "Method": "POST",
           "OperationID": "BatchEndpoints_ListKeys",
@@ -1864,7 +1303,9 @@
           "Description": "Lists batch Inference Endpoint keys."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "BatchEndpointTrackedResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/batchEndpoints",
       "ResourceKey": "endpointName",
@@ -1876,8 +1317,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningBatchDeployment": {
-      "Name": "MachineLearningBatchDeployment",
+    "BatchDeploymentTrackedResource": {
+      "Name": "BatchDeploymentTrackedResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1931,7 +1372,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1943,7 +1383,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningBatchEndpoint"],
+      "Parents": [
+        "BatchEndpointTrackedResource"
+      ],
       "SwaggerModelName": "BatchDeploymentTrackedResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/deployments",
       "ResourceKey": "deploymentName",
@@ -1955,8 +1397,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningDatastore": {
-      "Name": "MachineLearningDatastore",
+    "DatastoreResource": {
+      "Name": "DatastoreResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2010,7 +1452,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2023,7 +1464,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets",
           "Method": "POST",
           "OperationID": "Datastores_ListSecrets",
@@ -2032,7 +1473,9 @@
           "Description": "Get datastore secrets."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "DatastoreResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/datastores",
       "ResourceKey": "name",
@@ -2044,8 +1487,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningFeatureSetContainer": {
-      "Name": "MachineLearningFeatureSetContainer",
+    "FeaturesetContainer": {
+      "Name": "FeaturesetContainer",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2099,7 +1542,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2111,7 +1553,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "FeaturesetContainer",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/featuresets",
       "ResourceKey": "name",
@@ -2123,8 +1567,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningFeature": {
-      "Name": "MachineLearningFeature",
+    "Feature": {
+      "Name": "Feature",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2148,7 +1592,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2160,7 +1603,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningFeatureSetVersion"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "Feature",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/featuresets/versions/features",
       "ResourceKey": "featureName",
@@ -2172,8 +1617,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningFeatureSetVersion": {
-      "Name": "MachineLearningFeatureSetVersion",
+    "FeaturesetVersion": {
+      "Name": "FeaturesetVersion",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2227,7 +1672,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2249,21 +1693,22 @@
           "Description": "Backfill."
         },
         {
-          "Name": "GetMaterializationJobs",
+          "Name": "ListMaterializationJobs",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/listMaterializationJobs",
           "Method": "POST",
           "OperationID": "FeaturesetVersions_ListMaterializationJobs",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListMaterializationJobs",
-            "NextPageMethod": "ListMaterializationJobsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "List materialization Jobs."
         }
       ],
-      "Parents": ["MachineLearningFeatureSetContainer"],
+      "Parents": [
+        "FeaturesetContainer"
+      ],
       "SwaggerModelName": "FeaturesetVersion",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/featuresets/versions",
       "ResourceKey": "version",
@@ -2275,8 +1720,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningFeatureStoreEntityContainer": {
-      "Name": "MachineLearningFeatureStoreEntityContainer",
+    "FeaturestoreEntityContainer": {
+      "Name": "FeaturestoreEntityContainer",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2330,7 +1775,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2342,7 +1786,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "FeaturestoreEntityContainer",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/featurestoreEntities",
       "ResourceKey": "name",
@@ -2354,8 +1800,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningFeaturestoreEntityVersion": {
-      "Name": "MachineLearningFeaturestoreEntityVersion",
+    "FeaturestoreEntityVersion": {
+      "Name": "FeaturestoreEntityVersion",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2409,7 +1855,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2421,7 +1866,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningFeatureStoreEntityContainer"],
+      "Parents": [
+        "FeaturestoreEntityContainer"
+      ],
       "SwaggerModelName": "FeaturestoreEntityVersion",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/featurestoreEntities/versions",
       "ResourceKey": "version",
@@ -2433,8 +1880,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningJob": {
-      "Name": "MachineLearningJob",
+    "JobBaseResource": {
+      "Name": "JobBaseResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2488,7 +1935,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2510,7 +1956,9 @@
           "Description": "Cancels a Job (asynchronous)."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "JobBaseResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/jobs",
       "ResourceKey": "id",
@@ -2522,8 +1970,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningLabelingJob": {
-      "Name": "MachineLearningLabelingJob",
+    "LabelingJob": {
+      "Name": "LabelingJob",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2577,7 +2025,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2617,7 +2064,9 @@
           "Description": "Resume a labeling job (asynchronous)."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "LabelingJob",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
       "ResourceKey": "id",
@@ -2629,8 +2078,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningOnlineEndpoint": {
-      "Name": "MachineLearningOnlineEndpoint",
+    "OnlineEndpointTrackedResource": {
+      "Name": "OnlineEndpointTrackedResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2684,7 +2133,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2697,7 +2145,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetKeys",
+          "Name": "ListKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys",
           "Method": "POST",
           "OperationID": "OnlineEndpoints_ListKeys",
@@ -2724,7 +2172,9 @@
           "Description": "Retrieve a valid AML token for an Endpoint using AMLToken-based authentication."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "OnlineEndpointTrackedResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
       "ResourceKey": "endpointName",
@@ -2736,8 +2186,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningOnlineDeployment": {
-      "Name": "MachineLearningOnlineDeployment",
+    "OnlineDeploymentTrackedResource": {
+      "Name": "OnlineDeploymentTrackedResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2791,7 +2241,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2813,21 +2262,22 @@
           "Description": "Polls an Endpoint operation."
         },
         {
-          "Name": "GetSkus",
+          "Name": "ListSkus",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus",
           "Method": "GET",
           "OperationID": "OnlineDeployments_ListSkus",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListSkus",
-            "NextPageMethod": "ListSkusNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "List Inference Endpoint Deployment Skus."
         }
       ],
-      "Parents": ["MachineLearningOnlineEndpoint"],
+      "Parents": [
+        "OnlineEndpointTrackedResource"
+      ],
       "SwaggerModelName": "OnlineDeploymentTrackedResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
       "ResourceKey": "deploymentName",
@@ -2839,8 +2289,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningSchedule": {
-      "Name": "MachineLearningSchedule",
+    "Schedule": {
+      "Name": "Schedule",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2894,7 +2344,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2906,7 +2355,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "Schedule",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/schedules",
       "ResourceKey": "name",
@@ -2918,8 +2369,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningRegistry": {
-      "Name": "MachineLearningRegistry",
+    "Registry": {
+      "Name": "Registry",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2973,7 +2424,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2983,14 +2433,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetMachineLearningRegistries",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/registries",
           "Method": "GET",
           "OperationID": "Registries_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3010,7 +2459,9 @@
           "Description": "Remove regions from registry"
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Registry",
       "ResourceType": "Microsoft.MachineLearningServices/registries",
       "ResourceKey": "registryName",
@@ -3022,8 +2473,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningWorkspace": {
-      "Name": "MachineLearningWorkspace",
+    "Workspace": {
+      "Name": "Workspace",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3077,7 +2528,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3087,14 +2537,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetMachineLearningWorkspaces",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces",
           "Method": "GET",
           "OperationID": "Workspaces_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3105,14 +2554,13 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetWorkspaceFeatures",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features",
           "Method": "GET",
           "OperationID": "WorkspaceFeatures_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3128,7 +2576,7 @@
           "Description": "Diagnose workspace setup issue."
         },
         {
-          "Name": "GetKeys",
+          "Name": "ListKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys",
           "Method": "POST",
           "OperationID": "Workspaces_ListKeys",
@@ -3137,7 +2585,7 @@
           "Description": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry."
         },
         {
-          "Name": "GetNotebookAccessToken",
+          "Name": "ListNotebookAccessToken",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken",
           "Method": "POST",
           "OperationID": "Workspaces_ListNotebookAccessToken",
@@ -3146,7 +2594,7 @@
           "Description": "Get Azure Machine Learning Workspace notebook access token"
         },
         {
-          "Name": "GetNotebookKeys",
+          "Name": "ListNotebookKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys",
           "Method": "POST",
           "OperationID": "Workspaces_ListNotebookKeys",
@@ -3155,25 +2603,24 @@
           "Description": "Lists keys of Azure Machine Learning Workspaces notebook."
         },
         {
-          "Name": "GetStorageAccountKeys",
+          "Name": "ListStorageAccountKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys",
           "Method": "POST",
           "OperationID": "Workspaces_ListStorageAccountKeys",
           "IsLongRunning": false,
           "PagingMetadata": null,
-          "Description": "Lists keys of Azure Machine Learning Workspace\u0027s storage account."
+          "Description": "Lists keys of Azure Machine Learning Workspace's storage account."
         },
         {
-          "Name": "GetOutboundNetworkDependenciesEndpoints",
+          "Name": "ListOutboundNetworkDependenciesEndpoints",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints",
           "Method": "GET",
           "OperationID": "Workspaces_ListOutboundNetworkDependenciesEndpoints",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListOutboundNetworkDependenciesEndpoints",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically."
         },
@@ -3184,7 +2631,7 @@
           "OperationID": "Workspaces_PrepareNotebook",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Prepare Azure Machine Learning Workspace\u0027s notebook resource"
+          "Description": "Prepare Azure Machine Learning Workspace's notebook resource"
         },
         {
           "Name": "ResyncKeys",
@@ -3196,16 +2643,20 @@
           "Description": "Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry"
         },
         {
-          "Name": "GetPrivateLinkResources",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources",
           "Method": "GET",
           "OperationID": "PrivateLinkResources_List",
           "IsLongRunning": false,
-          "PagingMetadata": { "Method": "List", "NextPageMethod": null, "ItemName": "value", "NextLinkName": null },
-          "Description": "Called by Client (Portal, CLI, etc) to get available \u0022private link resources\u0022 for the workspace.\r\nEach \u0022private link resource\u0022 is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \u0022[NRP] Private Endpoint Design\u0022 doc, topic \u0022GET API for GroupIds\u0022."
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\r\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\"."
         },
         {
-          "Name": "ProvisionManagedNetworkManagedNetworkProvision",
+          "Name": "ProvisionManagedNetwork",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork",
           "Method": "POST",
           "OperationID": "ManagedNetworkProvisions_ProvisionManagedNetwork",
@@ -3214,7 +2665,9 @@
           "Description": "Provisions the managed network of a machine learning workspace."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Workspace",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces",
       "ResourceKey": "workspaceName",
@@ -3226,8 +2679,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningWorkspaceConnection": {
-      "Name": "MachineLearningWorkspaceConnection",
+    "WorkspaceConnectionPropertiesV2BasicResource": {
+      "Name": "WorkspaceConnectionPropertiesV2BasicResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3281,7 +2734,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3294,7 +2746,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets",
           "Method": "POST",
           "OperationID": "WorkspaceConnections_ListSecrets",
@@ -3303,7 +2755,9 @@
           "Description": "List all the secrets of a machine learning workspaces connections."
         }
       ],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "WorkspaceConnectionPropertiesV2BasicResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/connections",
       "ResourceKey": "connectionName",
@@ -3315,8 +2769,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningOutboundRuleBasic": {
-      "Name": "MachineLearningOutboundRuleBasic",
+    "OutboundRuleBasicResource": {
+      "Name": "OutboundRuleBasicResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3370,7 +2824,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3382,7 +2835,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "OutboundRuleBasicResource",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/outboundRules",
       "ResourceKey": "ruleName",
@@ -3394,8 +2849,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "MachineLearningPrivateEndpointConnection": {
-      "Name": "MachineLearningPrivateEndpointConnection",
+    "PrivateEndpointConnection": {
+      "Name": "PrivateEndpointConnection",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3447,7 +2902,11 @@
           "Method": "GET",
           "OperationID": "PrivateEndpointConnections_List",
           "IsLongRunning": false,
-          "PagingMetadata": { "Method": "List", "NextPageMethod": null, "ItemName": "value", "NextLinkName": null },
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
           "Description": "Called by end-users to get all PE connections."
         }
       ],
@@ -3456,7 +2915,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["MachineLearningWorkspace"],
+      "Parents": [
+        "Workspace"
+      ],
       "SwaggerModelName": "PrivateEndpointConnection",
       "ResourceType": "Microsoft.MachineLearningServices/workspaces/privateEndpointConnections",
       "ResourceKey": "privateEndpointConnectionName",
@@ -3468,5 +2929,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

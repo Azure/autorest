@@ -13,7 +13,7 @@ import {
 import { TypespecDecorator } from "../interfaces";
 import { getOptions } from "../options";
 import { getLogger } from "../utils/logger";
-import { Metadata, getArmResourcesMetadata } from "../utils/resource-discovery";
+import { Metadata } from "../utils/resource-discovery";
 
 type RenamableSchema = Schema | Property | Parameter | ChoiceValue | Operation;
 

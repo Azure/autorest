@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./RestorePoint.tsp";
+import "./RestorePointCollection.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.Compute;
 /**
  * Properties of disk restore point
  */
-@parentResource(RestorePoint)
+@parentResource(RestorePointCollection)
 model DiskRestorePoint
   is Azure.ResourceManager.ProxyResource<DiskRestorePointProperties> {
   ...ResourceNameParameter<
@@ -32,36 +32,14 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DiskRestorePoint_Get")
-  get is ArmResourceRead<
-    DiskRestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
-
-      /**
-       * The name of the restore point collection that the disk restore point belongs.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  get is ArmResourceRead<DiskRestorePoint>;
 
   /**
    * Lists diskRestorePoints under a vmRestorePoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DiskRestorePoint_ListByRestorePoint")
-  listByRestorePoint is ArmResourceListByParent<
-    DiskRestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
-
-      /**
-       * The name of the restore point collection that the disk restore point belongs.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  listByRestorePoint is ArmResourceListByParent<DiskRestorePoint>;
 
   /**
    * Grants access to a diskRestorePoint.
@@ -71,16 +49,7 @@ interface DiskRestorePoints {
   grantAccess is ArmResourceActionAsync<
     DiskRestorePoint,
     GrantAccessData,
-    AccessUri,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
-
-      /**
-       * The name of the restore point collection that the disk restore point belongs.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
+    AccessUri
   >;
 
   /**
@@ -88,20 +57,7 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DiskRestorePoint_RevokeAccess")
-  revokeAccess is ArmResourceActionAsync<
-    DiskRestorePoint,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiskRestorePoint>;
-
-      /**
-       * The name of the restore point collection that the disk restore point belongs.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  revokeAccess is ArmResourceActionAsync<DiskRestorePoint, void, void>;
 }
 
 @@doc(DiskRestorePoint.name, "The name of the disk restore point created.");

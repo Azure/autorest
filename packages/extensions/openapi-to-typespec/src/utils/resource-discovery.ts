@@ -16,7 +16,6 @@ export interface _ArmResourceOperation {
 
 export interface _ArmPagingMetadata {
   Method: string;
-  NextPageMethod?: string;
   ItemName: string;
   NextLinkName: string;
 }
@@ -121,24 +120,6 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
         return operation;
       }
     }
-  }
-}
-
-export function getArmResourcesMetadata(): Metadata {
-  if (metadataCache) {
-    return metadataCache;
-  }
-  const session = getSession();
-  const outputFolder: string = session.configuration["output-folder"] ?? "";
-
-  try {
-    const content = readFileSync(join(outputFolder, "resources.json"), "utf-8");
-    const metadata: Metadata = JSON.parse(content);
-    metadataCache = metadata;
-
-    return metadataCache;
-  } catch (e) {
-    throw new Error(`Failed to load resources.json from ${outputFolder} \n ${e}`);
   }
 }
 

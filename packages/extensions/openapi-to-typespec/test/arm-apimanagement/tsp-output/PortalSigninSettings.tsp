@@ -85,13 +85,6 @@ interface PortalSigninSettingsOperationGroup {
       `If-Match`: string;
     }
   >;
-
-  /**
-   * Lists a collection of portalsettings defined within a service instance..
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalSettings_ListByService")
-  listByService is ArmResourceListByParent<PortalSigninSettings>;
 }
 
 @@doc(PortalSigninSettings.name, "");
