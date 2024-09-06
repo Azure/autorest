@@ -65,7 +65,7 @@ function getArmResourceImports(program: TypespecProgram, metadata: Metadata): st
   const imports: string[] = [];
 
   for (const resource in metadata.Resources) {
-    const fileName = metadata.Resources[resource].Name;
+    const fileName = metadata.Resources[resource].SwaggerModelName;
     if (fileName) {
       imports.push(`import "./${fileName}.tsp";`);
     }
