@@ -3354,22 +3354,6 @@ model ConnectivityIssue {
   context?: Record<string>[];
 }
 
-/**
- * Paged list of content types.
- */
-model ContentTypeListResult is Azure.Core.Page<ContentTypeContract>;
-
-/**
- * Content type contract details.
- */
-model ContentTypeContract extends Resource {
-  /**
-   * Properties of the content type.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ContentTypeContractProperties;
-}
-
 model ContentTypeContractProperties {
   /**
    * Content type identifier
@@ -3398,21 +3382,9 @@ model ContentTypeContractProperties {
 }
 
 /**
- * Paged list of content items.
+ * Paged deleted API Management Services List Representation.
  */
-model ContentItemListResult is Azure.Core.Page<ContentItemContract>;
-
-/**
- * Content type contract details.
- */
-model ContentItemContract extends Resource {
-  /**
-   * Properties of the content item.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @extension("x-ms-client-flatten", true)
-  properties?: Record<unknown>;
-}
+model DeletedServicesListResult is Azure.Core.Page<DeletedServiceContract>;
 
 model DeletedServiceContractProperties {
   /**
@@ -5404,6 +5376,21 @@ model PortalRevisionContractProperties {
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedDateTime?: utcDateTime;
+}
+
+/**
+ * Descriptions of APIM policies.
+ */
+model PortalSettingsListResult {
+  /**
+   * Descriptions of APIM policies.
+   */
+  value?: PortalSettingsContract[];
+
+  /**
+   * Total record count number.
+   */
+  count?: int64;
 }
 
 /**

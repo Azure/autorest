@@ -42,12 +42,6 @@ interface VirtualMachineScaleSetExtensions {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
 
       /**
-       * The name of the VM scale set containing the extension.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * The expand expression to apply on the operation.
        */
       @query("$expand")
@@ -58,18 +52,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to create or update an extension.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    VirtualMachineScaleSetExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
-      /**
-       * The name of the VM scale set where the extension should be create or updated.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetExtension>;
 
   /**
    * The operation to update an extension.
@@ -77,16 +60,7 @@ interface VirtualMachineScaleSetExtensions {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSetExtension,
-    VirtualMachineScaleSetExtensionUpdate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
-      /**
-       * The name of the VM scale set where the extension should be updated.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    VirtualMachineScaleSetExtensionUpdate
   >;
 
   /**
@@ -95,36 +69,14 @@ interface VirtualMachineScaleSetExtensions {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
-    VirtualMachineScaleSetExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
-      /**
-       * The name of the VM scale set where the extension should be deleted.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  delete is ArmResourceDeleteAsync<VirtualMachineScaleSetExtension>;
 
   /**
    * Gets a list of all extensions in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetExtensions_List")
-  list is ArmResourceListByParent<
-    VirtualMachineScaleSetExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
-      /**
-       * The name of the VM scale set containing the extension.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 
 @@doc(VirtualMachineScaleSetExtension.name,

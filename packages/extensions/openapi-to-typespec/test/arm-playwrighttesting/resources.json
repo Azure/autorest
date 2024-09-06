@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -65,14 +64,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetAccounts",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/accounts",
           "Method": "GET",
           "OperationID": "Accounts_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -82,7 +80,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Account",
       "ResourceType": "Microsoft.AzurePlaywrightService/accounts",
       "ResourceKey": "name",
@@ -119,7 +119,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -131,7 +130,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "Quota",
       "ResourceType": "Microsoft.AzurePlaywrightService/locations/quotas",
       "ResourceKey": "name",
@@ -143,5 +144,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

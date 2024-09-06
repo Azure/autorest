@@ -31,11 +31,6 @@ interface DeletedAccounts {
    * Get properties of specified deleted account resource.
    */
   get is ArmResourceRead<DeletedAccount>;
-
-  /**
-   * Lists deleted accounts under the subscription.
-   */
-  list is ArmListBySubscription<DeletedAccount>;
 }
 
 @@maxLength(DeletedAccount.name, 24);

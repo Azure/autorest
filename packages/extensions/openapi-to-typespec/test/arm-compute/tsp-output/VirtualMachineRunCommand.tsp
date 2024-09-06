@@ -82,18 +82,6 @@ interface VirtualMachineRunCommands {
       $expand?: string;
     }
   >;
-
-  /**
-   * Lists all available run commands for a subscription in a location.
-   */
-  list is ArmResourceListAtScope<
-    VirtualMachineRunCommand,
-    LocationScope<VirtualMachineRunCommand>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
-      ...LocationResourceParameter;
-    }
-  >;
 }
 
 @@doc(VirtualMachineRunCommand.name,

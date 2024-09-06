@@ -41,12 +41,6 @@ using Azure.ResourceManager.ApiManagement;
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentTypeContract.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentItemContract.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RemotePrivateEndpointConnectionWrapper.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -192,6 +186,12 @@ using Azure.ResourceManager.ApiManagement;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CertificateContract.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ContentTypeContract.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ContentItemContract.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DeletedServiceContract.properties);

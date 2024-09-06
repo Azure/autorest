@@ -32,20 +32,20 @@ interface OpenidConnectProviderContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("OpenIdConnectProvider_Get")
-  get is ArmResourceRead<
-    OpenidConnectProviderContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
+  get is ArmResourceRead<OpenidConnectProviderContract>;
 
-      /**
-       * Identifier of the OpenID Connect Provider.
-       */
-      @maxLength(256)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      OpenId: string;
-    }
-  >;
+  /**
+   * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @head
+  @operationId("OpenIdConnectProvider_GetEntityTag")
+  getEntityTag(
+    ...ResourceInstanceParameters<
+      OpenidConnectProviderContract,
+      BaseParameters<OpenidConnectProviderContract>
+    >,
+  ): OkResponse | ErrorResponse;
 
   /**
    * Creates or updates the OpenID Connect Provider.
@@ -56,14 +56,6 @@ interface OpenidConnectProviderContracts {
     OpenidConnectProviderContract,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
-
-      /**
-       * Identifier of the OpenID Connect Provider.
-       */
-      @maxLength(256)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      OpenId: string;
 
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
@@ -86,14 +78,6 @@ interface OpenidConnectProviderContracts {
       ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
 
       /**
-       * Identifier of the OpenID Connect Provider.
-       */
-      @maxLength(256)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      OpenId: string;
-
-      /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
       @header
@@ -111,14 +95,6 @@ interface OpenidConnectProviderContracts {
     OpenidConnectProviderContract,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
-
-      /**
-       * Identifier of the OpenID Connect Provider.
-       */
-      @maxLength(256)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      OpenId: string;
 
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
@@ -167,18 +143,7 @@ interface OpenidConnectProviderContracts {
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,
-    ClientSecretContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<OpenidConnectProviderContract>;
-
-      /**
-       * Identifier of the OpenID Connect Provider.
-       */
-      @maxLength(256)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      OpenId: string;
-    }
+    ClientSecretContract
   >;
 }
 

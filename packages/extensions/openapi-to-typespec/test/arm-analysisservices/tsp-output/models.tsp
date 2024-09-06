@@ -312,6 +312,17 @@ model AnalysisServicesServerUpdateParameters {
 }
 
 /**
+ * An object that represents enumerating SKUs for new resources.
+ */
+model SkuEnumerationForNewResourceResult {
+  /**
+   * The collection of available SKUs for new resources.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  value?: ResourceSku[];
+}
+
+/**
  * An object that represents enumerating SKUs for existing resources.
  */
 model SkuEnumerationForExistingResourceResult {

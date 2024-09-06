@@ -207,16 +207,6 @@ interface ApiManagementServiceResources {
   >;
 
   /**
-   * Checks availability and correctness of a name for an API Management service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApiManagementService_CheckNameAvailability")
-  checkNameAvailability is checkGlobalNameAvailability<
-    ApiManagementServiceCheckNameAvailabilityParameters,
-    ApiManagementServiceNameAvailabilityResult
-  >;
-
-  /**
    * Lists a collection of apis associated with tags.
    */
   // FIXME: Api_ListByTags could not be converted to a resource operation
@@ -264,134 +254,6 @@ interface ApiManagementServiceResources {
 
     ...SubscriptionIdParameter,
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
-
-  /**
-   * Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.
-   */
-  // FIXME: ContentType_ListByService could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ContentType_ListByService")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes")
-  @get
-  listByService(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ContentTypeListResult> | ErrorResponse;
-
-  /**
-   * Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.
-   */
-  // FIXME: ContentType_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ContentType_Get")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * Content type identifier.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    contentTypeId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ContentTypeContract> | ErrorResponse;
-
-  /**
-   * Lists developer portal's content items specified by the provided content type.
-   */
-  // FIXME: ContentItem_ListByService could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ContentItem_ListByService")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems")
-  @get
-  listByService(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * Content type identifier.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    contentTypeId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ContentItemListResult> | ErrorResponse;
-
-  /**
-   * Returns the developer portal's content item specified by its identifier.
-   */
-  // FIXME: ContentItem_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ContentItem_Get")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * Content type identifier.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    contentTypeId: string,
-
-    /**
-     * Content item identifier.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    contentItemId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ContentItemContract> | ErrorResponse;
 
   /**
    * Gets all available SKU for a given API Management service
@@ -546,7 +408,7 @@ interface ApiManagementServiceResources {
     serviceName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<PortalSigninSettings>> | ErrorResponse;
+  ): ArmResponse<PortalSettingsListResult> | ErrorResponse;
 
   /**
    * Lists a collection of products associated with tags.

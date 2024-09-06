@@ -1,7 +1,7 @@
 {
   "Resources": {
-    "Api": {
-      "Name": "Api",
+    "ApiContract": {
+      "Name": "ApiContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -68,58 +67,48 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetApiRevisionsByService",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions",
           "Method": "GET",
           "OperationID": "ApiRevision_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all revisions of an API."
         },
         {
-          "Name": "GetApiProducts",
+          "Name": "ListByApis",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products",
           "Method": "GET",
           "OperationID": "ApiProduct_ListByApis",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByApis",
-            "NextPageMethod": "ListByApisNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all Products, which the API is part of."
         },
         {
-          "Name": "GetOperationsByTags",
+          "Name": "ListByTags",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags",
           "Method": "GET",
           "OperationID": "Operation_ListByTags",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTags",
-            "NextPageMethod": "ListByTagsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of operations associated with tags."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}",
-          "Method": "HEAD",
-          "OperationID": "Api_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the API specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "ApiContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis",
       "ResourceKey": "apiId",
@@ -131,8 +120,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiRelease": {
-      "Name": "ApiRelease",
+    "ApiReleaseContract": {
+      "Name": "ApiReleaseContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -186,7 +175,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -197,18 +185,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}",
-          "Method": "HEAD",
-          "OperationID": "ApiRelease_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Returns the etag of an API release."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "ApiReleaseContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/releases",
       "ResourceKey": "releaseId",
@@ -220,8 +200,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiOperation": {
-      "Name": "ApiOperation",
+    "OperationContract": {
+      "Name": "OperationContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -275,7 +255,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByApi",
-            "NextPageMethod": "ListByApiNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -286,18 +265,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}",
-          "Method": "HEAD",
-          "OperationID": "ApiOperation_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the API operation specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "OperationContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/operations",
       "ResourceKey": "operationId",
@@ -309,8 +280,32 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiOperationPolicy": {
-      "Name": "ApiOperationPolicy",
+    "PolicyContractFixMe": {
+      "Name": "PolicyContractFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "PolicyContract": {
+      "Name": "PolicyContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -364,9 +359,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByOperation",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Get the list of policy configuration at the API Operation level."
         }
@@ -375,18 +369,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/policies/{policyId}",
-          "Method": "HEAD",
-          "OperationID": "ApiOperationPolicy_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the API operation policy specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "OperationContract"
       ],
-      "Parents": ["ApiOperation"],
       "SwaggerModelName": "PolicyContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/operations/policies",
       "ResourceKey": "policyId",
@@ -398,88 +384,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiPolicy": {
-      "Name": "ApiPolicy",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}",
-          "Method": "GET",
-          "OperationID": "ApiPolicy_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get the policy configuration at the API level."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "ApiPolicy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates policy configuration for the API."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "ApiPolicy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates policy configuration for the API."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}",
-          "Method": "DELETE",
-          "OperationID": "ApiPolicy_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Deletes the policy configuration at the Api."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies",
-          "Method": "GET",
-          "OperationID": "ApiPolicy_ListByApi",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByApi",
-            "NextPageMethod": null,
-            "ItemName": "value",
-            "NextLinkName": null
-          },
-          "Description": "Get the policy configuration at the API level."
-        }
-      ],
+    "TagContractFixMe": {
+      "Name": "TagContractFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/policies/{policyId}",
-          "Method": "HEAD",
-          "OperationID": "ApiPolicy_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the API policy specified by its identifier."
-        }
-      ],
-      "Parents": ["Api"],
-      "SwaggerModelName": "PolicyContract",
-      "ResourceType": "Microsoft.ApiManagement/service/apis/policies",
-      "ResourceKey": "policyId",
-      "ResourceKeySegment": "policies",
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -487,186 +408,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementPolicy": {
-      "Name": "ApiManagementPolicy",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}",
-          "Method": "GET",
-          "OperationID": "Policy_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get the Global policy definition of the Api Management service."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "Policy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates the global policy configuration of the Api Management service."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "Policy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates the global policy configuration of the Api Management service."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}",
-          "Method": "DELETE",
-          "OperationID": "Policy_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Deletes the global policy configuration of the Api Management Service."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies",
-          "Method": "GET",
-          "OperationID": "Policy_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": null,
-            "ItemName": "value",
-            "NextLinkName": null
-          },
-          "Description": "Lists all the Global Policy definitions of the Api Management service."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId}",
-          "Method": "HEAD",
-          "OperationID": "Policy_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Global policy definition in the Api Management service."
-        }
-      ],
-      "Parents": ["ApiManagementService"],
-      "SwaggerModelName": "PolicyContract",
-      "ResourceType": "Microsoft.ApiManagement/service/policies",
-      "ResourceKey": "policyId",
-      "ResourceKeySegment": "policies",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiManagementProductPolicy": {
-      "Name": "ApiManagementProductPolicy",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}",
-          "Method": "GET",
-          "OperationID": "ProductPolicy_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get the policy configuration at the Product level."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "ProductPolicy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates policy configuration for the Product."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}",
-          "Method": "PUT",
-          "OperationID": "ProductPolicy_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates or updates policy configuration for the Product."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}",
-          "Method": "DELETE",
-          "OperationID": "ProductPolicy_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Deletes the policy configuration at the Product."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies",
-          "Method": "GET",
-          "OperationID": "ProductPolicy_ListByProduct",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByProduct",
-            "NextPageMethod": null,
-            "ItemName": "value",
-            "NextLinkName": null
-          },
-          "Description": "Get the policy configuration at the Product level."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/policies/{policyId}",
-          "Method": "HEAD",
-          "OperationID": "ProductPolicy_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get the ETag of the policy configuration at the Product level."
-        }
-      ],
-      "Parents": ["ApiManagementProduct"],
-      "SwaggerModelName": "PolicyContract",
-      "ResourceType": "Microsoft.ApiManagement/service/products/policies",
-      "ResourceKey": "policyId",
-      "ResourceKeySegment": "policies",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiOperationTag": {
-      "Name": "ApiOperationTag",
+    "TagContract": {
+      "Name": "TagContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -720,7 +463,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByOperation",
-            "NextPageMethod": "ListByOperationNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -731,18 +473,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityStateByOperation",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}/tags/{tagId}",
-          "Method": "HEAD",
-          "OperationID": "Tag_GetEntityStateByOperation",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state version of the tag specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "OperationContract"
       ],
-      "Parents": ["ApiOperation"],
       "SwaggerModelName": "TagContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/operations/tags",
       "ResourceKey": "tagId",
@@ -754,275 +488,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiTag": {
-      "Name": "ApiTag",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}",
-          "Method": "GET",
-          "OperationID": "Tag_GetByApi",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get tag associated with the API."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}",
-          "Method": "PUT",
-          "OperationID": "Tag_AssignToApi",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Assign tag to the Api."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}",
-          "Method": "PUT",
-          "OperationID": "Tag_AssignToApi",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Assign tag to the Api."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}",
-          "Method": "DELETE",
-          "OperationID": "Tag_DetachFromApi",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Detach the tag from the Api."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags",
-          "Method": "GET",
-          "OperationID": "Tag_ListByApi",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByApi",
-            "NextPageMethod": "ListByApiNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists all Tags associated with the API."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityStateByApi",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tags/{tagId}",
-          "Method": "HEAD",
-          "OperationID": "Tag_GetEntityStateByApi",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state version of the tag specified by its identifier."
-        }
-      ],
-      "Parents": ["Api"],
-      "SwaggerModelName": "TagContract",
-      "ResourceType": "Microsoft.ApiManagement/service/apis/tags",
-      "ResourceKey": "tagId",
-      "ResourceKeySegment": "tags",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiManagementProductTag": {
-      "Name": "ApiManagementProductTag",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}",
-          "Method": "GET",
-          "OperationID": "Tag_GetByProduct",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get tag associated with the Product."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}",
-          "Method": "PUT",
-          "OperationID": "Tag_AssignToProduct",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Assign tag to the Product."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}",
-          "Method": "PUT",
-          "OperationID": "Tag_AssignToProduct",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Assign tag to the Product."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}",
-          "Method": "DELETE",
-          "OperationID": "Tag_DetachFromProduct",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Detach the tag from the Product."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags",
-          "Method": "GET",
-          "OperationID": "Tag_ListByProduct",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByProduct",
-            "NextPageMethod": "ListByProductNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists all Tags associated with the Product."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityStateByProduct",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}",
-          "Method": "HEAD",
-          "OperationID": "Tag_GetEntityStateByProduct",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state version of the tag specified by its identifier."
-        }
-      ],
-      "Parents": ["ApiManagementProduct"],
-      "SwaggerModelName": "TagContract",
-      "ResourceType": "Microsoft.ApiManagement/service/products/tags",
-      "ResourceKey": "tagId",
-      "ResourceKeySegment": "tags",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiManagementTag": {
-      "Name": "ApiManagementTag",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}",
-          "Method": "GET",
-          "OperationID": "Tag_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the details of the tag specified by its identifier."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}",
-          "Method": "PUT",
-          "OperationID": "Tag_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates a tag."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}",
-          "Method": "PATCH",
-          "OperationID": "Tag_Update",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Updates the details of the tag specified by its identifier."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}",
-          "Method": "DELETE",
-          "OperationID": "Tag_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Deletes specific tag of the API Management service instance."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags",
-          "Method": "GET",
-          "OperationID": "Tag_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists a collection of tags defined within a service instance."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityState",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}",
-          "Method": "HEAD",
-          "OperationID": "Tag_GetEntityState",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state version of the tag specified by its identifier."
-        }
-      ],
-      "Parents": ["ApiManagementService"],
-      "SwaggerModelName": "TagContract",
-      "ResourceType": "Microsoft.ApiManagement/service/tags",
-      "ResourceKey": "tagId",
-      "ResourceKeySegment": "tags",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiSchema": {
-      "Name": "ApiSchema",
+    "SchemaContract": {
+      "Name": "SchemaContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1076,7 +543,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByApi",
-            "NextPageMethod": "ListByApiNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1087,18 +553,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas/{schemaId}",
-          "Method": "HEAD",
-          "OperationID": "ApiSchema_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the schema specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "SchemaContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/schemas",
       "ResourceKey": "schemaId",
@@ -1110,8 +568,32 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiDiagnostic": {
-      "Name": "ApiDiagnostic",
+    "DiagnosticContractFixMe": {
+      "Name": "DiagnosticContractFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DiagnosticContract": {
+      "Name": "DiagnosticContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1165,7 +647,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1176,18 +657,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}",
-          "Method": "HEAD",
-          "OperationID": "ApiDiagnostic_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "DiagnosticContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/diagnostics",
       "ResourceKey": "diagnosticId",
@@ -1199,88 +672,23 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementDiagnostic": {
-      "Name": "ApiManagementDiagnostic",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}",
-          "Method": "GET",
-          "OperationID": "Diagnostic_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the details of the Diagnostic specified by its identifier."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}",
-          "Method": "PUT",
-          "OperationID": "Diagnostic_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Creates a new Diagnostic or updates an existing one."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}",
-          "Method": "PATCH",
-          "OperationID": "Diagnostic_Update",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Updates the details of the Diagnostic specified by its identifier."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}",
-          "Method": "DELETE",
-          "OperationID": "Diagnostic_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "Deletes the specified Diagnostic."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics",
-          "Method": "GET",
-          "OperationID": "Diagnostic_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists all diagnostics of the API Management service instance."
-        }
-      ],
+    "IssueContractFixMe": {
+      "Name": "IssueContractFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}",
-          "Method": "HEAD",
-          "OperationID": "Diagnostic_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Diagnostic specified by its identifier."
-        }
-      ],
-      "Parents": ["ApiManagementService"],
-      "SwaggerModelName": "DiagnosticContract",
-      "ResourceType": "Microsoft.ApiManagement/service/diagnostics",
-      "ResourceKey": "diagnosticId",
-      "ResourceKeySegment": "diagnostics",
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
       "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
@@ -1288,8 +696,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiIssue": {
-      "Name": "ApiIssue",
+    "IssueContract": {
+      "Name": "IssueContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1343,7 +751,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1354,18 +761,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}",
-          "Method": "HEAD",
-          "OperationID": "ApiIssue_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Issue for an API specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "IssueContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/issues",
       "ResourceKey": "issueId",
@@ -1377,57 +776,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementIssue": {
-      "Name": "ApiManagementIssue",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues/{issueId}",
-          "Method": "GET",
-          "OperationID": "Issue_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets API Management issue details"
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/issues",
-          "Method": "GET",
-          "OperationID": "Issue_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists a collection of issues in the specified service instance."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["ApiManagementService"],
-      "SwaggerModelName": "IssueContract",
-      "ResourceType": "Microsoft.ApiManagement/service/issues",
-      "ResourceKey": "issueId",
-      "ResourceKeySegment": "issues",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "ApiIssueComment": {
-      "Name": "ApiIssueComment",
+    "IssueCommentContract": {
+      "Name": "IssueCommentContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1481,7 +831,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1492,18 +841,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments/{commentId}",
-          "Method": "HEAD",
-          "OperationID": "ApiIssueComment_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "IssueContract"
       ],
-      "Parents": ["ApiIssue"],
       "SwaggerModelName": "IssueCommentContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/issues/comments",
       "ResourceKey": "commentId",
@@ -1515,8 +856,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiIssueAttachment": {
-      "Name": "ApiIssueAttachment",
+    "IssueAttachmentContract": {
+      "Name": "IssueAttachmentContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1570,7 +911,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1581,18 +921,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments/{attachmentId}",
-          "Method": "HEAD",
-          "OperationID": "ApiIssueAttachment_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "IssueContract"
       ],
-      "Parents": ["ApiIssue"],
       "SwaggerModelName": "IssueAttachmentContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/issues/attachments",
       "ResourceKey": "attachmentId",
@@ -1604,8 +936,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiTagDescription": {
-      "Name": "ApiTagDescription",
+    "TagDescriptionContract": {
+      "Name": "TagDescriptionContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1659,7 +991,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1670,18 +1001,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/tagDescriptions/{tagDescriptionId}",
-          "Method": "HEAD",
-          "OperationID": "ApiTagDescription_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state version of the tag specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiContract"
       ],
-      "Parents": ["Api"],
       "SwaggerModelName": "TagDescriptionContract",
       "ResourceType": "Microsoft.ApiManagement/service/apis/tagDescriptions",
       "ResourceKey": "tagDescriptionId",
@@ -1693,8 +1016,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiVersionSet": {
-      "Name": "ApiVersionSet",
+    "ApiVersionSetContract": {
+      "Name": "ApiVersionSetContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1748,7 +1071,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1759,18 +1081,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apiVersionSets/{versionSetId}",
-          "Method": "HEAD",
-          "OperationID": "ApiVersionSet_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Api Version Set specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "ApiVersionSetContract",
       "ResourceType": "Microsoft.ApiManagement/service/apiVersionSets",
       "ResourceKey": "versionSetId",
@@ -1782,8 +1096,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementAuthorizationServer": {
-      "Name": "ApiManagementAuthorizationServer",
+    "AuthorizationServerContract": {
+      "Name": "AuthorizationServerContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1837,7 +1151,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1850,25 +1163,18 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}/listSecrets",
           "Method": "POST",
           "OperationID": "AuthorizationServer_ListSecrets",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the client secret details of the authorization server."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}",
-          "Method": "HEAD",
-          "OperationID": "AuthorizationServer_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the authorizationServer specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "AuthorizationServerContract",
       "ResourceType": "Microsoft.ApiManagement/service/authorizationServers",
       "ResourceKey": "authsid",
@@ -1880,8 +1186,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementBackend": {
-      "Name": "ApiManagementBackend",
+    "BackendContract": {
+      "Name": "BackendContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -1935,7 +1241,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1955,18 +1260,11 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}",
-          "Method": "HEAD",
-          "OperationID": "Backend_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the backend specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "BackendContract",
       "ResourceType": "Microsoft.ApiManagement/service/backends",
       "ResourceKey": "backendId",
@@ -1978,8 +1276,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementCache": {
-      "Name": "ApiManagementCache",
+    "CacheContract": {
+      "Name": "CacheContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2033,7 +1331,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2044,18 +1341,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/caches/{cacheId}",
-          "Method": "HEAD",
-          "OperationID": "Cache_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Cache specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "CacheContract",
       "ResourceType": "Microsoft.ApiManagement/service/caches",
       "ResourceKey": "cacheId",
@@ -2067,8 +1356,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementCertificate": {
-      "Name": "ApiManagementCertificate",
+    "CertificateContract": {
+      "Name": "CertificateContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2122,7 +1411,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2142,18 +1430,11 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "From KeyVault, Refresh the certificate being used for authentication with the backend."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}",
-          "Method": "HEAD",
-          "OperationID": "Certificate_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the certificate specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "CertificateContract",
       "ResourceType": "Microsoft.ApiManagement/service/certificates",
       "ResourceKey": "certificateId",
@@ -2165,8 +1446,168 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementDeletedService": {
-      "Name": "ApiManagementDeletedService",
+    "ContentTypeContract": {
+      "Name": "ContentTypeContract",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
+          "Method": "GET",
+          "OperationID": "ContentType_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
+          "Method": "PUT",
+          "OperationID": "ContentType_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
+          "Method": "PUT",
+          "OperationID": "ContentType_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
+          "Method": "DELETE",
+          "OperationID": "ContentType_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Removes the specified developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Built-in content types (with identifiers starting with the `c-` prefix) can't be removed."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes",
+          "Method": "GET",
+          "OperationID": "ContentType_ListByService",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByService",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
+      "SwaggerModelName": "ContentTypeContract",
+      "ResourceType": "Microsoft.ApiManagement/service/contentTypes",
+      "ResourceKey": "contentTypeId",
+      "ResourceKeySegment": "contentTypes",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "ContentItemContract": {
+      "Name": "ContentItemContract",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
+          "Method": "GET",
+          "OperationID": "ContentItem_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Returns the developer portal's content item specified by its identifier."
+        }
+      ],
+      "CreateOperations": [
+        {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
+          "Method": "PUT",
+          "OperationID": "ContentItem_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new developer portal's content item specified by the provided content type."
+        }
+      ],
+      "UpdateOperations": [
+        {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
+          "Method": "PUT",
+          "OperationID": "ContentItem_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates a new developer portal's content item specified by the provided content type."
+        }
+      ],
+      "DeleteOperations": [
+        {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
+          "Method": "DELETE",
+          "OperationID": "ContentItem_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Removes the specified developer portal's content item."
+        }
+      ],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems",
+          "Method": "GET",
+          "OperationID": "ContentItem_ListByService",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListByService",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Lists developer portal's content items specified by the provided content type."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "ContentTypeContract"
+      ],
+      "SwaggerModelName": "ContentItemContract",
+      "ResourceType": "Microsoft.ApiManagement/service/contentTypes/contentItems",
+      "ResourceKey": "contentItemId",
+      "ResourceKeySegment": "contentItems",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "DeletedServiceContract": {
+      "Name": "DeletedServiceContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2193,26 +1634,13 @@
       ],
       "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [
-        {
-          "Name": "GetApiManagementDeletedServices",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/deletedservices",
-          "Method": "GET",
-          "OperationID": "DeletedServices_ListBySubscription",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists all soft-deleted services available for undelete for the given subscription."
-        }
-      ],
+      "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "DeletedServiceContract",
       "ResourceType": "Microsoft.ApiManagement/locations/deletedservices",
       "ResourceKey": "serviceName",
@@ -2224,8 +1652,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementService": {
-      "Name": "ApiManagementService",
+    "ApiManagementServiceResource": {
+      "Name": "ApiManagementServiceResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2279,7 +1707,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2289,50 +1716,30 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetApiManagementServices",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service",
           "Method": "GET",
           "OperationID": "ApiManagementService_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all API Management services within an Azure subscription."
-        },
-        {
-          "Name": "CheckApiManagementServiceNameAvailability",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/checkNameAvailability",
-          "Method": "POST",
-          "OperationID": "ApiManagementService_CheckNameAvailability",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Checks availability and correctness of a name for an API Management service."
-        },
-        {
-          "Name": "GetApiManagementServiceDomainOwnershipIdentifier",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/getDomainOwnershipIdentifier",
-          "Method": "POST",
-          "OperationID": "ApiManagementService_GetDomainOwnershipIdentifier",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get the custom domain ownership identifier for an API Management service."
         }
       ],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetApisByTags",
+          "Name": "ListByTags",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apisByTags",
           "Method": "GET",
           "OperationID": "Api_ListByTags",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTags",
-            "NextPageMethod": "ListByTagsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2348,105 +1755,13 @@
           "Description": "Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it."
         },
         {
-          "Name": "GetContentTypes",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes",
-          "Method": "GET",
-          "OperationID": "ContentType_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists the developer portal\u0027s content types. Content types describe content items\u0027 properties, validation rules, and constraints."
-        },
-        {
-          "Name": "GetContentType",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
-          "Method": "GET",
-          "OperationID": "ContentType_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the details of the developer portal\u0027s content type. Content types describe content items\u0027 properties, validation rules, and constraints."
-        },
-        {
-          "Name": "CreateOrUpdateContentType",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
-          "Method": "PUT",
-          "OperationID": "ContentType_CreateOrUpdate",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Creates or updates the developer portal\u0027s content type. Content types describe content items\u0027 properties, validation rules, and constraints. Custom content types\u0027 identifiers need to start with the \u0060c-\u0060 prefix. Built-in content types can\u0027t be modified."
-        },
-        {
-          "Name": "DeleteContentType",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}",
-          "Method": "DELETE",
-          "OperationID": "ContentType_Delete",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Removes the specified developer portal\u0027s content type. Content types describe content items\u0027 properties, validation rules, and constraints. Built-in content types (with identifiers starting with the \u0060c-\u0060 prefix) can\u0027t be removed."
-        },
-        {
-          "Name": "GetContentItems",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems",
-          "Method": "GET",
-          "OperationID": "ContentItem_ListByService",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists developer portal\u0027s content items specified by the provided content type."
-        },
-        {
-          "Name": "GetContentItemEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
-          "Method": "HEAD",
-          "OperationID": "ContentItem_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Returns the entity state (ETag) version of the developer portal\u0027s content item specified by its identifier."
-        },
-        {
-          "Name": "GetContentItem",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
-          "Method": "GET",
-          "OperationID": "ContentItem_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Returns the developer portal\u0027s content item specified by its identifier."
-        },
-        {
-          "Name": "CreateOrUpdateContentItem",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
-          "Method": "PUT",
-          "OperationID": "ContentItem_CreateOrUpdate",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Creates a new developer portal\u0027s content item specified by the provided content type."
-        },
-        {
-          "Name": "DeleteContentItem",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/contentTypes/{contentTypeId}/contentItems/{contentItemId}",
-          "Method": "DELETE",
-          "OperationID": "ContentItem_Delete",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Removes the specified developer portal\u0027s content item."
-        },
-        {
-          "Name": "GetAvailableApiManagementServiceSkus",
+          "Name": "ListAvailableServiceSkus",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus",
           "Method": "GET",
           "OperationID": "ApiManagementServiceSkus_ListAvailableServiceSkus",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAvailableServiceSkus",
-            "NextPageMethod": "ListAvailableServiceSkusNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2489,21 +1804,20 @@
           "Description": "Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes."
         },
         {
-          "Name": "GetNetworkStatuses",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/networkstatus",
           "Method": "GET",
           "OperationID": "NetworkStatus_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
-            "ItemName": "",
-            "NextLinkName": null
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService."
         },
         {
-          "Name": "GetNetworkStatusByLocation",
+          "Name": "ListByLocation",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus",
           "Method": "GET",
           "OperationID": "NetworkStatus_ListByLocation",
@@ -2512,91 +1826,85 @@
           "Description": "Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService."
         },
         {
-          "Name": "GetOutboundNetworkDependenciesEndpoints",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/outboundNetworkDependenciesEndpoints",
           "Method": "GET",
           "OperationID": "OutboundNetworkDependenciesEndpoints_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the network endpoints of all outbound dependencies of a ApiManagement service."
         },
         {
-          "Name": "GetPolicyDescriptions",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions",
           "Method": "GET",
           "OperationID": "PolicyDescription_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all policy descriptions."
         },
         {
-          "Name": "GetPortalSettings",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings",
           "Method": "GET",
           "OperationID": "PortalSettings_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of portalsettings defined within a service instance.."
         },
         {
-          "Name": "GetProductsByTags",
+          "Name": "ListByTags",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags",
           "Method": "GET",
           "OperationID": "Product_ListByTags",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTags",
-            "NextPageMethod": "ListByTagsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of products associated with tags."
         },
         {
-          "Name": "GetQuotaByCounterKeys",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
           "Method": "GET",
           "OperationID": "QuotaByCounterKeys_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet."
         },
         {
-          "Name": "UpdateQuotaByCounterKeys",
+          "Name": "Update",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
           "Method": "PATCH",
           "OperationID": "QuotaByCounterKeys_Update",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "Update",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values."
         },
         {
-          "Name": "GetQuotaByPeriodKey",
+          "Name": "Get",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}",
           "Method": "GET",
           "OperationID": "QuotaByPeriodKeys_Get",
@@ -2605,7 +1913,7 @@
           "Description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance."
         },
         {
-          "Name": "UpdateQuotaByPeriodKey",
+          "Name": "Update",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}",
           "Method": "PATCH",
           "OperationID": "QuotaByPeriodKeys_Update",
@@ -2614,147 +1922,137 @@
           "Description": "Updates an existing quota counter value in the specified service instance."
         },
         {
-          "Name": "GetRegions",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions",
           "Method": "GET",
           "OperationID": "Region_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all azure regions in which the service exists."
         },
         {
-          "Name": "GetReportsByApi",
+          "Name": "ListByApi",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi",
           "Method": "GET",
           "OperationID": "Reports_ListByApi",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByApi",
-            "NextPageMethod": "ListByApiNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by API."
         },
         {
-          "Name": "GetReportsByUser",
+          "Name": "ListByUser",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser",
           "Method": "GET",
           "OperationID": "Reports_ListByUser",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByUser",
-            "NextPageMethod": "ListByUserNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by User."
         },
         {
-          "Name": "GetReportsByOperation",
+          "Name": "ListByOperation",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation",
           "Method": "GET",
           "OperationID": "Reports_ListByOperation",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByOperation",
-            "NextPageMethod": "ListByOperationNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by API Operations."
         },
         {
-          "Name": "GetReportsByProduct",
+          "Name": "ListByProduct",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct",
           "Method": "GET",
           "OperationID": "Reports_ListByProduct",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByProduct",
-            "NextPageMethod": "ListByProductNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by Product."
         },
         {
-          "Name": "GetReportsByGeo",
+          "Name": "ListByGeo",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo",
           "Method": "GET",
           "OperationID": "Reports_ListByGeo",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByGeo",
-            "NextPageMethod": "ListByGeoNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by geography."
         },
         {
-          "Name": "GetReportsBySubscription",
+          "Name": "ListBySubscription",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription",
           "Method": "GET",
           "OperationID": "Reports_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by subscription."
         },
         {
-          "Name": "GetReportsByTime",
+          "Name": "ListByTime",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime",
           "Method": "GET",
           "OperationID": "Reports_ListByTime",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTime",
-            "NextPageMethod": "ListByTimeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by Time."
         },
         {
-          "Name": "GetReportsByRequest",
+          "Name": "ListByRequest",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest",
           "Method": "GET",
           "OperationID": "Reports_ListByRequest",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByRequest",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists report records by Request."
         },
         {
-          "Name": "GetTagResources",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tagResources",
           "Method": "GET",
           "OperationID": "TagResource_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of resources associated with tags."
         },
         {
-          "Name": "DeployTenantConfiguration",
+          "Name": "Deploy",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/deploy",
           "Method": "POST",
           "OperationID": "TenantConfiguration_Deploy",
@@ -2763,7 +2061,7 @@
           "Description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete."
         },
         {
-          "Name": "SaveTenantConfiguration",
+          "Name": "Save",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/save",
           "Method": "POST",
           "OperationID": "TenantConfiguration_Save",
@@ -2772,7 +2070,7 @@
           "Description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete."
         },
         {
-          "Name": "ValidateTenantConfiguration",
+          "Name": "Validate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/validate",
           "Method": "POST",
           "OperationID": "TenantConfiguration_Validate",
@@ -2781,7 +2079,7 @@
           "Description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete."
         },
         {
-          "Name": "GetTenantConfigurationSyncState",
+          "Name": "GetSyncState",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState",
           "Method": "GET",
           "OperationID": "TenantConfiguration_GetSyncState",
@@ -2790,7 +2088,9 @@
           "Description": "Gets the status of the most recent synchronization between the configuration database and the Git repository."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "ApiManagementServiceResource",
       "ResourceType": "Microsoft.ApiManagement/service",
       "ResourceKey": "serviceName",
@@ -2802,8 +2102,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementEmailTemplate": {
-      "Name": "ApiManagementEmailTemplate",
+    "EmailTemplateContract": {
+      "Name": "EmailTemplateContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2857,7 +2157,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2868,18 +2167,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/templates/{templateName}",
-          "Method": "HEAD",
-          "OperationID": "EmailTemplate_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the email template specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "EmailTemplateContract",
       "ResourceType": "Microsoft.ApiManagement/service/templates",
       "ResourceKey": "templateName",
@@ -2891,8 +2182,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementGateway": {
-      "Name": "ApiManagementGateway",
+    "GatewayContract": {
+      "Name": "GatewayContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2946,7 +2237,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2959,7 +2249,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetKeys",
+          "Name": "ListKeys",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listKeys",
           "Method": "POST",
           "OperationID": "Gateway_ListKeys",
@@ -2986,21 +2276,20 @@
           "Description": "Gets the Shared Access Authorization Token for the gateway."
         },
         {
-          "Name": "GetGatewayApisByService",
+          "Name": "ListByService",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis",
           "Method": "GET",
           "OperationID": "GatewayApi_ListByService",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of the APIs associated with a gateway."
         },
         {
-          "Name": "GetGatewayApiEntityTag",
+          "Name": "GetEntityTag",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}",
           "Method": "HEAD",
           "OperationID": "GatewayApi_GetEntityTag",
@@ -3009,34 +2298,27 @@
           "Description": "Checks that API entity specified by identifier is associated with the Gateway entity."
         },
         {
-          "Name": "CreateOrUpdateGatewayApi",
+          "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}",
           "Method": "PUT",
           "OperationID": "GatewayApi_CreateOrUpdate",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Adds an API to the specified Gateway."
         },
         {
-          "Name": "DeleteGatewayApi",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}",
           "Method": "DELETE",
           "OperationID": "GatewayApi_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Deletes the specified API from the specified Gateway."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}",
-          "Method": "HEAD",
-          "OperationID": "Gateway_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Gateway specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "GatewayContract",
       "ResourceType": "Microsoft.ApiManagement/service/gateways",
       "ResourceKey": "gatewayId",
@@ -3048,8 +2330,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementGatewayHostnameConfiguration": {
-      "Name": "ApiManagementGatewayHostnameConfiguration",
+    "GatewayHostnameConfigurationContract": {
+      "Name": "GatewayHostnameConfigurationContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3103,7 +2385,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3114,18 +2395,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/hostnameConfigurations/{hcId}",
-          "Method": "HEAD",
-          "OperationID": "GatewayHostnameConfiguration_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Checks that hostname configuration entity specified by identifier exists for specified Gateway entity."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "GatewayContract"
       ],
-      "Parents": ["ApiManagementGateway"],
       "SwaggerModelName": "GatewayHostnameConfigurationContract",
       "ResourceType": "Microsoft.ApiManagement/service/gateways/hostnameConfigurations",
       "ResourceKey": "hcId",
@@ -3137,8 +2410,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementGatewayCertificateAuthority": {
-      "Name": "ApiManagementGatewayCertificateAuthority",
+    "GatewayCertificateAuthorityContract": {
+      "Name": "GatewayCertificateAuthorityContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3192,7 +2465,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3203,18 +2475,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/certificateAuthorities/{certificateId}",
-          "Method": "HEAD",
-          "OperationID": "GatewayCertificateAuthority_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Checks if Certificate entity is assigned to Gateway entity as Certificate Authority."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "GatewayContract"
       ],
-      "Parents": ["ApiManagementGateway"],
       "SwaggerModelName": "GatewayCertificateAuthorityContract",
       "ResourceType": "Microsoft.ApiManagement/service/gateways/certificateAuthorities",
       "ResourceKey": "certificateId",
@@ -3226,8 +2490,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementGroup": {
-      "Name": "ApiManagementGroup",
+    "GroupContract": {
+      "Name": "GroupContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3281,7 +2545,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3294,21 +2557,20 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetGroupUsers",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
           "Method": "GET",
           "OperationID": "GroupUser_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of user entities associated with the group."
         },
         {
-          "Name": "CheckGroupUserEntityExists",
+          "Name": "CheckEntityExists",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}",
           "Method": "HEAD",
           "OperationID": "GroupUser_CheckEntityExists",
@@ -3317,34 +2579,27 @@
           "Description": "Checks that user entity specified by identifier is associated with the group entity."
         },
         {
-          "Name": "CreateGroupUser",
+          "Name": "Create",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}",
           "Method": "PUT",
           "OperationID": "GroupUser_Create",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Add existing user to existing group"
         },
         {
-          "Name": "DeleteGroupUser",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}",
           "Method": "DELETE",
           "OperationID": "GroupUser_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Remove existing user from existing group."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}",
-          "Method": "HEAD",
-          "OperationID": "Group_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the group specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "GroupContract",
       "ResourceType": "Microsoft.ApiManagement/service/groups",
       "ResourceKey": "groupId",
@@ -3356,8 +2611,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementIdentityProvider": {
-      "Name": "ApiManagementIdentityProvider",
+    "IdentityProviderContract": {
+      "Name": "IdentityProviderContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3411,7 +2666,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3424,25 +2678,18 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}/listSecrets",
           "Method": "POST",
           "OperationID": "IdentityProvider_ListSecrets",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the client secret details of the Identity Provider."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}",
-          "Method": "HEAD",
-          "OperationID": "IdentityProvider_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the identityProvider specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "IdentityProviderContract",
       "ResourceType": "Microsoft.ApiManagement/service/identityProviders",
       "ResourceKey": "identityProviderName",
@@ -3454,8 +2701,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementLogger": {
-      "Name": "ApiManagementLogger",
+    "LoggerContract": {
+      "Name": "LoggerContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3509,7 +2756,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3520,18 +2766,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}",
-          "Method": "HEAD",
-          "OperationID": "Logger_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the logger specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "LoggerContract",
       "ResourceType": "Microsoft.ApiManagement/service/loggers",
       "ResourceKey": "loggerId",
@@ -3543,8 +2781,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementNamedValue": {
-      "Name": "ApiManagementNamedValue",
+    "NamedValueContract": {
+      "Name": "NamedValueContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3598,7 +2836,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3611,7 +2848,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetValue",
+          "Name": "ListValue",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}/listValue",
           "Method": "POST",
           "OperationID": "NamedValue_ListValue",
@@ -3627,18 +2864,11 @@
           "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Refresh the secret of the named value specified by its identifier."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}",
-          "Method": "HEAD",
-          "OperationID": "NamedValue_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the named value specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "NamedValueContract",
       "ResourceType": "Microsoft.ApiManagement/service/namedValues",
       "ResourceKey": "namedValueId",
@@ -3650,8 +2880,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementNotification": {
-      "Name": "ApiManagementNotification",
+    "NotificationContract": {
+      "Name": "NotificationContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3695,7 +2925,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3708,21 +2937,20 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetNotificationRecipientUsers",
+          "Name": "ListByNotification",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
           "Method": "GET",
           "OperationID": "NotificationRecipientUser_ListByNotification",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByNotification",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the list of the Notification Recipient User subscribed to the notification."
         },
         {
-          "Name": "CheckNotificationRecipientUserEntityExists",
+          "Name": "CheckEntityExists",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}",
           "Method": "HEAD",
           "OperationID": "NotificationRecipientUser_CheckEntityExists",
@@ -3731,39 +2959,38 @@
           "Description": "Determine if the Notification Recipient User is subscribed to the notification."
         },
         {
-          "Name": "CreateOrUpdateNotificationRecipientUser",
+          "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}",
           "Method": "PUT",
           "OperationID": "NotificationRecipientUser_CreateOrUpdate",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Adds the API Management User to the list of Recipients for the Notification."
         },
         {
-          "Name": "DeleteNotificationRecipientUser",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}",
           "Method": "DELETE",
           "OperationID": "NotificationRecipientUser_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Removes the API Management user from the list of Notification."
         },
         {
-          "Name": "GetNotificationRecipientEmails",
+          "Name": "ListByNotification",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails",
           "Method": "GET",
           "OperationID": "NotificationRecipientEmail_ListByNotification",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByNotification",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the list of the Notification Recipient Emails subscribed to a notification."
         },
         {
-          "Name": "CheckNotificationRecipientEmailEntityExists",
+          "Name": "CheckEntityExists",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
           "Method": "HEAD",
           "OperationID": "NotificationRecipientEmail_CheckEntityExists",
@@ -3772,25 +2999,27 @@
           "Description": "Determine if Notification Recipient Email subscribed to the notification."
         },
         {
-          "Name": "CreateOrUpdateNotificationRecipientEmail",
+          "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
           "Method": "PUT",
           "OperationID": "NotificationRecipientEmail_CreateOrUpdate",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Adds the Email address to the list of Recipients for the Notification."
         },
         {
-          "Name": "DeleteNotificationRecipientEmail",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
           "Method": "DELETE",
           "OperationID": "NotificationRecipientEmail_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Removes the email from the list of Notification."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "NotificationContract",
       "ResourceType": "Microsoft.ApiManagement/service/notifications",
       "ResourceKey": "notificationName",
@@ -3802,12 +3031,12 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementOpenIdConnectProvider": {
-      "Name": "ApiManagementOpenIdConnectProvider",
+    "OpenidConnectProviderContract": {
+      "Name": "OpenidConnectProviderContract",
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
           "Method": "GET",
           "OperationID": "OpenIdConnectProvider_Get",
           "IsLongRunning": false,
@@ -3818,7 +3047,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
           "Method": "PUT",
           "OperationID": "OpenIdConnectProvider_CreateOrUpdate",
           "IsLongRunning": true,
@@ -3829,7 +3058,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
           "Method": "PATCH",
           "OperationID": "OpenIdConnectProvider_Update",
           "IsLongRunning": false,
@@ -3840,7 +3069,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}",
           "Method": "DELETE",
           "OperationID": "OpenIdConnectProvider_Delete",
           "IsLongRunning": true,
@@ -3857,7 +3086,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3870,25 +3098,18 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}/listSecrets",
+          "Name": "ListSecrets",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}/listSecrets",
           "Method": "POST",
           "OperationID": "OpenIdConnectProvider_ListSecrets",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the client secret details of the OpenID Connect Provider."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}",
-          "Method": "HEAD",
-          "OperationID": "OpenIdConnectProvider_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "OpenidConnectProviderContract",
       "ResourceType": "Microsoft.ApiManagement/service/openidConnectProviders",
       "ResourceKey": "opid",
@@ -3900,8 +3121,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementPortalRevision": {
-      "Name": "ApiManagementPortalRevision",
+    "PortalRevisionContract": {
+      "Name": "PortalRevisionContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -3910,7 +3131,7 @@
           "OperationID": "PortalRevision_Get",
           "IsLongRunning": false,
           "PagingMetadata": null,
-          "Description": "Gets the developer portal\u0027s revision specified by its identifier."
+          "Description": "Gets the developer portal's revision specified by its identifier."
         }
       ],
       "CreateOperations": [
@@ -3921,7 +3142,7 @@
           "OperationID": "PortalRevision_CreateOrUpdate",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Creates a new developer portal\u0027s revision by running the portal\u0027s publishing. The \u0060isCurrent\u0060 property indicates if the revision is publicly accessible."
+          "Description": "Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible."
         }
       ],
       "UpdateOperations": [
@@ -3945,29 +3166,20 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
-          "Description": "Lists developer portal\u0027s revisions."
+          "Description": "Lists developer portal's revisions."
         }
       ],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalRevisions/{portalRevisionId}",
-          "Method": "HEAD",
-          "OperationID": "PortalRevision_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the developer portal revision specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "PortalRevisionContract",
       "ResourceType": "Microsoft.ApiManagement/service/portalRevisions",
       "ResourceKey": "portalRevisionId",
@@ -3979,8 +3191,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementPortalSignInSetting": {
-      "Name": "ApiManagementPortalSignInSetting",
+    "PortalSigninSettings": {
+      "Name": "PortalSigninSetting",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4020,18 +3232,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signin",
-          "Method": "HEAD",
-          "OperationID": "SignInSettings_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the SignInSettings."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "PortalSigninSettings",
       "ResourceType": "Microsoft.ApiManagement/service/portalsettings",
       "ResourceKey": "signin",
@@ -4043,8 +3247,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": true
     },
-    "ApiManagementPortalSignUpSetting": {
-      "Name": "ApiManagementPortalSignUpSetting",
+    "PortalSignupSettings": {
+      "Name": "PortalSignupSetting",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4084,18 +3288,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/signup",
-          "Method": "HEAD",
-          "OperationID": "SignUpSettings_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the SignUpSettings."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "PortalSignupSettings",
       "ResourceType": "Microsoft.ApiManagement/service/portalsettings",
       "ResourceKey": "signup",
@@ -4107,8 +3303,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": true
     },
-    "ApiManagementPortalDelegationSetting": {
-      "Name": "ApiManagementPortalDelegationSetting",
+    "PortalDelegationSettings": {
+      "Name": "PortalDelegationSetting",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4150,25 +3346,18 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation/listSecrets",
           "Method": "POST",
           "OperationID": "DelegationSettings_ListSecrets",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the secret validation key of the DelegationSettings."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation",
-          "Method": "HEAD",
-          "OperationID": "DelegationSettings_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the DelegationSettings."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "PortalDelegationSettings",
       "ResourceType": "Microsoft.ApiManagement/service/portalsettings",
       "ResourceKey": "delegation",
@@ -4180,8 +3369,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": true
     },
-    "ApiManagementPrivateEndpointConnection": {
-      "Name": "ApiManagementPrivateEndpointConnection",
+    "PrivateEndpointConnection": {
+      "Name": "PrivateEndpointConnection",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4235,9 +3424,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all private endpoint connections of the API Management service instance."
         }
@@ -4247,7 +3435,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "PrivateEndpointConnection",
       "ResourceType": "Microsoft.ApiManagement/service/privateEndpointConnections",
       "ResourceKey": "privateEndpointConnectionName",
@@ -4259,8 +3449,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementPrivateLinkResource": {
-      "Name": "ApiManagementPrivateLinkResource",
+    "PrivateLinkResource": {
+      "Name": "PrivateLinkResource",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4284,9 +3474,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListPrivateLinkResources",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the private link resources"
         }
@@ -4296,7 +3485,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "PrivateLinkResource",
       "ResourceType": "Microsoft.ApiManagement/service/privateLinkResources",
       "ResourceKey": "privateLinkSubResourceName",
@@ -4308,8 +3499,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementProduct": {
-      "Name": "ApiManagementProduct",
+    "ProductContract": {
+      "Name": "ProductContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4363,7 +3554,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4376,21 +3566,20 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetProductApis",
+          "Name": "ListByProduct",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis",
           "Method": "GET",
           "OperationID": "ProductApi_ListByProduct",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByProduct",
-            "NextPageMethod": "ListByProductNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of the APIs associated with a product."
         },
         {
-          "Name": "CheckProductApiEntityExists",
+          "Name": "CheckEntityExists",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}",
           "Method": "HEAD",
           "OperationID": "ProductApi_CheckEntityExists",
@@ -4399,39 +3588,38 @@
           "Description": "Checks that API entity specified by identifier is associated with the Product entity."
         },
         {
-          "Name": "CreateOrUpdateProductApi",
+          "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}",
           "Method": "PUT",
           "OperationID": "ProductApi_CreateOrUpdate",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Adds an API to the specified product."
         },
         {
-          "Name": "DeleteProductApi",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}",
           "Method": "DELETE",
           "OperationID": "ProductApi_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Deletes the specified API from the specified product."
         },
         {
-          "Name": "GetProductGroups",
+          "Name": "ListByProduct",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups",
           "Method": "GET",
           "OperationID": "ProductGroup_ListByProduct",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByProduct",
-            "NextPageMethod": "ListByProductNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists the collection of developer groups associated with the specified product."
         },
         {
-          "Name": "CheckProductGroupEntityExists",
+          "Name": "CheckEntityExists",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}",
           "Method": "HEAD",
           "OperationID": "ProductGroup_CheckEntityExists",
@@ -4440,48 +3628,40 @@
           "Description": "Checks that Group entity specified by identifier is associated with the Product entity."
         },
         {
-          "Name": "CreateOrUpdateProductGroup",
+          "Name": "CreateOrUpdate",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}",
           "Method": "PUT",
           "OperationID": "ProductGroup_CreateOrUpdate",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Adds the association between the specified developer group with the specified product."
         },
         {
-          "Name": "DeleteProductGroup",
+          "Name": "Delete",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}",
           "Method": "DELETE",
           "OperationID": "ProductGroup_Delete",
-          "IsLongRunning": false,
+          "IsLongRunning": true,
           "PagingMetadata": null,
           "Description": "Deletes the association between the specified group and product."
         },
         {
-          "Name": "GetAllProductSubscriptionData",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions",
           "Method": "GET",
           "OperationID": "ProductSubscriptions_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists the collection of subscriptions to the specified product."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}",
-          "Method": "HEAD",
-          "OperationID": "Product_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the product specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "ProductContract",
       "ResourceType": "Microsoft.ApiManagement/service/products",
       "ResourceKey": "productId",
@@ -4493,8 +3673,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementGlobalSchema": {
-      "Name": "ApiManagementGlobalSchema",
+    "GlobalSchemaContract": {
+      "Name": "GlobalSchemaContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4548,7 +3728,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4559,18 +3738,10 @@
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
-      "OtherOperations": [
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/schemas/{schemaId}",
-          "Method": "HEAD",
-          "OperationID": "GlobalSchema_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the Schema specified by its identifier."
-        }
+      "OtherOperations": [],
+      "Parents": [
+        "ApiManagementServiceResource"
       ],
-      "Parents": ["ApiManagementService"],
       "SwaggerModelName": "GlobalSchemaContract",
       "ResourceType": "Microsoft.ApiManagement/service/schemas",
       "ResourceKey": "schemaId",
@@ -4582,8 +3753,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementTenantSetting": {
-      "Name": "ApiManagementTenantSetting",
+    "TenantSettingsContract": {
+      "Name": "TenantSettingsContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4607,7 +3778,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4619,7 +3789,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "TenantSettingsContract",
       "ResourceType": "Microsoft.ApiManagement/service/settings",
       "ResourceKey": "settingsType",
@@ -4631,8 +3803,32 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementSubscription": {
-      "Name": "ApiManagementSubscription",
+    "SubscriptionContractFixMe": {
+      "Name": "SubscriptionContractFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "SubscriptionContract": {
+      "Name": "SubscriptionContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4686,7 +3882,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4717,28 +3912,21 @@
           "Description": "Regenerates secondary key of existing subscription of the API Management service instance."
         },
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/listSecrets",
           "Method": "POST",
           "OperationID": "Subscription_ListSecrets",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Gets the specified Subscription keys."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}",
-          "Method": "HEAD",
-          "OperationID": "Subscription_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "SubscriptionContract",
       "ResourceType": "Microsoft.ApiManagement/service/subscriptions",
-      "ResourceKey": "subscriptionId",
+      "ResourceKey": "sid",
       "ResourceKeySegment": "subscriptions",
       "IsTrackedResource": false,
       "IsTenantResource": false,
@@ -4747,57 +3935,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementUserSubscription": {
-      "Name": "ApiManagementUserSubscription",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions/{sid}",
-          "Method": "GET",
-          "OperationID": "UserSubscription_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the specified Subscription entity associated with a particular user."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions",
-          "Method": "GET",
-          "OperationID": "UserSubscription_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists the collection of subscriptions of the specified user."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["ApiManagementUser"],
-      "SwaggerModelName": "SubscriptionContract",
-      "ResourceType": "Microsoft.ApiManagement/service/users/subscriptions",
-      "ResourceKey": "subscriptionId",
-      "ResourceKeySegment": "subscriptions",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "TenantAccessInfo": {
-      "Name": "TenantAccessInfo",
+    "AccessInformationContract": {
+      "Name": "AccessInformationContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4841,7 +3980,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4872,7 +4010,7 @@
           "Description": "Regenerate secondary access key"
         },
         {
-          "Name": "GetSecrets",
+          "Name": "ListSecrets",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/listSecrets",
           "Method": "POST",
           "OperationID": "TenantAccess_ListSecrets",
@@ -4881,7 +4019,7 @@
           "Description": "Get tenant access information details."
         },
         {
-          "Name": "RegeneratePrimaryKeyForGit",
+          "Name": "RegeneratePrimaryKey",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/regeneratePrimaryKey",
           "Method": "POST",
           "OperationID": "TenantAccessGit_RegeneratePrimaryKey",
@@ -4890,25 +4028,18 @@
           "Description": "Regenerate primary access key for GIT."
         },
         {
-          "Name": "RegenerateSecondaryKeyForGit",
+          "Name": "RegenerateSecondaryKey",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/regenerateSecondaryKey",
           "Method": "POST",
           "OperationID": "TenantAccessGit_RegenerateSecondaryKey",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Regenerate secondary access key for GIT."
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}",
-          "Method": "HEAD",
-          "OperationID": "TenantAccess_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Tenant access metadata"
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "AccessInformationContract",
       "ResourceType": "Microsoft.ApiManagement/service/tenant",
       "ResourceKey": "accessName",
@@ -4920,8 +4051,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ApiManagementUser": {
-      "Name": "ApiManagementUser",
+    "UserContract": {
+      "Name": "UserContract",
       "GetOperations": [
         {
           "Name": "Get",
@@ -4975,7 +4106,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByService",
-            "NextPageMethod": "ListByServiceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -4988,7 +4118,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GenerateSsoUri",
+          "Name": "GenerateSsoUrl",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/generateSsoUrl",
           "Method": "POST",
           "OperationID": "User_GenerateSsoUrl",
@@ -5006,53 +4136,44 @@
           "Description": "Gets the Shared Access Authorization Token for the User."
         },
         {
-          "Name": "GetUserGroups",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups",
           "Method": "GET",
           "OperationID": "UserGroup_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all user groups."
         },
         {
-          "Name": "GetUserIdentities",
+          "Name": "List",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities",
           "Method": "GET",
           "OperationID": "UserIdentities_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "List of all user identities."
         },
         {
-          "Name": "SendUserConfirmationPassword",
+          "Name": "Send",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/confirmations/password/send",
           "Method": "POST",
           "OperationID": "UserConfirmationPassword_Send",
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Sends confirmation"
-        },
-        {
-          "Name": "GetEntityTag",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}",
-          "Method": "HEAD",
-          "OperationID": "User_GetEntityTag",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the entity state (Etag) version of the user specified by its identifier."
         }
       ],
-      "Parents": ["ApiManagementService"],
+      "Parents": [
+        "ApiManagementServiceResource"
+      ],
       "SwaggerModelName": "UserContract",
       "ResourceType": "Microsoft.ApiManagement/service/users",
       "ResourceKey": "userId",
@@ -5064,5 +4185,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

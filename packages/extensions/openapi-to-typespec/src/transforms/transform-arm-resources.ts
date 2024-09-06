@@ -522,34 +522,6 @@ function convertResourceListOperations(
     }
   }
 
-  // add list operation for singleton resource if exists
-  if (resourceMetadata.IsSingletonResource) {
-    const swaggerOperation = getSingletonResouceListOperation(resourceMetadata);
-    if (swaggerOperation) {
-      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
-      const baseParameters = buildOperationBaseParameters(swaggerOperation, resourceMetadata);
-
-      addGeneratedResourceObjectIfNotExits(
-        getSchemaResponseSchemaName(okResponse) ?? "",
-        `ResourceListResult<${resourceMetadata.SwaggerModelName}>`,
-      );
-      converted.push({
-        doc: swaggerOperation.language.default.description,
-        kind: "ArmResourceListByParent",
-        name: swaggerOperation.operationId
-          ? getOperationName(swaggerOperation.operationId)
-          : `listBy${resourceMetadata.Parents[0].replace(/Resource$/, "")}`,
-        clientDecorators: getOperationClientDecorators(swaggerOperation),
-        operationId: swaggerOperation.operationId,
-        templateParameters: baseParameters
-          ? [resourceMetadata.SwaggerModelName, baseParameters]
-          : [resourceMetadata.SwaggerModelName],
-        examples: swaggerOperation.extensions?.["x-ms-examples"],
-      });
-      (swaggerOperation as OperationWithResourceOperationFlag).isResourceOperation = true;
-    }
-  }
-
   return converted;
 }
 

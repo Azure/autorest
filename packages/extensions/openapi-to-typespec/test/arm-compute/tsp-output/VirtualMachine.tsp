@@ -122,18 +122,6 @@ interface VirtualMachines {
   >;
 
   /**
-   * Gets all the virtual machines under the specified subscription for the specified location.
-   */
-  listByLocation is ArmResourceListAtScope<
-    VirtualMachine,
-    LocationScope<VirtualMachine>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-      ...LocationResourceParameter;
-    }
-  >;
-
-  /**
    * Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
    */
   listAll is ArmListBySubscription<VirtualMachine>;

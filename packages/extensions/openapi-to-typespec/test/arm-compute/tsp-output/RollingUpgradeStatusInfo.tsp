@@ -33,18 +33,7 @@ interface RollingUpgradeStatusInfos {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetRollingUpgrades_GetLatest")
-  getLatest is ArmResourceRead<
-    RollingUpgradeStatusInfo,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RollingUpgradeStatusInfo>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  getLatest is ArmResourceRead<RollingUpgradeStatusInfo>;
 }
 
 @@doc(RollingUpgradeStatusInfo.name, "");

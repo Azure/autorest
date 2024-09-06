@@ -5,7 +5,7 @@
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSets_Get",
           "IsLongRunning": false,
@@ -16,7 +16,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
           "Method": "PUT",
           "OperationID": "VirtualMachineScaleSets_CreateOrUpdate",
           "IsLongRunning": true,
@@ -27,7 +27,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
           "Method": "PATCH",
           "OperationID": "VirtualMachineScaleSets_Update",
           "IsLongRunning": true,
@@ -38,7 +38,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}",
           "Method": "DELETE",
           "OperationID": "VirtualMachineScaleSets_Delete",
           "IsLongRunning": true,
@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -65,28 +64,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetVirtualMachineScaleSetsByLocation",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachineScaleSets",
-          "Method": "GET",
-          "OperationID": "VirtualMachineScaleSets_ListByLocation",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByLocation",
-            "NextPageMethod": "ListByLocationNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets all the VM scale sets under the specified subscription for the specified location."
-        },
-        {
-          "Name": "GetVirtualMachineScaleSets",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSets_ListAll",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAll",
-            "NextPageMethod": "ListAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -98,7 +82,7 @@
       "OtherOperations": [
         {
           "Name": "Deallocate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/deallocate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Deallocate",
           "IsLongRunning": true,
@@ -107,7 +91,7 @@
         },
         {
           "Name": "DeleteInstances",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_DeleteInstances",
           "IsLongRunning": true,
@@ -116,7 +100,7 @@
         },
         {
           "Name": "GetInstanceView",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/instanceView",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSets_GetInstanceView",
           "IsLongRunning": false,
@@ -124,14 +108,13 @@
           "Description": "Gets the status of a VM scale set instance."
         },
         {
-          "Name": "GetSkus",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/skus",
+          "Name": "ListSkus",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSets_ListSkus",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListSkus",
-            "NextPageMethod": "ListSkusNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -139,13 +122,12 @@
         },
         {
           "Name": "GetOSUpgradeHistory",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/osUpgradeHistory",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSets_GetOSUpgradeHistory",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "GetOSUpgradeHistory",
-            "NextPageMethod": "GetOSUpgradeHistoryNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -153,7 +135,7 @@
         },
         {
           "Name": "PowerOff",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/poweroff",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_PowerOff",
           "IsLongRunning": true,
@@ -162,7 +144,7 @@
         },
         {
           "Name": "Restart",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/restart",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Restart",
           "IsLongRunning": true,
@@ -171,7 +153,7 @@
         },
         {
           "Name": "Start",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/start",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Start",
           "IsLongRunning": true,
@@ -180,7 +162,7 @@
         },
         {
           "Name": "Reapply",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/reapply",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reapply",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Reapply",
           "IsLongRunning": true,
@@ -189,7 +171,7 @@
         },
         {
           "Name": "Redeploy",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/redeploy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Redeploy",
           "IsLongRunning": true,
@@ -198,7 +180,7 @@
         },
         {
           "Name": "PerformMaintenance",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/performMaintenance",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_PerformMaintenance",
           "IsLongRunning": true,
@@ -207,7 +189,7 @@
         },
         {
           "Name": "UpdateInstances",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/manualupgrade",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_UpdateInstances",
           "IsLongRunning": true,
@@ -216,16 +198,16 @@
         },
         {
           "Name": "Reimage",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/reimage",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_Reimage",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don\u0027t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state."
+          "Description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state."
         },
         {
           "Name": "ReimageAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/reimageall",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_ReimageAll",
           "IsLongRunning": true,
@@ -234,7 +216,7 @@
         },
         {
           "Name": "ForceRecoveryServiceFabricPlatformUpdateDomainWalk",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk",
           "IsLongRunning": false,
@@ -243,7 +225,7 @@
         },
         {
           "Name": "ConvertToSinglePlacementGroup",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/convertToSinglePlacementGroup",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
           "IsLongRunning": false,
@@ -252,7 +234,7 @@
         },
         {
           "Name": "SetOrchestrationServiceState",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/setOrchestrationServiceState",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSets_SetOrchestrationServiceState",
           "IsLongRunning": true,
@@ -260,8 +242,8 @@
           "Description": "Changes ServiceState property for a given service"
         },
         {
-          "Name": "CancelVirtualMachineScaleSetRollingUpgrade",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/rollingUpgrades/cancel",
+          "Name": "Cancel",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetRollingUpgrades_Cancel",
           "IsLongRunning": true,
@@ -269,8 +251,8 @@
           "Description": "Cancels the current virtual machine scale set rolling upgrade."
         },
         {
-          "Name": "StartOSUpgradeVirtualMachineScaleSetRollingUpgrade",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/osRollingUpgrade",
+          "Name": "StartOSUpgrade",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade",
           "IsLongRunning": true,
@@ -278,8 +260,8 @@
           "Description": "Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected."
         },
         {
-          "Name": "StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensionRollingUpgrade",
+          "Name": "StartExtensionUpgrade",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
           "IsLongRunning": true,
@@ -287,7 +269,9 @@
           "Description": "Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "VirtualMachineScaleSet",
       "ResourceType": "Microsoft.Compute/virtualMachineScaleSets",
       "ResourceKey": "vmScaleSetName",
@@ -304,7 +288,7 @@
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensions/{vmssExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetExtensions_Get",
           "IsLongRunning": false,
@@ -315,7 +299,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensions/{vmssExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
           "Method": "PUT",
           "OperationID": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
           "IsLongRunning": true,
@@ -326,7 +310,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensions/{vmssExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
           "Method": "PATCH",
           "OperationID": "VirtualMachineScaleSetExtensions_Update",
           "IsLongRunning": true,
@@ -337,7 +321,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensions/{vmssExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}",
           "Method": "DELETE",
           "OperationID": "VirtualMachineScaleSetExtensions_Delete",
           "IsLongRunning": true,
@@ -348,13 +332,12 @@
       "ListOperations": [
         {
           "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/extensions",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetExtensions_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -366,7 +349,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["VirtualMachineScaleSet"],
+      "Parents": [
+        "VirtualMachineScaleSet"
+      ],
       "SwaggerModelName": "VirtualMachineScaleSetExtension",
       "ResourceType": "Microsoft.Compute/virtualMachineScaleSets/extensions",
       "ResourceKey": "vmssExtensionName",
@@ -383,7 +368,7 @@
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/rollingUpgrades/latest",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
           "IsLongRunning": false,
@@ -400,7 +385,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["VirtualMachineScaleSet"],
+      "Parents": [
+        "VirtualMachineScaleSet"
+      ],
       "SwaggerModelName": "RollingUpgradeStatusInfo",
       "ResourceType": "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades",
       "ResourceKey": "latest",
@@ -412,12 +399,12 @@
       "IsExtensionResource": false,
       "IsSingletonResource": true
     },
-    "VirtualMachineScaleSetVmExtension": {
-      "Name": "VirtualMachineScaleSetVmExtension",
+    "VirtualMachineScaleSetVMExtension": {
+      "Name": "VirtualMachineScaleSetVMExtension",
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetVMExtensions_Get",
           "IsLongRunning": false,
@@ -428,7 +415,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
           "Method": "PUT",
           "OperationID": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
           "IsLongRunning": true,
@@ -439,7 +426,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
           "Method": "PATCH",
           "OperationID": "VirtualMachineScaleSetVMExtensions_Update",
           "IsLongRunning": true,
@@ -450,7 +437,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}",
           "Method": "DELETE",
           "OperationID": "VirtualMachineScaleSetVMExtensions_Delete",
           "IsLongRunning": true,
@@ -461,15 +448,14 @@
       "ListOperations": [
         {
           "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/extensions",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetVMExtensions_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "The operation to get all extensions of an instance in Virtual Machine Scaleset."
         }
@@ -479,7 +465,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["VirtualMachineScaleSetVm"],
+      "Parents": [
+        "VirtualMachineScaleSetVM"
+      ],
       "SwaggerModelName": "VirtualMachineScaleSetVMExtension",
       "ResourceType": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
       "ResourceKey": "vmExtensionName",
@@ -491,12 +479,12 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "VirtualMachineScaleSetVm": {
-      "Name": "VirtualMachineScaleSetVm",
+    "VirtualMachineScaleSetVM": {
+      "Name": "VirtualMachineScaleSetVM",
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetVMs_Get",
           "IsLongRunning": false,
@@ -507,7 +495,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
           "Method": "PUT",
           "OperationID": "VirtualMachineScaleSetVMs_Update",
           "IsLongRunning": true,
@@ -518,7 +506,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
           "Method": "PUT",
           "OperationID": "VirtualMachineScaleSetVMs_Update",
           "IsLongRunning": true,
@@ -529,7 +517,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}",
           "Method": "DELETE",
           "OperationID": "VirtualMachineScaleSetVMs_Delete",
           "IsLongRunning": true,
@@ -537,22 +525,7 @@
           "Description": "Deletes a virtual machine from a VM scale set."
         }
       ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines",
-          "Method": "GET",
-          "OperationID": "VirtualMachineScaleSetVMs_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets a list of all virtual machines in a VM scale sets."
-        }
-      ],
+      "ListOperations": [],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
@@ -560,7 +533,7 @@
       "OtherOperations": [
         {
           "Name": "Reimage",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/reimage",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimage",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_Reimage",
           "IsLongRunning": true,
@@ -569,7 +542,7 @@
         },
         {
           "Name": "ReimageAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/reimageall",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimageall",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_ReimageAll",
           "IsLongRunning": true,
@@ -578,7 +551,7 @@
         },
         {
           "Name": "Deallocate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/deallocate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/deallocate",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_Deallocate",
           "IsLongRunning": true,
@@ -587,7 +560,7 @@
         },
         {
           "Name": "GetInstanceView",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/instanceView",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView",
           "Method": "GET",
           "OperationID": "VirtualMachineScaleSetVMs_GetInstanceView",
           "IsLongRunning": false,
@@ -596,7 +569,7 @@
         },
         {
           "Name": "PowerOff",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/poweroff",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_PowerOff",
           "IsLongRunning": true,
@@ -605,7 +578,7 @@
         },
         {
           "Name": "Restart",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/restart",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_Restart",
           "IsLongRunning": true,
@@ -614,7 +587,7 @@
         },
         {
           "Name": "Start",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/start",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_Start",
           "IsLongRunning": true,
@@ -623,7 +596,7 @@
         },
         {
           "Name": "Redeploy",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/redeploy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_Redeploy",
           "IsLongRunning": true,
@@ -632,7 +605,7 @@
         },
         {
           "Name": "RetrieveBootDiagnosticsData",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData",
           "IsLongRunning": false,
@@ -641,7 +614,7 @@
         },
         {
           "Name": "PerformMaintenance",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/performMaintenance",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_PerformMaintenance",
           "IsLongRunning": true,
@@ -650,7 +623,7 @@
         },
         {
           "Name": "SimulateEviction",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/simulateEviction",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/simulateEviction",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_SimulateEviction",
           "IsLongRunning": false,
@@ -659,15 +632,21 @@
         },
         {
           "Name": "RunCommand",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualmachines/{instanceId}/runCommand",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/runCommand",
           "Method": "POST",
           "OperationID": "VirtualMachineScaleSetVMs_RunCommand",
           "IsLongRunning": true,
-          "PagingMetadata": null,
+          "PagingMetadata": {
+            "Method": "RunCommand",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
           "Description": "Run command on a virtual machine in a VM scale set."
         }
       ],
-      "Parents": ["VirtualMachineScaleSet"],
+      "Parents": [
+        "VirtualMachineScaleSet"
+      ],
       "SwaggerModelName": "VirtualMachineScaleSetVM",
       "ResourceType": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
       "ResourceKey": "instanceId",
@@ -734,9 +713,8 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "The operation to get all extensions of a Virtual Machine."
         }
@@ -746,7 +724,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["VirtualMachine"],
+      "Parents": [
+        "VirtualMachine"
+      ],
       "SwaggerModelName": "VirtualMachineExtension",
       "ResourceType": "Microsoft.Compute/virtualMachines/extensions",
       "ResourceKey": "vmExtensionName",
@@ -813,7 +793,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -823,28 +802,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetVirtualMachinesByLocation",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines",
-          "Method": "GET",
-          "OperationID": "VirtualMachines_ListByLocation",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "ListByLocation",
-            "NextPageMethod": "ListByLocationNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Gets all the virtual machines under the specified subscription for the specified location."
-        },
-        {
-          "Name": "GetVirtualMachines",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines",
           "Method": "GET",
           "OperationID": "VirtualMachines_ListAll",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAll",
-            "NextPageMethod": "ListAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -900,16 +864,15 @@
           "Description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image)."
         },
         {
-          "Name": "GetAvailableSizes",
+          "Name": "ListAvailableSizes",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes",
           "Method": "GET",
           "OperationID": "VirtualMachines_ListAvailableSizes",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAvailableSizes",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all available virtual machine sizes to which the specified virtual machine can be resized."
         },
@@ -929,7 +892,7 @@
           "OperationID": "VirtualMachines_Reapply",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "The operation to reapply a virtual machine\u0027s state."
+          "Description": "The operation to reapply a virtual machine's state."
         },
         {
           "Name": "Restart",
@@ -965,7 +928,7 @@
           "OperationID": "VirtualMachines_Reimage",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Reimages (upgrade the operating system) a virtual machine which don\u0027t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage."
+          "Description": "Reimages (upgrade the operating system) a virtual machine which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. NOTE: The retaining of old OS disk depends on the value of deleteOption of OS disk. If deleteOption is detach, the old OS disk will be preserved after reimage. If deleteOption is delete, the old OS disk will be deleted after reimage. The deleteOption of the OS disk should be updated accordingly before performing the reimage."
         },
         {
           "Name": "RetrieveBootDiagnosticsData",
@@ -974,7 +937,7 @@
           "OperationID": "VirtualMachines_RetrieveBootDiagnosticsData",
           "IsLongRunning": false,
           "PagingMetadata": null,
-          "Description": "The operation to retrieve SAS URIs for a virtual machine\u0027s boot diagnostic logs."
+          "Description": "The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs."
         },
         {
           "Name": "PerformMaintenance",
@@ -1018,11 +981,17 @@
           "Method": "POST",
           "OperationID": "VirtualMachines_RunCommand",
           "IsLongRunning": true,
-          "PagingMetadata": null,
+          "PagingMetadata": {
+            "Method": "RunCommand",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
           "Description": "Run command on the VM."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "VirtualMachine",
       "ResourceType": "Microsoft.Compute/virtualMachines",
       "ResourceKey": "vmName",
@@ -1059,11 +1028,23 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListTypes",
-            "NextPageMethod": null,
-            "ItemName": "",
-            "NextLinkName": null
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets a list of virtual machine extension image types."
+        },
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions",
+          "Method": "GET",
+          "OperationID": "VirtualMachineExtensionImages_ListVersions",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "ListVersions",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Gets a list of virtual machine extension image versions."
         }
       ],
       "OperationsFromResourceGroupExtension": [],
@@ -1071,7 +1052,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "VirtualMachineExtensionImage",
       "ResourceType": "Microsoft.Compute/locations/publishers/artifacttypes/types/versions",
       "ResourceKey": "version",
@@ -1138,7 +1121,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1148,14 +1130,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetAvailabilitySets",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets",
           "Method": "GET",
           "OperationID": "AvailabilitySets_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1166,21 +1147,22 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetAvailableSizes",
+          "Name": "ListAvailableSizes",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes",
           "Method": "GET",
           "OperationID": "AvailabilitySets_ListAvailableSizes",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAvailableSizes",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "AvailabilitySet",
       "ResourceType": "Microsoft.Compute/availabilitySets",
       "ResourceKey": "availabilitySetName",
@@ -1247,7 +1229,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1257,14 +1238,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetProximityPlacementGroups",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups",
           "Method": "GET",
           "OperationID": "ProximityPlacementGroups_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1274,7 +1254,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "ProximityPlacementGroup",
       "ResourceType": "Microsoft.Compute/proximityPlacementGroups",
       "ResourceKey": "proximityPlacementGroupName",
@@ -1341,7 +1323,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1351,14 +1332,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDedicatedHostGroups",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups",
           "Method": "GET",
           "OperationID": "DedicatedHostGroups_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1368,7 +1348,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DedicatedHostGroup",
       "ResourceType": "Microsoft.Compute/hostGroups",
       "ResourceKey": "hostGroupName",
@@ -1435,7 +1417,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByHostGroup",
-            "NextPageMethod": "ListByHostGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1457,21 +1438,22 @@
           "Description": "Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details."
         },
         {
-          "Name": "GetAvailableSizes",
+          "Name": "ListAvailableSizes",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/hostSizes",
           "Method": "GET",
           "OperationID": "DedicatedHosts_ListAvailableSizes",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAvailableSizes",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host."
         }
       ],
-      "Parents": ["DedicatedHostGroup"],
+      "Parents": [
+        "DedicatedHostGroup"
+      ],
       "SwaggerModelName": "DedicatedHost",
       "ResourceType": "Microsoft.Compute/hostGroups/hosts",
       "ResourceKey": "hostName",
@@ -1538,7 +1520,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1548,14 +1529,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetSshPublicKeyResources",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys",
           "Method": "GET",
           "OperationID": "SshPublicKeys_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1575,7 +1555,9 @@
           "Description": "Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "SshPublicKeyResource",
       "ResourceType": "Microsoft.Compute/sshPublicKeys",
       "ResourceKey": "sshPublicKeyName",
@@ -1642,7 +1624,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1652,14 +1633,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetImages",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images",
           "Method": "GET",
           "OperationID": "Images_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1669,7 +1649,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Image",
       "ResourceType": "Microsoft.Compute/images",
       "ResourceKey": "imageName",
@@ -1681,12 +1663,12 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "RestorePointGroup": {
-      "Name": "RestorePointGroup",
+    "RestorePointCollection": {
+      "Name": "RestorePointCollection",
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
           "Method": "GET",
           "OperationID": "RestorePointCollections_Get",
           "IsLongRunning": false,
@@ -1697,7 +1679,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
           "Method": "PUT",
           "OperationID": "RestorePointCollections_CreateOrUpdate",
           "IsLongRunning": true,
@@ -1708,7 +1690,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
           "Method": "PATCH",
           "OperationID": "RestorePointCollections_Update",
           "IsLongRunning": false,
@@ -1719,7 +1701,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}",
           "Method": "DELETE",
           "OperationID": "RestorePointCollections_Delete",
           "IsLongRunning": true,
@@ -1736,7 +1718,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1746,14 +1727,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetRestorePointGroups",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/restorePointCollections",
           "Method": "GET",
           "OperationID": "RestorePointCollections_ListAll",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAll",
-            "NextPageMethod": "ListAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1763,7 +1743,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "RestorePointCollection",
       "ResourceType": "Microsoft.Compute/restorePointCollections",
       "ResourceKey": "restorePointCollectionName",
@@ -1780,7 +1762,7 @@
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
           "Method": "GET",
           "OperationID": "RestorePoints_Get",
           "IsLongRunning": false,
@@ -1791,7 +1773,7 @@
       "CreateOperations": [
         {
           "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
           "Method": "PUT",
           "OperationID": "RestorePoints_Create",
           "IsLongRunning": true,
@@ -1802,7 +1784,7 @@
       "UpdateOperations": [
         {
           "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
           "Method": "PUT",
           "OperationID": "RestorePoints_Create",
           "IsLongRunning": true,
@@ -1813,7 +1795,7 @@
       "DeleteOperations": [
         {
           "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{restorePointName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}",
           "Method": "DELETE",
           "OperationID": "RestorePoints_Delete",
           "IsLongRunning": true,
@@ -1827,7 +1809,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["RestorePointGroup"],
+      "Parents": [
+        "RestorePointCollection"
+      ],
       "SwaggerModelName": "RestorePoint",
       "ResourceType": "Microsoft.Compute/restorePointCollections/restorePoints",
       "ResourceKey": "restorePointName",
@@ -1894,7 +1878,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1904,14 +1887,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetCapacityReservationGroups",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups",
           "Method": "GET",
           "OperationID": "CapacityReservationGroups_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -1921,7 +1903,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "CapacityReservationGroup",
       "ResourceType": "Microsoft.Compute/capacityReservationGroups",
       "ResourceKey": "capacityReservationGroupName",
@@ -1988,7 +1972,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByCapacityReservationGroup",
-            "NextPageMethod": "ListByCapacityReservationGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2000,12 +1983,38 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["CapacityReservationGroup"],
+      "Parents": [
+        "CapacityReservationGroup"
+      ],
       "SwaggerModelName": "CapacityReservation",
       "ResourceType": "Microsoft.Compute/capacityReservationGroups/capacityReservations",
       "ResourceKey": "capacityReservationName",
       "ResourceKeySegment": "capacityReservations",
       "IsTrackedResource": true,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "VirtualMachineRunCommandFixMe": {
+      "Name": "VirtualMachineRunCommandFixMe",
+      "GetOperations": [],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [],
+      "SwaggerModelName": "",
+      "ResourceType": "",
+      "ResourceKey": "",
+      "ResourceKeySegment": "",
+      "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
@@ -2067,7 +2076,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByVirtualMachine",
-            "NextPageMethod": "ListByVirtualMachineNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2075,116 +2083,15 @@
         }
       ],
       "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [
-        {
-          "Name": "GetVirtualMachineRunCommands",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands",
-          "Method": "GET",
-          "OperationID": "VirtualMachineRunCommands_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "Lists all available run commands for a subscription in a location."
-        },
-        {
-          "Name": "GetVirtualMachineRunCommand",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}",
-          "Method": "GET",
-          "OperationID": "VirtualMachineRunCommands_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets specific run command for a subscription in a location."
-        }
-      ],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["VirtualMachine"],
-      "SwaggerModelName": "VirtualMachineRunCommand",
-      "ResourceType": "Microsoft.Compute/virtualMachines/runCommands",
-      "ResourceKey": "runCommandName",
-      "ResourceKeySegment": "runCommands",
-      "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "VirtualMachineScaleSetVmRunCommand": {
-      "Name": "VirtualMachineScaleSetVmRunCommand",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-          "Method": "GET",
-          "OperationID": "VirtualMachineScaleSetVMRunCommands_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "The operation to get the VMSS VM run command."
-        }
-      ],
-      "CreateOperations": [
-        {
-          "Name": "CreateOrUpdate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-          "Method": "PUT",
-          "OperationID": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "The operation to create or update the VMSS VM run command."
-        }
-      ],
-      "UpdateOperations": [
-        {
-          "Name": "Update",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-          "Method": "PATCH",
-          "OperationID": "VirtualMachineScaleSetVMRunCommands_Update",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "The operation to update the VMSS VM run command."
-        }
-      ],
-      "DeleteOperations": [
-        {
-          "Name": "Delete",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}",
-          "Method": "DELETE",
-          "OperationID": "VirtualMachineScaleSetVMRunCommands_Delete",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "The operation to delete the VMSS VM run command."
-        }
-      ],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{instanceId}/runCommands",
-          "Method": "GET",
-          "OperationID": "VirtualMachineScaleSetVMRunCommands_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "The operation to get all run commands of an instance in Virtual Machine Scaleset."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["VirtualMachineScaleSetVm"],
+      "Parents": [
+        "VirtualMachine"
+      ],
       "SwaggerModelName": "VirtualMachineRunCommand",
-      "ResourceType": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+      "ResourceType": "Microsoft.Compute/virtualMachines/runCommands",
       "ResourceKey": "runCommandName",
       "ResourceKeySegment": "runCommands",
       "IsTrackedResource": true,
@@ -2249,7 +2156,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2259,14 +2165,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDisks",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks",
           "Method": "GET",
           "OperationID": "Disks_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2295,7 +2200,9 @@
           "Description": "Revokes access to a disk."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Disk",
       "ResourceType": "Microsoft.Compute/disks",
       "ResourceKey": "diskName",
@@ -2362,7 +2269,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2372,14 +2278,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDiskAccesses",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskAccesses",
           "Method": "GET",
           "OperationID": "DiskAccesses_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2397,14 +2302,15 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "GetPrivateLinkResources",
-            "NextPageMethod": null,
             "ItemName": "value",
-            "NextLinkName": null
+            "NextLinkName": "nextLink"
           },
           "Description": "Gets the private link resources possible under disk access resource"
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DiskAccess",
       "ResourceType": "Microsoft.Compute/diskAccesses",
       "ResourceKey": "diskAccessName",
@@ -2416,8 +2322,8 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
-    "ComputePrivateEndpointConnection": {
-      "Name": "ComputePrivateEndpointConnection",
+    "PrivateEndpointConnection": {
+      "Name": "PrivateEndpointConnection",
       "GetOperations": [
         {
           "Name": "Get",
@@ -2437,7 +2343,7 @@
           "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Approve or reject a private endpoint connection under disk access resource, this can\u0027t be used to create a new private endpoint connection."
+          "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
         }
       ],
       "UpdateOperations": [
@@ -2448,7 +2354,7 @@
           "OperationID": "DiskAccesses_UpdateAPrivateEndpointConnection",
           "IsLongRunning": true,
           "PagingMetadata": null,
-          "Description": "Approve or reject a private endpoint connection under disk access resource, this can\u0027t be used to create a new private endpoint connection."
+          "Description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection."
         }
       ],
       "DeleteOperations": [
@@ -2471,7 +2377,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListPrivateEndpointConnections",
-            "NextPageMethod": "ListPrivateEndpointConnectionsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2483,7 +2388,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["DiskAccess"],
+      "Parents": [
+        "DiskAccess"
+      ],
       "SwaggerModelName": "PrivateEndpointConnection",
       "ResourceType": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
       "ResourceKey": "privateEndpointConnectionName",
@@ -2550,7 +2457,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2560,14 +2466,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetDiskEncryptionSets",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets",
           "Method": "GET",
           "OperationID": "DiskEncryptionSets_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2578,21 +2483,22 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "GetAssociatedResources",
+          "Name": "ListAssociatedResources",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources",
           "Method": "GET",
           "OperationID": "DiskEncryptionSets_ListAssociatedResources",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAssociatedResources",
-            "NextPageMethod": "ListAssociatedResourcesNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Lists all resources that are encrypted with this disk encryption set."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "DiskEncryptionSet",
       "ResourceType": "Microsoft.Compute/diskEncryptionSets",
       "ResourceKey": "diskEncryptionSetName",
@@ -2609,7 +2515,7 @@
       "GetOperations": [
         {
           "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}",
           "Method": "GET",
           "OperationID": "DiskRestorePoint_Get",
           "IsLongRunning": false,
@@ -2623,13 +2529,12 @@
       "ListOperations": [
         {
           "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{vmRestorePointName}/diskRestorePoints",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints",
           "Method": "GET",
           "OperationID": "DiskRestorePoint_ListByRestorePoint",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByRestorePoint",
-            "NextPageMethod": "ListByRestorePointNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2643,7 +2548,7 @@
       "OtherOperations": [
         {
           "Name": "GrantAccess",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess",
           "Method": "POST",
           "OperationID": "DiskRestorePoint_GrantAccess",
           "IsLongRunning": true,
@@ -2652,7 +2557,7 @@
         },
         {
           "Name": "RevokeAccess",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointGroupName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess",
           "Method": "POST",
           "OperationID": "DiskRestorePoint_RevokeAccess",
           "IsLongRunning": true,
@@ -2660,7 +2565,9 @@
           "Description": "Revokes access to a diskRestorePoint."
         }
       ],
-      "Parents": ["RestorePoint"],
+      "Parents": [
+        "RestorePointCollection"
+      ],
       "SwaggerModelName": "DiskRestorePoint",
       "ResourceType": "Microsoft.Compute/restorePointCollections/restorePoints/diskRestorePoints",
       "ResourceKey": "diskRestorePointName",
@@ -2727,7 +2634,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2737,14 +2643,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetSnapshots",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots",
           "Method": "GET",
           "OperationID": "Snapshots_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2773,7 +2678,9 @@
           "Description": "Revokes access to a snapshot."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Snapshot",
       "ResourceType": "Microsoft.Compute/snapshots",
       "ResourceKey": "snapshotName",
@@ -2840,7 +2747,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2850,14 +2756,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetGalleries",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/galleries",
           "Method": "GET",
           "OperationID": "Galleries_List",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2868,7 +2773,7 @@
       "OperationsFromTenantExtension": [],
       "OtherOperations": [
         {
-          "Name": "UpdateGallerySharingProfile",
+          "Name": "Update",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/share",
           "Method": "POST",
           "OperationID": "GallerySharingProfile_Update",
@@ -2877,7 +2782,9 @@
           "Description": "Update sharing profile of a gallery."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "Gallery",
       "ResourceType": "Microsoft.Compute/galleries",
       "ResourceKey": "galleryName",
@@ -2944,7 +2851,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByGallery",
-            "NextPageMethod": "ListByGalleryNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -2956,7 +2862,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["Gallery"],
+      "Parents": [
+        "Gallery"
+      ],
       "SwaggerModelName": "GalleryImage",
       "ResourceType": "Microsoft.Compute/galleries/images",
       "ResourceKey": "galleryImageName",
@@ -3023,7 +2931,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByGalleryImage",
-            "NextPageMethod": "ListByGalleryImageNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3035,7 +2942,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["GalleryImage"],
+      "Parents": [
+        "GalleryImage"
+      ],
       "SwaggerModelName": "GalleryImageVersion",
       "ResourceType": "Microsoft.Compute/galleries/images/versions",
       "ResourceKey": "galleryImageVersionName",
@@ -3102,7 +3011,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByGallery",
-            "NextPageMethod": "ListByGalleryNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3114,7 +3022,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["Gallery"],
+      "Parents": [
+        "Gallery"
+      ],
       "SwaggerModelName": "GalleryApplication",
       "ResourceType": "Microsoft.Compute/galleries/applications",
       "ResourceKey": "galleryApplicationName",
@@ -3181,7 +3091,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByGalleryApplication",
-            "NextPageMethod": "ListByGalleryApplicationNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3193,291 +3102,14 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["GalleryApplication"],
+      "Parents": [
+        "GalleryApplication"
+      ],
       "SwaggerModelName": "GalleryApplicationVersion",
       "ResourceType": "Microsoft.Compute/galleries/applications/versions",
       "ResourceKey": "galleryApplicationVersionName",
       "ResourceKeySegment": "versions",
       "IsTrackedResource": true,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "SharedGallery": {
-      "Name": "SharedGallery",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}",
-          "Method": "GET",
-          "OperationID": "SharedGalleries_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a shared gallery by subscription id or tenant id."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries",
-          "Method": "GET",
-          "OperationID": "SharedGalleries_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List shared galleries by subscription id or tenant id."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
-      "SwaggerModelName": "SharedGallery",
-      "ResourceType": "Microsoft.Compute/locations/sharedGalleries",
-      "ResourceKey": "galleryUniqueName",
-      "ResourceKeySegment": "sharedGalleries",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": true,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "SharedGalleryImage": {
-      "Name": "SharedGalleryImage",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}",
-          "Method": "GET",
-          "OperationID": "SharedGalleryImages_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a shared gallery image by subscription id or tenant id."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images",
-          "Method": "GET",
-          "OperationID": "SharedGalleryImages_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List shared gallery images by subscription id or tenant id."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["SharedGallery"],
-      "SwaggerModelName": "SharedGalleryImage",
-      "ResourceType": "Microsoft.Compute/locations/sharedGalleries/images",
-      "ResourceKey": "galleryImageName",
-      "ResourceKeySegment": "images",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "SharedGalleryImageVersion": {
-      "Name": "SharedGalleryImageVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-          "Method": "GET",
-          "OperationID": "SharedGalleryImageVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a shared gallery image version by subscription id or tenant id."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions",
-          "Method": "GET",
-          "OperationID": "SharedGalleryImageVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List shared gallery image versions by subscription id or tenant id."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["SharedGalleryImage"],
-      "SwaggerModelName": "SharedGalleryImageVersion",
-      "ResourceType": "Microsoft.Compute/locations/sharedGalleries/images/versions",
-      "ResourceKey": "galleryImageVersionName",
-      "ResourceKeySegment": "versions",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "CommunityGallery": {
-      "Name": "CommunityGallery",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}",
-          "Method": "GET",
-          "OperationID": "CommunityGalleries_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a community gallery by gallery public name."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
-      "SwaggerModelName": "CommunityGallery",
-      "ResourceType": "Microsoft.Compute/locations/communityGalleries",
-      "ResourceKey": "publicGalleryName",
-      "ResourceKeySegment": "communityGalleries",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": true,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "CommunityGalleryImage": {
-      "Name": "CommunityGalleryImage",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}",
-          "Method": "GET",
-          "OperationID": "CommunityGalleryImages_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a community gallery image."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images",
-          "Method": "GET",
-          "OperationID": "CommunityGalleryImages_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List community gallery images inside a gallery."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["CommunityGallery"],
-      "SwaggerModelName": "CommunityGalleryImage",
-      "ResourceType": "Microsoft.Compute/locations/communityGalleries/images",
-      "ResourceKey": "galleryImageName",
-      "ResourceKeySegment": "images",
-      "IsTrackedResource": false,
-      "IsTenantResource": false,
-      "IsSubscriptionResource": false,
-      "IsManagementGroupResource": false,
-      "IsExtensionResource": false,
-      "IsSingletonResource": false
-    },
-    "CommunityGalleryImageVersion": {
-      "Name": "CommunityGalleryImageVersion",
-      "GetOperations": [
-        {
-          "Name": "Get",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
-          "Method": "GET",
-          "OperationID": "CommunityGalleryImageVersions_Get",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Get a community gallery image version."
-        }
-      ],
-      "CreateOperations": [],
-      "UpdateOperations": [],
-      "DeleteOperations": [],
-      "ListOperations": [
-        {
-          "Name": "GetAll",
-          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions",
-          "Method": "GET",
-          "OperationID": "CommunityGalleryImageVersions_List",
-          "IsLongRunning": false,
-          "PagingMetadata": {
-            "Method": "List",
-            "NextPageMethod": "ListNextPage",
-            "ItemName": "value",
-            "NextLinkName": "nextLink"
-          },
-          "Description": "List community gallery image versions inside an image."
-        }
-      ],
-      "OperationsFromResourceGroupExtension": [],
-      "OperationsFromSubscriptionExtension": [],
-      "OperationsFromManagementGroupExtension": [],
-      "OperationsFromTenantExtension": [],
-      "OtherOperations": [],
-      "Parents": ["CommunityGalleryImage"],
-      "SwaggerModelName": "CommunityGalleryImageVersion",
-      "ResourceType": "Microsoft.Compute/locations/communityGalleries/images/versions",
-      "ResourceKey": "galleryImageVersionName",
-      "ResourceKeySegment": "versions",
-      "IsTrackedResource": false,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
@@ -3519,7 +3151,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3577,12 +3208,14 @@
           "Description": "Gets a remote desktop file for a role instance in a cloud service."
         }
       ],
-      "Parents": ["CloudService"],
+      "Parents": [
+        "CloudService"
+      ],
       "SwaggerModelName": "RoleInstance",
       "ResourceType": "Microsoft.Compute/cloudServices/roleInstances",
       "ResourceKey": "roleInstanceName",
       "ResourceKeySegment": "roleInstances",
-      "IsTrackedResource": false,
+      "IsTrackedResource": true,
       "IsTenantResource": false,
       "IsSubscriptionResource": false,
       "IsManagementGroupResource": false,
@@ -3614,7 +3247,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3626,7 +3258,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["CloudService"],
+      "Parents": [
+        "CloudService"
+      ],
       "SwaggerModelName": "CloudServiceRole",
       "ResourceType": "Microsoft.Compute/cloudServices/roles",
       "ResourceKey": "roleName",
@@ -3693,7 +3327,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3703,14 +3336,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetCloudServices",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/cloudServices",
           "Method": "GET",
           "OperationID": "CloudServices_ListAll",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListAll",
-            "NextPageMethod": "ListAllNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3784,7 +3416,7 @@
           "Description": "Deletes role instances in a cloud service."
         },
         {
-          "Name": "WalkUpdateDomainCloudServicesUpdateDomain",
+          "Name": "WalkUpdateDomain",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}",
           "Method": "PUT",
           "OperationID": "CloudServicesUpdateDomain_WalkUpdateDomain",
@@ -3793,7 +3425,7 @@
           "Description": "Updates the role instances in the specified update domain."
         },
         {
-          "Name": "GetUpdateDomainCloudServicesUpdateDomain",
+          "Name": "GetUpdateDomain",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}",
           "Method": "GET",
           "OperationID": "CloudServicesUpdateDomain_GetUpdateDomain",
@@ -3802,21 +3434,22 @@
           "Description": "Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains."
         },
         {
-          "Name": "GetUpdateDomainsCloudServicesUpdateDomains",
+          "Name": "ListUpdateDomains",
           "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains",
           "Method": "GET",
           "OperationID": "CloudServicesUpdateDomain_ListUpdateDomains",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListUpdateDomains",
-            "NextPageMethod": "ListUpdateDomainsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
           "Description": "Gets a list of all update domains in a cloud service."
         }
       ],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "CloudService",
       "ResourceType": "Microsoft.Compute/cloudServices",
       "ResourceKey": "cloudServiceName",
@@ -3853,7 +3486,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListOSVersions",
-            "NextPageMethod": "ListOSVersionsNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3865,7 +3497,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "OSVersion",
       "ResourceType": "Microsoft.Compute/locations/cloudServiceOsVersions",
       "ResourceKey": "osVersionName",
@@ -3902,7 +3536,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListOSFamilies",
-            "NextPageMethod": "ListOSFamiliesNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -3914,7 +3547,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["SubscriptionResource"],
+      "Parents": [
+        "SubscriptionResource"
+      ],
       "SwaggerModelName": "OSFamily",
       "ResourceType": "Microsoft.Compute/locations/cloudServiceOsFamilies",
       "ResourceKey": "osFamilyName",
@@ -3926,5 +3561,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

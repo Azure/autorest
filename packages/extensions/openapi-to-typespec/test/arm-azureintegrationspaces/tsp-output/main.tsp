@@ -13,8 +13,8 @@ import "./Space.tsp";
 import "./Application.tsp";
 import "./BusinessProcess.tsp";
 import "./BusinessProcessVersion.tsp";
+import "./ApplicationResource.tsp";
 import "./InfrastructureResource.tsp";
-import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

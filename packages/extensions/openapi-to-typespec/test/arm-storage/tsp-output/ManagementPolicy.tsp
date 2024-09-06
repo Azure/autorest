@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The Get Storage Account ManagementPolicies operation response.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model ManagementPolicy
   is Azure.ResourceManager.ProxyResource<ManagementPolicyProperties> {
   ...ResourceNameParameter<
     Resource = ManagementPolicy,
-    KeyName = "managementPolicy",
+    KeyName = "managementPolicyName",
     SegmentName = "managementPolicies",
-    NamePattern = ""
+    NamePattern = "",
+    Type = ManagementPolicyName
   >;
 }
 
@@ -45,7 +45,9 @@ interface ManagementPolicies {
   delete is ArmResourceDeleteSync<ManagementPolicy>;
 }
 
-@@doc(ManagementPolicy.name, "");
+@@doc(ManagementPolicy.name,
+  "The name of the Storage Account Management Policy. It should always be 'default'"
+);
 @@doc(ManagementPolicy.properties,
   "Returns the Storage Account Data Policies Rules."
 );

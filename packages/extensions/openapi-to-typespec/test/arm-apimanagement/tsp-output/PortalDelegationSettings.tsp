@@ -87,13 +87,6 @@ interface PortalDelegationSettingsOperationGroup {
   >;
 
   /**
-   * Lists a collection of portalsettings defined within a service instance..
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PortalSettings_ListByService")
-  listByService is ArmResourceListByParent<PortalDelegationSettings>;
-
-  /**
    * Gets the secret validation key of the DelegationSettings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"

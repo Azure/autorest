@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FeaturesetVersion.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-@parentResource(FeaturesetVersion)
+@parentResource(Workspace)
 model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
   ...ResourceNameParameter<
     Resource = Feature,

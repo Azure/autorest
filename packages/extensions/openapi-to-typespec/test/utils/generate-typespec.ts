@@ -1,5 +1,5 @@
 import { execSync, spawnSync } from "child_process";
-import { readFileSync } from "fs";
+import { readFileSync, unlinkSync, lstatSync } from "fs";
 import { readdir } from "fs/promises";
 import { join, dirname, extname, resolve } from "path";
 import { resolveProject } from "./resolve-root";
@@ -34,7 +34,7 @@ export async function generateTypespec(repoRoot: string, folder: string, debug =
   }
 
   const swaggerPath = join(path, firstSwagger);
-  generate(repoRoot, swaggerPath, debug, brownFieldProjects.includes(folder));
+  await generate(repoRoot, swaggerPath, debug, brownFieldProjects.includes(folder));
 }
 
 // A list containing all the projects we could compile. After we enable all the projects, we will delete this list.
@@ -63,7 +63,7 @@ export async function generateSwagger(folder: string) {
 
 // `isFullCompatible` is mainly used for brownfield projects, where users want to fully honor the definition in the swagger file.
 // For greenfield projects, we expect users to set `isFullCompatible` to `false` so that it would follow the arm template definition.
-function generate(root: string, path: string, debug = false, isFullCompatible = false) {
+async function generate(root: string, path: string, debug = false, isFullCompatible = false) {
   const extension = extname(path);
   const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
 
@@ -71,6 +71,13 @@ function generate(root: string, path: string, debug = false, isFullCompatible = 
   if (extension === ".md") {
     const fileContent = readFileSync(path, "utf-8");
     overrideGuess = fileContent.includes("guessResourceKey: false");
+  }
+
+  const files = await readdir(join(dirname(path), "tsp-output"), { recursive: true });
+  for (const file of files) {
+    const fullPath = join(dirname(path), "tsp-output", file);
+    if (lstatSync(fullPath).isDirectory()) continue;
+    unlinkSync(fullPath);
   }
 
   const args = [
@@ -106,6 +113,10 @@ async function main() {
 
   for (let i = 0; i < folders.length; i++) {
     const folder = folders[i];
+    // Multipath cases
+    // if (["arm-apimanagement", "arm-compute", "arm-machinelearningservices"].includes(folder)) continue;
+    // Expanded cases: https://github.com/Azure/typespec-azure/issues/1261
+    if (folder === "arm-dns") continue;
     try {
       await generateTypespec(repoRoot, folder, debug);
       if (swagger) {

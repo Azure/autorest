@@ -59,12 +59,6 @@ interface VirtualMachineScaleSets {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation
        */
       @query("$expand")
@@ -75,18 +69,7 @@ interface VirtualMachineScaleSets {
   /**
    * Create or update a VM scale set.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set to create or update.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSet>;
 
   /**
    * Update a VM scale set.
@@ -94,16 +77,7 @@ interface VirtualMachineScaleSets {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
-    VirtualMachineScaleSetUpdate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set to create or update.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    VirtualMachineScaleSetUpdate
   >;
 
   /**
@@ -116,12 +90,6 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
 
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
@@ -139,18 +107,6 @@ interface VirtualMachineScaleSets {
   list is ArmResourceListByParent<VirtualMachineScaleSet>;
 
   /**
-   * Gets all the VM scale sets under the specified subscription for the specified location.
-   */
-  listByLocation is ArmResourceListAtScope<
-    VirtualMachineScaleSet,
-    LocationScope<VirtualMachineScaleSet>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-      ...LocationResourceParameter;
-    }
-  >;
-
-  /**
    * Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
    */
   listAll is ArmListBySubscription<VirtualMachineScaleSet>;
@@ -164,12 +120,6 @@ interface VirtualMachineScaleSets {
     void,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
 
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
@@ -190,12 +140,6 @@ interface VirtualMachineScaleSets {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
       @query("forceDeletion")
@@ -214,12 +158,6 @@ interface VirtualMachineScaleSets {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
       @query("skipShutdown")
@@ -233,16 +171,7 @@ interface VirtualMachineScaleSets {
   restart is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -251,35 +180,13 @@ interface VirtualMachineScaleSets {
   start is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
    * Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances
    */
-  reapply is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  reapply is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
@@ -287,16 +194,7 @@ interface VirtualMachineScaleSets {
   redeploy is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -305,16 +203,7 @@ interface VirtualMachineScaleSets {
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -323,16 +212,7 @@ interface VirtualMachineScaleSets {
   updateInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -341,16 +221,7 @@ interface VirtualMachineScaleSets {
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetReimageParameters,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -359,16 +230,7 @@ interface VirtualMachineScaleSets {
   reimageAll is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -380,12 +242,6 @@ interface VirtualMachineScaleSets {
     RecoveryWalkResponse,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
 
       /**
        * The platform update domain for which a manual recovery walk is requested
@@ -413,16 +269,7 @@ interface VirtualMachineScaleSets {
   convertToSinglePlacementGroup is ArmResourceActionSync<
     VirtualMachineScaleSet,
     VMScaleSetConvertToSinglePlacementGroupInput,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the virtual machine scale set to create or update.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -431,16 +278,7 @@ interface VirtualMachineScaleSets {
   setOrchestrationServiceState is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the virtual machine scale set to create or update.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -448,40 +286,14 @@ interface VirtualMachineScaleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
-  cancel is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
-  startOSUpgrade is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
@@ -491,16 +303,7 @@ interface VirtualMachineScaleSets {
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**

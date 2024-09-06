@@ -129,10 +129,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
-        "operationId": "StorageAccounts_CheckNameAvailability",
-        "tags": [
-          "StorageAccounts"
-        ],
+        "operationId": "StorageAccountsOperations_CheckNameAvailability",
         "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
@@ -142,9 +139,9 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "accountName",
             "in": "body",
-            "description": "The CheckAvailability request",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
@@ -153,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
@@ -164,20 +161,12 @@
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "StorageAccountCheckNameAvailability": {
-            "$ref": "./examples/StorageAccounts_CheckNameAvailability.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
       "get": {
-        "operationId": "DeletedAccounts_List",
-        "tags": [
-          "DeletedAccounts"
-        ],
+        "operationId": "DeletedAccountsOperations_List",
         "description": "Lists deleted accounts under the subscription.",
         "parameters": [
           {
@@ -185,9 +174,6 @@
           },
           {
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -202,11 +188,6 @@
             "schema": {
               "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeletedAccountList": {
-            "$ref": "./examples/DeletedAccounts_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3086,7 +3067,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}": {
       "get": {
         "operationId": "BlobInventoryPolicies_Get",
         "tags": [
@@ -3111,6 +3092,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "blobInventoryPolicyName",
+            "in": "path",
+            "description": "The name of the storage account blob inventory policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobInventoryPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -3157,6 +3158,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "blobInventoryPolicyName",
+            "in": "path",
+            "description": "The name of the storage account blob inventory policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobInventoryPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           },
           {
             "name": "properties",
@@ -3225,6 +3246,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "blobInventoryPolicyName",
+            "in": "path",
+            "description": "The name of the storage account blob inventory policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobInventoryPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -3776,7 +3817,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": {
       "get": {
         "operationId": "ManagementPolicies_Get",
         "tags": [
@@ -3801,6 +3842,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "managementPolicyName",
+            "in": "path",
+            "description": "The name of the Storage Account Management Policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagementPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -3847,6 +3908,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "managementPolicyName",
+            "in": "path",
+            "description": "The name of the Storage Account Management Policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagementPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           },
           {
             "name": "properties",
@@ -3930,6 +4011,26 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 24
+          },
+          {
+            "name": "managementPolicyName",
+            "in": "path",
+            "description": "The name of the Storage Account Management Policy. It should always be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagementPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -6659,7 +6760,7 @@
     },
     "DeletedAccountListResult": {
       "type": "object",
-      "description": "The response of a DeletedAccount list operation.",
+      "description": "The response from the List Deleted Accounts operation.",
       "properties": {
         "value": {
           "type": "array",

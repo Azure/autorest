@@ -55,7 +55,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByResourceGroup",
-            "NextPageMethod": "ListByResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -65,14 +64,13 @@
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [
         {
-          "Name": "GetTrafficControllers",
+          "Name": "_",
           "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceNetworking/trafficControllers",
           "Method": "GET",
           "OperationID": "TrafficControllerInterface_ListBySubscription",
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListBySubscription",
-            "NextPageMethod": "ListBySubscriptionNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -82,7 +80,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ResourceGroupResource"],
+      "Parents": [
+        "ResourceGroupResource"
+      ],
       "SwaggerModelName": "TrafficController",
       "ResourceType": "Microsoft.ServiceNetworking/trafficControllers",
       "ResourceKey": "trafficControllerName",
@@ -149,7 +149,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTrafficController",
-            "NextPageMethod": "ListByTrafficControllerNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -161,7 +160,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["TrafficController"],
+      "Parents": [
+        "TrafficController"
+      ],
       "SwaggerModelName": "Association",
       "ResourceType": "Microsoft.ServiceNetworking/trafficControllers/associations",
       "ResourceKey": "associationName",
@@ -228,7 +229,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListByTrafficController",
-            "NextPageMethod": "ListByTrafficControllerNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -240,7 +240,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["TrafficController"],
+      "Parents": [
+        "TrafficController"
+      ],
       "SwaggerModelName": "Frontend",
       "ResourceType": "Microsoft.ServiceNetworking/trafficControllers/frontends",
       "ResourceKey": "frontendName",
@@ -252,5 +254,7 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

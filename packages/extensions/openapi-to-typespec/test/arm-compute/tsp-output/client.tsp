@@ -115,7 +115,19 @@ using Microsoft.Compute;
 @@flattenProperty(PirSharedGalleryResource.identifier);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SharedGalleryImageVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PirCommunityGalleryResource.identifier);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(CommunityGalleryImageVersion.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LoadBalancerConfiguration.properties);
@@ -215,18 +227,6 @@ using Microsoft.Compute;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationVersion.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImage.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SharedGalleryImageVersion.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImage.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CommunityGalleryImageVersion.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleInstance.properties);

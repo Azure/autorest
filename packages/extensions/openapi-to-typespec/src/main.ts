@@ -4,6 +4,7 @@
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
+import { serialize } from "@azure-tools/codegen";
 import { OpenAPI3Document } from "@azure-tools/openapi";
 import { setArmCommonTypeVersion, setSession } from "./autorest-session";
 import { emitArmResources } from "./emiters/emit-arm-resources";
@@ -15,9 +16,11 @@ import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { emitTypespecConfig } from "./emiters/emit-typespec-config";
 import { getModel } from "./model";
+import { getOptions } from "./options";
 import { pretransformArmResources } from "./pretransforms/arm-pretransform";
 import { pretransformNames } from "./pretransforms/name-pretransform";
 import { pretransformRename } from "./pretransforms/rename-pretransform";
+import { parseMetadata } from "./resource/parse-metadata";
 import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
@@ -27,16 +30,25 @@ export async function processConverter(host: AutorestExtensionHost) {
   setSession(session);
   const codeModel = session.model;
   pretransformNames(codeModel);
-  pretransformArmResources(codeModel);
-  pretransformRename(codeModel);
+  const { isArm } = getOptions();
+  let metadata = undefined;
+  if (isArm) {
+    // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+    metadata = parseMetadata(codeModel);
+    await host.writeFile({ filename: "resources.json", content: JSON.stringify(metadata, null, 2) });
+    pretransformArmResources(codeModel, metadata);
+    pretransformRename(codeModel, metadata);
+  }
   markPagination(codeModel);
   markErrorModels(codeModel);
   markResources(codeModel);
   const programDetails = getModel(codeModel);
-  await emitArmResources(programDetails, getOutuptDirectory(session));
+  if (isArm) {
+    await emitArmResources(programDetails, metadata!, getOutuptDirectory(session));
+  }
   await emitModels(getFilePath(session, "models.tsp"), programDetails);
   await emitRoutes(getFilePath(session, "routes.tsp"), programDetails);
-  await emitMain(getFilePath(session, "main.tsp"), programDetails);
+  await emitMain(getFilePath(session, "main.tsp"), programDetails, metadata);
   await emitPackage(getFilePath(session, "package.json"), programDetails);
   await emitTypespecConfig(getFilePath(session, "tspconfig.yaml"), programDetails);
   await emitClient(getFilePath(session, "client.tsp"), programDetails);

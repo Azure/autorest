@@ -10,6 +10,7 @@ import {
   Response,
   AnySchema,
   StringSchema,
+  ArmIdSchema,
 } from "@autorest/codemodel";
 
 export function isConstantSchema(schema: Schema): schema is ConstantSchema {
@@ -48,7 +49,7 @@ export function isAnyObjectSchema(schema: Schema): schema is AnySchema {
   return schema.type === SchemaType.AnyObject;
 }
 
-export function isArmIdSchema(schema: Schema): boolean {
+export function isArmIdSchema(schema: Schema): schema is ArmIdSchema {
   return schema.type === SchemaType.ArmId;
 }
 

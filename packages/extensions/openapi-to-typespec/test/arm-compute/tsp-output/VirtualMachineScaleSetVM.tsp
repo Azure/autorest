@@ -72,12 +72,6 @@ interface VirtualMachineScaleSetVMS {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.
        */
       @query("$expand")
@@ -90,18 +84,7 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Update")
-  update is ArmResourceCreateOrReplaceAsync<
-    VirtualMachineScaleSetVM,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set where the extension should be create or updated.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  update is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetVM>;
 
   /**
    * Deletes a virtual machine from a VM scale set.
@@ -117,46 +100,10 @@ interface VirtualMachineScaleSetVMS {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
-  >;
-
-  /**
-   * Gets a list of all virtual machines in a VM scale sets.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_List")
-  list is ArmResourceListByParent<
-    VirtualMachineScaleSetVM,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-       */
-      @query("$select")
-      $select?: string;
-
-      /**
-       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
-       */
-      @query("$expand")
-      $expand?: string;
     }
   >;
 
@@ -168,16 +115,7 @@ interface VirtualMachineScaleSetVMS {
   reimage is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     VirtualMachineScaleSetVMReimageParameters,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -185,40 +123,14 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_ReimageAll")
-  reimageAll is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  reimageAll is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Deallocate")
-  deallocate is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
@@ -233,12 +145,6 @@ interface VirtualMachineScaleSetVMS {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
 
       /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-
-      /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
       @query("skipShutdown")
@@ -251,60 +157,21 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Restart")
-  restart is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * Starts a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Start")
-  start is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Redeploy")
-  redeploy is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
-  >;
+  redeploy is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
@@ -317,12 +184,6 @@ interface VirtualMachineScaleSetVMS {
     RetrieveBootDiagnosticsDataResult,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
 
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
@@ -340,16 +201,7 @@ interface VirtualMachineScaleSetVMS {
   performMaintenance is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -359,16 +211,7 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
   simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVM,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    void
   >;
 
   /**
@@ -379,16 +222,7 @@ interface VirtualMachineScaleSetVMS {
   runCommand is ArmResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,
-    RunCommandResult,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
-
-      /**
-       * The name of the VM scale set.
-       */
-      @path
-      vmScaleSetName: string;
-    }
+    RunCommandResult
   >;
 
   /**
