@@ -13,8 +13,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Storage;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
  */

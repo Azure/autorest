@@ -53,7 +53,10 @@ function addGeneratedResourceObjectIfNotExits(name: string, mapping: string) {
   generatedResourceObjects.set(name, mapping);
 }
 
+const armResourceCache: Map<ArmResourceSchema, TspArmResource> = new Map<ArmResourceSchema, TspArmResource>();
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {
+  if (armResourceCache.has(schema)) return armResourceCache.get(schema)!;
+
   const { isFullCompatible } = getOptions();
   const fixMe: string[] = [];
 
@@ -142,7 +145,7 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     });
   }
 
-  return {
+  const tspResource: TspArmResource = {
     fixMe,
     resourceKind: getResourceKind(schema),
     kind: "object",
@@ -165,6 +168,8 @@ export function transformTspArmResource(schema: ArmResourceSchema): TspArmResour
     baseModelName,
     locationParent: getLocationParent(schema),
   };
+  armResourceCache.set(schema, tspResource);
+  return tspResource;
 }
 
 function getOtherProperties(schema: ArmResourceSchema, noCommonTypes: boolean): TypespecObjectProperty[] {
@@ -228,7 +233,7 @@ function convertResourceReadOperation(
     {
       doc: resourceMetadata.GetOperations[0].Description, // TODO: resource have duplicated CRUD operations
       kind: "ArmResourceRead",
-      name: getOperationName(operation.OperationID),
+      name: getOperationName(resourceMetadata.Name, operation.OperationID),
       operationId: operation.OperationID,
       clientDecorators: getOperationClientDecorators(swaggerOperation),
       templateParameters: baseParameters
@@ -246,7 +251,7 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
       {
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
-        name: swaggerOperation.operationId ? getOperationName(swaggerOperation.operationId) : "exists",
+        name: swaggerOperation.operationId ? getOperationName(resourceMetadata.Name, swaggerOperation.operationId) : "exists",
         clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: swaggerOperation.operationId,
         parameters: [
@@ -285,7 +290,7 @@ function convertResourceCreateOrReplaceOperation(
       templateParameters.push(baseParameters);
     }
     const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-    const operationName = getOperationName(operation.OperationID);
+    const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
     const customizations = getCustomizations(
       bodyParam,
       tspOperationGroupName,
@@ -359,7 +364,7 @@ function convertResourceUpdateOperation(
       }
 
       const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-      const operationName = getOperationName(operation.OperationID);
+      const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
       const customizations = getCustomizations(
         bodyParam,
         tspOperationGroupName,
@@ -385,7 +390,7 @@ function convertResourceUpdateOperation(
           fixMe,
           doc: operation.Description,
           kind: kind as any,
-          name: getOperationName(operation.OperationID),
+          name: operationName,
           clientDecorators: getOperationClientDecorators(swaggerOperation),
           operationId: operation.OperationID,
           templateParameters,
@@ -429,7 +434,7 @@ function convertResourceDeleteOperation(
       {
         doc: operation.Description,
         kind: kind,
-        name: getOperationName(operation.OperationID),
+        name: getOperationName(resourceMetadata.Name, operation.OperationID),
         clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: operation.OperationID,
         templateParameters,
@@ -467,7 +472,7 @@ function convertResourceListOperations(
     converted.push({
       doc: operation.Description,
       kind: "ArmResourceListByParent",
-      name: getOperationName(operation.OperationID),
+      name: getOperationName(resourceMetadata.Name, operation.OperationID),
       clientDecorators: getOperationClientDecorators(swaggerOperation),
       operationId: operation.OperationID,
       templateParameters: templateParameters,
@@ -501,7 +506,7 @@ function convertResourceListOperations(
           converted.push({
             doc: operation.Description,
             kind: "ArmResourceListAtScope",
-            name: getOperationName(operation.OperationID),
+            name: getOperationName(resourceMetadata.Name, operation.OperationID),
             clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             templateParameters,
@@ -511,7 +516,7 @@ function convertResourceListOperations(
           converted.push({
             doc: operation.Description,
             kind: "ArmListBySubscription",
-            name: getOperationName(operation.OperationID),
+            name: getOperationName(resourceMetadata.Name, operation.OperationID),
             clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             templateParameters: [resourceMetadata.SwaggerModelName],
@@ -566,7 +571,7 @@ function convertResourceActionOperations(
         }
 
         const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-        const operationName = getOperationName(operation.OperationID);
+        const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
         const customizations = getCustomizations(
           bodyParam,
           tspOperationGroupName,
@@ -614,7 +619,7 @@ function convertCheckNameAvailabilityOperations(
           converted.push({
             doc: operation.Description,
             kind: "checkLocalNameAvailability",
-            name: getOperationName(operation.OperationID),
+            name: getOperationName(resourceMetadata.Name, operation.OperationID),
             clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -624,7 +629,7 @@ function convertCheckNameAvailabilityOperations(
           converted.push({
             doc: operation.Description,
             kind: "checkGlobalNameAvailability",
-            name: getOperationName(operation.OperationID),
+            name: getOperationName(resourceMetadata.Name, operation.OperationID),
             clientDecorators: getOperationClientDecorators(swaggerOperation),
             operationId: operation.OperationID,
             examples: swaggerOperation.extensions?.["x-ms-examples"],
@@ -704,8 +709,20 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
   return [tspOperations, normalOperations];
 }
 
-function getOperationName(name: string): string {
-  return _.lowerFirst(_.last(name.split("_")));
+const nameCache: { [resourceName: string]: Set<string> } = {};
+
+function getOperationName(resourceName: string, operationId: string): string {
+  let operationName = _.lowerFirst(_.last(operationId.split("_")));
+  if (resourceName in nameCache) {
+    if (nameCache[resourceName].has(operationName)) {
+      operationName = _.lowerFirst(operationId.split("_").map(n => _.upperFirst(n)).join(""));
+    }
+    nameCache[resourceName].add(operationName);
+  }
+  else {
+    nameCache[resourceName] = new Set<string>([operationName]);
+  }
+  return operationName;
 }
 
 function getOperationGroupName(name: string | undefined): string {

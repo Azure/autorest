@@ -2050,42 +2050,6 @@
             "NextLinkName": "nextLink"
           },
           "Description": "Lists a collection of resources associated with tags."
-        },
-        {
-          "Name": "Deploy",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/deploy",
-          "Method": "POST",
-          "OperationID": "TenantConfiguration_Deploy",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete."
-        },
-        {
-          "Name": "Save",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/save",
-          "Method": "POST",
-          "OperationID": "TenantConfiguration_Save",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete."
-        },
-        {
-          "Name": "Validate",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/validate",
-          "Method": "POST",
-          "OperationID": "TenantConfiguration_Validate",
-          "IsLongRunning": true,
-          "PagingMetadata": null,
-          "Description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete."
-        },
-        {
-          "Name": "GetSyncState",
-          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState",
-          "Method": "GET",
-          "OperationID": "TenantConfiguration_GetSyncState",
-          "IsLongRunning": false,
-          "PagingMetadata": null,
-          "Description": "Gets the status of the most recent synchronization between the configuration database and the Git repository."
         }
       ],
       "Parents": [
@@ -4035,6 +3999,42 @@
           "IsLongRunning": false,
           "PagingMetadata": null,
           "Description": "Regenerate secondary access key for GIT."
+        },
+        {
+          "Name": "Deploy",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/deploy",
+          "Method": "POST",
+          "OperationID": "TenantConfiguration_Deploy",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete."
+        },
+        {
+          "Name": "Save",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/save",
+          "Method": "POST",
+          "OperationID": "TenantConfiguration_Save",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete."
+        },
+        {
+          "Name": "Validate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/validate",
+          "Method": "POST",
+          "OperationID": "TenantConfiguration_Validate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete."
+        },
+        {
+          "Name": "GetSyncState",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState",
+          "Method": "GET",
+          "OperationID": "TenantConfiguration_GetSyncState",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the status of the most recent synchronization between the configuration database and the Git repository."
         }
       ],
       "Parents": [

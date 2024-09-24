@@ -13,8 +13,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
  */
@@ -5561,12 +5559,6 @@ model VirtualMachineIdentity {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
-
-/**
- * The List Virtual Machine Scale Set VMs operation response.
- */
-model VirtualMachineScaleSetVMListResult
-  is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
 /**
  * The SAS URIs of the console screenshot and serial log blobs.

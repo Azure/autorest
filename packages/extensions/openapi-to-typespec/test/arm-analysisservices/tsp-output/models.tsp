@@ -11,8 +11,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.Analysis;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.
  */

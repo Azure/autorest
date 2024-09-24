@@ -23,6 +23,9 @@ dependencies:
   '@azure-tools/typespec-azure-resource-manager':
     specifier: ^0.45.0
     version: 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
+  '@azure-tools/typespec-azure-rulesets':
+    specifier: ^0.45.0
+    version: 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@azure-tools/typespec-azure-resource-manager@0.45.0)(@azure-tools/typespec-client-generator-core@0.45.3)(@typespec/compiler@0.59.1)
   '@azure-tools/typespec-client-generator-core':
     specifier: ^0.45.0
     version: 0.45.3(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
@@ -178,7 +181,7 @@ dependencies:
     version: 0.59.0(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)
   '@typespec/openapi3':
     specifier: ^0.59.0
-    version: 0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0)
+    version: 0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0)(openapi-types@12.1.3)
   '@typespec/prettier-plugin-typespec':
     specifier: ^0.59.0
     version: 0.59.0
@@ -278,6 +281,9 @@ dependencies:
   npm-package-arg:
     specifier: ^9.0.0
     version: 9.1.2
+  openapi-types:
+    specifier: ~12.1.3
+    version: 12.1.3
   pacote:
     specifier: ~9.5.12
     version: 9.5.12
@@ -455,6 +461,21 @@ packages:
       '@typespec/versioning': 0.59.0(@typespec/compiler@0.59.1)
       change-case: 5.4.4
       pluralize: 8.0.0
+    dev: false
+
+  /@azure-tools/typespec-azure-rulesets@0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@azure-tools/typespec-azure-resource-manager@0.45.0)(@azure-tools/typespec-client-generator-core@0.45.3)(@typespec/compiler@0.59.1):
+    resolution: {integrity: sha512-OpMYYc0ElxnswABud22GSqE24ZoJCRGh9fwSA8SoqsJr0uXRX7D6D5pA1FHFT3b5uBVHy0l+FFHvjz9wxfsbUw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@azure-tools/typespec-azure-core': ~0.45.0
+      '@azure-tools/typespec-azure-resource-manager': ~0.45.0
+      '@azure-tools/typespec-client-generator-core': ~0.45.0
+      '@typespec/compiler': ~0.59.0
+    dependencies:
+      '@azure-tools/typespec-azure-core': 0.45.0(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/rest@0.59.1)
+      '@azure-tools/typespec-azure-resource-manager': 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
+      '@azure-tools/typespec-client-generator-core': 0.45.3(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
+      '@typespec/compiler': 0.59.1
     dev: false
 
   /@azure-tools/typespec-client-generator-core@0.45.3(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0):
@@ -1380,7 +1401,7 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@readme/openapi-parser@2.6.0:
+  /@readme/openapi-parser@2.6.0(openapi-types@12.1.3):
     resolution: {integrity: sha512-pyFJXezWj9WI1O+gdp95CoxfY+i+Uq3kKk4zXIFuRAZi9YnHpHOpjumWWr67wkmRTw19Hskh9spyY0Iyikf3fA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -1394,6 +1415,7 @@ packages:
       ajv: 8.16.0
       ajv-draft-04: 1.0.0(ajv@8.16.0)
       call-me-maybe: 1.0.2
+      openapi-types: 12.1.3
     dev: false
 
   /@readme/openapi-schemas@3.1.0:
@@ -1917,7 +1939,7 @@ packages:
       '@typespec/compiler': 0.59.1
     dev: false
 
-  /@typespec/openapi3@0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0):
+  /@typespec/openapi3@0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0)(openapi-types@12.1.3):
     resolution: {integrity: sha512-89VbUbkWKxeFgE0w0hpVyk1UZ6ZHRxOhcAHvF5MgxQxEhs2ALXKAqapWjFQsYrLBhAUoWzdPFrJJUMbwF9kX0Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -1927,7 +1949,7 @@ packages:
       '@typespec/openapi': ~0.59.0
       '@typespec/versioning': ~0.59.0
     dependencies:
-      '@readme/openapi-parser': 2.6.0
+      '@readme/openapi-parser': 2.6.0(openapi-types@12.1.3)
       '@typespec/compiler': 0.59.1
       '@typespec/http': 0.59.1(@typespec/compiler@0.59.1)
       '@typespec/openapi': 0.59.0(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)
@@ -6611,6 +6633,10 @@ packages:
       is-wsl: 2.2.0
     dev: false
 
+  /openapi-types@12.1.3:
+    resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
+    dev: false
+
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
     engines: {node: '>= 0.8.0'}
@@ -9626,7 +9652,7 @@ packages:
     dev: false
 
   file:projects/openapi-to-typespec.tgz(jest@29.7.0):
-    resolution: {integrity: sha512-XYcfOzdr4QGpFmGHhLSSoAkZiSsDaTQeyRKQrlmkybsAihGAuiR62N3nsAgz8WlDJCiem2ZgyreK/Pck7I4KiQ==, tarball: file:projects/openapi-to-typespec.tgz}
+    resolution: {integrity: sha512-nh3UlsBqlhoEFMHYWTmrPian6diNDD4vT/dW8mc37n/UvLzIfoOcKwTUY1vMZBnEU1qrXBX/w0KGiouUFemYFA==, tarball: file:projects/openapi-to-typespec.tgz}
     id: file:projects/openapi-to-typespec.tgz
     name: '@rush-temp/openapi-to-typespec'
     version: 0.0.0
@@ -9634,6 +9660,7 @@ packages:
       '@azure-tools/typespec-autorest': 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@azure-tools/typespec-azure-resource-manager@0.45.0)(@azure-tools/typespec-client-generator-core@0.45.3)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
       '@azure-tools/typespec-azure-core': 0.45.0(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/rest@0.59.1)
       '@azure-tools/typespec-azure-resource-manager': 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
+      '@azure-tools/typespec-azure-rulesets': 0.45.0(@azure-tools/typespec-azure-core@0.45.0)(@azure-tools/typespec-azure-resource-manager@0.45.0)(@azure-tools/typespec-client-generator-core@0.45.3)(@typespec/compiler@0.59.1)
       '@azure-tools/typespec-client-generator-core': 0.45.3(@azure-tools/typespec-azure-core@0.45.0)(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/rest@0.59.1)(@typespec/versioning@0.59.0)
       '@types/fs-extra': 9.0.13
       '@types/lodash': 4.14.201
@@ -9646,7 +9673,7 @@ packages:
       '@typespec/compiler': 0.59.1
       '@typespec/http': 0.59.1(@typespec/compiler@0.59.1)
       '@typespec/openapi': 0.59.0(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)
-      '@typespec/openapi3': 0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0)
+      '@typespec/openapi3': 0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)(@typespec/openapi@0.59.0)(@typespec/versioning@0.59.0)(openapi-types@12.1.3)
       '@typespec/prettier-plugin-typespec': 0.59.0
       '@typespec/rest': 0.59.1(@typespec/compiler@0.59.1)(@typespec/http@0.59.1)
       '@typespec/versioning': 0.59.0(@typespec/compiler@0.59.1)
@@ -9661,6 +9688,7 @@ packages:
       eslint-plugin-unicorn: 49.0.0(eslint@8.53.0)
       fs-extra: 10.1.0
       lodash: 4.17.21
+      openapi-types: 12.1.3
       pluralize: 8.0.0
       prettier: 3.1.0
       rimraf: 5.0.5
@@ -9677,7 +9705,6 @@ packages:
       - esbuild
       - eslint-config-prettier
       - jest
-      - openapi-types
       - supports-color
       - uglify-js
       - webpack-bundle-analyzer

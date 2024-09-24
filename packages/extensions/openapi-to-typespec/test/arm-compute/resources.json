@@ -525,7 +525,21 @@
           "Description": "Deletes a virtual machine from a VM scale set."
         }
       ],
-      "ListOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines",
+          "Method": "GET",
+          "OperationID": "VirtualMachineScaleSetVMs_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "Gets a list of all virtual machines in a VM scale sets."
+        }
+      ],
       "OperationsFromResourceGroupExtension": [],
       "OperationsFromSubscriptionExtension": [],
       "OperationsFromManagementGroupExtension": [],

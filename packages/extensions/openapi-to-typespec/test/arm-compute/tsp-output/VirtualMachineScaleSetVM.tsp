@@ -108,6 +108,42 @@ interface VirtualMachineScaleSetVMS {
   >;
 
   /**
+   * Gets a list of all virtual machines in a VM scale sets.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_List")
+  list is ArmResourceListByParent<
+    VirtualMachineScaleSetVM,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * The name of the VM scale set.
+       */
+      @path
+      virtualMachineScaleSetName: string;
+
+      /**
+       * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
+       */
+      @query("$select")
+      $select?: string;
+
+      /**
+       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
    * Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"

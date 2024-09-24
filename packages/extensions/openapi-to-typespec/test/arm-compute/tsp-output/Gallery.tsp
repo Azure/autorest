@@ -82,7 +82,11 @@ interface Galleries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GallerySharingProfile_Update")
-  update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
+  gallerySharingProfileUpdate is ArmResourceActionAsync<
+    Gallery,
+    SharingUpdate,
+    SharingUpdate
+  >;
 }
 
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
@@ -111,14 +115,14 @@ interface Galleries {
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@encodedName(Galleries.update::parameters.body,
+@@encodedName(Galleries.gallerySharingProfileUpdate::parameters.body,
   "application/json",
   "sharingUpdate"
 );
-@@extension(Galleries.update::parameters.body,
+@@extension(Galleries.gallerySharingProfileUpdate::parameters.body,
   "x-ms-client-name",
   "sharingUpdate"
 );
-@@doc(Galleries.update::parameters.body,
+@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );

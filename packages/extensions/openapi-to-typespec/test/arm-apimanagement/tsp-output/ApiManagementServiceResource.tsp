@@ -147,66 +147,6 @@ interface ApiManagementServiceResources {
   >;
 
   /**
-   * This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TenantConfiguration_Deploy")
-  deploy is ArmResourceActionAsync<
-    ApiManagementServiceResource,
-    DeployConfigurationParameters,
-    OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
-
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
-      @path
-      configurationName: ConfigurationIdName;
-    }
-  >;
-
-  /**
-   * This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TenantConfiguration_Save")
-  save is ArmResourceActionAsync<
-    ApiManagementServiceResource,
-    SaveConfigurationParameter,
-    OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
-
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
-      @path
-      configurationName: ConfigurationIdName;
-    }
-  >;
-
-  /**
-   * This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TenantConfiguration_Validate")
-  validate is ArmResourceActionAsync<
-    ApiManagementServiceResource,
-    DeployConfigurationParameters,
-    OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiManagementServiceResource>;
-
-      /**
-       * The identifier of the Git Configuration Operation.
-       */
-      @path
-      configurationName: ConfigurationIdName;
-    }
-  >;
-
-  /**
    * Lists a collection of apis associated with tags.
    */
   // FIXME: Api_ListByTags could not be converted to a resource operation
@@ -973,36 +913,6 @@ interface ApiManagementServiceResources {
 
     ...SubscriptionIdParameter,
   ): ArmResponse<TagResourceListResult> | ErrorResponse;
-
-  /**
-   * Gets the status of the most recent synchronization between the configuration database and the Git repository.
-   */
-  // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("TenantConfiguration_GetSyncState")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
-  @get
-  getSyncState(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * The identifier of the Git Configuration Operation.
-     */
-    @path
-    configurationName: ConfigurationIdName,
-  ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
 }
 
 @@maxLength(ApiManagementServiceResource.name, 50);
@@ -1078,37 +988,4 @@ interface ApiManagementServiceResources {
 );
 @@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
-);
-@@encodedName(ApiManagementServiceResources.deploy::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiManagementServiceResources.deploy::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(ApiManagementServiceResources.deploy::parameters.body,
-  "Deploy Configuration parameters."
-);
-@@encodedName(ApiManagementServiceResources.save::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiManagementServiceResources.save::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(ApiManagementServiceResources.save::parameters.body,
-  "Save Configuration parameters."
-);
-@@encodedName(ApiManagementServiceResources.validate::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiManagementServiceResources.validate::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(ApiManagementServiceResources.validate::parameters.body,
-  "Validate Configuration parameters."
 );
