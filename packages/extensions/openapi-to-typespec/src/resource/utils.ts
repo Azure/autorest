@@ -86,8 +86,7 @@ export function pathIncludes(path1: string, path2: string): boolean {
   for (let index = 0; index < segments2.length; ++index) {
     if (isVariable(segments1[index])) {
       if (!isVariable(segments2[index])) return false;
-    }
-    else if (segments1[index] !== segments2[index]) return false;
+    } else if (segments1[index] !== segments2[index]) return false;
   }
   return true;
 }

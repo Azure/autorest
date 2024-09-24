@@ -33,7 +33,9 @@ function generateModels(program: TypespecProgram) {
     namespaces,
     "\n",
     getNamespaceStatement(program),
-    isArm && containsListOperation(program) ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n" : "\n",
+    isArm && containsListOperation(program)
+      ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n"
+      : "\n",
     enums,
     "\n",
     objects,
@@ -49,5 +51,10 @@ function flattenEnums(enums: TypespecEnum[]) {
 function containsListOperation(program: TypespecProgram): boolean {
   const providerNamespace = getNamespace(program);
   const listOperationRoute = `/providers/${providerNamespace}/operations`;
-  return program.operationGroups.flatMap(g => g.operations).map(o => o.route).find(r => r === listOperationRoute) !== undefined;
+  return (
+    program.operationGroups
+      .flatMap((g) => g.operations)
+      .map((o) => o.route)
+      .find((r) => r === listOperationRoute) !== undefined
+  );
 }

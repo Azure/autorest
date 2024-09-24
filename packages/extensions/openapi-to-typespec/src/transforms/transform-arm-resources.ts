@@ -251,7 +251,9 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
       {
         doc: swaggerOperation.language.default.description,
         kind: "ArmResourceExists",
-        name: swaggerOperation.operationId ? getOperationName(resourceMetadata.Name, swaggerOperation.operationId) : "exists",
+        name: swaggerOperation.operationId
+          ? getOperationName(resourceMetadata.Name, swaggerOperation.operationId)
+          : "exists",
         clientDecorators: getOperationClientDecorators(swaggerOperation),
         operationId: swaggerOperation.operationId,
         parameters: [
@@ -715,11 +717,15 @@ function getOperationName(resourceName: string, operationId: string): string {
   let operationName = _.lowerFirst(_.last(operationId.split("_")));
   if (resourceName in nameCache) {
     if (nameCache[resourceName].has(operationName)) {
-      operationName = _.lowerFirst(operationId.split("_").map(n => _.upperFirst(n)).join(""));
+      operationName = _.lowerFirst(
+        operationId
+          .split("_")
+          .map((n) => _.upperFirst(n))
+          .join(""),
+      );
     }
     nameCache[resourceName].add(operationName);
-  }
-  else {
+  } else {
     nameCache[resourceName] = new Set<string>([operationName]);
   }
   return operationName;
