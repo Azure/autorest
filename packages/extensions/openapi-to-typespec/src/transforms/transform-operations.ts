@@ -31,7 +31,7 @@ export function transformOperationGroup(
   { language, operations }: OperationGroup,
   codeModel: CodeModel,
 ): TypespecOperationGroup {
-  const name = language.default.name ? `${language.default.name}Operations` : "";
+  const name = language.default.name ?? "";
   const doc = language.default.description;
   const ops = operations.reduce<TypespecOperation[]>((acc, op) => {
     acc = [...acc, ...transformOperation(op, codeModel)];

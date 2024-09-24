@@ -43,15 +43,14 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/${swaggerName}"
-    examples-directory: "{project-root}/examples"${
-      isFullCompatible
+    examples-directory: "{project-root}/examples"${isFullCompatible
         ? `
     arm-resource-flattening: true`
         : ""
-    }
+      }
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `;
   }
 

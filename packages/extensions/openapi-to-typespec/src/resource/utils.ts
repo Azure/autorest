@@ -65,7 +65,7 @@ export function isScopedPath(path: string): boolean {
 
 export function isSingleton(set: OperationSet): boolean {
   const lastSegment = getLastSegment(set.RequestPath);
-  if (lastSegment.match(/^\{\w+\}$/) === null) return true;
+  if (!isVariable(lastSegment)) return true;
 
   const resourceKey = lastSegment.replace(/^\{(\w+)\}$/, "$1");
   const resourceKeyParameter = set.Operations[0].parameters?.find(
@@ -79,8 +79,22 @@ export function isSingleton(set: OperationSet): boolean {
 export function pathIncludes(path1: string, path2: string): boolean {
   const lowerPath1 = path1.toLowerCase();
   const lowerPath2 = path2.toLowerCase();
-  // TO-DO: escape the variable case
-  return lowerPath1.includes(lowerPath2);
+  const segments1 = lowerPath1.split("/");
+  const segments2 = lowerPath2.split("/");
+  if (segments2.length > segments1.length) return false;
+
+  for (let index = 0; index < segments2.length; ++index) {
+    if (isVariable(segments1[index])) {
+      if (!isVariable(segments2[index])) return false;
+    }
+    else if (segments1[index] !== segments2[index]) return false;
+  }
+  return true;
+}
+
+// {variableName}
+function isVariable(segment: string): boolean {
+  return segment.match(/^\{\w+\}$/) !== null;
 }
 
 function getLastSegment(path: string): string {

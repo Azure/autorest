@@ -33,7 +33,7 @@ export async function processConverter(host: AutorestExtensionHost) {
   const { isArm } = getOptions();
   let metadata = undefined;
   if (isArm) {
-    // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema)} );
+    await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema) });
     metadata = parseMetadata(codeModel);
     await host.writeFile({ filename: "resources.json", content: JSON.stringify(metadata, null, 2) });
     pretransformArmResources(codeModel, metadata);
