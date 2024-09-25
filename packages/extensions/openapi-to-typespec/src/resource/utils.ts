@@ -83,6 +83,7 @@ export function pathIncludes(path1: string, path2: string): boolean {
   const segments2 = lowerPath2.split("/");
   if (segments2.length > segments1.length) return false;
 
+  // If the segment is a variable, then different variable names are still equivalent
   for (let index = 0; index < segments2.length; ++index) {
     if (isVariable(segments1[index])) {
       if (!isVariable(segments2[index])) return false;

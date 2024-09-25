@@ -711,12 +711,12 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
   return [tspOperations, normalOperations];
 }
 
-const nameCache: { [resourceName: string]: Set<string> } = {};
-
+const existingNames: { [resourceName: string]: Set<string> } = {};
+// TO-DO: Figure out a way to create a new name if the name exists  
 function getOperationName(resourceName: string, operationId: string): string {
   let operationName = _.lowerFirst(_.last(operationId.split("_")));
-  if (resourceName in nameCache) {
-    if (nameCache[resourceName].has(operationName)) {
+  if (resourceName in existingNames) {
+    if (existingNames[resourceName].has(operationName)) {
       operationName = _.lowerFirst(
         operationId
           .split("_")
@@ -724,9 +724,9 @@ function getOperationName(resourceName: string, operationId: string): string {
           .join(""),
       );
     }
-    nameCache[resourceName].add(operationName);
+    existingNames[resourceName].add(operationName);
   } else {
-    nameCache[resourceName] = new Set<string>([operationName]);
+    existingNames[resourceName] = new Set<string>([operationName]);
   }
   return operationName;
 }
