@@ -50,44 +50,6 @@ interface VirtualMachineScaleSetsOperations {
   ): ArmResponse<ResourceListResult<VirtualMachineScaleSet>> | ErrorResponse;
 }
 
-interface VirtualMachineScaleSetVMsOperations {
-  /**
-   * Gets a list of all virtual machines in a VM scale sets.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    virtualMachineScaleSetName: string,
-
-    /**
-     * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     */
-    @query("$select")
-    $select?: string,
-
-    /**
-     * The expand expression to apply to the operation. Allowed values are 'instanceView'.
-     */
-    @query("$expand")
-    $expand?: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetVMListResult> | ErrorResponse;
-}
-
 interface VirtualMachinesOperations {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.

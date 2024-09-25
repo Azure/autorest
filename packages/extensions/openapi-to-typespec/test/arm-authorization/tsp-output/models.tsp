@@ -12,8 +12,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.Authorization;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The principal type of the assigned principal ID.
  */

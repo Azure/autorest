@@ -13,8 +13,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.ApiManagement;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 union Protocol {
   string,
   http: "http",

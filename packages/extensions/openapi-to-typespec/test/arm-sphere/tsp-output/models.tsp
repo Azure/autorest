@@ -10,8 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureSphere;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Provisioning state of the resource.
  */

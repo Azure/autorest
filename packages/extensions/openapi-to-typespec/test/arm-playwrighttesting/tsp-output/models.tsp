@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzurePlaywrightService;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The enablement status of a feature.
  */

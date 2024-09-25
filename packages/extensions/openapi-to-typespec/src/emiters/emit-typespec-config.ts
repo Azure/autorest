@@ -51,7 +51,7 @@ options:
     }
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `;
   }
 

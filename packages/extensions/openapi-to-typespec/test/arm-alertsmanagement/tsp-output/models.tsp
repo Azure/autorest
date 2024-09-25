@@ -11,8 +11,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.AlertsManagement;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Field for a given condition.
  */

@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.NetworkAnalytics;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The status of the current operation.
  */

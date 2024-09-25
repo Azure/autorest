@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Enum for different types of AuthCredentials supported.
  */

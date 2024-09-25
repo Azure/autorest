@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ServiceNetworking;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 union ProvisioningState {
   string,
   Provisioning: "Provisioning",

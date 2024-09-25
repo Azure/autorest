@@ -9,8 +9,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Test;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The provisioning state of a resource.
  */

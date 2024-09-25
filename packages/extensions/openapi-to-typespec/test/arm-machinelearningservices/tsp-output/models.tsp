@@ -13,8 +13,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.MachineLearning;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * An enum describing the unit of usage measurement.
  */

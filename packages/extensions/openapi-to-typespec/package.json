@@ -70,6 +70,7 @@
     "chalk": "^4.1.0",
     "@azure-tools/typespec-autorest": "^0.45.0",
     "@azure-tools/typespec-client-generator-core": "^0.45.0",
+    "@azure-tools/typespec-azure-rulesets": "^0.45.0",
     "webpack-cli": "~5.1.4",
     "webpack": "~5.89.0",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
