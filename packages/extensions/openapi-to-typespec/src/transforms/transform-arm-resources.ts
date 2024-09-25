@@ -712,7 +712,7 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
 }
 
 const existingNames: { [resourceName: string]: Set<string> } = {};
-// TO-DO: Figure out a way to create a new name if the name exists  
+// TO-DO: Figure out a way to create a new name if the name exists
 function getOperationName(resourceName: string, operationId: string): string {
   let operationName = _.lowerFirst(_.last(operationId.split("_")));
   if (resourceName in existingNames) {
