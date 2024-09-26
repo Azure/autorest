@@ -11,13 +11,13 @@ import {
   setParentOfOtherOperation,
   setParentOfResourceCollectionOperation,
 } from "./find-parent";
-import { findOperation, getResourceDataSchema, OperationSet, populateSingletonRequestPath } from "./operation-set";
+import { findOperation, getResourceDataSchema, OperationSet, populateSingletonRequestPath, setResourceDataSchema } from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
 
 const logger = () => getLogger("parse-metadata");
 
-export function parseMetadata(codeModel: CodeModel): Metadata {
+export function parseMetadata(codeModel: CodeModel, configuration: Record<string, any>): Metadata {
   const operationSets: { [path: string]: OperationSet } = {};
   const operations = codeModel.operationGroups.flatMap((og) => og.operations);
   for (const operation of operations) {
@@ -32,7 +32,15 @@ export function parseMetadata(codeModel: CodeModel): Metadata {
   const operationSetsByResourceDataSchemaName: { [name: string]: OperationSet[] } = {};
   for (const key in operationSets) {
     const operationSet = operationSets[key];
-    const resourceSchemaName = getResourceDataSchema(operationSet);
+    let resourceSchemaName = getResourceDataSchema(operationSet);
+    if (resourceSchemaName === undefined) {
+      const resourceDataConfiguration = configuration["request-path-to-resource-data"] as Record<string, string>;
+      const configuredName = resourceDataConfiguration ? resourceDataConfiguration[operationSet.RequestPath] : undefined;
+      if (configuredName && codeModel.schemas.objects?.find(o => o.language.default.name === configuredName)) {
+        resourceSchemaName = configuredName;
+        setResourceDataSchema(operationSet, resourceSchemaName);
+      }
+    }
     if (resourceSchemaName !== undefined) {
       populateSingletonRequestPath(operationSet);
       if (resourceSchemaName in operationSetsByResourceDataSchemaName) {

@@ -3130,6 +3130,292 @@
       "IsExtensionResource": false,
       "IsSingletonResource": false
     },
+    "SharedGallery": {
+      "Name": "SharedGallery",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery by subscription id or tenant id."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries",
+          "Method": "GET",
+          "OperationID": "SharedGalleries_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List shared galleries by subscription id or tenant id."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "SubscriptionResource"
+      ],
+      "SwaggerModelName": "SharedGallery",
+      "ResourceType": "Microsoft.Compute/locations/sharedGalleries",
+      "ResourceKey": "galleryUniqueName",
+      "ResourceKeySegment": "sharedGalleries",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": true,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "SharedGalleryImage": {
+      "Name": "SharedGalleryImage",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery image by subscription id or tenant id."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImages_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List shared gallery images by subscription id or tenant id."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "SharedGallery"
+      ],
+      "SwaggerModelName": "SharedGalleryImage",
+      "ResourceType": "Microsoft.Compute/locations/sharedGalleries/images",
+      "ResourceKey": "galleryImageName",
+      "ResourceKeySegment": "images",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "SharedGalleryImageVersion": {
+      "Name": "SharedGalleryImageVersion",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImageVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a shared gallery image version by subscription id or tenant id."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions",
+          "Method": "GET",
+          "OperationID": "SharedGalleryImageVersions_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List shared gallery image versions by subscription id or tenant id."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "SharedGalleryImage"
+      ],
+      "SwaggerModelName": "SharedGalleryImageVersion",
+      "ResourceType": "Microsoft.Compute/locations/sharedGalleries/images/versions",
+      "ResourceKey": "galleryImageVersionName",
+      "ResourceKeySegment": "versions",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "CommunityGallery": {
+      "Name": "CommunityGallery",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleries_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery by gallery public name."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "SubscriptionResource"
+      ],
+      "SwaggerModelName": "CommunityGallery",
+      "ResourceType": "Microsoft.Compute/locations/communityGalleries",
+      "ResourceKey": "publicGalleryName",
+      "ResourceKeySegment": "communityGalleries",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": true,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "CommunityGalleryImage": {
+      "Name": "CommunityGalleryImage",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImages_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery image."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImages_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List community gallery images inside a gallery."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "CommunityGallery"
+      ],
+      "SwaggerModelName": "CommunityGalleryImage",
+      "ResourceType": "Microsoft.Compute/locations/communityGalleries/images",
+      "ResourceKey": "galleryImageName",
+      "ResourceKeySegment": "images",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
+    "CommunityGalleryImageVersion": {
+      "Name": "CommunityGalleryImageVersion",
+      "GetOperations": [
+        {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImageVersions_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get a community gallery image version."
+        }
+      ],
+      "CreateOperations": [],
+      "UpdateOperations": [],
+      "DeleteOperations": [],
+      "ListOperations": [
+        {
+          "Name": "GetAll",
+          "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions",
+          "Method": "GET",
+          "OperationID": "CommunityGalleryImageVersions_List",
+          "IsLongRunning": false,
+          "PagingMetadata": {
+            "Method": "List",
+            "ItemName": "value",
+            "NextLinkName": "nextLink"
+          },
+          "Description": "List community gallery image versions inside an image."
+        }
+      ],
+      "OperationsFromResourceGroupExtension": [],
+      "OperationsFromSubscriptionExtension": [],
+      "OperationsFromManagementGroupExtension": [],
+      "OperationsFromTenantExtension": [],
+      "OtherOperations": [],
+      "Parents": [
+        "CommunityGalleryImage"
+      ],
+      "SwaggerModelName": "CommunityGalleryImageVersion",
+      "ResourceType": "Microsoft.Compute/locations/communityGalleries/images/versions",
+      "ResourceKey": "galleryImageVersionName",
+      "ResourceKeySegment": "versions",
+      "IsTrackedResource": false,
+      "IsTenantResource": false,
+      "IsSubscriptionResource": false,
+      "IsManagementGroupResource": false,
+      "IsExtensionResource": false,
+      "IsSingletonResource": false
+    },
     "RoleInstance": {
       "Name": "RoleInstance",
       "GetOperations": [

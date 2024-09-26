@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "myGalleryImageVersionName",
+    "location": "myLocation",
+    "publicGalleryName": "publicGalleryName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryImageVersionName",
+        "type": "Microsoft.Compute/Locations/CommunityGalleryImageVersion",
+        "identifier": {
+          "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName/Versions/myGalleryImageVersionName"
+        },
+        "location": "myLocation",
+        "properties": {
+          "endOfLifeDate": "2022-03-20T09:12:28Z",
+          "excludeFromLatest": false,
+          "publishedDate": "2018-03-20T09:12:28Z",
+          "storageProfile": {
+            "osDiskImage": {
+              "diskSizeGB": 29,
+              "hostCaching": "None"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "CommunityGalleryImageVersions_Get",
+  "title": "Get a community gallery image version."
+}
