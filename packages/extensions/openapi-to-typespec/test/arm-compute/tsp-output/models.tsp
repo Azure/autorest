@@ -10605,16 +10605,6 @@ model SharingUpdate {
 }
 
 /**
- * The List Shared Galleries operation response.
- */
-model SharedGalleryList is Azure.Core.Page<SharedGallery>;
-
-/**
- * Specifies information about the Shared Gallery that you want to create or update.
- */
-model SharedGallery extends PirSharedGalleryResource {}
-
-/**
  * Base information about the shared gallery resource in pir.
  */
 model PirSharedGalleryResource extends PirResource {
@@ -10650,22 +10640,6 @@ model PirResource {
    */
   @visibility("read")
   location?: string;
-}
-
-/**
- * The List Shared Gallery Images operation response.
- */
-model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
-
-/**
- * Specifies information about the gallery image definition that you want to create or update.
- */
-model SharedGalleryImage extends PirSharedGalleryResource {
-  /**
-   * Describes the properties of a gallery image definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SharedGalleryImageProperties;
 }
 
 /**
@@ -10733,23 +10707,6 @@ model SharedGalleryImageProperties {
    * End-user license agreement for the current community gallery image.
    */
   eula?: string;
-}
-
-/**
- * The List Shared Gallery Image versions operation response.
- */
-model SharedGalleryImageVersionList
-  is Azure.Core.Page<SharedGalleryImageVersion>;
-
-/**
- * Specifies information about the gallery image version that you want to create or update.
- */
-model SharedGalleryImageVersion extends PirSharedGalleryResource {
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SharedGalleryImageVersionProperties;
 }
 
 /**
@@ -10827,11 +10784,6 @@ model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
 }
 
 /**
- * Specifies information about the Community Gallery that you want to create or update.
- */
-model CommunityGallery extends PirCommunityGalleryResource {}
-
-/**
  * Base information about the community gallery resource in pir.
  */
 model PirCommunityGalleryResource {
@@ -10868,17 +10820,6 @@ model CommunityGalleryIdentifier {
    * The unique id of this community gallery.
    */
   uniqueId?: string;
-}
-
-/**
- * Specifies information about the gallery image definition that you want to create or update.
- */
-model CommunityGalleryImage extends PirCommunityGalleryResource {
-  /**
-   * Describes the properties of a gallery image definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CommunityGalleryImageProperties;
 }
 
 /**
@@ -10969,17 +10910,6 @@ model CommunityGalleryImageIdentifier {
 }
 
 /**
- * Specifies information about the gallery image version that you want to create or update.
- */
-model CommunityGalleryImageVersion extends PirCommunityGalleryResource {
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CommunityGalleryImageVersionProperties;
-}
-
-/**
  * Describes the properties of a gallery image version.
  */
 model CommunityGalleryImageVersionProperties {
@@ -11005,17 +10935,6 @@ model CommunityGalleryImageVersionProperties {
    */
   storageProfile?: SharedGalleryImageVersionStorageProfile;
 }
-
-/**
- * The List Community Gallery Images operation response.
- */
-model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
-
-/**
- * The List Community Gallery Image versions operation response.
- */
-model CommunityGalleryImageVersionList
-  is Azure.Core.Page<CommunityGalleryImageVersion>;
 
 /**
  * The role instance SKU.

@@ -45,6 +45,10 @@ export function getResourceDataSchema(set: OperationSet): string | undefined {
   return undefined;
 }
 
+export function setResourceDataSchema(set: OperationSet, resourceDataName: string): void {
+  resourceDataSchemaCache.set(set, resourceDataName);
+}
+
 function checkEvenSegments(path: string): boolean {
   const index = path.lastIndexOf(ProvidersSegment);
 

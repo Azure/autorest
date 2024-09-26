@@ -34,7 +34,9 @@ export async function processConverter(host: AutorestExtensionHost) {
   let metadata = undefined;
   if (isArm) {
     // await host.writeFile({ filename: "codeModel.yaml", content: serialize(codeModel, codeModelSchema) });
-    metadata = parseMetadata(codeModel);
+    metadata = parseMetadata(codeModel, session.configuration);
+    // metadata.RenameMapping = session.configuration["rename-mapping"];
+    // metadata.OverrideOperationName = session.configuration["override-operation-name"];
     await host.writeFile({ filename: "resources.json", content: JSON.stringify(metadata, null, 2) });
     pretransformArmResources(codeModel, metadata);
     pretransformRename(codeModel, metadata);

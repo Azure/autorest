@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2022-03-03",
+    "galleryUniqueName": "galleryUniqueName",
+    "location": "myLocation",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myGalleryName",
+        "identifier": {
+          "uniqueId": "/SharedGalleries/galleryUniqueName"
+        },
+        "location": "myLocation"
+      }
+    }
+  },
+  "operationId": "SharedGalleries_Get",
+  "title": "Get a shared gallery."
+}
