@@ -11,7 +11,13 @@ import {
   setParentOfOtherOperation,
   setParentOfResourceCollectionOperation,
 } from "./find-parent";
-import { findOperation, getResourceDataSchema, OperationSet, populateSingletonRequestPath, setResourceDataSchema } from "./operation-set";
+import {
+  findOperation,
+  getResourceDataSchema,
+  OperationSet,
+  populateSingletonRequestPath,
+  setResourceDataSchema,
+} from "./operation-set";
 import { getPagingItemType, isTrackedResource } from "./resource-equivalent";
 import { getResourceKey, getResourceKeySegment, getResourceType, isScopedPath, isSingleton } from "./utils";
 
@@ -35,8 +41,10 @@ export function parseMetadata(codeModel: CodeModel, configuration: Record<string
     let resourceSchemaName = getResourceDataSchema(operationSet);
     if (resourceSchemaName === undefined) {
       const resourceDataConfiguration = configuration["request-path-to-resource-data"] as Record<string, string>;
-      const configuredName = resourceDataConfiguration ? resourceDataConfiguration[operationSet.RequestPath] : undefined;
-      if (configuredName && codeModel.schemas.objects?.find(o => o.language.default.name === configuredName)) {
+      const configuredName = resourceDataConfiguration
+        ? resourceDataConfiguration[operationSet.RequestPath]
+        : undefined;
+      if (configuredName && codeModel.schemas.objects?.find((o) => o.language.default.name === configuredName)) {
         resourceSchemaName = configuredName;
         setResourceDataSchema(operationSet, resourceSchemaName);
       }
