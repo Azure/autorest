@@ -3,6 +3,7 @@ import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
+import { generateDecorators } from "../utils/decorators";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
   const { isArm } = getOptions();
@@ -20,6 +21,9 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     statements.push(fixme);
   }
 
+  if (operation.decorators) {
+    statements.push(generateDecorators(operation.decorators));
+  }
   if (isArm) {
     statements.push(`@route("${route}")`);
     statements.push(

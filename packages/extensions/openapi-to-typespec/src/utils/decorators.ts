@@ -135,20 +135,20 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
         locationDecorator.arguments =
           format === "multi"
             ? [
-                {
-                  value: `#{ name: "${element.language.default.serializedName}", explode: true }`,
-                  options: { unwrap: true },
-                },
-              ]
+              {
+                value: `#{ name: "${element.language.default.serializedName}", explode: true }`,
+                options: { unwrap: true },
+              },
+            ]
             : [
-                {
-                  value:
-                    format === "csv"
-                      ? `"${element.language.default.serializedName}"`
-                      : `{name: "${element.language.default.serializedName}", format: "${format}"}`,
-                  options: { unwrap: true },
-                },
-              ];
+              {
+                value:
+                  format === "csv"
+                    ? `"${element.language.default.serializedName}"`
+                    : `{name: "${element.language.default.serializedName}", format: "${format}"}`,
+                options: { unwrap: true },
+              },
+            ];
       }
     }
 
@@ -181,6 +181,15 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   }
 
   return decorators;
+}
+
+export function createOperationIdDecorator(operationId: string): TypespecDecorator {
+  return {
+    name: "operationId",
+    module: "@typespec/openapi",
+    namespace: "TypeSpec.OpenAPI",
+    arguments: [operationId],
+  };
 }
 
 export function getPropertyClientDecorators(element: Property | Parameter): TypespecDecorator[] {

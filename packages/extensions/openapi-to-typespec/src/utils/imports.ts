@@ -106,6 +106,10 @@ export function getRoutesImports(_program: TypespecProgram) {
 
   for (const og of _program.operationGroups) {
     for (const operation of og.operations) {
+      for (const decorator of operation.decorators ?? []) {
+        decorator.module && modules.add(`import "${decorator.module}";`);
+        decorator.namespace && namespaces.add(`using ${decorator.namespace};`);
+      }
       for (const param of operation.parameters) {
         for (const decorator of param.decorators ?? []) {
           decorator.module && modules.add(`import "${decorator.module}";`);

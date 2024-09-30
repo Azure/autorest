@@ -95,7 +95,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
-        "operationId": "StorageAccountsOperations_CheckNameAvailability",
+        "operationId": "StorageAccounts_CheckNameAvailability",
         "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
@@ -132,7 +132,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
       "get": {
-        "operationId": "DeletedAccountsOperations_List",
+        "operationId": "DeletedAccounts_List",
         "description": "Lists deleted accounts under the subscription.",
         "parameters": [
           {
@@ -211,7 +211,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
       "get": {
-        "operationId": "UsagesOperations_ListByLocation",
+        "operationId": "Usages_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "parameters": [
           {
@@ -242,7 +242,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus": {
       "get": {
-        "operationId": "SkusOperations_List",
+        "operationId": "Skus_List",
         "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
         "parameters": [
           {

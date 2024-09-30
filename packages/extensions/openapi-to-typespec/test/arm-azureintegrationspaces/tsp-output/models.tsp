@@ -32,9 +32,13 @@ union ProvisioningState {
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
 }
 

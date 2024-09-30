@@ -367,7 +367,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
       "post": {
-        "operationId": "CheckNameAvailabilityOperations_CheckNameAvailability",
+        "operationId": "CheckNameAvailability_CheckNameAvailability",
         "description": "Checks the name availability of the resource with requested resource name.",
         "parameters": [
           {
@@ -404,7 +404,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
       "get": {
-        "operationId": "OperationResultsOperations_Get",
+        "operationId": "OperationResults_Get",
         "description": "Get operationResults for a Data Manager For Agriculture resource.",
         "parameters": [
           {

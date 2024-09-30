@@ -21,11 +21,12 @@ import {
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
-import { getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
+import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDecorators } from "../utils/decorators";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isConstantSchema } from "../utils/schemas";
 import { getDefaultValue } from "../utils/values";
+import { Case } from "change-case-all";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
@@ -34,7 +35,7 @@ export function transformOperationGroup(
   const name = language.default.name ? `${language.default.name}Operations` : "";
   const doc = language.default.description;
   const ops = operations.reduce<TypespecOperation[]>((acc, op) => {
-    acc = [...acc, ...transformOperation(op, codeModel)];
+    acc = [...acc, ...transformOperation(op, codeModel, name)];
     return acc;
   }, []);
   return {
@@ -69,7 +70,7 @@ function transformResponses(responses: SchemaResponse[] = [], codeModel: CodeMod
   });
 }
 
-export function transformOperation(operation: Operation, codeModel: CodeModel): TypespecOperation[] {
+function transformOperation(operation: Operation, codeModel: CodeModel, groupName: string): TypespecOperation[] {
   const { isArm } = getOptions();
   if (isArm) {
     if (
@@ -79,10 +80,11 @@ export function transformOperation(operation: Operation, codeModel: CodeModel): 
       return [];
     }
   }
-  return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel));
+  return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel, groupName));
 }
 
-export function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel): TypespecOperation {
+export function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel, groupName: string | undefined = undefined): TypespecOperation {
+  const { isFullCompatible } = getOptions();
   const { language, responses, requests } = operation;
   const name = _.lowerFirst(language.default.name);
   const doc = language.default.description;
@@ -108,6 +110,19 @@ export function transformRequest(_request: Request, operation: Operation, codeMo
   }
 
   const resource = operation.language.default.resource;
+  let decorators = undefined;
+  if (
+    groupName &&
+    operation.operationId &&
+    operation.operationId !== `${Case.pascal(groupName)}_${Case.pascal(name)}`
+  ) {
+    const decorator = createOperationIdDecorator(operation.operationId!);
+    if (isFullCompatible) {
+      decorator.suppressionCode = "@azure-tools/typespec-azure-core/no-openapi";
+      decorator.suppressionMessage = "non-standard operations";
+    }
+    decorators = [decorator];
+  }
 
   return {
     name,
@@ -120,6 +135,7 @@ export function transformRequest(_request: Request, operation: Operation, codeMo
     responses: [...new Set(transformedResponses)],
     extensions: [],
     resource,
+    decorators
   };
 }
 

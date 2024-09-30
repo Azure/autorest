@@ -45,6 +45,7 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
   clientDecorators?: TypespecDecorator[];
+  decorators?: TypespecDecorator[];
 }
 
 export type ResourceKind =
@@ -227,25 +228,25 @@ export type TspArmResourceOperation =
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrReplaceAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync"
-    | "checkGlobalNameAvailability"
-    | "checkLocalNameAvailability"
-    | "checkNameAvailability";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrReplaceAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync"
+  | "checkGlobalNameAvailability"
+  | "checkLocalNameAvailability"
+  | "checkNameAvailability";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {

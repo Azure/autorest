@@ -4,10 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
@@ -15,6 +17,8 @@ interface UsagesOperations {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Usages_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages")
   @get
   list(
@@ -28,6 +32,8 @@ interface VirtualMachineSizesOperations {
   /**
    * Returns supported VM Sizes in a location
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineSizes_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes")
   @get
   list(
@@ -41,6 +47,8 @@ interface QuotasOperations {
   /**
    * Update quota for each VM family in workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quotas_Update")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas")
   @post
   update(
@@ -58,6 +66,8 @@ interface QuotasOperations {
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Quotas_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas")
   @get
   list(
@@ -71,7 +81,9 @@ interface CodeContainersOperations {
   /**
    * List containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List containers.")
+  @operationId("CodeContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes")
   @get
   list(
@@ -96,7 +108,9 @@ interface CodeContainersOperations {
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete container.")
+  @operationId("CodeContainers_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @delete
   delete(
@@ -121,7 +135,9 @@ interface CodeContainersOperations {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get container.")
+  @operationId("CodeContainers_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @get
   get(
@@ -146,7 +162,9 @@ interface CodeContainersOperations {
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update container.")
+  @operationId("CodeContainers_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}")
   @put
   createOrUpdate(
@@ -180,7 +198,9 @@ interface CodeVersionsOperations {
   /**
    * List versions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List versions.")
+  @operationId("CodeVersions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions")
   @get
   list(
@@ -235,7 +255,9 @@ interface CodeVersionsOperations {
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete version.")
+  @operationId("CodeVersions_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @delete
   delete(
@@ -266,7 +288,9 @@ interface CodeVersionsOperations {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get version.")
+  @operationId("CodeVersions_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @get
   get(
@@ -297,7 +321,9 @@ interface CodeVersionsOperations {
   /**
    * Create or update version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update version.")
+  @operationId("CodeVersions_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}")
   @put
   createOrUpdate(
@@ -335,7 +361,9 @@ interface CodeVersionsOperations {
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Generate a storage location and credential for the client to upload a code asset to.")
+  @operationId("CodeVersions_CreateOrGetStartPendingUpload")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload")
   @post
   createOrGetStartPendingUpload(
@@ -374,7 +402,9 @@ interface ComponentContainersOperations {
   /**
    * List component containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List component containers.")
+  @operationId("ComponentContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components")
   @get
   list(
@@ -405,7 +435,9 @@ interface ComponentContainersOperations {
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete container.")
+  @operationId("ComponentContainers_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @delete
   delete(
@@ -430,7 +462,9 @@ interface ComponentContainersOperations {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get container.")
+  @operationId("ComponentContainers_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @get
   get(
@@ -455,7 +489,9 @@ interface ComponentContainersOperations {
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update container.")
+  @operationId("ComponentContainers_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}")
   @put
   createOrUpdate(
@@ -489,7 +525,9 @@ interface ComponentVersionsOperations {
   /**
    * List component versions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List component versions.")
+  @operationId("ComponentVersions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions")
   @get
   list(
@@ -544,7 +582,9 @@ interface ComponentVersionsOperations {
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete version.")
+  @operationId("ComponentVersions_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @delete
   delete(
@@ -575,7 +615,9 @@ interface ComponentVersionsOperations {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get version.")
+  @operationId("ComponentVersions_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @get
   get(
@@ -606,7 +648,9 @@ interface ComponentVersionsOperations {
   /**
    * Create or update version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update version.")
+  @operationId("ComponentVersions_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}")
   @put
   createOrUpdate(
@@ -646,7 +690,9 @@ interface DataContainersOperations {
   /**
    * List data containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List data containers.")
+  @operationId("DataContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data")
   @get
   list(
@@ -677,7 +723,9 @@ interface DataContainersOperations {
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete container.")
+  @operationId("DataContainers_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @delete
   delete(
@@ -702,7 +750,9 @@ interface DataContainersOperations {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get container.")
+  @operationId("DataContainers_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @get
   get(
@@ -727,7 +777,9 @@ interface DataContainersOperations {
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update container.")
+  @operationId("DataContainers_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}")
   @put
   createOrUpdate(
@@ -761,7 +813,9 @@ interface DataVersionsOperations {
   /**
    * List data versions in the data container
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List data versions in the data container")
+  @operationId("DataVersions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions")
   @get
   list(
@@ -823,7 +877,9 @@ interface DataVersionsOperations {
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete version.")
+  @operationId("DataVersions_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @delete
   delete(
@@ -854,7 +910,9 @@ interface DataVersionsOperations {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get version.")
+  @operationId("DataVersions_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @get
   get(
@@ -885,7 +943,9 @@ interface DataVersionsOperations {
   /**
    * Create or update version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update version.")
+  @operationId("DataVersions_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}")
   @put
   createOrUpdate(
@@ -925,7 +985,9 @@ interface EnvironmentContainersOperations {
   /**
    * List environment containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List environment containers.")
+  @operationId("EnvironmentContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments")
   @get
   list(
@@ -956,7 +1018,9 @@ interface EnvironmentContainersOperations {
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete container.")
+  @operationId("EnvironmentContainers_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @delete
   delete(
@@ -981,7 +1045,9 @@ interface EnvironmentContainersOperations {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get container.")
+  @operationId("EnvironmentContainers_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @get
   get(
@@ -1006,7 +1072,9 @@ interface EnvironmentContainersOperations {
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update container.")
+  @operationId("EnvironmentContainers_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}")
   @put
   createOrUpdate(
@@ -1040,7 +1108,9 @@ interface EnvironmentVersionsOperations {
   /**
    * List versions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List versions.")
+  @operationId("EnvironmentVersions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions")
   @get
   list(
@@ -1095,7 +1165,9 @@ interface EnvironmentVersionsOperations {
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete version.")
+  @operationId("EnvironmentVersions_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @delete
   delete(
@@ -1126,7 +1198,9 @@ interface EnvironmentVersionsOperations {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get version.")
+  @operationId("EnvironmentVersions_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @get
   get(
@@ -1157,7 +1231,9 @@ interface EnvironmentVersionsOperations {
   /**
    * Creates or updates an EnvironmentVersion.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Creates or updates an EnvironmentVersion.")
+  @operationId("EnvironmentVersions_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}")
   @put
   createOrUpdate(
@@ -1197,7 +1273,9 @@ interface ModelContainersOperations {
   /**
    * List model containers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List model containers.")
+  @operationId("ModelContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models")
   @get
   list(
@@ -1234,7 +1312,9 @@ interface ModelContainersOperations {
   /**
    * Delete container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete container.")
+  @operationId("ModelContainers_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @delete
   delete(
@@ -1259,7 +1339,9 @@ interface ModelContainersOperations {
   /**
    * Get container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get container.")
+  @operationId("ModelContainers_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @get
   get(
@@ -1284,7 +1366,9 @@ interface ModelContainersOperations {
   /**
    * Create or update container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update container.")
+  @operationId("ModelContainers_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}")
   @put
   createOrUpdate(
@@ -1318,7 +1402,9 @@ interface ModelVersionsOperations {
   /**
    * List model versions.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List model versions.")
+  @operationId("ModelVersions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions")
   @get
   list(
@@ -1409,7 +1495,9 @@ interface ModelVersionsOperations {
   /**
    * Delete version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Delete version.")
+  @operationId("ModelVersions_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @delete
   delete(
@@ -1440,7 +1528,9 @@ interface ModelVersionsOperations {
   /**
    * Get version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get version.")
+  @operationId("ModelVersions_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @get
   get(
@@ -1471,7 +1561,9 @@ interface ModelVersionsOperations {
   /**
    * Create or update version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update version.")
+  @operationId("ModelVersions_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}")
   @put
   createOrUpdate(
@@ -1509,7 +1601,9 @@ interface ModelVersionsOperations {
   /**
    * Model Version Package operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Model Version Package operation.")
+  @operationId("ModelVersions_Package")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/package")
   @post
   package(
