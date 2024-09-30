@@ -9,6 +9,7 @@ import {
   Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
+import { Case } from "change-case-all";
 import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
 import { getDataTypes } from "../data-types";
@@ -26,7 +27,6 @@ import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isConstantSchema } from "../utils/schemas";
 import { getDefaultValue } from "../utils/values";
-import { Case } from "change-case-all";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,

@@ -1,9 +1,9 @@
 import { TypespecOperation, TypespecOperationGroup, TypespecParameter } from "../interfaces";
 import { getOptions } from "../options";
 import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
+import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
 import { generateParameter } from "./generate-parameter";
-import { generateDecorators } from "../utils/decorators";
 
 export function generateOperation(operation: TypespecOperation, operationGroup?: TypespecOperationGroup) {
   const { isArm } = getOptions();
