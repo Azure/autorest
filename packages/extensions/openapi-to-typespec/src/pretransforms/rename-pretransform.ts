@@ -43,7 +43,7 @@ export function createClientNameDecorator(target: string, value: string): Typesp
     module: "@azure-tools/typespec-client-generator-core",
     namespace: "Azure.ClientGenerator.Core",
     arguments: [target, value],
-  }
+  };
 }
 
 function parseNewCSharpNameAndSetToSchema(schema: RenamableSchema, renameValue: string) {

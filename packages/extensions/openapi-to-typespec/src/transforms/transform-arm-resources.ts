@@ -337,7 +337,12 @@ function getCustomizations(
   const clientDecorators = [];
   if (bodyParam) {
     if (bodyParam.language.default.name !== templateName && isFullCompatible) {
-      clientDecorators.push(createClientNameDecorator(`${tspOperationGroupName}.${operationName}::parameters.${templateName}`, `${bodyParam.language.default.name}`));
+      clientDecorators.push(
+        createClientNameDecorator(
+          `${tspOperationGroupName}.${operationName}::parameters.${templateName}`,
+          `${bodyParam.language.default.name}`,
+        ),
+      );
     }
     if (bodyParam.language.default.description !== templateDoc) {
       augmentedDecorators.push(
@@ -761,7 +766,10 @@ function getOperationGroupName(name: string | undefined): string {
   }
 }
 
-function buildOperationParameters(operation: Operation, resource: ArmResource): Record<"baseParameters" | "parameters", string | undefined> {
+function buildOperationParameters(
+  operation: Operation,
+  resource: ArmResource,
+): Record<"baseParameters" | "parameters", string | undefined> {
   const codeModel = getSession().model;
   const otherParameters: TypespecParameter[] = [];
   const pathParameters = [];
@@ -794,9 +802,12 @@ function buildOperationParameters(operation: Operation, resource: ArmResource): 
   }
 
   return {
-    "baseParameters": parameterTemplate, "parameters": otherParameters.length ? `{
-    ${otherParameters.map(p => generateParameter(p)).join(";\n")}
-    }` : undefined
+    baseParameters: parameterTemplate,
+    parameters: otherParameters.length
+      ? `{
+    ${otherParameters.map((p) => generateParameter(p)).join(";\n")}
+    }`
+      : undefined,
   };
 }
 

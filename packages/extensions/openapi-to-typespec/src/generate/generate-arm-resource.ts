@@ -57,7 +57,8 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   definitions.push(
-    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${resource.propertiesPropertyRequired ? ", false" : ""
+    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${
+      resource.propertiesPropertyRequired ? ", false" : ""
     }> {`,
   );
 
@@ -97,7 +98,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (
       isFullCompatible &&
       operation.operationId &&
-      (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name))
+      operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
       definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
