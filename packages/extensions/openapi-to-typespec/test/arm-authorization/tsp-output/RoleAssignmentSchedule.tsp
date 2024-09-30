@@ -28,18 +28,18 @@ interface RoleAssignmentSchedules {
   /**
    * Get the specified role assignment schedule for a resource scope
    */
-  get is ArmResourceRead<RoleAssignmentSchedule>;
+  get is ArmResourceRead<
+    RoleAssignmentSchedule,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Gets role assignment schedules for a resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleAssignmentSchedules_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignmentSchedule,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role assignment schedules for the current user. Use $filter=asTarget() to return all role assignment schedules created for the current user.
        */

@@ -58,8 +58,6 @@ interface Registries {
   /**
    * List registries
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Registries_List")
   list is ArmResourceListByParent<Registry>;
 
   /**
@@ -77,24 +75,8 @@ interface Registries {
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );
 @@doc(Registry.properties, "[Required] Additional attributes of the entity.");
-@@encodedName(Registries.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(Registries.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(Registries.createOrUpdate::parameters.resource,
   "Details required to create the registry."
-);
-@@encodedName(Registries.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(Registries.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(Registries.update::parameters.properties,
   "Details required to create the registry."

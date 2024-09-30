@@ -46,9 +46,7 @@ interface Images {
    */
   listByCatalog is ArmResourceListByParent<
     Image,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

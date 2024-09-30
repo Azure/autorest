@@ -46,9 +46,7 @@ interface Deployments {
    */
   listByDeviceGroup is ArmResourceListByParent<
     Deployment,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Deployment>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

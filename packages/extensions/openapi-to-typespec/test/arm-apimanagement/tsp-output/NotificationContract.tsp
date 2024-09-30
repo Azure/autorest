@@ -31,20 +31,18 @@ interface NotificationContracts {
   /**
    * Gets the details of the Notification specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Notification_Get")
   get is ArmResourceRead<NotificationContract>;
 
   /**
    * Create or Update API Management publisher notification.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Notification_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NotificationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -56,13 +54,11 @@ interface NotificationContracts {
   /**
    * Lists a collection of properties defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Notification_ListByService")
   listByService is ArmResourceListByParent<
     NotificationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<NotificationContract>;
-
+    Parameters = {
       /**
        * Number of records to return.
        */
@@ -82,7 +78,7 @@ interface NotificationContracts {
    * Gets the list of the Notification Recipient User subscribed to the notification.
    */
   // FIXME: NotificationRecipientUser_ListByNotification could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NotificationRecipientUser_ListByNotification")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers")
   @get
@@ -112,7 +108,7 @@ interface NotificationContracts {
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
    */
   // FIXME: NotificationRecipientEmail_ListByNotification could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NotificationRecipientEmail_ListByNotification")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails")
   @get

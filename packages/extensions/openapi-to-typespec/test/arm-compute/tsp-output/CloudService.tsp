@@ -86,8 +86,6 @@ interface CloudServices {
   /**
    * Gets a list of all cloud services under a resource group. Use nextLink property in the response to get the next page of Cloud Services. Do this till nextLink is null to fetch all the Cloud Services.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CloudServices_List")
   list is ArmResourceListByParent<CloudService>;
 
   /**
@@ -148,7 +146,7 @@ interface CloudServices {
    * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
    */
   // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
@@ -175,7 +173,7 @@ interface CloudServices {
    * Gets a list of all update domains in a cloud service.
    */
   // FIXME: CloudServicesUpdateDomain_ListUpdateDomains could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
   @get
@@ -195,66 +193,18 @@ interface CloudServices {
 
 @@doc(CloudService.name, "Name of the cloud service.");
 @@doc(CloudService.properties, "Cloud service properties");
-@@encodedName(CloudServices.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CloudServices.createOrUpdate::parameters.resource,
   "The cloud service object."
 );
-@@encodedName(CloudServices.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CloudServices.update::parameters.properties, "The cloud service object.");
-@@encodedName(CloudServices.restart::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.restart::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CloudServices.restart::parameters.body,
   "List of cloud service role instance names."
-);
-@@encodedName(CloudServices.reimage::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.reimage::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CloudServices.reimage::parameters.body,
   "List of cloud service role instance names."
 );
-@@encodedName(CloudServices.rebuild::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.rebuild::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CloudServices.rebuild::parameters.body,
   "List of cloud service role instance names."
-);
-@@encodedName(CloudServices.deleteInstances::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(CloudServices.deleteInstances::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CloudServices.deleteInstances::parameters.body,
   "List of cloud service role instance names."

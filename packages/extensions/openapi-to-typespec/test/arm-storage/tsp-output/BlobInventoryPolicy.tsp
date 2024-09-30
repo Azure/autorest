@@ -47,8 +47,6 @@ interface BlobInventoryPolicies {
   /**
    * Gets the blob inventory policy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("BlobInventoryPolicies_List")
   list is ArmResourceListByParent<BlobInventoryPolicy>;
 }
 
@@ -57,14 +55,6 @@ interface BlobInventoryPolicies {
 );
 @@doc(BlobInventoryPolicy.properties,
   "Returns the storage account blob inventory policy rules."
-);
-@@encodedName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(BlobInventoryPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
 );
 @@doc(BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "The blob inventory policy set to a storage account."

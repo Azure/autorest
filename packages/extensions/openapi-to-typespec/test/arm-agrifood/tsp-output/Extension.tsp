@@ -46,13 +46,9 @@ interface Extensions {
   /**
    * Get installed extensions details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Extensions_ListByDataManagerForAgriculture")
   listByDataManagerForAgriculture is ArmResourceListByParent<
     Extension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Extension>;
-
+    Parameters = {
       /**
        * Installed extension ids.
        */
@@ -85,14 +81,6 @@ interface Extensions {
 
 @@doc(Extension.name, "Id of extension resource.");
 @@doc(Extension.properties, "Extension resource properties.");
-@@encodedName(Extensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "requestBody"
-);
-@@extension(Extensions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "requestBody"
-);
 @@doc(Extensions.createOrUpdate::parameters.resource,
   "Extension resource request body."
 );

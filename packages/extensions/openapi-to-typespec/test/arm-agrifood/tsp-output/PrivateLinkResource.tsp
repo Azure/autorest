@@ -35,8 +35,6 @@ interface PrivateLinkResources {
   /**
    * Get list of Private link resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateLinkResources_ListByResource")
   listByResource is ArmResourceListByParent<PrivateLinkResource>;
 }
 

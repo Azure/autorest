@@ -28,18 +28,18 @@ interface Alerts {
   /**
    * Get information related to a specific alert
    */
-  getById is ArmResourceRead<Alert>;
+  getById is ArmResourceRead<
+    Alert,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Alerts_GetAll")
   getAll is ArmResourceListByParent<
     Alert,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
        */
@@ -151,9 +151,8 @@ interface Alerts {
     Alert,
     string,
     Alert,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * New state of the alert.
        */
@@ -182,9 +181,4 @@ interface Alerts {
 
 @@doc(Alert.name, "Unique ID of an alert instance.");
 @@doc(Alert.properties, "Alert property bag");
-@@encodedName(Alerts.changeState::parameters.body,
-  "application/json",
-  "comment"
-);
-@@extension(Alerts.changeState::parameters.body, "x-ms-client-name", "comment");
 @@doc(Alerts.changeState::parameters.body, "reason of change alert state");

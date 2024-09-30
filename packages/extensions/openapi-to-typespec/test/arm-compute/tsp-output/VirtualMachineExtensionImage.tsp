@@ -30,14 +30,18 @@ interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
    */
-  get is ArmResourceRead<VirtualMachineExtensionImage>;
+  get is ArmResourceRead<
+    VirtualMachineExtensionImage,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Gets a list of virtual machine extension image types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineExtensionImages_ListTypes")
-  listTypes is ArmResourceListByParent<VirtualMachineExtensionImage>;
+  listTypes is ArmResourceListByParent<
+    VirtualMachineExtensionImage,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(VirtualMachineExtensionImage.name, "");

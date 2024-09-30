@@ -52,13 +52,9 @@ interface ApplicationResources {
   /**
    * List ApplicationResource resources by Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ApplicationResources_ListByApplication")
   listByApplication is ArmResourceListByParent<
     ApplicationResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApplicationResource>;
-
+    Parameters = {
       /**
        * The number of result items to return.
        */

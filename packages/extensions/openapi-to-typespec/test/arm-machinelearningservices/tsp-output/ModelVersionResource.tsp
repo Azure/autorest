@@ -30,21 +30,21 @@ interface ModelVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_Get")
   get is ArmResourceRead<ModelVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ModelVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface ModelVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_List")
   list is ArmResourceListByParent<
     ModelVersionResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ModelVersionResource>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -108,7 +106,7 @@ interface ModelVersionResources {
   /**
    * Model Version Package operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_Package")
   package is ArmResourceActionAsync<
     ModelVersionResource,
@@ -119,7 +117,7 @@ interface ModelVersionResources {
   /**
    * Generate a storage location and credential for the client to upload a model asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     ModelVersionResource,
@@ -131,14 +129,6 @@ interface ModelVersionResources {
 @@doc(ModelVersionResource.name, "Version identifier. This is case-sensitive.");
 @@doc(ModelVersionResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(ModelVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(ModelVersionResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(ModelVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."

@@ -36,21 +36,21 @@ interface BatchDeploymentTrackedResources {
   /**
    * Gets a batch inference deployment by id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchDeployments_Get")
   get is ArmResourceRead<BatchDeploymentTrackedResource>;
 
   /**
    * Creates/updates a batch inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchDeployments_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
 
   /**
    * Update a batch inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("BatchDeployments_Update")
   update is ArmCustomPatchAsync<
@@ -61,7 +61,7 @@ interface BatchDeploymentTrackedResources {
   /**
    * Delete Batch Inference deployment (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -71,13 +71,11 @@ interface BatchDeploymentTrackedResources {
   /**
    * Lists Batch inference deployments in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchDeployments_List")
   list is ArmResourceListByParent<
     BatchDeploymentTrackedResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BatchDeploymentTrackedResource>;
-
+    Parameters = {
       /**
        * Ordering of list.
        */
@@ -105,24 +103,8 @@ interface BatchDeploymentTrackedResources {
 @@doc(BatchDeploymentTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@encodedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference deployment definition object."
-);
-@@encodedName(BatchDeploymentTrackedResources.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(BatchDeploymentTrackedResources.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(BatchDeploymentTrackedResources.update::parameters.properties,
   "Batch inference deployment definition object."

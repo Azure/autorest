@@ -30,7 +30,10 @@ interface DeletedAccounts {
   /**
    * Get properties of specified deleted account resource.
    */
-  get is ArmResourceRead<DeletedAccount>;
+  get is ArmResourceRead<
+    DeletedAccount,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@maxLength(DeletedAccount.name, 24);

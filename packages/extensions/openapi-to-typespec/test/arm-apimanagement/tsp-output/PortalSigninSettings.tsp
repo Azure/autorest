@@ -31,14 +31,14 @@ interface PortalSigninSettingsOperationGroup {
   /**
    * Get Sign In Settings for the Portal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SignInSettings_Get")
   get is ArmResourceRead<PortalSigninSettings>;
 
   /**
    * Gets the entity state (Etag) version of the SignInSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("SignInSettings_GetEntityTag")
   getEntityTag(
@@ -51,13 +51,11 @@ interface PortalSigninSettingsOperationGroup {
   /**
    * Create or Update Sign-In settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SignInSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PortalSigninSettings,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSigninSettings>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -69,15 +67,13 @@ interface PortalSigninSettingsOperationGroup {
   /**
    * Update Sign-In settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("SignInSettings_Update")
   update is ArmCustomPatchSync<
     PortalSigninSettings,
     PortalSigninSettings,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<PortalSigninSettings>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -89,24 +85,8 @@ interface PortalSigninSettingsOperationGroup {
 
 @@doc(PortalSigninSettings.name, "");
 @@doc(PortalSigninSettings.properties, "Sign-in settings contract properties.");
-@@encodedName(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(PortalSigninSettingsOperationGroup.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@encodedName(PortalSigninSettingsOperationGroup.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(PortalSigninSettingsOperationGroup.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(PortalSigninSettingsOperationGroup.update::parameters.properties,
   "Update Sign-In settings."

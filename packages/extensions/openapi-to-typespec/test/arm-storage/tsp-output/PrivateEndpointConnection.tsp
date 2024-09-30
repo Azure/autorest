@@ -46,8 +46,6 @@ interface PrivateEndpointConnections {
   /**
    * List all the private endpoint connections associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
@@ -55,14 +53,6 @@ interface PrivateEndpointConnections {
   "The name of the private endpoint connection associated with the Azure resource"
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@encodedName(PrivateEndpointConnections.put::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(PrivateEndpointConnections.put::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
 @@doc(PrivateEndpointConnections.put::parameters.resource,
   "The private endpoint connection properties."
 );

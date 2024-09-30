@@ -30,14 +30,14 @@ interface UserContracts {
   /**
    * Gets the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("User_Get")
   get is ArmResourceRead<UserContract>;
 
   /**
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("User_GetEntityTag")
   getEntityTag(
@@ -47,13 +47,11 @@ interface UserContracts {
   /**
    * Creates or Updates a user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("User_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     UserContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<UserContract>;
-
+    Parameters = {
       /**
        * Send an Email notification to the User.
        */
@@ -71,15 +69,13 @@ interface UserContracts {
   /**
    * Updates the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("User_Update")
   update is ArmCustomPatchSync<
     UserContract,
     UserUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<UserContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -91,14 +87,12 @@ interface UserContracts {
   /**
    * Deletes specific user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("User_Delete")
   delete is ArmResourceDeleteSync<
     UserContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<UserContract>;
-
+    Parameters = {
       /**
        * Whether to delete user's subscription or not.
        */
@@ -128,13 +122,11 @@ interface UserContracts {
   /**
    * Lists a collection of registered users in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("User_ListByService")
   listByService is ArmResourceListByParent<
     UserContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<UserContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| groups | expand |     |     |</br>
        */
@@ -165,7 +157,7 @@ interface UserContracts {
   /**
    * Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("User_GenerateSsoUrl")
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
@@ -176,7 +168,7 @@ interface UserContracts {
   /**
    * Gets the Shared Access Authorization Token for the User.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("User_GetSharedAccessToken")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
@@ -187,14 +179,12 @@ interface UserContracts {
   /**
    * Sends confirmation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserConfirmationPassword_Send")
   send is ArmResourceActionNoContentSync<
     UserContract,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<UserContract>;
-
+    Parameters = {
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
        */
@@ -207,7 +197,7 @@ interface UserContracts {
    * Lists all user groups.
    */
   // FIXME: UserGroup_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserGroup_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
   @get
@@ -258,7 +248,7 @@ interface UserContracts {
    * List of all user identities.
    */
   // FIXME: UserIdentities_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserIdentities_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
   @get
@@ -293,34 +283,10 @@ interface UserContracts {
   "User identifier. Must be unique in the current API Management service instance."
 );
 @@doc(UserContract.properties, "User entity contract properties.");
-@@encodedName(UserContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(UserContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(UserContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@encodedName(UserContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(UserContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(UserContracts.update::parameters.properties, "Update parameters.");
-@@encodedName(UserContracts.getSharedAccessToken::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(UserContracts.getSharedAccessToken::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(UserContracts.getSharedAccessToken::parameters.body,
   "Create Authorization Token parameters."
 );

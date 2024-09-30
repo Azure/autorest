@@ -30,21 +30,21 @@ interface ComponentVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_Get")
   get is ArmResourceRead<ComponentVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ComponentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface ComponentVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_List")
   list is ArmResourceListByParent<
     ComponentVersionResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ComponentVersionResource>;
-
+    Parameters = {
       /**
        * Ordering of list.
        */
@@ -91,14 +89,6 @@ interface ComponentVersionResources {
 @@doc(ComponentVersionResource.name, "Version identifier.");
 @@doc(ComponentVersionResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(ComponentVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(ComponentVersionResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(ComponentVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."

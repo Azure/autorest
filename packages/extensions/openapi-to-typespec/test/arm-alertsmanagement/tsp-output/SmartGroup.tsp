@@ -28,18 +28,18 @@ interface SmartGroups {
   /**
    * Get information related to a specific Smart Group.
    */
-  getById is ArmResourceRead<SmartGroup>;
+  getById is ArmResourceRead<
+    SmartGroup,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List all the Smart Groups within a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
        */
@@ -115,9 +115,8 @@ interface SmartGroups {
     SmartGroup,
     void,
     SmartGroup,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * New state of the alert.
        */

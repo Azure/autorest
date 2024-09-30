@@ -35,8 +35,6 @@ interface CommunityGalleryImages {
   /**
    * List community gallery images inside a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CommunityGalleryImages_List")
   list is ArmResourceListByParent<CommunityGalleryImage>;
 }
 

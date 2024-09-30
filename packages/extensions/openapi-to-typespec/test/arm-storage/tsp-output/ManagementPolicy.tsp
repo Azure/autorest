@@ -51,14 +51,6 @@ interface ManagementPolicies {
 @@doc(ManagementPolicy.properties,
   "Returns the Storage Account Data Policies Rules."
 );
-@@encodedName(ManagementPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(ManagementPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
 @@doc(ManagementPolicies.createOrUpdate::parameters.resource,
   "The ManagementPolicy set to a storage account."
 );

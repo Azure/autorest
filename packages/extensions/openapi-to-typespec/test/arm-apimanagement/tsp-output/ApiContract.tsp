@@ -30,14 +30,14 @@ interface ApiContracts {
   /**
    * Gets the details of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Api_Get")
   get is ArmResourceRead<ApiContract>;
 
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Api_GetEntityTag")
   getEntityTag(
@@ -47,13 +47,11 @@ interface ApiContracts {
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -65,15 +63,13 @@ interface ApiContracts {
   /**
    * Updates the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Api_Update")
   update is ArmCustomPatchSync<
     ApiContract,
     ApiUpdateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -85,14 +81,12 @@ interface ApiContracts {
   /**
    * Deletes the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Api_Delete")
   delete is ArmResourceDeleteSync<
     ApiContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
-
+    Parameters = {
       /**
        * Delete all revisions of the Api.
        */
@@ -110,13 +104,11 @@ interface ApiContracts {
   /**
    * Lists all APIs of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Api_ListByService")
   listByService is ArmResourceListByParent<
     ApiContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| serviceUrl | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| path | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| isCurrent | filter | eq, ne |  |</br>
        */
@@ -154,7 +146,7 @@ interface ApiContracts {
    * Lists all revisions of an API.
    */
   // FIXME: ApiRevision_ListByService could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiRevision_ListByService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
@@ -205,7 +197,7 @@ interface ApiContracts {
    * Lists all Products, which the API is part of.
    */
   // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiProduct_ListByApis")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
@@ -256,7 +248,7 @@ interface ApiContracts {
    * Lists a collection of operations associated with tags.
    */
   // FIXME: Operation_ListByTags could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Operation_ListByTags")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
@@ -317,24 +309,8 @@ interface ApiContracts {
   "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
 );
 @@doc(ApiContract.properties, "API entity contract properties.");
-@@encodedName(ApiContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(ApiContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@encodedName(ApiContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(ApiContracts.update::parameters.properties,
   "API Update Contract parameters."

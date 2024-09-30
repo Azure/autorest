@@ -30,14 +30,14 @@ interface CacheContracts {
   /**
    * Gets the details of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cache_Get")
   get is ArmResourceRead<CacheContract>;
 
   /**
    * Gets the entity state (Etag) version of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Cache_GetEntityTag")
   getEntityTag(
@@ -47,13 +47,11 @@ interface CacheContracts {
   /**
    * Creates or updates an External Cache to be used in Api Management instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cache_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -65,15 +63,13 @@ interface CacheContracts {
   /**
    * Updates the details of the cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Cache_Update")
   update is ArmCustomPatchSync<
     CacheContract,
     CacheUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -85,14 +81,12 @@ interface CacheContracts {
   /**
    * Deletes specific Cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -104,13 +98,11 @@ interface CacheContracts {
   /**
    * Lists a collection of all external Caches in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cache_ListByService")
   listByService is ArmResourceListByParent<
     CacheContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CacheContract>;
-
+    Parameters = {
       /**
        * Number of records to return.
        */
@@ -133,23 +125,7 @@ interface CacheContracts {
   "Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier)."
 );
 @@doc(CacheContract.properties, "Cache properties details.");
-@@encodedName(CacheContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CacheContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CacheContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
-);
-@@encodedName(CacheContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(CacheContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CacheContracts.update::parameters.properties, "Update parameters.");

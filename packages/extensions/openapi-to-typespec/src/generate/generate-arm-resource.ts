@@ -57,8 +57,7 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   definitions.push(
-    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${
-      resource.propertiesPropertyRequired ? ", false" : ""
+    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${resource.propertiesPropertyRequired ? ", false" : ""
     }> {`,
   );
 
@@ -98,11 +97,10 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (
       isFullCompatible &&
       operation.operationId &&
-      (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name) ||
-        operation.kind === "ArmResourceListByParent")
+      (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name))
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
-      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);
+      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
     }
     if (isFullCompatible && operation.suppressions) {
       definitions.push(...generateSuppressions(operation.suppressions));
@@ -127,7 +125,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
-      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);
+      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
     }
     definitions.push(generateOperation(operation as TypespecOperation));
     definitions.push("");

@@ -30,19 +30,25 @@ interface DeletedServiceContracts {
   /**
    * Get soft-deleted Api Management Service by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedServices_GetByName")
-  getByName is ArmResourceRead<DeletedServiceContract>;
+  getByName is ArmResourceRead<
+    DeletedServiceContract,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Purges Api Management Service (deletes it with no option to undelete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DeletedServices_Purge")
-  purge is ArmResourceDeleteAsync<DeletedServiceContract>;
+  purge is ArmResourceDeleteAsync<
+    DeletedServiceContract,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@maxLength(DeletedServiceContract.name, 50);

@@ -30,14 +30,14 @@ interface TagContracts {
   /**
    * Get tag associated with the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tag_GetByOperation")
   getByOperation is ArmResourceRead<TagContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Tag_GetEntityStateByOperation")
   getEntityStateByOperation(
@@ -47,14 +47,14 @@ interface TagContracts {
   /**
    * Assign tag to the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tag_AssignToOperation")
   assignToOperation is ArmResourceCreateOrReplaceSync<TagContract>;
 
   /**
    * Detach the tag from the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Tag_DetachFromOperation")
   detachFromOperation is ArmResourceDeleteSync<TagContract>;
@@ -62,13 +62,11 @@ interface TagContracts {
   /**
    * Lists all Tags associated with the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tag_ListByOperation")
   listByOperation is ArmResourceListByParent<
     TagContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<TagContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */

@@ -29,18 +29,18 @@ interface DataManagerForAgricultureExtensions {
   /**
    * Get Data Manager For Agriculture extension.
    */
-  get is ArmResourceRead<DataManagerForAgricultureExtension>;
+  get is ArmResourceRead<
+    DataManagerForAgricultureExtension,
+    Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
 
   /**
    * Get list of Data Manager For Agriculture extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DataManagerForAgricultureExtensions_List")
   list is ArmResourceListByParent<
     DataManagerForAgricultureExtension,
-    {
-      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
-
+    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
       /**
        * DataManagerForAgricultureExtension ids.
        */

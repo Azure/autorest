@@ -32,9 +32,7 @@ interface GalleryApplicationVersions {
    */
   get is ArmResourceRead<
     GalleryApplicationVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryApplicationVersion>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -68,8 +66,6 @@ interface GalleryApplicationVersions {
   /**
    * List gallery Application Versions in a gallery Application Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryApplicationVersions_ListByGalleryApplication")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
 
@@ -79,24 +75,8 @@ interface GalleryApplicationVersions {
 @@doc(GalleryApplicationVersion.properties,
   "Describes the properties of a gallery image version."
 );
-@@encodedName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
-  "application/json",
-  "galleryApplicationVersion"
-);
-@@extension(GalleryApplicationVersions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "galleryApplicationVersion"
-);
 @@doc(GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application Version operation."
-);
-@@encodedName(GalleryApplicationVersions.update::parameters.properties,
-  "application/json",
-  "galleryApplicationVersion"
-);
-@@extension(GalleryApplicationVersions.update::parameters.properties,
-  "x-ms-client-name",
-  "galleryApplicationVersion"
 );
 @@doc(GalleryApplicationVersions.update::parameters.properties,
   "Parameters supplied to the update gallery Application Version operation."

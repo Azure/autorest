@@ -28,34 +28,34 @@ interface RoleManagementPolicies {
   /**
    * Get the specified role management policy for a resource scope
    */
-  get is ArmResourceRead<RoleManagementPolicy>;
+  get is ArmResourceRead<
+    RoleManagementPolicy,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Update a role management policy
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<RoleManagementPolicy, RoleManagementPolicy>;
+  update is ArmCustomPatchSync<
+    RoleManagementPolicy,
+    RoleManagementPolicy,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Gets role management policies for a resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleManagementPolicies_ListForScope")
-  listForScope is ArmResourceListByParent<RoleManagementPolicy>;
+  listForScope is ArmResourceListByParent<
+    RoleManagementPolicy,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 }
 
 @@doc(RoleManagementPolicy.name,
   "The name (guid) of the role management policy to get."
 );
 @@doc(RoleManagementPolicy.properties, "Role management policy properties.");
-@@encodedName(RoleManagementPolicies.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(RoleManagementPolicies.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RoleManagementPolicies.update::parameters.properties,
   "Parameters for the role management policy."
 );

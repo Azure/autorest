@@ -28,17 +28,18 @@ interface DenyAssignments {
   /**
    * Get the specified deny assignment.
    */
-  get is ArmResourceRead<DenyAssignment>;
+  get is ArmResourceRead<
+    DenyAssignment,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Gets deny assignments for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DenyAssignments_ListForResource")
   listForResource is ArmResourceListByParent<
     DenyAssignment,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
 
