@@ -83,7 +83,12 @@ function transformOperation(operation: Operation, codeModel: CodeModel, groupNam
   return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel, groupName));
 }
 
-export function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel, groupName: string | undefined = undefined): TypespecOperation {
+export function transformRequest(
+  _request: Request,
+  operation: Operation,
+  codeModel: CodeModel,
+  groupName: string | undefined = undefined,
+): TypespecOperation {
   const { isFullCompatible } = getOptions();
   const { language, responses, requests } = operation;
   const name = _.lowerFirst(language.default.name);
@@ -135,7 +140,7 @@ export function transformRequest(_request: Request, operation: Operation, codeMo
     responses: [...new Set(transformedResponses)],
     extensions: [],
     resource,
-    decorators
+    decorators,
   };
 }
 

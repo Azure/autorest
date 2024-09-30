@@ -228,25 +228,25 @@ export type TspArmResourceOperation =
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-  | "ArmResourceRead"
-  | "ArmResourceCreateOrReplaceSync"
-  | "ArmResourceCreateOrReplaceAsync"
-  | "ArmResourcePatchSync"
-  | "ArmResourcePatchAsync"
-  | "ArmTagsPatchSync"
-  | "ArmTagsPatchAsync"
-  | "ArmCustomPatchSync"
-  | "ArmCustomPatchAsync"
-  | "ArmResourceDeleteSync"
-  | "ArmResourceDeleteAsync"
-  | "ArmResourceDeleteWithoutOkAsync"
-  | "ArmResourceActionSync"
-  | "ArmResourceActionNoContentSync"
-  | "ArmResourceActionAsync"
-  | "ArmResourceActionNoResponseContentAsync"
-  | "checkGlobalNameAvailability"
-  | "checkLocalNameAvailability"
-  | "checkNameAvailability";
+    | "ArmResourceRead"
+    | "ArmResourceCreateOrReplaceSync"
+    | "ArmResourceCreateOrReplaceAsync"
+    | "ArmResourcePatchSync"
+    | "ArmResourcePatchAsync"
+    | "ArmTagsPatchSync"
+    | "ArmTagsPatchAsync"
+    | "ArmCustomPatchSync"
+    | "ArmCustomPatchAsync"
+    | "ArmResourceDeleteSync"
+    | "ArmResourceDeleteAsync"
+    | "ArmResourceDeleteWithoutOkAsync"
+    | "ArmResourceActionSync"
+    | "ArmResourceActionNoContentSync"
+    | "ArmResourceActionAsync"
+    | "ArmResourceActionNoResponseContentAsync"
+    | "checkGlobalNameAvailability"
+    | "checkLocalNameAvailability"
+    | "checkNameAvailability";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {
