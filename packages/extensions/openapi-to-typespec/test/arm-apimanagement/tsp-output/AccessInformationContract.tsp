@@ -31,14 +31,14 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details without secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_Get")
   get is ArmResourceRead<AccessInformationContract>;
 
   /**
    * Tenant access metadata
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("TenantAccess_GetEntityTag")
   getEntityTag(
@@ -51,13 +51,11 @@ interface AccessInformationContracts {
   /**
    * Update tenant access information details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_Create")
   create is ArmResourceCreateOrReplaceSync<
     AccessInformationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -69,15 +67,13 @@ interface AccessInformationContracts {
   /**
    * Update tenant access information details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("TenantAccess_Update")
   update is ArmCustomPatchSync<
     AccessInformationContract,
     AccessInformationUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -89,13 +85,11 @@ interface AccessInformationContracts {
   /**
    * Returns list of access infos - for Git and Management endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_ListByService")
   listByService is ArmResourceListByParent<
     AccessInformationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * Not used
        */
@@ -107,7 +101,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
@@ -117,7 +111,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
@@ -127,7 +121,7 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccess_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AccessInformationContract,
@@ -138,7 +132,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key for GIT.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccessGit_RegeneratePrimaryKey")
   tenantAccessGitRegeneratePrimaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
@@ -148,7 +142,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key for GIT.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantAccessGit_RegenerateSecondaryKey")
   tenantAccessGitRegenerateSecondaryKey is ArmResourceActionNoContentSync<
     AccessInformationContract,
@@ -158,15 +152,13 @@ interface AccessInformationContracts {
   /**
    * This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantConfiguration_Deploy")
   deploy is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
     OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
        */
@@ -178,15 +170,13 @@ interface AccessInformationContracts {
   /**
    * This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantConfiguration_Save")
   save is ArmResourceActionAsync<
     AccessInformationContract,
     SaveConfigurationParameter,
     OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
        */
@@ -198,15 +188,13 @@ interface AccessInformationContracts {
   /**
    * This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantConfiguration_Validate")
   validate is ArmResourceActionAsync<
     AccessInformationContract,
     DeployConfigurationParameters,
     OperationResultContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AccessInformationContract>;
-
+    Parameters = {
       /**
        * The identifier of the Git Configuration Operation.
        */
@@ -219,7 +207,7 @@ interface AccessInformationContracts {
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
   // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TenantConfiguration_GetSyncState")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
@@ -252,57 +240,17 @@ interface AccessInformationContracts {
 @@doc(AccessInformationContract.properties,
   "AccessInformation entity contract properties."
 );
-@@encodedName(AccessInformationContracts.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(AccessInformationContracts.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AccessInformationContracts.create::parameters.resource,
   "Parameters supplied to retrieve the Tenant Access Information."
-);
-@@encodedName(AccessInformationContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(AccessInformationContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AccessInformationContracts.update::parameters.properties,
   "Parameters supplied to retrieve the Tenant Access Information."
 );
-@@encodedName(AccessInformationContracts.deploy::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(AccessInformationContracts.deploy::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AccessInformationContracts.deploy::parameters.body,
   "Deploy Configuration parameters."
 );
-@@encodedName(AccessInformationContracts.save::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(AccessInformationContracts.save::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AccessInformationContracts.save::parameters.body,
   "Save Configuration parameters."
-);
-@@encodedName(AccessInformationContracts.validate::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(AccessInformationContracts.validate::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AccessInformationContracts.validate::parameters.body,
   "Validate Configuration parameters."

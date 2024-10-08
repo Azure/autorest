@@ -30,14 +30,14 @@ interface ContentItemContracts {
   /**
    * Returns the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentItem_Get")
   get is ArmResourceRead<ContentItemContract>;
 
   /**
    * Returns the entity state (ETag) version of the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ContentItem_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface ContentItemContracts {
   /**
    * Creates a new developer portal's content item specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentItem_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ContentItemContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ContentItemContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface ContentItemContracts {
   /**
    * Removes the specified developer portal's content item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ContentItem_Delete")
   delete is ArmResourceDeleteSync<
     ContentItemContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ContentItemContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,7 +83,7 @@ interface ContentItemContracts {
   /**
    * Lists developer portal's content items specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentItem_ListByService")
   listByService is ArmResourceListByParent<ContentItemContract>;
 }

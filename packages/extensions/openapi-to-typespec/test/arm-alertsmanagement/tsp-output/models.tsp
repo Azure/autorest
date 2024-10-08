@@ -16,16 +16,27 @@ namespace Azure.ResourceManager.AlertsManagement;
  */
 union Field {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Severity: "Severity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MonitorService: "MonitorService",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MonitorCondition: "MonitorCondition",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SignalType: "SignalType",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TargetResourceType: "TargetResourceType",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TargetResource: "TargetResource",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TargetResourceGroup: "TargetResourceGroup",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AlertRuleId: "AlertRuleId",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AlertRuleName: "AlertRuleName",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Description: "Description",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AlertContext: "AlertContext",
 }
 
@@ -34,9 +45,13 @@ union Field {
  */
 union Operator {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Equals: "Equals",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NotEquals: "NotEquals",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Contains: "Contains",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DoesNotContain: "DoesNotContain",
 }
 
@@ -45,13 +60,18 @@ union Operator {
  */
 union RecurrenceType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Daily: "Daily",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Weekly: "Weekly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Monthly: "Monthly",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union Identifier {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MonitorServiceList: "MonitorServiceList",
 }
 
@@ -60,74 +80,122 @@ union Identifier {
  */
 union MetadataIdentifier {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MonitorServiceList: "MonitorServiceList",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union MonitorService {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Application Insights`: "Application Insights",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `ActivityLog Administrative`: "ActivityLog Administrative",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `ActivityLog Security`: "ActivityLog Security",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `ActivityLog Recommendation`: "ActivityLog Recommendation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `ActivityLog Policy`: "ActivityLog Policy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `ActivityLog Autoscale`: "ActivityLog Autoscale",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Log Analytics`: "Log Analytics",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Nagios: "Nagios",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Platform: "Platform",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SCOM: "SCOM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ServiceHealth: "ServiceHealth",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SmartDetector: "SmartDetector",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `VM Insights`: "VM Insights",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Zabbix: "Zabbix",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union MonitorCondition {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Fired: "Fired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resolved: "Resolved",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union Severity {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sev0: "Sev0",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sev1: "Sev1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sev2: "Sev2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sev3: "Sev3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sev4: "Sev4",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AlertState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   New: "New",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Acknowledged: "Acknowledged",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Closed: "Closed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AlertsSortByFields {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name: "name",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   severity: "severity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   alertState: "alertState",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   monitorCondition: "monitorCondition",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   targetResource: "targetResource",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   targetResourceName: "targetResourceName",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   targetResourceGroup: "targetResourceGroup",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   targetResourceType: "targetResourceType",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   startDateTime: "startDateTime",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   lastModifiedDateTime: "lastModifiedDateTime",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union SortOrder {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   asc: "asc",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   desc: "desc",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union TimeRange {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1h`: "1h",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1d`: "1d",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `7d`: "7d",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `30d`: "30d",
 }
 
@@ -136,27 +204,43 @@ union TimeRange {
  */
 union SignalType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Metric: "Metric",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Log: "Log",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AlertsSummaryGroupByFields {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   severity: "severity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   alertState: "alertState",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   monitorCondition: "monitorCondition",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   monitorService: "monitorService",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   signalType: "signalType",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   alertRule: "alertRule",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union SmartGroupsSortByFields {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   alertsCount: "alertsCount",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   state: "state",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   severity: "severity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   startDateTime: "startDateTime",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   lastModifiedDateTime: "lastModifiedDateTime",
 }
 
@@ -165,8 +249,11 @@ union SmartGroupsSortByFields {
  */
 union SmartGroupState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   New: "New",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Acknowledged: "Acknowledged",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Closed: "Closed",
 }
 
@@ -175,18 +262,26 @@ union SmartGroupState {
  */
 union DaysOfWeek {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Sunday: "Sunday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Monday: "Monday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Tuesday: "Tuesday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Wednesday: "Wednesday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Thursday: "Thursday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Friday: "Friday",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Saturday: "Saturday",
 }
 
 /**
  * Reason for the modification
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AlertModificationEvent {
   AlertCreated,
   StateChange,
@@ -202,6 +297,7 @@ enum AlertModificationEvent {
 /**
  * Reason for the modification
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum SmartGroupModificationEvent {
   SmartGroupCreated,
   StateChange,

@@ -31,14 +31,14 @@ interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EmailTemplate_Get")
   get is ArmResourceRead<EmailTemplateContract>;
 
   /**
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("EmailTemplate_GetEntityTag")
   getEntityTag(
@@ -51,13 +51,11 @@ interface EmailTemplateContracts {
   /**
    * Updates an Email Template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EmailTemplate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EmailTemplateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -69,15 +67,13 @@ interface EmailTemplateContracts {
   /**
    * Updates API Management email template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("EmailTemplate_Update")
   update is ArmCustomPatchSync<
     EmailTemplateContract,
     EmailTemplateUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -89,14 +85,12 @@ interface EmailTemplateContracts {
   /**
    * Reset the Email Template to default template provided by the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -108,13 +102,11 @@ interface EmailTemplateContracts {
   /**
    * Gets all email templates
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EmailTemplate_ListByService")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EmailTemplateContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -141,24 +133,8 @@ interface EmailTemplateContracts {
 @@doc(EmailTemplateContract.properties,
   "Email Template entity contract properties."
 );
-@@encodedName(EmailTemplateContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(EmailTemplateContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(EmailTemplateContracts.createOrUpdate::parameters.resource,
   "Email Template update parameters."
-);
-@@encodedName(EmailTemplateContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(EmailTemplateContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(EmailTemplateContracts.update::parameters.properties,
   "Update parameters."

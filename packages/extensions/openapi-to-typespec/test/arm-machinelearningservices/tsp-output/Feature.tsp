@@ -34,13 +34,9 @@ interface Features {
   /**
    * List Features.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Features_List")
   list is ArmResourceListByParent<
     Feature,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Feature>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */

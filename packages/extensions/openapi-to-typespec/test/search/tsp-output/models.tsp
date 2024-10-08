@@ -61,7 +61,55 @@ namespace Azure.Search;
 */"JsonArray": "jsonArray", /**
 * Set to jsonLines to extract individual JSON entities, separated by a new line,
 * as separate documents.
-*/"JsonLines": "jsonLines"
+*/"JsonLines": "jsonLines", /**
+* Set to markdown to extract content from markdown files.
+*/"Markdown": "markdown"
+    }
+
+/**
+* Specifies the submode that will determine whether a markdown file will be
+* parsed into exactly one search document or multiple search documents. Default
+* is `oneToMany`.
+*/
+    union MarkdownParsingSubmode {
+        string,
+
+        /**
+* Indicates that each section of the markdown file (up to a specified depth) will
+* be parsed into individual search documents. This can result in a single
+* markdown file producing multiple search documents. This is the default
+* sub-mode.
+*/"OneToMany": "oneToMany", /**
+* Indicates that each markdown file will be parsed into a single search document.
+*/"OneToOne": "oneToOne"
+    }
+
+/**
+* Specifies the max header depth that will be considered while grouping markdown
+* content. Default is `h6`.
+*/
+    union MarkdownHeaderDepth {
+        string,
+
+        /**
+* Indicates that headers up to a level of h1 will be considered while grouping
+* markdown content.
+*/"h1": "h1", /**
+* Indicates that headers up to a level of h2 will be considered while grouping
+* markdown content.
+*/"h2": "h2", /**
+* Indicates that headers up to a level of h3 will be considered while grouping
+* markdown content.
+*/"h3": "h3", /**
+* Indicates that headers up to a level of h4 will be considered while grouping
+* markdown content.
+*/"h4": "h4", /**
+* Indicates that headers up to a level of h5 will be considered while grouping
+* markdown content.
+*/"h5": "h5", /**
+* Indicates that headers up to a level of h6 will be considered while grouping
+* markdown content. This is the default.
+*/"h6": "h6"
     }
 
 /**
@@ -523,6 +571,24 @@ namespace Azure.Search;
     }
 
 /**
+* The storage method for the original full-precision vectors used for rescoring
+* and internal index operations.
+*/
+    union VectorSearchCompressionRescoreStorageMethod {
+        string,
+
+        /**
+* This option preserves the original full-precision vectors. Choose this option
+* for maximum flexibility and highest quality of compressed search results. This
+* consumes more storage but allows for rescoring and oversampling.
+*/"PreserveOriginals": "preserveOriginals", /**
+* This option discards the original full-precision vectors. Choose this option
+* for maximum storage savings. Since this option does not allow for rescoring and
+* oversampling, it will often cause slight to moderate reductions in quality.
+*/"DiscardOriginals": "discardOriginals"
+    }
+
+/**
 * Defines the names of all tokenizers supported by the search engine.
 */
     union LexicalTokenizerName {
@@ -732,6 +798,9 @@ namespace Azure.Search;
 * confidence threshold can be configured by appending the pipe character `|`
 * followed by the `threshold-<confidence threshold>` option after the answers
 * parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.
+* The maximum character length of answers can be configured by appending the pipe
+* character '|' followed by the 'count-<number of maximum character length>',
+* such as 'extractive|maxcharlength-600'.
 */
     union QueryAnswerType {
         string,
@@ -750,7 +819,9 @@ namespace Azure.Search;
 * When Captions is set to `extractive`, highlighting is enabled by default, and
 * can be configured by appending the pipe character `|` followed by the
 * `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults
-* to `None`.
+* to `None`. The maximum character length of captions can be configured by
+* appending the pipe character '|' followed by the 'count-<number of maximum
+* character length>', such as 'extractive|maxcharlength-600'.
 */
     union QueryCaptionType {
         string,
@@ -764,8 +835,27 @@ namespace Azure.Search;
     }
 
 /**
+* This parameter is only valid if the query type is `semantic`. When
+* QueryRewrites is set to `generative`, the query terms are sent to a generate
+* model which will produce 10 (default) rewrites to help increase the recall of
+* the request. The requested count can be configured by appending the pipe
+* character `|` followed by the `count-<number of rewrites>` option, such as
+* `generative|count-3`. Defaults to `None`.
+*/
+    union QueryRewritesType {
+        string,
+
+        /**
+* Do not generate additional query rewrites for this query.
+*/"None": "none", /**
+* Generate alternative query terms to increase the recall of a search request.
+*/"Generative": "generative"
+    }
+
+/**
 * Enables a debugging tool that can be used to further explore your search
-* results.
+* results. You can enable multiple debug modes simultaneously by separating them
+* with a | character, for example: semantic|queryRewrites.
 */
     union QueryDebugMode {
         string,
@@ -774,7 +864,14 @@ namespace Azure.Search;
 * No query debugging information will be returned.
 */"Disabled": "disabled", /**
 * Allows the user to further explore their reranked results.
-*/"Semantic": "semantic"
+*/"Semantic": "semantic", /**
+* Allows the user to further explore their hybrid and vector query results.
+*/"Vector": "vector", /**
+* Allows the user to explore the list of query rewrites generated for their
+* search request.
+*/"QueryRewrites": "queryRewrites", /**
+* Turn on all debug options.
+*/"All": "all"
     }
 
 /**
@@ -930,18 +1027,6 @@ namespace Azure.Search;
 */"UrPk": "ur-pk"
     }
 
-
-    union Speller {
-        string,
-
-        /**
-* Speller not enabled.
-*/"None": "none", /**
-* Speller corrects individual query terms using a static lexicon for the language
-* specified by the queryLanguage parameter.
-*/"Lexicon": "lexicon"
-    }
-
 /**
 * Improve search recall by spell-correcting individual search query terms.
 */
@@ -1071,6 +1156,18 @@ threshold direction will be chosen for higher @search.score.
 * captions. They will not include any answers, answers highlights or caption
 * highlights.
 */"RerankedResults": "rerankedResults"
+    }
+
+/**
+* Type of query rewrite that was used for this request.
+*/
+    union SemanticQueryRewritesResultType {
+        string,
+
+        /**
+* Query rewrites were not successfully generated for this request. Only the
+* original query was used to retrieve the results.
+*/"OriginalQueryOnly": "originalQueryOnly"
     }
 
 /**
@@ -2141,6 +2238,39 @@ threshold direction will be chosen for higher @search.score.
 */"ml": "ml", /**
 * Punjabi
 */"pa": "pa"
+    }
+
+/**
+* Controls the cardinality of the output produced by the skill. Default is
+* 'oneToMany'
+*/
+    union DocumentIntelligenceLayoutSkillOutputMode {
+        string,
+
+        /**
+* Specify the deepest markdown header section to parse.
+*/"OneToMany": "oneToMany"
+    }
+
+/**
+* The depth of headers in the markdown output. Default is h6.
+*/
+    union DocumentIntelligenceLayoutSkillMarkdownHeaderDepth {
+        string,
+
+        /**
+* Header level 1.
+*/"H1": "h1", /**
+* Header level 2.
+*/"H2": "h2", /**
+* Header level 3.
+*/"H3": "h3", /**
+* Header level 4.
+*/"H4": "h4", /**
+* Header level 5.
+*/"H5": "h5", /**
+* Header level 6.
+*/"H6": "h6"
     }
 
 /**
@@ -3250,6 +3380,17 @@ model IndexingParametersConfiguration {
 * headers.
 */
 "firstLineContainsHeaders"?: boolean = true;
+/**
+* Specifies the submode that will determine whether a markdown file will be
+* parsed into exactly one search document or multiple search documents. Default
+* is `oneToMany`.
+*/
+"markdownParsingSubmode"?: MarkdownParsingSubmode = MarkdownParsingSubmode.`OneToMany`;
+/**
+* Specifies the max header depth that will be considered while grouping markdown
+* content. Default is `h6`.
+*/
+"markdownHeaderDepth"?: MarkdownHeaderDepth = MarkdownHeaderDepth.`h6`;
 /**
 * For JSON arrays, given a structured or semi-structured document, you can
 * specify a path to the array using this property.
@@ -4584,6 +4725,10 @@ model VectorSearchCompressionConfiguration {
 */
 "defaultOversampling"?: float64;
 /**
+* Contains the options for rescoring.
+*/
+"rescoringOptions"?: RescoringOptions;
+/**
 * The number of dimensions to truncate the vectors to. Truncating the vectors
 * reduces the size of the vectors and the amount of data that needs to be
 * transferred during search. This can save storage cost and improve search
@@ -4593,6 +4738,31 @@ model VectorSearchCompressionConfiguration {
 * truncation.
 */
 "truncationDimension"?: int32;
+}
+
+/**
+* Contains the options for rescoring.
+*/
+model RescoringOptions {
+/**
+* If set to true, after the initial search on the compressed vectors, the
+* similarity scores are recalculated using the full-precision vectors. This will
+* improve recall at the expense of latency.
+*/
+"enableRescoring"?: boolean = true;
+/**
+* Default oversampling factor. Oversampling retrieves a greater set of potential
+* documents to offset the resolution loss due to quantization. This increases the
+* set of results that will be rescored on full-precision vectors. Minimum value
+* is 1, meaning no oversampling (1x). This parameter can only be set when
+* 'enableRescoring' is true. Higher values improve recall at the expense of
+* latency.
+*/
+"defaultOversampling"?: float64;
+/**
+* Controls the storage method for original vectors. This setting is immutable.
+*/
+"rescoreStorageMethod"?: VectorSearchCompressionRescoreStorageMethod;
 }
 
 /**
@@ -4897,6 +5067,12 @@ model SearchDocumentsResult {
 @visibility("read")
 @encodedName("application/json", "@search.answers")
 "answers"?: QueryAnswerResult[];
+/**
+* Debug information that applies to the search results as a whole.
+*/
+@visibility("read")
+@encodedName("application/json", "@search.debugInfo")
+"debugInfo"?: DebugInfo;
 @doc("""
 Continuation JSON payload returned when the query can't return all the
 requested results in a single response. You can use this JSON along with
@@ -4935,6 +5111,12 @@ of the search response.
 @visibility("read")
 @encodedName("application/json", "@search.semanticPartialResponseType")
 "semanticPartialResponseType"?: SemanticSearchResultsType;
+/**
+* Type of query rewrite that was used to retrieve documents.
+*/
+@visibility("read")
+@encodedName("application/json", "@search.semanticQueryRewritesResultType")
+"semanticQueryRewritesResultType"?: SemanticQueryRewritesResultType;
 }
 
 /**
@@ -4950,6 +5132,14 @@ model FacetResult {
 */
 @visibility("read")
 "count"?: int64;
+/**
+* The nested facet query results for the search operation, organized as a
+* collection of buckets for each faceted field; null if the query did not contain
+* any nested facets.
+*/
+@visibility("read")
+@encodedName("application/json", "@search.facets")
+"facets"?: Record<FacetResult[]>;
 }
 
 /**
@@ -4981,6 +5171,45 @@ model QueryAnswerResult {
 */
 @visibility("read")
 "highlights"?: string;
+}
+
+/**
+* Contains debugging information that can be used to further explore your search
+* results.
+*/
+model DebugInfo {
+/**
+* Contains debugging information specific to query rewrites.
+*/
+@visibility("read")
+"queryRewrites"?: QueryRewritesDebugInfo;
+}
+
+/**
+* Contains debugging information specific to query rewrites.
+*/
+model QueryRewritesDebugInfo {
+/**
+* List of query rewrites generated for the text query.
+*/
+@visibility("read")
+"text"?: QueryRewritesValuesDebugInfo;
+/**
+* List of query rewrites generated for the vectorizable text queries.
+*/
+@visibility("read")
+"vectors"?: QueryRewritesValuesDebugInfo[];
+}
+
+/**
+* Contains debugging information specific to query rewrites.
+*/
+model QueryRewritesValuesDebugInfo {
+/**
+* List of query rewrites.
+*/
+@visibility("read")
+"rewrites"?: string[];
 }
 
 /**
@@ -5158,6 +5387,11 @@ model SearchRequest {
 * search response.
 */
 "captions"?: QueryCaptionType;
+/**
+* A value that specifies whether query rewrites should be generated to augment
+* the search query.
+*/
+"queryRewrites"?: QueryRewritesType;
 /**
 * The comma-separated list of field names used for semantic ranking.
 */
@@ -7380,6 +7614,49 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
 }
 
 /**
+* The account key of an Azure AI service resource that's attached to a skillset,
+* to be used with the resource's subdomain.
+*/
+model AIServicesAccountKey extends CognitiveServicesAccount {
+/**
+* The key used to provision the Azure AI service resource attached to a skillset.
+*/
+"key": string;
+/**
+* The subdomain url for the corresponding AI Service.
+*/
+"subdomainUrl": string;
+/**
+* A URI fragment specifying the type of Azure AI service resource attached to a
+* skillset.
+*/
+"@odata.type": "#Microsoft.Azure.Search.AIServicesByKey";
+}
+
+/**
+* The multi-region account of an Azure AI service resource that's attached to a
+* skillset.
+*/
+model AIServicesAccountIdentity extends CognitiveServicesAccount {
+/**
+* The user-assigned managed identity used for connections to AI Service. If not
+* specified, the system-assigned managed identity is used. On updates to the
+* skillset, if the identity is unspecified, the value remains unchanged. If set
+* to "none", the value of this property is cleared.
+*/
+"identity": SearchIndexerDataIdentity;
+/**
+* The subdomain url for the corresponding AI Service.
+*/
+"subdomainUrl": string;
+/**
+* A URI fragment specifying the type of Azure AI service resource attached to a
+* skillset.
+*/
+"@odata.type": "#Microsoft.Azure.Search.AIServicesByIdentity";
+}
+
+/**
 * An object that contains information about the matches that were found, and
 * related metadata.
 */
@@ -7952,6 +8229,26 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 }
 
 /**
+* A skill that extracts content and layout information (as markdown), via Azure
+* AI Services, from files within the enrichment pipeline.
+*/
+model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
+/**
+* Controls the cardinality of the output produced by the skill. Default is
+* 'oneToMany'.
+*/
+"outputMode"?: DocumentIntelligenceLayoutSkillOutputMode = DocumentIntelligenceLayoutSkillOutputMode.`OneToMany`;
+/**
+* The depth of headers in the markdown output. Default is h6.
+*/
+"markdownHeaderDepth"?: DocumentIntelligenceLayoutSkillMarkdownHeaderDepth = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.`H6`;
+/**
+* A URI fragment specifying the type of skill.
+*/
+"@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill";
+}
+
+/**
 * A skill that can call a Web API endpoint, allowing you to extend a skillset by
 * having it call your custom code.
 */
@@ -8109,6 +8406,11 @@ model VectorizableTextQuery extends VectorQuery {
 * The text to be vectorized to perform a vector search query.
 */
 "text": string;
+/**
+* Can be configured to let a generative model rewrite the query before sending it
+* to be vectorized.
+*/
+"queryRewrites"?: QueryRewritesType;
 /**
 * The kind of vector query being performed.
 */

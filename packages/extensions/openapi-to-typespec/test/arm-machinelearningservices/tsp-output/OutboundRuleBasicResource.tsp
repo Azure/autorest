@@ -30,21 +30,21 @@ interface OutboundRuleBasicResources {
   /**
    * Gets an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettingsRule_Get")
   get is ArmResourceRead<OutboundRuleBasicResource>;
 
   /**
    * Creates or updates an outbound rule in the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettingsRule_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OutboundRuleBasicResource>;
 
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,7 +54,7 @@ interface OutboundRuleBasicResources {
   /**
    * Lists the managed network outbound rules for a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettingsRule_List")
   list is ArmResourceListByParent<OutboundRuleBasicResource>;
 }
@@ -64,14 +64,6 @@ interface OutboundRuleBasicResources {
 );
 @@doc(OutboundRuleBasicResource.properties,
   "Outbound Rule for the managed network of a machine learning workspace."
-);
-@@encodedName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "Outbound Rule to be created or updated in the managed network of a machine learning workspace."

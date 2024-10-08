@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.Keyvault;
 
@@ -2113,6 +2115,7 @@ interface RoleDefinitionsOperations {
   /**
    * Deletes a custom role definition.
    */
+  @operationId("RoleDefinitions_Delete")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -2135,6 +2138,7 @@ interface RoleDefinitionsOperations {
   /**
    * Creates or updates a custom role definition.
    */
+  @operationId("RoleDefinitions_CreateOrUpdate")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
   createOrUpdate is Azure.Core.Foundations.Operation<
@@ -2164,6 +2168,7 @@ interface RoleDefinitionsOperations {
   /**
    * Get the specified role definition.
    */
+  @operationId("RoleDefinitions_Get")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -2186,6 +2191,7 @@ interface RoleDefinitionsOperations {
   /**
    * Get all role definitions that are applicable at scope and above.
    */
+  @operationId("RoleDefinitions_List")
   @route("/{scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -2211,6 +2217,7 @@ interface RoleAssignmentsOperations {
   /**
    * Deletes a role assignment.
    */
+  @operationId("RoleAssignments_Delete")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
   delete is Azure.Core.Foundations.Operation<
@@ -2233,6 +2240,7 @@ interface RoleAssignmentsOperations {
   /**
    * Creates a role assignment.
    */
+  @operationId("RoleAssignments_Create")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
   create is Azure.Core.Foundations.Operation<
@@ -2261,6 +2269,7 @@ interface RoleAssignmentsOperations {
   /**
    * Get the specified role assignment.
    */
+  @operationId("RoleAssignments_Get")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -2283,6 +2292,7 @@ interface RoleAssignmentsOperations {
   /**
    * Gets role assignments for a scope.
    */
+  @operationId("RoleAssignments_ListForScope")
   @route("/{scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
   listForScope is Azure.Core.Foundations.Operation<
@@ -2309,6 +2319,7 @@ interface HSMSecurityDomainOperations {
   /**
    * Retrieves the Security Domain download operation status
    */
+  @operationId("HSMSecurityDomain_DownloadPending")
   @route("/securitydomain/download/pending")
   @get
   downloadPending is Azure.Core.Foundations.Operation<
@@ -2320,6 +2331,7 @@ interface HSMSecurityDomainOperations {
    * Retrieves the Security Domain from the managed HSM. Calling this endpoint can
    * be used to activate a provisioned managed HSM resource.
    */
+  @operationId("HSMSecurityDomain_Download")
   @route("/securitydomain/download")
   @post
   download is Azure.Core.Foundations.Operation<
@@ -2330,6 +2342,7 @@ interface HSMSecurityDomainOperations {
   /**
    * Retrieve Security Domain transfer key
    */
+  @operationId("HSMSecurityDomain_TransferKey")
   @route("/securitydomain/upload")
   @get
   transferKey is Azure.Core.Foundations.Operation<{}, TransferKey>;
@@ -2337,6 +2350,7 @@ interface HSMSecurityDomainOperations {
   /**
    * Restore the provided Security Domain.
    */
+  @operationId("HSMSecurityDomain_Upload")
   @route("/securitydomain/upload")
   @post
   upload is Azure.Core.Foundations.Operation<
@@ -2347,6 +2361,7 @@ interface HSMSecurityDomainOperations {
   /**
    * Get Security Domain upload operation status
    */
+  @operationId("HSMSecurityDomain_UploadPending")
   @route("/securitydomain/upload/pending")
   @get
   uploadPending is Azure.Core.Foundations.Operation<

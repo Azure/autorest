@@ -30,9 +30,7 @@ interface RestorePointCollections {
    */
   get is ArmResourceRead<
     RestorePointCollection,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
        */
@@ -66,8 +64,6 @@ interface RestorePointCollections {
   /**
    * Gets the list of restore point collections in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RestorePointCollections_List")
   list is ArmResourceListByParent<RestorePointCollection>;
 
   /**
@@ -80,24 +76,8 @@ interface RestorePointCollections {
 @@doc(RestorePointCollection.properties,
   "The restore point collection properties."
 );
-@@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePointCollections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RestorePointCollections.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create or Update restore point collection operation."
-);
-@@encodedName(RestorePointCollections.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePointCollections.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(RestorePointCollections.update::parameters.properties,
   "Parameters supplied to the Update restore point collection operation."

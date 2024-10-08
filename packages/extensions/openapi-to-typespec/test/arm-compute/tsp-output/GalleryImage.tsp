@@ -54,8 +54,6 @@ interface GalleryImages {
   /**
    * List gallery image definitions in a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryImages_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }
 
@@ -65,24 +63,8 @@ interface GalleryImages {
 @@doc(GalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );
-@@encodedName(GalleryImages.createOrUpdate::parameters.resource,
-  "application/json",
-  "galleryImage"
-);
-@@extension(GalleryImages.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "galleryImage"
-);
 @@doc(GalleryImages.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery image operation."
-);
-@@encodedName(GalleryImages.update::parameters.properties,
-  "application/json",
-  "galleryImage"
-);
-@@extension(GalleryImages.update::parameters.properties,
-  "x-ms-client-name",
-  "galleryImage"
 );
 @@doc(GalleryImages.update::parameters.properties,
   "Parameters supplied to the update gallery image operation."

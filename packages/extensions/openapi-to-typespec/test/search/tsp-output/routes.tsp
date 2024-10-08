@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/openapi";
 
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 
 namespace Azure.Search;
@@ -15,6 +17,7 @@ interface DataSourcesOperations {
 /**
 * Creates a new datasource or updates a datasource if it already exists.
 */
+@operationId("DataSources_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchIndexerDataSource , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -50,6 +53,7 @@ interface DataSourcesOperations {
 /**
 * Deletes a datasource.
 */
+@operationId("DataSources_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SearchIndexerDataSource , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -74,6 +78,7 @@ interface DataSourcesOperations {
 /**
 * Retrieves a datasource definition.
 */
+@operationId("DataSources_Get")
 
 `get` is Azure.Core.ResourceRead<SearchIndexerDataSource , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -86,6 +91,7 @@ interface DataSourcesOperations {
 /**
 * Lists all datasources available for a search service.
 */
+@operationId("DataSources_List")
 @route("/datasources")
 @get op `list` is Azure.Core.Foundations.Operation<{/**
 * Selects which top-level properties of the data sources to retrieve. Specified
@@ -105,6 +111,7 @@ interface DataSourcesOperations {
 /**
 * Creates a new datasource.
 */
+@operationId("DataSources_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchIndexerDataSource , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -120,6 +127,7 @@ interface IndexersOperations {
 /**
 * Resets the change tracking state associated with an indexer.
 */
+@operationId("Indexers_Reset")
 @route("/indexers('{indexerName}')/search.reset")
 @post op `reset` is Azure.Core.Foundations.Operation<{/**
 * The name of the indexer to reset.
@@ -138,6 +146,7 @@ interface IndexersOperations {
 * Resets specific documents in the datasource to be selectively re-ingested by
 * the indexer.
 */
+@operationId("Indexers_ResetDocs")
 @route("/indexers('{indexerName}')/search.resetdocs")
 @post op `resetDocs` is Azure.Core.Foundations.Operation<{/**
 * The name of the indexer to reset documents for.
@@ -164,6 +173,7 @@ interface IndexersOperations {
 /**
 * Runs an indexer on-demand.
 */
+@operationId("Indexers_Run")
 @route("/indexers('{indexerName}')/search.run")
 @post op `run` is Azure.Core.Foundations.Operation<{/**
 * The name of the indexer to run.
@@ -181,6 +191,7 @@ interface IndexersOperations {
 /**
 * Creates a new indexer or updates an indexer if it already exists.
 */
+@operationId("Indexers_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchIndexer , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -221,6 +232,7 @@ interface IndexersOperations {
 /**
 * Deletes an indexer.
 */
+@operationId("Indexers_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SearchIndexer , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -245,6 +257,7 @@ interface IndexersOperations {
 /**
 * Retrieves an indexer definition.
 */
+@operationId("Indexers_Get")
 
 `get` is Azure.Core.ResourceRead<SearchIndexer , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -257,6 +270,7 @@ interface IndexersOperations {
 /**
 * Lists all indexers available for a search service.
 */
+@operationId("Indexers_List")
 @route("/indexers")
 @get op `list` is Azure.Core.Foundations.Operation<{/**
 * Selects which top-level properties of the indexers to retrieve. Specified as a
@@ -276,6 +290,7 @@ interface IndexersOperations {
 /**
 * Creates a new indexer.
 */
+@operationId("Indexers_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchIndexer , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -288,6 +303,7 @@ interface IndexersOperations {
 /**
 * Returns the current status and execution history of an indexer.
 */
+@operationId("Indexers_GetStatus")
 @route("/indexers('{indexerName}')/search.status")
 @get op `getStatus` is Azure.Core.Foundations.Operation<{/**
 * The name of the indexer for which to retrieve status.
@@ -309,6 +325,7 @@ interface SkillsetsOperations {
 * Creates a new skillset in a search service or updates the skillset if it
 * already exists.
 */
+@operationId("Skillsets_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchIndexerSkillset , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -349,6 +366,7 @@ interface SkillsetsOperations {
 /**
 * Deletes a skillset in a search service.
 */
+@operationId("Skillsets_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SearchIndexerSkillset , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -373,6 +391,7 @@ interface SkillsetsOperations {
 /**
 * Retrieves a skillset in a search service.
 */
+@operationId("Skillsets_Get")
 
 `get` is Azure.Core.ResourceRead<SearchIndexerSkillset , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -385,6 +404,7 @@ interface SkillsetsOperations {
 /**
 * List all skillsets in a search service.
 */
+@operationId("Skillsets_List")
 @route("/skillsets")
 @get op `list` is Azure.Core.Foundations.Operation<{/**
 * Selects which top-level properties of the skillsets to retrieve. Specified as a
@@ -404,6 +424,7 @@ interface SkillsetsOperations {
 /**
 * Creates a new skillset in a search service.
 */
+@operationId("Skillsets_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchIndexerSkillset , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -416,6 +437,7 @@ interface SkillsetsOperations {
 /**
 * Reset an existing skillset in a search service.
 */
+@operationId("Skillsets_ResetSkills")
 @route("/skillsets('{skillsetName}')/search.resetskills")
 @post op `resetSkills` is Azure.Core.Foundations.Operation<{/**
 * The name of the skillset to reset.
@@ -441,6 +463,7 @@ interface SynonymMapsOperations {
 /**
 * Creates a new synonym map or updates a synonym map if it already exists.
 */
+@operationId("SynonymMaps_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SynonymMap , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -471,6 +494,7 @@ interface SynonymMapsOperations {
 /**
 * Deletes a synonym map.
 */
+@operationId("SynonymMaps_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SynonymMap , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -495,6 +519,7 @@ interface SynonymMapsOperations {
 /**
 * Retrieves a synonym map definition.
 */
+@operationId("SynonymMaps_Get")
 
 `get` is Azure.Core.ResourceRead<SynonymMap , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -507,6 +532,7 @@ interface SynonymMapsOperations {
 /**
 * Lists all synonym maps available for a search service.
 */
+@operationId("SynonymMaps_List")
 @route("/synonymmaps")
 @get op `list` is Azure.Core.Foundations.Operation<{/**
 * Selects which top-level properties of the synonym maps to retrieve. Specified
@@ -526,6 +552,7 @@ interface SynonymMapsOperations {
 /**
 * Creates a new synonym map.
 */
+@operationId("SynonymMaps_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SynonymMap , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -541,6 +568,7 @@ interface IndexesOperations {
 /**
 * Creates a new search index.
 */
+@operationId("Indexes_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchIndex , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -553,6 +581,7 @@ interface IndexesOperations {
 /**
 * Lists all indexes available for a search service.
 */
+@operationId("Indexes_List")
 
 `list` is Azure.Core.ResourceList<SearchIndex , { parameters: {/**
 * Selects which top-level properties of the index definitions to retrieve.
@@ -572,6 +601,7 @@ interface IndexesOperations {
 /**
 * Creates a new search index or updates an index if it already exists.
 */
+@operationId("Indexes_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchIndex , { parameters: {/**
 * Allows new analyzers, tokenizers, token filters, or char filters to be added to
@@ -614,6 +644,7 @@ interface IndexesOperations {
 * index definition, data ingestion code, and a backup of the primary data source
 * in case you need to re-build the index.
 */
+@operationId("Indexes_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SearchIndex , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -638,6 +669,7 @@ interface IndexesOperations {
 /**
 * Retrieves an index definition.
 */
+@operationId("Indexes_Get")
 
 `get` is Azure.Core.ResourceRead<SearchIndex , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -651,6 +683,7 @@ interface IndexesOperations {
 * Returns statistics for the given index, including a document count and storage
 * usage.
 */
+@operationId("Indexes_GetStatistics")
 @route("/indexes('{indexName}')/search.stats")
 @get op `getStatistics` is Azure.Core.Foundations.Operation<{/**
 * The name of the index for which to retrieve statistics.
@@ -668,6 +701,7 @@ interface IndexesOperations {
 /**
 * Shows how an analyzer breaks text into tokens.
 */
+@operationId("Indexes_Analyze")
 @route("/indexes('{indexName}')/search.analyze")
 @post op `analyze` is Azure.Core.Foundations.Operation<{/**
 * The name of the index for which to test an analyzer.
@@ -693,6 +727,7 @@ interface AliasesOperations {
 /**
 * Creates a new search alias.
 */
+@operationId("Aliases_Create")
 
 `create` is Azure.Core.ResourceCreateWithServiceProvidedName<SearchAlias , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -705,6 +740,7 @@ interface AliasesOperations {
 /**
 * Lists all aliases available for a search service.
 */
+@operationId("Aliases_List")
 
 `list` is Azure.Core.ResourceList<SearchAlias , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -717,6 +753,7 @@ interface AliasesOperations {
 /**
 * Creates a new search alias or updates an alias if it already exists.
 */
+@operationId("Aliases_CreateOrUpdate")
 
 `createOrUpdate` is Azure.Core.ResourceCreateOrReplace<SearchAlias , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -749,6 +786,7 @@ interface AliasesOperations {
 * is permanent, with no recovery option. The mapped index is untouched by this
 * operation.
 */
+@operationId("Aliases_Delete")
 
 `delete` is Azure.Core.ResourceDelete<SearchAlias , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -773,6 +811,7 @@ interface AliasesOperations {
 /**
 * Retrieves an alias definition.
 */
+@operationId("Aliases_Get")
 
 `get` is Azure.Core.ResourceRead<SearchAlias , { parameters: {/**
 * The tracking ID sent with the request to help with debugging.
@@ -801,6 +840,7 @@ interface DocumentsOperations {
 /**
 * Queries the number of documents in the index.
 */
+@operationId("Documents_Count")
 @route("/docs/$count")
 @get op `count` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.
@@ -813,6 +853,7 @@ interface DocumentsOperations {
 /**
 * Searches for documents in the index.
 */
+@operationId("Documents_SearchGet")
 @route("/docs")
 @get op `searchGet` is Azure.Core.Foundations.Operation<{/**
 * A full-text search query expression; Use "*" or omit this parameter to match
@@ -983,6 +1024,9 @@ interface DocumentsOperations {
 * confidence threshold can be configured by appending the pipe character `|`
 * followed by the `threshold-<confidence threshold>` option after the answers
 * parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.
+* The maximum character length of answers can be configured by appending the pipe
+* character '|' followed by the 'count-<number of maximum character length>',
+* such as 'extractive|maxcharlength-600'.
 */
 @query("answers")
 "answers"?: QueryAnswerType
@@ -992,7 +1036,9 @@ interface DocumentsOperations {
 * When Captions is set to `extractive`, highlighting is enabled by default, and
 * can be configured by appending the pipe character `|` followed by the
 * `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults
-* to `None`.
+* to `None`. The maximum character length of captions can be configured by
+* appending the pipe character '|' followed by the 'count-<number of maximum
+* character length>', such as 'extractive|maxcharlength-600'.
 */
 @query("captions")
 "captions"?: QueryCaptionType
@@ -1004,6 +1050,16 @@ interface DocumentsOperations {
 */
 @query("semanticQuery")
 "semanticQuery"?: string
+/**
+* When QueryRewrites is set to `generative`, the query terms are sent to a
+* generate model which will produce 10 (default) rewrites to help increase the
+* recall of the request. The requested count can be configured by appending the
+* pipe character `|` followed by the `count-<number of rewrites>` option, such as
+* `generative|count-3`. Defaults to `None`. This parameter is only valid if the
+* query type is `semantic`.
+*/
+@query("queryRewrites")
+"queryRewrites"?: QueryRewritesType
 /**
 * Enables a debugging tool that can be used to further explore your search
 * results.
@@ -1019,7 +1075,7 @@ interface DocumentsOperations {
 * Improve search recall by spell-correcting individual search query terms.
 */
 @query("speller")
-"speller"?: Speller
+"speller"?: QuerySpellerType
 /**
 * The list of field names used for semantic ranking.
 */
@@ -1031,6 +1087,7 @@ interface DocumentsOperations {
 /**
 * Searches for documents in the index.
 */
+@operationId("Documents_SearchPost")
 @route("/docs/search.post.search")
 @post op `searchPost` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.
@@ -1048,6 +1105,7 @@ interface DocumentsOperations {
 /**
 * Retrieves a document from the index.
 */
+@operationId("Documents_Get")
 @route("/docs('{key}')")
 @get op `get` is Azure.Core.Foundations.Operation<{/**
 * The key of the document to retrieve.
@@ -1071,6 +1129,7 @@ interface DocumentsOperations {
 /**
 * Suggests documents in the index that match the given partial query text.
 */
+@operationId("Documents_SuggestGet")
 @route("/docs/search.suggest")
 @get op `suggestGet` is Azure.Core.Foundations.Operation<{/**
 * The search text to use to suggest documents. Must be at least 1 character, and
@@ -1158,6 +1217,7 @@ interface DocumentsOperations {
 /**
 * Suggests documents in the index that match the given partial query text.
 */
+@operationId("Documents_SuggestPost")
 @route("/docs/search.post.suggest")
 @post op `suggestPost` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.
@@ -1175,6 +1235,7 @@ interface DocumentsOperations {
 /**
 * Sends a batch of document write actions to the index.
 */
+@operationId("Documents_Index")
 @route("/docs/search.index")
 @post op `index` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.
@@ -1193,6 +1254,7 @@ interface DocumentsOperations {
 * Autocompletes incomplete query terms based on input text and matching terms in
 * the index.
 */
+@operationId("Documents_AutocompleteGet")
 @route("/docs/search.autocomplete")
 @get op `autocompleteGet` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.
@@ -1271,6 +1333,7 @@ interface DocumentsOperations {
 * Autocompletes incomplete query terms based on input text and matching terms in
 * the index.
 */
+@operationId("Documents_AutocompletePost")
 @route("/docs/search.post.autocomplete")
 @post op `autocompletePost` is Azure.Core.Foundations.Operation<{/**
 * The tracking ID sent with the request to help with debugging.

@@ -32,9 +32,7 @@ interface RestorePoints {
    */
   get is ArmResourceRead<
     RestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
        */
@@ -59,14 +57,6 @@ interface RestorePoints {
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@encodedName(RestorePoints.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePoints.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );

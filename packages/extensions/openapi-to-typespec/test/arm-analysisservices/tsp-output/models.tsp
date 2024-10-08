@@ -16,17 +16,29 @@ namespace Azure.ResourceManager.Analysis;
  */
 union State {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Paused: "Paused",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspending: "Suspending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pausing: "Pausing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resuming: "Resuming",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Preparing: "Preparing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Scaling: "Scaling",
 }
 
@@ -36,17 +48,29 @@ union State {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Paused: "Paused",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspending: "Suspending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pausing: "Pausing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resuming: "Resuming",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Preparing: "Preparing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Scaling: "Scaling",
 }
 
@@ -55,8 +79,11 @@ union ProvisioningState {
  */
 union SkuTier {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Development: "Development",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard: "Standard",
 }
 
@@ -65,7 +92,9 @@ union SkuTier {
  */
 union ManagedMode {
   integer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `0`: 0,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1`: 1,
 }
 
@@ -74,13 +103,16 @@ union ManagedMode {
  */
 union ServerMonitorMode {
   integer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `0`: 0,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1`: 1,
 }
 
 /**
  * How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ConnectionMode {
   All,
   ReadOnly,

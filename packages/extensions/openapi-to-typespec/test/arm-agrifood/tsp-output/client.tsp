@@ -4,6 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.AgFoodPlatform;
 
+@@clientName(DataManagerForAgricultures.update,
+  "DataManagerForAgricultures.update::parameters.properties",
+  "request"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DataManagerForAgriculture.properties);
 

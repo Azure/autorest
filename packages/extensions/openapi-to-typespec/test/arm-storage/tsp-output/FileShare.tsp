@@ -31,9 +31,7 @@ interface FileShares {
    */
   get is ArmResourceRead<
     FileShare,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
-
+    Parameters = {
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: stats. Should be passed as a string with delimiter ','.
        */
@@ -53,9 +51,7 @@ interface FileShares {
    */
   create is ArmResourceCreateOrReplaceSync<
     FileShare,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
-
+    Parameters = {
       /**
        * Optional, used to expand the properties within share's properties. Valid values are: snapshots. Should be passed as a string with delimiter ','
        */
@@ -76,9 +72,7 @@ interface FileShares {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     FileShare,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
-
+    Parameters = {
       /**
        * Optional, used to delete a snapshot.
        */
@@ -96,13 +90,9 @@ interface FileShares {
   /**
    * Lists all shares.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FileShares_List")
   list is ArmResourceListByParent<
     FileShare,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
-
+    Parameters = {
       /**
        * Optional. Specified maximum number of shares that can be included in the list.
        */
@@ -135,9 +125,7 @@ interface FileShares {
     FileShare,
     LeaseShareRequest,
     LeaseShareResponse,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FileShare>;
-
+    Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
        */
@@ -153,43 +141,11 @@ interface FileShares {
   "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );
 @@doc(FileShare.properties, "Properties of the file share.");
-@@encodedName(FileShares.create::parameters.resource,
-  "application/json",
-  "fileShare"
-);
-@@extension(FileShares.create::parameters.resource,
-  "x-ms-client-name",
-  "fileShare"
-);
 @@doc(FileShares.create::parameters.resource,
   "Properties of the file share to create."
-);
-@@encodedName(FileShares.update::parameters.properties,
-  "application/json",
-  "fileShare"
-);
-@@extension(FileShares.update::parameters.properties,
-  "x-ms-client-name",
-  "fileShare"
 );
 @@doc(FileShares.update::parameters.properties,
   "Properties to update for the file share."
 );
-@@encodedName(FileShares.restore::parameters.body,
-  "application/json",
-  "deletedShare"
-);
-@@extension(FileShares.restore::parameters.body,
-  "x-ms-client-name",
-  "deletedShare"
-);
 @@doc(FileShares.restore::parameters.body, "");
-@@encodedName(FileShares.lease::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(FileShares.lease::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(FileShares.lease::parameters.body, "Lease Share request body.");

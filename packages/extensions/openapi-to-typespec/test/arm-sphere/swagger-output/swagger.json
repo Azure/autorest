@@ -401,6 +401,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -434,14 +442,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -704,6 +704,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -737,14 +745,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -995,6 +995,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -1028,14 +1036,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1080,6 +1080,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -1113,14 +1121,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "body",
@@ -1174,6 +1174,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -1207,14 +1215,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1259,6 +1259,14 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -1292,14 +1300,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1738,6 +1738,22 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -1771,22 +1787,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "productName",
-            "in": "path",
-            "description": "Name of product.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -2299,6 +2299,30 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Filter the result list using the given expression",
@@ -2332,30 +2356,6 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "maxpagesize"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "productName",
-            "in": "path",
-            "description": "Name of product.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "deviceGroupName",
-            "in": "path",
-            "description": "Name of device group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {

@@ -31,14 +31,14 @@ interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IdentityProvider_Get")
   get is ArmResourceRead<IdentityProviderContract>;
 
   /**
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("IdentityProvider_GetEntityTag")
   getEntityTag(
@@ -51,13 +51,11 @@ interface IdentityProviderContracts {
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IdentityProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IdentityProviderContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -69,15 +67,13 @@ interface IdentityProviderContracts {
   /**
    * Updates an existing IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("IdentityProvider_Update")
   update is ArmCustomPatchSync<
     IdentityProviderContract,
     IdentityProviderUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -89,14 +85,12 @@ interface IdentityProviderContracts {
   /**
    * Deletes the specified identity provider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IdentityProviderContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -108,14 +102,14 @@ interface IdentityProviderContracts {
   /**
    * Lists a collection of Identity Provider configured in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IdentityProvider_ListByService")
   listByService is ArmResourceListByParent<IdentityProviderContract>;
 
   /**
    * Gets the client secret details of the Identity Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
@@ -128,24 +122,8 @@ interface IdentityProviderContracts {
 @@doc(IdentityProviderContract.properties,
   "Identity Provider contract properties."
 );
-@@encodedName(IdentityProviderContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(IdentityProviderContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(IdentityProviderContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(IdentityProviderContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(IdentityProviderContracts.update::parameters.properties,
   "Update parameters."

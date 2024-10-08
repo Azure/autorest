@@ -67,8 +67,6 @@ interface Snapshots {
   /**
    * Lists snapshots under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Snapshots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Snapshot>;
 
   /**
@@ -91,35 +89,11 @@ interface Snapshots {
   "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
 );
 @@doc(Snapshot.properties, "Snapshot resource properties.");
-@@encodedName(Snapshots.createOrUpdate::parameters.resource,
-  "application/json",
-  "snapshot"
-);
-@@extension(Snapshots.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "snapshot"
-);
 @@doc(Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@encodedName(Snapshots.update::parameters.properties,
-  "application/json",
-  "snapshot"
-);
-@@extension(Snapshots.update::parameters.properties,
-  "x-ms-client-name",
-  "snapshot"
-);
 @@doc(Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
-);
-@@encodedName(Snapshots.grantAccess::parameters.body,
-  "application/json",
-  "grantAccessData"
-);
-@@extension(Snapshots.grantAccess::parameters.body,
-  "x-ms-client-name",
-  "grantAccessData"
 );
 @@doc(Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."

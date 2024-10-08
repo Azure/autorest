@@ -37,9 +37,7 @@ interface Certificates {
    */
   listByCatalog is ArmResourceListByParent<
     Certificate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Certificate>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

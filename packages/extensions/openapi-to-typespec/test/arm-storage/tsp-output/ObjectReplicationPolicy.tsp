@@ -46,8 +46,6 @@ interface ObjectReplicationPolicies {
   /**
    * List the object replication policies associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<ObjectReplicationPolicy>;
 }
 
@@ -57,14 +55,6 @@ interface ObjectReplicationPolicies {
 );
 @@doc(ObjectReplicationPolicy.properties,
   "Returns the Storage Account Object Replication Policy."
-);
-@@encodedName(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
 );
 @@doc(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."

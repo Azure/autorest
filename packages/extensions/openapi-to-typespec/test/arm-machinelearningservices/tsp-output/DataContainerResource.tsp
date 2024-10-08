@@ -30,21 +30,21 @@ interface DataContainerResources {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_Get")
   get is ArmResourceRead<DataContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface DataContainerResources {
   /**
    * List Data containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_List")
   list is ArmResourceListByParent<
     DataContainerResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DataContainerResource>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -79,14 +77,6 @@ interface DataContainerResources {
 @@doc(DataContainerResource.name, "Container name.");
 @@doc(DataContainerResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(DataContainerResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(DataContainerResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(DataContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."

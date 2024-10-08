@@ -321,6 +321,24 @@
           },
           {
             "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$maxPageSize",
+            "in": "query",
+            "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 10,
+            "maximum": 1000
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token for getting next set of results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -349,7 +367,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
       "post": {
-        "operationId": "CheckNameAvailabilityOperations_CheckNameAvailability",
+        "operationId": "CheckNameAvailability_CheckNameAvailability",
         "description": "Checks the name availability of the resource with requested resource name.",
         "parameters": [
           {
@@ -386,7 +404,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
       "get": {
-        "operationId": "OperationResultsOperations_Get",
+        "operationId": "OperationResults_Get",
         "description": "Get operationResults for a Data Manager For Agriculture resource.",
         "parameters": [
           {
@@ -561,14 +579,13 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "request",
+            "name": "resource",
             "in": "body",
             "description": "Data Manager For Agriculture resource create or update request object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataManagerForAgriculture"
-            },
-            "x-ms-client-name": "request"
+            }
           }
         ],
         "responses": {
@@ -624,14 +641,13 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "name": "request",
+            "name": "properties",
             "in": "body",
             "description": "Request object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataManagerForAgricultureUpdateRequestModel"
-            },
-            "x-ms-client-name": "request"
+            }
           }
         ],
         "responses": {
@@ -738,6 +754,16 @@
             "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
             "name": "$maxPageSize",
             "in": "query",
             "description": "Maximum number of items needed (inclusive).\nMinimum = 10, Maximum = 1000, Default value = 50.",
@@ -754,16 +780,6 @@
             "description": "Continuation token for getting next set of results.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "dataManagerForAgricultureResourceName",
-            "in": "path",
-            "description": "DataManagerForAgriculture resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           }
         ],
         "responses": {
@@ -883,14 +899,13 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "description": "Body must be valid DataConnector request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataConnector"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -994,6 +1009,16 @@
             "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
             "name": "extensionIds",
             "in": "query",
             "description": "Installed extension ids.",
@@ -1032,16 +1057,6 @@
             "description": "Skip token for getting next set of results.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "dataManagerForAgricultureResourceName",
-            "in": "path",
-            "description": "DataManagerForAgriculture resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           }
         ],
         "responses": {
@@ -1157,14 +1172,13 @@
             "type": "string"
           },
           {
-            "name": "requestBody",
+            "name": "resource",
             "in": "body",
             "description": "Extension resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Extension"
-            },
-            "x-ms-client-name": "requestBody"
+            }
           }
         ],
         "responses": {
@@ -1389,14 +1403,13 @@
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "resource",
             "in": "body",
             "description": "Request object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "x-ms-client-name": "request"
+            }
           }
         ],
         "responses": {
@@ -1624,6 +1637,16 @@
             "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "dataManagerForAgricultureResourceName",
+            "in": "path",
+            "description": "DataManagerForAgriculture resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
             "name": "solutionIds",
             "in": "query",
             "description": "Installed Solution ids.",
@@ -1727,16 +1750,6 @@
             "description": "Skip token for getting next set of results.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "dataManagerForAgricultureResourceName",
-            "in": "path",
-            "description": "DataManagerForAgriculture resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           }
         ],
         "responses": {
@@ -1854,14 +1867,13 @@
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
-            "name": "requestBody",
+            "name": "resource",
             "in": "body",
             "description": "Solution resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Solution"
-            },
-            "x-ms-client-name": "requestBody"
+            }
           }
         ],
         "responses": {

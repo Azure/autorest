@@ -32,21 +32,21 @@ interface FileServicePropertiesOperationGroup {
   /**
    * Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FileServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<FileServiceProperties>;
 
   /**
    * Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FileServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<FileServiceProperties>;
 
   /**
    * List all file services in storage accounts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FileServices_List")
   list is ArmResourceListByParent<FileServiceProperties>;
 }
@@ -54,14 +54,6 @@ interface FileServicePropertiesOperationGroup {
 @@doc(FileServiceProperties.name, "");
 @@doc(FileServiceProperties.properties,
   "The properties of File services in storage account."
-);
-@@encodedName(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(FileServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules."

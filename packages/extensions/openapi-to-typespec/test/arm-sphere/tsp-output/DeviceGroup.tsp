@@ -53,9 +53,7 @@ interface DeviceGroups {
    */
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DeviceGroup>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

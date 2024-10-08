@@ -30,14 +30,14 @@ interface ApiVersionSetContracts {
   /**
    * Gets the details of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiVersionSet_Get")
   get is ArmResourceRead<ApiVersionSetContract>;
 
   /**
    * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiVersionSet_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface ApiVersionSetContracts {
   /**
    * Creates or Updates a Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiVersionSet_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ApiVersionSetContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface ApiVersionSetContracts {
   /**
    * Updates the details of the Api VersionSet specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("ApiVersionSet_Update")
   update is ArmCustomPatchSync<
     ApiVersionSetContract,
     ApiVersionSetUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface ApiVersionSetContracts {
   /**
    * Deletes specific Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiVersionSet_Delete")
   delete is ArmResourceDeleteSync<
     ApiVersionSetContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -107,13 +101,11 @@ interface ApiVersionSetContracts {
   /**
    * Lists a collection of API Version Sets in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiVersionSet_ListByService")
   listByService is ArmResourceListByParent<
     ApiVersionSetContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ApiVersionSetContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>
        */
@@ -142,24 +134,8 @@ interface ApiVersionSetContracts {
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ApiVersionSetContract.properties, "API VersionSet contract properties.");
-@@encodedName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiVersionSetContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@encodedName(ApiVersionSetContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(ApiVersionSetContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(ApiVersionSetContracts.update::parameters.properties,
   "Update parameters."

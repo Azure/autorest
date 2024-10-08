@@ -38,9 +38,7 @@ interface VirtualMachineScaleSetExtensions {
    */
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -74,8 +72,6 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * Gets a list of all extensions in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetExtensions_List")
   list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 
@@ -85,24 +81,8 @@ interface VirtualMachineScaleSetExtensions {
 @@doc(VirtualMachineScaleSetExtension.properties,
   "Describes the properties of a Virtual Machine Scale Set Extension."
 );
-@@encodedName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "extensionParameters"
-);
 @@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."
-);
-@@encodedName(VirtualMachineScaleSetExtensions.update::parameters.properties,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineScaleSetExtensions.update::parameters.properties,
-  "x-ms-client-name",
-  "extensionParameters"
 );
 @@doc(VirtualMachineScaleSetExtensions.update::parameters.properties,
   "Parameters supplied to the Update VM scale set Extension operation."

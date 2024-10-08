@@ -52,13 +52,9 @@ interface BlobContainers {
   /**
    * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("BlobContainers_List")
   list is ArmResourceListByParent<
     BlobContainer,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BlobContainer>;
-
+    Parameters = {
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
        */
@@ -110,56 +106,16 @@ interface BlobContainers {
   "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number."
 );
 @@doc(BlobContainer.properties, "Properties of the blob container.");
-@@encodedName(BlobContainers.create::parameters.resource,
-  "application/json",
-  "blobContainer"
-);
-@@extension(BlobContainers.create::parameters.resource,
-  "x-ms-client-name",
-  "blobContainer"
-);
 @@doc(BlobContainers.create::parameters.resource,
   "Properties of the blob container to create."
-);
-@@encodedName(BlobContainers.update::parameters.properties,
-  "application/json",
-  "blobContainer"
-);
-@@extension(BlobContainers.update::parameters.properties,
-  "x-ms-client-name",
-  "blobContainer"
 );
 @@doc(BlobContainers.update::parameters.properties,
   "Properties to update for the blob container."
 );
-@@encodedName(BlobContainers.setLegalHold::parameters.body,
-  "application/json",
-  "LegalHold"
-);
-@@extension(BlobContainers.setLegalHold::parameters.body,
-  "x-ms-client-name",
-  "LegalHold"
-);
 @@doc(BlobContainers.setLegalHold::parameters.body,
   "The LegalHold property that will be set to a blob container."
 );
-@@encodedName(BlobContainers.clearLegalHold::parameters.body,
-  "application/json",
-  "LegalHold"
-);
-@@extension(BlobContainers.clearLegalHold::parameters.body,
-  "x-ms-client-name",
-  "LegalHold"
-);
 @@doc(BlobContainers.clearLegalHold::parameters.body,
   "The LegalHold property that will be clear from a blob container."
-);
-@@encodedName(BlobContainers.lease::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(BlobContainers.lease::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(BlobContainers.lease::parameters.body, "Lease Container request body.");

@@ -30,18 +30,18 @@ interface SharedGalleries {
   /**
    * Get a shared gallery by subscription id or tenant id.
    */
-  get is ArmResourceRead<SharedGallery>;
+  get is ArmResourceRead<
+    SharedGallery,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List shared galleries by subscription id or tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SharedGalleries_List")
   list is ArmResourceListByParent<
     SharedGallery,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
        */

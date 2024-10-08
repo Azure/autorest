@@ -30,7 +30,10 @@ interface CommunityGalleries {
   /**
    * Get a community gallery by gallery public name.
    */
-  get is ArmResourceRead<CommunityGallery>;
+  get is ArmResourceRead<
+    CommunityGallery,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(CommunityGallery.name, "The public name of the community gallery.");

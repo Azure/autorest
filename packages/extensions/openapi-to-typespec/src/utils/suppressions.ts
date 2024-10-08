@@ -2,6 +2,14 @@ import { ChoiceSchema, Property, Schema, SealedChoiceSchema } from "@autorest/co
 import { WithSuppressDirective } from "../interfaces";
 import { isChoiceSchema, isSealedChoiceSchema, isDictionarySchema, isStringSchema } from "./schemas";
 
+export function generateSuppressionForDocumentRequired(): string {
+  return `#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"`;
+}
+
+export function generateSuppressionForNoEnum(): string {
+  return `#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"`;
+}
+
 export function getPropertySuppressions(propertySchema: Property): WithSuppressDirective[] | undefined {
   return isDictionarySchema(propertySchema.schema) ? getSuppressionsForRecordProperty() : undefined;
 }

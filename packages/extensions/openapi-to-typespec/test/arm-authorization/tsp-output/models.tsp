@@ -17,10 +17,15 @@ namespace Azure.ResourceManager.Authorization;
  */
 union PrincipalType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Group: "Group",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ServicePrincipal: "ServicePrincipal",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ForeignGroup: "ForeignGroup",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Device: "Device",
 }
 
@@ -29,7 +34,9 @@ union PrincipalType {
  */
 union RoleType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   BuiltInRole: "BuiltInRole",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CustomRole: "CustomRole",
 }
 
@@ -38,7 +45,9 @@ union RoleType {
  */
 union AssignmentType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Activated: "Activated",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Assigned: "Assigned",
 }
 
@@ -47,8 +56,11 @@ union AssignmentType {
  */
 union RoleManagementScheduleMemberType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Inherited: "Inherited",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Direct: "Direct",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Group: "Group",
 }
 
@@ -57,27 +69,49 @@ union RoleManagementScheduleMemberType {
  */
 union RoleManagementScheduleStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingEvaluation: "PendingEvaluation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Granted: "Granted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Denied: "Denied",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingProvisioning: "PendingProvisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioned: "Provisioned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingRevocation: "PendingRevocation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Revoked: "Revoked",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingApprovalProvisioning: "PendingApprovalProvisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingApproval: "PendingApproval",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   FailedAsResourceIsLocked: "FailedAsResourceIsLocked",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingAdminDecision: "PendingAdminDecision",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminApproved: "AdminApproved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminDenied: "AdminDenied",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TimedOut: "TimedOut",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ProvisioningStarted: "ProvisioningStarted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Invalid: "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingScheduleCreation: "PendingScheduleCreation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ScheduleCreated: "ScheduleCreated",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PendingExternalProvisioning: "PendingExternalProvisioning",
 }
 
@@ -86,8 +120,11 @@ union RoleManagementScheduleStatus {
  */
 union ScopeType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   subscription: "subscription",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   managementgroup: "managementgroup",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   resourcegroup: "resourcegroup",
 }
 
@@ -96,14 +133,23 @@ union ScopeType {
  */
 union RoleManagementScheduleRequestType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminAssign: "AdminAssign",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminRemove: "AdminRemove",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminUpdate: "AdminUpdate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminExtend: "AdminExtend",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AdminRenew: "AdminRenew",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SelfActivate: "SelfActivate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SelfDeactivate: "SelfDeactivate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SelfExtend: "SelfExtend",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SelfRenew: "SelfRenew",
 }
 
@@ -112,8 +158,11 @@ union RoleManagementScheduleRequestType {
  */
 union RoleManagementScheduleExpirationType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AfterDuration: "AfterDuration",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AfterDateTime: "AfterDateTime",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NoExpiration: "NoExpiration",
 }
 
@@ -122,10 +171,15 @@ union RoleManagementScheduleExpirationType {
  */
 union RoleManagementPolicyRuleType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RoleManagementPolicyApprovalRule: "RoleManagementPolicyApprovalRule",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RoleManagementPolicyAuthenticationContextRule: "RoleManagementPolicyAuthenticationContextRule",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RoleManagementPolicyEnablementRule: "RoleManagementPolicyEnablementRule",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RoleManagementPolicyExpirationRule: "RoleManagementPolicyExpirationRule",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RoleManagementPolicyNotificationRule: "RoleManagementPolicyNotificationRule",
 }
 
@@ -134,7 +188,9 @@ union RoleManagementPolicyRuleType {
  */
 union RoleManagementAssignmentLevel {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Assignment: "Assignment",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Eligibility: "Eligibility",
 }
 
@@ -143,9 +199,13 @@ union RoleManagementAssignmentLevel {
  */
 union ApprovalMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SingleStage: "SingleStage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Serial: "Serial",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Parallel: "Parallel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NoApproval: "NoApproval",
 }
 
@@ -154,7 +214,9 @@ union ApprovalMode {
  */
 union UserType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Group: "Group",
 }
 
@@ -163,8 +225,11 @@ union UserType {
  */
 union EnablementRules {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MultiFactorAuthentication: "MultiFactorAuthentication",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Justification: "Justification",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Ticketing: "Ticketing",
 }
 
@@ -173,6 +238,7 @@ union EnablementRules {
  */
 union NotificationDeliveryMechanism {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Email: "Email",
 }
 
@@ -181,8 +247,11 @@ union NotificationDeliveryMechanism {
  */
 union NotificationLevel {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Critical: "Critical",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   All: "All",
 }
 
@@ -191,8 +260,11 @@ union NotificationLevel {
  */
 union RecipientType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Requestor: "Requestor",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Approver: "Approver",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Admin: "Admin",
 }
 

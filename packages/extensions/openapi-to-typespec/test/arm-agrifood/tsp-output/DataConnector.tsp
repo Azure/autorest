@@ -47,13 +47,9 @@ interface DataConnectors {
   /**
    * Lists the Data Connector Credentials for MADMA instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DataConnectors_List")
   list is ArmResourceListByParent<
     DataConnector,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DataConnector>;
-
+    Parameters = {
       /**
        * Maximum number of items needed (inclusive).
        * Minimum = 10, Maximum = 1000, Default value = 50.
@@ -76,14 +72,6 @@ interface DataConnectors {
 @@minLength(DataConnector.name, 1);
 @@doc(DataConnector.name, "Connector name.");
 @@doc(DataConnector.properties, "DataConnector Properties.");
-@@encodedName(DataConnectors.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(DataConnectors.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(DataConnectors.createOrUpdate::parameters.resource,
   "Body must be valid DataConnector request."
 );

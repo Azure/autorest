@@ -5,7 +5,7 @@ import { TypespecEnum, TypespecProgram } from "../interfaces";
 import { getOptions } from "../options";
 import { formatTypespecFile } from "../utils/format";
 import { getModelsImports } from "../utils/imports";
-import { getNamespace, getNamespaceStatement } from "../utils/namespace";
+import { getNamespaceStatement } from "../utils/namespace";
 
 export async function emitModels(filePath: string, program: TypespecProgram): Promise<void> {
   const content = generateModels(program);
@@ -23,38 +23,13 @@ function generateModels(program: TypespecProgram) {
     "\n",
   );
 
-  const isArm = getOptions().isArm;
-
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
-  return [
-    imports,
-    "\n",
-    namespaces,
-    "\n",
-    getNamespaceStatement(program),
-    isArm && containsListOperation(program)
-      ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n"
-      : "\n",
-    enums,
-    "\n",
-    objects,
-  ].join("\n");
+  return [imports, "\n", namespaces, "\n", getNamespaceStatement(program), "\n", enums, "\n", objects].join("\n");
 }
 
 function flattenEnums(enums: TypespecEnum[]) {
   return enums.reduce<string[]>((a, c) => {
     return [...a, ...generateEnums(c)];
   }, []);
-}
-
-function containsListOperation(program: TypespecProgram): boolean {
-  const providerNamespace = getNamespace(program);
-  const listOperationRoute = `/providers/${providerNamespace}/operations`;
-  return (
-    program.operationGroups
-      .flatMap((g) => g.operations)
-      .map((o) => o.route)
-      .find((r) => r === listOperationRoute) !== undefined
-  );
 }

@@ -28,29 +28,35 @@ interface RoleDefinitions {
   /**
    * Get role definition by name (GUID).
    */
-  get is ArmResourceRead<RoleDefinition>;
+  get is ArmResourceRead<
+    RoleDefinition,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Creates or updates a role definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<RoleDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    RoleDefinition,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Deletes a role definition.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<RoleDefinition>;
+  delete is ArmResourceDeleteSync<
+    RoleDefinition,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Get all role definitions that are applicable at scope and above.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleDefinitions_List")
   list is ArmResourceListByParent<
     RoleDefinition,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
        */
@@ -62,14 +68,6 @@ interface RoleDefinitions {
 
 @@doc(RoleDefinition.name, "The ID of the role definition.");
 @@doc(RoleDefinition.properties, "Role definition properties.");
-@@encodedName(RoleDefinitions.createOrUpdate::parameters.resource,
-  "application/json",
-  "roleDefinition"
-);
-@@extension(RoleDefinitions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "roleDefinition"
-);
 @@doc(RoleDefinitions.createOrUpdate::parameters.resource,
   "The values for the role definition."
 );

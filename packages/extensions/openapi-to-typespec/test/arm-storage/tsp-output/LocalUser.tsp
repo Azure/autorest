@@ -45,8 +45,6 @@ interface LocalUsers {
   /**
    * List the local users associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("LocalUsers_List")
   list is ArmResourceListByParent<LocalUser>;
 
   /**
@@ -70,14 +68,6 @@ interface LocalUsers {
   "The name of local user. The username must contain lowercase letters and numbers only. It must be unique only within the storage account."
 );
 @@doc(LocalUser.properties, "Storage account local user properties.");
-@@encodedName(LocalUsers.createOrUpdate::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(LocalUsers.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
 @@doc(LocalUsers.createOrUpdate::parameters.resource,
   "The local user associated with a storage account."
 );

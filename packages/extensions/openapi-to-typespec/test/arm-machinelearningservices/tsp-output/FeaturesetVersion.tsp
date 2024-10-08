@@ -48,13 +48,9 @@ interface FeaturesetVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FeaturesetVersions_List")
   list is ArmResourceListByParent<
     FeaturesetVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetVersion>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -121,9 +117,7 @@ interface FeaturesetVersions {
     FeaturesetVersion,
     void,
     FeaturesetJobArmPaginatedResult,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetVersion>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -154,14 +148,6 @@ interface FeaturesetVersions {
 @@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
 @@doc(FeaturesetVersion.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(FeaturesetVersions.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(FeaturesetVersions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(FeaturesetVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."

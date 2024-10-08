@@ -31,13 +31,11 @@ interface PolicyContracts {
   /**
    * Get the policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_Get")
   get is ArmResourceRead<
     PolicyContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
-
+    Parameters = {
       /**
        * Policy Export Format.
        */
@@ -49,7 +47,7 @@ interface PolicyContracts {
   /**
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiOperationPolicy_GetEntityTag")
   getEntityTag(
@@ -62,13 +60,11 @@ interface PolicyContracts {
   /**
    * Creates or updates policy configuration for the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PolicyContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -80,14 +76,12 @@ interface PolicyContracts {
   /**
    * Deletes the policy configuration at the Api Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiOperationPolicy_Delete")
   delete is ArmResourceDeleteSync<
     PolicyContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<PolicyContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -99,21 +93,13 @@ interface PolicyContracts {
   /**
    * Get the list of policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_ListByOperation")
   listByOperation is ArmResourceListByParent<PolicyContract>;
 }
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");
 @@doc(PolicyContract.properties, "Properties of the Policy.");
-@@encodedName(PolicyContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(PolicyContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(PolicyContracts.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );

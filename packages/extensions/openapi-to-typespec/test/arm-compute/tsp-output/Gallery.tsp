@@ -29,9 +29,7 @@ interface Galleries {
    */
   get is ArmResourceRead<
     Gallery,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Gallery>;
-
+    Parameters = {
       /**
        * The select expression to apply on the operation.
        */
@@ -68,8 +66,6 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Galleries_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Gallery>;
 
   /**
@@ -80,7 +76,7 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,
@@ -93,35 +89,11 @@ interface Galleries {
 @@doc(Gallery.properties,
   "Describes the properties of a Shared Image Gallery."
 );
-@@encodedName(Galleries.createOrUpdate::parameters.resource,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "gallery"
-);
 @@doc(Galleries.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Shared Image Gallery operation."
 );
-@@encodedName(Galleries.update::parameters.properties,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.update::parameters.properties,
-  "x-ms-client-name",
-  "gallery"
-);
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
-);
-@@encodedName(Galleries.gallerySharingProfileUpdate::parameters.body,
-  "application/json",
-  "sharingUpdate"
-);
-@@extension(Galleries.gallerySharingProfileUpdate::parameters.body,
-  "x-ms-client-name",
-  "sharingUpdate"
 );
 @@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."

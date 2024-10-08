@@ -14,6 +14,8 @@ export async function emitMain(
   const { isArm } = getOptions();
   const content = `${getHeaders()}\n${
     isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)
+  }${
+    isArm && program.containsListOperation ? "\n\ninterface Operations extends Azure.ResourceManager.Operations {}" : ""
   }`;
   const session = getSession();
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });

@@ -55,9 +55,7 @@ interface VirtualMachineScaleSets {
    */
   get is ArmResourceRead<
     VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation
        */
@@ -88,9 +86,7 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
        */
@@ -102,8 +98,6 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of all VM scale sets under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSets_List")
   list is ArmResourceListByParent<VirtualMachineScaleSet>;
 
   /**
@@ -118,9 +112,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
@@ -136,9 +128,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
@@ -154,9 +144,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
@@ -240,9 +228,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     void,
     RecoveryWalkResponse,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The platform update domain for which a manual recovery walk is requested
        */
@@ -284,21 +270,21 @@ interface VirtualMachineScaleSets {
   /**
    * Cancels the current virtual machine scale set rolling upgrade.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
   startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
@@ -348,7 +334,7 @@ interface VirtualMachineScaleSets {
    * Gets list of OS upgrades on a VM scale set instance.
    */
   // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get
@@ -370,156 +356,44 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSet.properties,
   "Describes the properties of a Virtual Machine Scale Set."
 );
-@@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "The scale set object."
-);
-@@encodedName(VirtualMachineScaleSets.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
-@@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.deallocate::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.deallocate::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.powerOff::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.powerOff::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.restart::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.restart::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.restart::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.start::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.start::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.redeploy::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.redeploy::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
-  "application/json",
-  "vmScaleSetReimageInput"
-);
-@@extension(VirtualMachineScaleSets.reimage::parameters.body,
-  "x-ms-client-name",
-  "vmScaleSetReimageInput"
-);
 @@doc(VirtualMachineScaleSets.reimage::parameters.body,
   "Parameters for Reimaging VM ScaleSet."
-);
-@@encodedName(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "The input object for ConvertToSinglePlacementGroup API."
-);
-@@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "The input object for SetOrchestrationServiceState API."

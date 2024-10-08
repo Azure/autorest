@@ -2,6 +2,7 @@ export interface TypespecProgram {
   models: Models;
   operationGroups: TypespecOperationGroup[];
   serviceInformation: ServiceInformation;
+  containsListOperation: boolean;
 }
 
 export interface TypespecOptions {
@@ -45,6 +46,7 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   operationId?: string;
   examples?: Record<string, Record<string, unknown>>;
   clientDecorators?: TypespecDecorator[];
+  decorators?: TypespecDecorator[];
 }
 
 export type ResourceKind =

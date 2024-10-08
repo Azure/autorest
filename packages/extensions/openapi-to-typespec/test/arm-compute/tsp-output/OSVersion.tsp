@@ -47,16 +47,22 @@ interface OSVersions {
   /**
    * Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceOperatingSystems_GetOSVersion")
-  getOSVersion is ArmResourceRead<OSVersion>;
+  getOSVersion is ArmResourceRead<
+    OSVersion,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceOperatingSystems_ListOSVersions")
-  listOSVersions is ArmResourceListByParent<OSVersion>;
+  listOSVersions is ArmResourceListByParent<
+    OSVersion,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(OSVersion.name, "Name of the OS version.");

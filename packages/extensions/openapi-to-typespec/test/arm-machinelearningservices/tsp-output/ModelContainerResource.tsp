@@ -30,21 +30,21 @@ interface ModelContainerResources {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_Get")
   get is ArmResourceRead<ModelContainerResource>;
 
   /**
    * Create or update model container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ModelContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface ModelContainerResources {
   /**
    * List model containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_List")
   list is ArmResourceListByParent<
     ModelContainerResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ModelContainerResource>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -79,14 +77,6 @@ interface ModelContainerResources {
 @@doc(ModelContainerResource.name, "Container name. This is case-sensitive.");
 @@doc(ModelContainerResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(ModelContainerResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(ModelContainerResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(ModelContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."

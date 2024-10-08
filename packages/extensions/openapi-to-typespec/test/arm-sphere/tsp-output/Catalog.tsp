@@ -67,9 +67,7 @@ interface Catalogs {
     Catalog,
     void,
     ResourceListResult<Deployment>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -103,9 +101,7 @@ interface Catalogs {
     Catalog,
     ListDeviceGroupsRequest,
     ResourceListResult<DeviceGroup>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -139,9 +135,7 @@ interface Catalogs {
     Catalog,
     void,
     PagedDeviceInsight,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -175,9 +169,7 @@ interface Catalogs {
     Catalog,
     void,
     ResourceListResult<Device>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

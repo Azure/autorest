@@ -55,14 +55,21 @@ interface AvailabilitySets {
   /**
    * Lists all availability sets in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AvailabilitySets_List")
   list is ArmResourceListByParent<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a subscription.
    */
-  listBySubscription is ArmListBySubscription<AvailabilitySet>;
+  listBySubscription is ArmListBySubscription<
+    AvailabilitySet,
+    Parameters = {
+      /**
+       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
 
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
@@ -86,24 +93,8 @@ interface AvailabilitySets {
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
 @@doc(AvailabilitySet.properties, "The instance view of a resource.");
-@@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(AvailabilitySets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
-);
-@@encodedName(AvailabilitySets.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(AvailabilitySets.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AvailabilitySets.update::parameters.properties,
   "Parameters supplied to the Update Availability Set operation."

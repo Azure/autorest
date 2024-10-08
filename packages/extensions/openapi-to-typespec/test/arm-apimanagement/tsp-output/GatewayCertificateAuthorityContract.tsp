@@ -30,14 +30,14 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Get assigned Gateway Certificate Authority details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayCertificateAuthority_Get")
   get is ArmResourceRead<GatewayCertificateAuthorityContract>;
 
   /**
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("GatewayCertificateAuthority_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Remove relationship between Certificate Authority and Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Lists the collection of Certificate Authorities for the specified Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayCertificateAuthorityContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>
        */
@@ -123,14 +117,6 @@ interface GatewayCertificateAuthorityContracts {
 );
 @@doc(GatewayCertificateAuthorityContract.properties,
   "Gateway certificate authority details."
-);
-@@encodedName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   ""

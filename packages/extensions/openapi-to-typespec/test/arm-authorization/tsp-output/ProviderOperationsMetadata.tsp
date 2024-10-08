@@ -48,9 +48,8 @@ interface ProviderOperationsMetadataOperationGroup {
    */
   get is ArmResourceRead<
     ProviderOperationsMetadata,
-    {
-      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
-
+    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
       /**
        * Specifies whether to expand the values.
        */
@@ -62,13 +61,10 @@ interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for all resource providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
-    {
-      ...Azure.ResourceManager.Foundations.TenantBaseParameters;
-
+    Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
       /**
        * Specifies whether to expand the values.
        */

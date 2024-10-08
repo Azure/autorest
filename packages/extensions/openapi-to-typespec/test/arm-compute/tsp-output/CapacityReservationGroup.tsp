@@ -35,9 +35,7 @@ interface CapacityReservationGroups {
    */
   get is ArmResourceRead<
     CapacityReservationGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
@@ -69,13 +67,9 @@ interface CapacityReservationGroups {
   /**
    * Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CapacityReservationGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
        */
@@ -87,7 +81,16 @@ interface CapacityReservationGroups {
   /**
    * Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
-  listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
+  listBySubscription is ArmListBySubscription<
+    CapacityReservationGroup,
+    Parameters = {
+      /**
+       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
+    }
+  >;
 }
 
 @@doc(CapacityReservationGroup.name,
@@ -96,24 +99,8 @@ interface CapacityReservationGroups {
 @@doc(CapacityReservationGroup.properties,
   "capacity reservation group Properties."
 );
-@@encodedName(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CapacityReservationGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation Group."
-);
-@@encodedName(CapacityReservationGroups.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservationGroups.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CapacityReservationGroups.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation Group operation."
