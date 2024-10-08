@@ -52,8 +52,8 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
 
   const armResources = isArm
     ? codeModel.schemas.objects
-      ?.filter((o) => isResourceSchema(o))
-      .map((o) => transformTspArmResource(o as ArmResourceSchema)) ?? []
+        ?.filter((o) => isResourceSchema(o))
+        .map((o) => transformTspArmResource(o as ArmResourceSchema)) ?? []
     : [];
 
   const serviceInformation = transformServiceInformation(codeModel);
@@ -76,9 +76,10 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
       armResources,
     },
     operationGroups: typespecOperationGroups,
-    containsListOperation: codeModel.operationGroups
-      .flatMap((g) => g.operations)
-      .map((o) => o.requests?.[0].protocol.http?.path)
-      .find((r) => r === listOperationRoute) !== undefined
+    containsListOperation:
+      codeModel.operationGroups
+        .flatMap((g) => g.operations)
+        .map((o) => o.requests?.[0].protocol.http?.path)
+        .find((r) => r === listOperationRoute) !== undefined,
   };
 }

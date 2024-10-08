@@ -12,9 +12,11 @@ export async function emitMain(
   metadata: Metadata | undefined,
 ): Promise<void> {
   const { isArm } = getOptions();
-  const content = `${getHeaders()}\n${isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)
-    }${isArm && program.containsListOperation ? "\n\ninterface Operations extends Azure.ResourceManager.Operations {}"
-      : ""}`;
+  const content = `${getHeaders()}\n${
+    isArm ? getArmServiceInformation(program, metadata!) : getServiceInformation(program)
+  }${
+    isArm && program.containsListOperation ? "\n\ninterface Operations extends Azure.ResourceManager.Operations {}" : ""
+  }`;
   const session = getSession();
   session.writeFile({ filename: filePath, content: await formatTypespecFile(content, filePath) });
 }
