@@ -74,7 +74,8 @@ interface VirtualMachineRunCommands {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = VirtualMachineRunCommandsListResult
   >;
 }
 

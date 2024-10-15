@@ -70,7 +70,8 @@ interface EnvironmentContainerResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = EnvironmentContainerResourceArmPaginatedResult
   >;
 }
 

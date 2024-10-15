@@ -67,12 +67,18 @@ interface ProximityPlacementGroups {
   /**
    * Lists all proximity placement groups in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
+  listByResourceGroup is ArmResourceListByParent<
+    ProximityPlacementGroup,
+    Response = ProximityPlacementGroupListResult
+  >;
 
   /**
    * Lists all proximity placement groups in a subscription.
    */
-  listBySubscription is ArmListBySubscription<ProximityPlacementGroup>;
+  listBySubscription is ArmListBySubscription<
+    ProximityPlacementGroup,
+    Response = ProximityPlacementGroupListResult
+  >;
 }
 
 @@doc(ProximityPlacementGroup.name,

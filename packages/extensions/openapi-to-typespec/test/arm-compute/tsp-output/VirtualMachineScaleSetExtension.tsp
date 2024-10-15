@@ -72,7 +72,10 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * Gets a list of all extensions in a VM scale set.
    */
-  list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
+  list is ArmResourceListByParent<
+    VirtualMachineScaleSetExtension,
+    Response = VirtualMachineScaleSetExtensionListResult
+  >;
 }
 
 @@doc(VirtualMachineScaleSetExtension.name,

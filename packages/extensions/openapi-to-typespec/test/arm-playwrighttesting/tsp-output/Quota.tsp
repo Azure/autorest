@@ -40,7 +40,8 @@ interface Quotas {
    */
   listBySubscription is ArmResourceListByParent<
     Quota,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = QuotaListResult
   >;
 }
 

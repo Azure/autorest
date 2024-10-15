@@ -53,8 +53,13 @@ interface ApiManagementServiceResources {
    * Creates or updates an API Management service. This is long running operation and could take several minutes to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("ApiManagementService_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiManagementServiceResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ApiManagementServiceResource,
+    Response = ArmResourceCreatedResponse<ApiManagementServiceResource> | ArmResourceUpdatedResponse<ApiManagementServiceResource> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Updates an existing API Management service.
@@ -82,14 +87,20 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<ApiManagementServiceResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    ApiManagementServiceResource,
+    Response = ApiManagementServiceListResult
+  >;
 
   /**
    * Lists all API Management services within an Azure subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_List")
-  list is ArmListBySubscription<ApiManagementServiceResource>;
+  list is ArmListBySubscription<
+    ApiManagementServiceResource,
+    Response = ApiManagementServiceListResult
+  >;
 
   /**
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
@@ -241,7 +252,7 @@ interface ApiManagementServiceResources {
     @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
     @path
     serviceName: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<NetworkStatusContractByLocation[]> | ErrorResponse;
 
   /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.

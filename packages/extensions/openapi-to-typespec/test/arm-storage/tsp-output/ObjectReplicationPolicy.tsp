@@ -26,27 +26,38 @@ model ObjectReplicationPolicy
 }
 
 @armResourceOperations
-interface ObjectReplicationPolicies {
+interface ObjectReplicationPoliciesOperationGroup {
   /**
    * Get the object replication policy of the storage account by policy ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ObjectReplicationPolicies_Get")
   get is ArmResourceRead<ObjectReplicationPolicy>;
 
   /**
    * Create or update the object replication policy of the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ObjectReplicationPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ObjectReplicationPolicy>;
 
   /**
    * Deletes the object replication policy associated with the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("ObjectReplicationPolicies_Delete")
   delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
 
   /**
    * List the object replication policies associated with the storage account.
    */
-  list is ArmResourceListByParent<ObjectReplicationPolicy>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ObjectReplicationPolicies_List")
+  list is ArmResourceListByParent<
+    ObjectReplicationPolicy,
+    Response = ObjectReplicationPolicies
+  >;
 }
 
 @@minLength(ObjectReplicationPolicy.name, 1);
@@ -56,6 +67,6 @@ interface ObjectReplicationPolicies {
 @@doc(ObjectReplicationPolicy.properties,
   "Returns the Storage Account Object Replication Policy."
 );
-@@doc(ObjectReplicationPolicies.createOrUpdate::parameters.resource,
+@@doc(ObjectReplicationPoliciesOperationGroup.createOrUpdate::parameters.resource,
   "The object replication policy set to a storage account. A unique policy ID will be created if absent."
 );

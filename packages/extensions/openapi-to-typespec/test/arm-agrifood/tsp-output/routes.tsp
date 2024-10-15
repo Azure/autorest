@@ -13,24 +13,20 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 
+@armResourceOperations
 interface CheckNameAvailabilityOperations {
   /**
    * Checks the name availability of the resource with requested resource name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CheckNameAvailability_CheckNameAvailability")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability")
   @post
-  checkNameAvailability(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * NameAvailabilityRequest object.
-     */
-    @body
-    nameAvailabilityRequest: CheckNameAvailabilityRequest,
-  ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
+  checkNameAvailability is ArmProviderActionAsync<
+    Response = CheckNameAvailabilityResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    Request = CheckNameAvailabilityRequest
+  >;
 }
 
 interface OperationResultsOperations {

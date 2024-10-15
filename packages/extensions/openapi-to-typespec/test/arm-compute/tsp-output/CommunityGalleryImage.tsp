@@ -35,7 +35,10 @@ interface CommunityGalleryImages {
   /**
    * List community gallery images inside a gallery.
    */
-  list is ArmResourceListByParent<CommunityGalleryImage>;
+  list is ArmResourceListByParent<
+    CommunityGalleryImage,
+    Response = CommunityGalleryImageList
+  >;
 }
 
 @@doc(CommunityGalleryImage.name,

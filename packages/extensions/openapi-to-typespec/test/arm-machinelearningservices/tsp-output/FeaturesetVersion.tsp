@@ -98,7 +98,8 @@ interface FeaturesetVersions {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = FeaturesetVersionResourceArmPaginatedResult
   >;
 
   /**

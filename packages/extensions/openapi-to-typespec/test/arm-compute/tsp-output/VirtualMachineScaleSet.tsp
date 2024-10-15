@@ -98,12 +98,18 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of all VM scale sets under a resource group.
    */
-  list is ArmResourceListByParent<VirtualMachineScaleSet>;
+  list is ArmResourceListByParent<
+    VirtualMachineScaleSet,
+    Response = VirtualMachineScaleSetListResult
+  >;
 
   /**
    * Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
    */
-  listAll is ArmListBySubscription<VirtualMachineScaleSet>;
+  listAll is ArmListBySubscription<
+    VirtualMachineScaleSet,
+    Response = VirtualMachineScaleSetListWithLinkResult
+  >;
 
   /**
    * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.

@@ -48,7 +48,10 @@ interface PrivateEndpointConnections {
   /**
    * Get list of Private endpoint connections.
    */
-  listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
+  listByResource is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "Private endpoint connection name.");

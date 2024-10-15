@@ -117,7 +117,8 @@ interface OnlineEndpointTrackedResources {
        */
       @query("orderBy")
       orderBy?: OrderString;
-    }
+    },
+    Response = OnlineEndpointTrackedResourceArmPaginatedResult
   >;
 
   /**

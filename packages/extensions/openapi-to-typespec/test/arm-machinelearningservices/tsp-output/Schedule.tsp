@@ -62,7 +62,8 @@ interface Schedules {
        */
       @query("listViewType")
       listViewType?: ScheduleListViewType;
-    }
+    },
+    Response = ScheduleResourceArmPaginatedResult
   >;
 }
 

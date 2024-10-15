@@ -68,7 +68,10 @@ interface DedicatedHosts {
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  listByHostGroup is ArmResourceListByParent<DedicatedHost>;
+  listByHostGroup is ArmResourceListByParent<
+    DedicatedHost,
+    Response = DedicatedHostListResult
+  >;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.

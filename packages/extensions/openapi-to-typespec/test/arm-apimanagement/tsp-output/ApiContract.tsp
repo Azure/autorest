@@ -48,6 +48,8 @@ interface ApiContracts {
    * Creates new or updates existing specified API of the API Management service instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Api_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiContract,
@@ -57,7 +59,8 @@ interface ApiContracts {
        */
       @header
       `If-Match`?: string;
-    }
+    },
+    Response = ArmResourceCreatedResponse<ApiContract> | ArmResourceUpdatedResponse<ApiContract> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -139,7 +142,8 @@ interface ApiContracts {
        */
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
-    }
+    },
+    Response = ApiListResult
   >;
 
   /**
@@ -242,7 +246,7 @@ interface ApiContracts {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<ProductContract>> | ErrorResponse;
+  ): ArmResponse<ProductListResult> | ErrorResponse;
 
   /**
    * Lists a collection of operations associated with tags.

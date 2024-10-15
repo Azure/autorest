@@ -85,7 +85,8 @@ interface TagContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = TagListResult
   >;
 }
 

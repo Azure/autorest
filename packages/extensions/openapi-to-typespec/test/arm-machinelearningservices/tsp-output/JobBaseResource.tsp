@@ -107,7 +107,8 @@ interface JobBaseResources {
        */
       @query("scheduleId")
       scheduleId?: string;
-    }
+    },
+    Response = JobBaseResourceArmPaginatedResult
   >;
 
   /**

@@ -38,8 +38,13 @@ interface PrivateEndpointConnections {
    * Creates a new Private Endpoint Connection or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("PrivateEndpointConnection_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Deletes the specified Private Endpoint Connection.
@@ -56,7 +61,10 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateEndpointConnection_ListByService")
-  listByService is ArmResourceListByParent<PrivateEndpointConnection>;
+  listByService is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name,

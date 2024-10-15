@@ -83,7 +83,8 @@ interface ComputeResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = PaginatedComputeResourcesList
   >;
 
   /**

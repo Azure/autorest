@@ -61,7 +61,7 @@ interface Tables {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Table_List")
-  list is ArmResourceListByParent<Table>;
+  list is ArmResourceListByParent<Table, Response = ListTableResource>;
 }
 
 @@maxLength(Table.name, 63);

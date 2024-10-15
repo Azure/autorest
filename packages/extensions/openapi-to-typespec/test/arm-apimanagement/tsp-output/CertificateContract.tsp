@@ -112,7 +112,8 @@ interface CertificateContracts {
        */
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
-    }
+    },
+    Response = CertificateListResult
   >;
 
   /**

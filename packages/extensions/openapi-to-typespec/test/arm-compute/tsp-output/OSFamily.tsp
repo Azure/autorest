@@ -61,7 +61,8 @@ interface OSFamilies {
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
   listOSFamilies is ArmResourceListByParent<
     OSFamily,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = OSFamilyListResult
   >;
 }
 

@@ -74,7 +74,8 @@ interface VirtualMachineExtensions {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = VirtualMachineExtensionsListResult
   >;
 }
 

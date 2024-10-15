@@ -87,7 +87,8 @@ interface BatchEndpointTrackedResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = BatchEndpointTrackedResourceArmPaginatedResult
   >;
 
   /**

@@ -38,7 +38,14 @@ interface DiskAccesses {
   /**
    * Creates or updates a disk access resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskAccess>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DiskAccess,
+    Response = ArmResourceCreatedResponse<DiskAccess> | ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+      @body _: DiskAccess;
+    })
+  >;
 
   /**
    * Updates (patches) a disk access resource.
@@ -57,12 +64,15 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<DiskAccess>;
+  listByResourceGroup is ArmResourceListByParent<
+    DiskAccess,
+    Response = DiskAccessList
+  >;
 
   /**
    * Lists all the disk access resources under a subscription.
    */
-  list is ArmListBySubscription<DiskAccess>;
+  list is ArmListBySubscription<DiskAccess, Response = DiskAccessList>;
 
   /**
    * Gets the private link resources possible under disk access resource

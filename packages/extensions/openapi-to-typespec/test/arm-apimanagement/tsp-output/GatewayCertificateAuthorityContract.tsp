@@ -106,7 +106,8 @@ interface GatewayCertificateAuthorityContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = GatewayCertificateAuthorityListResult
   >;
 }
 

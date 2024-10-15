@@ -50,8 +50,15 @@ interface PrivateEndpointConnections {
    * Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
-  updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
+  updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+      @body _: PrivateEndpointConnection;
+    })
+  >;
 
   /**
    * Deletes a private endpoint connection under a disk access resource.
@@ -68,7 +75,10 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
-  listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
+  listPrivateEndpointConnections is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name,

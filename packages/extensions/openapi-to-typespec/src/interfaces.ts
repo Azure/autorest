@@ -30,7 +30,7 @@ export interface WithSummary {
 
 export interface TypespecOperationGroup extends WithDoc {
   name: string;
-  operations: TypespecOperation[];
+  operations: (TypespecOperation | TspArmProviderActionOperation)[];
 }
 
 export type Extension = "Pageable" | "LRO";
@@ -38,7 +38,7 @@ export interface TypespecOperation extends WithDoc, WithSummary, WithFixMe {
   name: string;
   verb: "get" | "post" | "put" | "delete";
   route: string;
-  responses: string[];
+  responses: [string, string][];
   parameters: TypespecParameter[];
   extensions: Extension[];
   resource?: TypespecResource;
@@ -222,6 +222,18 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe, WithSup
   customizations?: string[];
 }
 
+export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
+  kind: "ArmProviderActionAsync",
+  name: string;
+  action: string | undefined;
+  responses: string[] | undefined;
+  verb: string;
+  scope: "TenantActionScope" | "SubscriptionActionScope" | undefined;
+  parameters: TypespecParameter[];
+  request: TypespecParameter | undefined;
+  decorators?: TypespecDecorator[];
+}
+
 export type TspArmResourceOperation =
   | TspArmResourceListOperation
   | TspArmResourceNonListOperation
@@ -229,25 +241,25 @@ export type TspArmResourceOperation =
 
 export interface TspArmResourceNonListOperation extends TspArmResourceOperationBase {
   kind:
-    | "ArmResourceRead"
-    | "ArmResourceCreateOrReplaceSync"
-    | "ArmResourceCreateOrReplaceAsync"
-    | "ArmResourcePatchSync"
-    | "ArmResourcePatchAsync"
-    | "ArmTagsPatchSync"
-    | "ArmTagsPatchAsync"
-    | "ArmCustomPatchSync"
-    | "ArmCustomPatchAsync"
-    | "ArmResourceDeleteSync"
-    | "ArmResourceDeleteAsync"
-    | "ArmResourceDeleteWithoutOkAsync"
-    | "ArmResourceActionSync"
-    | "ArmResourceActionNoContentSync"
-    | "ArmResourceActionAsync"
-    | "ArmResourceActionNoResponseContentAsync"
-    | "checkGlobalNameAvailability"
-    | "checkLocalNameAvailability"
-    | "checkNameAvailability";
+  | "ArmResourceRead"
+  | "ArmResourceCreateOrReplaceSync"
+  | "ArmResourceCreateOrReplaceAsync"
+  | "ArmResourcePatchSync"
+  | "ArmResourcePatchAsync"
+  | "ArmTagsPatchSync"
+  | "ArmTagsPatchAsync"
+  | "ArmCustomPatchSync"
+  | "ArmCustomPatchAsync"
+  | "ArmResourceDeleteSync"
+  | "ArmResourceDeleteAsync"
+  | "ArmResourceDeleteWithoutOkAsync"
+  | "ArmResourceActionSync"
+  | "ArmResourceActionNoContentSync"
+  | "ArmResourceActionAsync"
+  | "ArmResourceActionNoResponseContentAsync"
+  | "checkGlobalNameAvailability"
+  | "checkLocalNameAvailability"
+  | "checkNameAvailability";
 }
 
 export interface TspArmResourceListOperation extends TspArmResourceOperationBase {

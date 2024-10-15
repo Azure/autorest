@@ -76,7 +76,8 @@ interface CodeVersionResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = CodeVersionResourceArmPaginatedResult
   >;
 
   /**

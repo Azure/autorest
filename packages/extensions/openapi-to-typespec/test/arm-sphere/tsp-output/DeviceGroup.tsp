@@ -77,7 +77,8 @@ interface DeviceGroups {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = DeviceGroupListResult
   >;
 
   /**

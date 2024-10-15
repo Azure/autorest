@@ -35,7 +35,10 @@ interface CommunityGalleryImageVersions {
   /**
    * List community gallery image versions inside an image.
    */
-  list is ArmResourceListByParent<CommunityGalleryImageVersion>;
+  list is ArmResourceListByParent<
+    CommunityGalleryImageVersion,
+    Response = CommunityGalleryImageVersionList
+  >;
 }
 
 @@doc(CommunityGalleryImageVersion.name,

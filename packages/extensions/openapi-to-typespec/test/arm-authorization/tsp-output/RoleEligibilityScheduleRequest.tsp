@@ -53,7 +53,8 @@ interface RoleEligibilityScheduleRequests {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleEligibilityScheduleRequestListResult
   >;
 
   /**

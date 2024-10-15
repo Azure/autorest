@@ -75,7 +75,8 @@ interface LabelingJobs {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = LabelingJobResourceArmPaginatedResult
   >;
 
   /**

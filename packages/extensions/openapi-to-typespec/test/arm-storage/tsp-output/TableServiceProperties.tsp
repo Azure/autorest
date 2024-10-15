@@ -47,7 +47,10 @@ interface TableServicePropertiesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TableServices_List")
-  list is ArmResourceListByParent<TableServiceProperties>;
+  list is ArmResourceListByParent<
+    TableServiceProperties,
+    Response = ListTableServices
+  >;
 }
 
 @@doc(TableServiceProperties.name, "");

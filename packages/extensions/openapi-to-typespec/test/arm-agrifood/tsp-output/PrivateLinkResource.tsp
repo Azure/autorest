@@ -35,7 +35,10 @@ interface PrivateLinkResources {
   /**
    * Get list of Private link resources.
    */
-  listByResource is ArmResourceListByParent<PrivateLinkResource>;
+  listByResource is ArmResourceListByParent<
+    PrivateLinkResource,
+    Response = PrivateLinkResourceListResult
+  >;
 }
 
 @@doc(PrivateLinkResource.name, "Sub resource name.");

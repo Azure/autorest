@@ -46,7 +46,8 @@ interface RoleManagementPolicyAssignments {
    */
   listForScope is ArmResourceListByParent<
     RoleManagementPolicyAssignment,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = RoleManagementPolicyAssignmentListResult
   >;
 }
 

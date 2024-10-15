@@ -63,14 +63,20 @@ interface SshPublicKeyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<SshPublicKeyResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    SshPublicKeyResource,
+    Response = SshPublicKeysGroupListResult
+  >;
 
   /**
    * Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SshPublicKeys_ListBySubscription")
-  listBySubscription is ArmListBySubscription<SshPublicKeyResource>;
+  listBySubscription is ArmListBySubscription<
+    SshPublicKeyResource,
+    Response = SshPublicKeysGroupListResult
+  >;
 
   /**
    * Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.

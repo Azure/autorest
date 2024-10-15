@@ -96,7 +96,8 @@ interface VirtualMachineScaleSetVMExtensions {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = VirtualMachineScaleSetVMExtensionsListResult
   >;
 }
 

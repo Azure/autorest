@@ -71,7 +71,8 @@ interface NotificationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = NotificationListResult
   >;
 
   /**

@@ -110,7 +110,8 @@ interface FileShares {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = FileShareItems
   >;
 
   /**

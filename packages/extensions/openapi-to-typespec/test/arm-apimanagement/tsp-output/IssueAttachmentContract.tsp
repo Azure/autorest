@@ -106,7 +106,8 @@ interface IssueAttachmentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = IssueAttachmentListResult
   >;
 }
 

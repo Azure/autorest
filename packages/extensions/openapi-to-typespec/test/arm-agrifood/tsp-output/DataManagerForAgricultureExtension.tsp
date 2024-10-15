@@ -73,7 +73,8 @@ interface DataManagerForAgricultureExtensions {
       @minValue(10)
       @query("$maxPageSize")
       $maxPageSize?: int32 = 50;
-    }
+    },
+    Response = DataManagerForAgricultureExtensionListResponse
   >;
 }
 

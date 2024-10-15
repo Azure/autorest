@@ -63,6 +63,9 @@
     },
     {
       "name": "DataManagerForAgricultureSolutions"
+    },
+    {
+      "name": "CheckNameAvailabilityOperations"
     }
   ],
   "paths": {
@@ -135,9 +138,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataManagerForAgricultureExtensionListResult"
+              "$ref": "#/definitions/DataManagerForAgricultureExtensionListResponse"
             }
           },
           "default": {
@@ -245,9 +248,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataManagerForAgricultureSolutionListResult"
+              "$ref": "#/definitions/DataManagerForAgricultureSolutionListResponse"
             }
           },
           "default": {
@@ -308,6 +311,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailability_CheckNameAvailability",
+        "tags": [
+          "CheckNameAvailabilityOperations"
+        ],
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats": {
       "get": {
         "operationId": "DataManagerForAgricultureResources_ListBySubscription",
@@ -343,9 +386,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataManagerForAgricultureListResult"
+              "$ref": "#/definitions/DataManagerForAgricultureListResponse"
             }
           },
           "default": {
@@ -362,43 +405,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
-      "post": {
-        "operationId": "CheckNameAvailability_CheckNameAvailability",
-        "description": "Checks the name availability of the resource with requested resource name.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "nameAvailabilityRequest",
-            "in": "body",
-            "description": "NameAvailabilityRequest object.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -482,9 +488,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataManagerForAgricultureListResult"
+              "$ref": "#/definitions/DataManagerForAgricultureListResponse"
             }
           },
           "default": {
@@ -784,9 +790,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataConnectorListResult"
+              "$ref": "#/definitions/DataConnectorListResponse"
             }
           },
           "default": {
@@ -1061,9 +1067,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExtensionListResult"
+              "$ref": "#/definitions/ExtensionListResponse"
             }
           },
           "default": {
@@ -1292,7 +1298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -1308,9 +1314,6 @@
           "PrivateEndpointConnections_ListByResource": {
             "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1541,7 +1544,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
@@ -1557,9 +1560,6 @@
           "PrivateLinkResources_ListByResource": {
             "$ref": "./examples/PrivateLinkResources_ListByResource.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1754,9 +1754,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SolutionListResult"
+              "$ref": "#/definitions/SolutionListResponse"
             }
           },
           "default": {
@@ -2113,9 +2113,9 @@
         }
       ]
     },
-    "DataConnectorListResult": {
+    "DataConnectorListResponse": {
       "type": "object",
-      "description": "The response of a DataConnector list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2183,9 +2183,9 @@
         }
       ]
     },
-    "DataManagerForAgricultureExtensionListResult": {
+    "DataManagerForAgricultureExtensionListResponse": {
       "type": "object",
-      "description": "The response of a DataManagerForAgricultureExtension list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2198,6 +2198,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2278,9 +2283,9 @@
         }
       }
     },
-    "DataManagerForAgricultureListResult": {
+    "DataManagerForAgricultureListResponse": {
       "type": "object",
-      "description": "The response of a DataManagerForAgriculture list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2293,6 +2298,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2348,9 +2358,9 @@
         }
       ]
     },
-    "DataManagerForAgricultureSolutionListResult": {
+    "DataManagerForAgricultureSolutionListResponse": {
       "type": "object",
-      "description": "The response of a DataManagerForAgricultureSolution list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2363,6 +2373,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2545,9 +2560,9 @@
         }
       ]
     },
-    "ExtensionListResult": {
+    "ExtensionListResponse": {
       "type": "object",
-      "description": "The response of a Extension list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2560,6 +2575,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [
@@ -2724,24 +2744,16 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
+      "description": "List of private endpoint connections associated with the specified resource.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
+          "description": "Array of private endpoint connections.",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
@@ -2851,24 +2863,16 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
+      "description": "A list of private link resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResource items on this page",
+          "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -3019,9 +3023,9 @@
         }
       ]
     },
-    "SolutionListResult": {
+    "SolutionListResponse": {
       "type": "object",
-      "description": "The response of a Solution list operation.",
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -3034,6 +3038,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "x-ms-client-name": "skipToken"
         }
       },
       "required": [

@@ -59,10 +59,10 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "ObjectReplicationPolicies"
+      "name": "ObjectReplicationPoliciesOperationGroup"
     },
     {
-      "name": "LocalUsers"
+      "name": "LocalUsersOperationGroup"
     },
     {
       "name": "EncryptionScopes"
@@ -93,6 +93,18 @@
     },
     {
       "name": "Tables"
+    },
+    {
+      "name": "SkusOperations"
+    },
+    {
+      "name": "StorageAccountsOperations"
+    },
+    {
+      "name": "DeletedAccountsOperations"
+    },
+    {
+      "name": "UsagesOperations"
     }
   ],
   "paths": {
@@ -130,6 +142,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
         "operationId": "StorageAccounts_CheckNameAvailability",
+        "tags": [
+          "StorageAccountsOperations"
+        ],
         "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
@@ -139,9 +154,9 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "accountName",
+            "name": "body",
             "in": "body",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
@@ -150,7 +165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
@@ -167,6 +182,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
       "get": {
         "operationId": "DeletedAccounts_List",
+        "tags": [
+          "DeletedAccountsOperations"
+        ],
         "description": "Lists deleted accounts under the subscription.",
         "parameters": [
           {
@@ -178,7 +196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeletedAccountListResult"
             }
@@ -246,6 +264,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages": {
       "get": {
         "operationId": "Usages_ListByLocation",
+        "tags": [
+          "UsagesOperations"
+        ],
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "parameters": [
           {
@@ -260,7 +281,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
             }
@@ -277,6 +298,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus": {
       "get": {
         "operationId": "Skus_List",
+        "tags": [
+          "SkusOperations"
+        ],
         "description": "Lists the available SKUs supported by Microsoft.Storage for given subscription.",
         "parameters": [
           {
@@ -288,7 +312,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageSkuListResult"
             }
@@ -319,7 +343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -361,7 +385,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -502,9 +526,19 @@
               "$ref": "#/definitions/StorageAccount"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -557,11 +591,7 @@
           "StorageAccountCreateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_With_Immutability_Policy.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "StorageAccounts_Update",
@@ -778,9 +808,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BlobServicePropertiesListResult"
+              "$ref": "#/definitions/BlobServiceItems"
             }
           },
           "default": {
@@ -794,9 +824,6 @@
           "ListBlobServices": {
             "$ref": "./examples/BlobServices_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -978,9 +1005,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BlobContainerListResult"
+              "$ref": "#/definitions/ListContainerItems"
             }
           },
           "default": {
@@ -1958,7 +1985,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EncryptionScopeListResult"
             }
@@ -2282,9 +2309,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FileServicePropertiesListResult"
+              "$ref": "#/definitions/FileServiceItems"
             }
           },
           "default": {
@@ -2298,9 +2325,6 @@
           "ListFileServices": {
             "$ref": "./examples/FileServices_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2469,9 +2493,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FileShareListResult"
+              "$ref": "#/definitions/FileShareItems"
             }
           },
           "default": {
@@ -3028,9 +3052,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BlobInventoryPolicyListResult"
+              "$ref": "#/definitions/ListBlobInventoryPolicy"
             }
           },
           "default": {
@@ -3044,9 +3068,6 @@
           "StorageAccountGetBlobInventoryPolicy": {
             "$ref": "./examples/BlobInventoryPolicies_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3450,7 +3471,7 @@
       "get": {
         "operationId": "LocalUsers_List",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "List the local users associated with the storage account.",
         "parameters": [
@@ -3475,9 +3496,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LocalUserListResult"
+              "$ref": "#/definitions/LocalUsers"
             }
           },
           "default": {
@@ -3491,9 +3512,6 @@
           "ListLocalUsers": {
             "$ref": "./examples/LocalUsers_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3501,7 +3519,7 @@
       "get": {
         "operationId": "LocalUsers_Get",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "Get the local user of the storage account by username.",
         "parameters": [
@@ -3556,7 +3574,7 @@
       "put": {
         "operationId": "LocalUsers_CreateOrUpdate",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "Create or update the properties of a local user associated with the storage account",
         "parameters": [
@@ -3629,7 +3647,7 @@
       "delete": {
         "operationId": "LocalUsers_Delete",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "Deletes the local user associated with the specified storage account.",
         "parameters": [
@@ -3686,7 +3704,7 @@
       "post": {
         "operationId": "LocalUsers_ListKeys",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "List SSH authorized keys and shared key of the local user.",
         "parameters": [
@@ -3743,7 +3761,7 @@
       "post": {
         "operationId": "LocalUsers_RegeneratePassword",
         "tags": [
-          "LocalUsers"
+          "LocalUsersOperationGroup"
         ],
         "description": "Regenerate the local user SSH password.",
         "parameters": [
@@ -4036,7 +4054,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_List",
         "tags": [
-          "ObjectReplicationPolicies"
+          "ObjectReplicationPoliciesOperationGroup"
         ],
         "description": "List the object replication policies associated with the storage account.",
         "parameters": [
@@ -4061,9 +4079,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ObjectReplicationPolicyListResult"
+              "$ref": "#/definitions/ObjectReplicationPolicies"
             }
           },
           "default": {
@@ -4077,9 +4095,6 @@
           "StorageAccountListObjectReplicationPolicies": {
             "$ref": "./examples/ObjectReplicationPolicies_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4087,7 +4102,7 @@
       "get": {
         "operationId": "ObjectReplicationPolicies_Get",
         "tags": [
-          "ObjectReplicationPolicies"
+          "ObjectReplicationPoliciesOperationGroup"
         ],
         "description": "Get the object replication policy of the storage account by policy ID.",
         "parameters": [
@@ -4141,7 +4156,7 @@
       "put": {
         "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
         "tags": [
-          "ObjectReplicationPolicies"
+          "ObjectReplicationPoliciesOperationGroup"
         ],
         "description": "Create or update the object replication policy of the storage account.",
         "parameters": [
@@ -4219,7 +4234,7 @@
       "delete": {
         "operationId": "ObjectReplicationPolicies_Delete",
         "tags": [
-          "ObjectReplicationPolicies"
+          "ObjectReplicationPoliciesOperationGroup"
         ],
         "description": "Deletes the object replication policy associated with the specified storage account.",
         "parameters": [
@@ -4300,7 +4315,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -4316,9 +4331,6 @@
           "StorageAccountListPrivateEndpointConnections": {
             "$ref": "./examples/PrivateEndpointConnections_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4575,9 +4587,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/QueueServicePropertiesListResult"
+              "$ref": "#/definitions/ListQueueServices"
             }
           },
           "default": {
@@ -4591,9 +4603,6 @@
           "QueueServicesList": {
             "$ref": "./examples/QueueServices_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4749,9 +4758,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StorageQueueListResult"
+              "$ref": "#/definitions/ListQueueResource"
             }
           },
           "default": {
@@ -5233,9 +5242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TableServicePropertiesListResult"
+              "$ref": "#/definitions/ListTableServices"
             }
           },
           "default": {
@@ -5249,9 +5258,6 @@
           "TableServicesList": {
             "$ref": "./examples/TableServices_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5393,9 +5399,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TableListResult"
+              "$ref": "#/definitions/ListTableResource"
             }
           },
           "default": {
@@ -6008,27 +6014,6 @@
         }
       ]
     },
-    "BlobContainerListResult": {
-      "type": "object",
-      "description": "The response of a BlobContainer list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BlobContainer items on this page",
-          "items": {
-            "$ref": "#/definitions/BlobContainer"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "BlobInventoryPolicy": {
       "type": "object",
       "description": "The storage account blob inventory policy.",
@@ -6118,27 +6103,6 @@
           "description": "For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded."
         }
       }
-    },
-    "BlobInventoryPolicyListResult": {
-      "type": "object",
-      "description": "The response of a BlobInventoryPolicy list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BlobInventoryPolicy items on this page",
-          "items": {
-            "$ref": "#/definitions/BlobInventoryPolicy"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "BlobInventoryPolicyProperties": {
       "type": "object",
@@ -6314,6 +6278,19 @@
         }
       }
     },
+    "BlobServiceItems": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blob services returned.",
+          "items": {
+            "$ref": "#/definitions/BlobServiceProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "BlobServiceProperties": {
       "type": "object",
       "description": "The properties of a storage account’s Blob service.",
@@ -6332,27 +6309,6 @@
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "BlobServicePropertiesListResult": {
-      "type": "object",
-      "description": "The response of a BlobServiceProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The BlobServiceProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/BlobServiceProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "BlobServicePropertiesProperties": {
@@ -6976,7 +6932,7 @@
     },
     "EncryptionScopeListResult": {
       "type": "object",
-      "description": "The response of a EncryptionScope list operation.",
+      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.",
       "properties": {
         "value": {
           "type": "array",
@@ -7194,6 +7150,19 @@
         ]
       }
     },
+    "FileServiceItems": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of file services returned.",
+          "items": {
+            "$ref": "#/definitions/FileServiceProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "FileServiceProperties": {
       "type": "object",
       "description": "The properties of File services in storage account.",
@@ -7212,27 +7181,6 @@
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "FileServicePropertiesListResult": {
-      "type": "object",
-      "description": "The response of a FileServiceProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FileServiceProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/FileServiceProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "FileServicePropertiesProperties": {
@@ -7285,9 +7233,9 @@
         }
       ]
     },
-    "FileShareListResult": {
+    "FileShareItems": {
       "type": "object",
-      "description": "The response of a FileShare list operation.",
+      "description": "Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.",
       "properties": {
         "value": {
           "type": "array",
@@ -8245,6 +8193,20 @@
         }
       }
     },
+    "ListBlobInventoryPolicy": {
+      "type": "object",
+      "description": "List of blob inventory policies returned.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of blob inventory policies.",
+          "items": {
+            "$ref": "#/definitions/BlobInventoryPolicy"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ListContainerItem": {
       "type": "object",
       "description": "The blob container properties be listed out.",
@@ -8259,6 +8221,27 @@
         {
           "$ref": "#/definitions/AzureEntityResource"
         }
+      ]
+    },
+    "ListContainerItems": {
+      "type": "object",
+      "description": "Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BlobContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/BlobContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ListQueue": {
@@ -8289,6 +8272,40 @@
         }
       }
     },
+    "ListQueueResource": {
+      "type": "object",
+      "description": "Response schema. Contains list of queues returned",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageQueue items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageQueue"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListQueueServices": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of queue services returned.",
+          "items": {
+            "$ref": "#/definitions/QueueServiceProperties"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ListServiceSasResponse": {
       "type": "object",
       "description": "The List service SAS credentials operation response.",
@@ -8296,6 +8313,40 @@
         "serviceSasToken": {
           "type": "string",
           "description": "List service SAS credentials of specific resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ListTableResource": {
+      "type": "object",
+      "description": "Response schema. Contains list of tables returned",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Table items on this page",
+          "items": {
+            "$ref": "#/definitions/Table"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListTableServices": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of table services returned.",
+          "items": {
+            "$ref": "#/definitions/TableServiceProperties"
+          },
           "readOnly": true
         }
       }
@@ -8334,27 +8385,6 @@
           "readOnly": true
         }
       }
-    },
-    "LocalUserListResult": {
-      "type": "object",
-      "description": "The response of a LocalUser list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LocalUser items on this page",
-          "items": {
-            "$ref": "#/definitions/LocalUser"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "LocalUserProperties": {
       "type": "object",
@@ -8407,6 +8437,19 @@
           "type": "string",
           "description": "Auto generated password by the server for SSH authentication if hasSshPassword is set to true on the creation of local user.",
           "readOnly": true
+        }
+      }
+    },
+    "LocalUsers": {
+      "type": "object",
+      "description": "List storage account local users.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The local users associated with the storage account.",
+          "items": {
+            "$ref": "#/definitions/LocalUser"
+          }
         }
       }
     },
@@ -8792,6 +8835,19 @@
         "defaultAction"
       ]
     },
+    "ObjectReplicationPolicies": {
+      "type": "object",
+      "description": "List storage account object replication policies.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The replication policy between two storage accounts.",
+          "items": {
+            "$ref": "#/definitions/ObjectReplicationPolicy"
+          }
+        }
+      }
+    },
     "ObjectReplicationPolicy": {
       "type": "object",
       "description": "The replication policy between two storage accounts. Multiple rules can be defined in one policy.",
@@ -8824,27 +8880,6 @@
           "description": "Blobs created after the time will be replicated to the destination. It must be in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z"
         }
       }
-    },
-    "ObjectReplicationPolicyListResult": {
-      "type": "object",
-      "description": "The response of a ObjectReplicationPolicy list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ObjectReplicationPolicy items on this page",
-          "items": {
-            "$ref": "#/definitions/ObjectReplicationPolicy"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ObjectReplicationPolicyProperties": {
       "type": "object",
@@ -9034,24 +9069,16 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
+      "description": "List of private endpoint connection associated with the specified storage account",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
+          "description": "Array of private endpoint connections",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
@@ -9314,27 +9341,6 @@
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "QueueServicePropertiesListResult": {
-      "type": "object",
-      "description": "The response of a QueueServiceProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The QueueServiceProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/QueueServiceProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "QueueServicePropertiesProperties": {
@@ -10216,7 +10222,7 @@
     },
     "StorageAccountListResult": {
       "type": "object",
-      "description": "The response of a StorageAccount list operation.",
+      "description": "The response from the List Storage Accounts operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -10640,27 +10646,6 @@
         }
       ]
     },
-    "StorageQueueListResult": {
-      "type": "object",
-      "description": "The response of a StorageQueue list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The StorageQueue items on this page",
-          "items": {
-            "$ref": "#/definitions/StorageQueue"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "StorageSkuListResult": {
       "type": "object",
       "description": "The response from the List Storage SKUs operation.",
@@ -10715,27 +10700,6 @@
         "permission"
       ]
     },
-    "TableListResult": {
-      "type": "object",
-      "description": "The response of a Table list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Table items on this page",
-          "items": {
-            "$ref": "#/definitions/Table"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TableProperties": {
       "type": "object",
       "properties": {
@@ -10767,27 +10731,6 @@
         {
           "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "TableServicePropertiesListResult": {
-      "type": "object",
-      "description": "The response of a TableServiceProperties list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TableServiceProperties items on this page",
-          "items": {
-            "$ref": "#/definitions/TableServiceProperties"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "TableServicePropertiesProperties": {

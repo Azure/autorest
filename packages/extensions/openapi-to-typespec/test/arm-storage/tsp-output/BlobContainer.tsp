@@ -72,7 +72,8 @@ interface BlobContainers {
        */
       @query("$include")
       $include?: ListContainersInclude;
-    }
+    },
+    Response = ListContainerItems
   >;
 
   /**

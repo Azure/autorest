@@ -13,35 +13,30 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Analysis;
 
+@armResourceOperations
 interface ServersOperations {
   /**
    * Lists eligible SKUs for Analysis Services resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListSkusForNew")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus")
   @get
-  listSkusForNew(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<SkuEnumerationForNewResourceResult> | ErrorResponse;
-
+  @action("skus")
+  listSkusForNew is ArmProviderActionAsync<
+    Response = SkuEnumerationForNewResourceResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
   /**
    * Check the name availability in the target location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_CheckNameAvailability")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/checkNameAvailability")
   @post
-  checkNameAvailability(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Contains the information used to provision the Analysis Services server.
-     */
-    @body
-    serverParameters: CheckServerNameAvailabilityParameters,
-  ): ArmResponse<CheckServerNameAvailabilityResult> | ErrorResponse;
+  checkNameAvailability is ArmProviderActionAsync<
+    Response = CheckServerNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter,
+    Request = CheckServerNameAvailabilityParameters
+  >;
 }

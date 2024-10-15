@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -158,6 +159,23 @@ model Resource {
    */
   @visibility("read")
   systemData?: SystemData;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataConnectorListResponse is Azure.Core.Page<DataConnector>;
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureExtensionListResponse
+  is Azure.Core.Page<DataManagerForAgricultureExtension> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
 }
 
 /**
@@ -481,6 +499,18 @@ model DataManagerForAgricultureUpdateProperties {
 }
 
 /**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureListResponse
+  is Azure.Core.Page<DataManagerForAgriculture> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
  * Arm async operation class.
  * Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
  */
@@ -587,6 +617,37 @@ model ExtensionProperties {
 }
 
 /**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model ExtensionListResponse is Azure.Core.Page<Extension> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
+ * List of private endpoint connections associated with the specified resource.
+ */
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections.
+   */
+  value?: PrivateEndpointConnection[];
+}
+
+/**
+ * A list of private link resources.
+ */
+model PrivateLinkResourceListResult {
+  /**
+   * Array of private link resources
+   */
+  value?: PrivateLinkResource[];
+}
+
+/**
  * Properties of a private link resource.
  */
 model PrivateLinkResourceProperties {
@@ -660,6 +721,29 @@ model SolutionProperties {
    */
   @minLength(1)
   termId: string;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model SolutionListResponse is Azure.Core.Page<Solution> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureSolutionListResponse
+  is Azure.Core.Page<DataManagerForAgricultureSolution> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
 }
 
 /**

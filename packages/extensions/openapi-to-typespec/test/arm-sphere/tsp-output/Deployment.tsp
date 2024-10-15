@@ -70,7 +70,8 @@ interface Deployments {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = DeploymentListResult
   >;
 }
 

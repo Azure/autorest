@@ -45,7 +45,8 @@ interface RoleEligibilityScheduleInstances {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleEligibilityScheduleInstanceListResult
   >;
 }
 

@@ -56,7 +56,7 @@ model RoleInstance
 }
 
 @armResourceOperations
-interface RoleInstances {
+interface RoleInstancesOperationGroup {
   /**
    * Gets a role instance from a cloud service.
    */
@@ -96,7 +96,8 @@ interface RoleInstances {
        */
       @query("$expand")
       $expand?: InstanceViewTypes;
-    }
+    },
+    Response = RoleInstanceListResult
   >;
 
   /**
@@ -180,7 +181,7 @@ interface RoleInstances {
      */
     @header
     accept: "application/x-rdp",
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 @@doc(RoleInstance.name, "Name of the role instance.");

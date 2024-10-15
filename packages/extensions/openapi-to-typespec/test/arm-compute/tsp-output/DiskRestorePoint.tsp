@@ -39,7 +39,10 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskRestorePoint_ListByRestorePoint")
-  listByRestorePoint is ArmResourceListByParent<DiskRestorePoint>;
+  listByRestorePoint is ArmResourceListByParent<
+    DiskRestorePoint,
+    Response = DiskRestorePointList
+  >;
 
   /**
    * Grants access to a diskRestorePoint.

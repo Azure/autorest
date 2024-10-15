@@ -89,7 +89,8 @@ interface FeaturestoreEntityContainers {
        */
       @query("createdBy")
       createdBy?: string;
-    }
+    },
+    Response = FeaturestoreEntityContainerResourceArmPaginatedResult
   >;
 }
 

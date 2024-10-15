@@ -35,7 +35,14 @@ interface GalleryApplications {
   /**
    * Create or update a gallery Application Definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplication>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryApplication,
+    Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {
+      @body _: GalleryApplication;
+    })
+  >;
 
   /**
    * Update a gallery Application Definition.
@@ -54,7 +61,10 @@ interface GalleryApplications {
   /**
    * List gallery Application Definitions in a gallery.
    */
-  listByGallery is ArmResourceListByParent<GalleryApplication>;
+  listByGallery is ArmResourceListByParent<
+    GalleryApplication,
+    Response = GalleryApplicationList
+  >;
 }
 
 @@doc(GalleryApplication.name,

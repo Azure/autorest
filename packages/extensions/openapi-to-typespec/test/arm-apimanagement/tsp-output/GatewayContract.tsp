@@ -124,7 +124,8 @@ interface GatewayContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = GatewayListResult
   >;
 
   /**

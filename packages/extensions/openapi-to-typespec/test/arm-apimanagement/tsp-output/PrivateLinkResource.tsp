@@ -39,7 +39,10 @@ interface PrivateLinkResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
-  listPrivateLinkResources is ArmResourceListByParent<PrivateLinkResource>;
+  listPrivateLinkResources is ArmResourceListByParent<
+    PrivateLinkResource,
+    Response = PrivateLinkResourceListResult
+  >;
 }
 
 @@doc(PrivateLinkResource.name, "Name of the private link resource.");

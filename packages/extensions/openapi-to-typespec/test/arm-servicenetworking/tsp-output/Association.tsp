@@ -51,7 +51,10 @@ interface Associations {
   /**
    * List Association resources by TrafficController
    */
-  listByTrafficController is ArmResourceListByParent<Association>;
+  listByTrafficController is ArmResourceListByParent<
+    Association,
+    Response = AssociationListResult
+  >;
 }
 
 @@doc(Association.name, "Name of Association");

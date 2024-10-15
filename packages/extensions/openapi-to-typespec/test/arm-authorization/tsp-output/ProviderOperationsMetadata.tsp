@@ -46,6 +46,8 @@ interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for the specified resource provider.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ProviderOperationsMetadata_Get")
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -61,6 +63,8 @@ interface ProviderOperationsMetadataOperationGroup {
   /**
    * Gets provider operations metadata for all resource providers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ProviderOperationsMetadata_List")
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -70,7 +74,8 @@ interface ProviderOperationsMetadataOperationGroup {
        */
       @query("$expand")
       $expand?: string = "resourceTypes";
-    }
+    },
+    Response = ProviderOperationsMetadataListResult
   >;
 }
 

@@ -36,6 +36,19 @@ export function getSuppressionsForArmResourceDeleteAsync(): WithSuppressDirectiv
   ];
 }
 
+export function getSuppressionsForArmResourceCreateOrReplaceAsync(): WithSuppressDirective[] {
+  return [
+    {
+      suppressionCode: "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes",
+      suppressionMessage: "For backward compatibility",
+    },
+    {
+      suppressionCode: "@azure-tools/typespec-azure-resource-manager/no-response-body",
+      suppressionMessage: "For backward compatibility",
+    },
+  ];
+}
+
 export function getSuppressionsForArmResourceDeleteSync(): WithSuppressDirective[] {
   return [
     {

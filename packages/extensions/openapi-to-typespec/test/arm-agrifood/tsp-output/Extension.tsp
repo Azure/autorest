@@ -75,7 +75,8 @@ interface Extensions {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = ExtensionListResponse
   >;
 }
 

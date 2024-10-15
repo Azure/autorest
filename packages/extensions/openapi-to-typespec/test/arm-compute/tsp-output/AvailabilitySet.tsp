@@ -55,7 +55,10 @@ interface AvailabilitySets {
   /**
    * Lists all availability sets in a resource group.
    */
-  list is ArmResourceListByParent<AvailabilitySet>;
+  list is ArmResourceListByParent<
+    AvailabilitySet,
+    Response = AvailabilitySetListResult
+  >;
 
   /**
    * Lists all availability sets in a subscription.
@@ -68,7 +71,8 @@ interface AvailabilitySets {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = AvailabilitySetListResult
   >;
 
   /**

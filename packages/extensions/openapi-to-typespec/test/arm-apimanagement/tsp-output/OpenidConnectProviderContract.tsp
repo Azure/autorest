@@ -124,7 +124,8 @@ interface OpenidConnectProviderContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = OpenIdConnectProviderListResult
   >;
 
   /**

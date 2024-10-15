@@ -2204,6 +2204,12 @@ model VirtualMachineSize {
 }
 
 /**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineScaleSetListResult
+  is Azure.Core.Page<VirtualMachineScaleSet>;
+
+/**
  * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.
  */
 model Sku {
@@ -4609,6 +4615,18 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
 }
 
 /**
+ * The List VM scale set extension operation response.
+ */
+model VirtualMachineScaleSetExtensionListResult
+  is Azure.Core.Page<VirtualMachineScaleSetExtension>;
+
+/**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineScaleSetListWithLinkResult
+  is Azure.Core.Page<VirtualMachineScaleSet>;
+
+/**
  * The Virtual Machine Scale Set List Skus operation response.
  */
 model VirtualMachineScaleSetListSkusResult
@@ -5038,6 +5056,16 @@ model VirtualMachineExtensionUpdateProperties {
    * The extensions protected settings that are passed by reference, and consumed from key vault
    */
   protectedSettingsFromKeyVault?: KeyVaultSecretReference;
+}
+
+/**
+ * The List VMSS VM Extension operation response
+ */
+model VirtualMachineScaleSetVMExtensionsListResult {
+  /**
+   * The list of VMSS VM extensions
+   */
+  value?: VirtualMachineScaleSetVMExtension[];
 }
 
 /**
@@ -6001,6 +6029,12 @@ model VirtualMachineIdentity {
 }
 
 /**
+ * The List Virtual Machine Scale Set VMs operation response.
+ */
+model VirtualMachineScaleSetVMListResult
+  is Azure.Core.Page<VirtualMachineScaleSetVM>;
+
+/**
  * The SAS URIs of the console screenshot and serial log blobs.
  */
 model RetrieveBootDiagnosticsDataResult {
@@ -6027,6 +6061,21 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineExtensionUpdateProperties;
 }
+
+/**
+ * The List Extension operation response
+ */
+model VirtualMachineExtensionsListResult {
+  /**
+   * The list of extensions
+   */
+  value?: VirtualMachineExtension[];
+}
+
+/**
+ * The List Virtual Machine operation response.
+ */
+model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 /**
  * Describes the properties of a Virtual Machine.
@@ -7100,6 +7149,11 @@ model AvailabilitySetUpdate extends UpdateResource {
 }
 
 /**
+ * The List Availability Set operation response.
+ */
+model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
+
+/**
  * Describes the properties of a Proximity Placement Group.
  */
 model ProximityPlacementGroupProperties {
@@ -7158,6 +7212,12 @@ model ProximityPlacementGroupPropertiesIntent {
  * Specifies information about the proximity placement group.
  */
 model ProximityPlacementGroupUpdate extends UpdateResource {}
+
+/**
+ * The List Proximity Placement Group operation response.
+ */
+model ProximityPlacementGroupListResult
+  is Azure.Core.Page<ProximityPlacementGroup>;
 
 /**
  * Dedicated Host Group Properties.
@@ -7286,6 +7346,11 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 }
 
 /**
+ * The List Dedicated Host Group with resource group response.
+ */
+model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
+
+/**
  * Properties of the dedicated host.
  */
 model DedicatedHostProperties {
@@ -7360,6 +7425,11 @@ model DedicatedHostUpdate extends UpdateResource {
 }
 
 /**
+ * The list dedicated host operation response.
+ */
+model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
+
+/**
  * The List Dedicated Host sizes operation response.
  */
 @pagedResult
@@ -7371,6 +7441,11 @@ model DedicatedHostSizeListResult {
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   value?: string[];
 }
+
+/**
+ * The list SSH public keys operation response.
+ */
+model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 /**
  * Properties of the SSH public key.
@@ -7535,6 +7610,11 @@ model ImageUpdate extends UpdateResource {
   @extension("x-ms-client-flatten", true)
   properties?: ImageProperties;
 }
+
+/**
+ * The List Image operation response.
+ */
+model ImageListResult is Azure.Core.Page<Image>;
 
 /**
  * The restore point collection properties.
@@ -7911,6 +7991,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 }
 
 /**
+ * The List restore point collection operation response.
+ */
+model RestorePointCollectionListResult
+  is Azure.Core.Page<RestorePointCollection>;
+
+/**
  * capacity reservation group Properties.
  */
 model CapacityReservationGroupProperties {
@@ -7999,6 +8085,12 @@ model CapacityReservationGroupUpdate extends UpdateResource {
 }
 
 /**
+ * The List capacity reservation group with resource group response.
+ */
+model CapacityReservationGroupListResult
+  is Azure.Core.Page<CapacityReservationGroup>;
+
+/**
  * Properties of the Capacity reservation.
  */
 model CapacityReservationProperties {
@@ -8062,6 +8154,11 @@ model CapacityReservationUpdate extends UpdateResource {
    */
   sku?: Sku;
 }
+
+/**
+ * The list capacity reservation operation response.
+ */
+model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
 /**
  * Api request input for LogAnalytics getRequestRateByInterval Api.
@@ -8445,6 +8542,12 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineRunCommandProperties;
 }
+
+/**
+ * The List run command operation response
+ */
+model VirtualMachineRunCommandsListResult
+  is Azure.Core.Page<VirtualMachineRunCommand>;
 
 /**
  * The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, StandardSSD_ZRS, or PremiumV2_LRS.
@@ -9034,6 +9137,11 @@ model DiskUpdateProperties {
 }
 
 /**
+ * The List Disks operation response.
+ */
+model DiskList is Azure.Core.Page<Disk>;
+
+/**
  * Data used for requesting a SAS.
  */
 model GrantAccessData {
@@ -9161,6 +9269,11 @@ model DiskAccessUpdate {
 }
 
 /**
+ * The List disk access operation response.
+ */
+model DiskAccessList is Azure.Core.Page<DiskAccess>;
+
+/**
  * A list of private link resources
  */
 model PrivateLinkResourceListResult {
@@ -9220,6 +9333,12 @@ model PrivateLinkResourceProperties {
    */
   requiredZoneNames?: string[];
 }
+
+/**
+ * A list of private link resources
+ */
+model PrivateEndpointConnectionListResult
+  is Azure.Core.Page<PrivateEndpointConnection>;
 
 /**
  * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
@@ -9360,6 +9479,11 @@ model DiskEncryptionSetUpdateProperties {
 }
 
 /**
+ * The List disk encryption set operation response.
+ */
+model DiskEncryptionSetList is Azure.Core.Page<DiskEncryptionSet>;
+
+/**
  * The List resources which are encrypted with the disk encryption set.
  */
 model ResourceUriList is Azure.Core.Page<string>;
@@ -9485,6 +9609,11 @@ model ProxyOnlyResource {
   @visibility("read")
   type?: string;
 }
+
+/**
+ * The List Disk Restore Points operation response.
+ */
+model DiskRestorePointList is Azure.Core.Page<DiskRestorePoint>;
 
 /**
  * The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot
@@ -9720,6 +9849,11 @@ model SnapshotUpdateProperties {
    */
   supportedCapabilities?: SupportedCapabilities;
 }
+
+/**
+ * The List Snapshots operation response.
+ */
+model SnapshotList is Azure.Core.Page<Snapshot>;
 
 /**
  * The List Resource Skus operation response.
@@ -11029,6 +11163,32 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
 }
 
 /**
+ * The List Galleries operation response.
+ */
+model GalleryList is Azure.Core.Page<Gallery>;
+
+/**
+ * The List Gallery Images operation response.
+ */
+model GalleryImageList is Azure.Core.Page<GalleryImage>;
+
+/**
+ * The List Gallery Image version operation response.
+ */
+model GalleryImageVersionList is Azure.Core.Page<GalleryImageVersion>;
+
+/**
+ * The List Gallery Applications operation response.
+ */
+model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
+
+/**
+ * The List Gallery Application version operation response.
+ */
+model GalleryApplicationVersionList
+  is Azure.Core.Page<GalleryApplicationVersion>;
+
+/**
  * Specifies information about the gallery sharing profile update.
  */
 model SharingUpdate {
@@ -11043,6 +11203,11 @@ model SharingUpdate {
   @OpenAPI.extension("x-ms-identifiers", [])
   groups?: SharingProfileGroup[];
 }
+
+/**
+ * The List Shared Galleries operation response.
+ */
+model SharedGalleryList is Azure.Core.Page<SharedGallery>;
 
 /**
  * Base information about the shared gallery resource in pir.
@@ -11081,6 +11246,11 @@ model PirResource {
   @visibility("read")
   location?: string;
 }
+
+/**
+ * The List Shared Gallery Images operation response.
+ */
+model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
 
 /**
  * Describes the properties of a gallery image definition.
@@ -11148,6 +11318,12 @@ model SharedGalleryImageProperties {
    */
   eula?: string;
 }
+
+/**
+ * The List Shared Gallery Image versions operation response.
+ */
+model SharedGalleryImageVersionList
+  is Azure.Core.Page<SharedGalleryImageVersion>;
 
 /**
  * Describes the properties of a gallery image version.
@@ -11377,6 +11553,17 @@ model CommunityGalleryImageVersionProperties {
 }
 
 /**
+ * The List Community Gallery Images operation response.
+ */
+model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
+
+/**
+ * The List Community Gallery Image versions operation response.
+ */
+model CommunityGalleryImageVersionList
+  is Azure.Core.Page<CommunityGalleryImageVersion>;
+
+/**
  * The role instance SKU.
  */
 model InstanceSku {
@@ -11482,6 +11669,11 @@ model ResourceInstanceViewStatus {
 }
 
 /**
+ * The list operation result.
+ */
+model RoleInstanceListResult is Azure.Core.Page<RoleInstance>;
+
+/**
  * Describes the cloud service role sku.
  */
 model CloudServiceRoleSku {
@@ -11511,6 +11703,11 @@ model CloudServiceRoleProperties {
   @visibility("read")
   uniqueId?: string;
 }
+
+/**
+ * The list operation result.
+ */
+model CloudServiceRoleListResult is Azure.Core.Page<CloudServiceRole>;
 
 /**
  * Cloud service properties
@@ -11977,6 +12174,11 @@ model OSVersionProperties {
 }
 
 /**
+ * The list operation result.
+ */
+model OSVersionListResult is Azure.Core.Page<OSVersion>;
+
+/**
  * OS family properties.
  */
 model OSFamilyProperties {
@@ -12028,6 +12230,11 @@ model OSVersionPropertiesBase {
   @visibility("read")
   isActive?: boolean;
 }
+
+/**
+ * The list operation result.
+ */
+model OSFamilyListResult is Azure.Core.Page<OSFamily>;
 
 /**
  * The source image from which the Image Version is going to be created.

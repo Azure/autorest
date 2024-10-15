@@ -34,12 +34,18 @@ interface DataProductsCatalogs {
   /**
    * List data catalog by resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
+  listByResourceGroup is ArmResourceListByParent<
+    DataProductsCatalog,
+    Response = DataProductsCatalogListResult
+  >;
 
   /**
    * List data catalog by subscription.
    */
-  listBySubscription is ArmListBySubscription<DataProductsCatalog>;
+  listBySubscription is ArmListBySubscription<
+    DataProductsCatalog,
+    Response = DataProductsCatalogListResult
+  >;
 }
 
 @@doc(DataProductsCatalog.name, "");

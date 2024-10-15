@@ -141,7 +141,8 @@ interface Alerts {
        */
       @query("customTimeRange")
       customTimeRange?: string;
-    }
+    },
+    Response = AlertsList
   >;
 
   /**
@@ -165,7 +166,7 @@ interface Alerts {
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).
    */
   // FIXME: Alerts_GetHistory could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history")
+  @route("undefined")
   @get
   getHistory(
     ...ApiVersionParameter,
@@ -175,8 +176,9 @@ interface Alerts {
      * Unique ID of an alert instance.
      */
     @path
+    @segment("alerts")
     alertId: string,
-  ): ArmResponse<AlertModification> | ErrorResponse;
+  ): ArmResponse<l> | ErrorResponse;
 }
 
 @@doc(Alert.name, "Unique ID of an alert instance.");

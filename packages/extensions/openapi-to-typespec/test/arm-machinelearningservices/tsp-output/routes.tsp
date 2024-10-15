@@ -13,68 +13,65 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.MachineLearning;
 
+@armResourceOperations
 interface UsagesOperations {
   /**
    * Gets the current usage information as well as limits for AML resources for given subscription and location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usages")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-  ): ArmResponse<ListUsagesResult> | ErrorResponse;
+  @action("usages")
+  list is ArmProviderActionAsync<
+    Response = ListUsagesResult,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
 }
 
+@armResourceOperations
 interface VirtualMachineSizesOperations {
   /**
    * Returns supported VM Sizes in a location
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineSizes_List")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
+  @action("vmSizes")
+  list is ArmProviderActionAsync<
+    Response = VirtualMachineSizeListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
 }
 
+@armResourceOperations
 interface QuotasOperations {
   /**
    * Update quota for each VM family in workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Quotas_Update")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas")
   @post
-  update(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Quota update parameters.
-     */
-    @body
-    parameters: QuotaUpdateParameters,
-  ): ArmResponse<UpdateWorkspaceQuotasResult> | ErrorResponse;
-
+  @action("updateQuotas")
+  update is ArmProviderActionAsync<
+    Response = UpdateWorkspaceQuotasResult,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter,
+    Request = QuotaUpdateParameters
+  >;
   /**
    * Gets the currently assigned Workspace Quotas based on VMFamily.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Quotas_List")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-  ): ArmResponse<ListWorkspaceQuotas> | ErrorResponse;
+  @action("quotas")
+  list is ArmProviderActionAsync<
+    Response = ListWorkspaceQuotas,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
 }
 
 interface CodeContainersOperations {
@@ -103,7 +100,7 @@ interface CodeContainersOperations {
      */
     @query("$skip")
     $skip?: string,
-  ): ArmResponse<ResourceListResult<CodeContainerResource>> | ErrorResponse;
+  ): ArmResponse<CodeContainerResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete container.
@@ -130,7 +127,7 @@ interface CodeContainersOperations {
      */
     @path
     name: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get container.
@@ -250,7 +247,7 @@ interface CodeVersionsOperations {
      */
     @query("hashVersion")
     hashVersion?: string,
-  ): ArmResponse<ResourceListResult<CodeVersionResource>> | ErrorResponse;
+  ): ArmResponse<CodeVersionResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete version.
@@ -283,7 +280,7 @@ interface CodeVersionsOperations {
      */
     @path
     version: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get version.
@@ -430,7 +427,7 @@ interface ComponentContainersOperations {
      */
     @query("listViewType")
     listViewType?: ListViewType,
-  ): ArmResponse<ResourceListResult<ComponentContainerResource>> | ErrorResponse;
+  ): ArmResponse<ComponentContainerResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete container.
@@ -457,7 +454,7 @@ interface ComponentContainersOperations {
      */
     @path
     name: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get container.
@@ -577,7 +574,7 @@ interface ComponentVersionsOperations {
      */
     @query("stage")
     stage?: string,
-  ): ArmResponse<ResourceListResult<ComponentVersionResource>> | ErrorResponse;
+  ): ArmResponse<ComponentVersionResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete version.
@@ -610,7 +607,7 @@ interface ComponentVersionsOperations {
      */
     @path
     version: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get version.
@@ -718,7 +715,7 @@ interface DataContainersOperations {
      */
     @query("listViewType")
     listViewType?: ListViewType,
-  ): ArmResponse<ResourceListResult<DataContainerResource>> | ErrorResponse;
+  ): ArmResponse<DataContainerResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete container.
@@ -745,7 +742,7 @@ interface DataContainersOperations {
      */
     @path
     name: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get container.
@@ -872,7 +869,7 @@ interface DataVersionsOperations {
      */
     @query("stage")
     stage?: string,
-  ): ArmResponse<ResourceListResult<DataVersionBaseResource>> | ErrorResponse;
+  ): ArmResponse<DataVersionBaseResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete version.
@@ -905,7 +902,7 @@ interface DataVersionsOperations {
      */
     @path
     version: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get version.
@@ -1013,7 +1010,7 @@ interface EnvironmentContainersOperations {
      */
     @query("listViewType")
     listViewType?: ListViewType,
-  ): ArmResponse<ResourceListResult<EnvironmentContainerResource>> | ErrorResponse;
+  ): ArmResponse<EnvironmentContainerResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete container.
@@ -1040,7 +1037,7 @@ interface EnvironmentContainersOperations {
      */
     @path
     name: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get container.
@@ -1160,7 +1157,7 @@ interface EnvironmentVersionsOperations {
      */
     @query("stage")
     stage?: string,
-  ): ArmResponse<ResourceListResult<EnvironmentVersionResource>> | ErrorResponse;
+  ): ArmResponse<EnvironmentVersionResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete version.
@@ -1193,7 +1190,7 @@ interface EnvironmentVersionsOperations {
      */
     @path
     version: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get version.
@@ -1307,7 +1304,7 @@ interface ModelContainersOperations {
      */
     @query("listViewType")
     listViewType?: ListViewType,
-  ): ArmResponse<ResourceListResult<ModelContainerResource>> | ErrorResponse;
+  ): ArmResponse<ModelContainerResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete container.
@@ -1334,7 +1331,7 @@ interface ModelContainersOperations {
      */
     @path
     name: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get container.
@@ -1490,7 +1487,7 @@ interface ModelVersionsOperations {
      */
     @query("stage")
     stage?: string,
-  ): ArmResponse<ResourceListResult<ModelVersionResource>> | ErrorResponse;
+  ): ArmResponse<ModelVersionResourceArmPaginatedResult> | ErrorResponse;
 
   /**
    * Delete version.
@@ -1523,7 +1520,7 @@ interface ModelVersionsOperations {
      */
     @path
     version: string,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get version.
@@ -1636,5 +1633,5 @@ interface ModelVersionsOperations {
      */
     @body
     body: PackageRequest,
-  ): ArmResponse<PackageResponse | void> | ErrorResponse;
+  ): ArmResponse<PackageResponse> | ArmAcceptedResponse | ErrorResponse;
 }

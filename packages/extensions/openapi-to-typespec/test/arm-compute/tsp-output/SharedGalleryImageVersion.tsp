@@ -43,7 +43,8 @@ interface SharedGalleryImageVersions {
        */
       @query("sharedTo")
       sharedTo?: SharedToValues;
-    }
+    },
+    Response = SharedGalleryImageVersionList
   >;
 }
 

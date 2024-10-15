@@ -93,13 +93,17 @@ interface Spaces {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = SpaceListResult
   >;
 
   /**
    * List Space resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<Space>;
+  listBySubscription is ArmListBySubscription<
+    Space,
+    Response = SpaceListResult
+  >;
 }
 
 @@doc(Space.name, "The name of the space");

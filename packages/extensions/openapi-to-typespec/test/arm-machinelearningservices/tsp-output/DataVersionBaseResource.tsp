@@ -89,7 +89,8 @@ interface DataVersionBaseResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = DataVersionBaseResourceArmPaginatedResult
   >;
 
   /**

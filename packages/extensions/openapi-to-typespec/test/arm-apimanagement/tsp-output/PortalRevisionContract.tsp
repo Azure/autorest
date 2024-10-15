@@ -51,8 +51,13 @@ interface PortalRevisionContracts {
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("PortalRevision_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PortalRevisionContract>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PortalRevisionContract,
+    Response = ArmResourceCreatedResponse<PortalRevisionContract> | ArmResourceUpdatedResponse<PortalRevisionContract> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Updates the description of specified portal revision or makes it current.
@@ -104,7 +109,8 @@ interface PortalRevisionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = PortalRevisionListResult
   >;
 }
 

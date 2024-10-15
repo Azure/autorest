@@ -106,7 +106,8 @@ interface TagDescriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = TagDescriptionListResult
   >;
 }
 

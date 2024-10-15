@@ -86,7 +86,8 @@ interface FeaturesetContainers {
        */
       @query("createdBy")
       createdBy?: string;
-    }
+    },
+    Response = FeaturesetContainerResourceArmPaginatedResult
   >;
 }
 

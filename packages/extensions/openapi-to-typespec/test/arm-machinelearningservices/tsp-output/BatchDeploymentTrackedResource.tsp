@@ -93,7 +93,8 @@ interface BatchDeploymentTrackedResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = BatchDeploymentTrackedResourceArmPaginatedResult
   >;
 }
 
