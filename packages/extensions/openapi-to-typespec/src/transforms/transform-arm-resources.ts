@@ -1,4 +1,13 @@
-import { ArraySchema, ObjectSchema, Operation, Parameter, Property, Response, SchemaResponse, SchemaType } from "@autorest/codemodel";
+import {
+  ArraySchema,
+  ObjectSchema,
+  Operation,
+  Parameter,
+  Property,
+  Response,
+  SchemaResponse,
+  SchemaType,
+} from "@autorest/codemodel";
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
@@ -259,7 +268,10 @@ function convertResourceExistsOperation(resourceMetadata: ArmResource): TspArmRe
 export function getTSPOperationGroupName(resourceName: string): string {
   const codeModel = getSession().model;
   const operationGroupName = pluralize(resourceName);
-  if (operationGroupName === resourceName || codeModel.schemas.objects?.find(o => o.language.default.name === operationGroupName)) {
+  if (
+    operationGroupName === resourceName ||
+    codeModel.schemas.objects?.find((o) => o.language.default.name === operationGroupName)
+  ) {
     return `${operationGroupName}OperationGroup`;
   } else {
     return operationGroupName;
@@ -296,13 +308,12 @@ function convertResourceCreateOrReplaceOperation(
 
     let suppressions = undefined;
     if (isFullCompatible) {
-      const acceptedResponse = swaggerOperation.responses?.find(r => r.protocol.http?.statusCodes[0] === '202');
+      const acceptedResponse = swaggerOperation.responses?.find((r) => r.protocol.http?.statusCodes[0] === "202");
       if (acceptedResponse) {
         let responseParameter = `ArmResourceCreatedResponse<${resourceMetadata.SwaggerModelName}> | ArmResourceUpdatedResponse<${resourceMetadata.SwaggerModelName}>`;
         if (isResponseSchema(acceptedResponse) && acceptedResponse.schema) {
-          responseParameter += `| (ArmAcceptedLroResponse & {@body _: ${resourceMetadata.SwaggerModelName};})`
-        }
-        else responseParameter += `| ArmAcceptedLroResponse`;
+          responseParameter += `| (ArmAcceptedLroResponse & {@body _: ${resourceMetadata.SwaggerModelName};})`;
+        } else responseParameter += `| ArmAcceptedLroResponse`;
         templateParameters.push(`Response = ${responseParameter}`);
         suppressions = getSuppressionsForArmResourceCreateOrReplaceAsync();
       }
@@ -318,7 +329,7 @@ function convertResourceCreateOrReplaceOperation(
         templateParameters: templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
         customizations,
-        suppressions
+        suppressions,
       },
     ];
   }
@@ -584,7 +595,9 @@ function convertResourceActionOperations(
           if (!okResponse.schema.language.default.name.includes("·")) {
             operationResponseName = okResponse.schema.language.default.name;
             if (isResourceListResult(okResponse)) {
-              const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(p => p.language.default.name === "value");
+              const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
+                (p) => p.language.default.name === "value",
+              );
               const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
               operationResponseName = `ResourceListResult<${responseName ?? "void"}>`;
             }
@@ -695,7 +708,11 @@ function convertResourceOtherGetOperations(
       if (operation.Method === "GET") {
         const swaggerOperation = operations[operation.OperationID];
         if (swaggerOperation.requests && swaggerOperation.requests[0]) {
-          const op = transformRequest(swaggerOperation.requests[0], swaggerOperation, getSession().model) as TypespecOperation;
+          const op = transformRequest(
+            swaggerOperation.requests[0],
+            swaggerOperation,
+            getSession().model,
+          ) as TypespecOperation;
           op.operationGroupName = getOperationGroupName(operation.OperationID);
           op.operationId = operation.OperationID;
           if (!op.fixMe) {

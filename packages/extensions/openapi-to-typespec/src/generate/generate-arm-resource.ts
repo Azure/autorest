@@ -57,7 +57,8 @@ function generateArmResourceModel(resource: TspArmResource): string {
   }
 
   definitions.push(
-    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${resource.propertiesPropertyRequired ? ", false" : ""
+    `model ${resource.name} is Azure.ResourceManager.${resource.resourceKind}<${resource.propertiesModelName}${
+      resource.propertiesPropertyRequired ? ", false" : ""
     }> {`,
   );
 
@@ -104,10 +105,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (operation.kind === "ArmResourceExists") {
       definitions.push(`op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`);
     } else if (operation.templateParameters?.length) {
-      definitions.push(
-        `${operation.name} is ${operation.kind}<${(operation.templateParameters ?? [])
-          .join(",")}>`,
-      );
+      definitions.push(`${operation.name} is ${operation.kind}<${(operation.templateParameters ?? []).join(",")}>`);
     } else {
       definitions.push(`${operation.name} is ${operation.kind}`);
     }

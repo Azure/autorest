@@ -69,7 +69,9 @@ function transformResponse(response: Response): [string, string] {
   }
 
   if (isResourceListResult(response)) {
-    const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(p => p.language.default.name === "value");
+    const valueSchema = ((response as SchemaResponse).schema as ObjectSchema).properties?.find(
+      (p) => p.language.default.name === "value",
+    );
     const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
     return [statusCode, `ResourceListResult<${responseName ?? "void"}>`];
   }
@@ -94,10 +96,14 @@ function transformResponse(response: Response): [string, string] {
 }
 
 function transformResponses(responses: Response[] = []): [string, string][] {
-  return responses.map(r => transformResponse(r));
+  return responses.map((r) => transformResponse(r));
 }
 
-function transformOperation(operation: Operation, codeModel: CodeModel, groupName: string): (TypespecOperation | TspArmProviderActionOperation)[] {
+function transformOperation(
+  operation: Operation,
+  codeModel: CodeModel,
+  groupName: string,
+): (TypespecOperation | TspArmProviderActionOperation)[] {
   const { isArm } = getOptions();
   if (isArm) {
     if (
@@ -169,25 +175,26 @@ export function transformRequest(
           verb: transformVerb(requests?.[0].protocol),
           action: action === name ? undefined : action,
           scope: route.startsWith("/providers/") ? "TenantActionScope" : "SubscriptionActionScope",
-          responses: transformedResponses.map(r => r[1]),
-          parameters: parameters.filter(p => p.location !== "body").map(p => {
-            if (p.location === "path") {
-              const segment = getSegmentForPathParameter(route, p.name);
-              if (p.decorators === undefined) p.decorators = [];
-              p.decorators.push({
-                name: "segment",
-                arguments: [segment]
-              });
-            }
-            return p;
-          }),
-          request: parameters.find(p => p.location === "body"),
-          decorators
+          responses: transformedResponses.map((r) => r[1]),
+          parameters: parameters
+            .filter((p) => p.location !== "body")
+            .map((p) => {
+              if (p.location === "path") {
+                const segment = getSegmentForPathParameter(route, p.name);
+                if (p.decorators === undefined) p.decorators = [];
+                p.decorators.push({
+                  name: "segment",
+                  arguments: [segment],
+                });
+              }
+              return p;
+            }),
+          request: parameters.find((p) => p.location === "body"),
+          decorators,
         };
       }
     }
   }
-
 
   return {
     name,
@@ -206,8 +213,8 @@ export function transformRequest(
 
 function getActionForPrviderTemplate(route: string): string | undefined {
   const segments = route.split("/");
-  const lastVariableIndex = segments.findLastIndex(s => s.match(/^\{\w+\}$/) !== null);
-  const lastProviderIndex = segments.findLastIndex(s => s === "providers");
+  const lastVariableIndex = segments.findLastIndex((s) => s.match(/^\{\w+\}$/) !== null);
+  const lastProviderIndex = segments.findLastIndex((s) => s === "providers");
   if (lastVariableIndex > lastProviderIndex + 1 && lastVariableIndex !== segments.length - 1) {
     return segments.slice(lastVariableIndex + 1).join("/");
   }
@@ -219,7 +226,7 @@ function getActionForPrviderTemplate(route: string): string | undefined {
 
 function getSegmentForPathParameter(route: string, parameter: string): string {
   const segments = route.split("/");
-  const variableIndex = segments.findIndex(s => s === `\{${parameter}\}`);
+  const variableIndex = segments.findIndex((s) => s === `\{${parameter}\}`);
   if (variableIndex < 1) throw `Cannot find parameter ${parameter} in route ${route}`;
   return segments[variableIndex - 1];
 }

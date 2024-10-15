@@ -185,7 +185,9 @@ export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[])
       }
     }
   }
-  filtered.push(...(codeModel.schemas.objects?.filter((o) => isResourceSchema(o)).map(o => o.language.default.name)) ?? []);
+  filtered.push(
+    ...(codeModel.schemas.objects?.filter((o) => isResourceSchema(o)).map((o) => o.language.default.name) ?? []),
+  );
   filtered.push(...getSkipList());
   return objects.filter((o) => !filtered.includes(o.name));
 }

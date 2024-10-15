@@ -1,4 +1,9 @@
-import { TspArmProviderActionOperation, TypespecOperation, TypespecOperationGroup, TypespecParameter } from "../interfaces";
+import {
+  TspArmProviderActionOperation,
+  TypespecOperation,
+  TypespecOperationGroup,
+  TypespecParameter,
+} from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs, generateSummary } from "../utils/docs";
@@ -13,7 +18,7 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
   const statements: string[] = [];
   summary && statements.push(summary);
   statements.push(doc);
-  const modelResponses = [...new Set(operation.responses.filter(r => r[1] !== "void").map(r => r[1]))];
+  const modelResponses = [...new Set(operation.responses.filter((r) => r[1] !== "void").map((r) => r[1]))];
   generateMultiResponseWarning(modelResponses, statements);
 
   for (const fixme of operation.fixMe ?? []) {
@@ -25,15 +30,19 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
   }
   if (isArm) {
     statements.push(`@route("${route}")`);
-    const otherResponses = operation.responses.filter(r => r[1] === "void" && ["200", "202"].includes(r[0])).map(r => {
-      if (r[0] === "200") return "OkResponse";
-      if (r[0] === "202") return "ArmAcceptedResponse";
-    });
+    const otherResponses = operation.responses
+      .filter((r) => r[1] === "void" && ["200", "202"].includes(r[0]))
+      .map((r) => {
+        if (r[0] === "200") return "OkResponse";
+        if (r[0] === "202") return "ArmAcceptedResponse";
+      });
     statements.push(
       `@${verb} op \`${name}\`(
         ...ApiVersionParameter,
         ${params}
-        ): ${modelResponses.length > 0 ? `ArmResponse<${modelResponses.join(" | ")}>` : ""}${otherResponses.length > 0 ? `| ${otherResponses.join("|")}` : ""} | ErrorResponse;\n\n\n`,
+        ): ${modelResponses.length > 0 ? `ArmResponse<${modelResponses.join(" | ")}>` : ""}${
+          otherResponses.length > 0 ? `| ${otherResponses.join("|")}` : ""
+        } | ErrorResponse;\n\n\n`,
     );
   } else if (!operation.resource) {
     const names = [name, ...modelResponses, ...parameters.map((p) => p.name)];
@@ -41,8 +50,9 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op \`${name}\` is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${modelResponses.length > 0 ? `${modelResponses.join(
-        " | ")}` : "void"}>;\n\n\n`,
+      `@${verb} op \`${name}\` is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${
+        modelResponses.length > 0 ? `${modelResponses.join(" | ")}` : "void"
+      }>;\n\n\n`,
     );
   } else {
     const { resource } = operation;
@@ -80,16 +90,14 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
       if (parameter.name === "subscriptionId") continue;
       if (parameter.name === "location") {
         params.push("...LocationParameter");
-      }
-      else {
+      } else {
         params.push(generateParameter(parameter));
       }
     }
 
     if (params.length === 1 && params[0] === "...LocationParameter") {
       templateParameters.push(`Parameters = LocationParameter`);
-    }
-    else {
+    } else {
       templateParameters.push(`Parameters = {${params}}`);
     }
   }
@@ -105,10 +113,7 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
     statements.push(`@action("${operation.action}")`);
   }
 
-  statements.push(
-    `${operation.name} is ${operation.kind}<${(templateParameters ?? [])
-      .join(",")}>`,
-  );
+  statements.push(`${operation.name} is ${operation.kind}<${(templateParameters ?? []).join(",")}>`);
   return statements.join("\n");
 }
 
@@ -165,7 +170,8 @@ export function generateOperationGroup(operationGroup: TypespecOperationGroup) {
 
   statements.push(`${doc}`);
   const hasInterface = Boolean(name);
-  const hasProvider = operations.find(o => (o as TspArmProviderActionOperation).kind === "ArmProviderActionAsync") !== undefined;
+  const hasProvider =
+    operations.find((o) => (o as TspArmProviderActionOperation).kind === "ArmProviderActionAsync") !== undefined;
   if (hasProvider && hasInterface) {
     statements.push(`@armResourceOperations`);
   }
@@ -174,8 +180,7 @@ export function generateOperationGroup(operationGroup: TypespecOperationGroup) {
   for (const operation of operations) {
     if ((operation as TspArmProviderActionOperation).kind === "ArmProviderActionAsync") {
       statements.push(generateProviderAction(operation as TspArmProviderActionOperation));
-    }
-    else {
+    } else {
       statements.push(generateOperation(operation as TypespecOperation, operationGroup));
     }
   }
