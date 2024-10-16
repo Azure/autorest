@@ -227,11 +227,11 @@ export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
   kind: "ArmProviderActionAsync";
   name: string;
   action?: string;
-  responses: string[] | undefined;
+  responses?: string[];
   verb: string;
-  scope: "TenantActionScope" | "SubscriptionActionScope" | undefined;
+  scope?: "TenantActionScope" | "SubscriptionActionScope";
   parameters: TypespecParameter[];
-  request: TypespecParameter | undefined;
+  request?: TypespecParameter;
   decorators?: TypespecDecorator[];
 }
 
