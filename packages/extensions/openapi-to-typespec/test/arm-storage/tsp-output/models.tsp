@@ -2365,6 +2365,11 @@ model ErrorResponseBody {
 }
 
 /**
+ * The response from the List Storage Accounts operation.
+ */
+model StorageAccountListResult is Azure.Core.Page<StorageAccount>;
+
+/**
  * The response from the ListKeys operation.
  */
 @pagedResult
@@ -3100,6 +3105,31 @@ model CloudErrorBody {
 }
 
 /**
+ * List of blob inventory policies returned.
+ */
+@pagedResult
+model ListBlobInventoryPolicy {
+  /**
+   * List of blob inventory policies.
+   */
+  @visibility("read")
+  @items
+  value?: BlobInventoryPolicy[];
+}
+
+/**
+ * List of private endpoint connection associated with the specified storage account
+ */
+@pagedResult
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections
+   */
+  @items
+  value?: PrivateEndpointConnection[];
+}
+
+/**
  * A list of private link resources
  */
 model PrivateLinkResourceListResult {
@@ -3140,6 +3170,18 @@ model PrivateLinkResourceProperties {
    * The private link resource Private link DNS zone name.
    */
   requiredZoneNames?: string[];
+}
+
+/**
+ * List storage account object replication policies.
+ */
+@pagedResult
+model ObjectReplicationPolicies {
+  /**
+   * The replication policy between two storage accounts.
+   */
+  @items
+  value?: ObjectReplicationPolicy[];
 }
 
 /**
@@ -3213,6 +3255,18 @@ model ObjectReplicationPolicyFilter {
    * Blobs created after the time will be replicated to the destination. It must be in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z
    */
   minCreationTime?: string;
+}
+
+/**
+ * List storage account local users.
+ */
+@pagedResult
+model LocalUsers {
+  /**
+   * The local users associated with the storage account.
+   */
+  @items
+  value?: LocalUser[];
 }
 
 /**
@@ -3372,6 +3426,21 @@ model EncryptionScopeKeyVaultProperties {
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeyRotationTimestamp?: utcDateTime;
+}
+
+/**
+ * List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.
+ */
+model EncryptionScopeListResult is Azure.Core.Page<EncryptionScope>;
+
+@pagedResult
+model BlobServiceItems {
+  /**
+   * List of blob services returned.
+   */
+  @visibility("read")
+  @items
+  value?: BlobServiceProperties[];
 }
 
 /**
@@ -3558,6 +3627,11 @@ model LastAccessTimeTrackingPolicy {
    */
   blobType?: string[];
 }
+
+/**
+ * Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers.
+ */
+model ListContainerItems is Azure.Core.Page<BlobContainer>;
 
 /**
  * The properties of a container.
@@ -3949,6 +4023,14 @@ model LeaseContainerResponse {
   leaseTimeSeconds?: string;
 }
 
+model FileServiceItems {
+  /**
+   * List of file services returned.
+   */
+  @visibility("read")
+  value?: FileServiceProperties[];
+}
+
 /**
  * The properties of File services in storage account.
  */
@@ -4018,6 +4100,11 @@ model Multichannel {
    */
   enabled?: boolean;
 }
+
+/**
+ * Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.
+ */
+model FileShareItems is Azure.Core.Page<FileShare>;
 
 /**
  * The properties of the file share.
@@ -4225,6 +4312,14 @@ model LeaseShareResponse {
   leaseTimeSeconds?: string;
 }
 
+model ListQueueServices {
+  /**
+   * List of queue services returned.
+   */
+  @visibility("read")
+  value?: QueueServiceProperties[];
+}
+
 /**
  * The properties of a storage account’s Queue service.
  */
@@ -4247,6 +4342,19 @@ model QueueProperties {
    */
   @visibility("read")
   approximateMessageCount?: int32;
+}
+
+/**
+ * Response schema. Contains list of queues returned
+ */
+model ListQueueResource is Azure.Core.Page<StorageQueue>;
+
+model ListTableServices {
+  /**
+   * List of table services returned.
+   */
+  @visibility("read")
+  value?: TableServiceProperties[];
 }
 
 /**
@@ -4308,6 +4416,11 @@ model TableAccessPolicy {
    */
   permission: string;
 }
+
+/**
+ * Response schema. Contains list of tables returned
+ */
+model ListTableResource is Azure.Core.Page<Table>;
 
 /**
  * The blob container properties be listed out.

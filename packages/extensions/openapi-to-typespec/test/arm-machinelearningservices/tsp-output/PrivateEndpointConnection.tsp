@@ -49,7 +49,10 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to get all PE connections.
    */
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  list is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");

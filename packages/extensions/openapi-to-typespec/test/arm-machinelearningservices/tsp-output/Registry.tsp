@@ -58,12 +58,18 @@ interface Registries {
   /**
    * List registries
    */
-  list is ArmResourceListByParent<Registry>;
+  list is ArmResourceListByParent<
+    Registry,
+    Response = RegistryTrackedResourceArmPaginatedResult
+  >;
 
   /**
    * List registries by subscription
    */
-  listBySubscription is ArmListBySubscription<Registry>;
+  listBySubscription is ArmListBySubscription<
+    Registry,
+    Response = RegistryTrackedResourceArmPaginatedResult
+  >;
 
   /**
    * Remove regions from registry

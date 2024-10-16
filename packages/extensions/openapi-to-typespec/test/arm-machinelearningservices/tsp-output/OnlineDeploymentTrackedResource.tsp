@@ -93,7 +93,8 @@ interface OnlineDeploymentTrackedResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = OnlineDeploymentTrackedResourceArmPaginatedResult
   >;
 
   /**

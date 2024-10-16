@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -306,6 +307,11 @@ enum SmartGroupModificationEvent {
 }
 
 /**
+ * List of alert processing rules.
+ */
+model AlertProcessingRulesList is Azure.Core.Page<AlertProcessingRule>;
+
+/**
  * Alert processing rule properties defining scopes, conditions and scheduling logic for alert processing rule.
  */
 model AlertProcessingRuleProperties {
@@ -565,6 +571,11 @@ model AlertsMetaData {
  */
 @discriminator("metadataIdentifier")
 model AlertsMetaDataProperties {}
+
+/**
+ * List the alerts.
+ */
+model AlertsList is Azure.Core.Page<Alert>;
 
 /**
  * Alert property bag
@@ -839,6 +850,11 @@ model AlertsSummaryGroupItem {
    */
   values?: AlertsSummaryGroupItem[];
 }
+
+/**
+ * List the alerts.
+ */
+model SmartGroupsList is Azure.Core.Page<SmartGroup>;
 
 /**
  * Properties of smart group.

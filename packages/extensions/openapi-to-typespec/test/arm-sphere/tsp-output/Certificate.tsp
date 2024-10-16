@@ -61,7 +61,8 @@ interface Certificates {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = CertificateListResult
   >;
 
   /**

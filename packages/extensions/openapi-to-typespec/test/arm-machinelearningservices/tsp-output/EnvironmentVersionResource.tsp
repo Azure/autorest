@@ -88,7 +88,8 @@ interface EnvironmentVersionResources {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = EnvironmentVersionResourceArmPaginatedResult
   >;
 }
 

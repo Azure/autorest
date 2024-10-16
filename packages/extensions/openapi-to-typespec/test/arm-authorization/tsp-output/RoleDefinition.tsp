@@ -62,7 +62,8 @@ interface RoleDefinitions {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleDefinitionListResult
   >;
 }
 

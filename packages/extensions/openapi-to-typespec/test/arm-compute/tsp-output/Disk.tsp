@@ -59,7 +59,14 @@ interface Disks {
   /**
    * Creates or updates a disk.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Disk>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Disk,
+    Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
+      @body _: Disk;
+    })
+  >;
 
   /**
    * Updates (patches) a disk.
@@ -78,12 +85,12 @@ interface Disks {
   /**
    * Lists all the disks under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Disk>;
+  listByResourceGroup is ArmResourceListByParent<Disk, Response = DiskList>;
 
   /**
    * Lists all the disks under a subscription.
    */
-  list is ArmListBySubscription<Disk>;
+  list is ArmListBySubscription<Disk, Response = DiskList>;
 
   /**
    * Grants access to a disk.

@@ -130,7 +130,8 @@ interface OperationContracts {
        */
       @query("tags")
       tags?: string;
-    }
+    },
+    Response = OperationListResult
   >;
 }
 

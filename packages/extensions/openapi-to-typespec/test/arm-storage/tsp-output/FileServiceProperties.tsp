@@ -48,7 +48,10 @@ interface FileServicePropertiesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FileServices_List")
-  list is ArmResourceListByParent<FileServiceProperties>;
+  list is ArmResourceListByParent<
+    FileServiceProperties,
+    Response = FileServiceItems
+  >;
 }
 
 @@doc(FileServiceProperties.name, "");

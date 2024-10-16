@@ -99,7 +99,8 @@ interface InfrastructureResources {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = InfrastructureResourceListResult
   >;
 }
 

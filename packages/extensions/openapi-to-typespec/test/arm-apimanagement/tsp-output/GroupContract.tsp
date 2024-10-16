@@ -121,7 +121,8 @@ interface GroupContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = GroupListResult
   >;
 
   /**

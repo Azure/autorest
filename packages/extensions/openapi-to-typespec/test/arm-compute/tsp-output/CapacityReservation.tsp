@@ -73,7 +73,10 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
-  listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
+  listByCapacityReservationGroup is ArmResourceListByParent<
+    CapacityReservation,
+    Response = CapacityReservationListResult
+  >;
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");

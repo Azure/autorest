@@ -3,7 +3,7 @@ import { join } from "path";
 import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
-import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
+import { getSkipList } from "./type-mapping";
 export interface _ArmResourceOperation {
   Name: string;
   Path: string;
@@ -185,7 +185,11 @@ export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[])
       }
     }
   }
-  return objects.filter((o) => !filtered.includes(o.name) && !isGeneratedResourceObject(o.name));
+  filtered.push(
+    ...(codeModel.schemas.objects?.filter((o) => isResourceSchema(o)).map((o) => o.language.default.name) ?? []),
+  );
+  filtered.push(...getSkipList());
+  return objects.filter((o) => !filtered.includes(o.name));
 }
 
 const _ArmCoreEnums = [

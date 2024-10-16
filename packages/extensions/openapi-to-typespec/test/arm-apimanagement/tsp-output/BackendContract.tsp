@@ -124,7 +124,8 @@ interface BackendContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = BackendListResult
   >;
 
   /**

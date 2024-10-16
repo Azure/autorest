@@ -45,7 +45,8 @@ interface RoleAssignmentSchedules {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleAssignmentScheduleListResult
   >;
 }
 

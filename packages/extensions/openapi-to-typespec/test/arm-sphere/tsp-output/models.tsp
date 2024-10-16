@@ -292,6 +292,11 @@ union CapabilityType {
 }
 
 /**
+ * The response of a Catalog list operation.
+ */
+model CatalogListResult is Azure.Core.Page<Catalog>;
+
+/**
  * Catalog properties
  */
 model CatalogProperties {
@@ -340,6 +345,11 @@ model CatalogUpdate {
    */
   tags?: Record<string>;
 }
+
+/**
+ * The response of a Certificate list operation.
+ */
+model CertificateListResult is Azure.Core.Page<Certificate>;
 
 /**
  * The properties of certificate
@@ -432,6 +442,11 @@ model CountElementsResponse {
 }
 
 /**
+ * The response of a Image list operation.
+ */
+model ImageListResult is Azure.Core.Page<Image>;
+
+/**
  * The properties of image
  */
 model ImageProperties {
@@ -491,6 +506,11 @@ model ImageProperties {
 }
 
 /**
+ * The response of a Deployment list operation.
+ */
+model DeploymentListResult is Azure.Core.Page<Deployment>;
+
+/**
  * The properties of deployment
  */
 model DeploymentProperties {
@@ -529,6 +549,11 @@ model ListDeviceGroupsRequest {
    */
   deviceGroupName?: string;
 }
+
+/**
+ * The response of a DeviceGroup list operation.
+ */
+model DeviceGroupListResult is Azure.Core.Page<DeviceGroup>;
 
 /**
  * The properties of deviceGroup
@@ -625,6 +650,11 @@ model DeviceInsight {
 }
 
 /**
+ * The response of a Device list operation.
+ */
+model DeviceListResult is Azure.Core.Page<Device>;
+
+/**
  * The properties of device
  */
 model DeviceProperties {
@@ -672,6 +702,11 @@ model DeviceProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+/**
+ * The response of a Product list operation.
+ */
+model ProductListResult is Azure.Core.Page<Product>;
 
 /**
  * The properties of product

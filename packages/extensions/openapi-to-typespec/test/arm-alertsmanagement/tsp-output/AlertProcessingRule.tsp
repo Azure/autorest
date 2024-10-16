@@ -50,12 +50,18 @@ interface AlertProcessingRules {
   /**
    * List all alert processing rules in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<AlertProcessingRule>;
+  listByResourceGroup is ArmResourceListByParent<
+    AlertProcessingRule,
+    Response = AlertProcessingRulesList
+  >;
 
   /**
    * List all alert processing rules in a subscription.
    */
-  listBySubscription is ArmListBySubscription<AlertProcessingRule>;
+  listBySubscription is ArmListBySubscription<
+    AlertProcessingRule,
+    Response = AlertProcessingRulesList
+  >;
 }
 
 @@doc(AlertProcessingRule.name,

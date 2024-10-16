@@ -73,7 +73,8 @@ interface StorageQueues {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ListQueueResource
   >;
 }
 

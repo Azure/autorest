@@ -36,7 +36,12 @@ interface Workspaces {
   /**
    * Creates or updates a workspace with the specified parameters.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Workspace,
+    Response = ArmResourceCreatedResponse<Workspace> | ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Updates a machine learning workspace with the specified parameters.
@@ -78,7 +83,8 @@ interface Workspaces {
        */
       @query("kind")
       kind?: string;
-    }
+    },
+    Response = WorkspaceListResult
   >;
 
   /**
@@ -98,7 +104,8 @@ interface Workspaces {
        */
       @query("kind")
       kind?: string;
-    }
+    },
+    Response = WorkspaceListResult
   >;
 
   /**

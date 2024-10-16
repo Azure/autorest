@@ -95,7 +95,10 @@ interface PolicyContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiOperationPolicy_ListByOperation")
-  listByOperation is ArmResourceListByParent<PolicyContract>;
+  listByOperation is ArmResourceListByParent<
+    PolicyContract,
+    Response = PolicyListResult
+  >;
 }
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");

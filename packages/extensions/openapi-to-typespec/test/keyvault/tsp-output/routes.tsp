@@ -2355,7 +2355,7 @@ interface HSMSecurityDomainOperations {
   @post
   upload is Azure.Core.Foundations.Operation<
     SecurityDomainObject,
-    SecurityDomainOperationStatus | void
+    SecurityDomainOperationStatus
   >;
 
   /**

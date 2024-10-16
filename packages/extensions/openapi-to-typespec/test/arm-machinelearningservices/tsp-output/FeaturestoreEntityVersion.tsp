@@ -101,7 +101,8 @@ interface FeaturestoreEntityVersions {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = FeaturestoreEntityVersionResourceArmPaginatedResult
   >;
 }
 

@@ -142,7 +142,8 @@ interface ProductContracts {
        */
       @query("tags")
       tags?: string;
-    }
+    },
+    Response = ProductListResult
   >;
 
   /**
@@ -296,7 +297,7 @@ interface ProductContracts {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
+  ): ArmResponse<SubscriptionListResult> | ErrorResponse;
 }
 
 @@maxLength(ProductContract.name, 256);

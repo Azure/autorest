@@ -44,7 +44,7 @@ interface ApiOperations {
     apiId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiReleaseOperations {
@@ -86,7 +86,7 @@ interface ApiReleaseOperations {
     releaseId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiOperationOperations {
@@ -128,7 +128,7 @@ interface ApiOperationOperations {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiOperationPolicyOperations {
@@ -176,7 +176,7 @@ interface ApiOperationPolicyOperations {
     policyId: PolicyIdName,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface TagOperations {
@@ -227,7 +227,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Lists all Tags associated with the API.
@@ -278,7 +278,7 @@ interface TagOperations {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<TagContract>> | ErrorResponse;
+  ): ArmResponse<TagListResult> | ErrorResponse;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
@@ -319,7 +319,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get tag associated with the API.
@@ -442,7 +442,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Lists all Tags associated with the Product.
@@ -492,7 +492,7 @@ interface TagOperations {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<TagContract>> | ErrorResponse;
+  ): ArmResponse<TagListResult> | ErrorResponse;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
@@ -532,7 +532,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get tag associated with the Product.
@@ -652,7 +652,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Lists a collection of tags defined within a service instance.
@@ -700,7 +700,7 @@ interface TagOperations {
     scope?: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<TagContract>> | ErrorResponse;
+  ): ArmResponse<TagListResult> | ErrorResponse;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
@@ -732,7 +732,7 @@ interface TagOperations {
     tagId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Gets the details of the tag specified by its identifier.
@@ -890,7 +890,7 @@ interface TagOperations {
     `If-Match`: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiPolicyOperations {
@@ -924,7 +924,7 @@ interface ApiPolicyOperations {
     apiId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<PolicyContract>> | ErrorResponse;
+  ): ArmResponse<PolicyListResult> | ErrorResponse;
 
   /**
    * Gets the entity state (Etag) version of the API policy specified by its identifier.
@@ -962,7 +962,7 @@ interface ApiPolicyOperations {
     policyId: PolicyIdName,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get the policy configuration at the API level.
@@ -1106,7 +1106,7 @@ interface ApiPolicyOperations {
     `If-Match`: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiSchemaOperations {
@@ -1148,7 +1148,7 @@ interface ApiSchemaOperations {
     schemaId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiDiagnosticOperations {
@@ -1190,7 +1190,7 @@ interface ApiDiagnosticOperations {
     diagnosticId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiIssueOperations {
@@ -1232,7 +1232,7 @@ interface ApiIssueOperations {
     issueId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiIssueCommentOperations {
@@ -1283,7 +1283,7 @@ interface ApiIssueCommentOperations {
     commentId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiIssueAttachmentOperations {
@@ -1334,7 +1334,7 @@ interface ApiIssueAttachmentOperations {
     attachmentId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiTagDescriptionOperations {
@@ -1377,7 +1377,7 @@ interface ApiTagDescriptionOperations {
     tagDescriptionId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ApiExportOperations {
@@ -1457,7 +1457,7 @@ interface ApiVersionSetOperations {
     versionSetId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface AuthorizationServerOperations {
@@ -1491,7 +1491,7 @@ interface AuthorizationServerOperations {
     authsid: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface BackendOperations {
@@ -1524,7 +1524,7 @@ interface BackendOperations {
     backendId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface CacheOperations {
@@ -1558,7 +1558,7 @@ interface CacheOperations {
     cacheId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface CertificateOperations {
@@ -1592,7 +1592,7 @@ interface CertificateOperations {
     certificateId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ContentItemOperations {
@@ -1633,53 +1633,50 @@ interface ContentItemOperations {
     contentItemId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
+@armResourceOperations
 interface DeletedServicesOperations {
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedServices_ListBySubscription")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/deletedservices")
   @get
-  listBySubscription(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<DeletedServicesListResult> | ErrorResponse;
+  @action("deletedservices")
+  listBySubscription is ArmProviderActionAsync<
+    Response = DeletedServicesListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
+@armResourceOperations
 interface ApiManagementServiceOperations {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_CheckNameAvailability")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/checkNameAvailability")
   @post
-  checkNameAvailability(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Parameters supplied to the CheckNameAvailability operation.
-     */
-    @body
-    parameters: ApiManagementServiceCheckNameAvailabilityParameters,
-  ): ArmResponse<ApiManagementServiceNameAvailabilityResult> | ErrorResponse;
-
+  checkNameAvailability is ArmProviderActionAsync<
+    Response = ApiManagementServiceNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    Request = ApiManagementServiceCheckNameAvailabilityParameters
+  >;
   /**
    * Get the custom domain ownership identifier for an API Management service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementService_GetDomainOwnershipIdentifier")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/getDomainOwnershipIdentifier")
   @post
-  getDomainOwnershipIdentifier(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementServiceGetDomainOwnershipIdentifierResult> | ErrorResponse;
+  getDomainOwnershipIdentifier is ArmProviderActionAsync<
+    Response = ApiManagementServiceGetDomainOwnershipIdentifierResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
 interface DiagnosticOperations {
@@ -1723,7 +1720,7 @@ interface DiagnosticOperations {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<DiagnosticContract>> | ErrorResponse;
+  ): ArmResponse<DiagnosticListResult> | ErrorResponse;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic specified by its identifier.
@@ -1755,7 +1752,7 @@ interface DiagnosticOperations {
     diagnosticId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Gets the details of the Diagnostic specified by its identifier.
@@ -1913,7 +1910,7 @@ interface DiagnosticOperations {
     `If-Match`: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface EmailTemplateOperations {
@@ -1944,7 +1941,7 @@ interface EmailTemplateOperations {
     templateName: TemplateName,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface GatewayOperations {
@@ -1977,7 +1974,7 @@ interface GatewayOperations {
     gatewayId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface GatewayHostnameConfigurationOperations {
@@ -2018,7 +2015,7 @@ interface GatewayHostnameConfigurationOperations {
     hcId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface GatewayCertificateAuthorityOperations {
@@ -2060,7 +2057,7 @@ interface GatewayCertificateAuthorityOperations {
     certificateId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface GroupOperations {
@@ -2093,7 +2090,7 @@ interface GroupOperations {
     groupId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface IdentityProviderOperations {
@@ -2124,7 +2121,7 @@ interface IdentityProviderOperations {
     identityProviderName: IdentityProviderType,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface IssueOperations {
@@ -2168,7 +2165,7 @@ interface IssueOperations {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<IssueContract>> | ErrorResponse;
+  ): ArmResponse<IssueListResult> | ErrorResponse;
 
   /**
    * Gets API Management issue details
@@ -2233,7 +2230,7 @@ interface LoggerOperations {
     loggerId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface NamedValueOperations {
@@ -2266,7 +2263,7 @@ interface NamedValueOperations {
     namedValueId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface OpenIdConnectProviderOperations {
@@ -2299,7 +2296,7 @@ interface OpenIdConnectProviderOperations {
     OpenId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface PolicyOperations {
@@ -2324,7 +2321,7 @@ interface PolicyOperations {
     serviceName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<PolicyContract>> | ErrorResponse;
+  ): ArmResponse<PolicyListResult> | ErrorResponse;
 
   /**
    * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
@@ -2353,7 +2350,7 @@ interface PolicyOperations {
     policyId: PolicyIdName,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get the Global policy definition of the Api Management service.
@@ -2464,7 +2461,7 @@ interface PolicyOperations {
     `If-Match`: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface PortalRevisionOperations {
@@ -2497,7 +2494,7 @@ interface PortalRevisionOperations {
     portalRevisionId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface SignInSettingsOperations {
@@ -2522,7 +2519,7 @@ interface SignInSettingsOperations {
     serviceName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface SignUpSettingsOperations {
@@ -2547,7 +2544,7 @@ interface SignUpSettingsOperations {
     serviceName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface DelegationSettingsOperations {
@@ -2572,7 +2569,7 @@ interface DelegationSettingsOperations {
     serviceName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ProductOperations {
@@ -2605,7 +2602,7 @@ interface ProductOperations {
     productId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface ProductPolicyOperations {
@@ -2638,7 +2635,7 @@ interface ProductPolicyOperations {
     productId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<PolicyContract>> | ErrorResponse;
+  ): ArmResponse<PolicyListResult> | ErrorResponse;
 
   /**
    * Get the ETag of the policy configuration at the Product level.
@@ -2675,7 +2672,7 @@ interface ProductPolicyOperations {
     policyId: PolicyIdName,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 
   /**
    * Get the policy configuration at the Product level.
@@ -2810,7 +2807,7 @@ interface ProductPolicyOperations {
     `If-Match`: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface GlobalSchemaOperations {
@@ -2843,21 +2840,23 @@ interface GlobalSchemaOperations {
     schemaId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
+@armResourceOperations
 interface ApiManagementSkusOperations {
   /**
    * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiManagementSkus_List")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/skus")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementSkusResult> | ErrorResponse;
+  @action("skus")
+  list is ArmProviderActionAsync<
+    Response = ApiManagementSkusResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
 interface SubscriptionOperations {
@@ -2890,7 +2889,7 @@ interface SubscriptionOperations {
     sid: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface TenantAccessOperations {
@@ -2921,7 +2920,7 @@ interface TenantAccessOperations {
      */
     @path
     accessName: AccessIdName,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface UserOperations {
@@ -2954,7 +2953,7 @@ interface UserOperations {
     userId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
 
 interface UserSubscriptionOperations {
@@ -3006,7 +3005,7 @@ interface UserSubscriptionOperations {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
+  ): ArmResponse<SubscriptionListResult> | ErrorResponse;
 
   /**
    * Gets the specified Subscription entity associated with a particular user.

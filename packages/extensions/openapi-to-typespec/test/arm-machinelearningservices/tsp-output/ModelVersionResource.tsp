@@ -100,7 +100,8 @@ interface ModelVersionResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = ModelVersionResourceArmPaginatedResult
   >;
 
   /**

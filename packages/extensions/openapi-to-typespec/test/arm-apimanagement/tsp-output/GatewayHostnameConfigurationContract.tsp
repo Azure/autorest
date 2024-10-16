@@ -106,7 +106,8 @@ interface GatewayHostnameConfigurationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = GatewayHostnameConfigurationListResult
   >;
 }
 

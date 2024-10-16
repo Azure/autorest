@@ -125,7 +125,8 @@ interface EmailTemplateContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = EmailTemplateListResult
   >;
 }
 

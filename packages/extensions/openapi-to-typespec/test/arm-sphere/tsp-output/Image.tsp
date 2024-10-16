@@ -70,7 +70,8 @@ interface Images {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = ImageListResult
   >;
 }
 

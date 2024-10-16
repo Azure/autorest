@@ -50,7 +50,10 @@ interface Frontends {
   /**
    * List Frontend resources by TrafficController
    */
-  listByTrafficController is ArmResourceListByParent<Frontend>;
+  listByTrafficController is ArmResourceListByParent<
+    Frontend,
+    Response = FrontendListResult
+  >;
 }
 
 @@doc(Frontend.name, "Frontends");

@@ -72,7 +72,8 @@ interface DenyAssignments {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = DenyAssignmentListResult
   >;
 }
 

@@ -13,29 +13,31 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 
+@armResourceOperations
 interface ClassicAdministratorsOperations {
   /**
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ClassicAdministrators_List")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ClassicAdministratorListResult> | ErrorResponse;
+  @action("classicAdministrators")
+  list is ArmProviderActionAsync<
+    Response = ClassicAdministratorListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
+@armResourceOperations
 interface GlobalAdministratorOperations {
   /**
    * Elevates access for a Global Administrator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GlobalAdministrator_ElevateAccess")
-  @route("/providers/Microsoft.Authorization/elevateAccess")
   @post
-  elevateAccess(...ApiVersionParameter): ArmResponse<void> | ErrorResponse;
+  elevateAccess is ArmProviderActionAsync<Scope = TenantActionScope>;
 }
 
 interface AzurePermissionsForResourceGroupOperations {

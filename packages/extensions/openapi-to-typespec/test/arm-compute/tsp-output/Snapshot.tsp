@@ -48,7 +48,14 @@ interface Snapshots {
   /**
    * Creates or updates a snapshot.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Snapshot>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Snapshot,
+    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+      @body _: Snapshot;
+    })
+  >;
 
   /**
    * Updates (patches) a snapshot.
@@ -67,12 +74,15 @@ interface Snapshots {
   /**
    * Lists snapshots under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Snapshot>;
+  listByResourceGroup is ArmResourceListByParent<
+    Snapshot,
+    Response = SnapshotList
+  >;
 
   /**
    * Lists snapshots under a subscription.
    */
-  list is ArmListBySubscription<Snapshot>;
+  list is ArmListBySubscription<Snapshot, Response = SnapshotList>;
 
   /**
    * Grants access to a snapshot.

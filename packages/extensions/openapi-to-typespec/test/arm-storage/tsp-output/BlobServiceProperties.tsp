@@ -48,7 +48,10 @@ interface BlobServicePropertiesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BlobServices_List")
-  list is ArmResourceListByParent<BlobServiceProperties>;
+  list is ArmResourceListByParent<
+    BlobServiceProperties,
+    Response = BlobServiceItems
+  >;
 }
 
 @@doc(BlobServiceProperties.name, "");

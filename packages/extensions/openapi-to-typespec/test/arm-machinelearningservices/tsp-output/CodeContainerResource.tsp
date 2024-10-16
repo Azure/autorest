@@ -64,7 +64,8 @@ interface CodeContainerResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = CodeContainerResourceArmPaginatedResult
   >;
 }
 

@@ -46,7 +46,10 @@ interface PrivateEndpointConnections {
   /**
    * List all the private endpoint connections associated with the storage account.
    */
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  list is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name,

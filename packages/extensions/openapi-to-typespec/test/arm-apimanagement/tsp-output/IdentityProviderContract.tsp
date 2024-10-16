@@ -104,7 +104,10 @@ interface IdentityProviderContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IdentityProvider_ListByService")
-  listByService is ArmResourceListByParent<IdentityProviderContract>;
+  listByService is ArmResourceListByParent<
+    IdentityProviderContract,
+    Response = IdentityProviderList
+  >;
 
   /**
    * Gets the client secret details of the Identity Provider.

@@ -118,7 +118,8 @@ interface Solutions {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = SolutionListResponse
   >;
 }
 

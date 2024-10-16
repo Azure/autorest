@@ -24,7 +24,7 @@ model AnalysisServicesServer
 }
 
 @armResourceOperations
-interface AnalysisServicesServers {
+interface AnalysisServicesServersOperationGroup {
   /**
    * Gets details about the specified Analysis Services server.
    */
@@ -36,8 +36,15 @@ interface AnalysisServicesServers {
    * Provisions the specified Analysis Services server based on the configuration specified in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Servers_Create")
-  create is ArmResourceCreateOrReplaceAsync<AnalysisServicesServer>;
+  create is ArmResourceCreateOrReplaceAsync<
+    AnalysisServicesServer,
+    Response = ArmResourceCreatedResponse<AnalysisServicesServer> | ArmResourceUpdatedResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
+      @body _: AnalysisServicesServer;
+    })
+  >;
 
   /**
    * Updates the current state of the specified Analysis Services server.
@@ -65,14 +72,20 @@ interface AnalysisServicesServers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<AnalysisServicesServer>;
+  listByResourceGroup is ArmResourceListByParent<
+    AnalysisServicesServer,
+    Response = AnalysisServicesServers
+  >;
 
   /**
    * Lists all the Analysis Services servers for the given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_List")
-  list is ArmListBySubscription<AnalysisServicesServer>;
+  list is ArmListBySubscription<
+    AnalysisServicesServer,
+    Response = AnalysisServicesServers
+  >;
 
   /**
    * Suspends operation of the specified Analysis Services server instance.
@@ -143,9 +156,9 @@ interface AnalysisServicesServers {
 @@doc(AnalysisServicesServer.properties,
   "Properties of the provision operation request."
 );
-@@doc(AnalysisServicesServers.create::parameters.resource,
+@@doc(AnalysisServicesServersOperationGroup.create::parameters.resource,
   "Contains the information used to provision the Analysis Services server."
 );
-@@doc(AnalysisServicesServers.update::parameters.properties,
+@@doc(AnalysisServicesServersOperationGroup.update::parameters.properties,
   "Request object that contains the updated information for the server."
 );

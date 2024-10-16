@@ -81,7 +81,8 @@ interface DataManagerForAgricultures {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = DataManagerForAgricultureListResponse
   >;
 
   /**
@@ -106,7 +107,8 @@ interface DataManagerForAgricultures {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = DataManagerForAgricultureListResponse
   >;
 }
 

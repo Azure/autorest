@@ -152,7 +152,8 @@ interface SubscriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = SubscriptionListResult
   >;
 
   /**

@@ -75,7 +75,8 @@ interface CapacityReservationGroups {
        */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
-    }
+    },
+    Response = CapacityReservationGroupListResult
   >;
 
   /**
@@ -89,7 +90,8 @@ interface CapacityReservationGroups {
        */
       @query("$expand")
       $expand?: ExpandTypesForGetCapacityReservationGroups;
-    }
+    },
+    Response = CapacityReservationGroupListResult
   >;
 }
 

@@ -47,7 +47,10 @@ interface QueueServicePropertiesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("QueueServices_List")
-  list is ArmResourceListByParent<QueueServiceProperties>;
+  list is ArmResourceListByParent<
+    QueueServiceProperties,
+    Response = ListQueueServices
+  >;
 }
 
 @@doc(QueueServiceProperties.name, "");

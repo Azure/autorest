@@ -95,7 +95,8 @@ interface AccessInformationContracts {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = AccessInformationListResult
   >;
 
   /**

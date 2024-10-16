@@ -79,7 +79,8 @@ interface BusinessProcessVersions {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = BusinessProcessVersionListResult
   >;
 }
 

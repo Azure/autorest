@@ -68,7 +68,8 @@ interface EncryptionScopes {
        */
       @query("$include")
       $include?: ListEncryptionScopesInclude;
-    }
+    },
+    Response = EncryptionScopeListResult
   >;
 }
 

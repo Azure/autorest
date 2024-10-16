@@ -82,7 +82,8 @@ interface ComponentVersionResources {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = ComponentVersionResourceArmPaginatedResult
   >;
 }
 

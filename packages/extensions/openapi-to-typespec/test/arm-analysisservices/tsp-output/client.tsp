@@ -8,7 +8,7 @@ using Azure.ResourceManager.Analysis;
 @@flattenProperty(AnalysisServicesServerUpdateParameters.properties);
 
 @@clientName(AnalysisServicesServers.update,
-  "AnalysisServicesServers.update::parameters.properties",
+  "AnalysisServicesServersOperationGroup.update::parameters.properties",
   "serverUpdateParameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

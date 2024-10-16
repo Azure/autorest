@@ -64,7 +64,8 @@ interface ComponentContainerResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = ComponentContainerResourceArmPaginatedResult
   >;
 }
 

@@ -50,7 +50,10 @@ interface Devices {
   /**
    * List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  listByDeviceGroup is ArmResourceListByParent<Device>;
+  listByDeviceGroup is ArmResourceListByParent<
+    Device,
+    Response = DeviceListResult
+  >;
 
   /**
    * Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.

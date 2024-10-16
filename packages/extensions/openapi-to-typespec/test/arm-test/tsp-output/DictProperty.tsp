@@ -34,7 +34,10 @@ interface DictProperties {
   /**
    * List resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<DictProperty>;
+  listByResourceGroup is ArmResourceListByParent<
+    DictProperty,
+    Response = DictPropertyListResult
+  >;
 }
 
 @@doc(DictProperty.name, "Name of resource");

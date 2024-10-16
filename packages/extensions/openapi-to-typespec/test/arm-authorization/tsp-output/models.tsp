@@ -315,6 +315,11 @@ model ClassicAdministratorProperties {
 }
 
 /**
+ * Deny assignment list operation result.
+ */
+model DenyAssignmentListResult is Azure.Core.Page<DenyAssignment>;
+
+/**
  * Deny assignment properties.
  */
 model DenyAssignmentProperties {
@@ -479,6 +484,12 @@ model ProviderOperation {
 }
 
 /**
+ * Provider operations metadata list
+ */
+model ProviderOperationsMetadataListResult
+  is Azure.Core.Page<ProviderOperationsMetadata>;
+
+/**
  * Role assignment properties.
  */
 model RoleAssignmentProperties {
@@ -560,6 +571,11 @@ model RoleAssignmentCreateParameters {
 }
 
 /**
+ * Role assignment list operation result.
+ */
+model RoleAssignmentListResult is Azure.Core.Page<RoleAssignment>;
+
+/**
  * Permissions information.
  */
 model PermissionGetResult is Azure.Core.Page<Permission>;
@@ -620,6 +636,11 @@ model RoleDefinitionProperties {
    */
   assignableScopes?: string[];
 }
+
+/**
+ * Role definition list operation result.
+ */
+model RoleDefinitionListResult is Azure.Core.Page<RoleDefinition>;
 
 /**
  * Eligible child resources list operation result.
@@ -856,6 +877,18 @@ model ExpandedPropertiesPrincipal {
   @encodedName("application/json", "type")
   principalType?: PrincipalType;
 }
+
+/**
+ * Role assignment schedule list operation result.
+ */
+model RoleAssignmentScheduleListResult
+  is Azure.Core.Page<RoleAssignmentSchedule>;
+
+/**
+ * Role assignment schedule instance list operation result.
+ */
+model RoleAssignmentScheduleInstanceListResult
+  is Azure.Core.Page<RoleAssignmentScheduleInstance>;
 
 /**
  * Role assignment schedule properties with scope.
@@ -1105,6 +1138,12 @@ model RoleAssignmentScheduleRequestPropertiesTicketInfo {
 }
 
 /**
+ * Role assignment schedule request list operation result.
+ */
+model RoleAssignmentScheduleRequestListResult
+  is Azure.Core.Page<RoleAssignmentScheduleRequest>;
+
+/**
  * Role eligibility schedule properties with scope.
  */
 model RoleEligibilityScheduleProperties {
@@ -1180,6 +1219,18 @@ model RoleEligibilityScheduleProperties {
    */
   expandedProperties?: ExpandedProperties;
 }
+
+/**
+ * role eligibility schedule list operation result.
+ */
+model RoleEligibilityScheduleListResult
+  is Azure.Core.Page<RoleEligibilitySchedule>;
+
+/**
+ * Role eligibility schedule instance list operation result.
+ */
+model RoleEligibilityScheduleInstanceListResult
+  is Azure.Core.Page<RoleEligibilityScheduleInstance>;
 
 /**
  * Role eligibility schedule properties with scope.
@@ -1404,6 +1455,12 @@ model RoleEligibilityScheduleRequestPropertiesTicketInfo {
 }
 
 /**
+ * Role eligibility schedule request list operation result.
+ */
+model RoleEligibilityScheduleRequestListResult
+  is Azure.Core.Page<RoleEligibilityScheduleRequest>;
+
+/**
  * Role management policy properties with scope.
  */
 model RoleManagementPolicyProperties {
@@ -1545,6 +1602,11 @@ model PolicyPropertiesScope {
 }
 
 /**
+ * Role management policy list operation result.
+ */
+model RoleManagementPolicyListResult is Azure.Core.Page<RoleManagementPolicy>;
+
+/**
  * Role management policy assignment properties with scope.
  */
 model RoleManagementPolicyAssignmentProperties {
@@ -1667,6 +1729,12 @@ model PolicyAssignmentPropertiesPolicy {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDateTime?: utcDateTime;
 }
+
+/**
+ * Role management policy assignment list operation result.
+ */
+model RoleManagementPolicyAssignmentListResult
+  is Azure.Core.Page<RoleManagementPolicyAssignment>;
 
 /**
  * Deny Assignments filter

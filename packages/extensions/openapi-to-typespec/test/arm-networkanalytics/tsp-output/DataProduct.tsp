@@ -50,12 +50,18 @@ interface DataProducts {
   /**
    * List data products by resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<DataProduct>;
+  listByResourceGroup is ArmResourceListByParent<
+    DataProduct,
+    Response = DataProductListResult
+  >;
 
   /**
    * List data products by subscription.
    */
-  listBySubscription is ArmListBySubscription<DataProduct>;
+  listBySubscription is ArmListBySubscription<
+    DataProduct,
+    Response = DataProductListResult
+  >;
 
   /**
    * Assign role to the data product.

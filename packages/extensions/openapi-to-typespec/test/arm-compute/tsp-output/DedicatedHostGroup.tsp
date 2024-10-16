@@ -64,12 +64,18 @@ interface DedicatedHostGroups {
   /**
    * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
+  listByResourceGroup is ArmResourceListByParent<
+    DedicatedHostGroup,
+    Response = DedicatedHostGroupListResult
+  >;
 
   /**
    * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
+  listBySubscription is ArmListBySubscription<
+    DedicatedHostGroup,
+    Response = DedicatedHostGroupListResult
+  >;
 }
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");

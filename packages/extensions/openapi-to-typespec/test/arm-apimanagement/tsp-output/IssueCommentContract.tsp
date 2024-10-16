@@ -106,7 +106,8 @@ interface IssueCommentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = IssueCommentListResult
   >;
 }
 

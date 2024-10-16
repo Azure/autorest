@@ -3668,6 +3668,11 @@ model ResourceName {
 }
 
 /**
+ * Paginated list of Machine Learning compute objects wrapped in ARM resource envelope.
+ */
+model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
+
+/**
  * The resource model definition representing SKU
  */
 model Sku {
@@ -4101,6 +4106,12 @@ model IdleShutdownSetting {
 }
 
 /**
+ * A paginated list of CodeContainer entities.
+ */
+model CodeContainerResourceArmPaginatedResult
+  is Azure.Core.Page<CodeContainerResource>;
+
+/**
  * Container for code asset versions.
  */
 model CodeContainer extends AssetContainer {
@@ -4149,6 +4160,12 @@ model ResourceBase {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
+
+/**
+ * A paginated list of CodeVersion entities.
+ */
+model CodeVersionResourceArmPaginatedResult
+  is Azure.Core.Page<CodeVersionResource>;
 
 /**
  * Code asset version details.
@@ -4251,6 +4268,12 @@ model BlobReferenceForConsumptionDto {
 model PendingUploadCredentialDto {}
 
 /**
+ * A paginated list of ComponentContainer entities.
+ */
+model ComponentContainerResourceArmPaginatedResult
+  is Azure.Core.Page<ComponentContainerResource>;
+
+/**
  * Component container definition.
  * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
  */
@@ -4261,6 +4284,12 @@ model ComponentContainer extends AssetContainer {
   @visibility("read")
   provisioningState?: AssetProvisioningState;
 }
+
+/**
+ * A paginated list of ComponentVersion entities.
+ */
+model ComponentVersionResourceArmPaginatedResult
+  is Azure.Core.Page<ComponentVersionResource>;
 
 /**
  * Definition of a component version: defines resources that span component types.
@@ -4286,6 +4315,12 @@ model ComponentVersion extends AssetBase {
 }
 
 /**
+ * A paginated list of DataContainer entities.
+ */
+model DataContainerResourceArmPaginatedResult
+  is Azure.Core.Page<DataContainerResource>;
+
+/**
  * Container for data asset versions.
  */
 model DataContainer extends AssetContainer {
@@ -4295,6 +4330,12 @@ model DataContainer extends AssetContainer {
   @visibility("read", "create")
   dataType: DataType;
 }
+
+/**
+ * A paginated list of DataVersionBase entities.
+ */
+model DataVersionBaseResourceArmPaginatedResult
+  is Azure.Core.Page<DataVersionBaseResource>;
 
 /**
  * Data version base definition
@@ -4339,6 +4380,12 @@ model IntellectualProperty {
 }
 
 /**
+ * A paginated list of EnvironmentContainer entities.
+ */
+model EnvironmentContainerResourceArmPaginatedResult
+  is Azure.Core.Page<EnvironmentContainerResource>;
+
+/**
  * Container for environment specification versions.
  */
 model EnvironmentContainer extends AssetContainer {
@@ -4348,6 +4395,12 @@ model EnvironmentContainer extends AssetContainer {
   @visibility("read")
   provisioningState?: AssetProvisioningState;
 }
+
+/**
+ * A paginated list of EnvironmentVersion entities.
+ */
+model EnvironmentVersionResourceArmPaginatedResult
+  is Azure.Core.Page<EnvironmentVersionResource>;
 
 /**
  * Environment version details.
@@ -4468,6 +4521,12 @@ model Route {
   port: int32;
 }
 
+/**
+ * A paginated list of ModelContainer entities.
+ */
+model ModelContainerResourceArmPaginatedResult
+  is Azure.Core.Page<ModelContainerResource>;
+
 model ModelContainer extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -4475,6 +4534,12 @@ model ModelContainer extends AssetContainer {
   @visibility("read")
   provisioningState?: AssetProvisioningState;
 }
+
+/**
+ * A paginated list of ModelVersion entities.
+ */
+model ModelVersionResourceArmPaginatedResult
+  is Azure.Core.Page<ModelVersionResource>;
 
 /**
  * Model asset version details.
@@ -4697,6 +4762,12 @@ model PackageResponse {
 }
 
 /**
+ * A paginated list of BatchEndpoint entities.
+ */
+model BatchEndpointTrackedResourceArmPaginatedResult
+  is Azure.Core.Page<BatchEndpointTrackedResource>;
+
+/**
  * Batch endpoint configuration.
  */
 model BatchEndpoint extends EndpointPropertiesBase {
@@ -4817,6 +4888,12 @@ model PartialMinimalTrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
+
+/**
+ * A paginated list of BatchDeployment entities.
+ */
+model BatchDeploymentTrackedResourceArmPaginatedResult
+  is Azure.Core.Page<BatchDeploymentTrackedResource>;
 
 /**
  * Batch inference settings per deployment.
@@ -5033,6 +5110,11 @@ model PartialBatchDeployment {
 }
 
 /**
+ * A paginated list of Datastore entities.
+ */
+model DatastoreResourceArmPaginatedResult is Azure.Core.Page<DatastoreResource>;
+
+/**
  * Base definition for datastore contents configuration.
  */
 @discriminator("datastoreType")
@@ -5068,6 +5150,12 @@ model DatastoreCredentials {}
 model DatastoreSecrets {}
 
 /**
+ * A paginated list of FeaturesetContainer entities.
+ */
+model FeaturesetContainerResourceArmPaginatedResult
+  is Azure.Core.Page<FeaturesetContainer>;
+
+/**
  * Dto object representing feature set
  */
 model FeaturesetContainerProperties extends AssetContainer {
@@ -5077,6 +5165,11 @@ model FeaturesetContainerProperties extends AssetContainer {
   @visibility("read")
   provisioningState?: AssetProvisioningState;
 }
+
+/**
+ * A paginated list of Feature entities.
+ */
+model FeatureResourceArmPaginatedResult is Azure.Core.Page<Feature>;
 
 /**
  * Dto object representing feature
@@ -5092,6 +5185,12 @@ model FeatureProperties extends ResourceBase {
    */
   featureName?: string;
 }
+
+/**
+ * A paginated list of FeaturesetVersion entities.
+ */
+model FeaturesetVersionResourceArmPaginatedResult
+  is Azure.Core.Page<FeaturesetVersion>;
 
 /**
  * Dto object representing feature set version
@@ -5385,6 +5484,12 @@ model FeaturesetJob {
 model FeaturesetJobArmPaginatedResult is Azure.Core.Page<FeaturesetJob>;
 
 /**
+ * A paginated list of FeaturestoreEntityContainer entities.
+ */
+model FeaturestoreEntityContainerResourceArmPaginatedResult
+  is Azure.Core.Page<FeaturestoreEntityContainer>;
+
+/**
  * Dto object representing feature entity
  */
 model FeaturestoreEntityContainerProperties extends AssetContainer {
@@ -5394,6 +5499,12 @@ model FeaturestoreEntityContainerProperties extends AssetContainer {
   @visibility("read")
   provisioningState?: AssetProvisioningState;
 }
+
+/**
+ * A paginated list of FeaturestoreEntityVersion entities.
+ */
+model FeaturestoreEntityVersionResourceArmPaginatedResult
+  is Azure.Core.Page<FeaturestoreEntityVersion>;
 
 /**
  * Dto object representing feature entity version
@@ -5431,6 +5542,11 @@ model IndexColumn {
    */
   dataType?: FeatureDataType;
 }
+
+/**
+ * A paginated list of JobBase entities.
+ */
+model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBaseResource>;
 
 /**
  * Base definition for a job.
@@ -5608,6 +5724,11 @@ model PartialNotificationSetting {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   webhooks?: Record<Webhook>;
 }
+
+/**
+ * A paginated list of LabelingJob entities.
+ */
+model LabelingJobResourceArmPaginatedResult is Azure.Core.Page<LabelingJob>;
 
 /**
  * Labeling job definition
@@ -5854,6 +5975,12 @@ model ExportSummary {
 }
 
 /**
+ * A paginated list of OnlineEndpoint entities.
+ */
+model OnlineEndpointTrackedResourceArmPaginatedResult
+  is Azure.Core.Page<OnlineEndpointTrackedResource>;
+
+/**
  * Online endpoint configuration
  */
 model OnlineEndpoint extends EndpointPropertiesBase {
@@ -5886,6 +6013,12 @@ model OnlineEndpoint extends EndpointPropertiesBase {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   traffic?: Record<int32>;
 }
+
+/**
+ * A paginated list of OnlineDeployment entities.
+ */
+model OnlineDeploymentTrackedResourceArmPaginatedResult
+  is Azure.Core.Page<OnlineDeploymentTrackedResource>;
 
 @discriminator("endpointComputeType")
 model OnlineDeployment extends EndpointDeploymentPropertiesBase {
@@ -6225,6 +6358,11 @@ model EndpointAuthToken {
 }
 
 /**
+ * A paginated list of Schedule entities.
+ */
+model ScheduleResourceArmPaginatedResult is Azure.Core.Page<Schedule>;
+
+/**
  * Base definition of a schedule
  */
 model ScheduleProperties extends ResourceBase {
@@ -6261,6 +6399,11 @@ model ScheduleProperties extends ResourceBase {
 
 @discriminator("actionType")
 model ScheduleActionBase {}
+
+/**
+ * A paginated list of Registry entities.
+ */
+model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 
 /**
  * Details of the Registry
@@ -6597,6 +6740,11 @@ model AmlOperation {
    */
   origin?: string;
 }
+
+/**
+ * The result of a request to list machine learning workspaces.
+ */
+model WorkspaceListResult is Azure.Core.Page<Workspace>;
 
 /**
  * The properties of a machine learning workspace.
@@ -7141,6 +7289,9 @@ model EncryptionKeyVaultUpdateProperties {
   keyIdentifier: string;
 }
 
+model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
+  is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
+
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -7412,6 +7563,23 @@ model FqdnEndpoint {
 
 model FqdnEndpointDetail {
   port?: int32;
+}
+
+/**
+ * List of outbound rules for the managed network of a machine learning workspace.
+ */
+model OutboundRuleListResult is Azure.Core.Page<OutboundRuleBasicResource>;
+
+/**
+ * List of private endpoint connection associated with the specified workspace
+ */
+@pagedResult
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections
+   */
+  @items
+  value?: PrivateEndpointConnection[];
 }
 
 /**

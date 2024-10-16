@@ -70,7 +70,8 @@ interface ModelContainerResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = ModelContainerResourceArmPaginatedResult
   >;
 }
 

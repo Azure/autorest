@@ -149,7 +149,7 @@ interface QuestionAnsweringProjectsOperations {
       @query("assetKind")
       assetKind?: AssetKind;
     },
-    ExportJobState | void
+    ExportJobState
   >;
 
   /**

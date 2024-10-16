@@ -80,7 +80,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
        */
       @query("category")
       category?: string;
-    }
+    },
+    Response = WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   >;
 
   /**

@@ -65,12 +65,15 @@ interface Images {
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  listByResourceGroup is ArmResourceListByParent<Image>;
+  listByResourceGroup is ArmResourceListByParent<
+    Image,
+    Response = ImageListResult
+  >;
 
   /**
    * Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  list is ArmListBySubscription<Image>;
+  list is ArmListBySubscription<Image, Response = ImageListResult>;
 }
 
 @@doc(Image.name, "The name of the image.");

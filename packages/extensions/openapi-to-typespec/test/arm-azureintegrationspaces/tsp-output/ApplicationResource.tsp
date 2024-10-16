@@ -96,7 +96,8 @@ interface ApplicationResources {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = ApplicationResourceListResult
   >;
 }
 

@@ -151,7 +151,8 @@ interface UserContracts {
        */
       @query("expandGroups")
       expandGroups?: boolean;
-    }
+    },
+    Response = UserListResult
   >;
 
   /**
@@ -242,7 +243,7 @@ interface UserContracts {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<GroupContract>> | ErrorResponse;
+  ): ArmResponse<GroupListResult> | ErrorResponse;
 
   /**
    * List of all user identities.

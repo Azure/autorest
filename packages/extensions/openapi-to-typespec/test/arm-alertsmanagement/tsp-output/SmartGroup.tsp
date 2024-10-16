@@ -105,7 +105,8 @@ interface SmartGroups {
        */
       @query("sortOrder")
       sortOrder?: SortOrder;
-    }
+    },
+    Response = SmartGroupsList
   >;
 
   /**
@@ -129,7 +130,7 @@ interface SmartGroups {
    * Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
    */
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")
+  @route("undefined")
   @get
   getHistory(
     ...ApiVersionParameter,
@@ -139,8 +140,9 @@ interface SmartGroups {
      * Smart group unique id.
      */
     @path
+    @segment("smartGroups")
     smartGroupId: string,
-  ): ArmResponse<SmartGroupModification> | ErrorResponse;
+  ): ArmResponse<m> | ErrorResponse;
 }
 
 @@doc(SmartGroup.name, "Smart group unique id. ");

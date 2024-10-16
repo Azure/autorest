@@ -64,7 +64,8 @@ interface DataConnectors {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = DataConnectorListResponse
   >;
 }
 

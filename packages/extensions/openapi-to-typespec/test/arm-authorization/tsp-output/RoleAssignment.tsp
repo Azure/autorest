@@ -88,7 +88,8 @@ interface RoleAssignments {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 }
 

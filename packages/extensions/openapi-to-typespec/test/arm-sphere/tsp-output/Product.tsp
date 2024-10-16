@@ -50,7 +50,10 @@ interface Products {
   /**
    * List Product resources by Catalog
    */
-  listByCatalog is ArmResourceListByParent<Product>;
+  listByCatalog is ArmResourceListByParent<
+    Product,
+    Response = ProductListResult
+  >;
 
   /**
    * Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
@@ -63,7 +66,7 @@ interface Products {
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
     void,
-    ResourceListResult<DeviceGroup>
+    DeviceGroupListResult
   >;
 }
 

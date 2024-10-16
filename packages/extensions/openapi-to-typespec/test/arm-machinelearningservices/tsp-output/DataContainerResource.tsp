@@ -70,7 +70,8 @@ interface DataContainerResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = DataContainerResourceArmPaginatedResult
   >;
 }
 

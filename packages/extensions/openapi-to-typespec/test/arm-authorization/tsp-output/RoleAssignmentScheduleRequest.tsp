@@ -53,7 +53,8 @@ interface RoleAssignmentScheduleRequests {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleAssignmentScheduleRequestListResult
   >;
 
   /**

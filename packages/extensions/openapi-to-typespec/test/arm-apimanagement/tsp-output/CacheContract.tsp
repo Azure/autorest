@@ -115,7 +115,8 @@ interface CacheContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = CacheListResult
   >;
 }
 

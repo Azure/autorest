@@ -47,7 +47,8 @@ interface SharedGalleries {
        */
       @query("sharedTo")
       sharedTo?: SharedToValues;
-    }
+    },
+    Response = SharedGalleryList
   >;
 }
 

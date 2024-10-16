@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -339,6 +341,18 @@ model AnalysisServicesServerUpdateParameters {
    */
   @extension("x-ms-client-flatten", true)
   properties?: AnalysisServicesServerMutableProperties;
+}
+
+/**
+ * An array of Analysis Services resources.
+ */
+@pagedResult
+model AnalysisServicesServers {
+  /**
+   * An array of Analysis Services resources.
+   */
+  @items
+  value: AnalysisServicesServer[];
 }
 
 /**

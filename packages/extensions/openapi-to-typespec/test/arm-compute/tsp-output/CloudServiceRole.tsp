@@ -58,7 +58,10 @@ interface CloudServiceRoles {
   /**
    * Gets a list of all roles in a cloud service. Use nextLink property in the response to get the next page of roles. Do this till nextLink is null to fetch all the roles.
    */
-  list is ArmResourceListByParent<CloudServiceRole>;
+  list is ArmResourceListByParent<
+    CloudServiceRole,
+    Response = CloudServiceRoleListResult
+  >;
 }
 
 @@doc(CloudServiceRole.name, "Name of the role.");

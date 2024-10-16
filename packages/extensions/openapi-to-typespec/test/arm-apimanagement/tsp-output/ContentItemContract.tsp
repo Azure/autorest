@@ -85,7 +85,10 @@ interface ContentItemContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContentItem_ListByService")
-  listByService is ArmResourceListByParent<ContentItemContract>;
+  listByService is ArmResourceListByParent<
+    ContentItemContract,
+    Response = ContentItemListResult
+  >;
 }
 
 @@maxLength(ContentItemContract.name, 80);

@@ -107,7 +107,8 @@ interface DatastoreResources {
        */
       @query("orderByAsc")
       orderByAsc?: boolean;
-    }
+    },
+    Response = DatastoreResourceArmPaginatedResult
   >;
 
   /**

@@ -81,8 +81,15 @@ interface VirtualMachineScaleSetVMS {
    * Updates a virtual machine of a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Update")
-  update is ArmResourceCreateOrReplaceAsync<VirtualMachineScaleSetVM>;
+  update is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetVM,
+    Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
+      @body _: VirtualMachineScaleSetVM;
+    })
+  >;
 
   /**
    * Deletes a virtual machine from a VM scale set.
@@ -134,7 +141,8 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = VirtualMachineScaleSetVMListResult
   >;
 
   /**
