@@ -222,10 +222,11 @@ export interface TspArmResourceOperationBase extends WithDoc, WithFixMe, WithSup
   customizations?: string[];
 }
 
+// TO-DO: consolidate with other templates
 export interface TspArmProviderActionOperation extends WithDoc, WithSummary {
   kind: "ArmProviderActionAsync";
   name: string;
-  action: string | undefined;
+  action?: string;
   responses: string[] | undefined;
   verb: string;
   scope: "TenantActionScope" | "SubscriptionActionScope" | undefined;

@@ -1,4 +1,4 @@
-import { isObjectSchema, Response, SchemaResponse } from "@autorest/codemodel";
+import { isObjectSchema, Response } from "@autorest/codemodel";
 import { isArraySchema, isResponseSchema, isStringSchema, isUriSchema } from "./schemas";
 
 export function getFullyQualifiedName(type: string, namespace: string | undefined = undefined): string {
