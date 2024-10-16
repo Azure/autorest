@@ -49,22 +49,15 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to get all PE connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_List")
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  list is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");
 @@doc(PrivateEndpointConnection.properties,
   "Private endpoint connection properties."
-);
-@@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "PrivateEndpointConnection object"

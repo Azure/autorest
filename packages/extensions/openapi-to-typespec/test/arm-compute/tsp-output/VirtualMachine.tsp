@@ -56,9 +56,7 @@ interface VirtualMachines {
    */
   get is ArmResourceRead<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
        */
@@ -86,9 +84,7 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete virtual machines.
        */
@@ -100,13 +96,9 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
        */
@@ -118,25 +110,36 @@ interface VirtualMachines {
        */
       @query("$expand")
       $expand?: ExpandTypeForListVMs;
-    }
-  >;
-
-  /**
-   * Gets all the virtual machines under the specified subscription for the specified location.
-   */
-  listByLocation is ArmResourceListAtScope<
-    VirtualMachine,
-    LocationScope<VirtualMachine>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-      ...LocationResourceParameter;
-    }
+    },
+    Response = VirtualMachineListResult
   >;
 
   /**
    * Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  listAll is ArmListBySubscription<VirtualMachine>;
+  listAll is ArmListBySubscription<
+    VirtualMachine,
+    Parameters = {
+      /**
+       * statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
+       */
+      @query("statusOnly")
+      statusOnly?: string;
+
+      /**
+       * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForListVMs;
+    },
+    Response = VirtualMachineListResult
+  >;
 
   /**
    * Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.
@@ -159,9 +162,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine. (Feature in Preview)
        */
@@ -182,9 +183,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
@@ -229,9 +228,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     RetrieveBootDiagnosticsDataResult,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */
@@ -320,68 +317,20 @@ interface VirtualMachines {
 @@doc(VirtualMachine.properties,
   "Describes the properties of a Virtual Machine."
 );
-@@encodedName(VirtualMachines.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine operation."
-);
-@@encodedName(VirtualMachines.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.capture::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.capture::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
-);
-@@encodedName(VirtualMachines.reimage::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.reimage::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachines.reimage::parameters.body,
   "Parameters supplied to the Reimage Virtual Machine operation."
 );
-@@encodedName(VirtualMachines.installPatches::parameters.body,
-  "application/json",
-  "installPatchesInput"
-);
-@@extension(VirtualMachines.installPatches::parameters.body,
-  "x-ms-client-name",
-  "installPatchesInput"
-);
 @@doc(VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
-);
-@@encodedName(VirtualMachines.runCommand::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.runCommand::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachines.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."

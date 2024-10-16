@@ -50,38 +50,26 @@ interface AlertProcessingRules {
   /**
    * List all alert processing rules in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AlertProcessingRules_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<AlertProcessingRule>;
+  listByResourceGroup is ArmResourceListByParent<
+    AlertProcessingRule,
+    Response = AlertProcessingRulesList
+  >;
 
   /**
    * List all alert processing rules in a subscription.
    */
-  listBySubscription is ArmListBySubscription<AlertProcessingRule>;
+  listBySubscription is ArmListBySubscription<
+    AlertProcessingRule,
+    Response = AlertProcessingRulesList
+  >;
 }
 
 @@doc(AlertProcessingRule.name,
   "The name of the alert processing rule that needs to be fetched."
 );
 @@doc(AlertProcessingRule.properties, "Alert processing rule properties.");
-@@encodedName(AlertProcessingRules.createOrUpdate::parameters.resource,
-  "application/json",
-  "alertProcessingRule"
-);
-@@extension(AlertProcessingRules.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "alertProcessingRule"
-);
 @@doc(AlertProcessingRules.createOrUpdate::parameters.resource,
   "Alert processing rule to be created/updated."
-);
-@@encodedName(AlertProcessingRules.update::parameters.properties,
-  "application/json",
-  "alertProcessingRulePatch"
-);
-@@extension(AlertProcessingRules.update::parameters.properties,
-  "x-ms-client-name",
-  "alertProcessingRulePatch"
 );
 @@doc(AlertProcessingRules.update::parameters.properties,
   "Parameters supplied to the operation."

@@ -19,9 +19,9 @@ model SubscriptionContract
   is Azure.ResourceManager.ProxyResource<SubscriptionContractProperties> {
   ...ResourceNameParameter<
     Resource = SubscriptionContract,
-    KeyName = "subscriptionId",
+    KeyName = "sid",
     SegmentName = "subscriptions",
-    NamePattern = ""
+    NamePattern = "^[^*#&+:<>?]+$"
   >;
 }
 
@@ -30,14 +30,14 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_Get")
   get is ArmResourceRead<SubscriptionContract>;
 
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Subscription_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface SubscriptionContracts {
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SubscriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
-
+    Parameters = {
       /**
        * Notify change in Subscription State.
        *  - If false, do not send any email notification for change of state of subscription
@@ -82,15 +80,13 @@ interface SubscriptionContracts {
   /**
    * Updates the details of a subscription specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Subscription_Update")
   update is ArmCustomPatchSync<
     SubscriptionContract,
     SubscriptionUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
-
+    Parameters = {
       /**
        * Notify change in Subscription State.
        *  - If false, do not send any email notification for change of state of subscription
@@ -116,14 +112,12 @@ interface SubscriptionContracts {
   /**
    * Deletes the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Subscription_Delete")
   delete is ArmResourceDeleteSync<
     SubscriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -135,13 +129,11 @@ interface SubscriptionContracts {
   /**
    * Lists all subscriptions of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_List")
   list is ArmResourceListByParent<
     SubscriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<SubscriptionContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| stateComment | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| ownerId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| scope | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| user | expand |     |     |</br>
        */
@@ -160,13 +152,14 @@ interface SubscriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = SubscriptionListResult
   >;
 
   /**
    * Regenerates primary key of existing subscription of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegeneratePrimaryKey")
   regeneratePrimaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
@@ -176,7 +169,7 @@ interface SubscriptionContracts {
   /**
    * Regenerates secondary key of existing subscription of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_RegenerateSecondaryKey")
   regenerateSecondaryKey is ArmResourceActionNoContentSync<
     SubscriptionContract,
@@ -186,7 +179,7 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscription_ListSecrets")
   listSecrets is ArmResourceActionSync<
     SubscriptionContract,
@@ -195,28 +188,13 @@ interface SubscriptionContracts {
   >;
 }
 
+@@maxLength(SubscriptionContract.name, 256);
 @@doc(SubscriptionContract.name,
-  "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+  "Subscription entity Identifier. The entity represents the association between a user and a product in API Management."
 );
 @@doc(SubscriptionContract.properties, "Subscription contract properties.");
-@@encodedName(SubscriptionContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(SubscriptionContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(SubscriptionContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(SubscriptionContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(SubscriptionContracts.update::parameters.properties,
   "Update parameters."

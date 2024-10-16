@@ -31,36 +31,31 @@ interface TableServicePropertiesOperationGroup {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TableServices_GetServiceProperties")
   getServiceProperties is ArmResourceRead<TableServiceProperties>;
 
   /**
    * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TableServices_SetServiceProperties")
   setServiceProperties is ArmResourceCreateOrReplaceSync<TableServiceProperties>;
 
   /**
    * List all table services for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TableServices_List")
-  list is ArmResourceListByParent<TableServiceProperties>;
+  list is ArmResourceListByParent<
+    TableServiceProperties,
+    Response = ListTableServices
+  >;
 }
 
 @@doc(TableServiceProperties.name, "");
 @@doc(TableServiceProperties.properties,
   "The properties of a storage account’s Table service."
-);
-@@encodedName(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(TableServicePropertiesOperationGroup.setServiceProperties::parameters.resource,
   "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."

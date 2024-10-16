@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -13,13 +13,16 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.ApiManagement;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union Protocol {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   http: "http",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   https: "https",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ws: "ws",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   wss: "wss",
 }
 
@@ -28,14 +31,20 @@ union Protocol {
  */
 union VersioningScheme {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Segment: "Segment",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Query: "Query",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Header: "Header",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union BearerTokenSendingMethod {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   authorizationHeader: "authorizationHeader",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   query: "query",
 }
 
@@ -44,9 +53,13 @@ union BearerTokenSendingMethod {
  */
 union ApiType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   http: "http",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   soap: "soap",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   websocket: "websocket",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   graphql: "graphql",
 }
 
@@ -170,11 +183,14 @@ union PolicyContentFormat {
   `rawxml-link`: "rawxml-link",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union PolicyIdName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   policy: "policy",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union PolicyExportFormat {
   string,
 
@@ -323,6 +339,7 @@ union State {
   closed: "closed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExportFormat {
   string,
 
@@ -352,8 +369,10 @@ union ExportFormat {
   OpenapiJson: "openapi+json-link",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExportApi {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `true`: "true",
 }
 
@@ -384,6 +403,7 @@ union ExportResultFormat {
   OpenApi: "openapi-link",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union GrantType {
   string,
 
@@ -408,6 +428,7 @@ union GrantType {
   clientCredentials: "clientCredentials",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ClientAuthenticationMethod {
   string,
 
@@ -444,6 +465,7 @@ union BackendProtocol {
  */
 union PreferredIPVersion {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IPv4: "IPv4",
 }
 
@@ -452,8 +474,11 @@ union PreferredIPVersion {
  */
 union ConnectivityCheckProtocol {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TCP: "TCP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   HTTP: "HTTP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   HTTPS: "HTTPS",
 }
 
@@ -462,7 +487,9 @@ union ConnectivityCheckProtocol {
  */
 union Method {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   GET: "GET",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   POST: "POST",
 }
 
@@ -471,7 +498,9 @@ union Method {
  */
 union Severity {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Error: "Error",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Warning: "Warning",
 }
 
@@ -480,14 +509,23 @@ union Severity {
  */
 union IssueType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AgentStopped: "AgentStopped",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   GuestFirewall: "GuestFirewall",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DnsResolution: "DnsResolution",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SocketBind: "SocketBind",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NetworkSecurityRule: "NetworkSecurityRule",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UserDefinedRoute: "UserDefinedRoute",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PortThrottled: "PortThrottled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Platform: "Platform",
 }
 
@@ -496,9 +534,13 @@ union IssueType {
  */
 union ConnectionStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Connected: "Connected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disconnected: "Disconnected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Degraded: "Degraded",
 }
 
@@ -588,10 +630,15 @@ union AccessType {
  */
 union HostnameType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Proxy: "Proxy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Portal: "Portal",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Management: "Management",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Scm: "Scm",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DeveloperPortal: "DeveloperPortal",
 }
 
@@ -600,9 +647,13 @@ union HostnameType {
  */
 union CertificateSource {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Managed: "Managed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   KeyVault: "KeyVault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Custom: "Custom",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   BuiltIn: "BuiltIn",
 }
 
@@ -611,8 +662,11 @@ union CertificateSource {
  */
 union CertificateStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
 }
 
@@ -621,7 +675,9 @@ union CertificateStatus {
  */
 union PublicNetworkAccess {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
@@ -657,7 +713,9 @@ union PlatformVersion {
  */
 union CertificateConfigurationStoreName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CertificateAuthority: "CertificateAuthority",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Root: "Root",
 }
 
@@ -688,8 +746,11 @@ union VirtualNetworkType {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Rejected: "Rejected",
 }
 
@@ -698,27 +759,46 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union ApimIdentityType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SystemAssigned: "SystemAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union TemplateName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   applicationApprovedNotificationMessage: "applicationApprovedNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   accountClosedDeveloper: "accountClosedDeveloper",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   quotaLimitApproachingDeveloperNotificationMessage: "quotaLimitApproachingDeveloperNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   newDeveloperNotificationMessage: "newDeveloperNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   emailChangeIdentityDefault: "emailChangeIdentityDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   inviteUserNotificationMessage: "inviteUserNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   newCommentNotificationMessage: "newCommentNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   confirmSignUpIdentityDefault: "confirmSignUpIdentityDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   newIssueNotificationMessage: "newIssueNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   purchaseDeveloperNotificationMessage: "purchaseDeveloperNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   passwordResetIdentityDefault: "passwordResetIdentityDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   passwordResetByAdminNotificationMessage: "passwordResetByAdminNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   rejectDeveloperNotificationMessage: "rejectDeveloperNotificationMessage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   requestDeveloperNotificationMessage: "requestDeveloperNotificationMessage",
 }
 
@@ -749,6 +829,7 @@ union UserState {
   deleted: "deleted",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union IdentityProviderType {
   string,
 
@@ -810,11 +891,15 @@ union LoggerType {
  */
 union ConnectivityStatusType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   initializing: "initializing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   success: "success",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   failure: "failure",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union NotificationName {
   string,
 
@@ -887,9 +972,13 @@ union PortalRevisionStatus {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
@@ -910,11 +999,14 @@ union SchemaType {
   Json: "json",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union SettingsTypeName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   public: "public",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AppType {
   string,
 
@@ -929,14 +1021,19 @@ union AppType {
   developerPortal: "developerPortal",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union AccessIdName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   access: "access",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   gitAccess: "gitAccess",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ConfigurationIdName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   configuration: "configuration",
 }
 
@@ -960,11 +1057,14 @@ union Confirmation {
 /**
  * whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ProductState {
   notPublished,
   published,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AuthorizationMethod {
   HEAD,
   OPTIONS,
@@ -979,6 +1079,7 @@ enum AuthorizationMethod {
 /**
  * Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum NameAvailabilityReason {
   Valid,
   Invalid,
@@ -988,6 +1089,7 @@ enum NameAvailabilityReason {
 /**
  * The Key being regenerated.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum GatewayRegenerateKeyType {
   primary,
   secondary,
@@ -996,6 +1098,7 @@ enum GatewayRegenerateKeyType {
 /**
  * The Key to be used to generate token for user.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum KeyType {
   primary,
   secondary,
@@ -1004,12 +1107,15 @@ enum KeyType {
 /**
  * Group type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum GroupType {
   custom,
   system,
   external,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum PolicyScopeContract {
   Tenant,
   Product,
@@ -1021,6 +1127,7 @@ enum PolicyScopeContract {
 /**
  * Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum SubscriptionState {
   suspended,
   active,
@@ -1033,6 +1140,7 @@ enum SubscriptionState {
 /**
  * The scale type applicable to the sku.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ApiManagementSkuCapacityScaleType {
   Automatic,
   Manual,
@@ -1042,6 +1150,7 @@ enum ApiManagementSkuCapacityScaleType {
 /**
  * The type of restrictions.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ApiManagementSkuRestrictionsType {
   Location,
   Zone,
@@ -1050,6 +1159,7 @@ enum ApiManagementSkuRestrictionsType {
 /**
  * The reason for restriction.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ApiManagementSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
@@ -1058,11 +1168,22 @@ enum ApiManagementSkuRestrictionsReasonCode {
 /**
  * Status of an async operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum AsyncOperationStatus {
   Started,
   InProgress,
   Succeeded,
   Failed,
+}
+
+/**
+ * Paged API list representation.
+ */
+model ApiListResult is Azure.Core.Page<ApiContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -1552,6 +1673,16 @@ model ApiRevisionContract {
 }
 
 /**
+ * Paged ApiRelease list representation.
+ */
+model ApiReleaseListResult is Azure.Core.Page<ApiReleaseContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * API Release details
  */
 model ApiReleaseContractProperties {
@@ -1836,6 +1967,26 @@ model OperationUpdateContractProperties extends OperationEntityBaseContract {
 }
 
 /**
+ * The response of the list policy operation.
+ */
+model PolicyListResult {
+  /**
+   * Policy Contract value.
+   */
+  value?: PolicyContract[];
+
+  /**
+   * Total record count number.
+   */
+  count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  nextLink?: string;
+}
+
+/**
  * Policy contract Properties.
  */
 model PolicyContractProperties {
@@ -1851,6 +2002,16 @@ model PolicyContractProperties {
 }
 
 /**
+ * Paged Tag list representation.
+ */
+model TagListResult is Azure.Core.Page<TagContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Tag contract Properties.
  */
 model TagContractProperties {
@@ -1860,6 +2021,16 @@ model TagContractProperties {
   @maxLength(160)
   @minLength(1)
   displayName: string;
+}
+
+/**
+ * Paged Products list representation.
+ */
+model ProductListResult is Azure.Core.Page<ProductContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -1913,6 +2084,16 @@ model ProductEntityBaseParameters {
 }
 
 /**
+ * The response of the list schema operation.
+ */
+model SchemaListResult is Azure.Core.Page<SchemaContract> {
+  /**
+   * Total record count number.
+   */
+  count?: int64;
+}
+
+/**
  * API Schema create or update contract Properties.
  */
 model SchemaContractProperties {
@@ -1946,6 +2127,16 @@ model SchemaDocumentProperties {
    * Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise.
    */
   components?: Record<unknown>;
+}
+
+/**
+ * Paged Diagnostic list representation.
+ */
+model DiagnosticListResult is Azure.Core.Page<DiagnosticContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -2092,6 +2283,16 @@ model DataMaskingEntity {
 }
 
 /**
+ * Paged Issue list representation.
+ */
+model IssueListResult is Azure.Core.Page<IssueContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Issue contract Properties.
  */
 model IssueContractProperties extends IssueContractBaseProperties {
@@ -2164,6 +2365,16 @@ model IssueUpdateContractProperties extends IssueContractBaseProperties {
 }
 
 /**
+ * Paged Issue Comment list representation.
+ */
+model IssueCommentListResult is Azure.Core.Page<IssueCommentContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Issue Comment contract Properties.
  */
 model IssueCommentContractProperties {
@@ -2185,6 +2396,16 @@ model IssueCommentContractProperties {
 }
 
 /**
+ * Paged Issue Attachment list representation.
+ */
+model IssueAttachmentListResult is Azure.Core.Page<IssueAttachmentContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Issue Attachment contract Properties.
  */
 model IssueAttachmentContractProperties {
@@ -2202,6 +2423,16 @@ model IssueAttachmentContractProperties {
    * An HTTP link or Base64-encoded binary data.
    */
   content: string;
+}
+
+/**
+ * Paged TagDescription list representation.
+ */
+model TagDescriptionListResult is Azure.Core.Page<TagDescriptionContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -2443,6 +2674,16 @@ model ApiExportResultValue {
 }
 
 /**
+ * Paged API Version Set list representation.
+ */
+model ApiVersionSetListResult is Azure.Core.Page<ApiVersionSetContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Properties of an API Version Set.
  */
 model ApiVersionSetContractProperties extends ApiVersionSetEntityBase {
@@ -2509,6 +2750,17 @@ model ApiVersionSetUpdateParametersProperties extends ApiVersionSetEntityBase {
    * An value that determines where the API Version identifier will be located in a HTTP request.
    */
   versioningScheme?: VersioningScheme;
+}
+
+/**
+ * Paged OAuth2 Authorization Servers list representation.
+ */
+model AuthorizationServerListResult
+  is Azure.Core.Page<AuthorizationServerContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -2689,6 +2941,16 @@ model AuthorizationServerSecretsContract {
    * Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
    */
   resourceOwnerPassword?: string;
+}
+
+/**
+ * Paged Backend list representation.
+ */
+model BackendListResult is Azure.Core.Page<BackendContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -2953,6 +3215,16 @@ model BackendReconnectProperties {
 }
 
 /**
+ * Paged Caches list representation.
+ */
+model CacheListResult is Azure.Core.Page<CacheContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Properties of the Cache contract.
  */
 model CacheContractProperties {
@@ -3021,6 +3293,16 @@ model CacheUpdateProperties {
   @maxLength(2000)
   @encodedName("application/json", "resourceId")
   resourceUri?: string;
+}
+
+/**
+ * Paged Certificates list representation.
+ */
+model CertificateListResult is Azure.Core.Page<CertificateContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -3359,17 +3641,6 @@ model ConnectivityIssue {
  */
 model ContentTypeListResult is Azure.Core.Page<ContentTypeContract>;
 
-/**
- * Content type contract details.
- */
-model ContentTypeContract extends Resource {
-  /**
-   * Properties of the content type.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: ContentTypeContractProperties;
-}
-
 model ContentTypeContractProperties {
   /**
    * Content type identifier
@@ -3403,16 +3674,9 @@ model ContentTypeContractProperties {
 model ContentItemListResult is Azure.Core.Page<ContentItemContract>;
 
 /**
- * Content type contract details.
+ * Paged deleted API Management Services List Representation.
  */
-model ContentItemContract extends Resource {
-  /**
-   * Properties of the content item.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @extension("x-ms-client-flatten", true)
-  properties?: Record<unknown>;
-}
+model DeletedServicesListResult is Azure.Core.Page<DeletedServiceContract>;
 
 model DeletedServiceContractProperties {
   /**
@@ -4113,6 +4377,12 @@ model ApiManagementServiceUpdateProperties
 }
 
 /**
+ * The response of the List API Management services operation.
+ */
+model ApiManagementServiceListResult
+  is Azure.Core.Page<ApiManagementServiceResource>;
+
+/**
  * The response of the GetSsoToken operation.
  */
 model ApiManagementServiceGetSsoTokenResult {
@@ -4173,6 +4443,16 @@ model ApiManagementServiceApplyNetworkConfigurationParameters {
    * Location of the Api Management service to update for a multi-region service. For a service deployed in a single region, this parameter is not required.
    */
   location?: string;
+}
+
+/**
+ * Paged email template list representation.
+ */
+model EmailTemplateListResult is Azure.Core.Page<EmailTemplateContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -4289,6 +4569,16 @@ model EmailTemplateUpdateParameterProperties {
 }
 
 /**
+ * Paged Gateway list representation.
+ */
+model GatewayListResult is Azure.Core.Page<GatewayContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Properties of the Gateway contract.
  */
 model GatewayContractProperties {
@@ -4386,6 +4676,12 @@ model GatewayTokenContract {
 }
 
 /**
+ * Paged Gateway hostname configuration list representation.
+ */
+model GatewayHostnameConfigurationListResult
+  is Azure.Core.Page<GatewayHostnameConfigurationContract>;
+
+/**
  * Gateway hostname configuration details.
  */
 model GatewayHostnameConfigurationContractProperties {
@@ -4454,6 +4750,12 @@ model AssociationContractProperties {
 }
 
 /**
+ * Paged Gateway certificate authority list representation.
+ */
+model GatewayCertificateAuthorityListResult
+  is Azure.Core.Page<GatewayCertificateAuthorityContract>;
+
+/**
  * Gateway certificate authority details.
  */
 model GatewayCertificateAuthorityContractProperties {
@@ -4461,6 +4763,16 @@ model GatewayCertificateAuthorityContractProperties {
    * Determines whether certificate authority is trusted.
    */
   isTrusted?: boolean;
+}
+
+/**
+ * Paged Group list representation.
+ */
+model GroupListResult is Azure.Core.Page<GroupContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -4656,6 +4968,16 @@ model UserIdentityContract {
 }
 
 /**
+ * List of all the Identity Providers configured on the service instance.
+ */
+model IdentityProviderList is Azure.Core.Page<IdentityProviderContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.
  */
 model IdentityProviderContractProperties
@@ -4794,6 +5116,16 @@ model ClientSecretContract {
 }
 
 /**
+ * Paged Logger list representation.
+ */
+model LoggerListResult is Azure.Core.Page<LoggerContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
  */
 model LoggerContractProperties {
@@ -4861,6 +5193,16 @@ model LoggerUpdateParameters {
    * Whether records are buffered in the logger before publishing. Default is assumed to be true.
    */
   isBuffered?: boolean;
+}
+
+/**
+ * Paged NamedValue list representation.
+ */
+model NamedValueListResult is Azure.Core.Page<NamedValueContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -5066,6 +5408,16 @@ model ConnectivityStatusContract {
 }
 
 /**
+ * Paged Notification list representation.
+ */
+model NotificationListResult is Azure.Core.Page<NotificationContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Notification Contract properties.
  */
 model NotificationContractProperties {
@@ -5182,6 +5534,17 @@ model RecipientEmailContractProperties {
    * User Email subscribed to notification.
    */
   email?: string;
+}
+
+/**
+ * Paged OpenIdProviders list representation.
+ */
+model OpenIdConnectProviderListResult
+  is Azure.Core.Page<OpenidConnectProviderContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**
@@ -5366,6 +5729,11 @@ model PolicyDescriptionContractProperties {
   scope?: int64;
 }
 
+/**
+ * Paged list of portal revisions.
+ */
+model PortalRevisionListResult is Azure.Core.Page<PortalRevisionContract>;
+
 model PortalRevisionContractProperties {
   /**
    * Portal revision description.
@@ -5404,6 +5772,21 @@ model PortalRevisionContractProperties {
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedDateTime?: utcDateTime;
+}
+
+/**
+ * Descriptions of APIM policies.
+ */
+model PortalSettingsListResult {
+  /**
+   * Descriptions of APIM policies.
+   */
+  value?: PortalSettingsContract[];
+
+  /**
+   * Total record count number.
+   */
+  count?: int64;
 }
 
 /**
@@ -5555,6 +5938,18 @@ model PortalSettingValidationKeyContract {
 }
 
 /**
+ * List of private endpoint connection associated with the specified storage account
+ */
+@pagedResult
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections
+   */
+  @items
+  value?: PrivateEndpointConnection[];
+}
+
+/**
  * Properties of the PrivateEndpointConnectProperties.
  */
 model PrivateEndpointConnectionProperties {
@@ -5609,6 +6004,16 @@ model PrivateEndpointConnectionRequestProperties {
    * A collection of information about the state of the connection between service consumer and provider.
    */
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+}
+
+/**
+ * A list of private link resources
+ */
+model PrivateLinkResourceListResult {
+  /**
+   * Array of private link resources
+   */
+  value?: PrivateLinkResource[];
 }
 
 /**
@@ -5679,6 +6084,16 @@ model ApiManagementProductGroupListResult is Azure.Core.Page<ProductGroupData> {
 }
 
 model ProductGroupData extends GroupContract {}
+
+/**
+ * Paged Subscriptions list representation.
+ */
+model SubscriptionListResult is Azure.Core.Page<SubscriptionContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
 
 /**
  * Subscription details.
@@ -6149,6 +6564,16 @@ model RequestReportRecordContract {
 }
 
 /**
+ * The response of the list schema operation.
+ */
+model GlobalSchemaListResult is Azure.Core.Page<GlobalSchemaContract> {
+  /**
+   * Total record count number.
+   */
+  count?: int64;
+}
+
+/**
  * Schema create or update contract Properties.
  */
 model GlobalSchemaContractProperties {
@@ -6173,6 +6598,11 @@ model GlobalSchemaContractProperties {
   @extension("x-ms-client-flatten", true)
   document?: Record<unknown>;
 }
+
+/**
+ * Paged AccessInformation list representation.
+ */
+model TenantSettingsListResult is Azure.Core.Page<TenantSettingsContract>;
 
 /**
  * Tenant access information contract of the API Management service.
@@ -6582,6 +7012,17 @@ model TagCreateUpdateParameters {
 }
 
 /**
+ * Paged AccessInformation list representation.
+ */
+model AccessInformationListResult
+  is Azure.Core.Page<AccessInformationContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
+}
+
+/**
  * Tenant access information contract of the API Management service.
  */
 model AccessInformationContractProperties {
@@ -6875,6 +7316,16 @@ model TenantConfigurationSyncStateContractProperties {
    * Most recent tenant configuration operation identifier
    */
   lastOperationId?: string;
+}
+
+/**
+ * Paged Users list representation.
+ */
+model UserListResult is Azure.Core.Page<UserContract> {
+  /**
+   * Total record count number across all pages.
+   */
+  count?: int64;
 }
 
 /**

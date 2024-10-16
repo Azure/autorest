@@ -48,21 +48,14 @@ interface PrivateEndpointConnections {
   /**
    * Get list of Private endpoint connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateEndpointConnections_ListByResource")
-  listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
+  listByResource is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Response = PrivateEndpointConnectionListResult
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name, "Private endpoint connection name.");
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@encodedName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "application/json",
-  "request"
-);
-@@extension(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "request"
-);
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "Request object."
 );

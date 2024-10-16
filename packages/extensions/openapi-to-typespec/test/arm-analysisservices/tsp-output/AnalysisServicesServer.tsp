@@ -24,25 +24,32 @@ model AnalysisServicesServer
 }
 
 @armResourceOperations
-interface AnalysisServicesServers {
+interface AnalysisServicesServersOperationGroup {
   /**
    * Gets details about the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_GetDetails")
   getDetails is ArmResourceRead<AnalysisServicesServer>;
 
   /**
    * Provisions the specified Analysis Services server based on the configuration specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("Servers_Create")
-  create is ArmResourceCreateOrReplaceAsync<AnalysisServicesServer>;
+  create is ArmResourceCreateOrReplaceAsync<
+    AnalysisServicesServer,
+    Response = ArmResourceCreatedResponse<AnalysisServicesServer> | ArmResourceUpdatedResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
+      @body _: AnalysisServicesServer;
+    })
+  >;
 
   /**
    * Updates the current state of the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Servers_Update")
   update is ArmCustomPatchAsync<
@@ -53,7 +60,7 @@ interface AnalysisServicesServers {
   /**
    * Deletes the specified Analysis Services server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -63,42 +70,41 @@ interface AnalysisServicesServers {
   /**
    * Gets all the Analysis Services servers for the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<AnalysisServicesServer>;
+  listByResourceGroup is ArmResourceListByParent<
+    AnalysisServicesServer,
+    Response = AnalysisServicesServers
+  >;
 
   /**
    * Lists all the Analysis Services servers for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_List")
-  list is ArmListBySubscription<AnalysisServicesServer>;
-
-  /**
-   * Lists eligible SKUs for Analysis Services resource provider.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Servers_ListSkusForNew")
-  listSkusForNew is ArmListBySubscription<AnalysisServicesServer>;
+  list is ArmListBySubscription<
+    AnalysisServicesServer,
+    Response = AnalysisServicesServers
+  >;
 
   /**
    * Suspends operation of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_Suspend")
   suspend is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
 
   /**
    * Resumes operation of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_Resume")
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
 
   /**
    * Return the gateway status of the specified Analysis Services server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListGatewayStatus")
   listGatewayStatus is ArmResourceActionSync<
     AnalysisServicesServer,
@@ -109,7 +115,7 @@ interface AnalysisServicesServers {
   /**
    * Dissociates a Unified Gateway associated with the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_DissociateGateway")
   dissociateGateway is ArmResourceActionSync<
     AnalysisServicesServer,
@@ -118,20 +124,10 @@ interface AnalysisServicesServers {
   >;
 
   /**
-   * Check the name availability in the target location.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Servers_CheckNameAvailability")
-  checkNameAvailability is checkLocalNameAvailability<
-    CheckServerNameAvailabilityParameters,
-    CheckServerNameAvailabilityResult
-  >;
-
-  /**
    * Lists eligible SKUs for an Analysis Services resource.
    */
   // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Servers_ListSkusForExisting")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")
   @get
@@ -160,25 +156,9 @@ interface AnalysisServicesServers {
 @@doc(AnalysisServicesServer.properties,
   "Properties of the provision operation request."
 );
-@@encodedName(AnalysisServicesServers.create::parameters.resource,
-  "application/json",
-  "serverParameters"
-);
-@@extension(AnalysisServicesServers.create::parameters.resource,
-  "x-ms-client-name",
-  "serverParameters"
-);
-@@doc(AnalysisServicesServers.create::parameters.resource,
+@@doc(AnalysisServicesServersOperationGroup.create::parameters.resource,
   "Contains the information used to provision the Analysis Services server."
 );
-@@encodedName(AnalysisServicesServers.update::parameters.properties,
-  "application/json",
-  "serverUpdateParameters"
-);
-@@extension(AnalysisServicesServers.update::parameters.properties,
-  "x-ms-client-name",
-  "serverUpdateParameters"
-);
-@@doc(AnalysisServicesServers.update::parameters.properties,
+@@doc(AnalysisServicesServersOperationGroup.update::parameters.properties,
   "Request object that contains the updated information for the server."
 );

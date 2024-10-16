@@ -46,9 +46,7 @@ interface Images {
    */
   listByCatalog is ArmResourceListByParent<
     Image,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -72,7 +70,8 @@ interface Images {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = ImageListResult
   >;
 }
 

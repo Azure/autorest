@@ -14,15 +14,15 @@ namespace Microsoft.Storage;
 /**
  * The storage account blob inventory policy.
  */
-@singleton("default")
 @parentResource(StorageAccount)
 model BlobInventoryPolicy
   is Azure.ResourceManager.ProxyResource<BlobInventoryPolicyProperties> {
   ...ResourceNameParameter<
     Resource = BlobInventoryPolicy,
-    KeyName = "inventoryPolicy",
+    KeyName = "blobInventoryPolicyName",
     SegmentName = "inventoryPolicies",
-    NamePattern = ""
+    NamePattern = "",
+    Type = BlobInventoryPolicyName
   >;
 }
 
@@ -47,22 +47,17 @@ interface BlobInventoryPolicies {
   /**
    * Gets the blob inventory policy associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("BlobInventoryPolicies_List")
-  list is ArmResourceListByParent<BlobInventoryPolicy>;
+  list is ArmResourceListByParent<
+    BlobInventoryPolicy,
+    Response = ListBlobInventoryPolicy
+  >;
 }
 
-@@doc(BlobInventoryPolicy.name, "");
+@@doc(BlobInventoryPolicy.name,
+  "The name of the storage account blob inventory policy. It should always be 'default'"
+);
 @@doc(BlobInventoryPolicy.properties,
   "Returns the storage account blob inventory policy rules."
-);
-@@encodedName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "properties"
-);
-@@extension(BlobInventoryPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
 );
 @@doc(BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "The blob inventory policy set to a storage account."

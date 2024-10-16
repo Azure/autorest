@@ -1,34 +1,46 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.Analysis;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.
  */
 union State {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Paused: "Paused",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspending: "Suspending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pausing: "Pausing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resuming: "Resuming",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Preparing: "Preparing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Scaling: "Scaling",
 }
 
@@ -38,17 +50,29 @@ union State {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Paused: "Paused",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspending: "Suspending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pausing: "Pausing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resuming: "Resuming",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Preparing: "Preparing",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Scaling: "Scaling",
 }
 
@@ -57,8 +81,11 @@ union ProvisioningState {
  */
 union SkuTier {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Development: "Development",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard: "Standard",
 }
 
@@ -67,7 +94,9 @@ union SkuTier {
  */
 union ManagedMode {
   integer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `0`: 0,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1`: 1,
 }
 
@@ -76,13 +105,16 @@ union ManagedMode {
  */
 union ServerMonitorMode {
   integer,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `0`: 0,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `1`: 1,
 }
 
 /**
  * How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ConnectionMode {
   All,
   ReadOnly,
@@ -309,6 +341,29 @@ model AnalysisServicesServerUpdateParameters {
    */
   @extension("x-ms-client-flatten", true)
   properties?: AnalysisServicesServerMutableProperties;
+}
+
+/**
+ * An array of Analysis Services resources.
+ */
+@pagedResult
+model AnalysisServicesServers {
+  /**
+   * An array of Analysis Services resources.
+   */
+  @items
+  value: AnalysisServicesServer[];
+}
+
+/**
+ * An object that represents enumerating SKUs for new resources.
+ */
+model SkuEnumerationForNewResourceResult {
+  /**
+   * The collection of available SKUs for new resources.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  value?: ResourceSku[];
 }
 
 /**

@@ -27,21 +27,21 @@ interface StorageQueues {
   /**
    * Gets the queue with the specified queue name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queue_Get")
   get is ArmResourceRead<StorageQueue>;
 
   /**
    * Creates a new queue with the specified queue name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queue_Create")
   create is ArmResourceCreateOrReplaceSync<StorageQueue>;
 
   /**
    * Creates a new queue with the specified queue name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Queue_Update")
   update is ArmCustomPatchSync<StorageQueue, StorageQueue>;
@@ -49,7 +49,7 @@ interface StorageQueues {
   /**
    * Deletes the queue with the specified queue name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Queue_Delete")
   delete is ArmResourceDeleteSync<StorageQueue>;
@@ -57,13 +57,11 @@ interface StorageQueues {
   /**
    * Gets a list of all the queues under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queue_List")
   list is ArmResourceListByParent<
     StorageQueue,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<StorageQueue>;
-
+    Parameters = {
       /**
        * Optional, a maximum number of queues that should be included in a list queue response
        */
@@ -75,7 +73,8 @@ interface StorageQueues {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ListQueueResource
   >;
 }
 
@@ -85,24 +84,8 @@ interface StorageQueues {
   "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters."
 );
 @@doc(StorageQueue.properties, "Queue resource properties.");
-@@encodedName(StorageQueues.create::parameters.resource,
-  "application/json",
-  "queue"
-);
-@@extension(StorageQueues.create::parameters.resource,
-  "x-ms-client-name",
-  "queue"
-);
 @@doc(StorageQueues.create::parameters.resource,
   "Queue properties and metadata to be created with"
-);
-@@encodedName(StorageQueues.update::parameters.properties,
-  "application/json",
-  "queue"
-);
-@@extension(StorageQueues.update::parameters.properties,
-  "x-ms-client-name",
-  "queue"
 );
 @@doc(StorageQueues.update::parameters.properties,
   "Queue properties and metadata to be created with"

@@ -3,7 +3,7 @@ import { join } from "path";
 import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
-import { isGeneratedResourceObject } from "../transforms/transform-arm-resources";
+import { getSkipList } from "./type-mapping";
 export interface _ArmResourceOperation {
   Name: string;
   Path: string;
@@ -16,7 +16,6 @@ export interface _ArmResourceOperation {
 
 export interface _ArmPagingMetadata {
   Method: string;
-  NextPageMethod?: string;
   ItemName: string;
   NextLinkName: string;
 }
@@ -124,34 +123,15 @@ export function getResourceExistOperation(resource: ArmResource): Operation | un
   }
 }
 
-export function getArmResourcesMetadata(): Metadata {
-  if (metadataCache) {
-    return metadataCache;
-  }
-  const session = getSession();
-  const outputFolder: string = session.configuration["output-folder"] ?? "";
-
-  try {
-    const content = readFileSync(join(outputFolder, "resources.json"), "utf-8");
-    const metadata: Metadata = JSON.parse(content);
-    metadataCache = metadata;
-
-    return metadataCache;
-  } catch (e) {
-    throw new Error(`Failed to load resources.json from ${outputFolder} \n ${e}`);
-  }
-}
-
 export interface ArmResourceSchema extends ObjectSchema {
   resourceMetadata: ArmResource;
 }
 
-export function tagSchemaAsResource(schema: ObjectSchema): void {
-  const metadata = getArmResourcesMetadata();
+export function tagSchemaAsResource(schema: ObjectSchema, metadata: Metadata): void {
   const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
-    if (resourcesMetadata[resourceName].SwaggerModelName.toLowerCase() === schema.language.default.name.toLowerCase()) {
+    if (resourcesMetadata[resourceName].SwaggerModelName === schema.language.default.name) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
       return;
     }
@@ -205,7 +185,11 @@ export function filterArmModels(codeModel: CodeModel, objects: TypespecObject[])
       }
     }
   }
-  return objects.filter((o) => !filtered.includes(o.name) && !isGeneratedResourceObject(o.name));
+  filtered.push(
+    ...(codeModel.schemas.objects?.filter((o) => isResourceSchema(o)).map((o) => o.language.default.name) ?? []),
+  );
+  filtered.push(...getSkipList());
+  return objects.filter((o) => !filtered.includes(o.name));
 }
 
 const _ArmCoreEnums = [

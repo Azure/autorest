@@ -32,9 +32,7 @@ interface LabelingJobs {
    */
   get is ArmResourceRead<
     LabelingJob,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
-
+    Parameters = {
       /**
        * Boolean value to indicate whether to include JobInstructions in response.
        */
@@ -63,13 +61,9 @@ interface LabelingJobs {
   /**
    * Lists labeling jobs in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("LabelingJobs_List")
   list is ArmResourceListByParent<
     LabelingJob,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LabelingJob>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -81,7 +75,8 @@ interface LabelingJobs {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = LabelingJobResourceArmPaginatedResult
   >;
 
   /**
@@ -107,14 +102,6 @@ interface LabelingJobs {
 @@doc(LabelingJob.name, "The name and identifier for the LabelingJob.");
 @@doc(LabelingJob.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(LabelingJobs.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(LabelingJobs.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(LabelingJobs.createOrUpdate::parameters.resource,
   "LabelingJob definition object."

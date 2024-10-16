@@ -49,13 +49,9 @@ interface Spaces {
   /**
    * List Space resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Spaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Space,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Space>;
-
+    Parameters = {
       /**
        * The number of result items to return.
        */
@@ -97,13 +93,17 @@ interface Spaces {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = SpaceListResult
   >;
 
   /**
    * List Space resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<Space>;
+  listBySubscription is ArmListBySubscription<
+    Space,
+    Response = SpaceListResult
+  >;
 }
 
 @@doc(Space.name, "The name of the space");

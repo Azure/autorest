@@ -35,9 +35,7 @@ interface DedicatedHostGroups {
    */
   get is ArmResourceRead<
     DedicatedHostGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DedicatedHostGroup>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group. 'UserData' is not supported for dedicated host group.
        */
@@ -66,36 +64,24 @@ interface DedicatedHostGroups {
   /**
    * Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DedicatedHostGroups_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<DedicatedHostGroup>;
+  listByResourceGroup is ArmResourceListByParent<
+    DedicatedHostGroup,
+    Response = DedicatedHostGroupListResult
+  >;
 
   /**
    * Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.
    */
-  listBySubscription is ArmListBySubscription<DedicatedHostGroup>;
+  listBySubscription is ArmListBySubscription<
+    DedicatedHostGroup,
+    Response = DedicatedHostGroupListResult
+  >;
 }
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
 @@doc(DedicatedHostGroup.properties, "Dedicated Host Group Properties.");
-@@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host Group."
-);
-@@encodedName(DedicatedHostGroups.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(DedicatedHostGroups.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(DedicatedHostGroups.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host Group operation."

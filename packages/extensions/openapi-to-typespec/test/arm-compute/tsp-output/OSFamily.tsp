@@ -47,16 +47,23 @@ interface OSFamilies {
   /**
    * Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceOperatingSystems_GetOSFamily")
-  getOSFamily is ArmResourceRead<OSFamily>;
+  getOSFamily is ArmResourceRead<
+    OSFamily,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudServiceOperatingSystems_ListOSFamilies")
-  listOSFamilies is ArmResourceListByParent<OSFamily>;
+  listOSFamilies is ArmResourceListByParent<
+    OSFamily,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = OSFamilyListResult
+  >;
 }
 
 @@doc(OSFamily.name, "Name of the OS family.");

@@ -29,9 +29,7 @@ interface Galleries {
    */
   get is ArmResourceRead<
     Gallery,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Gallery>;
-
+    Parameters = {
       /**
        * The select expression to apply on the operation.
        */
@@ -49,7 +47,14 @@ interface Galleries {
   /**
    * Create or update a Shared Image Gallery.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Gallery>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Gallery,
+    Response = ArmResourceCreatedResponse<Gallery> | ArmResourceUpdatedResponse<Gallery> | (ArmAcceptedLroResponse & {
+      @body _: Gallery;
+    })
+  >;
 
   /**
    * Update a Shared Image Gallery.
@@ -68,57 +73,38 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Galleries_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<Gallery>;
+  listByResourceGroup is ArmResourceListByParent<
+    Gallery,
+    Response = GalleryList
+  >;
 
   /**
    * List galleries under a subscription.
    */
-  list is ArmListBySubscription<Gallery>;
+  list is ArmListBySubscription<Gallery, Response = GalleryList>;
 
   /**
    * Update sharing profile of a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GallerySharingProfile_Update")
-  update is ArmResourceActionAsync<Gallery, SharingUpdate, SharingUpdate>;
+  gallerySharingProfileUpdate is ArmResourceActionAsync<
+    Gallery,
+    SharingUpdate,
+    SharingUpdate
+  >;
 }
 
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
 @@doc(Gallery.properties,
   "Describes the properties of a Shared Image Gallery."
 );
-@@encodedName(Galleries.createOrUpdate::parameters.resource,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "gallery"
-);
 @@doc(Galleries.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Shared Image Gallery operation."
-);
-@@encodedName(Galleries.update::parameters.properties,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.update::parameters.properties,
-  "x-ms-client-name",
-  "gallery"
 );
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@encodedName(Galleries.update::parameters.body,
-  "application/json",
-  "sharingUpdate"
-);
-@@extension(Galleries.update::parameters.body,
-  "x-ms-client-name",
-  "sharingUpdate"
-);
-@@doc(Galleries.update::parameters.body,
+@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );

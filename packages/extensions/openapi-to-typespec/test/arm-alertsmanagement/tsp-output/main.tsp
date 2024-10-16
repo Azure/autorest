@@ -12,6 +12,7 @@ import "./models.tsp";
 import "./AlertProcessingRule.tsp";
 import "./Alert.tsp";
 import "./SmartGroup.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

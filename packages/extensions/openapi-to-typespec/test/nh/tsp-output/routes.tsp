@@ -66,7 +66,7 @@ op getNotificationHub is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  NotificationHubEntryModel | void
+  NotificationHubEntryModel
 >;
 
 /**
@@ -109,7 +109,7 @@ op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  NotificationHubEntryModel | void
+  NotificationHubEntryModel
 >;
 
 /**
@@ -162,7 +162,7 @@ op getRegistrationsByTag is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  void
+  RegistrationEntryModel[]
 >;
 
 /**
@@ -243,7 +243,7 @@ op getRegistrations is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  void
+  RegistrationEntryModel[]
 >;
 
 /**
@@ -277,7 +277,7 @@ op createRegistration is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel | void
+  RegistrationEntryModel
 >;
 
 /**
@@ -357,7 +357,7 @@ op getRegistration is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel | void
+  RegistrationEntryModel
 >;
 
 /**
@@ -400,7 +400,7 @@ op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
     @header
     accept: "application/atom+xml;type=entry;charset=utf-8";
   },
-  RegistrationEntryModel | void
+  RegistrationEntryModel
 >;
 
 /**

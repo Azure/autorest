@@ -30,14 +30,14 @@ interface IssueAttachmentContracts {
   /**
    * Gets the details of the issue Attachment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueAttachment_Get")
   get is ArmResourceRead<IssueAttachmentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiIssueAttachment_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface IssueAttachmentContracts {
   /**
    * Creates a new Attachment for the Issue in an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueAttachment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueAttachmentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface IssueAttachmentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueAttachment_Delete")
   delete is ArmResourceDeleteSync<
     IssueAttachmentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface IssueAttachmentContracts {
   /**
    * Lists all attachments for the Issue associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueAttachment_ListByService")
   listByService is ArmResourceListByParent<
     IssueAttachmentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueAttachmentContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -112,7 +106,8 @@ interface IssueAttachmentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = IssueAttachmentListResult
   >;
 }
 
@@ -123,14 +118,6 @@ interface IssueAttachmentContracts {
 );
 @@doc(IssueAttachmentContract.properties,
   "Properties of the Issue Attachment."
-);
-@@encodedName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(IssueAttachmentContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "Create parameters."

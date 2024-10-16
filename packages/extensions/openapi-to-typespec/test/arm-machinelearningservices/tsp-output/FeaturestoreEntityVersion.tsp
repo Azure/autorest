@@ -51,13 +51,9 @@ interface FeaturestoreEntityVersions {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FeaturestoreEntityVersions_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturestoreEntityVersion>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -105,7 +101,8 @@ interface FeaturestoreEntityVersions {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = FeaturestoreEntityVersionResourceArmPaginatedResult
   >;
 }
 
@@ -114,14 +111,6 @@ interface FeaturestoreEntityVersions {
 );
 @@doc(FeaturestoreEntityVersion.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."

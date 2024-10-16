@@ -48,13 +48,9 @@ interface Schedules {
   /**
    * List schedules in specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Schedules_List")
   list is ArmResourceListByParent<
     Schedule,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Schedule>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -66,18 +62,11 @@ interface Schedules {
        */
       @query("listViewType")
       listViewType?: ScheduleListViewType;
-    }
+    },
+    Response = ScheduleResourceArmPaginatedResult
   >;
 }
 
 @@doc(Schedule.name, "Schedule name.");
 @@doc(Schedule.properties, "[Required] Additional attributes of the entity.");
-@@encodedName(Schedules.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(Schedules.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(Schedules.createOrUpdate::parameters.resource, "Schedule definition.");

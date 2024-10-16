@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -11,8 +11,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.IntegrationSpaces;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The status of the current operation.
@@ -35,11 +33,20 @@ union ProvisioningState {
    */
   Canceled: "Canceled",
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
 }
+
+/**
+ * The response of a Space list operation.
+ */
+model SpaceListResult is Azure.Core.Page<Space>;
 
 /**
  * The properties of space.
@@ -112,6 +119,11 @@ model SpaceUpdateProperties {
    */
   description?: string;
 }
+
+/**
+ * The response of a Application list operation.
+ */
+model ApplicationListResult is Azure.Core.Page<Application>;
 
 /**
  * The properties of application.
@@ -192,6 +204,11 @@ model ApplicationUpdateProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   trackingDataStores?: Record<TrackingDataStore>;
 }
+
+/**
+ * The response of a BusinessProcess list operation.
+ */
+model BusinessProcessListResult is Azure.Core.Page<BusinessProcess>;
 
 /**
  * The properties of business process.
@@ -350,6 +367,12 @@ model BusinessProcessUpdateProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   businessProcessMapping?: Record<BusinessProcessMappingItem>;
 }
+
+/**
+ * The response of a BusinessProcessVersion list operation.
+ */
+model BusinessProcessVersionListResult
+  is Azure.Core.Page<BusinessProcessVersion>;
 
 /**
  * The business process development artifact get or delete request.
@@ -540,18 +563,6 @@ model ListBusinessProcessDevelopmentArtifactsResponse {
 model ApplicationResourceListResult is Azure.Core.Page<ApplicationResource>;
 
 /**
- * A resource under application.
- */
-model ApplicationResource extends ProxyResource {
-  /**
-   * The resource-specific properties for this resource.
-   */
-  @visibility("read", "create")
-  @extension("x-ms-client-flatten", true)
-  properties?: ApplicationResourceProperties;
-}
-
-/**
  * The properties of application resource.
  */
 model ApplicationResourceProperties {
@@ -622,6 +633,12 @@ model SaveOrValidateBusinessProcessDevelopmentArtifactRequest {
    */
   properties?: BusinessProcessDevelopmentArtifactProperties;
 }
+
+/**
+ * The response of a InfrastructureResource list operation.
+ */
+model InfrastructureResourceListResult
+  is Azure.Core.Page<InfrastructureResource>;
 
 /**
  * The properties of infrastructure resource.

@@ -55,13 +55,9 @@ interface InfrastructureResources {
   /**
    * List InfrastructureResource resources by Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("InfrastructureResources_ListBySpace")
   listBySpace is ArmResourceListByParent<
     InfrastructureResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<InfrastructureResource>;
-
+    Parameters = {
       /**
        * The number of result items to return.
        */
@@ -103,7 +99,8 @@ interface InfrastructureResources {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = InfrastructureResourceListResult
   >;
 }
 

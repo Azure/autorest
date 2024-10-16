@@ -13,8 +13,8 @@ import "./Space.tsp";
 import "./Application.tsp";
 import "./BusinessProcess.tsp";
 import "./BusinessProcessVersion.tsp";
+import "./ApplicationResource.tsp";
 import "./InfrastructureResource.tsp";
-import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -45,3 +45,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_11_14_preview: "2023-11-14-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}

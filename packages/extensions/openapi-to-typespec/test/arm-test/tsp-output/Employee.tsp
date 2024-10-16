@@ -48,12 +48,18 @@ interface Employees {
   /**
    * List Employee resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<Employee>;
+  listByResourceGroup is ArmResourceListByParent<
+    Employee,
+    Response = EmployeeListResult
+  >;
 
   /**
    * List Employee resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<Employee>;
+  listBySubscription is ArmListBySubscription<
+    Employee,
+    Response = EmployeeListResult
+  >;
 }
 
 @@doc(Employee.name, "Name of employee");

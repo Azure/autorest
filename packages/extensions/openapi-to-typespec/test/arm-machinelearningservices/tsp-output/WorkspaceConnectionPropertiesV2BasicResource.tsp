@@ -31,21 +31,21 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Lists machine learning workspaces connections by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceConnections_Get")
   get is ArmResourceRead<WorkspaceConnectionPropertiesV2BasicResource>;
 
   /**
    * Create or update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceConnections_Create")
   create is ArmResourceCreateOrReplaceSync<WorkspaceConnectionPropertiesV2BasicResource>;
 
   /**
    * Update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("WorkspaceConnections_Update")
   update is ArmCustomPatchSync<
@@ -56,7 +56,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Delete machine learning workspaces connections by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("WorkspaceConnections_Delete")
   delete is ArmResourceDeleteSync<WorkspaceConnectionPropertiesV2BasicResource>;
@@ -64,13 +64,11 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Lists all the available machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceConnections_List")
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<WorkspaceConnectionPropertiesV2BasicResource>;
-
+    Parameters = {
       /**
        * Target of the workspace connection.
        */
@@ -82,13 +80,14 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
        */
       @query("category")
       category?: string;
-    }
+    },
+    Response = WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   >;
 
   /**
    * List all the secrets of a machine learning workspaces connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceConnections_ListSecrets")
   listSecrets is ArmResourceActionSync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -101,24 +100,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   "Friendly name of the workspace connection"
 );
 @@doc(WorkspaceConnectionPropertiesV2BasicResource.properties, "");
-@@encodedName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "The object for creating or updating a new workspace connection"
-);
-@@encodedName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
   "Parameters for workspace connection update."

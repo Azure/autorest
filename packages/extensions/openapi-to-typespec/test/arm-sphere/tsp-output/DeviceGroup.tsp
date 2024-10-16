@@ -53,9 +53,7 @@ interface DeviceGroups {
    */
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DeviceGroup>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -79,7 +77,8 @@ interface DeviceGroups {
        */
       @query("$maxpagesize")
       maxpagesize?: int32;
-    }
+    },
+    Response = DeviceGroupListResult
   >;
 
   /**

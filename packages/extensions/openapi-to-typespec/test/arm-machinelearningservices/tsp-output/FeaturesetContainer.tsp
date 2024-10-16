@@ -48,13 +48,9 @@ interface FeaturesetContainers {
   /**
    * List featurestore entity containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FeaturesetContainers_List")
   list is ArmResourceListByParent<
     FeaturesetContainer,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturesetContainer>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -90,21 +86,14 @@ interface FeaturesetContainers {
        */
       @query("createdBy")
       createdBy?: string;
-    }
+    },
+    Response = FeaturesetContainerResourceArmPaginatedResult
   >;
 }
 
 @@doc(FeaturesetContainer.name, "Container name. This is case-sensitive.");
 @@doc(FeaturesetContainer.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(FeaturesetContainers.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(FeaturesetContainers.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(FeaturesetContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."

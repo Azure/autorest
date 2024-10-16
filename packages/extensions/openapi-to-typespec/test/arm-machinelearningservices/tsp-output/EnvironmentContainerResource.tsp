@@ -30,21 +30,21 @@ interface EnvironmentContainerResources {
   /**
    * Get container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_Get")
   get is ArmResourceRead<EnvironmentContainerResource>;
 
   /**
    * Create or update container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EnvironmentContainerResource>;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface EnvironmentContainerResources {
   /**
    * List environment containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_List")
   list is ArmResourceListByParent<
     EnvironmentContainerResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EnvironmentContainerResource>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -72,7 +70,8 @@ interface EnvironmentContainerResources {
        */
       @query("listViewType")
       listViewType?: ListViewType;
-    }
+    },
+    Response = EnvironmentContainerResourceArmPaginatedResult
   >;
 }
 
@@ -81,14 +80,6 @@ interface EnvironmentContainerResources {
 );
 @@doc(EnvironmentContainerResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(EnvironmentContainerResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(EnvironmentContainerResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(EnvironmentContainerResources.createOrUpdate::parameters.resource,
   "Container entity to create or update."

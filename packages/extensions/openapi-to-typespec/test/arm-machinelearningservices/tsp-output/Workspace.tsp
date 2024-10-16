@@ -36,7 +36,12 @@ interface Workspaces {
   /**
    * Creates or updates a workspace with the specified parameters.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Workspace,
+    Response = ArmResourceCreatedResponse<Workspace> | ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse
+  >;
 
   /**
    * Updates a machine learning workspace with the specified parameters.
@@ -52,9 +57,7 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     Workspace,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
-
+    Parameters = {
       /**
        * Flag to indicate delete is a purge request.
        */
@@ -66,13 +69,9 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Workspaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Workspace>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -84,13 +83,30 @@ interface Workspaces {
        */
       @query("kind")
       kind?: string;
-    }
+    },
+    Response = WorkspaceListResult
   >;
 
   /**
    * Lists all the available machine learning workspaces under the specified subscription.
    */
-  listBySubscription is ArmListBySubscription<Workspace>;
+  listBySubscription is ArmListBySubscription<
+    Workspace,
+    Parameters = {
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+
+      /**
+       * Kind of workspace.
+       */
+      @query("kind")
+      kind?: string;
+    },
+    Response = WorkspaceListResult
+  >;
 
   /**
    * Diagnose workspace setup issue.
@@ -150,7 +166,7 @@ interface Workspaces {
   /**
    * Provisions the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
@@ -162,7 +178,7 @@ interface Workspaces {
    * Lists all enabled features for a workspace
    */
   // FIXME: WorkspaceFeatures_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspaceFeatures_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features")
   @get
@@ -207,7 +223,7 @@ interface Workspaces {
    * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
    */
   // FIXME: PrivateLinkResources_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkResources_List")
   @summary("""
     Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
@@ -234,24 +250,8 @@ interface Workspaces {
 
 @@doc(Workspace.name, "Name of Azure Machine Learning workspace.");
 @@doc(Workspace.properties, "Additional attributes of the entity.");
-@@encodedName(Workspaces.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(Workspaces.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(Workspaces.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a machine learning workspace."
-);
-@@encodedName(Workspaces.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(Workspaces.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(Workspaces.update::parameters.properties,
   "The parameters for updating a machine learning workspace."

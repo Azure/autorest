@@ -32,15 +32,7 @@ interface RestorePoints {
    */
   get is ArmResourceRead<
     RestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
-
-      /**
-       * The name of the restore point collection.
-       */
-      @path
-      restorePointCollectionName: string;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
        */
@@ -52,18 +44,7 @@ interface RestorePoints {
   /**
    * The operation to create the restore point. Updating properties of an existing restore point is not allowed
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    RestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
-
-      /**
-       * The name of the restore point collection.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  create is ArmResourceCreateOrReplaceAsync<RestorePoint>;
 
   /**
    * The operation to delete the restore point.
@@ -71,30 +52,11 @@ interface RestorePoints {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<
-    RestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
-
-      /**
-       * The name of the Restore Point Collection.
-       */
-      @path
-      restorePointCollectionName: string;
-    }
-  >;
+  delete is ArmResourceDeleteAsync<RestorePoint>;
 }
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@encodedName(RestorePoints.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePoints.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );

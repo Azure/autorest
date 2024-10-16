@@ -38,7 +38,14 @@ interface DiskAccesses {
   /**
    * Creates or updates a disk access resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiskAccess>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DiskAccess,
+    Response = ArmResourceCreatedResponse<DiskAccess> | ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+      @body _: DiskAccess;
+    })
+  >;
 
   /**
    * Updates (patches) a disk access resource.
@@ -57,14 +64,15 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DiskAccesses_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<DiskAccess>;
+  listByResourceGroup is ArmResourceListByParent<
+    DiskAccess,
+    Response = DiskAccessList
+  >;
 
   /**
    * Lists all the disk access resources under a subscription.
    */
-  list is ArmListBySubscription<DiskAccess>;
+  list is ArmListBySubscription<DiskAccess, Response = DiskAccessList>;
 
   /**
    * Gets the private link resources possible under disk access resource
@@ -89,24 +97,8 @@ interface DiskAccesses {
   "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(DiskAccess.properties, "");
-@@encodedName(DiskAccesses.createOrUpdate::parameters.resource,
-  "application/json",
-  "diskAccess"
-);
-@@extension(DiskAccesses.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "diskAccess"
-);
 @@doc(DiskAccesses.createOrUpdate::parameters.resource,
   "disk access object supplied in the body of the Put disk access operation."
-);
-@@encodedName(DiskAccesses.update::parameters.properties,
-  "application/json",
-  "diskAccess"
-);
-@@extension(DiskAccesses.update::parameters.properties,
-  "x-ms-client-name",
-  "diskAccess"
 );
 @@doc(DiskAccesses.update::parameters.properties,
   "disk access object supplied in the body of the Patch disk access operation."

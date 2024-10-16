@@ -30,14 +30,14 @@ interface BackendContracts {
   /**
    * Gets the details of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backend_Get")
   get is ArmResourceRead<BackendContract>;
 
   /**
    * Gets the entity state (Etag) version of the backend specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Backend_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface BackendContracts {
   /**
    * Creates or Updates a backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backend_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BackendContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface BackendContracts {
   /**
    * Updates an existing backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Backend_Update")
   update is ArmCustomPatchSync<
     BackendContract,
     BackendUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface BackendContracts {
   /**
    * Deletes the specified backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Backend_Delete")
   delete is ArmResourceDeleteSync<
     BackendContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -107,13 +101,11 @@ interface BackendContracts {
   /**
    * Lists a collection of backends in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backend_ListByService")
   listByService is ArmResourceListByParent<
     BackendContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BackendContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| title | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| url | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -132,13 +124,14 @@ interface BackendContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = BackendListResult
   >;
 
   /**
    * Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backend_Reconnect")
   reconnect is ArmResourceActionNoContentSync<
     BackendContract,
@@ -152,34 +145,10 @@ interface BackendContracts {
   "Identifier of the Backend entity. Must be unique in the current API Management service instance."
 );
 @@doc(BackendContract.properties, "Backend entity contract properties.");
-@@encodedName(BackendContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@encodedName(BackendContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
-@@encodedName(BackendContracts.reconnect::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(BackendContracts.reconnect::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(BackendContracts.reconnect::parameters.body,
   "Reconnect request parameters."
 );

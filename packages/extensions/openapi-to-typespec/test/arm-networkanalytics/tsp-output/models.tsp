@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -8,8 +9,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.NetworkAnalytics;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The status of the current operation.
@@ -159,6 +158,11 @@ union Bypass {
    */
   AzureServices: "AzureServices",
 }
+
+/**
+ * The response of a DataProduct list operation.
+ */
+model DataProductListResult is Azure.Core.Page<DataProduct>;
 
 /**
  * The data product properties.
@@ -464,6 +468,11 @@ model Resource {
 }
 
 /**
+ * The response of a DataProductsCatalog list operation.
+ */
+model DataProductsCatalogListResult is Azure.Core.Page<DataProductsCatalog>;
+
+/**
  * Details for data catalog properties.
  */
 model DataProductsCatalogProperties {
@@ -656,6 +665,11 @@ model RoleAssignmentDetail {
    */
   roleAssignmentId: string;
 }
+
+/**
+ * The response of a DataType list operation.
+ */
+model DataTypeListResult is Azure.Core.Page<DataType>;
 
 /**
  * The data type properties

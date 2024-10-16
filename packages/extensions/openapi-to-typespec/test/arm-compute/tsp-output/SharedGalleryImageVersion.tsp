@@ -35,19 +35,16 @@ interface SharedGalleryImageVersions {
   /**
    * List shared gallery image versions by subscription id or tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SharedGalleryImageVersions_List")
   list is ArmResourceListByParent<
     SharedGalleryImageVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<SharedGalleryImageVersion>;
-
+    Parameters = {
       /**
        * The query parameter to decide what shared galleries to fetch when doing listing operations.
        */
       @query("sharedTo")
       sharedTo?: SharedToValues;
-    }
+    },
+    Response = SharedGalleryImageVersionList
   >;
 }
 

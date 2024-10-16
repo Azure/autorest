@@ -45,7 +45,7 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
     .filter((c) => c.language.default.name !== "Versions")
     .map((c) => transformEnum(c, codeModel));
 
-  const { isArm } = getOptions();
+  const { isArm, namespace } = getOptions();
 
   // objects need to be converted first because they are used in operation convertion
   const typespecObjects = (codeModel.schemas.objects ?? []).map((o) => transformObject(o, codeModel));
@@ -67,6 +67,7 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
     }
   }
 
+  const listOperationRoute = `/providers/${namespace}/operations`;
   return {
     serviceInformation,
     models: {
@@ -75,5 +76,10 @@ function transformModel(codeModel: CodeModel): TypespecProgram {
       armResources,
     },
     operationGroups: typespecOperationGroups,
+    containsListOperation:
+      codeModel.operationGroups
+        .flatMap((g) => g.operations)
+        .map((o) => o.requests?.[0].protocol.http?.path)
+        .find((r) => r === listOperationRoute) !== undefined,
   };
 }

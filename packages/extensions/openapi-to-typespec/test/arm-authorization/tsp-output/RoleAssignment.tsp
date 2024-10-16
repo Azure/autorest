@@ -30,9 +30,8 @@ interface RoleAssignments {
    */
   get is ArmResourceRead<
     RoleAssignment,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * Tenant ID for cross-tenant request
        */
@@ -44,7 +43,10 @@ interface RoleAssignments {
   /**
    * Create or update a role assignment by scope and name.
    */
-  create is ArmResourceCreateOrReplaceSync<RoleAssignment>;
+  create is ArmResourceCreateOrReplaceSync<
+    RoleAssignment,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Delete a role assignment by scope and name.
@@ -52,9 +54,8 @@ interface RoleAssignments {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteSync<
     RoleAssignment,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * Tenant ID for cross-tenant request
        */
@@ -66,13 +67,10 @@ interface RoleAssignments {
   /**
    * List all role assignments that apply to a scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleAssignments_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignment,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
        */
@@ -90,7 +88,8 @@ interface RoleAssignments {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 }
 
@@ -98,14 +97,6 @@ interface RoleAssignments {
   "The name of the role assignment. It can be any valid GUID."
 );
 @@doc(RoleAssignment.properties, "Role assignment properties.");
-@@encodedName(RoleAssignments.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RoleAssignments.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RoleAssignments.create::parameters.resource,
   "Parameters for the role assignment."
 );

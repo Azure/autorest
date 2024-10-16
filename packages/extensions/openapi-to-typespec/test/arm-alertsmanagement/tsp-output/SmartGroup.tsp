@@ -28,18 +28,18 @@ interface SmartGroups {
   /**
    * Get information related to a specific Smart Group.
    */
-  getById is ArmResourceRead<SmartGroup>;
+  getById is ArmResourceRead<
+    SmartGroup,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List all the Smart Groups within a specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SmartGroups_GetAll")
   getAll is ArmResourceListByParent<
     SmartGroup,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * Filter by target resource( which is full ARM ID) Default value is select all.
        */
@@ -105,7 +105,8 @@ interface SmartGroups {
        */
       @query("sortOrder")
       sortOrder?: SortOrder;
-    }
+    },
+    Response = SmartGroupsList
   >;
 
   /**
@@ -115,9 +116,8 @@ interface SmartGroups {
     SmartGroup,
     void,
     SmartGroup,
-    {
-      ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
       /**
        * New state of the alert.
        */
@@ -130,7 +130,7 @@ interface SmartGroups {
    * Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
    */
   // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history")
+  @route("undefined")
   @get
   getHistory(
     ...ApiVersionParameter,
@@ -140,8 +140,9 @@ interface SmartGroups {
      * Smart group unique id.
      */
     @path
+    @segment("smartGroups")
     smartGroupId: string,
-  ): ArmResponse<SmartGroupModification> | ErrorResponse;
+  ): ArmResponse<m> | ErrorResponse;
 }
 
 @@doc(SmartGroup.name, "Smart group unique id. ");

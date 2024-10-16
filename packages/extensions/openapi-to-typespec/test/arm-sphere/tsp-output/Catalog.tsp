@@ -48,12 +48,18 @@ interface Catalogs {
   /**
    * List Catalog resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<Catalog>;
+  listByResourceGroup is ArmResourceListByParent<
+    Catalog,
+    Response = CatalogListResult
+  >;
 
   /**
    * List Catalog resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<Catalog>;
+  listBySubscription is ArmListBySubscription<
+    Catalog,
+    Response = CatalogListResult
+  >;
 
   /**
    * Counts devices in catalog.
@@ -66,10 +72,8 @@ interface Catalogs {
   listDeployments is ArmResourceActionSync<
     Catalog,
     void,
-    ResourceListResult<Deployment>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    DeploymentListResult,
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -102,10 +106,8 @@ interface Catalogs {
   listDeviceGroups is ArmResourceActionSync<
     Catalog,
     ListDeviceGroupsRequest,
-    ResourceListResult<DeviceGroup>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    DeviceGroupListResult,
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -139,9 +141,7 @@ interface Catalogs {
     Catalog,
     void,
     PagedDeviceInsight,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */
@@ -174,10 +174,8 @@ interface Catalogs {
   listDevices is ArmResourceActionSync<
     Catalog,
     void,
-    ResourceListResult<Device>,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
-
+    DeviceListResult,
+    Parameters = {
       /**
        * Filter the result list using the given expression
        */

@@ -2,6 +2,36 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.1",
+      "tag": "@autorest/openapi-to-typespec_v0.10.1",
+      "date": "Tue, 08 Oct 2024 09:03:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Uptake SDK configuration to converter"
+          },
+          {
+            "comment": "Fix some issues in convertion tool"
+          },
+          {
+            "comment": "Upgrade compiler to 0.60.0"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.10.0",
+      "tag": "@autorest/openapi-to-typespec_v0.10.0",
+      "date": "Fri, 06 Sep 2024 08:41:02 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove .net generator dependency of tsp converter"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.9.1",
       "tag": "@autorest/openapi-to-typespec_v0.9.1",
       "date": "Tue, 20 Aug 2024 21:31:07 GMT",

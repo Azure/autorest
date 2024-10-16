@@ -52,13 +52,9 @@ interface Applications {
   /**
    * List Application resources by Space
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Applications_ListBySpace")
   listBySpace is ArmResourceListByParent<
     Application,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Application>;
-
+    Parameters = {
       /**
        * The number of result items to return.
        */
@@ -100,7 +96,8 @@ interface Applications {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = ApplicationListResult
   >;
 
   /**

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FeaturesetVersion.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.MachineLearning;
 /**
  * Azure Resource Manager resource envelope.
  */
-@parentResource(FeaturesetVersion)
+@parentResource(Workspace)
 model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
   ...ResourceNameParameter<
     Resource = Feature,
@@ -34,13 +34,9 @@ interface Features {
   /**
    * List Features.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Features_List")
   list is ArmResourceListByParent<
     Feature,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Feature>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -58,7 +54,8 @@ interface Features {
        */
       @query("description")
       description?: string;
-    }
+    },
+    Response = FeatureResourceArmPaginatedResult
   >;
 }
 

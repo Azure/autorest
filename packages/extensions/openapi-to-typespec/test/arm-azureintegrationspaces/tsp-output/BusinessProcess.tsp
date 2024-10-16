@@ -52,13 +52,9 @@ interface BusinessProcesses {
   /**
    * List BusinessProcess resources by Application
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("BusinessProcesses_ListByApplication")
   listByApplication is ArmResourceListByParent<
     BusinessProcess,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BusinessProcess>;
-
+    Parameters = {
       /**
        * The number of result items to return.
        */
@@ -100,7 +96,8 @@ interface BusinessProcesses {
        */
       @query(#{ name: "orderby", explode: true })
       orderby?: string[];
-    }
+    },
+    Response = BusinessProcessListResult
   >;
 }
 

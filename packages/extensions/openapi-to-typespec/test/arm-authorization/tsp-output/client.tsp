@@ -63,6 +63,10 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleInstance.properties);
 
+@@clientName(RoleAssignmentScheduleRequests.validate,
+  "RoleAssignmentScheduleRequests.validate::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleAssignmentScheduleRequest.properties);
 
@@ -72,9 +76,17 @@ using Azure.ResourceManager.Authorization;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleInstance.properties);
 
+@@clientName(RoleEligibilityScheduleRequests.validate,
+  "RoleEligibilityScheduleRequests.validate::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleEligibilityScheduleRequest.properties);
 
+@@clientName(RoleManagementPolicies.update,
+  "RoleManagementPolicies.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RoleManagementPolicy.properties);
 

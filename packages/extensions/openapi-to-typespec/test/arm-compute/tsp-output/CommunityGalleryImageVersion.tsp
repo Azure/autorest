@@ -35,9 +35,10 @@ interface CommunityGalleryImageVersions {
   /**
    * List community gallery image versions inside an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CommunityGalleryImageVersions_List")
-  list is ArmResourceListByParent<CommunityGalleryImageVersion>;
+  list is ArmResourceListByParent<
+    CommunityGalleryImageVersion,
+    Response = CommunityGalleryImageVersionList
+  >;
 }
 
 @@doc(CommunityGalleryImageVersion.name,

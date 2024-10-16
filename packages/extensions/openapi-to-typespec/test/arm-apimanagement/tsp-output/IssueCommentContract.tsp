@@ -30,14 +30,14 @@ interface IssueCommentContracts {
   /**
    * Gets the details of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueComment_Get")
   get is ArmResourceRead<IssueCommentContract>;
 
   /**
    * Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiIssueComment_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface IssueCommentContracts {
   /**
    * Creates a new Comment for the Issue in an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueComment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface IssueCommentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface IssueCommentContracts {
   /**
    * Lists all comments for the Issue associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiIssueComment_ListByService")
   listByService is ArmResourceListByParent<
     IssueCommentContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<IssueCommentContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| userId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -112,7 +106,8 @@ interface IssueCommentContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = IssueCommentListResult
   >;
 }
 
@@ -122,14 +117,6 @@ interface IssueCommentContracts {
   "Comment identifier within an Issue. Must be unique in the current Issue."
 );
 @@doc(IssueCommentContract.properties, "Properties of the Issue Comment.");
-@@encodedName(IssueCommentContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(IssueCommentContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(IssueCommentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

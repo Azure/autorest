@@ -36,21 +36,21 @@ interface OnlineEndpointTrackedResources {
   /**
    * Get Online Endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_Get")
   get is ArmResourceRead<OnlineEndpointTrackedResource>;
 
   /**
    * Create or update Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OnlineEndpointTrackedResource>;
 
   /**
    * Update Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("OnlineEndpoints_Update")
   update is ArmCustomPatchAsync<
@@ -61,7 +61,7 @@ interface OnlineEndpointTrackedResources {
   /**
    * Delete Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -71,13 +71,11 @@ interface OnlineEndpointTrackedResources {
   /**
    * List Online Endpoints.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_List")
   list is ArmResourceListByParent<
     OnlineEndpointTrackedResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<OnlineEndpointTrackedResource>;
-
+    Parameters = {
       /**
        * Name of the endpoint.
        */
@@ -119,13 +117,14 @@ interface OnlineEndpointTrackedResources {
        */
       @query("orderBy")
       orderBy?: OrderString;
-    }
+    },
+    Response = OnlineEndpointTrackedResourceArmPaginatedResult
   >;
 
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
@@ -136,7 +135,7 @@ interface OnlineEndpointTrackedResources {
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_RegenerateKeys")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpointTrackedResource,
@@ -147,7 +146,7 @@ interface OnlineEndpointTrackedResources {
   /**
    * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OnlineEndpoints_GetToken")
   getToken is ArmResourceActionSync<
     OnlineEndpointTrackedResource,
@@ -160,24 +159,8 @@ interface OnlineEndpointTrackedResources {
 @@doc(OnlineEndpointTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@encodedName(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(OnlineEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Online Endpoint entity to apply during operation."
-);
-@@encodedName(OnlineEndpointTrackedResources.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(OnlineEndpointTrackedResources.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(OnlineEndpointTrackedResources.update::parameters.properties,
   "Online Endpoint entity to apply during operation."

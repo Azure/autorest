@@ -30,14 +30,14 @@ interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Product_Get")
   get is ArmResourceRead<ProductContract>;
 
   /**
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Product_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface ProductContracts {
   /**
    * Creates or Updates a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Product_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProductContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface ProductContracts {
   /**
    * Update existing product details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Product_Update")
   update is ArmCustomPatchSync<
     ProductContract,
     ProductUpdateParameters,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface ProductContracts {
   /**
    * Delete product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Product_Delete")
   delete is ArmResourceDeleteSync<
     ProductContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -113,13 +107,11 @@ interface ProductContracts {
   /**
    * Lists a collection of products in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Product_ListByService")
   listByService is ArmResourceListByParent<
     ProductContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ProductContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| terms | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| state | filter | eq |     |</br>| groups | expand |     |     |</br>
        */
@@ -150,14 +142,15 @@ interface ProductContracts {
        */
       @query("tags")
       tags?: string;
-    }
+    },
+    Response = ProductListResult
   >;
 
   /**
    * Lists a collection of the APIs associated with a product.
    */
   // FIXME: ProductApi_ListByProduct could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductApi_ListByProduct")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis")
   @get
@@ -208,7 +201,7 @@ interface ProductContracts {
    * Lists the collection of developer groups associated with the specified product.
    */
   // FIXME: ProductGroup_ListByProduct could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductGroup_ListByProduct")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups")
   @get
@@ -259,7 +252,7 @@ interface ProductContracts {
    * Lists the collection of subscriptions to the specified product.
    */
   // FIXME: ProductSubscriptions_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProductSubscriptions_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions")
   @get
@@ -304,7 +297,7 @@ interface ProductContracts {
     $skip?: int32,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ResourceListResult<SubscriptionContract>> | ErrorResponse;
+  ): ArmResponse<SubscriptionListResult> | ErrorResponse;
 }
 
 @@maxLength(ProductContract.name, 256);
@@ -313,23 +306,7 @@ interface ProductContracts {
   "Product identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ProductContract.properties, "Product entity contract properties.");
-@@encodedName(ProductContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(ProductContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(ProductContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@encodedName(ProductContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(ProductContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(ProductContracts.update::parameters.properties, "Update parameters.");

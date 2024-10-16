@@ -30,20 +30,18 @@ interface DatastoreResources {
   /**
    * Get datastore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Datastores_Get")
   get is ArmResourceRead<DatastoreResource>;
 
   /**
    * Create or update datastore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Datastores_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DatastoreResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
-
+    Parameters = {
       /**
        * Flag to skip validation.
        */
@@ -55,7 +53,7 @@ interface DatastoreResources {
   /**
    * Delete datastore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Datastores_Delete")
   delete is ArmResourceDeleteSync<DatastoreResource>;
@@ -63,13 +61,11 @@ interface DatastoreResources {
   /**
    * List datastores.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Datastores_List")
   list is ArmResourceListByParent<
     DatastoreResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DatastoreResource>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -111,13 +107,14 @@ interface DatastoreResources {
        */
       @query("orderByAsc")
       orderByAsc?: boolean;
-    }
+    },
+    Response = DatastoreResourceArmPaginatedResult
   >;
 
   /**
    * Get datastore secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Datastores_ListSecrets")
   listSecrets is ArmResourceActionSync<
     DatastoreResource,
@@ -129,14 +126,6 @@ interface DatastoreResources {
 @@doc(DatastoreResource.name, "Datastore name.");
 @@doc(DatastoreResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(DatastoreResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(DatastoreResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(DatastoreResources.createOrUpdate::parameters.resource,
   "Datastore entity to create or update."

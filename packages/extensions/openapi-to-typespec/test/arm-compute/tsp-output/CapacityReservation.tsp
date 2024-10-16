@@ -42,9 +42,7 @@ interface CapacityReservations {
    */
   get is ArmResourceRead<
     CapacityReservation,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservation>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
@@ -75,33 +73,18 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CapacityReservations_ListByCapacityReservationGroup")
-  listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
+  listByCapacityReservationGroup is ArmResourceListByParent<
+    CapacityReservation,
+    Response = CapacityReservationListResult
+  >;
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
 @@doc(CapacityReservation.properties,
   "Properties of the Capacity reservation."
 );
-@@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservations.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
-);
-@@encodedName(CapacityReservations.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservations.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CapacityReservations.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation operation."

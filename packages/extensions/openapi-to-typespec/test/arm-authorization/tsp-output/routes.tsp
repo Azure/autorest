@@ -4,38 +4,48 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Azure.ResourceManager.Authorization;
 
+@armResourceOperations
 interface ClassicAdministratorsOperations {
   /**
    * Gets service administrator, account administrator, and co-administrators for the subscription.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ClassicAdministrators_List")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ClassicAdministratorListResult> | ErrorResponse;
+  @action("classicAdministrators")
+  list is ArmProviderActionAsync<
+    Response = ClassicAdministratorListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
+@armResourceOperations
 interface GlobalAdministratorOperations {
   /**
    * Elevates access for a Global Administrator.
    */
-  @route("/providers/Microsoft.Authorization/elevateAccess")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("GlobalAdministrator_ElevateAccess")
   @post
-  elevateAccess(...ApiVersionParameter): ArmResponse<void> | ErrorResponse;
+  elevateAccess is ArmProviderActionAsync<Scope = TenantActionScope>;
 }
 
 interface AzurePermissionsForResourceGroupOperations {
   /**
    * Gets all permissions the caller has for a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AzurePermissionsForResourceGroup_List")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions")
   @get
   list(
@@ -49,6 +59,8 @@ interface AzurePermissionsForResourceOperations {
   /**
    * Gets all permissions the caller has for a resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AzurePermissionsForResource_List")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions")
   @get
   list(
@@ -87,6 +99,8 @@ interface EligibleChildResourcesOperations {
   /**
    * Get the child resources of a resource on which user has eligible access
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("EligibleChildResources_Get")
   @route("/{scope}/providers/Microsoft.Authorization/eligibleChildResources")
   @get
   get(

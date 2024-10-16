@@ -34,9 +34,7 @@ interface Images {
    */
   get is ArmResourceRead<
     Image,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -67,36 +65,21 @@ interface Images {
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Images_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<Image>;
+  listByResourceGroup is ArmResourceListByParent<
+    Image,
+    Response = ImageListResult
+  >;
 
   /**
    * Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  list is ArmListBySubscription<Image>;
+  list is ArmListBySubscription<Image, Response = ImageListResult>;
 }
 
 @@doc(Image.name, "The name of the image.");
 @@doc(Image.properties, "Describes the properties of an Image.");
-@@encodedName(Images.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(Images.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(Images.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Image operation."
-);
-@@encodedName(Images.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(Images.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(Images.update::parameters.properties,
   "Parameters supplied to the Update Image operation."

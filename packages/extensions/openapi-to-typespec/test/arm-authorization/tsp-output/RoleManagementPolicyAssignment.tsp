@@ -28,19 +28,27 @@ interface RoleManagementPolicyAssignments {
   /**
    * Get the specified role management policy assignment for a resource scope
    */
-  get is ArmResourceRead<RoleManagementPolicyAssignment>;
+  get is ArmResourceRead<
+    RoleManagementPolicyAssignment,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Create a role management policy assignment
    */
-  create is ArmResourceCreateOrReplaceSync<RoleManagementPolicyAssignment>;
+  create is ArmResourceCreateOrReplaceSync<
+    RoleManagementPolicyAssignment,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Gets role management assignment policies for a resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleManagementPolicyAssignments_ListForScope")
-  listForScope is ArmResourceListByParent<RoleManagementPolicyAssignment>;
+  listForScope is ArmResourceListByParent<
+    RoleManagementPolicyAssignment,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = RoleManagementPolicyAssignmentListResult
+  >;
 }
 
 @@doc(RoleManagementPolicyAssignment.name,
@@ -48,14 +56,6 @@ interface RoleManagementPolicyAssignments {
 );
 @@doc(RoleManagementPolicyAssignment.properties,
   "Role management policy properties."
-);
-@@encodedName(RoleManagementPolicyAssignments.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RoleManagementPolicyAssignments.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(RoleManagementPolicyAssignments.create::parameters.resource,
   "Parameters for the role management policy assignment."

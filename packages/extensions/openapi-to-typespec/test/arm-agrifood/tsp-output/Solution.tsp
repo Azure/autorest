@@ -46,13 +46,9 @@ interface Solutions {
   /**
    * Get installed Solutions details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Solutions_List")
   list is ArmResourceListByParent<
     Solution,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Solution>;
-
+    Parameters = {
       /**
        * Installed Solution ids.
        */
@@ -122,20 +118,13 @@ interface Solutions {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = SolutionListResponse
   >;
 }
 
 @@doc(Solution.name, "SolutionId for Data Manager For Agriculture Resource.");
 @@doc(Solution.properties, "Solution resource properties.");
-@@encodedName(Solutions.createOrUpdate::parameters.resource,
-  "application/json",
-  "requestBody"
-);
-@@extension(Solutions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "requestBody"
-);
 @@doc(Solutions.createOrUpdate::parameters.resource,
   "Solution resource request body."
 );

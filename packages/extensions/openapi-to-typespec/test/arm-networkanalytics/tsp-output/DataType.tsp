@@ -50,7 +50,10 @@ interface DataTypes {
   /**
    * List data type by parent resource.
    */
-  listByDataProduct is ArmResourceListByParent<DataType>;
+  listByDataProduct is ArmResourceListByParent<
+    DataType,
+    Response = DataTypeListResult
+  >;
 
   /**
    * Delete data for data type.

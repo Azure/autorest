@@ -30,21 +30,21 @@ interface CodeVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_Get")
   get is ArmResourceRead<CodeVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CodeVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface CodeVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_List")
   list is ArmResourceListByParent<
     CodeVersionResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CodeVersionResource>;
-
+    Parameters = {
       /**
        * Ordering of list.
        */
@@ -78,13 +76,14 @@ interface CodeVersionResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = CodeVersionResourceArmPaginatedResult
   >;
 
   /**
    * Generate a storage location and credential for the client to upload a code asset to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeVersions_CreateOrGetStartPendingUpload")
   createOrGetStartPendingUpload is ArmResourceActionSync<
     CodeVersionResource,
@@ -96,14 +95,6 @@ interface CodeVersionResources {
 @@doc(CodeVersionResource.name, "Version identifier.");
 @@doc(CodeVersionResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(CodeVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(CodeVersionResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(CodeVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."

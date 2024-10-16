@@ -23,21 +23,9 @@ function generateModels(program: TypespecProgram) {
     "\n",
   );
 
-  const isArm = getOptions().isArm;
-
   const enums = flattenEnums(models.enums).join("");
   const objects = models.objects.map(generateObject).join("\n\n");
-  return [
-    imports,
-    "\n",
-    namespaces,
-    "\n",
-    getNamespaceStatement(program),
-    isArm ? "\ninterface Operations extends Azure.ResourceManager.Operations {} \n" : "\n",
-    enums,
-    "\n",
-    objects,
-  ].join("\n");
+  return [imports, "\n", namespaces, "\n", getNamespaceStatement(program), "\n", enums, "\n", objects].join("\n");
 }
 
 function flattenEnums(enums: TypespecEnum[]) {

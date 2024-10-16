@@ -30,14 +30,14 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Get details of a hostname configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayHostnameConfiguration_Get")
   get is ArmResourceRead<GatewayHostnameConfigurationContract>;
 
   /**
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("GatewayHostnameConfiguration_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Creates of updates hostname configuration for a Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayHostnameConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Deletes the specified hostname configuration from the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Lists the collection of hostname configurations for the specified gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GatewayHostnameConfiguration_ListByService")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GatewayHostnameConfigurationContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| hostname | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -112,7 +106,8 @@ interface GatewayHostnameConfigurationContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = GatewayHostnameConfigurationListResult
   >;
 }
 
@@ -123,14 +118,6 @@ interface GatewayHostnameConfigurationContracts {
 );
 @@doc(GatewayHostnameConfigurationContract.properties,
   "Gateway hostname configuration details."
-);
-@@encodedName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   ""

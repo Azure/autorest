@@ -30,14 +30,14 @@ interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AuthorizationServer_Get")
   get is ArmResourceRead<AuthorizationServerContract>;
 
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("AuthorizationServer_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface AuthorizationServerContracts {
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AuthorizationServer_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface AuthorizationServerContracts {
   /**
    * Updates the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("AuthorizationServer_Update")
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
     AuthorizationServerUpdateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface AuthorizationServerContracts {
   /**
    * Deletes specific authorization server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -107,13 +101,11 @@ interface AuthorizationServerContracts {
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AuthorizationServer_ListByService")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<AuthorizationServerContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -132,13 +124,14 @@ interface AuthorizationServerContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = AuthorizationServerListResult
   >;
 
   /**
    * Gets the client secret details of the authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AuthorizationServer_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
@@ -155,24 +148,8 @@ interface AuthorizationServerContracts {
 @@doc(AuthorizationServerContract.properties,
   "Properties of the External OAuth authorization server Contract."
 );
-@@encodedName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(AuthorizationServerContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
-);
-@@encodedName(AuthorizationServerContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(AuthorizationServerContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AuthorizationServerContracts.update::parameters.properties,
   "OAuth2 Server settings Update parameters."

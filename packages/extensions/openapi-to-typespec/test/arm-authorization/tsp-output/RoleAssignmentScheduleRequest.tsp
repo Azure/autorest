@@ -28,35 +28,44 @@ interface RoleAssignmentScheduleRequests {
   /**
    * Get the specified role assignment schedule request.
    */
-  get is ArmResourceRead<RoleAssignmentScheduleRequest>;
+  get is ArmResourceRead<
+    RoleAssignmentScheduleRequest,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Creates a role assignment schedule request.
    */
-  create is ArmResourceCreateOrReplaceSync<RoleAssignmentScheduleRequest>;
+  create is ArmResourceCreateOrReplaceSync<
+    RoleAssignmentScheduleRequest,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Gets role assignment schedule requests for a scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RoleAssignmentScheduleRequests_ListForScope")
   listForScope is ArmResourceListByParent<
     RoleAssignmentScheduleRequest,
-    {
-      ...Azure.ResourceManager.Foundations.ExtensionBaseParameters;
-
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver.
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = RoleAssignmentScheduleRequestListResult
   >;
 
   /**
    * Cancels a pending role assignment schedule request.
    */
-  cancel is ArmResourceActionSync<RoleAssignmentScheduleRequest, void, void>;
+  cancel is ArmResourceActionSync<
+    RoleAssignmentScheduleRequest,
+    void,
+    void,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+  >;
 
   /**
    * Validates a new role assignment schedule request.
@@ -64,7 +73,8 @@ interface RoleAssignmentScheduleRequests {
   validate is ArmResourceActionSync<
     RoleAssignmentScheduleRequest,
     RoleAssignmentScheduleRequest,
-    RoleAssignmentScheduleRequest
+    RoleAssignmentScheduleRequest,
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters
   >;
 }
 
@@ -74,24 +84,8 @@ interface RoleAssignmentScheduleRequests {
 @@doc(RoleAssignmentScheduleRequest.properties,
   "Role assignment schedule request properties."
 );
-@@encodedName(RoleAssignmentScheduleRequests.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RoleAssignmentScheduleRequests.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RoleAssignmentScheduleRequests.create::parameters.resource,
   "Parameters for the role assignment schedule request."
-);
-@@encodedName(RoleAssignmentScheduleRequests.validate::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(RoleAssignmentScheduleRequests.validate::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(RoleAssignmentScheduleRequests.validate::parameters.body,
   "Parameters for the role assignment schedule request."

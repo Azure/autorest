@@ -51,13 +51,9 @@ interface FeaturestoreEntityContainers {
   /**
    * List featurestore entity containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("FeaturestoreEntityContainers_List")
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<FeaturestoreEntityContainer>;
-
+    Parameters = {
       /**
        * Continuation token for pagination.
        */
@@ -93,7 +89,8 @@ interface FeaturestoreEntityContainers {
        */
       @query("createdBy")
       createdBy?: string;
-    }
+    },
+    Response = FeaturestoreEntityContainerResourceArmPaginatedResult
   >;
 }
 
@@ -102,14 +99,6 @@ interface FeaturestoreEntityContainers {
 );
 @@doc(FeaturestoreEntityContainer.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."

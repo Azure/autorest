@@ -30,14 +30,14 @@ interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiTagDescription_Get")
   get is ArmResourceRead<TagDescriptionContract>;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiTagDescription_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface TagDescriptionContracts {
   /**
    * Create/Update tag description in scope of the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiTagDescription_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     TagDescriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface TagDescriptionContracts {
   /**
    * Delete tag description for the Api.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiTagDescription_Delete")
   delete is ArmResourceDeleteSync<
     TagDescriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface TagDescriptionContracts {
   /**
    * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiTagDescription_ListByService")
   listByService is ArmResourceListByParent<
     TagDescriptionContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<TagDescriptionContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -112,7 +106,8 @@ interface TagDescriptionContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = TagDescriptionListResult
   >;
 }
 
@@ -123,14 +118,6 @@ interface TagDescriptionContracts {
 );
 @@doc(TagDescriptionContract.properties,
   "TagDescription entity contract properties."
-);
-@@encodedName(TagDescriptionContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(TagDescriptionContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(TagDescriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -9,14 +10,14 @@ using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Enum for different types of AuthCredentials supported.
  */
 union AuthCredentialsKind {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   OAuthClientCredentials: "OAuthClientCredentials",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ApiKeyAuthCredentials: "ApiKeyAuthCredentials",
 }
 
@@ -26,11 +27,17 @@ union AuthCredentialsKind {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union ProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Running: "Running",
 }
 
@@ -39,7 +46,9 @@ union ProvisioningState {
  */
 union PublicNetworkAccess {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
@@ -48,8 +57,11 @@ union PublicNetworkAccess {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Rejected: "Rejected",
 }
 
@@ -59,9 +71,13 @@ union PrivateEndpointServiceConnectionStatus {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
@@ -143,6 +159,23 @@ model Resource {
    */
   @visibility("read")
   systemData?: SystemData;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataConnectorListResponse is Azure.Core.Page<DataConnector>;
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureExtensionListResponse
+  is Azure.Core.Page<DataManagerForAgricultureExtension> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
 }
 
 /**
@@ -466,6 +499,18 @@ model DataManagerForAgricultureUpdateProperties {
 }
 
 /**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureListResponse
+  is Azure.Core.Page<DataManagerForAgriculture> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
  * Arm async operation class.
  * Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
  */
@@ -572,6 +617,37 @@ model ExtensionProperties {
 }
 
 /**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model ExtensionListResponse is Azure.Core.Page<Extension> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
+ * List of private endpoint connections associated with the specified resource.
+ */
+model PrivateEndpointConnectionListResult {
+  /**
+   * Array of private endpoint connections.
+   */
+  value?: PrivateEndpointConnection[];
+}
+
+/**
+ * A list of private link resources.
+ */
+model PrivateLinkResourceListResult {
+  /**
+   * Array of private link resources
+   */
+  value?: PrivateLinkResource[];
+}
+
+/**
  * Properties of a private link resource.
  */
 model PrivateLinkResourceProperties {
@@ -645,6 +721,29 @@ model SolutionProperties {
    */
   @minLength(1)
   termId: string;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model SolutionListResponse is Azure.Core.Page<Solution> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
+}
+
+/**
+ * Paged response contains list of requested objects and a URL link to get the next set of results.
+ */
+model DataManagerForAgricultureSolutionListResponse
+  is Azure.Core.Page<DataManagerForAgricultureSolution> {
+  /**
+   * Token used in retrieving the next page. If null, there are no additional pages.
+   */
+  @encodedName("application/json", "$skipToken")
+  skipToken?: string;
 }
 
 /**

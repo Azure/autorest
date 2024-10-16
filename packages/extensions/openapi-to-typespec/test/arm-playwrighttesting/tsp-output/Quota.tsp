@@ -30,12 +30,19 @@ interface Quotas {
   /**
    * Get quota by name.
    */
-  get is ArmResourceRead<Quota>;
+  get is ArmResourceRead<
+    Quota,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * List quotas for a given subscription Id.
    */
-  listBySubscription is ArmResourceListByParent<Quota>;
+  listBySubscription is ArmResourceListByParent<
+    Quota,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = QuotaListResult
+  >;
 }
 
 @@doc(Quota.name, "The quota name.");

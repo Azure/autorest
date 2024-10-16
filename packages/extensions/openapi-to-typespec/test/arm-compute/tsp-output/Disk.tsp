@@ -59,7 +59,14 @@ interface Disks {
   /**
    * Creates or updates a disk.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Disk>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Disk,
+    Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
+      @body _: Disk;
+    })
+  >;
 
   /**
    * Updates (patches) a disk.
@@ -78,14 +85,12 @@ interface Disks {
   /**
    * Lists all the disks under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Disks_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<Disk>;
+  listByResourceGroup is ArmResourceListByParent<Disk, Response = DiskList>;
 
   /**
    * Lists all the disks under a subscription.
    */
-  list is ArmListBySubscription<Disk>;
+  list is ArmListBySubscription<Disk, Response = DiskList>;
 
   /**
    * Grants access to a disk.
@@ -102,29 +107,11 @@ interface Disks {
   "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(Disk.properties, "Disk resource properties.");
-@@encodedName(Disks.createOrUpdate::parameters.resource,
-  "application/json",
-  "disk"
-);
-@@extension(Disks.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "disk"
-);
 @@doc(Disks.createOrUpdate::parameters.resource,
   "Disk object supplied in the body of the Put disk operation."
 );
-@@encodedName(Disks.update::parameters.properties, "application/json", "disk");
-@@extension(Disks.update::parameters.properties, "x-ms-client-name", "disk");
 @@doc(Disks.update::parameters.properties,
   "Disk object supplied in the body of the Patch disk operation."
-);
-@@encodedName(Disks.grantAccess::parameters.body,
-  "application/json",
-  "grantAccessData"
-);
-@@extension(Disks.grantAccess::parameters.body,
-  "x-ms-client-name",
-  "grantAccessData"
 );
 @@doc(Disks.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."

@@ -30,14 +30,14 @@ interface CertificateContracts {
   /**
    * Gets the details of the certificate specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_Get")
   get is ArmResourceRead<CertificateContract>;
 
   /**
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Certificate_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface CertificateContracts {
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,14 +66,12 @@ interface CertificateContracts {
   /**
    * Deletes specific certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Certificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -87,13 +83,11 @@ interface CertificateContracts {
   /**
    * Lists a collection of all certificates in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_ListByService")
   listByService is ArmResourceListByParent<
     CertificateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CertificateContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| subject | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| thumbprint | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| expirationDate | filter | ge, le, eq, ne, gt, lt |     |</br>
        */
@@ -118,13 +112,14 @@ interface CertificateContracts {
        */
       @query("isKeyVaultRefreshFailed")
       isKeyVaultRefreshFailed?: boolean;
-    }
+    },
+    Response = CertificateListResult
   >;
 
   /**
    * From KeyVault, Refresh the certificate being used for authentication with the backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_RefreshSecret")
   refreshSecret is ArmResourceActionSync<
     CertificateContract,
@@ -139,14 +134,6 @@ interface CertificateContracts {
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );
 @@doc(CertificateContract.properties, "Certificate properties details.");
-@@encodedName(CertificateContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CertificateContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CertificateContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );

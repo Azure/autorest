@@ -32,9 +32,7 @@ interface GalleryImageVersions {
    */
   get is ArmResourceRead<
     GalleryImageVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryImageVersion>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -46,7 +44,14 @@ interface GalleryImageVersions {
   /**
    * Create or update a gallery image version.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImageVersion>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryImageVersion,
+    Response = ArmResourceCreatedResponse<GalleryImageVersion> | ArmResourceUpdatedResponse<GalleryImageVersion> | (ArmAcceptedLroResponse & {
+      @body _: GalleryImageVersion;
+    })
+  >;
 
   /**
    * Update a gallery image version.
@@ -65,9 +70,10 @@ interface GalleryImageVersions {
   /**
    * List gallery image versions in a gallery image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryImageVersions_ListByGalleryImage")
-  listByGalleryImage is ArmResourceListByParent<GalleryImageVersion>;
+  listByGalleryImage is ArmResourceListByParent<
+    GalleryImageVersion,
+    Response = GalleryImageVersionList
+  >;
 }
 
 @@doc(GalleryImageVersion.name,
@@ -76,24 +82,8 @@ interface GalleryImageVersions {
 @@doc(GalleryImageVersion.properties,
   "Describes the properties of a gallery image version."
 );
-@@encodedName(GalleryImageVersions.createOrUpdate::parameters.resource,
-  "application/json",
-  "galleryImageVersion"
-);
-@@extension(GalleryImageVersions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "galleryImageVersion"
-);
 @@doc(GalleryImageVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery image version operation."
-);
-@@encodedName(GalleryImageVersions.update::parameters.properties,
-  "application/json",
-  "galleryImageVersion"
-);
-@@extension(GalleryImageVersions.update::parameters.properties,
-  "x-ms-client-name",
-  "galleryImageVersion"
 );
 @@doc(GalleryImageVersions.update::parameters.properties,
   "Parameters supplied to the update gallery image version operation."

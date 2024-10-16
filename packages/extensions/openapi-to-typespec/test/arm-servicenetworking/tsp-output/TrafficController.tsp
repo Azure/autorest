@@ -49,12 +49,18 @@ interface TrafficControllers {
   /**
    * List TrafficController resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<TrafficController>;
+  listByResourceGroup is ArmResourceListByParent<
+    TrafficController,
+    Response = TrafficControllerListResult
+  >;
 
   /**
    * List TrafficController resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<TrafficController>;
+  listBySubscription is ArmListBySubscription<
+    TrafficController,
+    Response = TrafficControllerListResult
+  >;
 }
 
 @@doc(TrafficController.name, "traffic controller name for path");

@@ -25,7 +25,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForResource",
-            "NextPageMethod": "ListForResourceNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -39,7 +38,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForResourceGroup",
-            "NextPageMethod": "ListForResourceGroupNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -53,7 +51,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -67,7 +64,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -79,7 +75,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "DenyAssignment",
       "ResourceType": "Microsoft.Authorization/denyAssignments",
       "ResourceKey": "denyAssignmentId",
@@ -91,8 +89,8 @@
       "IsExtensionResource": true,
       "IsSingletonResource": false
     },
-    "AuthorizationProviderOperationsMetadata": {
-      "Name": "AuthorizationProviderOperationsMetadata",
+    "ProviderOperationsMetadata": {
+      "Name": "ProviderOperationsMetadatum",
       "GetOperations": [
         {
           "Name": "Get",
@@ -116,7 +114,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -128,7 +125,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["TenantResource"],
+      "Parents": [
+        "TenantResource"
+      ],
       "SwaggerModelName": "ProviderOperationsMetadata",
       "ResourceType": "Microsoft.Authorization/providerOperations",
       "ResourceKey": "resourceProviderNamespace",
@@ -195,7 +194,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -207,7 +205,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleAssignment",
       "ResourceType": "Microsoft.Authorization/roleAssignments",
       "ResourceKey": "roleAssignmentName",
@@ -219,8 +219,8 @@
       "IsExtensionResource": true,
       "IsSingletonResource": false
     },
-    "AuthorizationRoleDefinition": {
-      "Name": "AuthorizationRoleDefinition",
+    "RoleDefinition": {
+      "Name": "RoleDefinition",
       "GetOperations": [
         {
           "Name": "Get",
@@ -274,7 +274,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "List",
-            "NextPageMethod": "ListNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -286,7 +285,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleDefinition",
       "ResourceType": "Microsoft.Authorization/roleDefinitions",
       "ResourceKey": "roleDefinitionId",
@@ -323,7 +324,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -335,7 +335,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleAssignmentSchedule",
       "ResourceType": "Microsoft.Authorization/roleAssignmentSchedules",
       "ResourceKey": "roleAssignmentScheduleName",
@@ -372,7 +374,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -384,7 +385,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleAssignmentScheduleInstance",
       "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleInstances",
       "ResourceKey": "roleAssignmentScheduleInstanceName",
@@ -441,7 +444,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -472,7 +474,9 @@
           "Description": "Validates a new role assignment schedule request."
         }
       ],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleAssignmentScheduleRequest",
       "ResourceType": "Microsoft.Authorization/roleAssignmentScheduleRequests",
       "ResourceKey": "roleAssignmentScheduleRequestName",
@@ -509,7 +513,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -521,7 +524,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleEligibilitySchedule",
       "ResourceType": "Microsoft.Authorization/roleEligibilitySchedules",
       "ResourceKey": "roleEligibilityScheduleName",
@@ -558,7 +563,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -570,7 +574,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleEligibilityScheduleInstance",
       "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleInstances",
       "ResourceKey": "roleEligibilityScheduleInstanceName",
@@ -627,7 +633,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -658,7 +663,9 @@
           "Description": "Validates a new role eligibility schedule request."
         }
       ],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleEligibilityScheduleRequest",
       "ResourceType": "Microsoft.Authorization/roleEligibilityScheduleRequests",
       "ResourceKey": "roleEligibilityScheduleRequestName",
@@ -705,7 +712,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -717,7 +723,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleManagementPolicy",
       "ResourceType": "Microsoft.Authorization/roleManagementPolicies",
       "ResourceKey": "roleManagementPolicyName",
@@ -774,7 +782,6 @@
           "IsLongRunning": false,
           "PagingMetadata": {
             "Method": "ListForScope",
-            "NextPageMethod": "ListForScopeNextPage",
             "ItemName": "value",
             "NextLinkName": "nextLink"
           },
@@ -786,7 +793,9 @@
       "OperationsFromManagementGroupExtension": [],
       "OperationsFromTenantExtension": [],
       "OtherOperations": [],
-      "Parents": ["ArmResource"],
+      "Parents": [
+        "ArmResource"
+      ],
       "SwaggerModelName": "RoleManagementPolicyAssignment",
       "ResourceType": "Microsoft.Authorization/roleManagementPolicyAssignments",
       "ResourceKey": "roleManagementPolicyAssignmentName",
@@ -798,5 +807,7 @@
       "IsExtensionResource": true,
       "IsSingletonResource": false
     }
-  }
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
 }

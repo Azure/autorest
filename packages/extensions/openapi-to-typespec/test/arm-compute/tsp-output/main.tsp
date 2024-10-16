@@ -28,7 +28,6 @@ import "./RestorePoint.tsp";
 import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
 import "./VirtualMachineRunCommand.tsp";
-import "./VirtualMachineRunCommand.tsp";
 import "./Disk.tsp";
 import "./DiskAccess.tsp";
 import "./PrivateEndpointConnection.tsp";
@@ -109,3 +108,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_09_04: "2022-09-04",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}

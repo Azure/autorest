@@ -30,14 +30,14 @@ interface LoggerContracts {
   /**
    * Gets the details of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Logger_Get")
   get is ArmResourceRead<LoggerContract>;
 
   /**
    * Gets the entity state (Etag) version of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("Logger_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface LoggerContracts {
   /**
    * Creates or Updates a logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Logger_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LoggerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface LoggerContracts {
   /**
    * Updates an existing logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Logger_Update")
   update is ArmCustomPatchSync<
     LoggerContract,
     LoggerUpdateContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface LoggerContracts {
   /**
    * Deletes the specified logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Logger_Delete")
   delete is ArmResourceDeleteSync<
     LoggerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -107,13 +101,11 @@ interface LoggerContracts {
   /**
    * Lists a collection of loggers in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Logger_ListByService")
   listByService is ArmResourceListByParent<
     LoggerContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<LoggerContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| loggerType | filter | eq |     |</br>| resourceId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -132,7 +124,8 @@ interface LoggerContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = LoggerListResult
   >;
 }
 
@@ -141,23 +134,7 @@ interface LoggerContracts {
   "Logger identifier. Must be unique in the API Management service instance."
 );
 @@doc(LoggerContract.properties, "Logger entity contract properties.");
-@@encodedName(LoggerContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(LoggerContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(LoggerContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(LoggerContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(LoggerContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(LoggerContracts.update::parameters.properties, "Update parameters.");

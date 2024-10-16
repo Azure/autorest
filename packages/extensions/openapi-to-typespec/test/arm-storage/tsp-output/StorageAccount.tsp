@@ -44,9 +44,7 @@ interface StorageAccounts {
    */
   getProperties is ArmResourceRead<
     StorageAccount,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
-
+    Parameters = {
       /**
        * May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus.
        */
@@ -58,7 +56,12 @@ interface StorageAccounts {
   /**
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
-  create is ArmResourceCreateOrReplaceAsync<StorageAccount>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    StorageAccount,
+    Response = ArmResourceCreatedResponse<StorageAccount> | ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse
+  >;
 
   /**
    * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
@@ -75,14 +78,18 @@ interface StorageAccounts {
   /**
    * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("StorageAccounts_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<StorageAccount>;
+  listByResourceGroup is ArmResourceListByParent<
+    StorageAccount,
+    Response = StorageAccountListResult
+  >;
 
   /**
    * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  list is ArmListBySubscription<StorageAccount>;
+  list is ArmListBySubscription<
+    StorageAccount,
+    Response = StorageAccountListResult
+  >;
 
   /**
    * Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
@@ -91,9 +98,7 @@ interface StorageAccounts {
     StorageAccount,
     void,
     StorageAccountListKeysResult,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
-
+    Parameters = {
       /**
        * Specifies type of the key to be listed. Possible value is kerb.
        */
@@ -114,7 +119,7 @@ interface StorageAccounts {
   /**
    * List SAS credentials of a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
@@ -125,7 +130,7 @@ interface StorageAccounts {
   /**
    * List service SAS credentials of a specific resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
@@ -140,9 +145,7 @@ interface StorageAccounts {
     StorageAccount,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
-
+    Parameters = {
       /**
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
        */
@@ -158,9 +161,7 @@ interface StorageAccounts {
     StorageAccount,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<StorageAccount>;
-
+    Parameters = {
       /**
        * Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request 'HnsOnValidationRequest' or a hydration request 'HnsOnHydrationRequest'. The validation request will validate the migration whereas the hydration request will migrate the account.
        */
@@ -193,18 +194,10 @@ interface StorageAccounts {
   revokeUserDelegationKeys is ArmResourceActionSync<StorageAccount, void, void>;
 
   /**
-   * Checks that the storage account name is valid and is not already in use.
-   */
-  checkNameAvailability is checkGlobalNameAvailability<
-    StorageAccountCheckNameAvailabilityParameters,
-    CheckNameAvailabilityResult
-  >;
-
-  /**
    * Gets the private link resources that need to be created for a storage account.
    */
   // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkResources_ListByStorageAccount")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
@@ -230,68 +223,20 @@ interface StorageAccounts {
   "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
 @@doc(StorageAccount.properties, "Properties of the storage account.");
-@@encodedName(StorageAccounts.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(StorageAccounts.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(StorageAccounts.create::parameters.resource,
   "The parameters to provide for the created account."
-);
-@@encodedName(StorageAccounts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(StorageAccounts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(StorageAccounts.update::parameters.properties,
   "The parameters to provide for the updated account."
 );
-@@encodedName(StorageAccounts.regenerateKey::parameters.body,
-  "application/json",
-  "regenerateKey"
-);
-@@extension(StorageAccounts.regenerateKey::parameters.body,
-  "x-ms-client-name",
-  "regenerateKey"
-);
 @@doc(StorageAccounts.regenerateKey::parameters.body,
   "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
-);
-@@encodedName(StorageAccounts.listAccountSAS::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(StorageAccounts.listAccountSAS::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(StorageAccounts.listAccountSAS::parameters.body,
   "The parameters to provide to list SAS credentials for the storage account."
 );
-@@encodedName(StorageAccounts.listServiceSAS::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(StorageAccounts.listServiceSAS::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(StorageAccounts.listServiceSAS::parameters.body,
   "The parameters to provide to list service SAS credentials."
-);
-@@encodedName(StorageAccounts.restoreBlobRanges::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(StorageAccounts.restoreBlobRanges::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(StorageAccounts.restoreBlobRanges::parameters.body,
   "The parameters to provide for restore blob ranges."

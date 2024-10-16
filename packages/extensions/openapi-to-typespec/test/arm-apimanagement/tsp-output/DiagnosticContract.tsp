@@ -30,14 +30,14 @@ interface DiagnosticContracts {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiDiagnostic_Get")
   get is ArmResourceRead<DiagnosticContract>;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @head
   @operationId("ApiDiagnostic_GetEntityTag")
   getEntityTag(
@@ -50,13 +50,11 @@ interface DiagnosticContracts {
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DiagnosticContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
@@ -68,15 +66,13 @@ interface DiagnosticContracts {
   /**
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("ApiDiagnostic_Update")
   update is ArmCustomPatchSync<
     DiagnosticContract,
     DiagnosticContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -88,14 +84,12 @@ interface DiagnosticContracts {
   /**
    * Deletes the specified Diagnostic from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("ApiDiagnostic_Delete")
   delete is ArmResourceDeleteSync<
     DiagnosticContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
-
+    Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
@@ -107,13 +101,11 @@ interface DiagnosticContracts {
   /**
    * Lists all diagnostics of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ApiDiagnostic_ListByService")
   listByService is ArmResourceListByParent<
     DiagnosticContract,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DiagnosticContract>;
-
+    Parameters = {
       /**
        * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
        */
@@ -132,7 +124,8 @@ interface DiagnosticContracts {
        */
       @query("$skip")
       $skip?: int32;
-    }
+    },
+    Response = DiagnosticListResult
   >;
 }
 
@@ -142,24 +135,8 @@ interface DiagnosticContracts {
   "Diagnostic identifier. Must be unique in the current API Management service instance."
 );
 @@doc(DiagnosticContract.properties, "Diagnostic entity contract properties.");
-@@encodedName(DiagnosticContracts.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(DiagnosticContracts.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(DiagnosticContracts.createOrUpdate::parameters.resource,
   "Create parameters."
-);
-@@encodedName(DiagnosticContracts.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(DiagnosticContracts.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(DiagnosticContracts.update::parameters.properties,
   "Diagnostic Update parameters."

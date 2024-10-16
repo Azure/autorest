@@ -48,12 +48,18 @@ interface Accounts {
   /**
    * List Account resources by resource group
    */
-  listByResourceGroup is ArmResourceListByParent<Account>;
+  listByResourceGroup is ArmResourceListByParent<
+    Account,
+    Response = AccountListResult
+  >;
 
   /**
    * List Account resources by subscription ID
    */
-  listBySubscription is ArmListBySubscription<Account>;
+  listBySubscription is ArmListBySubscription<
+    Account,
+    Response = AccountListResult
+  >;
 }
 
 @@maxLength(Account.name, 64);

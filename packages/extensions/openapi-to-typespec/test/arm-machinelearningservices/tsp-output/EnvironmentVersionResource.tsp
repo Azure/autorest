@@ -30,21 +30,21 @@ interface EnvironmentVersionResources {
   /**
    * Get version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_Get")
   get is ArmResourceRead<EnvironmentVersionResource>;
 
   /**
    * Create or update version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EnvironmentVersionResource>;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -54,13 +54,11 @@ interface EnvironmentVersionResources {
   /**
    * List versions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_List")
   list is ArmResourceListByParent<
     EnvironmentVersionResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<EnvironmentVersionResource>;
-
+    Parameters = {
       /**
        * Ordering of list.
        */
@@ -90,7 +88,8 @@ interface EnvironmentVersionResources {
        */
       @query("stage")
       stage?: string;
-    }
+    },
+    Response = EnvironmentVersionResourceArmPaginatedResult
   >;
 }
 
@@ -99,14 +98,6 @@ interface EnvironmentVersionResources {
 );
 @@doc(EnvironmentVersionResource.properties,
   "[Required] Additional attributes of the entity."
-);
-@@encodedName(EnvironmentVersionResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(EnvironmentVersionResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(EnvironmentVersionResources.createOrUpdate::parameters.resource,
   "Version entity to create or update."

@@ -36,21 +36,21 @@ interface BatchEndpointTrackedResources {
   /**
    * Gets a batch inference endpoint by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchEndpoints_Get")
   get is ArmResourceRead<BatchEndpointTrackedResource>;
 
   /**
    * Creates a batch inference endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchEndpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchEndpointTrackedResource>;
 
   /**
    * Update a batch inference endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("BatchEndpoints_Update")
   update is ArmCustomPatchAsync<
@@ -61,7 +61,7 @@ interface BatchEndpointTrackedResources {
   /**
    * Delete Batch Inference Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -71,13 +71,11 @@ interface BatchEndpointTrackedResources {
   /**
    * Lists Batch inference endpoint in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchEndpoints_List")
   list is ArmResourceListByParent<
     BatchEndpointTrackedResource,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<BatchEndpointTrackedResource>;
-
+    Parameters = {
       /**
        * Number of endpoints to be retrieved in a page of results.
        */
@@ -89,13 +87,14 @@ interface BatchEndpointTrackedResources {
        */
       @query("$skip")
       $skip?: string;
-    }
+    },
+    Response = BatchEndpointTrackedResourceArmPaginatedResult
   >;
 
   /**
    * Lists batch Inference Endpoint keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BatchEndpoints_ListKeys")
   listKeys is ArmResourceActionSync<
     BatchEndpointTrackedResource,
@@ -108,24 +107,8 @@ interface BatchEndpointTrackedResources {
 @@doc(BatchEndpointTrackedResource.properties,
   "[Required] Additional attributes of the entity."
 );
-@@encodedName(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "application/json",
-  "body"
-);
-@@extension(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
 @@doc(BatchEndpointTrackedResources.createOrUpdate::parameters.resource,
   "Batch inference endpoint definition object."
-);
-@@encodedName(BatchEndpointTrackedResources.update::parameters.properties,
-  "application/json",
-  "body"
-);
-@@extension(BatchEndpointTrackedResources.update::parameters.properties,
-  "x-ms-client-name",
-  "body"
 );
 @@doc(BatchEndpointTrackedResources.update::parameters.properties,
   "Mutable batch inference endpoint definition object."

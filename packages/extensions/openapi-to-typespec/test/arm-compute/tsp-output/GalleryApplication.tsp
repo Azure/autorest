@@ -35,7 +35,14 @@ interface GalleryApplications {
   /**
    * Create or update a gallery Application Definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryApplication>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryApplication,
+    Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {
+      @body _: GalleryApplication;
+    })
+  >;
 
   /**
    * Update a gallery Application Definition.
@@ -54,9 +61,10 @@ interface GalleryApplications {
   /**
    * List gallery Application Definitions in a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryApplications_ListByGallery")
-  listByGallery is ArmResourceListByParent<GalleryApplication>;
+  listByGallery is ArmResourceListByParent<
+    GalleryApplication,
+    Response = GalleryApplicationList
+  >;
 }
 
 @@doc(GalleryApplication.name,
@@ -65,24 +73,8 @@ interface GalleryApplications {
 @@doc(GalleryApplication.properties,
   "Describes the properties of a gallery Application Definition."
 );
-@@encodedName(GalleryApplications.createOrUpdate::parameters.resource,
-  "application/json",
-  "galleryApplication"
-);
-@@extension(GalleryApplications.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "galleryApplication"
-);
 @@doc(GalleryApplications.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application operation."
-);
-@@encodedName(GalleryApplications.update::parameters.properties,
-  "application/json",
-  "galleryApplication"
-);
-@@extension(GalleryApplications.update::parameters.properties,
-  "x-ms-client-name",
-  "galleryApplication"
 );
 @@doc(GalleryApplications.update::parameters.properties,
   "Parameters supplied to the update gallery Application operation."

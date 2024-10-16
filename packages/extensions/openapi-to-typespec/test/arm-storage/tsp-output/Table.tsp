@@ -29,21 +29,21 @@ interface Tables {
   /**
    * Gets the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Table_Get")
   get is ArmResourceRead<Table>;
 
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Table_Create")
   create is ArmResourceCreateOrReplaceSync<Table>;
 
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @parameterVisibility
   @operationId("Table_Update")
   update is ArmCustomPatchSync<Table, Table>;
@@ -51,7 +51,7 @@ interface Tables {
   /**
    * Deletes the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<Table>;
@@ -59,9 +59,9 @@ interface Tables {
   /**
    * Gets a list of all the tables under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Table_List")
-  list is ArmResourceListByParent<Table>;
+  list is ArmResourceListByParent<Table, Response = ListTableResource>;
 }
 
 @@maxLength(Table.name, 63);
@@ -70,24 +70,8 @@ interface Tables {
   "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character."
 );
 @@doc(Table.properties, "Table resource properties.");
-@@encodedName(Tables.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(Tables.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(Tables.create::parameters.resource,
   "The parameters to provide to create a table."
-);
-@@encodedName(Tables.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(Tables.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(Tables.update::parameters.properties,
   "The parameters to provide to create a table."

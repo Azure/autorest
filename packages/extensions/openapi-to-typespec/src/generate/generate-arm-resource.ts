@@ -1,10 +1,9 @@
 import { Case } from "change-case-all";
-import { TypespecOperation, TspArmResource } from "interfaces";
+import { TypespecOperation, TspArmResource, TypespecProgram } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
-import { getArmCommonTypeVersion } from "../autorest-session";
 import { getOptions } from "../options";
-import { replaceGeneratedResourceObject } from "../transforms/transform-arm-resources";
+import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
@@ -78,15 +77,11 @@ function generateArmResourceModel(resource: TspArmResource): string {
 function generateArmResourceOperation(resource: TspArmResource): string {
   const { isFullCompatible } = getOptions();
 
-  const formalOperationGroupName = pluralize(resource.name);
+  const formalOperationGroupName = getTSPOperationGroupName(resource.name);
   const definitions: string[] = [];
 
   definitions.push("@armResourceOperations");
-  if (resource.name === formalOperationGroupName) {
-    definitions.push(`interface ${formalOperationGroupName}OperationGroup {`);
-  } else {
-    definitions.push(`interface ${formalOperationGroupName} {`);
-  }
+  definitions.push(`interface ${formalOperationGroupName} {`);
 
   for (const operation of resource.resourceOperations) {
     for (const fixme of operation.fixMe ?? []) {
@@ -98,11 +93,10 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (
       isFullCompatible &&
       operation.operationId &&
-      (operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name) ||
-        operation.kind === "ArmResourceListByParent")
+      operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
-      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);
+      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
     }
     if (isFullCompatible && operation.suppressions) {
       definitions.push(...generateSuppressions(operation.suppressions));
@@ -110,11 +104,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
     if (operation.kind === "ArmResourceExists") {
       definitions.push(`op ${operation.name}(${operation.parameters.join(",")}): ${operation.responses.join("|")}`);
     } else if (operation.templateParameters?.length) {
-      definitions.push(
-        `${operation.name} is ${operation.kind}<${(operation.templateParameters ?? [])
-          .map(replaceGeneratedResourceObject)
-          .join(",")}>`,
-      );
+      definitions.push(`${operation.name} is ${operation.kind}<${(operation.templateParameters ?? []).join(",")}>`);
     } else {
       definitions.push(`${operation.name} is ${operation.kind}`);
     }
@@ -127,7 +117,7 @@ function generateArmResourceOperation(resource: TspArmResource): string {
       operation.operationId !== getGeneratedOperationId(formalOperationGroupName, operation.name)
     ) {
       definitions.push(`@operationId("${operation.operationId}")`);
-      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"`);
+      definitions.push(`#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"`);
     }
     definitions.push(generateOperation(operation as TypespecOperation));
     definitions.push("");
