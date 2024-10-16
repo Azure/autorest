@@ -11,6 +11,7 @@ import {
 import _ from "lodash";
 import pluralize, { singular } from "pluralize";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
+import { getDataTypes } from "../data-types";
 import { generateParameter } from "../generate/generate-parameter";
 import {
   ArmResourceKind,
@@ -25,15 +26,13 @@ import {
 import { getOptions, updateOptions } from "../options";
 import { createClientNameDecorator, createCSharpNameDecorator } from "../pretransforms/rename-pretransform";
 import { getOperationClientDecorators } from "../utils/decorators";
-import { generateDocs, generateDocsContent } from "../utils/docs";
+import { generateDocsContent } from "../utils/docs";
 import {
   ArmResource,
   ArmResourceSchema,
-  OperationWithResourceOperationFlag,
   _ArmResourceOperation,
   getResourceExistOperation as getResourceExistsOperation,
   getResourceOperations,
-  getSingletonResouceListOperation,
   isResourceSchema,
 } from "../utils/resource-discovery";
 import { isArraySchema, isResponseSchema } from "../utils/schemas";
@@ -45,7 +44,6 @@ import {
 import { getFullyQualifiedName, isResourceListResult } from "../utils/type-mapping";
 import { getTypespecType, transformObjectProperty } from "./transform-object";
 import { transformParameter, transformRequest } from "./transform-operations";
-import { getDataTypes } from "../data-types";
 
 const armResourceCache: Map<ArmResourceSchema, TspArmResource> = new Map<ArmResourceSchema, TspArmResource>();
 export function transformTspArmResource(schema: ArmResourceSchema): TspArmResource {

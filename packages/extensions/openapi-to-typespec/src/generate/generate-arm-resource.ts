@@ -2,14 +2,13 @@ import { Case } from "change-case-all";
 import { TypespecOperation, TspArmResource, TypespecProgram } from "interfaces";
 import _ from "lodash";
 import pluralize from "pluralize";
-import { getArmCommonTypeVersion } from "../autorest-session";
 import { getOptions } from "../options";
+import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation } from "./generate-operations";
-import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 
 export function generateArmResource(resource: TspArmResource): string {
   const definitions: string[] = [];

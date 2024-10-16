@@ -40,8 +40,9 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
       `@${verb} op \`${name}\`(
         ...ApiVersionParameter,
         ${params}
-        ): ${modelResponses.length > 0 ? `ArmResponse<${modelResponses.join(" | ")}>` : ""}${otherResponses.length > 0 ? `| ${otherResponses.join("|")}` : ""
-      } | ErrorResponse;\n\n\n`,
+        ): ${modelResponses.length > 0 ? `ArmResponse<${modelResponses.join(" | ")}>` : ""}${
+          otherResponses.length > 0 ? `| ${otherResponses.join("|")}` : ""
+        } | ErrorResponse;\n\n\n`,
     );
   } else if (!operation.resource) {
     const names = [name, ...modelResponses, ...parameters.map((p) => p.name)];
@@ -49,7 +50,8 @@ export function generateOperation(operation: TypespecOperation, operationGroup?:
     generateNameCollisionWarning(duplicateNames, statements);
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op \`${name}\` is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${modelResponses.length > 0 ? `${modelResponses.join(" | ")}` : "void"
+      `@${verb} op \`${name}\` is Azure.Core.Foundations.Operation<${params ? params : "{}"}, ${
+        modelResponses.length > 0 ? `${modelResponses.join(" | ")}` : "void"
       }>;\n\n\n`,
     );
   } else {
@@ -78,7 +80,8 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   const templateParameters = [];
   const responses = [...new Set(operation.responses)];
   // Workaround for array response, refactor later.
-  const response = (responses.length === 1 && responses[0].endsWith("[]")) ? `{@body _: ${responses[0]}}` : responses.join("|");
+  const response =
+    responses.length === 1 && responses[0].endsWith("[]") ? `{@body _: ${responses[0]}}` : responses.join("|");
   if (response !== "void") {
     templateParameters.push(`Response = ${response}`);
   }

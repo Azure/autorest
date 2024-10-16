@@ -13,8 +13,9 @@ import {
   SchemaResponse,
 } from "@autorest/codemodel";
 import { Case } from "change-case-all";
-import _, { isArray } from "lodash";
+import _ from "lodash";
 import { OperationWithResourceOperationFlag } from "utils/resource-discovery";
+import { getSession } from "../autorest-session";
 import { getDataTypes } from "../data-types";
 import {
   TypespecOperation,
@@ -23,7 +24,6 @@ import {
   TypespecParameterLocation,
   Extension,
   TspArmProviderActionOperation,
-  TypespecDecorator,
 } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -31,9 +31,8 @@ import { createOperationIdDecorator, getOperationClientDecorators, getPropertyDe
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
 import { isArraySchema, isConstantSchema, isResponseSchema } from "../utils/schemas";
-import { getDefaultValue } from "../utils/values";
 import { isResourceListResult } from "../utils/type-mapping";
-import { getSession } from "../autorest-session";
+import { getDefaultValue } from "../utils/values";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
@@ -226,7 +225,7 @@ function getActionForPrviderTemplate(route: string): string | undefined {
 
 function getSegmentForPathParameter(route: string, parameter: string): string {
   const segments = route.split("/");
-  const variableIndex = segments.findIndex((s) => s === `\{${parameter}\}`);
+  const variableIndex = segments.findIndex((s) => s === `{${parameter}}`);
   if (variableIndex < 1) throw `Cannot find parameter ${parameter} in route ${route}`;
   return segments[variableIndex - 1];
 }
