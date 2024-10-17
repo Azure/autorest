@@ -1,6 +1,6 @@
-import { ChoiceSchema, Property, Schema, SealedChoiceSchema } from "@autorest/codemodel";
+import { Property } from "@autorest/codemodel";
 import { WithSuppressDirective } from "../interfaces";
-import { isChoiceSchema, isSealedChoiceSchema, isDictionarySchema, isStringSchema } from "./schemas";
+import { isDictionarySchema } from "./schemas";
 
 export function generateSuppressionForDocumentRequired(): string {
   return `#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"`;

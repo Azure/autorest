@@ -1,3 +1,4 @@
+import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
 import { TypespecParameter } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
@@ -10,12 +11,13 @@ const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
 };
 
 export function generateParameter(parameter: TypespecParameter): string {
-  const { isArm } = getOptions();
+  const { isArm, isFullCompatible } = getOptions();
   if (isArm && _ARM_PARAM_REPLACEMENTS[parameter.name] !== undefined) {
     return _ARM_PARAM_REPLACEMENTS[parameter.name];
   }
   const definitions: string[] = [];
   const doc = generateDocs(parameter);
+  if (doc === '' && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
   definitions.push(doc);
 
   const decorators = generateDecorators(parameter.decorators);

@@ -135,20 +135,20 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
         locationDecorator.arguments =
           format === "multi"
             ? [
-                {
-                  value: `#{ name: "${element.language.default.serializedName}", explode: true }`,
-                  options: { unwrap: true },
-                },
-              ]
+              {
+                value: `#{ name: "${element.language.default.serializedName}", explode: true }`,
+                options: { unwrap: true },
+              },
+            ]
             : [
-                {
-                  value:
-                    format === "csv"
-                      ? `"${element.language.default.serializedName}"`
-                      : `{name: "${element.language.default.serializedName}", format: "${format}"}`,
-                  options: { unwrap: true },
-                },
-              ];
+              {
+                value:
+                  format === "csv"
+                    ? `"${element.language.default.serializedName}"`
+                    : `{name: "${element.language.default.serializedName}", format: "${format}"}`,
+                options: { unwrap: true },
+              },
+            ];
       }
     }
 
@@ -173,10 +173,9 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
     decorators.push({
-      name: "extension",
-      module: "@typespec/openapi",
-      namespace: "TypeSpec.OpenAPI",
-      arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
+      name: "Azure.ResourceManager.Private.conditionalClientFlatten",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-private-usage",
+      suppressionMessage: "For backward compatibility"
     });
   }
 

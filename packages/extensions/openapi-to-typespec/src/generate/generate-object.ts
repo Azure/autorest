@@ -1,15 +1,19 @@
+import { getOptions } from "../options";
 import { TypespecObject } from "../interfaces";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
+import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
 
 export function generateObject(typespecObject: TypespecObject) {
+  const { isFullCompatible } = getOptions();
   let definitions: string[] = [];
 
   const fixme = getFixme(typespecObject);
   fixme && definitions.push(fixme);
 
   const doc = generateDocs(typespecObject);
+  if (doc === '' && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
   definitions.push(doc);
 
   const decorators = generateDecorators(typespecObject.decorators);
