@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.2",
+      "tag": "@autorest/openapi-to-typespec_v0.10.2",
+      "date": "Thu, 17 Oct 2024 10:14:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix paging, LRO and provideraction template. Upgrade compiler to 0.61"
+          },
+          {
+            "comment": "Fix flatter and no doc warning "
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.1",
       "tag": "@autorest/openapi-to-typespec_v0.10.1",
       "date": "Tue, 08 Oct 2024 09:03:42 GMT",

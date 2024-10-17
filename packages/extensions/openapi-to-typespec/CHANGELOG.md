@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Tue, 08 Oct 2024 09:03:42 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Oct 2024 10:14:02 GMT and should not be manually modified.
+
+## 0.10.2
+Thu, 17 Oct 2024 10:14:02 GMT
+
+### Patches
+
+- Fix paging, LRO and provideraction template. Upgrade compiler to 0.61
+- Fix flatter and no doc warning 
 
 ## 0.10.1
 Tue, 08 Oct 2024 09:03:42 GMT
