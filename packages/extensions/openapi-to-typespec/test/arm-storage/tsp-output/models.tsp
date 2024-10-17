@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1043,7 +1041,8 @@ model StorageAccountCreateParameters {
   /**
    * The parameters used to create the storage account.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesCreateParameters;
 }
 
@@ -1964,9 +1963,10 @@ model StorageAccountInternetEndpoints {
  * Storage account keys creation time.
  */
 model KeyCreationTime {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   key1?: utcDateTime;
-
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   key2?: utcDateTime;
 }
@@ -2184,7 +2184,8 @@ model StorageAccountUpdateParameters {
   /**
    * The parameters used when updating a storage account.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageAccountPropertiesUpdateParameters;
 
   /**
@@ -3146,7 +3147,8 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -3310,6 +3312,7 @@ model LocalUserProperties {
   hasSshPassword?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model PermissionScope {
   /**
    * The permissions for the local user. Possible values include: Read (r), Write (w), Delete (d), List (l), and Create (c).
@@ -3327,6 +3330,7 @@ model PermissionScope {
   resourceName: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SshPublicKey {
   /**
    * Optional. It is used to store the function/usage of the key
@@ -3433,6 +3437,7 @@ model EncryptionScopeKeyVaultProperties {
  */
 model EncryptionScopeListResult is Azure.Core.Page<EncryptionScope>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @pagedResult
 model BlobServiceItems {
   /**
@@ -3755,7 +3760,8 @@ model ImmutabilityPolicyProperties {
   /**
    * The properties of an ImmutabilityPolicy of a blob container.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImmutabilityPolicyProperty;
 
   /**
@@ -4023,6 +4029,7 @@ model LeaseContainerResponse {
   leaseTimeSeconds?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model FileServiceItems {
   /**
    * List of file services returned.
@@ -4221,6 +4228,7 @@ model FileShareProperties {
   snapshotTime?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SignedIdentifier {
   /**
    * An unique identifier of the stored access policy.
@@ -4233,6 +4241,7 @@ model SignedIdentifier {
   accessPolicy?: AccessPolicy;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AccessPolicy {
   /**
    * Start time of the access policy
@@ -4312,6 +4321,7 @@ model LeaseShareResponse {
   leaseTimeSeconds?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueueServices {
   /**
    * List of queue services returned.
@@ -4330,6 +4340,7 @@ model QueueServicePropertiesProperties {
   cors?: CorsRules;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueProperties {
   /**
    * A name-value pair that represents queue metadata.
@@ -4349,6 +4360,7 @@ model QueueProperties {
  */
 model ListQueueResource is Azure.Core.Page<StorageQueue>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListTableServices {
   /**
    * List of table services returned.
@@ -4367,6 +4379,7 @@ model TableServicePropertiesProperties {
   cors?: CorsRules;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TableProperties {
   /**
    * Table name under the specified account
@@ -4429,7 +4442,8 @@ model ListContainerItem extends AzureEntityResource {
   /**
    * The blob container properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ContainerProperties;
 }
 
@@ -4440,19 +4454,23 @@ model FileShareItem extends AzureEntityResource {
   /**
    * The file share properties be listed out.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileShareProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueue extends Resource {
   /**
    * List Queue resource properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @encodedName("application/json", "properties")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   queueProperties?: ListQueueProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ListQueueProperties {
   /**
    * A name-value pair that represents queue metadata.

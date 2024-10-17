@@ -2,7 +2,7 @@ import { TypespecObjectProperty } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "./decorators";
 import { generateDocs } from "./docs";
-import { generateSuppressions } from "./suppressions";
+import { generateSuppressionForDocumentRequired, generateSuppressions } from "./suppressions";
 import { getFullyQualifiedName } from "./type-mapping";
 
 export function getModelPropertiesDeclarations(properties: TypespecObjectProperty[]): string[] {
@@ -10,6 +10,7 @@ export function getModelPropertiesDeclarations(properties: TypespecObjectPropert
   const definitions: string[] = [];
   for (const property of properties) {
     const propertyDoc = generateDocs(property);
+    if (propertyDoc === "" && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
     propertyDoc && definitions.push(propertyDoc);
     const decorators = generateDecorators(property.decorators);
     decorators && definitions.push(decorators);

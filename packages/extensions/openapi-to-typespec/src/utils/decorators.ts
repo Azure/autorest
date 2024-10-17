@@ -173,10 +173,9 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
 
   if (element.extensions?.["x-ms-client-flatten"] && isFullCompatible) {
     decorators.push({
-      name: "extension",
-      module: "@typespec/openapi",
-      namespace: "TypeSpec.OpenAPI",
-      arguments: [{ value: `"x-ms-client-flatten"` }, { value: "true" }],
+      name: "Azure.ResourceManager.Private.conditionalClientFlatten",
+      suppressionCode: "@azure-tools/typespec-azure-core/no-private-usage",
+      suppressionMessage: "For backward compatibility",
     });
   }
 

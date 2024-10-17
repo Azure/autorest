@@ -159,9 +159,11 @@ interface VirtualMachineImagesOperations {
       @query("$expand")
       $expand?: string;
 
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("$top")
       $top?: int32;
 
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("$orderby")
       $orderby?: string;
     }

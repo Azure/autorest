@@ -21,6 +21,7 @@ model Workspace
     SegmentName = "workspaces",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   kind?: string;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
