@@ -17,7 +17,7 @@ export function generateParameter(parameter: TypespecParameter): string {
   }
   const definitions: string[] = [];
   const doc = generateDocs(parameter);
-  if (doc === '' && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
+  if (doc === "" && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
   definitions.push(doc);
 
   const decorators = generateDecorators(parameter.decorators);

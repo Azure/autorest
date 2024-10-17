@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -2000,7 +1998,8 @@ model ComputeOperationValue {
   /**
    * Describes the properties of a Compute Operation Value Display.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   display?: ComputeOperationValueDisplay;
 }
 
@@ -2846,6 +2845,7 @@ model VaultSecretGroup {
   vaultCertificates?: VaultCertificate[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResource {
   /**
    * Resource Id
@@ -2888,6 +2888,7 @@ model VirtualMachineScaleSetStorageProfile {
   @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: string;
 }
 
@@ -3156,7 +3157,8 @@ model VirtualMachineScaleSetNetworkConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
 }
 
@@ -3243,7 +3245,8 @@ model VirtualMachineScaleSetIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetIPConfigurationProperties;
 }
 
@@ -3304,7 +3307,8 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetPublicIPAddressConfigurationProperties;
 
   /**
@@ -3550,6 +3554,7 @@ model KeyVaultSecretReference {
   sourceVault: SubResource;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResourceReadOnly {
   /**
    * Resource Id
@@ -3568,6 +3573,7 @@ model BillingProfile {
   maxPrice?: float64;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ScheduledEventsProfile {
   /**
    * Specifies Terminate Scheduled Event related configurations.
@@ -3580,6 +3586,7 @@ model ScheduledEventsProfile {
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TerminateNotificationProfile {
   /**
    * Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)
@@ -3592,6 +3599,7 @@ model TerminateNotificationProfile {
   enable?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OSImageNotificationProfile {
   /**
    * Length of time a Virtual Machine being reimaged or having its OS upgraded will have to potentially approve the OS Image Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, and the value must be 15 minutes (PT15M)
@@ -3967,6 +3975,7 @@ model VirtualMachineScaleSetIdentity {
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
@@ -4047,7 +4056,8 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Scale Set.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateProperties;
 
   /**
@@ -4222,6 +4232,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: string;
 }
 
@@ -4298,7 +4309,8 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   /**
    * Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
 }
 
@@ -4375,7 +4387,8 @@ model VirtualMachineScaleSetUpdateIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdateIPConfigurationProperties;
 }
 
@@ -4436,7 +4449,8 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
 }
 
@@ -4610,7 +4624,8 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
@@ -4958,6 +4973,7 @@ model RecoveryWalkResponse {
   nextPlatformUpdateDomain?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VMScaleSetConvertToSinglePlacementGroupInput {
   /**
    * Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances.
@@ -4999,7 +5015,8 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -5718,7 +5735,8 @@ model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NetworkInterfaceReferenceProperties;
 }
 
@@ -5749,7 +5767,8 @@ model VirtualMachineNetworkInterfaceConfiguration {
   /**
    * Describes a virtual machine network profile's IP configuration.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
 }
 
@@ -5803,6 +5822,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   dscpConfiguration?: SubResource;
 
   /**
@@ -5838,7 +5858,8 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
   /**
    * Describes a virtual machine network interface IP configuration properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineNetworkInterfaceIPConfigurationProperties;
 }
 
@@ -5894,7 +5915,8 @@ model VirtualMachinePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines IP Configuration's PublicIPAddress configuration
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachinePublicIPAddressConfigurationProperties;
 
   /**
@@ -6058,7 +6080,8 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -6520,7 +6543,8 @@ model VirtualMachineUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineProperties;
 
   /**
@@ -6864,7 +6888,8 @@ model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineImageProperties;
 }
 
@@ -6903,6 +6928,7 @@ model VirtualMachineImageProperties {
    */
   disallowed?: DisallowedConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   features?: VirtualMachineImageFeature[];
 
@@ -7139,7 +7165,8 @@ model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AvailabilitySetProperties;
 
   /**
@@ -7191,6 +7218,7 @@ model ProximityPlacementGroupProperties {
   intent?: ProximityPlacementGroupPropertiesIntent;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubResourceWithColocationStatus extends SubResource {
   /**
    * Describes colocation status of a resource in the Proximity Placement Group.
@@ -7252,6 +7280,7 @@ model DedicatedHostGroupProperties {
   additionalCapabilities?: DedicatedHostGroupPropertiesAdditionalCapabilities;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DedicatedHostGroupInstanceView {
   /**
    * List of instance view of the dedicated hosts under the dedicated host group.
@@ -7336,7 +7365,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DedicatedHostGroupProperties;
 
   /**
@@ -7415,7 +7445,8 @@ model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DedicatedHostProperties;
 
   /**
@@ -7464,7 +7495,8 @@ model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SshPublicKeyResourceProperties;
 }
 
@@ -7607,7 +7639,8 @@ model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ImageProperties;
 }
 
@@ -7986,7 +8019,8 @@ model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RestorePointCollectionProperties;
 }
 
@@ -8019,6 +8053,7 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CapacityReservationGroupInstanceView {
   /**
    * List of instance view of the capacity reservations under the capacity reservation group.
@@ -8080,7 +8115,8 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CapacityReservationGroupProperties;
 }
 
@@ -8146,7 +8182,8 @@ model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CapacityReservationProperties;
 
   /**
@@ -8357,6 +8394,7 @@ model RunCommandInputParameter {
   value: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RunCommandResult {
   /**
    * Run command operation response.
@@ -8539,7 +8577,8 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineRunCommandProperties;
 }
 
@@ -8973,6 +9012,7 @@ model Encryption {
   type?: EncryptionType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ShareInfoElement {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
@@ -9013,7 +9053,8 @@ model DiskUpdate {
   /**
    * Disk resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiskUpdateProperties;
 
   /**
@@ -9183,6 +9224,7 @@ model AccessUri {
   securityDataAccessSAS?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DiskAccessProperties {
   /**
    * A readonly collection of private endpoint connections created on the disk. Currently only one endpoint connection is supported.
@@ -9290,7 +9332,8 @@ model PrivateLinkResource {
   /**
    * Resource properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -9368,6 +9411,7 @@ model EncryptionSetIdentity {
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model EncryptionSetProperties {
   /**
    * The type of key used to encrypt the data of the disk.
@@ -9438,7 +9482,8 @@ model DiskEncryptionSetUpdate {
   /**
    * disk encryption set resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiskEncryptionSetUpdateProperties;
 
   /**
@@ -9780,7 +9825,8 @@ model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotUpdateProperties;
 
   /**
@@ -10293,7 +10339,8 @@ model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryProperties;
 }
 
@@ -10511,7 +10558,8 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryImageProperties;
 }
 
@@ -10694,6 +10742,7 @@ model DataDiskImageEncryption extends DiskImageEncryption {
   lun: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GalleryTargetExtendedLocation {
   /**
    * The name of the region.
@@ -10725,6 +10774,7 @@ model GalleryTargetExtendedLocation {
  * The name of the extended location.
  */
 model GalleryExtendedLocation {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
 
   /**
@@ -10923,7 +10973,8 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryImageVersionProperties;
 }
 
@@ -11032,7 +11083,8 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryApplicationProperties;
 }
 
@@ -11073,6 +11125,7 @@ model GalleryApplicationVersionPublishingProfile
    */
   source: UserArtifactSource;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   manageActions?: UserArtifactManage;
 
   /**
@@ -11113,6 +11166,7 @@ model UserArtifactSource {
   defaultConfigurationLink?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserArtifactManage {
   /**
    * Required. The path and arguments to install the gallery application. This is limited to 4096 characters.
@@ -11158,7 +11212,8 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GalleryApplicationVersionProperties;
 }
 
@@ -11216,7 +11271,8 @@ model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   identifier?: SharedGalleryIdentifier;
 }
 
@@ -11424,7 +11480,8 @@ model PirCommunityGalleryResource {
   /**
    * The identifier information of community gallery.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   identifier?: CommunityGalleryIdentifier;
 }
 
@@ -11628,6 +11685,7 @@ model RoleInstanceInstanceView {
   @visibility("read")
   privateId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
   statuses?: ResourceInstanceViewStatus[];
@@ -11884,7 +11942,8 @@ model LoadBalancerConfiguration {
   /**
    * Properties of the load balancer configuration.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: LoadBalancerConfigurationProperties;
 }
 
@@ -11911,7 +11970,8 @@ model LoadBalancerFrontendIpConfiguration {
   /**
    * Properties of load balancer frontend ip configuration.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: LoadBalancerFrontendIpConfigurationProperties;
 }
 
@@ -11958,7 +12018,8 @@ model Extension {
   /**
    * Extension Properties.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CloudServiceExtensionProperties;
 }
 
@@ -12037,6 +12098,7 @@ model CloudServiceVaultAndSecretReference {
   secretUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CloudServiceUpdate {
   /**
    * Resource tags
@@ -12066,6 +12128,7 @@ model CloudServiceInstanceView {
   @visibility("read")
   privateIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
   statuses?: ResourceInstanceViewStatus[];

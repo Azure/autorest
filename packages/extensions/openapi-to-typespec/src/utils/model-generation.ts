@@ -10,7 +10,7 @@ export function getModelPropertiesDeclarations(properties: TypespecObjectPropert
   const definitions: string[] = [];
   for (const property of properties) {
     const propertyDoc = generateDocs(property);
-    if (propertyDoc === '' && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
+    if (propertyDoc === "" && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
     propertyDoc && definitions.push(propertyDoc);
     const decorators = generateDecorators(property.decorators);
     decorators && definitions.push(decorators);

@@ -5206,6 +5206,12 @@ model QueryRewritesDebugInfo {
 */
 model QueryRewritesValuesDebugInfo {
 /**
+* The input text to the generative query rewriting model. There may be cases
+* where the user query and the input to the generative model are not identical.
+*/
+@visibility("read")
+"inputQuery"?: string;
+/**
 * List of query rewrites.
 */
 @visibility("read")

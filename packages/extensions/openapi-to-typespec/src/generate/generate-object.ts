@@ -13,7 +13,7 @@ export function generateObject(typespecObject: TypespecObject) {
   fixme && definitions.push(fixme);
 
   const doc = generateDocs(typespecObject);
-  if (doc === '' && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
+  if (doc === "" && isFullCompatible) definitions.push(generateSuppressionForDocumentRequired());
   definitions.push(doc);
 
   const decorators = generateDecorators(typespecObject.decorators);

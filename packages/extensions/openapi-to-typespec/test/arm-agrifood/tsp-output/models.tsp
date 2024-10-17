@@ -769,6 +769,7 @@ model DataManagerForAgricultureSolutionProperties {
   @visibility("read")
   dataAccessScopes?: string[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   marketplaceOfferDetails?: MarketplaceOfferDetails;
 
   /**
@@ -815,8 +816,11 @@ model DataManagerForAgricultureSolutionProperties {
   accessFBApplicationName?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model MarketplaceOfferDetails {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   saasOfferId?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   publisherId?: string;
 }
 
