@@ -1,5 +1,5 @@
-import { getOptions } from "../options";
 import { TypespecObject } from "../interfaces";
+import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";

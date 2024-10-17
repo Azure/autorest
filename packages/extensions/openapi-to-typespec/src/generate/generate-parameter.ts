@@ -1,8 +1,8 @@
-import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
 import { TypespecParameter } from "../interfaces";
 import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
 
 const _ARM_PARAM_REPLACEMENTS: { [key: string]: string } = {
   subscriptionId: "...SubscriptionIdParameter",
