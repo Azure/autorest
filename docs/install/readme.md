@@ -2,9 +2,11 @@
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. **Install [Node.js](https://nodejs.org/en/)** (12.19.x LTS preferred. May not function with Node < 10.x.)
+1. **Install [Node.js](https://nodejs.org/en/)** (LTS preferred, only version currently supported by node will be supported)
 
-   > if you want an easy way to install and update Node, I recommend [NVS - Node Version Switcher](./installing-via-nvs.md) or [NVM - Node Version Manager](./installing-via-nvm.md)
+   > You can use `nvm`
+     - [linux or osx](https://github.com/nvm-sh/nvm)
+     - [windows](https://github.com/coreybutler/nvm-windows) version
 
 2. **Install AutoRest** using `npm`
 
