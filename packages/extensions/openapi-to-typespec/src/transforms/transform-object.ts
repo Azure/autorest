@@ -100,10 +100,10 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
   const suppressions = extendSuppressions;
 
   if (isFullCompatible && (schema as ArmResourcePropertiesModel).isPropertiesModel === true) {
-    const provisioningProperty = schema.properties?.find(p => p.language.default.name === "provisioningState");
+    const provisioningProperty = schema.properties?.find((p) => p.language.default.name === "provisioningState");
     if (provisioningProperty === undefined) suppressions.push(...getSuppressionsForProvisioningState());
     else if (!isChoiceSchema(provisioningProperty.schema) && !isSealedChoiceSchema(provisioningProperty.schema)) {
-      const provisioningProperty = properties.find(p => p.name === "provisioningState");
+      const provisioningProperty = properties.find((p) => p.name === "provisioningState");
       if (provisioningProperty) {
         const propertySuppression = provisioningProperty.suppressions ?? [];
         propertySuppression.push(...getSuppressionsForProvisioningState());
@@ -112,7 +112,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     }
   }
   if (isFullCompatible) {
-    const provisioningProperty = properties.find(p => p.name === "provisioningState");
+    const provisioningProperty = properties.find((p) => p.name === "provisioningState");
   }
 
   const updatedVisited: TypespecObject = {
@@ -125,7 +125,7 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
     spreadParents,
     decorators: getModelDecorators(schema),
     clientDecorators: getModelClientDecorators(schema),
-    suppressions
+    suppressions,
   };
 
   addCorePageAlias(updatedVisited);
@@ -233,7 +233,7 @@ function getExtendedAndSpreadParents(
         .map((p) =>
           isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
         ),
-      []
+      [],
     ];
   }
 
@@ -246,7 +246,7 @@ function getExtendedAndSpreadParents(
     immediateParents.map((p) =>
       isDictionarySchema(p) ? `Record<${getTypespecType(p.elementType, codeModel)}>` : p.language.default.name,
     ),
-    []
+    [],
   ];
 }
 

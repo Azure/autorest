@@ -583,9 +583,7 @@ function convertResourceActionOperations(
       const swaggerOperation = operations[operation.OperationID];
       const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
       const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-      const okResponse = swaggerOperation?.responses?.filter(
-        (o) => o.protocol.http?.statusCodes.includes("200"),
-      )?.[0];
+      const okResponse = swaggerOperation?.responses?.filter((o) => o.protocol.http?.statusCodes.includes("200"))?.[0];
       // TODO: deal with non-schema response for action
       let operationResponseName;
       if (okResponse && isResponseSchema(okResponse)) {
@@ -631,9 +629,12 @@ function convertResourceActionOperations(
         "The content of the action request",
       );
 
-      const verbDecorator: TypespecDecorator | undefined = operation.Method !== "POST" ? {
-        name: operation.Method.toLocaleLowerCase()
-      } : undefined;
+      const verbDecorator: TypespecDecorator | undefined =
+        operation.Method !== "POST"
+          ? {
+              name: operation.Method.toLocaleLowerCase(),
+            }
+          : undefined;
 
       converted.push({
         doc: operation.Description,
@@ -644,7 +645,7 @@ function convertResourceActionOperations(
         templateParameters,
         examples: swaggerOperation.extensions?.["x-ms-examples"],
         customizations: customizations[0],
-        decorators: verbDecorator !== undefined ? [verbDecorator] : undefined
+        decorators: verbDecorator !== undefined ? [verbDecorator] : undefined,
       });
     }
   }

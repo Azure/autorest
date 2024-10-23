@@ -59,10 +59,12 @@ export function getSuppressionsForArmResourceDeleteSync(): WithSuppressDirective
 }
 
 export function getSuppressionsForModelExtension(): WithSuppressDirective[] {
-  return [{
-    suppressionCode: "@azure-tools/typespec-azure-core/composition-over-inheritance",
-    suppressionMessage: "For backward compatibility",
-  }]
+  return [
+    {
+      suppressionCode: "@azure-tools/typespec-azure-core/composition-over-inheritance",
+      suppressionMessage: "For backward compatibility",
+    },
+  ];
 }
 
 export function getSuppressionsForRecordProperty(): WithSuppressDirective[] {
