@@ -32,14 +32,5 @@
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
-  "typespec.tsp-server.path": "./packages/extensions/openapi-to-typespec/node_modules/@typespec/compiler",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  "typespec.tsp-server.path": "./packages/extensions/openapi-to-typespec/node_modules/@typespec/compiler"
 }
