@@ -159,53 +159,97 @@ interface GatewayContracts {
   /**
    * Lists a collection of the APIs associated with a gateway.
    */
-  // FIXME: GatewayApi_ListByService could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_ListByService")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis")
   @get
-  listByService(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @operationId("GatewayApi_ListByService")
+  gatewayApiListByService is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    ApiManagementGatewayApiListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    gatewayId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
+  /**
+   * Checks that API entity specified by identifier is associated with the Gateway entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @operationId("GatewayApi_GetEntityTag")
+  gatewayApiGetEntityTag is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    void,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
+  /**
+   * Adds an API to the specified Gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @operationId("GatewayApi_CreateOrUpdate")
+  gatewayApiCreateOrUpdate is ArmResourceActionSync<
+    GatewayContract,
+    AssociationContract,
+    GatewayApiData,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementGatewayApiListResult> | ErrorResponse;
+  /**
+   * Deletes the specified API from the specified Gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @operationId("GatewayApi_Delete")
+  gatewayApiDelete is ArmResourceActionSync<
+    GatewayContract,
+    void,
+    void,
+    Parameters = {
+      /**
+       * API identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      apiId: string;
+    }
+  >;
 }
 
 @@maxLength(GatewayContract.name, 80);
@@ -218,3 +262,4 @@ interface GatewayContracts {
 @@doc(GatewayContracts.update::parameters.properties, "");
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
 @@doc(GatewayContracts.generateToken::parameters.body, "");
+@@doc(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body, "");

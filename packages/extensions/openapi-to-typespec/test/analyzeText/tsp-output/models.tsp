@@ -467,6 +467,7 @@ model CreateDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeploymentJobState extends JobState {}
 
 /**
@@ -532,6 +533,7 @@ model Warning {
 /**
  * Represents the state of an export job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ExportProjectJobState extends JobState {
   /**
    * The URL to use in order to download the exported project.
@@ -542,6 +544,7 @@ model ExportProjectJobState extends JobState {
 /**
  * Represents the state of an import job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImportProjectJobState extends JobState {}
 
 /**
@@ -634,6 +637,7 @@ model TrainingJobs is Azure.Core.Page<TrainingJobState>;
 /**
  * Represents the state of a training job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TrainingJobState extends JobState {
   /**
    * Represents training tasks detailed result.
@@ -702,6 +706,7 @@ model SubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProjectDeletionJobState extends JobState {}
 
 /**

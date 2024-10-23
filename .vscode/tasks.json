@@ -25,15 +25,24 @@
       "args": [
         "watch"
       ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "isBackground": false,
       "problemMatcher": [
         "$msCompile",
         "$tsc"
       ]
     },
+    {
+      "type": "typescript",
+      "tsconfig": "tsconfig.json",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "tsc: build - tsconfig.json"
+    }
   ]
 }

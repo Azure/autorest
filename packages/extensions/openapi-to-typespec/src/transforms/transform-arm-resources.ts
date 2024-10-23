@@ -580,68 +580,72 @@ function convertResourceActionOperations(
 
   if (resourceMetadata.OtherOperations.length) {
     for (const operation of resourceMetadata.OtherOperations) {
-      if (operation.Method === "POST") {
-        const swaggerOperation = operations[operation.OperationID];
-        const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
-        const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
-        const okResponse = swaggerOperation?.responses?.filter(
-          (o) => o.protocol.http?.statusCodes.includes("200"),
-        )?.[0];
-        // TODO: deal with non-schema response for action
-        let operationResponseName;
-        if (okResponse && isResponseSchema(okResponse)) {
-          if (!okResponse.schema.language.default.name.includes("·")) {
-            operationResponseName = okResponse.schema.language.default.name;
-            if (isResourceListResult(okResponse)) {
-              const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
-                (p) => p.language.default.name === "value",
-              );
-              const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
-              operationResponseName = `ResourceListResult<${responseName ?? "void"}>`;
-            }
+      const swaggerOperation = operations[operation.OperationID];
+      const bodyParam = swaggerOperation.requests?.[0].parameters?.find((p) => p.protocol.http?.in === "body");
+      const isLongRunning = swaggerOperation.extensions?.["x-ms-long-running-operation"] ?? false;
+      const okResponse = swaggerOperation?.responses?.filter(
+        (o) => o.protocol.http?.statusCodes.includes("200"),
+      )?.[0];
+      // TODO: deal with non-schema response for action
+      let operationResponseName;
+      if (okResponse && isResponseSchema(okResponse)) {
+        if (!okResponse.schema.language.default.name.includes("·")) {
+          operationResponseName = okResponse.schema.language.default.name;
+          if (isResourceListResult(okResponse)) {
+            const valueSchema = ((okResponse as SchemaResponse).schema as ObjectSchema).properties?.find(
+              (p) => p.language.default.name === "value",
+            );
+            const responseName = dataTypes.get((valueSchema!.schema as ArraySchema).elementType)?.name;
+            operationResponseName = `ResourceListResult<${responseName ?? "void"}>`;
           }
         }
-
-        const request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
-        const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
-        let kind;
-        if (!okResponse) {
-          // TODO: Sync operation should have a 204 response
-          kind = isLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
-        } else {
-          kind = isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
-        }
-        const templateParameters = [resourceMetadata.SwaggerModelName, request];
-        if (okResponse) {
-          templateParameters.push(operationResponseName ?? "void");
-        }
-        if (parameters.baseParameters) {
-          templateParameters.push(parameters.baseParameters);
-        }
-        if (parameters.parameters) {
-          templateParameters.push(`Parameters = ${parameters.parameters}`);
-        }
-
-        const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
-        const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
-        const customizations = getCustomizations(
-          bodyParam,
-          tspOperationGroupName,
-          operationName,
-          "body",
-          "The content of the action request",
-        );
-        converted.push({
-          doc: operation.Description,
-          kind: kind as any,
-          name: operationName,
-          clientDecorators: getOperationClientDecorators(swaggerOperation).concat(customizations[1]),
-          operationId: operation.OperationID,
-          templateParameters,
-          examples: swaggerOperation.extensions?.["x-ms-examples"],
-          customizations: customizations[0],
-        });
       }
+
+      const request = bodyParam ? getTypespecType(bodyParam.schema, getSession().model) : "void";
+      const parameters = buildOperationParameters(swaggerOperation, resourceMetadata);
+      let kind;
+      if (!okResponse) {
+        // TODO: Sync operation should have a 204 response
+        kind = isLongRunning ? "ArmResourceActionNoResponseContentAsync" : "ArmResourceActionNoContentSync";
+      } else {
+        kind = isLongRunning ? "ArmResourceActionAsync" : "ArmResourceActionSync";
+      }
+      const templateParameters = [resourceMetadata.SwaggerModelName, request];
+      if (okResponse) {
+        templateParameters.push(operationResponseName ?? "void");
+      }
+      if (parameters.baseParameters) {
+        templateParameters.push(parameters.baseParameters);
+      }
+      if (parameters.parameters) {
+        templateParameters.push(`Parameters = ${parameters.parameters}`);
+      }
+
+      const tspOperationGroupName = getTSPOperationGroupName(resourceMetadata.SwaggerModelName);
+      const operationName = getOperationName(resourceMetadata.Name, operation.OperationID);
+      const customizations = getCustomizations(
+        bodyParam,
+        tspOperationGroupName,
+        operationName,
+        "body",
+        "The content of the action request",
+      );
+
+      const verbDecorator: TypespecDecorator | undefined = operation.Method !== "POST" ? {
+        name: operation.Method.toLocaleLowerCase()
+      } : undefined;
+
+      converted.push({
+        doc: operation.Description,
+        kind: kind as any,
+        name: operationName,
+        clientDecorators: getOperationClientDecorators(swaggerOperation).concat(customizations[1]),
+        operationId: operation.OperationID,
+        templateParameters,
+        examples: swaggerOperation.extensions?.["x-ms-examples"],
+        customizations: customizations[0],
+        decorators: verbDecorator !== undefined ? [verbDecorator] : undefined
+      });
     }
   }
 
@@ -695,38 +699,6 @@ function convertCheckNameAvailabilityOperations(
   return converted;
 }
 
-function convertResourceOtherGetOperations(
-  resourceMetadata: ArmResource,
-  operations: Record<string, Operation>,
-): TypespecOperation[] {
-  const converted: TypespecOperation[] = [];
-
-  if (resourceMetadata.OtherOperations.length) {
-    for (const operation of resourceMetadata.OtherOperations) {
-      if (operation.Method === "GET") {
-        const swaggerOperation = operations[operation.OperationID];
-        if (swaggerOperation.requests && swaggerOperation.requests[0]) {
-          const op = transformRequest(
-            swaggerOperation.requests[0],
-            swaggerOperation,
-            getSession().model,
-          ) as TypespecOperation;
-          op.operationGroupName = getOperationGroupName(operation.OperationID);
-          op.operationId = operation.OperationID;
-          if (!op.fixMe) {
-            op.fixMe = [];
-          }
-          op.fixMe.push(`// FIXME: ${operation.OperationID} could not be converted to a resource operation`);
-          op.examples = swaggerOperation.extensions?.["x-ms-examples"];
-          converted.push(op);
-        }
-      }
-    }
-  }
-
-  return converted;
-}
-
 function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperation[], TypespecOperation[]] {
   const resourceMetadata = armSchema.resourceMetadata;
   const operations = getResourceOperations(resourceMetadata);
@@ -758,9 +730,6 @@ function getTspOperations(armSchema: ArmResourceSchema): [TspArmResourceOperatio
 
   // check name availability operation
   tspOperations.push(...convertCheckNameAvailabilityOperations(resourceMetadata, operations));
-
-  // other get operations
-  normalOperations.push(...convertResourceOtherGetOperations(resourceMetadata, operations));
 
   return [tspOperations, normalOperations];
 }

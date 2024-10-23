@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "groupId": "tempgroup",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "59307d350af58404d8a26300"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "59307d350af58404d8a26300",
+        "type": "Microsoft.ApiManagement/service/groups/users",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/59307d350af58404d8a26300",
+        "properties": {
+          "email": "testuser1@live.com",
+          "firstName": "test",
+          "groups": [],
+          "identities": [],
+          "lastName": "user",
+          "registrationDate": "2017-06-01T20:46:45.437Z",
+          "state": "active"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "59307d350af58404d8a26300",
+        "type": "Microsoft.ApiManagement/service/groups/users",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/59307d350af58404d8a26300",
+        "properties": {
+          "email": "testuser1@live.com",
+          "firstName": "test",
+          "groups": [],
+          "identities": [],
+          "lastName": "user",
+          "registrationDate": "2017-06-01T20:46:45.437Z",
+          "state": "active"
+        }
+      }
+    }
+  },
+  "operationId": "GroupUser_Create",
+  "title": "ApiManagementCreateGroupUser"
+}

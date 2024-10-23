@@ -102,6 +102,18 @@ interface AnalysisServicesServersOperationGroup {
   resume is ArmResourceActionAsync<AnalysisServicesServer, void, void>;
 
   /**
+   * Lists eligible SKUs for an Analysis Services resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("Servers_ListSkusForExisting")
+  listSkusForExisting is ArmResourceActionSync<
+    AnalysisServicesServer,
+    void,
+    SkuEnumerationForExistingResourceResult
+  >;
+
+  /**
    * Return the gateway status of the specified Analysis Services server instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -122,30 +134,6 @@ interface AnalysisServicesServersOperationGroup {
     void,
     void
   >;
-
-  /**
-   * Lists eligible SKUs for an Analysis Services resource.
-   */
-  // FIXME: Servers_ListSkusForExisting could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Servers_ListSkusForExisting")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus")
-  @get
-  listSkusForExisting(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.
-     */
-    @maxLength(63)
-    @minLength(3)
-    @pattern("^[a-z][a-z0-9]*$")
-    @path
-    serverName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<SkuEnumerationForExistingResourceResult> | ErrorResponse;
 }
 
 @@maxLength(AnalysisServicesServer.name, 63);

@@ -3936,6 +3936,7 @@ model SearchIndexerKnowledgeStoreProjection {
 /**
 * Description for what data to store in Azure Tables.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreTableProjectionSelector extends SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Name of the Azure table to store projected data in.
@@ -3972,12 +3973,14 @@ model SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Projection definition for what data to store in Azure Blob.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreObjectProjectionSelector extends SearchIndexerKnowledgeStoreBlobProjectionSelector {
 }
 
 /**
 * Abstract class to share properties between concrete selectors.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreBlobProjectionSelector extends SearchIndexerKnowledgeStoreProjectionSelector {
 /**
 * Blob container to store projections in.
@@ -3988,6 +3991,7 @@ model SearchIndexerKnowledgeStoreBlobProjectionSelector extends SearchIndexerKno
 /**
 * Projection definition for what data to store in Azure Files.
 */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreFileProjectionSelector extends SearchIndexerKnowledgeStoreBlobProjectionSelector {
 }
 

@@ -78,21 +78,12 @@ interface AvailabilitySets {
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
    */
-  // FIXME: AvailabilitySets_ListAvailableSizes could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes")
   @get
-  listAvailableSizes(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the availability set.
-     */
-    @path
-    availabilitySetName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineSizeListResult> | ErrorResponse;
+  listAvailableSizes is ArmResourceActionSync<
+    AvailabilitySet,
+    void,
+    VirtualMachineSizeListResult
+  >;
 }
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");

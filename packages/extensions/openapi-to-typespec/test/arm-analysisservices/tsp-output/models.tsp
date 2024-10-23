@@ -121,6 +121,7 @@ enum ConnectionMode {
 /**
  * Properties of Analysis Services resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AnalysisServicesServerProperties
   extends AnalysisServicesServerMutableProperties {
   /**

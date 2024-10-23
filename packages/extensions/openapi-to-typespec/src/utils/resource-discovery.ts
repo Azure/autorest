@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
-import { CodeModel, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
+import { CodeModel, isObjectSchema, ObjectSchema, Operation, SchemaResponse } from "@autorest/codemodel";
 import { getArmCommonTypeVersion, getSession } from "../autorest-session";
 import { TypespecObject, TspArmResource, TypespecEnum } from "../interfaces";
 import { getSkipList } from "./type-mapping";
@@ -127,12 +127,20 @@ export interface ArmResourceSchema extends ObjectSchema {
   resourceMetadata: ArmResource;
 }
 
+export interface ArmResourcePropertiesModel extends ObjectSchema {
+  isPropertiesModel: boolean;
+}
+
 export function tagSchemaAsResource(schema: ObjectSchema, metadata: Metadata): void {
   const resourcesMetadata = metadata.Resources;
 
   for (const resourceName in resourcesMetadata) {
     if (resourcesMetadata[resourceName].SwaggerModelName === schema.language.default.name) {
       (schema as ArmResourceSchema).resourceMetadata = resourcesMetadata[resourceName];
+      const propertiesModel = schema.properties?.find((p) => p.serializedName === "properties");
+      if (propertiesModel && isObjectSchema(propertiesModel.schema)) {
+        (propertiesModel.schema as ArmResourcePropertiesModel).isPropertiesModel = true;
+      }
       return;
     }
   }

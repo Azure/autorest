@@ -149,162 +149,104 @@ interface ApiContracts {
   /**
    * Lists all revisions of an API.
    */
-  // FIXME: ApiRevision_ListByService could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRevision_ListByService")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions")
   @get
-  listByService(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @operationId("ApiRevision_ListByService")
+  apiRevisionListByService is ArmResourceActionSync<
+    ApiContract,
+    void,
+    ApiRevisionListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * API identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    apiId: string,
-
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiRevision | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiRevisionListResult> | ErrorResponse;
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
   /**
    * Lists all Products, which the API is part of.
    */
-  // FIXME: ApiProduct_ListByApis could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiProduct_ListByApis")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products")
   @get
-  listByApis(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @operationId("ApiProduct_ListByApis")
+  listByApis is ArmResourceActionSync<
+    ApiContract,
+    void,
+    ProductListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * API identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    apiId: string,
-
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ProductListResult> | ErrorResponse;
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
   /**
    * Lists a collection of operations associated with tags.
    */
-  // FIXME: Operation_ListByTags could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Operation_ListByTags")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operationsByTags")
   @get
-  listByTags(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @operationId("Operation_ListByTags")
+  listByTags is ArmResourceActionSync<
+    ApiContract,
+    void,
+    TagResourceListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-     */
-    @maxLength(256)
-    @minLength(1)
-    @pattern("^[^*#&+:<>?]+$")
-    @path
-    apiId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| apiName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| method | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| urlTemplate | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    /**
-     * Include not tagged Operations.
-     */
-    @query("includeNotTaggedOperations")
-    includeNotTaggedOperations?: boolean,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<TagResourceListResult> | ErrorResponse;
+      /**
+       * Include not tagged Operations.
+       */
+      @query("includeNotTaggedOperations")
+      includeNotTaggedOperations?: boolean;
+    }
+  >;
 }
 
 @@maxLength(ApiContract.name, 256);

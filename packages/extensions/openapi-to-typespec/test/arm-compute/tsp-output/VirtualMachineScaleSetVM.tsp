@@ -171,6 +171,18 @@ interface VirtualMachineScaleSetVMS {
   deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
+   * Gets the status of a virtual machine from a VM scale set.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
+  getInstanceView is ArmResourceActionSync<
+    VirtualMachineScaleSetVM,
+    void,
+    VirtualMachineScaleSetVMInstanceView
+  >;
+
+  /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -258,33 +270,6 @@ interface VirtualMachineScaleSetVMS {
     RunCommandInput,
     RunCommandResult
   >;
-
-  /**
-   * Gets the status of a virtual machine from a VM scale set.
-   */
-  // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
-  @get
-  getInstanceView(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    /**
-     * The instance ID of the virtual machine.
-     */
-    @path
-    instanceId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
 }
 
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");

@@ -128,53 +128,96 @@ interface GroupContracts {
   /**
    * Lists a collection of user entities associated with the group.
    */
-  // FIXME: GroupUser_List could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
+  @operationId("GroupUser_List")
+  list is ArmResourceActionSync<
+    GroupContract,
+    void,
+    ApiManagementGroupUserListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
 
-    /**
-     * Group identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(256)
-    @minLength(1)
-    @path
-    groupId: string,
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
 
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| firstName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| lastName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| email | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| registrationDate | filter | ge, le, eq, ne, gt, lt |     |</br>| note | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
+  /**
+   * Checks that user entity specified by identifier is associated with the group entity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @head
+  @operationId("GroupUser_CheckEntityExists")
+  checkEntityExists is ArmResourceActionNoContentSync<
+    GroupContract,
+    void,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
+  /**
+   * Add existing user to existing group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @operationId("GroupUser_Create")
+  create is ArmResourceActionSync<
+    GroupContract,
+    void,
+    ApiManagementGroupUserData,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ApiManagementGroupUserListResult> | ErrorResponse;
+  /**
+   * Remove existing user from existing group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @delete
+  @operationId("GroupUser_Delete")
+  groupUserDelete is ArmResourceActionSync<
+    GroupContract,
+    void,
+    void,
+    Parameters = {
+      /**
+       * User identifier. Must be unique in the current API Management service instance.
+       */
+      @maxLength(80)
+      @minLength(1)
+      @path
+      userId: string;
+    }
+  >;
 }
 
 @@maxLength(GroupContract.name, 256);

@@ -435,6 +435,10 @@ using Microsoft.Compute;
   "CloudServices.deleteInstances::parameters.body",
   "parameters"
 );
+@@clientName(CloudServices.walkUpdateDomain,
+  "CloudServices.walkUpdateDomain::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CloudService.properties);
 

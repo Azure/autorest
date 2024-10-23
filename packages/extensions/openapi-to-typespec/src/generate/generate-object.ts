@@ -3,7 +3,7 @@ import { getOptions } from "../options";
 import { generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
-import { generateSuppressionForDocumentRequired } from "../utils/suppressions";
+import { generateSuppressionForDocumentRequired, generateSuppressions } from "../utils/suppressions";
 
 export function generateObject(typespecObject: TypespecObject) {
   const { isFullCompatible } = getOptions();
@@ -18,6 +18,8 @@ export function generateObject(typespecObject: TypespecObject) {
 
   const decorators = generateDecorators(typespecObject.decorators);
   decorators && definitions.push(decorators);
+
+  typespecObject.suppressions && definitions.push(...generateSuppressions(typespecObject.suppressions));
 
   if (typespecObject.extendedParents?.length) {
     const firstParent = typespecObject.extendedParents[0];

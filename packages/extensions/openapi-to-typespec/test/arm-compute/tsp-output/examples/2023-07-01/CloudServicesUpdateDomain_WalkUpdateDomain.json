@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "api-version": "2022-09-04",
+    "cloudServiceName": "{cs-name}",
+    "resourceGroupName": "ConstosoRG",
+    "subscriptionId": "{subscription-id}",
+    "updateDomain": 1
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "CloudServicesUpdateDomain_WalkUpdateDomain",
+  "title": "Update Cloud Service to specified Domain"
+}

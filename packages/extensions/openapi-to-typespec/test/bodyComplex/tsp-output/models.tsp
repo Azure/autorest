@@ -139,15 +139,18 @@ model DictionaryWrapper {
   defaultProgram?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model Siamese extends Cat {
   breed?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model Cat extends Pet {
   color?: string;
   hates?: Dog[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model Dog extends Pet {
   food?: string;
 }

@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "groupId": "59306a29e4bbd510dc24e5f9",
+    "productId": "5931a75ae4bbd512a88c680b",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "204": {}
+  },
+  "operationId": "ProductGroup_CheckEntityExists",
+  "title": "ApiManagementHeadProductGroup"
+}

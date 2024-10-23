@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid",
+    "userId": "576823d0a40f7e74ec07d642"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  },
+  "operationId": "NotificationRecipientUser_Delete",
+  "title": "ApiManagementDeleteNotificationRecipientUser"
+}
