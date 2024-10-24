@@ -101,8 +101,9 @@ export function transformObject(schema: ObjectSchema, codeModel: CodeModel): Typ
 
   if (isFullCompatible && (schema as ArmResourcePropertiesModel).isPropertiesModel === true) {
     const provisioningProperty = schema.properties?.find((p) => p.language.default.name === "provisioningState");
-    if (provisioningProperty === undefined) suppressions.push(...getSuppressionsForProvisioningState());
-    else if (!isChoiceSchema(provisioningProperty.schema) && !isSealedChoiceSchema(provisioningProperty.schema)) {
+    if (provisioningProperty === undefined) {
+      suppressions.push(...getSuppressionsForProvisioningState());
+    } else if (!isChoiceSchema(provisioningProperty.schema) && !isSealedChoiceSchema(provisioningProperty.schema)) {
       const provisioningProperty = properties.find((p) => p.name === "provisioningState");
       if (provisioningProperty) {
         const propertySuppression = provisioningProperty.suppressions ?? [];
