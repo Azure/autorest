@@ -80,20 +80,12 @@ interface DiskEncryptionSets {
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
-  // FIXME: DiskEncryptionSets_ListAssociatedResources could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}/associatedResources")
   @get
-  listAssociatedResources(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-     */
-    @path
-    diskEncryptionSetName: string,
-  ): ArmResponse<ResourceUriList> | ErrorResponse;
+  listAssociatedResources is ArmResourceActionSync<
+    DiskEncryptionSet,
+    void,
+    ResourceUriList
+  >;
 }
 
 @@doc(DiskEncryptionSet.name,

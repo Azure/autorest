@@ -1,0 +1,16 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "email": "contoso@live.com",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "204": {},
+    "404": {}
+  },
+  "operationId": "NotificationRecipientEmail_CheckEntityExists",
+  "title": "ApiManagementHeadNotificationRecipientEmail"
+}

@@ -110,6 +110,14 @@ interface Workspaces {
   >;
 
   /**
+   * Lists all enabled features for a workspace
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("WorkspaceFeatures_List")
+  list is ArmResourceActionSync<Workspace, void, ListAmlUserFeatureResult>;
+
+  /**
    * Diagnose workspace setup issue.
    */
   diagnose is ArmResourceActionAsync<
@@ -151,6 +159,16 @@ interface Workspaces {
   >;
 
   /**
+   * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
+   */
+  @get
+  listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
+    Workspace,
+    void,
+    ExternalFqdnResponse
+  >;
+
+  /**
    * Prepare Azure Machine Learning Workspace's notebook resource
    */
   prepareNotebook is ArmResourceActionAsync<
@@ -165,6 +183,22 @@ interface Workspaces {
   resyncKeys is ArmResourceActionAsync<Workspace, void, void>;
 
   /**
+   * Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
+   * Each "private link resource" is a connection endpoint (IP address) to the resource.
+   * Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
+   * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
+   * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("PrivateLinkResources_List")
+  privateLinkResourcesList is ArmResourceActionSync<
+    Workspace,
+    void,
+    PrivateLinkResourceListResult
+  >;
+
+  /**
    * Provisions the managed network of a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -174,79 +208,6 @@ interface Workspaces {
     ManagedNetworkProvisionOptions,
     ManagedNetworkProvisionStatus
   >;
-
-  /**
-   * Lists all enabled features for a workspace
-   */
-  // FIXME: WorkspaceFeatures_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceFeatures_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of Azure Machine Learning workspace.
-     */
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    @path
-    workspaceName: string,
-  ): ArmResponse<ListAmlUserFeatureResult> | ErrorResponse;
-
-  /**
-   * Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.
-   */
-  // FIXME: Workspaces_ListOutboundNetworkDependenciesEndpoints could not be converted to a resource operation
-  @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints")
-  @get
-  listOutboundNetworkDependenciesEndpoints(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of Azure Machine Learning workspace.
-     */
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    @path
-    workspaceName: string,
-  ): ArmResponse<ExternalFqdnResponse> | ErrorResponse;
-
-  /**
-   * Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
-   * Each "private link resource" is a connection endpoint (IP address) to the resource.
-   * Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
-   * Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
-   * Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
-   */
-  // FIXME: PrivateLinkResources_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_List")
-  @summary("""
-    Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
-    Each "private link resource" is a connection endpoint (IP address) to the resource.
-    Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
-    Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
-    Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".
-    """)
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of Azure Machine Learning workspace.
-     */
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    @path
-    workspaceName: string,
-  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
 }
 
 @@doc(Workspace.name, "Name of Azure Machine Learning workspace.");

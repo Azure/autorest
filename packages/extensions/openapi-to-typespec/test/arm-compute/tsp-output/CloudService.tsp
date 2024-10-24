@@ -94,6 +94,16 @@ interface CloudServices {
   listAll is ArmListBySubscription<CloudService>;
 
   /**
+   * Gets the status of a cloud service.
+   */
+  @get
+  getInstanceView is ArmResourceActionSync<
+    CloudService,
+    void,
+    CloudServiceInstanceView
+  >;
+
+  /**
    * Starts the cloud service.
    */
   start is ArmResourceActionAsync<CloudService, void, void>;
@@ -124,71 +134,54 @@ interface CloudServices {
   deleteInstances is ArmResourceActionAsync<CloudService, RoleInstances, void>;
 
   /**
-   * Gets the status of a cloud service.
+   * Updates the role instances in the specified update domain.
    */
-  // FIXME: CloudServices_GetInstanceView could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/instanceView")
-  @get
-  getInstanceView(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of the cloud service.
-     */
-    @path
-    cloudServiceName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<CloudServiceInstanceView> | ErrorResponse;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @put
+  @operationId("CloudServicesUpdateDomain_WalkUpdateDomain")
+  walkUpdateDomain is ArmResourceActionAsync<
+    CloudService,
+    UpdateDomain,
+    void,
+    Parameters = {
+      /**
+       * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
+       */
+      @path
+      updateDomain: int32;
+    }
+  >;
 
   /**
    * Gets the specified update domain of a cloud service. Use nextLink property in the response to get the next page of update domains. Do this till nextLink is null to fetch all the update domains.
    */
-  // FIXME: CloudServicesUpdateDomain_GetUpdateDomain could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}")
   @get
-  getUpdateDomain(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of the cloud service.
-     */
-    @path
-    cloudServiceName: string,
-
-    /**
-     * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
-     */
-    @path
-    updateDomain: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<UpdateDomain> | ErrorResponse;
+  @operationId("CloudServicesUpdateDomain_GetUpdateDomain")
+  getUpdateDomain is ArmResourceActionSync<
+    CloudService,
+    void,
+    UpdateDomain,
+    Parameters = {
+      /**
+       * Specifies an integer value that identifies the update domain. Update domains are identified with a zero-based index: the first update domain has an ID of 0, the second has an ID of 1, and so on.
+       */
+      @path
+      updateDomain: int32;
+    }
+  >;
 
   /**
    * Gets a list of all update domains in a cloud service.
    */
-  // FIXME: CloudServicesUpdateDomain_ListUpdateDomains could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains")
   @get
-  listUpdateDomains(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of the cloud service.
-     */
-    @path
-    cloudServiceName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<UpdateDomainListResult> | ErrorResponse;
+  @operationId("CloudServicesUpdateDomain_ListUpdateDomains")
+  listUpdateDomains is ArmResourceActionSync<
+    CloudService,
+    void,
+    UpdateDomainListResult
+  >;
 }
 
 @@doc(CloudService.name, "Name of the cloud service.");
@@ -208,4 +201,7 @@ interface CloudServices {
 );
 @@doc(CloudServices.deleteInstances::parameters.body,
   "List of cloud service role instance names."
+);
+@@doc(CloudServices.walkUpdateDomain::parameters.body,
+  "The update domain object."
 );

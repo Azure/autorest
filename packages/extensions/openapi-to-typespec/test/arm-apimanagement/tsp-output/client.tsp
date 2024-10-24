@@ -259,6 +259,8 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(ApiManagementServiceResources.restore, "ApiManagementServiceResources.restore::parameters.body", "parameters")
 @@clientName(ApiManagementServiceResources.backup, "ApiManagementServiceResources.backup::parameters.body", "parameters")
 @@clientName(ApiManagementServiceResources.applyNetworkConfigurationUpdates, "ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body", "parameters")
+@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate, "ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body", "parameters")
+@@clientName(ApiManagementServiceResources.quotaByPeriodKeysUpdate, "ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body", "parameters")
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApiManagementServiceResource.properties)
 
@@ -269,6 +271,7 @@ using Azure.ResourceManager.ApiManagement;
 @@clientName(GatewayContracts.update, "GatewayContracts.update::parameters.properties", "parameters")
 @@clientName(GatewayContracts.regenerateKey, "GatewayContracts.regenerateKey::parameters.body", "parameters")
 @@clientName(GatewayContracts.generateToken, "GatewayContracts.generateToken::parameters.body", "parameters")
+@@clientName(GatewayContracts.gatewayApiCreateOrUpdate, "GatewayContracts.gatewayApiCreateOrUpdate::parameters.body", "parameters")
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GatewayContract.properties)
 

@@ -4122,6 +4122,7 @@ model CodeContainerResourceArmPaginatedResult
 /**
  * Container for code asset versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeContainer extends AssetContainer {
   /**
    * Provisioning state for the code container.
@@ -4131,6 +4132,7 @@ model CodeContainer extends AssetContainer {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
@@ -4180,6 +4182,7 @@ model CodeVersionResourceArmPaginatedResult
 /**
  * Code asset version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CodeVersion extends AssetBase {
   /**
    * Uri where code is located
@@ -4194,6 +4197,7 @@ model CodeVersion extends AssetBase {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AssetBase extends ResourceBase {
   /**
    * Specifies the lifecycle setting of managed data asset.
@@ -4293,6 +4297,7 @@ model ComponentContainerResourceArmPaginatedResult
  * Component container definition.
  * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentContainer extends AssetContainer {
   /**
    * Provisioning state for the component container.
@@ -4310,6 +4315,7 @@ model ComponentVersionResourceArmPaginatedResult
 /**
  * Definition of a component version: defines resources that span component types.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ComponentVersion extends AssetBase {
   /**
    * Defines Component definition details.
@@ -4339,6 +4345,8 @@ model DataContainerResourceArmPaginatedResult
 /**
  * Container for data asset versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataContainer extends AssetContainer {
   /**
    * [Required] Specifies the type of data.
@@ -4356,6 +4364,8 @@ model DataVersionBaseResourceArmPaginatedResult
 /**
  * Data version base definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("dataType")
 model DataVersionBase extends AssetBase {
   /**
@@ -4404,6 +4414,7 @@ model EnvironmentContainerResourceArmPaginatedResult
 /**
  * Container for environment specification versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentContainer extends AssetContainer {
   /**
    * Provisioning state for the environment container.
@@ -4421,6 +4432,7 @@ model EnvironmentVersionResourceArmPaginatedResult
 /**
  * Environment version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentVersion extends AssetBase {
   /**
    * Defines if image needs to be rebuilt based on base image changes.
@@ -4546,6 +4558,7 @@ model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainerResource>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ModelContainer extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -4563,6 +4576,7 @@ model ModelVersionResourceArmPaginatedResult
 /**
  * Model asset version details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ModelVersion extends AssetBase {
   /**
    * Mapping of model flavors to their properties.
@@ -4793,6 +4807,7 @@ model BatchEndpointTrackedResourceArmPaginatedResult
 /**
  * Batch endpoint configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchEndpoint extends EndpointPropertiesBase {
   /**
    * Default values for Batch Endpoint.
@@ -4877,6 +4892,7 @@ model EndpointAuthKeys {
 /**
  * Strictly used in update requests.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithIdentity
   extends PartialMinimalTrackedResource {
   /**
@@ -4921,6 +4937,7 @@ model BatchDeploymentTrackedResourceArmPaginatedResult
 /**
  * Batch inference settings per deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model BatchDeployment extends EndpointDeploymentPropertiesBase {
   /**
    * Compute target for batch inference operation.
@@ -5005,6 +5022,7 @@ model BatchDeploymentConfiguration {}
 model AssetReferenceBase {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5142,6 +5160,8 @@ model DatastoreResourceArmPaginatedResult is Azure.Core.Page<DatastoreResource>;
 /**
  * Base definition for datastore contents configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("datastoreType")
 model Datastore extends ResourceBase {
   /**
@@ -5183,6 +5203,7 @@ model FeaturesetContainerResourceArmPaginatedResult
 /**
  * Dto object representing feature set
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featureset container.
@@ -5199,6 +5220,8 @@ model FeatureResourceArmPaginatedResult is Azure.Core.Page<Feature>;
 /**
  * Dto object representing feature
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model FeatureProperties extends ResourceBase {
   /**
    * Specifies type
@@ -5220,6 +5243,7 @@ model FeaturesetVersionResourceArmPaginatedResult
 /**
  * Dto object representing feature set version
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies list of entities
@@ -5521,6 +5545,7 @@ model FeaturestoreEntityContainerResourceArmPaginatedResult
 /**
  * Dto object representing feature entity
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featurestore entity container.
@@ -5538,6 +5563,7 @@ model FeaturestoreEntityVersionResourceArmPaginatedResult
 /**
  * Dto object representing feature entity version
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
@@ -5580,6 +5606,8 @@ model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBaseResource>;
 /**
  * Base definition for a job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("jobType")
 model JobBase extends ResourceBase {
   /**
@@ -6013,6 +6041,7 @@ model OnlineEndpointTrackedResourceArmPaginatedResult
 /**
  * Online endpoint configuration
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model OnlineEndpoint extends EndpointPropertiesBase {
   /**
    * ARM resource ID of the compute if it exists.
@@ -6051,6 +6080,7 @@ model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeploymentTrackedResource>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @discriminator("endpointComputeType")
 model OnlineDeployment extends EndpointDeploymentPropertiesBase {
   /**
@@ -6229,6 +6259,7 @@ model OnlineScaleSettings {}
 /**
  * Strictly used in update requests.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
   /**
@@ -6402,6 +6433,7 @@ model ScheduleResourceArmPaginatedResult is Azure.Core.Page<Schedule>;
 /**
  * Base definition of a schedule
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ScheduleProperties extends ResourceBase {
   /**
    * [Required] Specifies the action of the schedule
@@ -6446,6 +6478,7 @@ model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 /**
  * Details of the Registry
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RegistryProperties {
   /**
    * Discovery URL for the Registry
@@ -6548,6 +6581,7 @@ model RegistryPrivateEndpointConnectionProperties {
 /**
  * The PE network resource that is linked to this PE connection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateEndpointResource extends PrivateEndpoint {
   /**
    * The subnetId that the private endpoint is connected to.
@@ -6732,6 +6766,7 @@ model PartialRegistryPartialTrackedResource {
 /**
  * Managed service identity (system assigned and/or user assigned identities)
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegistryPartialManagedServiceIdentity extends ManagedServiceIdentity {}
 
 /**
@@ -7086,6 +7121,7 @@ model ManagedNetworkSettings {
 /**
  * Outbound Rule for the managed network of a machine learning workspace.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("type")
 model OutboundRule {
   /**
@@ -7375,6 +7411,7 @@ model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -7724,6 +7761,7 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateLinkResource extends Resource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
@@ -9454,6 +9492,7 @@ model QueueSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
@@ -10104,6 +10143,7 @@ model Classification extends AutoMLVertical {
 /**
  * Classification Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ClassificationTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for classification task.
@@ -10258,6 +10298,7 @@ model TableVertical {
 /**
  * Featurization Configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * These transformers shall not be used in featurization.
@@ -11578,6 +11619,7 @@ model ForecastingSettings {
 /**
  * Forecasting Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ForecastingTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for forecasting task.
@@ -11748,6 +11790,7 @@ model ImageClassification extends AutoMLVertical {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -11766,6 +11809,7 @@ model ImageClassificationBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsClassification extends ImageModelSettings {
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
@@ -11989,6 +12033,7 @@ model MLFlowModelJobInput extends JobInput {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelDistributionSettingsClassification
   extends ImageModelDistributionSettings {
   /**
@@ -12280,6 +12325,7 @@ model ImageInstanceSegmentation extends AutoMLVertical {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
@@ -12298,6 +12344,7 @@ model ImageObjectDetectionBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelSettingsObjectDetection extends ImageModelSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
@@ -12406,6 +12453,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ImageModelDistributionSettingsObjectDetection
   extends ImageModelDistributionSettings {
   /**
@@ -13080,6 +13128,7 @@ model NlpVertical {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
 /**
@@ -13469,6 +13518,7 @@ model Regression extends AutoMLVertical {
 /**
  * Regression Training related configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model RegressionTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for regression task.

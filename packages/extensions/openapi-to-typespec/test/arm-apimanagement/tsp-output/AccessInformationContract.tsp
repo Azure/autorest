@@ -207,32 +207,21 @@ interface AccessInformationContracts {
   /**
    * Gets the status of the most recent synchronization between the configuration database and the Git repository.
    */
-  // FIXME: TenantConfiguration_GetSyncState could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantConfiguration_GetSyncState")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState")
   @get
-  getSyncState(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * The identifier of the Git Configuration Operation.
-     */
-    @path
-    configurationName: ConfigurationIdName,
-  ): ArmResponse<TenantConfigurationSyncStateContract> | ErrorResponse;
+  @operationId("TenantConfiguration_GetSyncState")
+  getSyncState is ArmResourceActionSync<
+    AccessInformationContract,
+    void,
+    TenantConfigurationSyncStateContract,
+    Parameters = {
+      /**
+       * The identifier of the Git Configuration Operation.
+       */
+      @path
+      configurationName: ConfigurationIdName;
+    }
+  >;
 }
 
 @@doc(AccessInformationContract.name,

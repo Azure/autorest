@@ -196,25 +196,14 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
-  // FIXME: PrivateLinkResources_ListByStorageAccount could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkResources_ListByStorageAccount")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources")
   @get
-  listByStorageAccount(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     */
-    @maxLength(24)
-    @minLength(3)
-    @path
-    accountName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
+  @operationId("PrivateLinkResources_ListByStorageAccount")
+  listByStorageAccount is ArmResourceActionSync<
+    StorageAccount,
+    void,
+    PrivateLinkResourceListResult
+  >;
 }
 
 @@maxLength(StorageAccount.name, 24);

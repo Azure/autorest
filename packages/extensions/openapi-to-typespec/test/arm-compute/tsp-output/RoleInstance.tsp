@@ -101,6 +101,18 @@ interface RoleInstancesOperationGroup {
   >;
 
   /**
+   * Retrieves information about the run-time state of a role instance in a cloud service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("CloudServiceRoleInstances_GetInstanceView")
+  getInstanceView is ArmResourceActionSync<
+    RoleInstance,
+    void,
+    RoleInstanceInstanceView
+  >;
+
+  /**
    * The Reboot Role Instance asynchronous operation requests a reboot of a role instance in the cloud service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -122,66 +134,12 @@ interface RoleInstancesOperationGroup {
   rebuild is ArmResourceActionAsync<RoleInstance, void, void>;
 
   /**
-   * Retrieves information about the run-time state of a role instance in a cloud service.
-   */
-  // FIXME: CloudServiceRoleInstances_GetInstanceView could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CloudServiceRoleInstances_GetInstanceView")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/instanceView")
-  @get
-  getInstanceView(
-    ...ApiVersionParameter,
-
-    /**
-     * Name of the role instance.
-     */
-    @path
-    roleInstanceName: string,
-
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of the cloud service.
-     */
-    @path
-    cloudServiceName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<RoleInstanceInstanceView> | ErrorResponse;
-
-  /**
    * Gets a remote desktop file for a role instance in a cloud service.
    */
-  // FIXME: CloudServiceRoleInstances_GetRemoteDesktopFile could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CloudServiceRoleInstances_GetRemoteDesktopFile")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile")
   @get
-  getRemoteDesktopFile(
-    ...ApiVersionParameter,
-
-    /**
-     * Name of the role instance.
-     */
-    @path
-    roleInstanceName: string,
-
-    ...ResourceGroupParameter,
-
-    /**
-     * Name of the cloud service.
-     */
-    @path
-    cloudServiceName: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/x-rdp",
-  ): OkResponse | ErrorResponse;
+  @operationId("CloudServiceRoleInstances_GetRemoteDesktopFile")
+  getRemoteDesktopFile is ArmResourceActionSync<RoleInstance, void, void>;
 }
 
 @@doc(RoleInstance.name, "Name of the role instance.");

@@ -111,48 +111,27 @@ interface OnlineDeploymentTrackedResources {
   /**
    * List Inference Endpoint Deployment Skus.
    */
-  // FIXME: OnlineDeployments_ListSkus could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OnlineDeployments_ListSkus")
-  @summary("List Inference Endpoint Deployment Skus.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus")
   @get
-  listSkus(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
+  @operationId("OnlineDeployments_ListSkus")
+  listSkus is ArmResourceActionSync<
+    OnlineDeploymentTrackedResource,
+    void,
+    SkuResourceArmPaginatedResult,
+    Parameters = {
+      /**
+       * Number of Skus to be retrieved in a page of results.
+       */
+      @query("count")
+      count?: int32;
 
-    /**
-     * Name of Azure Machine Learning workspace.
-     */
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-    @path
-    workspaceName: string,
-
-    /**
-     * Inference endpoint name.
-     */
-    @path
-    endpointName: string,
-
-    /**
-     * Inference Endpoint Deployment name.
-     */
-    @path
-    deploymentName: string,
-
-    /**
-     * Number of Skus to be retrieved in a page of results.
-     */
-    @query("count")
-    count?: int32,
-
-    /**
-     * Continuation token for pagination.
-     */
-    @query("$skip")
-    $skip?: string,
-  ): ArmResponse<SkuResourceArmPaginatedResult> | ErrorResponse;
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+    }
+  >;
 }
 
 @@doc(OnlineDeploymentTrackedResource.name,

@@ -77,20 +77,12 @@ interface DiskAccesses {
   /**
    * Gets the private link resources possible under disk access resource
    */
-  // FIXME: DiskAccesses_GetPrivateLinkResources could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources")
   @get
-  getPrivateLinkResources(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.
-     */
-    @path
-    diskAccessName: string,
-  ): ArmResponse<PrivateLinkResourceListResult> | ErrorResponse;
+  getPrivateLinkResources is ArmResourceActionSync<
+    DiskAccess,
+    void,
+    PrivateLinkResourceListResult
+  >;
 }
 
 @@doc(DiskAccess.name,

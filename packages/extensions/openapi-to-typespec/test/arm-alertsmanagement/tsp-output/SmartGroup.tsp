@@ -129,20 +129,13 @@ interface SmartGroups {
   /**
    * Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
    */
-  // FIXME: SmartGroups_GetHistory could not be converted to a resource operation
-  @route("undefined")
   @get
-  getHistory(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Smart group unique id.
-     */
-    @path
-    @segment("smartGroups")
-    smartGroupId: string,
-  ): ArmResponse<m> | ErrorResponse;
+  getHistory is ArmResourceActionSync<
+    SmartGroup,
+    void,
+    SmartGroupModification,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(SmartGroup.name, "Smart group unique id. ");

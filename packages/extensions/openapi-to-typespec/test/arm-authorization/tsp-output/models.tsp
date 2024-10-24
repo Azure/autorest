@@ -321,6 +321,7 @@ model DenyAssignmentListResult is Azure.Core.Page<DenyAssignment>;
 /**
  * Deny assignment properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DenyAssignmentProperties {
   /**
    * The display name of the deny assignment.
@@ -492,6 +493,7 @@ model ProviderOperationsMetadataListResult
 /**
  * Role assignment properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentProperties {
   /**
    * The role assignment scope.
@@ -609,6 +611,7 @@ model Permission {
 /**
  * Role definition properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleDefinitionProperties {
   /**
    * The role name.
@@ -701,6 +704,7 @@ model CloudErrorBody {
 /**
  * Role assignment schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleProperties {
   /**
    * The role assignment schedule scope.
@@ -898,6 +902,7 @@ model RoleAssignmentScheduleInstanceListResult
 /**
  * Role assignment schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleInstanceProperties {
   /**
    * The role assignment schedule scope.
@@ -989,6 +994,7 @@ model RoleAssignmentScheduleInstanceProperties {
 /**
  * Role assignment schedule request properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleAssignmentScheduleRequestProperties {
   /**
    * The role assignment schedule request scope.
@@ -1153,6 +1159,7 @@ model RoleAssignmentScheduleRequestListResult
 /**
  * Role eligibility schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleProperties {
   /**
    * The role eligibility schedule scope.
@@ -1242,6 +1249,7 @@ model RoleEligibilityScheduleInstanceListResult
 /**
  * Role eligibility schedule properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleInstanceProperties {
   /**
    * The role eligibility schedule scope.
@@ -1313,6 +1321,7 @@ model RoleEligibilityScheduleInstanceProperties {
 /**
  * Role eligibility schedule request properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleEligibilityScheduleRequestProperties {
   /**
    * The role eligibility schedule request scope.
@@ -1472,6 +1481,7 @@ model RoleEligibilityScheduleRequestListResult
 /**
  * Role management policy properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleManagementPolicyProperties {
   /**
    * The role management policy scope.
@@ -1619,6 +1629,7 @@ model RoleManagementPolicyListResult is Azure.Core.Page<RoleManagementPolicy>;
 /**
  * Role management policy assignment properties with scope.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model RoleManagementPolicyAssignmentProperties {
   /**
    * The role management policy scope.

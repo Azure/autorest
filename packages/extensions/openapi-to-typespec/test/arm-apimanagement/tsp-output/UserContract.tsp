@@ -178,6 +178,50 @@ interface UserContracts {
   >;
 
   /**
+   * Lists all user groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("UserGroup_List")
+  list is ArmResourceActionSync<
+    UserContract,
+    void,
+    GroupListResult,
+    Parameters = {
+      /**
+       * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Number of records to skip.
+       */
+      @query("$skip")
+      $skip?: int32;
+    }
+  >;
+
+  /**
+   * List of all user identities.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @operationId("UserIdentities_List")
+  userIdentitiesList is ArmResourceActionSync<
+    UserContract,
+    void,
+    UserIdentityListResult
+  >;
+
+  /**
    * Sends confirmation
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -193,89 +237,6 @@ interface UserContracts {
       appType?: AppType;
     }
   >;
-
-  /**
-   * Lists all user groups.
-   */
-  // FIXME: UserGroup_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserGroup_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * User identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    userId: string,
-
-    /**
-     * |     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|------------------------|-----------------------------------|</br>| name | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| displayName | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Number of records to return.
-     */
-    @minValue(1)
-    @query("$top")
-    $top?: int32,
-
-    /**
-     * Number of records to skip.
-     */
-    @query("$skip")
-    $skip?: int32,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<GroupListResult> | ErrorResponse;
-
-  /**
-   * List of all user identities.
-   */
-  // FIXME: UserIdentities_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserIdentities_List")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the API Management service.
-     */
-    @maxLength(50)
-    @minLength(1)
-    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-    @path
-    serviceName: string,
-
-    /**
-     * User identifier. Must be unique in the current API Management service instance.
-     */
-    @maxLength(80)
-    @minLength(1)
-    @path
-    userId: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<UserIdentityListResult> | ErrorResponse;
 }
 
 @@maxLength(UserContract.name, 80);

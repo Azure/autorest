@@ -3349,6 +3349,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listByStorageAccount": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByStorageAccount",
+        "tags": [
+          "StorageAccounts"
+        ],
+        "description": "Gets the private link resources that need to be created for a storage account.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountListPrivateLinkResources": {
+            "$ref": "./examples/PrivateLinkResources_ListByStorageAccount.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
       "post": {
         "operationId": "StorageAccounts_ListKeys",
@@ -4506,54 +4554,6 @@
         "x-ms-examples": {
           "StorageAccountDeletePrivateEndpointConnection": {
             "$ref": "./examples/PrivateEndpointConnections_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources/resourceGroups/{resourceGroupName}/{accountName}/subscriptions/{subscriptionId}": {
-      "get": {
-        "operationId": "PrivateLinkResources_ListByStorageAccount",
-        "tags": [
-          "StorageAccounts"
-        ],
-        "description": "Gets the private link resources that need to be created for a storage account.",
-        "parameters": [
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StorageAccountListPrivateLinkResources": {
-            "$ref": "./examples/PrivateLinkResources_ListByStorageAccount.json"
           }
         }
       }

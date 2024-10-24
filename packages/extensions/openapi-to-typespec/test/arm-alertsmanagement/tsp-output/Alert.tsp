@@ -165,20 +165,13 @@ interface Alerts {
   /**
    * Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).
    */
-  // FIXME: Alerts_GetHistory could not be converted to a resource operation
-  @route("undefined")
   @get
-  getHistory(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * Unique ID of an alert instance.
-     */
-    @path
-    @segment("alerts")
-    alertId: string,
-  ): ArmResponse<l> | ErrorResponse;
+  getHistory is ArmResourceActionSync<
+    Alert,
+    void,
+    AlertModification,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 }
 
 @@doc(Alert.name, "Unique ID of an alert instance.");

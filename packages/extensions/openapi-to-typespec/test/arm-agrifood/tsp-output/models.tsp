@@ -119,6 +119,7 @@ model CheckNameAvailabilityResponse {
 /**
  * DataConnector Properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataConnectorProperties {
   /**
    * AuthCredentials abstract base class for Auth Purpose.
@@ -181,6 +182,7 @@ model DataManagerForAgricultureExtensionListResponse
 /**
  * DataManagerForAgricultureExtension properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataManagerForAgricultureExtensionProperties {
   /**
    * Target ResourceType of the Data Manager For Agriculture Extension.
@@ -575,6 +577,7 @@ model ApiProperties {
 /**
  * Extension resource properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ExtensionProperties {
   /**
    * Extension Id.
@@ -650,6 +653,7 @@ model PrivateLinkResourceListResult {
 /**
  * Properties of a private link resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -672,6 +676,7 @@ model PrivateLinkResourceProperties {
 /**
  * Solution resource properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SolutionProperties {
   ...Record<unknown>;
 
@@ -749,6 +754,7 @@ model DataManagerForAgricultureSolutionListResponse
 /**
  * DataManagerForAgricultureSolution properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DataManagerForAgricultureSolutionProperties {
   /**
    * Solution Partner Id.
