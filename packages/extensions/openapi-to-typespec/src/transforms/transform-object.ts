@@ -13,6 +13,7 @@ import {
 import { get } from "lodash";
 import { getDataTypes } from "../data-types";
 import { TypespecObject, TypespecObjectProperty, WithSuppressDirective } from "../interfaces";
+import { getOptions } from "../options";
 import { addCorePageAlias } from "../utils/alias";
 import {
   getModelClientDecorators,
@@ -22,6 +23,7 @@ import {
 } from "../utils/decorators";
 import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
 import { getLogger } from "../utils/logger";
+import { ArmResourcePropertiesModel } from "../utils/resource-discovery";
 import {
   isAnyObjectSchema,
   isAnySchema,
@@ -41,8 +43,6 @@ import {
 } from "../utils/suppressions";
 import { getDefaultValue, transformValue } from "../utils/values";
 import { transformEnum } from "./transform-choices";
-import { ArmResourcePropertiesModel } from "../utils/resource-discovery";
-import { getOptions } from "../options";
 
 const typespecTypes = new Map<string, string>([
   [SchemaType.Date, "plainDate"],
