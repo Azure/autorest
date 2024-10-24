@@ -64,7 +64,7 @@ interface Disks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
     Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
-      @body _: Disk;
+      @bodyRoot _: Disk;
     })
   >;
 

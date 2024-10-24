@@ -52,7 +52,7 @@ interface Galleries {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gallery,
     Response = ArmResourceCreatedResponse<Gallery> | ArmResourceUpdatedResponse<Gallery> | (ArmAcceptedLroResponse & {
-      @body _: Gallery;
+      @bodyRoot _: Gallery;
     })
   >;
 

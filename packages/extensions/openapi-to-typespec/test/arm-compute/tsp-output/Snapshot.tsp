@@ -53,7 +53,7 @@ interface Snapshots {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Snapshot,
     Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
-      @body _: Snapshot;
+      @bodyRoot _: Snapshot;
     })
   >;
 

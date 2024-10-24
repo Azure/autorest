@@ -40,7 +40,7 @@ interface GalleryApplications {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryApplication,
     Response = ArmResourceCreatedResponse<GalleryApplication> | ArmResourceUpdatedResponse<GalleryApplication> | (ArmAcceptedLroResponse & {
-      @body _: GalleryApplication;
+      @bodyRoot _: GalleryApplication;
     })
   >;
 
