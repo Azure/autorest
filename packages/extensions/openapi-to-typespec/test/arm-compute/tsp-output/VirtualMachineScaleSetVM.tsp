@@ -87,7 +87,7 @@ interface VirtualMachineScaleSetVMS {
   update is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
     Response = ArmResourceCreatedResponse<VirtualMachineScaleSetVM> | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
-      @body _: VirtualMachineScaleSetVM;
+      @bodyRoot _: VirtualMachineScaleSetVM;
     })
   >;
 
