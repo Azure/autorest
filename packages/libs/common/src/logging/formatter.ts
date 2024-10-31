@@ -6,7 +6,7 @@ import { EnhancedLogInfo, EnhancedSourceLocation } from "./types";
 import { LogLevel } from ".";
 
 export interface LogFormatter {
-  log(log: EnhancedLogInfo2): string;
+  log(log: EnhancedLogInfo): string;
 }
 
 export interface FormatterOptions {
