@@ -310,7 +310,7 @@ function convertResourceCreateOrReplaceOperation(
       if (acceptedResponse) {
         let responseParameter = `ArmResourceCreatedResponse<${resourceMetadata.SwaggerModelName}> | ArmResourceUpdatedResponse<${resourceMetadata.SwaggerModelName}>`;
         if (isResponseSchema(acceptedResponse) && acceptedResponse.schema) {
-          responseParameter += `| (ArmAcceptedLroResponse & {@body _: ${resourceMetadata.SwaggerModelName};})`;
+          responseParameter += `| (ArmAcceptedLroResponse & {@bodyRoot _: ${resourceMetadata.SwaggerModelName};})`;
         } else responseParameter += `| ArmAcceptedLroResponse`;
         templateParameters.push(`Response = ${responseParameter}`);
         suppressions = getSuppressionsForArmResourceCreateOrReplaceAsync();

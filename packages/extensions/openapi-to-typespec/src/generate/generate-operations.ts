@@ -81,7 +81,7 @@ export function generateProviderAction(operation: TspArmProviderActionOperation)
   const responses = [...new Set(operation.responses)];
   // Workaround for array response, refactor later.
   const response =
-    responses.length === 1 && responses[0].endsWith("[]") ? `{@body _: ${responses[0]}}` : responses.join("|");
+    responses.length === 1 && responses[0].endsWith("[]") ? `{@bodyRoot _: ${responses[0]}}` : responses.join("|");
   if (response !== "void") {
     templateParameters.push(`Response = ${response}`);
   }

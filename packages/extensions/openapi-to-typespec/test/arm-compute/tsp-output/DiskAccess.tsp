@@ -43,7 +43,7 @@ interface DiskAccesses {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskAccess,
     Response = ArmResourceCreatedResponse<DiskAccess> | ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
-      @body _: DiskAccess;
+      @bodyRoot _: DiskAccess;
     })
   >;
 

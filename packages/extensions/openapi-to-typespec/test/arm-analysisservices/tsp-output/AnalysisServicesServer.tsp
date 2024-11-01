@@ -42,7 +42,7 @@ interface AnalysisServicesServersOperationGroup {
   create is ArmResourceCreateOrReplaceAsync<
     AnalysisServicesServer,
     Response = ArmResourceCreatedResponse<AnalysisServicesServer> | ArmResourceUpdatedResponse<AnalysisServicesServer> | (ArmAcceptedLroResponse & {
-      @body _: AnalysisServicesServer;
+      @bodyRoot _: AnalysisServicesServer;
     })
   >;
 

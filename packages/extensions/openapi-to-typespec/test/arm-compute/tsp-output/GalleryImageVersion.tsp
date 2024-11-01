@@ -49,7 +49,7 @@ interface GalleryImageVersions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     GalleryImageVersion,
     Response = ArmResourceCreatedResponse<GalleryImageVersion> | ArmResourceUpdatedResponse<GalleryImageVersion> | (ArmAcceptedLroResponse & {
-      @body _: GalleryImageVersion;
+      @bodyRoot _: GalleryImageVersion;
     })
   >;
 

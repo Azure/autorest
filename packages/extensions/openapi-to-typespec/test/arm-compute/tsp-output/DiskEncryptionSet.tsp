@@ -43,7 +43,7 @@ interface DiskEncryptionSets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
     Response = ArmResourceCreatedResponse<DiskEncryptionSet> | ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
-      @body _: DiskEncryptionSet;
+      @bodyRoot _: DiskEncryptionSet;
     })
   >;
 
