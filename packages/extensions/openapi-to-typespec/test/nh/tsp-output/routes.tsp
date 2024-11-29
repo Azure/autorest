@@ -100,7 +100,7 @@ op createOrUpdateNotificationHub is Azure.Core.Foundations.Operation<
     @header
     `If-Match`?: string;
 
-    @body
+    @bodyRoot
     body: NotificationHubEntryModel;
 
     /**
@@ -391,7 +391,7 @@ op createOrUpdateRegistration is Azure.Core.Foundations.Operation<
     @header
     Authorization: string;
 
-    @body
+    @bodyRoot
     body: RegistrationEntryModel;
 
     /**
@@ -617,7 +617,7 @@ op sendMessage is Azure.Core.Foundations.Operation<
     /**
      * The notification message body
      */
-    @body
+    @bodyRoot
     body: string;
   },
   void
@@ -735,7 +735,7 @@ op sendMessage is Azure.Core.Foundations.Operation<
     /**
      * The notification message body
      */
-    @body
+    @bodyRoot
     body: string;
   },
   void

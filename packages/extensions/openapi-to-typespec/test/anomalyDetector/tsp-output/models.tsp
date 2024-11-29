@@ -694,7 +694,7 @@ model ModelList {
   /**
    * The link to fetch more models.
    */
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 

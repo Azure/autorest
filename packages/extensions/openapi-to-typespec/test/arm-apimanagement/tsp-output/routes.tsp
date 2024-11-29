@@ -806,7 +806,7 @@ interface TagOperations {
     /**
      * Create parameters.
      */
-    @body
+    @bodyRoot
     parameters: TagCreateUpdateParameters,
   ): ArmResponse<TagContract> | ErrorResponse;
 
@@ -850,7 +850,7 @@ interface TagOperations {
     /**
      * Update parameters.
      */
-    @body
+    @bodyRoot
     parameters: TagCreateUpdateParameters,
   ): ArmResponse<TagContract> | ErrorResponse;
 
@@ -1060,7 +1060,7 @@ interface ApiPolicyOperations {
     /**
      * The policy contents to apply.
      */
-    @body
+    @bodyRoot
     parameters: PolicyContract,
   ): ArmResponse<PolicyContract> | ErrorResponse;
 
@@ -1826,7 +1826,7 @@ interface DiagnosticOperations {
     /**
      * Create parameters.
      */
-    @body
+    @bodyRoot
     parameters: DiagnosticContract,
   ): ArmResponse<DiagnosticContract> | ErrorResponse;
 
@@ -1870,7 +1870,7 @@ interface DiagnosticOperations {
     /**
      * Diagnostic Update parameters.
      */
-    @body
+    @bodyRoot
     parameters: DiagnosticContract,
   ): ArmResponse<DiagnosticContract> | ErrorResponse;
 
@@ -2424,7 +2424,7 @@ interface PolicyOperations {
     /**
      * The policy contents to apply.
      */
-    @body
+    @bodyRoot
     parameters: PolicyContract,
   ): ArmResponse<PolicyContract> | ErrorResponse;
 
@@ -2762,7 +2762,7 @@ interface ProductPolicyOperations {
     /**
      * The policy contents to apply.
      */
-    @body
+    @bodyRoot
     parameters: PolicyContract,
   ): ArmResponse<PolicyContract> | ErrorResponse;
 

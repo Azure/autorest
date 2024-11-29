@@ -82,7 +82,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   }
 
   if (paging.isNextLink) {
-    decorators.push({ name: "nextLink" });
+    decorators.push({ name: "Azure.Core.nextLink" });
   }
 
   if (paging.isValue) {

@@ -1063,7 +1063,7 @@ model ApplicationListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -1157,7 +1157,7 @@ model PoolListUsageMetricsResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -1213,7 +1213,7 @@ model AccountListSupportedImagesResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -1325,7 +1325,7 @@ model PoolNodeCountsListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -1790,7 +1790,7 @@ model CertificateListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -1810,7 +1810,7 @@ model NodeFileListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -4112,7 +4112,7 @@ model BatchJobScheduleListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -4487,7 +4487,7 @@ model BatchJobListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -4507,7 +4507,7 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -5209,7 +5209,7 @@ model BatchPoolListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -5951,7 +5951,7 @@ model BatchTaskListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -6663,7 +6663,7 @@ model ComputeNodeListResult {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }
@@ -6752,7 +6752,7 @@ model NodeVMExtensionList {
   /**
    * The URL to get the next set of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   @encodedName("application/json", "odata.nextLink")
   odataNextLink?: string;
 }

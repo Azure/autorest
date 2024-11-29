@@ -137,7 +137,7 @@ op detectAnomaly is Azure.Core.Foundations.Operation<
     /**
      * Detect anomaly request
      */
-    @body
+    @bodyRoot
     body: DetectionRequest;
   },
   void
@@ -160,7 +160,7 @@ op lastDetectAnomaly is Azure.Core.Foundations.Operation<
     /**
      * Request for last detection
      */
-    @body
+    @bodyRoot
     body: LastDetectionRequest;
   },
   LastDetectionResult

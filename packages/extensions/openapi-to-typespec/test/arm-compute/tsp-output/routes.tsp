@@ -572,7 +572,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
     /**
      * Parameters supplied to the Create Virtual Machine RunCommand operation.
      */
-    @body
+    @bodyRoot
     runCommand: VirtualMachineRunCommand,
 
     /**
@@ -616,7 +616,7 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
     /**
      * Parameters supplied to the Update Virtual Machine RunCommand operation.
      */
-    @body
+    @bodyRoot
     runCommand: VirtualMachineRunCommandUpdate,
 
     /**

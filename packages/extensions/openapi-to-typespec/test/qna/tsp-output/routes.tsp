@@ -34,7 +34,7 @@ interface QuestionAnsweringOperations {
       /**
        * Post body of the request.
        */
-      @body
+      @bodyRoot
       knowledgeBaseQueryOptions: AnswersOptions;
     },
     AnswersResult

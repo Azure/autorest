@@ -4052,7 +4052,7 @@ model AmlComputeNodesInformation {
    * The continuation token.
    */
   @visibility("read")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 

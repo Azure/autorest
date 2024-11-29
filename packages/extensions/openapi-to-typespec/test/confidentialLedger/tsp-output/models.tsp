@@ -93,7 +93,7 @@ model Consortium {
   /**
    * Path from which to retrieve the next page of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
@@ -169,7 +169,7 @@ model PagedCollections {
   /**
    * Path from which to retrieve the next page of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
@@ -196,7 +196,7 @@ model PagedLedgerEntries {
   /**
    * Path from which to retrieve the next page of results.
    */
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 
   /**

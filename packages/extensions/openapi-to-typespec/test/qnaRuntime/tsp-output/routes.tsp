@@ -28,7 +28,7 @@ interface RuntimeOperations {
       /**
        * Post body of the request.
        */
-      @body
+      @bodyRoot
       generateAnswerPayload: QueryDTO;
     },
     QnASearchResultList
@@ -52,7 +52,7 @@ interface RuntimeOperations {
       /**
        * Post body of the request.
        */
-      @body
+      @bodyRoot
       trainPayload: FeedbackRecordsDTO;
     },
     void
