@@ -2,6 +2,21 @@
   "name": "@autorest/openapi-to-typespec",
   "entries": [
     {
+      "version": "0.10.4",
+      "tag": "@autorest/openapi-to-typespec_v0.10.4",
+      "date": "Fri, 29 Nov 2024 09:20:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change @body to @bodyRoot"
+          },
+          {
+            "comment": "Upgrade tsp compiler to 0.62"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.10.3",
       "tag": "@autorest/openapi-to-typespec_v0.10.3",
       "date": "Thu, 24 Oct 2024 11:53:16 GMT",
