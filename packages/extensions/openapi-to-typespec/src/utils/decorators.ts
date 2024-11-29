@@ -106,7 +106,7 @@ export function getPropertyDecorators(element: Property | Parameter): TypespecDe
   }
 
   if (isParameter(element) && element?.protocol?.http?.in) {
-    const location = element.protocol.http.in;
+    const location = element.protocol.http.in === "body" ? "bodyRoot" : element.protocol.http.in;
     const locationDecorator: TypespecDecorator = { name: location };
 
     if (location === "query") {
