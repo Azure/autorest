@@ -55,7 +55,7 @@ op create is Azure.Core.Foundations.Operation<
     /**
      * body Parameter
      */
-    @body
+    @bodyRoot
     bodyParameter: CatalogDictionaryOfArray;
   },
   CatalogDictionary
@@ -84,7 +84,7 @@ op update is Azure.Core.Foundations.Operation<
     /**
      * body Parameter
      */
-    @body
+    @bodyRoot
     bodyParameter: CatalogArrayOfDictionary;
   },
   CatalogArray

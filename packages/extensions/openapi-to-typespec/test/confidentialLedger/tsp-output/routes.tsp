@@ -192,7 +192,7 @@ op createOrUpdateUser is Azure.Core.Foundations.Operation<
     /**
      * Details about a Confidential Ledger user.
      */
-    @body
+    @bodyRoot
     userDetails: LedgerUser;
   },
   LedgerUser

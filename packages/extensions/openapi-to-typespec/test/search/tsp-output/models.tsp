@@ -5075,8 +5075,8 @@ model SearchDocumentsResult {
 * Debug information that applies to the search results as a whole.
 */
 @visibility("read")
-@encodedName("application/json", "@search.debugInfo")
-"debugInfo"?: DebugInfo;
+@encodedName("application/json", "@search.debug")
+"debug"?: DebugInfo;
 @doc("""
 Continuation JSON payload returned when the query can't return all the
 requested results in a single response. You can use this JSON along with

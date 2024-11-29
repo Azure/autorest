@@ -81,7 +81,7 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
      * The Azure blob SAS token pointing to a folder where the previous successful
      * full backup was stored
      */
-    @body
+    @bodyRoot
     restoreBlobDetails?: SelectiveKeyRestoreOperationParameters;
   },
   SelectiveKeyRestoreOperation
@@ -206,7 +206,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
     /**
      * Certificate issuer set parameter.
      */
-    @body
+    @bodyRoot
     parameter: CertificateIssuerSetParameters;
   },
   IssuerBundle
@@ -231,7 +231,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
     /**
      * Certificate issuer update parameter.
      */
-    @body
+    @bodyRoot
     parameter: CertificateIssuerUpdateParameters;
   },
   IssuerBundle
@@ -296,7 +296,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
     /**
      * The parameters to create a certificate.
      */
-    @body
+    @bodyRoot
     parameters: CertificateCreateParameters;
   },
   CertificateOperation
@@ -326,7 +326,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
     /**
      * The parameters to import the certificate.
      */
-    @body
+    @bodyRoot
     parameters: CertificateImportParameters;
   },
   CertificateBundle
@@ -397,7 +397,7 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
     /**
      * The policy for the certificate.
      */
-    @body
+    @bodyRoot
     certificatePolicy: CertificatePolicy;
   },
   CertificatePolicy
@@ -428,7 +428,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
     /**
      * The parameters for certificate update.
      */
-    @body
+    @bodyRoot
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -477,7 +477,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
     /**
      * The certificate operation response.
      */
-    @body
+    @bodyRoot
     certificateOperation: CertificateOperationUpdateParameter;
   },
   CertificateOperation
@@ -542,7 +542,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
     /**
      * The parameters to merge certificate.
      */
-    @body
+    @bodyRoot
     parameters: CertificateMergeParameters;
   },
   CertificateBundle
@@ -702,7 +702,7 @@ op createKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters to create a key.
      */
-    @body
+    @bodyRoot
     parameters: KeyCreateParameters;
   },
   KeyBundle
@@ -756,7 +756,7 @@ op importKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters to import a key.
      */
-    @body
+    @bodyRoot
     parameters: KeyImportParameters;
   },
   KeyBundle
@@ -810,7 +810,7 @@ op updateKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters of the key to update.
      */
-    @body
+    @bodyRoot
     parameters: KeyUpdateParameters;
   },
   KeyBundle
@@ -979,7 +979,7 @@ op encrypt is Azure.Core.Foundations.Operation<
     /**
      * The parameters for the encryption operation.
      */
-    @body
+    @bodyRoot
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1018,7 +1018,7 @@ op decrypt is Azure.Core.Foundations.Operation<
     /**
      * The parameters for the decryption operation.
      */
-    @body
+    @bodyRoot
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1049,7 +1049,7 @@ op sign is Azure.Core.Foundations.Operation<
     /**
      * The parameters for the signing operation.
      */
-    @body
+    @bodyRoot
     parameters: KeySignParameters;
   },
   KeyOperationResult
@@ -1083,7 +1083,7 @@ op verify is Azure.Core.Foundations.Operation<
     /**
      * The parameters for verify operations.
      */
-    @body
+    @bodyRoot
     parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -1118,7 +1118,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters for wrap operation.
      */
-    @body
+    @bodyRoot
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1154,7 +1154,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters for the key operation.
      */
-    @body
+    @bodyRoot
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -1184,7 +1184,7 @@ op release is Azure.Core.Foundations.Operation<
     /**
      * The parameters for the key release operation.
      */
-    @body
+    @bodyRoot
     parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -1312,7 +1312,7 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     /**
      * The policy for the key.
      */
-    @body
+    @bodyRoot
     keyRotationPolicy: KeyRotationPolicy;
   },
   KeyRotationPolicy
@@ -1351,7 +1351,7 @@ op setSecret is Azure.Core.Foundations.Operation<
     /**
      * The parameters for setting the secret.
      */
-    @body
+    @bodyRoot
     parameters: SecretSetParameters;
   },
   SecretBundle
@@ -1402,7 +1402,7 @@ op updateSecret is Azure.Core.Foundations.Operation<
     /**
      * The parameters for update secret operation.
      */
-    @body
+    @bodyRoot
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -1613,7 +1613,7 @@ op updateSettings is Azure.Core.Foundations.Operation<
     /**
      * The parameters to update an account setting.
      */
-    @body
+    @bodyRoot
     parameters: UpdateSettingsRequest;
   },
   Setting
@@ -1833,7 +1833,7 @@ op setStorageAccount is Azure.Core.Foundations.Operation<
     /**
      * The parameters to create a storage account.
      */
-    @body
+    @bodyRoot
     parameters: StorageAccountCreateParameters;
   },
   StorageBundle
@@ -1857,7 +1857,7 @@ op updateStorageAccount is Azure.Core.Foundations.Operation<
     /**
      * The parameters to update a storage account.
      */
-    @body
+    @bodyRoot
     parameters: StorageAccountUpdateParameters;
   },
   StorageBundle
@@ -1881,7 +1881,7 @@ op regenerateStorageAccountKey is Azure.Core.Foundations.Operation<
     /**
      * The parameters to regenerate storage account key.
      */
-    @body
+    @bodyRoot
     parameters: StorageAccountRegenerteKeyParameters;
   },
   StorageBundle
@@ -2074,7 +2074,7 @@ op setSasDefinition is Azure.Core.Foundations.Operation<
     /**
      * The parameters to create a SAS definition.
      */
-    @body
+    @bodyRoot
     parameters: SasDefinitionCreateParameters;
   },
   SasDefinitionBundle
@@ -2105,7 +2105,7 @@ op updateSasDefinition is Azure.Core.Foundations.Operation<
     /**
      * The parameters to update a SAS definition.
      */
-    @body
+    @bodyRoot
     parameters: SasDefinitionUpdateParameters;
   },
   SasDefinitionBundle
@@ -2159,7 +2159,7 @@ interface RoleDefinitionsOperations {
       /**
        * Parameters for the role definition.
        */
-      @body
+      @bodyRoot
       parameters: RoleDefinitionCreateParameters;
     },
     RoleDefinition
@@ -2260,7 +2260,7 @@ interface RoleAssignmentsOperations {
       /**
        * Parameters for the role assignment.
        */
-      @body
+      @bodyRoot
       parameters: RoleAssignmentCreateParameters;
     },
     RoleAssignment

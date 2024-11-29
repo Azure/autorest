@@ -186,7 +186,7 @@ interface CodeContainersOperations {
     /**
      * Container entity to create or update.
      */
-    @body
+    @bodyRoot
     body: CodeContainerResource,
   ): ArmResponse<CodeContainerResource> | ErrorResponse;
 }
@@ -351,7 +351,7 @@ interface CodeVersionsOperations {
     /**
      * Version entity to create or update.
      */
-    @body
+    @bodyRoot
     body: CodeVersionResource,
   ): ArmResponse<CodeVersionResource> | ErrorResponse;
 
@@ -390,7 +390,7 @@ interface CodeVersionsOperations {
     /**
      * Pending upload request object
      */
-    @body
+    @bodyRoot
     body: PendingUploadRequestDto,
   ): ArmResponse<PendingUploadResponseDto> | ErrorResponse;
 }
@@ -513,7 +513,7 @@ interface ComponentContainersOperations {
     /**
      * Container entity to create or update.
      */
-    @body
+    @bodyRoot
     body: ComponentContainerResource,
   ): ArmResponse<ComponentContainerResource> | ErrorResponse;
 }
@@ -678,7 +678,7 @@ interface ComponentVersionsOperations {
     /**
      * Version entity to create or update.
      */
-    @body
+    @bodyRoot
     body: ComponentVersionResource,
   ): ArmResponse<ComponentVersionResource> | ErrorResponse;
 }
@@ -801,7 +801,7 @@ interface DataContainersOperations {
     /**
      * Container entity to create or update.
      */
-    @body
+    @bodyRoot
     body: DataContainerResource,
   ): ArmResponse<DataContainerResource> | ErrorResponse;
 }
@@ -973,7 +973,7 @@ interface DataVersionsOperations {
     /**
      * Version entity to create or update.
      */
-    @body
+    @bodyRoot
     body: DataVersionBaseResource,
   ): ArmResponse<DataVersionBaseResource> | ErrorResponse;
 }
@@ -1096,7 +1096,7 @@ interface EnvironmentContainersOperations {
     /**
      * Container entity to create or update.
      */
-    @body
+    @bodyRoot
     body: EnvironmentContainerResource,
   ): ArmResponse<EnvironmentContainerResource> | ErrorResponse;
 }
@@ -1261,7 +1261,7 @@ interface EnvironmentVersionsOperations {
     /**
      * Definition of EnvironmentVersion.
      */
-    @body
+    @bodyRoot
     body: EnvironmentVersionResource,
   ): ArmResponse<EnvironmentVersionResource> | ErrorResponse;
 }
@@ -1390,7 +1390,7 @@ interface ModelContainersOperations {
     /**
      * Container entity to create or update.
      */
-    @body
+    @bodyRoot
     body: ModelContainerResource,
   ): ArmResponse<ModelContainerResource> | ErrorResponse;
 }
@@ -1591,7 +1591,7 @@ interface ModelVersionsOperations {
     /**
      * Version entity to create or update.
      */
-    @body
+    @bodyRoot
     body: ModelVersionResource,
   ): ArmResponse<ModelVersionResource> | ErrorResponse;
 
@@ -1631,7 +1631,7 @@ interface ModelVersionsOperations {
     /**
      * Package operation request body.
      */
-    @body
+    @bodyRoot
     body: PackageRequest,
   ): ArmResponse<PackageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
