@@ -1,6 +1,14 @@
 # Change Log - @autorest/openapi-to-typespec
 
-This log was last generated on Thu, 24 Oct 2024 11:53:16 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Nov 2024 09:20:01 GMT and should not be manually modified.
+
+## 0.10.4
+Fri, 29 Nov 2024 09:20:01 GMT
+
+### Patches
+
+- Change @body to @bodyRoot
+- Upgrade tsp compiler to 0.62
 
 ## 0.10.3
 Thu, 24 Oct 2024 11:53:16 GMT
