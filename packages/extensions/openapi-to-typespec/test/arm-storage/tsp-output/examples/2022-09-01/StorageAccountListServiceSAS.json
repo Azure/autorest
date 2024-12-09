@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "accountName": "sto1299",
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "parameters": {
+      "canonicalizedResource": "/blob/sto1299/music",
+      "signedExpiry": "2017-05-24T11:32:48.8457197Z",
+      "signedPermission": "l",
+      "signedResource": "c"
+    },
+    "resourceGroupName": "res7439",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "serviceSasToken": "sv=2015-04-05&sr=c&se=2017-05-24T11%3A32%3A48Z&sp=l&sig=PoF8yBUGixsjzwroLmw7vG3VbGz4KB2woZC2D4C2oio%3D"
+      }
+    }
+  },
+  "operationId": "StorageAccounts_ListServiceSAS",
+  "title": "StorageAccountListServiceSAS"
+}

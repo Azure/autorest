@@ -27,6 +27,8 @@ version: 3.10.1
 use-extension:
   "@autorest/modelerfour": "^4.27.0"
 
+include-x-ms-examples-original-file: true
+
 modelerfour:
   # this runs a pre-namer step to clean up names
   prenamer: false

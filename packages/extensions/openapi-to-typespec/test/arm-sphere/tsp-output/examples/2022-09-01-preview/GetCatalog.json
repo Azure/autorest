@@ -1,0 +1,21 @@
+{
+  "operationId": "Catalogs_Get",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Catalogs_Get",
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "name": "MyCatalog1",
+        "type": "Microsoft.AzureSphere/catalogs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1",
+        "location": "global"
+      }
+    }
+  }
+}

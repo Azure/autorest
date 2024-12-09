@@ -9,6 +9,9 @@ import { generateDocs } from "../utils/docs";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation } from "./generate-operations";
+import { getLogger } from "../utils/logger";
+
+const logger = () => getLogger("generate-arm-resource");
 
 export function generateArmResource(resource: TspArmResource): string {
   const definitions: string[] = [];
@@ -157,7 +160,23 @@ function generateExamples(
   for (const [title, example] of _.entries(examples)) {
     example.operationId = operationId;
     example.title = title;
-    let filename = operationId;
+
+    let filename = undefined;
+    const originalFile = example["x-ms-original-file"] as string;
+    if (originalFile) {
+      const exampleIndex = originalFile.lastIndexOf("/examples/");
+      if (exampleIndex !== -1) {
+        filename = originalFile.substring(exampleIndex + "/examples/".length);
+        delete example["x-ms-original-file"];
+        generatedExamples[filename] = JSON.stringify(example, null, 2);
+        continue;
+      }
+    }
+
+    logger().info(
+      `Cannot find the example original path or the path isn't in the examples folder for operation ${operationId}`,
+    );
+    filename = operationId;
     if (count > 1) {
       if (title.startsWith(filename)) {
         filename = title;
