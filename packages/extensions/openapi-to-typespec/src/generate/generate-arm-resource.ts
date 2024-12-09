@@ -6,10 +6,10 @@ import { getOptions } from "../options";
 import { getTSPOperationGroupName } from "../transforms/transform-arm-resources";
 import { generateAugmentedDecorators, generateDecorators } from "../utils/decorators";
 import { generateDocs } from "../utils/docs";
+import { getLogger } from "../utils/logger";
 import { getModelPropertiesDeclarations } from "../utils/model-generation";
 import { generateSuppressions } from "../utils/suppressions";
 import { generateOperation } from "./generate-operations";
-import { getLogger } from "../utils/logger";
 
 const logger = () => getLogger("generate-arm-resource");
 
