@@ -288,7 +288,7 @@
         },
         "x-ms-examples": {
           "DeletedAccountGet": {
-            "$ref": "./examples/DeletedAccounts_Get.json"
+            "$ref": "./examples/DeletedAccountGet.json"
           }
         }
       }
@@ -417,7 +417,7 @@
         },
         "x-ms-examples": {
           "StorageAccountList": {
-            "$ref": "./examples/StorageAccounts_List.json"
+            "$ref": "./examples/StorageAccountList.json"
           }
         },
         "x-ms-pageable": {
@@ -459,7 +459,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListByResourceGroup": {
-            "$ref": "./examples/StorageAccounts_ListByResourceGroup.json"
+            "$ref": "./examples/StorageAccountListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -525,16 +525,16 @@
         },
         "x-ms-examples": {
           "StorageAccountGetAsyncSkuConversionStatus": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Async_Sku_Conversion_Status.json"
+            "$ref": "./examples/StorageAccountGetAsyncSkuConversionStatus.json"
           },
           "StorageAccountGetProperties": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties.json"
+            "$ref": "./examples/StorageAccountGetProperties.json"
           },
           "StorageAccountGetPropertiesCMKEnabled": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Enabled.json"
+            "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
           },
           "StorageAccountGetPropertiesCMKVersionExpirationTime": {
-            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Version_Expiration_Time.json"
+            "$ref": "./examples/StorageAccountGetPropertiesCMKVersionExpirationTime.json"
           }
         }
       },
@@ -616,40 +616,40 @@
         },
         "x-ms-examples": {
           "NfsV3AccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_Nfs_V3_Account_Create.json"
+            "$ref": "./examples/NfsV3AccountCreate.json"
           },
           "StorageAccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create.json"
+            "$ref": "./examples/StorageAccountCreate.json"
           },
           "StorageAccountCreateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Aad.json"
+            "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToAAD.json"
           },
           "StorageAccountCreateAllowedCopyScopeToPrivateLink": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Private_Link.json"
+            "$ref": "./examples/StorageAccountCreateAllowedCopyScopeToPrivateLink.json"
           },
           "StorageAccountCreateDisallowPublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Disallow_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountCreateDisallowPublicNetworkAccess.json"
           },
           "StorageAccountCreateDnsEndpointTypeToAzureDnsZone": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Azure_Dns_Zone.json"
+            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToAzureDnsZone.json"
           },
           "StorageAccountCreateDnsEndpointTypeToStandard": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Standard.json"
+            "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToStandard.json"
           },
           "StorageAccountCreateEnablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Enable_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountCreateEnablePublicNetworkAccess.json"
           },
           "StorageAccountCreatePremiumBlockBlobStorage": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Premium_Block_Blob_Storage.json"
+            "$ref": "./examples/StorageAccountCreatePremiumBlockBlobStorage.json"
           },
           "StorageAccountCreateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Encryption_Identity_With_Cmk.json"
+            "$ref": "./examples/StorageAccountCreateUserAssignedEncryptionIdentityWithCMK.json"
           },
           "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
+            "$ref": "./examples/StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
           "StorageAccountCreateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_With_Immutability_Policy.json"
+            "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
           }
         }
       },
@@ -704,28 +704,28 @@
         },
         "x-ms-examples": {
           "StorageAccountEnableAD": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Ad.json"
+            "$ref": "./examples/StorageAccountEnableAD.json"
           },
           "StorageAccountEnableCMK": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Cmk.json"
+            "$ref": "./examples/StorageAccountEnableCMK.json"
           },
           "StorageAccountUpdate": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update.json"
+            "$ref": "./examples/StorageAccountUpdate.json"
           },
           "StorageAccountUpdateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Allowed_Copy_Scope_To_Aad.json"
+            "$ref": "./examples/StorageAccountUpdateAllowedCopyScopeToAAD.json"
           },
           "StorageAccountUpdateDisablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Disable_Public_Network_Access.json"
+            "$ref": "./examples/StorageAccountUpdateDisablePublicNetworkAccess.json"
           },
           "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Encryption_Identity_With_Cmk.json"
+            "$ref": "./examples/StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK.json"
           },
           "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
+            "$ref": "./examples/StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
           },
           "StorageAccountUpdateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_With_Immutability_Policy.json"
+            "$ref": "./examples/StorageAccountUpdateWithImmutabilityPolicy.json"
           }
         }
       },
@@ -771,7 +771,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDelete": {
-            "$ref": "./examples/StorageAccounts_Delete.json"
+            "$ref": "./examples/StorageAccountDelete.json"
           }
         }
       }
@@ -830,7 +830,7 @@
         },
         "x-ms-examples": {
           "StorageAccountAbortHierarchicalNamespaceMigration": {
-            "$ref": "./examples/StorageAccounts_AbortHierarchicalNamespaceMigration.json"
+            "$ref": "./examples/StorageAccountAbortHierarchicalNamespaceMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -882,7 +882,7 @@
         },
         "x-ms-examples": {
           "ListBlobServices": {
-            "$ref": "./examples/BlobServices_List.json"
+            "$ref": "./examples/BlobServicesList.json"
           }
         }
       }
@@ -930,7 +930,7 @@
         },
         "x-ms-examples": {
           "GetBlobServices": {
-            "$ref": "./examples/BlobServices_GetServiceProperties.json"
+            "$ref": "./examples/BlobServicesGet.json"
           }
         }
       },
@@ -991,13 +991,13 @@
         },
         "x-ms-examples": {
           "BlobServicesPutAllowPermanentDelete": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Allow_Permanent_Delete.json"
+            "$ref": "./examples/BlobServicesPutAllowPermanentDelete.json"
           },
           "BlobServicesPutLastAccessTimeBasedTracking": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Last_Access_Time_Based_Tracking.json"
+            "$ref": "./examples/BlobServicesPutLastAccessTimeBasedTracking.json"
           },
           "PutBlobServices": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_Put_Blob_Services.json"
+            "$ref": "./examples/BlobServicesPut.json"
           }
         }
       }
@@ -1079,10 +1079,10 @@
         },
         "x-ms-examples": {
           "ListContainers": {
-            "$ref": "./examples/BlobContainers_List_List_Containers.json"
+            "$ref": "./examples/BlobContainersList.json"
           },
           "ListDeletedContainers": {
-            "$ref": "./examples/BlobContainers_List_List_Deleted_Containers.json"
+            "$ref": "./examples/DeletedBlobContainersList.json"
           }
         },
         "x-ms-pageable": {
@@ -1142,10 +1142,10 @@
         },
         "x-ms-examples": {
           "GetBlobContainersGetWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_Get_Get_Blob_Containers_Get_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersGetWithAllowProtectedAppendWritesAll.json"
           },
           "GetContainers": {
-            "$ref": "./examples/BlobContainers_Get_Get_Containers.json"
+            "$ref": "./examples/BlobContainersGet.json"
           }
         }
       },
@@ -1215,13 +1215,13 @@
         },
         "x-ms-examples": {
           "PutContainerWithDefaultEncryptionScope": {
-            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Default_Encryption_Scope.json"
+            "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
           },
           "PutContainerWithObjectLevelWorm": {
-            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Object_Level_Worm.json"
+            "$ref": "./examples/BlobContainersPutObjectLevelWorm.json"
           },
           "PutContainers": {
-            "$ref": "./examples/BlobContainers_Create_Put_Containers.json"
+            "$ref": "./examples/BlobContainersPut.json"
           }
         }
       },
@@ -1285,7 +1285,7 @@
         },
         "x-ms-examples": {
           "UpdateContainers": {
-            "$ref": "./examples/BlobContainers_Update.json"
+            "$ref": "./examples/BlobContainersPatch.json"
           }
         }
       },
@@ -1340,7 +1340,7 @@
         },
         "x-ms-examples": {
           "DeleteContainers": {
-            "$ref": "./examples/BlobContainers_Delete.json"
+            "$ref": "./examples/BlobContainersDelete.json"
           }
         }
       }
@@ -1406,7 +1406,7 @@
         },
         "x-ms-examples": {
           "ClearLegalHoldContainers": {
-            "$ref": "./examples/BlobContainers_ClearLegalHold.json"
+            "$ref": "./examples/BlobContainersClearLegalHold.json"
           }
         }
       }
@@ -1471,7 +1471,7 @@
         },
         "x-ms-examples": {
           "GetImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_GetImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersGetImmutabilityPolicy.json"
           }
         }
       },
@@ -1549,10 +1549,10 @@
         },
         "x-ms-examples": {
           "CreateOrUpdateImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy.json"
+            "$ref": "./examples/BlobContainersPutImmutabilityPolicy.json"
           },
           "CreateOrUpdateImmutabilityPolicyWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersPutImmutabilityPolicyAllowProtectedAppendWritesAll.json"
           }
         }
       },
@@ -1615,7 +1615,7 @@
         },
         "x-ms-examples": {
           "DeleteImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_DeleteImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersDeleteImmutabilityPolicy.json"
           }
         }
       }
@@ -1689,7 +1689,7 @@
         },
         "x-ms-examples": {
           "ExtendImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_ExtendImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersExtendImmutabilityPolicy.json"
           }
         }
       }
@@ -1754,7 +1754,7 @@
         },
         "x-ms-examples": {
           "LockImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_LockImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainersLockImmutabilityPolicy.json"
           }
         }
       }
@@ -1820,10 +1820,10 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_Acquire_A_Lease_On_A_Container.json"
+            "$ref": "./examples/BlobContainersLease_Acquire.json"
           },
           "Break a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_Break_A_Lease_On_A_Container.json"
+            "$ref": "./examples/BlobContainersLease_Break.json"
           }
         }
       }
@@ -1891,7 +1891,7 @@
         },
         "x-ms-examples": {
           "VersionLevelWormContainerMigration": {
-            "$ref": "./examples/BlobContainers_ObjectLevelWorm.json"
+            "$ref": "./examples/ObjectLevelWormContainerMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1961,10 +1961,10 @@
         },
         "x-ms-examples": {
           "SetLegalHoldContainers": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers.json"
+            "$ref": "./examples/BlobContainersSetLegalHold.json"
           },
           "SetLegalHoldContainersWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers_With_Allow_Protected_Append_Writes_All.json"
+            "$ref": "./examples/BlobContainersSetLegalHoldAllowProtectedAppendWritesAll.json"
           }
         }
       }
@@ -2059,7 +2059,7 @@
         },
         "x-ms-examples": {
           "StorageAccountEncryptionScopeList": {
-            "$ref": "./examples/EncryptionScopes_List.json"
+            "$ref": "./examples/StorageAccountEncryptionScopeList.json"
           }
         },
         "x-ms-pageable": {
@@ -2119,7 +2119,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Get.json"
+            "$ref": "./examples/StorageAccountGetEncryptionScope.json"
           }
         }
       },
@@ -2189,10 +2189,10 @@
         },
         "x-ms-examples": {
           "StorageAccountPutEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope.json"
+            "$ref": "./examples/StorageAccountPutEncryptionScope.json"
           },
           "StorageAccountPutEncryptionScopeWithInfrastructureEncryption": {
-            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope_With_Infrastructure_Encryption.json"
+            "$ref": "./examples/StorageAccountPutEncryptionScopeWithInfrastructureEncryption.json"
           }
         }
       },
@@ -2256,7 +2256,7 @@
         },
         "x-ms-examples": {
           "StorageAccountPatchEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Patch.json"
+            "$ref": "./examples/StorageAccountPatchEncryptionScope.json"
           }
         }
       }
@@ -2328,10 +2328,10 @@
         },
         "x-ms-examples": {
           "StorageAccountFailover": {
-            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover.json"
+            "$ref": "./examples/StorageAccountFailover.json"
           },
           "StorageAccountFailoverPlanned": {
-            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover_Planned.json"
+            "$ref": "./examples/StorageAccountFailoverPlanned.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2383,7 +2383,7 @@
         },
         "x-ms-examples": {
           "ListFileServices": {
-            "$ref": "./examples/FileServices_List.json"
+            "$ref": "./examples/FileServicesList.json"
           }
         }
       }
@@ -2431,7 +2431,7 @@
         },
         "x-ms-examples": {
           "GetFileServices": {
-            "$ref": "./examples/FileServices_GetServiceProperties.json"
+            "$ref": "./examples/FileServicesGet.json"
           }
         }
       },
@@ -2492,13 +2492,13 @@
         },
         "x-ms-examples": {
           "PutFileServices": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services.json"
+            "$ref": "./examples/FileServicesPut.json"
           },
           "PutFileServices_EnableSMBMultichannel": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Smb_Multichannel.json"
+            "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
           },
           "PutFileServices_EnableSecureSmbFeatures": {
-            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Secure_Smb_Features.json"
+            "$ref": "./examples/FileServicesPut_EnableSecureSmbFeatures.json"
           }
         }
       }
@@ -2567,13 +2567,13 @@
         },
         "x-ms-examples": {
           "ListDeletedShares": {
-            "$ref": "./examples/FileShares_List_List_Deleted_Shares.json"
+            "$ref": "./examples/DeletedFileSharesList.json"
           },
           "ListShareSnapshots": {
-            "$ref": "./examples/FileShares_List_List_Share_Snapshots.json"
+            "$ref": "./examples/FileShareSnapshotsList.json"
           },
           "ListShares": {
-            "$ref": "./examples/FileShares_List_List_Shares.json"
+            "$ref": "./examples/FileSharesList.json"
           }
         },
         "x-ms-pageable": {
@@ -2647,10 +2647,10 @@
         },
         "x-ms-examples": {
           "GetShareStats": {
-            "$ref": "./examples/FileShares_Get_Get_Share_Stats.json"
+            "$ref": "./examples/FileSharesGet_Stats.json"
           },
           "GetShares": {
-            "$ref": "./examples/FileShares_Get_Get_Shares.json"
+            "$ref": "./examples/FileSharesGet.json"
           }
         }
       },
@@ -2727,13 +2727,13 @@
         },
         "x-ms-examples": {
           "Create NFS Shares": {
-            "$ref": "./examples/FileShares_Create_Create_Nfs_Shares.json"
+            "$ref": "./examples/FileSharesPut_NFS.json"
           },
           "PutShares": {
-            "$ref": "./examples/FileShares_Create_Put_Shares.json"
+            "$ref": "./examples/FileSharesPut.json"
           },
           "PutShares with Access Tier": {
-            "$ref": "./examples/FileShares_Create_Put_Shares_With_Access_Tier.json"
+            "$ref": "./examples/FileSharesPut_AccessTier.json"
           }
         }
       },
@@ -2797,10 +2797,10 @@
         },
         "x-ms-examples": {
           "UpdateShareAcls": {
-            "$ref": "./examples/FileShares_Update_Update_Share_Acls.json"
+            "$ref": "./examples/FileShareAclsPatch.json"
           },
           "UpdateShares": {
-            "$ref": "./examples/FileShares_Update_Update_Shares.json"
+            "$ref": "./examples/FileSharesPatch.json"
           }
         }
       },
@@ -2869,7 +2869,7 @@
         },
         "x-ms-examples": {
           "DeleteShares": {
-            "$ref": "./examples/FileShares_Delete.json"
+            "$ref": "./examples/FileSharesDelete.json"
           }
         }
       }
@@ -2942,10 +2942,10 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_Acquire_A_Lease_On_A_Share.json"
+            "$ref": "./examples/FileSharesLease_Acquire.json"
           },
           "Break a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_Break_A_Lease_On_A_Share.json"
+            "$ref": "./examples/FileSharesLease_Break.json"
           }
         }
       }
@@ -3008,7 +3008,7 @@
         },
         "x-ms-examples": {
           "RestoreShares": {
-            "$ref": "./examples/FileShares_Restore.json"
+            "$ref": "./examples/FileSharesRestore.json"
           }
         }
       }
@@ -3074,7 +3074,7 @@
         },
         "x-ms-examples": {
           "StorageAccountHierarchicalNamespaceMigration": {
-            "$ref": "./examples/StorageAccounts_HierarchicalNamespaceMigration.json"
+            "$ref": "./examples/StorageAccountHierarchicalNamespaceMigration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3126,7 +3126,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_List.json"
+            "$ref": "./examples/StorageAccountListBlobInventoryPolicy.json"
           }
         }
       }
@@ -3194,7 +3194,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetBlobInventoryPolicy.json"
           }
         }
       },
@@ -3275,13 +3275,13 @@
         },
         "x-ms-examples": {
           "StorageAccountSetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicy.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Hns_Account.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Non_Hns_Account.json"
+            "$ref": "./examples/StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount.json"
           }
         }
       },
@@ -3347,7 +3347,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteBlobInventoryPolicy.json"
           }
         }
       }
@@ -3404,7 +3404,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListAccountSAS": {
-            "$ref": "./examples/StorageAccounts_ListAccountSAS.json"
+            "$ref": "./examples/StorageAccountListAccountSAS.json"
           }
         }
       }
@@ -3452,7 +3452,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListPrivateLinkResources": {
-            "$ref": "./examples/PrivateLinkResources_ListByStorageAccount.json"
+            "$ref": "./examples/StorageAccountListPrivateLinkResources.json"
           }
         }
       }
@@ -3513,7 +3513,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListKeys": {
-            "$ref": "./examples/StorageAccounts_ListKeys.json"
+            "$ref": "./examples/StorageAccountListKeys.json"
           }
         }
       }
@@ -3570,7 +3570,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListServiceSAS": {
-            "$ref": "./examples/StorageAccounts_ListServiceSAS.json"
+            "$ref": "./examples/StorageAccountListServiceSAS.json"
           }
         }
       }
@@ -3618,7 +3618,7 @@
         },
         "x-ms-examples": {
           "ListLocalUsers": {
-            "$ref": "./examples/LocalUsers_List.json"
+            "$ref": "./examples/LocalUsersList.json"
           }
         }
       }
@@ -3675,7 +3675,7 @@
         },
         "x-ms-examples": {
           "GetLocalUser": {
-            "$ref": "./examples/LocalUsers_Get.json"
+            "$ref": "./examples/LocalUserGet.json"
           }
         }
       },
@@ -3745,10 +3745,10 @@
         },
         "x-ms-examples": {
           "CreateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_Create_Local_User.json"
+            "$ref": "./examples/LocalUserCreate.json"
           },
           "UpdateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_Update_Local_User.json"
+            "$ref": "./examples/LocalUserUpdate.json"
           }
         }
       },
@@ -3803,7 +3803,7 @@
         },
         "x-ms-examples": {
           "DeleteLocalUser": {
-            "$ref": "./examples/LocalUsers_Delete.json"
+            "$ref": "./examples/LocalUserDelete.json"
           }
         }
       }
@@ -3860,7 +3860,7 @@
         },
         "x-ms-examples": {
           "ListLocalUserKeys": {
-            "$ref": "./examples/LocalUsers_ListKeys.json"
+            "$ref": "./examples/LocalUserListKeys.json"
           }
         }
       }
@@ -3917,7 +3917,7 @@
         },
         "x-ms-examples": {
           "RegenerateLocalUserPassword": {
-            "$ref": "./examples/LocalUsers_RegeneratePassword.json"
+            "$ref": "./examples/LocalUserRegeneratePassword.json"
           }
         }
       }
@@ -3985,7 +3985,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetManagementPolicy.json"
           }
         }
       },
@@ -4066,28 +4066,28 @@
         },
         "x-ms-examples": {
           "StorageAccountSetManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policies.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy.json"
           },
           "StorageAccountSetManagementPolicyColdTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Cold_Tier_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyColdTierActions.json"
           },
           "StorageAccountSetManagementPolicyForBlockAndAppendBlobs": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_For_Block_And_Append_Blobs.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyForBlockAndAppendBlobs.json"
           },
           "StorageAccountSetManagementPolicyHotTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Hot_Tier_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyHotTierActions.json"
           },
           "StorageAccountSetManagementPolicyWithSnapshotAndVersion": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_With_Snapshot_And_Version.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicyWithSnapshotAndVersion.json"
           },
           "StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Base_Blob_Days_After_Creation_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions.json"
           },
           "StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Access_Time_Based_Blob_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions.json"
           },
           "StorageAccountSetManagementPolicy_LastTierChangeTimeActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Tier_Change_Time_Actions.json"
+            "$ref": "./examples/StorageAccountSetManagementPolicy_LastTierChangeTimeActions.json"
           }
         }
       },
@@ -4153,7 +4153,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteManagementPolicy.json"
           }
         }
       }
@@ -4201,7 +4201,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_List.json"
+            "$ref": "./examples/StorageAccountListObjectReplicationPolicies.json"
           }
         }
       }
@@ -4257,7 +4257,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_Get.json"
+            "$ref": "./examples/StorageAccountGetObjectReplicationPolicy.json"
           }
         }
       },
@@ -4326,16 +4326,16 @@
         },
         "x-ms-examples": {
           "StorageAccountCreateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Destination.json"
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnDestination.json"
           },
           "StorageAccountCreateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Source.json"
+            "$ref": "./examples/StorageAccountCreateObjectReplicationPolicyOnSource.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Destination.json"
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnDestination.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Source.json"
+            "$ref": "./examples/StorageAccountUpdateObjectReplicationPolicyOnSource.json"
           }
         }
       },
@@ -4389,7 +4389,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeleteObjectReplicationPolicies": {
-            "$ref": "./examples/ObjectReplicationPolicies_Delete.json"
+            "$ref": "./examples/StorageAccountDeleteObjectReplicationPolicy.json"
           }
         }
       }
@@ -4437,7 +4437,7 @@
         },
         "x-ms-examples": {
           "StorageAccountListPrivateEndpointConnections": {
-            "$ref": "./examples/PrivateEndpointConnections_List.json"
+            "$ref": "./examples/StorageAccountListPrivateEndpointConnections.json"
           }
         }
       }
@@ -4492,7 +4492,7 @@
         },
         "x-ms-examples": {
           "StorageAccountGetPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+            "$ref": "./examples/StorageAccountGetPrivateEndpointConnection.json"
           }
         }
       },
@@ -4560,7 +4560,7 @@
         },
         "x-ms-examples": {
           "StorageAccountPutPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Put.json"
+            "$ref": "./examples/StorageAccountPutPrivateEndpointConnection.json"
           }
         }
       },
@@ -4613,7 +4613,7 @@
         },
         "x-ms-examples": {
           "StorageAccountDeletePrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+            "$ref": "./examples/StorageAccountDeletePrivateEndpointConnection.json"
           }
         }
       }
@@ -4661,7 +4661,7 @@
         },
         "x-ms-examples": {
           "QueueServicesList": {
-            "$ref": "./examples/QueueServices_List.json"
+            "$ref": "./examples/QueueServicesList.json"
           }
         }
       }
@@ -4709,7 +4709,7 @@
         },
         "x-ms-examples": {
           "QueueServicesGet": {
-            "$ref": "./examples/QueueServices_GetServiceProperties.json"
+            "$ref": "./examples/QueueServicesGet.json"
           }
         }
       },
@@ -4770,7 +4770,7 @@
         },
         "x-ms-examples": {
           "QueueServicesPut": {
-            "$ref": "./examples/QueueServices_SetServiceProperties.json"
+            "$ref": "./examples/QueueServicesPut.json"
           }
         }
       }
@@ -4832,7 +4832,7 @@
         },
         "x-ms-examples": {
           "QueueOperationList": {
-            "$ref": "./examples/Queue_List.json"
+            "$ref": "./examples/QueueOperationList.json"
           }
         },
         "x-ms-pageable": {
@@ -4893,7 +4893,7 @@
         },
         "x-ms-examples": {
           "QueueOperationGet": {
-            "$ref": "./examples/Queue_Get.json"
+            "$ref": "./examples/QueueOperationGet.json"
           }
         }
       },
@@ -4964,10 +4964,10 @@
         },
         "x-ms-examples": {
           "QueueOperationPut": {
-            "$ref": "./examples/Queue_Create_Queue_Operation_Put.json"
+            "$ref": "./examples/QueueOperationPut.json"
           },
           "QueueOperationPutWithMetadata": {
-            "$ref": "./examples/Queue_Create_Queue_Operation_Put_With_Metadata.json"
+            "$ref": "./examples/QueueOperationPutWithMetadata.json"
           }
         }
       },
@@ -5032,7 +5032,7 @@
         },
         "x-ms-examples": {
           "QueueOperationPatch": {
-            "$ref": "./examples/Queue_Update.json"
+            "$ref": "./examples/QueueOperationPatch.json"
           }
         }
       },
@@ -5088,7 +5088,7 @@
         },
         "x-ms-examples": {
           "QueueOperationDelete": {
-            "$ref": "./examples/Queue_Delete.json"
+            "$ref": "./examples/QueueOperationDelete.json"
           }
         }
       }
@@ -5145,10 +5145,10 @@
         },
         "x-ms-examples": {
           "StorageAccountRegenerateKerbKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Kerb_Key.json"
+            "$ref": "./examples/StorageAccountRegenerateKerbKey.json"
           },
           "StorageAccountRegenerateKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Key.json"
+            "$ref": "./examples/StorageAccountRegenerateKey.json"
           }
         }
       }
@@ -5219,7 +5219,7 @@
         },
         "x-ms-examples": {
           "BlobRangesRestore": {
-            "$ref": "./examples/StorageAccounts_RestoreBlobRanges.json"
+            "$ref": "./examples/BlobRangesRestore.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5268,7 +5268,7 @@
         },
         "x-ms-examples": {
           "StorageAccountRevokeUserDelegationKeys": {
-            "$ref": "./examples/StorageAccounts_RevokeUserDelegationKeys.json"
+            "$ref": "./examples/StorageAccountRevokeUserDelegationKeys.json"
           }
         }
       }
@@ -5316,7 +5316,7 @@
         },
         "x-ms-examples": {
           "TableServicesList": {
-            "$ref": "./examples/TableServices_List.json"
+            "$ref": "./examples/TableServicesList.json"
           }
         }
       }
@@ -5364,7 +5364,7 @@
         },
         "x-ms-examples": {
           "TableServicesGet": {
-            "$ref": "./examples/TableServices_GetServiceProperties.json"
+            "$ref": "./examples/TableServicesGet.json"
           }
         }
       },
@@ -5425,7 +5425,7 @@
         },
         "x-ms-examples": {
           "TableServicesPut": {
-            "$ref": "./examples/TableServices_SetServiceProperties.json"
+            "$ref": "./examples/TableServicesPut.json"
           }
         }
       }
@@ -5473,7 +5473,7 @@
         },
         "x-ms-examples": {
           "TableOperationList": {
-            "$ref": "./examples/Table_List.json"
+            "$ref": "./examples/TableOperationList.json"
           }
         },
         "x-ms-pageable": {
@@ -5534,7 +5534,7 @@
         },
         "x-ms-examples": {
           "TableOperationGet": {
-            "$ref": "./examples/Table_Get.json"
+            "$ref": "./examples/TableOperationGet.json"
           }
         }
       },
@@ -5605,10 +5605,7 @@
         },
         "x-ms-examples": {
           "TableOperationPut": {
-            "$ref": "./examples/Table_Create_Table_Operation_Put.json"
-          },
-          "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Create_Table_Operation_Put_Or_Patch_Acls.json"
+            "$ref": "./examples/TableOperationPut.json"
           }
         }
       },
@@ -5673,10 +5670,10 @@
         },
         "x-ms-examples": {
           "TableOperationPatch": {
-            "$ref": "./examples/Table_Update_Table_Operation_Patch.json"
+            "$ref": "./examples/TableOperationPatch.json"
           },
           "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Update_Table_Operation_Put_Or_Patch_Acls.json"
+            "$ref": "./examples/TableOperationPutOrPatchAcls.json"
           }
         }
       },
@@ -5732,7 +5729,7 @@
         },
         "x-ms-examples": {
           "TableOperationDelete": {
-            "$ref": "./examples/Table_Delete.json"
+            "$ref": "./examples/TableOperationDelete.json"
           }
         }
       }

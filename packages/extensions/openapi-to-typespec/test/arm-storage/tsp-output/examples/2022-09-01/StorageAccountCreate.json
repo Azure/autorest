@@ -1,0 +1,151 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2022-09-01",
+    "parameters": {
+      "extendedLocation": {
+        "name": "losangeles001",
+        "type": "EdgeZone"
+      },
+      "kind": "Storage",
+      "location": "eastus",
+      "properties": {
+        "allowBlobPublicAccess": false,
+        "allowSharedKeyAccess": true,
+        "defaultToOAuthAuthentication": false,
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "isHnsEnabled": true,
+        "isSftpEnabled": true,
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "minimumTlsVersion": "TLS1_2",
+        "routingPreference": {
+          "publishInternetEndpoints": true,
+          "publishMicrosoftEndpoints": true,
+          "routingChoice": "MicrosoftRouting"
+        },
+        "sasPolicy": {
+          "expirationAction": "Log",
+          "sasExpirationPeriod": "1.15:59:59"
+        }
+      },
+      "sku": {
+        "name": "Standard_GRS"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "extendedLocation": {
+          "name": "losangeles001",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "allowSharedKeyAccess": true,
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "requireInfrastructureEncryption": false,
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            }
+          },
+          "isHnsEnabled": true,
+          "isSftpEnabled": true,
+          "keyCreationTime": {
+            "key1": "2021-03-18T04:42:22.4322836Z",
+            "key2": "2021-03-18T04:42:22.4322836Z"
+          },
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "file": "https://sto4445.file.core.windows.net/",
+            "internetEndpoints": {
+              "blob": "https://sto4445-internetrouting.blob.core.windows.net/",
+              "dfs": "https://sto4445-internetrouting.dfs.core.windows.net/",
+              "file": "https://sto4445-internetrouting.file.core.windows.net/",
+              "web": "https://sto4445-internetrouting.web.core.windows.net/"
+            },
+            "microsoftEndpoints": {
+              "blob": "https://sto4445-microsoftrouting.blob.core.windows.net/",
+              "dfs": "https://sto4445-microsoftrouting.dfs.core.windows.net/",
+              "file": "https://sto4445-microsoftrouting.file.core.windows.net/",
+              "queue": "https://sto4445-microsoftrouting.queue.core.windows.net/",
+              "table": "https://sto4445-microsoftrouting.table.core.windows.net/",
+              "web": "https://sto4445-microsoftrouting.web.core.windows.net/"
+            },
+            "queue": "https://sto4445.queue.core.windows.net/",
+            "table": "https://sto4445.table.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+          },
+          "primaryLocation": "eastus2euap",
+          "provisioningState": "Succeeded",
+          "routingPreference": {
+            "publishInternetEndpoints": true,
+            "publishMicrosoftEndpoints": true,
+            "routingChoice": "MicrosoftRouting"
+          },
+          "sasPolicy": {
+            "expirationAction": "Log",
+            "sasExpirationPeriod": "1.15:59:59"
+          },
+          "secondaryLocation": "centraluseuap",
+          "statusOfPrimary": "available",
+          "statusOfSecondary": "available",
+          "supportsHttpsTrafficOnly": true
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreate"
+}

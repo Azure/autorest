@@ -16,6 +16,7 @@ function run(command, args, options) {
     stdio: "inherit",
     sync: true,
     throwOnNonZeroExit: true,
+    shell: process.platform === "win32",
     ...options,
   };
 

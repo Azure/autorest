@@ -28,11 +28,11 @@ export async function emitArmResources(program: TypespecProgram, metadata: Metad
     for (const [filename, content] of Object.entries(examples)) {
       if (serviceInformation.versions) {
         session.writeFile({
-          filename: join(basePath, "examples", serviceInformation.versions[0], `${filename}.json`),
+          filename: join(basePath, "examples", serviceInformation.versions[0], filename),
           content,
         });
       } else {
-        session.writeFile({ filename: join(basePath, "examples", "unknown", `${filename}.json`), content });
+        session.writeFile({ filename: join(basePath, "examples", "unknown", filename), content });
       }
     }
   }

@@ -1,0 +1,25 @@
+{
+  "operationId": "DeviceGroups_ClaimDevices",
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "catalogName": "MyCatalog1",
+    "claimDevicesRequest": {
+      "deviceIdentifiers": [
+        "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ]
+    },
+    "deviceGroupName": "MyDeviceGroup1",
+    "productName": "MyProduct1",
+    "resourceGroupName": "MyResourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "DeviceGroups_ClaimDevices",
+  "responses": {
+    "202": {
+      "description": "Resource operation accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}
